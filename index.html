@@ -1,0 +1,1672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>🚀 Antigravity App Portal — Master Workspace & Mobile Launchpad</title>
+  <meta name="description" content="Centralized management and unified viewing portal for all Antigravity HTML apps, tools, dashboards, and readers on PC and mobile.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+  
+  <style>
+    :root {
+      --bg-base: #070a12;
+      --bg-surface: #0e1424;
+      --bg-card: #131b30;
+      --bg-card-hover: #1a2542;
+      --border: #1e293b;
+      --border-accent: rgba(56, 189, 248, 0.3);
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.25);
+      --accent-subtle: rgba(56, 189, 248, 0.1);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --green: #10b981;
+      --purple: #a855f7;
+      --amber: #f59e0b;
+      --rose: #f43f5e;
+      --sidebar-width: 340px;
+      --topbar-height: 58px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --spring: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    html, body {
+      background: var(--bg-base);
+      color: var(--text-main);
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+      overscroll-behavior-y: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    button, a, input, select {
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button:active {
+      transform: scale(0.97);
+      transition: transform 0.08s var(--spring);
+    }
+
+    /* Layout Shell */
+    .app-shell {
+      display: flex;
+      height: 100vh;
+      height: 100dvh;
+      width: 100vw;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      width: var(--sidebar-width);
+      min-width: var(--sidebar-width);
+      height: 100%;
+      background: var(--bg-surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s var(--spring), width 0.25s var(--spring);
+      z-index: 50;
+      position: relative;
+    }
+
+    .sidebar.collapsed {
+      transform: translateX(-100%);
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+    }
+
+    .sidebar-header {
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text-main);
+      cursor: pointer;
+    }
+
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #0284c7, #38bdf8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 0 16px var(--accent-glow);
+    }
+
+    .brand-title {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .btn-icon {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 15px;
+      transition: all 0.15s ease;
+      min-width: 36px;
+      min-height: 36px;
+    }
+
+    .btn-icon:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-main);
+      border-color: #334155;
+    }
+
+    /* Search & Filter Bar */
+    .sidebar-controls {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .search-box {
+      position: relative;
+      width: 100%;
+    }
+
+    .search-input {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 34px 10px 36px;
+      color: #fff;
+      font-size: 13.5px;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+      background: #172138;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 14px;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .search-clear {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 14px;
+      display: none;
+    }
+
+    .search-clear.visible {
+      display: block;
+    }
+
+    /* Category Pill Carousel */
+    .category-pills {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 2px;
+    }
+
+    .category-pills::-webkit-scrollbar {
+      display: none;
+    }
+
+    .cat-pill {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      scroll-snap-align: start;
+    }
+
+    .cat-pill:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-main);
+    }
+
+    .cat-pill.active {
+      background: var(--accent);
+      color: #050811;
+      border-color: var(--accent);
+      box-shadow: 0 0 10px var(--accent-glow);
+    }
+
+    /* App List */
+    .sidebar-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      overscroll-behavior-y: contain;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      padding: 10px 6px 4px 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .app-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: var(--radius-md);
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      min-height: 52px;
+      position: relative;
+    }
+
+    .app-item:hover {
+      background: var(--bg-card);
+      border-color: #273552;
+      color: var(--text-main);
+    }
+
+    .app-item.active {
+      background: rgba(56, 189, 248, 0.12);
+      border-color: var(--accent);
+      color: #fff;
+      box-shadow: 0 0 14px var(--accent-glow);
+    }
+
+    .app-item-icon {
+      font-size: 22px;
+      line-height: 1;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .app-item-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .app-item-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      margin-bottom: 2px;
+    }
+
+    .app-item-title {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text-main);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .app-item-badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .app-item.active .app-item-badge {
+      background: rgba(56, 189, 248, 0.2);
+      color: var(--accent);
+    }
+
+    .app-item-desc {
+      font-size: 11.5px;
+      color: var(--text-dim);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.3;
+    }
+
+    .app-item:hover .app-item-desc {
+      color: var(--text-muted);
+    }
+
+    /* Sidebar Footer */
+    .sidebar-footer {
+      padding: 12px 14px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .mode-indicator {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+
+    .dot-status {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+    }
+
+    /* Main Content Stage */
+    .main-stage {
+      flex: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: var(--bg-base);
+      position: relative;
+    }
+
+    /* Top Control Bar */
+    .topbar {
+      height: var(--topbar-height);
+      min-height: var(--topbar-height);
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      gap: 12px;
+      z-index: 40;
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .active-app-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .active-app-icon {
+      font-size: 20px;
+    }
+
+    .active-app-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .active-app-tag {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .topbar-center {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 3px;
+      border-radius: 9px;
+      border: 1px solid var(--border);
+    }
+
+    .device-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      padding: 5px 10px;
+      border-radius: 7px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.15s ease;
+    }
+
+    .device-btn:hover {
+      color: #fff;
+    }
+
+    .device-btn.active {
+      background: var(--bg-card);
+      color: var(--accent);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 12px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      min-height: 36px;
+    }
+
+    .action-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: #334155;
+    }
+
+    .action-btn.btn-qr {
+      background: rgba(16, 185, 129, 0.12);
+      color: #34d399;
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+
+    .action-btn.btn-qr:hover {
+      background: rgba(16, 185, 129, 0.2);
+    }
+
+    /* Iframe Viewing Area */
+    .viewport-container {
+      flex: 1;
+      width: 100%;
+      height: calc(100% - var(--topbar-height));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #03060d;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .device-frame {
+      width: 100%;
+      height: 100%;
+      transition: width 0.3s var(--spring), height 0.3s var(--spring), border-radius 0.3s var(--spring);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background: #000;
+    }
+
+    .device-frame.mode-tablet {
+      width: 768px;
+      height: 94%;
+      border-radius: 20px;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.8), 0 0 0 1px #334155;
+      overflow: hidden;
+    }
+
+    .device-frame.mode-mobile {
+      width: 390px;
+      height: 844px;
+      max-height: 96%;
+      border-radius: 36px;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.9), 0 0 0 3px #1e293b;
+      overflow: hidden;
+      border: 8px solid #0f172a;
+    }
+
+    /* Simulated Phone Notch */
+    .phone-notch {
+      display: none;
+      width: 110px;
+      height: 20px;
+      background: #0f172a;
+      border-radius: 0 0 12px 12px;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+    }
+
+    .device-frame.mode-mobile .phone-notch {
+      display: block;
+    }
+
+    .app-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #000;
+      flex: 1;
+    }
+
+    /* Loading Overlay */
+    .iframe-loader {
+      position: absolute;
+      inset: 0;
+      background: rgba(7, 10, 18, 0.85);
+      backdrop-filter: blur(4px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      z-index: 5;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .iframe-loader.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .spinner {
+      width: 36px;
+      height: 36px;
+      border: 3px solid rgba(56, 189, 248, 0.2);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Welcome / Hub Home Stage */
+    .welcome-stage {
+      position: absolute;
+      inset: 0;
+      background: var(--bg-base);
+      overflow-y: auto;
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 2;
+    }
+
+    .welcome-stage.hidden {
+      display: none;
+    }
+
+    .welcome-card {
+      max-width: 900px;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .welcome-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .welcome-title {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #fff 40%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .welcome-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      max-width: 650px;
+      margin: 0 auto 24px auto;
+      line-height: 1.5;
+    }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+      max-width: 1000px;
+      width: 100%;
+    }
+
+    .quick-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .quick-card:hover {
+      transform: translateY(-3px);
+      border-color: #334155;
+      background: var(--bg-card);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .quick-card-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .quick-card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .quick-card-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.45;
+      flex: 1;
+      margin-bottom: 14px;
+    }
+
+    .quick-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    /* Floating Switcher Pill (Mobile Fullscreen) */
+    .mobile-switcher-pill {
+      display: none;
+      position: fixed;
+      bottom: 24px;
+      right: 20px;
+      background: var(--accent);
+      color: #050811;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      box-shadow: 0 8px 24px rgba(56, 189, 248, 0.4);
+      z-index: 90;
+      cursor: pointer;
+      border: none;
+      align-items: center;
+      gap: 8px;
+      touch-action: manipulation;
+    }
+
+    /* Mobile Bottom Drawer */
+    .drawer-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .drawer-overlay.open {
+      display: block;
+      opacity: 1;
+    }
+
+    .mobile-drawer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 80vh;
+      height: 80dvh;
+      background: #090d18;
+      border-top: 1px solid #273552;
+      border-radius: 24px 24px 0 0;
+      z-index: 101;
+      transform: translateY(100%);
+      transition: transform 0.3s var(--spring);
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.8);
+      padding-bottom: env(safe-area-inset-bottom, 16px);
+    }
+
+    .mobile-drawer.open {
+      transform: translateY(0);
+    }
+
+    .drawer-handle {
+      width: 40px;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.2);
+      margin: 10px auto 14px auto;
+    }
+
+    /* QR Code Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(6px);
+      z-index: 150;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      max-width: 440px;
+      width: 100%;
+      padding: 28px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .qr-frame {
+      width: 220px;
+      height: 220px;
+      background: #fff;
+      border-radius: 14px;
+      margin: 20px auto;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .qr-frame svg, .qr-frame img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .qr-url-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 13px;
+      color: var(--accent);
+      margin-bottom: 16px;
+      word-break: break-all;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .copy-btn-mini {
+      background: rgba(56, 189, 248, 0.15);
+      border: none;
+      color: var(--accent);
+      padding: 4px 8px;
+      border-radius: 5px;
+      font-size: 11px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    /* Toast */
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--green);
+      color: #000;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 10px 18px;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.2s var(--spring);
+      z-index: 200;
+    }
+
+    #toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Mobile Responsive Overrides */
+    @media (max-width: 768px) {
+      .sidebar {
+        display: none;
+      }
+      .topbar-center {
+        display: none; /* Hide device simulator on small phone screens */
+      }
+      .topbar {
+        padding: 0 12px;
+      }
+      .mobile-switcher-pill {
+        display: inline-flex;
+      }
+      .viewport-container {
+        height: calc(100% - var(--topbar-height));
+      }
+      .device-frame.mode-tablet, .device-frame.mode-mobile {
+        width: 100% !important;
+        height: 100% !important;
+        border-radius: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+      .phone-notch {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-shell">
+    
+    <!-- Desktop Left Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="brand" id="brand-home" title="Go to Home Hub">
+          <div class="brand-logo">🚀</div>
+          <div>
+            <div class="brand-title">Antigravity Portal</div>
+            <div class="brand-sub">Master App Suite</div>
+          </div>
+        </div>
+        <button class="btn-icon" id="btn-collapse-sidebar" title="Collapse Sidebar">◀</button>
+      </div>
+
+      <div class="sidebar-controls">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="search" class="search-input" id="search-input" placeholder="Search apps, tools... (Ctrl+K)" enterkeyhint="search" autocomplete="off">
+          <button class="search-clear" id="search-clear">✕</button>
+        </div>
+
+        <div class="category-pills" id="category-pills">
+          <button class="cat-pill active" data-category="ALL">All Apps</button>
+          <button class="cat-pill" data-category="Islamic & Faith">🕌 Islamic</button>
+          <button class="cat-pill" data-category="Productivity & Utilities">🛠️ Tools</button>
+          <button class="cat-pill" data-category="Health & Nutrition">🥗 Health</button>
+          <button class="cat-pill" data-category="Knowledge & Engineering">🧠 Knowledge</button>
+        </div>
+      </div>
+
+      <div class="sidebar-list" id="app-list">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="mode-indicator">
+          <span class="dot-status" id="mode-dot"></span>
+          <span id="mode-label">Local File Mode</span>
+        </div>
+        <button class="btn-icon" id="btn-open-qr" title="Mobile QR Code">📱</button>
+      </div>
+    </aside>
+
+    <!-- Main Content Stage -->
+    <main class="main-stage">
+      
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="btn-icon" id="btn-toggle-sidebar" title="Toggle Sidebar">☰</button>
+          <div class="active-app-meta" id="active-app-meta">
+            <span class="active-app-icon" id="top-icon">🚀</span>
+            <div>
+              <span class="active-app-title" id="top-title">Workspace Hub</span>
+              <span class="active-app-tag" id="top-badge">Dashboard</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Center: Device Simulator -->
+        <div class="topbar-center">
+          <button class="device-btn active" data-mode="desktop" title="Full Desktop View">🖥️ Full</button>
+          <button class="device-btn" data-mode="tablet" title="iPad / Tablet View (768px)">📱 Tablet</button>
+          <button class="device-btn" data-mode="mobile" title="iPhone / Mobile View (390px)">📱 Mobile</button>
+        </div>
+
+        <!-- Right: Actions -->
+        <div class="topbar-right">
+          <button class="action-btn" id="btn-reload-app" title="Reload active app">🔄 Reload</button>
+          <a class="action-btn" id="btn-open-tab" href="#" target="_blank" rel="noopener" title="Open in new dedicated browser tab">↗️ Pop Out</a>
+          <button class="action-btn" id="btn-fullscreen" title="Toggle Fullscreen">⛶</button>
+          <button class="action-btn btn-qr" id="btn-top-qr" title="Connect Phone via Wi-Fi">📱 Mobile QR</button>
+        </div>
+      </header>
+
+      <!-- Viewport & Iframe -->
+      <section class="viewport-container" id="viewport-container">
+        
+        <div class="device-frame" id="device-frame">
+          <div class="phone-notch"></div>
+          
+          <div class="iframe-loader" id="iframe-loader">
+            <div class="spinner"></div>
+            <div style="font-size: 13px; color: var(--text-muted);">Loading application...</div>
+          </div>
+
+          <iframe class="app-iframe" id="content-iframe" title="Application Viewer" src="about:blank"></iframe>
+        </div>
+
+        <!-- Welcome Stage (Rendered when no app is chosen or at startup) -->
+        <div class="welcome-stage" id="welcome-stage">
+          <div class="welcome-card">
+            <div class="welcome-pill">⚡ Central Command Hub</div>
+            <h1 class="welcome-title">Antigravity Master App Portal</h1>
+            <p class="welcome-desc">
+              Manage and view all your HTML applications, calculators, readers, and tools in one unified interface.
+              Use the sidebar to launch instantly or point your smartphone camera at the QR code to open on mobile.
+            </p>
+          </div>
+
+          <div class="quick-grid" id="quick-grid">
+            <!-- Populated dynamically with flagship apps -->
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- Mobile Floating Pill -->
+  <button class="mobile-switcher-pill" id="mobile-switcher-pill">
+    ⚡ Switch App
+  </button>
+
+  <!-- Mobile Drawer Overlay & Sheet -->
+  <div class="drawer-overlay" id="drawer-overlay"></div>
+  <div class="mobile-drawer" id="mobile-drawer">
+    <div class="drawer-handle"></div>
+    <div class="sidebar-controls" style="border-bottom: 1px solid var(--border);">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="search" class="search-input" id="mobile-search-input" placeholder="Search all apps..." enterkeyhint="search" autocomplete="off">
+      </div>
+      <div class="category-pills" id="mobile-category-pills">
+        <button class="cat-pill active" data-category="ALL">All</button>
+        <button class="cat-pill" data-category="Islamic & Faith">🕌 Islamic</button>
+        <button class="cat-pill" data-category="Productivity & Utilities">🛠️ Tools</button>
+        <button class="cat-pill" data-category="Health & Nutrition">🥗 Health</button>
+        <button class="cat-pill" data-category="Knowledge & Engineering">🧠 Knowledge</button>
+      </div>
+    </div>
+    <div class="sidebar-list" id="mobile-app-list">
+      <!-- Populated dynamically -->
+    </div>
+  </div>
+
+  <!-- Mobile QR Code Modal -->
+  <div class="modal-overlay" id="qr-modal">
+    <div class="modal-card">
+      <button class="modal-close" id="modal-close">✕</button>
+      <div style="font-size: 32px; margin-bottom: 8px;">📱</div>
+      <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 6px;">Connect Smartphone via Wi-Fi</h3>
+      <p style="font-size: 13px; color: var(--text-muted); line-height: 1.45;">
+        Scan this QR code with your phone camera while connected to the same Wi-Fi network:
+      </p>
+
+      <div class="qr-frame" id="qr-frame">
+        <div style="font-size: 12px; color: #64748b; text-align: center;">
+          Generating QR code...
+        </div>
+      </div>
+
+      <div class="qr-url-box">
+        <span id="qr-url-text">http://localhost:8080/</span>
+        <button class="copy-btn-mini" id="btn-copy-url">Copy</button>
+      </div>
+
+      <div style="font-size: 11.5px; color: var(--text-dim); line-height: 1.4;">
+        💡 <strong>Tip</strong>: If the QR code shows offline, double-click <code style="color: var(--accent);">server.py</code> in <code style="color: var(--accent);">Common-Resources/App-Portal/</code> to start the Wi-Fi gateway.
+      </div>
+    </div>
+  </div>
+
+  <div id="toast">Copied to clipboard!</div>
+
+  <!-- Synchronous Catalog Script -->
+  <script src="portal_catalog.js"></script>
+
+  <script>
+    /**
+     * ANTIGRAVITY APP PORTAL — DEFENSIVE BOOTLOADER ARCHITECTURE
+     * Strictly adheres to GEMINI.md Rule 5: Component Bootloader Isolation,
+     * Strict DOM Identifier Hygiene, and Mobile Touch Ergonomics.
+     */
+
+    // Built-in Fallback Catalog in case portal_catalog.js is not yet generated
+    const FALLBACK_CATALOG = {
+      apps: [
+        {
+          id: "02-Namaz-Prayer-Times__index_html",
+          title: "Namaz Prayer Timings",
+          category: "Islamic & Faith",
+          icon: "🕌",
+          badge: "PWA • 60 FPS",
+          description: "High-precision solar prayer timings calculator with Qibla compass and Hanafi Asr method.",
+          portalHref: "../../02-Namaz-Prayer-Times/index.html",
+          serverHref: "/02-Namaz-Prayer-Times/index.html",
+          primary: true
+        },
+        {
+          id: "08-Pincode-Search__index_html",
+          title: "Courier Pincode Search PWA",
+          category: "Productivity & Utilities",
+          icon: "📦",
+          badge: "21,865 Pincodes",
+          description: "Instant <0.01ms integer binary search across all 21,865 courier pincodes with ODA badges.",
+          portalHref: "../../08-Pincode-Search/index.html",
+          serverHref: "/08-Pincode-Search/index.html",
+          primary: true
+        },
+        {
+          id: "04-Cloud-Clipboard__index_html",
+          title: "CloudClip PRO",
+          category: "Productivity & Utilities",
+          icon: "📋",
+          badge: "Real-Time Sync",
+          description: "Multi-room encrypted text sync between PC and phone, with Web Speech narration.",
+          portalHref: "../../04-Cloud-Clipboard/index.html",
+          serverHref: "/04-Cloud-Clipboard/index.html",
+          primary: true
+        },
+        {
+          id: "13-Sustainable-Weight-Gain-Guide__Weight_Gain_Dashboard_html",
+          title: "Sustainable Weight Gain Suite",
+          category: "Health & Nutrition",
+          icon: "🥗",
+          badge: "Macro Calculator",
+          description: "Interactive calorie surplus calculator, hypertrophy progression, and meal planner.",
+          portalHref: "../../13-Sustainable-Weight-Gain-Guide/Weight_Gain_Dashboard.html",
+          serverHref: "/13-Sustainable-Weight-Gain-Guide/Weight_Gain_Dashboard.html",
+          primary: true
+        },
+        {
+          id: "12- Fatawa Project__output__fatawa_reader_html",
+          title: "Fatawa Razviya Encyclopedia",
+          category: "Islamic & Faith",
+          icon: "📖",
+          badge: "Encyclopedia Reader",
+          description: "Comprehensive searchable Islamic jurisprudence questions, answers, and references.",
+          portalHref: "../../12- Fatawa Project/output/fatawa_reader.html",
+          serverHref: "/12- Fatawa Project/output/fatawa_reader.html",
+          primary: true
+        },
+        {
+          id: "01-Events-Countdown__index_html",
+          title: "Events Countdown & Tracker",
+          category: "Islamic & Faith",
+          icon: "📅",
+          badge: "PWA • Storage",
+          description: "Milestone & event countdown manager for Islamic calendar events and deadlines.",
+          portalHref: "../../01-Events-Countdown/index.html",
+          serverHref: "/01-Events-Countdown/index.html",
+          primary: true
+        },
+        {
+          id: "Common-Resources__Knowledge_Navigator_html",
+          title: "Knowledge Navigator & Launchpad",
+          category: "Knowledge & Engineering",
+          icon: "🧠",
+          badge: "28 Topics • 4 Pillars",
+          description: "Searchable engineering knowledge base, mobile architecture patterns, and project directory.",
+          portalHref: "../../Common-Resources/Knowledge_Navigator.html",
+          serverHref: "/Common-Resources/Knowledge_Navigator.html",
+          primary: true
+        }
+      ]
+    };
+
+    // Global State
+    const AppState = {
+      catalog: (window.PORTAL_CATALOG && window.PORTAL_CATALOG.apps) ? window.PORTAL_CATALOG.apps : FALLBACK_CATALOG.apps,
+      activeApp: null,
+      activeCategory: "ALL",
+      searchQuery: "",
+      deviceMode: "desktop",
+      isServerMode: window.location.protocol.startsWith("http"),
+      serverInfo: null
+    };
+
+    // DOM Target Registry
+    const DOM = {};
+
+    function cacheDOM() {
+      DOM.sidebar = document.getElementById("sidebar");
+      DOM.btnToggleSidebar = document.getElementById("btn-toggle-sidebar");
+      DOM.btnCollapseSidebar = document.getElementById("btn-collapse-sidebar");
+      DOM.brandHome = document.getElementById("brand-home");
+      DOM.searchInput = document.getElementById("search-input");
+      DOM.searchClear = document.getElementById("search-clear");
+      DOM.categoryPills = document.getElementById("category-pills");
+      DOM.appList = document.getElementById("app-list");
+      DOM.modeDot = document.getElementById("mode-dot");
+      DOM.modeLabel = document.getElementById("mode-label");
+      
+      DOM.topIcon = document.getElementById("top-icon");
+      DOM.topTitle = document.getElementById("top-title");
+      DOM.topBadge = document.getElementById("top-badge");
+      DOM.btnReload = document.getElementById("btn-reload-app");
+      DOM.btnOpenTab = document.getElementById("btn-open-tab");
+      DOM.btnFullscreen = document.getElementById("btn-fullscreen");
+      DOM.btnTopQR = document.getElementById("btn-top-qr");
+      DOM.btnOpenQR = document.getElementById("btn-open-qr");
+      
+      DOM.deviceButtons = document.querySelectorAll(".device-btn");
+      DOM.deviceFrame = document.getElementById("device-frame");
+      DOM.contentIframe = document.getElementById("content-iframe");
+      DOM.iframeLoader = document.getElementById("iframe-loader");
+      DOM.welcomeStage = document.getElementById("welcome-stage");
+      DOM.quickGrid = document.getElementById("quick-grid");
+
+      DOM.mobileSwitcherPill = document.getElementById("mobile-switcher-pill");
+      DOM.drawerOverlay = document.getElementById("drawer-overlay");
+      DOM.mobileDrawer = document.getElementById("mobile-drawer");
+      DOM.mobileSearchInput = document.getElementById("mobile-search-input");
+      DOM.mobileCategoryPills = document.getElementById("mobile-category-pills");
+      DOM.mobileAppList = document.getElementById("mobile-app-list");
+
+      DOM.qrModal = document.getElementById("qr-modal");
+      DOM.modalClose = document.getElementById("modal-close");
+      DOM.qrFrame = document.getElementById("qr-frame");
+      DOM.qrUrlText = document.getElementById("qr-url-text");
+      DOM.btnCopyUrl = document.getElementById("btn-copy-url");
+      DOM.toast = document.getElementById("toast");
+    }
+
+    function showToast(msg) {
+      if (!DOM.toast) return;
+      DOM.toast.textContent = msg;
+      DOM.toast.classList.add("show");
+      setTimeout(() => DOM.toast.classList.remove("show"), 2500);
+    }
+
+    function getAppUrl(app) {
+      if (!app) return "about:blank";
+      // In HTTP mode, prefer serverHref so full origin / service workers work
+      if (AppState.isServerMode && app.serverHref) {
+        return app.serverHref;
+      }
+      return app.portalHref || app.serverHref || "#";
+    }
+
+    // UI Renderers
+    function renderAppList() {
+      if (!DOM.appList) return;
+      const query = AppState.searchQuery.toLowerCase().trim();
+      
+      const filtered = AppState.catalog.filter(app => {
+        const matchesCategory = (AppState.activeCategory === "ALL") || (app.category === AppState.activeCategory);
+        if (!matchesCategory) return false;
+        if (!query) return true;
+        const inTitle = (app.title || "").toLowerCase().includes(query);
+        const inDesc = (app.description || "").toLowerCase().includes(query);
+        const inCat = (app.category || "").toLowerCase().includes(query);
+        const inTags = (app.tags || []).some(t => t.toLowerCase().includes(query));
+        return inTitle || inDesc || inCat || inTags;
+      });
+
+      if (filtered.length === 0) {
+        DOM.appList.innerHTML = `
+          <div style="padding: 24px 12px; text-align: center; color: var(--text-dim); font-size: 13px;">
+            🔍 No applications found matching "${escapeHtml(query)}"
+          </div>
+        `;
+        return;
+      }
+
+      // Group by Category
+      const grouped = {};
+      filtered.forEach(app => {
+        const cat = app.category || "Other";
+        if (!grouped[cat]) grouped[cat] = [];
+        grouped[cat].push(app);
+      });
+
+      let html = "";
+      for (const [catName, catApps] of Object.entries(grouped)) {
+        html += `<div class="section-label"><span>${escapeHtml(catName)}</span><span>${catApps.length}</span></div>`;
+        catApps.forEach(app => {
+          const isActive = AppState.activeApp && AppState.activeApp.id === app.id;
+          html += `
+            <div class="app-item ${isActive ? 'active' : ''}" data-app-id="${escapeHtml(app.id)}">
+              <div class="app-item-icon">${app.icon || '🚀'}</div>
+              <div class="app-item-info">
+                <div class="app-item-top">
+                  <span class="app-item-title">${escapeHtml(app.title)}</span>
+                  <span class="app-item-badge">${escapeHtml(app.badge || '')}</span>
+                </div>
+                <div class="app-item-desc">${escapeHtml(app.description || '')}</div>
+              </div>
+            </div>
+          `;
+        });
+      }
+
+      DOM.appList.innerHTML = html;
+
+      // Also render into mobile drawer if present
+      if (DOM.mobileAppList) {
+        DOM.mobileAppList.innerHTML = html;
+      }
+    }
+
+    function renderQuickGrid() {
+      if (!DOM.quickGrid) return;
+      const flagship = AppState.catalog.filter(a => a.primary).slice(0, 6);
+      DOM.quickGrid.innerHTML = flagship.map(app => `
+        <div class="quick-card" data-app-id="${escapeHtml(app.id)}">
+          <div class="quick-card-icon">${app.icon || '🚀'}</div>
+          <div class="quick-card-title">${escapeHtml(app.title)}</div>
+          <div class="quick-card-desc">${escapeHtml(app.description || '')}</div>
+          <div class="quick-card-footer">
+            <span>${escapeHtml(app.badge || app.category)}</span>
+            <span>Launch →</span>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function selectApp(appId) {
+      const app = AppState.catalog.find(a => a.id === appId);
+      if (!app) return;
+
+      AppState.activeApp = app;
+      localStorage.setItem("antigravity_portal_last_active_app", app.id);
+
+      // Hide Welcome Stage, Show Iframe
+      if (DOM.welcomeStage) DOM.welcomeStage.classList.add("hidden");
+      if (DOM.iframeLoader) DOM.iframeLoader.classList.add("active");
+
+      // Update Top Bar Meta
+      if (DOM.topIcon) DOM.topIcon.textContent = app.icon || "🚀";
+      if (DOM.topTitle) DOM.topTitle.textContent = app.title || "Untitled";
+      if (DOM.topBadge) DOM.topBadge.textContent = app.badge || app.category || "Tool";
+
+      const targetUrl = getAppUrl(app);
+      if (DOM.btnOpenTab) DOM.btnOpenTab.href = targetUrl;
+
+      // Load Iframe
+      if (DOM.contentIframe) {
+        DOM.contentIframe.src = targetUrl;
+        DOM.contentIframe.onload = () => {
+          if (DOM.iframeLoader) DOM.iframeLoader.classList.remove("active");
+        };
+      }
+
+      // Re-render list highlights
+      renderAppList();
+
+      // Close mobile drawer if open
+      closeMobileDrawer();
+    }
+
+    function goHome() {
+      AppState.activeApp = null;
+      localStorage.removeItem("antigravity_portal_last_active_app");
+      if (DOM.welcomeStage) DOM.welcomeStage.classList.remove("hidden");
+      if (DOM.contentIframe) DOM.contentIframe.src = "about:blank";
+      if (DOM.topIcon) DOM.topIcon.textContent = "🚀";
+      if (DOM.topTitle) DOM.topTitle.textContent = "Workspace Hub";
+      if (DOM.topBadge) DOM.topBadge.textContent = "Dashboard";
+      if (DOM.btnOpenTab) DOM.btnOpenTab.href = "#";
+      renderAppList();
+      closeMobileDrawer();
+    }
+
+    function setDeviceMode(mode) {
+      AppState.deviceMode = mode;
+      DOM.deviceButtons.forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.mode === mode);
+      });
+      if (!DOM.deviceFrame) return;
+      DOM.deviceFrame.className = `device-frame mode-${mode}`;
+    }
+
+    function openMobileDrawer() {
+      if (DOM.drawerOverlay) DOM.drawerOverlay.classList.add("open");
+      if (DOM.mobileDrawer) DOM.mobileDrawer.classList.add("open");
+    }
+
+    function closeMobileDrawer() {
+      if (DOM.drawerOverlay) DOM.drawerOverlay.classList.remove("open");
+      if (DOM.mobileDrawer) DOM.mobileDrawer.classList.remove("open");
+    }
+
+    function openQRModal() {
+      if (!DOM.qrModal) return;
+      DOM.qrModal.classList.add("open");
+
+      // Populate Live QR Code & URL
+      const fallbackUrl = AppState.isServerMode ? window.location.href : "http://192.168.1.9:8080/Common-Resources/App-Portal/index.html";
+      
+      if (AppState.isServerMode) {
+        // Query server for live outbound IP & QR SVG
+        fetch("/api/info")
+          .then(res => res.json())
+          .then(data => {
+            AppState.serverInfo = data;
+            if (DOM.qrUrlText) DOM.qrUrlText.textContent = data.portal_url;
+            if (DOM.qrFrame) {
+              DOM.qrFrame.innerHTML = `<img src="/api/qr?t=${Date.now()}" alt="Wi-Fi Mobile QR Code" style="width: 100%; height: 100%;">`;
+            }
+          })
+          .catch(() => {
+            renderOfflineQR(fallbackUrl);
+          });
+      } else {
+        renderOfflineQR(fallbackUrl);
+      }
+    }
+
+    function renderOfflineQR(url) {
+      if (DOM.qrUrlText) DOM.qrUrlText.textContent = url;
+      // Generate scannable QR via quick SVG / image API fallback
+      if (DOM.qrFrame) {
+        const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}`;
+        DOM.qrFrame.innerHTML = `
+          <img src="${qrApiUrl}" alt="Wi-Fi Mobile QR Code" style="width: 100%; height: 100%;" onerror="this.parentElement.innerHTML='<div style=\\'font-size:12px;color:#ef4444;text-align:center;\\'>QR generation requires internet or server.py running.<br>Open URL manually on your phone.</div>'">
+        `;
+      }
+    }
+
+    function closeQRModal() {
+      if (DOM.qrModal) DOM.qrModal.classList.remove("open");
+    }
+
+    function escapeHtml(str) {
+      if (!str) return "";
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    // Defensive Sub-system Bootloader
+    function bootPortal() {
+      const steps = [
+        ["Cache DOM Registry", cacheDOM],
+        ["Initialize Mode Detection", () => {
+          if (DOM.modeLabel && DOM.modeDot) {
+            if (AppState.isServerMode) {
+              DOM.modeLabel.textContent = "Wi-Fi Server Mode";
+              DOM.modeDot.style.background = "var(--green)";
+              DOM.modeDot.style.boxShadow = "0 0 8px rgba(16, 185, 129, 0.7)";
+            } else {
+              DOM.modeLabel.textContent = "Local File Mode";
+              DOM.modeDot.style.background = "var(--accent)";
+              DOM.modeDot.style.boxShadow = "0 0 8px rgba(56, 189, 248, 0.7)";
+            }
+          }
+        }],
+        ["Initialize Search & Filter Listeners", () => {
+          const bindSearch = (input, clearBtn) => {
+            if (!input) return;
+            input.addEventListener("input", e => {
+              AppState.searchQuery = e.target.value;
+              if (clearBtn) clearBtn.classList.toggle("visible", !!e.target.value);
+              renderAppList();
+            });
+            input.addEventListener("keydown", e => {
+              if (e.key === "Enter") input.blur();
+            });
+          };
+
+          bindSearch(DOM.searchInput, DOM.searchClear);
+          bindSearch(DOM.mobileSearchInput, null);
+
+          if (DOM.searchClear) {
+            DOM.searchClear.addEventListener("click", () => {
+              DOM.searchInput.value = "";
+              AppState.searchQuery = "";
+              DOM.searchClear.classList.remove("visible");
+              renderAppList();
+            });
+          }
+
+          // Category Pill delegation
+          const bindPills = (container) => {
+            if (!container) return;
+            container.addEventListener("click", e => {
+              const pill = e.target.closest(".cat-pill");
+              if (!pill) return;
+              container.querySelectorAll(".cat-pill").forEach(p => p.classList.remove("active"));
+              pill.classList.add("active");
+              AppState.activeCategory = pill.dataset.category;
+              renderAppList();
+            });
+          };
+
+          bindPills(DOM.categoryPills);
+          bindPills(DOM.mobileCategoryPills);
+
+          // Keyboard shortcut (Ctrl+K or /) to focus search
+          window.addEventListener("keydown", e => {
+            if ((e.ctrlKey && e.key === "k") || (e.key === "/" && document.activeElement.tagName !== "INPUT")) {
+              e.preventDefault();
+              if (DOM.searchInput) {
+                DOM.searchInput.focus();
+                DOM.searchInput.select();
+              }
+            }
+          });
+        }],
+        ["Initialize App Selection Delegation", () => {
+          const handleAppClick = e => {
+            const item = e.target.closest(".app-item, .quick-card");
+            if (!item) return;
+            const appId = item.dataset.appId;
+            if (appId) selectApp(appId);
+          };
+
+          if (DOM.appList) DOM.appList.addEventListener("click", handleAppClick);
+          if (DOM.mobileAppList) DOM.mobileAppList.addEventListener("click", handleAppClick);
+          if (DOM.quickGrid) DOM.quickGrid.addEventListener("click", handleAppClick);
+          if (DOM.brandHome) DOM.brandHome.addEventListener("click", goHome);
+        }],
+        ["Initialize Topbar & Device Controls", () => {
+          if (DOM.btnReload) {
+            DOM.btnReload.addEventListener("click", () => {
+              if (DOM.contentIframe && DOM.contentIframe.src && DOM.contentIframe.src !== "about:blank") {
+                if (DOM.iframeLoader) DOM.iframeLoader.classList.add("active");
+                DOM.contentIframe.src = DOM.contentIframe.src;
+              }
+            });
+          }
+
+          if (DOM.btnFullscreen) {
+            DOM.btnFullscreen.addEventListener("click", () => {
+              if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(() => {});
+              } else {
+                document.exitFullscreen().catch(() => {});
+              }
+            });
+          }
+
+          DOM.deviceButtons.forEach(btn => {
+            btn.addEventListener("click", () => setDeviceMode(btn.dataset.mode));
+          });
+
+          // Sidebar Toggle
+          if (DOM.btnToggleSidebar) {
+            DOM.btnToggleSidebar.addEventListener("click", () => {
+              if (DOM.sidebar) DOM.sidebar.classList.toggle("collapsed");
+            });
+          }
+          if (DOM.btnCollapseSidebar) {
+            DOM.btnCollapseSidebar.addEventListener("click", () => {
+              if (DOM.sidebar) DOM.sidebar.classList.add("collapsed");
+            });
+          }
+        }],
+        ["Initialize Mobile Drawer & Floating Switcher", () => {
+          if (DOM.mobileSwitcherPill) {
+            DOM.mobileSwitcherPill.addEventListener("click", openMobileDrawer);
+          }
+          if (DOM.drawerOverlay) {
+            DOM.drawerOverlay.addEventListener("click", closeMobileDrawer);
+          }
+        }],
+        ["Initialize Mobile QR Modal", () => {
+          if (DOM.btnTopQR) DOM.btnTopQR.addEventListener("click", openQRModal);
+          if (DOM.btnOpenQR) DOM.btnOpenQR.addEventListener("click", openQRModal);
+          if (DOM.modalClose) DOM.modalClose.addEventListener("click", closeQRModal);
+          if (DOM.qrModal) {
+            DOM.qrModal.addEventListener("click", e => {
+              if (e.target === DOM.qrModal) closeQRModal();
+            });
+          }
+          if (DOM.btnCopyUrl) {
+            DOM.btnCopyUrl.addEventListener("click", () => {
+              const url = DOM.qrUrlText ? DOM.qrUrlText.textContent : "";
+              navigator.clipboard.writeText(url).then(() => {
+                showToast("URL copied to clipboard!");
+              });
+            });
+          }
+        }],
+        ["Render Initial Views & Restore State", () => {
+          renderAppList();
+          renderQuickGrid();
+
+          // Restore last active app if saved
+          const lastAppId = localStorage.getItem("antigravity_portal_last_active_app");
+          if (lastAppId && AppState.catalog.some(a => a.id === lastAppId)) {
+            selectApp(lastAppId);
+          } else {
+            goHome();
+          }
+        }]
+      ];
+
+      steps.forEach(([name, fn]) => {
+        try {
+          fn();
+        } catch (err) {
+          console.error(`[Boot Warning] ${name} failed:`, err);
+        }
+      });
+    }
+
+    // Auto-boot on DOM ready
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", bootPortal);
+    } else {
+      bootPortal();
+    }
+  </script>
+</body>
+</html>

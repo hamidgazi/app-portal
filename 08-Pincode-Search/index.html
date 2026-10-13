@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="PincodeSearch">
+  <meta name="description" content="Zero-latency offline search across 21,865 Indian courier pincodes, delivery hubs, and ODA status directly on mobile.">
+  <title>Courier Pincode &amp; ODA Search | Zero-Latency PWA</title>
+
+  <!-- PWA & Mobile Icons -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+
+  <!-- Core Application Stylesheet -->
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <div id="app" class="app-root">
+    <!-- Top Application Header -->
+    <header id="app-header" class="app-header">
+      <div class="header-content">
+        <div class="header-brand">
+          <div class="brand-icon" aria-hidden="true">⚡</div>
+          <div class="brand-text">
+            <h1 class="brand-title">PINCODE SEARCH</h1>
+            <p class="brand-subtitle">21,865 Courier Hubs &bull; Offline PWA</p>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button id="btn-toggle-guide" class="btn-header-action" title="How to use &amp; logistics terminology" aria-label="Beginner Guide">
+            <span class="btn-icon" aria-hidden="true">💡</span>
+            <span class="btn-label">Guide</span>
+          </button>
+          <button id="btn-toggle-numpad" class="btn-header-action" title="Toggle On-Screen Number Keypad" aria-label="Toggle Pin Pad">
+            <span class="btn-icon" aria-hidden="true">🔢</span>
+            <span class="btn-label">Pin Pad</span>
+          </button>
+          <button id="btn-excel-updater" class="btn-header-action" title="Update Courier Excel Database" aria-label="Update Courier Excel Database">
+            <span class="btn-icon" aria-hidden="true">📊</span>
+            <span class="btn-label">Update</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Sticky Search & Filter Toolbar -->
+    <div id="search-sticky-zone" class="search-sticky-zone">
+      <!-- Search Input Bar -->
+      <div class="search-box-wrapper">
+        <button id="btn-input-mode" class="btn-input-mode mode-numeric" type="button" aria-label="Switch between Number and Text keyboard" title="Switch keyboard mode">
+          <span class="mode-icon" aria-hidden="true">🔢</span>
+          <span class="mode-label">123</span>
+        </button>
+        <input
+          id="search-input"
+          class="search-input"
+          type="search"
+          inputmode="numeric"
+          pattern="[0-9]*"
+          enterkeyhint="search"
+          placeholder="Enter 6-digit Pincode (or tap 123 for City)..."
+          aria-label="Search pincode, city, or delivery hub"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="false"
+        >
+        <button id="btn-clear-search" class="btn-clear-search" aria-label="Clear search input" style="display: none;">
+          &times;
+        </button>
+      </div>
+
+      <!-- Quick Filter Chips -->
+      <nav class="filter-chips-bar" aria-label="Search filters">
+        <button id="chip-filter-all" class="filter-chip active" data-filter="all" type="button">
+          All (21,865)
+        </button>
+        <button id="chip-filter-oda" class="filter-chip chip-oda" data-filter="oda" type="button">
+          ⚠️ ODA Only
+        </button>
+        <button id="chip-filter-std" class="filter-chip chip-std" data-filter="standard" type="button">
+          ✓ Standard Only
+        </button>
+        <button id="chip-filter-metro" class="filter-chip chip-metro" data-filter="metro" type="button">
+          🏢 Metro Hubs
+        </button>
+      </nav>
+
+      <!-- Live Search Stats & Latency Bar -->
+      <div id="search-stats-bar" class="search-stats-bar">
+        <span id="stats-match-badge" class="stats-badge">
+          Showing 50 of 21,865 pincodes
+        </span>
+        <span id="stats-speed-badge" class="stats-speed-badge">
+          ⚡ &lt; 0.1 ms
+        </span>
+      </div>
+    </div>
+
+    <!-- Main Results Feed -->
+    <main id="main-content" class="main-content">
+      <!-- Beginner & New Staff Guide (Collapsible) -->
+      <section id="beginner-guide" class="beginner-guide" style="display: none;" aria-label="How to use and courier terminology guide">
+        <div class="guide-card">
+          <div class="guide-header">
+            <div class="guide-title-wrap">
+              <span class="guide-badge-icon" aria-hidden="true">💡</span>
+              <h2 class="guide-title">New Staff Quick Guide &bull; How to Read Results</h2>
+            </div>
+            <button id="btn-close-guide" class="btn-guide-close" aria-label="Close guide">&times;</button>
+          </div>
+          <div class="guide-body">
+            <div class="guide-term-item term-std">
+              <div class="term-badge">🟢 Standard Delivery</div>
+              <p class="term-desc"><strong>Normal rate &amp; regular speed.</strong> Courier delivery vehicles service this pincode daily on their standard route.</p>
+            </div>
+            <div class="guide-term-item term-oda">
+              <div class="term-badge">⚠️ ODA (Out of Delivery Area)</div>
+              <p class="term-desc"><strong>Remote / rural location.</strong> Outside courier standard boundaries. Courier applies an <strong>extra surcharge</strong> and delivery takes <strong>1&ndash;2 extra days</strong>.</p>
+            </div>
+            <div class="guide-term-item term-hub">
+              <div class="term-badge">🏢 Dispatch Hub</div>
+              <p class="term-desc"><strong>Main sorting facility.</strong> Parcels arrive at this hub before final dispatch to the local delivery executive.</p>
+            </div>
+            <div class="guide-tips">
+              <span class="tips-label">💡 Search Tips:</span>
+              <ul>
+                <li>Type 6 digits for instant pincode match (or tap <strong>🔢 Pin Pad</strong> above).</li>
+                <li>Type any city or town name (e.g. <em>Surat</em>, <em>Kolkata</em>, <em>Patna</em>, <em>Delhi</em>).</li>
+                <li>Tap <strong>📋 Copy</strong> to copy full docket text to clipboard.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Cards Container -->
+      <div id="results-container" class="results-container" role="feed" aria-busy="false" aria-live="polite">
+        <!-- Pincode Cards Dynamically Injected Here -->
+      </div>
+
+      <!-- Empty State -->
+      <div id="empty-state" class="empty-state" style="display: none;">
+        <div class="empty-icon" aria-hidden="true">🔍</div>
+        <h2 id="empty-title" class="empty-title">No Matching Pincodes</h2>
+        <p id="empty-description" class="empty-description">
+          No records matched your search query. Try checking for typos or searching by district or state.
+        </p>
+        <button id="btn-empty-reset" class="btn-empty-reset" type="button">
+          Show All Pincodes
+        </button>
+      </div>
+
+      <!-- Load More Button -->
+      <div id="load-more-container" class="load-more-container" style="display: none;">
+        <button id="btn-load-more" class="btn-load-more" type="button">
+          Load More (+50)
+        </button>
+      </div>
+
+      <!-- Sentinel for Smooth Infinite Scroll -->
+      <div id="scroll-sentinel" class="scroll-sentinel" aria-hidden="true"></div>
+    </main>
+
+    <!-- On-Screen Numeric Keypad for Mobile Thumb Typing -->
+    <div id="quick-numpad" class="quick-numpad" style="display: none;" aria-label="On-Screen Number Keypad">
+      <div class="numpad-header">
+        <div class="numpad-title-wrap">
+          <span class="numpad-icon" aria-hidden="true">🔢</span>
+          <span class="numpad-title">On-Screen Pin Keypad</span>
+        </div>
+        <button id="btn-close-numpad" class="btn-numpad-close" aria-label="Close Keypad">&times;</button>
+      </div>
+      <div class="numpad-grid">
+        <button type="button" class="num-key" data-key="1">1</button>
+        <button type="button" class="num-key" data-key="2">2</button>
+        <button type="button" class="num-key" data-key="3">3</button>
+        <button type="button" class="num-key" data-key="4">4</button>
+        <button type="button" class="num-key" data-key="5">5</button>
+        <button type="button" class="num-key" data-key="6">6</button>
+        <button type="button" class="num-key" data-key="7">7</button>
+        <button type="button" class="num-key" data-key="8">8</button>
+        <button type="button" class="num-key" data-key="9">9</button>
+        <button type="button" class="num-key num-key-action num-key-backspace" data-key="backspace" aria-label="Backspace">⌫</button>
+        <button type="button" class="num-key" data-key="0">0</button>
+        <button type="button" class="num-key num-key-action num-key-enter" data-key="enter" aria-label="Search and Close">↵ Search</button>
+      </div>
+    </div>
+
+    <!-- Excel Updater Modal / Sheet (Hook for M4) -->
+    <div id="updater-modal" class="updater-modal" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="updater-modal-title">
+      <div class="updater-backdrop" id="updater-backdrop"></div>
+      <div class="updater-dialog">
+        <div class="updater-header">
+          <h2 id="updater-modal-title" class="updater-title">📊 Courier Excel Database Updater</h2>
+          <button id="btn-close-updater" class="btn-close-updater" aria-label="Close updater modal">&times;</button>
+        </div>
+        <div class="updater-body">
+          <p class="updater-info">
+            Upload an updated courier pincode Excel/CSV spreadsheet (<code>.xlsx</code>, <code>.csv</code>) or compiled JSON to refresh your offline database.
+          </p>
+          <div id="drop-zone" class="drop-zone">
+            <span class="drop-icon" aria-hidden="true">📁</span>
+            <p class="drop-text">Drag &amp; drop Excel or CSV file here or tap to select</p>
+            <input type="file" id="excel-file-input" class="excel-file-input" accept=".xlsx,.xls,.csv,.json">
+          </div>
+          <div id="updater-status" class="updater-status" style="display: none;">
+            <!-- Status messages during parsing -->
+          </div>
+        </div>
+        <div class="updater-footer">
+          <button id="btn-restore-bundled" class="btn-secondary" type="button">Restore Factory Dataset</button>
+          <button id="btn-dismiss-updater" class="btn-primary" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1-Tap Copy Micro-Toast -->
+    <div id="copy-toast" class="copy-toast" role="status" aria-live="polite">
+      <span class="toast-icon" aria-hidden="true">✓</span>
+      <span id="toast-message" class="toast-message">Copied to clipboard!</span>
+    </div>
+  </div>
+
+  <!-- Zero-CORS Script Fallback (Loads window.PINCODE_DB immediately without HTTP server) -->
+  <script src="data/pincodes.js"></script>
+
+  <!-- Core Search Engine & Application Logic -->
+  <script src="app.js"></script>
+</body>
+</html>

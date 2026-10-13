@@ -1,0 +1,2508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0d1117">
+    <title>Events Countdown</title>
+    <!-- Mobile Home Screen Icons & Favicon -->
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-app-192.png?v=1.1.2">
+    <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-app-512.png?v=1.1.2">
+    <link rel="icon" type="image/svg+xml" href="icons/icon.svg?v=1.1.2">
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png?v=1.1.2">
+    <link rel="apple-touch-icon" sizes="512x512" href="icons/icon-app-512.png?v=1.1.2">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=1.1.2">
+    <link rel="shortcut icon" href="icons/icon-app-192.png?v=1.1.2">
+    <link rel="manifest" href="manifest.json?v=1.1.2">
+    <style>
+        /* ============================================
+           CSS VARIABLES
+        ============================================ */
+        :root {
+            --bg:           #0d1117;
+            --bg-2:         #161b22;
+            --surface:      rgba(255, 255, 255, 0.055);
+            --surface-h:    rgba(255, 255, 255, 0.10);
+            --border:       rgba(255, 255, 255, 0.10);
+            --border-h:     rgba(255, 255, 255, 0.18);
+
+            --text-1:  #e6edf3;
+            --text-2:  #8b949e;
+            --text-3:  #6e7681;
+
+            /* Urgency accent colors */
+            --c-today:   #ff4444;
+            --c-high:    #ff8c00;
+            --c-medium:  #e8b030;
+            --c-low:     #4a9eff;
+            --c-future:  #3dd68c;
+            --c-far:     #6e7681;
+
+            --radius:    16px;
+            --radius-sm: 10px;
+            --shadow:    0 4px 28px rgba(0,0,0,0.45);
+        }
+
+        /* ============================================
+           RESET & BASE
+        ============================================ */
+        *, *::before, *::after {
+            margin: 0; padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html { height: 100%; }
+
+        body {
+            background: var(--bg);
+            background-image:
+                radial-gradient(ellipse 70% 50% at 15% 10%,  rgba(74,158,255,.07) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 45% at 85% 90%,  rgba(61,214,140,.05) 0%, transparent 60%);
+            color: var(--text-1);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, 'Helvetica Neue', sans-serif;
+            min-height: 100vh;
+            padding-bottom: 110px;
+            overflow-x: hidden;
+            overscroll-behavior-y: contain;
+        }
+
+        main {
+            contain: layout style;
+        }
+
+        button { font-family: inherit; cursor: pointer; }
+
+        /* ============================================
+           HEADER
+        ============================================ */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(13,17,23,0.88);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 20px 14px;
+        }
+
+        .hdr-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+            gap: 8px;
+        }
+
+        header h1 {
+            font-size: 21px;
+            font-weight: 800;
+            letter-spacing: -.5px;
+            background: linear-gradient(120deg, #e6edf3 30%, #8b949e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            white-space: nowrap;
+        }
+
+        .hdr-actions {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: nowrap;
+        }
+
+        .hdr-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 11.5px;
+            font-weight: 600;
+            color: var(--text-2);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 4px 10px;
+            border-radius: 20px;
+            transition: all .2s;
+            white-space: nowrap;
+        }
+        .hdr-btn:hover {
+            background: var(--surface-h);
+            color: var(--text-1);
+            border-color: var(--border-h);
+        }
+        .hdr-btn:active {
+            transform: scale(0.96);
+        }
+
+        .hdr-chip {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-2);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 4px 11px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        .hdr-date {
+            font-size: 12.5px;
+            color: var(--text-3);
+            letter-spacing: .1px;
+        }
+
+        /* Search Bar */
+        .search-bar-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .search-input-box {
+            position: relative;
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-ico {
+            position: absolute;
+            left: 11px;
+            font-size: 13px;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        #search-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 7px 32px 7px 32px;
+            color: var(--text-1);
+            font-size: 13px;
+            outline: none;
+            transition: all .2s ease;
+        }
+
+        #search-input:focus {
+            background: rgba(255, 255, 255, 0.10);
+            border-color: rgba(74, 158, 255, 0.5);
+            box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.15);
+        }
+
+        #search-input::placeholder {
+            color: var(--text-3);
+        }
+
+        .search-clear-btn {
+            position: absolute;
+            right: 8px;
+            background: rgba(255, 255, 255, 0.14);
+            border: none;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-2);
+            font-size: 10px;
+            font-weight: 700;
+            padding: 0;
+            cursor: pointer;
+            transition: all .15s;
+        }
+        .search-clear-btn:hover {
+            background: rgba(255, 255, 255, 0.28);
+            color: #fff;
+        }
+
+        .search-badge {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--c-low);
+            background: rgba(74, 158, 255, 0.12);
+            border: 1px solid rgba(74, 158, 255, 0.25);
+            padding: 4px 9px;
+            border-radius: 12px;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 420px) {
+            .hdr-btn-lbl { display: none; }
+            .hdr-btn { padding: 5px 8px; font-size: 13px; }
+        }
+
+        /* ============================================
+           FILTER BAR
+        ============================================ */
+        #filter-bar {
+            display: flex;
+            gap: 8px;
+            padding: 12px 16px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            background: var(--bg);
+            border-bottom: 1px solid rgba(255,255,255,.04);
+        }
+        #filter-bar::-webkit-scrollbar { display: none; }
+
+        .pill {
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 13px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text-2);
+            font-size: 13px;
+            font-weight: 500;
+            transition: all .2s;
+            white-space: nowrap;
+        }
+        .pill.active {
+            background: rgba(74,158,255,.14);
+            border-color: rgba(74,158,255,.45);
+            color: #4a9eff;
+            box-shadow: 0 0 14px rgba(74,158,255,.18);
+        }
+        .pill:not(.active):hover {
+            background: var(--surface-h);
+            color: var(--text-1);
+        }
+
+        .pill-count {
+            font-size: 11px;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.12);
+            padding: 1px 6px;
+            border-radius: 10px;
+        }
+        .pill.active .pill-count {
+            background: rgba(74, 158, 255, 0.32);
+            color: #ffffff;
+        }
+
+        /* ============================================
+           MAIN / SECTIONS
+        ============================================ */
+        main { padding: 4px 14px 8px; }
+
+        .section-hdr {
+            font-size: 10.5px;
+            font-weight: 700;
+            letter-spacing: 1.1px;
+            text-transform: uppercase;
+            color: var(--text-3);
+            padding: 18px 4px 10px;
+        }
+
+        /* ============================================
+           EVENT CARD & SWIPE-TO-DELETE CONTAINER
+        ============================================ */
+        .card-wrapper {
+            position: relative;
+            border-radius: var(--radius);
+            margin-bottom: 10px;
+            overflow: hidden;
+            touch-action: pan-y;
+            animation: card-in .32s ease both;
+            content-visibility: auto;
+            contain-intrinsic-size: 0 100px;
+        }
+
+        .card-swipe-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, #991b1b 0%, #dc2626 40%, #ef4444 100%);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 22px;
+            border-radius: var(--radius);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .swipe-trash-content {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 700;
+            transform-origin: right center;
+            transform: scale(0.8);
+            opacity: 0.85;
+            transition: transform 0.08s ease, opacity 0.15s ease;
+            user-select: none;
+        }
+
+        .swipe-trash-icon {
+            font-size: 22px;
+            line-height: 1;
+            display: inline-block;
+            transition: transform 0.15s ease;
+        }
+
+        .swipe-trash-text {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            opacity: 0;
+            transition: opacity 0.15s ease;
+            white-space: nowrap;
+        }
+
+        .swipe-trash-content.threshold-met {
+            opacity: 1;
+        }
+        .swipe-trash-content.threshold-met .swipe-trash-text {
+            opacity: 1;
+        }
+        .swipe-trash-content.threshold-met .swipe-trash-icon {
+            transform: scale(1.3) rotate(-12deg);
+        }
+
+        .card {
+            --accent: var(--c-far);
+            --accent-rgb: 110,118,129;
+            position: relative;
+            z-index: 2;
+            background: #161b22;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 0;
+            overflow: hidden;
+            cursor: pointer;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: var(--shadow);
+            transition: border-color .2s;
+            touch-action: pan-y;
+            user-select: none;
+            will-change: transform;
+        }
+        .card:not(.swiping):active { transform: scale(0.985); }
+
+        /* Urgency left stripe */
+        .card::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 3.5px;
+            background: var(--accent);
+            border-radius: 3.5px 0 0 3.5px;
+        }
+
+        /* Urgency classes */
+        .u-today  { --accent: var(--c-today);  --accent-rgb: 255,68,68; }
+        .u-high   { --accent: var(--c-high);   --accent-rgb: 255,140,0; }
+        .u-medium { --accent: var(--c-medium); --accent-rgb: 232,176,48; }
+        .u-low    { --accent: var(--c-low);    --accent-rgb: 74,158,255; }
+        .u-future { --accent: var(--c-future); --accent-rgb: 61,214,140; }
+        .u-far    { --accent: var(--c-far);    --accent-rgb: 110,118,129; }
+
+        /* Pulse for urgent */
+        .card.pulsing {
+            animation: pulse-ring 2.8s ease-in-out .6s infinite;
+        }
+
+        /* Card inner layout */
+        .card-inner { padding: 14px 15px 13px 18px; }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 9px;
+        }
+
+        .cat-tag {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-2);
+        }
+        .cat-icon { font-size: 15px; line-height: 1; }
+
+        /* Days badge */
+        .days-badge {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: .4px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            color: var(--accent);
+            background: rgba(var(--accent-rgb),.14);
+            border: 1px solid rgba(var(--accent-rgb),.28);
+            white-space: nowrap;
+        }
+
+        .card-name {
+            font-size: 17px;
+            font-weight: 700;
+            letter-spacing: -.2px;
+            line-height: 1.25;
+            color: var(--text-1);
+            margin-bottom: 6px;
+        }
+
+        .card-date {
+            font-size: 12.5px;
+            color: var(--text-2);
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .card-notes {
+            font-size: 12.5px;
+            color: var(--text-3);
+            line-height: 1.45;
+            margin-bottom: 5px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Progress bar */
+        .prog-wrap { margin-top: 11px; }
+        .prog-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            color: var(--text-3);
+            margin-bottom: 5px;
+        }
+        .prog-track {
+            height: 4px;
+            background: rgba(255,255,255,.07);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .prog-fill {
+            height: 100%;
+            border-radius: 4px;
+            background: var(--accent);
+            opacity: .75;
+            transition: width .9s cubic-bezier(.34,1.2,.64,1);
+        }
+
+        /* Expanded actions row */
+        .card-actions {
+            display: none;
+            gap: 9px;
+            padding: 10px 14px 13px;
+            border-top: 1px solid var(--border);
+            background: rgba(255,255,255,.025);
+        }
+        .card.open .card-actions { display: flex; }
+
+        .btn-share, .btn-edit, .btn-del {
+            flex: 1;
+            padding: 10px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 700;
+            border: 1px solid;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: background .2s, transform .1s;
+        }
+        .btn-share {
+            background: rgba(61,214,140,.12);
+            color: #3dd68c;
+            border-color: rgba(61,214,140,.28);
+        }
+        .btn-share:hover { background: rgba(61,214,140,.22); }
+        .btn-edit {
+            background: rgba(74,158,255,.12);
+            color: #4a9eff;
+            border-color: rgba(74,158,255,.28);
+        }
+        .btn-edit:hover { background: rgba(74,158,255,.22); }
+        .btn-del {
+            background: rgba(255,68,68,.10);
+            color: #ff5555;
+            border-color: rgba(255,68,68,.24);
+        }
+        .btn-del:hover { background: rgba(255,68,68,.20); }
+
+        /* Archived card */
+        .card.archived { opacity: .48; }
+        .card.archived::before { background: var(--text-3); }
+
+        /* ============================================
+           ARCHIVE SECTION
+        ============================================ */
+        .archive-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            user-select: none;
+            padding: 10px 4px 8px;
+            color: var(--text-3);
+            font-size: 10.5px;
+            font-weight: 700;
+            letter-spacing: 1.1px;
+            text-transform: uppercase;
+        }
+        .arch-arrow { font-size: 9px; transition: transform .3s; display: inline-block; }
+        .archive-toggle.open .arch-arrow { transform: rotate(90deg); }
+
+        #archived-list { display: none; }
+        #archived-list.open { display: block; }
+
+        /* ============================================
+           EMPTY STATE
+        ============================================ */
+        .empty {
+            text-align: center;
+            padding: 56px 24px;
+            color: var(--text-3);
+        }
+        .empty-icon { font-size: 52px; display: block; margin-bottom: 16px; }
+        .empty p { font-size: 15px; line-height: 1.6; }
+        .empty strong { color: var(--text-2); }
+
+        /* ============================================
+           FAB
+        ============================================ */
+        #fab {
+            position: fixed;
+            bottom: 28px;
+            right: 22px;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(140deg, #4a9eff 0%, #1d5fd4 100%);
+            color: #fff;
+            font-size: 30px;
+            font-weight: 300;
+            line-height: 1;
+            box-shadow: 0 5px 22px rgba(74,158,255,.45);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform .2s, box-shadow .2s;
+        }
+        #fab:hover { transform: scale(1.08); box-shadow: 0 7px 28px rgba(74,158,255,.6); }
+        #fab:active { transform: scale(0.92); }
+
+        /* ============================================
+           OVERLAY
+        ============================================ */
+        #overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.62);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            z-index: 300;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .3s;
+        }
+        #overlay.on { opacity: 1; pointer-events: all; }
+
+        /* ============================================
+           BOTTOM SHEET MODAL
+        ============================================ */
+        #modal {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            z-index: 400;
+            background: #161b22;
+            border: 1px solid var(--border);
+            border-bottom: none;
+            border-radius: 24px 24px 0 0;
+            padding: 0 20px 44px;
+            transform: translateY(102%);
+            transition: transform .42s cubic-bezier(.32,.72,0,1);
+            max-height: 92vh;
+            overflow-y: auto;
+        }
+        #modal.on { transform: translateY(0); }
+
+        .modal-grip {
+            width: 38px; height: 4px;
+            background: rgba(255,255,255,.18);
+            border-radius: 4px;
+            margin: 15px auto 22px;
+        }
+        .modal-title {
+            font-size: 19px;
+            font-weight: 800;
+            color: var(--text-1);
+            margin-bottom: 22px;
+            letter-spacing: -.3px;
+        }
+
+        /* Form */
+        .fg { margin-bottom: 18px; }
+        .fg label {
+            display: block;
+            font-size: 12.5px;
+            font-weight: 700;
+            color: var(--text-2);
+            margin-bottom: 8px;
+            letter-spacing: .2px;
+        }
+        .fg input, .fg textarea, .fg select {
+            width: 100%;
+            background: rgba(255,255,255,.055);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text-1);
+            font-size: 16px;
+            padding: 13px 14px;
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+            font-family: inherit;
+            transition: border-color .2s, box-shadow .2s;
+        }
+        .fg input:focus, .fg textarea:focus, .fg select:focus {
+            border-color: rgba(74,158,255,.55);
+            box-shadow: 0 0 0 3px rgba(74,158,255,.13);
+        }
+        .fg textarea { resize: none; height: 82px; line-height: 1.5; }
+        .fg select option { background: #161b22; }
+
+        .quick-chips-row {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 9px;
+            overflow-x: auto;
+            padding-bottom: 2px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .quick-chips-row::-webkit-scrollbar { display: none; }
+
+        .q-chip {
+            flex: 1;
+            min-width: fit-content;
+            padding: 6px 9px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid var(--border);
+            color: var(--text-2);
+            font-size: 11.5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .15s ease;
+            white-space: nowrap;
+            text-align: center;
+        }
+        .q-chip:hover {
+            background: rgba(74, 158, 255, 0.15);
+            border-color: rgba(74, 158, 255, 0.4);
+            color: #fff;
+        }
+        .q-chip.active {
+            background: rgba(74, 158, 255, 0.22);
+            border-color: var(--c-low);
+            color: #fff;
+        }
+
+        .form-btns {
+            display: flex;
+            gap: 10px;
+            margin-top: 26px;
+        }
+        .btn-cancel-form {
+            flex: 1;
+            padding: 14px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-2);
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .btn-save-form {
+            flex: 2;
+            padding: 14px;
+            border-radius: var(--radius-sm);
+            border: none;
+            background: linear-gradient(135deg, #4a9eff, #1d5fd4);
+            color: #fff;
+            font-size: 15px;
+            font-weight: 800;
+            transition: opacity .2s;
+        }
+        .btn-save-form:active { opacity: .82; }
+
+        /* ============================================
+           DELETE & IMPORT CONFIRM SHEETS
+        ============================================ */
+        .sheet-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 500;
+            display: flex;
+            align-items: flex-end;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .22s;
+        }
+        .sheet-modal.on { opacity: 1; pointer-events: all; }
+
+        .del-bg { position: absolute; inset: 0; background: rgba(0,0,0,.6); }
+
+        .del-box {
+            position: relative;
+            z-index: 1;
+            background: #1c2128;
+            border: 1px solid var(--border);
+            border-bottom: none;
+            border-radius: 22px 22px 0 0;
+            padding: 26px 20px 44px;
+            width: 100%;
+        }
+        .del-box h3 {
+            font-size: 17px;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+        .del-box p {
+            font-size: 14px;
+            color: var(--text-2);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        .del-btns { display: flex; gap: 10px; }
+        .del-cancel {
+            flex: 1; padding: 13px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-2);
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .del-confirm {
+            flex: 1; padding: 13px;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(255,68,68,.3);
+            background: rgba(255,68,68,.12);
+            color: #ff5555;
+            font-size: 15px;
+            font-weight: 800;
+        }
+        .del-confirm:hover { background: rgba(255,68,68,.22); }
+
+        /* Import options */
+        .import-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+        .import-opt-btn {
+            width: 100%;
+            text-align: left;
+            padding: 13px 15px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.05);
+            color: var(--text-1);
+            transition: all .2s;
+        }
+        .import-opt-btn:hover {
+            background: var(--surface-h);
+            border-color: rgba(74,158,255,0.4);
+        }
+        .import-opt-btn.danger {
+            border-color: rgba(255,68,68,0.25);
+            background: rgba(255,68,68,0.06);
+        }
+        .import-opt-btn.danger:hover {
+            background: rgba(255,68,68,0.14);
+            border-color: rgba(255,68,68,0.45);
+        }
+        .import-opt-title {
+            font-size: 14.5px;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+        .import-opt-btn.danger .import-opt-title {
+            color: #ff6b6b;
+        }
+        .import-opt-desc {
+            font-size: 12px;
+            color: var(--text-2);
+            line-height: 1.35;
+        }
+
+        /* ============================================
+           TOAST NOTIFICATION
+        ============================================ */
+        .toast {
+            position: fixed;
+            bottom: 26px;
+            left: 50%;
+            transform: translateX(-50%) translateY(90px);
+            background: #1c2128;
+            color: var(--text-1);
+            border: 1px solid var(--border-h);
+            padding: 10px 18px;
+            border-radius: 28px;
+            font-size: 13.5px;
+            font-weight: 600;
+            box-shadow: 0 10px 36px rgba(0,0,0,0.55);
+            z-index: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.32s cubic-bezier(0.18, 0.89, 0.32, 1.28), opacity 0.25s ease;
+            max-width: 90vw;
+            white-space: nowrap;
+        }
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+            pointer-events: all;
+        }
+        .toast-btn {
+            background: rgba(74, 158, 255, 0.18);
+            border: 1px solid rgba(74, 158, 255, 0.45);
+            color: #4a9eff;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 14px;
+            font-size: 12.5px;
+            transition: background .2s;
+        }
+        .toast-btn:hover {
+            background: rgba(74, 158, 255, 0.3);
+        }
+
+        /* ============================================
+           KEYFRAMES
+        ============================================ */
+        @keyframes card-in {
+            from { opacity: 0; transform: translateY(14px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse-ring {
+            0%,100% { box-shadow: var(--shadow), 0 0 0 0 rgba(var(--accent-rgb),.0); }
+            50%      { box-shadow: var(--shadow), 0 0 0 7px rgba(var(--accent-rgb),.18); }
+        }
+
+        /* Stagger card animation delays */
+        .card-wrapper:nth-child(1) { animation-delay: .00s }
+        .card-wrapper:nth-child(2) { animation-delay: .04s }
+        .card-wrapper:nth-child(3) { animation-delay: .08s }
+        .card-wrapper:nth-child(4) { animation-delay: .12s }
+        .card-wrapper:nth-child(5) { animation-delay: .16s }
+        .card-wrapper:nth-child(6) { animation-delay: .20s }
+        .card-wrapper:nth-child(7) { animation-delay: .24s }
+        .card-wrapper:nth-child(n+8) { animation-delay: .28s }
+
+        /* ============================================
+           FOOTER & VERSION DETAILS
+        ============================================ */
+        .app-footer {
+            margin-top: 36px;
+            padding: 20px 16px 48px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        .footer-version-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            font-size: 13px;
+            color: var(--text-2);
+        }
+        .footer-version-badge {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border);
+            padding: 3px 8px;
+            border-radius: 6px;
+            color: var(--text-1);
+            font-weight: 700;
+        }
+        .btn-check-update {
+            background: rgba(56, 139, 253, 0.15);
+            border: 1px solid rgba(56, 139, 253, 0.35);
+            color: #58a6ff;
+            font-size: 11.5px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-check-update:active { transform: scale(0.96); }
+        .footer-status-text {
+            font-size: 11px;
+            color: var(--text-3);
+        }
+
+        /* Auto-Popup Update Modal */
+        .update-popup-box {
+            max-width: 360px !important;
+            text-align: center;
+            animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== IN-APP UPDATE NOTIFICATION BANNER ===== -->
+<div id="updateBanner" style="display:none; align-items:center; justify-content:space-between; background:linear-gradient(90deg, #1f6feb, #238636); color:#fff; padding:10px 16px; font-size:13px; font-weight:600; position:sticky; top:0; z-index:999; box-shadow:0 4px 14px rgba(0,0,0,0.5);">
+    <div style="display:flex; align-items:center; gap:8px;">
+        <span>✨</span>
+        <span>New update available! (<span id="txtNewVersion">v1.1.2</span>)</span>
+    </div>
+    <button id="btnReloadUpdate" style="background:#fff; color:#0d1117; border:none; padding:6px 12px; border-radius:8px; font-weight:700; font-size:12px; cursor:pointer;">Update Now</button>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header>
+    <div class="hdr-row">
+        <h1>📅 Events</h1>
+        <div class="hdr-actions">
+            <button class="hdr-btn" id="btn-sound-toggle" title="Toggle Sound Effects" aria-label="Toggle Sound">
+                <span id="sound-icon">🔊</span><span class="hdr-btn-lbl">Sound</span>
+            </button>
+            <button class="hdr-btn" id="btn-share-app" title="Share Events App" aria-label="Share App">
+                <span>↗️</span><span class="hdr-btn-lbl">Share</span>
+            </button>
+            <button class="hdr-btn" id="btn-export" title="Export Backup JSON" aria-label="Export Backup">
+                <span>📤</span><span class="hdr-btn-lbl">Export</span>
+            </button>
+            <button class="hdr-btn" id="btn-import" title="Import Events JSON" aria-label="Import Events">
+                <span>📥</span><span class="hdr-btn-lbl">Import</span>
+            </button>
+            <input type="file" id="file-import" accept=".json,application/json" style="display:none">
+            <span class="hdr-chip" id="hdr-chip">0 upcoming</span>
+        </div>
+    </div>
+    <div class="hdr-date" id="hdr-date"></div>
+
+    <!-- Real-time Live Search Bar -->
+    <div class="search-bar-wrap">
+        <div class="search-input-box">
+            <span class="search-ico">🔍</span>
+            <input type="search" id="search-input" placeholder="Search events, notes, tags…" autocomplete="off" spellcheck="false">
+            <button type="button" id="search-clear" class="search-clear-btn" title="Clear search" aria-label="Clear search" style="display:none">✕</button>
+        </div>
+        <span id="search-badge" class="search-badge" style="display:none">0 found</span>
+    </div>
+</header>
+
+<!-- ===== FILTER BAR ===== -->
+<div id="filter-bar">
+    <button class="pill active" data-cat="all">All <span class="pill-count" id="cnt-all">0</span></button>
+    <button class="pill" data-cat="general">🏷️ General <span class="pill-count" id="cnt-general">0</span></button>
+    <button class="pill" data-cat="birthday">🎂 Birthday <span class="pill-count" id="cnt-birthday">0</span></button>
+    <button class="pill" data-cat="meeting">📋 Meeting <span class="pill-count" id="cnt-meeting">0</span></button>
+    <button class="pill" data-cat="deadline">⏰ Deadline <span class="pill-count" id="cnt-deadline">0</span></button>
+    <button class="pill" data-cat="holiday">🏖️ Holiday <span class="pill-count" id="cnt-holiday">0</span></button>
+    <button class="pill" data-cat="reminder">🔔 Reminder <span class="pill-count" id="cnt-reminder">0</span></button>
+    <button class="pill" data-cat="other">📌 Other <span class="pill-count" id="cnt-other">0</span></button>
+</div>
+
+<!-- ===== MAIN ===== -->
+<main>
+    <div class="section-hdr" id="active-hdr"></div>
+    <div id="active-list"></div>
+
+    <div id="archive-wrap" style="display:none">
+        <div class="archive-toggle" id="arch-toggle">
+            <span class="arch-arrow">▶</span>
+            <span id="arch-label">Past Events</span>
+        </div>
+        <div id="archived-list"></div>
+    </div>
+</main>
+
+<!-- ===== FOOTER (VERSION & UPDATE STATUS) ===== -->
+<footer class="app-footer">
+    <div class="footer-version-row">
+        <span>📅 Events Countdown <span class="footer-version-badge" id="app-version-display">v1.1.2</span></span>
+        <button type="button" id="btn-manual-update-check" class="btn-check-update">🔄 Check for Updates</button>
+    </div>
+    <div class="footer-status-text" id="footer-status-text">App is up to date</div>
+</footer>
+
+<!-- ===== FAB ===== -->
+<button id="fab" title="Add Event" aria-label="Add Event">+</button>
+
+<!-- ===== OVERLAY ===== -->
+<div id="overlay"></div>
+
+<!-- ===== BOTTOM SHEET MODAL ===== -->
+<div id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-grip"></div>
+    <div class="modal-title" id="modal-title">✨ New Event</div>
+
+    <form id="ev-form" autocomplete="off" novalidate>
+        <input type="hidden" id="f-id">
+
+        <div class="fg">
+            <label for="f-name">Event Name <span style="color:var(--c-today)">*</span></label>
+            <input id="f-name" type="text" placeholder="e.g. Team Meeting" maxlength="80" required>
+        </div>
+
+        <div class="fg">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
+                <label for="f-date" style="margin-bottom:0;">Date <span style="color:var(--c-today)">*</span></label>
+                <span style="font-size:11px; color:var(--text-3);">Quick Presets</span>
+            </div>
+            <div class="quick-chips-row" id="quick-date-presets">
+                <button type="button" class="q-chip" data-days="0" onclick="setQuickDate(0)">Today</button>
+                <button type="button" class="q-chip" data-days="1" onclick="setQuickDate(1)">Tomorrow</button>
+                <button type="button" class="q-chip" data-days="3" onclick="setQuickDate(3)">+3 Days</button>
+                <button type="button" class="q-chip" data-days="7" onclick="setQuickDate(7)">Next Week</button>
+                <button type="button" class="q-chip" data-days="30" onclick="setQuickDate(30)">+1 Mo</button>
+            </div>
+            <input id="f-date" type="date" required>
+        </div>
+
+        <div class="fg">
+            <label for="f-cat">Category</label>
+            <select id="f-cat">
+                <option value="general" selected>🏷️ General</option>
+                <option value="birthday">🎂 Birthday</option>
+                <option value="meeting">📋 Meeting</option>
+                <option value="deadline">⏰ Deadline</option>
+                <option value="holiday">🏖️ Holiday</option>
+                <option value="reminder">🔔 Reminder</option>
+                <option value="other">📌 Other</option>
+            </select>
+        </div>
+
+        <div class="fg">
+            <label for="f-notes">Notes <span style="font-weight:400;opacity:.6">(optional)</span></label>
+            <textarea id="f-notes" placeholder="Add extra details…"></textarea>
+        </div>
+
+        <div class="form-btns">
+            <button type="button" class="btn-cancel-form" id="btn-cancel">Cancel</button>
+            <button type="submit" class="btn-save-form" id="btn-save">Save Event</button>
+        </div>
+    </form>
+</div>
+
+<!-- ===== DELETE CONFIRM SHEET ===== -->
+<div id="del-sheet" class="sheet-modal">
+    <div class="del-bg" id="del-bg"></div>
+    <div class="del-box">
+        <h3>🗑️ Delete Event?</h3>
+        <p id="del-msg"></p>
+        <div class="del-btns">
+            <button class="del-cancel" id="del-cancel">Keep It</button>
+            <button class="del-confirm" id="del-ok">Delete</button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== IMPORT MODAL SHEET ===== -->
+<div id="import-sheet" class="sheet-modal">
+    <div class="del-bg" id="import-bg"></div>
+    <div class="del-box">
+        <h3>📥 Import Events</h3>
+        <p id="import-msg">Found events in backup file. Choose how to import:</p>
+        <div class="import-options">
+            <button type="button" class="import-opt-btn" id="import-btn-merge">
+                <div class="import-opt-title">✨ Merge Events</div>
+                <div class="import-opt-desc">Keep your existing events and add new ones (skips duplicates)</div>
+            </button>
+            <button type="button" class="import-opt-btn danger" id="import-btn-replace">
+                <div class="import-opt-title">⚠️ Replace All</div>
+                <div class="import-opt-desc">Wipe existing events and replace with backup contents</div>
+            </button>
+            <button type="button" class="del-cancel" id="import-cancel" style="width:100%;margin-top:4px">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== AUTO-POPUP UPDATE MODAL ===== -->
+<div id="update-popup-modal" class="sheet-modal">
+    <div class="del-bg" id="update-popup-bg"></div>
+    <div class="del-box update-popup-box">
+        <div style="font-size:40px; margin-bottom:6px;">🚀</div>
+        <h3 style="font-size:18px; margin-bottom:4px; color:#fff;">New Update Available!</h3>
+        <p style="font-size:13.5px; color:var(--text-2); margin-bottom:14px;">
+            A newer version <b id="popup-new-version" style="color:#3dd68c;">v1.1.2</b> is ready for you.
+        </p>
+        <div id="popup-changelog-box" style="background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:10px; padding:12px; font-size:12px; color:var(--text-1); text-align:left; margin-bottom:18px; line-height:1.45;">
+            <b style="color:var(--text-3); font-size:11px; text-transform:uppercase;">What's New:</b><br>
+            <span id="popup-changelog-text">Performance improvements and new features.</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+            <button type="button" id="btn-popup-update-now" style="background:linear-gradient(135deg, #1f6feb, #238636); border:none; color:#fff; font-size:15px; font-weight:700; padding:12px; border-radius:10px; cursor:pointer; box-shadow:0 4px 15px rgba(35,134,54,0.4);">
+                ⚡ Update Now (1-Tap)
+            </button>
+            <button type="button" id="btn-popup-later" class="del-cancel" style="width:100%; border:none; background:transparent; font-size:12px; color:var(--text-3); cursor:pointer; padding:6px;">
+                Maybe Later
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== TOAST NOTIFICATION ===== -->
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* =====================================================
+   CONFIGURATION
+===================================================== */
+const STORAGE_KEY = 'events_v2';
+
+const CATS = {
+    general:  { icon: '🏷️', label: 'General'  },
+    birthday: { icon: '🎂', label: 'Birthday' },
+    meeting:  { icon: '📋', label: 'Meeting'  },
+    deadline: { icon: '⏰', label: 'Deadline' },
+    holiday:  { icon: '🏖️', label: 'Holiday'  },
+    reminder: { icon: '🔔', label: 'Reminder' },
+    other:    { icon: '📌', label: 'Other'    },
+};
+
+function formatLocalDate(d) {
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, '0');
+    const dd = String(d.getDate()).padStart(2, '0');
+    return yyyy + '-' + mm + '-' + dd;
+}
+
+function relDate(daysFromNow) {
+    const d = new Date();
+    d.setDate(d.getDate() + daysFromNow);
+    return formatLocalDate(d);
+}
+
+const SAMPLES = [
+    { name: 'Welcome to Countdown', date: relDate(0),  category: 'general',  notes: 'Swipe left to delete! Tap card to expand details.' },
+    { name: 'Team Meeting',         date: relDate(1),  category: 'meeting',  notes: 'Q3 planning session — room 3B' },
+    { name: 'Project Deadline',     date: relDate(3),  category: 'deadline', notes: 'Submit final report to manager' },
+    { name: "Mom's Birthday",       date: relDate(5),  category: 'birthday', notes: 'Get a cake and flowers' },
+    { name: 'Beach Holiday',        date: relDate(10), category: 'holiday',  notes: 'Pack sunscreen and swimwear!' },
+    { name: 'Doctor Reminder',      date: relDate(21), category: 'reminder', notes: 'Annual checkup — bring documents' },
+];
+
+/* =====================================================
+   STATE
+===================================================== */
+let events = [];
+let activeFilter = 'all';
+let searchQuery = '';
+let pendingDelId = null;
+let pendingImportEvents = null;
+let liveTimer = null;
+let toastTimer = null;
+
+/* =====================================================
+   SOUND EFFECTS ENGINE (Web Audio API Synthesizer)
+===================================================== */
+const SoundFX = {
+    audioCtx: null,
+    enabled: (function() {
+        try {
+            const saved = localStorage.getItem('events_sound_enabled');
+            return saved === null ? true : saved === 'true';
+        } catch (_) {
+            return true;
+        }
+    })(),
+
+    init() {
+        if (typeof window === 'undefined') return;
+        if (!this.audioCtx && (window.AudioContext || window.webkitAudioContext)) {
+            const AudioClass = window.AudioContext || window.webkitAudioContext;
+            this.audioCtx = new AudioClass();
+        }
+        if (this.audioCtx && this.audioCtx.state === 'suspended') {
+            this.audioCtx.resume().catch(() => {});
+        }
+    },
+
+    toggle() {
+        this.enabled = !this.enabled;
+        try {
+            localStorage.setItem('events_sound_enabled', this.enabled ? 'true' : 'false');
+        } catch (_) {}
+        this.updateUI();
+        if (this.enabled) {
+            this.playPop();
+            showToast('Sound effects enabled 🔊');
+        } else {
+            showToast('Sound effects muted 🔇');
+        }
+    },
+
+    updateUI() {
+        const icon = document.getElementById('sound-icon');
+        const btn  = document.getElementById('btn-sound-toggle');
+        if (icon) icon.textContent = this.enabled ? '🔊' : '🔇';
+        if (btn) btn.title = this.enabled ? 'Sound Effects: On' : 'Sound Effects: Muted';
+    },
+
+    playPop() {
+        if (!this.enabled) return;
+        try {
+            this.init();
+            if (!this.audioCtx) return;
+            const now = this.audioCtx.currentTime;
+            const osc = this.audioCtx.createOscillator();
+            const gain = this.audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(520, now);
+            osc.frequency.exponentialRampToValueAtTime(300, now + 0.05);
+
+            gain.gain.setValueAtTime(0.001, now);
+            gain.gain.exponentialRampToValueAtTime(0.18, now + 0.01);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.06);
+
+            osc.connect(gain);
+            gain.connect(this.audioCtx.destination);
+            osc.start(now);
+            osc.stop(now + 0.07);
+        } catch (_) {}
+    },
+
+    playWhoosh() {
+        if (!this.enabled) return;
+        try {
+            this.init();
+            if (!this.audioCtx) return;
+            const now = this.audioCtx.currentTime;
+            const osc = this.audioCtx.createOscillator();
+            const gain = this.audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(360, now);
+            osc.frequency.exponentialRampToValueAtTime(140, now + 0.12);
+
+            gain.gain.setValueAtTime(0.001, now);
+            gain.gain.exponentialRampToValueAtTime(0.15, now + 0.02);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.14);
+
+            osc.connect(gain);
+            gain.connect(this.audioCtx.destination);
+            osc.start(now);
+            osc.stop(now + 0.15);
+        } catch (_) {}
+    },
+
+    playCelebrate() {
+        if (!this.enabled) return;
+        try {
+            this.init();
+            if (!this.audioCtx) return;
+            const now = this.audioCtx.currentTime;
+            const chords = [
+                { f: 523.25, start: 0.00, dur: 0.12 },
+                { f: 659.25, start: 0.08, dur: 0.14 },
+                { f: 783.99, start: 0.16, dur: 0.20 },
+                { f: 1046.50, start: 0.24, dur: 0.35 }
+            ];
+            chords.forEach(n => {
+                const osc = this.audioCtx.createOscillator();
+                const gain = this.audioCtx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(n.f, now + n.start);
+
+                gain.gain.setValueAtTime(0.001, now + n.start);
+                gain.gain.exponentialRampToValueAtTime(0.18, now + n.start + 0.02);
+                gain.gain.exponentialRampToValueAtTime(0.0001, now + n.start + n.dur);
+
+                osc.connect(gain);
+                gain.connect(this.audioCtx.destination);
+                osc.start(now + n.start);
+                osc.stop(now + n.start + n.dur + 0.02);
+            });
+        } catch (_) {}
+    }
+};
+
+/* =====================================================
+   CONFETTI CELEBRATION ENGINE (60 FPS Canvas)
+===================================================== */
+const CanvasConfetti = {
+    canvas: null,
+    ctx: null,
+    particles: [],
+    animationId: null,
+
+    init() {
+        if (typeof document === 'undefined') return;
+        if (!this.canvas) {
+            this.canvas = document.getElementById('confetti-canvas');
+            if (this.canvas && typeof this.canvas.getContext === 'function') {
+                this.ctx = this.canvas.getContext('2d');
+            }
+        }
+    },
+
+    burst() {
+        this.init();
+        if (!this.canvas || !this.ctx || typeof window === 'undefined') return;
+
+        this.canvas.width = window.innerWidth || 800;
+        this.canvas.height = window.innerHeight || 600;
+        this.canvas.style.display = 'block';
+
+        const colors = ['#ff4444', '#ff8c00', '#e8b030', '#4a9eff', '#3dd68c', '#a371f7', '#ffffff'];
+        this.particles = [];
+        const count = 45;
+
+        for (let i = 0; i < count; i++) {
+            this.particles.push({
+                x: this.canvas.width * (0.3 + Math.random() * 0.4),
+                y: this.canvas.height * 0.35,
+                vx: (Math.random() - 0.5) * 8,
+                vy: (Math.random() - 0.8) * 9 - 2,
+                size: Math.random() * 7 + 4,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                rotation: Math.random() * 360,
+                rotSpeed: (Math.random() - 0.5) * 10,
+                opacity: 1
+            });
+        }
+
+        if (this.animationId && typeof cancelAnimationFrame === 'function') {
+            cancelAnimationFrame(this.animationId);
+        }
+        const startTime = (typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now();
+
+        const animate = (now) => {
+            const elapsed = now - startTime;
+            if (elapsed > 1800) {
+                this.canvas.style.display = 'none';
+                if (this.ctx && this.ctx.clearRect) {
+                    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                }
+                this.animationId = null;
+                return;
+            }
+
+            if (this.ctx && this.ctx.clearRect) {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                this.particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vy += 0.22;
+                    p.rotation += p.rotSpeed;
+                    p.opacity = Math.max(0, 1 - (elapsed / 1800));
+
+                    this.ctx.save();
+                    this.ctx.translate(p.x, p.y);
+                    this.ctx.rotate((p.rotation * Math.PI) / 180);
+                    this.ctx.fillStyle = p.color;
+                    this.ctx.globalAlpha = p.opacity;
+                    this.ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.7);
+                    this.ctx.restore();
+                });
+            }
+
+            if (typeof requestAnimationFrame === 'function') {
+                this.animationId = requestAnimationFrame(animate);
+            }
+        };
+
+        if (typeof requestAnimationFrame === 'function') {
+            this.animationId = requestAnimationFrame(animate);
+        }
+    }
+};
+
+/* =====================================================
+   HELPERS
+===================================================== */
+function uid() {
+    try { return crypto.randomUUID(); } catch(_) {
+        return Math.random().toString(36).slice(2) + Date.now().toString(36);
+    }
+}
+
+function todayMid() {
+    const d = new Date();
+    d.setHours(0,0,0,0);
+    return d;
+}
+
+function daysLeft(dateStr) {
+    const t = new Date(dateStr + 'T00:00:00');
+    return Math.round((t - todayMid()) / 864e5);
+}
+
+function progress(dateStr) {
+    const d = daysLeft(dateStr);
+    if (d <= 0)  return 100;
+    if (d >= 30) return 0;
+    return Math.round(((30 - d) / 30) * 100);
+}
+
+function urgencyClass(d) {
+    if (d === 0)  return 'u-today';
+    if (d <= 3)   return 'u-high';
+    if (d <= 7)   return 'u-medium';
+    if (d <= 14)  return 'u-low';
+    if (d <= 30)  return 'u-future';
+    return 'u-far';
+}
+
+function badgeText(evt) {
+    const d = daysLeft(evt.date);
+    if (d === 0)  return liveCountdown(evt.date);
+    if (d > 0)    return d + 'd left';
+    return Math.abs(d) + 'd ago';
+}
+
+function liveCountdown(dateStr) {
+    const end = new Date(dateStr + 'T23:59:59');
+    const diff = end - Date.now();
+    if (diff <= 0) return 'Today!';
+    const h = Math.floor(diff / 36e5);
+    const m = Math.floor((diff % 36e5) / 6e4);
+    return h + 'h ' + String(m).padStart(2,'0') + 'm';
+}
+
+function fmtDate(s) {
+    return new Date(s + 'T00:00:00').toLocaleDateString('en-GB',
+        { day:'numeric', month:'short', year:'numeric' });
+}
+
+function esc(s) {
+    return String(s)
+        .replace(/&/g,'&amp;')
+        .replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;')
+        .replace(/"/g,'&quot;');
+}
+
+/* =====================================================
+   TOAST NOTIFICATION
+===================================================== */
+function showToast(msg, options) {
+    options = options || {};
+    const toast = document.getElementById('toast');
+    if (!toast) return;
+    clearTimeout(toastTimer);
+
+    let html = '<span>' + esc(msg) + '</span>';
+    if (options.actionText && options.onAction) {
+        html += '<button class="toast-btn" id="toast-action-btn">' + esc(options.actionText) + '</button>';
+    }
+    toast.innerHTML = html;
+
+    if (options.actionText && options.onAction) {
+        const actionBtn = document.getElementById('toast-action-btn');
+        if (actionBtn) {
+            actionBtn.onclick = function(e) {
+                e.stopPropagation();
+                options.onAction();
+                toast.classList.remove('show');
+            };
+        }
+    }
+
+    toast.classList.add('show');
+    toastTimer = setTimeout(function() {
+        toast.classList.remove('show');
+    }, options.duration || 4500);
+}
+
+/* =====================================================
+   STORAGE
+===================================================== */
+function syncToAndroidWidget() {
+    try {
+        if (typeof window !== 'undefined' && window.AndroidWidget && typeof window.AndroidWidget.syncEvents === 'function') {
+            window.AndroidWidget.syncEvents(JSON.stringify(events));
+        }
+    } catch(err) {
+        console.warn('Widget sync:', err);
+    }
+}
+
+function load() {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+        try {
+            events = JSON.parse(raw);
+        } catch(_) {
+            events = [];
+        }
+    } else {
+        events = SAMPLES.map((e,i) => ({ ...e, id: uid(), createdAt: Date.now()+i }));
+        save();
+    }
+    syncToAndroidWidget();
+}
+
+function save() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(events));
+    syncToAndroidWidget();
+}
+
+/* =====================================================
+   SORT & FILTER
+===================================================== */
+function sortedFiltered() {
+    let evts = activeFilter === 'all'
+        ? [...events]
+        : events.filter(e => (e.category || 'general') === activeFilter);
+
+    if (searchQuery && searchQuery.trim()) {
+        const q = searchQuery.toLowerCase().trim();
+        evts = evts.filter(e => {
+            const name = (e.name || '').toLowerCase();
+            const notes = (e.notes || '').toLowerCase();
+            const catObj = CATS[e.category] || CATS.general;
+            const catLabel = (catObj.label || '').toLowerCase();
+            return name.includes(q) || notes.includes(q) || catLabel.includes(q);
+        });
+    }
+
+    return evts.sort((a, b) => {
+        const da = daysLeft(a.date), db = daysLeft(b.date);
+        if (da >= 0 && db >= 0) return da - db || a.name.localeCompare(b.name);
+        if (da < 0  && db < 0)  return db - da;
+        return da >= 0 ? -1 : 1;
+    });
+}
+
+function updateFilterCounts() {
+    const activeEvents = events.filter(e => daysLeft(e.date) >= 0);
+    const counts = { all: activeEvents.length };
+    Object.keys(CATS).forEach(function(k) { counts[k] = 0; });
+
+    activeEvents.forEach(function(e) {
+        const k = (e.category && CATS[e.category]) ? e.category : 'general';
+        counts[k] = (counts[k] || 0) + 1;
+    });
+
+    const cntAll = document.getElementById('cnt-all');
+    if (cntAll) cntAll.textContent = counts.all;
+
+    Object.keys(CATS).forEach(function(k) {
+        const el = document.getElementById('cnt-' + k);
+        if (el) el.textContent = counts[k] || 0;
+    });
+}
+
+/* =====================================================
+   CARD HTML
+===================================================== */
+function cardHtml(evt, archived) {
+    const d   = daysLeft(evt.date);
+    const uc  = archived ? 'u-far archived' : urgencyClass(d);
+    const pls = (!archived && d >= 0 && d <= 3) ? 'pulsing' : '';
+    const cat = CATS[evt.category] || CATS.general;
+    const pg  = progress(evt.date);
+    const pgLabel = archived ? '100% elapsed' : pg + '% to event';
+    const badge = archived ? Math.abs(d)+'d ago' : badgeText(evt);
+    const celebrateAttr = (!archived && d === 0) ? ' onclick="celebrateToday(event)" title="🎉 Celebrate Today!" style="cursor:pointer;"' : '';
+    const notes = evt.notes
+        ? '<div class="card-notes">📝 ' + esc(evt.notes) + '</div>'
+        : '';
+
+    return '<div class="card-wrapper" data-id="' + evt.id + '">'
+        + '<div class="card-swipe-bg">'
+        +   '<div class="swipe-trash-content">'
+        +     '<span class="swipe-trash-icon">🗑️</span>'
+        +     '<span class="swipe-trash-text">Release to delete</span>'
+        +   '</div>'
+        + '</div>'
+        + '<div class="card ' + uc + ' ' + pls + '" data-id="' + evt.id + '" onclick="toggleCard(\'' + evt.id + '\',event)">'
+        + '<div class="card-inner">'
+        +   '<div class="card-top">'
+        +     '<div class="cat-tag"><span class="cat-icon">' + cat.icon + '</span><span>' + cat.label + '</span></div>'
+        +     '<div class="days-badge" id="badge-' + evt.id + '"' + celebrateAttr + '>' + badge + '</div>'
+        +   '</div>'
+        +   '<div class="card-name">' + esc(evt.name) + '</div>'
+        +   '<div class="card-date">📅 ' + fmtDate(evt.date) + '</div>'
+        +   notes
+        +   '<div class="prog-wrap">'
+        +     '<div class="prog-meta"><span>Progress</span><span>' + pgLabel + '</span></div>'
+        +     '<div class="prog-track"><div class="prog-fill" style="width:' + pg + '%"></div></div>'
+        +   '</div>'
+        + '</div>'
+        + '<div class="card-actions">'
+        +   '<button class="btn-share" onclick="doShareEvent(\'' + evt.id + '\',event)">↗️ Share</button>'
+        +   '<button class="btn-edit" onclick="doEdit(\'' + evt.id + '\',event)">✏️ Edit</button>'
+        +   '<button class="btn-del"  onclick="doDelPrompt(\'' + evt.id + '\',event)">🗑️ Delete</button>'
+        + '</div>'
+        + '</div>'
+        + '</div>';
+}
+
+/* =====================================================
+   REAL-TIME SWIPE-TO-DELETE GESTURE
+===================================================== */
+function attachSwipeHandlers(cardEl) {
+    if (cardEl._swipeAttached) return;
+    cardEl._swipeAttached = true;
+
+    const wrapper = cardEl.closest('.card-wrapper');
+    if (!wrapper) return;
+    const trashContent = wrapper.querySelector('.swipe-trash-content');
+
+    let startX = 0;
+    let startY = 0;
+    let currentX = 0;
+    let isTracking = false;
+    let isSwiping = false;
+    let pointerId = null;
+    let cardWidth = 0;
+
+    cardEl.addEventListener('pointerdown', function(e) {
+        if (e.target.closest('button, input, select, textarea, a')) return;
+        if (e.button !== 0) return; // Primary button only
+
+        startX = e.clientX;
+        startY = e.clientY;
+        currentX = 0;
+        isTracking = true;
+        isSwiping = false;
+        pointerId = e.pointerId;
+        cardWidth = cardEl.offsetWidth;
+        cardEl.style.transition = 'none';
+    });
+
+    cardEl.addEventListener('pointermove', function(e) {
+        if (!isTracking || e.pointerId !== pointerId) return;
+
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+
+        if (!isSwiping) {
+            if (Math.abs(dx) > 8 || Math.abs(dy) > 8) {
+                if (Math.abs(dx) > Math.abs(dy) && dx < 0) {
+                    isSwiping = true;
+                    cardEl.classList.add('swiping');
+                    try { cardEl.setPointerCapture(pointerId); } catch (_) {}
+                } else {
+                    isTracking = false;
+                    return;
+                }
+            } else {
+                return;
+            }
+        }
+
+        // Swiping left: 1:1 direct tracking
+        currentX = dx < 0 ? dx : dx * 0.12;
+        cardEl.style.transform = 'translateX(' + currentX + 'px)';
+
+        const absDx = Math.abs(currentX);
+        const threshold = cardWidth * 0.35;
+        const scale = Math.min(0.75 + (absDx / cardWidth) * 1.3, 1.4);
+
+        if (trashContent) {
+            trashContent.style.transform = 'scale(' + scale + ')';
+            if (absDx >= threshold) {
+                trashContent.classList.add('threshold-met');
+            } else {
+                trashContent.classList.remove('threshold-met');
+            }
+        }
+    });
+
+    function endSwipe(e) {
+        if (!isTracking && !isSwiping) return;
+        const wasSwiping = isSwiping;
+        isTracking = false;
+        isSwiping = false;
+
+        try { cardEl.releasePointerCapture(pointerId); } catch (_) {}
+        cardEl.classList.remove('swiping');
+
+        if (!wasSwiping) {
+            cardEl.style.transform = '';
+            cardEl.style.transition = '';
+            return;
+        }
+
+        cardEl._justSwiped = true;
+        setTimeout(function() { cardEl._justSwiped = false; }, 260);
+
+        const threshold = cardWidth * 0.35;
+        const absDx = Math.abs(currentX);
+
+        if (absDx >= threshold) {
+            // Dragged past threshold (>35%): card flies off-screen
+            cardEl.style.transition = 'transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1)';
+            cardEl.style.transform = 'translateX(-115%)';
+
+            setTimeout(function() {
+                // Row height collapses smoothly
+                const h = wrapper.offsetHeight;
+                wrapper.style.height = h + 'px';
+                wrapper.offsetHeight; // Force reflow
+                wrapper.style.transition = 'height 0.3s cubic-bezier(0.4, 0, 0.2, 1), margin-bottom 0.3s ease, opacity 0.25s ease';
+                wrapper.style.height = '0px';
+                wrapper.style.marginBottom = '0px';
+                wrapper.style.opacity = '0';
+
+                setTimeout(function() {
+                    executeSwipeDelete(wrapper.dataset.id);
+                }, 300);
+            }, 180);
+        } else {
+            // Released before threshold: card snaps back smoothly to origin
+            cardEl.style.transition = 'transform 0.25s cubic-bezier(0.25, 1, 0.5, 1)';
+            cardEl.style.transform = 'translateX(0px)';
+            if (trashContent) {
+                trashContent.classList.remove('threshold-met');
+                trashContent.style.transform = '';
+            }
+            setTimeout(function() {
+                cardEl.style.transition = '';
+            }, 260);
+        }
+    }
+
+    cardEl.addEventListener('pointerup', endSwipe);
+    cardEl.addEventListener('pointercancel', endSwipe);
+}
+
+function executeSwipeDelete(id) {
+    const idx = events.findIndex(function(e) { return e.id === id; });
+    if (idx === -1) return;
+    const deleted = events[idx];
+    events.splice(idx, 1);
+    save();
+    render();
+    SoundFX.playWhoosh();
+
+    showToast('Deleted "' + deleted.name + '"', {
+        actionText: 'Undo',
+        onAction: function() {
+            events.splice(Math.min(idx, events.length), 0, deleted);
+            save();
+            render();
+            SoundFX.playPop();
+            showToast('Restored "' + deleted.name + '"');
+        }
+    });
+}
+
+/* =====================================================
+   SEARCH HELPER
+===================================================== */
+function clearSearch() {
+    searchQuery = '';
+    const input = document.getElementById('search-input');
+    if (input) {
+        input.value = '';
+        input.focus();
+    }
+    render();
+}
+
+/* =====================================================
+   RENDER
+===================================================== */
+function render() {
+    const all      = sortedFiltered();
+    const active   = all.filter(e => daysLeft(e.date) >= 0);
+    const archived = all.filter(e => daysLeft(e.date) < 0);
+
+    /* Search UI indicators */
+    const searchClear = document.getElementById('search-clear');
+    const searchBadge = document.getElementById('search-badge');
+    if (searchQuery.trim()) {
+        if (searchClear) searchClear.style.display = 'flex';
+        if (searchBadge) {
+            searchBadge.style.display = 'inline-block';
+            searchBadge.textContent = active.length + ' found';
+        }
+    } else {
+        if (searchClear) searchClear.style.display = 'none';
+        if (searchBadge) searchBadge.style.display = 'none';
+    }
+
+    /* Active section */
+    const aList = document.getElementById('active-list');
+    const aHdr  = document.getElementById('active-hdr');
+    if (active.length) {
+        aHdr.textContent = (searchQuery.trim() ? 'Matching Upcoming — ' : 'Upcoming — ') + active.length + ' event' + (active.length !== 1 ? 's' : '');
+        aList.innerHTML  = active.map(e => cardHtml(e, false)).join('');
+    } else {
+        aHdr.textContent = '';
+        if (searchQuery.trim()) {
+            aList.innerHTML = '<div class="empty"><span class="empty-icon">🔍</span><p>No events match "<strong>' + esc(searchQuery) + '</strong>".<br><button type="button" onclick="clearSearch()" class="toast-btn" style="margin-top:12px;padding:6px 14px;border-radius:12px;cursor:pointer;">Clear Search</button></p></div>';
+        } else {
+            aList.innerHTML = '<div class="empty"><span class="empty-icon">🗓️</span><p>No upcoming events.<br>Tap <strong>+</strong> to add one!</p></div>';
+        }
+    }
+
+    /* Archived section */
+    const archWrap = document.getElementById('archive-wrap');
+    const archList = document.getElementById('archived-list');
+    const archLbl  = document.getElementById('arch-label');
+    if (archived.length) {
+        archWrap.style.display = 'block';
+        archLbl.textContent = (searchQuery.trim() ? 'Matching Past Events (' : 'Past Events (') + archived.length + ')';
+        archList.innerHTML = archived.map(e => cardHtml(e, true)).join('');
+    } else {
+        archWrap.style.display = 'none';
+    }
+
+    /* Header chip */
+    const upCount = events.filter(e => daysLeft(e.date) >= 0).length;
+    const hdrChip = document.getElementById('hdr-chip');
+    if (hdrChip) hdrChip.textContent = upCount + ' upcoming';
+
+    /* Attach real-time swipe handlers */
+    document.querySelectorAll('.card').forEach(attachSwipeHandlers);
+
+    /* Update live counts on filter pills */
+    updateFilterCounts();
+
+    setupLive();
+}
+
+/* Live countdown for today's events */
+function setupLive() {
+    clearInterval(liveTimer);
+    const hasToday = events.some(e => daysLeft(e.date) === 0);
+    if (!hasToday) return;
+    liveTimer = setInterval(function() {
+        events.forEach(function(ev) {
+            if (daysLeft(ev.date) === 0) {
+                const el = document.getElementById('badge-' + ev.id);
+                if (el) el.textContent = liveCountdown(ev.date);
+            }
+        });
+    }, 30000);
+}
+
+/* =====================================================
+   CARD INTERACTIONS (ACCORDION)
+===================================================== */
+function toggleCard(id, e) {
+    e.stopPropagation();
+    const card = document.querySelector('.card[data-id="' + id + '"]');
+    if (!card) return;
+    if (card._justSwiped) return;
+    const wasOpen = card.classList.contains('open');
+    document.querySelectorAll('.card.open').forEach(function(c) { c.classList.remove('open'); });
+    if (!wasOpen) {
+        card.classList.add('open');
+        SoundFX.playPop();
+        const ev = events.find(function(item) { return item.id === id; });
+        if (ev && daysLeft(ev.date) === 0) {
+            SoundFX.playCelebrate();
+            CanvasConfetti.burst();
+        }
+    }
+}
+
+/* =====================================================
+   QUICK DATE CHIPS & MODAL
+===================================================== */
+function highlightActiveQuickChip(days) {
+    if (typeof document === 'undefined') return;
+    document.querySelectorAll('.q-chip').forEach(function(c) {
+        if (parseInt(c.dataset.days, 10) === days) {
+            c.classList.add('active');
+        } else {
+            c.classList.remove('active');
+        }
+    });
+}
+
+function setQuickDate(days) {
+    const d = new Date();
+    d.setDate(d.getDate() + days);
+    const dateStr = formatLocalDate(d);
+    const input = document.getElementById('f-date');
+    if (input) {
+        input.value = dateStr;
+        highlightActiveQuickChip(days);
+        SoundFX.playPop();
+    }
+}
+
+function openModal(evtId) {
+    const modal   = document.getElementById('modal');
+    const overlay = document.getElementById('overlay');
+    const title   = document.getElementById('modal-title');
+    const saveLbl = document.getElementById('btn-save');
+
+    document.getElementById('f-id').value    = '';
+    document.getElementById('f-name').value  = '';
+    document.getElementById('f-date').value  = '';
+    document.getElementById('f-cat').value   = 'general'; // Default saving option is 'General'
+    document.getElementById('f-notes').value = '';
+    highlightActiveQuickChip(-999);
+
+    if (evtId) {
+        const ev = events.find(function(e) { return e.id === evtId; });
+        if (ev) {
+            title.textContent   = '✏️ Edit Event';
+            saveLbl.textContent = 'Save Changes';
+            document.getElementById('f-id').value    = ev.id;
+            document.getElementById('f-name').value  = ev.name;
+            document.getElementById('f-date').value  = ev.date;
+            document.getElementById('f-cat').value   = ev.category || 'general';
+            document.getElementById('f-notes').value = ev.notes || '';
+            const d = daysLeft(ev.date);
+            highlightActiveQuickChip(d);
+        }
+    } else {
+        title.textContent   = '✨ New Event';
+        saveLbl.textContent = 'Save Event';
+        // Default quick date to Today
+        setQuickDate(0);
+    }
+
+    overlay.classList.add('on');
+    modal.classList.add('on');
+    setTimeout(function() { document.getElementById('f-name').focus(); }, 420);
+}
+
+function closeModal() {
+    document.getElementById('modal').classList.remove('on');
+    document.getElementById('overlay').classList.remove('on');
+}
+
+function doEdit(id, e) {
+    e.stopPropagation();
+    document.querySelectorAll('.card.open').forEach(function(c) { c.classList.remove('open'); });
+    openModal(id);
+}
+
+/* =====================================================
+   FORM SUBMIT
+===================================================== */
+document.getElementById('ev-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const id    = document.getElementById('f-id').value.trim();
+    const name  = document.getElementById('f-name').value.trim();
+    const date  = document.getElementById('f-date').value;
+    const cat   = document.getElementById('f-cat').value || 'general';
+    const notes = document.getElementById('f-notes').value.trim();
+
+    if (!name || !date) return;
+
+    if (id) {
+        const idx = events.findIndex(function(ev) { return ev.id === id; });
+        if (idx > -1) events[idx] = Object.assign({}, events[idx], { name: name, date: date, category: cat, notes: notes });
+    } else {
+        events.push({ id: uid(), name: name, date: date, category: cat, notes: notes, createdAt: Date.now() });
+    }
+
+    save();
+    closeModal();
+    render();
+    showToast(id ? 'Event updated' : 'Event created');
+});
+
+/* =====================================================
+   DELETE MODAL PROMPT
+===================================================== */
+function doDelPrompt(id, e) {
+    e.stopPropagation();
+    const ev = events.find(function(ev) { return ev.id === id; });
+    if (!ev) return;
+    pendingDelId = id;
+    document.getElementById('del-msg').textContent = '"' + ev.name + '" will be permanently removed.';
+    document.getElementById('del-sheet').classList.add('on');
+}
+
+document.getElementById('del-ok').addEventListener('click', function() {
+    if (pendingDelId) {
+        const idToDelete = pendingDelId;
+        const evIndex = events.findIndex(function(e) { return e.id === idToDelete; });
+        if (evIndex > -1) {
+            const removed = events.splice(evIndex, 1)[0];
+            save();
+            render();
+            showToast('Deleted "' + removed.name + '"', {
+                actionText: 'Undo',
+                onAction: function() {
+                    events.splice(Math.min(evIndex, events.length), 0, removed);
+                    save();
+                    render();
+                    showToast('Restored "' + removed.name + '"');
+                }
+            });
+        }
+        pendingDelId = null;
+    }
+    document.getElementById('del-sheet').classList.remove('on');
+});
+
+['del-cancel','del-bg'].forEach(function(id) {
+    const el = document.getElementById(id);
+    if (el) {
+        el.addEventListener('click', function() {
+            pendingDelId = null;
+            document.getElementById('del-sheet').classList.remove('on');
+        });
+    }
+});
+
+/* =====================================================
+   BACKUP & RESTORE (IMPORT / EXPORT)
+===================================================== */
+function exportData() {
+    try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        const dataToExport = raw ? JSON.parse(raw) : events;
+        const now = new Date();
+        const yyyy = now.getFullYear();
+        const mm = String(now.getMonth() + 1).padStart(2, '0');
+        const dd = String(now.getDate()).padStart(2, '0');
+        const filename = 'events_backup_' + yyyy + '-' + mm + '-' + dd + '.json';
+
+        const blob = new Blob([JSON.stringify(dataToExport, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast('Backup saved as ' + filename);
+    } catch (err) {
+        showToast('Export failed: ' + err.message);
+    }
+}
+
+function handleFileSelect(e) {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(evt) {
+        try {
+            const parsed = JSON.parse(evt.target.result);
+            let items = [];
+            if (Array.isArray(parsed)) {
+                items = parsed;
+            } else if (parsed && Array.isArray(parsed.events)) {
+                items = parsed.events;
+            } else {
+                throw new Error('File does not contain a valid events list.');
+            }
+
+            const validList = items.filter(function(item) {
+                return item && typeof item === 'object' &&
+                       typeof item.name === 'string' && item.name.trim().length > 0 &&
+                       typeof item.date === 'string' && /^\d{4}-\d{2}-\d{2}/.test(item.date);
+            }).map(function(item) {
+                return {
+                    id: item.id || uid(),
+                    name: item.name.trim(),
+                    date: item.date.slice(0, 10),
+                    category: (item.category && CATS[item.category]) ? item.category : 'general',
+                    notes: typeof item.notes === 'string' ? item.notes.trim() : '',
+                    createdAt: item.createdAt || Date.now()
+                };
+            });
+
+            if (validList.length === 0) {
+                alert('No valid events found in the backup file.');
+                return;
+            }
+
+            pendingImportEvents = validList;
+            openImportModal(validList.length);
+        } catch (err) {
+            alert('Failed to parse backup file: ' + (err.message || 'Invalid format'));
+        } finally {
+            e.target.value = '';
+        }
+    };
+    reader.readAsText(file);
+}
+
+function openImportModal(count) {
+    const sheet = document.getElementById('import-sheet');
+    const msg = document.getElementById('import-msg');
+    msg.textContent = 'Found ' + count + ' event' + (count !== 1 ? 's' : '') + ' in backup file. Choose how to restore:';
+    sheet.classList.add('on');
+}
+
+function closeImportModal() {
+    document.getElementById('import-sheet').classList.remove('on');
+    pendingImportEvents = null;
+}
+
+function executeImportMerge() {
+    if (!pendingImportEvents || !pendingImportEvents.length) return;
+    let addedCount = 0;
+    let skippedCount = 0;
+
+    pendingImportEvents.forEach(function(imported) {
+        const isDup = events.some(function(ex) {
+            return (ex.id && imported.id && ex.id === imported.id) ||
+                   (ex.name.toLowerCase().trim() === imported.name.toLowerCase().trim() && ex.date === imported.date);
+        });
+
+        if (isDup) {
+            skippedCount++;
+        } else {
+            events.push(imported);
+            addedCount++;
+        }
+    });
+
+    save();
+    render();
+    closeImportModal();
+    showToast('Imported ' + addedCount + ' new event' + (addedCount !== 1 ? 's' : '') + (skippedCount > 0 ? ' (' + skippedCount + ' duplicate' + (skippedCount !== 1 ? 's' : '') + ' skipped)' : ''));
+}
+
+function executeImportReplace() {
+    if (!pendingImportEvents || !pendingImportEvents.length) return;
+    events = pendingImportEvents.slice();
+    save();
+    render();
+    closeImportModal();
+    showToast('Replaced all events with ' + events.length + ' event' + (events.length !== 1 ? 's' : ''));
+}
+
+document.getElementById('btn-export').addEventListener('click', exportData);
+document.getElementById('btn-import').addEventListener('click', function() {
+    document.getElementById('file-import').click();
+});
+document.getElementById('file-import').addEventListener('change', handleFileSelect);
+document.getElementById('import-btn-merge').addEventListener('click', executeImportMerge);
+document.getElementById('import-btn-replace').addEventListener('click', executeImportReplace);
+['import-cancel', 'import-bg'].forEach(function(id) {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('click', closeImportModal);
+});
+
+/* =====================================================
+   FILTER PILLS
+===================================================== */
+document.querySelectorAll('.pill').forEach(function(pill) {
+    pill.addEventListener('click', function() {
+        document.querySelectorAll('.pill').forEach(function(p) { p.classList.remove('active'); });
+        this.classList.add('active');
+        activeFilter = this.dataset.cat;
+        render();
+    });
+});
+
+/* =====================================================
+   ARCHIVED TOGGLE
+===================================================== */
+document.getElementById('arch-toggle').addEventListener('click', function() {
+    this.classList.toggle('open');
+    document.getElementById('archived-list').classList.toggle('open');
+});
+
+/* =====================================================
+   FAB & OVERLAY
+===================================================== */
+document.getElementById('fab').addEventListener('click', function() { openModal(null); });
+document.getElementById('btn-cancel').addEventListener('click', closeModal);
+document.getElementById('overlay').addEventListener('click', closeModal);
+
+/* Collapse expanded cards on outside tap */
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.card')) {
+        document.querySelectorAll('.card.open').forEach(function(c) { c.classList.remove('open'); });
+    }
+});
+
+/* =====================================================
+   INIT
+===================================================== */
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB', {
+    weekday:'long', day:'numeric', month:'long', year:'numeric'
+});
+
+/* =====================================================
+   WEB SHARE API & CELEBRATION
+===================================================== */
+async function doShareApp() {
+    SoundFX.playPop();
+    const appUrl = (typeof window !== 'undefined' && window.location) ? window.location.href : 'https://hamidgazi.github.io/events/';
+    const shareData = {
+        title: 'Events Countdown',
+        text: 'Track birthdays, deadlines, meetings, and upcoming events with real-time countdowns.',
+        url: appUrl
+    };
+
+    if (typeof navigator !== 'undefined' && navigator.share) {
+        try {
+            await navigator.share(shareData);
+            return;
+        } catch (err) {
+            if (err.name === 'AbortError') return;
+        }
+    }
+
+    try {
+        if (typeof navigator !== 'undefined' && navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(appUrl);
+            showToast('App link copied to clipboard! 📋');
+        } else {
+            prompt('Copy app link:', appUrl);
+        }
+    } catch (_) {
+        prompt('Copy app link:', appUrl);
+    }
+}
+
+async function doShareEvent(id, e) {
+    if (e) e.stopPropagation();
+    SoundFX.playPop();
+
+    const evt = events.find(function(item) { return item.id === id; });
+    if (!evt) return;
+
+    const d = daysLeft(evt.date);
+    const cat = CATS[evt.category] || CATS.general;
+    let timingStr = '';
+
+    if (d === 0) timingStr = 'is TODAY! 🎉';
+    else if (d === 1) timingStr = 'is TOMORROW! ⏳';
+    else if (d > 1) timingStr = 'is in ' + d + ' days (' + fmtDate(evt.date) + ') ⏳';
+    else timingStr = 'took place ' + Math.abs(d) + ' days ago (' + fmtDate(evt.date) + ')';
+
+    let text = cat.icon + ' ' + evt.name + ' ' + timingStr;
+    if (evt.notes) {
+        text += '\n📝 ' + evt.notes;
+    }
+    const appUrl = (typeof window !== 'undefined' && window.location) ? window.location.href : 'https://hamidgazi.github.io/events/';
+    text += '\n\nTrack countdown: ' + appUrl;
+
+    const shareData = {
+        title: evt.name + ' - Events Countdown',
+        text: text,
+        url: appUrl
+    };
+
+    if (typeof navigator !== 'undefined' && navigator.share) {
+        try {
+            await navigator.share(shareData);
+            return;
+        } catch (err) {
+            if (err.name === 'AbortError') return;
+        }
+    }
+
+    try {
+        if (typeof navigator !== 'undefined' && navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(text);
+            showToast('Event countdown copied! 📋');
+        } else {
+            prompt('Copy event text:', text);
+        }
+    } catch (_) {
+        prompt('Copy event text:', text);
+    }
+}
+
+function celebrateToday(e) {
+    if (e) e.stopPropagation();
+    SoundFX.playCelebrate();
+    CanvasConfetti.burst();
+    showToast('🎉 Event is Today! Celebrate!');
+}
+
+// Sound toggle button listener
+const btnSound = document.getElementById('btn-sound-toggle');
+if (btnSound) {
+    btnSound.addEventListener('click', function() {
+        SoundFX.toggle();
+    });
+}
+
+// Share app button listener
+const btnShare = document.getElementById('btn-share-app');
+if (btnShare) {
+    btnShare.addEventListener('click', doShareApp);
+}
+
+// Search input listener
+const sInput = document.getElementById('search-input');
+if (sInput) {
+    sInput.addEventListener('input', function(e) {
+        searchQuery = e.target.value;
+        render();
+    });
+}
+
+const sClear = document.getElementById('search-clear');
+if (sClear) {
+    sClear.addEventListener('click', clearSearch);
+}
+
+// Date input change listener to update quick chips
+const fDateInput = document.getElementById('f-date');
+if (fDateInput) {
+    fDateInput.addEventListener('change', function() {
+        const val = fDateInput.value;
+        let matched = false;
+        document.querySelectorAll('.q-chip').forEach(function(c) {
+            const days = parseInt(c.dataset.days, 10);
+            const d = new Date();
+            d.setDate(d.getDate() + days);
+            if (formatLocalDate(d) === val) {
+                c.classList.add('active');
+                matched = true;
+            } else {
+                c.classList.remove('active');
+            }
+        });
+        if (!matched) highlightActiveQuickChip(-999);
+    });
+}
+
+SoundFX.updateUI();
+load();
+render();
+
+/* =====================================================
+   ONLINE AUTO-UPDATE SYSTEM (PWA & Service Worker)
+===================================================== */
+const CURRENT_APP_VERSION = "1.1.2";
+
+// Display current version in footer on load
+const versionBadge = document.getElementById('app-version-display');
+if (versionBadge) versionBadge.textContent = 'v' + CURRENT_APP_VERSION;
+
+async function checkForAppUpdates(isManual = false) {
+    const statusText = document.getElementById('footer-status-text');
+    const btnCheck   = document.getElementById('btn-manual-update-check');
+
+    if (isManual) {
+        if (btnCheck)   btnCheck.textContent = 'Checking...';
+        if (statusText) statusText.textContent = 'Checking remote server for updates...';
+    }
+
+    try {
+        const response = await fetch('version.json?_t=' + Date.now(), { cache: 'no-store' });
+        if (response.ok) {
+            const data = await response.json();
+            const remoteVersion = data.version;
+
+            if (remoteVersion && remoteVersion !== CURRENT_APP_VERSION) {
+                // 1. Show Top Header Banner
+                const banner = document.getElementById('updateBanner');
+                const txt = document.getElementById('txtNewVersion');
+                if (txt) txt.textContent = 'v' + remoteVersion;
+                if (banner) banner.style.display = 'flex';
+
+                // 2. AUTO-POPUP MODAL NOTIFICATION!
+                const popupModal = document.getElementById('update-popup-modal');
+                const popupVer   = document.getElementById('popup-new-version');
+                const popupLog   = document.getElementById('popup-changelog-text');
+                if (popupVer) popupVer.textContent = 'v' + remoteVersion;
+                if (popupLog && data.changelog) popupLog.textContent = data.changelog;
+                if (popupModal) popupModal.classList.add('on');
+
+                if (statusText) {
+                    statusText.innerHTML = '<strong style="color:#3dd68c;">New version v' + remoteVersion + ' available!</strong> Tap Update Now.';
+                }
+            } else {
+                if (statusText) statusText.textContent = 'App is up to date (v' + CURRENT_APP_VERSION + ')';
+                if (isManual) alert('You are already using the latest version (v' + CURRENT_APP_VERSION + ')!');
+            }
+        }
+    } catch (err) {
+        if (statusText) statusText.textContent = 'Running offline (v' + CURRENT_APP_VERSION + ')';
+        if (isManual) alert('Could not reach update server. Check your internet connection.');
+    } finally {
+        if (isManual && btnCheck) {
+            btnCheck.textContent = '🔄 Check for Updates';
+        }
+    }
+}
+
+async function applyAppUpdate() {
+    if ('caches' in window) {
+        try {
+            const keys = await caches.keys();
+            await Promise.all(keys.map(k => caches.delete(k)));
+        } catch(e) {}
+    }
+    if ('serviceWorker' in navigator) {
+        try {
+            const regs = await navigator.serviceWorker.getRegistrations();
+            await Promise.all(regs.map(r => r.unregister()));
+        } catch(e) {}
+    }
+    window.location.href = window.location.pathname + '?_v=' + Date.now();
+}
+
+// Button listeners
+const btnReloadUpdate = document.getElementById('btnReloadUpdate');
+if (btnReloadUpdate) btnReloadUpdate.addEventListener('click', applyAppUpdate);
+
+const btnPopupUpdate = document.getElementById('btn-popup-update-now');
+if (btnPopupUpdate) btnPopupUpdate.addEventListener('click', applyAppUpdate);
+
+const btnPopupLater = document.getElementById('btn-popup-later');
+if (btnPopupLater) btnPopupLater.addEventListener('click', () => {
+    document.getElementById('update-popup-modal').classList.remove('on');
+});
+
+const btnManualCheck = document.getElementById('btn-manual-update-check');
+if (btnManualCheck) btnManualCheck.addEventListener('click', () => checkForAppUpdates(true));
+
+// URL Intent Actions (e.g. launched from Widget '+' button)
+try {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('action') === 'add') {
+        setTimeout(() => openModal(), 200);
+    }
+} catch(_) {}
+
+// Auto-check for updates on startup (after 2s) & when user re-opens the app
+setTimeout(() => checkForAppUpdates(false), 2000);
+document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+        checkForAppUpdates(false);
+    }
+});
+
+// Service Worker Registration for Offline Cache & Auto-Update
+if (typeof navigator !== 'undefined' && 'serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').catch(() => {});
+    });
+}
+</script>
+
+<!-- ===== CONFETTI CANVAS ===== -->
+<canvas id="confetti-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;display:none;"></canvas>
+</body>
+</html>

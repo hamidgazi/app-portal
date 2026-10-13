@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Protected Document — Access Gate</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --card-bg: rgba(22, 27, 34, 0.9);
+      --border: rgba(240, 246, 252, 0.12);
+      --text: #f0f6fc;
+      --text-muted: #8b949e;
+      --wa-green: #25d366;
+      --wa-green-glow: rgba(37, 211, 102, 0.35);
+      --accent: #58a6ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 16px; }
+    .gate-container { width: 100%; max-width: 440px; margin: auto; display: flex; flex-direction: column; gap: 16px; }
+    .gate-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 24px 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    .gate-header { text-align: center; margin-bottom: 18px; }
+    .gate-badge { width: 60px; height: 60px; border-radius: 30px; background: rgba(37, 211, 102, 0.12); border: 1px solid rgba(37, 211, 102, 0.3); display: flex; align-items: center; justify-content: center; font-size: 28px; margin: 0 auto 12px; box-shadow: 0 0 20px var(--wa-green-glow); }
+    .gate-title { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .gate-subtitle { font-size: 13.5px; color: var(--text-muted); line-height: 1.45; }
+    .gate-steps { display: flex; justify-content: space-between; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; margin-bottom: 20px; font-size: 11.5px; color: var(--text-muted); }
+    .gate-step.active { color: #fff; font-weight: 600; }
+    .gate-input { width: 100%; background: rgba(13,17,23,0.9); border: 1px solid var(--border); border-radius: 12px; color: #fff; font-size: 16px; padding: 14px; outline: none; margin-bottom: 16px; }
+    .gate-input:focus { border-color: var(--wa-green); box-shadow: 0 0 0 3px var(--wa-green-glow); }
+    .gate-btn-wa { width: 100%; background: linear-gradient(135deg, #25d366, #128c7e); border: none; color: #fff; font-size: 15px; font-weight: 700; padding: 14px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 15px var(--wa-green-glow); }
+    .gate-btn-verify { width: 100%; background: linear-gradient(135deg, #1f6feb, #388bfd); border: none; color: #fff; font-size: 15px; font-weight: 700; padding: 14px; border-radius: 12px; cursor: pointer; }
+    .gate-pin-input { text-align: center; font-size: 26px; letter-spacing: 8px; font-weight: 700; margin: 16px 0; }
+    .gate-preview { background: rgba(37, 211, 102, 0.08); border: 1px dashed rgba(37, 211, 102, 0.3); border-radius: 12px; padding: 12px; font-size: 12.5px; color: #c9d1d9; margin-bottom: 16px; line-height: 1.45; }
+
+    /* Protected Content Area */
+    #protected-content { display: none; width: 100%; max-width: 600px; margin: auto; animation: fadeIn 0.4s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .gate-top-bar { display: flex; justify-content: space-between; align-items: center; background: rgba(37, 211, 102, 0.12); border: 1px solid rgba(37, 211, 102, 0.3); padding: 8px 14px; border-radius: 10px; margin-bottom: 14px; font-size: 12px; color: var(--wa-green); }
+  </style>
+</head>
+<body>
+
+  <!-- ======================================================== -->
+  <!-- 1. WHATSAPP ACCESS GATE (Locks the page until verified)  -->
+  <!-- ======================================================== -->
+  <div class="gate-container" id="gate-screen">
+    
+    <!-- Step 1: Name Request Screen -->
+    <div class="gate-card" id="gate-step-1">
+      <div class="gate-header">
+        <div class="gate-badge">💬</div>
+        <div class="gate-title">Protected Document</div>
+        <p class="gate-subtitle">Access is verified via WhatsApp to ensure security.</p>
+      </div>
+
+      <div class="gate-steps">
+        <span class="gate-step active">1. Your Name</span>
+        <span class="gate-step">2. Tap Send</span>
+        <span class="gate-step">3. Get PIN</span>
+      </div>
+
+      <form id="gate-name-form">
+        <label style="font-size: 12px; font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 6px;">YOUR FULL NAME</label>
+        <input type="text" id="gate-user-name" class="gate-input" placeholder="e.g. Rahul Sharma" required autofocus>
+
+        <div class="gate-preview">
+          ✉️ <b>Message Preview:</b><br>
+          <em>"Hi! Can you please share the access PIN for this project? Thanks! — [Your Name]"</em>
+        </div>
+
+        <button type="submit" class="gate-btn-wa">
+          <span>📲</span> Open WhatsApp & Tap Send
+        </button>
+      </form>
+    </div>
+
+    <!-- Step 2: Enter 6-Digit PIN Screen -->
+    <div class="gate-card" id="gate-step-2" style="display: none; text-align: center;">
+      <div class="gate-header">
+        <div class="gate-badge" style="background: rgba(88, 166, 255, 0.12); border-color: rgba(88, 166, 255, 0.3);">🔑</div>
+        <div class="gate-title">Enter 6-Digit PIN</div>
+        <p class="gate-subtitle">Check your WhatsApp chat with the owner. Enter the 6-digit PIN they sent you:</p>
+      </div>
+
+      <form id="gate-pin-form">
+        <input type="text" id="gate-pin-input" class="gate-input gate-pin-input" placeholder="••••••" maxlength="6" autofocus required>
+        <button type="submit" class="gate-btn-verify">Unlock Content 🔓</button>
+      </form>
+
+      <div style="margin-top: 16px; display: flex; justify-content: space-between;">
+        <a id="gate-reopen-wa" href="#" target="_blank" style="font-size: 12px; color: var(--wa-green); text-decoration: underline;">Re-open WhatsApp</a>
+        <button type="button" id="gate-reset-btn" style="background: none; border: none; font-size: 12px; color: var(--text-muted); cursor: pointer; text-decoration: underline;">Change Name</button>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ======================================================== -->
+  <!-- 2. YOUR PROTECTED PROJECT CONTENT GOES HERE!              -->
+  <!-- ======================================================== -->
+  <div id="protected-content">
+    <div class="gate-top-bar">
+      <span id="gate-verified-name">✅ Verified via WhatsApp</span>
+      <button type="button" id="gate-logout-btn" style="background: transparent; border: 1px solid rgba(255, 68, 68, 0.3); color: #ff5555; padding: 4px 8px; border-radius: 6px; font-size: 11px; cursor: pointer;">Lock</button>
+    </div>
+
+    <!-- **************************************************** -->
+    <!--  REPLACE THIS SECTION WITH YOUR ACTUAL PROJECT HTML  -->
+    <!-- **************************************************** -->
+    <div style="background: rgba(22, 27, 34, 0.9); border: 1px solid rgba(240, 246, 252, 0.12); border-radius: 16px; padding: 24px; text-align: center;">
+      <h1 style="font-size: 22px; margin-bottom: 8px;">🎉 Your Project Name Here</h1>
+      <p style="color: var(--text-muted); font-size: 14px;">
+        This entire area was completely protected and locked! You can put your tables, dashboards, event countdowns, or any HTML app right here.
+      </p>
+    </div>
+    <!-- **************************************************** -->
+
+  </div>
+
+
+  <!-- ======================================================== -->
+  <!-- 3. GATE ENGINE JAVASCRIPT                                -->
+  <!-- ======================================================== -->
+  <script>
+    // CONFIGURATION
+    const OWNER_PHONE = '919033200440'; // Your WhatsApp Number (9033200440)
+    const PROJECT_NAME = 'Document';    // Name of your project to display in message
+
+    let currentReqCode = localStorage.getItem('gate_active_code');
+    let currentName = localStorage.getItem('gate_active_name');
+
+    // Check if already authenticated
+    if (localStorage.getItem('gate_auth_token') && currentName) {
+      showGate(false);
+    } else if (currentReqCode && currentName) {
+      showStep(2);
+    } else {
+      showStep(1);
+    }
+
+    // Step 1: Submit Name
+    document.getElementById('gate-name-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('gate-user-name').value.trim();
+      const code = 'REQ-' + Math.floor(1000 + Math.random() * 9000);
+
+      currentReqCode = code;
+      currentName = name;
+      localStorage.setItem('gate_active_code', code);
+      localStorage.setItem('gate_active_name', name);
+
+      const msg = encodeURIComponent(
+        `Hi! 👋\n` +
+        `Can you please share the access PIN for the ${PROJECT_NAME}?\n\n` +
+        `Name: ${name}\n` +
+        `Code: ${code}\n\n` +
+        `Thanks!`
+      );
+      window.open(`https://wa.me/${OWNER_PHONE}?text=${msg}`, '_blank');
+
+      showStep(2);
+    });
+
+    // Step 2: Compute & Verify PIN
+    function computeGatePin(code) {
+      let hash = 0;
+      const str = code + 'SECRET_SALT_2026';
+      for (let i = 0; i < str.length; i++) {
+        hash = (hash * 31 + str.charCodeAt(i)) % 1000000;
+      }
+      return String(Math.abs(hash)).padStart(6, '7');
+    }
+
+    document.getElementById('gate-pin-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const entered = document.getElementById('gate-pin-input').value.trim();
+      const valid = computeGatePin(currentReqCode);
+
+      if (entered === valid) {
+        localStorage.setItem('gate_auth_token', 'TOKEN_' + Date.now());
+        showGate(false);
+      } else {
+        alert('❌ Invalid PIN! Please enter the 6-digit code received on WhatsApp.');
+      }
+    });
+
+    function showStep(step) {
+      document.getElementById('gate-step-1').style.display = (step === 1) ? 'block' : 'none';
+      document.getElementById('gate-step-2').style.display = (step === 2) ? 'block' : 'none';
+      if (step === 2) {
+        const msg = encodeURIComponent(`Hi! Can you please share the access PIN for ${PROJECT_NAME}?\nName: ${currentName}\nCode: ${currentReqCode}`);
+        document.getElementById('gate-reopen-wa').href = `https://wa.me/${OWNER_PHONE}?text=${msg}`;
+      }
+    }
+
+    function showGate(show) {
+      document.getElementById('gate-screen').style.display = show ? 'flex' : 'none';
+      document.getElementById('protected-content').style.display = show ? 'none' : 'block';
+      if (!show) {
+        document.getElementById('gate-verified-name').textContent = `✅ Verified: ${currentName}`;
+      }
+    }
+
+    function resetGate() {
+      localStorage.removeItem('gate_auth_token');
+      localStorage.removeItem('gate_active_code');
+      localStorage.removeItem('gate_active_name');
+      currentReqCode = null;
+      currentName = null;
+      showGate(true);
+      showStep(1);
+    }
+
+    document.getElementById('gate-logout-btn').addEventListener('click', resetGate);
+    document.getElementById('gate-reset-btn').addEventListener('click', resetGate);
+  </script>
+</body>
+</html>

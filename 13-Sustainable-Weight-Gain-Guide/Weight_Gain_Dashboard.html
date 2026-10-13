@@ -1,0 +1,1990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Sustainable Weight Gain & Home Hypertrophy Suite</title>
+  <style>
+    :root {
+      --bg-primary: #0a0f1d;
+      --bg-card: #131b2e;
+      --bg-card-hover: #1a253f;
+      --accent-cyan: #38bdf8;
+      --accent-emerald: #22c55e;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      line-height: 1.6;
+      padding: 1.5rem;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(34, 197, 94, 0.08));
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      backdrop-filter: blur(12px);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+      background: rgba(56, 189, 248, 0.2);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(to right, #38bdf8, #22c55e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    /* Navigation Tabs */
+    .nav-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 0.75rem;
+    }
+
+    .tab-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 0.75rem 1.25rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      user-select: none;
+      touch-action: manipulation;
+      min-height: 48px;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tab-btn:hover {
+      background: var(--bg-card-hover);
+      color: var(--text-main);
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+
+    .tab-btn.active {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+    }
+
+    /* Tab Panes */
+    .tab-pane {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .tab-pane.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Cards */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--accent-cyan);
+    }
+
+    /* Tables (Fixed Width & Kinetic Touch Scrolling) */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+      margin: 1rem 0;
+      background: #0d1424;
+    }
+
+    table {
+      width: 100%;
+      min-width: 600px;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+      table-layout: fixed;
+    }
+
+    th, td {
+      padding: 0.85rem 1rem;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    th {
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--accent-cyan);
+      font-weight: 700;
+      border-bottom: 2px solid rgba(56, 189, 248, 0.3);
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+    }
+
+    tr:nth-child(even) {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    tr {
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    /* Calculator Controls */
+    .calc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .input-group input, .input-group select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: #090e1a;
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      color: var(--text-main);
+      font-size: 1rem;
+      outline: none;
+      min-height: 48px;
+    }
+
+    .input-group input:focus, .input-group select:focus {
+      border-color: var(--accent-cyan);
+    }
+
+    .calc-result-box {
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(56, 189, 248, 0.08));
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      text-align: center;
+    }
+
+    .res-item .val {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--accent-emerald);
+      margin-top: 0.25rem;
+    }
+
+    .res-item .lbl {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    /* Interactive Workout Timer */
+    .timer-card {
+      background: #090e1a;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .timer-display {
+      font-size: 3.5rem;
+      font-weight: 800;
+      font-family: monospace;
+      color: var(--accent-cyan);
+      margin: 1rem 0;
+    }
+
+    .timer-actions {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      user-select: none;
+      touch-action: manipulation;
+      min-height: 48px;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent-cyan);
+      color: #050811;
+    }
+
+    .btn-primary:hover {
+      background: #7dd3fc;
+    }
+
+    .btn-secondary {
+      background: #1e293b;
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .btn-secondary:hover {
+      background: #334155;
+    }
+
+    /* Daily Habit Checklist */
+    .habit-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-subtle);
+      margin-bottom: 0.6rem;
+      cursor: pointer;
+      user-select: none;
+      touch-action: manipulation;
+      transition: all 0.2s;
+    }
+
+    .habit-item:hover {
+      background: rgba(56, 189, 248, 0.05);
+      border-color: rgba(56, 189, 248, 0.2);
+    }
+
+    .habit-item.done {
+      background: rgba(34, 197, 94, 0.08);
+      border-color: rgba(34, 197, 94, 0.3);
+    }
+
+    .habit-checkbox {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      border: 2px solid var(--accent-cyan);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .habit-item.done .habit-checkbox {
+      background: var(--accent-emerald);
+      border-color: var(--accent-emerald);
+    }
+
+    .habit-item.done .habit-checkbox::after {
+      content: "✔";
+      color: #050811;
+      font-size: 0.9rem;
+      font-weight: 800;
+    }
+
+    .habit-content {
+      flex: 1;
+    }
+
+    .habit-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text-main);
+    }
+
+    .habit-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .progress-bar-container {
+      background: #090e1a;
+      border-radius: 999px;
+      height: 12px;
+      width: 100%;
+      overflow: hidden;
+      margin: 1rem 0;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(to right, #38bdf8, #22c55e);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    /* Digestive Clinic Triage Styles */
+    .symptom-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .symptom-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      touch-action: manipulation;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+
+    .symptom-pill:hover {
+      background: var(--bg-card-hover);
+      color: var(--text-main);
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+
+    .symptom-pill.active {
+      background: rgba(56, 189, 248, 0.18);
+      color: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+    }
+
+    .triage-display {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .triage-card {
+      background: #0d1424;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.25rem;
+      position: relative;
+    }
+
+    .triage-card h4 {
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .triage-card p, .triage-card ul {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .med-search-input {
+      width: 100%;
+      padding: 0.75rem 1.25rem;
+      background: #090e1a;
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      color: var(--text-main);
+      font-size: 0.95rem;
+      outline: none;
+      margin-bottom: 1rem;
+      min-height: 48px;
+    }
+
+    .med-search-input:focus {
+      border-color: var(--accent-cyan);
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        background: #ffffff;
+        color: #000000;
+        padding: 0;
+      }
+      .nav-tabs, .timer-card, .btn, .calc-grid {
+        display: none !important;
+      }
+      .tab-pane {
+        display: block !important;
+        margin-bottom: 2rem;
+      }
+      .card {
+        border: 1px solid #ccc;
+        background: #ffffff;
+        color: #000000;
+      }
+      th {
+        background: #eee !important;
+        color: #000 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="badge">Biometric Hypertrophy Cockpit • 6'0" • 57 kg Baseline</div>
+      <h1>Sustainable Weight Gain Suite</h1>
+      <p class="subtitle">Evidence-based early satiety elimination, halal Indian nutrition, triple lifestyle routines & zero-gym calisthenics.</p>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs" id="nav-tabs" role="tablist">
+      <button class="tab-btn active" data-tab="tab-overview" role="tab">📊 Diagnostics & Target</button>
+      <button class="tab-btn" data-tab="tab-calculator" role="tab">🧮 Macro Calculator</button>
+      <button class="tab-btn" data-tab="tab-digestion" role="tab">🌿 Gut & Appetite Secrets</button>
+      <button class="tab-btn" data-tab="tab-clinic" role="tab">🏥 Digestive Clinic & Medicines</button>
+      <button class="tab-btn" data-tab="tab-lifestyle" role="tab">🧬 Dual-Tissue & Lifestyle</button>
+      <button class="tab-btn" data-tab="tab-food-science" role="tab">🧪 Clinical Nutrition & Food Science</button>
+      <button class="tab-btn" data-tab="tab-nutrition" role="tab">🍗 Food Catalog & Shakes</button>
+      <button class="tab-btn" data-tab="tab-schedules" role="tab">🕒 Triple Schedules</button>
+      <button class="tab-btn" data-tab="tab-calisthenics" role="tab">🤸 Calisthenics & Timer</button>
+      <button class="tab-btn" data-tab="tab-supplements" role="tab">💊 Safe Supplements</button>
+      <button class="tab-btn" data-tab="tab-tracker" role="tab">📅 Daily Habit Tracker</button>
+      <button class="tab-btn" onclick="window.print()" role="tab">🖨️ Print / PDF</button>
+    </nav>
+
+    <!-- TAB 1: OVERVIEW & DIAGNOSTICS -->
+    <section id="tab-overview" class="tab-pane active" role="tabpanel">
+      <div class="card">
+        <h2 class="card-title">📌 Clinical Biometric Baseline & Milestone Roadmap</h2>
+        <div class="table-container">
+          <table>
+            <colgroup>
+              <col style="width: 25%;">
+              <col style="width: 18%;">
+              <col style="width: 19%;">
+              <col style="width: 19%;">
+              <col style="width: 19%;">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>Biometric Metric</th>
+                <th>Current Baseline</th>
+                <th>Milestone 1 (Mo. 2)</th>
+                <th>Milestone 2 (Mo. 6)</th>
+                <th>Athletic Target (Mo. 18)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Age & Stature</strong></td>
+                <td>24 Yrs | 6'0" (183 cm)</td>
+                <td>24 Yrs | 6'0" (183 cm)</td>
+                <td>24 Yrs | 6'0" (183 cm)</td>
+                <td>25 Yrs | 6'0" (183 cm)</td>
+              </tr>
+              <tr>
+                <td><strong>Body Weight</strong></td>
+                <td><strong style="color: #f43f5e;">57.0 kg</strong></td>
+                <td><strong>59.5 – 60.0 kg</strong></td>
+                <td><strong>64.0 – 65.0 kg</strong></td>
+                <td><strong style="color: #22c55e;">72.0 – 75.0 kg</strong></td>
+              </tr>
+              <tr>
+                <td><strong>BMI (Body Mass Index)</strong></td>
+                <td>17.02 (Underweight)</td>
+                <td>17.9 (Normal boundary)</td>
+                <td>19.4 (Healthy normal)</td>
+                <td>21.8 – 22.4 (Optimal athletic)</td>
+              </tr>
+              <tr>
+                <td><strong>BMR / TDEE</strong></td>
+                <td>1598 / 1950 kcal</td>
+                <td>1630 / 2020 kcal</td>
+                <td>1690 / 2150 kcal</td>
+                <td>1800 / 2350 kcal</td>
+              </tr>
+              <tr>
+                <td><strong>Target Daily Intake</strong></td>
+                <td><strong>2300 – 2400 kcal/day</strong></td>
+                <td>2350 – 2450 kcal/day</td>
+                <td>2500 – 2600 kcal/day</td>
+                <td>2700 – 2800 kcal/day</td>
+              </tr>
+              <tr>
+                <td><strong>Target Rate of Gain</strong></td>
+                <td colspan="4"><strong>+0.25 to +0.40 kg / week (&approx; 1.0 to 1.5 kg / month)</strong> — Pure lean tissue without food-stuffing nausea.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title">🔍 The 4 Golden Physiological Rules (Why Standard Advice Failed)</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem;">
+          <div style="background: rgba(255,255,255,0.02); padding: 1rem; border-radius: 8px; border-left: 3px solid var(--accent-rose);">
+            <h4 style="color: var(--accent-rose); margin-bottom: 0.3rem;">1. Zero-Water Rule</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Never drink water 25m before or 35m after solid meals. Fluids stretch the stomach prematurely and dilute gastric acid, triggering early satiety.</p>
+          </div>
+          <div style="background: rgba(255,255,255,0.02); padding: 1rem; border-radius: 8px; border-left: 3px solid var(--accent-cyan);">
+            <h4 style="color: var(--accent-cyan); margin-bottom: 0.3rem;">2. 100 Steps Motility Stroll</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Take a relaxed 10-minute stroll after lunch and dinner. Gravity assists gastric emptying into the small intestine, preventing heaviness.</p>
+          </div>
+          <div style="background: rgba(255,255,255,0.02); padding: 1rem; border-radius: 8px; border-left: 3px solid var(--accent-emerald);">
+            <h4 style="color: var(--accent-emerald); margin-bottom: 0.3rem;">3. Liquid Calorie Bypass</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Drink 1 blended whole-food shake (680 kcal) daily in under 3 minutes. It bypasses chewing fatigue and digests in 75–90 minutes.</p>
+          </div>
+          <div style="background: rgba(255,255,255,0.02); padding: 1rem; border-radius: 8px; border-left: 3px solid var(--accent-amber);">
+            <h4 style="color: var(--accent-amber); margin-bottom: 0.3rem;">4. 3-1-1 Calisthenics Tempo</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Never do endless fast push-ups. Lower down for 3 full seconds under tension to stimulate real muscle hypertrophy without weights.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: MACRO & CALORIE CALCULATOR -->
+    <section id="tab-calculator" class="tab-pane" role="tabpanel">
+      <div class="card">
+        <h2 class="card-title">🧮 Interactive Precision Macro & Surplus Calculator</h2>
+        <div class="calc-grid">
+          <div class="input-group">
+            <label for="calc-weight">Current Weight (kg)</label>
+            <input type="number" id="calc-weight" value="57" min="40" max="120" step="0.5">
+          </div>
+          <div class="input-group">
+            <label for="calc-height">Height (cm)</label>
+            <input type="number" id="calc-height" value="183" min="140" max="210">
+          </div>
+          <div class="input-group">
+            <label for="calc-age">Age (years)</label>
+            <input type="number" id="calc-age" value="24" min="16" max="65">
+          </div>
+          <div class="input-group">
+            <label for="calc-surplus">Surplus Target</label>
+            <select id="calc-surplus">
+              <option value="480" selected>🌟 Dual-Tissue Accretion (+480 kcal - Muscle & Healthy Fat)</option>
+              <option value="750">🚀 Fast-Gain Accelerated (+750 kcal - 2-Shake Split Engine)</option>
+              <option value="350">Clean Lean Surplus (+350 kcal)</option>
+              <option value="450">Moderate Athletic (+450 kcal)</option>
+              <option value="550">Aggressive Hardgainer (+550 kcal)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="calc-result-box" id="calc-results">
+          <div class="res-item">
+            <div class="lbl">Basal Metabolic Rate</div>
+            <div class="val" id="res-bmr">1,598</div>
+          </div>
+          <div class="res-item">
+            <div class="lbl">TDEE Maintenance</div>
+            <div class="val" id="res-tdee">1,918</div>
+          </div>
+          <div class="res-item">
+            <div class="lbl">Target Calories</div>
+            <div class="val" id="res-target" style="color: #38bdf8;">2,268</div>
+          </div>
+          <div class="res-item">
+            <div class="lbl">Target Protein</div>
+            <div class="val" id="res-protein" style="color: #22c55e;">114g</div>
+          </div>
+          <div class="res-item">
+            <div class="lbl">Target Fats</div>
+            <div class="val" id="res-fats">75g</div>
+          </div>
+          <div class="res-item">
+            <div class="lbl">Target Carbs</div>
+            <div class="val" id="res-carbs">285g</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: GUT & APPETITE SECRETS -->
+    <section id="tab-digestion" class="tab-pane" role="tabpanel">
+      <div class="card">
+        <h2 class="card-title">🌿 Bio-Digestive Secrets & Vagus Nerve Priming</h2>
+        
+        <div style="margin-bottom: 1.5rem;">
+          <h3 style="color: var(--accent-emerald); font-size: 1.1rem; margin-bottom: 0.5rem;">1. The At-Home Stomach Acid Test (Sodium Bicarbonate Burp Proxy)</h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+            Underweight people often have <strong>low stomach acid (hypochlorhydria)</strong>, which delays gastric emptying and causes early fullness.
+          </p>
+          <ul style="padding-left: 1.25rem; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+            <li>First thing in the morning on an empty stomach, mix 1/4 teaspoon of baking soda in 100 ml room-temperature water and drink.</li>
+            <li><strong>Burp within 2 to 3 minutes</strong>: Healthy, robust stomach acid levels.</li>
+            <li><strong>No burp after 5 minutes</strong>: Sluggish stomach acid. Take 1 slice fresh ginger with lemon & black salt 15 mins before meals.</li>
+          </ul>
+        </div>
+
+        <div style="margin-bottom: 1.5rem;">
+          <h3 style="color: var(--accent-emerald); font-size: 1.1rem; margin-bottom: 0.5rem;">2. Vagus Nerve "Gargle & Cold Splash" Priming</h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+            Eating in a stressed, distracted state keeps the sympathetic nervous system on, shutting off stomach secretions. 5 minutes before eating:
+          </p>
+          <ul style="padding-left: 1.25rem; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+            <li>Splash cold water on face and eyes (triggers the mammalian dive reflex to drop pulse).</li>
+            <li>Gargle deeply with warm water for 30 seconds (vibrates the motor fibers of the vagus nerve).</li>
+            <li>Take 3 deep belly breaths before touching food.</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 style="color: var(--accent-emerald); font-size: 1.1rem; margin-bottom: 0.5rem;">3. Sacred Ayurvedic Synergy: Ghee + Raw Honey (Unequal Proportions)</h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">
+            Mix <strong>2 teaspoons pure Desi Ghee + 1 teaspoon pure Raw Honey</strong> (always unequal amounts) with a pinch of cinnamon. Acts as a cellular carrier (*Yogavahi*) that fuels the intestinal mucosal barrier with butyric acid.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB: DIGESTIVE CLINIC & PHARMACOLOGY -->
+    <section id="tab-clinic" class="tab-pane" role="tabpanel">
+      <div class="card">
+        <h2 class="card-title">🏥 Gastrointestinal Clinical Triage & Symptom Navigator</h2>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+          Select any digestive problem below for instant 5-minute emergency relief, root-cause protocols, and clinical pharmacology insights.
+        </p>
+
+        <!-- Symptom Selector Pills -->
+        <div class="symptom-pills" id="symptom-pills">
+          <button class="symptom-pill active" data-sym="acidity">🔥 Acidity & Reflux</button>
+          <button class="symptom-pill" data-sym="fullness">🪨 Early Fullness</button>
+          <button class="symptom-pill" data-sym="burning">🌋 Burning Stomach</button>
+          <button class="symptom-pill" data-sym="nausea">🤢 Nausea / Vomiting</button>
+          <button class="symptom-pill" data-sym="pain">⚡ Spasms & Pain</button>
+          <button class="symptom-pill" data-sym="gas">🐡 Bloating & Gas</button>
+          <button class="symptom-pill" data-sym="constipation">🧱 Constipation</button>
+          <button class="symptom-pill" data-sym="diarrhea">🌊 Loose Stools</button>
+        </div>
+
+        <!-- Dynamic Triage Cards Container -->
+        <div class="triage-display">
+          <div class="triage-card" style="border-left: 3px solid var(--accent-amber);">
+            <h4 style="color: var(--accent-amber);">⏱️ 5-to-15 Min Emergency Quick Fix</h4>
+            <div id="triage-quick">
+              <p>• Sip 100 ml cold whole milk or chew 1 tsp raw fennel seeds (*Saunf*).<br>• Stand upright; strictly avoid reclining.<br>• OTC: 10 ml Sodium Alginate (Gaviscon) to form a mechanical raft barrier over acid.</p>
+            </div>
+          </div>
+          <div class="triage-card" style="border-left: 3px solid var(--accent-emerald);">
+            <h4 style="color: var(--accent-emerald);">🌿 Root-Cause Long-Term Eradication</h4>
+            <div id="triage-long">
+              <p>• Enforce the <strong>Zero-Water Rule</strong> (no fluids 25m before or 35m after solid meals).<br>• Finish dinner 2.5 hours before lying down; elevate head of bed by 6 inches.<br>• Identify trigger foods (excessive green chillies or citrus on an empty stomach).</p>
+            </div>
+          </div>
+          <div class="triage-card" style="border-left: 3px solid var(--accent-cyan);">
+            <h4 style="color: var(--accent-cyan);">💊 Medical Class & Pharmacology</h4>
+            <div id="triage-med">
+              <p><strong>Primary Classes</strong>: OTC Antacids (Digene/Gelusil), Alginate Raft Formers (Gaviscon), H2 Blockers (Famotidine 20/40mg), PPIs (Pantoprazole 40mg).<br><strong style="color: var(--accent-rose);">Caution</strong>: Avoid abrupt daily PPI cessation to prevent rebound acid hypersecretion.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Searchable Medicine Matrix -->
+      <div class="card">
+        <h2 class="card-title">💊 Master Clinical Pharmacology Compendium (Educational Reference)</h2>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+          Search through OTC & prescription gastrointestinal medications by brand, symptom, or drug class for pharmacological transparency.
+        </p>
+
+        <input type="text" id="med-search" class="med-search-input" placeholder="🔍 Search medicines by name, symptom, or class (e.g. Pan 40, Drotin, gas, nausea, Gaviscon, curd)...">
+
+        <div class="table-container">
+          <table id="med-table">
+            <colgroup>
+              <col style="width: 20%;">
+              <col style="width: 15%;">
+              <col style="width: 22%;">
+              <col style="width: 20%;">
+              <col style="width: 23%;">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>Drug Class & Brands</th>
+                <th>Target Symptoms</th>
+                <th>Biochemical Mechanism</th>
+                <th>Clinical Positives</th>
+                <th>Negatives & Safety Warnings</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>OTC Antacids</strong><br><small style="color: var(--text-muted);">Gelusil, Digene, Megalac<br>(Aluminium + Magnesium Hydroxide + Simethicone)</small></td>
+                <td>Acidity, Heartburn, Gas</td>
+                <td>Chemical neutralization of gastric HCl by basic salts; Simethicone reduces gas surface tension.</td>
+                <td>Instant relief (< 3 mins); acts locally without hormonal interference; low cost.</td>
+                <td>Short duration (30–60 mins); Aluminium causes constipation, Magnesium causes loose stools. Chelates antibiotics.</td>
+              </tr>
+              <tr>
+                <td><strong>Alginate Raft Formers</strong><br><small style="color: var(--text-muted);">Gaviscon Liquid<br>(Sodium Alginate + Potassium Bicarbonate)</small></td>
+                <td>Acid Reflux, GERD, Night Burning</td>
+                <td>Reacts with acid to form a thick, floating mechanical gel "raft" that physically blocks acid from refluxing into esophagus.</td>
+                <td>Superior for nocturnal reflux; mechanical barrier rather than systemic acid shutdown; high safety.</td>
+                <td>Must be taken immediately after meals and before bed. High sodium content in some formulations.</td>
+              </tr>
+              <tr>
+                <td><strong>Mucosal Protectants</strong><br><small style="color: var(--text-muted);">Sucrafil, Sucrate<br>(Sucralfate 1g / 10ml)</small></td>
+                <td>Gastric Erosions, Ulcers, Burning Pit</td>
+                <td>Polymerizes in acidic environment (pH < 4) to bind electrostatically to ulcer proteins, forming a protective shield.</td>
+                <td>Accelerates ulcer healing; shields against bile salt injury; minimal systemic absorption (< 3%).</td>
+                <td>Must be taken on an empty stomach (1h before meals). Can cause mild constipation; binds to other drugs.</td>
+              </tr>
+              <tr>
+                <td><strong>H2 Receptor Blockers</strong><br><small style="color: var(--text-muted);">Topcid 20/40, Famocid<br>(Famotidine)</small></td>
+                <td>Nocturnal Acidity, Moderate GERD</td>
+                <td>Competitively inhibits histamine H2 receptors on parietal cells, lowering acid output by ~70%.</td>
+                <td>Fast onset (45–60 mins); lasts 10–12 hours; ideal for intermittent acid breakthrough without heavy PPI shutdown.</td>
+                <td>Tolerance (tachyphylaxis) develops if taken continuously past 14 days. Mild headache or fatigue.</td>
+              </tr>
+              <tr>
+                <td><strong>Proton Pump Inhibitors (PPIs)</strong><br><small style="color: var(--text-muted);">Pan 40, Razo 20, Nexpro, Omez<br>(Pantoprazole, Rabeprazole, Esomeprazole)</small></td>
+                <td>Severe Gastritis, Esophagitis, Ulcers</td>
+                <td>Irreversibly inhibits H+/K+ ATPase enzyme in parietal cells, shutting down terminal acid secretion by >90%.</td>
+                <td>Gold standard for healing erosions and peptic ulcers; potent 24h acid suppression.</td>
+                <td><strong style="color: var(--accent-rose);">Rebound Hypersecretion</strong>: Abrupt stopping causes severe rebound burning. Long-term use impairs B12, Iron, and Calcium.</td>
+              </tr>
+              <tr>
+                <td><strong>Prokinetics & Motility Enhancers</strong><br><small style="color: var(--text-muted);">Motilium, Vomistop, Lesuride, Ganaton<br>(Domperidone, Levosulpiride, Itopride)</small></td>
+                <td>Early Fullness, Nausea, Gastroparesis</td>
+                <td>Dopamine D2 antagonism & 5-HT4 agonism; accelerates stomach emptying and strengthens LES tone.</td>
+                <td>Rapidly empties stagnant food into intestines; relieves early satiety and nausea. Itopride has no cardiac risk.</td>
+                <td><strong style="color: var(--accent-rose);">Cardiac Warning</strong>: Domperidone can prolong QT interval. Can elevate prolactin (breast tenderness/gynecomastia).</td>
+              </tr>
+              <tr>
+                <td><strong>Antiemetics</strong><br><small style="color: var(--text-muted);">Emeset 4mg, Ondem<br>(Ondansetron)</small></td>
+                <td>Acute Nausea, Vomiting Reflex</td>
+                <td>Selective 5-HT3 serotonin receptor antagonist blocking triggers in vagus nerve and central CTZ.</td>
+                <td>Rapid suppression of vomiting reflex; mouth-dissolving tablet melts on tongue without water; non-drowsy.</td>
+                <td>Constipation is common (slows colonic transit). Transient mild headache. Strictly for acute episodes.</td>
+              </tr>
+              <tr>
+                <td><strong>Antispasmodics</strong><br><small style="color: var(--text-muted);">Drotin 40/80mg, Meftal-Spas, Cyclopam<br>(Drotaverine, Dicyclomine)</small></td>
+                <td>Colicky Abdominal Pain, Intestinal Cramps</td>
+                <td>Drotaverine: Selective PDE-4 inhibitor relaxing visceral smooth muscle. Dicyclomine: Muscarinic receptor blocker.</td>
+                <td>Rapidly relieves sharp intestinal colic and cramping without anticholinergic side effects (Drotaverine).</td>
+                <td>Never use for undiagnosed acute abdomen with high fever (can mask appendicitis). Dicyclomine can cause dry mouth.</td>
+              </tr>
+              <tr>
+                <td><strong>Osmotic & Bulk Laxatives</strong><br><small style="color: var(--text-muted);">Duphalac, Cremaffin, Isabgol<br>(Lactulose, Liquid Paraffin, Psyllium)</small></td>
+                <td>Sluggish Bowel, Constipation, Hard Stools</td>
+                <td>Lactulose/PEG pulls water into stool via osmosis. Psyllium absorbs water into soft gelatinous bulking mass.</td>
+                <td>Non-habit-forming; Lactulose acts as a prebiotic supporting beneficial gut bacteria.</td>
+                <td>Initial gas and rumbling (first 3 days). Avoid harsh stimulant laxatives (Senna) that cause lazy bowel syndrome.</td>
+              </tr>
+              <tr>
+                <td><strong>Flora Restorers & Anti-Diarrheals</strong><br><small style="color: var(--text-muted);">Enterogermina, Econorm, Redotil<br>(B. clausii spores, S. boulardii, Racecadotril)</small></td>
+                <td>Loose Stools, Dysbiosis, Osmotic Diarrhea</td>
+                <td>Probiotic spores colonize gut; Racecadotril inhibits intestinal hypersecretion without paralyzing bowel motility.</td>
+                <td>Controls diarrhea without causing secondary constipation (unlike Loperamide); restores natural flora.</td>
+                <td><strong style="color: var(--accent-rose);">Imodium Warning</strong>: Never use Loperamide if fever or blood/mucus is present (traps bacterial toxins). Always hydrate with ORS.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Red Flag Warning Card -->
+      <div class="card" style="border: 1px solid rgba(244, 63, 94, 0.3);">
+        <h2 class="card-title" style="color: var(--accent-rose);">🚨 Clinical Red Flags: When to Seek Immediate Medical Care</h2>
+        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+          Seek emergency or specialist hospital evaluation immediately if you experience:
+          <br>• <strong>Black Tarry Stools (Melena)</strong> or vomiting blood / dark coffee-ground material (indicates active GI bleeding).
+          <br>• <strong>Difficulty Swallowing (Dysphagia)</strong> or food sensation physically sticking in the chest.
+          <br>• <strong>Severe Localized Right Lower Abdominal Pain</strong> with fever, rigid belly wall, or involuntary muscle guarding.
+          <br>• <strong>Unexplained Jaundice</strong> (yellowing of eyes, dark urine, pale stools).
+        </p>
+      </div>
+    </section>
+
+    <!-- TAB: DUAL-TISSUE ACCRETION & LIFESTYLE -->
+    <section id="tab-lifestyle" class="tab-pane" role="tabpanel">
+      <div class="card">
+        <h2 class="card-title">🧬 Dual-Tissue Accretion Blueprint: Muscle & Healthy Subcutaneous Fat</h2>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+          At 6'0" and 57 kg, your body fat is &lt; 9–10%. You need <strong>both</strong> muscle and healthy subcutaneous fat to fill out sunken cheeks, cushion joints, and supply cholesterol for testosterone synthesis.
+        </p>
+
+        <div class="table-container">
+          <table>
+            <colgroup>
+              <col style="width: 20%;">
+              <col style="width: 40%;">
+              <col style="width: 40%;">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>🟢 Healthy Subcutaneous Fat (OUR TARGET)</th>
+                <th>🔴 Toxic Visceral Fat (STRICTLY AVOID)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Location</strong></td>
+                <td>Directly beneath skin across face, chest, shoulders, arms, thighs.</td>
+                <td>Deep in abdomen, wrapped around liver, intestines, and pancreas.</td>
+              </tr>
+              <tr>
+                <td><strong>Visual Look</strong></td>
+                <td>Full face, smooth radiant skin, filled-out sleeves, masculine symmetry.</td>
+                <td>Protruding hard potbelly, "skinny-fat" torso with skinny limbs.</td>
+              </tr>
+              <tr>
+                <td><strong>Clean Drivers</strong></td>
+                <td>Desi Ghee, whole egg yolks, full-cream milk, paneer, almonds, chicken thighs.</td>
+                <td>Refined palm oil, commercial vanaspati, fried samosas, sugary sodas, cheap gainers.</td>
+              </tr>
+              <tr>
+                <td><strong>Hormones</strong></td>
+                <td>Protective; supplies cholesterol for testosterone and thyroid hormone synthesis.</td>
+                <td>Releases inflammatory cytokines; causes insulin resistance and fatty liver.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- The 4 Pro Lifestyle Pillars -->
+      <div class="card">
+        <h2 class="card-title">⚡ The 4 Pro Lifestyle Pillars for Hardgainers</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem;">
+          <div style="background: rgba(56, 189, 248, 0.05); padding: 1.25rem; border-radius: 12px; border-left: 3px solid var(--accent-cyan);">
+            <h4 style="color: var(--accent-cyan); margin-bottom: 0.4rem;">☀️ 1. Circadian Sunlight</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">
+              Spend <strong>15 minutes in direct morning sunlight</strong> (7:00–8:30 AM). Triggers morning cortisol to wake up appetite, synthesizes nitric oxide, and sets nighttime melatonin.
+            </p>
+          </div>
+          <div style="background: rgba(34, 197, 94, 0.05); padding: 1.25rem; border-radius: 12px; border-left: 3px solid var(--accent-emerald);">
+            <h4 style="color: var(--accent-emerald); margin-bottom: 0.4rem;">🌙 2. Deep Sleep Architecture</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">
+              In bed by <strong>10:30 PM</strong> in a dark, cool room (20–22°C). 70% of daily Human Growth Hormone (HGH) surges during Stage 3–4 slow-wave sleep between 11 PM and 2 AM.
+            </p>
+          </div>
+          <div style="background: rgba(245, 158, 11, 0.05); padding: 1.25rem; border-radius: 12px; border-left: 3px solid var(--accent-amber);">
+            <h4 style="color: var(--accent-amber); margin-bottom: 0.4rem;">🛡️ 3. Anti-Burnout Energy Conservation</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">
+              Sit down when talking on the phone; eliminate nervous pacing and unnecessary cardio. Save your surplus calories so they fuel cellular tissue growth rather than futile burning.
+            </p>
+          </div>
+          <div style="background: rgba(244, 63, 94, 0.05); padding: 1.25rem; border-radius: 12px; border-left: 3px solid var(--accent-rose);">
+            <h4 style="color: var(--accent-rose); margin-bottom: 0.4rem;">⚡ 4. The 3 Anabolic Daily Rituals</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">
+              Anchor your day around 3 non-negotiable nutrition events: Morning 30g protein kickstart, Post-workout Desi shake, and Bedtime lipid & casein anchor.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- The 3 Daily Rituals Detail -->
+      <div class="card">
+        <h2 class="card-title">🕒 The 3 Anabolic Daily Rituals Cockpit</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
+          <div style="background: #0d1424; padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-subtle);">
+            <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--accent-cyan);">Ritual 1 • 08:30 AM</div>
+            <h4 style="margin: 0.3rem 0; color: var(--text-main);">Morning 30g Protein Kickstart</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Within 45 mins of waking: 3 whole eggs scrambled in 1 tsp ghee + 2 parathas or bread + glass of milk. Halts overnight muscle catabolism immediately.</p>
+          </div>
+          <div style="background: #0d1424; padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-subtle);">
+            <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--accent-emerald);">Ritual 2 • 05:30 PM</div>
+            <h4 style="margin: 0.3rem 0; color: var(--text-main);">Post-Workout Anabolic Shake</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Immediately post-workout: Desi Power Bulk Shake (Milk, 2 bananas, 2 tbsp peanut butter, 4 dates = 680 kcal). Shuttles glycogen directly into sensitized muscle cells.</p>
+          </div>
+          <div style="background: #0d1424; padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-subtle);">
+            <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--accent-amber);">Ritual 3 • 10:30 PM</div>
+            <h4 style="margin: 0.3rem 0; color: var(--text-main);">Bedtime Lipid & Casein Anchor</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">1 cup warm milk + 1 tsp Desi Ghee + 300mg Ashwagandha + 3 dates. Saturated fats and slow casein provide an 8-hour slow nutrient drip during sleep.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB: CLINICAL NUTRITION & FOOD SCIENCE -->
+    <section id="tab-food-science" class="tab-pane" role="tabpanel">
+      <!-- The Anti-Crash Architecture -->
+      <div class="card">
+        <h2 class="card-title">🧪 The Anti-Crash Architecture: Why 2x Food Causes Collapse</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.25rem;">
+          Hardgainers often attempt to gain weight by abruptly doubling their solid meal sizes (4–5 heavy rotis, double rice). This triggers <strong style="color: var(--accent-rose);">mechanoreceptor stretch shock</strong>, vagal shutdown, hypochlorhydria, and intestinal bacterial fermentation. By Day 3, acute nausea, vomiting reflex, and acid reflux force a 48-hour fast—wiping out all gains.
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+          <div style="background: rgba(244, 63, 94, 0.06); padding: 1rem; border-radius: 10px; border-left: 3px solid var(--accent-rose);">
+            <h4 style="color: var(--accent-rose); margin-bottom: 0.3rem;">1. Mechanoreceptor Shock</h4>
+            <p style="font-size: 0.82rem; color: var(--text-muted);">Over-stretching stomach walls fires vagal signals to the Area Postrema in the brainstem, triggering an involuntary gag reflex and severe nausea.</p>
+          </div>
+          <div style="background: rgba(245, 158, 11, 0.06); padding: 1rem; border-radius: 10px; border-left: 3px solid var(--accent-amber);">
+            <h4 style="color: var(--accent-amber); margin-bottom: 0.3rem;">2. Acid Dilution Bottleneck</h4>
+            <p style="font-size: 0.82rem; color: var(--text-muted);">Parietal cells produce limited HCl per feeding. Forcing 2x solid protein leaves meat un-acidified, causing putrefaction and foul sulfur burps.</p>
+          </div>
+          <div style="background: rgba(56, 189, 248, 0.06); padding: 1rem; border-radius: 10px; border-left: 3px solid var(--accent-cyan);">
+            <h4 style="color: var(--accent-cyan); margin-bottom: 0.3rem;">3. Small Intestinal Osmotic Pull</h4>
+            <p style="font-size: 0.82rem; color: var(--text-muted);">Un-cleaved starch dumps pull excess fluid into the bowel lumen, creating painful colicky cramps, loud gut gurgling, and watery diarrhea.</p>
+          </div>
+          <div style="background: rgba(34, 197, 94, 0.06); padding: 1rem; border-radius: 10px; border-left: 3px solid var(--accent-emerald);">
+            <h4 style="color: var(--accent-emerald); margin-bottom: 0.3rem;">4. The 2-Shake Split Engine</h4>
+            <p style="font-size: 0.82rem; color: var(--text-muted);">Keep solid meals modest (520–550 kcal) and deliver the +750 kcal surplus via two liquid emulsions that clear the stomach in 60–75 minutes!</p>
+          </div>
+        </div>
+
+        <h3 style="font-size: 1rem; color: var(--accent-cyan); margin-bottom: 0.75rem;">⚡ The Anti-Crash Daily 2,750 kcal Pacing Blueprint</h3>
+        <div class="table-container">
+          <table>
+            <colgroup>
+              <col style="width: 15%;">
+              <col style="width: 25%;">
+              <col style="width: 40%;">
+              <col style="width: 20%;">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Feeding Vehicle</th>
+                <th>Digestive Composition</th>
+                <th>Energy & Transit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>08:30 AM</strong></td>
+                <td><strong>Solid Meal 1 (Breakfast)</strong></td>
+                <td>3 Whole Eggs (1 tsp Ghee) + 2 slices Toast/Paratha + Chai</td>
+                <td><strong>520 kcal</strong> • 120m clearance</td>
+              </tr>
+              <tr style="background: rgba(56, 189, 248, 0.05);">
+                <td><strong>11:30 AM</strong></td>
+                <td><strong>Liquid 1 (Refresh Shake)</strong></td>
+                <td>250ml Milk + 1 Banana + 1 tbsp Peanut Butter + 1 scoop Whey/Sattu</td>
+                <td><strong style="color: var(--accent-cyan);">380 kcal</strong> • 60m clearance</td>
+              </tr>
+              <tr>
+                <td><strong>02:00 PM</strong></td>
+                <td><strong>Solid Meal 2 (Lunch)</strong></td>
+                <td>150g Chicken/Mutton + 1.5 katori White Basmati Rice + Curd</td>
+                <td><strong>550 kcal</strong> • 180m clearance</td>
+              </tr>
+              <tr style="background: rgba(34, 197, 94, 0.05);">
+                <td><strong>05:30 PM</strong></td>
+                <td><strong>Liquid 2 (Anabolic Shake)</strong></td>
+                <td>250ml Milk + 1 Banana + 4 Dates + 1 tbsp Peanut Butter + Nuts</td>
+                <td><strong style="color: var(--accent-emerald);">450 kcal</strong> • 75m clearance</td>
+              </tr>
+              <tr>
+                <td><strong>08:30 PM</strong></td>
+                <td><strong>Solid Meal 3 (Dinner)</strong></td>
+                <td>Chicken/Mutton/Dal Curry + 1.5 katori White Rice / 2 Phulkas + Takra</td>
+                <td><strong>530 kcal</strong> • 150m clearance</td>
+              </tr>
+              <tr style="background: rgba(245, 158, 11, 0.05);">
+                <td><strong>10:30 PM</strong></td>
+                <td><strong>Lipid Bedtime Anchor</strong></td>
+                <td>1 cup warm Milk + 1 tsp pure Desi Ghee + 300mg Ashwagandha</td>
+                <td><strong style="color: var(--accent-amber);">230 kcal</strong> • Zero solid bulk</td>
+              </tr>
+              <tr style="background: #0b1329;">
+                <td colspan="3"><strong style="color: #38bdf8;">DAILY TOTAL FAST-GAIN NUTRITION (Zero Sickness Guarantee)</strong></td>
+                <td><strong style="color: #22c55e;">2,750 kcal | 122g P</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- DIAAS Bioavailability & Protein Kinetics -->
+      <div class="card">
+        <h2 class="card-title">🥩 DIAAS Protein Bioavailability & Digestion Kinetics</h2>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">
+          Protein quality is defined by the <strong>Digestible Indispensable Amino Acid Score (DIAAS)</strong>, measuring actual ileal absorption of essential amino acids into human muscle tissue.
+        </p>
+        <div class="table-container">
+          <table>
+            <colgroup>
+              <col style="width: 25%;">
+              <col style="width: 15%;">
+              <col style="width: 20%;">
+              <col style="width: 40%;">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>Protein Source</th>
+                <th>DIAAS Score</th>
+                <th>Stomach Clearance</th>
+                <th>Clinical Advantage for Hardgainers</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Whole Eggs</strong> (Boiled/Bhurji)</td>
+                <td><strong style="color: #22c55e;">1.18 (Superior)</strong></td>
+                <td>90 – 120 mins</td>
+                <td>Gold standard 100% biological utilization. Yolks deliver cholesterol for testosterone synthesis & choline for liver health.</td>
+              </tr>
+              <tr>
+                <td><strong>A2 Milk & Fresh Curd</strong></td>
+                <td><strong style="color: #22c55e;">1.15 (Superior)</strong></td>
+                <td>Whey: 60m / Casein: 240m</td>
+                <td>80% slow anti-catabolic Casein + 20% rapid muscle-building Whey. Curd supplies natural lactic acid for gut flora.</td>
+              </tr>
+              <tr>
+                <td><strong>Chicken Thighs & Breast</strong></td>
+                <td><strong style="color: #22c55e;">1.08 (High)</strong></td>
+                <td>150 – 180 mins</td>
+                <td>High in carnosine. Juicy chicken thighs provide mono-unsaturated fats that digest far easier than dry, fibrous chicken breast.</td>
+              </tr>
+              <tr>
+                <td><strong>Mutton / Lamb</strong> (Slow-Cooked)</td>
+                <td><strong style="color: #22c55e;">1.02 (High)</strong></td>
+                <td>180 – 210 mins</td>
+                <td>Dense in bioavailable Heme-Iron, B12, and natural Creatine. Stewing hydrolyzes tough collagen into digestible gelatin.</td>
+              </tr>
+              <tr>
+                <td><strong>Fresh Paneer</strong></td>
+                <td><strong style="color: #eab308;">0.92 (Moderate)</strong></td>
+                <td>180 – 240 mins</td>
+                <td>High calorie density (260 kcal/100g), but dense casein matrix can cause sluggish transit if single portion exceeds 100g.</td>
+              </tr>
+              <tr>
+                <td><strong>Whole Dals (Moong/Masoor)</strong></td>
+                <td><strong style="color: #f97316;">0.58 (Low)</strong></td>
+                <td>150 – 200 mins</td>
+                <td>Incomplete protein (limiting: Methionine). Contains phytates that cause gas. Must pair with Rice (limiting: Lysine) to complete amino acids.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Carbohydrate & Lipid Biochemistry -->
+      <div class="card">
+        <h2 class="card-title">🍚 Carbohydrate & Lipid Biochemistry: The Hardgainer Rules</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
+          <div style="background: #0d1424; padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-subtle);">
+            <h4 style="color: var(--accent-cyan); margin-bottom: 0.5rem;">🌾 Why White Rice Beats Brown Rice</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+              • <strong>Amylopectin Branching</strong>: Polished white rice (Sona Masoori/Basmati) has highly branched starches that salivary and pancreatic amylase cleave in <strong>60–90 minutes</strong> without gas.<br>
+              • <strong>No Phytic Acid Barrier</strong>: Brown rice retains the outer bran containing phytic acid that blocks Zinc, Iron, and Magnesium absorption while irritating the intestinal lining.
+            </p>
+          </div>
+          <div style="background: #0d1424; padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-subtle);">
+            <h4 style="color: var(--accent-emerald); margin-bottom: 0.5rem;">🧈 The Physics of Lipid Emulsification</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+              • <strong>SCFAs in Desi Ghee</strong>: Butyric acid does not require bile salt emulsification; it feeds colonocytes directly, repairing the gut mucosal wall.<br>
+              • <strong>Blender Emulsions</strong>: Blending peanut butter and ghee into warm shakes creates microscopic fat droplets with 1,000x greater surface area, preventing greasy indigestion or nausea.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Micronutrient Anabolic Co-Factors -->
+      <div class="card">
+        <h2 class="card-title">💊 Essential Micronutrient Anabolic Co-Factors Matrix</h2>
+        <div class="table-container">
+          <table>
+            <colgroup>
+              <col style="width: 22%;">
+              <col style="width: 18%;">
+              <col style="width: 25%;">
+              <col style="width: 35%;">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>Micronutrient</th>
+                <th>Target Dose</th>
+                <th>Best Indian Food Source</th>
+                <th>Physiological Role in Weight Gain</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Zinc Picolinate</strong></td>
+                <td>20 – 25 mg / day</td>
+                <td>Mutton, eggs, pumpkin seeds, cashews</td>
+                <td>Cofactor for carbonic anhydrase (produces stomach acid HCl), regenerates taste buds for appetite, stimulates testosterone synthesis.</td>
+              </tr>
+              <tr>
+                <td><strong>Magnesium Glycinate</strong></td>
+                <td>300 – 350 mg / day</td>
+                <td>Soaked almonds, bananas, spinach, dairy</td>
+                <td>Required for ATP phosphorylation; prevents intestinal visceral cramps; unlocks Stage 3/4 slow-wave sleep for GH secretion.</td>
+              </tr>
+              <tr>
+                <td><strong>Active B-Complex</strong></td>
+                <td>B12: 1000mcg / B6: 25mg</td>
+                <td>Chicken liver, mutton, eggs, fresh curd</td>
+                <td>Essential for amino acid transamination (building human muscle from dietary protein) and RBC production for tissue oxygenation.</td>
+              </tr>
+              <tr>
+                <td><strong>Vitamin D3 + K2</strong></td>
+                <td>D3: 60,000 IU/mo<br>K2: 55 mcg/day</td>
+                <td>Morning sunlight, egg yolks, Desi Ghee</td>
+                <td>Upregulates androgen receptor density in muscle tissue; increases intestinal calcium absorption; directs calcium to bones instead of arteries.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Desi Food Chemistry Deep Dives & Anti-Fermentation Rules -->
+      <div class="card">
+        <h2 class="card-title">🍲 Desi Superfood Chemistry & Anti-Fermentation Laws</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem;">
+          <div style="background: rgba(255, 255, 255, 0.02); padding: 1rem; border-radius: 8px; border-left: 3px solid var(--accent-cyan);">
+            <h4 style="color: var(--accent-cyan); margin-bottom: 0.3rem;">🦴 Mutton Marrow (Nalli / Paya)</h4>
+            <p style="font-size: 0.82rem; color: var(--text-muted);">Slow-simmered bone broth releases massive Glycine and Proline, sealing intestinal enterocyte tight junctions and eliminating food sensitivities.</p>
+          </div>
+          <div style="background: rgba(255, 255, 255, 0.02); padding: 1rem; border-radius: 8px; border-left: 3px solid var(--accent-emerald);">
+            <h4 style="color: var(--accent-emerald); margin-bottom: 0.3rem;">🍳 Whole Egg Yolks (Never Discard)</h4>
+            <p style="font-size: 0.82rem; color: var(--text-muted);">Supplies unesterified cholesterol (the biochemical precursor for testosterone synthesis) and choline (enables liver to export healthy fats to body tissues).</p>
+          </div>
+          <div style="background: rgba(255, 255, 255, 0.02); padding: 1rem; border-radius: 8px; border-left: 3px solid var(--accent-amber);">
+            <h4 style="color: var(--accent-amber); margin-bottom: 0.3rem;">🚫 The Fruit Separation Law</h4>
+            <p style="font-size: 0.82rem; color: var(--text-muted);">Never eat whole fruits right after meat meals. Fruit sugars clear in 25 mins; meat takes 3 hours. Eating fruit on top causes rotting fermentation, burping, and nausea.</p>
+          </div>
+          <div style="background: rgba(255, 255, 255, 0.02); padding: 1rem; border-radius: 8px; border-left: 3px solid var(--accent-rose);">
+            <h4 style="color: var(--accent-rose); margin-bottom: 0.3rem;">🥗 The Starch De-Residue Law</h4>
+            <p style="font-size: 0.82rem; color: var(--text-muted);">Avoid raw salads and raw cruciferous vegetables. Insoluble cellulose slows gastric emptying by 50% without calories. Always cook vegetables thoroughly with spices.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: NUTRITION & RECIPES -->
+    <section id="tab-nutrition" class="tab-pane" role="tabpanel">
+      <div class="card">
+        <h2 class="card-title">🍗 Halal Indian High-Density Foods Catalog</h2>
+        <div class="table-container">
+          <table>
+            <colgroup>
+              <col style="width: 25%;">
+              <col style="width: 25%;">
+              <col style="width: 25%;">
+              <col style="width: 25%;">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>Food Item</th>
+                <th>Serving Size</th>
+                <th>Calories & Protein</th>
+                <th>Why It Works for Hardgainers</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Chicken Thighs / Legs</strong></td>
+                <td>150g cooked curry</td>
+                <td>&approx; 310 kcal | 33g P</td>
+                <td>Dark meat has juicy intramuscular fats, easier to digest than dry breast.</td>
+              </tr>
+              <tr>
+                <td><strong>Whole Eggs (3 Boiled/Bhurji)</strong></td>
+                <td>3 whole eggs</td>
+                <td>&approx; 225 kcal | 18g P</td>
+                <td>Yolks provide cholesterol for testosterone, choline, and fat-soluble vitamins.</td>
+              </tr>
+              <tr>
+                <td><strong>Mutton Chops / Curry</strong></td>
+                <td>120g portion</td>
+                <td>&approx; 340 kcal | 26g P</td>
+                <td>High in bioavailable heme iron, zinc, and natural dietary creatine.</td>
+              </tr>
+              <tr>
+                <td><strong>Desi Ghee (Clarified Butter)</strong></td>
+                <td>1 level tablespoon</td>
+                <td>&approx; 115 kcal | 0g P</td>
+                <td>Pure calorie booster with zero bulk; delivers gut-healing butyrate.</td>
+              </tr>
+              <tr>
+                <td><strong>Paneer (Full-Fat)</strong></td>
+                <td>100g raw/pan-fried</td>
+                <td>&approx; 270 kcal | 18g P</td>
+                <td>Slow-digesting casein protein; excellent before sleep or in curries.</td>
+              </tr>
+              <tr>
+                <td><strong>Soft Dates (Khajoor)</strong></td>
+                <td>4 medium dates</td>
+                <td>&approx; 240 kcal | 2g P</td>
+                <td>Instant natural glycogen fuel; rich in potassium and digestive enzymes.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card" style="border: 1px solid rgba(34, 197, 94, 0.3);">
+        <h2 class="card-title" style="color: #22c55e;">🥤 The "Desi Power Bulk" Homemade Shake (&approx; 680 kcal)</h2>
+        <div style="background: rgba(34, 197, 94, 0.05); padding: 1.25rem; border-radius: 10px;">
+          <p style="font-weight: 700; margin-bottom: 0.5rem; color: var(--text-main);">Ingredients (Blend for 60 seconds with immersion stick blender):</p>
+          <ul style="padding-left: 1.25rem; font-size: 0.9rem; color: var(--text-muted); line-height: 1.7;">
+            <li><strong>250 ml</strong> Full-cream milk (room temperature or warm)</li>
+            <li><strong>2 medium</strong> Ripe bananas</li>
+            <li><strong>2 tablespoons (32g)</strong> Natural peanut butter (no palm oil)</li>
+            <li><strong>4 soft dates (Khajoor)</strong>, seeds removed</li>
+            <li><strong>5–6 soaked almonds/walnuts</strong></li>
+            <li><strong>1 pinch</strong> Cardamom (*elaichi*) or cinnamon powder (eliminates bloating)</li>
+          </ul>
+          <p style="margin-top: 0.75rem; font-size: 0.85rem; color: var(--accent-cyan);">
+            ⚡ <strong>Pro Tip</strong>: Drink daily at 05:00–05:30 PM. Takes 3 minutes to drink, exits stomach in 80 minutes!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: TRIPLE SCHEDULES -->
+    <section id="tab-schedules" class="tab-pane" role="tabpanel">
+      <div class="card">
+        <h2 class="card-title">🕒 Schedule A: The Gold Standard (3 Meals + 2 Nutrient Shakes)</h2>
+        <div class="table-container">
+          <table>
+            <colgroup>
+              <col style="width: 15%;">
+              <col style="width: 20%;">
+              <col style="width: 45%;">
+              <col style="width: 20%;">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Activity / Meal</th>
+                <th>Exact Menu & Instructions</th>
+                <th>Calories & Protein</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>07:30 AM</strong></td>
+                <td>Morning Awakening</td>
+                <td>1 glass warm water + 8 soaked Munakka + 6 peeled almonds</td>
+                <td>&approx; 100 kcal | 2g P</td>
+              </tr>
+              <tr>
+                <td><strong>08:15 AM</strong></td>
+                <td>Appetite Primer</td>
+                <td>50 ml warm water with fresh ginger slice, lemon drop, kala namak</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>08:30 AM</strong></td>
+                <td><strong>Breakfast</strong></td>
+                <td>3 whole eggs (omelet/bhurji in 1 tsp ghee) + 2 parathas / bread</td>
+                <td>&approx; 450 kcal | 22g P</td>
+              </tr>
+              <tr>
+                <td><strong>11:30 AM</strong></td>
+                <td>Mid-Morning Snack</td>
+                <td>1 bowl fresh curd (dahi) with 1 banana or 4 dates + roasted chana</td>
+                <td>&approx; 220 kcal | 7g P</td>
+              </tr>
+              <tr>
+                <td><strong>01:30 PM</strong></td>
+                <td><strong>Lunch</strong></td>
+                <td>1.5 katori rice + thick dal with 1 tsp ghee + 120g chicken/mutton curry</td>
+                <td>&approx; 620 kcal | 32g P</td>
+              </tr>
+              <tr>
+                <td><strong>01:50 PM</strong></td>
+                <td>Post-Meal Stroll</td>
+                <td>100–200 slow steps inside house + 1 tab Liv.52 DS / Aristozyme</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>05:30 PM</strong></td>
+                <td><strong>Power Shake</strong></td>
+                <td><strong>Desi Power Bulk Shake</strong> (Milk, 2 bananas, 2 tbsp peanut butter, dates)</td>
+                <td>&approx; 680 kcal | 24g P</td>
+              </tr>
+              <tr>
+                <td><strong>06:30 PM</strong></td>
+                <td><strong>Home Workout</strong></td>
+                <td>35–45 minutes calisthenics (3-sec lowering tempo)</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>08:30 PM</strong></td>
+                <td><strong>Dinner</strong></td>
+                <td>2 rotis (light ghee) + chicken/mutton or egg curry + cooked sabzi</td>
+                <td>&approx; 520 kcal | 28g P</td>
+              </tr>
+              <tr>
+                <td><strong>10:30 PM</strong></td>
+                <td>Bedtime Tonic</td>
+                <td>1 cup warm milk + pinch of turmeric & cardamom + 300mg Ashwagandha</td>
+                <td>&approx; 140 kcal | 5g P</td>
+              </tr>
+              <tr style="background: rgba(34, 197, 94, 0.12);">
+                <td colspan="3"><strong>DAILY ACCUMULATION</strong></td>
+                <td><strong style="color: #22c55e;">&approx; 2730 kcal | 120g P</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 6: CALISTHENICS & WORKOUT TIMER -->
+    <section id="tab-calisthenics" class="tab-pane" role="tabpanel">
+      <div class="card">
+        <h2 class="card-title">🤸 100% Home Calisthenics Hypertrophy System</h2>
+        <div class="table-container">
+          <table>
+            <colgroup>
+              <col style="width: 28%;">
+              <col style="width: 18%;">
+              <col style="width: 24%;">
+              <col style="width: 30%;">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>Movement</th>
+                <th>Sets × Reps</th>
+                <th>Target Muscle Group</th>
+                <th>Strict Form Cue (3-1-1 Tempo)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1. Push-Up Variation</strong></td>
+                <td>4 Sets × 8–12 Reps</td>
+                <td>Chest, Shoulders, Triceps</td>
+                <td>Knee/Incline (Phase 1) &rarr; Floor Standard (Phase 2) &rarr; Decline/Backpack (Phase 3).</td>
+              </tr>
+              <tr>
+                <td><strong>2. Doorframe / Table Rows</strong></td>
+                <td>4 Sets × 8–12 Reps</td>
+                <td>Upper Back, Lats, Biceps</td>
+                <td>Hang under sturdy table or grip doorframe. 2s peak scapular squeeze.</td>
+              </tr>
+              <tr>
+                <td><strong>3. Bulgarian Split Squat</strong></td>
+                <td>4 Sets × 8–10 Reps/leg</td>
+                <td>Quadriceps, Glutes</td>
+                <td>Rear foot elevated on bed/chair. The #1 bodyweight mass builder.</td>
+              </tr>
+              <tr>
+                <td><strong>4. Pike Push-Ups</strong></td>
+                <td>3 Sets × 6–10 Reps</td>
+                <td>Anterior & Lateral Delts</td>
+                <td>Hips raised in high V-shape; lower head diagonally forward.</td>
+              </tr>
+              <tr>
+                <td><strong>5. Backpack Loaded Squats</strong></td>
+                <td>4 Sets × 12–15 Reps</td>
+                <td>Full Quadriceps, Hips</td>
+                <td>Load backpack with 3–6 kg books; squat below parallel with proud chest.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Zero-Audio Web Audio API Workout Timer -->
+      <div class="card">
+        <h2 class="card-title">⏱️ Web Audio Rest & Tempo Pacer</h2>
+        <div class="timer-card">
+          <div style="font-size: 0.9rem; color: var(--text-muted);">90-Second Inter-Set Rest Timer with Audio Synthesizer (Zero MP3s)</div>
+          <div class="timer-display" id="timer-display">01:30</div>
+          <div class="timer-actions">
+            <button class="btn btn-primary" id="btn-timer-start">▶ Start 90s Rest</button>
+            <button class="btn btn-secondary" id="btn-timer-reset">↺ Reset</button>
+            <button class="btn btn-secondary" id="btn-tempo-beep">🔔 Test Chime</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 7: SAFE SUPPLEMENTS -->
+    <section id="tab-supplements" class="tab-pane" role="tabpanel">
+      <div class="card">
+        <h2 class="card-title">💊 Safe Supplement & Digestive Stack (Strictly Zero Steroids)</h2>
+        <div class="table-container">
+          <table>
+            <colgroup>
+              <col style="width: 25%;">
+              <col style="width: 20%;">
+              <col style="width: 25%;">
+              <col style="width: 30%;">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>Compound</th>
+                <th>Classification</th>
+                <th>Daily Dosage & Timing</th>
+                <th>Clinical Action in Body</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Creatine Monohydrate</strong></td>
+                <td>Sports Ergogenic</td>
+                <td>3 to 5g daily with water/shake</td>
+                <td>Cellular hydration into muscle cells; adds +1.2 kg clean mass in 3 weeks; boosts ATP.</td>
+              </tr>
+              <tr>
+                <td><strong>Whey Protein (80%)</strong></td>
+                <td>Dairy Protein</td>
+                <td>1 scoop (25g P) post-workout</td>
+                <td>Convenient amino acids to hit 110–120g protein without chewing extra solid food.</td>
+              </tr>
+              <tr>
+                <td><strong>Himalaya Liv.52 DS</strong></td>
+                <td>Ayurvedic Hepatotonic</td>
+                <td>1 tab twice daily after lunch & dinner</td>
+                <td>Stimulates liver bile production, accelerating fat breakdown and natural hunger.</td>
+              </tr>
+              <tr>
+                <td><strong>Aristozyme / Unienzyme</strong></td>
+                <td>OTC Digestive Enzyme</td>
+                <td>1 tab after heaviest meal (Wks 1–4)</td>
+                <td>Fungal Diastase & Pepsin breaks starches and proteins, eliminating early fullness.</td>
+              </tr>
+              <tr>
+                <td><strong>KSM-66 Ashwagandha</strong></td>
+                <td>Ayurvedic Adaptogen</td>
+                <td>300mg before bed with warm milk</td>
+                <td>Lowers evening cortisol; deepens slow-wave Stage 3 sleep where growth hormone surges.</td>
+              </tr>
+              <tr>
+                <td><strong>Vitamin D3 (60k IU)</strong></td>
+                <td>Essential Micronutrient</td>
+                <td>1 cap weekly for 8 weeks</td>
+                <td>Corrects widespread deficiency; vital for muscle protein synthesis and bone density.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card" style="border: 1px solid rgba(244, 63, 94, 0.3);">
+        <h2 class="card-title" style="color: var(--accent-rose);">🚫 The Medical Blacklist (Strict Warnings)</h2>
+        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
+          ⚠️ <strong>Never take Practin (Cyproheptadine) + Dexona (Dexamethasone)</strong>: Dexamethasone is a dangerous corticosteroid that causes facial swelling ("moon face"), suppresses adrenal glands, and causes severe muscle wasting once stopped.
+          <br>⚠️ <strong>Never touch Anabolic Steroids</strong>: Shuts down your natural testosterone and causes severe organ stress.
+          <br>⚠️ <strong>Avoid cheap maltodextrin mass gainers</strong>: They are 70% refined corn starch that bloat the gut and spike visceral belly fat.
+        </p>
+      </div>
+    </section>
+
+    <!-- TAB 8: DAILY HABIT TRACKER -->
+    <section id="tab-tracker" class="tab-pane" role="tabpanel">
+      <div class="card">
+        <h2 class="card-title">📅 Interactive Daily Habit Tracker</h2>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+          Your progress is automatically saved in your browser's <code>localStorage</code>. Check off each habit daily to stay consistent!
+        </p>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
+          <span style="font-size: 0.85rem; font-weight: 700; color: var(--accent-cyan);" id="tracker-pct">0% Completed Today</span>
+          <button class="btn btn-secondary" style="padding: 0.35rem 0.8rem; min-height: 36px; font-size: 0.8rem;" id="btn-reset-habits">↺ Reset Habits</button>
+        </div>
+
+        <div class="progress-bar-container">
+          <div class="progress-bar" id="tracker-bar"></div>
+        </div>
+
+        <div id="habits-list">
+          <div class="habit-item" data-id="h-munakka">
+            <div class="habit-checkbox"></div>
+            <div class="habit-content">
+              <div class="habit-title">Morning Soaked Munakka & Almonds</div>
+              <div class="habit-desc">8 Munakka + 6 peeled soaked almonds upon waking</div>
+            </div>
+          </div>
+          <div class="habit-item" data-id="h-vagus">
+            <div class="habit-checkbox"></div>
+            <div class="habit-content">
+              <div class="habit-title">Vagus Nerve Splash & Deep Gargle</div>
+              <div class="habit-desc">Cold water face splash + 30s deep gargle 5 mins before lunch</div>
+            </div>
+          </div>
+          <div class="habit-item" data-id="h-elixir">
+            <div class="habit-checkbox"></div>
+            <div class="habit-content">
+              <div class="habit-title">Pre-Meal Carminative Elixir</div>
+              <div class="habit-desc">Fresh ginger slice + lemon drop + pinch kala namak 15 mins before largest meal</div>
+            </div>
+          </div>
+          <div class="habit-item" data-id="h-zerowater">
+            <div class="habit-checkbox"></div>
+            <div class="habit-content">
+              <div class="habit-title">Zero-Water Rule Enforced</div>
+              <div class="habit-desc">Zero fluids 25m before and 35m after solid meals to prevent stomach dilation</div>
+            </div>
+          </div>
+          <div class="habit-item" data-id="h-shake1">
+            <div class="habit-checkbox"></div>
+            <div class="habit-content">
+              <div class="habit-title">Liquid 1: Mid-Morning Refresh Shake</div>
+              <div class="habit-desc">380 kcal consumed at 11:30 AM (Milk + Banana + Peanut Butter + Whey/Sattu; 60m transit)</div>
+            </div>
+          </div>
+          <div class="habit-item" data-id="h-shake2">
+            <div class="habit-checkbox"></div>
+            <div class="habit-content">
+              <div class="habit-title">Liquid 2: Evening Anabolic Shake</div>
+              <div class="habit-desc">450 kcal consumed at 05:30 PM (Milk + Banana + 4 Dates + Peanut Butter + Nuts)</div>
+            </div>
+          </div>
+          <div class="habit-item" data-id="h-stroll">
+            <div class="habit-checkbox"></div>
+            <div class="habit-content">
+              <div class="habit-title">Post-Meal 100 Steps Motility Stroll</div>
+              <div class="habit-desc">10-minute gentle walk inside room after lunch and dinner to speed transit</div>
+            </div>
+          </div>
+          <div class="habit-item" data-id="h-creatine">
+            <div class="habit-checkbox"></div>
+            <div class="habit-content">
+              <div class="habit-title">Creatine Monohydrate (3–5g)</div>
+              <div class="habit-desc">Taken daily with evening shake or water for intracellular muscle hydration</div>
+            </div>
+          </div>
+          <div class="habit-item" data-id="h-micros">
+            <div class="habit-checkbox"></div>
+            <div class="habit-content">
+              <div class="habit-title">Anabolic Micronutrients (Zinc & Magnesium)</div>
+              <div class="habit-desc">Zinc 25mg with lunch (stomach acid & testosterone); Magnesium 300mg with dinner (muscle relaxation)</div>
+            </div>
+          </div>
+          <div class="habit-item" data-id="h-liv52">
+            <div class="habit-checkbox"></div>
+            <div class="habit-content">
+              <div class="habit-title">Liv.52 DS & Digestive Support</div>
+              <div class="habit-desc">1 tab Liv.52 DS twice daily; 1 tsp Aristozyme after heaviest meal if adapting to new calories</div>
+            </div>
+          </div>
+          <div class="habit-item" data-id="h-workout">
+            <div class="habit-checkbox"></div>
+            <div class="habit-content">
+              <div class="habit-title">Home Calisthenics / GTG Micro-Sets</div>
+              <div class="habit-desc">Strict 3-second lowering tempo; paused stretch holds on final rep</div>
+            </div>
+          </div>
+          <div class="habit-item" data-id="h-bedtime-lipid">
+            <div class="habit-checkbox"></div>
+            <div class="habit-content">
+              <div class="habit-title">Bedtime Lipid & Casein Anchor</div>
+              <div class="habit-desc">1 cup warm milk + 1 tsp pure Desi Ghee + 300mg Ashwagandha at 10:30 PM (8-hour overnight drip)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Defensive Bootloader Architecture (Directive 5)
+    document.addEventListener("DOMContentLoaded", function() {
+      // 1. Navigation Tabs Bootloader
+      try {
+        const tabButtons = document.querySelectorAll(".tab-btn[data-tab]");
+        const tabPanes = document.querySelectorAll(".tab-pane");
+
+        tabButtons.forEach(btn => {
+          btn.addEventListener("click", () => {
+            const targetId = btn.getAttribute("data-tab");
+            if (!targetId) return;
+
+            tabButtons.forEach(b => b.classList.remove("active"));
+            tabPanes.forEach(p => p.classList.remove("active"));
+
+            btn.classList.add("active");
+            const targetPane = document.getElementById(targetId);
+            if (targetPane) targetPane.classList.add("active");
+          });
+        });
+      } catch (err) {
+        console.error("Tab bootloader error:", err);
+      }
+
+      // 2. Interactive Calculator Bootloader
+      try {
+        const weightInput = document.getElementById("calc-weight");
+        const heightInput = document.getElementById("calc-height");
+        const ageInput = document.getElementById("calc-age");
+        const surplusSelect = document.getElementById("calc-surplus");
+
+        const resBmr = document.getElementById("res-bmr");
+        const resTdee = document.getElementById("res-tdee");
+        const resTarget = document.getElementById("res-target");
+        const resProtein = document.getElementById("res-protein");
+        const resFats = document.getElementById("res-fats");
+        const resCarbs = document.getElementById("res-carbs");
+
+        function calculateMacros() {
+          const w = parseFloat(weightInput.value) || 57;
+          const h = parseFloat(heightInput.value) || 183;
+          const a = parseFloat(ageInput.value) || 24;
+          const surplus = parseFloat(surplusSelect.value) || 480;
+
+          // Mifflin-St Jeor: (10*w) + (6.25*h) - (5*a) + 5
+          const bmr = Math.round((10 * w) + (6.25 * h) - (5 * a) + 5);
+          // Sedentary desk factor: 1.2
+          const tdee = Math.round(bmr * 1.2);
+          const target = tdee + surplus;
+
+          // Macro distribution:
+          // Protein: 2.2g/kg for accelerated fast gain (>=750 surplus), 2.0g/kg standard
+          const proteinG = (surplus >= 750) ? Math.round(w * 2.2) : Math.round(w * 2.0);
+          const proteinKcal = proteinG * 4;
+
+          // Fats: 33% for Dual-Tissue Accretion (+480) & Accelerated Fast-Gain (+750), 30% for standard lean
+          const fatPct = (surplus >= 480) ? 0.33 : 0.30;
+          const fatKcal = Math.round(target * fatPct);
+          const fatG = Math.round(fatKcal / 9);
+
+          // Carbs: Remaining calories
+          const carbKcal = target - proteinKcal - fatKcal;
+          const carbG = Math.round(carbKcal / 4);
+
+          if (resBmr) resBmr.textContent = bmr.toLocaleString();
+          if (resTdee) resTdee.textContent = tdee.toLocaleString();
+          if (resTarget) resTarget.textContent = target.toLocaleString();
+          if (resProtein) resProtein.textContent = proteinG + "g";
+          if (resFats) resFats.textContent = fatG + "g";
+          if (resCarbs) resCarbs.textContent = carbG + "g";
+        }
+
+        [weightInput, heightInput, ageInput, surplusSelect].forEach(el => {
+          if (el) el.addEventListener("input", calculateMacros);
+        });
+
+        calculateMacros();
+      } catch (err) {
+        console.error("Calculator bootloader error:", err);
+      }
+
+      // 3. Web Audio API Timer Bootloader (Zero External MP3s)
+      try {
+        let audioCtx = null;
+
+        function getAudioContext() {
+          if (!audioCtx) {
+            const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+            if (AudioContextClass) audioCtx = new AudioContextClass();
+          }
+          if (audioCtx && audioCtx.state === "suspended") {
+            audioCtx.resume();
+          }
+          return audioCtx;
+        }
+
+        function playSynthesizedChime(freq, type, duration) {
+          try {
+            const ctx = getAudioContext();
+            if (!ctx) return;
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+
+            osc.type = type || "sine";
+            osc.frequency.setValueAtTime(freq || 587.33, ctx.currentTime);
+
+            gain.gain.setValueAtTime(0.3, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+
+            osc.start();
+            osc.stop(ctx.currentTime + duration);
+          } catch (e) {
+            console.warn("Web audio playback not allowed:", e);
+          }
+        }
+
+        let timerInterval = null;
+        let remainingSeconds = 90;
+        const timerDisplay = document.getElementById("timer-display");
+        const btnStart = document.getElementById("btn-timer-start");
+        const btnReset = document.getElementById("btn-timer-reset");
+        const btnBeep = document.getElementById("btn-tempo-beep");
+
+        function updateTimerDisplay() {
+          const mins = Math.floor(remainingSeconds / 60);
+          const secs = remainingSeconds % 60;
+          if (timerDisplay) {
+            timerDisplay.textContent = 
+              String(mins).padStart(2, "0") + ":" + String(secs).padStart(2, "0");
+          }
+        }
+
+        if (btnStart) {
+          btnStart.addEventListener("click", () => {
+            getAudioContext();
+            if (timerInterval) {
+              clearInterval(timerInterval);
+              timerInterval = null;
+              btnStart.textContent = "▶ Resume Rest";
+              return;
+            }
+
+            btnStart.textContent = "⏸ Pause Timer";
+            timerInterval = setInterval(() => {
+              if (remainingSeconds > 0) {
+                remainingSeconds--;
+                updateTimerDisplay();
+                if (remainingSeconds === 3 || remainingSeconds === 2 || remainingSeconds === 1) {
+                  playSynthesizedChime(440, "sine", 0.15); // soft countdown tick
+                }
+              } else {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                btnStart.textContent = "▶ Start 90s Rest";
+                remainingSeconds = 90;
+                updateTimerDisplay();
+                // Victory completion chords
+                playSynthesizedChime(587.33, "triangle", 0.4);
+                setTimeout(() => playSynthesizedChime(880, "triangle", 0.6), 250);
+              }
+            }, 1000);
+          });
+        }
+
+        if (btnReset) {
+          btnReset.addEventListener("click", () => {
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = null;
+            remainingSeconds = 90;
+            updateTimerDisplay();
+            if (btnStart) btnStart.textContent = "▶ Start 90s Rest";
+          });
+        }
+
+        if (btnBeep) {
+          btnBeep.addEventListener("click", () => {
+            playSynthesizedChime(659.25, "triangle", 0.35);
+          });
+        }
+      } catch (err) {
+        console.error("Timer bootloader error:", err);
+      }
+
+      // 4. Interactive Habit Tracker & LocalStorage Bootloader
+      try {
+        const habitItems = document.querySelectorAll(".habit-item");
+        const progressBar = document.getElementById("tracker-bar");
+        const progressPct = document.getElementById("tracker-pct");
+        const btnResetHabits = document.getElementById("btn-reset-habits");
+        const STORAGE_KEY = "weight_gain_habits_state_v1";
+
+        function loadHabitState() {
+          try {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            return saved ? JSON.parse(saved) : {};
+          } catch (e) {
+            return {};
+          }
+        }
+
+        function saveHabitState(state) {
+          try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+          } catch (e) {}
+        }
+
+        function updateProgress() {
+          const total = habitItems.length;
+          if (total === 0) return;
+          let doneCount = 0;
+
+          habitItems.forEach(item => {
+            if (item.classList.contains("done")) doneCount++;
+          });
+
+          const pct = Math.round((doneCount / total) * 100);
+          if (progressBar) progressBar.style.width = pct + "%";
+          if (progressPct) progressPct.textContent = pct + "% Completed Today (" + doneCount + "/" + total + ")";
+        }
+
+        const state = loadHabitState();
+        habitItems.forEach(item => {
+          const id = item.getAttribute("data-id");
+          if (id && state[id]) {
+            item.classList.add("done");
+          }
+
+          item.addEventListener("click", () => {
+            item.classList.toggle("done");
+            const currentState = loadHabitState();
+            currentState[id] = item.classList.contains("done");
+            saveHabitState(currentState);
+            updateProgress();
+          });
+        });
+
+        if (btnResetHabits) {
+          btnResetHabits.addEventListener("click", () => {
+            habitItems.forEach(item => item.classList.remove("done"));
+            saveHabitState({});
+            updateProgress();
+          });
+        }
+
+        updateProgress();
+      } catch (err) {
+        console.error("Habit tracker bootloader error:", err);
+      }
+
+      // 5. Digestive Clinic & Triage Bootloader
+      try {
+        const triageData = {
+          acidity: {
+            quick: "<p>• Sip 100 ml chilled whole milk OR chew 1 tsp raw fennel seeds (<em>Saunf</em>).<br>• Stand upright; do not recline for 60 mins.<br>• OTC: 10 ml Sodium Alginate (Gaviscon) to form a mechanical raft barrier over stomach acid.</p>",
+            long: "<p>• Eliminate water 25m before and 35m after solid meals.<br>• Finish dinner 2.5 hours before lying down; elevate bed head by 6 inches.<br>• Identify trigger foods (excessive green chillies or citrus on an empty stomach).</p>",
+            med: "<p><strong>Primary Classes</strong>: OTC Antacids (Digene/Gelusil), Alginate Raft Formers (Gaviscon), H2 Blockers (Famotidine 20/40mg), PPIs (Pantoprazole 40mg).<br><strong style=\"color: var(--accent-rose);\">Caution</strong>: Avoid abrupt daily PPI cessation to prevent severe rebound acid burning.</p>"
+          },
+          fullness: {
+            quick: "<p>• Drink 50 ml warm water with a pinch of roasted ajwain and black salt.<br>• Take a slow 10-minute stroll (100–200 steps).<br>• OTC: 1 tsp Fungal Diastase + Pepsin syrup (Aristozyme).</p>",
+            long: "<p>• Replace bulky solid volume with high-density liquid calories (Desi Power Shake).<br>• Split into 4–5 smaller feedings instead of 2 massive plates.<br>• 8-week cycle of Himalaya Liv.52 DS to optimize bile flow.</p>",
+            med: "<p><strong>Primary Classes</strong>: Prokinetics (Itopride 50mg, Domperidone 10mg), Digestive Enzymes (Aristozyme).<br><strong style=\"color: var(--accent-rose);\">Caution</strong>: Domperidone can prolong cardiac QT interval; limit to short cycles.</p>"
+          },
+          burning: {
+            quick: "<p>• Ingest 1 tablespoon cold fresh curd (Dahi) with 1 tsp raw honey.<br>• Drink 100 ml tender coconut water.<br>• OTC: Sucralfate suspension (10 ml on empty stomach) to physically coat mucosal craters.</p>",
+            long: "<p>• Never keep stomach completely empty past 4 hours; keep peeled almonds/dates handy.<br>• Nightly 2 tsp Desi Cow Ghee in warm milk (butyrate heals mucosal enterocytes).<br>• Screen for <em>H. pylori</em> if burning is chronic.</p>",
+            med: "<p><strong>Primary Classes</strong>: Mucosal Protectants (Sucralfate / Sucrafil), H2 Blockers (Famotidine), PPIs (Rabeprazole / Razo 20).<br><strong style=\"color: var(--accent-rose);\">Caution</strong>: Sucralfate must be taken on an empty stomach to bind ulcer proteins.</p>"
+          },
+          nausea: {
+            quick: "<p>• Slowly suck on a thin piece of fresh ginger dipped in black salt, or 1 clove (<em>Laung</em>).<br>• Inhale fresh lemon peel or peppermint aroma.<br>• Rx/OTC: Domperidone 10mg or Ondansetron 4mg mouth-dissolving tablet.</p>",
+            long: "<p>• Never eat when emotionally stressed or anxious; practice vagus nerve gargling first.<br>• Ensure chicken/mutton are cooked juicy with gravies, never dry or rubbery.<br>• Avoid strong offensive cooking fumes right before meals.</p>",
+            med: "<p><strong>Primary Classes</strong>: 5-HT3 Antiemetics (Ondansetron / Emeset 4mg), Dopamine D2 Antagonists (Domperidone 10mg).<br><strong style=\"color: var(--accent-rose);\">Caution</strong>: Ondansetron commonly causes constipation; use strictly for acute episodes.</p>"
+          },
+          pain: {
+            quick: "<p>• Apply a warm heating pad or hot-water bottle across lower abdomen for 10 minutes.<br>• Sip warm water steeped with 1/2 tsp crushed cumin and ajwain.<br>• Rx: Drotaverine 40mg or Dicyclomine 10mg (Drotin / Meftal-Spas).</p>",
+            long: "<p>• Eliminate chewing gum and rapid air-gulping during meals.<br>• Soak all lentils and nuts overnight to hydrolyze enzyme-inhibiting oligosaccharides.<br>• Maintain daily gentle core stretching.</p>",
+            med: "<p><strong>Primary Classes</strong>: Smooth Muscle Antispasmodics (Drotaverine / Drotin 40/80mg, Dicyclomine / Cyclopam).<br><strong style=\"color: var(--accent-rose);\">Caution</strong>: Never take painkillers for undiagnosed sharp pain with high fever (risk of masking appendicitis).</p>"
+          },
+          gas: {
+            quick: "<p>• Drink 100 ml warm water with a pinch of ghee-roasted Hing (Asafoetida) and lemon.<br>• Perform <em>Pawanmuktasana</em> (lie on back, pull knees to chest for 60 seconds).<br>• OTC: Simethicone chewable (Gas-O-Fast, Digene).</p>",
+            long: "<p>• Enforce 20–25 chews per bite so salivary amylase pre-digests starches before reaching bowel.<br>• Use an immersion stick blender for shakes (avoid blender jars that whip excess air).<br>• Daily cup of cumin-coriander-fennel (CCF) tea.</p>",
+            med: "<p><strong>Primary Classes</strong>: Simethicone, Digestive Enzyme supplements, Carminative herbal infusions.<br><strong style=\"color: var(--accent-rose);\">Caution</strong>: Simethicone defoams bubbles locally; does not reduce gas production without proper chewing.</p>"
+          },
+          constipation: {
+            quick: "<p>• Drink 2 glasses of lukewarm water on empty morning stomach + 15 bodyweight air squats.<br>• Eat 8 soaked Munakka (black raisins) with their soaking water.<br>• OTC: 10–15 ml Lactulose syrup at bedtime.</p>",
+            long: "<p>• Ensure 2.5 to 3.0 liters daily water intake (strictly consumed between meals).<br>• 1 tbsp Psyllium husk (<em>Isabgol</em>) with warm milk at bedtime 3 nights weekly.<br>• Daily 100-step post-meal walks stimulate colon peristalsis.</p>",
+            med: "<p><strong>Primary Classes</strong>: Osmotic Laxatives (Lactulose / Duphalac, Polyethylene Glycol), Bulk Formers (Psyllium / Isabgol).<br><strong style=\"color: var(--accent-rose);\">Caution</strong>: Avoid harsh stimulant laxatives (Senna/Bisacodyl) as they deplete electrolytes and create dependency.</p>"
+          },
+          diarrhea: {
+            quick: "<p>• Drink 200 ml WHO-formula Oral Rehydration Salts (ORS) to restore lost electrolytes.<br>• Eat 1 bowl of curd with 1 mashed raw banana and roasted cumin.<br>• OTC: Bacillus clausii spores (Enterogermina) or Racecadotril 100mg.</p>",
+            long: "<p>• Temporarily switch from full milk to lactose-free curd or boiled almond milk for 5 days.<br>• Reduce shake peanut butter from 2 tbsp to 1 tbsp until stools normalize.<br>• Rebuild gut microbiota with daily fermented curd and dietary soluble fiber.</p>",
+            med: "<p><strong>Primary Classes</strong>: Enkephalinase Inhibitors (Racecadotril / Redotil), Spore Probiotics (Enterogermina, Econorm).<br><strong style=\"color: var(--accent-rose);\">Caution</strong>: Never take Loperamide (Imodium) if stool contains blood or if accompanied by fever.</p>"
+          }
+        };
+
+        const symptomPills = document.querySelectorAll(".symptom-pill");
+        const triageQuick = document.getElementById("triage-quick");
+        const triageLong = document.getElementById("triage-long");
+        const triageMed = document.getElementById("triage-med");
+
+        symptomPills.forEach(pill => {
+          pill.addEventListener("click", () => {
+            const sym = pill.getAttribute("data-sym");
+            if (!sym || !triageData[sym]) return;
+
+            symptomPills.forEach(p => p.classList.remove("active"));
+            pill.classList.add("active");
+
+            if (triageQuick) triageQuick.innerHTML = triageData[sym].quick;
+            if (triageLong) triageLong.innerHTML = triageData[sym].long;
+            if (triageMed) triageMed.innerHTML = triageData[sym].med;
+          });
+        });
+
+        // Search Filter for Medicine Table
+        const medSearchInput = document.getElementById("med-search");
+        const medTableRows = document.querySelectorAll("#med-table tbody tr");
+
+        if (medSearchInput) {
+          medSearchInput.addEventListener("input", () => {
+            const query = medSearchInput.value.toLowerCase().trim();
+            medTableRows.forEach(row => {
+              const text = row.textContent.toLowerCase();
+              if (text.includes(query)) {
+                row.style.display = "";
+              } else {
+                row.style.display = "none";
+              }
+            });
+          });
+        }
+      } catch (err) {
+        console.error("Digestive clinic bootloader error:", err);
+      }
+    });
+  </script>
+</body>
+</html>
