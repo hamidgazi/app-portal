@@ -1,0 +1,1959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Thela Stock Manager</title>
+  
+  <!-- PWA Meta -->
+  <meta name="theme-color" content="#000000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Thela Stock">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+
+  <!-- Vendor SheetJS (Offline Local Bundle) -->
+  <script src="vendor/xlsx.full.min.js"></script>
+
+  <!-- Firebase v8 Compat SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+  <style>
+    /* ==========================================================================
+       AMOLED PURE BLACK DESIGN SYSTEM & ERGONOMIC RESILIENCE
+       ========================================================================== */
+    :root {
+      --bg-canvas: #000000;
+      --bg-surface: #0e1424;
+      --bg-surface-elevated: #151e34;
+      --bg-surface-hover: #1c2742;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-active: #38bdf8;
+      
+      /* Typography (Soft warm off-white to prevent OLED purple smear) */
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      
+      /* Accents */
+      --accent-out: #f43f5e;
+      --accent-out-bg: rgba(244, 63, 94, 0.15);
+      --accent-out-glow: rgba(244, 63, 94, 0.35);
+      
+      --accent-in: #10b981;
+      --accent-in-bg: rgba(16, 185, 129, 0.15);
+      --accent-in-glow: rgba(16, 185, 129, 0.35);
+
+      --accent-cyan: #38bdf8;
+      --accent-amber: #f59e0b;
+      
+      /* Physics */
+      --spring: cubic-bezier(0.16, 1, 0.3, 1);
+      --min-hitbox: 48px;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-pill: 9999px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-canvas);
+      color: var(--text-primary);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: max(12px, env(safe-area-inset-top, 0px));
+      padding-bottom: max(32px, env(safe-area-inset-bottom, 0px));
+      padding-left: max(12px, env(safe-area-inset-left, 0px));
+      padding-right: max(12px, env(safe-area-inset-right, 0px));
+      overflow-x: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 640px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* ==========================================================================
+       ZONE 1: PASSIVE APP BAR & DIAGNOSTICS
+       ========================================================================== */
+    .top-app-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      gap: 10px;
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: var(--min-hitbox);
+      min-height: var(--min-hitbox);
+      background: var(--bg-surface-elevated);
+      color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      font-size: 16px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: transform 0.15s var(--spring), background-color 0.15s;
+    }
+
+    .btn-back:active {
+      transform: scale(0.96);
+    }
+
+    .brand-title-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.3px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .brand-subtitle {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      letter-spacing: 0.2px;
+    }
+
+    .app-bar-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-secondary);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--accent-in);
+      box-shadow: 0 0 8px var(--accent-in);
+    }
+
+    .status-dot.offline {
+      background-color: var(--accent-amber);
+      box-shadow: 0 0 8px var(--accent-amber);
+    }
+
+    .queue-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2px 7px;
+      font-size: 11px;
+      font-weight: 800;
+      background: rgba(245, 158, 11, 0.2);
+      color: var(--accent-amber);
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+
+    .btn-icon-action {
+      min-width: var(--min-hitbox);
+      min-height: var(--min-hitbox);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-surface-elevated);
+      color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      font-size: 16px;
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: transform 0.15s var(--spring), background-color 0.15s, border-color 0.15s;
+    }
+
+    .btn-icon-action:active {
+      transform: scale(0.96);
+      background: var(--bg-surface-hover);
+    }
+
+    /* Header action toolbar */
+    .quick-toolbar {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-tool {
+      flex: 1;
+      min-height: var(--min-hitbox);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: transform 0.15s var(--spring), border-color 0.15s;
+    }
+
+    .btn-tool:active {
+      transform: scale(0.97);
+      border-color: var(--border-active);
+    }
+
+    /* ==========================================================================
+       BANNER: LOW STOCK ALERT
+       ========================================================================== */
+    .low-stock-banner {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      background: var(--accent-out-bg);
+      border: 1px solid var(--accent-out);
+      border-radius: var(--radius-md);
+      color: #fecdd3;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.4;
+      animation: pulseGlow 2s infinite ease-in-out;
+    }
+
+    .low-stock-banner.active {
+      display: flex;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 10px var(--accent-out-glow); }
+      50% { box-shadow: 0 0 20px var(--accent-out-glow); }
+    }
+
+    /* ==========================================================================
+       ZONE 2: 6 REAL-TIME STOCK BALANCE CARDS
+       ========================================================================== */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 4px;
+    }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-secondary);
+    }
+
+    .total-stock-badge {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      background: rgba(56, 189, 248, 0.12);
+      padding: 4px 8px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    @media (min-width: 520px) {
+      .cards-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    /* Ergonomic Whole-Card Click Delegation */
+    .stock-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      touch-action: manipulation;
+      user-select: none;
+      -webkit-user-select: none;
+      transition: transform 0.15s var(--spring), border-color 0.15s, background-color 0.15s, box-shadow 0.15s;
+      min-height: 104px;
+    }
+
+    .stock-card:active {
+      transform: scale(0.97);
+      background: var(--bg-surface-hover);
+    }
+
+    .stock-card.selected {
+      border-color: var(--accent-cyan);
+      background: var(--bg-surface-elevated);
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.25);
+    }
+
+    .stock-card.zero-stock {
+      border-color: var(--accent-out);
+      background: rgba(244, 63, 94, 0.08);
+      animation: alertBorderPulse 2.5s infinite ease-in-out;
+    }
+
+    @keyframes alertBorderPulse {
+      0%, 100% { border-color: rgba(244, 63, 94, 0.5); }
+      50% { border-color: rgba(244, 63, 94, 1); box-shadow: 0 0 12px var(--accent-out-glow); }
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-item-name {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-badge {
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: var(--radius-pill);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .card-badge.ok {
+      background: var(--accent-in-bg);
+      color: var(--accent-in);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .card-badge.empty {
+      background: var(--accent-out-bg);
+      color: var(--accent-out);
+      border: 1px solid rgba(244, 63, 94, 0.5);
+    }
+
+    .card-balance {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      color: var(--text-primary);
+      line-height: 1.1;
+    }
+
+    .card-balance.zero {
+      color: var(--accent-out);
+    }
+
+    .card-breakdown {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 6px;
+      margin-top: 2px;
+    }
+
+    .breakdown-in {
+      color: var(--accent-in);
+    }
+
+    .breakdown-out {
+      color: var(--accent-out);
+    }
+
+    /* ==========================================================================
+       ZONE 3: TRANSACTION INPUT CONSOLE
+       ========================================================================== */
+    .input-console-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* IN / OUT Toggle Switch */
+    .type-toggle-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      background: var(--bg-surface-elevated);
+      padding: 4px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .type-toggle-btn {
+      min-height: var(--min-hitbox);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 15px;
+      font-weight: 800;
+      border: none;
+      border-radius: 10px;
+      color: var(--text-secondary);
+      background: transparent;
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: all 0.18s var(--spring);
+    }
+
+    .type-toggle-btn:active {
+      transform: scale(0.97);
+    }
+
+    .type-toggle-btn.active-out {
+      background: var(--accent-out);
+      color: #ffffff;
+      box-shadow: 0 0 14px var(--accent-out-glow);
+    }
+
+    .type-toggle-btn.active-in {
+      background: var(--accent-in);
+      color: #ffffff;
+      box-shadow: 0 0 14px var(--accent-in-glow);
+    }
+
+    /* 6 Item Selection Matrix */
+    .form-group-label {
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .item-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .item-btn {
+      min-height: var(--min-hitbox);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8px;
+      background: var(--bg-surface-elevated);
+      color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: transform 0.15s var(--spring), border-color 0.15s, background-color 0.15s;
+    }
+
+    .item-btn:active {
+      transform: scale(0.96);
+    }
+
+    .item-btn.selected {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: var(--accent-cyan);
+      color: #ffffff;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+    }
+
+    /* Quantity Presets */
+    .preset-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+    }
+
+    .preset-btn {
+      min-height: var(--min-hitbox);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-surface-elevated);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: transform 0.15s var(--spring), background-color 0.15s, border-color 0.15s;
+    }
+
+    .preset-btn:active {
+      transform: scale(0.95);
+      background: rgba(56, 189, 248, 0.25);
+    }
+
+    /* Custom Quantity & Details Input */
+    .qty-input-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .qty-input-box {
+      position: relative;
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+
+    .qty-input {
+      width: 100%;
+      min-height: var(--min-hitbox);
+      background: var(--bg-surface-elevated);
+      color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      font-size: 20px;
+      font-weight: 800;
+      padding: 8px 44px 8px 14px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .qty-input:focus {
+      border-color: var(--accent-cyan);
+    }
+
+    .btn-clear-qty {
+      position: absolute;
+      right: 4px;
+      min-width: 40px;
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 16px;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    .tx-meta-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .text-input {
+      min-height: var(--min-hitbox);
+      background: var(--bg-surface-elevated);
+      color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 12px;
+      outline: none;
+      transition: border-color 0.15s;
+      width: 100%;
+    }
+
+    .text-input:focus {
+      border-color: var(--accent-cyan);
+    }
+
+    /* Submit Button */
+    .btn-submit {
+      min-height: 56px;
+      width: 100%;
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 16px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: transform 0.15s var(--spring), background-color 0.15s, box-shadow 0.15s;
+      color: #ffffff;
+      background: var(--accent-out);
+      box-shadow: 0 4px 16px var(--accent-out-glow);
+    }
+
+    .btn-submit.mode-in {
+      background: var(--accent-in);
+      box-shadow: 0 4px 16px var(--accent-in-glow);
+    }
+
+    .btn-submit:active {
+      transform: scale(0.97);
+    }
+
+    /* ==========================================================================
+       ZONE 4: RECENT TRANSACTIONS STREAM
+       ========================================================================== */
+    .history-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .history-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .filter-select {
+      background: var(--bg-surface-elevated);
+      color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 10px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .tx-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 380px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    /* Custom scrollbar */
+    .tx-list::-webkit-scrollbar {
+      width: 6px;
+    }
+    .tx-list::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .tx-list::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 3px;
+    }
+
+    .tx-item {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .tx-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tx-type-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 8px;
+      border-radius: var(--radius-sm);
+      min-width: 44px;
+    }
+
+    .tx-type-pill.out {
+      background: var(--accent-out-bg);
+      color: var(--accent-out);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+    }
+
+    .tx-type-pill.in {
+      background: var(--accent-in-bg);
+      color: var(--accent-in);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .tx-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tx-item-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .tx-item-meta {
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    .tx-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2px;
+    }
+
+    .tx-qty {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .tx-sync-status {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .tx-sync-status.synced {
+      color: var(--accent-cyan);
+    }
+
+    .tx-sync-status.queued {
+      color: var(--accent-amber);
+    }
+
+    /* Toast Notification System */
+    .toast-container {
+      position: fixed;
+      bottom: max(24px, env(safe-area-inset-bottom, 0px));
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 9999;
+      pointer-events: none;
+      width: 90%;
+      max-width: 420px;
+    }
+
+    .toast {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.25s var(--spring);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .toast.success {
+      border-left: 4px solid var(--accent-in);
+    }
+
+    .toast.warning {
+      border-left: 4px solid var(--accent-amber);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- ZONE 1: TOP APP BAR & DIAGNOSTICS -->
+    <header class="top-app-bar">
+      <div class="brand-section">
+        <a id="header-back-btn" href="../../Common-Resources/App-Portal/index.html" class="btn-back" title="Back to App Portal">←</a>
+        <div class="brand-title-wrap">
+          <h1 class="brand-title">📦 Thela Stock</h1>
+          <span class="brand-subtitle">Real-Time Mobile Ledger</span>
+        </div>
+      </div>
+
+      <div class="app-bar-actions">
+        <div id="status-badge" class="status-pill" title="Cloud Sync Status">
+          <span id="status-dot" class="status-dot"></span>
+          <span id="status-text">Online</span>
+        </div>
+        <span id="queue-badge" class="queue-badge" title="Pending Local Queue">0 Queued</span>
+        <button id="btn-sync-now" class="btn-icon-action" title="Force Sync with Cloud">🔄</button>
+      </div>
+    </header>
+
+    <!-- QUICK TOOLBAR: EXPORT & ACTIONS -->
+    <div class="quick-toolbar">
+      <button id="btn-export-excel" class="btn-tool">
+        <span>📊</span>
+        <span>Export Excel (.xlsx)</span>
+      </button>
+      <button id="btn-quick-refresh" class="btn-tool">
+        <span>⚡</span>
+        <span>Recalculate Balances</span>
+      </button>
+    </div>
+
+    <!-- LOW STOCK ALERT BANNER -->
+    <div id="banner-low-stock" class="low-stock-banner" role="alert">
+      <span style="font-size: 20px;">⚠️</span>
+      <div id="banner-low-stock-text">
+        <strong>Low Stock Alert:</strong> Lining 28 is completely out of stock (0 units). Restocking recommended!
+      </div>
+    </div>
+
+    <!-- ZONE 2: 6 REAL-TIME STOCK BALANCE CARDS -->
+    <section>
+      <div class="section-header" style="margin-bottom: 8px;">
+        <span class="section-title">Stock Balances</span>
+        <span id="total-stock-badge" class="total-stock-badge">1,675 Units</span>
+      </div>
+
+      <div id="balance-cards-grid" class="cards-grid">
+        <!-- Injected via renderStockBalanceCards -->
+      </div>
+    </section>
+
+    <!-- ZONE 3: TRANSACTION INPUT CONSOLE -->
+    <section class="input-console-card">
+      
+      <!-- OUT / IN Toggle -->
+      <div class="type-toggle-container">
+        <button id="btn-type-out" class="type-toggle-btn active-out" type="button">
+          <span>🔴</span>
+          <span>OUT (Dispatch)</span>
+        </button>
+        <button id="btn-type-in" class="type-toggle-btn" type="button">
+          <span>🟢</span>
+          <span>IN (Received)</span>
+        </button>
+      </div>
+
+      <!-- Item Selection Matrix (6 Items) -->
+      <div>
+        <div class="form-group-label">
+          <span>Select Item (1-Tap)</span>
+          <span id="selected-item-display" style="color: var(--accent-cyan); font-weight: 800;">1 set</span>
+        </div>
+        <div id="item-selector-grid" class="item-grid">
+          <!-- Injected via initTouchControls -->
+        </div>
+      </div>
+
+      <!-- Quantity Presets -->
+      <div>
+        <div class="form-group-label">
+          <span>Quick Quantity Presets</span>
+          <span style="color: var(--text-muted);">Tap to add</span>
+        </div>
+        <div id="preset-container" class="preset-grid">
+          <button class="preset-btn" data-val="25" type="button">+25</button>
+          <button class="preset-btn" data-val="50" type="button">+50</button>
+          <button class="preset-btn" data-val="100" type="button">+100</button>
+          <button class="preset-btn" data-val="200" type="button">+200</button>
+          <button class="preset-btn" data-val="500" type="button">+500</button>
+        </div>
+      </div>
+
+      <!-- Custom Quantity Input -->
+      <div>
+        <div class="form-group-label">
+          <span>Quantity</span>
+          <span id="current-stock-preview" style="color: var(--text-secondary);">Bal: 250</span>
+        </div>
+        <div class="qty-input-wrapper">
+          <div class="qty-input-box">
+            <input id="qty-input" class="qty-input" type="number" min="1" step="1" placeholder="Enter quantity" value="50">
+            <button id="btn-qty-clear" class="btn-clear-qty" type="button" title="Clear Quantity">✖</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Date & Optional Reference -->
+      <div class="tx-meta-row">
+        <div>
+          <div class="form-group-label">Date</div>
+          <input id="tx-date-input" class="text-input" type="date">
+        </div>
+        <div>
+          <div class="form-group-label">Chalan / Note</div>
+          <input id="tx-notes-input" class="text-input" type="text" placeholder="Optional remark">
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button id="btn-submit-tx" class="btn-submit" type="button">
+        <span id="btn-submit-icon">🚀</span>
+        <span id="btn-submit-label">Record OUT: 50 × 1 set</span>
+      </button>
+
+    </section>
+
+    <!-- ZONE 4: RECENT TRANSACTIONS STREAM -->
+    <section class="history-card">
+      <div class="history-header">
+        <div class="section-title">Recent Transactions</div>
+        <select id="filter-item-select" class="filter-select">
+          <option value="ALL">All Items</option>
+          <option value="1 set">1 set</option>
+          <option value="Kohinoor">Kohinoor</option>
+          <option value="Lining 28">Lining 28</option>
+          <option value="Medium 29">Medium 29</option>
+          <option value="Pink 30">Pink 30</option>
+          <option value="White (6)">White (6)</option>
+        </select>
+      </div>
+
+      <div id="tx-history-list" class="tx-list">
+        <!-- Injected via renderTransactionHistory -->
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- APPLICATION LOGIC & DEFENSIVE BOOTLOADER -->
+  <script>
+    /* ==========================================================================
+       1. DATA STRUCTURES & CONFIGURATION
+       ========================================================================== */
+    const ITEMS = [
+      '1 set',
+      'Kohinoor',
+      'Lining 28',
+      'Medium 29',
+      'Pink 30',
+      'White (6)'
+    ];
+
+    const OPENING_STOCKS = {
+      '1 set': 225,
+      'Kohinoor': 250,
+      'Lining 28': 150,
+      'Medium 29': 0,
+      'Pink 30': 200,
+      'White (6)': 75
+    };
+
+    const BASE_SUMMARY = {
+      '1 set': { opStock: 225, stockIn: 1200, stockOut: 1175, currentStock: 250 },
+      'Kohinoor': { opStock: 250, stockIn: 2100, stockOut: 1850, currentStock: 500 },
+      'Lining 28': { opStock: 150, stockIn: 800, stockOut: 950, currentStock: 0 },
+      'Medium 29': { opStock: 0, stockIn: 1300, stockOut: 975, currentStock: 325 },
+      'Pink 30': { opStock: 200, stockIn: 700, stockOut: 375, currentStock: 525 },
+      'White (6)': { opStock: 75, stockIn: 0, stockOut: 0, currentStock: 75 }
+    };
+
+    const SEED_TRANSACTIONS = [{"id": "excel_sr_1", "sr": 1, "date": "2025-08-20", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_2", "sr": 2, "date": "2025-08-22", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_3", "sr": 3, "date": "2025-08-25", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_4", "sr": 4, "date": "2025-09-01", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_5", "sr": 5, "date": "2025-09-03", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_6", "sr": 6, "date": "2025-09-07", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_7", "sr": 7, "date": "2025-09-10", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_8", "sr": 8, "date": "2025-09-15", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_9", "sr": 9, "date": "2025-09-16", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_10", "sr": 10, "date": "2025-09-19", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_11", "sr": 11, "date": "2025-09-22", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_12", "sr": 12, "date": "2025-09-22", "item": "Pink 30", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_13", "sr": 13, "date": "2025-09-27", "item": "1 set", "quantity": 500, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_14", "sr": 14, "date": "2025-09-27", "item": "Kohinoor", "quantity": 300, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_15", "sr": 15, "date": "2025-09-27", "item": "Pink 30", "quantity": 200, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_16", "sr": 16, "date": "2025-09-27", "item": "Medium 29", "quantity": 200, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_17", "sr": 17, "date": "2025-09-27", "item": "Lining 28", "quantity": 300, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_18", "sr": 18, "date": "2025-10-01", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_19", "sr": 19, "date": "2025-10-01", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_20", "sr": 20, "date": "2025-10-01", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_21", "sr": 21, "date": "2025-10-09", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_22", "sr": 22, "date": "2025-10-09", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_23", "sr": 23, "date": "2025-10-13", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_24", "sr": 24, "date": "2025-10-13", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_25", "sr": 25, "date": "2025-10-13", "item": "Pink 30", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_26", "sr": 26, "date": "2025-10-13", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_27", "sr": 27, "date": "2025-10-29", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_28", "sr": 28, "date": "2025-10-29", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_29", "sr": 29, "date": "2025-10-31", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_30", "sr": 30, "date": "2025-11-04", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_31", "sr": 31, "date": "2025-11-05", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_32", "sr": 32, "date": "2025-11-05", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_33", "sr": 33, "date": "2025-11-10", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_34", "sr": 34, "date": "2025-11-11", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_35", "sr": 35, "date": "2025-11-14", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_36", "sr": 36, "date": "2025-11-14", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_37", "sr": 37, "date": "2025-11-14", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_38", "sr": 38, "date": "2025-11-17", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_39", "sr": 39, "date": "2025-11-17", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_40", "sr": 40, "date": "2025-11-19", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_41", "sr": 41, "date": "2025-11-19", "item": "Pink 30", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_42", "sr": 42, "date": "2025-11-21", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_43", "sr": 43, "date": "2025-11-21", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_44", "sr": 44, "date": "2025-11-23", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_45", "sr": 45, "date": "2025-11-23", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_46", "sr": 46, "date": "2025-11-27", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_47", "sr": 47, "date": "2025-11-28", "item": "Kohinoor", "quantity": 400, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_48", "sr": 48, "date": "2025-11-28", "item": "Lining 28", "quantity": 200, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_49", "sr": 49, "date": "2025-11-29", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_50", "sr": 50, "date": "2025-11-29", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_51", "sr": 51, "date": "2025-12-02", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_52", "sr": 52, "date": "2025-12-02", "item": "Pink 30", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_53", "sr": 53, "date": "2025-12-04", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_54", "sr": 54, "date": "2025-12-04", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_55", "sr": 55, "date": "2025-12-08", "item": "Kohinoor", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_56", "sr": 56, "date": "2025-12-11", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_57", "sr": 57, "date": "2025-12-14", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_58", "sr": 58, "date": "2025-12-14", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_59", "sr": 59, "date": "2025-12-17", "item": "Pink 30", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_60", "sr": 60, "date": "2025-12-17", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_61", "sr": 61, "date": "2025-12-18", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_62", "sr": 62, "date": "2025-12-18", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_63", "sr": 63, "date": "2025-12-18", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_64", "sr": 64, "date": "2025-12-19", "item": "Medium 29", "quantity": 500, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_65", "sr": 65, "date": "2025-12-22", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_66", "sr": 66, "date": "2025-12-22", "item": "Pink 30", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_67", "sr": 67, "date": "2025-12-22", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_68", "sr": 68, "date": "2025-12-22", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_69", "sr": 69, "date": "2025-12-23", "item": "1 set", "quantity": 125, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_70", "sr": 70, "date": "2025-12-23", "item": "Medium 29", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_71", "sr": 71, "date": "2025-12-23", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_72", "sr": 72, "date": "2025-12-23", "item": "Lining 28", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_73", "sr": 73, "date": "2026-12-31", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_74", "sr": 74, "date": "2026-12-31", "item": "Kohinoor", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_75", "sr": 75, "date": "2026-01-06", "item": "Kohinoor", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_76", "sr": 76, "date": "2026-01-06", "item": "Lining 28", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_77", "sr": 77, "date": "2026-01-06", "item": "Pink 30", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_78", "sr": 78, "date": "2026-01-15", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_79", "sr": 79, "date": "2026-01-15", "item": "Kohinoor", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_80", "sr": 80, "date": "2026-01-15", "item": "Medium 29", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_81", "sr": 81, "date": "2026-01-24", "item": "Kohinoor", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_82", "sr": 82, "date": "2026-01-24", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_83", "sr": 83, "date": "2026-01-28", "item": "Kohinoor", "quantity": 400, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_84", "sr": 84, "date": "2026-01-28", "item": "Lining 28", "quantity": 300, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_85", "sr": 85, "date": "2026-01-28", "item": "1 set", "quantity": 200, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_86", "sr": 86, "date": "2026-01-30", "item": "Lining 28", "quantity": 75, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_87", "sr": 87, "date": "2026-01-30", "item": "Medium 29", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_88", "sr": 88, "date": "2026-01-30", "item": "Pink 30", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_89", "sr": 89, "date": "2026-01-30", "item": "Kohinoor", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_90", "sr": 90, "date": "2026-01-30", "item": "1 set", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_91", "sr": 91, "date": "2026-02-01", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_92", "sr": 92, "date": "2026-02-02", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_93", "sr": 93, "date": "2026-02-03", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_94", "sr": 94, "date": "2026-02-04", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_95", "sr": 95, "date": "2026-02-04", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_96", "sr": 96, "date": "2026-02-05", "item": "Pink 30", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_97", "sr": 97, "date": "2026-02-07", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_98", "sr": 98, "date": "2026-02-07", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_99", "sr": 99, "date": "2026-02-10", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_100", "sr": 100, "date": "2026-02-10", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_101", "sr": 101, "date": "2026-02-12", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_102", "sr": 102, "date": "2026-02-12", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_103", "sr": 103, "date": "2026-02-13", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_104", "sr": 104, "date": "2026-02-16", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_105", "sr": 105, "date": "2026-02-17", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_106", "sr": 106, "date": "2026-02-17", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_107", "sr": 107, "date": "2026-02-19", "item": "Kohinoor", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_108", "sr": 108, "date": "2026-02-20", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_109", "sr": 109, "date": "2026-02-20", "item": "Pink 30", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_110", "sr": 110, "date": "2026-02-22", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_111", "sr": 111, "date": "2026-02-22", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_112", "sr": 112, "date": "2026-02-24", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_113", "sr": 113, "date": "2026-02-25", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_114", "sr": 114, "date": "2026-02-27", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_115", "sr": 115, "date": "2026-02-28", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_116", "sr": 116, "date": "2026-02-28", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_117", "sr": 117, "date": "2026-03-03", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_118", "sr": 118, "date": "2026-03-03", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_119", "sr": 119, "date": "2026-03-04", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_120", "sr": 120, "date": "2026-03-06", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_121", "sr": 121, "date": "2026-03-07", "item": "Pink 30", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_122", "sr": 122, "date": "2026-03-08", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_123", "sr": 123, "date": "2026-03-09", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_124", "sr": 124, "date": "2026-03-09", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_125", "sr": 125, "date": "2026-03-10", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_126", "sr": 126, "date": "2026-03-12", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_127", "sr": 127, "date": "2026-03-14", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_128", "sr": 128, "date": "2026-03-15", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_129", "sr": 129, "date": "2026-03-16", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_130", "sr": 130, "date": "2026-03-17", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_131", "sr": 131, "date": "2026-03-18", "item": "Kohinoor", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_132", "sr": 132, "date": "2026-03-19", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_133", "sr": 133, "date": "2026-03-21", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_134", "sr": 134, "date": "2026-03-22", "item": "Pink 30", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_135", "sr": 135, "date": "2026-03-24", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_136", "sr": 136, "date": "2026-03-24", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_137", "sr": 137, "date": "2026-03-24", "item": "Lining 28", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_138", "sr": 138, "date": "2026-04-03", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_139", "sr": 139, "date": "2026-04-09", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_143", "sr": 143, "date": "2026-04-09", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_144", "sr": 144, "date": "2026-04-10", "item": "Kohinoor", "quantity": 500, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_145", "sr": 145, "date": "2026-04-10", "item": "Medium 29", "quantity": 300, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_146", "sr": 146, "date": "2026-04-10", "item": "Pink 30", "quantity": 500, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_147", "sr": 147, "date": "2026-04-09", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_148", "sr": 148, "date": "2026-04-14", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_149", "sr": 149, "date": "2026-04-14", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_150", "sr": 150, "date": "2026-04-14", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_151", "sr": 151, "date": "2026-04-21", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_152", "sr": 152, "date": "2026-04-21", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_153", "sr": 153, "date": "2026-04-27", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_154", "sr": 154, "date": "2026-04-29", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_155", "sr": 155, "date": "2026-05-04", "item": "Pink 30", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_156", "sr": 156, "date": "2026-05-04", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_157", "sr": 157, "date": "2026-05-04", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_158", "sr": 158, "date": "2026-05-04", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_159", "sr": 159, "date": "2026-05-05", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_160", "sr": 160, "date": "2026-05-09", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_161", "sr": 161, "date": "2026-05-09", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_162", "sr": 162, "date": "2026-05-11", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_163", "sr": 163, "date": "2026-05-16", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_164", "sr": 164, "date": "2026-05-25", "item": "Medium 29", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_165", "sr": 165, "date": "2026-05-25", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_166", "sr": 166, "date": "2026-06-08", "item": "1 set", "quantity": 200, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_167", "sr": 167, "date": "2026-05-27", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_168", "sr": 168, "date": "2026-06-04", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_169", "sr": 169, "date": "2026-04-13", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_170", "sr": 170, "date": "2026-06-17", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_171", "sr": 171, "date": "2026-06-17", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_172", "sr": 172, "date": "2026-06-17", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_173", "sr": 173, "date": "2026-06-29", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_174", "sr": 174, "date": "2026-07-11", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_175", "sr": 175, "date": "2026-07-18", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_176", "sr": 176, "date": "2026-07-18", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_177", "sr": 177, "date": "2026-07-18", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_178", "sr": 178, "date": "2026-07-18", "item": "Pink 30", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_179", "sr": 179, "date": "2026-07-23", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_180", "sr": 180, "date": "2026-07-29", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_181", "sr": 181, "date": "2026-07-29", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_182", "sr": 182, "date": "2026-08-05", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_183", "sr": 183, "date": "2026-08-05", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_184", "sr": 184, "date": "2026-08-10", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_185", "sr": 185, "date": "2026-08-12", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_186", "sr": 186, "date": "2026-08-17", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_187", "sr": 187, "date": "2026-08-17", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_188", "sr": 188, "date": "2026-08-17", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_189", "sr": 189, "date": "2026-08-20", "item": "Medium 29", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_190", "sr": 190, "date": "2026-08-20", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_191", "sr": 191, "date": "2026-08-20", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_192", "sr": 192, "date": "2026-08-29", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_193", "sr": 193, "date": "2026-08-29", "item": "Kohinoor", "quantity": 500, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_194", "sr": 194, "date": "2026-08-29", "item": "1 set", "quantity": 300, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_195", "sr": 195, "date": "2026-08-29", "item": "Medium 29", "quantity": 300, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_196", "sr": 196, "date": "2026-09-04", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_197", "sr": 197, "date": "2026-09-03", "item": "1 set", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_198", "sr": 198, "date": "2026-09-06", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_199", "sr": 199, "date": "2026-09-10", "item": "Kohinoor", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_200", "sr": 200, "date": "2026-09-10", "item": "Medium 29", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_201", "sr": 201, "date": "2026-09-22", "item": "1 set", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_202", "sr": 202, "date": "2026-09-22", "item": "Pink 30", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_203", "sr": 203, "date": "2026-09-23", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_204", "sr": 204, "date": "2026-10-02", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_205", "sr": 205, "date": "2026-10-03", "item": "Kohinoor", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_206", "sr": 206, "date": "2026-10-05", "item": "1 set", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_207", "sr": 207, "date": "2026-10-09", "item": "Medium 29", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}];
+
+    const FIREBASE_CONFIG = {
+      apiKey: "AIzaSyDHZwg7GRqSUgGxRFhgr17-tK-DJRqxL_A",
+      authDomain: "clip-18233.firebaseapp.com",
+      projectId: "clip-18233",
+      storageBucket: "clip-18233.firebasestorage.app",
+      messagingSenderId: "953672309081",
+      appId: "1:953672309081:web:563bdf3fead45697bc9448"
+    };
+
+    const STORAGE_KEY_QUEUE = 'thela_stock_offline_queue';
+    const STORAGE_KEY_LOCAL_TX = 'thela_stock_local_transactions';
+
+    /* ==========================================================================
+       2. STRICT DOM HYGIENE BINDING
+       ========================================================================== */
+    const UI = {};
+
+    function bindDomElements() {
+      const ids = [
+        'header-back-btn',
+        'status-badge',
+        'status-dot',
+        'status-text',
+        'queue-badge',
+        'btn-sync-now',
+        'btn-export-excel',
+        'btn-quick-refresh',
+        'banner-low-stock',
+        'banner-low-stock-text',
+        'total-stock-badge',
+        'balance-cards-grid',
+        'btn-type-out',
+        'btn-type-in',
+        'selected-item-display',
+        'item-selector-grid',
+        'preset-container',
+        'current-stock-preview',
+        'qty-input',
+        'btn-qty-clear',
+        'tx-date-input',
+        'tx-notes-input',
+        'btn-submit-tx',
+        'btn-submit-icon',
+        'btn-submit-label',
+        'filter-item-select',
+        'tx-history-list',
+        'toast-container'
+      ];
+
+      ids.forEach(id => {
+        UI[id] = document.getElementById(id);
+      });
+    }
+
+    /* ==========================================================================
+       3. WEB AUDIO API MICRO-HAPTICS ENGINE
+       ========================================================================== */
+    class MicroHapticsEngine {
+      constructor() {
+        this.ctx = null;
+        this.initUnlock();
+      }
+
+      initUnlock() {
+        const unlock = () => {
+          try {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (AudioCtx && !this.ctx) {
+              this.ctx = new AudioCtx();
+            }
+            if (this.ctx && this.ctx.state === 'suspended') {
+              this.ctx.resume();
+            }
+          } catch (e) {
+            console.warn('[Haptics] AudioContext unlock warning:', e);
+          }
+          window.removeEventListener('pointerdown', unlock);
+          window.removeEventListener('touchstart', unlock);
+        };
+        window.addEventListener('pointerdown', unlock, { passive: true });
+        window.addEventListener('touchstart', unlock, { passive: true });
+      }
+
+      playPop() {
+        try {
+          if (!this.ctx) {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (AudioCtx) this.ctx = new AudioCtx();
+          }
+          if (!this.ctx) return;
+          if (this.ctx.state === 'suspended') this.ctx.resume();
+          const now = this.ctx.currentTime;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(520, now);
+          osc.frequency.exponentialRampToValueAtTime(300, now + 0.05);
+          gain.gain.setValueAtTime(0.0001, now);
+          gain.gain.exponentialRampToValueAtTime(0.18, now + 0.01);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.06);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.07);
+        } catch (e) {
+          console.warn('[Haptics] Pop warning:', e);
+        }
+      }
+
+      playToggle() {
+        try {
+          if (!this.ctx) {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (AudioCtx) this.ctx = new AudioCtx();
+          }
+          if (!this.ctx) return;
+          if (this.ctx.state === 'suspended') this.ctx.resume();
+          const now = this.ctx.currentTime;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(360, now);
+          osc.frequency.exponentialRampToValueAtTime(140, now + 0.12);
+          gain.gain.setValueAtTime(0.0001, now);
+          gain.gain.exponentialRampToValueAtTime(0.15, now + 0.02);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.14);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.15);
+        } catch (e) {
+          console.warn('[Haptics] Toggle warning:', e);
+        }
+      }
+
+      playCelebration() {
+        try {
+          if (!this.ctx) {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (AudioCtx) this.ctx = new AudioCtx();
+          }
+          if (!this.ctx) return;
+          if (this.ctx.state === 'suspended') this.ctx.resume();
+          const now = this.ctx.currentTime;
+          const notes = [
+            { f: 523.25, start: 0.00, dur: 0.12 },
+            { f: 659.25, start: 0.08, dur: 0.14 },
+            { f: 783.99, start: 0.16, dur: 0.20 },
+            { f: 1046.50, start: 0.24, dur: 0.35 }
+          ];
+          notes.forEach(n => {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(n.f, now + n.start);
+            gain.gain.setValueAtTime(0.0001, now + n.start);
+            gain.gain.exponentialRampToValueAtTime(0.18, now + n.start + 0.02);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + n.start + n.dur);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start(now + n.start);
+            osc.stop(now + n.start + n.dur + 0.02);
+          });
+        } catch (e) {
+          console.warn('[Haptics] Celebration warning:', e);
+        }
+      }
+    }
+
+    let haptics;
+    function initWebAudioHaptics() {
+      haptics = new MicroHapticsEngine();
+    }
+
+    /* ==========================================================================
+       4. STATE STORE & TRANSACTION CALCULATIONS
+       ========================================================================== */
+    const State = {
+      currentType: 'OUT', // 'OUT' or 'IN'
+      selectedItem: '1 set',
+      quantity: 50,
+      stockBalances: {},
+      transactions: [],
+      offlineQueue: [],
+      isOnline: navigator.onLine,
+      db: null
+    };
+
+    function initStateStore() {
+      // Initialize default date in input
+      if (UI['tx-date-input']) {
+        const today = new Date().toISOString().slice(0, 10);
+        UI['tx-date-input'].value = today;
+      }
+
+      // Load local transactions & offline queue from localStorage
+      loadFromLocalStorage();
+
+      // Recalculate balances
+      recalculateStockBalances();
+    }
+
+    function loadFromLocalStorage() {
+      try {
+        const rawQueue = localStorage.getItem(STORAGE_KEY_QUEUE);
+        State.offlineQueue = rawQueue ? JSON.parse(rawQueue) : [];
+      } catch (e) {
+        console.warn('[Store] Local queue read error:', e);
+        State.offlineQueue = [];
+      }
+
+      try {
+        const rawLocal = localStorage.getItem(STORAGE_KEY_LOCAL_TX);
+        const storedLocal = rawLocal ? JSON.parse(rawLocal) : [];
+        
+        // Merge seed transactions with stored local transactions
+        const txMap = new Map();
+        SEED_TRANSACTIONS.forEach(t => txMap.set(t.id || `sr_${t.sr}`, t));
+        storedLocal.forEach(t => txMap.set(t.id, t));
+        State.offlineQueue.forEach(t => txMap.set(t.id, t));
+
+        State.transactions = Array.from(txMap.values());
+      } catch (e) {
+        console.warn('[Store] Stored local transactions read error:', e);
+        State.transactions = [...SEED_TRANSACTIONS];
+      }
+
+      updateQueueBadge();
+    }
+
+    function saveToLocalStorage() {
+      try {
+        localStorage.setItem(STORAGE_KEY_QUEUE, JSON.stringify(State.offlineQueue));
+        
+        // Filter out seed transactions to keep localStorage lean
+        const customTxs = State.transactions.filter(t => t.source !== 'excel');
+        localStorage.setItem(STORAGE_KEY_LOCAL_TX, JSON.stringify(customTxs));
+      } catch (e) {
+        console.warn('[Store] LocalStorage write error:', e);
+      }
+      updateQueueBadge();
+    }
+
+    function recalculateStockBalances() {
+      const balances = {};
+      ITEMS.forEach(item => {
+        const base = BASE_SUMMARY[item] || { opStock: OPENING_STOCKS[item] || 0, stockIn: 0, stockOut: 0, currentStock: 0 };
+        balances[item] = {
+          opStock: base.opStock,
+          stockIn: base.stockIn,
+          stockOut: base.stockOut,
+          currentStock: base.currentStock
+        };
+      });
+
+      // Aggregate newly recorded transactions (source !== 'excel')
+      State.transactions.forEach(tx => {
+        if (tx.source === 'excel') return; // Already incorporated in Excel BASE_SUMMARY
+        const item = tx.item;
+        if (!balances[item]) return;
+        const qty = Number(tx.quantity) || 0;
+        if (tx.type === 'IN') {
+          balances[item].stockIn += qty;
+        } else if (tx.type === 'OUT') {
+          balances[item].stockOut += qty;
+        }
+      });
+
+      // Compute current stock = Op. Stock + Stock In - Stock Out
+      let totalUnits = 0;
+      let hasZeroStock = false;
+      let zeroItems = [];
+
+      ITEMS.forEach(item => {
+        const b = balances[item];
+        b.currentStock = b.opStock + b.stockIn - b.stockOut;
+        totalUnits += b.currentStock;
+        if (b.currentStock <= 0) {
+          hasZeroStock = true;
+          zeroItems.push(item);
+        }
+      });
+
+      State.stockBalances = balances;
+
+      // Update total badge
+      if (UI['total-stock-badge']) {
+        UI['total-stock-badge'].textContent = `${totalUnits.toLocaleString()} Units`;
+      }
+
+      // Update Low Stock Banner
+      if (UI['banner-low-stock']) {
+        if (hasZeroStock) {
+          UI['banner-low-stock'].classList.add('active');
+          if (UI['banner-low-stock-text']) {
+            UI['banner-low-stock-text'].innerHTML = `<strong>Low Stock Alert:</strong> ${zeroItems.join(', ')} has 0 or negative units! Urgent restocking required.`;
+          }
+        } else {
+          UI['banner-low-stock'].classList.remove('active');
+        }
+      }
+
+      // Re-render balance cards & preview
+      renderStockBalanceCards();
+      updateFormPreview();
+    }
+
+    /* ==========================================================================
+       5. RENDERING: STOCK BALANCE CARDS & RECENT TRANSACTIONS
+       ========================================================================== */
+    function renderStockBalanceCards() {
+      if (!UI['balance-cards-grid']) return;
+      const container = UI['balance-cards-grid'];
+      container.innerHTML = '';
+
+      ITEMS.forEach(item => {
+        const b = State.stockBalances[item] || { opStock: 0, stockIn: 0, stockOut: 0, currentStock: 0 };
+        const isSelected = (State.selectedItem === item);
+        const isZero = (b.currentStock <= 0);
+
+        const card = document.createElement('div');
+        card.className = `stock-card ${isSelected ? 'selected' : ''} ${isZero ? 'zero-stock' : ''}`;
+        card.setAttribute('data-item', item);
+        card.setAttribute('role', 'button');
+        card.setAttribute('tabindex', '0');
+
+        card.innerHTML = `
+          <div class="card-top">
+            <span class="card-item-name" title="${item}">${item}</span>
+            <span class="card-badge ${isZero ? 'empty' : 'ok'}">${isZero ? 'EMPTY ⚠️' : 'OK'}</span>
+          </div>
+          <div class="card-balance ${isZero ? 'zero' : ''}">${b.currentStock.toLocaleString()}</div>
+          <div class="card-breakdown">
+            <span class="breakdown-in">+${b.stockIn} In</span>
+            <span class="breakdown-out">-${b.stockOut} Out</span>
+            <span>Op:${b.opStock}</span>
+          </div>
+        `;
+
+        // Whole-Card Touch Delegation
+        card.addEventListener('click', () => {
+          selectItem(item);
+          if (haptics) haptics.playPop();
+          // Smooth scroll towards input console
+          const consoleEl = document.querySelector('.input-console-card');
+          if (consoleEl) {
+            consoleEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        });
+
+        container.appendChild(card);
+      });
+    }
+
+    function renderTransactionHistory() {
+      if (!UI['tx-history-list']) return;
+      const list = UI['tx-history-list'];
+      list.innerHTML = '';
+
+      const filter = UI['filter-item-select'] ? UI['filter-item-select'].value : 'ALL';
+
+      // Sort descending (newest first)
+      const sorted = [...State.transactions].sort((a, b) => {
+        const dateA = a.date || '';
+        const dateB = b.date || '';
+        if (dateA !== dateB) return dateB.localeCompare(dateA);
+        const srA = a.sr || 0;
+        const srB = b.sr || 0;
+        return srB - srA;
+      });
+
+      const filtered = (filter === 'ALL')
+        ? sorted
+        : sorted.filter(t => t.item === filter);
+
+      // Display up to 35 most recent
+      const displayList = filtered.slice(0, 35);
+
+      if (displayList.length === 0) {
+        list.innerHTML = '<div style="padding: 16px; text-align: center; color: var(--text-muted); font-size: 13px;">No transactions recorded.</div>';
+        return;
+      }
+
+      displayList.forEach(tx => {
+        const itemEl = document.createElement('div');
+        itemEl.className = 'tx-item';
+
+        const isOut = (tx.type === 'OUT');
+        const syncText = (tx.source === 'excel')
+          ? `Excel #${tx.sr}`
+          : (tx.status === 'synced' ? '☁️ Synced' : '🟡 Queued');
+        const syncClass = (tx.status === 'synced' || tx.source === 'excel') ? 'synced' : 'queued';
+
+        itemEl.innerHTML = `
+          <div class="tx-left">
+            <span class="tx-type-pill ${isOut ? 'out' : 'in'}">${tx.type}</span>
+            <div class="tx-info">
+              <span class="tx-item-title">${tx.item}</span>
+              <span class="tx-item-meta">${tx.date}${tx.notes ? ' • ' + tx.notes : ''}</span>
+            </div>
+          </div>
+          <div class="tx-right">
+            <span class="tx-qty">${isOut ? '-' : '+'}${Number(tx.quantity).toLocaleString()}</span>
+            <span class="tx-sync-status ${syncClass}">${syncText}</span>
+          </div>
+        `;
+        list.appendChild(itemEl);
+      });
+    }
+
+    /* ==========================================================================
+       6. TOUCH INPUT CONTROLS & ERGONOMIC DELEGATIONS
+       ========================================================================== */
+    function initTouchControls() {
+      // 1. IN / OUT Toggle
+      if (UI['btn-type-out'] && UI['btn-type-in']) {
+        UI['btn-type-out'].addEventListener('click', () => {
+          setType('OUT');
+          if (haptics) haptics.playToggle();
+        });
+        UI['btn-type-in'].addEventListener('click', () => {
+          setType('IN');
+          if (haptics) haptics.playToggle();
+        });
+      }
+
+      // 2. Item Selector Buttons
+      if (UI['item-selector-grid']) {
+        const grid = UI['item-selector-grid'];
+        grid.innerHTML = '';
+        ITEMS.forEach(item => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = `item-btn ${State.selectedItem === item ? 'selected' : ''}`;
+          btn.setAttribute('data-item', item);
+          btn.textContent = item;
+          btn.addEventListener('click', () => {
+            selectItem(item);
+            if (haptics) haptics.playPop();
+          });
+          grid.appendChild(btn);
+        });
+      }
+
+      // 3. Preset Buttons
+      if (UI['preset-container']) {
+        const presetBtns = UI['preset-container'].querySelectorAll('.preset-btn');
+        presetBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const val = parseInt(btn.getAttribute('data-val'), 10) || 0;
+            addQuantity(val);
+            if (haptics) haptics.playPop();
+          });
+        });
+      }
+
+      // 4. Custom Quantity Input & Clear
+      if (UI['qty-input']) {
+        UI['qty-input'].addEventListener('input', () => {
+          const val = parseInt(UI['qty-input'].value, 10);
+          State.quantity = isNaN(val) ? 0 : Math.max(0, val);
+          updateFormPreview();
+        });
+      }
+
+      if (UI['btn-qty-clear']) {
+        UI['btn-qty-clear'].addEventListener('click', () => {
+          if (UI['qty-input']) {
+            UI['qty-input'].value = '';
+            State.quantity = 0;
+            updateFormPreview();
+            UI['qty-input'].focus();
+          }
+          if (haptics) haptics.playPop();
+        });
+      }
+
+      // 5. Submit Transaction Button
+      if (UI['btn-submit-tx']) {
+        UI['btn-submit-tx'].addEventListener('click', handleTransactionSubmit);
+      }
+
+      // 6. Recalculate button
+      if (UI['btn-quick-refresh']) {
+        UI['btn-quick-refresh'].addEventListener('click', () => {
+          recalculateStockBalances();
+          renderTransactionHistory();
+          showToast('Stock balances refreshed', 'success');
+          if (haptics) haptics.playPop();
+        });
+      }
+
+      // 7. Filter selector
+      if (UI['filter-item-select']) {
+        UI['filter-item-select'].addEventListener('change', () => {
+          renderTransactionHistory();
+        });
+      }
+
+      // Initial form preview update
+      updateFormPreview();
+      renderTransactionHistory();
+    }
+
+    function setType(type) {
+      State.currentType = type;
+      if (UI['btn-type-out'] && UI['btn-type-in'] && UI['btn-submit-tx']) {
+        if (type === 'OUT') {
+          UI['btn-type-out'].className = 'type-toggle-btn active-out';
+          UI['btn-type-in'].className = 'type-toggle-btn';
+          UI['btn-submit-tx'].className = 'btn-submit';
+        } else {
+          UI['btn-type-out'].className = 'type-toggle-btn';
+          UI['btn-type-in'].className = 'type-toggle-btn active-in';
+          UI['btn-submit-tx'].className = 'btn-submit mode-in';
+        }
+      }
+      updateFormPreview();
+    }
+
+    function selectItem(item) {
+      State.selectedItem = item;
+      if (UI['selected-item-display']) {
+        UI['selected-item-display'].textContent = item;
+      }
+      // Update item buttons selection highlight
+      if (UI['item-selector-grid']) {
+        const btns = UI['item-selector-grid'].querySelectorAll('.item-btn');
+        btns.forEach(btn => {
+          if (btn.getAttribute('data-item') === item) {
+            btn.classList.add('selected');
+          } else {
+            btn.classList.remove('selected');
+          }
+        });
+      }
+      // Update balance cards selection highlight
+      if (UI['balance-cards-grid']) {
+        const cards = UI['balance-cards-grid'].querySelectorAll('.stock-card');
+        cards.forEach(card => {
+          if (card.getAttribute('data-item') === item) {
+            card.classList.add('selected');
+          } else {
+            card.classList.remove('selected');
+          }
+        });
+      }
+      updateFormPreview();
+    }
+
+    function addQuantity(val) {
+      const current = parseInt(UI['qty-input'] ? UI['qty-input'].value : 0, 10) || 0;
+      const next = (current === 0) ? val : (current + val);
+      if (UI['qty-input']) {
+        UI['qty-input'].value = next;
+      }
+      State.quantity = next;
+      updateFormPreview();
+    }
+
+    function updateFormPreview() {
+      const b = State.stockBalances[State.selectedItem] || { currentStock: 0 };
+      if (UI['current-stock-preview']) {
+        UI['current-stock-preview'].textContent = `Bal: ${b.currentStock.toLocaleString()}`;
+      }
+      if (UI['btn-submit-label']) {
+        const verb = (State.currentType === 'OUT') ? 'OUT (Dispatch)' : 'IN (Received)';
+        const qty = State.quantity || 0;
+        UI['btn-submit-label'].textContent = `Record ${verb}: ${qty} × ${State.selectedItem}`;
+      }
+      if (UI['btn-submit-icon']) {
+        UI['btn-submit-icon'].textContent = (State.currentType === 'OUT') ? '🚀' : '📥';
+      }
+    }
+
+    /* ==========================================================================
+       7. TRANSACTION SUBMISSION & OFFLINE QUEUE
+       ========================================================================== */
+    function handleTransactionSubmit() {
+      const qty = parseInt(UI['qty-input'] ? UI['qty-input'].value : 0, 10);
+      if (!qty || qty <= 0) {
+        showToast('Please specify a quantity greater than 0', 'warning');
+        if (haptics) haptics.playToggle();
+        if (UI['qty-input']) UI['qty-input'].focus();
+        return;
+      }
+
+      const item = State.selectedItem;
+      const type = State.currentType;
+      const dateVal = UI['tx-date-input'] ? UI['tx-date-input'].value : new Date().toISOString().slice(0, 10);
+      const notes = UI['tx-notes-input'] ? UI['tx-notes-input'].value.trim() : '';
+
+      // Create transaction object
+      const tx = {
+        id: `tx_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`,
+        date: dateVal,
+        item: item,
+        quantity: qty,
+        type: type,
+        timestamp: new Date().toISOString(),
+        source: 'mobile_pwa',
+        excel_sr: null,
+        synced_to_excel: false,
+        notes: notes,
+        status: 'pending'
+      };
+
+      // Optimistically push to state
+      State.transactions.unshift(tx);
+      State.offlineQueue.push(tx);
+
+      // Save to localStorage
+      saveToLocalStorage();
+
+      // Recalculate & re-render
+      recalculateStockBalances();
+      renderTransactionHistory();
+
+      // Play celebration chord
+      if (haptics) haptics.playCelebration();
+
+      // Show toast
+      showToast(`Recorded ${type}: ${qty} × ${item}`, 'success');
+
+      // Reset notes and reset quantity to 50
+      if (UI['tx-notes-input']) UI['tx-notes-input'].value = '';
+      if (UI['qty-input']) UI['qty-input'].value = '50';
+      State.quantity = 50;
+      updateFormPreview();
+
+      // Attempt cloud sync if online
+      if (navigator.onLine && State.db) {
+        flushOfflineQueue();
+      }
+    }
+
+    function updateQueueBadge() {
+      const count = State.offlineQueue.length;
+      if (UI['queue-badge']) {
+        UI['queue-badge'].textContent = `${count} Queued`;
+        UI['queue-badge'].style.display = (count > 0) ? 'inline-flex' : 'none';
+      }
+    }
+
+    function initOfflineQueueManager() {
+      updateQueueBadge();
+
+      // Listen for network state changes
+      window.addEventListener('online', () => {
+        updateOnlineStatus(true, 'Online');
+        showToast('Network restored. Syncing queue...', 'success');
+        flushOfflineQueue();
+      });
+
+      window.addEventListener('offline', () => {
+        updateOnlineStatus(false, 'Offline');
+        showToast('Offline Mode. Transactions queued locally.', 'warning');
+      });
+
+      // Manual sync button
+      if (UI['btn-sync-now']) {
+        UI['btn-sync-now'].addEventListener('click', () => {
+          if (haptics) haptics.playPop();
+          if (navigator.onLine) {
+            flushOfflineQueue();
+            showToast('Syncing with Firestore...', 'success');
+          } else {
+            showToast('Device is offline. Queued locally.', 'warning');
+          }
+        });
+      }
+
+      // Periodic queue flush check (every 20 seconds)
+      setInterval(() => {
+        if (navigator.onLine && State.offlineQueue.length > 0) {
+          flushOfflineQueue();
+        }
+      }, 20000);
+    }
+
+    function updateOnlineStatus(isOnline, text) {
+      State.isOnline = isOnline;
+      if (UI['status-text']) UI['status-text'].textContent = text;
+      if (UI['status-dot']) {
+        if (isOnline) {
+          UI['status-dot'].classList.remove('offline');
+        } else {
+          UI['status-dot'].classList.add('offline');
+        }
+      }
+    }
+
+    /* ==========================================================================
+       8. FIREBASE FIRESTORE REALTIME SYNC ENGINE
+       ========================================================================== */
+    function initFirebaseSyncEngine() {
+      if (typeof firebase === 'undefined') {
+        console.warn('[Firebase] SDK unavailable. Running local mode.');
+        updateOnlineStatus(false, 'Local Offline');
+        return;
+      }
+
+      try {
+        if (!firebase.apps.length) {
+          firebase.initializeApp(FIREBASE_CONFIG);
+        }
+        State.db = firebase.firestore();
+
+        updateOnlineStatus(true, 'Online');
+
+        // Listen for real-time transactions
+        State.db.collection('thela_stock_transactions')
+          .orderBy('timestamp', 'desc')
+          .limit(100)
+          .onSnapshot(snapshot => {
+            let changed = false;
+            const existingMap = new Map();
+            State.transactions.forEach(t => existingMap.set(t.id, t));
+
+            snapshot.docChanges().forEach(change => {
+              const data = change.doc.data();
+              if (change.type === 'added' || change.type === 'modified') {
+                existingMap.set(data.id || change.doc.id, {
+                  ...data,
+                  status: 'synced'
+                });
+                changed = true;
+              }
+            });
+
+            if (changed) {
+              State.transactions = Array.from(existingMap.values());
+              recalculateStockBalances();
+              renderTransactionHistory();
+            }
+          }, err => {
+            console.warn('[Firestore] Realtime subscription warning:', err);
+          });
+
+        // Flush any initial queued items
+        flushOfflineQueue();
+      } catch (err) {
+        console.warn('[Firebase] Init exception:', err);
+        updateOnlineStatus(false, 'Local Mode');
+      }
+    }
+
+    async function flushOfflineQueue() {
+      if (!State.db || !navigator.onLine || State.offlineQueue.length === 0) return;
+
+      const queueCopy = [...State.offlineQueue];
+      const remaining = [];
+
+      for (const tx of queueCopy) {
+        try {
+          // 1. Write transaction to firestore
+          await State.db.collection('thela_stock_transactions').doc(tx.id).set({
+            id: tx.id,
+            date: tx.date,
+            item: tx.item,
+            quantity: tx.quantity,
+            type: tx.type,
+            timestamp: tx.timestamp,
+            source: tx.source || 'mobile_pwa',
+            excel_sr: tx.excel_sr || null,
+            synced_to_excel: tx.synced_to_excel || false,
+            notes: tx.notes || ''
+          });
+
+          // 2. Mark in-memory tx as synced
+          const found = State.transactions.find(t => t.id === tx.id);
+          if (found) found.status = 'synced';
+
+        } catch (err) {
+          console.warn('[Firestore] Push failed for tx:', tx.id, err);
+          remaining.push(tx);
+        }
+      }
+
+      // 3. Update summary doc
+      try {
+        const summaryData = {};
+        ITEMS.forEach(it => {
+          summaryData[it] = State.stockBalances[it] || {};
+        });
+        await State.db.collection('thela_stock_summary').doc('live_summary').set({
+          balances: summaryData,
+          lastUpdated: new Date().toISOString()
+        });
+      } catch (e) {
+        console.warn('[Firestore] Summary update warning:', e);
+      }
+
+      State.offlineQueue = remaining;
+      saveToLocalStorage();
+      renderTransactionHistory();
+      if (remaining.length === 0 && queueCopy.length > 0) {
+        showToast('All transactions synced to cloud', 'success');
+      }
+    }
+
+    /* ==========================================================================
+       9. SHEETJS IN-BROWSER EXCEL EXPORT ENGINE
+       ========================================================================== */
+    function initSheetJsExportEngine() {
+      if (UI['btn-export-excel']) {
+        UI['btn-export-excel'].addEventListener('click', exportToExcel);
+      }
+    }
+
+    function exportToExcel() {
+      if (typeof XLSX === 'undefined') {
+        alert('SheetJS engine is still loading or unavailable offline.');
+        return;
+      }
+
+      try {
+        const wb = XLSX.utils.book_new();
+
+        // Sheet 1: C. Stock Summary
+        const summaryHeader = [["SR", "Item Name", "Op. Stock", "Stock In", "Stock Out", "Current Stock"]];
+        const summaryRows = ITEMS.map((item, idx) => {
+          const b = State.stockBalances[item] || { opStock: 0, stockIn: 0, stockOut: 0, currentStock: 0 };
+          return [idx + 1, item, b.opStock, b.stockIn, b.stockOut, b.currentStock];
+        });
+        const wsSummary = XLSX.utils.aoa_to_sheet([...summaryHeader, ...summaryRows]);
+        XLSX.utils.book_append_sheet(wb, wsSummary, "C. Stock Summary");
+
+        // Sheet 2: Transactions (Ascending by SR/Date)
+        const sortedTx = [...State.transactions].sort((a, b) => {
+          const srA = a.sr || 0;
+          const srB = b.sr || 0;
+          if (srA !== 0 && srB !== 0) return srA - srB;
+          return (a.date || '').localeCompare(b.date || '');
+        });
+
+        const txHeader = [["SR", "Date", "Item Name", "Quantity", "Type"]];
+        const txRows = sortedTx.map((tx, idx) => [
+          tx.sr || (idx + 1),
+          tx.date,
+          tx.item,
+          tx.quantity,
+          tx.type
+        ]);
+        const wsTx = XLSX.utils.aoa_to_sheet([...txHeader, ...txRows]);
+        XLSX.utils.book_append_sheet(wb, wsTx, "Transactions");
+
+        // Download
+        const todayStr = new Date().toISOString().slice(0, 10);
+        const fileName = `Thela_Stock_Export_${todayStr}.xlsx`;
+        XLSX.writeFile(wb, fileName);
+
+        if (haptics) haptics.playCelebration();
+        showToast(`Exported ${fileName}`, 'success');
+      } catch (err) {
+        console.error('[SheetJS] Export error:', err);
+        showToast('Export failed: ' + err.message, 'warning');
+      }
+    }
+
+    /* ==========================================================================
+       10. SERVICE WORKER REGISTRATION
+       ========================================================================== */
+    function registerAppServiceWorker() {
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('sw.js')
+            .then(reg => {
+              console.log('[PWA] Service Worker registered:', reg.scope);
+            })
+            .catch(err => {
+              console.warn('[PWA] Service Worker registration failed:', err);
+            });
+        });
+      }
+    }
+
+    /* ==========================================================================
+       11. UI TOAST SYSTEM
+       ========================================================================== */
+    function showToast(message, type = 'info') {
+      if (!UI['toast-container']) return;
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      const icon = (type === 'success') ? '✅' : (type === 'warning' ? '⚠️' : 'ℹ️');
+      toast.innerHTML = `<span>${icon}</span><span>${message}</span>`;
+      UI['toast-container'].appendChild(toast);
+
+      requestAnimationFrame(() => {
+        toast.classList.add('show');
+      });
+
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => {
+          if (toast.parentNode) toast.parentNode.removeChild(toast);
+        }, 300);
+      }, 3200);
+    }
+
+    /* ==========================================================================
+       12. DEFENSIVE COMPONENT BOOTLOADER ISOLATION
+       ========================================================================== */
+    function bootApplication() {
+      const modules = [
+        { name: 'DOM Hygiene & Element Binding', fn: bindDomElements, critical: true },
+        { name: 'Web Audio Micro-Haptics', fn: initWebAudioHaptics, critical: false },
+        { name: 'State Management Store', fn: initStateStore, critical: true },
+        { name: 'Touch Input Controls', fn: initTouchControls, critical: true },
+        { name: 'Offline LocalStorage Queue', fn: initOfflineQueueManager, critical: true },
+        { name: 'SheetJS Excel Export Engine', fn: initSheetJsExportEngine, critical: false },
+        { name: 'Firebase Firestore Realtime Sync', fn: initFirebaseSyncEngine, critical: false },
+        { name: 'Service Worker Registration', fn: registerAppServiceWorker, critical: false }
+      ];
+
+      modules.forEach(m => {
+        try {
+          m.fn();
+        } catch (err) {
+          console.warn(`[Bootloader Warning] Module "${m.name}" non-fatal failure:`, err);
+        }
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', bootApplication);
+  </script>
+</body>
+</html>

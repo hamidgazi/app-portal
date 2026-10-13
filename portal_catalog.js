@@ -2,7 +2,7 @@
 window.PORTAL_CATALOG = {
   "version": "1.0.0",
   "lastUpdated": "Antigravity Files",
-  "totalApps": 16,
+  "totalApps": 17,
   "categories": [
     "Islamic & Faith",
     "Productivity & Utilities",
@@ -161,6 +161,27 @@ window.PORTAL_CATALOG = {
       "relPath": "08-Pincode-Search/index.html",
       "portalHref": "./08-Pincode-Search/index.html",
       "serverHref": "./08-Pincode-Search/index.html"
+    },
+    {
+      "id": "14-Thela-Stock-Manager__index_html",
+      "title": "Thela Stock Manager PWA",
+      "category": "Productivity & Utilities",
+      "icon": "📦",
+      "badge": "PWA • 2-Way Sync",
+      "description": "Mobile-first stock transaction manager with live Firebase sync, offline queue, Web Audio haptics, and 2-way Excel reconciliation.",
+      "tags": [
+        "thela",
+        "stock",
+        "inventory",
+        "excel",
+        "firebase",
+        "pwa",
+        "offline"
+      ],
+      "primary": true,
+      "relPath": "14-Thela-Stock-Manager/index.html",
+      "portalHref": "./14-Thela-Stock-Manager/index.html",
+      "serverHref": "./14-Thela-Stock-Manager/index.html"
     },
     {
       "id": "08-Pincode-Search__Pincode_Search_Offline_html",

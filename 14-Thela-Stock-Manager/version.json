@@ -1,0 +1,6 @@
+{
+  "version": "1.0.0",
+  "name": "Thela Stock Manager",
+  "updated": "2026-10-13",
+  "changelog": "v1.0.0: Initial release of mobile-first PWA with 1-tap rapid item selection, IN/OUT toggle, quantity presets, real-time balance cards, low-stock alerts, Web Audio micro-haptics, offline localStorage queue, SheetJS in-browser export, and Firebase Firestore cloud sync."
+}
