@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-  <title>🚀 Antigravity App Portal — Master Workspace & Mobile Launchpad</title>
-  <meta name="description" content="Centralized management and unified viewing portal for all Antigravity HTML apps, tools, dashboards, and readers on PC and mobile.">
+  <title>🚀 Antigravity App Portal & Omnichannel Links Hub</title>
+  <meta name="description" content="Centralized management and unified viewing portal for all Antigravity HTML apps and 1-tap omnichannel links sharing engine.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
   
   <style>
@@ -95,7 +95,7 @@
     }
 
     .sidebar-header {
-      padding: 16px;
+      padding: 14px 16px;
       border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
@@ -158,6 +158,48 @@
       background: rgba(255, 255, 255, 0.08);
       color: var(--text-main);
       border-color: #334155;
+    }
+
+    /* Mode Switcher Tabs */
+    .mode-switcher-container {
+      padding: 8px 14px 0 14px;
+    }
+
+    .mode-tabs {
+      display: flex;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 3px;
+      gap: 4px;
+    }
+
+    .mode-tab-btn {
+      flex: 1;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 8px 10px;
+      border-radius: 7px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .mode-tab-btn:hover {
+      color: #fff;
+    }
+
+    .mode-tab-btn.active {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
 
     /* Search & Filter Bar */
@@ -260,7 +302,7 @@
       box-shadow: 0 0 10px var(--accent-glow);
     }
 
-    /* App List */
+    /* App & Links List */
     .sidebar-list {
       flex: 1;
       overflow-y: auto;
@@ -579,7 +621,6 @@
       border: 8px solid #0f172a;
     }
 
-    /* Simulated Phone Notch */
     .phone-notch {
       display: none;
       width: 110px;
@@ -752,6 +793,235 @@
       color: var(--accent);
     }
 
+    /* Links & Share Stage */
+    .links-stage {
+      position: absolute;
+      inset: 0;
+      background: var(--bg-base);
+      overflow-y: auto;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 3;
+    }
+
+    .links-stage.hidden {
+      display: none;
+    }
+
+    .links-panel-inner {
+      max-width: 1100px;
+      width: 100%;
+    }
+
+    .links-stage-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .links-stage-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .links-stage-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .btn-add-link-main {
+      background: var(--accent);
+      color: #050811;
+      font-weight: 700;
+      font-size: 13.5px;
+      padding: 10px 18px;
+      border-radius: 9px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 10px var(--accent-glow);
+    }
+
+    .btn-add-link-main:hover {
+      filter: brightness(1.1);
+    }
+
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 16px;
+      margin-top: 14px;
+    }
+
+    .link-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .link-card:hover {
+      transform: translateY(-2px);
+      border-color: #334155;
+      background: var(--bg-card);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .card-icon {
+      font-size: 24px;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .card-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .card-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      margin-bottom: 2px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 5px;
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .card-domain {
+      font-size: 11.5px;
+      color: var(--text-dim);
+      font-family: monospace;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin-bottom: 14px;
+      flex: 1;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 14px;
+    }
+
+    .card-tag {
+      font-size: 10.5px;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-dim);
+    }
+
+    /* Actions Toolbar */
+    .card-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      margin-top: auto;
+    }
+
+    .btn-act {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 7px 11px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.15s ease;
+      min-height: 36px;
+      text-decoration: none;
+    }
+
+    .btn-act:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border-color: #334155;
+    }
+
+    .btn-act.btn-act-open {
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--accent);
+      border-color: rgba(56, 189, 248, 0.3);
+      margin-left: auto;
+    }
+
+    .btn-act.btn-act-open:hover {
+      background: var(--accent);
+      color: #050811;
+    }
+
+    .btn-act.btn-act-wa {
+      color: #34d399;
+      border-color: rgba(16, 185, 129, 0.3);
+      background: rgba(16, 185, 129, 0.08);
+    }
+
+    .btn-act.btn-act-wa:hover {
+      background: rgba(16, 185, 129, 0.2);
+    }
+
     /* Floating Switcher Pill (Mobile Fullscreen) */
     .mobile-switcher-pill {
       display: none;
@@ -821,7 +1091,7 @@
       margin: 10px auto 14px auto;
     }
 
-    /* QR Code Modal */
+    /* Modals */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -845,10 +1115,9 @@
       background: var(--bg-surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      max-width: 440px;
+      max-width: 460px;
       width: 100%;
-      padding: 28px;
-      text-align: center;
+      padding: 26px;
       position: relative;
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
     }
@@ -862,6 +1131,47 @@
       color: var(--text-muted);
       font-size: 18px;
       cursor: pointer;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .form-input, .form-select {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      color: #fff;
+      font-size: 13.5px;
+      outline: none;
+    }
+
+    .form-input:focus, .form-select:focus {
+      border-color: var(--accent);
+    }
+
+    .btn-submit-form {
+      width: 100%;
+      background: var(--accent);
+      color: #050811;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 12px;
+      border-radius: 9px;
+      border: none;
+      cursor: pointer;
+      margin-top: 8px;
+      box-shadow: 0 2px 10px var(--accent-glow);
     }
 
     .qr-frame {
@@ -926,7 +1236,7 @@
       opacity: 0;
       pointer-events: none;
       transition: all 0.2s var(--spring);
-      z-index: 200;
+      z-index: 300;
     }
 
     #toast.show {
@@ -940,7 +1250,7 @@
         display: none;
       }
       .topbar-center {
-        display: none; /* Hide device simulator on small phone screens */
+        display: none;
       }
       .topbar {
         padding: 0 12px;
@@ -960,6 +1270,9 @@
       }
       .phone-notch {
         display: none !important;
+      }
+      .links-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -981,6 +1294,14 @@
         <button class="btn-icon" id="btn-collapse-sidebar" title="Collapse Sidebar">◀</button>
       </div>
 
+      <!-- Mode Switcher Tabs (Apps vs Links) -->
+      <div class="mode-switcher-container">
+        <div class="mode-tabs">
+          <button class="mode-tab-btn active" id="tab-mode-apps">🚀 Apps</button>
+          <button class="mode-tab-btn" id="tab-mode-links">🔗 Links</button>
+        </div>
+      </div>
+
       <div class="sidebar-controls">
         <div class="search-box">
           <span class="search-icon">🔍</span>
@@ -989,11 +1310,7 @@
         </div>
 
         <div class="category-pills" id="category-pills">
-          <button class="cat-pill active" data-category="ALL">All Apps</button>
-          <button class="cat-pill" data-category="Islamic & Faith">🕌 Islamic</button>
-          <button class="cat-pill" data-category="Productivity & Utilities">🛠️ Tools</button>
-          <button class="cat-pill" data-category="Health & Nutrition">🥗 Health</button>
-          <button class="cat-pill" data-category="Knowledge & Engineering">🧠 Knowledge</button>
+          <!-- Populated dynamically based on mode -->
         </div>
       </div>
 
@@ -1026,8 +1343,8 @@
           </div>
         </div>
 
-        <!-- Center: Device Simulator -->
-        <div class="topbar-center">
+        <!-- Center: Device Simulator (Only visible in Apps mode) -->
+        <div class="topbar-center" id="topbar-device-controls">
           <button class="device-btn active" data-mode="desktop" title="Full Desktop View">🖥️ Full</button>
           <button class="device-btn" data-mode="tablet" title="iPad / Tablet View (768px)">📱 Tablet</button>
           <button class="device-btn" data-mode="mobile" title="iPhone / Mobile View (390px)">📱 Mobile</button>
@@ -1042,9 +1359,10 @@
         </div>
       </header>
 
-      <!-- Viewport & Iframe -->
+      <!-- Viewport Stage -->
       <section class="viewport-container" id="viewport-container">
         
+        <!-- Iframe Viewer (For Apps) -->
         <div class="device-frame" id="device-frame">
           <div class="phone-notch"></div>
           
@@ -1056,19 +1374,36 @@
           <iframe class="app-iframe" id="content-iframe" title="Application Viewer" src="about:blank"></iframe>
         </div>
 
-        <!-- Welcome Stage (Rendered when no app is chosen or at startup) -->
+        <!-- Welcome Stage (Home View for Apps) -->
         <div class="welcome-stage" id="welcome-stage">
           <div class="welcome-card">
             <div class="welcome-pill">⚡ Central Command Hub</div>
             <h1 class="welcome-title">Antigravity Master App Portal</h1>
             <p class="welcome-desc">
               Manage and view all your HTML applications, calculators, readers, and tools in one unified interface.
-              Use the sidebar to launch instantly or point your smartphone camera at the QR code to open on mobile.
+              Use the sidebar to launch instantly or switch to <strong>Links & Quick Share</strong> to share tools.
             </p>
           </div>
 
           <div class="quick-grid" id="quick-grid">
             <!-- Populated dynamically with flagship apps -->
+          </div>
+        </div>
+
+        <!-- Links Hub Stage (For Links Mode) -->
+        <div class="links-stage hidden" id="links-stage">
+          <div class="links-panel-inner">
+            <div class="links-stage-header">
+              <div>
+                <h2 class="links-stage-title"><span>🔗</span> Links & Quick Share Hub</h2>
+                <p class="links-stage-desc">Access GitHub repositories, live deployments, cloud services, and share in 1 tap.</p>
+              </div>
+              <button class="btn-add-link-main" id="btn-stage-add-link">➕ Add New Link</button>
+            </div>
+
+            <div class="links-grid" id="main-links-grid">
+              <!-- Populated dynamically -->
+            </div>
           </div>
         </div>
 
@@ -1080,24 +1415,26 @@
 
   <!-- Mobile Floating Pill -->
   <button class="mobile-switcher-pill" id="mobile-switcher-pill">
-    ⚡ Switch App
+    ⚡ Switch View
   </button>
 
   <!-- Mobile Drawer Overlay & Sheet -->
   <div class="drawer-overlay" id="drawer-overlay"></div>
   <div class="mobile-drawer" id="mobile-drawer">
     <div class="drawer-handle"></div>
+    <div class="mode-switcher-container" style="padding-bottom: 8px;">
+      <div class="mode-tabs">
+        <button class="mode-tab-btn active" id="drawer-mode-apps">🚀 Apps</button>
+        <button class="mode-tab-btn" id="drawer-mode-links">🔗 Links</button>
+      </div>
+    </div>
     <div class="sidebar-controls" style="border-bottom: 1px solid var(--border);">
       <div class="search-box">
         <span class="search-icon">🔍</span>
-        <input type="search" class="search-input" id="mobile-search-input" placeholder="Search all apps..." enterkeyhint="search" autocomplete="off">
+        <input type="search" class="search-input" id="mobile-search-input" placeholder="Search..." enterkeyhint="search" autocomplete="off">
       </div>
       <div class="category-pills" id="mobile-category-pills">
-        <button class="cat-pill active" data-category="ALL">All</button>
-        <button class="cat-pill" data-category="Islamic & Faith">🕌 Islamic</button>
-        <button class="cat-pill" data-category="Productivity & Utilities">🛠️ Tools</button>
-        <button class="cat-pill" data-category="Health & Nutrition">🥗 Health</button>
-        <button class="cat-pill" data-category="Knowledge & Engineering">🧠 Knowledge</button>
+        <!-- Populated dynamically -->
       </div>
     </div>
     <div class="sidebar-list" id="mobile-app-list">
@@ -1110,10 +1447,8 @@
     <div class="modal-card">
       <button class="modal-close" id="modal-close">✕</button>
       <div style="font-size: 32px; margin-bottom: 8px;">📱</div>
-      <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 6px;">Connect Smartphone via Wi-Fi</h3>
-      <p style="font-size: 13px; color: var(--text-muted); line-height: 1.45;">
-        Scan this QR code with your phone camera while connected to the same Wi-Fi network:
-      </p>
+      <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 6px;" id="qr-modal-title">Share Link via QR Code</h3>
+      <div style="font-size: 12.5px; color: var(--text-dim); margin-bottom: 12px; word-break: break-all;" id="qr-url-text">http://localhost:8080/</div>
 
       <div class="qr-frame" id="qr-frame">
         <div style="font-size: 12px; color: #64748b; text-align: center;">
@@ -1121,124 +1456,81 @@
         </div>
       </div>
 
-      <div class="qr-url-box">
-        <span id="qr-url-text">http://localhost:8080/</span>
-        <button class="copy-btn-mini" id="btn-copy-url">Copy</button>
+      <div style="display: flex; gap: 8px; justify-content: center; margin-top: 14px;">
+        <button class="action-btn" id="btn-copy-url">📋 Copy Link</button>
+        <button class="action-btn btn-qr" id="btn-wa-modal-share">💬 WhatsApp</button>
       </div>
+    </div>
+  </div>
 
-      <div style="font-size: 11.5px; color: var(--text-dim); line-height: 1.4;">
-        💡 <strong>Tip</strong>: If the QR code shows offline, double-click <code style="color: var(--accent);">server.py</code> in <code style="color: var(--accent);">Common-Resources/App-Portal/</code> to start the Wi-Fi gateway.
-      </div>
+  <!-- Add Custom Link Modal -->
+  <div class="modal-overlay" id="add-modal">
+    <div class="modal-card">
+      <button class="modal-close" id="add-modal-close">✕</button>
+      <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 14px; color: #fff;">➕ Add Custom Link</h3>
+      <form id="add-link-form">
+        <div class="form-group">
+          <label class="form-label" for="inp-title">Link Title *</label>
+          <input class="form-input" id="inp-title" placeholder="e.g. My Document / Tool" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="inp-url">Web URL (https://...) *</label>
+          <input class="form-input" id="inp-url" type="url" placeholder="https://..." required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="inp-cat">Category</label>
+          <select class="form-select" id="inp-cat">
+            <option value="⭐ Custom Saved Links">⭐ Custom Saved Links</option>
+            <option value="🚀 Live Web Apps">🚀 Live Web Apps</option>
+            <option value="🐙 GitHub Repositories">🐙 GitHub Repositories</option>
+            <option value="☁️ Cloud & Google Services">☁️ Cloud & Google Services</option>
+            <option value="🛠️ Web Arsenal & Tools">🛠️ Web Arsenal & Tools</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="inp-desc">Short Description</label>
+          <input class="form-input" id="inp-desc" placeholder="What is this link for?">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="inp-tags">Tags (comma separated)</label>
+          <input class="form-input" id="inp-tags" placeholder="e.g. work, repo, sheet">
+        </div>
+        <button type="submit" class="btn-submit-form">Save Link</button>
+      </form>
     </div>
   </div>
 
   <div id="toast">Copied to clipboard!</div>
 
-  <!-- Synchronous Catalog Script -->
+  <!-- Synchronous Catalog Scripts -->
   <script src="portal_catalog.js"></script>
+  <script src="links_catalog.js"></script>
 
   <script>
     /**
-     * ANTIGRAVITY APP PORTAL — DEFENSIVE BOOTLOADER ARCHITECTURE
-     * Strictly adheres to GEMINI.md Rule 5: Component Bootloader Isolation,
-     * Strict DOM Identifier Hygiene, and Mobile Touch Ergonomics.
+     * ANTIGRAVITY MASTER PORTAL & LINKS ENGINE
+     * Strictly adheres to GEMINI.md Directives:
+     * Component Bootloader Isolation, Strict DOM Identifier Hygiene, and Mobile Touch Ergonomics.
      */
 
-    // Built-in Fallback Catalog in case portal_catalog.js is not yet generated
-    const FALLBACK_CATALOG = {
-      apps: [
-        {
-          id: "02-Namaz-Prayer-Times__index_html",
-          title: "Namaz Prayer Timings",
-          category: "Islamic & Faith",
-          icon: "🕌",
-          badge: "PWA • 60 FPS",
-          description: "High-precision solar prayer timings calculator with Qibla compass and Hanafi Asr method.",
-          portalHref: "../../02-Namaz-Prayer-Times/index.html",
-          serverHref: "/02-Namaz-Prayer-Times/index.html",
-          primary: true
-        },
-        {
-          id: "08-Pincode-Search__index_html",
-          title: "Courier Pincode Search PWA",
-          category: "Productivity & Utilities",
-          icon: "📦",
-          badge: "21,865 Pincodes",
-          description: "Instant <0.01ms integer binary search across all 21,865 courier pincodes with ODA badges.",
-          portalHref: "../../08-Pincode-Search/index.html",
-          serverHref: "/08-Pincode-Search/index.html",
-          primary: true
-        },
-        {
-          id: "04-Cloud-Clipboard__index_html",
-          title: "CloudClip PRO",
-          category: "Productivity & Utilities",
-          icon: "📋",
-          badge: "Real-Time Sync",
-          description: "Multi-room encrypted text sync between PC and phone, with Web Speech narration.",
-          portalHref: "../../04-Cloud-Clipboard/index.html",
-          serverHref: "/04-Cloud-Clipboard/index.html",
-          primary: true
-        },
-        {
-          id: "13-Sustainable-Weight-Gain-Guide__Weight_Gain_Dashboard_html",
-          title: "Sustainable Weight Gain Suite",
-          category: "Health & Nutrition",
-          icon: "🥗",
-          badge: "Macro Calculator",
-          description: "Interactive calorie surplus calculator, hypertrophy progression, and meal planner.",
-          portalHref: "../../13-Sustainable-Weight-Gain-Guide/Weight_Gain_Dashboard.html",
-          serverHref: "/13-Sustainable-Weight-Gain-Guide/Weight_Gain_Dashboard.html",
-          primary: true
-        },
-        {
-          id: "12- Fatawa Project__output__fatawa_reader_html",
-          title: "Fatawa Razviya Encyclopedia",
-          category: "Islamic & Faith",
-          icon: "📖",
-          badge: "Encyclopedia Reader",
-          description: "Comprehensive searchable Islamic jurisprudence questions, answers, and references.",
-          portalHref: "../../12- Fatawa Project/output/fatawa_reader.html",
-          serverHref: "/12- Fatawa Project/output/fatawa_reader.html",
-          primary: true
-        },
-        {
-          id: "01-Events-Countdown__index_html",
-          title: "Events Countdown & Tracker",
-          category: "Islamic & Faith",
-          icon: "📅",
-          badge: "PWA • Storage",
-          description: "Milestone & event countdown manager for Islamic calendar events and deadlines.",
-          portalHref: "../../01-Events-Countdown/index.html",
-          serverHref: "/01-Events-Countdown/index.html",
-          primary: true
-        },
-        {
-          id: "Common-Resources__Knowledge_Navigator_html",
-          title: "Knowledge Navigator & Launchpad",
-          category: "Knowledge & Engineering",
-          icon: "🧠",
-          badge: "28 Topics • 4 Pillars",
-          description: "Searchable engineering knowledge base, mobile architecture patterns, and project directory.",
-          portalHref: "../../Common-Resources/Knowledge_Navigator.html",
-          serverHref: "/Common-Resources/Knowledge_Navigator.html",
-          primary: true
-        }
-      ]
-    };
-
-    // Global State
-    const AppState = {
-      catalog: (window.PORTAL_CATALOG && window.PORTAL_CATALOG.apps) ? window.PORTAL_CATALOG.apps : FALLBACK_CATALOG.apps,
+    const State = {
+      viewMode: "apps", // "apps" or "links"
+      apps: (window.PORTAL_CATALOG && window.PORTAL_CATALOG.apps) ? window.PORTAL_CATALOG.apps : [],
+      baseLinks: (window.LINKS_CATALOG && window.LINKS_CATALOG.links) ? window.LINKS_CATALOG.links : [],
+      customLinks: JSON.parse(localStorage.getItem("antigravity_custom_links") || "[]"),
       activeApp: null,
-      activeCategory: "ALL",
+      activeAppCategory: "ALL",
+      activeLinkCategory: "ALL",
       searchQuery: "",
       deviceMode: "desktop",
       isServerMode: window.location.protocol.startsWith("http"),
-      serverInfo: null
+      activeQRTarget: null
     };
 
-    // DOM Target Registry
+    function getAllLinks() {
+      return [...State.baseLinks, ...State.customLinks];
+    }
+
     const DOM = {};
 
     function cacheDOM() {
@@ -1246,28 +1538,40 @@
       DOM.btnToggleSidebar = document.getElementById("btn-toggle-sidebar");
       DOM.btnCollapseSidebar = document.getElementById("btn-collapse-sidebar");
       DOM.brandHome = document.getElementById("brand-home");
+
+      DOM.tabModeApps = document.getElementById("tab-mode-apps");
+      DOM.tabModeLinks = document.getElementById("tab-mode-links");
+      DOM.drawerModeApps = document.getElementById("drawer-mode-apps");
+      DOM.drawerModeLinks = document.getElementById("drawer-mode-links");
+
       DOM.searchInput = document.getElementById("search-input");
       DOM.searchClear = document.getElementById("search-clear");
       DOM.categoryPills = document.getElementById("category-pills");
       DOM.appList = document.getElementById("app-list");
       DOM.modeDot = document.getElementById("mode-dot");
       DOM.modeLabel = document.getElementById("mode-label");
-      
+
       DOM.topIcon = document.getElementById("top-icon");
       DOM.topTitle = document.getElementById("top-title");
       DOM.topBadge = document.getElementById("top-badge");
+      DOM.topbarDeviceControls = document.getElementById("topbar-device-controls");
+      DOM.deviceButtons = document.querySelectorAll(".device-btn");
       DOM.btnReload = document.getElementById("btn-reload-app");
       DOM.btnOpenTab = document.getElementById("btn-open-tab");
       DOM.btnFullscreen = document.getElementById("btn-fullscreen");
       DOM.btnTopQR = document.getElementById("btn-top-qr");
       DOM.btnOpenQR = document.getElementById("btn-open-qr");
-      
-      DOM.deviceButtons = document.querySelectorAll(".device-btn");
+
+      DOM.viewportContainer = document.getElementById("viewport-container");
       DOM.deviceFrame = document.getElementById("device-frame");
       DOM.contentIframe = document.getElementById("content-iframe");
       DOM.iframeLoader = document.getElementById("iframe-loader");
       DOM.welcomeStage = document.getElementById("welcome-stage");
       DOM.quickGrid = document.getElementById("quick-grid");
+
+      DOM.linksStage = document.getElementById("links-stage");
+      DOM.mainLinksGrid = document.getElementById("main-links-grid");
+      DOM.btnStageAddLink = document.getElementById("btn-stage-add-link");
 
       DOM.mobileSwitcherPill = document.getElementById("mobile-switcher-pill");
       DOM.drawerOverlay = document.getElementById("drawer-overlay");
@@ -1278,9 +1582,16 @@
 
       DOM.qrModal = document.getElementById("qr-modal");
       DOM.modalClose = document.getElementById("modal-close");
-      DOM.qrFrame = document.getElementById("qr-frame");
+      DOM.qrModalTitle = document.getElementById("qr-modal-title");
       DOM.qrUrlText = document.getElementById("qr-url-text");
+      DOM.qrFrame = document.getElementById("qr-frame");
       DOM.btnCopyUrl = document.getElementById("btn-copy-url");
+      DOM.btnWaModalShare = document.getElementById("btn-wa-modal-share");
+
+      DOM.addModal = document.getElementById("add-modal");
+      DOM.addModalClose = document.getElementById("add-modal-close");
+      DOM.addForm = document.getElementById("add-link-form");
+
       DOM.toast = document.getElementById("toast");
     }
 
@@ -1291,22 +1602,89 @@
       setTimeout(() => DOM.toast.classList.remove("show"), 2500);
     }
 
-    function getAppUrl(app) {
-      if (!app) return "about:blank";
-      // In HTTP mode, prefer serverHref so full origin / service workers work
-      if (AppState.isServerMode && app.serverHref) {
-        return app.serverHref;
+    function setViewMode(mode) {
+      State.viewMode = mode;
+      
+      const isApps = mode === "apps";
+      if (DOM.tabModeApps) DOM.tabModeApps.classList.toggle("active", isApps);
+      if (DOM.tabModeLinks) DOM.tabModeLinks.classList.toggle("active", !isApps);
+      if (DOM.drawerModeApps) DOM.drawerModeApps.classList.toggle("active", isApps);
+      if (DOM.drawerModeLinks) DOM.drawerModeLinks.classList.toggle("active", !isApps);
+
+      if (DOM.topbarDeviceControls) DOM.topbarDeviceControls.style.display = isApps ? "flex" : "none";
+      if (DOM.btnReload) DOM.btnReload.style.display = isApps ? "inline-flex" : "none";
+      if (DOM.btnOpenTab) DOM.btnOpenTab.style.display = isApps ? "inline-flex" : "none";
+
+      if (isApps) {
+        if (DOM.linksStage) DOM.linksStage.classList.add("hidden");
+        if (State.activeApp) {
+          if (DOM.deviceFrame) DOM.deviceFrame.style.display = "flex";
+          if (DOM.welcomeStage) DOM.welcomeStage.classList.add("hidden");
+        } else {
+          if (DOM.welcomeStage) DOM.welcomeStage.classList.remove("hidden");
+          if (DOM.deviceFrame) DOM.deviceFrame.style.display = "flex";
+        }
+      } else {
+        if (DOM.welcomeStage) DOM.welcomeStage.classList.add("hidden");
+        if (DOM.deviceFrame) DOM.deviceFrame.style.display = "none";
+        if (DOM.linksStage) DOM.linksStage.classList.remove("hidden");
+        if (DOM.topIcon) DOM.topIcon.textContent = "🔗";
+        if (DOM.topTitle) DOM.topTitle.textContent = "Links & Quick Share";
+        if (DOM.topBadge) DOM.topBadge.textContent = "Vault";
       }
-      return app.portalHref || app.serverHref || "#";
+
+      renderPills();
+      renderSidebarList();
+      if (!isApps) renderLinksGrid();
     }
 
-    // UI Renderers
+    function renderPills() {
+      const isApps = State.viewMode === "apps";
+      let pills = [];
+      if (isApps) {
+        pills = [
+          { label: "All Apps", cat: "ALL" },
+          { label: "🕌 Islamic", cat: "Islamic & Faith" },
+          { label: "🛠️ Tools", cat: "Productivity & Utilities" },
+          { label: "🥗 Health", cat: "Health & Nutrition" },
+          { label: "🧠 Knowledge", cat: "Knowledge & Engineering" }
+        ];
+      } else {
+        pills = [
+          { label: "All Links", cat: "ALL" },
+          { label: "🚀 Live Apps", cat: "🚀 Live Web Apps" },
+          { label: "🐙 GitHub", cat: "🐙 GitHub Repositories" },
+          { label: "☁️ Cloud", cat: "☁️ Cloud & Google Services" },
+          { label: "🛠️ Web Tools", cat: "🛠️ Web Arsenal & Tools" },
+          { label: "⭐ Custom", cat: "⭐ Custom Saved Links" }
+        ];
+      }
+
+      const activeCat = isApps ? State.activeAppCategory : State.activeLinkCategory;
+      const html = pills.map(p => `
+        <button class="cat-pill ${p.cat === activeCat ? 'active' : ''}" data-cat="${escapeHtml(p.cat)}">
+          ${escapeHtml(p.label)}
+        </button>
+      `).join("");
+
+      if (DOM.categoryPills) DOM.categoryPills.innerHTML = html;
+      if (DOM.mobileCategoryPills) DOM.mobileCategoryPills.innerHTML = html;
+    }
+
+    function renderSidebarList() {
+      if (State.viewMode === "apps") {
+        renderAppList();
+      } else {
+        renderLinksSidebarList();
+      }
+    }
+
     function renderAppList() {
       if (!DOM.appList) return;
-      const query = AppState.searchQuery.toLowerCase().trim();
-      
-      const filtered = AppState.catalog.filter(app => {
-        const matchesCategory = (AppState.activeCategory === "ALL") || (app.category === AppState.activeCategory);
+      const query = State.searchQuery.toLowerCase().trim();
+
+      const filtered = State.apps.filter(app => {
+        const matchesCategory = (State.activeAppCategory === "ALL") || (app.category === State.activeAppCategory);
         if (!matchesCategory) return false;
         if (!query) return true;
         const inTitle = (app.title || "").toLowerCase().includes(query);
@@ -1317,15 +1695,10 @@
       });
 
       if (filtered.length === 0) {
-        DOM.appList.innerHTML = `
-          <div style="padding: 24px 12px; text-align: center; color: var(--text-dim); font-size: 13px;">
-            🔍 No applications found matching "${escapeHtml(query)}"
-          </div>
-        `;
+        DOM.appList.innerHTML = `<div style="padding: 24px; text-align: center; color: var(--text-dim); font-size: 13px;">No applications found.</div>`;
         return;
       }
 
-      // Group by Category
       const grouped = {};
       filtered.forEach(app => {
         const cat = app.category || "Other";
@@ -1337,7 +1710,7 @@
       for (const [catName, catApps] of Object.entries(grouped)) {
         html += `<div class="section-label"><span>${escapeHtml(catName)}</span><span>${catApps.length}</span></div>`;
         catApps.forEach(app => {
-          const isActive = AppState.activeApp && AppState.activeApp.id === app.id;
+          const isActive = State.activeApp && State.activeApp.id === app.id;
           html += `
             <div class="app-item ${isActive ? 'active' : ''}" data-app-id="${escapeHtml(app.id)}">
               <div class="app-item-icon">${app.icon || '🚀'}</div>
@@ -1354,41 +1727,131 @@
       }
 
       DOM.appList.innerHTML = html;
+      if (DOM.mobileAppList) DOM.mobileAppList.innerHTML = html;
+    }
 
-      // Also render into mobile drawer if present
-      if (DOM.mobileAppList) {
-        DOM.mobileAppList.innerHTML = html;
+    function renderLinksSidebarList() {
+      if (!DOM.appList) return;
+      const all = getAllLinks();
+      const query = State.searchQuery.toLowerCase().trim();
+
+      const filtered = all.filter(item => {
+        const matchesCat = (State.activeLinkCategory === "ALL") || (item.category === State.activeLinkCategory);
+        if (!matchesCat) return false;
+        if (!query) return true;
+        const inTitle = (item.title || "").toLowerCase().includes(query);
+        const inUrl = (item.url || "").toLowerCase().includes(query);
+        const inTags = (item.tags || []).some(t => t.toLowerCase().includes(query));
+        return inTitle || inUrl || inTags;
+      });
+
+      if (filtered.length === 0) {
+        DOM.appList.innerHTML = `<div style="padding: 24px; text-align: center; color: var(--text-dim); font-size: 13px;">No links found.</div>`;
+        return;
+      }
+
+      let html = filtered.map(link => `
+        <div class="app-item link-sidebar-item" data-url="${escapeHtml(link.url)}" data-title="${escapeHtml(link.title)}">
+          <div class="app-item-icon">${link.icon || '🔗'}</div>
+          <div class="app-item-info">
+            <div class="app-item-top">
+              <span class="app-item-title">${escapeHtml(link.title)}</span>
+              <span class="app-item-badge">${escapeHtml(link.badge || link.category)}</span>
+            </div>
+            <div class="app-item-desc">${escapeHtml(link.domain || link.url)}</div>
+          </div>
+        </div>
+      `).join('');
+
+      DOM.appList.innerHTML = html;
+      if (DOM.mobileAppList) DOM.mobileAppList.innerHTML = html;
+    }
+
+    function renderLinksGrid() {
+      if (!DOM.mainLinksGrid) return;
+      const all = getAllLinks();
+      const query = State.searchQuery.toLowerCase().trim();
+
+      const filtered = all.filter(item => {
+        const matchesCategory = (State.activeLinkCategory === "ALL") || (item.category === State.activeLinkCategory);
+        if (!matchesCategory) return false;
+        if (!query) return true;
+        const inTitle = (item.title || "").toLowerCase().includes(query);
+        const inDesc = (item.description || "").toLowerCase().includes(query);
+        const inUrl = (item.url || "").toLowerCase().includes(query);
+        const inDomain = (item.domain || "").toLowerCase().includes(query);
+        const inTags = (item.tags || []).some(t => t.toLowerCase().includes(query));
+        return inTitle || inDesc || inUrl || inDomain || inTags;
+      });
+
+      if (filtered.length === 0) {
+        DOM.mainLinksGrid.innerHTML = `
+          <div style="grid-column: 1 / -1; padding: 40px; text-align: center; color: var(--text-dim);">
+            🔍 No links found matching "${escapeHtml(query)}"
+          </div>
+        `;
+        return;
+      }
+
+      DOM.mainLinksGrid.innerHTML = filtered.map(link => {
+        const domain = link.domain || extractDomain(link.url);
+        return `
+          <article class="link-card" data-url="${escapeHtml(link.url)}" data-title="${escapeHtml(link.title)}" data-desc="${escapeHtml(link.description || '')}">
+            <div class="card-head">
+              <div class="card-icon">${link.icon || '🔗'}</div>
+              <div class="card-info">
+                <div class="card-title-row">
+                  <span class="card-title" title="${escapeHtml(link.title)}">${escapeHtml(link.title)}</span>
+                  <span class="card-badge">${escapeHtml(link.badge || link.category)}</span>
+                </div>
+                <div class="card-domain">${escapeHtml(domain)}</div>
+              </div>
+            </div>
+
+            <p class="card-desc">${escapeHtml(link.description || 'Quick access link.')}</p>
+
+            <div class="card-tags">
+              ${(link.tags || []).map(t => `<span class="card-tag">#${escapeHtml(t)}</span>`).join('')}
+            </div>
+
+            <div class="card-actions">
+              <button class="btn-act act-copy" title="Copy clean link">📋 Copy</button>
+              <button class="btn-act btn-act-wa act-wa" title="Share via WhatsApp">💬 WhatsApp</button>
+              <button class="btn-act act-qr" title="Scan QR code">📱 QR</button>
+              <button class="btn-act act-native" title="Share via phone">📲</button>
+              <a class="btn-act btn-act-open" href="${escapeHtml(link.url)}" target="_blank" rel="noopener" title="Open in new tab">↗️ Open</a>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function extractDomain(url) {
+      try {
+        const u = new URL(url);
+        return u.hostname;
+      } catch (e) {
+        return url;
       }
     }
 
-    function renderQuickGrid() {
-      if (!DOM.quickGrid) return;
-      const flagship = AppState.catalog.filter(a => a.primary).slice(0, 6);
-      DOM.quickGrid.innerHTML = flagship.map(app => `
-        <div class="quick-card" data-app-id="${escapeHtml(app.id)}">
-          <div class="quick-card-icon">${app.icon || '🚀'}</div>
-          <div class="quick-card-title">${escapeHtml(app.title)}</div>
-          <div class="quick-card-desc">${escapeHtml(app.description || '')}</div>
-          <div class="quick-card-footer">
-            <span>${escapeHtml(app.badge || app.category)}</span>
-            <span>Launch →</span>
-          </div>
-        </div>
-      `).join("");
+    function getAppUrl(app) {
+      if (!app) return "about:blank";
+      if (State.isServerMode && app.serverHref) return app.serverHref;
+      return app.portalHref || app.serverHref || "#";
     }
 
     function selectApp(appId) {
-      const app = AppState.catalog.find(a => a.id === appId);
+      const app = State.apps.find(a => a.id === appId);
       if (!app) return;
 
-      AppState.activeApp = app;
+      setViewMode("apps");
+      State.activeApp = app;
       localStorage.setItem("antigravity_portal_last_active_app", app.id);
 
-      // Hide Welcome Stage, Show Iframe
       if (DOM.welcomeStage) DOM.welcomeStage.classList.add("hidden");
       if (DOM.iframeLoader) DOM.iframeLoader.classList.add("active");
 
-      // Update Top Bar Meta
       if (DOM.topIcon) DOM.topIcon.textContent = app.icon || "🚀";
       if (DOM.topTitle) DOM.topTitle.textContent = app.title || "Untitled";
       if (DOM.topBadge) DOM.topBadge.textContent = app.badge || app.category || "Tool";
@@ -1396,7 +1859,6 @@
       const targetUrl = getAppUrl(app);
       if (DOM.btnOpenTab) DOM.btnOpenTab.href = targetUrl;
 
-      // Load Iframe
       if (DOM.contentIframe) {
         DOM.contentIframe.src = targetUrl;
         DOM.contentIframe.onload = () => {
@@ -1404,33 +1866,94 @@
         };
       }
 
-      // Re-render list highlights
-      renderAppList();
-
-      // Close mobile drawer if open
-      closeMobileDrawer();
-    }
-
-    function goHome() {
-      AppState.activeApp = null;
-      localStorage.removeItem("antigravity_portal_last_active_app");
-      if (DOM.welcomeStage) DOM.welcomeStage.classList.remove("hidden");
-      if (DOM.contentIframe) DOM.contentIframe.src = "about:blank";
-      if (DOM.topIcon) DOM.topIcon.textContent = "🚀";
-      if (DOM.topTitle) DOM.topTitle.textContent = "Workspace Hub";
-      if (DOM.topBadge) DOM.topBadge.textContent = "Dashboard";
-      if (DOM.btnOpenTab) DOM.btnOpenTab.href = "#";
       renderAppList();
       closeMobileDrawer();
     }
 
-    function setDeviceMode(mode) {
-      AppState.deviceMode = mode;
-      DOM.deviceButtons.forEach(btn => {
-        btn.classList.toggle("active", btn.dataset.mode === mode);
+    function copyToClipboard(url, title) {
+      navigator.clipboard.writeText(url).then(() => {
+        showToast(`Copied: ${title || url}`);
+      }).catch(() => {
+        const inp = document.createElement("input");
+        inp.value = url;
+        document.body.appendChild(inp);
+        inp.select();
+        document.execCommand("copy");
+        document.body.removeChild(inp);
+        showToast("Copied to clipboard!");
       });
-      if (!DOM.deviceFrame) return;
-      DOM.deviceFrame.className = `device-frame mode-${mode}`;
+    }
+
+    function shareViaWhatsApp(url, title) {
+      const text = `*${title}*\n${url}`;
+      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, "_blank", "noopener");
+    }
+
+    function shareViaNative(url, title, desc) {
+      if (navigator.share) {
+        navigator.share({ title, text: desc || title, url }).catch(() => {});
+      } else {
+        copyToClipboard(url, title);
+      }
+    }
+
+    function openQRDialog(url, title) {
+      State.activeQRTarget = { url, title };
+      if (DOM.qrModalTitle) DOM.qrModalTitle.textContent = title ? `Share: ${title}` : "Connect Smartphone";
+      if (DOM.qrUrlText) DOM.qrUrlText.textContent = url;
+      if (DOM.qrFrame) {
+        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}`;
+        DOM.qrFrame.innerHTML = `<img src="${qrUrl}" alt="QR Code" style="width: 100%; height: 100%;">`;
+      }
+      if (DOM.qrModal) DOM.qrModal.classList.add("open");
+    }
+
+    function closeQRModal() {
+      if (DOM.qrModal) DOM.qrModal.classList.remove("open");
+    }
+
+    function openAddModal() {
+      if (DOM.addModal) DOM.addModal.classList.add("open");
+    }
+
+    function closeAddModal() {
+      if (DOM.addModal) DOM.addModal.classList.remove("open");
+      if (DOM.addForm) DOM.addForm.reset();
+    }
+
+    function saveCustomLink(e) {
+      e.preventDefault();
+      const title = document.getElementById("inp-title").value.trim();
+      let url = document.getElementById("inp-url").value.trim();
+      if (!url.startsWith("http://") && !url.startsWith("https://")) {
+        url = "https://" + url;
+      }
+      const category = document.getElementById("inp-cat").value;
+      const desc = document.getElementById("inp-desc").value.trim();
+      const tagsStr = document.getElementById("inp-tags").value.trim();
+      const tags = tagsStr ? tagsStr.split(",").map(t => t.trim()).filter(Boolean) : ["custom"];
+
+      const newLink = {
+        id: "custom-" + Date.now(),
+        title,
+        url,
+        category,
+        icon: "⭐",
+        badge: "Custom",
+        domain: extractDomain(url),
+        description: desc || "Personal saved link.",
+        tags
+      };
+
+      State.customLinks.unshift(newLink);
+      localStorage.setItem("antigravity_custom_links", JSON.stringify(State.customLinks));
+
+      closeAddModal();
+      showToast("Custom link saved!");
+      if (State.viewMode === "links") {
+        renderLinksGrid();
+        renderLinksSidebarList();
+      }
     }
 
     function openMobileDrawer() {
@@ -1443,45 +1966,12 @@
       if (DOM.mobileDrawer) DOM.mobileDrawer.classList.remove("open");
     }
 
-    function openQRModal() {
-      if (!DOM.qrModal) return;
-      DOM.qrModal.classList.add("open");
-
-      // Populate Live QR Code & URL
-      const fallbackUrl = AppState.isServerMode ? window.location.href : "http://192.168.1.9:8080/Common-Resources/App-Portal/index.html";
-      
-      if (AppState.isServerMode) {
-        // Query server for live outbound IP & QR SVG
-        fetch("/api/info")
-          .then(res => res.json())
-          .then(data => {
-            AppState.serverInfo = data;
-            if (DOM.qrUrlText) DOM.qrUrlText.textContent = data.portal_url;
-            if (DOM.qrFrame) {
-              DOM.qrFrame.innerHTML = `<img src="/api/qr?t=${Date.now()}" alt="Wi-Fi Mobile QR Code" style="width: 100%; height: 100%;">`;
-            }
-          })
-          .catch(() => {
-            renderOfflineQR(fallbackUrl);
-          });
-      } else {
-        renderOfflineQR(fallbackUrl);
-      }
-    }
-
-    function renderOfflineQR(url) {
-      if (DOM.qrUrlText) DOM.qrUrlText.textContent = url;
-      // Generate scannable QR via quick SVG / image API fallback
-      if (DOM.qrFrame) {
-        const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}`;
-        DOM.qrFrame.innerHTML = `
-          <img src="${qrApiUrl}" alt="Wi-Fi Mobile QR Code" style="width: 100%; height: 100%;" onerror="this.parentElement.innerHTML='<div style=\\'font-size:12px;color:#ef4444;text-align:center;\\'>QR generation requires internet or server.py running.<br>Open URL manually on your phone.</div>'">
-        `;
-      }
-    }
-
-    function closeQRModal() {
-      if (DOM.qrModal) DOM.qrModal.classList.remove("open");
+    function setDeviceMode(mode) {
+      State.deviceMode = mode;
+      DOM.deviceButtons.forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.mode === mode);
+      });
+      if (DOM.deviceFrame) DOM.deviceFrame.className = `device-frame mode-${mode}`;
     }
 
     function escapeHtml(str) {
@@ -1498,61 +1988,55 @@
     function bootPortal() {
       const steps = [
         ["Cache DOM Registry", cacheDOM],
-        ["Initialize Mode Detection", () => {
-          if (DOM.modeLabel && DOM.modeDot) {
-            if (AppState.isServerMode) {
-              DOM.modeLabel.textContent = "Wi-Fi Server Mode";
-              DOM.modeDot.style.background = "var(--green)";
-              DOM.modeDot.style.boxShadow = "0 0 8px rgba(16, 185, 129, 0.7)";
-            } else {
-              DOM.modeLabel.textContent = "Local File Mode";
-              DOM.modeDot.style.background = "var(--accent)";
-              DOM.modeDot.style.boxShadow = "0 0 8px rgba(56, 189, 248, 0.7)";
-            }
-          }
+        ["Initialize Mode Tabs", () => {
+          const bindTab = (btn, mode) => {
+            if (!btn) return;
+            btn.addEventListener("click", () => setViewMode(mode));
+          };
+          bindTab(DOM.tabModeApps, "apps");
+          bindTab(DOM.tabModeLinks, "links");
+          bindTab(DOM.drawerModeApps, "apps");
+          bindTab(DOM.drawerModeLinks, "links");
         }],
-        ["Initialize Search & Filter Listeners", () => {
-          const bindSearch = (input, clearBtn) => {
-            if (!input) return;
-            input.addEventListener("input", e => {
-              AppState.searchQuery = e.target.value;
-              if (clearBtn) clearBtn.classList.toggle("visible", !!e.target.value);
-              renderAppList();
-            });
-            input.addEventListener("keydown", e => {
-              if (e.key === "Enter") input.blur();
-            });
+        ["Initialize Search & Category Delegation", () => {
+          const handleSearch = e => {
+            State.searchQuery = e.target.value;
+            if (DOM.searchClear) DOM.searchClear.classList.toggle("visible", !!e.target.value);
+            renderSidebarList();
+            if (State.viewMode === "links") renderLinksGrid();
           };
 
-          bindSearch(DOM.searchInput, DOM.searchClear);
-          bindSearch(DOM.mobileSearchInput, null);
+          if (DOM.searchInput) DOM.searchInput.addEventListener("input", handleSearch);
+          if (DOM.mobileSearchInput) DOM.mobileSearchInput.addEventListener("input", handleSearch);
 
           if (DOM.searchClear) {
             DOM.searchClear.addEventListener("click", () => {
               DOM.searchInput.value = "";
-              AppState.searchQuery = "";
+              State.searchQuery = "";
               DOM.searchClear.classList.remove("visible");
-              renderAppList();
+              renderSidebarList();
+              if (State.viewMode === "links") renderLinksGrid();
             });
           }
 
-          // Category Pill delegation
-          const bindPills = (container) => {
-            if (!container) return;
-            container.addEventListener("click", e => {
-              const pill = e.target.closest(".cat-pill");
-              if (!pill) return;
-              container.querySelectorAll(".cat-pill").forEach(p => p.classList.remove("active"));
-              pill.classList.add("active");
-              AppState.activeCategory = pill.dataset.category;
-              renderAppList();
-            });
+          const handlePillClick = e => {
+            const pill = e.target.closest(".cat-pill");
+            if (!pill) return;
+            const cat = pill.dataset.cat;
+            if (State.viewMode === "apps") {
+              State.activeAppCategory = cat;
+            } else {
+              State.activeLinkCategory = cat;
+            }
+            renderPills();
+            renderSidebarList();
+            if (State.viewMode === "links") renderLinksGrid();
           };
 
-          bindPills(DOM.categoryPills);
-          bindPills(DOM.mobileCategoryPills);
+          if (DOM.categoryPills) DOM.categoryPills.addEventListener("click", handlePillClick);
+          if (DOM.mobileCategoryPills) DOM.mobileCategoryPills.addEventListener("click", handlePillClick);
 
-          // Keyboard shortcut (Ctrl+K or /) to focus search
+          // Keyboard shortcut (Ctrl+K or /)
           window.addEventListener("keydown", e => {
             if ((e.ctrlKey && e.key === "k") || (e.key === "/" && document.activeElement.tagName !== "INPUT")) {
               e.preventDefault();
@@ -1563,20 +2047,55 @@
             }
           });
         }],
-        ["Initialize App Selection Delegation", () => {
-          const handleAppClick = e => {
-            const item = e.target.closest(".app-item, .quick-card");
-            if (!item) return;
-            const appId = item.dataset.appId;
-            if (appId) selectApp(appId);
+        ["Initialize App & Link Interactions", () => {
+          // App item click
+          const handleItemClick = e => {
+            const appItem = e.target.closest(".app-item[data-app-id], .quick-card[data-app-id]");
+            if (appItem) {
+              selectApp(appItem.dataset.appId);
+              return;
+            }
+            const linkItem = e.target.closest(".link-sidebar-item");
+            if (linkItem) {
+              copyToClipboard(linkItem.dataset.url, linkItem.dataset.title);
+              closeMobileDrawer();
+            }
           };
 
-          if (DOM.appList) DOM.appList.addEventListener("click", handleAppClick);
-          if (DOM.mobileAppList) DOM.mobileAppList.addEventListener("click", handleAppClick);
-          if (DOM.quickGrid) DOM.quickGrid.addEventListener("click", handleAppClick);
-          if (DOM.brandHome) DOM.brandHome.addEventListener("click", goHome);
+          if (DOM.appList) DOM.appList.addEventListener("click", handleItemClick);
+          if (DOM.mobileAppList) DOM.mobileAppList.addEventListener("click", handleItemClick);
+          if (DOM.quickGrid) DOM.quickGrid.addEventListener("click", handleItemClick);
+
+          // Omnichannel Action Delegation on Links Grid
+          if (DOM.mainLinksGrid) {
+            DOM.mainLinksGrid.addEventListener("click", e => {
+              const card = e.target.closest(".link-card");
+              if (!card) return;
+              const url = card.dataset.url;
+              const title = card.dataset.title;
+              const desc = card.dataset.desc;
+
+              if (e.target.closest(".act-copy")) {
+                e.preventDefault();
+                copyToClipboard(url, title);
+              } else if (e.target.closest(".act-wa")) {
+                e.preventDefault();
+                shareViaWhatsApp(url, title);
+              } else if (e.target.closest(".act-qr")) {
+                e.preventDefault();
+                openQRDialog(url, title);
+              } else if (e.target.closest(".act-native")) {
+                e.preventDefault();
+                shareViaNative(url, title, desc);
+              }
+            });
+          }
         }],
-        ["Initialize Topbar & Device Controls", () => {
+        ["Initialize Topbar Actions & Simulator", () => {
+          DOM.deviceButtons.forEach(btn => {
+            btn.addEventListener("click", () => setDeviceMode(btn.dataset.mode));
+          });
+
           if (DOM.btnReload) {
             DOM.btnReload.addEventListener("click", () => {
               if (DOM.contentIframe && DOM.contentIframe.src && DOM.contentIframe.src !== "about:blank") {
@@ -1596,11 +2115,6 @@
             });
           }
 
-          DOM.deviceButtons.forEach(btn => {
-            btn.addEventListener("click", () => setDeviceMode(btn.dataset.mode));
-          });
-
-          // Sidebar Toggle
           if (DOM.btnToggleSidebar) {
             DOM.btnToggleSidebar.addEventListener("click", () => {
               if (DOM.sidebar) DOM.sidebar.classList.toggle("collapsed");
@@ -1611,43 +2125,85 @@
               if (DOM.sidebar) DOM.sidebar.classList.add("collapsed");
             });
           }
-        }],
-        ["Initialize Mobile Drawer & Floating Switcher", () => {
-          if (DOM.mobileSwitcherPill) {
-            DOM.mobileSwitcherPill.addEventListener("click", openMobileDrawer);
+
+          if (DOM.brandHome) {
+            DOM.brandHome.addEventListener("click", () => {
+              setViewMode("apps");
+              State.activeApp = null;
+              localStorage.removeItem("antigravity_portal_last_active_app");
+              if (DOM.welcomeStage) DOM.welcomeStage.classList.remove("hidden");
+              if (DOM.contentIframe) DOM.contentIframe.src = "about:blank";
+              if (DOM.topIcon) DOM.topIcon.textContent = "🚀";
+              if (DOM.topTitle) DOM.topTitle.textContent = "Workspace Hub";
+              if (DOM.topBadge) DOM.topBadge.textContent = "Dashboard";
+              renderAppList();
+              closeMobileDrawer();
+            });
           }
-          if (DOM.drawerOverlay) {
-            DOM.drawerOverlay.addEventListener("click", closeMobileDrawer);
-          }
         }],
-        ["Initialize Mobile QR Modal", () => {
-          if (DOM.btnTopQR) DOM.btnTopQR.addEventListener("click", openQRModal);
-          if (DOM.btnOpenQR) DOM.btnOpenQR.addEventListener("click", openQRModal);
+        ["Initialize QR & Add Link Modals", () => {
+          const openPortalQR = () => {
+            const url = State.isServerMode ? window.location.href : "https://hamidgazi.github.io/app-portal/";
+            openQRDialog(url, "Antigravity App Portal");
+          };
+
+          if (DOM.btnTopQR) DOM.btnTopQR.addEventListener("click", openPortalQR);
+          if (DOM.btnOpenQR) DOM.btnOpenQR.addEventListener("click", openPortalQR);
           if (DOM.modalClose) DOM.modalClose.addEventListener("click", closeQRModal);
           if (DOM.qrModal) {
             DOM.qrModal.addEventListener("click", e => {
               if (e.target === DOM.qrModal) closeQRModal();
             });
           }
+
           if (DOM.btnCopyUrl) {
             DOM.btnCopyUrl.addEventListener("click", () => {
-              const url = DOM.qrUrlText ? DOM.qrUrlText.textContent : "";
-              navigator.clipboard.writeText(url).then(() => {
-                showToast("URL copied to clipboard!");
-              });
+              if (State.activeQRTarget) copyToClipboard(State.activeQRTarget.url, State.activeQRTarget.title);
+            });
+          }
+          if (DOM.btnWaModalShare) {
+            DOM.btnWaModalShare.addEventListener("click", () => {
+              if (State.activeQRTarget) shareViaWhatsApp(State.activeQRTarget.url, State.activeQRTarget.title);
+            });
+          }
+
+          if (DOM.btnStageAddLink) DOM.btnStageAddLink.addEventListener("click", openAddModal);
+          if (DOM.addModalClose) DOM.addModalClose.addEventListener("click", closeAddModal);
+          if (DOM.addForm) DOM.addForm.addEventListener("submit", saveCustomLink);
+          if (DOM.addModal) {
+            DOM.addModal.addEventListener("click", e => {
+              if (e.target === DOM.addModal) closeAddModal();
             });
           }
         }],
-        ["Render Initial Views & Restore State", () => {
-          renderAppList();
-          renderQuickGrid();
+        ["Initialize Mobile Drawer & Floating Switcher", () => {
+          if (DOM.mobileSwitcherPill) DOM.mobileSwitcherPill.addEventListener("click", openMobileDrawer);
+          if (DOM.drawerOverlay) DOM.drawerOverlay.addEventListener("click", closeMobileDrawer);
+        }],
+        ["Render Initial Views", () => {
+          renderPills();
+          renderSidebarList();
+          
+          if (DOM.quickGrid) {
+            const flagship = State.apps.filter(a => a.primary).slice(0, 6);
+            DOM.quickGrid.innerHTML = flagship.map(app => `
+              <div class="quick-card" data-app-id="${escapeHtml(app.id)}">
+                <div class="quick-card-icon">${app.icon || '🚀'}</div>
+                <div class="quick-card-title">${escapeHtml(app.title)}</div>
+                <div class="quick-card-desc">${escapeHtml(app.description || '')}</div>
+                <div class="quick-card-footer">
+                  <span>${escapeHtml(app.badge || app.category)}</span>
+                  <span>Launch →</span>
+                </div>
+              </div>
+            `).join("");
+          }
 
-          // Restore last active app if saved
           const lastAppId = localStorage.getItem("antigravity_portal_last_active_app");
-          if (lastAppId && AppState.catalog.some(a => a.id === lastAppId)) {
+          if (lastAppId && State.apps.some(a => a.id === lastAppId)) {
             selectApp(lastAppId);
           } else {
-            goHome();
+            setViewMode("apps");
           }
         }]
       ];
@@ -1661,7 +2217,6 @@
       });
     }
 
-    // Auto-boot on DOM ready
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", bootPortal);
     } else {

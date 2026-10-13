@@ -1,9 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" class="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Cloud Clipboard Pro</title>
+    <script>
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -233,7 +240,7 @@
                     <!-- Action Bar -->
                     <div class="px-4 py-3 bg-gray-50/80 dark:bg-slate-900 flex gap-3 items-center border-t border-gray-100 dark:border-slate-800 shrink-0">
                         <!-- Desktop Keyboard hint -->
-                        <span class="text-[9px] text-gray-400 dark:text-slate-500 hidden md:inline mr-auto">↵ Enter to save | Shift+Enter for new line</span>
+                        <span class="text-[9px] text-gray-400 dark:text-slate-500 hidden md:inline mr-auto">Ctrl+Enter to save | Enter for new line</span>
                         <button 
                             id="saveBtn"
                             class="flex-1 md:flex-none md:px-6 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-semibold py-3 px-4 rounded-xl shadow-md active:scale-[0.98] transition-all flex items-center justify-center gap-2 text-sm"
@@ -412,13 +419,31 @@
             }
         }
         
+        function getHistoryStorageKey() {
+            return 'cloudclip_history_' + roomName;
+        }
+
         function saveLocalHistory() {
-            localStorage.setItem('cloudclip_history', JSON.stringify(historyArray));
+            try {
+                localStorage.setItem(getHistoryStorageKey(), JSON.stringify(historyArray));
+            } catch (e) {
+                showStatus("STORAGE QUOTA FULL", true);
+            }
         }
 
         function loadLocalHistory() {
             try {
-                const stored = localStorage.getItem('cloudclip_history');
+                const key = getHistoryStorageKey();
+                let stored = localStorage.getItem(key);
+                if (stored === null) {
+                    const legacyStored = localStorage.getItem('cloudclip_history');
+                    if (legacyStored !== null) {
+                        try {
+                            localStorage.setItem(key, legacyStored);
+                        } catch (e) {}
+                        stored = legacyStored;
+                    }
+                }
                 return stored ? JSON.parse(stored) : [];
             } catch (e) {
                 console.error("Failed to load local history:", e);
@@ -469,6 +494,14 @@
         let statusTimer;
         let currentUtterance = null;
         let isPlayingId = null;
+        let speechHeartbeat = null;
+
+        function clearSpeechHeartbeat() {
+            if (speechHeartbeat) {
+                clearInterval(speechHeartbeat);
+                speechHeartbeat = null;
+            }
+        }
         
         // Safe Parse Speech Speed
         let currentSpeechRate = parseFloat(localStorage.getItem('ttsSpeed'));
@@ -501,9 +534,6 @@
                 html.classList.add('dark'); localStorage.setItem('theme', 'dark');
             }
             renderIcons();
-        }
-        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
         }
 
         function renderIcons() {
@@ -548,7 +578,7 @@
 
         function formatExpertText(str) {
             let escaped = String(str || '').replace(/[&<>'"]/g, tag => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'}[tag]));
-            return escaped.replace(/(#[a-zA-Z0-9_]+)/g, '<span class="smart-tag cursor-pointer hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors" onclick="event.stopPropagation(); filterByHashtag(\'$1\')">$1</span>');
+            return escaped.replace(/(#[a-zA-Z0-9_-]+)/g, '<span class="smart-tag cursor-pointer hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors" onclick="event.stopPropagation(); filterByHashtag(\'$1\')">$1</span>');
         }
 
         function formatDateTime(ms) {
@@ -572,6 +602,7 @@
             // Restart audio immediately with new speed if it's currently playing
             if(isPlayingId) {
                 const id = isPlayingId;
+                clearSpeechHeartbeat();
                 window.speechSynthesis.cancel();
                 isPlayingId = null;
                 setTimeout(() => window.toggleSpeech(id), 50);
@@ -692,7 +723,7 @@
             editingItemId = id;
             textArea.value = item.content;
             pushToUndo(item.content);
-            textArea.dispatchEvent(new Event('input')); 
+            updateStats(); 
             
             document.getElementById('editBanner').classList.remove('hidden');
             
@@ -719,7 +750,7 @@
             showStatus("LOADED FOR EDIT");
         }
 
-        window.cancelEditMode = function() {
+        function cancelEditMode() {
             editingItemId = null;
             
             // Restore previous unsaved draft text
@@ -740,6 +771,7 @@
             
             renderIcons();
         }
+        window.cancelEditMode = cancelEditMode;
 
         // --- ACTIONS ---
         textArea.addEventListener('input', () => {
@@ -764,10 +796,9 @@
             }, 800);
         });
 
-        // Save on Enter key (PC only), new line on Shift + Enter
-        const isPC = !/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        // Save on Ctrl+Enter / Cmd+Enter, regular Enter inserts a new line
         textArea.addEventListener('keydown', (e) => {
-            if (isPC && e.key === 'Enter' && !e.shiftKey) {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
                 e.preventDefault();
                 saveBtn.click();
             }
@@ -837,6 +868,7 @@
             let updatedHistory = [...historyArray];
             let isEdit = !!editingItemId;
             let targetItemId = editingItemId;
+            let isDuplicateBump = false;
 
             if (isEdit) {
                 const index = updatedHistory.findIndex(i => i.id === editingItemId);
@@ -853,14 +885,21 @@
                     };
                 }
             } else {
-                const isDuplicate = updatedHistory.some(item => String(item.content) === currentText);
-                if (!isDuplicate) {
+                const existingIndex = updatedHistory.findIndex(item => String(item.content).trim() === currentText);
+                if (existingIndex > -1) {
+                    isDuplicateBump = true;
+                    const existingItem = updatedHistory.splice(existingIndex, 1)[0];
+                    const now = Date.now();
+                    existingItem.modified = now;
+                    existingItem.accessed = now;
+                    updatedHistory.unshift(existingItem);
+                } else {
                     const now = Date.now();
                     const newItem = { 
                         id: generateId(), content: currentText, pinned: false, 
                         created: now, modified: now, accessed: now, versions: [] 
                     };
-                    updatedHistory.push(newItem);
+                    updatedHistory.unshift(newItem);
                 }
             }
 
@@ -874,23 +913,26 @@
             localStorage.setItem('cloudclip_currentText', "");
             updateStats();
 
+            if (isEdit) {
+                editingItemId = null;
+                const editBanner = document.getElementById('editBanner');
+                if (editBanner) editBanner.classList.add('hidden');
+            }
+
             try {
                 if (typeof firebase !== 'undefined' && docRef && historyRef) {
-                    await docRef.set({ content: currentText });
                     await historyRef.set({ items: updatedHistory });
                     await docRef.set({ content: "" }); 
                     
-                    showStatus(isEdit ? "UPDATED (CLOUD)" : "SAVED (CLOUD)");
+                    showStatus(isDuplicateBump ? "CLIP MOVED TO TOP" : (isEdit ? "UPDATED (CLOUD)" : "SAVED (CLOUD)"));
                     updateCloudStatus('online');
                 } else {
-                    showStatus(isEdit ? "UPDATED LOCALLY" : "SAVED LOCALLY");
+                    showStatus(isDuplicateBump ? "CLIP MOVED TO TOP" : (isEdit ? "UPDATED LOCALLY" : "SAVED LOCALLY"));
                 }
-                cancelEditMode();
             } catch (error) {
                 console.warn("Cloud save failed:", error);
                 updateCloudStatus('offline');
-                showStatus(isEdit ? "UPDATED LOCALLY" : "SAVED LOCALLY", true);
-                cancelEditMode();
+                showStatus(isDuplicateBump ? "CLIP MOVED TO TOP" : (isEdit ? "UPDATED LOCALLY" : "SAVED LOCALLY"), true);
             } finally {
                 const btnText = editingItemId ? 'Update Clip' : 'Save to History';
                 const btnIcon = editingItemId ? 'save' : 'bookmark-plus';
@@ -926,6 +968,8 @@
                     console.warn("History replaceState failed:", e);
                 }
                 
+                historyArray = loadLocalHistory();
+                renderHistory();
                 initializeFirestoreRefs();
                 showStatus("ROOM CHANGED");
                 
@@ -1278,10 +1322,14 @@
             let filteredArray = [...historyArray];
             if (activeFilter) {
                 const query = activeFilter.toLowerCase();
-                if (query.startsWith('#')) {
+                if (query === '#') {
                     filteredArray = filteredArray.filter(item => {
-                        const tags = (item.content.match(/(#[a-zA-Z0-9_]+)/g) || []).map(t => t.toLowerCase());
-                        return tags.includes(query);
+                        return /(#[a-zA-Z0-9_-]+)/.test(item.content);
+                    });
+                } else if (query.startsWith('#')) {
+                    filteredArray = filteredArray.filter(item => {
+                        const tags = (item.content.match(/(#[a-zA-Z0-9_-]+)/g) || []).map(t => t.toLowerCase());
+                        return tags.some(t => t.startsWith(query));
                     });
                 } else {
                     filteredArray = filteredArray.filter(item => 
@@ -1322,6 +1370,7 @@
                 const linkMatch = safeContent.match(/(https?:\/\/[^\s]+)/);
                 const hasLink = !!linkMatch;
                 let firstLink = hasLink ? linkMatch[0] : '#';
+                const cleanLink = encodeURI(firstLink).replace(/"/g, '&quot;');
                 const isYoutube = hasLink && (firstLink.includes('youtube.com') || firstLink.includes('youtu.be'));
                 
                 // Smart Date Formatting
@@ -1430,7 +1479,7 @@
                                 <i data-lucide="${audioIcon}" class="w-3.5 h-3.5 ${isThisPlaying ? 'fill-red-500' : 'fill-emerald-500'}"></i>
                             </button>
                             ${hasLink ? `
-                            <a href="${firstLink}" target="_blank" class="w-7 h-7 flex items-center justify-center bg-gray-50 dark:bg-slate-700 hover:bg-red-50 dark:hover:bg-red-500/20 text-gray-400 dark:text-slate-400 hover:text-red-500 dark:hover:text-red-400 rounded-lg border border-gray-100 dark:border-slate-600 active:scale-95 transition-all">
+                            <a href="${cleanLink}" target="_blank" class="w-7 h-7 flex items-center justify-center bg-gray-50 dark:bg-slate-700 hover:bg-red-50 dark:hover:bg-red-500/20 text-gray-400 dark:text-slate-400 hover:text-red-500 dark:hover:text-red-400 rounded-lg border border-gray-100 dark:border-slate-600 active:scale-95 transition-all">
                                 <i data-lucide="${isYoutube ? 'youtube' : 'external-link'}" class="w-3.5 h-3.5 ${isYoutube ? 'text-red-500' : ''}"></i>
                             </a>` : ''}
                             <button onclick="copyHistoryItem('${item.id}')" class="w-7 h-7 flex items-center justify-center bg-gray-50 dark:bg-slate-700 hover:bg-gray-100 text-gray-400 dark:text-slate-400 hover:text-gray-600 dark:hover:text-gray-200 rounded-lg border border-gray-100 dark:border-slate-600 active:scale-95 transition-all" title="Copy Text">
@@ -1615,14 +1664,44 @@
             const item = historyArray.find(i => i.id === id);
             if(!item) return;
             
-            if (isPlayingId === id) { window.speechSynthesis.cancel(); isPlayingId = null; renderHistory(); return; }
+            if (isPlayingId === id) { 
+                clearSpeechHeartbeat();
+                window.speechSynthesis.cancel(); 
+                isPlayingId = null; 
+                renderHistory(); 
+                return; 
+            }
+            clearSpeechHeartbeat();
             window.speechSynthesis.cancel();
             
             currentUtterance = new SpeechSynthesisUtterance(item.content);
             currentUtterance.rate = currentSpeechRate;
-            currentUtterance.onend = () => { isPlayingId = null; renderHistory(); };
+
+            const cleanupSpeech = () => {
+                clearSpeechHeartbeat();
+                isPlayingId = null;
+                renderHistory();
+            };
+
+            currentUtterance.onend = cleanupSpeech;
+            currentUtterance.onerror = (e) => {
+                console.warn("Speech synthesis error:", e);
+                cleanupSpeech();
+            };
             
-            isPlayingId = id; window.speechSynthesis.speak(currentUtterance); renderHistory();
+            isPlayingId = id; 
+            window.speechSynthesis.speak(currentUtterance);
+
+            speechHeartbeat = setInterval(() => {
+                if (window.speechSynthesis && window.speechSynthesis.speaking) {
+                    if (typeof window.speechSynthesis.pause === 'function') window.speechSynthesis.pause();
+                    if (typeof window.speechSynthesis.resume === 'function') window.speechSynthesis.resume();
+                } else {
+                    clearSpeechHeartbeat();
+                }
+            }, 10000);
+
+            renderHistory();
         }
 
         window.triggerImport = function() {
@@ -1835,6 +1914,7 @@
 
         // Cancel TTS on unload/reloading
         window.addEventListener('beforeunload', () => {
+            clearSpeechHeartbeat();
             window.speechSynthesis.cancel();
         });
     </script>
