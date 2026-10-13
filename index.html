@@ -1022,25 +1022,141 @@
       background: rgba(16, 185, 129, 0.2);
     }
 
-    /* Floating Switcher Pill (Mobile Fullscreen) */
-    .mobile-switcher-pill {
+    /* Context-Aware Mobile Back to Hub Button */
+    .btn-back-hub {
       display: none;
-      position: fixed;
-      bottom: 24px;
-      right: 20px;
-      background: var(--accent);
-      color: #050811;
+      align-items: center;
+      gap: 6px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: var(--accent);
+      font-size: 12.5px;
       font-weight: 700;
-      font-size: 13px;
-      padding: 12px 18px;
-      border-radius: 999px;
-      box-shadow: 0 8px 24px rgba(56, 189, 248, 0.4);
-      z-index: 90;
+      padding: 6px 12px;
+      border-radius: 8px;
       cursor: pointer;
-      border: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+      min-height: 38px;
+      touch-action: manipulation;
+      transition: all 0.15s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .btn-back-hub:hover {
+      background: rgba(56, 189, 248, 0.22);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .btn-back-hub:active {
+      transform: scale(0.96);
+    }
+
+    /* Mobile Brand Header */
+    .mobile-brand-title {
+      display: none;
       align-items: center;
       gap: 8px;
-      touch-action: manipulation;
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.3px;
+      user-select: none;
+    }
+
+    .mobile-brand-icon {
+      font-size: 18px;
+    }
+
+    .mobile-brand-name {
+      background: linear-gradient(135deg, #fff 40%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Mobile Category Strip */
+    .mobile-category-bar {
+      display: none;
+    }
+
+    /* Fixed Native Bottom Navigation Bar */
+    .bottom-nav-bar {
+      display: none;
+    }
+
+    /* Quick Card Enhanced Styles */
+    .quick-card-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .quick-card-meta {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .quick-card-tag {
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 5px;
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--accent);
+      display: inline-block;
+      margin-top: 2px;
+    }
+
+    .quick-card-cat {
+      font-size: 11.5px;
+      color: var(--text-dim);
+    }
+
+    .quick-card-launch {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .quick-card:active,
+    .link-card:active,
+    .app-item:active {
+      transform: scale(0.98);
+      transition: transform 0.08s var(--spring);
+    }
+
+    /* Drawer Header & Close Button */
+    .drawer-header-row {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px 6px 16px;
+    }
+
+    .drawer-close-btn {
+      position: absolute;
+      right: 16px;
+      top: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.15s ease;
+    }
+
+    .drawer-close-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.15);
     }
 
     /* Mobile Bottom Drawer */
@@ -1247,20 +1363,189 @@
     /* Mobile Responsive Overrides */
     @media (max-width: 768px) {
       .sidebar {
-        display: none;
+        display: none !important;
       }
-      .topbar-center {
-        display: none;
+
+      /* R1: Neutralize inline JS overrides and suppress desktop controls on mobile */
+      #topbar-device-controls,
+      .topbar-center,
+      #btn-fullscreen,
+      #btn-top-qr,
+      #btn-toggle-sidebar {
+        display: none !important;
       }
+
+      /* R3: Suppress floating switcher pill completely */
+      .mobile-switcher-pill {
+        display: none !important;
+      }
+
       .topbar {
         padding: 0 12px;
+        height: var(--topbar-height);
+        min-height: var(--topbar-height);
       }
-      .mobile-switcher-pill {
-        display: inline-flex;
+
+      .topbar-left {
+        gap: 8px;
+        flex: 1;
+        min-width: 0;
       }
+
+      /* Catalog View Header State (not app active) on Mobile */
+      body:not(.app-active) .mobile-brand-title {
+        display: flex !important;
+      }
+
+      body:not(.app-active) .btn-back-hub {
+        display: none !important;
+      }
+
+      body:not(.app-active) .active-app-meta {
+        display: none !important;
+      }
+
+      body:not(.app-active) #btn-reload-app,
+      body:not(.app-active) #btn-open-tab {
+        display: none !important;
+      }
+
+      /* App Active Header State on Mobile */
+      body.app-active .mobile-brand-title {
+        display: none !important;
+      }
+
+      body.app-active .btn-back-hub {
+        display: inline-flex !important;
+      }
+
+      body.app-active .active-app-meta {
+        display: flex !important;
+        flex: 1;
+        min-width: 0;
+      }
+
+      body.app-active #btn-reload-app,
+      body.app-active #btn-open-tab {
+        display: inline-flex !important;
+      }
+
+      /* Mobile Category Strip (Visible in Catalog mode) */
+      .mobile-category-bar {
+        display: flex;
+        background: var(--bg-surface);
+        border-bottom: 1px solid var(--border);
+        padding: 8px 12px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        z-index: 30;
+        flex-shrink: 0;
+      }
+
+      .mobile-category-bar::-webkit-scrollbar {
+        display: none;
+      }
+
+      body.app-active .mobile-category-bar {
+        display: none !important;
+      }
+
+      .mobile-category-bar .category-pills {
+        display: flex;
+        gap: 8px;
+        width: 100%;
+      }
+
+      .mobile-category-bar .cat-pill {
+        padding: 6px 14px;
+        font-size: 12px;
+        font-weight: 600;
+        border-radius: 999px;
+        white-space: nowrap;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--border);
+        color: var(--text-muted);
+        cursor: pointer;
+        touch-action: manipulation;
+        transition: all 0.15s ease;
+      }
+
+      .mobile-category-bar .cat-pill.active {
+        background: var(--accent);
+        color: #050811;
+        font-weight: 700;
+        border-color: var(--accent);
+        box-shadow: 0 0 10px var(--accent-glow);
+      }
+
+      /* Fixed Native Bottom Navigation Bar */
+      .bottom-nav-bar {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: calc(56px + env(safe-area-inset-bottom, 0px));
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+        background: rgba(14, 20, 36, 0.96);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-top: 1px solid var(--border);
+        z-index: 100;
+        align-items: center;
+        justify-content: space-around;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+      }
+
+      .bottom-nav-item {
+        flex: 1;
+        height: 100%;
+        min-height: 48px;
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        cursor: pointer;
+        user-select: none;
+        touch-action: manipulation;
+        transition: color 0.15s ease, transform 0.1s ease;
+        padding: 4px 0;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .bottom-nav-item:active {
+        transform: scale(0.95);
+      }
+
+      .bottom-nav-item .nav-icon {
+        font-size: 20px;
+        line-height: 1;
+      }
+
+      .bottom-nav-item .nav-label {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: -0.2px;
+      }
+
+      .bottom-nav-item.active {
+        color: var(--accent);
+      }
+
+      .bottom-nav-item.active .nav-icon {
+        filter: drop-shadow(0 0 6px var(--accent-glow));
+      }
+
+      /* Viewport Stage height accounting for topbar and bottom bar */
       .viewport-container {
-        height: calc(100% - var(--topbar-height));
+        height: calc(100% - var(--topbar-height) - 56px - env(safe-area-inset-bottom, 0px));
       }
+
       .device-frame.mode-tablet, .device-frame.mode-mobile {
         width: 100% !important;
         height: 100% !important;
@@ -1268,11 +1553,92 @@
         border: none !important;
         box-shadow: none !important;
       }
+
       .phone-notch {
         display: none !important;
       }
+
+      /* R4: Compress hero banner on mobile to pull cards above the fold */
+      .welcome-stage {
+        padding: 12px 14px calc(84px + env(safe-area-inset-bottom, 16px)) 14px !important;
+      }
+
+      .welcome-card {
+        margin-bottom: 12px;
+        text-align: left;
+      }
+
+      .welcome-pill {
+        display: none !important;
+      }
+
+      .welcome-title {
+        font-size: 19px;
+        letter-spacing: -0.4px;
+        margin-bottom: 3px;
+      }
+
+      .welcome-desc {
+        font-size: 12px;
+        line-height: 1.35;
+        margin-bottom: 8px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      /* R4: Card ergonomics & touch targets */
+      .quick-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .quick-card {
+        padding: 14px 16px;
+        min-height: 52px;
+        border-radius: var(--radius-md);
+      }
+
+      /* R4: Safe bottom padding on catalog scroll containers */
+      .links-stage {
+        padding: 16px 14px calc(84px + env(safe-area-inset-bottom, 16px)) 14px !important;
+      }
+
       .links-grid {
         grid-template-columns: 1fr;
+      }
+
+      .mobile-drawer .sidebar-list {
+        padding-bottom: calc(84px + env(safe-area-inset-bottom, 16px));
+      }
+    }
+
+    /* Small Screen Fine-Tuning (360px - 430px) */
+    @media (max-width: 480px) {
+      .topbar {
+        padding: 0 8px;
+        gap: 6px;
+      }
+
+      .btn-back-hub {
+        padding: 6px 9px;
+        font-size: 12px;
+      }
+
+      .active-app-tag, .active-app-icon {
+        display: none !important;
+      }
+
+      .active-app-title {
+        font-size: 13.5px;
+      }
+
+      .action-btn {
+        padding: 6px 8px;
+        font-size: 11.5px;
+        gap: 4px;
+        min-height: 34px;
       }
     }
   </style>
@@ -1331,9 +1697,14 @@
     <main class="main-stage">
       
       <!-- Top Bar -->
-      <header class="topbar">
+      <header class="topbar" id="main-topbar">
         <div class="topbar-left">
           <button class="btn-icon" id="btn-toggle-sidebar" title="Toggle Sidebar">☰</button>
+          <button class="btn-back-hub" id="btn-back-hub" title="Return to Apps Catalog">← Back to Hub</button>
+          <div class="mobile-brand-title" id="mobile-brand-title">
+            <span class="mobile-brand-icon">🚀</span>
+            <span class="mobile-brand-name">Antigravity</span>
+          </div>
           <div class="active-app-meta" id="active-app-meta">
             <span class="active-app-icon" id="top-icon">🚀</span>
             <div>
@@ -1358,6 +1729,13 @@
           <button class="action-btn btn-qr" id="btn-top-qr" title="Connect Phone via Wi-Fi">📱 Mobile QR</button>
         </div>
       </header>
+
+      <!-- Mobile Category Strip (Visible in Catalog mode) -->
+      <div class="mobile-category-bar" id="mobile-category-bar">
+        <div class="category-pills" id="mobile-header-category-pills">
+          <!-- Populated dynamically based on mode -->
+        </div>
+      </div>
 
       <!-- Viewport Stage -->
       <section class="viewport-container" id="viewport-container">
@@ -1413,15 +1791,29 @@
 
   </div>
 
-  <!-- Mobile Floating Pill -->
-  <button class="mobile-switcher-pill" id="mobile-switcher-pill">
-    ⚡ Switch View
-  </button>
+  <!-- Fixed Native Bottom Navigation Bar (Mobile) -->
+  <nav class="bottom-nav-bar" id="bottom-nav-bar" aria-label="Mobile Navigation">
+    <button class="bottom-nav-item active" id="nav-btn-apps" data-target="apps" title="Apps Catalog">
+      <span class="nav-icon">🚀</span>
+      <span class="nav-label">Apps</span>
+    </button>
+    <button class="bottom-nav-item" id="nav-btn-links" data-target="links" title="Links & Quick Share">
+      <span class="nav-icon">🔗</span>
+      <span class="nav-label">Quick Share</span>
+    </button>
+    <button class="bottom-nav-item" id="nav-btn-search" data-target="search" title="Instant Search">
+      <span class="nav-icon">🔍</span>
+      <span class="nav-label">Search</span>
+    </button>
+  </nav>
 
-  <!-- Mobile Drawer Overlay & Sheet -->
+  <!-- Mobile Drawer Overlay & Instant Search Overlay -->
   <div class="drawer-overlay" id="drawer-overlay"></div>
   <div class="mobile-drawer" id="mobile-drawer">
-    <div class="drawer-handle"></div>
+    <div class="drawer-header-row">
+      <div class="drawer-handle"></div>
+      <button class="drawer-close-btn" id="drawer-close-btn" title="Close Search">✕</button>
+    </div>
     <div class="mode-switcher-container" style="padding-bottom: 8px;">
       <div class="mode-tabs">
         <button class="mode-tab-btn active" id="drawer-mode-apps">🚀 Apps</button>
@@ -1431,7 +1823,8 @@
     <div class="sidebar-controls" style="border-bottom: 1px solid var(--border);">
       <div class="search-box">
         <span class="search-icon">🔍</span>
-        <input type="search" class="search-input" id="mobile-search-input" placeholder="Search..." enterkeyhint="search" autocomplete="off">
+        <input type="search" class="search-input" id="mobile-search-input" placeholder="Search apps, tools, links..." enterkeyhint="search" autocomplete="off">
+        <button class="search-clear" id="mobile-search-clear">✕</button>
       </div>
       <div class="category-pills" id="mobile-category-pills">
         <!-- Populated dynamically -->
@@ -1551,6 +1944,11 @@
       DOM.modeDot = document.getElementById("mode-dot");
       DOM.modeLabel = document.getElementById("mode-label");
 
+      DOM.btnBackHub = document.getElementById("btn-back-hub");
+      DOM.mobileBrandTitle = document.getElementById("mobile-brand-title");
+      DOM.mobileCategoryBar = document.getElementById("mobile-category-bar");
+      DOM.mobileHeaderCategoryPills = document.getElementById("mobile-header-category-pills");
+
       DOM.topIcon = document.getElementById("top-icon");
       DOM.topTitle = document.getElementById("top-title");
       DOM.topBadge = document.getElementById("top-badge");
@@ -1573,10 +1971,17 @@
       DOM.mainLinksGrid = document.getElementById("main-links-grid");
       DOM.btnStageAddLink = document.getElementById("btn-stage-add-link");
 
+      DOM.bottomNavBar = document.getElementById("bottom-nav-bar");
+      DOM.navBtnApps = document.getElementById("nav-btn-apps");
+      DOM.navBtnLinks = document.getElementById("nav-btn-links");
+      DOM.navBtnSearch = document.getElementById("nav-btn-search");
+
       DOM.mobileSwitcherPill = document.getElementById("mobile-switcher-pill");
       DOM.drawerOverlay = document.getElementById("drawer-overlay");
       DOM.mobileDrawer = document.getElementById("mobile-drawer");
+      DOM.drawerCloseBtn = document.getElementById("drawer-close-btn");
       DOM.mobileSearchInput = document.getElementById("mobile-search-input");
+      DOM.mobileSearchClear = document.getElementById("mobile-search-clear");
       DOM.mobileCategoryPills = document.getElementById("mobile-category-pills");
       DOM.mobileAppList = document.getElementById("mobile-app-list");
 
@@ -1602,6 +2007,24 @@
       setTimeout(() => DOM.toast.classList.remove("show"), 2500);
     }
 
+    function updateTopbarState() {
+      const isAppActive = !!State.activeApp;
+      document.body.classList.toggle("app-active", isAppActive);
+
+      if (DOM.btnBackHub) {
+        DOM.btnBackHub.style.display = isAppActive ? "inline-flex" : "none";
+      }
+      if (DOM.mobileBrandTitle) {
+        DOM.mobileBrandTitle.style.display = isAppActive ? "none" : "";
+      }
+      if (DOM.btnReload) {
+        DOM.btnReload.style.display = (State.viewMode === "apps" && isAppActive) ? "inline-flex" : "none";
+      }
+      if (DOM.btnOpenTab) {
+        DOM.btnOpenTab.style.display = (State.viewMode === "apps" && isAppActive) ? "inline-flex" : "none";
+      }
+    }
+
     function setViewMode(mode) {
       State.viewMode = mode;
       
@@ -1611,9 +2034,11 @@
       if (DOM.drawerModeApps) DOM.drawerModeApps.classList.toggle("active", isApps);
       if (DOM.drawerModeLinks) DOM.drawerModeLinks.classList.toggle("active", !isApps);
 
+      if (DOM.navBtnApps) DOM.navBtnApps.classList.toggle("active", isApps);
+      if (DOM.navBtnLinks) DOM.navBtnLinks.classList.toggle("active", !isApps);
+      if (DOM.navBtnSearch) DOM.navBtnSearch.classList.remove("active");
+
       if (DOM.topbarDeviceControls) DOM.topbarDeviceControls.style.display = isApps ? "flex" : "none";
-      if (DOM.btnReload) DOM.btnReload.style.display = isApps ? "inline-flex" : "none";
-      if (DOM.btnOpenTab) DOM.btnOpenTab.style.display = isApps ? "inline-flex" : "none";
 
       if (isApps) {
         if (DOM.linksStage) DOM.linksStage.classList.add("hidden");
@@ -1622,7 +2047,7 @@
           if (DOM.welcomeStage) DOM.welcomeStage.classList.add("hidden");
         } else {
           if (DOM.welcomeStage) DOM.welcomeStage.classList.remove("hidden");
-          if (DOM.deviceFrame) DOM.deviceFrame.style.display = "flex";
+          if (DOM.deviceFrame) DOM.deviceFrame.style.display = "none";
         }
       } else {
         if (DOM.welcomeStage) DOM.welcomeStage.classList.add("hidden");
@@ -1633,8 +2058,10 @@
         if (DOM.topBadge) DOM.topBadge.textContent = "Vault";
       }
 
+      updateTopbarState();
       renderPills();
       renderSidebarList();
+      renderQuickGrid();
       if (!isApps) renderLinksGrid();
     }
 
@@ -1669,6 +2096,48 @@
 
       if (DOM.categoryPills) DOM.categoryPills.innerHTML = html;
       if (DOM.mobileCategoryPills) DOM.mobileCategoryPills.innerHTML = html;
+      if (DOM.mobileHeaderCategoryPills) DOM.mobileHeaderCategoryPills.innerHTML = html;
+    }
+
+    function renderQuickGrid() {
+      if (!DOM.quickGrid) return;
+      const query = State.searchQuery.toLowerCase().trim();
+      const filtered = State.apps.filter(app => {
+        const matchesCategory = (State.activeAppCategory === "ALL") || (app.category === State.activeAppCategory);
+        if (!matchesCategory) return false;
+        if (!query) return true;
+        const inTitle = (app.title || "").toLowerCase().includes(query);
+        const inDesc = (app.description || "").toLowerCase().includes(query);
+        const inCat = (app.category || "").toLowerCase().includes(query);
+        const inTags = (app.tags || []).some(t => t.toLowerCase().includes(query));
+        return inTitle || inDesc || inCat || inTags;
+      });
+
+      if (filtered.length === 0) {
+        DOM.quickGrid.innerHTML = `
+          <div style="grid-column: 1 / -1; padding: 40px 16px; text-align: center; color: var(--text-dim); font-size: 14px;">
+            🔍 No applications found matching "${escapeHtml(query || State.activeAppCategory)}"
+          </div>
+        `;
+        return;
+      }
+
+      DOM.quickGrid.innerHTML = filtered.map(app => `
+        <div class="quick-card" data-app-id="${escapeHtml(app.id)}">
+          <div class="quick-card-head">
+            <div class="quick-card-icon">${app.icon || '🚀'}</div>
+            <div class="quick-card-meta">
+              <div class="quick-card-title">${escapeHtml(app.title)}</div>
+              <span class="quick-card-tag">${escapeHtml(app.badge || app.category)}</span>
+            </div>
+          </div>
+          <div class="quick-card-desc">${escapeHtml(app.description || '')}</div>
+          <div class="quick-card-footer">
+            <span class="quick-card-cat">${escapeHtml(app.category)}</span>
+            <span class="quick-card-launch">Launch ↗</span>
+          </div>
+        </div>
+      `).join("");
     }
 
     function renderSidebarList() {
@@ -1850,6 +2319,7 @@
       localStorage.setItem("antigravity_portal_last_active_app", app.id);
 
       if (DOM.welcomeStage) DOM.welcomeStage.classList.add("hidden");
+      if (DOM.deviceFrame) DOM.deviceFrame.style.display = "flex";
       if (DOM.iframeLoader) DOM.iframeLoader.classList.add("active");
 
       if (DOM.topIcon) DOM.topIcon.textContent = app.icon || "🚀";
@@ -1866,7 +2336,23 @@
         };
       }
 
+      updateTopbarState();
       renderAppList();
+      closeMobileDrawer();
+    }
+
+    function backToHub() {
+      State.activeApp = null;
+      localStorage.removeItem("antigravity_portal_last_active_app");
+      if (DOM.welcomeStage) DOM.welcomeStage.classList.remove("hidden");
+      if (DOM.contentIframe) DOM.contentIframe.src = "about:blank";
+      if (DOM.deviceFrame) DOM.deviceFrame.style.display = "none";
+      if (DOM.topIcon) DOM.topIcon.textContent = "🚀";
+      if (DOM.topTitle) DOM.topTitle.textContent = "Workspace Hub";
+      if (DOM.topBadge) DOM.topBadge.textContent = "Dashboard";
+      updateTopbarState();
+      renderAppList();
+      renderQuickGrid();
       closeMobileDrawer();
     }
 
@@ -1959,11 +2445,18 @@
     function openMobileDrawer() {
       if (DOM.drawerOverlay) DOM.drawerOverlay.classList.add("open");
       if (DOM.mobileDrawer) DOM.mobileDrawer.classList.add("open");
+      if (DOM.navBtnSearch) DOM.navBtnSearch.classList.add("active");
+      setTimeout(() => {
+        if (DOM.mobileSearchInput) DOM.mobileSearchInput.focus();
+      }, 100);
     }
 
     function closeMobileDrawer() {
       if (DOM.drawerOverlay) DOM.drawerOverlay.classList.remove("open");
       if (DOM.mobileDrawer) DOM.mobileDrawer.classList.remove("open");
+      if (DOM.navBtnSearch) DOM.navBtnSearch.classList.remove("active");
+      if (DOM.navBtnApps && State.viewMode === "apps") DOM.navBtnApps.classList.add("active");
+      if (DOM.navBtnLinks && State.viewMode === "links") DOM.navBtnLinks.classList.add("active");
     }
 
     function setDeviceMode(mode) {
@@ -2002,7 +2495,9 @@
           const handleSearch = e => {
             State.searchQuery = e.target.value;
             if (DOM.searchClear) DOM.searchClear.classList.toggle("visible", !!e.target.value);
+            if (DOM.mobileSearchClear) DOM.mobileSearchClear.classList.toggle("visible", !!e.target.value);
             renderSidebarList();
+            renderQuickGrid();
             if (State.viewMode === "links") renderLinksGrid();
           };
 
@@ -2015,6 +2510,18 @@
               State.searchQuery = "";
               DOM.searchClear.classList.remove("visible");
               renderSidebarList();
+              renderQuickGrid();
+              if (State.viewMode === "links") renderLinksGrid();
+            });
+          }
+
+          if (DOM.mobileSearchClear) {
+            DOM.mobileSearchClear.addEventListener("click", () => {
+              if (DOM.mobileSearchInput) DOM.mobileSearchInput.value = "";
+              State.searchQuery = "";
+              DOM.mobileSearchClear.classList.remove("visible");
+              renderSidebarList();
+              renderQuickGrid();
               if (State.viewMode === "links") renderLinksGrid();
             });
           }
@@ -2030,11 +2537,13 @@
             }
             renderPills();
             renderSidebarList();
+            renderQuickGrid();
             if (State.viewMode === "links") renderLinksGrid();
           };
 
           if (DOM.categoryPills) DOM.categoryPills.addEventListener("click", handlePillClick);
           if (DOM.mobileCategoryPills) DOM.mobileCategoryPills.addEventListener("click", handlePillClick);
+          if (DOM.mobileHeaderCategoryPills) DOM.mobileHeaderCategoryPills.addEventListener("click", handlePillClick);
 
           // Keyboard shortcut (Ctrl+K or /)
           window.addEventListener("keydown", e => {
@@ -2096,6 +2605,10 @@
             btn.addEventListener("click", () => setDeviceMode(btn.dataset.mode));
           });
 
+          if (DOM.btnBackHub) {
+            DOM.btnBackHub.addEventListener("click", backToHub);
+          }
+
           if (DOM.btnReload) {
             DOM.btnReload.addEventListener("click", () => {
               if (DOM.contentIframe && DOM.contentIframe.src && DOM.contentIframe.src !== "about:blank") {
@@ -2127,18 +2640,7 @@
           }
 
           if (DOM.brandHome) {
-            DOM.brandHome.addEventListener("click", () => {
-              setViewMode("apps");
-              State.activeApp = null;
-              localStorage.removeItem("antigravity_portal_last_active_app");
-              if (DOM.welcomeStage) DOM.welcomeStage.classList.remove("hidden");
-              if (DOM.contentIframe) DOM.contentIframe.src = "about:blank";
-              if (DOM.topIcon) DOM.topIcon.textContent = "🚀";
-              if (DOM.topTitle) DOM.topTitle.textContent = "Workspace Hub";
-              if (DOM.topBadge) DOM.topBadge.textContent = "Dashboard";
-              renderAppList();
-              closeMobileDrawer();
-            });
+            DOM.brandHome.addEventListener("click", backToHub);
           }
         }],
         ["Initialize QR & Add Link Modals", () => {
@@ -2176,28 +2678,44 @@
             });
           }
         }],
-        ["Initialize Mobile Drawer & Floating Switcher", () => {
+        ["Initialize Mobile Drawer & Bottom Navigation", () => {
           if (DOM.mobileSwitcherPill) DOM.mobileSwitcherPill.addEventListener("click", openMobileDrawer);
           if (DOM.drawerOverlay) DOM.drawerOverlay.addEventListener("click", closeMobileDrawer);
+          if (DOM.drawerCloseBtn) DOM.drawerCloseBtn.addEventListener("click", closeMobileDrawer);
+
+          if (DOM.navBtnApps) {
+            DOM.navBtnApps.addEventListener("click", () => {
+              closeMobileDrawer();
+              if (State.activeApp) {
+                backToHub();
+              } else {
+                setViewMode("apps");
+              }
+            });
+          }
+
+          if (DOM.navBtnLinks) {
+            DOM.navBtnLinks.addEventListener("click", () => {
+              closeMobileDrawer();
+              setViewMode("links");
+            });
+          }
+
+          if (DOM.navBtnSearch) {
+            DOM.navBtnSearch.addEventListener("click", () => {
+              if (DOM.mobileDrawer && DOM.mobileDrawer.classList.contains("open")) {
+                closeMobileDrawer();
+              } else {
+                openMobileDrawer();
+              }
+            });
+          }
         }],
         ["Render Initial Views", () => {
           renderPills();
           renderSidebarList();
-          
-          if (DOM.quickGrid) {
-            const flagship = State.apps.filter(a => a.primary).slice(0, 6);
-            DOM.quickGrid.innerHTML = flagship.map(app => `
-              <div class="quick-card" data-app-id="${escapeHtml(app.id)}">
-                <div class="quick-card-icon">${app.icon || '🚀'}</div>
-                <div class="quick-card-title">${escapeHtml(app.title)}</div>
-                <div class="quick-card-desc">${escapeHtml(app.description || '')}</div>
-                <div class="quick-card-footer">
-                  <span>${escapeHtml(app.badge || app.category)}</span>
-                  <span>Launch →</span>
-                </div>
-              </div>
-            `).join("");
-          }
+          renderQuickGrid();
+          updateTopbarState();
 
           const lastAppId = localStorage.getItem("antigravity_portal_last_active_app");
           if (lastAppId && State.apps.some(a => a.id === lastAppId)) {

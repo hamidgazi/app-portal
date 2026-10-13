@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Cloud Clipboard Pro</title>
     <script>
-        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
+        try {
+            if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        } catch (e) {}
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -502,6 +504,15 @@
                 speechHeartbeat = null;
             }
         }
+
+        function stopAllSpeech() {
+            clearSpeechHeartbeat();
+            if (typeof window !== 'undefined' && window.speechSynthesis && typeof window.speechSynthesis.cancel === 'function') {
+                try { window.speechSynthesis.cancel(); } catch (e) {}
+            }
+            isPlayingId = null;
+            currentUtterance = null;
+        }
         
         // Safe Parse Speech Speed
         let currentSpeechRate = parseFloat(localStorage.getItem('ttsSpeed'));
@@ -602,9 +613,7 @@
             // Restart audio immediately with new speed if it's currently playing
             if(isPlayingId) {
                 const id = isPlayingId;
-                clearSpeechHeartbeat();
-                window.speechSynthesis.cancel();
-                isPlayingId = null;
+                stopAllSpeech();
                 setTimeout(() => window.toggleSpeech(id), 50);
             }
         }
@@ -968,6 +977,7 @@
                     console.warn("History replaceState failed:", e);
                 }
                 
+                stopAllSpeech();
                 historyArray = loadLocalHistory();
                 renderHistory();
                 initializeFirestoreRefs();
@@ -1324,16 +1334,18 @@
                 const query = activeFilter.toLowerCase();
                 if (query === '#') {
                     filteredArray = filteredArray.filter(item => {
-                        return /(#[a-zA-Z0-9_-]+)/.test(item.content);
+                        const content = String(item && item.content || '');
+                        return /(#[a-zA-Z0-9_-]+)/.test(content);
                     });
                 } else if (query.startsWith('#')) {
                     filteredArray = filteredArray.filter(item => {
-                        const tags = (item.content.match(/(#[a-zA-Z0-9_-]+)/g) || []).map(t => t.toLowerCase());
+                        const content = String(item && item.content || '');
+                        const tags = (content.match(/(#[a-zA-Z0-9_-]+)/g) || []).map(t => t.toLowerCase());
                         return tags.some(t => t.startsWith(query));
                     });
                 } else {
                     filteredArray = filteredArray.filter(item => 
-                        item.content.toLowerCase().includes(query)
+                        String(item && item.content || '').toLowerCase().includes(query)
                     );
                 }
             }
@@ -1358,7 +1370,10 @@
                 const [key, order] = currentSort.split('_');
                 const multiplier = order === 'asc' ? 1 : -1;
 
-                if (key === 'created') return (a.created - b.created) * multiplier;
+                if (key === 'created') {
+                    if (order === 'desc') return 0; // Preserve natural vault array order (newest clips and bumped duplicates at top)
+                    return (a.created - b.created) * multiplier;
+                }
                 if (key === 'modified') return (a.modified - b.modified) * multiplier;
                 if (key === 'accessed') return (a.accessed - b.accessed) * multiplier;
                 if (key === 'length') return ((a.content || '').length - (b.content || '').length) * multiplier;
@@ -1545,6 +1560,9 @@
 
         window.deleteSingleHistory = async function(id) {
             if(!confirm("Delete this clip completely?")) return;
+            if (isPlayingId === id) {
+                stopAllSpeech();
+            }
             const updatedHistory = historyArray.filter(i => i.id !== id);
             
             historyArray = updatedHistory;
@@ -1587,6 +1605,7 @@
                 }
             }
 
+            stopAllSpeech();
             historyArray = [];
             saveLocalHistory();
             renderHistory();
@@ -1663,34 +1682,46 @@
         window.toggleSpeech = function(id) {
             const item = historyArray.find(i => i.id === id);
             if(!item) return;
+
+            if (typeof window === 'undefined' || !window.speechSynthesis || typeof SpeechSynthesisUtterance === 'undefined') {
+                showStatus("TTS NOT SUPPORTED", true);
+                return;
+            }
+
+            const textToSpeak = String(item.content || '').trim();
+            if (!textToSpeak) {
+                showStatus("CLIP IS EMPTY", true);
+                return;
+            }
             
             if (isPlayingId === id) { 
-                clearSpeechHeartbeat();
-                window.speechSynthesis.cancel(); 
-                isPlayingId = null; 
+                stopAllSpeech();
                 renderHistory(); 
                 return; 
             }
-            clearSpeechHeartbeat();
-            window.speechSynthesis.cancel();
+            stopAllSpeech();
             
-            currentUtterance = new SpeechSynthesisUtterance(item.content);
-            currentUtterance.rate = currentSpeechRate;
+            const thisUtterance = new SpeechSynthesisUtterance(textToSpeak);
+            currentUtterance = thisUtterance;
+            thisUtterance.rate = currentSpeechRate;
 
             const cleanupSpeech = () => {
-                clearSpeechHeartbeat();
-                isPlayingId = null;
-                renderHistory();
+                if (currentUtterance === thisUtterance) {
+                    clearSpeechHeartbeat();
+                    isPlayingId = null;
+                    currentUtterance = null;
+                    renderHistory();
+                }
             };
 
-            currentUtterance.onend = cleanupSpeech;
-            currentUtterance.onerror = (e) => {
+            thisUtterance.onend = cleanupSpeech;
+            thisUtterance.onerror = (e) => {
                 console.warn("Speech synthesis error:", e);
                 cleanupSpeech();
             };
             
             isPlayingId = id; 
-            window.speechSynthesis.speak(currentUtterance);
+            window.speechSynthesis.speak(thisUtterance);
 
             speechHeartbeat = setInterval(() => {
                 if (window.speechSynthesis && window.speechSynthesis.speaking) {
@@ -1914,8 +1945,7 @@
 
         // Cancel TTS on unload/reloading
         window.addEventListener('beforeunload', () => {
-            clearSpeechHeartbeat();
-            window.speechSynthesis.cancel();
+            stopAllSpeech();
         });
     </script>
 </body>
