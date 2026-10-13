@@ -1517,6 +1517,10 @@
       }
 
       .mobile-category-bar .cat-pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 34px;
         padding: 6px 14px;
         font-size: 12px;
         font-weight: 600;
@@ -2453,10 +2457,19 @@
       if (DOM.btnOpenTab) DOM.btnOpenTab.href = targetUrl;
 
       if (DOM.contentIframe) {
-        DOM.contentIframe.src = targetUrl;
+        const loaderTimeout = setTimeout(() => {
+          if (DOM.iframeLoader) DOM.iframeLoader.classList.remove("active");
+        }, 6000);
+
         DOM.contentIframe.onload = () => {
+          clearTimeout(loaderTimeout);
           if (DOM.iframeLoader) DOM.iframeLoader.classList.remove("active");
         };
+        DOM.contentIframe.onerror = () => {
+          clearTimeout(loaderTimeout);
+          if (DOM.iframeLoader) DOM.iframeLoader.classList.remove("active");
+        };
+        DOM.contentIframe.src = targetUrl;
       }
 
       updateTopbarState();
@@ -2467,15 +2480,11 @@
     function backToHub() {
       State.activeApp = null;
       localStorage.removeItem("antigravity_portal_last_active_app");
-      if (DOM.welcomeStage) DOM.welcomeStage.classList.remove("hidden");
       if (DOM.contentIframe) DOM.contentIframe.src = "about:blank";
-      if (DOM.deviceFrame) DOM.deviceFrame.style.display = "none";
       if (DOM.topIcon) DOM.topIcon.textContent = "🚀";
       if (DOM.topTitle) DOM.topTitle.textContent = "Workspace Hub";
       if (DOM.topBadge) DOM.topBadge.textContent = "Dashboard";
-      updateTopbarState();
-      renderAppList();
-      renderQuickGrid();
+      setViewMode("apps");
       closeMobileDrawer();
     }
 
@@ -2568,7 +2577,11 @@
     function openMobileDrawer() {
       if (DOM.drawerOverlay) DOM.drawerOverlay.classList.add("open");
       if (DOM.mobileDrawer) DOM.mobileDrawer.classList.add("open");
+      if (DOM.navBtnApps) DOM.navBtnApps.classList.remove("active");
+      if (DOM.navBtnLinks) DOM.navBtnLinks.classList.remove("active");
       if (DOM.navBtnSearch) DOM.navBtnSearch.classList.add("active");
+      if (DOM.mobileSearchInput) DOM.mobileSearchInput.value = State.searchQuery;
+      if (DOM.mobileSearchClear) DOM.mobileSearchClear.classList.toggle("visible", !!State.searchQuery);
       setTimeout(() => {
         if (DOM.mobileSearchInput) DOM.mobileSearchInput.focus();
       }, 100);
@@ -2668,11 +2681,23 @@
           if (DOM.mobileCategoryPills) DOM.mobileCategoryPills.addEventListener("click", handlePillClick);
           if (DOM.mobileHeaderCategoryPills) DOM.mobileHeaderCategoryPills.addEventListener("click", handlePillClick);
 
-          // Keyboard shortcut (Ctrl+K or /)
+          // Keyboard shortcuts (Ctrl+K or / to search, Escape to close overlays)
           window.addEventListener("keydown", e => {
-            if ((e.ctrlKey && e.key === "k") || (e.key === "/" && document.activeElement.tagName !== "INPUT")) {
+            if (e.key === "Escape") {
+              if (DOM.mobileDrawer && DOM.mobileDrawer.classList.contains("open")) {
+                closeMobileDrawer();
+              }
+              if (DOM.qrModal && DOM.qrModal.classList.contains("open")) {
+                closeQRModal();
+              }
+              if (DOM.addModal && DOM.addModal.classList.contains("open")) {
+                closeAddModal();
+              }
+            } else if ((e.ctrlKey && e.key === "k") || (e.key === "/" && document.activeElement.tagName !== "INPUT")) {
               e.preventDefault();
-              if (DOM.searchInput) {
+              if (window.innerWidth <= 768) {
+                openMobileDrawer();
+              } else if (DOM.searchInput) {
                 DOM.searchInput.focus();
                 DOM.searchInput.select();
               }
@@ -2719,6 +2744,13 @@
               } else if (e.target.closest(".act-native")) {
                 e.preventDefault();
                 shareViaNative(url, title, desc);
+              } else if (e.target.closest(".btn-act-open")) {
+                // Default anchor navigation handles this
+              } else {
+                // Whole-card tap: open target link in new tab
+                if (url && url !== "#") {
+                  window.open(url, "_blank", "noopener");
+                }
               }
             });
           }
@@ -2736,6 +2768,17 @@
             DOM.btnReload.addEventListener("click", () => {
               if (DOM.contentIframe && DOM.contentIframe.src && DOM.contentIframe.src !== "about:blank") {
                 if (DOM.iframeLoader) DOM.iframeLoader.classList.add("active");
+                const reloadTimeout = setTimeout(() => {
+                  if (DOM.iframeLoader) DOM.iframeLoader.classList.remove("active");
+                }, 6000);
+                DOM.contentIframe.onload = () => {
+                  clearTimeout(reloadTimeout);
+                  if (DOM.iframeLoader) DOM.iframeLoader.classList.remove("active");
+                };
+                DOM.contentIframe.onerror = () => {
+                  clearTimeout(reloadTimeout);
+                  if (DOM.iframeLoader) DOM.iframeLoader.classList.remove("active");
+                };
                 DOM.contentIframe.src = DOM.contentIframe.src;
               }
             });
