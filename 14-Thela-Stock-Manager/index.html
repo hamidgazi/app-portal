@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Thela Stock Manager</title>
-  
+  <title>Thela Stock — Quick Entry</title>
+
   <!-- PWA Meta -->
   <meta name="theme-color" content="#000000">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -12,14 +12,10 @@
   <meta name="apple-mobile-web-app-title" content="Thela Stock">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
-  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
 
-  <!-- Vendor SheetJS (Offline Local Bundle) -->
+  <!-- SheetJS for 1-Tap Excel Download -->
   <script src="vendor/xlsx.full.min.js"></script>
-
-  <!-- Firebase v8 Compat SDK -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
   <style>
     /* ==========================================================================
@@ -27,36 +23,22 @@
        ========================================================================== */
     :root {
       --bg-canvas: #000000;
-      --bg-surface: #0e1424;
-      --bg-surface-elevated: #151e34;
-      --bg-surface-hover: #1c2742;
-      --border-subtle: rgba(255, 255, 255, 0.08);
-      --border-active: #38bdf8;
+      --bg-card: #0f172a;
+      --bg-card-selected: #1e293b;
+      --border-subtle: rgba(255, 255, 255, 0.1);
+      --border-focus: #38bdf8;
       
-      /* Typography (Soft warm off-white to prevent OLED purple smear) */
-      --text-primary: #f1f5f9;
-      --text-secondary: #94a3b8;
-      --text-muted: #64748b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
       
-      /* Accents */
-      --accent-out: #f43f5e;
-      --accent-out-bg: rgba(244, 63, 94, 0.15);
-      --accent-out-glow: rgba(244, 63, 94, 0.35);
-      
-      --accent-in: #10b981;
-      --accent-in-bg: rgba(16, 185, 129, 0.15);
-      --accent-in-glow: rgba(16, 185, 129, 0.35);
+      --color-out: #ef4444;
+      --color-out-bg: rgba(239, 68, 68, 0.15);
+      --color-in: #10b981;
+      --color-in-bg: rgba(16, 185, 129, 0.15);
+      --color-cyan: #0284c7;
 
-      --accent-cyan: #38bdf8;
-      --accent-amber: #f59e0b;
-      
-      /* Physics */
-      --spring: cubic-bezier(0.16, 1, 0.3, 1);
       --min-hitbox: 48px;
-      --radius-sm: 8px;
-      --radius-md: 14px;
-      --radius-lg: 20px;
-      --radius-pill: 9999px;
+      --touch-action: manipulation;
     }
 
     * {
@@ -68,1892 +50,1420 @@
 
     body {
       background-color: var(--bg-canvas);
-      color: var(--text-primary);
+      color: var(--text-main);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       min-height: 100vh;
+      min-height: 100dvh;
+      padding: env(safe-area-inset-top, 12px) 14px env(safe-area-inset-bottom, 16px) 14px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-top: max(12px, env(safe-area-inset-top, 0px));
-      padding-bottom: max(32px, env(safe-area-inset-bottom, 0px));
-      padding-left: max(12px, env(safe-area-inset-left, 0px));
-      padding-right: max(12px, env(safe-area-inset-right, 0px));
-      overflow-x: hidden;
+      touch-action: manipulation;
       user-select: none;
       -webkit-user-select: none;
     }
 
     .app-container {
       width: 100%;
-      max-width: 640px;
+      max-width: 520px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
     }
 
-    /* ==========================================================================
-       ZONE 1: PASSIVE APP BAR & DIAGNOSTICS
-       ========================================================================== */
-    .top-app-bar {
+    /* Top Navigation Header */
+    .header-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 14px;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
-      gap: 10px;
-    }
-
-    .brand-section {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .btn-back {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: var(--min-hitbox);
-      min-height: var(--min-hitbox);
-      background: var(--bg-surface-elevated);
-      color: var(--text-primary);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      font-size: 16px;
-      font-weight: 700;
-      text-decoration: none;
-      cursor: pointer;
-      touch-action: manipulation;
-      transition: transform 0.15s var(--spring), background-color 0.15s;
-    }
-
-    .btn-back:active {
-      transform: scale(0.96);
-    }
-
-    .brand-title-wrap {
-      display: flex;
-      flex-direction: column;
+      padding: 8px 4px;
+      border-bottom: 1px solid var(--border-subtle);
     }
 
     .brand-title {
-      font-size: 17px;
-      font-weight: 800;
-      color: var(--text-primary);
-      letter-spacing: -0.3px;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 10px;
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #ffffff;
     }
 
-    .brand-subtitle {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-secondary);
-      letter-spacing: 0.2px;
+    .brand-icon {
+      font-size: 1.4rem;
     }
 
-    .app-bar-actions {
+    .header-actions {
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
     .status-pill {
-      display: inline-flex;
+      display: flex;
       align-items: center;
       gap: 6px;
-      padding: 6px 10px;
-      background: var(--bg-surface-elevated);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.06);
       border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-pill);
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--text-secondary);
+      min-height: 36px;
     }
 
     .status-dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background-color: var(--accent-in);
-      box-shadow: 0 0 8px var(--accent-in);
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
     }
 
-    .status-dot.offline {
-      background-color: var(--accent-amber);
-      box-shadow: 0 0 8px var(--accent-amber);
-    }
-
-    .queue-badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2px 7px;
-      font-size: 11px;
-      font-weight: 800;
-      background: rgba(245, 158, 11, 0.2);
-      color: var(--accent-amber);
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(245, 158, 11, 0.4);
-    }
-
-    .btn-icon-action {
+    .btn-icon {
       min-width: var(--min-hitbox);
       min-height: var(--min-hitbox);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--bg-surface-elevated);
-      color: var(--text-primary);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.06);
       border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      font-size: 16px;
+      color: var(--text-main);
+      font-size: 1.15rem;
       cursor: pointer;
-      touch-action: manipulation;
-      transition: transform 0.15s var(--spring), background-color 0.15s, border-color 0.15s;
-    }
-
-    .btn-icon-action:active {
-      transform: scale(0.96);
-      background: var(--bg-surface-hover);
-    }
-
-    /* Header action toolbar */
-    .quick-toolbar {
-      display: flex;
-      gap: 8px;
-    }
-
-    .btn-tool {
-      flex: 1;
-      min-height: var(--min-hitbox);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      background: var(--bg-surface);
-      color: var(--text-primary);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      font-size: 13px;
+      touch-action: manipulation;
+    }
+
+    .btn-icon:active {
+      transform: scale(0.94);
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    /* Section Label */
+    .step-label {
+      font-size: 0.85rem;
       font-weight: 700;
-      cursor: pointer;
-      touch-action: manipulation;
-      transition: transform 0.15s var(--spring), border-color 0.15s;
-    }
-
-    .btn-tool:active {
-      transform: scale(0.97);
-      border-color: var(--border-active);
-    }
-
-    /* ==========================================================================
-       BANNER: LOW STOCK ALERT
-       ========================================================================== */
-    .low-stock-banner {
-      display: none;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 14px;
-      background: var(--accent-out-bg);
-      border: 1px solid var(--accent-out);
-      border-radius: var(--radius-md);
-      color: #fecdd3;
-      font-size: 13px;
-      font-weight: 600;
-      line-height: 1.4;
-      animation: pulseGlow 2s infinite ease-in-out;
-    }
-
-    .low-stock-banner.active {
-      display: flex;
-    }
-
-    @keyframes pulseGlow {
-      0%, 100% { box-shadow: 0 0 10px var(--accent-out-glow); }
-      50% { box-shadow: 0 0 20px var(--accent-out-glow); }
-    }
-
-    /* ==========================================================================
-       ZONE 2: 6 REAL-TIME STOCK BALANCE CARDS
-       ========================================================================== */
-    .section-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 4px;
-    }
-
-    .section-title {
-      font-size: 14px;
-      font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.8px;
-      color: var(--text-secondary);
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    .total-stock-badge {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--accent-cyan);
-      background: rgba(56, 189, 248, 0.12);
-      padding: 4px 8px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(56, 189, 248, 0.25);
-    }
-
-    .cards-grid {
+    /* STEP 1: Bag Cards Grid */
+    .bag-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 10px;
     }
 
-    @media (min-width: 520px) {
-      .cards-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    /* Ergonomic Whole-Card Click Delegation */
-    .stock-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
-      padding: 12px;
+    .bag-card {
+      min-height: 64px;
+      background: var(--bg-card);
+      border: 2px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 10px 12px;
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      justify-content: space-between;
       cursor: pointer;
       touch-action: manipulation;
-      user-select: none;
-      -webkit-user-select: none;
-      transition: transform 0.15s var(--spring), border-color 0.15s, background-color 0.15s, box-shadow 0.15s;
-      min-height: 104px;
+      transition: all 0.15s ease;
+      position: relative;
     }
 
-    .stock-card:active {
-      transform: scale(0.97);
-      background: var(--bg-surface-hover);
-    }
-
-    .stock-card.selected {
-      border-color: var(--accent-cyan);
-      background: var(--bg-surface-elevated);
-      box-shadow: 0 0 16px rgba(56, 189, 248, 0.25);
-    }
-
-    .stock-card.zero-stock {
-      border-color: var(--accent-out);
-      background: rgba(244, 63, 94, 0.08);
-      animation: alertBorderPulse 2.5s infinite ease-in-out;
-    }
-
-    @keyframes alertBorderPulse {
-      0%, 100% { border-color: rgba(244, 63, 94, 0.5); }
-      50% { border-color: rgba(244, 63, 94, 1); box-shadow: 0 0 12px var(--accent-out-glow); }
-    }
-
-    .card-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .card-item-name {
-      font-size: 14px;
-      font-weight: 800;
-      color: var(--text-primary);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .card-badge {
-      font-size: 10px;
-      font-weight: 800;
-      padding: 2px 6px;
-      border-radius: var(--radius-pill);
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-    }
-
-    .card-badge.ok {
-      background: var(--accent-in-bg);
-      color: var(--accent-in);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-    }
-
-    .card-badge.empty {
-      background: var(--accent-out-bg);
-      color: var(--accent-out);
-      border: 1px solid rgba(244, 63, 94, 0.5);
-    }
-
-    .card-balance {
-      font-size: 28px;
-      font-weight: 900;
-      letter-spacing: -0.5px;
-      color: var(--text-primary);
-      line-height: 1.1;
-    }
-
-    .card-balance.zero {
-      color: var(--accent-out);
-    }
-
-    .card-breakdown {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-secondary);
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      padding-top: 6px;
-      margin-top: 2px;
-    }
-
-    .breakdown-in {
-      color: var(--accent-in);
-    }
-
-    .breakdown-out {
-      color: var(--accent-out);
-    }
-
-    /* ==========================================================================
-       ZONE 3: TRANSACTION INPUT CONSOLE
-       ========================================================================== */
-    .input-console-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    /* IN / OUT Toggle Switch */
-    .type-toggle-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      background: var(--bg-surface-elevated);
-      padding: 4px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border-subtle);
-    }
-
-    .type-toggle-btn {
-      min-height: var(--min-hitbox);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-size: 15px;
-      font-weight: 800;
-      border: none;
-      border-radius: 10px;
-      color: var(--text-secondary);
-      background: transparent;
-      cursor: pointer;
-      touch-action: manipulation;
-      transition: all 0.18s var(--spring);
-    }
-
-    .type-toggle-btn:active {
-      transform: scale(0.97);
-    }
-
-    .type-toggle-btn.active-out {
-      background: var(--accent-out);
-      color: #ffffff;
-      box-shadow: 0 0 14px var(--accent-out-glow);
-    }
-
-    .type-toggle-btn.active-in {
-      background: var(--accent-in);
-      color: #ffffff;
-      box-shadow: 0 0 14px var(--accent-in-glow);
-    }
-
-    /* 6 Item Selection Matrix */
-    .form-group-label {
-      font-size: 12px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
-      color: var(--text-secondary);
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .item-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-    }
-
-    .item-btn {
-      min-height: var(--min-hitbox);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 8px;
-      background: var(--bg-surface-elevated);
-      color: var(--text-primary);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      touch-action: manipulation;
-      transition: transform 0.15s var(--spring), border-color 0.15s, background-color 0.15s;
-    }
-
-    .item-btn:active {
+    .bag-card:active {
       transform: scale(0.96);
     }
 
-    .item-btn.selected {
-      background: rgba(56, 189, 248, 0.15);
-      border-color: var(--accent-cyan);
-      color: #ffffff;
-      box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+    .bag-card.selected {
+      border-color: #38bdf8;
+      background: #13233c;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.25);
     }
 
-    /* Quantity Presets */
-    .preset-grid {
+    .bag-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .bag-stock-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 4px;
+    }
+
+    .bag-stock-badge {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #38bdf8;
+    }
+
+    .bag-stock-badge.low {
+      color: #f59e0b;
+    }
+
+    .bag-stock-badge.empty {
+      color: #ef4444;
+    }
+
+    /* STEP 2: Large Action Buttons (OUT vs IN) */
+    .action-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .action-btn {
+      min-height: 60px;
+      border-radius: 14px;
+      border: 2px solid var(--border-subtle);
+      background: var(--bg-card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 1.05rem;
+      font-weight: 800;
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: all 0.15s ease;
+      color: var(--text-muted);
+    }
+
+    .action-btn:active {
+      transform: scale(0.96);
+    }
+
+    .action-btn.btn-out.selected {
+      background: var(--color-out);
+      border-color: #f87171;
+      color: #ffffff;
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+    }
+
+    .action-btn.btn-in.selected {
+      background: var(--color-in);
+      border-color: #34d399;
+      color: #ffffff;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+    }
+
+    /* STEP 3: Quantity Chips */
+    .qty-chips {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       gap: 6px;
     }
 
-    .preset-btn {
+    .qty-chip {
       min-height: var(--min-hitbox);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--bg-surface-elevated);
-      color: var(--accent-cyan);
-      border: 1px solid rgba(56, 189, 248, 0.2);
-      border-radius: var(--radius-md);
-      font-size: 14px;
-      font-weight: 800;
-      cursor: pointer;
-      touch-action: manipulation;
-      transition: transform 0.15s var(--spring), background-color 0.15s, border-color 0.15s;
-    }
-
-    .preset-btn:active {
-      transform: scale(0.95);
-      background: rgba(56, 189, 248, 0.25);
-    }
-
-    /* Custom Quantity & Details Input */
-    .qty-input-wrapper {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .qty-input-box {
-      position: relative;
-      flex: 1;
-      display: flex;
-      align-items: center;
-    }
-
-    .qty-input {
-      width: 100%;
-      min-height: var(--min-hitbox);
-      background: var(--bg-surface-elevated);
-      color: var(--text-primary);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      font-size: 20px;
-      font-weight: 800;
-      padding: 8px 44px 8px 14px;
-      outline: none;
-      transition: border-color 0.15s;
-    }
-
-    .qty-input:focus {
-      border-color: var(--accent-cyan);
-    }
-
-    .btn-clear-qty {
-      position: absolute;
-      right: 4px;
-      min-width: 40px;
-      min-height: 40px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: transparent;
-      border: none;
-      color: var(--text-secondary);
-      font-size: 16px;
-      cursor: pointer;
-      touch-action: manipulation;
-    }
-
-    .tx-meta-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
-
-    .text-input {
-      min-height: var(--min-hitbox);
-      background: var(--bg-surface-elevated);
-      color: var(--text-primary);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      font-size: 13px;
-      font-weight: 600;
-      padding: 8px 12px;
-      outline: none;
-      transition: border-color 0.15s;
-      width: 100%;
-    }
-
-    .text-input:focus {
-      border-color: var(--accent-cyan);
-    }
-
-    /* Submit Button */
-    .btn-submit {
-      min-height: 56px;
-      width: 100%;
-      border: none;
-      border-radius: var(--radius-md);
-      font-size: 16px;
-      font-weight: 800;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      cursor: pointer;
-      touch-action: manipulation;
-      transition: transform 0.15s var(--spring), background-color 0.15s, box-shadow 0.15s;
+      border-radius: 12px;
+      background: var(--bg-card);
+      border: 2px solid var(--border-subtle);
       color: #ffffff;
-      background: var(--accent-out);
-      box-shadow: 0 4px 16px var(--accent-out-glow);
+      font-size: 1.05rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: all 0.15s ease;
     }
 
-    .btn-submit.mode-in {
-      background: var(--accent-in);
-      box-shadow: 0 4px 16px var(--accent-in-glow);
+    .qty-chip:active {
+      transform: scale(0.92);
+    }
+
+    .qty-chip.selected {
+      border-color: #38bdf8;
+      background: #0284c7;
+      color: #ffffff;
+      box-shadow: 0 0 12px rgba(2, 132, 199, 0.35);
+    }
+
+    .custom-qty-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .custom-qty-input {
+      flex: 1;
+      min-height: var(--min-hitbox);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 0 14px;
+      color: #ffffff;
+      font-size: 1.1rem;
+      font-weight: 700;
+      outline: none;
+    }
+
+    .custom-qty-input:focus {
+      border-color: #38bdf8;
+    }
+
+    .note-input {
+      width: 100%;
+      min-height: 44px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 0 14px;
+      color: #ffffff;
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    .note-input:focus {
+      border-color: #38bdf8;
+    }
+
+    /* STEP 4: Full-Width Primary Submit Button */
+    .btn-submit {
+      width: 100%;
+      min-height: 60px;
+      background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+      border: none;
+      border-radius: 16px;
+      color: #ffffff;
+      font-size: 1.25rem;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.35);
+      touch-action: manipulation;
+      transition: all 0.15s ease;
     }
 
     .btn-submit:active {
       transform: scale(0.97);
+      filter: brightness(0.9);
     }
 
-    /* ==========================================================================
-       ZONE 4: RECENT TRANSACTIONS STREAM
-       ========================================================================== */
-    .history-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+    .btn-submit:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      box-shadow: none;
     }
 
-    .history-header {
+    /* Live Summary Glance Card */
+    .summary-glance {
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 14px;
+      padding: 12px 14px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
     }
 
-    .filter-select {
-      background: var(--bg-surface-elevated);
-      color: var(--text-primary);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-sm);
-      font-size: 12px;
-      font-weight: 700;
-      padding: 6px 10px;
-      outline: none;
-      cursor: pointer;
-    }
-
-    .tx-list {
+    .glance-left {
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      max-height: 380px;
-      overflow-y: auto;
-      padding-right: 4px;
-    }
-
-    /* Custom scrollbar */
-    .tx-list::-webkit-scrollbar {
-      width: 6px;
-    }
-    .tx-list::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    .tx-list::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 3px;
-    }
-
-    .tx-item {
-      background: var(--bg-surface-elevated);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: 10px 12px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .tx-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .tx-type-pill {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      font-weight: 800;
-      padding: 4px 8px;
-      border-radius: var(--radius-sm);
-      min-width: 44px;
-    }
-
-    .tx-type-pill.out {
-      background: var(--accent-out-bg);
-      color: var(--accent-out);
-      border: 1px solid rgba(244, 63, 94, 0.3);
-    }
-
-    .tx-type-pill.in {
-      background: var(--accent-in-bg);
-      color: var(--accent-in);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-    }
-
-    .tx-info {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .tx-item-title {
-      font-size: 13px;
-      font-weight: 800;
-      color: var(--text-primary);
-    }
-
-    .tx-item-meta {
-      font-size: 11px;
-      color: var(--text-secondary);
-    }
-
-    .tx-right {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
       gap: 2px;
     }
 
-    .tx-qty {
-      font-size: 15px;
-      font-weight: 800;
-      color: var(--text-primary);
-    }
-
-    .tx-sync-status {
-      font-size: 10px;
+    .glance-title {
+      font-size: 0.8rem;
       font-weight: 700;
-      color: var(--text-muted);
+      color: #38bdf8;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
     }
 
-    .tx-sync-status.synced {
-      color: var(--accent-cyan);
+    .glance-item {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #ffffff;
     }
 
-    .tx-sync-status.queued {
-      color: var(--accent-amber);
+    .glance-stock {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: #10b981;
     }
 
-    /* Toast Notification System */
-    .toast-container {
-      position: fixed;
-      bottom: max(24px, env(safe-area-inset-bottom, 0px));
-      left: 50%;
-      transform: translateX(-50%);
+    /* STEP 5: Recent Transactions with 1-Tap Undo */
+    .recent-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 12px 14px;
+    }
+
+    .recent-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .recent-list {
       display: flex;
       flex-direction: column;
       gap: 8px;
-      z-index: 9999;
-      pointer-events: none;
-      width: 90%;
-      max-width: 420px;
     }
 
-    .toast {
-      background: #1e293b;
-      color: #f8fafc;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: var(--radius-md);
-      padding: 12px 16px;
-      font-size: 13px;
-      font-weight: 700;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.25s var(--spring);
+    .recent-item {
       display: flex;
       align-items: center;
-      gap: 10px;
+      justify-content: space-between;
+      padding: 8px 10px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      font-size: 0.9rem;
+    }
+
+    .recent-item-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .recent-item-title {
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .recent-item-meta {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .recent-item-badge {
+      font-weight: 800;
+      font-size: 0.95rem;
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .recent-item-badge.out {
+      color: #f87171;
+      background: rgba(239, 68, 68, 0.15);
+    }
+
+    .recent-item-badge.in {
+      color: #34d399;
+      background: rgba(16, 185, 129, 0.15);
+    }
+
+    .btn-undo {
+      min-height: 36px;
+      padding: 0 10px;
+      border-radius: 8px;
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #f87171;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      touch-action: manipulation;
+    }
+
+    .btn-undo:active {
+      transform: scale(0.92);
+    }
+
+    /* Modal Styling */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 100;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-box {
+      width: 100%;
+      max-width: 480px;
+      background: #0f172a;
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .modal-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-input {
+      width: 100%;
+      min-height: 48px;
+      background: #1e293b;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 0 12px;
+      color: #ffffff;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #10b981;
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: 9999px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .toast.show {
+      transform: translateX(-50%) translateY(0);
       opacity: 1;
-      transform: translateY(0);
     }
 
-    .toast.success {
-      border-left: 4px solid var(--accent-in);
-    }
-
-    .toast.warning {
-      border-left: 4px solid var(--accent-amber);
+    .toast.error {
+      background: #ef4444;
     }
   </style>
 </head>
 <body>
 
   <div class="app-container">
-    
-    <!-- ZONE 1: TOP APP BAR & DIAGNOSTICS -->
-    <header class="top-app-bar">
-      <div class="brand-section">
-        <a id="header-back-btn" href="../../Common-Resources/App-Portal/index.html" class="btn-back" title="Back to App Portal">←</a>
-        <div class="brand-title-wrap">
-          <h1 class="brand-title">📦 Thela Stock</h1>
-          <span class="brand-subtitle">Real-Time Mobile Ledger</span>
-        </div>
-      </div>
 
-      <div class="app-bar-actions">
-        <div id="status-badge" class="status-pill" title="Cloud Sync Status">
+    <!-- Top Header Bar -->
+    <header class="header-bar">
+      <div class="brand-title">
+        <span class="brand-icon">🛍️</span>
+        <span>Thela Stock</span>
+      </div>
+      <div class="header-actions">
+        <div id="status-pill" class="status-pill">
           <span id="status-dot" class="status-dot"></span>
           <span id="status-text">Online</span>
         </div>
-        <span id="queue-badge" class="queue-badge" title="Pending Local Queue">0 Queued</span>
-        <button id="btn-sync-now" class="btn-icon-action" title="Force Sync with Cloud">🔄</button>
+        <button id="btn-settings" class="btn-icon" aria-label="Settings" title="Google Sheet Webhook Settings">
+          ⚙️
+        </button>
+        <button id="btn-export-excel" class="btn-icon" aria-label="Export Excel" title="Download Excel (.xlsx)">
+          📥
+        </button>
       </div>
     </header>
 
-    <!-- QUICK TOOLBAR: EXPORT & ACTIONS -->
-    <div class="quick-toolbar">
-      <button id="btn-export-excel" class="btn-tool">
-        <span>📊</span>
-        <span>Export Excel (.xlsx)</span>
-      </button>
-      <button id="btn-quick-refresh" class="btn-tool">
-        <span>⚡</span>
-        <span>Recalculate Balances</span>
-      </button>
-    </div>
-
-    <!-- LOW STOCK ALERT BANNER -->
-    <div id="banner-low-stock" class="low-stock-banner" role="alert">
-      <span style="font-size: 20px;">⚠️</span>
-      <div id="banner-low-stock-text">
-        <strong>Low Stock Alert:</strong> Lining 28 is completely out of stock (0 units). Restocking recommended!
+    <!-- Live Selected Glance Banner -->
+    <section class="summary-glance" id="summary-glance">
+      <div class="glance-left">
+        <span class="glance-title">Selected Bag</span>
+        <span id="glance-item-name" class="glance-item">Kohinoor</span>
       </div>
-    </div>
-
-    <!-- ZONE 2: 6 REAL-TIME STOCK BALANCE CARDS -->
-    <section>
-      <div class="section-header" style="margin-bottom: 8px;">
-        <span class="section-title">Stock Balances</span>
-        <span id="total-stock-badge" class="total-stock-badge">1,675 Units</span>
-      </div>
-
-      <div id="balance-cards-grid" class="cards-grid">
-        <!-- Injected via renderStockBalanceCards -->
+      <div style="text-align: right;">
+        <span class="glance-title">Available Stock</span>
+        <div id="glance-item-stock" class="glance-stock">500 pcs</div>
       </div>
     </section>
 
-    <!-- ZONE 3: TRANSACTION INPUT CONSOLE -->
-    <section class="input-console-card">
-      
-      <!-- OUT / IN Toggle -->
-      <div class="type-toggle-container">
-        <button id="btn-type-out" class="type-toggle-btn active-out" type="button">
-          <span>🔴</span>
+    <!-- STEP 1: Select Bag Type (6 Big Cards) -->
+    <section>
+      <div class="step-label">
+        <span>Step 1: Choose Bag</span>
+        <span style="font-size: 0.75rem; color: #38bdf8;">1-Tap Select</span>
+      </div>
+      <div class="bag-grid" id="bag-grid">
+        <!-- Injected via JavaScript -->
+      </div>
+    </section>
+
+    <!-- STEP 2: Choose OUT or IN (Giant Buttons) -->
+    <section>
+      <div class="step-label">
+        <span>Step 2: Choose Action</span>
+      </div>
+      <div class="action-grid">
+        <button id="btn-action-out" class="action-btn btn-out selected">
+          <span style="font-size: 1.3rem;">📤</span>
           <span>OUT (Dispatch)</span>
         </button>
-        <button id="btn-type-in" class="type-toggle-btn" type="button">
-          <span>🟢</span>
+        <button id="btn-action-in" class="action-btn btn-in">
+          <span style="font-size: 1.3rem;">📥</span>
           <span>IN (Received)</span>
         </button>
       </div>
-
-      <!-- Item Selection Matrix (6 Items) -->
-      <div>
-        <div class="form-group-label">
-          <span>Select Item (1-Tap)</span>
-          <span id="selected-item-display" style="color: var(--accent-cyan); font-weight: 800;">1 set</span>
-        </div>
-        <div id="item-selector-grid" class="item-grid">
-          <!-- Injected via initTouchControls -->
-        </div>
-      </div>
-
-      <!-- Quantity Presets -->
-      <div>
-        <div class="form-group-label">
-          <span>Quick Quantity Presets</span>
-          <span style="color: var(--text-muted);">Tap to add</span>
-        </div>
-        <div id="preset-container" class="preset-grid">
-          <button class="preset-btn" data-val="25" type="button">+25</button>
-          <button class="preset-btn" data-val="50" type="button">+50</button>
-          <button class="preset-btn" data-val="100" type="button">+100</button>
-          <button class="preset-btn" data-val="200" type="button">+200</button>
-          <button class="preset-btn" data-val="500" type="button">+500</button>
-        </div>
-      </div>
-
-      <!-- Custom Quantity Input -->
-      <div>
-        <div class="form-group-label">
-          <span>Quantity</span>
-          <span id="current-stock-preview" style="color: var(--text-secondary);">Bal: 250</span>
-        </div>
-        <div class="qty-input-wrapper">
-          <div class="qty-input-box">
-            <input id="qty-input" class="qty-input" type="number" min="1" step="1" placeholder="Enter quantity" value="50">
-            <button id="btn-qty-clear" class="btn-clear-qty" type="button" title="Clear Quantity">✖</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Date & Optional Reference -->
-      <div class="tx-meta-row">
-        <div>
-          <div class="form-group-label">Date</div>
-          <input id="tx-date-input" class="text-input" type="date">
-        </div>
-        <div>
-          <div class="form-group-label">Chalan / Note</div>
-          <input id="tx-notes-input" class="text-input" type="text" placeholder="Optional remark">
-        </div>
-      </div>
-
-      <!-- Submit Button -->
-      <button id="btn-submit-tx" class="btn-submit" type="button">
-        <span id="btn-submit-icon">🚀</span>
-        <span id="btn-submit-label">Record OUT: 50 × 1 set</span>
-      </button>
-
     </section>
 
-    <!-- ZONE 4: RECENT TRANSACTIONS STREAM -->
-    <section class="history-card">
-      <div class="history-header">
-        <div class="section-title">Recent Transactions</div>
-        <select id="filter-item-select" class="filter-select">
-          <option value="ALL">All Items</option>
-          <option value="1 set">1 set</option>
-          <option value="Kohinoor">Kohinoor</option>
-          <option value="Lining 28">Lining 28</option>
-          <option value="Medium 29">Medium 29</option>
-          <option value="Pink 30">Pink 30</option>
-          <option value="White (6)">White (6)</option>
-        </select>
+    <!-- STEP 3: Choose Quantity (Quick Chips) -->
+    <section>
+      <div class="step-label">
+        <span>Step 3: Quantity (Pieces)</span>
       </div>
+      <div class="qty-chips" id="qty-chips">
+        <button class="qty-chip selected" data-qty="25">25</button>
+        <button class="qty-chip" data-qty="50">50</button>
+        <button class="qty-chip" data-qty="100">100</button>
+        <button class="qty-chip" data-qty="200">200</button>
+        <button class="qty-chip" data-qty="500">500</button>
+      </div>
+      <div class="custom-qty-row">
+        <input type="number" id="input-custom-qty" class="custom-qty-input" placeholder="Or enter custom number..." min="1" step="1">
+      </div>
+    </section>
 
-      <div id="tx-history-list" class="tx-list">
-        <!-- Injected via renderTransactionHistory -->
+    <!-- STEP 4: Optional Party Name / Remark -->
+    <section>
+      <input type="text" id="input-remark" class="note-input" placeholder="Party Name / Note (Optional)">
+    </section>
+
+    <!-- STEP 5: Big Vibrant SAVE ENTRY Button -->
+    <button id="btn-submit-entry" class="btn-submit">
+      <span>💾</span>
+      <span id="submit-btn-text">RECORD TRANSACTION</span>
+    </button>
+
+    <!-- STEP 6: Recent Transactions & 1-Tap Undo -->
+    <section class="recent-section">
+      <div class="recent-header">
+        <span class="step-label" style="margin-bottom: 0;">Recent Entries</span>
+        <button id="btn-refresh-data" class="btn-undo" style="background: rgba(56, 189, 248, 0.15); border-color: rgba(56, 189, 248, 0.3); color: #38bdf8;">
+          🔄 Refresh
+        </button>
+      </div>
+      <div id="recent-list" class="recent-list">
+        <!-- Rendered via JavaScript -->
       </div>
     </section>
 
   </div>
 
-  <!-- Toast Container -->
-  <div id="toast-container" class="toast-container"></div>
+  <!-- Settings Modal (Google Apps Script Webhook URL) -->
+  <div id="settings-modal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-title">
+        <span>⚙️ Google Sheet Webhook</span>
+        <button id="btn-close-settings" class="btn-icon" style="min-width: 36px; min-height: 36px;">✕</button>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4;">
+        Paste your Google Apps Script Web App URL below. Every mobile entry will automatically appear in your live Google Sheet!
+      </p>
+      <input type="url" id="input-webhook-url" class="modal-input" placeholder="https://script.google.com/macros/s/.../exec">
+      <div style="display: flex; gap: 8px;">
+        <button id="btn-test-connection" class="btn-submit" style="min-height: 48px; font-size: 0.95rem; background: #0284c7;">
+          🔌 Test Connection
+        </button>
+        <button id="btn-save-settings" class="btn-submit" style="min-height: 48px; font-size: 0.95rem;">
+          💾 Save URL
+        </button>
+      </div>
+      <div id="settings-status-msg" style="font-size: 0.8rem; min-height: 18px; color: #38bdf8; text-align: center;"></div>
+    </div>
+  </div>
 
-  <!-- APPLICATION LOGIC & DEFENSIVE BOOTLOADER -->
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">
+    <span id="toast-icon">✅</span>
+    <span id="toast-msg">Transaction Recorded!</span>
+  </div>
+
+  <!-- ========================================================================
+       APPLICATION LOGIC & RESILIENCE ENGINE
+       ======================================================================== -->
   <script>
-    /* ==========================================================================
-       1. DATA STRUCTURES & CONFIGURATION
-       ========================================================================== */
-    const ITEMS = [
-      '1 set',
-      'Kohinoor',
-      'Lining 28',
-      'Medium 29',
-      'Pink 30',
-      'White (6)'
+    // Canonical 6 Stock Items matching Thela Stock Final.xlsx
+    const CANONICAL_ITEMS = [
+      "1 set",
+      "Kohinoor",
+      "Lining 28",
+      "Medium 29",
+      "Pink 30",
+      "White (6)"
     ];
 
-    const OPENING_STOCKS = {
-      '1 set': 225,
-      'Kohinoor': 250,
-      'Lining 28': 150,
-      'Medium 29': 0,
-      'Pink 30': 200,
-      'White (6)': 75
+    // Seed Opening Stock & Initial Balances
+    const DEFAULT_STOCK = {
+      "1 set": { op: 225, inQty: 1200, outQty: 1175, current: 250 },
+      "Kohinoor": { op: 250, inQty: 2100, outQty: 1850, current: 500 },
+      "Lining 28": { op: 150, inQty: 800, outQty: 950, current: 0 },
+      "Medium 29": { op: 0, inQty: 1300, outQty: 975, current: 325 },
+      "Pink 30": { op: 200, inQty: 700, outQty: 375, current: 525 },
+      "White (6)": { op: 75, inQty: 0, outQty: 0, current: 75 }
     };
 
-    const BASE_SUMMARY = {
-      '1 set': { opStock: 225, stockIn: 1200, stockOut: 1175, currentStock: 250 },
-      'Kohinoor': { opStock: 250, stockIn: 2100, stockOut: 1850, currentStock: 500 },
-      'Lining 28': { opStock: 150, stockIn: 800, stockOut: 950, currentStock: 0 },
-      'Medium 29': { opStock: 0, stockIn: 1300, stockOut: 975, currentStock: 325 },
-      'Pink 30': { opStock: 200, stockIn: 700, stockOut: 375, currentStock: 525 },
-      'White (6)': { opStock: 75, stockIn: 0, stockOut: 0, currentStock: 75 }
-    };
+    // State Variables
+    let selectedItem = "Kohinoor";
+    let selectedAction = "OUT"; // "OUT" or "IN"
+    let selectedQuantity = 25;
+    let liveBalances = {};
+    let recentTransactions = [];
+    let offlineQueue = [];
+    let audioCtx = null;
 
-    const SEED_TRANSACTIONS = [{"id": "excel_sr_1", "sr": 1, "date": "2025-08-20", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_2", "sr": 2, "date": "2025-08-22", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_3", "sr": 3, "date": "2025-08-25", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_4", "sr": 4, "date": "2025-09-01", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_5", "sr": 5, "date": "2025-09-03", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_6", "sr": 6, "date": "2025-09-07", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_7", "sr": 7, "date": "2025-09-10", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_8", "sr": 8, "date": "2025-09-15", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_9", "sr": 9, "date": "2025-09-16", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_10", "sr": 10, "date": "2025-09-19", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_11", "sr": 11, "date": "2025-09-22", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_12", "sr": 12, "date": "2025-09-22", "item": "Pink 30", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_13", "sr": 13, "date": "2025-09-27", "item": "1 set", "quantity": 500, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_14", "sr": 14, "date": "2025-09-27", "item": "Kohinoor", "quantity": 300, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_15", "sr": 15, "date": "2025-09-27", "item": "Pink 30", "quantity": 200, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_16", "sr": 16, "date": "2025-09-27", "item": "Medium 29", "quantity": 200, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_17", "sr": 17, "date": "2025-09-27", "item": "Lining 28", "quantity": 300, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_18", "sr": 18, "date": "2025-10-01", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_19", "sr": 19, "date": "2025-10-01", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_20", "sr": 20, "date": "2025-10-01", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_21", "sr": 21, "date": "2025-10-09", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_22", "sr": 22, "date": "2025-10-09", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_23", "sr": 23, "date": "2025-10-13", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_24", "sr": 24, "date": "2025-10-13", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_25", "sr": 25, "date": "2025-10-13", "item": "Pink 30", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_26", "sr": 26, "date": "2025-10-13", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_27", "sr": 27, "date": "2025-10-29", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_28", "sr": 28, "date": "2025-10-29", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_29", "sr": 29, "date": "2025-10-31", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_30", "sr": 30, "date": "2025-11-04", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_31", "sr": 31, "date": "2025-11-05", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_32", "sr": 32, "date": "2025-11-05", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_33", "sr": 33, "date": "2025-11-10", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_34", "sr": 34, "date": "2025-11-11", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_35", "sr": 35, "date": "2025-11-14", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_36", "sr": 36, "date": "2025-11-14", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_37", "sr": 37, "date": "2025-11-14", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_38", "sr": 38, "date": "2025-11-17", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_39", "sr": 39, "date": "2025-11-17", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_40", "sr": 40, "date": "2025-11-19", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_41", "sr": 41, "date": "2025-11-19", "item": "Pink 30", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_42", "sr": 42, "date": "2025-11-21", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_43", "sr": 43, "date": "2025-11-21", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_44", "sr": 44, "date": "2025-11-23", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_45", "sr": 45, "date": "2025-11-23", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_46", "sr": 46, "date": "2025-11-27", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_47", "sr": 47, "date": "2025-11-28", "item": "Kohinoor", "quantity": 400, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_48", "sr": 48, "date": "2025-11-28", "item": "Lining 28", "quantity": 200, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_49", "sr": 49, "date": "2025-11-29", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_50", "sr": 50, "date": "2025-11-29", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_51", "sr": 51, "date": "2025-12-02", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_52", "sr": 52, "date": "2025-12-02", "item": "Pink 30", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_53", "sr": 53, "date": "2025-12-04", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_54", "sr": 54, "date": "2025-12-04", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_55", "sr": 55, "date": "2025-12-08", "item": "Kohinoor", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_56", "sr": 56, "date": "2025-12-11", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_57", "sr": 57, "date": "2025-12-14", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_58", "sr": 58, "date": "2025-12-14", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_59", "sr": 59, "date": "2025-12-17", "item": "Pink 30", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_60", "sr": 60, "date": "2025-12-17", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_61", "sr": 61, "date": "2025-12-18", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_62", "sr": 62, "date": "2025-12-18", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_63", "sr": 63, "date": "2025-12-18", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_64", "sr": 64, "date": "2025-12-19", "item": "Medium 29", "quantity": 500, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_65", "sr": 65, "date": "2025-12-22", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_66", "sr": 66, "date": "2025-12-22", "item": "Pink 30", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_67", "sr": 67, "date": "2025-12-22", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_68", "sr": 68, "date": "2025-12-22", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_69", "sr": 69, "date": "2025-12-23", "item": "1 set", "quantity": 125, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_70", "sr": 70, "date": "2025-12-23", "item": "Medium 29", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_71", "sr": 71, "date": "2025-12-23", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_72", "sr": 72, "date": "2025-12-23", "item": "Lining 28", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_73", "sr": 73, "date": "2026-12-31", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_74", "sr": 74, "date": "2026-12-31", "item": "Kohinoor", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_75", "sr": 75, "date": "2026-01-06", "item": "Kohinoor", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_76", "sr": 76, "date": "2026-01-06", "item": "Lining 28", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_77", "sr": 77, "date": "2026-01-06", "item": "Pink 30", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_78", "sr": 78, "date": "2026-01-15", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_79", "sr": 79, "date": "2026-01-15", "item": "Kohinoor", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_80", "sr": 80, "date": "2026-01-15", "item": "Medium 29", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_81", "sr": 81, "date": "2026-01-24", "item": "Kohinoor", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_82", "sr": 82, "date": "2026-01-24", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_83", "sr": 83, "date": "2026-01-28", "item": "Kohinoor", "quantity": 400, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_84", "sr": 84, "date": "2026-01-28", "item": "Lining 28", "quantity": 300, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_85", "sr": 85, "date": "2026-01-28", "item": "1 set", "quantity": 200, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_86", "sr": 86, "date": "2026-01-30", "item": "Lining 28", "quantity": 75, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_87", "sr": 87, "date": "2026-01-30", "item": "Medium 29", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_88", "sr": 88, "date": "2026-01-30", "item": "Pink 30", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_89", "sr": 89, "date": "2026-01-30", "item": "Kohinoor", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_90", "sr": 90, "date": "2026-01-30", "item": "1 set", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_91", "sr": 91, "date": "2026-02-01", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_92", "sr": 92, "date": "2026-02-02", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_93", "sr": 93, "date": "2026-02-03", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_94", "sr": 94, "date": "2026-02-04", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_95", "sr": 95, "date": "2026-02-04", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_96", "sr": 96, "date": "2026-02-05", "item": "Pink 30", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_97", "sr": 97, "date": "2026-02-07", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_98", "sr": 98, "date": "2026-02-07", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_99", "sr": 99, "date": "2026-02-10", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_100", "sr": 100, "date": "2026-02-10", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_101", "sr": 101, "date": "2026-02-12", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_102", "sr": 102, "date": "2026-02-12", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_103", "sr": 103, "date": "2026-02-13", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_104", "sr": 104, "date": "2026-02-16", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_105", "sr": 105, "date": "2026-02-17", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_106", "sr": 106, "date": "2026-02-17", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_107", "sr": 107, "date": "2026-02-19", "item": "Kohinoor", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_108", "sr": 108, "date": "2026-02-20", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_109", "sr": 109, "date": "2026-02-20", "item": "Pink 30", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_110", "sr": 110, "date": "2026-02-22", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_111", "sr": 111, "date": "2026-02-22", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_112", "sr": 112, "date": "2026-02-24", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_113", "sr": 113, "date": "2026-02-25", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_114", "sr": 114, "date": "2026-02-27", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_115", "sr": 115, "date": "2026-02-28", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_116", "sr": 116, "date": "2026-02-28", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_117", "sr": 117, "date": "2026-03-03", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_118", "sr": 118, "date": "2026-03-03", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_119", "sr": 119, "date": "2026-03-04", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_120", "sr": 120, "date": "2026-03-06", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_121", "sr": 121, "date": "2026-03-07", "item": "Pink 30", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_122", "sr": 122, "date": "2026-03-08", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_123", "sr": 123, "date": "2026-03-09", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_124", "sr": 124, "date": "2026-03-09", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_125", "sr": 125, "date": "2026-03-10", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_126", "sr": 126, "date": "2026-03-12", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_127", "sr": 127, "date": "2026-03-14", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_128", "sr": 128, "date": "2026-03-15", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_129", "sr": 129, "date": "2026-03-16", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_130", "sr": 130, "date": "2026-03-17", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_131", "sr": 131, "date": "2026-03-18", "item": "Kohinoor", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_132", "sr": 132, "date": "2026-03-19", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_133", "sr": 133, "date": "2026-03-21", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_134", "sr": 134, "date": "2026-03-22", "item": "Pink 30", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_135", "sr": 135, "date": "2026-03-24", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_136", "sr": 136, "date": "2026-03-24", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_137", "sr": 137, "date": "2026-03-24", "item": "Lining 28", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_138", "sr": 138, "date": "2026-04-03", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_139", "sr": 139, "date": "2026-04-09", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_143", "sr": 143, "date": "2026-04-09", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_144", "sr": 144, "date": "2026-04-10", "item": "Kohinoor", "quantity": 500, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_145", "sr": 145, "date": "2026-04-10", "item": "Medium 29", "quantity": 300, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_146", "sr": 146, "date": "2026-04-10", "item": "Pink 30", "quantity": 500, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_147", "sr": 147, "date": "2026-04-09", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_148", "sr": 148, "date": "2026-04-14", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_149", "sr": 149, "date": "2026-04-14", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_150", "sr": 150, "date": "2026-04-14", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_151", "sr": 151, "date": "2026-04-21", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_152", "sr": 152, "date": "2026-04-21", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_153", "sr": 153, "date": "2026-04-27", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_154", "sr": 154, "date": "2026-04-29", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_155", "sr": 155, "date": "2026-05-04", "item": "Pink 30", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_156", "sr": 156, "date": "2026-05-04", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_157", "sr": 157, "date": "2026-05-04", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_158", "sr": 158, "date": "2026-05-04", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_159", "sr": 159, "date": "2026-05-05", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_160", "sr": 160, "date": "2026-05-09", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_161", "sr": 161, "date": "2026-05-09", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_162", "sr": 162, "date": "2026-05-11", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_163", "sr": 163, "date": "2026-05-16", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_164", "sr": 164, "date": "2026-05-25", "item": "Medium 29", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_165", "sr": 165, "date": "2026-05-25", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_166", "sr": 166, "date": "2026-06-08", "item": "1 set", "quantity": 200, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_167", "sr": 167, "date": "2026-05-27", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_168", "sr": 168, "date": "2026-06-04", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_169", "sr": 169, "date": "2026-04-13", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_170", "sr": 170, "date": "2026-06-17", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_171", "sr": 171, "date": "2026-06-17", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_172", "sr": 172, "date": "2026-06-17", "item": "Lining 28", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_173", "sr": 173, "date": "2026-06-29", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_174", "sr": 174, "date": "2026-07-11", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_175", "sr": 175, "date": "2026-07-18", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_176", "sr": 176, "date": "2026-07-18", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_177", "sr": 177, "date": "2026-07-18", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_178", "sr": 178, "date": "2026-07-18", "item": "Pink 30", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_179", "sr": 179, "date": "2026-07-23", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_180", "sr": 180, "date": "2026-07-29", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_181", "sr": 181, "date": "2026-07-29", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_182", "sr": 182, "date": "2026-08-05", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_183", "sr": 183, "date": "2026-08-05", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_184", "sr": 184, "date": "2026-08-10", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_185", "sr": 185, "date": "2026-08-12", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_186", "sr": 186, "date": "2026-08-17", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_187", "sr": 187, "date": "2026-08-17", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_188", "sr": 188, "date": "2026-08-17", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_189", "sr": 189, "date": "2026-08-20", "item": "Medium 29", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_190", "sr": 190, "date": "2026-08-20", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_191", "sr": 191, "date": "2026-08-20", "item": "1 set", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_192", "sr": 192, "date": "2026-08-29", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_193", "sr": 193, "date": "2026-08-29", "item": "Kohinoor", "quantity": 500, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_194", "sr": 194, "date": "2026-08-29", "item": "1 set", "quantity": 300, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_195", "sr": 195, "date": "2026-08-29", "item": "Medium 29", "quantity": 300, "type": "IN", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_196", "sr": 196, "date": "2026-09-04", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_197", "sr": 197, "date": "2026-09-03", "item": "1 set", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_198", "sr": 198, "date": "2026-09-06", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_199", "sr": 199, "date": "2026-09-10", "item": "Kohinoor", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_200", "sr": 200, "date": "2026-09-10", "item": "Medium 29", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_201", "sr": 201, "date": "2026-09-22", "item": "1 set", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_202", "sr": 202, "date": "2026-09-22", "item": "Pink 30", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_203", "sr": 203, "date": "2026-09-23", "item": "Kohinoor", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_204", "sr": 204, "date": "2026-10-02", "item": "Medium 29", "quantity": 25, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_205", "sr": 205, "date": "2026-10-03", "item": "Kohinoor", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_206", "sr": 206, "date": "2026-10-05", "item": "1 set", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}, {"id": "excel_sr_207", "sr": 207, "date": "2026-10-09", "item": "Medium 29", "quantity": 50, "type": "OUT", "source": "excel", "synced_to_excel": true, "status": "synced"}];
+    // Local Storage Keys
+    const KEY_WEBHOOK_URL = "thela_stock_webhook_url";
+    const KEY_BALANCES = "thela_stock_balances";
+    const KEY_RECENT = "thela_stock_recent";
+    const KEY_QUEUE = "thela_stock_offline_queue";
 
-    const FIREBASE_CONFIG = {
-      apiKey: "AIzaSyDHZwg7GRqSUgGxRFhgr17-tK-DJRqxL_A",
-      authDomain: "clip-18233.firebaseapp.com",
-      projectId: "clip-18233",
-      storageBucket: "clip-18233.firebasestorage.app",
-      messagingSenderId: "953672309081",
-      appId: "1:953672309081:web:563bdf3fead45697bc9448"
-    };
-
-    const STORAGE_KEY_QUEUE = 'thela_stock_offline_queue';
-    const STORAGE_KEY_LOCAL_TX = 'thela_stock_local_transactions';
-
-    /* ==========================================================================
-       2. STRICT DOM HYGIENE BINDING
-       ========================================================================== */
-    const UI = {};
-
-    function bindDomElements() {
-      const ids = [
-        'header-back-btn',
-        'status-badge',
-        'status-dot',
-        'status-text',
-        'queue-badge',
-        'btn-sync-now',
-        'btn-export-excel',
-        'btn-quick-refresh',
-        'banner-low-stock',
-        'banner-low-stock-text',
-        'total-stock-badge',
-        'balance-cards-grid',
-        'btn-type-out',
-        'btn-type-in',
-        'selected-item-display',
-        'item-selector-grid',
-        'preset-container',
-        'current-stock-preview',
-        'qty-input',
-        'btn-qty-clear',
-        'tx-date-input',
-        'tx-notes-input',
-        'btn-submit-tx',
-        'btn-submit-icon',
-        'btn-submit-label',
-        'filter-item-select',
-        'tx-history-list',
-        'toast-container'
-      ];
-
-      ids.forEach(id => {
-        UI[id] = document.getElementById(id);
-      });
+    /* ========================================================================
+       ACOUSTIC UI (ZERO-MUSIC PROCEDURAL WEB AUDIO SYNTHESIS)
+       ======================================================================== */
+    function initAudio() {
+      if (!audioCtx && (window.AudioContext || window.webkitAudioContext)) {
+        const AudioClass = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioClass();
+      }
     }
 
-    /* ==========================================================================
-       3. WEB AUDIO API MICRO-HAPTICS ENGINE
-       ========================================================================== */
-    class MicroHapticsEngine {
-      constructor() {
-        this.ctx = null;
-        this.initUnlock();
-      }
+    function playSound(type) {
+      try {
+        if (!audioCtx) initAudio();
+        if (!audioCtx) return;
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
 
-      initUnlock() {
-        const unlock = () => {
-          try {
-            const AudioCtx = window.AudioContext || window.webkitAudioContext;
-            if (AudioCtx && !this.ctx) {
-              this.ctx = new AudioCtx();
-            }
-            if (this.ctx && this.ctx.state === 'suspended') {
-              this.ctx.resume();
-            }
-          } catch (e) {
-            console.warn('[Haptics] AudioContext unlock warning:', e);
-          }
-          window.removeEventListener('pointerdown', unlock);
-          window.removeEventListener('touchstart', unlock);
-        };
-        window.addEventListener('pointerdown', unlock, { passive: true });
-        window.addEventListener('touchstart', unlock, { passive: true });
-      }
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
 
-      playPop() {
-        try {
-          if (!this.ctx) {
-            const AudioCtx = window.AudioContext || window.webkitAudioContext;
-            if (AudioCtx) this.ctx = new AudioCtx();
-          }
-          if (!this.ctx) return;
-          if (this.ctx.state === 'suspended') this.ctx.resume();
-          const now = this.ctx.currentTime;
-          const osc = this.ctx.createOscillator();
-          const gain = this.ctx.createGain();
+        if (type === 'tap') {
           osc.type = 'sine';
-          osc.frequency.setValueAtTime(520, now);
-          osc.frequency.exponentialRampToValueAtTime(300, now + 0.05);
-          gain.gain.setValueAtTime(0.0001, now);
-          gain.gain.exponentialRampToValueAtTime(0.18, now + 0.01);
-          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.06);
-          osc.connect(gain);
-          gain.connect(this.ctx.destination);
+          osc.frequency.setValueAtTime(600, now);
+          osc.frequency.exponentialRampToValueAtTime(200, now + 0.04);
+          gain.gain.setValueAtTime(0.08, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
           osc.start(now);
-          osc.stop(now + 0.07);
-        } catch (e) {
-          console.warn('[Haptics] Pop warning:', e);
-        }
-      }
-
-      playToggle() {
-        try {
-          if (!this.ctx) {
-            const AudioCtx = window.AudioContext || window.webkitAudioContext;
-            if (AudioCtx) this.ctx = new AudioCtx();
-          }
-          if (!this.ctx) return;
-          if (this.ctx.state === 'suspended') this.ctx.resume();
-          const now = this.ctx.currentTime;
-          const osc = this.ctx.createOscillator();
-          const gain = this.ctx.createGain();
+          osc.stop(now + 0.04);
+        } else if (type === 'success') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(523.25, now); // C5
+          osc.frequency.setValueAtTime(659.25, now + 0.08); // E5
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+          osc.start(now);
+          osc.stop(now + 0.22);
+        } else if (type === 'warn') {
           osc.type = 'sine';
-          osc.frequency.setValueAtTime(360, now);
-          osc.frequency.exponentialRampToValueAtTime(140, now + 0.12);
-          gain.gain.setValueAtTime(0.0001, now);
-          gain.gain.exponentialRampToValueAtTime(0.15, now + 0.02);
-          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.14);
-          osc.connect(gain);
-          gain.connect(this.ctx.destination);
+          osc.frequency.setValueAtTime(150, now);
+          osc.frequency.exponentialRampToValueAtTime(80, now + 0.12);
+          gain.gain.setValueAtTime(0.15, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
           osc.start(now);
-          osc.stop(now + 0.15);
-        } catch (e) {
-          console.warn('[Haptics] Toggle warning:', e);
+          osc.stop(now + 0.12);
         }
-      }
-
-      playCelebration() {
-        try {
-          if (!this.ctx) {
-            const AudioCtx = window.AudioContext || window.webkitAudioContext;
-            if (AudioCtx) this.ctx = new AudioCtx();
-          }
-          if (!this.ctx) return;
-          if (this.ctx.state === 'suspended') this.ctx.resume();
-          const now = this.ctx.currentTime;
-          const notes = [
-            { f: 523.25, start: 0.00, dur: 0.12 },
-            { f: 659.25, start: 0.08, dur: 0.14 },
-            { f: 783.99, start: 0.16, dur: 0.20 },
-            { f: 1046.50, start: 0.24, dur: 0.35 }
-          ];
-          notes.forEach(n => {
-            const osc = this.ctx.createOscillator();
-            const gain = this.ctx.createGain();
-            osc.type = 'triangle';
-            osc.frequency.setValueAtTime(n.f, now + n.start);
-            gain.gain.setValueAtTime(0.0001, now + n.start);
-            gain.gain.exponentialRampToValueAtTime(0.18, now + n.start + 0.02);
-            gain.gain.exponentialRampToValueAtTime(0.0001, now + n.start + n.dur);
-            osc.connect(gain);
-            gain.connect(this.ctx.destination);
-            osc.start(now + n.start);
-            osc.stop(now + n.start + n.dur + 0.02);
-          });
-        } catch (e) {
-          console.warn('[Haptics] Celebration warning:', e);
-        }
-      }
-    }
-
-    let haptics;
-    function initWebAudioHaptics() {
-      haptics = new MicroHapticsEngine();
-    }
-
-    /* ==========================================================================
-       4. STATE STORE & TRANSACTION CALCULATIONS
-       ========================================================================== */
-    const State = {
-      currentType: 'OUT', // 'OUT' or 'IN'
-      selectedItem: '1 set',
-      quantity: 50,
-      stockBalances: {},
-      transactions: [],
-      offlineQueue: [],
-      isOnline: navigator.onLine,
-      db: null
-    };
-
-    function initStateStore() {
-      // Initialize default date in input
-      if (UI['tx-date-input']) {
-        const today = new Date().toISOString().slice(0, 10);
-        UI['tx-date-input'].value = today;
-      }
-
-      // Load local transactions & offline queue from localStorage
-      loadFromLocalStorage();
-
-      // Recalculate balances
-      recalculateStockBalances();
-    }
-
-    function loadFromLocalStorage() {
-      try {
-        const rawQueue = localStorage.getItem(STORAGE_KEY_QUEUE);
-        State.offlineQueue = rawQueue ? JSON.parse(rawQueue) : [];
       } catch (e) {
-        console.warn('[Store] Local queue read error:', e);
-        State.offlineQueue = [];
+        // Audio synthesis non-fatal
+      }
+    }
+
+    /* ========================================================================
+       ISOLATED DEFENSIVE BOOTLOADER
+       ======================================================================== */
+    function bootApplication() {
+      try {
+        loadStoredData();
+      } catch (err) {
+        console.error("Bootloader loadStoredData error:", err);
       }
 
       try {
-        const rawLocal = localStorage.getItem(STORAGE_KEY_LOCAL_TX);
-        const storedLocal = rawLocal ? JSON.parse(rawLocal) : [];
-        
-        // Merge seed transactions with stored local transactions
-        const txMap = new Map();
-        SEED_TRANSACTIONS.forEach(t => txMap.set(t.id || `sr_${t.sr}`, t));
-        storedLocal.forEach(t => txMap.set(t.id, t));
-        State.offlineQueue.forEach(t => txMap.set(t.id, t));
-
-        State.transactions = Array.from(txMap.values());
-      } catch (e) {
-        console.warn('[Store] Stored local transactions read error:', e);
-        State.transactions = [...SEED_TRANSACTIONS];
+        renderBagCards();
+      } catch (err) {
+        console.error("Bootloader renderBagCards error:", err);
       }
 
-      updateQueueBadge();
-    }
-
-    function saveToLocalStorage() {
       try {
-        localStorage.setItem(STORAGE_KEY_QUEUE, JSON.stringify(State.offlineQueue));
-        
-        // Filter out seed transactions to keep localStorage lean
-        const customTxs = State.transactions.filter(t => t.source !== 'excel');
-        localStorage.setItem(STORAGE_KEY_LOCAL_TX, JSON.stringify(customTxs));
-      } catch (e) {
-        console.warn('[Store] LocalStorage write error:', e);
+        setupActionListeners();
+      } catch (err) {
+        console.error("Bootloader setupActionListeners error:", err);
       }
-      updateQueueBadge();
+
+      try {
+        setupQuantityChips();
+      } catch (err) {
+        console.error("Bootloader setupQuantityChips error:", err);
+      }
+
+      try {
+        setupSubmitListener();
+      } catch (err) {
+        console.error("Bootloader setupSubmitListener error:", err);
+      }
+
+      try {
+        setupSettingsModal();
+      } catch (err) {
+        console.error("Bootloader setupSettingsModal error:", err);
+      }
+
+      try {
+        setupExcelExport();
+      } catch (err) {
+        console.error("Bootloader setupExcelExport error:", err);
+      }
+
+      try {
+        updateGlanceBanner();
+        renderRecentTransactions();
+        checkNetworkStatus();
+        fetchLiveFromGoogleSheet(); // Auto-refresh in background
+      } catch (err) {
+        console.error("Bootloader background sync error:", err);
+      }
     }
 
-    function recalculateStockBalances() {
-      const balances = {};
-      ITEMS.forEach(item => {
-        const base = BASE_SUMMARY[item] || { opStock: OPENING_STOCKS[item] || 0, stockIn: 0, stockOut: 0, currentStock: 0 };
-        balances[item] = {
-          opStock: base.opStock,
-          stockIn: base.stockIn,
-          stockOut: base.stockOut,
-          currentStock: base.currentStock
-        };
-      });
-
-      // Aggregate newly recorded transactions (source !== 'excel')
-      State.transactions.forEach(tx => {
-        if (tx.source === 'excel') return; // Already incorporated in Excel BASE_SUMMARY
-        const item = tx.item;
-        if (!balances[item]) return;
-        const qty = Number(tx.quantity) || 0;
-        if (tx.type === 'IN') {
-          balances[item].stockIn += qty;
-        } else if (tx.type === 'OUT') {
-          balances[item].stockOut += qty;
-        }
-      });
-
-      // Compute current stock = Op. Stock + Stock In - Stock Out
-      let totalUnits = 0;
-      let hasZeroStock = false;
-      let zeroItems = [];
-
-      ITEMS.forEach(item => {
-        const b = balances[item];
-        b.currentStock = b.opStock + b.stockIn - b.stockOut;
-        totalUnits += b.currentStock;
-        if (b.currentStock <= 0) {
-          hasZeroStock = true;
-          zeroItems.push(item);
-        }
-      });
-
-      State.stockBalances = balances;
-
-      // Update total badge
-      if (UI['total-stock-badge']) {
-        UI['total-stock-badge'].textContent = `${totalUnits.toLocaleString()} Units`;
-      }
-
-      // Update Low Stock Banner
-      if (UI['banner-low-stock']) {
-        if (hasZeroStock) {
-          UI['banner-low-stock'].classList.add('active');
-          if (UI['banner-low-stock-text']) {
-            UI['banner-low-stock-text'].innerHTML = `<strong>Low Stock Alert:</strong> ${zeroItems.join(', ')} has 0 or negative units! Urgent restocking required.`;
-          }
+    /* ========================================================================
+       DATA MANAGEMENT & LOCALSTORAGE HYGIENE
+       ======================================================================== */
+    function loadStoredData() {
+      try {
+        const storedBalances = localStorage.getItem(KEY_BALANCES);
+        if (storedBalances) {
+          liveBalances = JSON.parse(storedBalances);
         } else {
-          UI['banner-low-stock'].classList.remove('active');
+          // Initialize with default seed balances
+          liveBalances = {};
+          CANONICAL_ITEMS.forEach(item => {
+            liveBalances[item] = DEFAULT_STOCK[item] ? DEFAULT_STOCK[item].current : 0;
+          });
         }
+      } catch (e) {
+        liveBalances = {};
+        CANONICAL_ITEMS.forEach(item => {
+          liveBalances[item] = DEFAULT_STOCK[item] ? DEFAULT_STOCK[item].current : 0;
+        });
       }
 
-      // Re-render balance cards & preview
-      renderStockBalanceCards();
-      updateFormPreview();
+      try {
+        const storedRecent = localStorage.getItem(KEY_RECENT);
+        recentTransactions = storedRecent ? JSON.parse(storedRecent) : [
+          { sr: 207, date: "09/10/2026", itemName: "Medium 29", quantity: 50, type: "OUT", remark: "Daily dispatch" },
+          { sr: 206, date: "05/10/2026", itemName: "1 set", quantity: 50, type: "OUT", remark: "Shop delivery" },
+          { sr: 205, date: "03/10/2026", itemName: "Kohinoor", quantity: 50, type: "OUT", remark: "" }
+        ];
+      } catch (e) {
+        recentTransactions = [];
+      }
+
+      try {
+        const storedQueue = localStorage.getItem(KEY_QUEUE);
+        offlineQueue = storedQueue ? JSON.parse(storedQueue) : [];
+      } catch (e) {
+        offlineQueue = [];
+      }
     }
 
-    /* ==========================================================================
-       5. RENDERING: STOCK BALANCE CARDS & RECENT TRANSACTIONS
-       ========================================================================== */
-    function renderStockBalanceCards() {
-      if (!UI['balance-cards-grid']) return;
-      const container = UI['balance-cards-grid'];
-      container.innerHTML = '';
+    function saveBalances() {
+      try {
+        localStorage.setItem(KEY_BALANCES, JSON.stringify(liveBalances));
+      } catch (e) {}
+    }
 
-      ITEMS.forEach(item => {
-        const b = State.stockBalances[item] || { opStock: 0, stockIn: 0, stockOut: 0, currentStock: 0 };
-        const isSelected = (State.selectedItem === item);
-        const isZero = (b.currentStock <= 0);
+    function saveRecent() {
+      try {
+        localStorage.setItem(KEY_RECENT, JSON.stringify(recentTransactions));
+      } catch (e) {}
+    }
 
-        const card = document.createElement('div');
-        card.className = `stock-card ${isSelected ? 'selected' : ''} ${isZero ? 'zero-stock' : ''}`;
-        card.setAttribute('data-item', item);
-        card.setAttribute('role', 'button');
-        card.setAttribute('tabindex', '0');
+    function saveQueue() {
+      try {
+        localStorage.setItem(KEY_QUEUE, JSON.stringify(offlineQueue));
+      } catch (e) {}
+    }
+
+    /* ========================================================================
+       UI RENDERING ENGINES
+       ======================================================================== */
+    function renderBagCards() {
+      const grid = document.getElementById("bag-grid");
+      if (!grid) return;
+      grid.innerHTML = "";
+
+      CANONICAL_ITEMS.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "bag-card" + (item === selectedItem ? " selected" : "");
+        card.setAttribute("data-item", item);
+
+        const currentStock = (typeof liveBalances[item] === 'number') ? liveBalances[item] : 0;
+        let badgeClass = "bag-stock-badge";
+        if (currentStock <= 0) badgeClass += " empty";
+        else if (currentStock <= 50) badgeClass += " low";
 
         card.innerHTML = `
-          <div class="card-top">
-            <span class="card-item-name" title="${item}">${item}</span>
-            <span class="card-badge ${isZero ? 'empty' : 'ok'}">${isZero ? 'EMPTY ⚠️' : 'OK'}</span>
-          </div>
-          <div class="card-balance ${isZero ? 'zero' : ''}">${b.currentStock.toLocaleString()}</div>
-          <div class="card-breakdown">
-            <span class="breakdown-in">+${b.stockIn} In</span>
-            <span class="breakdown-out">-${b.stockOut} Out</span>
-            <span>Op:${b.opStock}</span>
+          <div class="bag-name">${escapeHtml(item)}</div>
+          <div class="bag-stock-row">
+            <span style="font-size: 0.75rem; color: #94a3b8;">Available:</span>
+            <span class="${badgeClass}">${currentStock} pcs</span>
           </div>
         `;
 
-        // Whole-Card Touch Delegation
-        card.addEventListener('click', () => {
-          selectItem(item);
-          if (haptics) haptics.playPop();
-          // Smooth scroll towards input console
-          const consoleEl = document.querySelector('.input-console-card');
-          if (consoleEl) {
-            consoleEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          }
+        card.addEventListener("click", () => {
+          playSound('tap');
+          selectedItem = item;
+          document.querySelectorAll(".bag-card").forEach(c => c.classList.remove("selected"));
+          card.classList.add("selected");
+          updateGlanceBanner();
         });
 
-        container.appendChild(card);
+        grid.appendChild(card);
       });
     }
 
-    function renderTransactionHistory() {
-      if (!UI['tx-history-list']) return;
-      const list = UI['tx-history-list'];
-      list.innerHTML = '';
+    function updateGlanceBanner() {
+      const itemEl = document.getElementById("glance-item-name");
+      const stockEl = document.getElementById("glance-item-stock");
+      if (itemEl) itemEl.textContent = selectedItem;
+      if (stockEl) {
+        const cur = (typeof liveBalances[selectedItem] === 'number') ? liveBalances[selectedItem] : 0;
+        stockEl.textContent = cur + " pcs";
+        if (cur <= 0) {
+          stockEl.style.color = "#ef4444";
+        } else if (cur <= 50) {
+          stockEl.style.color = "#f59e0b";
+        } else {
+          stockEl.style.color = "#10b981";
+        }
+      }
+    }
 
-      const filter = UI['filter-item-select'] ? UI['filter-item-select'].value : 'ALL';
+    function setupActionListeners() {
+      const btnOut = document.getElementById("btn-action-out");
+      const btnIn = document.getElementById("btn-action-in");
 
-      // Sort descending (newest first)
-      const sorted = [...State.transactions].sort((a, b) => {
-        const dateA = a.date || '';
-        const dateB = b.date || '';
-        if (dateA !== dateB) return dateB.localeCompare(dateA);
-        const srA = a.sr || 0;
-        const srB = b.sr || 0;
-        return srB - srA;
+      if (btnOut) {
+        btnOut.addEventListener("click", () => {
+          playSound('tap');
+          selectedAction = "OUT";
+          btnOut.classList.add("selected");
+          if (btnIn) btnIn.classList.remove("selected");
+        });
+      }
+
+      if (btnIn) {
+        btnIn.addEventListener("click", () => {
+          playSound('tap');
+          selectedAction = "IN";
+          btnIn.classList.add("selected");
+          if (btnOut) btnOut.classList.remove("selected");
+        });
+      }
+    }
+
+    function setupQuantityChips() {
+      const chips = document.querySelectorAll(".qty-chip");
+      const customInput = document.getElementById("input-custom-qty");
+
+      chips.forEach(chip => {
+        chip.addEventListener("click", () => {
+          playSound('tap');
+          chips.forEach(c => c.classList.remove("selected"));
+          chip.classList.add("selected");
+          selectedQuantity = Number(chip.getAttribute("data-qty") || 25);
+          if (customInput) customInput.value = "";
+        });
       });
 
-      const filtered = (filter === 'ALL')
-        ? sorted
-        : sorted.filter(t => t.item === filter);
+      if (customInput) {
+        customInput.addEventListener("input", () => {
+          const val = Number(customInput.value);
+          if (val > 0) {
+            selectedQuantity = val;
+            chips.forEach(c => c.classList.remove("selected"));
+          }
+        });
+      }
+    }
 
-      // Display up to 35 most recent
-      const displayList = filtered.slice(0, 35);
+    function renderRecentTransactions() {
+      const list = document.getElementById("recent-list");
+      if (!list) return;
+      list.innerHTML = "";
 
-      if (displayList.length === 0) {
-        list.innerHTML = '<div style="padding: 16px; text-align: center; color: var(--text-muted); font-size: 13px;">No transactions recorded.</div>';
+      if (recentTransactions.length === 0) {
+        list.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 12px; font-size: 0.85rem;">No recent transactions yet</div>`;
         return;
       }
 
-      displayList.forEach(tx => {
-        const itemEl = document.createElement('div');
-        itemEl.className = 'tx-item';
+      recentTransactions.slice(0, 5).forEach((tx, idx) => {
+        const item = document.createElement("div");
+        item.className = "recent-item";
 
-        const isOut = (tx.type === 'OUT');
-        const syncText = (tx.source === 'excel')
-          ? `Excel #${tx.sr}`
-          : (tx.status === 'synced' ? '☁️ Synced' : '🟡 Queued');
-        const syncClass = (tx.status === 'synced' || tx.source === 'excel') ? 'synced' : 'queued';
+        const badgeType = (tx.type === "OUT") ? "out" : "in";
+        const isLatest = (idx === 0);
 
-        itemEl.innerHTML = `
-          <div class="tx-left">
-            <span class="tx-type-pill ${isOut ? 'out' : 'in'}">${tx.type}</span>
-            <div class="tx-info">
-              <span class="tx-item-title">${tx.item}</span>
-              <span class="tx-item-meta">${tx.date}${tx.notes ? ' • ' + tx.notes : ''}</span>
-            </div>
+        item.innerHTML = `
+          <div class="recent-item-info">
+            <div class="recent-item-title">${escapeHtml(tx.itemName)}</div>
+            <div class="recent-item-meta">${escapeHtml(tx.date || "")} ${tx.remark ? "• " + escapeHtml(tx.remark) : ""}</div>
           </div>
-          <div class="tx-right">
-            <span class="tx-qty">${isOut ? '-' : '+'}${Number(tx.quantity).toLocaleString()}</span>
-            <span class="tx-sync-status ${syncClass}">${syncText}</span>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="recent-item-badge ${badgeType}">${tx.type} ${tx.quantity}</span>
+            ${isLatest ? `<button class="btn-undo" data-sr="${tx.sr || ''}">↩ Undo</button>` : ""}
           </div>
         `;
-        list.appendChild(itemEl);
+
+        if (isLatest) {
+          const undoBtn = item.querySelector(".btn-undo");
+          if (undoBtn) {
+            undoBtn.addEventListener("click", () => {
+              undoTransaction(tx);
+            });
+          }
+        }
+
+        list.appendChild(item);
       });
     }
 
-    /* ==========================================================================
-       6. TOUCH INPUT CONTROLS & ERGONOMIC DELEGATIONS
-       ========================================================================== */
-    function initTouchControls() {
-      // 1. IN / OUT Toggle
-      if (UI['btn-type-out'] && UI['btn-type-in']) {
-        UI['btn-type-out'].addEventListener('click', () => {
-          setType('OUT');
-          if (haptics) haptics.playToggle();
-        });
-        UI['btn-type-in'].addEventListener('click', () => {
-          setType('IN');
-          if (haptics) haptics.playToggle();
-        });
-      }
+    /* ========================================================================
+       TRANSACTION SUBMISSION & GOOGLE APPS SCRIPT WEBHOOK ENGINE
+       ======================================================================== */
+    function setupSubmitListener() {
+      const submitBtn = document.getElementById("btn-submit-entry");
+      const remarkInput = document.getElementById("input-remark");
 
-      // 2. Item Selector Buttons
-      if (UI['item-selector-grid']) {
-        const grid = UI['item-selector-grid'];
-        grid.innerHTML = '';
-        ITEMS.forEach(item => {
-          const btn = document.createElement('button');
-          btn.type = 'button';
-          btn.className = `item-btn ${State.selectedItem === item ? 'selected' : ''}`;
-          btn.setAttribute('data-item', item);
-          btn.textContent = item;
-          btn.addEventListener('click', () => {
-            selectItem(item);
-            if (haptics) haptics.playPop();
-          });
-          grid.appendChild(btn);
-        });
-      }
+      if (!submitBtn) return;
 
-      // 3. Preset Buttons
-      if (UI['preset-container']) {
-        const presetBtns = UI['preset-container'].querySelectorAll('.preset-btn');
-        presetBtns.forEach(btn => {
-          btn.addEventListener('click', () => {
-            const val = parseInt(btn.getAttribute('data-val'), 10) || 0;
-            addQuantity(val);
-            if (haptics) haptics.playPop();
-          });
-        });
-      }
+      submitBtn.addEventListener("click", async () => {
+        playSound('tap');
 
-      // 4. Custom Quantity Input & Clear
-      if (UI['qty-input']) {
-        UI['qty-input'].addEventListener('input', () => {
-          const val = parseInt(UI['qty-input'].value, 10);
-          State.quantity = isNaN(val) ? 0 : Math.max(0, val);
-          updateFormPreview();
-        });
-      }
-
-      if (UI['btn-qty-clear']) {
-        UI['btn-qty-clear'].addEventListener('click', () => {
-          if (UI['qty-input']) {
-            UI['qty-input'].value = '';
-            State.quantity = 0;
-            updateFormPreview();
-            UI['qty-input'].focus();
-          }
-          if (haptics) haptics.playPop();
-        });
-      }
-
-      // 5. Submit Transaction Button
-      if (UI['btn-submit-tx']) {
-        UI['btn-submit-tx'].addEventListener('click', handleTransactionSubmit);
-      }
-
-      // 6. Recalculate button
-      if (UI['btn-quick-refresh']) {
-        UI['btn-quick-refresh'].addEventListener('click', () => {
-          recalculateStockBalances();
-          renderTransactionHistory();
-          showToast('Stock balances refreshed', 'success');
-          if (haptics) haptics.playPop();
-        });
-      }
-
-      // 7. Filter selector
-      if (UI['filter-item-select']) {
-        UI['filter-item-select'].addEventListener('change', () => {
-          renderTransactionHistory();
-        });
-      }
-
-      // Initial form preview update
-      updateFormPreview();
-      renderTransactionHistory();
-    }
-
-    function setType(type) {
-      State.currentType = type;
-      if (UI['btn-type-out'] && UI['btn-type-in'] && UI['btn-submit-tx']) {
-        if (type === 'OUT') {
-          UI['btn-type-out'].className = 'type-toggle-btn active-out';
-          UI['btn-type-in'].className = 'type-toggle-btn';
-          UI['btn-submit-tx'].className = 'btn-submit';
-        } else {
-          UI['btn-type-out'].className = 'type-toggle-btn';
-          UI['btn-type-in'].className = 'type-toggle-btn active-in';
-          UI['btn-submit-tx'].className = 'btn-submit mode-in';
+        if (!selectedItem) {
+          showToast("Please tap a bag first!", true);
+          playSound('warn');
+          return;
         }
-      }
-      updateFormPreview();
+
+        const qty = selectedQuantity;
+        if (!qty || qty <= 0) {
+          showToast("Please select a quantity!", true);
+          playSound('warn');
+          return;
+        }
+
+        const remark = remarkInput ? remarkInput.value.trim() : "";
+        const now = new Date();
+        const dateStr = ("0" + now.getDate()).slice(-2) + "/" + ("0" + (now.getMonth() + 1)).slice(-2) + "/" + now.getFullYear();
+
+        const newTx = {
+          sr: Date.now(), // Temporary local SR
+          date: dateStr,
+          itemName: selectedItem,
+          quantity: qty,
+          type: selectedAction,
+          remark: remark
+        };
+
+        // Update local optimistic stock balance
+        if (typeof liveBalances[selectedItem] !== 'number') {
+          liveBalances[selectedItem] = 0;
+        }
+        if (selectedAction === "OUT") {
+          liveBalances[selectedItem] = Math.max(0, liveBalances[selectedItem] - qty);
+        } else {
+          liveBalances[selectedItem] += qty;
+        }
+
+        // Add to recent list
+        recentTransactions.unshift(newTx);
+        saveBalances();
+        saveRecent();
+        renderBagCards();
+        updateGlanceBanner();
+        renderRecentTransactions();
+
+        if (remarkInput) remarkInput.value = "";
+        playSound('success');
+        showToast(`Recorded: ${qty} ${selectedItem} ${selectedAction}!`);
+
+        // Send to Google Sheets Webhook
+        await pushTransactionToGoogleSheet(newTx);
+      });
     }
 
-    function selectItem(item) {
-      State.selectedItem = item;
-      if (UI['selected-item-display']) {
-        UI['selected-item-display'].textContent = item;
-      }
-      // Update item buttons selection highlight
-      if (UI['item-selector-grid']) {
-        const btns = UI['item-selector-grid'].querySelectorAll('.item-btn');
-        btns.forEach(btn => {
-          if (btn.getAttribute('data-item') === item) {
-            btn.classList.add('selected');
-          } else {
-            btn.classList.remove('selected');
-          }
-        });
-      }
-      // Update balance cards selection highlight
-      if (UI['balance-cards-grid']) {
-        const cards = UI['balance-cards-grid'].querySelectorAll('.stock-card');
-        cards.forEach(card => {
-          if (card.getAttribute('data-item') === item) {
-            card.classList.add('selected');
-          } else {
-            card.classList.remove('selected');
-          }
-        });
-      }
-      updateFormPreview();
-    }
-
-    function addQuantity(val) {
-      const current = parseInt(UI['qty-input'] ? UI['qty-input'].value : 0, 10) || 0;
-      const next = (current === 0) ? val : (current + val);
-      if (UI['qty-input']) {
-        UI['qty-input'].value = next;
-      }
-      State.quantity = next;
-      updateFormPreview();
-    }
-
-    function updateFormPreview() {
-      const b = State.stockBalances[State.selectedItem] || { currentStock: 0 };
-      if (UI['current-stock-preview']) {
-        UI['current-stock-preview'].textContent = `Bal: ${b.currentStock.toLocaleString()}`;
-      }
-      if (UI['btn-submit-label']) {
-        const verb = (State.currentType === 'OUT') ? 'OUT (Dispatch)' : 'IN (Received)';
-        const qty = State.quantity || 0;
-        UI['btn-submit-label'].textContent = `Record ${verb}: ${qty} × ${State.selectedItem}`;
-      }
-      if (UI['btn-submit-icon']) {
-        UI['btn-submit-icon'].textContent = (State.currentType === 'OUT') ? '🚀' : '📥';
-      }
-    }
-
-    /* ==========================================================================
-       7. TRANSACTION SUBMISSION & OFFLINE QUEUE
-       ========================================================================== */
-    function handleTransactionSubmit() {
-      const qty = parseInt(UI['qty-input'] ? UI['qty-input'].value : 0, 10);
-      if (!qty || qty <= 0) {
-        showToast('Please specify a quantity greater than 0', 'warning');
-        if (haptics) haptics.playToggle();
-        if (UI['qty-input']) UI['qty-input'].focus();
+    async function pushTransactionToGoogleSheet(tx) {
+      const webhookUrl = getWebhookUrl();
+      if (!webhookUrl) {
+        // Saved locally in offline queue until webhook URL is set
+        offlineQueue.push(tx);
+        saveQueue();
+        updateStatusPill(false, "Saved Locally");
         return;
       }
 
-      const item = State.selectedItem;
-      const type = State.currentType;
-      const dateVal = UI['tx-date-input'] ? UI['tx-date-input'].value : new Date().toISOString().slice(0, 10);
-      const notes = UI['tx-notes-input'] ? UI['tx-notes-input'].value.trim() : '';
-
-      // Create transaction object
-      const tx = {
-        id: `tx_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`,
-        date: dateVal,
-        item: item,
-        quantity: qty,
-        type: type,
-        timestamp: new Date().toISOString(),
-        source: 'mobile_pwa',
-        excel_sr: null,
-        synced_to_excel: false,
-        notes: notes,
-        status: 'pending'
-      };
-
-      // Optimistically push to state
-      State.transactions.unshift(tx);
-      State.offlineQueue.push(tx);
-
-      // Save to localStorage
-      saveToLocalStorage();
-
-      // Recalculate & re-render
-      recalculateStockBalances();
-      renderTransactionHistory();
-
-      // Play celebration chord
-      if (haptics) haptics.playCelebration();
-
-      // Show toast
-      showToast(`Recorded ${type}: ${qty} × ${item}`, 'success');
-
-      // Reset notes and reset quantity to 50
-      if (UI['tx-notes-input']) UI['tx-notes-input'].value = '';
-      if (UI['qty-input']) UI['qty-input'].value = '50';
-      State.quantity = 50;
-      updateFormPreview();
-
-      // Attempt cloud sync if online
-      if (navigator.onLine && State.db) {
-        flushOfflineQueue();
-      }
-    }
-
-    function updateQueueBadge() {
-      const count = State.offlineQueue.length;
-      if (UI['queue-badge']) {
-        UI['queue-badge'].textContent = `${count} Queued`;
-        UI['queue-badge'].style.display = (count > 0) ? 'inline-flex' : 'none';
-      }
-    }
-
-    function initOfflineQueueManager() {
-      updateQueueBadge();
-
-      // Listen for network state changes
-      window.addEventListener('online', () => {
-        updateOnlineStatus(true, 'Online');
-        showToast('Network restored. Syncing queue...', 'success');
-        flushOfflineQueue();
-      });
-
-      window.addEventListener('offline', () => {
-        updateOnlineStatus(false, 'Offline');
-        showToast('Offline Mode. Transactions queued locally.', 'warning');
-      });
-
-      // Manual sync button
-      if (UI['btn-sync-now']) {
-        UI['btn-sync-now'].addEventListener('click', () => {
-          if (haptics) haptics.playPop();
-          if (navigator.onLine) {
-            flushOfflineQueue();
-            showToast('Syncing with Firestore...', 'success');
-          } else {
-            showToast('Device is offline. Queued locally.', 'warning');
-          }
-        });
-      }
-
-      // Periodic queue flush check (every 20 seconds)
-      setInterval(() => {
-        if (navigator.onLine && State.offlineQueue.length > 0) {
-          flushOfflineQueue();
-        }
-      }, 20000);
-    }
-
-    function updateOnlineStatus(isOnline, text) {
-      State.isOnline = isOnline;
-      if (UI['status-text']) UI['status-text'].textContent = text;
-      if (UI['status-dot']) {
-        if (isOnline) {
-          UI['status-dot'].classList.remove('offline');
-        } else {
-          UI['status-dot'].classList.add('offline');
-        }
-      }
-    }
-
-    /* ==========================================================================
-       8. FIREBASE FIRESTORE REALTIME SYNC ENGINE
-       ========================================================================== */
-    function initFirebaseSyncEngine() {
-      if (typeof firebase === 'undefined') {
-        console.warn('[Firebase] SDK unavailable. Running local mode.');
-        updateOnlineStatus(false, 'Local Offline');
-        return;
-      }
+      updateStatusPill(true, "Syncing...");
 
       try {
-        if (!firebase.apps.length) {
-          firebase.initializeApp(FIREBASE_CONFIG);
-        }
-        State.db = firebase.firestore();
+        // We use GET query parameters for zero-CORS friction across all mobile browsers
+        const params = new URLSearchParams({
+          action: "add",
+          item: tx.itemName,
+          quantity: String(tx.quantity),
+          type: tx.type,
+          date: tx.date,
+          remark: tx.remark || ""
+        });
 
-        updateOnlineStatus(true, 'Online');
+        const targetUrl = webhookUrl + (webhookUrl.includes("?") ? "&" : "?") + params.toString();
+        const response = await fetch(targetUrl, { method: "GET", mode: "cors" });
 
-        // Listen for real-time transactions
-        State.db.collection('thela_stock_transactions')
-          .orderBy('timestamp', 'desc')
-          .limit(100)
-          .onSnapshot(snapshot => {
-            let changed = false;
-            const existingMap = new Map();
-            State.transactions.forEach(t => existingMap.set(t.id, t));
-
-            snapshot.docChanges().forEach(change => {
-              const data = change.doc.data();
-              if (change.type === 'added' || change.type === 'modified') {
-                existingMap.set(data.id || change.doc.id, {
-                  ...data,
-                  status: 'synced'
-                });
-                changed = true;
-              }
-            });
-
-            if (changed) {
-              State.transactions = Array.from(existingMap.values());
-              recalculateStockBalances();
-              renderTransactionHistory();
+        if (response.ok) {
+          const result = await response.json();
+          if (result && result.status === "success" && result.data) {
+            applyUpdatedGoogleSheetData(result.data);
+            if (result.recorded && result.recorded.sr) {
+              tx.sr = result.recorded.sr;
+              saveRecent();
+              renderRecentTransactions();
             }
-          }, err => {
-            console.warn('[Firestore] Realtime subscription warning:', err);
-          });
-
-        // Flush any initial queued items
-        flushOfflineQueue();
+          }
+          updateStatusPill(true, "Online (Sheet Synced)");
+        } else {
+          throw new Error("HTTP " + response.status);
+        }
       } catch (err) {
-        console.warn('[Firebase] Init exception:', err);
-        updateOnlineStatus(false, 'Local Mode');
+        console.warn("Failed to push to Google Sheet, queued offline:", err);
+        offlineQueue.push(tx);
+        saveQueue();
+        updateStatusPill(false, "Queued Offline");
       }
+    }
+
+    async function undoTransaction(tx) {
+      if (!confirm(`Undo last transaction: ${tx.itemName} ${tx.quantity} ${tx.type}?`)) {
+        return;
+      }
+
+      playSound('warn');
+
+      // Revert optimistic stock balance
+      if (typeof liveBalances[tx.itemName] === 'number') {
+        if (tx.type === "OUT") {
+          liveBalances[tx.itemName] += tx.quantity;
+        } else {
+          liveBalances[tx.itemName] = Math.max(0, liveBalances[tx.itemName] - tx.quantity);
+        }
+      }
+
+      // Remove from recent
+      recentTransactions = recentTransactions.filter(t => t.sr !== tx.sr);
+      saveBalances();
+      saveRecent();
+      renderBagCards();
+      updateGlanceBanner();
+      renderRecentTransactions();
+      showToast("Undone last entry!");
+
+      // If webhook configured, send undo command to Google Sheet
+      const webhookUrl = getWebhookUrl();
+      if (webhookUrl) {
+        try {
+          const params = new URLSearchParams({
+            action: "undo",
+            sr: String(tx.sr || "")
+          });
+          const targetUrl = webhookUrl + (webhookUrl.includes("?") ? "&" : "?") + params.toString();
+          const response = await fetch(targetUrl, { method: "GET", mode: "cors" });
+          if (response.ok) {
+            const res = await response.json();
+            if (res && res.data) {
+              applyUpdatedGoogleSheetData(res.data);
+            }
+          }
+        } catch (e) {
+          console.warn("Undo webhook call failed:", e);
+        }
+      }
+    }
+
+    async function fetchLiveFromGoogleSheet() {
+      const webhookUrl = getWebhookUrl();
+      if (!webhookUrl) return;
+
+      updateStatusPill(true, "Refreshing...");
+      try {
+        const response = await fetch(webhookUrl, { method: "GET", mode: "cors" });
+        if (response.ok) {
+          const res = await response.json();
+          if (res && res.status === "success" && res.data) {
+            applyUpdatedGoogleSheetData(res.data);
+            updateStatusPill(true, "Live Sheet Synced");
+          }
+        }
+      } catch (e) {
+        console.warn("Fetch live Google Sheet failed:", e);
+        updateStatusPill(false, "Offline");
+      }
+    }
+
+    function applyUpdatedGoogleSheetData(data) {
+      if (data && data.stockBalances) {
+        Object.keys(data.stockBalances).forEach(name => {
+          const itemData = data.stockBalances[name];
+          if (itemData && typeof itemData.currentStock === 'number') {
+            liveBalances[name] = itemData.currentStock;
+          }
+        });
+        saveBalances();
+        renderBagCards();
+        updateGlanceBanner();
+      }
+
+      if (data && Array.isArray(data.recent) && data.recent.length > 0) {
+        recentTransactions = data.recent;
+        saveRecent();
+        renderRecentTransactions();
+      }
+    }
+
+    /* ========================================================================
+       SETTINGS MODAL (GOOGLE APPS SCRIPT WEBHOOK URL)
+       ======================================================================== */
+    function getWebhookUrl() {
+      return localStorage.getItem(KEY_WEBHOOK_URL) || "";
+    }
+
+    function setupSettingsModal() {
+      const modal = document.getElementById("settings-modal");
+      const btnOpen = document.getElementById("btn-settings");
+      const btnClose = document.getElementById("btn-close-settings");
+      const btnSave = document.getElementById("btn-save-settings");
+      const btnTest = document.getElementById("btn-test-connection");
+      const inputUrl = document.getElementById("input-webhook-url");
+      const statusMsg = document.getElementById("settings-status-msg");
+      const btnRefresh = document.getElementById("btn-refresh-data");
+
+      if (btnOpen && modal) {
+        btnOpen.addEventListener("click", () => {
+          playSound('tap');
+          if (inputUrl) inputUrl.value = getWebhookUrl();
+          if (statusMsg) statusMsg.textContent = "";
+          modal.classList.add("active");
+        });
+      }
+
+      if (btnClose && modal) {
+        btnClose.addEventListener("click", () => {
+          playSound('tap');
+          modal.classList.remove("active");
+        });
+      }
+
+      if (btnSave) {
+        btnSave.addEventListener("click", () => {
+          playSound('tap');
+          const val = inputUrl ? inputUrl.value.trim() : "";
+          localStorage.setItem(KEY_WEBHOOK_URL, val);
+          if (statusMsg) statusMsg.textContent = "✅ URL Saved Successfully!";
+          showToast("Settings Saved!");
+          setTimeout(() => {
+            if (modal) modal.classList.remove("active");
+            fetchLiveFromGoogleSheet();
+          }, 800);
+        });
+      }
+
+      if (btnTest) {
+        btnTest.addEventListener("click", async () => {
+          playSound('tap');
+          const val = inputUrl ? inputUrl.value.trim() : "";
+          if (!val) {
+            if (statusMsg) {
+              statusMsg.textContent = "⚠️ Please paste your Google Apps Script URL first.";
+              statusMsg.style.color = "#f87171";
+            }
+            return;
+          }
+
+          if (statusMsg) {
+            statusMsg.textContent = "Testing connection...";
+            statusMsg.style.color = "#38bdf8";
+          }
+
+          try {
+            const res = await fetch(val, { method: "GET", mode: "cors" });
+            if (res.ok) {
+              const data = await res.json();
+              if (data && data.status === "success") {
+                statusMsg.textContent = "✅ Connection Successful! Connected to Google Sheet.";
+                statusMsg.style.color = "#34d399";
+                playSound('success');
+              } else {
+                throw new Error("Invalid response format");
+              }
+            } else {
+              throw new Error("HTTP " + res.status);
+            }
+          } catch (err) {
+            if (statusMsg) {
+              statusMsg.textContent = "❌ Connection Failed: " + err.message;
+              statusMsg.style.color = "#f87171";
+            }
+            playSound('warn');
+          }
+        });
+      }
+
+      if (btnRefresh) {
+        btnRefresh.addEventListener("click", () => {
+          playSound('tap');
+          fetchLiveFromGoogleSheet();
+        });
+      }
+    }
+
+    /* ========================================================================
+       1-TAP EXCEL EXPORT (SHEETJS ENGINE)
+       ======================================================================== */
+    function setupExcelExport() {
+      const btnExport = document.getElementById("btn-export-excel");
+      if (!btnExport) return;
+
+      btnExport.addEventListener("click", () => {
+        playSound('tap');
+        try {
+          if (typeof XLSX === 'undefined') {
+            showToast("Excel export library loading...", true);
+            return;
+          }
+
+          const wb = XLSX.utils.book_new();
+
+          // 1. Transactions Sheet
+          const txData = [
+            ["SR", "Date", "Item Name", "Quantity", "Type", "Remark"]
+          ];
+          recentTransactions.forEach(tx => {
+            txData.push([tx.sr, tx.date, tx.itemName, tx.quantity, tx.type, tx.remark || ""]);
+          });
+          const wsTx = XLSX.utils.aoa_to_sheet(txData);
+          XLSX.utils.book_append_sheet(wb, wsTx, "Transactions");
+
+          // 2. Summary Sheet
+          const summaryData = [
+            ["Item Name", "Current Stock (pcs)"]
+          ];
+          CANONICAL_ITEMS.forEach(item => {
+            summaryData.push([item, liveBalances[item] || 0]);
+          });
+          const wsSummary = XLSX.utils.aoa_to_sheet(summaryData);
+          XLSX.utils.book_append_sheet(wb, wsSummary, "C. Stock Summary");
+
+          // Download File
+          const now = new Date();
+          const filename = `Thela_Stock_${now.getFullYear()}${(now.getMonth()+1)}${now.getDate()}.xlsx`;
+          XLSX.writeFile(wb, filename);
+
+          playSound('success');
+          showToast("Excel downloaded!");
+        } catch (e) {
+          console.error("Excel export error:", e);
+          showToast("Export failed: " + e.message, true);
+        }
+      });
+    }
+
+    /* ========================================================================
+       HELPERS & NETWORK STATUS
+       ======================================================================== */
+    function updateStatusPill(online, label) {
+      const dot = document.getElementById("status-dot");
+      const text = document.getElementById("status-text");
+      if (dot) {
+        dot.style.background = online ? "#10b981" : "#f59e0b";
+        dot.style.boxShadow = online ? "0 0 8px #10b981" : "0 0 8px #f59e0b";
+      }
+      if (text) text.textContent = label;
+    }
+
+    function checkNetworkStatus() {
+      window.addEventListener("online", () => {
+        updateStatusPill(true, "Online");
+        flushOfflineQueue();
+      });
+      window.addEventListener("offline", () => {
+        updateStatusPill(false, "Offline");
+      });
     }
 
     async function flushOfflineQueue() {
-      if (!State.db || !navigator.onLine || State.offlineQueue.length === 0) return;
-
-      const queueCopy = [...State.offlineQueue];
-      const remaining = [];
+      if (offlineQueue.length === 0) return;
+      const queueCopy = [...offlineQueue];
+      offlineQueue = [];
+      saveQueue();
 
       for (const tx of queueCopy) {
-        try {
-          // 1. Write transaction to firestore
-          await State.db.collection('thela_stock_transactions').doc(tx.id).set({
-            id: tx.id,
-            date: tx.date,
-            item: tx.item,
-            quantity: tx.quantity,
-            type: tx.type,
-            timestamp: tx.timestamp,
-            source: tx.source || 'mobile_pwa',
-            excel_sr: tx.excel_sr || null,
-            synced_to_excel: tx.synced_to_excel || false,
-            notes: tx.notes || ''
-          });
-
-          // 2. Mark in-memory tx as synced
-          const found = State.transactions.find(t => t.id === tx.id);
-          if (found) found.status = 'synced';
-
-        } catch (err) {
-          console.warn('[Firestore] Push failed for tx:', tx.id, err);
-          remaining.push(tx);
-        }
-      }
-
-      // 3. Update summary doc
-      try {
-        const summaryData = {};
-        ITEMS.forEach(it => {
-          summaryData[it] = State.stockBalances[it] || {};
-        });
-        await State.db.collection('thela_stock_summary').doc('live_summary').set({
-          balances: summaryData,
-          lastUpdated: new Date().toISOString()
-        });
-      } catch (e) {
-        console.warn('[Firestore] Summary update warning:', e);
-      }
-
-      State.offlineQueue = remaining;
-      saveToLocalStorage();
-      renderTransactionHistory();
-      if (remaining.length === 0 && queueCopy.length > 0) {
-        showToast('All transactions synced to cloud', 'success');
+        await pushTransactionToGoogleSheet(tx);
       }
     }
 
-    /* ==========================================================================
-       9. SHEETJS IN-BROWSER EXCEL EXPORT ENGINE
-       ========================================================================== */
-    function initSheetJsExportEngine() {
-      if (UI['btn-export-excel']) {
-        UI['btn-export-excel'].addEventListener('click', exportToExcel);
-      }
-    }
+    function showToast(msg, isError = false) {
+      const toast = document.getElementById("toast");
+      const toastMsg = document.getElementById("toast-msg");
+      const toastIcon = document.getElementById("toast-icon");
+      if (!toast || !toastMsg) return;
 
-    function exportToExcel() {
-      if (typeof XLSX === 'undefined') {
-        alert('SheetJS engine is still loading or unavailable offline.');
-        return;
-      }
-
-      try {
-        const wb = XLSX.utils.book_new();
-
-        // Sheet 1: C. Stock Summary
-        const summaryHeader = [["SR", "Item Name", "Op. Stock", "Stock In", "Stock Out", "Current Stock"]];
-        const summaryRows = ITEMS.map((item, idx) => {
-          const b = State.stockBalances[item] || { opStock: 0, stockIn: 0, stockOut: 0, currentStock: 0 };
-          return [idx + 1, item, b.opStock, b.stockIn, b.stockOut, b.currentStock];
-        });
-        const wsSummary = XLSX.utils.aoa_to_sheet([...summaryHeader, ...summaryRows]);
-        XLSX.utils.book_append_sheet(wb, wsSummary, "C. Stock Summary");
-
-        // Sheet 2: Transactions (Ascending by SR/Date)
-        const sortedTx = [...State.transactions].sort((a, b) => {
-          const srA = a.sr || 0;
-          const srB = b.sr || 0;
-          if (srA !== 0 && srB !== 0) return srA - srB;
-          return (a.date || '').localeCompare(b.date || '');
-        });
-
-        const txHeader = [["SR", "Date", "Item Name", "Quantity", "Type"]];
-        const txRows = sortedTx.map((tx, idx) => [
-          tx.sr || (idx + 1),
-          tx.date,
-          tx.item,
-          tx.quantity,
-          tx.type
-        ]);
-        const wsTx = XLSX.utils.aoa_to_sheet([...txHeader, ...txRows]);
-        XLSX.utils.book_append_sheet(wb, wsTx, "Transactions");
-
-        // Download
-        const todayStr = new Date().toISOString().slice(0, 10);
-        const fileName = `Thela_Stock_Export_${todayStr}.xlsx`;
-        XLSX.writeFile(wb, fileName);
-
-        if (haptics) haptics.playCelebration();
-        showToast(`Exported ${fileName}`, 'success');
-      } catch (err) {
-        console.error('[SheetJS] Export error:', err);
-        showToast('Export failed: ' + err.message, 'warning');
-      }
-    }
-
-    /* ==========================================================================
-       10. SERVICE WORKER REGISTRATION
-       ========================================================================== */
-    function registerAppServiceWorker() {
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('sw.js')
-            .then(reg => {
-              console.log('[PWA] Service Worker registered:', reg.scope);
-            })
-            .catch(err => {
-              console.warn('[PWA] Service Worker registration failed:', err);
-            });
-        });
-      }
-    }
-
-    /* ==========================================================================
-       11. UI TOAST SYSTEM
-       ========================================================================== */
-    function showToast(message, type = 'info') {
-      if (!UI['toast-container']) return;
-      const toast = document.createElement('div');
-      toast.className = `toast ${type}`;
-      const icon = (type === 'success') ? '✅' : (type === 'warning' ? '⚠️' : 'ℹ️');
-      toast.innerHTML = `<span>${icon}</span><span>${message}</span>`;
-      UI['toast-container'].appendChild(toast);
-
-      requestAnimationFrame(() => {
-        toast.classList.add('show');
-      });
+      toastMsg.textContent = msg;
+      if (toastIcon) toastIcon.textContent = isError ? "⚠️" : "✅";
+      toast.className = "toast show" + (isError ? " error" : "");
 
       setTimeout(() => {
-        toast.classList.remove('show');
-        setTimeout(() => {
-          if (toast.parentNode) toast.parentNode.removeChild(toast);
-        }, 300);
-      }, 3200);
+        toast.className = "toast";
+      }, 2500);
     }
 
-    /* ==========================================================================
-       12. DEFENSIVE COMPONENT BOOTLOADER ISOLATION
-       ========================================================================== */
-    function bootApplication() {
-      const modules = [
-        { name: 'DOM Hygiene & Element Binding', fn: bindDomElements, critical: true },
-        { name: 'Web Audio Micro-Haptics', fn: initWebAudioHaptics, critical: false },
-        { name: 'State Management Store', fn: initStateStore, critical: true },
-        { name: 'Touch Input Controls', fn: initTouchControls, critical: true },
-        { name: 'Offline LocalStorage Queue', fn: initOfflineQueueManager, critical: true },
-        { name: 'SheetJS Excel Export Engine', fn: initSheetJsExportEngine, critical: false },
-        { name: 'Firebase Firestore Realtime Sync', fn: initFirebaseSyncEngine, critical: false },
-        { name: 'Service Worker Registration', fn: registerAppServiceWorker, critical: false }
-      ];
-
-      modules.forEach(m => {
-        try {
-          m.fn();
-        } catch (err) {
-          console.warn(`[Bootloader Warning] Module "${m.name}" non-fatal failure:`, err);
-        }
-      });
+    function escapeHtml(str) {
+      if (!str) return "";
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
     }
 
-    window.addEventListener('DOMContentLoaded', bootApplication);
+    // Auto-boot on DOM ready
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", bootApplication);
+    } else {
+      bootApplication();
+    }
   </script>
 </body>
 </html>
