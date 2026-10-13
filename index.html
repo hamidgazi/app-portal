@@ -2797,6 +2797,16 @@
             });
           }
 
+          // Make clicking search box or search icon focus the input
+          document.querySelectorAll(".search-box").forEach(box => {
+            box.addEventListener("click", e => {
+              if (e.target.tagName !== "INPUT" && !e.target.closest(".search-clear")) {
+                const input = box.querySelector("input");
+                if (input) input.focus();
+              }
+            });
+          });
+
           const handlePillClick = e => {
             const pill = e.target.closest(".cat-pill");
             if (!pill) return;
@@ -2817,7 +2827,7 @@
           if (DOM.mobileHeaderCategoryPills) DOM.mobileHeaderCategoryPills.addEventListener("click", handlePillClick);
 
           // Keyboard shortcuts (Ctrl+K or / to search, Escape to close overlays)
-          window.addEventListener("keydown", e => {
+          const handleGlobalKey = e => {
             if (e.key === "Escape") {
               if (DOM.mobileDrawer && DOM.mobileDrawer.classList.contains("open")) {
                 closeMobileDrawer();
@@ -2828,16 +2838,39 @@
               if (DOM.addModal && DOM.addModal.classList.contains("open")) {
                 closeAddModal();
               }
-            } else if ((e.ctrlKey && e.key === "k") || (e.key === "/" && document.activeElement.tagName !== "INPUT")) {
+            } else if (((e.ctrlKey || e.metaKey) && (e.key === "k" || e.key === "K" || e.code === "KeyK")) || (e.key === "/" && document.activeElement && document.activeElement.tagName !== "INPUT" && document.activeElement.tagName !== "TEXTAREA")) {
               e.preventDefault();
+              e.stopPropagation();
               if (window.innerWidth <= 768) {
                 openMobileDrawer();
-              } else if (DOM.searchInput) {
-                DOM.searchInput.focus();
-                DOM.searchInput.select();
+                setTimeout(() => {
+                  if (DOM.mobileSearchInput) {
+                    DOM.mobileSearchInput.focus();
+                    DOM.mobileSearchInput.select();
+                  }
+                }, 80);
+              } else {
+                if (DOM.sidebar && DOM.sidebar.classList.contains("collapsed")) {
+                  DOM.sidebar.classList.remove("collapsed");
+                }
+                if (DOM.searchInput) {
+                  DOM.searchInput.focus();
+                  DOM.searchInput.select();
+                }
               }
             }
-          });
+          };
+
+          window.addEventListener("keydown", handleGlobalKey, true);
+
+          // Forward Ctrl+K from inside iframe if same-origin
+          if (DOM.appIframe) {
+            DOM.appIframe.addEventListener("load", () => {
+              try {
+                DOM.appIframe.contentWindow.addEventListener("keydown", handleGlobalKey, true);
+              } catch (iframeErr) {}
+            });
+          }
         }],
         ["Initialize App & Link Interactions", () => {
           // App item click
