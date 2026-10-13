@@ -31,6 +31,10 @@
       --radius-md: 12px;
       --radius-lg: 18px;
       --spring: cubic-bezier(0.16, 1, 0.3, 1);
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-left: env(safe-area-inset-left, 0px);
+      --safe-right: env(safe-area-inset-right, 0px);
     }
 
     * {
@@ -458,14 +462,16 @@
 
     /* Top Control Bar */
     .topbar {
-      height: var(--topbar-height);
-      min-height: var(--topbar-height);
+      height: calc(var(--topbar-height) + var(--safe-top));
+      min-height: calc(var(--topbar-height) + var(--safe-top));
+      padding-top: var(--safe-top);
       background: var(--bg-surface);
       border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 16px;
+      padding-left: calc(16px + var(--safe-left));
+      padding-right: calc(16px + var(--safe-right));
       gap: 12px;
       z-index: 40;
     }
@@ -601,9 +607,10 @@
 
     /* Iframe Viewing Area */
     .viewport-container {
-      flex: 1;
+      flex: 1 1 auto;
+      min-height: 0;
       width: 100%;
-      height: calc(100% - var(--topbar-height));
+      height: calc(100% - var(--topbar-height) - var(--safe-top));
       display: flex;
       align-items: center;
       justify-content: center;
@@ -706,6 +713,8 @@
       inset: 0;
       background: var(--bg-base);
       overflow-y: auto;
+      overscroll-behavior-y: contain;
+      -webkit-overflow-scrolling: touch;
       padding: 32px 24px;
       display: flex;
       flex-direction: column;
@@ -818,6 +827,8 @@
       inset: 0;
       background: var(--bg-base);
       overflow-y: auto;
+      overscroll-behavior-y: contain;
+      -webkit-overflow-scrolling: touch;
       padding: 24px;
       display: flex;
       flex-direction: column;
@@ -1082,6 +1093,8 @@
       color: #fff;
       letter-spacing: -0.3px;
       user-select: none;
+      cursor: pointer;
+      touch-action: manipulation;
     }
 
     .mobile-brand-icon {
@@ -1170,14 +1183,16 @@
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid var(--border);
       color: var(--text-muted);
-      width: 32px;
-      height: 32px;
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      min-height: 44px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-size: 14px;
+      font-size: 16px;
       transition: all 0.15s ease;
       touch-action: manipulation;
     }
@@ -1270,13 +1285,28 @@
 
     .modal-close {
       position: absolute;
-      top: 16px;
-      right: 16px;
-      background: none;
-      border: none;
+      top: 12px;
+      right: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
       color: var(--text-muted);
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
+      min-height: 40px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       font-size: 18px;
       cursor: pointer;
+      touch-action: manipulation;
+      transition: all 0.15s ease;
+    }
+
+    .modal-close:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
     }
 
     .form-group {
@@ -1411,9 +1441,11 @@
       }
 
       .topbar {
-        padding: 0 12px;
-        height: var(--topbar-height);
-        min-height: var(--topbar-height);
+        padding-top: var(--safe-top);
+        padding-left: calc(12px + var(--safe-left));
+        padding-right: calc(12px + var(--safe-right));
+        height: calc(var(--topbar-height) + var(--safe-top));
+        min-height: calc(var(--topbar-height) + var(--safe-top));
         overflow: hidden;
       }
 
@@ -1552,6 +1584,8 @@
         right: 0;
         height: calc(56px + env(safe-area-inset-bottom, 0px));
         padding-bottom: env(safe-area-inset-bottom, 0px);
+        padding-left: env(safe-area-inset-left, 0px);
+        padding-right: env(safe-area-inset-right, 0px);
         background: rgba(14, 20, 36, 0.96);
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
@@ -1690,7 +1724,9 @@
     /* Small Screen Fine-Tuning (360px - 430px) */
     @media (max-width: 480px) {
       .topbar {
-        padding: 0 8px;
+        padding-top: var(--safe-top);
+        padding-left: calc(8px + var(--safe-left));
+        padding-right: calc(8px + var(--safe-right));
         gap: 6px;
       }
 
@@ -1725,7 +1761,9 @@
 
     @media (max-width: 380px) {
       .topbar {
-        padding: 0 6px;
+        padding-top: var(--safe-top);
+        padding-left: calc(6px + var(--safe-left));
+        padding-right: calc(6px + var(--safe-right));
         gap: 4px;
       }
 
@@ -1776,32 +1814,32 @@
     <!-- Desktop Left Sidebar -->
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-header">
-        <div class="brand" id="brand-home" title="Go to Home Hub">
-          <div class="brand-logo">🚀</div>
+        <div class="brand" id="brand-home" title="Go to Home Hub" role="button" tabindex="0" aria-label="Go to Home Hub">
+          <div class="brand-logo" aria-hidden="true">🚀</div>
           <div>
             <div class="brand-title">Antigravity Portal</div>
             <div class="brand-sub">Master App Suite</div>
           </div>
         </div>
-        <button class="btn-icon" id="btn-collapse-sidebar" title="Collapse Sidebar">◀</button>
+        <button class="btn-icon" id="btn-collapse-sidebar" title="Collapse Sidebar" aria-label="Collapse Sidebar">◀</button>
       </div>
 
       <!-- Mode Switcher Tabs (Apps vs Links) -->
       <div class="mode-switcher-container">
-        <div class="mode-tabs">
-          <button class="mode-tab-btn active" id="tab-mode-apps">🚀 Apps</button>
-          <button class="mode-tab-btn" id="tab-mode-links">🔗 Links</button>
+        <div class="mode-tabs" role="tablist" aria-label="Desktop View Modes">
+          <button class="mode-tab-btn active" id="tab-mode-apps" role="tab" aria-selected="true">🚀 Apps</button>
+          <button class="mode-tab-btn" id="tab-mode-links" role="tab" aria-selected="false">🔗 Links</button>
         </div>
       </div>
 
       <div class="sidebar-controls">
         <div class="search-box">
-          <span class="search-icon">🔍</span>
-          <input type="search" class="search-input" id="search-input" placeholder="Search apps, tools... (Ctrl+K)" enterkeyhint="search" autocomplete="off">
-          <button class="search-clear" id="search-clear">✕</button>
+          <span class="search-icon" aria-hidden="true">🔍</span>
+          <input type="search" class="search-input" id="search-input" placeholder="Search apps, tools... (Ctrl+K)" enterkeyhint="search" autocomplete="off" aria-label="Search apps and tools">
+          <button class="search-clear" id="search-clear" aria-label="Clear Search Input">✕</button>
         </div>
 
-        <div class="category-pills" id="category-pills">
+        <div class="category-pills" id="category-pills" role="tablist" aria-label="App Categories">
           <!-- Populated dynamically based on mode -->
         </div>
       </div>
@@ -1823,12 +1861,12 @@
     <main class="main-stage">
       
       <!-- Top Bar -->
-      <header class="topbar" id="main-topbar">
+      <header class="topbar" id="main-topbar" role="banner">
         <div class="topbar-left">
-          <button class="btn-icon" id="btn-toggle-sidebar" title="Toggle Sidebar">☰</button>
-          <button class="btn-back-hub" id="btn-back-hub" title="Return to Apps Catalog">← Back to Hub</button>
-          <div class="mobile-brand-title" id="mobile-brand-title">
-            <span class="mobile-brand-icon">🚀</span>
+          <button class="btn-icon" id="btn-toggle-sidebar" title="Toggle Sidebar" aria-label="Toggle Sidebar">☰</button>
+          <button class="btn-back-hub" id="btn-back-hub" title="Return to Apps Catalog" aria-label="Back to Hub">← Back to Hub</button>
+          <div class="mobile-brand-title" id="mobile-brand-title" role="button" tabindex="0" aria-label="Antigravity Home">
+            <span class="mobile-brand-icon" aria-hidden="true">🚀</span>
             <span class="mobile-brand-name">Antigravity</span>
           </div>
           <div class="active-app-meta" id="active-app-meta">
@@ -1841,24 +1879,24 @@
         </div>
 
         <!-- Center: Device Simulator (Only visible in Apps mode) -->
-        <div class="topbar-center" id="topbar-device-controls">
-          <button class="device-btn active" data-mode="desktop" title="Full Desktop View">🖥️ Full</button>
-          <button class="device-btn" data-mode="tablet" title="iPad / Tablet View (768px)">📱 Tablet</button>
-          <button class="device-btn" data-mode="mobile" title="iPhone / Mobile View (390px)">📱 Mobile</button>
+        <div class="topbar-center" id="topbar-device-controls" role="toolbar" aria-label="Device Simulator Controls">
+          <button class="device-btn active" data-mode="desktop" title="Full Desktop View" aria-label="Full Desktop View">🖥️ Full</button>
+          <button class="device-btn" data-mode="tablet" title="iPad / Tablet View (768px)" aria-label="iPad Tablet View">📱 Tablet</button>
+          <button class="device-btn" data-mode="mobile" title="iPhone / Mobile View (390px)" aria-label="iPhone Mobile View">📱 Mobile</button>
         </div>
 
         <!-- Right: Actions -->
         <div class="topbar-right">
-          <button class="action-btn" id="btn-reload-app" title="Reload active app">🔄 Reload</button>
-          <a class="action-btn" id="btn-open-tab" href="#" target="_blank" rel="noopener" title="Open in new dedicated browser tab">↗️ Pop Out</a>
-          <button class="action-btn" id="btn-fullscreen" title="Toggle Fullscreen">⛶</button>
-          <button class="action-btn btn-qr" id="btn-top-qr" title="Connect Phone via Wi-Fi">📱 Mobile QR</button>
+          <button class="action-btn" id="btn-reload-app" title="Reload active app" aria-label="Reload active app">🔄 Reload</button>
+          <a class="action-btn" id="btn-open-tab" href="#" target="_blank" rel="noopener" title="Open in new dedicated browser tab" aria-label="Open in new tab">↗️ Pop Out</a>
+          <button class="action-btn" id="btn-fullscreen" title="Toggle Fullscreen" aria-label="Toggle Fullscreen">⛶</button>
+          <button class="action-btn btn-qr" id="btn-top-qr" title="Connect Phone via Wi-Fi" aria-label="Mobile QR Code">📱 Mobile QR</button>
         </div>
       </header>
 
       <!-- Mobile Category Strip (Visible in Catalog mode) -->
-      <div class="mobile-category-bar" id="mobile-category-bar">
-        <div class="category-pills" id="mobile-header-category-pills">
+      <div class="mobile-category-bar" id="mobile-category-bar" role="navigation" aria-label="Category Filter Strip">
+        <div class="category-pills" id="mobile-header-category-pills" role="tablist" aria-label="Mobile Categories">
           <!-- Populated dynamically based on mode -->
         </div>
       </div>
@@ -1918,41 +1956,41 @@
   </div>
 
   <!-- Fixed Native Bottom Navigation Bar (Mobile) -->
-  <nav class="bottom-nav-bar" id="bottom-nav-bar" aria-label="Mobile Navigation">
-    <button class="bottom-nav-item active" id="nav-btn-apps" data-target="apps" title="Apps Catalog">
-      <span class="nav-icon">🚀</span>
+  <nav class="bottom-nav-bar" id="bottom-nav-bar" role="tablist" aria-label="Mobile Navigation">
+    <button class="bottom-nav-item active" id="nav-btn-apps" data-target="apps" role="tab" aria-selected="true" title="Apps Catalog">
+      <span class="nav-icon" aria-hidden="true">🚀</span>
       <span class="nav-label">Apps</span>
     </button>
-    <button class="bottom-nav-item" id="nav-btn-links" data-target="links" title="Links & Quick Share">
-      <span class="nav-icon">🔗</span>
+    <button class="bottom-nav-item" id="nav-btn-links" data-target="links" role="tab" aria-selected="false" title="Links & Quick Share">
+      <span class="nav-icon" aria-hidden="true">🔗</span>
       <span class="nav-label">Quick Share</span>
     </button>
-    <button class="bottom-nav-item" id="nav-btn-search" data-target="search" title="Instant Search">
-      <span class="nav-icon">🔍</span>
+    <button class="bottom-nav-item" id="nav-btn-search" data-target="search" role="tab" aria-selected="false" aria-haspopup="dialog" aria-expanded="false" title="Instant Search">
+      <span class="nav-icon" aria-hidden="true">🔍</span>
       <span class="nav-label">Search</span>
     </button>
   </nav>
 
   <!-- Mobile Drawer Overlay & Instant Search Overlay -->
-  <div class="drawer-overlay" id="drawer-overlay"></div>
-  <div class="mobile-drawer" id="mobile-drawer">
+  <div class="drawer-overlay" id="drawer-overlay" aria-hidden="true"></div>
+  <div class="mobile-drawer" id="mobile-drawer" role="dialog" aria-modal="true" aria-label="Search and Navigation Drawer" aria-hidden="true">
     <div class="drawer-header-row">
-      <div class="drawer-handle"></div>
-      <button class="drawer-close-btn" id="drawer-close-btn" title="Close Search">✕</button>
+      <div class="drawer-handle" aria-hidden="true"></div>
+      <button class="drawer-close-btn" id="drawer-close-btn" aria-label="Close Search Drawer" title="Close Search">✕</button>
     </div>
     <div class="mode-switcher-container" style="padding-bottom: 8px;">
-      <div class="mode-tabs">
-        <button class="mode-tab-btn active" id="drawer-mode-apps">🚀 Apps</button>
-        <button class="mode-tab-btn" id="drawer-mode-links">🔗 Links</button>
+      <div class="mode-tabs" role="tablist" aria-label="Drawer Mode Switcher">
+        <button class="mode-tab-btn active" id="drawer-mode-apps" role="tab" aria-selected="true">🚀 Apps</button>
+        <button class="mode-tab-btn" id="drawer-mode-links" role="tab" aria-selected="false">🔗 Links</button>
       </div>
     </div>
     <div class="sidebar-controls" style="border-bottom: 1px solid var(--border);">
       <div class="search-box">
-        <span class="search-icon">🔍</span>
-        <input type="search" class="search-input" id="mobile-search-input" placeholder="Search apps, tools, links..." enterkeyhint="search" autocomplete="off">
-        <button class="search-clear" id="mobile-search-clear">✕</button>
+        <span class="search-icon" aria-hidden="true">🔍</span>
+        <input type="search" class="search-input" id="mobile-search-input" placeholder="Search apps, tools, links..." enterkeyhint="search" autocomplete="off" aria-label="Search mobile catalog">
+        <button class="search-clear" id="mobile-search-clear" aria-label="Clear Search Input">✕</button>
       </div>
-      <div class="category-pills" id="mobile-category-pills">
+      <div class="category-pills" id="mobile-category-pills" role="tablist" aria-label="Search Category Filters">
         <!-- Populated dynamically -->
       </div>
     </div>
@@ -1962,10 +2000,10 @@
   </div>
 
   <!-- Mobile QR Code Modal -->
-  <div class="modal-overlay" id="qr-modal">
+  <div class="modal-overlay" id="qr-modal" role="dialog" aria-modal="true" aria-labelledby="qr-modal-title" aria-hidden="true">
     <div class="modal-card">
-      <button class="modal-close" id="modal-close">✕</button>
-      <div style="font-size: 32px; margin-bottom: 8px;">📱</div>
+      <button class="modal-close" id="modal-close" aria-label="Close QR Modal">✕</button>
+      <div style="font-size: 32px; margin-bottom: 8px;" aria-hidden="true">📱</div>
       <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 6px;" id="qr-modal-title">Share Link via QR Code</h3>
       <div style="font-size: 12.5px; color: var(--text-dim); margin-bottom: 12px; word-break: break-all;" id="qr-url-text">http://localhost:8080/</div>
 
@@ -1983,10 +2021,10 @@
   </div>
 
   <!-- Add Custom Link Modal -->
-  <div class="modal-overlay" id="add-modal">
+  <div class="modal-overlay" id="add-modal" role="dialog" aria-modal="true" aria-labelledby="add-modal-title" aria-hidden="true">
     <div class="modal-card">
-      <button class="modal-close" id="add-modal-close">✕</button>
-      <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 14px; color: #fff;">➕ Add Custom Link</h3>
+      <button class="modal-close" id="add-modal-close" aria-label="Close Add Link Modal">✕</button>
+      <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 14px; color: #fff;" id="add-modal-title">➕ Add Custom Link</h3>
       <form id="add-link-form">
         <div class="form-group">
           <label class="form-label" for="inp-title">Link Title *</label>
@@ -2019,7 +2057,7 @@
     </div>
   </div>
 
-  <div id="toast">Copied to clipboard!</div>
+  <div id="toast" role="status" aria-live="polite">Copied to clipboard!</div>
 
   <!-- Synchronous Catalog Scripts -->
   <script src="portal_catalog.js"></script>
@@ -2043,7 +2081,8 @@
       searchQuery: "",
       deviceMode: "desktop",
       isServerMode: window.location.protocol.startsWith("http"),
-      activeQRTarget: null
+      activeQRTarget: null,
+      loaderTimeout: null
     };
 
     function getAllLinks() {
@@ -2151,18 +2190,47 @@
       }
     }
 
-    function setViewMode(mode) {
+    function setViewMode(mode, updateHash = true) {
       State.viewMode = mode;
       
-      const isApps = mode === "apps";
-      if (DOM.tabModeApps) DOM.tabModeApps.classList.toggle("active", isApps);
-      if (DOM.tabModeLinks) DOM.tabModeLinks.classList.toggle("active", !isApps);
-      if (DOM.drawerModeApps) DOM.drawerModeApps.classList.toggle("active", isApps);
-      if (DOM.drawerModeLinks) DOM.drawerModeLinks.classList.toggle("active", !isApps);
+      if (updateHash) {
+        if (mode === "links" && window.location.hash !== "#links") {
+          window.location.hash = "links";
+        } else if (mode === "apps" && window.location.hash && window.location.hash !== "#apps" && !State.activeApp) {
+          window.location.hash = "apps";
+        }
+      }
 
-      if (DOM.navBtnApps) DOM.navBtnApps.classList.toggle("active", isApps);
-      if (DOM.navBtnLinks) DOM.navBtnLinks.classList.toggle("active", !isApps);
-      if (DOM.navBtnSearch) DOM.navBtnSearch.classList.remove("active");
+      const isApps = mode === "apps";
+      if (DOM.tabModeApps) {
+        DOM.tabModeApps.classList.toggle("active", isApps);
+        DOM.tabModeApps.setAttribute("aria-selected", isApps ? "true" : "false");
+      }
+      if (DOM.tabModeLinks) {
+        DOM.tabModeLinks.classList.toggle("active", !isApps);
+        DOM.tabModeLinks.setAttribute("aria-selected", !isApps ? "true" : "false");
+      }
+      if (DOM.drawerModeApps) {
+        DOM.drawerModeApps.classList.toggle("active", isApps);
+        DOM.drawerModeApps.setAttribute("aria-selected", isApps ? "true" : "false");
+      }
+      if (DOM.drawerModeLinks) {
+        DOM.drawerModeLinks.classList.toggle("active", !isApps);
+        DOM.drawerModeLinks.setAttribute("aria-selected", !isApps ? "true" : "false");
+      }
+
+      if (DOM.navBtnApps) {
+        DOM.navBtnApps.classList.toggle("active", isApps);
+        DOM.navBtnApps.setAttribute("aria-selected", isApps ? "true" : "false");
+      }
+      if (DOM.navBtnLinks) {
+        DOM.navBtnLinks.classList.toggle("active", !isApps);
+        DOM.navBtnLinks.setAttribute("aria-selected", !isApps ? "true" : "false");
+      }
+      if (DOM.navBtnSearch) {
+        DOM.navBtnSearch.classList.remove("active");
+        DOM.navBtnSearch.setAttribute("aria-selected", "false");
+      }
 
       if (DOM.topbarDeviceControls) DOM.topbarDeviceControls.style.display = isApps ? "flex" : "none";
 
@@ -2216,7 +2284,7 @@
 
       const activeCat = isApps ? State.activeAppCategory : State.activeLinkCategory;
       const html = pills.map(p => `
-        <button class="cat-pill ${p.cat === activeCat ? 'active' : ''}" data-cat="${escapeHtml(p.cat)}">
+        <button class="cat-pill ${p.cat === activeCat ? 'active' : ''}" data-cat="${escapeHtml(p.cat)}" role="tab" aria-selected="${p.cat === activeCat ? 'true' : 'false'}">
           ${escapeHtml(p.label)}
         </button>
       `).join("");
@@ -2437,13 +2505,20 @@
       return app.portalHref || app.serverHref || "#";
     }
 
-    function selectApp(appId) {
+    function selectApp(appId, updateHash = true) {
       const app = State.apps.find(a => a.id === appId);
       if (!app) return;
 
-      setViewMode("apps");
+      setViewMode("apps", false);
       State.activeApp = app;
       localStorage.setItem("antigravity_portal_last_active_app", app.id);
+
+      if (updateHash) {
+        const targetHash = `#app=${encodeURIComponent(app.id)}`;
+        if (window.location.hash !== targetHash) {
+          window.location.hash = targetHash;
+        }
+      }
 
       if (DOM.welcomeStage) DOM.welcomeStage.classList.add("hidden");
       if (DOM.deviceFrame) DOM.deviceFrame.style.display = "flex";
@@ -2457,16 +2532,27 @@
       if (DOM.btnOpenTab) DOM.btnOpenTab.href = targetUrl;
 
       if (DOM.contentIframe) {
-        const loaderTimeout = setTimeout(() => {
+        if (State.loaderTimeout) {
+          clearTimeout(State.loaderTimeout);
+          State.loaderTimeout = null;
+        }
+        State.loaderTimeout = setTimeout(() => {
           if (DOM.iframeLoader) DOM.iframeLoader.classList.remove("active");
+          State.loaderTimeout = null;
         }, 6000);
 
         DOM.contentIframe.onload = () => {
-          clearTimeout(loaderTimeout);
+          if (State.loaderTimeout) {
+            clearTimeout(State.loaderTimeout);
+            State.loaderTimeout = null;
+          }
           if (DOM.iframeLoader) DOM.iframeLoader.classList.remove("active");
         };
         DOM.contentIframe.onerror = () => {
-          clearTimeout(loaderTimeout);
+          if (State.loaderTimeout) {
+            clearTimeout(State.loaderTimeout);
+            State.loaderTimeout = null;
+          }
           if (DOM.iframeLoader) DOM.iframeLoader.classList.remove("active");
         };
         DOM.contentIframe.src = targetUrl;
@@ -2481,9 +2567,20 @@
       State.activeApp = null;
       localStorage.removeItem("antigravity_portal_last_active_app");
       if (DOM.contentIframe) DOM.contentIframe.src = "about:blank";
+      if (DOM.iframeLoader) DOM.iframeLoader.classList.remove("active");
+      if (State.loaderTimeout) {
+        clearTimeout(State.loaderTimeout);
+        State.loaderTimeout = null;
+      }
       if (DOM.topIcon) DOM.topIcon.textContent = "🚀";
       if (DOM.topTitle) DOM.topTitle.textContent = "Workspace Hub";
       if (DOM.topBadge) DOM.topBadge.textContent = "Dashboard";
+      if (DOM.btnOpenTab) DOM.btnOpenTab.href = "#";
+
+      if (window.location.hash && window.location.hash !== "#apps") {
+        window.location.hash = "apps";
+      }
+
       setViewMode("apps");
       closeMobileDrawer();
     }
@@ -2523,19 +2620,31 @@
         const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}`;
         DOM.qrFrame.innerHTML = `<img src="${qrUrl}" alt="QR Code" style="width: 100%; height: 100%;">`;
       }
-      if (DOM.qrModal) DOM.qrModal.classList.add("open");
+      if (DOM.qrModal) {
+        DOM.qrModal.classList.add("open");
+        DOM.qrModal.setAttribute("aria-hidden", "false");
+      }
     }
 
     function closeQRModal() {
-      if (DOM.qrModal) DOM.qrModal.classList.remove("open");
+      if (DOM.qrModal) {
+        DOM.qrModal.classList.remove("open");
+        DOM.qrModal.setAttribute("aria-hidden", "true");
+      }
     }
 
     function openAddModal() {
-      if (DOM.addModal) DOM.addModal.classList.add("open");
+      if (DOM.addModal) {
+        DOM.addModal.classList.add("open");
+        DOM.addModal.setAttribute("aria-hidden", "false");
+      }
     }
 
     function closeAddModal() {
-      if (DOM.addModal) DOM.addModal.classList.remove("open");
+      if (DOM.addModal) {
+        DOM.addModal.classList.remove("open");
+        DOM.addModal.setAttribute("aria-hidden", "true");
+      }
       if (DOM.addForm) DOM.addForm.reset();
     }
 
@@ -2576,10 +2685,23 @@
 
     function openMobileDrawer() {
       if (DOM.drawerOverlay) DOM.drawerOverlay.classList.add("open");
-      if (DOM.mobileDrawer) DOM.mobileDrawer.classList.add("open");
-      if (DOM.navBtnApps) DOM.navBtnApps.classList.remove("active");
-      if (DOM.navBtnLinks) DOM.navBtnLinks.classList.remove("active");
-      if (DOM.navBtnSearch) DOM.navBtnSearch.classList.add("active");
+      if (DOM.mobileDrawer) {
+        DOM.mobileDrawer.classList.add("open");
+        DOM.mobileDrawer.setAttribute("aria-hidden", "false");
+      }
+      if (DOM.navBtnApps) {
+        DOM.navBtnApps.classList.remove("active");
+        DOM.navBtnApps.setAttribute("aria-selected", "false");
+      }
+      if (DOM.navBtnLinks) {
+        DOM.navBtnLinks.classList.remove("active");
+        DOM.navBtnLinks.setAttribute("aria-selected", "false");
+      }
+      if (DOM.navBtnSearch) {
+        DOM.navBtnSearch.classList.add("active");
+        DOM.navBtnSearch.setAttribute("aria-selected", "true");
+        DOM.navBtnSearch.setAttribute("aria-expanded", "true");
+      }
       if (DOM.mobileSearchInput) DOM.mobileSearchInput.value = State.searchQuery;
       if (DOM.mobileSearchClear) DOM.mobileSearchClear.classList.toggle("visible", !!State.searchQuery);
       setTimeout(() => {
@@ -2589,10 +2711,23 @@
 
     function closeMobileDrawer() {
       if (DOM.drawerOverlay) DOM.drawerOverlay.classList.remove("open");
-      if (DOM.mobileDrawer) DOM.mobileDrawer.classList.remove("open");
-      if (DOM.navBtnSearch) DOM.navBtnSearch.classList.remove("active");
-      if (DOM.navBtnApps && State.viewMode === "apps") DOM.navBtnApps.classList.add("active");
-      if (DOM.navBtnLinks && State.viewMode === "links") DOM.navBtnLinks.classList.add("active");
+      if (DOM.mobileDrawer) {
+        DOM.mobileDrawer.classList.remove("open");
+        DOM.mobileDrawer.setAttribute("aria-hidden", "true");
+      }
+      if (DOM.navBtnSearch) {
+        DOM.navBtnSearch.classList.remove("active");
+        DOM.navBtnSearch.setAttribute("aria-selected", "false");
+        DOM.navBtnSearch.setAttribute("aria-expanded", "false");
+      }
+      if (DOM.navBtnApps && State.viewMode === "apps") {
+        DOM.navBtnApps.classList.add("active");
+        DOM.navBtnApps.setAttribute("aria-selected", "true");
+      }
+      if (DOM.navBtnLinks && State.viewMode === "links") {
+        DOM.navBtnLinks.classList.add("active");
+        DOM.navBtnLinks.setAttribute("aria-selected", "true");
+      }
     }
 
     function setDeviceMode(mode) {
@@ -2768,18 +2903,33 @@
             DOM.btnReload.addEventListener("click", () => {
               if (DOM.contentIframe && DOM.contentIframe.src && DOM.contentIframe.src !== "about:blank") {
                 if (DOM.iframeLoader) DOM.iframeLoader.classList.add("active");
-                const reloadTimeout = setTimeout(() => {
+                if (State.loaderTimeout) {
+                  clearTimeout(State.loaderTimeout);
+                  State.loaderTimeout = null;
+                }
+                State.loaderTimeout = setTimeout(() => {
                   if (DOM.iframeLoader) DOM.iframeLoader.classList.remove("active");
+                  State.loaderTimeout = null;
                 }, 6000);
                 DOM.contentIframe.onload = () => {
-                  clearTimeout(reloadTimeout);
+                  if (State.loaderTimeout) {
+                    clearTimeout(State.loaderTimeout);
+                    State.loaderTimeout = null;
+                  }
                   if (DOM.iframeLoader) DOM.iframeLoader.classList.remove("active");
                 };
                 DOM.contentIframe.onerror = () => {
-                  clearTimeout(reloadTimeout);
+                  if (State.loaderTimeout) {
+                    clearTimeout(State.loaderTimeout);
+                    State.loaderTimeout = null;
+                  }
                   if (DOM.iframeLoader) DOM.iframeLoader.classList.remove("active");
                 };
-                DOM.contentIframe.src = DOM.contentIframe.src;
+                try {
+                  DOM.contentIframe.contentWindow.location.reload();
+                } catch (err) {
+                  DOM.contentIframe.src = DOM.contentIframe.src;
+                }
               }
             });
           }
@@ -2807,6 +2957,25 @@
 
           if (DOM.brandHome) {
             DOM.brandHome.addEventListener("click", backToHub);
+          }
+
+          if (DOM.mobileBrandTitle) {
+            DOM.mobileBrandTitle.addEventListener("click", () => {
+              if (State.viewMode === "apps") {
+                State.activeAppCategory = "ALL";
+              } else {
+                State.activeLinkCategory = "ALL";
+              }
+              State.searchQuery = "";
+              if (DOM.searchInput) DOM.searchInput.value = "";
+              if (DOM.mobileSearchInput) DOM.mobileSearchInput.value = "";
+              renderPills();
+              renderSidebarList();
+              renderQuickGrid();
+              if (State.viewMode === "links") renderLinksGrid();
+              if (DOM.welcomeStage) DOM.welcomeStage.scrollTo({ top: 0, behavior: "smooth" });
+              if (DOM.linksStage) DOM.linksStage.scrollTo({ top: 0, behavior: "smooth" });
+            });
           }
         }],
         ["Initialize QR & Add Link Modals", () => {
@@ -2854,8 +3023,10 @@
               closeMobileDrawer();
               if (State.activeApp) {
                 backToHub();
+              } else if (State.viewMode === "apps") {
+                if (DOM.welcomeStage) DOM.welcomeStage.scrollTo({ top: 0, behavior: "smooth" });
               } else {
-                setViewMode("apps");
+                setViewMode("apps", true);
               }
             });
           }
@@ -2863,7 +3034,11 @@
           if (DOM.navBtnLinks) {
             DOM.navBtnLinks.addEventListener("click", () => {
               closeMobileDrawer();
-              setViewMode("links");
+              if (State.viewMode === "links") {
+                if (DOM.linksStage) DOM.linksStage.scrollTo({ top: 0, behavior: "smooth" });
+              } else {
+                setViewMode("links", true);
+              }
             });
           }
 
@@ -2877,17 +3052,65 @@
             });
           }
         }],
+        ["Initialize URL Hash Routing & Browser History", () => {
+          function syncStateFromHash() {
+            const rawHash = (window.location.hash || "").replace(/^#/, "");
+            const searchParams = new URLSearchParams(window.location.search);
+            const appParam = searchParams.get("app");
+
+            if (rawHash.startsWith("app=")) {
+              const appId = decodeURIComponent(rawHash.slice(4));
+              if (appId && (!State.activeApp || State.activeApp.id !== appId)) {
+                selectApp(appId, false);
+              }
+            } else if (appParam && (!State.activeApp || State.activeApp.id !== appParam)) {
+              selectApp(appParam, false);
+            } else if (rawHash === "links") {
+              if (State.viewMode !== "links") {
+                setViewMode("links", false);
+              }
+            } else if (rawHash === "apps" || rawHash === "") {
+              if (State.activeApp) {
+                backToHub(false);
+              } else if (State.viewMode !== "apps") {
+                setViewMode("apps", false);
+              }
+            } else if (rawHash === "search") {
+              openMobileDrawer();
+            }
+          }
+
+          window.addEventListener("hashchange", syncStateFromHash);
+        }],
         ["Render Initial Views", () => {
           renderPills();
           renderSidebarList();
           renderQuickGrid();
           updateTopbarState();
 
+          const rawHash = (window.location.hash || "").replace(/^#/, "");
+          const searchParams = new URLSearchParams(window.location.search);
+          const appParam = searchParams.get("app");
+
+          if (rawHash.startsWith("app=")) {
+            const appId = decodeURIComponent(rawHash.slice(4));
+            if (State.apps.some(a => a.id === appId)) {
+              selectApp(appId, false);
+              return;
+            }
+          } else if (appParam && State.apps.some(a => a.id === appParam)) {
+            selectApp(appParam, false);
+            return;
+          } else if (rawHash === "links") {
+            setViewMode("links", false);
+            return;
+          }
+
           const lastAppId = localStorage.getItem("antigravity_portal_last_active_app");
           if (lastAppId && State.apps.some(a => a.id === lastAppId)) {
-            selectApp(lastAppId);
+            selectApp(lastAppId, false);
           } else {
-            setViewMode("apps");
+            setViewMode("apps", false);
           }
         }]
       ];
