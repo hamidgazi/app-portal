@@ -733,7 +733,8 @@
     let offlineQueue = [];
     let audioCtx = null;
 
-    // Local Storage Keys
+    // Local Storage Keys & Default Configuration
+    const DEFAULT_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwh2Lfu-M_Ci_L0qcnAN6HkI8phrFbW9px-j_n8DuSdL2k-_ZzbiRCTHasQGDJYvsU/exec";
     const KEY_WEBHOOK_URL = "thela_stock_webhook_url";
     const KEY_BALANCES = "thela_stock_balances";
     const KEY_RECENT = "thela_stock_recent";
@@ -1256,7 +1257,7 @@
        SETTINGS MODAL (GOOGLE APPS SCRIPT WEBHOOK URL)
        ======================================================================== */
     function getWebhookUrl() {
-      return localStorage.getItem(KEY_WEBHOOK_URL) || "";
+      return localStorage.getItem(KEY_WEBHOOK_URL) || DEFAULT_WEBHOOK_URL;
     }
 
     function setupSettingsModal() {
