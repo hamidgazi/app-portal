@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Antigravity Universal AI Search Kit - Interactive Demo</title>
+  
+  <!-- AI Search Kit Stylesheet -->
+  <link rel="stylesheet" href="ai_search.css">
+
+  <style>
+    :root {
+      --bg-dark: #070a12;
+      --bg-card: #0d121f;
+      --bg-card-hover: #131b2e;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --accent-cyan: #38bdf8;
+      --accent-indigo: #818cf8;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+      padding-bottom: 80px;
+    }
+
+    /* Top Sticky Navigation Bar */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 10, 18, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: -0.3px;
+    }
+
+    .brand-icon {
+      width: 26px;
+      height: 26px;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-indigo));
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #070a12;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .search-trigger-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #111827;
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 8px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s ease;
+      min-height: 48px; /* Touch target requirement */
+    }
+
+    .search-trigger-btn:hover {
+      border-color: var(--accent-cyan);
+      color: var(--text-main);
+      background: #1e293b;
+    }
+
+    .search-trigger-btn kbd {
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+
+    .hero-banner {
+      text-align: center;
+      padding: 40px 10px 30px 10px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-size: 11.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--accent-cyan);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+
+    .hero-title {
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 14px;
+      background: linear-gradient(135deg, #ffffff, #94a3b8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub {
+      font-size: clamp(14px, 2.5vw, 17px);
+      color: var(--text-muted);
+      max-width: 640px;
+      margin: 0 auto 24px auto;
+    }
+
+    /* Interactive Demo Try-Chips */
+    .demo-chips-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin-bottom: 40px;
+    }
+
+    .demo-chips-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .chips-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .test-chip {
+      background: #111827;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      min-height: 48px; /* Touch target */
+    }
+
+    .test-chip:hover {
+      background: #1e293b;
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+      transform: translateY(-1px);
+    }
+
+    .chip-badge {
+      font-size: 10px;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent-cyan);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    /* Showcase Content Sections */
+    .section-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .content-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 24px;
+      transition: border-color 0.2s;
+    }
+
+    .content-card:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .content-card h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .content-card p {
+      font-size: 14.5px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      line-height: 1.6;
+    }
+
+    .content-card ul {
+      padding-left: 20px;
+      color: var(--text-muted);
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .badge-tag {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: #1e293b;
+      color: var(--accent-cyan);
+    }
+
+    /* Footer Notes */
+    .demo-footer {
+      text-align: center;
+      margin-top: 50px;
+      font-size: 13px;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Sticky Navigation Bar -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-icon">AI</div>
+      <span>Universal AI Search Kit</span>
+    </div>
+    <button class="search-trigger-btn ai-search-trigger" id="top-search-btn" type="button" aria-label="Open AI Search Spotlight">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <span>Search page...</span>
+      <kbd>Ctrl+K</kbd>
+    </button>
+  </header>
+
+  <div class="container">
+    
+    <!-- Hero Header -->
+    <div class="hero-banner">
+      <span class="hero-badge">Pure Vanilla ES6 · 0 Dependencies</span>
+      <h1 class="hero-title">Instant Offline Semantic Search</h1>
+      <p class="hero-sub">
+        Solves the fragility of traditional Ctrl+F search. Tolerates typos, expands semantic synonyms, and calculates probabilistic BM25 relevance scores directly in your browser.
+      </p>
+    </div>
+
+    <!-- Quick Test Interactive Chips -->
+    <div class="demo-chips-box">
+      <div class="demo-chips-title">⚡ Click to Test AI Search Capabilities:</div>
+      <div class="chips-wrapper">
+        <button class="test-chip" data-query="kuik traking">
+          <span>"kuik traking"</span>
+          <span class="chip-badge">Fuzzy Typo</span>
+        </button>
+        <button class="test-chip" data-query="khana calories">
+          <span>"khana calories"</span>
+          <span class="chip-badge">Roman Urdu</span>
+        </button>
+        <button class="test-chip" data-query="wazan bulk">
+          <span>"wazan bulk"</span>
+          <span class="chip-badge">Transliteration</span>
+        </button>
+        <button class="test-chip" data-query="food calories">
+          <span>"food calories"</span>
+          <span class="chip-badge">Synonym Graph</span>
+        </button>
+        <button class="test-chip" data-query="delhii pincode">
+          <span>"delhii pincode"</span>
+          <span class="chip-badge">Typo + Concept</span>
+        </button>
+        <button class="test-chip" data-query="namaz timing">
+          <span>"namaz timing"</span>
+          <span class="chip-badge">Islamic Fiqh</span>
+        </button>
+        <button class="test-chip" data-query="khat speed post">
+          <span>"khat speed post"</span>
+          <span class="chip-badge">Urdu Postal</span>
+        </button>
+        <button class="test-chip" data-query="mobile ergonomics">
+          <span>"mobile ergonomics"</span>
+          <span class="chip-badge">Directive 5</span>
+        </button>
+        <button class="test-chip" data-query="?">
+          <span>❓ Help & Shortcuts</span>
+          <span class="chip-badge">Cheatsheet</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Multi-Domain Showcase Content (Auto-crawled by AISearch) -->
+    <main class="section-grid">
+
+      <!-- Section 1: Logistics & Courier -->
+      <article class="content-card" id="section-logistics">
+        <h2>
+          <span>📦 Courier Logistics & Rapid Shipment Tracking</span>
+          <span class="badge-tag">Logistics</span>
+        </h2>
+        <p>
+          Our courier dispatch portal integrates automated status lookups across leading parcel carriers including DTDC, Delhivery, Speed Post, and Blue Dart. Track air express shipments and surface cargo dockets instantly with real-time transit telemetry.
+        </p>
+        <ul>
+          <li><strong>Air Express Consignment:</strong> Guaranteed 24-hour inter-city courier delivery for urgent legal documents and medicine.</li>
+          <li><strong>Surface Cargo Tracking:</strong> Heavy freight logistics tracking with detailed milestone logs from dispatch hub to delivery destination.</li>
+          <li><strong>Proof of Delivery (POD):</strong> Digital signature verification and instant SMS delivery confirmation upon handover.</li>
+        </ul>
+      </article>
+
+      <!-- Section 2: Nutrition & Muscle Protocol -->
+      <article class="content-card" id="section-nutrition">
+        <h2>
+          <span>🥑 Weight Gain & High-Calorie Nutrition Protocol</span>
+          <span class="badge-tag">Health</span>
+        </h2>
+        <p>
+          For lean individuals aiming to overcome metabolic plateaus, maintaining a consistent calorie surplus is paramount. Consuming 2,800 to 3,200 nutrient-dense kilocalories daily provides the necessary energy to support muscle protein synthesis and healthy body weight gain.
+        </p>
+        <ul>
+          <li><strong>Mass Builder Shake:</strong> Whole milk, oats, peanut butter, banana, and whey protein isolate supplying 850 clean calories.</li>
+          <li><strong>Macro Distribution:</strong> Target 1.8g to 2.2g of protein per kilogram of body weight, combined with complex carbohydrates for glycogen replenishment.</li>
+          <li><strong>Progressive Overload:</strong> Pair nutrition with compound resistance exercises (squats, bench press, deadlifts) 4 times weekly.</li>
+        </ul>
+      </article>
+
+      <!-- Section 3: Postal Code Directory -->
+      <article class="content-card" id="section-pincodes">
+        <h2>
+          <span>📮 India National Postal Code & Pincode Directory</span>
+          <span class="badge-tag">Postal</span>
+        </h2>
+        <p>
+          Locate postal routing codes and post office delivery jurisdictions across all 28 states and union territories. The six-digit PIN code system assigns delivery beats for seamless courier dispatch and mail sorting.
+        </p>
+        <ul>
+          <li><strong>New Delhi GPO (PIN 110001):</strong> Central Delhi head sorting office covering Connaught Place and central administrative districts.</li>
+          <li><strong>Mumbai GPO (PIN 400001):</strong> Maharashtra circle central delivery zone handling high-volume commercial dispatches.</li>
+          <li><strong>Kolkata GPO (PIN 700001):</strong> West Bengal postal headquarters serving B.B.D. Bagh and the central commercial corridor.</li>
+        </ul>
+      </article>
+
+      <!-- Section 4: Islamic Jurisprudence & Timings -->
+      <article class="content-card" id="section-fiqh">
+        <h2>
+          <span>🕌 Islamic Jurisprudence, Salat & Fasting Times</span>
+          <span class="badge-tag">Fiqh</span>
+        </h2>
+        <p>
+          Authoritative Hanafi jurisprudence calculations for daily prayer timings (Salat/Namaz), Tahajjud, and fasting schedules (Roza, Sehri, and Iftar). Calculated with solar twilight zenith angles to guarantee accurate observance.
+        </p>
+        <ul>
+          <li><strong>Fajr & Sehri Cutoff:</strong> Begins at true astronomical dawn (Subh Sadiq) when the white thread of light appears on the horizon.</li>
+          <li><strong>Zuhr, Asr, and Maghrib:</strong> Zuhr commences immediately after solar zenith; Asr starts at Mithlayn in the Hanafi school; Maghrib begins at sunset.</li>
+          <li><strong>Wudu Guidelines:</strong> Ritual purification requirements for valid prayer, including face, arms to elbows, head wipe, and feet to ankles.</li>
+        </ul>
+      </article>
+
+      <!-- Section 5: Antigravity Developer Suite -->
+      <article class="content-card" id="section-developer">
+        <h2>
+          <span>⚡ Antigravity Workspace Directives & Engineering Resilience</span>
+          <span class="badge-tag">Developer</span>
+        </h2>
+        <p>
+          The Antigravity system enforces strict engineering standards to build durable, self-healing web applications and progressive web apps (PWAs).
+        </p>
+        <ul>
+          <li><strong>Directive 5 (Mobile Touch Ergonomics):</strong> Touch target hitboxes must measure at least 48px to eliminate tap friction. Defensive bootloaders isolate module initialization in separate try/catch blocks.</li>
+          <li><strong>Directive 7 (Zero Music Jurisprudence):</strong> Prohibits musical tracks or background songs while fully allowing functional non-musical acoustic feedback (procedural Web Audio clicks and chimes).</li>
+          <li><strong>Directive 6 (Cloud Synchronization):</strong> Automatic deployment to GitHub Pages ensures mobile devices receive immediate updates without manual steps.</li>
+        </ul>
+      </article>
+
+    </main>
+
+    <footer class="demo-footer">
+      <p>Antigravity Universal AI Search Kit · 100% Offline Client-Side BM25 & Semantic Synonym Engine</p>
+      <p style="margin-top: 8px;">
+        <a href="AI_SEARCH_USER_GUIDE.md" style="color: var(--accent-cyan); text-decoration: none; font-weight: 600;">📘 Read the Master User Guide & Integration Playbook &rarr;</a>
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- AI Search Kit Script -->
+  <script src="ai_search.js"></script>
+
+  <script>
+    // Defensive Bootloader Initialization (Directive 5)
+    function initDemo() {
+      try {
+        // Initialize AI Search with auto-crawling
+        const search = AISearch.init({
+          autoCrawl: true,
+          enableSound: true,
+          placeholder: 'Type "kuik traking", "food", or "pincode"...'
+        });
+
+        // Explicitly wire top search button
+        const topBtn = document.getElementById('top-search-btn');
+        if (topBtn) {
+          topBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (AISearch) AISearch.open();
+          });
+        }
+
+        // Wire quick test chips
+        document.querySelectorAll('.test-chip').forEach(function (chip) {
+          chip.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const query = chip.getAttribute('data-query');
+            if (query && AISearch) {
+              AISearch.open();
+              setTimeout(function () {
+                const input = document.getElementById('ai-search-input');
+                if (input) {
+                  input.value = query;
+                  input.dispatchEvent(new Event('input', { bubbles: true }));
+                  input.focus();
+                }
+              }, 50);
+            }
+          });
+        });
+
+      } catch (err) {
+        console.error('Failed to initialize demo search:', err);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initDemo);
+    } else {
+      initDemo();
+    }
+  </script>
+</body>
+</html>

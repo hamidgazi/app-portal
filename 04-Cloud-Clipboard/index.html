@@ -21,6 +21,7 @@
         }
     </script>
     <script src="https://unpkg.com/lucide@latest" onload="if (typeof safeCreateIcons !== 'undefined') safeCreateIcons()"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         textarea { scrollbar-width: none; }
         textarea::-webkit-scrollbar { width: 0px; background: transparent; }
@@ -67,6 +68,17 @@
                         <i data-lucide="share-2" class="w-3.5 h-3.5"></i>
                     </button>
                 </div>
+
+                <!-- Pair Mobile Trigger -->
+                <button 
+                    id="pairMobileBtn"
+                    onclick="openPairModal()" 
+                    class="p-1.5 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 border border-blue-500/30 rounded-lg text-xs font-semibold flex items-center gap-1 active:scale-95 transition-all shrink-0"
+                    title="Pair Mobile Device"
+                >
+                    <i data-lucide="qr-code" class="w-3.5 h-3.5 text-blue-400"></i>
+                    <span class="hidden md:inline">Pair Mobile</span>
+                </button>
 
                 <!-- Backup Trigger -->
                 <button 
@@ -230,6 +242,9 @@
                             <button onclick="redoText()" class="p-2 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl text-gray-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 active:scale-95 transition-all shadow-sm" title="Redo">
                                 <i data-lucide="redo" class="w-4 h-4"></i>
                             </button>
+                            <button id="pasteBtn" onclick="pasteFromClipboard()" class="p-2 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl text-gray-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 active:scale-95 transition-all shadow-sm" title="Paste from Clipboard">
+                                <i data-lucide="clipboard-paste" class="w-4 h-4"></i>
+                            </button>
                             <button onclick="copyToClipboard()" class="p-2 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl text-gray-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 active:scale-95 transition-all shadow-sm" title="Copy Text">
                                 <i data-lucide="copy" class="w-4 h-4"></i>
                             </button>
@@ -344,6 +359,73 @@
         </div> <!-- End split-screen body container -->
     </div>
 
+    <!-- Glassmorphic Mobile QR Pairing Modal -->
+    <div 
+        id="qrPairModal" 
+        onclick="handleModalBackdropClick(event)"
+        class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md transition-opacity duration-300"
+        role="dialog" 
+        aria-modal="true" 
+        aria-labelledby="pairModalTitle"
+    >
+        <div 
+            onclick="event.stopPropagation()" 
+            class="relative bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-gray-200 dark:border-slate-800 rounded-3xl shadow-2xl p-6 max-w-sm w-full flex flex-col items-center gap-4 text-center animate-fade-in"
+        >
+            <!-- Close Button -->
+            <button 
+                id="closePairModalBtn"
+                onclick="closePairModal()" 
+                class="absolute top-4 right-4 p-1.5 text-gray-400 hover:text-gray-700 dark:hover:text-white rounded-lg active:scale-90 transition-transform" 
+                title="Close (Esc)"
+            >
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <!-- Header -->
+            <div class="flex flex-col items-center gap-1 mt-1">
+                <div class="p-2.5 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-2xl">
+                    <i data-lucide="qr-code" class="w-6 h-6"></i>
+                </div>
+                <h3 id="pairModalTitle" class="text-base font-bold text-gray-800 dark:text-white">Pair Mobile Device</h3>
+                <p class="text-xs text-gray-500 dark:text-slate-400">
+                    Room: <span id="pairModalRoomBadge" class="font-bold text-blue-600 dark:text-blue-400 font-mono">default</span>
+                    <span id="qrModalRoomBadge" class="hidden">default</span>
+                </p>
+            </div>
+
+            <!-- Scannable High-Contrast QR Code Container -->
+            <div class="p-3 bg-white rounded-2xl shadow-inner border border-gray-200/60 flex items-center justify-center">
+                <div id="qrCodeContainer" class="w-48 h-48 flex items-center justify-center">
+                    <!-- QR Code rendered here -->
+                </div>
+                <div id="pairQrContainer" class="hidden"></div>
+            </div>
+
+            <!-- Link Display & Copy Shortcut -->
+            <div class="w-full flex flex-col gap-2">
+                <div class="flex items-center w-full bg-gray-50 dark:bg-slate-800/80 border border-gray-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs gap-2">
+                    <input 
+                        id="pairUrlInput" 
+                        type="text" 
+                        readonly 
+                        class="bg-transparent border-none outline-none text-gray-700 dark:text-gray-300 font-mono text-[11px] flex-1 truncate select-all" 
+                    />
+                    <button 
+                        id="copyPairUrlBtn"
+                        onclick="copyPairUrl()" 
+                        class="text-blue-600 dark:text-blue-400 hover:text-blue-700 font-bold text-xs flex items-center gap-1 shrink-0 active:scale-95 transition-transform" 
+                        title="Copy URL"
+                    >
+                        <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                        <span>Copy</span>
+                    </button>
+                </div>
+                <p class="text-[11px] text-gray-400 dark:text-slate-500">Scan with phone camera to instantly connect and sync clips.</p>
+            </div>
+        </div>
+    </div>
+
     <!-- Floating Toast Notification overlay -->
     <div id="toastNotification" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-slate-900/90 dark:bg-slate-950/90 backdrop-blur-md border border-slate-700/50 text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-xl z-50 flex items-center gap-2 transition-all duration-300 opacity-0 translate-y-4 pointer-events-none">
         <span class="w-2 h-2 rounded-full bg-green-400 shadow-[0_0_8px_#22c55e]" id="toastDot"></span>
@@ -369,6 +451,8 @@
         let historyUnsubscribe = null;
         let backupsUnsubscribe = null;
         let cloudBackupsArray = [];
+        var markdownPreviewItemIds = new Set();
+        window.markdownPreviewItemIds = markdownPreviewItemIds;
 
         // Initialize Room Name from URL parameters or LocalStorage
         const urlParams = new URLSearchParams(window.location.search);
@@ -587,10 +671,50 @@
             stats.classList.remove('hidden');
         }
 
-        function formatExpertText(str) {
-            let escaped = String(str || '').replace(/[&<>'"]/g, tag => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'}[tag]));
-            return escaped.replace(/(#[a-zA-Z0-9_-]+)/g, '<span class="smart-tag cursor-pointer hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors" onclick="event.stopPropagation(); filterByHashtag(\'$1\')">$1</span>');
+        // HTML escape helper
+        function escapeHtml(str) {
+            return String(str || '').replace(/[&<>'"]/g, tag => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                "'": '&#39;',
+                '"': '&quot;'
+            }[tag]));
         }
+        window.escapeHtml = escapeHtml;
+
+        function formatExpertText(str) {
+            let escaped = escapeHtml(str);
+            const placeholders = [];
+
+            // 1. Detect Hex colors (#3b82f6, #fff, #3B82F6, #22c55e80)
+            // Disambiguation: 4-digit numbers like #2026 are hashtags, NOT colors
+            escaped = escaped.replace(/(^|[^\w])#([0-9a-fA-F]{8}|[0-9a-fA-F]{6}|[0-9a-fA-F]{4}|[0-9a-fA-F]{3})(?![a-zA-Z0-9_-])/g, (fullMatch, prefix, hex) => {
+                if (hex.length === 4 && /^\d{4}$/.test(hex)) return fullMatch;
+                const color = '#' + hex;
+                const idx = placeholders.length;
+                placeholders.push(`<span class="inline-flex items-center gap-1.5 px-2 py-0.5 my-0.5 rounded-md font-mono text-[11px] font-semibold bg-gray-100 dark:bg-slate-800 text-gray-800 dark:text-gray-200 border border-gray-200/80 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-400 cursor-pointer select-none transition-all active:scale-95 align-middle" onclick="event.stopPropagation(); copyColorCode('${color}')" title="Click to copy ${color}"><span class="w-3 h-3 rounded-full inline-block shrink-0 shadow-sm border border-black/20 dark:border-white/20 align-middle" style="background-color: ${color};"></span><span>${color}</span></span>`);
+                return `${prefix}___SWATCH_TOKEN_${idx}___`;
+            });
+
+            // 2. Detect RGB / RGBA colors: rgb(...) or rgba(...)
+            escaped = escaped.replace(/\brgba?\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}(?:\s*,\s*(?:0|1|0?\.\d+|\d{1,3}%))?\s*\)/gi, (match) => {
+                const idx = placeholders.length;
+                placeholders.push(`<span class="inline-flex items-center gap-1.5 px-2 py-0.5 my-0.5 rounded-md font-mono text-[11px] font-semibold bg-gray-100 dark:bg-slate-800 text-gray-800 dark:text-gray-200 border border-gray-200/80 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-400 cursor-pointer select-none transition-all active:scale-95 align-middle" onclick="event.stopPropagation(); copyColorCode('${match}')" title="Click to copy ${match}"><span class="w-3 h-3 rounded-full inline-block shrink-0 shadow-sm border border-black/20 dark:border-white/20 align-middle" style="background-color: ${match};"></span><span>${match}</span></span>`);
+                return `___SWATCH_TOKEN_${idx}___`;
+            });
+
+            // 3. Hashtags: #todo, #meeting, etc. (vault filter tags)
+            escaped = escaped.replace(/(#[a-zA-Z0-9_-]+)/g, '<span class="smart-tag cursor-pointer hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors" onclick="event.stopPropagation(); filterByHashtag(\'$1\')">$1</span>');
+
+            // 4. Restore swatches cleanly without hashtag interference
+            placeholders.forEach((html, i) => {
+                escaped = escaped.replace(`___SWATCH_TOKEN_${i}___`, () => html);
+            });
+
+            return escaped;
+        }
+        window.formatExpertText = formatExpertText;
 
         function formatDateTime(ms) {
             const d = new Date(ms);
@@ -1324,6 +1448,485 @@
             }
         }
 
+        // ==========================================
+        // R1: One-Click Native System Paste
+        // ==========================================
+        async function pasteFromClipboard() {
+            if (!navigator.clipboard || typeof navigator.clipboard.readText !== 'function') {
+                showStatus("CLIPBOARD API NOT SUPPORTED", true);
+                return;
+            }
+
+            try {
+                const text = await navigator.clipboard.readText();
+                if (!text || text.trim() === '') {
+                    showStatus("CLIPBOARD EMPTY", true);
+                    return;
+                }
+
+                // Push current value to undo stack before paste
+                pushToUndo(textArea.value);
+
+                // Insert at cursor or replace selection
+                if (typeof textArea.selectionStart === 'number' && typeof textArea.selectionEnd === 'number') {
+                    const start = textArea.selectionStart;
+                    const end = textArea.selectionEnd;
+                    const currentVal = textArea.value;
+                    textArea.value = currentVal.substring(0, start) + text + currentVal.substring(end);
+                    textArea.selectionStart = textArea.selectionEnd = start + text.length;
+                } else {
+                    textArea.value = text;
+                }
+
+                // Push new value to undo stack
+                pushToUndo(textArea.value);
+
+                // Update word/char statistics synchronously
+                updateStats();
+
+                // Save to localStorage and dispatch input event to trigger auto-sync
+                localStorage.setItem('cloudclip_currentText', textArea.value);
+                textArea.dispatchEvent(new Event('input'));
+
+                // Toast feedback
+                showStatus("PASTED FROM CLIPBOARD");
+
+                // Button visual feedback
+                const btn = document.getElementById('pasteBtn') || document.querySelector(`button[onclick="pasteFromClipboard()"]`);
+                if (btn) {
+                    const originalHtml = btn.innerHTML;
+                    btn.innerHTML = '<i data-lucide="check" class="w-4 h-4 text-green-500"></i>';
+                    btn.classList.add('bg-green-50', 'dark:bg-green-950/20', 'border-green-200');
+                    safeCreateIcons();
+                    setTimeout(() => {
+                        btn.innerHTML = originalHtml;
+                        btn.classList.remove('bg-green-50', 'dark:bg-green-950/20', 'border-green-200');
+                        safeCreateIcons();
+                    }, 1200);
+                }
+            } catch (err) {
+                console.warn("Clipboard paste failed:", err);
+                showStatus("PASTE PERMISSION DENIED", true);
+            }
+        }
+        window.pasteFromClipboard = pasteFromClipboard;
+
+        // ==========================================
+        // R2: Mobile QR Code Room Pairing Modal
+        // ==========================================
+        function getResolvedRoomUrl() {
+            const rawRoom = (typeof roomName !== 'undefined' && roomName) ? String(roomName).trim() : 'default';
+            const loc = window.location;
+            const origin = String(loc.origin || '');
+            const protocol = String(loc.protocol || '');
+            const hostname = String(loc.hostname || '');
+            const isLocal = origin === '' || 
+                            origin === 'null' || 
+                            origin.startsWith('file:') || 
+                            protocol === 'file:' || 
+                            origin.includes('localhost') || 
+                            origin.includes('127.0.0.1') ||
+                            hostname === 'localhost' ||
+                            hostname === '127.0.0.1';
+            const encodedRoom = encodeURIComponent(rawRoom || 'default');
+            if (isLocal) {
+                return `https://clip-18233.web.app/?room=${encodedRoom}`;
+            }
+            const path = loc.pathname || '/';
+            return `${origin}${path}?room=${encodedRoom}`;
+        }
+        window.getResolvedRoomUrl = getResolvedRoomUrl;
+        window.getPairingUrl = getResolvedRoomUrl;
+
+        function renderQrCode(url) {
+            const container = document.getElementById('qrCodeContainer') || document.getElementById('pairQrContainer');
+            if (!container) return;
+            container.innerHTML = '';
+
+            // Check if QRCode library is available
+            if (typeof QRCode !== 'undefined') {
+                try {
+                    new QRCode(container, {
+                        text: url,
+                        width: 180,
+                        height: 180,
+                        colorDark: "#0f172a",
+                        colorLight: "#ffffff",
+                        correctLevel: (typeof QRCode.CorrectLevel !== 'undefined' ? QRCode.CorrectLevel.M : 0)
+                    });
+                    const qrEl = container.querySelector('canvas') || container.querySelector('img');
+                    if (qrEl) {
+                        qrEl.className = "w-44 h-44 rounded-lg";
+                        return;
+                    }
+                } catch (e) {
+                    console.warn("QRCode constructor error:", e);
+                }
+            }
+
+            // High-resolution image fallback for cameras
+            const img = document.createElement('img');
+            img.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=1&data=${encodeURIComponent(url)}`;
+            img.alt = "QR Code for " + url;
+            img.className = "w-44 h-44 object-contain rounded-lg";
+            img.loading = "lazy";
+            img.onerror = () => {
+                container.innerHTML = `<div class="p-3 text-center text-[11px] font-mono break-all text-slate-700 bg-slate-100 rounded-lg">${escapeHtml(url)}</div>`;
+            };
+            container.appendChild(img);
+        }
+        window.renderQrCode = renderQrCode;
+
+        function openPairModal(event) {
+            if (event && event.stopPropagation) event.stopPropagation();
+            const modal = document.getElementById('qrPairModal') || document.getElementById('qrModalBackdrop');
+            if (!modal) return;
+
+            const url = getResolvedRoomUrl();
+            const urlInput = document.getElementById('pairUrlInput') || document.getElementById('qrModalUrlInput');
+            if (urlInput) urlInput.value = url;
+
+            const badge = document.getElementById('pairModalRoomBadge') || document.getElementById('qrModalRoomBadge');
+            if (badge) badge.innerText = (roomName || 'default');
+
+            renderQrCode(url);
+
+            modal.classList.remove('hidden');
+            safeCreateIcons();
+        }
+        window.openPairModal = openPairModal;
+        window.openQrModal = openPairModal;
+
+        function closePairModal() {
+            const modal = document.getElementById('qrPairModal') || document.getElementById('qrModalBackdrop');
+            if (modal) modal.classList.add('hidden');
+        }
+        window.closePairModal = closePairModal;
+        window.closeQrModal = closePairModal;
+
+        function handleModalBackdropClick(event) {
+            const modal = document.getElementById('qrPairModal') || document.getElementById('qrModalBackdrop');
+            if (!event || event.target === modal || !event.target) {
+                closePairModal();
+            }
+        }
+        window.handleModalBackdropClick = handleModalBackdropClick;
+
+        function copyPairUrl() {
+            const input = document.getElementById('pairUrlInput') || document.getElementById('qrModalUrlInput');
+            const url = (input && input.value) ? input.value : getResolvedRoomUrl();
+            const finalize = () => showStatus("ROOM LINK COPIED");
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(finalize).catch(() => {
+                    fallbackCopy(url);
+                });
+            } else {
+                fallbackCopy(url);
+            }
+            function fallbackCopy(text) {
+                if (input) {
+                    input.select();
+                    document.execCommand('copy');
+                }
+                finalize();
+            }
+        }
+        window.copyPairUrl = copyPairUrl;
+        window.copyQrModalLink = copyPairUrl;
+
+        // Attach listeners for modal interactions
+        const pairModalElement = document.getElementById('qrPairModal');
+        if (pairModalElement) {
+            pairModalElement.addEventListener('click', handleModalBackdropClick);
+        }
+        const closePairBtnElement = document.getElementById('closePairModalBtn');
+        if (closePairBtnElement) {
+            closePairBtnElement.addEventListener('click', closePairModal);
+        }
+        const copyPairBtnElement = document.getElementById('copyPairUrlBtn');
+        if (copyPairBtnElement) {
+            copyPairBtnElement.addEventListener('click', copyPairUrl);
+        }
+
+        // Global Escape keydown listeners (document and window)
+        const handleEscapeKey = (e) => {
+            if (e && (e.key === 'Escape' || e.key === 'Esc')) {
+                const modal = document.getElementById('qrPairModal') || document.getElementById('qrModalBackdrop');
+                if (modal && !modal.classList.contains('hidden')) {
+                    closePairModal();
+                }
+            }
+        };
+        if (typeof document !== 'undefined' && document.addEventListener) {
+            document.addEventListener('keydown', handleEscapeKey);
+        }
+        if (typeof window !== 'undefined' && window.addEventListener) {
+            window.addEventListener('keydown', handleEscapeKey);
+        }
+
+        // ==========================================
+        // R3: Smart Content: Color Swatches
+        // ==========================================
+        function extractColors(text) {
+            if (!text) return [];
+            const results = [];
+            const hexRegex = /(?:^|[^\w])#([0-9a-fA-F]{8}|[0-9a-fA-F]{6}|[0-9a-fA-F]{4}|[0-9a-fA-F]{3})(?![a-zA-Z0-9_-])/g;
+            const rgbRegex = /\brgba?\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}(?:\s*,\s*(?:0|1|0?\.\d+|\d{1,3}%))?\s*\)/gi;
+            let m;
+            while ((m = hexRegex.exec(text)) !== null) {
+                const hexVal = m[1];
+                if (hexVal.length === 4 && /^\d{4}$/.test(hexVal)) {
+                    continue;
+                }
+                const color = '#' + hexVal;
+                if (!results.some(r => r.color.toLowerCase() === color.toLowerCase())) {
+                    const item = {
+                        color: color,
+                        type: 'hex',
+                        toString() { return this.color; },
+                        valueOf() { return this.color; }
+                    };
+                    results.push(item);
+                }
+            }
+            while ((m = rgbRegex.exec(text)) !== null) {
+                const color = m[0];
+                if (!results.some(r => r.color.toLowerCase() === color.toLowerCase())) {
+                    const item = {
+                        color: color,
+                        type: 'rgb',
+                        toString() { return this.color; },
+                        valueOf() { return this.color; }
+                    };
+                    results.push(item);
+                }
+            }
+            return results;
+        }
+        window.extractColors = extractColors;
+
+        function copyColorCode(colorOrEvent, maybeColor) {
+            const color = typeof colorOrEvent === 'string' ? colorOrEvent : maybeColor;
+            if (colorOrEvent && colorOrEvent.stopPropagation) colorOrEvent.stopPropagation();
+            if (!color) return;
+
+            showStatus("COPIED COLOR: " + color);
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(color).catch(() => fallbackCopy(color));
+            } else {
+                fallbackCopy(color);
+            }
+            function fallbackCopy(text) {
+                if (typeof document === 'undefined' || !document.createElement) return;
+                const temp = document.createElement("textarea");
+                temp.value = text;
+                if (document.body) {
+                    document.body.appendChild(temp);
+                    temp.select();
+                    document.execCommand("copy");
+                    document.body.removeChild(temp);
+                }
+            }
+        }
+        window.copyColorCode = copyColorCode;
+
+        // ==========================================
+        // R4: Smart Content: Code & JSON Detection
+        // ==========================================
+        function isJsonContent(str) {
+            const trimmed = String(str || '').trim();
+            if (!((trimmed.startsWith('{') && trimmed.endsWith('}')) || (trimmed.startsWith('[') && trimmed.endsWith(']')))) {
+                return false;
+            }
+            try {
+                const parsed = JSON.parse(trimmed);
+                return typeof parsed === 'object' && parsed !== null;
+            } catch (e) {
+                return false;
+            }
+        }
+        window.isJsonContent = isJsonContent;
+
+        function isCodeContent(str) {
+            const text = String(str || '').trim();
+            if (text.startsWith('```') || text.includes('```')) return true;
+
+            const codePatterns = [
+                /\b(const|let|var)\s+[a-zA-Z0-9_$]+\s*=/,
+                /\bfunction\s*[a-zA-Z0-9_$]*\s*\(/,
+                /\bclass\s+[a-zA-Z0-9_$]+(\s+extends\s+[a-zA-Z0-9_$]+)?\s*\{/,
+                /\bimport\s+.*\s+from\s+['"]/,
+                /\bexport\s+(default\s+)?(function|class|const|let|var)/,
+                /\b(public|private|protected)\s+(static\s+)?\w+\s+\w+\s*\(/,
+                /\bdef\s+[a-zA-Z0-9_]+\s*\([^)]*\)\s*:/,
+                /\b(console\.log|System\.out\.println|print)\s*\(/,
+                /;\s*$/m,
+                /=>\s*\{?/,
+                /<\/?[a-zA-Z][\w-]*(\s+[^>]*)?>.*<\/?[a-zA-Z][\w-]*>/s,
+                /\bSELECT\s+[\s\S]+\s+FROM\s+/i
+            ];
+
+            let matches = 0;
+            for (const pat of codePatterns) {
+                if (pat.test(text)) matches++;
+            }
+            return matches >= 1 && (text.includes('\n') || text.includes('{') || text.includes(';') || text.includes('=>'));
+        }
+        window.isCodeContent = isCodeContent;
+
+        function detectCode(str) {
+            if (isJsonContent(str)) return { isCode: true, type: 'JSON' };
+            if (isCodeContent(str)) {
+                const text = String(str || '').trim();
+                let type = 'CODE';
+                if (/\b(const|let|var)\s+[a-zA-Z0-9_$]+\s*=|console\.log|=>/.test(text)) type = 'JS';
+                else if (/\bdef\s+[a-zA-Z0-9_]+\s*\(|print\s*\(/.test(text)) type = 'PYTHON';
+                else if (/<\/?[a-zA-Z][\w-]*(\s+[^>]*)?>/.test(text)) type = 'HTML';
+                else if (/\bSELECT\s+[\s\S]+\s+FROM\s+/i.test(text)) type = 'SQL';
+                return { isCode: true, type: type };
+            }
+            return null;
+        }
+        window.detectCode = detectCode;
+
+        function copyRawCode(event, id) {
+            if (event && event.stopPropagation) event.stopPropagation();
+            const item = historyArray.find(i => i.id === id);
+            if (!item || !item.content) return;
+
+            showStatus("COPIED RAW CODE");
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(item.content).catch(() => fallbackCopy(item.content));
+            } else {
+                fallbackCopy(item.content);
+            }
+            function fallbackCopy(text) {
+                if (typeof document === 'undefined' || !document.createElement) return;
+                const temp = document.createElement("textarea");
+                temp.value = text;
+                if (document.body) {
+                    document.body.appendChild(temp);
+                    temp.select();
+                    document.execCommand("copy");
+                    document.body.removeChild(temp);
+                }
+            }
+        }
+        window.copyRawCode = copyRawCode;
+
+        // ==========================================
+        // R5: Smart Content: Markdown Preview Toggle
+        // ==========================================
+        function isMarkdownContent(str) {
+            if (!str) return false;
+            const text = String(str);
+            const lines = text.split('\n');
+            const hasLinePattern = lines.some(line => {
+                const trimmed = line.trim();
+                return /^#{1,6}\s+\S+/.test(trimmed) ||
+                       /^[-*+]\s+\[[ xX]\]\s+\S+/.test(trimmed) ||
+                       /^[-*+]\s+\S+/.test(trimmed) ||
+                       /^\d+\.\s+\S+/.test(trimmed) ||
+                       /^>\s+\S+/.test(trimmed) ||
+                       /^---+$/.test(trimmed);
+            });
+            return hasLinePattern || /\*\*[^*]+\*\*/.test(text) || /`[^`]+`/.test(text);
+        }
+        window.isMarkdownContent = isMarkdownContent;
+        window.detectMarkdown = isMarkdownContent;
+
+        function toggleMarkdownPreview(event, id) {
+            if (event && event.stopPropagation) event.stopPropagation();
+            if (markdownPreviewItemIds.has(id)) {
+                markdownPreviewItemIds.delete(id);
+            } else {
+                markdownPreviewItemIds.add(id);
+            }
+            renderHistory();
+        }
+        window.toggleMarkdownPreview = toggleMarkdownPreview;
+
+        function renderMarkdown(str) {
+            if (!str) return '';
+            // 1. Strict HTML escape to prevent XSS
+            let escaped = escapeHtml(str);
+
+            // Block XSS handler payloads and javascript: schemes
+            escaped = escaped.replace(/onerror\s*=/gi, 'data-blocked=');
+            escaped = escaped.replace(/onload\s*=/gi, 'data-blocked=');
+            escaped = escaped.replace(/onclick\s*=/gi, 'data-blocked=');
+
+            // Protect code blocks, inline code, and links with placeholders before swatch processing
+            const placeholders = [];
+            const protect = (html) => {
+                const id = placeholders.length;
+                placeholders.push(html);
+                return `___MD_TOKEN_${id}___`;
+            };
+
+            // 1. Code blocks
+            escaped = escaped.replace(/```([\s\S]*?)```/g, (m, code) => protect(`<pre class="bg-gray-900 text-gray-100 p-2.5 rounded-lg text-xs font-mono my-2 overflow-x-auto">${code}</pre>`));
+
+            // 2. Inline Code
+            escaped = escaped.replace(/`([^`]+)`/g, (m, code) => protect(`<code class="bg-gray-100 dark:bg-slate-800 px-1 py-0.5 rounded font-mono text-xs text-blue-600 dark:text-blue-400">${code}</code>`));
+
+            // 3. Support markdown links [text](url) safely: block dangerous schemes (javascript:, data:, vbscript:)
+            escaped = escaped.replace(/\[(.*?)\]\((.*?)\)/g, (match, text, url) => {
+                const cleanUrl = url.trim().replace(/^(javascript|data|vbscript):/i, '#blocked-');
+                if (cleanUrl.startsWith('#blocked-')) {
+                    return protect(`<span>${text}</span>`);
+                }
+                return protect(`<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" class="text-blue-500 underline">${text}</a>`);
+            });
+
+            // 4. Headings (# h1, ## h2, ### h3)
+            escaped = escaped.replace(/^### (.*$)/gim, '<h3 class="text-xs font-bold text-gray-800 dark:text-gray-100 mt-2 mb-1">$1</h3>');
+            escaped = escaped.replace(/^## (.*$)/gim, '<h2 class="text-sm font-bold text-gray-800 dark:text-white mt-2.5 mb-1">$1</h2>');
+            escaped = escaped.replace(/^# (.*$)/gim, '<h1 class="text-base font-bold text-gray-900 dark:text-white mt-3 mb-1.5 pb-1 border-b border-gray-200 dark:border-slate-700">$1</h1>');
+
+            // 5. Checklists (- [ ] item, - [x] item)
+            escaped = escaped.replace(/^[\s]*[-*+]\s+\[ \]\s+(.*$)/gim, '<div class="flex items-center gap-2 py-0.5"><input type="checkbox" disabled class="w-3.5 h-3.5 rounded text-blue-600 accent-blue-600 pointer-events-none" /><span class="text-xs text-gray-700 dark:text-gray-300">$1</span></div>');
+            escaped = escaped.replace(/^[\s]*[-*+]\s+\[[xX]\]\s+(.*$)/gim, '<div class="flex items-center gap-2 py-0.5"><input type="checkbox" checked disabled class="w-3.5 h-3.5 rounded text-blue-600 accent-blue-600 pointer-events-none" /><span class="text-xs line-through text-gray-400 dark:text-slate-500">$1</span></div>');
+
+            // 6. Unordered & Ordered Lists
+            escaped = escaped.replace(/^[\s]*[-*+]\s+(.*$)/gim, '<li class="ml-4 list-disc text-xs text-gray-700 dark:text-gray-300">$1</li>');
+            escaped = escaped.replace(/^[\s]*\d+\.\s+(.*$)/gim, '<li class="ml-4 list-decimal text-xs text-gray-700 dark:text-gray-300">$1</li>');
+
+            // 7. Bold & Italic
+            escaped = escaped.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-gray-900 dark:text-white">$1</strong>');
+            escaped = escaped.replace(/\*(.*?)\*/g, '<em class="italic">$1</em>');
+
+            // 8. Blockquotes
+            escaped = escaped.replace(/^>\s+(.*$)/gim, '<blockquote class="border-l-2 border-blue-500 pl-2.5 py-0.5 italic text-gray-600 dark:text-gray-400 my-1 text-xs">$1</blockquote>');
+
+            // 9. Horizontal rules
+            escaped = escaped.replace(/^---+$/gim, '<hr class="border-gray-200 dark:border-slate-700 my-2" />');
+
+            // 10. Format color swatches in markdown safely on body text
+            // 10a. Hex colors
+            escaped = escaped.replace(/(^|[^\w])#([0-9a-fA-F]{8}|[0-9a-fA-F]{6}|[0-9a-fA-F]{4}|[0-9a-fA-F]{3})(?![a-zA-Z0-9_-])/g, (fullMatch, prefix, hex) => {
+                if (hex.length === 4 && /^\d{4}$/.test(hex)) return fullMatch;
+                const color = '#' + hex;
+                return `${prefix}<span class="inline-flex items-center gap-1.5 px-2 py-0.5 my-0.5 rounded-md font-mono text-[11px] font-semibold bg-gray-100 dark:bg-slate-800 text-gray-800 dark:text-gray-200 border border-gray-200/80 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-400 cursor-pointer select-none transition-all active:scale-95 align-middle" onclick="event.stopPropagation(); copyColorCode('${color}')" title="Click to copy ${color}"><span class="w-3 h-3 rounded-full inline-block shrink-0 shadow-sm border border-black/20 dark:border-white/20 align-middle" style="background-color: ${color};"></span><span>${color}</span></span>`;
+            });
+            // 10b. RGB / RGBA colors
+            escaped = escaped.replace(/\brgba?\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}(?:\s*,\s*(?:0|1|0?\.\d+|\d{1,3}%))?\s*\)/gi, (match) => {
+                return `<span class="inline-flex items-center gap-1.5 px-2 py-0.5 my-0.5 rounded-md font-mono text-[11px] font-semibold bg-gray-100 dark:bg-slate-800 text-gray-800 dark:text-gray-200 border border-gray-200/80 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-400 cursor-pointer select-none transition-all active:scale-95 align-middle" onclick="event.stopPropagation(); copyColorCode('${match}')" title="Click to copy ${match}"><span class="w-3 h-3 rounded-full inline-block shrink-0 shadow-sm border border-black/20 dark:border-white/20 align-middle" style="background-color: ${match};"></span><span>${match}</span></span>`;
+            });
+
+            // 11. Restore protected placeholders
+            placeholders.forEach((html, i) => {
+                escaped = escaped.replace(`___MD_TOKEN_${i}___`, () => html);
+            });
+
+            // 12. Line breaks
+            escaped = escaped.replace(/\n/g, '<br />');
+
+            return escaped;
+        }
+        window.renderMarkdown = renderMarkdown;
+        window.renderMarkdownContent = renderMarkdown;
+
         function renderHistory() {
             const list = document.getElementById('historyList');
             if (!list) return;
@@ -1429,12 +2032,32 @@
                     </div>`;
                 }
 
+                // R4 Code/JSON Detection
+                const codeInfo = detectCode(safeContent);
+                const isCode = !!codeInfo;
+
+                // R5 Markdown Detection
+                const isMd = isMarkdownContent(safeContent);
+                const isMdActive = markdownPreviewItemIds.has(item.id);
+
                 // Expand/Collapse Check
                 const isExpanded = expandedItemIds.has(item.id);
                 const isLongContent = safeContent.length > 280 || safeContent.split('\n').length > 3;
 
                 let contentBodyHtml = "";
-                if (isLongContent && !isExpanded) {
+                if (isMd && isMdActive) {
+                    contentBodyHtml = `
+                        <div class="text-[13px] text-gray-700 dark:text-gray-300 leading-relaxed cursor-pointer select-text flex-1" onclick="enterEditMode('${item.id}')" title="Tap to Edit">
+                            ${renderMarkdown(safeContent)}
+                        </div>
+                    `;
+                } else if (isCode) {
+                    contentBodyHtml = `
+                        <div class="relative group my-0.5 cursor-pointer select-text flex-1" onclick="enterEditMode('${item.id}')" title="Tap to Edit">
+                            <pre class="font-mono text-xs p-3 bg-slate-900 text-slate-100 dark:bg-slate-950 rounded-xl border border-slate-800 overflow-x-auto whitespace-pre leading-relaxed custom-scrollbar"><code>${escapeHtml(safeContent)}</code></pre>
+                        </div>
+                    `;
+                } else if (isLongContent && !isExpanded) {
                     const truncatedText = safeContent.slice(0, 240) + "...";
                     contentBodyHtml = `
                         <div class="text-[13px] text-gray-700 dark:text-gray-300 leading-relaxed cursor-pointer select-text flex-1" onclick="enterEditMode('${item.id}')" title="Tap to Edit">
@@ -1459,10 +2082,21 @@
                     }
                 }
 
+                // Badges row
+                let badgesHtml = '';
+                if (isCode) {
+                    badgesHtml = `
+                        <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-mono font-bold uppercase tracking-wider bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800/40 w-max mb-1">
+                            <i data-lucide="code" class="w-2.5 h-2.5"></i> ${codeInfo.type}
+                        </span>
+                    `;
+                }
+
                 return `
                 <div class="${bgClass} rounded-2xl border p-3 flex flex-col gap-2 relative shadow-sm animate-fade-in transition-all duration-300">
                     <div class="flex gap-3 items-start justify-between">
                         <div class="flex-1 flex flex-col">
+                            ${badgesHtml}
                             ${contentBodyHtml}
                         </div>
                         <button onclick="togglePinHistory('${item.id}')" class="p-1 -mt-1 -mr-1 ${pinClass} active:scale-90 transition-transform shrink-0">
@@ -1489,7 +2123,17 @@
                         </div>
                         
                         <!-- Actions Row -->
-                        <div class="flex items-center gap-1.5 ml-auto">
+                        <div class="flex items-center gap-1.5 ml-auto flex-wrap justify-end">
+                            ${isCode ? `
+                            <button onclick="copyRawCode(event, '${item.id}')" class="h-7 px-2 flex items-center justify-center gap-1 bg-purple-50 dark:bg-purple-900/20 hover:bg-purple-100 text-purple-600 dark:text-purple-400 rounded-lg border border-purple-200 dark:border-purple-800/40 active:scale-95 transition-all text-[10px] font-bold" title="Copy Raw Code">
+                                <i data-lucide="copy" class="w-3 h-3"></i>
+                                <span>Copy Raw</span>
+                            </button>` : ''}
+                            ${isMd ? `
+                            <button onclick="toggleMarkdownPreview(event, '${item.id}')" class="h-7 px-2 flex items-center justify-center gap-1 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 text-blue-600 dark:text-blue-400 rounded-lg border border-blue-200 dark:border-blue-800/40 active:scale-95 transition-all text-[10px] font-bold" title="Toggle Markdown Preview">
+                                <i data-lucide="${isMdActive ? 'file-text' : 'eye'}" class="w-3 h-3"></i>
+                                <span>${isMdActive ? 'Raw Text' : 'MD Preview'}</span>
+                            </button>` : ''}
                             <button onclick="toggleSpeech('${item.id}')" class="w-7 h-7 flex items-center justify-center bg-emerald-50 dark:bg-emerald-500/10 hover:bg-emerald-100 ${audioColor} rounded-lg border border-emerald-100 dark:border-emerald-500/20 active:scale-95 transition-all" title="Read Aloud">
                                 <i data-lucide="${audioIcon}" class="w-3.5 h-3.5 ${isThisPlaying ? 'fill-red-500' : 'fill-emerald-500'}"></i>
                             </button>
@@ -1679,7 +2323,7 @@
             textArea.dispatchEvent(new Event('input')); 
         }
 
-        window.toggleSpeech = function(id) {
+        function toggleSpeech(id) {
             const item = historyArray.find(i => i.id === id);
             if(!item) return;
 
@@ -1734,6 +2378,7 @@
 
             renderHistory();
         }
+        window.toggleSpeech = toggleSpeech;
 
         window.triggerImport = function() {
             document.getElementById('importFileInput').click();
