@@ -1,6 +1,6 @@
 /**
  * Corpus Engine - Surah Navigator, Deep Ayah Analyzer, Thematic Graph & Mutashabihat
- * Client-Side Modular Reader & Analytics Integration
+ * Client-Side Modular Reader with Zero-CORS Dynamic Script Loading
  */
 
 class CorpusEngine {
@@ -18,31 +18,40 @@ class CorpusEngine {
 
   async init() {
     try {
-      console.log("[CorpusEngine] Loading metadata & telemetry...");
-      const [sRes, tRes, mRes, wRes] = await Promise.all([
-        fetch('data/quran_surah_telemetry.json').then(r => r.json()).catch(() => []),
-        fetch('data/quran_thematic_graph.json').then(r => r.json()).catch(() => []),
-        fetch('data/quran_mutashabihat.json').then(r => r.json()).catch(() => []),
-        fetch('data/quran_waqf_rules.json').then(r => r.json()).catch(() => [])
-      ]);
+      console.log("[CorpusEngine] Initializing corpus engine...");
 
-      this.surahsTelemetry = sRes;
-      this.thematicGraph = tRes;
-      this.mutashabihat = mRes;
-      this.waqfRules = wRes;
+      if (window.QURAN_CORE_DATA) {
+        this.surahsTelemetry = window.QURAN_CORE_DATA.surahsTelemetry || [];
+        this.thematicGraph = window.QURAN_CORE_DATA.thematicGraph || [];
+        this.mutashabihat = window.QURAN_CORE_DATA.mutashabihat || [];
+        this.waqfRules = window.QURAN_CORE_DATA.waqfRules || [];
+        console.log("[CorpusEngine] Loaded from window.QURAN_CORE_DATA (Zero-CORS)");
+      } else {
+        console.log("[CorpusEngine] Fetching metadata via HTTP...");
+        const [sRes, tRes, mRes, wRes] = await Promise.all([
+          fetch('data/quran_surah_telemetry.json').then(r => r.json()).catch(() => []),
+          fetch('data/quran_thematic_graph.json').then(r => r.json()).catch(() => []),
+          fetch('data/quran_mutashabihat.json').then(r => r.json()).catch(() => []),
+          fetch('data/quran_waqf_rules.json').then(r => r.json()).catch(() => [])
+        ]);
+
+        this.surahsTelemetry = sRes;
+        this.thematicGraph = tRes;
+        this.mutashabihat = mRes;
+        this.waqfRules = wRes;
+      }
 
       this.renderSurahNavigator();
       this.populateSurahDropdown();
       this.renderThematicGraph();
       this.renderMutashabihat();
       this.renderWaqfRules();
-
       this.setupSurahControls();
 
       // Load initial Surah (Al-Fatihah)
       await this.loadSurah(1);
 
-      console.log("[CorpusEngine] Initialized successfully.");
+      console.log(`[CorpusEngine] Initialized with ${this.surahsTelemetry.length} Surahs.`);
     } catch (err) {
       console.error("[CorpusEngine] Failed to initialize:", err);
     }
@@ -102,7 +111,6 @@ class CorpusEngine {
 
     let list = [...this.surahsTelemetry];
 
-    // Filter by type
     if (this.surahFilterMode === "makki") {
       list = list.filter(s => (s.place || "").toLowerCase().includes("makki") || s.place === "مکی");
     } else if (this.surahFilterMode === "madani") {
@@ -113,7 +121,6 @@ class CorpusEngine {
       list.sort((a, b) => a.revelation_order - b.revelation_order);
     }
 
-    // Search query
     if (this.surahSearchQuery) {
       const q = this.surahSearchQuery;
       list = list.filter(s => {
@@ -182,11 +189,48 @@ class CorpusEngine {
       const select = document.getElementById("active-surah-select");
       if (select) select.value = surahId;
 
-      const filename = String(surahId).padStart(3, '0') + '.json';
-      const res = await fetch(`data/surahs/${filename}`);
-      this.currentSurahData = await res.json();
+      // 1. Check if already loaded in memory
+      if (window.QURAN_SURAHS && window.QURAN_SURAHS[surahId]) {
+        this.currentSurahData = window.QURAN_SURAHS[surahId];
+        this.renderAyahAnalyzer();
+        return;
+      }
 
-      this.renderAyahAnalyzer();
+      // 2. Try HTTP fetch if online
+      if (window.location.protocol.startsWith("http")) {
+        try {
+          const filename = String(surahId).padStart(3, '0') + '.json';
+          const res = await fetch(`data/surahs/${filename}`);
+          if (res.ok) {
+            this.currentSurahData = await res.json();
+            window.QURAN_SURAHS = window.QURAN_SURAHS || {};
+            window.QURAN_SURAHS[surahId] = this.currentSurahData;
+            this.renderAyahAnalyzer();
+            return;
+          }
+        } catch (fetchErr) {
+          // Fall through to script loader
+        }
+      }
+
+      // 3. Dynamic script injection (Zero-CORS offline under file://)
+      await new Promise((resolve, reject) => {
+        const sName = String(surahId).padStart(3, '0');
+        const script = document.createElement("script");
+        script.src = `data/surahs_js/${sName}.js`;
+        script.onload = () => {
+          if (window.QURAN_SURAHS && window.QURAN_SURAHS[surahId]) {
+            this.currentSurahData = window.QURAN_SURAHS[surahId];
+            this.renderAyahAnalyzer();
+            resolve();
+          } else {
+            reject(new Error(`Surah ${surahId} not found in script.`));
+          }
+        };
+        script.onerror = (err) => reject(err);
+        document.head.appendChild(script);
+      });
+
     } catch (err) {
       console.error(`Failed to load Surah ${surahId}:`, err);
     }
@@ -289,7 +333,6 @@ class CorpusEngine {
 
     ayatContainer.innerHTML = html;
 
-    // Bind Tafsir toggles
     ayatContainer.querySelectorAll(".tafsir-toggle-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         if (window.AudioSFX) window.AudioSFX.playClick();
@@ -302,7 +345,6 @@ class CorpusEngine {
       });
     });
 
-    // Bind word pill clicks
     ayatContainer.querySelectorAll(".word-pill").forEach(pill => {
       pill.addEventListener("click", () => {
         if (window.AudioSFX) window.AudioSFX.playClick();

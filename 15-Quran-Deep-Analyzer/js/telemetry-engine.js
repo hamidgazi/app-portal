@@ -1,6 +1,6 @@
 /**
  * Quantitative Telemetry & Multi-Level Word Frequency Engine
- * Client-Side In-Memory Analytical Core
+ * Client-Side In-Memory Analytical Core with Zero-CORS Offline Support
  */
 
 class TelemetryEngine {
@@ -18,24 +18,34 @@ class TelemetryEngine {
 
   async init() {
     try {
-      console.log("[Telemetry] Loading datasets...");
-      const [wRes, rRes, lRes, hRes, sRes] = await Promise.all([
-        fetch('data/quran_word_frequency_top1000.json').then(r => r.json()).catch(() => []),
-        fetch('data/quran_roots.json').then(r => r.json()).catch(() => []),
-        fetch('data/quran_lemmas.json').then(r => r.json()).catch(() => []),
-        fetch('data/quran_hapax_legomena.json').then(r => r.json()).catch(() => []),
-        fetch('data/quran_semantic_pairs.json').then(r => r.json()).catch(() => [])
-      ]);
+      console.log("[Telemetry] Initializing telemetry engine...");
+      if (window.QURAN_CORE_DATA) {
+        this.words = window.QURAN_CORE_DATA.wordsTop1000 || [];
+        this.roots = window.QURAN_CORE_DATA.roots || [];
+        this.lemmas = window.QURAN_CORE_DATA.lemmas || [];
+        this.hapax = window.QURAN_CORE_DATA.hapax || [];
+        this.semanticPairs = window.QURAN_CORE_DATA.semanticPairs || [];
+        console.log("[Telemetry] Loaded from window.QURAN_CORE_DATA (Zero-CORS)");
+      } else {
+        console.log("[Telemetry] Fetching datasets via HTTP...");
+        const [wRes, rRes, lRes, hRes, sRes] = await Promise.all([
+          fetch('data/quran_word_frequency_top1000.json').then(r => r.json()).catch(() => []),
+          fetch('data/quran_roots.json').then(r => r.json()).catch(() => []),
+          fetch('data/quran_lemmas.json').then(r => r.json()).catch(() => []),
+          fetch('data/quran_hapax_legomena.json').then(r => r.json()).catch(() => []),
+          fetch('data/quran_semantic_pairs.json').then(r => r.json()).catch(() => [])
+        ]);
 
-      this.words = wRes;
-      this.roots = rRes;
-      this.lemmas = lRes;
-      this.hapax = hRes;
-      this.semanticPairs = sRes;
+        this.words = wRes;
+        this.roots = rRes;
+        this.lemmas = lRes;
+        this.hapax = hRes;
+        this.semanticPairs = sRes;
+      }
 
       this.render();
       this.setupEventListeners();
-      console.log("[Telemetry] Datasets initialized successfully.");
+      console.log(`[Telemetry] Initialized with ${this.words.length} words, ${this.roots.length} roots.`);
     } catch (err) {
       console.error("[Telemetry] Failed to load telemetry data:", err);
     }
