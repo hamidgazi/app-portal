@@ -418,23 +418,23 @@ class CorpusEngine {
 
           <div class="translations-block">
             ${a.translation_english ? `
-              <div class="translation-item trans-layer-en" style="${this.showEnglish ? 'display:flex;' : 'display:none;'}">
+              <div class="translation-item trans-layer-en" dir="ltr" style="${this.showEnglish ? 'display:flex;' : 'display:none;'}">
                 <span class="compact-trans-tag en">EN</span>
                 <div class="trans-text english">${a.translation_english}</div>
               </div>
             ` : ''}
 
             ${a.translation_urdu_kanzul_iman ? `
-              <div class="translation-item trans-layer-ki" style="${this.showKanzulIman ? 'display:flex;' : 'display:none;'}">
+              <div class="translation-item trans-layer-ki" dir="rtl" style="${this.showKanzulIman ? 'display:flex;' : 'display:none;'}">
                 <span class="compact-trans-tag ur-ki">کنز الایمان</span>
-                <div class="trans-text urdu">${a.translation_urdu_kanzul_iman}</div>
+                <div class="trans-text urdu" dir="rtl">${a.translation_urdu_kanzul_iman}</div>
               </div>
             ` : ''}
 
             ${a.translation_urdu_kanzul_irfan ? `
-              <div class="translation-item trans-layer-kr" style="${this.showKanzulIrfan ? 'display:flex;' : 'display:none;'}">
+              <div class="translation-item trans-layer-kr" dir="rtl" style="${this.showKanzulIrfan ? 'display:flex;' : 'display:none;'}">
                 <span class="compact-trans-tag ur-kr">کنز العرفان</span>
-                <div class="trans-text urdu">${a.translation_urdu_kanzul_irfan}</div>
+                <div class="trans-text urdu" dir="rtl">${a.translation_urdu_kanzul_irfan}</div>
               </div>
             ` : ''}
           </div>
