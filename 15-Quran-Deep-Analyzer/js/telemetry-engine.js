@@ -338,8 +338,29 @@ class TelemetryEngine {
   }
 
   renderSemanticPairs(container) {
+    let pairs = this.semanticPairs;
+    if (this.searchQuery) {
+      const q = this.searchQuery.toLowerCase();
+      pairs = pairs.filter(p => {
+        return (p.concept && p.concept.toLowerCase().includes(q)) ||
+               (p.term1_ar && p.term1_ar.includes(this.searchQuery)) ||
+               (p.term2_ar && p.term2_ar.includes(this.searchQuery)) ||
+               (p.term1_label && p.term1_label.toLowerCase().includes(q)) ||
+               (p.term2_label && p.term2_label.toLowerCase().includes(q)) ||
+               (p.term1_en && p.term1_en.toLowerCase().includes(q)) ||
+               (p.term2_en && p.term2_en.toLowerCase().includes(q)) ||
+               (p.term1_ur && p.term1_ur.toLowerCase().includes(q)) ||
+               (p.term2_ur && p.term2_ur.toLowerCase().includes(q));
+      });
+    }
+
+    if (pairs.length === 0) {
+      container.innerHTML = `<div style="text-align: center; padding: 40px; color: var(--text-dim); font-size: 1rem;">No semantic pairs found matching "${this.searchQuery}".</div>`;
+      return;
+    }
+
     let html = `<div class="semantic-grid">`;
-    this.semanticPairs.forEach(p => {
+    pairs.forEach(p => {
       const isBalanced = p.is_balanced || p.term1_count === p.term2_count;
       const tibaqCount = p.tibaq_count || (p.tibaq_sample ? p.tibaq_sample.length : 0);
       const ratioDisplay = p.ratio ? `${p.ratio}:1` : 'N/A';

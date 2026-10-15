@@ -1489,6 +1489,567 @@ footer.app-footer {
   margin-top: auto;
 }
 
+/* ==========================================================================
+   Thematic Graph RTL & Inline Preview Architecture
+   ========================================================================== */
+.thematic-topic-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  margin-bottom: 14px;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.thematic-topic-card:hover {
+  border-color: var(--border-accent);
+}
+
+.thematic-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  direction: rtl;
+  text-align: right;
+}
+
+.thematic-title-urdu {
+  font-family: var(--font-urdu);
+  font-size: 1.45rem;
+  line-height: 1.8;
+  color: #38bdf8;
+  margin: 0;
+  text-align: right;
+  direction: rtl;
+  letter-spacing: 0;
+  font-weight: 500;
+}
+
+.thematic-citations-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+  direction: ltr; /* Keeps badge labels formatted naturally */
+}
+
+.topic-citation-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+}
+
+.topic-citation-btn:hover,
+.topic-citation-btn.active {
+  background: rgba(212, 175, 55, 0.15);
+  border-color: rgba(212, 175, 55, 0.4);
+  color: #fbbf24;
+}
+
+.thematic-preview-drawer {
+  background: rgba(8, 11, 18, 0.95);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  margin-top: 14px;
+  animation: fadeIn 0.2s ease;
+}
+
+.thematic-preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  gap: 10px;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 8px;
+}
+
+.preview-coord-badge {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.12);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+}
+
+.preview-arabic-text {
+  font-family: var(--font-arabic);
+  font-size: 1.65rem;
+  line-height: 2;
+  color: #f8fafc;
+  direction: rtl;
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+.preview-trans-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.preview-trans-en {
+  font-size: 0.92rem;
+  color: #cbd5e1;
+  line-height: 1.5;
+}
+
+.preview-trans-ur {
+  font-family: var(--font-urdu);
+  font-size: 1.22rem;
+  color: #fbbf24;
+  line-height: 1.8;
+  direction: rtl;
+  text-align: right;
+}
+
+/* ==========================================================================
+   Mutashabihat Comparative Parallels Architecture (>= 2 Occurrences)
+   ========================================================================== */
+.mutashabihat-cluster-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-card);
+}
+
+.cluster-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 16px;
+}
+
+.cluster-badge-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.cluster-num-badge {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  font-weight: 800;
+  font-size: 0.8rem;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+}
+
+.cluster-type-badge {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-subtle);
+}
+
+.cluster-meta-pill {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.count-highlight {
+  font-weight: 700;
+  color: #fbbf24;
+}
+
+.mutashabihat-comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 14px;
+}
+
+.parallel-verse-node {
+  background: rgba(8, 12, 20, 0.85);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color 0.15s ease;
+}
+
+.parallel-verse-node:hover {
+  border-color: rgba(212, 175, 55, 0.35);
+}
+
+.parallel-verse-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.surah-coord-badge {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.coord-sname {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #38bdf8;
+}
+
+.coord-num {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+
+.parallel-arabic-text {
+  font-family: var(--font-arabic);
+  font-size: 1.55rem;
+  line-height: 1.9;
+  color: #f8fafc;
+  direction: rtl;
+  text-align: right;
+  padding: 8px 0;
+  word-spacing: 2px;
+}
+
+.parallel-trans {
+  font-size: 0.86rem;
+  line-height: 1.45;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.parallel-trans.en {
+  color: #cbd5e1;
+}
+
+.parallel-trans.ur {
+  font-family: var(--font-urdu);
+  font-size: 1.15rem;
+  color: #e2e8f0;
+  line-height: 1.7;
+  direction: rtl;
+  text-align: right;
+}
+
+/* ==========================================================================
+   Sticky Floating Quick-Nav Controller in Deep Ayah Analyzer
+   ========================================================================== */
+.sticky-ayah-controller {
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99;
+  width: calc(100% - 32px);
+  max-width: 900px;
+  background: rgba(10, 14, 24, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: var(--radius-full);
+  padding: 6px 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(212, 175, 55, 0.15);
+  animation: slideDownFade 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideDownFade {
+  from { opacity: 0; transform: translate(-50%, -15px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.sticky-inner-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: nowrap;
+}
+
+.sticky-surah-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 160px;
+}
+
+.sticky-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+}
+
+.sticky-select {
+  padding: 6px 12px;
+  min-height: 34px;
+  font-size: 0.85rem;
+  width: 100%;
+}
+
+.sticky-jump-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sticky-input {
+  width: 70px;
+  min-height: 34px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-main);
+  padding: 4px 8px;
+  font-size: 0.85rem;
+  text-align: center;
+  outline: none;
+}
+
+.sticky-input:focus {
+  border-color: var(--border-focus);
+}
+
+.sticky-go-btn {
+  min-height: 34px;
+  padding: 4px 10px;
+}
+
+.sticky-actions-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ==========================================================================
+   Cyber-Glass Omnisearch Command Palette (Ctrl+K / '/')
+   ========================================================================== */
+.omnisearch-trigger-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 36px;
+}
+
+.omnisearch-trigger-btn:hover {
+  background: rgba(212, 175, 55, 0.12);
+  border-color: rgba(212, 175, 55, 0.4);
+  color: #fbbf24;
+}
+
+.omnisearch-trigger-btn kbd {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 0.7rem;
+  color: var(--text-dim);
+}
+
+.omnisearch-box {
+  background: #090e18;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 680px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.85), 0 0 30px rgba(212, 175, 55, 0.2);
+  overflow: hidden;
+  animation: modalScale 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.omnisearch-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: rgba(12, 17, 28, 0.95);
+}
+
+.omnisearch-icon {
+  font-size: 1.25rem;
+  color: var(--accent-gold);
+}
+
+.omnisearch-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-main);
+  font-size: 1.1rem;
+  font-family: inherit;
+}
+
+.omnisearch-esc-hint {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  padding: 2px 8px;
+}
+
+.omnisearch-quick-filters {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  background: rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid var(--border-subtle);
+  overflow-x: auto;
+}
+
+.omni-filter-chip {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-dim);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.omni-filter-chip:hover {
+  color: var(--text-main);
+}
+
+.omni-filter-chip.active {
+  background: rgba(212, 175, 55, 0.15);
+  border-color: rgba(212, 175, 55, 0.35);
+  color: #fbbf24;
+}
+
+.omnisearch-results {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 50vh;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.omni-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  background: transparent;
+  border: 1px solid transparent;
+}
+
+.omni-item:hover,
+.omni-item.selected {
+  background: rgba(212, 175, 55, 0.08);
+  border-color: rgba(212, 175, 55, 0.25);
+}
+
+.omni-item-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.omni-category-badge {
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.omni-category-badge.surah { background: rgba(56, 189, 248, 0.15); color: #38bdf8; }
+.omni-category-badge.verse { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+.omni-category-badge.prophet { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+.omni-category-badge.theme { background: rgba(192, 132, 252, 0.15); color: #c084fc; }
+.omni-category-badge.word { background: rgba(244, 63, 94, 0.15); color: #f43f5e; }
+
+.omni-item-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.omni-item-desc {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+
+.omni-item-right {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  flex-shrink: 0;
+}
+
+.omnisearch-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  padding: 10px 20px;
+  background: rgba(10, 14, 22, 0.9);
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+
+.omnisearch-footer kbd {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  border-radius: 3px;
+  padding: 1px 5px;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
 /* Mobile Touch Ergonomics */
 @media (max-width: 768px) {
   header.app-header {

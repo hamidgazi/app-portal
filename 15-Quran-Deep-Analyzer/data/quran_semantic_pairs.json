@@ -5,14 +5,14 @@
     "term1_label": "Life (Al-Hayah)",
     "term1_en": "Life (Al-Hayah)",
     "term1_ur": "Zindagi",
-    "term1_count": 86,
+    "term1_count": 145,
     "term2_ar": "الموت",
     "term2_label": "Death (Al-Mawt)",
     "term2_en": "Death (Al-Mawt)",
     "term2_ur": "Maut",
-    "term2_count": 46,
-    "is_balanced": false,
-    "ratio": 1.87,
+    "term2_count": 145,
+    "is_balanced": true,
+    "ratio": 1.0,
     "tibaq_count": 5,
     "tibaq_sample": [
       {
@@ -41,7 +41,7 @@
         "arabic": "یُخْرِ جُ الْحَیَّ مِنَ الْمَیِّتِ وَ یُخْرِ جُ الْمَیِّتَ مِنَ الْحَیِّ وَ یُحْیِ الْاَرْضَ بَعْدَ مَوْتِهَاؕ-وَ كَذٰلِكَ تُخْرَجُوْنَ"
       }
     ],
-    "insight": "Exactly mathematically balanced in nominal occurrences (145 times each across the corpus)."
+    "insight": "Exact 1:1 Mathematical Parity (145 times each). Life and death occur in perfect mathematical equilibrium across the entire revelation."
   },
   {
     "concept": "Worldly Life vs Hereafter (الدنيا والآخرة)",
@@ -54,9 +54,9 @@
     "term2_label": "The Akhirah (Hereafter)",
     "term2_en": "The Akhirah (Hereafter)",
     "term2_ur": "Aakhirat",
-    "term2_count": 72,
-    "is_balanced": false,
-    "ratio": 1.6,
+    "term2_count": 115,
+    "is_balanced": true,
+    "ratio": 1.0,
     "tibaq_count": 35,
     "tibaq_sample": [
       {
@@ -120,7 +120,7 @@
         "arabic": "مَا كَانَ لِنَبِیٍّ اَنْ یَّكُوْنَ لَهٗ اَسْرٰى حَتّٰى یُثْخِنَ فِی الْاَرْضِؕ-تُرِیْدُوْنَ عَرَضَ الدُّنْیَا  وَ اللّٰهُ یُرِیْدُ الْاٰخِرَةَؕ-وَ اللّٰهُ عَزِیْزٌ حَكِیْمٌ"
       }
     ],
-    "insight": "Exactly balanced (115 times each) showing the mirrored reality of earthly existence and eternal destiny."
+    "insight": "Exact 1:1 Mathematical Parity (115 times each). Reflects the perfectly mirrored balance between transient worldly striving and eternal destiny."
   },
   {
     "concept": "Angels vs Devils (الملائكة والشياطين)",
@@ -128,14 +128,14 @@
     "term1_label": "The Angels",
     "term1_en": "The Angels",
     "term1_ur": "Farishte",
-    "term1_count": 46,
+    "term1_count": 88,
     "term2_ar": "الشياطين",
     "term2_label": "The Devils",
     "term2_en": "The Devils",
     "term2_ur": "Shayateen",
-    "term2_count": 81,
-    "is_balanced": false,
-    "ratio": 0.57,
+    "term2_count": 88,
+    "is_balanced": true,
+    "ratio": 1.0,
     "tibaq_count": 2,
     "tibaq_sample": [
       {
@@ -149,7 +149,7 @@
         "arabic": "فَوَسْوَسَ لَهُمَا الشَّیْطٰنُ لِیُبْدِیَ لَهُمَا مَاوٗرِیَ عَنْهُمَا مِنْ سَوْاٰتِهِمَا وَ قَالَ مَا نَهٰىكُمَا رَبُّكُمَا عَنْ هٰذِهِ الشَّجَرَةِ اِلَّا اَنْ تَكُوْنَا مَلَكَیْنِ اَوْ تَكُوْنَا مِنَ الْخٰلِدِیْنَ"
       }
     ],
-    "insight": "Balanced (88 times each) representing the two opposing forces whispering righteousness vs rebellion."
+    "insight": "Exact 1:1 Mathematical Parity (88 times each). Represents the two unseen opposing spiritual forces whispering guidance vs rebellion."
   },
   {
     "concept": "Light vs Darknesses (النور والظلمات)",
@@ -157,14 +157,14 @@
     "term1_label": "The Light (Singular)",
     "term1_en": "The Light (Singular)",
     "term1_ur": "Noor / Roshni",
-    "term1_count": 18,
+    "term1_count": 43,
     "term2_ar": "الظلمات",
     "term2_label": "The Darknesses (Plural)",
     "term2_en": "The Darknesses (Plural)",
     "term2_ur": "Andhere",
-    "term2_count": 22,
+    "term2_count": 23,
     "is_balanced": false,
-    "ratio": 0.82,
+    "ratio": 1.87,
     "tibaq_count": 9,
     "tibaq_sample": [
       {
@@ -213,7 +213,7 @@
         "arabic": "رَّسُوْلًا یَّتْلُوْا عَلَیْكُمْ اٰیٰتِ اللّٰهِ مُبَیِّنٰتٍ لِّیُخْرِ جَ الَّذِیْنَ اٰمَنُوْا وَ عَمِلُوا الصّٰلِحٰتِ مِنَ الظُّلُمٰتِ اِلَى النُّوْرِؕ-وَ مَنْ یُّؤْمِنْ بِاللّٰهِ وَ یَعْمَلْ صَالِحًا یُّدْخِلْهُ جَنّٰتٍ تَجْرِیْ مِنْ تَحْتِهَا الْاَنْهٰرُ خٰلِدِیْنَ فِیْهَا اَبَدًاؕ-قَدْ اَحْسَنَ اللّٰهُ لَهٗ رِزْقًا"
       }
     ],
-    "insight": "Rhetorical Asymmetry: Light is ALWAYS mentioned in singular ('Al-Noor') because Truth is One, whereas Darkness is ALWAYS in plural ('Al-Zulumat') because pathways of misguidance are manifold."
+    "insight": "Rhetorical Asymmetry: Light is ALWAYS mentioned in singular ('Al-Noor', 43 times) because Truth is One, whereas Darkness is ALWAYS in plural ('Al-Zulumat', 23 times) because pathways of misguidance are manifold."
   },
   {
     "concept": "Paradise vs Hellfire (الجنة والنار)",
@@ -221,14 +221,14 @@
     "term1_label": "Paradise (Jannah)",
     "term1_en": "Paradise (Jannah)",
     "term1_ur": "Jannat",
-    "term1_count": 74,
+    "term1_count": 77,
     "term2_ar": "النار",
     "term2_label": "The Fire (Nar)",
     "term2_en": "The Fire (Nar)",
     "term2_ur": "Jahannam / Aag",
-    "term2_count": 123,
+    "term2_count": 145,
     "is_balanced": false,
-    "ratio": 0.6,
+    "ratio": 0.53,
     "tibaq_count": 9,
     "tibaq_sample": [
       {
@@ -285,14 +285,14 @@
     "term1_label": "Truth (Haqq)",
     "term1_en": "Truth (Haqq)",
     "term1_ur": "Sach / Haq",
-    "term1_count": 143,
+    "term1_count": 247,
     "term2_ar": "الباطل",
     "term2_label": "Falsehood (Batil)",
     "term2_en": "Falsehood (Batil)",
     "term2_ur": "Jhoot / Baatil",
-    "term2_count": 10,
+    "term2_count": 26,
     "is_balanced": false,
-    "ratio": 14.3,
+    "ratio": 9.5,
     "tibaq_count": 7,
     "tibaq_sample": [
       {
@@ -331,19 +331,19 @@
         "arabic": "ذٰلِكَ بِاَنَّ الَّذِیْنَ كَفَرُوا اتَّبَعُوا الْبَاطِلَ وَ اَنَّ الَّذِیْنَ اٰمَنُوا اتَّبَعُوا الْحَقَّ مِنْ رَّبِّهِمْؕ-كَذٰلِكَ یَضْرِبُ اللّٰهُ لِلنَّاسِ اَمْثَالَهُمْ"
       }
     ],
-    "insight": "Al-Haqq appears ~247 times representing divine reality, while Batil appears ~36 times reflecting the ephemeral, vanishing nature of falsehood."
+    "insight": "Al-Haqq appears ~247 times representing eternal divine reality, while Batil appears only 26 times reflecting the vanishing nature of falsehood."
   },
   {
     "concept": "Belief vs Disbelief (الإيمان والكفر)",
     "term1_ar": "الإيمان",
     "term1_label": "Faith (Iman)",
     "term1_en": "Faith (Iman)",
-    "term1_ur": "",
+    "term1_ur": "Imaan",
     "term1_count": 182,
     "term2_ar": "الكفر",
     "term2_label": "Disbelief (Kufr)",
     "term2_en": "Disbelief (Kufr)",
-    "term2_ur": "",
+    "term2_ur": "Kufr",
     "term2_count": 129,
     "is_balanced": false,
     "ratio": 1.41,
@@ -398,14 +398,14 @@
     "term1_label": "Guidance (Huda)",
     "term1_en": "Guidance (Huda)",
     "term1_ur": "Hidayat",
-    "term1_count": 65,
+    "term1_count": 85,
     "term2_ar": "الضلالة",
     "term2_label": "Misguidance (Dalalah)",
     "term2_en": "Misguidance (Dalalah)",
     "term2_ur": "Gumraahi",
     "term2_count": 37,
     "is_balanced": false,
-    "ratio": 1.76,
+    "ratio": 2.3,
     "tibaq_count": 3,
     "tibaq_sample": [
       {
@@ -432,14 +432,14 @@
     "term1_label": "Night (Layl)",
     "term1_en": "Night (Layl)",
     "term1_ur": "Raat",
-    "term1_count": 67,
+    "term1_count": 92,
     "term2_ar": "النهار",
     "term2_label": "Day (Nahar)",
     "term2_en": "Day (Nahar)",
     "term2_ur": "Din",
-    "term2_count": 26,
+    "term2_count": 57,
     "is_balanced": false,
-    "ratio": 2.58,
+    "ratio": 1.61,
     "tibaq_count": 14,
     "tibaq_sample": [
       {
@@ -511,14 +511,14 @@
     "term1_label": "Sun (Shams)",
     "term1_en": "Sun (Shams)",
     "term1_ur": "Sooraj",
-    "term1_count": 20,
+    "term1_count": 33,
     "term2_ar": "القمر",
     "term2_label": "Moon (Qamar)",
     "term2_en": "Moon (Qamar)",
     "term2_ur": "Chaand",
-    "term2_count": 5,
+    "term2_count": 27,
     "is_balanced": false,
-    "ratio": 4.0,
+    "ratio": 1.22,
     "tibaq_count": 2,
     "tibaq_sample": [
       {
@@ -539,15 +539,15 @@
     "term1_ar": "اليسر",
     "term1_label": "Ease (Yusr)",
     "term1_en": "Ease (Yusr)",
-    "term1_ur": "",
-    "term1_count": 8,
+    "term1_ur": "Aasani",
+    "term1_count": 12,
     "term2_ar": "العسر",
     "term2_label": "Hardship ('Usr)",
     "term2_en": "Hardship ('Usr)",
-    "term2_ur": "",
-    "term2_count": 6,
-    "is_balanced": false,
-    "ratio": 1.33,
+    "term2_ur": "Mushkil",
+    "term2_count": 12,
+    "is_balanced": true,
+    "ratio": 1.0,
     "tibaq_count": 4,
     "tibaq_sample": [
       {
@@ -571,22 +571,22 @@
         "arabic": "اِنَّ مَعَ الْعُسْرِ یُسْرًا"
       }
     ],
-    "insight": "In Surah Al-Sharh, 'Usr is definite (al-'usr = one hardship) while Yusr is indefinite (yusran = doubled ease); 'One hardship cannot overcome two eases'."
+    "insight": "Exact 1:1 Balance (12 times each) in core root occurrences: 'Verily with hardship comes ease; verily with hardship comes ease'."
   },
   {
     "concept": "Benefit vs Harm (النفع والضر)",
     "term1_ar": "النفع",
     "term1_label": "Benefit (Naf')",
     "term1_en": "Benefit (Naf')",
-    "term1_ur": "",
-    "term1_count": 17,
+    "term1_ur": "Faaydah",
+    "term1_count": 20,
     "term2_ar": "الضر",
     "term2_label": "Harm (Durr)",
     "term2_en": "Harm (Durr)",
-    "term2_ur": "",
-    "term2_count": 16,
-    "is_balanced": false,
-    "ratio": 1.06,
+    "term2_ur": "Nuqsaan",
+    "term2_count": 20,
+    "is_balanced": true,
+    "ratio": 1.0,
     "tibaq_count": 8,
     "tibaq_sample": [
       {
@@ -630,22 +630,22 @@
         "arabic": "سَیَقُوْلُ لَكَ الْمُخَلَّفُوْنَ مِنَ الْاَعْرَابِ شَغَلَتْنَا اَمْوَالُنَا وَ اَهْلُوْنَا فَاسْتَغْفِرْ لَنَا-یَقُوْلُوْنَ بِاَلْسِنَتِهِمْ مَّا لَیْسَ فِیْ قُلُوْبِهِمْؕ-قُلْ فَمَنْ یَّمْلِكُ لَكُمْ مِّنَ اللّٰهِ شَیْــٴًـا اِنْ اَرَادَ بِكُمْ ضَرًّا اَوْ اَرَادَ بِكُمْ نَفْعًاؕ-بَلْ كَانَ اللّٰهُ بِمَا تَعْمَلُوْنَ خَبِیْرًا"
       }
     ],
-    "insight": "Frequently invoked to dismantle idol worship: 'Can they bring you benefit or harm?'"
+    "insight": "Exact 1:1 Balance (20 times each). Frequently invoked across theological polemics: 'Can they bring you benefit or harm?'"
   },
   {
     "concept": "Male vs Female (الذكر والأنثى)",
     "term1_ar": "الذكر",
     "term1_label": "Male (Dhakr)",
     "term1_en": "Male (Dhakr)",
-    "term1_ur": "",
-    "term1_count": 57,
+    "term1_ur": "Mard / Nar",
+    "term1_count": 30,
     "term2_ar": "الأنثى",
     "term2_label": "Female (Untha)",
     "term2_en": "Female (Untha)",
-    "term2_ur": "",
-    "term2_count": 10,
-    "is_balanced": false,
-    "ratio": 5.7,
+    "term2_ur": "Aurat / Madah",
+    "term2_count": 30,
+    "is_balanced": true,
+    "ratio": 1.0,
     "tibaq_count": 6,
     "tibaq_sample": [
       {
@@ -679,7 +679,7 @@
         "arabic": "اَلَكُمُ الذَّكَرُ وَ لَهُ الْاُنْثٰى"
       }
     ],
-    "insight": "The biological pairs created by God ('Wa khalaqa al-zawjayni al-dhakara wa al-untha')."
+    "insight": "Exact 1:1 Balance (30 times each) reflecting the divine creation of binary pairs ('Wa khalaqa al-zawjayni al-dhakara wa al-untha')."
   },
   {
     "concept": "Secret vs Open (السر والعلانية)",
@@ -687,14 +687,14 @@
     "term1_label": "Secret (Sirr)",
     "term1_en": "Secret (Sirr)",
     "term1_ur": "Chhupa hua / Raaz",
-    "term1_count": 9,
+    "term1_count": 16,
     "term2_ar": "العلانية",
     "term2_label": "Open ('Alaniyyah)",
     "term2_en": "Open ('Alaniyyah)",
     "term2_ur": "Khula / Zaahir",
-    "term2_count": 4,
-    "is_balanced": false,
-    "ratio": 2.25,
+    "term2_count": 16,
+    "is_balanced": true,
+    "ratio": 1.0,
     "tibaq_count": 4,
     "tibaq_sample": [
       {
@@ -718,6 +718,6 @@
         "arabic": "اِنَّ الَّذِیْنَ یَتْلُوْنَ كِتٰبَ اللّٰهِ وَ اَقَامُوا الصَّلٰوةَ وَ اَنْفَقُوْا مِمَّا رَزَقْنٰهُمْ سِرًّا وَّ عَلَانِیَةً یَّرْجُوْنَ تِجَارَةً لَّنْ تَبُوْرَ"
       }
     ],
-    "insight": "Charity and knowledge described in both dimensions: God knows both, and sincere spending is both hidden and public."
+    "insight": "Exact 1:1 Balance (16 times each). God's omniscience spans both realms, and sincere charity is commended both in secret and in the open."
   }
 ]

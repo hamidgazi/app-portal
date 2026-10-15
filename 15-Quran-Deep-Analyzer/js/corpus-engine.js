@@ -52,6 +52,7 @@ class CorpusEngine {
       this.renderMutashabihat();
       this.renderWaqfRules();
       this.setupSurahControls();
+      this.setupStickyController();
 
       // Load initial Surah (Al-Fatihah)
       await this.loadSurah(1);
@@ -292,6 +293,8 @@ class CorpusEngine {
       this.activeSurahId = surahId;
       const select = document.getElementById("active-surah-select");
       if (select) select.value = surahId;
+      const stickySelect = document.getElementById("sticky-surah-select");
+      if (stickySelect) stickySelect.value = surahId;
 
       // 1. Check if already loaded in memory
       if (window.QURAN_SURAHS && window.QURAN_SURAHS[surahId]) {
@@ -508,6 +511,43 @@ class CorpusEngine {
     });
   }
 
+  async getAyahData(surahId, ayahNumber) {
+    if (window.QURAN_SURAHS && window.QURAN_SURAHS[surahId]) {
+      const s = window.QURAN_SURAHS[surahId];
+      const ayah = s.ayat.find(a => a.ayatNumber === ayahNumber);
+      return { surah: s, ayah };
+    }
+    // Attempt HTTP fetch first if http/https
+    if (window.location.protocol.startsWith("http")) {
+      try {
+        const filename = String(surahId).padStart(3, '0') + '.json';
+        const res = await fetch(`data/surahs/${filename}`);
+        if (res.ok) {
+          const s = await res.json();
+          window.QURAN_SURAHS = window.QURAN_SURAHS || {};
+          window.QURAN_SURAHS[surahId] = s;
+          const ayah = s.ayat.find(a => a.ayatNumber === ayahNumber);
+          return { surah: s, ayah };
+        }
+      } catch (e) {}
+    }
+    // Fallback to script injection for offline Zero-CORS
+    await new Promise((resolve) => {
+      const sName = String(surahId).padStart(3, '0');
+      const script = document.createElement("script");
+      script.src = `data/surahs_js/${sName}.js`;
+      script.onload = () => resolve();
+      script.onerror = () => resolve();
+      document.head.appendChild(script);
+    });
+    if (window.QURAN_SURAHS && window.QURAN_SURAHS[surahId]) {
+      const s = window.QURAN_SURAHS[surahId];
+      const ayah = s.ayat.find(a => a.ayatNumber === ayahNumber);
+      return { surah: s, ayah };
+    }
+    return null;
+  }
+
   renderThematicGraph(query = "") {
     const container = document.getElementById("thematic-topics-container");
     if (!container) return;
@@ -521,20 +561,22 @@ class CorpusEngine {
     if (topics.length === 0) {
       html = `<div style="text-align: center; padding: 40px; color: var(--text-dim);">No topics found matching "${query}".</div>`;
     } else {
-      topics.slice(0, 60).forEach(t => {
+      topics.slice(0, 80).forEach((t, idx) => {
+        const topicId = t.matalib_id || (idx + 1);
         html += `
-          <div class="semantic-card" style="margin-bottom: 12px;">
-            <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
-              <h4 style="font-family: var(--font-urdu); font-size: 1.35rem; color: #38bdf8; direction: rtl; text-align: right;">${t.heading}</h4>
+          <div class="thematic-topic-card" id="thematic-topic-${topicId}">
+            <div class="thematic-card-header" dir="rtl">
+              <h4 class="thematic-heading-urdu" dir="rtl">${t.heading}</h4>
               <span class="count-pill">${t.references_count} Ayat</span>
             </div>
-            <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px;">
+            <div class="thematic-citations-row">
               ${(t.references || []).map(r => `
-                <button class="filter-btn jump-to-ayah-btn" data-surah="${r.surah_id}" data-ayah="${r.ayat_number}">
+                <button class="thematic-citation-pill" data-surah="${r.surah_id}" data-ayah="${r.ayat_number}" data-topic="${topicId}">
                   Surah ${r.surah_id}:${r.ayat_number}
                 </button>
               `).join("")}
             </div>
+            <div id="topic-preview-${topicId}" class="thematic-preview-drawer" style="display: none;"></div>
           </div>
         `;
       });
@@ -542,12 +584,70 @@ class CorpusEngine {
 
     container.innerHTML = html;
 
-    container.querySelectorAll(".jump-to-ayah-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        if (window.AudioSFX) window.AudioSFX.playTab();
-        const sId = parseInt(btn.dataset.surah, 10);
-        const aNo = parseInt(btn.dataset.ayah, 10);
-        this.jumpToAyah(sId, aNo);
+    container.querySelectorAll(".thematic-citation-pill").forEach(pill => {
+      pill.addEventListener("click", async (e) => {
+        e.stopPropagation();
+        if (window.AudioSFX) window.AudioSFX.playClick();
+
+        const sId = parseInt(pill.dataset.surah, 10);
+        const aNo = parseInt(pill.dataset.ayah, 10);
+        const topicId = pill.dataset.topic;
+        const drawer = document.getElementById(`topic-preview-${topicId}`);
+        if (!drawer) return;
+
+        // If clicking active pill, toggle drawer closed
+        if (pill.classList.contains("active") && drawer.style.display !== "none") {
+          drawer.style.display = "none";
+          pill.classList.remove("active");
+          return;
+        }
+
+        // Deactivate sibling pills in this card
+        const card = document.getElementById(`thematic-topic-${topicId}`);
+        if (card) {
+          card.querySelectorAll(".thematic-citation-pill").forEach(p => p.classList.remove("active"));
+        }
+        pill.classList.add("active");
+
+        drawer.style.display = "block";
+        drawer.innerHTML = `<div style="padding: 12px; color: var(--text-dim); text-align: center;">Loading Ayah ${sId}:${aNo} preview...</div>`;
+
+        const data = await this.getAyahData(sId, aNo);
+        if (!data || !data.ayah) {
+          drawer.innerHTML = `
+            <div class="thematic-preview-header">
+              <span class="preview-badge">Surah ${sId}:${aNo}</span>
+              <button class="filter-btn jump-to-ayah-btn" data-surah="${sId}" data-ayah="${aNo}">Read in Ayah Analyzer ↗</button>
+            </div>
+          `;
+        } else {
+          const s = data.surah;
+          const a = data.ayah;
+          drawer.innerHTML = `
+            <div class="thematic-preview-header">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="preview-badge">${s.name_roman || 'Surah ' + sId} (${sId}:${aNo})</span>
+                ${s.name_ar ? `<span style="font-family: var(--font-arabic); font-size: 1.1rem; color: var(--accent-gold);">${s.name_ar}</span>` : ''}
+              </div>
+              <button class="filter-btn jump-to-ayah-btn" data-surah="${sId}" data-ayah="${aNo}">
+                📖 Read in Context ↗
+              </button>
+            </div>
+            <div class="thematic-preview-arabic" dir="rtl">${a.arabicText}</div>
+            <div class="thematic-preview-translations">
+              ${a.translation_en ? `<div class="preview-trans-en"><strong>EN:</strong> ${a.translation_en}</div>` : ''}
+              ${a.translation_ur_ki ? `<div class="preview-trans-ur" dir="rtl"><span class="compact-trans-tag ur-ki">کنز الایمان</span> ${a.translation_ur_ki}</div>` : ''}
+            </div>
+          `;
+        }
+
+        const jumpBtn = drawer.querySelector(".jump-to-ayah-btn");
+        if (jumpBtn) {
+          jumpBtn.addEventListener("click", () => {
+            if (window.AudioSFX) window.AudioSFX.playTab();
+            this.jumpToAyah(sId, aNo);
+          });
+        }
       });
     });
   }
@@ -557,23 +657,41 @@ class CorpusEngine {
     if (!container) return;
 
     let html = "";
-    this.mutashabihat.slice(0, 40).forEach(c => {
+    this.mutashabihat.forEach(c => {
+      const sampleText = c.preview_text || c.arabic_sample || (c.occurrences && c.occurrences[0] && c.occurrences[0].arabic) || "";
       html += `
-        <div class="ayah-card" style="margin-bottom: 16px;">
-          <div class="ayah-card-meta">
-            <span class="ayah-badge" style="background: rgba(6, 182, 212, 0.15); color: #38bdf8;">Cluster #${c.cluster_id}</span>
-            <span class="count-pill">${c.match_count} Similar Verses</span>
+        <div class="mutashabihat-cluster-card">
+          <div class="cluster-card-header">
+            <div class="cluster-title-group">
+              <span class="ayah-badge" style="background: rgba(6, 182, 212, 0.15); color: #38bdf8;">Cluster #${c.cluster_id}</span>
+              <span class="count-pill gold">${c.match_count} Parallel Verses</span>
+            </div>
+            <div class="cluster-arabic-anchor" dir="rtl">${sampleText}</div>
           </div>
-          <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 12px;">
-            ${(c.occurrences || []).map(occ => `
-              <div style="background: rgba(255, 255, 255, 0.02); padding: 12px; border-radius: var(--radius-sm); border-left: 3px solid var(--accent-emerald);">
-                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                  <span class="surah-count-pill">Surah ${occ.surah_id} : Ayah ${occ.ayat_number}</span>
-                  <button class="filter-btn jump-to-ayah-btn" data-surah="${occ.surah_id}" data-ayah="${occ.ayat_number}">View in Context</button>
+          <div class="mutashabihat-comparison-grid">
+            ${(c.occurrences || []).map(occ => {
+              const sRoman = occ.surah_name_roman || occ.surah_roman || 'Surah ' + occ.surah_id;
+              const sAr = occ.surah_name_ar || occ.surah_arabic || '';
+              const urTrans = occ.translation_ur || occ.translation_ur_ki || '';
+              return `
+              <div class="parallel-verse-node">
+                <div class="parallel-node-header">
+                  <div class="parallel-location-badge">
+                    <span class="surah-count-pill">${occ.surah_id}. ${sRoman}</span>
+                    <span class="ayah-coord-pill">Ayah ${occ.ayat_number}</span>
+                    ${sAr ? `<span class="arabic-mini-name">${sAr}</span>` : ''}
+                  </div>
+                  <button class="filter-btn jump-to-ayah-btn" data-surah="${occ.surah_id}" data-ayah="${occ.ayat_number}">
+                    Open in Ayah Analyzer ↗
+                  </button>
                 </div>
-                <div style="font-family: var(--font-arabic); font-size: 1.45rem; line-height: 1.8; color: #f8fafc; direction: rtl; text-align: right;">${occ.arabic}</div>
+                <div class="parallel-arabic" dir="rtl">${occ.arabic}</div>
+                <div class="parallel-translations">
+                  ${occ.translation_en ? `<div class="parallel-trans-en"><strong>EN:</strong> ${occ.translation_en}</div>` : ''}
+                  ${urTrans ? `<div class="parallel-trans-ur" dir="rtl"><span class="compact-trans-tag ur-ki">کنز الایمان</span> ${urTrans}</div>` : ''}
+                </div>
               </div>
-            `).join("")}
+            `;}).join("")}
           </div>
         </div>
       `;
@@ -589,6 +707,91 @@ class CorpusEngine {
         this.jumpToAyah(sId, aNo);
       });
     });
+  }
+
+  setupStickyController() {
+    const stickyCtrl = document.getElementById("sticky-ayah-controller");
+    const stickySelect = document.getElementById("sticky-surah-select");
+    const stickyInput = document.getElementById("sticky-ayah-input");
+    const stickyJumpBtn = document.getElementById("sticky-jump-btn");
+    const stickyDensityToggle = document.getElementById("sticky-density-toggle");
+    const stickyScrollTopBtn = document.getElementById("sticky-scroll-top-btn");
+
+    if (!stickyCtrl) return;
+
+    // Populate dropdown
+    if (stickySelect && this.surahsTelemetry) {
+      let html = "";
+      this.surahsTelemetry.forEach(s => {
+        html += `<option value="${s.id}">${s.id}. ${s.name_roman} (${s.name_ar})</option>`;
+      });
+      stickySelect.innerHTML = html;
+
+      stickySelect.addEventListener("change", (e) => {
+        if (window.AudioSFX) window.AudioSFX.playClick();
+        const surahId = parseInt(e.target.value, 10);
+        const mainSelect = document.getElementById("active-surah-select");
+        if (mainSelect) mainSelect.value = surahId;
+        this.loadSurah(surahId);
+      });
+    }
+
+    // Jump by number
+    const doJump = () => {
+      const val = parseInt(stickyInput.value, 10);
+      if (!val || val < 1) return;
+      if (window.AudioSFX) window.AudioSFX.playClick();
+      const target = document.getElementById(`ayah-node-${val}`);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        target.style.borderColor = "var(--border-focus)";
+        target.style.boxShadow = "0 0 25px rgba(16, 185, 129, 0.4)";
+        setTimeout(() => {
+          target.style.borderColor = "";
+          target.style.boxShadow = "";
+        }, 2500);
+      }
+    };
+
+    if (stickyJumpBtn) {
+      stickyJumpBtn.addEventListener("click", doJump);
+    }
+    if (stickyInput) {
+      stickyInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") doJump();
+      });
+    }
+
+    // Toggle density
+    if (stickyDensityToggle) {
+      stickyDensityToggle.addEventListener("click", () => {
+        if (window.AudioSFX) window.AudioSFX.playClick();
+        const newMode = (this.ayahViewMode === "compact") ? "deep" : "compact";
+        this.setAyahViewMode(newMode);
+        const txt = stickyDensityToggle.querySelector(".density-text");
+        const ico = stickyDensityToggle.querySelector(".density-icon");
+        if (txt) txt.textContent = (newMode === "compact") ? "Compact" : "Deep View";
+        if (ico) ico.textContent = (newMode === "compact") ? "⚡" : "🔬";
+      });
+    }
+
+    // Scroll to top
+    if (stickyScrollTopBtn) {
+      stickyScrollTopBtn.addEventListener("click", () => {
+        if (window.AudioSFX) window.AudioSFX.playClick();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    // Show/hide on scroll
+    window.addEventListener("scroll", () => {
+      const tabAyahs = document.getElementById("tab-ayahs");
+      if (tabAyahs && tabAyahs.classList.contains("active") && window.scrollY > 300) {
+        stickyCtrl.classList.add("visible");
+      } else {
+        stickyCtrl.classList.remove("visible");
+      }
+    }, { passive: true });
   }
 
   renderWaqfRules() {

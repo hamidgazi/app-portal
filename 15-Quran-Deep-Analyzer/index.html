@@ -41,7 +41,7 @@
         </button>
         <button class="nav-tab-btn" data-tab="mutashabihat">
           <span>⚖️ Mutashabihat</span>
-          <span class="tab-badge">332</span>
+          <span class="tab-badge">95</span>
         </button>
         <button class="nav-tab-btn" data-tab="waqf">
           <span>🛑 Waqf Rules</span>
@@ -52,6 +52,13 @@
           <span class="tab-badge" style="background: rgba(168, 85, 247, 0.2); color: #c084fc;">PRO</span>
         </button>
       </nav>
+
+      <!-- Global Omnisearch Trigger Button -->
+      <button id="open-omnisearch-btn" class="omnisearch-trigger-btn" title="Open Global Omnisearch (Ctrl+K or /)">
+        <span class="omnisearch-icon">🔍</span>
+        <span class="omnisearch-btn-text">Quick Search...</span>
+        <kbd>Ctrl K</kbd>
+      </button>
     </div>
   </header>
 
@@ -158,6 +165,31 @@
 
     <!-- Tab 3: Deep Ayah Analyzer -->
     <section id="tab-ayahs" class="tab-panel">
+
+      <!-- Sticky Floating Quick-Nav Controller -->
+      <div id="sticky-ayah-controller" class="sticky-ayah-controller" aria-label="Quick Ayah Navigation">
+        <div class="sticky-inner-wrapper">
+          <div class="sticky-select-wrap">
+            <select id="sticky-surah-select" class="sticky-select" aria-label="Select Surah">
+              <!-- Populated dynamically -->
+            </select>
+          </div>
+          <div class="sticky-jump-wrap">
+            <span class="sticky-label">Ayah:</span>
+            <input type="number" id="sticky-ayah-input" class="sticky-input" min="1" max="286" placeholder="#" aria-label="Ayah Number">
+            <button id="sticky-jump-btn" class="sticky-action-btn" title="Jump to Ayah">Go</button>
+          </div>
+          <div class="sticky-divider"></div>
+          <button id="sticky-density-toggle" class="sticky-density-btn" title="Toggle Compact / Deep View">
+            <span class="density-icon">⚡</span>
+            <span class="density-text">Compact</span>
+          </button>
+          <button id="sticky-scroll-top-btn" class="sticky-icon-btn" title="Scroll to Top">
+            ▲
+          </button>
+        </div>
+      </div>
+
       <div class="ayah-analyzer-header">
         <div class="surah-selector-group">
           <label for="active-surah-select" style="font-size: 0.9rem; font-weight: 700; color: var(--text-muted);">Select Surah:</label>
@@ -315,6 +347,33 @@
       </div>
       <div id="occ-modal-body" class="modal-body">
         <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Cyber-Glass Omnisearch Command Palette Modal -->
+  <div id="omnisearch-modal" class="modal-overlay" role="dialog" aria-modal="true" style="display: none;">
+    <div class="omnisearch-box">
+      <div class="omnisearch-header">
+        <span class="omnisearch-icon">⚡</span>
+        <input type="text" id="omnisearch-input" class="omnisearch-input" placeholder="Search Surahs, Ayats (e.g. 2:255), Prophets, Topics, or Words..." autocomplete="off" spellcheck="false">
+        <kbd class="omnisearch-esc-hint">ESC</kbd>
+      </div>
+      <div class="omnisearch-quick-filters">
+        <button class="omni-filter-chip active" data-cat="all">All</button>
+        <button class="omni-filter-chip" data-cat="surahs">Surahs (114)</button>
+        <button class="omni-filter-chip" data-cat="ayahs">Ayat (6,236)</button>
+        <button class="omni-filter-chip" data-cat="prophets">Prophets (25)</button>
+        <button class="omni-filter-chip" data-cat="topics">Topics (484)</button>
+        <button class="omni-filter-chip" data-cat="words">Words</button>
+      </div>
+      <div id="omnisearch-results" class="omnisearch-results">
+        <!-- Live matches rendered here -->
+      </div>
+      <div class="omnisearch-footer">
+        <span><kbd>↑</kbd> <kbd>↓</kbd> Navigate</span>
+        <span><kbd>Enter</kbd> Select</span>
+        <span><kbd>Esc</kbd> Close</span>
       </div>
     </div>
   </div>
