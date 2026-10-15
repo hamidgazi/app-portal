@@ -144,8 +144,8 @@
         </div>
         <div class="filter-pills-group">
           <button class="filter-btn surah-filter-btn active" data-filter="all">All 114 Surahs</button>
-          <button class="filter-btn surah-filter-btn" data-filter="makki">Makki (86)</button>
-          <button class="filter-btn surah-filter-btn" data-filter="madani">Madani (28)</button>
+          <button class="filter-btn surah-filter-btn" data-filter="makki">Makki (87)</button>
+          <button class="filter-btn surah-filter-btn" data-filter="madani">Madani (27)</button>
           <button class="filter-btn surah-filter-btn" data-filter="length">Sort by Word Count</button>
           <button class="filter-btn surah-filter-btn" data-filter="order">Revelation Sequence</button>
         </div>
@@ -170,11 +170,41 @@
         </div>
       </div>
 
+      <!-- Ayah View Controls Toolbar -->
+      <div class="ayah-controls-toolbar">
+        <div class="view-mode-group">
+          <button id="view-mode-compact" class="density-btn active" title="Compact Reading View - Minimal Scrolling">
+            ⚡ Compact Reading View
+          </button>
+          <button id="view-mode-deep" class="density-btn" title="Deep Study View - All Layers Expanded">
+            🔬 Deep Study View
+          </button>
+        </div>
+        <div class="layer-toggles-group">
+          <label class="toggle-chip active" id="chip-layer-en">
+            <input type="checkbox" id="toggle-layer-en" checked>
+            <span>English</span>
+          </label>
+          <label class="toggle-chip active" id="chip-layer-ki">
+            <input type="checkbox" id="toggle-layer-ki" checked>
+            <span>کنز الایمان</span>
+          </label>
+          <label class="toggle-chip" id="chip-layer-kr">
+            <input type="checkbox" id="toggle-layer-kr">
+            <span>کنز العرفان</span>
+          </label>
+          <label class="toggle-chip" id="chip-layer-words">
+            <input type="checkbox" id="toggle-layer-words">
+            <span>Word Breakdown</span>
+          </label>
+        </div>
+      </div>
+
       <div id="active-surah-meta-banner" class="metric-pill" style="margin-bottom: 20px;">
         <!-- Surah introduction & telemetry header -->
       </div>
 
-      <div id="ayahs-list-container">
+      <div id="ayahs-list-container" class="compact-mode">
         <!-- Rendered by corpus-engine.js -->
       </div>
     </section>

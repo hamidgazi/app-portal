@@ -103,10 +103,41 @@ class TelemetryEngine {
     if (loadMoreBtn) {
       loadMoreBtn.addEventListener("click", () => {
         if (window.AudioSFX) window.AudioSFX.playClick();
-        this.displayLimit += 100;
-        this.render();
+        this.loadMore();
       });
     }
+  }
+
+  loadMore() {
+    let items = [];
+    if (this.currentMode === "words") items = this.filterWords();
+    else if (this.currentMode === "roots") items = this.filterRoots();
+    else if (this.currentMode === "lemmas") items = this.filterLemmas();
+    else if (this.currentMode === "hapax") items = this.filterHapax();
+
+    const prevLimit = this.displayLimit;
+    this.displayLimit += 100;
+    const nextChunk = items.slice(prevLimit, this.displayLimit);
+
+    const tbody = document.querySelector("#freq-data-container tbody");
+    if (!tbody || nextChunk.length === 0) {
+      this.render();
+      return;
+    }
+
+    let appendHtml = "";
+    nextChunk.forEach((item, idx) => {
+      appendHtml += this.renderRow(item, prevLimit + idx + 1);
+    });
+
+    tbody.insertAdjacentHTML("beforeend", appendHtml);
+
+    const loadMoreContainer = document.getElementById("freq-load-more-container");
+    if (loadMoreContainer) {
+      loadMoreContainer.style.display = (this.displayLimit < items.length) ? "block" : "none";
+    }
+
+    this.bindRowEvents(tbody);
   }
 
   stripTashkeel(text) {
@@ -121,7 +152,10 @@ class TelemetryEngine {
     const container = document.getElementById("freq-data-container");
     if (!container) return;
 
+    const loadMoreContainer = document.getElementById("freq-load-more-container");
+
     if (this.currentMode === "semantic") {
+      if (loadMoreContainer) loadMoreContainer.style.display = "none";
       this.renderSemanticPairs(container);
       return;
     }
@@ -172,7 +206,6 @@ class TelemetryEngine {
       </div>
     `;
 
-    const loadMoreContainer = document.getElementById("freq-load-more-container");
     if (loadMoreContainer) {
       loadMoreContainer.style.display = (visibleItems.length < items.length) ? "block" : "none";
     }
@@ -307,30 +340,41 @@ class TelemetryEngine {
   renderSemanticPairs(container) {
     let html = `<div class="semantic-grid">`;
     this.semanticPairs.forEach(p => {
+      const isBalanced = p.is_balanced || p.term1_count === p.term2_count;
+      const tibaqCount = p.tibaq_count || (p.tibaq_sample ? p.tibaq_sample.length : 0);
+      const ratioDisplay = p.ratio ? `${p.ratio}:1` : 'N/A';
       html += `
         <div class="semantic-card">
           <div class="semantic-card-header">${p.concept}</div>
           <div class="semantic-terms-row">
             <div class="semantic-term-box">
               <span class="arabic-term">${p.term1_ar}</span>
-              <span class="stat-title">${p.term1_label}</span>
-              <span class="term-count">${p.term1_count}</span>
+              <span class="stat-title">${p.term1_label || p.term1_en || ''}</span>
+              ${p.term1_ur ? `<span class="stat-urdu-badge">${p.term1_ur}</span>` : ''}
+              <span class="term-count">${(p.term1_count || 0).toLocaleString()}</span>
             </div>
             <div style="font-size: 1.5rem; color: var(--text-dim); font-weight: 300;">vs</div>
             <div class="semantic-term-box">
               <span class="arabic-term">${p.term2_ar}</span>
-              <span class="stat-title">${p.term2_label}</span>
-              <span class="term-count">${p.term2_count}</span>
+              <span class="stat-title">${p.term2_label || p.term2_en || ''}</span>
+              ${p.term2_ur ? `<span class="stat-urdu-badge">${p.term2_ur}</span>` : ''}
+              <span class="term-count">${(p.term2_count || 0).toLocaleString()}</span>
             </div>
           </div>
-          <div class="balance-status-badge ${p.is_balanced ? 'balanced' : ''}">
-            ${p.is_balanced ? '✓ Exact Mathematical Balance (1:1)' : `Ratio: ${p.ratio || 'N/A'}`}
+          <div class="balance-status-badge ${isBalanced ? 'balanced' : ''}">
+            ${isBalanced ? '✓ Exact Mathematical Balance (1:1)' : `Ratio: ${ratioDisplay}`}
           </div>
+          ${tibaqCount > 0 ? `
+            <button class="filter-btn view-tibaq-btn" style="margin-top: 12px; width: 100%; justify-content: center; background: rgba(212, 175, 55, 0.12); color: #fbbf24; border-color: rgba(212, 175, 55, 0.3);" data-val="${encodeURIComponent(JSON.stringify(p))}">
+              📖 View Tibaq Verses (${tibaqCount} Ayat)
+            </button>
+          ` : ''}
         </div>
       `;
     });
     html += `</div>`;
     container.innerHTML = html;
+    this.bindRowEvents(container);
   }
 
   bindRowEvents(container) {
@@ -344,6 +388,20 @@ class TelemetryEngine {
           this.openOccurrenceModal(btn.dataset.type, data);
         } catch (err) {
           console.error("Failed to parse occurrence data:", err);
+        }
+      });
+    });
+
+    container.querySelectorAll(".view-tibaq-btn").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (window.AudioSFX) window.AudioSFX.playClick();
+        try {
+          const raw = decodeURIComponent(btn.dataset.val);
+          const data = JSON.parse(raw);
+          this.openOccurrenceModal("tibaq", data);
+        } catch (err) {
+          console.error("Failed to parse tibaq data:", err);
         }
       });
     });
@@ -366,6 +424,54 @@ class TelemetryEngine {
     const modalTitle = document.getElementById("occ-modal-title");
     const modalBody = document.getElementById("occ-modal-body");
     if (!modal || !modalTitle || !modalBody) return;
+
+    if (type === "tibaq" || data.tibaq_sample) {
+      const tibaqList = data.tibaq_sample || [];
+      modalTitle.innerHTML = `
+        <div style="display: flex; flex-direction: column; gap: 4px; text-align: left;">
+          <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+            <span style="font-family: var(--font-arabic); font-size: 1.8rem; color: #38bdf8; direction: rtl;">${data.term1_ar} • ${data.term2_ar}</span>
+            <span class="count-pill">${data.tibaq_count || tibaqList.length} Tibaq Ayat</span>
+          </div>
+          <div style="font-size: 0.95rem; font-weight: 500; color: #f1f5f9; display: flex; align-items: center; gap: 8px;">
+            <span>${data.concept}</span>
+            ${data.insight ? `<span style="color: #34d399; font-size: 0.85rem;">(${data.insight})</span>` : ''}
+          </div>
+        </div>
+      `;
+
+      let bodyHtml = "";
+      if (tibaqList.length === 0) {
+        bodyHtml = `<p style="color: var(--text-dim); text-align: center; padding: 20px;">No sample verses recorded.</p>`;
+      } else {
+        tibaqList.forEach(v => {
+          bodyHtml += `
+            <div class="occurrence-item" style="flex-direction: column; align-items: stretch; gap: 8px; margin-bottom: 12px; padding: 14px; background: rgba(255, 255, 255, 0.02); border-left: 3px solid #d4af37; border-radius: var(--radius-sm);">
+              <div style="display: flex; align-items: center; justify-content: space-between;">
+                <span class="occ-ref-badge">Surah ${v.surah} : Ayah ${v.ayah}</span>
+                <button class="filter-btn modal-jump-btn" data-surah="${v.surah}" data-ayah="${v.ayah}">View in Context</button>
+              </div>
+              <div style="font-family: var(--font-arabic); font-size: 1.4rem; line-height: 1.8; color: #f8fafc; direction: rtl; text-align: right;">${v.arabic}</div>
+            </div>
+          `;
+        });
+      }
+      modalBody.innerHTML = bodyHtml;
+      modal.classList.add("open");
+
+      modalBody.querySelectorAll(".modal-jump-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          if (window.AudioSFX) window.AudioSFX.playTab();
+          modal.classList.remove("open");
+          const sId = parseInt(btn.dataset.surah, 10);
+          const aNo = parseInt(btn.dataset.ayah, 10);
+          if (window.CorpusEngine) {
+            window.CorpusEngine.jumpToAyah(sId, aNo);
+          }
+        });
+      });
+      return;
+    }
 
     let displayWord = data.token || data.root_display || data.lemma_ar;
     let occList = data.sample_occurrences || [];

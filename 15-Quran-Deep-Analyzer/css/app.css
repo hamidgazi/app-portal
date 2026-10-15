@@ -1021,6 +1021,226 @@ table.analytics-table tbody tr:hover {
   animation: fadeIn 0.2s ease;
 }
 
+/* Ayah View Controls Toolbar & Density Engine */
+.ayah-controls-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 10px 16px;
+  background: rgba(12, 17, 29, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  margin-bottom: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.view-mode-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 3px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-subtle);
+}
+
+.density-btn {
+  background: transparent;
+  color: var(--text-muted);
+  border: none;
+  border-radius: var(--radius-full);
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 32px;
+}
+
+.density-btn:hover {
+  color: var(--text-main);
+}
+
+.density-btn.active {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.3) 0%, rgba(16, 185, 129, 0.25) 100%);
+  color: #fbbf24;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.layer-toggles-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.toggle-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  color: var(--text-dim);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s ease;
+  min-height: 30px;
+}
+
+.toggle-chip input[type="checkbox"] {
+  accent-color: #d4af37;
+  cursor: pointer;
+  margin: 0;
+  width: 14px;
+  height: 14px;
+}
+
+.toggle-chip.active {
+  background: rgba(212, 175, 55, 0.12);
+  border-color: rgba(212, 175, 55, 0.35);
+  color: #f1f5f9;
+}
+
+/* Compact Reading Mode for Ayah Cards */
+.compact-mode .ayah-card,
+.ayah-card.compact-card {
+  padding: 14px 18px;
+  margin-bottom: 12px;
+  border-radius: var(--radius-sm);
+  background: rgba(12, 16, 26, 0.85);
+}
+
+.compact-mode .ayah-card-meta {
+  margin-bottom: 8px;
+}
+
+.ayah-meta-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ayah-stat-chip {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-subtle);
+}
+
+.ayah-meta-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ayah-tool-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 28px;
+  touch-action: manipulation;
+}
+
+.ayah-tool-btn:hover {
+  background: rgba(212, 175, 55, 0.15);
+  border-color: rgba(212, 175, 55, 0.35);
+  color: #fbbf24;
+}
+
+.ayah-tool-btn.active {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: #10b981;
+  color: #34d399;
+}
+
+.compact-mode .ayah-arabic-text {
+  font-size: 1.8rem;
+  line-height: 1.85;
+  margin-bottom: 10px;
+  color: #f8fafc;
+}
+
+.compact-mode .translations-block {
+  padding-top: 8px;
+  gap: 6px;
+}
+
+.compact-mode .translation-item {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.compact-trans-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  text-transform: uppercase;
+}
+
+.compact-trans-tag.en {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.compact-trans-tag.ur-ki {
+  background: rgba(212, 175, 55, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.compact-trans-tag.ur-kr {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.compact-mode .trans-text.english {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: #cbd5e1;
+}
+
+.compact-mode .trans-text.urdu {
+  font-size: 1.18rem;
+  line-height: 1.7;
+  color: #e2e8f0;
+}
+
+.stat-urdu-badge {
+  display: inline-block;
+  font-family: var(--font-urdu);
+  font-size: 0.95rem;
+  color: #fbbf24;
+  margin-top: 2px;
+}
+
 /* Modal Drawer for Word Occurrences */
 .modal-overlay {
   display: none;
