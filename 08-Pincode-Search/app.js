@@ -37,7 +37,8 @@
     searchDebounceTimer: null,
     audioContext: null,
     audioAvailable: false,
-    keyboardMode: 'numeric'
+    keyboardMode: 'numeric',
+    recentSearches: []
   };
 
   // Metro centers catalog for quick filter
@@ -232,6 +233,29 @@
   }
 
   /**
+   * Smart Address Extractor: Extracts 6-digit Indian postal code from messy address or text string.
+   * Handles formats:
+   * - Pure: "395003" -> "395003"
+   * - Embedded: "Plot 12, GIDC, Surat - 395002, Gujarat" -> "395002"
+   * - Spaced/Hyphenated: "Surat 395 003" or "Surat 395-003" -> "395003"
+   * - Word boundary guard: does not match inside 10-digit phone numbers (e.g. 9876543210)
+   */
+  function extractPincodeFromText(text) {
+    if (!text || typeof text !== 'string') return null;
+    // 1. Check for spaced or hyphenated 6-digit pincode: 395 003 or 395-003
+    const spacedMatch = text.match(/\b([1-9][0-9]{2})\s*[- ]\s*([0-9]{3})\b/);
+    if (spacedMatch) {
+      return spacedMatch[1] + spacedMatch[2];
+    }
+    // 2. Check for standard 6-digit pincode with word boundaries
+    const pinMatch = text.match(/\b([1-9][0-9]{5})\b/);
+    if (pinMatch) {
+      return pinMatch[1];
+    }
+    return null;
+  }
+
+  /**
    * Master query routing function
    */
   function executeSearch(queryStr, filterType) {
@@ -243,6 +267,11 @@
     if (/^\d+$/.test(q)) {
       return searchPincodePrefix(q, filterType);
     } else {
+      // Check if text query contains a 6-digit pincode embedded in it
+      const embeddedPin = extractPincodeFromText(q);
+      if (embeddedPin) {
+        return searchPincodePrefix(embeddedPin, filterType);
+      }
       return searchTextQuery(q, filterType);
     }
   }
@@ -675,22 +704,45 @@
     if (typeof document === 'undefined') return;
     const searchInput = document.getElementById('search-input');
     const btnClearSearch = document.getElementById('btn-clear-search');
+    const btnPasteSearch = document.getElementById('btn-paste-search');
     const btnResetEmpty = document.getElementById('btn-empty-reset');
 
     if (searchInput) {
       searchInput.addEventListener('input', function (e) {
         const val = e.target.value;
         State.currentQuery = val;
+        const trimmed = val.trim();
 
         // Toggle clear button
         if (btnClearSearch) {
-          btnClearSearch.style.display = val.length > 0 ? 'flex' : 'none';
+          btnClearSearch.style.display = val.length > 0 ? 'inline-flex' : 'none';
+        }
+
+        // 6th Digit Auto-Dismiss: If exactly 6 digits are typed, auto-hide keyboard immediately
+        if (/^\d{6}$/.test(trimmed)) {
+          if (State.searchDebounceTimer) {
+            clearTimeout(State.searchDebounceTimer);
+          }
+          searchInput.blur();
+
+          // Also close on-screen numpad if open
+          const numpad = document.getElementById('quick-numpad');
+          if (numpad && numpad.style.display !== 'none') {
+            numpad.style.display = 'none';
+            const mainContent = document.getElementById('main-content');
+            if (mainContent) mainContent.classList.remove('has-numpad-open');
+          }
+
+          playPopSound();
+          performSearch();
+          saveRecentSearch(trimmed);
+          return;
         }
 
         // Adaptive zero-lag debounce:
         // Pure digits: 0-10ms (instant binary search)
         // Text: 25ms
-        const debounceMs = /^\d+$/.test(val.trim()) ? 5 : 25;
+        const debounceMs = /^\d+$/.test(trimmed) ? 5 : 25;
 
         if (State.searchDebounceTimer) {
           clearTimeout(State.searchDebounceTimer);
@@ -701,15 +753,44 @@
         }, debounceMs);
       });
 
+      // Direct paste listener: automatically extracts 6-digit pincode if present in pasted text
+      searchInput.addEventListener('paste', function (e) {
+        const pasted = (e.clipboardData || window.clipboardData).getData('text');
+        if (pasted) {
+          const extracted = extractPincodeFromText(pasted);
+          if (extracted && extracted !== pasted.trim()) {
+            e.preventDefault();
+            searchInput.value = extracted;
+            State.currentQuery = extracted;
+            if (btnClearSearch) btnClearSearch.style.display = 'inline-flex';
+            searchInput.blur();
+            playPopSound();
+            showToast('📋 Extracted Pincode: ' + extracted);
+            performSearch();
+            saveRecentSearch(extracted);
+          }
+        }
+      });
+
       // Enter / Search key on native mobile keyboard: auto-hide keyboard and show results
       searchInput.addEventListener('keydown', function (e) {
         if (e.key === 'Enter') {
           e.preventDefault();
           searchInput.blur(); // Dismisses mobile OS keyboard immediately
           playPopSound();
+          if (State.currentQuery && State.currentQuery.trim()) {
+            saveRecentSearch(State.currentQuery.trim());
+          }
           performSearch();
         }
       });
+
+      // 1-Tap Smart Paste Button
+      if (btnPasteSearch) {
+        btnPasteSearch.addEventListener('click', function () {
+          handleSmartPaste();
+        });
+      }
 
       // Clear search button
       if (btnClearSearch) {
@@ -1107,6 +1188,9 @@
       if (keyAction === 'enter') {
         toggleNumpad(false);
         if (searchInput) searchInput.blur();
+        if (searchInput && searchInput.value.trim()) {
+          saveRecentSearch(searchInput.value.trim());
+        }
         performSearch();
         return;
       }
@@ -1125,6 +1209,12 @@
         const btnClear = document.getElementById('btn-clear-search');
         if (btnClear) btnClear.style.display = 'inline-flex';
         performSearch();
+
+        // Auto-close on-screen numpad when 6 digits are reached!
+        if (searchInput.value.length === 6) {
+          toggleNumpad(false);
+          saveRecentSearch(searchInput.value);
+        }
       }
     });
   }
@@ -1179,6 +1269,241 @@
   }
 
   /* ==========================================================================
+     Recent Searches & Smart Paste Module
+     ========================================================================== */
+
+  const RECENT_STORAGE_KEY = 'pincode_recent_searches_v1';
+  const MAX_RECENT_SEARCHES = 8;
+
+  function loadRecentSearches() {
+    try {
+      if (typeof localStorage === 'undefined') return [];
+      const raw = localStorage.getItem(RECENT_STORAGE_KEY);
+      if (!raw) return [];
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (e) {
+      console.warn('[RecentSearches] Failed to load from localStorage:', e);
+      return [];
+    }
+  }
+
+  function saveRecentSearch(query) {
+    if (!query || typeof query !== 'string') return;
+    const cleanQuery = query.trim();
+    if (!cleanQuery) return;
+
+    let recent = loadRecentSearches();
+    // Filter out if duplicate
+    recent = recent.filter(function (item) {
+      return item.query.toLowerCase() !== cleanQuery.toLowerCase();
+    });
+
+    let cityLabel = '';
+    let isOda = false;
+
+    // If query is a 6-digit pincode, lookup details in State.db
+    if (/^\d{6}$/.test(cleanQuery) && State.db && State.pins) {
+      const pinInt = parseInt(cleanQuery, 10);
+      const idx = lowerBound(State.pins, pinInt);
+      if (idx < State.pins.length && State.pins[idx] === pinInt) {
+        const row = State.db.r[idx];
+        cityLabel = State.db.d[row[4]] || '';
+        isOda = row[6] === 1;
+      }
+    }
+
+    recent.unshift({
+      query: cleanQuery,
+      city: cityLabel,
+      oda: isOda,
+      isPin: /^\d{6}$/.test(cleanQuery)
+    });
+
+    if (recent.length > MAX_RECENT_SEARCHES) {
+      recent = recent.slice(0, MAX_RECENT_SEARCHES);
+    }
+
+    State.recentSearches = recent;
+    try {
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem(RECENT_STORAGE_KEY, JSON.stringify(recent));
+      }
+    } catch (e) {
+      console.warn('[RecentSearches] Failed to save to localStorage:', e);
+    }
+
+    renderRecentSearches();
+  }
+
+  function clearRecentSearches() {
+    State.recentSearches = [];
+    try {
+      if (typeof localStorage !== 'undefined') {
+        localStorage.removeItem(RECENT_STORAGE_KEY);
+      }
+    } catch (e) {
+      console.warn('[RecentSearches] Failed to clear localStorage:', e);
+    }
+    renderRecentSearches();
+  }
+
+  function renderRecentSearches() {
+    if (typeof document === 'undefined') return;
+    const container = document.getElementById('recent-searches-container');
+    const chipsList = document.getElementById('recent-chips-list');
+    if (!container || !chipsList) return;
+
+    const recent = State.recentSearches && State.recentSearches.length > 0
+      ? State.recentSearches
+      : loadRecentSearches();
+    State.recentSearches = recent;
+
+    if (!recent || recent.length === 0) {
+      container.style.display = 'none';
+      chipsList.innerHTML = '';
+      return;
+    }
+
+    container.style.display = 'flex';
+    chipsList.innerHTML = recent.map(function (item) {
+      let badgeHtml = '';
+      if (item.oda) {
+        badgeHtml = ' <span class="chip-badge-oda" title="ODA: Remote Area">⚠️ ODA</span>';
+      }
+      const cityHtml = item.city ? (' <span class="chip-city">&bull; ' + escapeHTML(item.city) + '</span>') : '';
+      return (
+        '<button type="button" class="recent-chip" data-query="' + escapeHTML(item.query) + '" aria-label="Search ' + escapeHTML(item.query) + '">' +
+          '<span class="chip-pin">' + escapeHTML(item.query) + '</span>' +
+          cityHtml +
+          badgeHtml +
+        '</button>'
+      );
+    }).join('');
+  }
+
+  function handleSmartPaste() {
+    if (typeof navigator === 'undefined' || !navigator.clipboard || !navigator.clipboard.readText) {
+      showToast('⚠️ Clipboard access not available. Please paste directly into search box.');
+      return;
+    }
+    navigator.clipboard.readText().then(function (text) {
+      if (!text || !text.trim()) {
+        showToast('⚠️ Clipboard is empty.');
+        return;
+      }
+      const cleanText = text.trim();
+      const extractedPin = extractPincodeFromText(cleanText);
+      const searchInput = document.getElementById('search-input');
+      const btnClearSearch = document.getElementById('btn-clear-search');
+
+      if (extractedPin) {
+        if (searchInput) {
+          searchInput.value = extractedPin;
+          State.currentQuery = extractedPin;
+          searchInput.blur();
+        }
+        if (btnClearSearch) btnClearSearch.style.display = 'inline-flex';
+        playPopSound();
+        showToast('📋 Extracted Pincode: ' + extractedPin);
+        performSearch();
+        saveRecentSearch(extractedPin);
+      } else {
+        // Fallback: paste full text (e.g. city or hub)
+        if (searchInput) {
+          searchInput.value = cleanText;
+          State.currentQuery = cleanText;
+          searchInput.blur();
+        }
+        // If mode was numeric, switch to text mode
+        if (State.keyboardMode === 'numeric' && /[a-zA-Z]/.test(cleanText)) {
+          const btnMode = document.getElementById('btn-input-mode');
+          if (btnMode) {
+            State.keyboardMode = 'text';
+            if (searchInput) {
+              searchInput.setAttribute('inputmode', 'text');
+              searchInput.removeAttribute('pattern');
+              searchInput.setAttribute('placeholder', 'Search City or Hub (e.g. Surat, Delhi)...');
+            }
+            btnMode.className = 'btn-input-mode mode-text';
+            btnMode.innerHTML = '<span class="mode-icon" aria-hidden="true">🔤</span><span class="mode-label">ABC</span>';
+          }
+        }
+        if (btnClearSearch) btnClearSearch.style.display = 'inline-flex';
+        playPopSound();
+        showToast('📋 Pasted: ' + (cleanText.length > 25 ? cleanText.slice(0, 22) + '...' : cleanText));
+        performSearch();
+        saveRecentSearch(cleanText);
+      }
+    }).catch(function (err) {
+      console.warn('[Clipboard] Read error:', err);
+      showToast('⚠️ Please allow clipboard permission or paste into box.');
+    });
+  }
+
+  function initRecentSearches() {
+    if (typeof document === 'undefined') return;
+    const chipsList = document.getElementById('recent-chips-list');
+    const btnClear = document.getElementById('btn-clear-recent');
+    const searchInput = document.getElementById('search-input');
+    const btnClearSearch = document.getElementById('btn-clear-search');
+
+    if (chipsList && searchInput) {
+      chipsList.addEventListener('click', function (e) {
+        const chip = e.target.closest('.recent-chip');
+        if (!chip) return;
+        const q = chip.getAttribute('data-query');
+        if (!q) return;
+
+        playPopSound();
+        searchInput.value = q;
+        State.currentQuery = q;
+        if (btnClearSearch) btnClearSearch.style.display = 'inline-flex';
+
+        // Set appropriate keyboard mode
+        if (/^\d+$/.test(q)) {
+          if (State.keyboardMode !== 'numeric') {
+            const btnMode = document.getElementById('btn-input-mode');
+            State.keyboardMode = 'numeric';
+            searchInput.setAttribute('inputmode', 'numeric');
+            searchInput.setAttribute('pattern', '[0-9]*');
+            searchInput.setAttribute('placeholder', 'Enter 6-digit Pincode (or tap 123 for City)...');
+            if (btnMode) {
+              btnMode.className = 'btn-input-mode mode-numeric';
+              btnMode.innerHTML = '<span class="mode-icon" aria-hidden="true">🔢</span><span class="mode-label">123</span>';
+            }
+          }
+        } else {
+          if (State.keyboardMode !== 'text') {
+            const btnMode = document.getElementById('btn-input-mode');
+            State.keyboardMode = 'text';
+            searchInput.setAttribute('inputmode', 'text');
+            searchInput.removeAttribute('pattern');
+            searchInput.setAttribute('placeholder', 'Search City or Hub (e.g. Surat, Delhi)...');
+            if (btnMode) {
+              btnMode.className = 'btn-input-mode mode-text';
+              btnMode.innerHTML = '<span class="mode-icon" aria-hidden="true">🔤</span><span class="mode-label">ABC</span>';
+            }
+          }
+        }
+
+        searchInput.blur();
+        performSearch();
+      });
+    }
+
+    if (btnClear) {
+      btnClear.addEventListener('click', function () {
+        playPopSound();
+        clearRecentSearches();
+        showToast('Recent searches cleared');
+      });
+    }
+
+    renderRecentSearches();
+  }
+
+  /* ==========================================================================
      7. Master Defensive Component Bootloader Isolation (LESSONS §20.1)
      ========================================================================== */
 
@@ -1194,6 +1519,7 @@
       { name: 'Beginner & New Staff Guide', fn: initBeginnerGuide, critical: false },
       { name: 'On-Screen Numeric Pin Keypad', fn: initNumberPad, critical: false },
       { name: 'Input Mode Switcher (123 / ABC)', fn: initInputModeSwitcher, critical: false },
+      { name: 'Recent Searches & Smart Paste', fn: initRecentSearches, critical: false },
       { name: 'Excel Updater Modal Hook', fn: initExcelUpdater, critical: false },
       { name: 'PWA Service Worker Registration', fn: initServiceWorker, critical: false }
     ];
@@ -1239,6 +1565,11 @@
     resolveRecord: resolveRecord,
     formatCopyPayload: formatCopyPayload,
     performSearch: performSearch,
+    extractPincodeFromText: extractPincodeFromText,
+    loadRecentSearches: loadRecentSearches,
+    saveRecentSearch: saveRecentSearch,
+    clearRecentSearches: clearRecentSearches,
+    handleSmartPaste: handleSmartPaste,
     bootloader: bootloader
   };
 });
