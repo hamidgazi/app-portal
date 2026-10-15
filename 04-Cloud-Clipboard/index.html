@@ -197,6 +197,16 @@
                     </div>
                 </div>
 
+                <!-- Help Guide Modal Trigger -->
+                <button 
+                    id="helpGuideBtn" 
+                    onclick="openHelpGuideModal(event)" 
+                    class="p-1.5 bg-white/10 hover:bg-white/20 rounded-lg text-slate-300 flex items-center gap-1 active:scale-95 transition-all shrink-0" 
+                    title="User Guide & Help"
+                >
+                    <i data-lucide="help-circle" class="w-3.5 h-3.5"></i>
+                </button>
+
                 <!-- Theme Toggle -->
                 <button onclick="toggleDarkMode()" class="p-1.5 bg-white/10 hover:bg-white/20 rounded-lg active:scale-95 transition-all shrink-0" title="Toggle Dark Mode">
                     <i data-lucide="moon" id="themeIcon" class="w-3.5 h-3.5 text-blue-300"></i>
@@ -422,6 +432,263 @@
                     </button>
                 </div>
                 <p class="text-[11px] text-gray-400 dark:text-slate-500">Scan with phone camera to instantly connect and sync clips.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive In-App Help & User Guide Modal -->
+    <div 
+        id="helpGuideModal" 
+        onclick="handleHelpModalBackdropClick(event)"
+        class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md transition-opacity duration-300"
+        role="dialog" 
+        aria-modal="true" 
+        aria-labelledby="helpModalTitle"
+    >
+        <div 
+            onclick="event.stopPropagation()" 
+            class="relative bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-gray-200 dark:border-slate-800 rounded-3xl shadow-2xl p-6 max-w-2xl w-full flex flex-col max-h-[85vh] animate-fade-in"
+        >
+            <!-- Close Button -->
+            <button 
+                id="closeHelpGuideBtn"
+                onclick="closeHelpGuideModal()" 
+                class="absolute top-4 right-4 p-1.5 text-gray-400 hover:text-gray-700 dark:hover:text-white rounded-lg active:scale-90 transition-transform" 
+                title="Close (Esc)"
+            >
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <!-- Modal Header -->
+            <div class="flex items-center gap-3 pb-4 border-b border-gray-100 dark:border-slate-800 shrink-0">
+                <div class="p-2.5 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-2xl shrink-0">
+                    <i data-lucide="book-open" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h3 id="helpModalTitle" class="text-base font-bold text-gray-800 dark:text-white flex items-center gap-2">
+                        <span>CloudClip PRO Guide</span>
+                        <span class="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300">v2.5 PRO</span>
+                    </h3>
+                    <p class="text-xs text-gray-500 dark:text-slate-400">Features, settings, shortcuts, and troubleshooting reference.</p>
+                </div>
+            </div>
+
+            <!-- Tab Buttons Bar -->
+            <div class="flex items-center gap-1.5 py-3 border-b border-gray-100 dark:border-slate-800 overflow-x-auto custom-scrollbar shrink-0 text-xs">
+                <button onclick="switchHelpTab('shortcuts')" id="helpTabBtn-shortcuts" class="help-tab-btn px-3 py-1.5 rounded-xl font-bold transition-all bg-blue-600 text-white shadow-sm flex items-center gap-1.5 shrink-0">
+                    <i data-lucide="zap" class="w-3.5 h-3.5"></i>
+                    <span>Quick Start & Shortcuts</span>
+                </button>
+                <button onclick="switchHelpTab('sync')" id="helpTabBtn-sync" class="help-tab-btn px-3 py-1.5 rounded-xl font-semibold transition-all bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-slate-700 flex items-center gap-1.5 shrink-0">
+                    <i data-lucide="qr-code" class="w-3.5 h-3.5"></i>
+                    <span>Sync & Mobile QR</span>
+                </button>
+                <button onclick="switchHelpTab('inspectors')" id="helpTabBtn-inspectors" class="help-tab-btn px-3 py-1.5 rounded-xl font-semibold transition-all bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-slate-700 flex items-center gap-1.5 shrink-0">
+                    <i data-lucide="palette" class="w-3.5 h-3.5"></i>
+                    <span>Smart Inspectors</span>
+                </button>
+                <button onclick="switchHelpTab('history')" id="helpTabBtn-history" class="help-tab-btn px-3 py-1.5 rounded-xl font-semibold transition-all bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-slate-700 flex items-center gap-1.5 shrink-0">
+                    <i data-lucide="git-branch" class="w-3.5 h-3.5"></i>
+                    <span>Versions & Diff</span>
+                </button>
+                <button onclick="switchHelpTab('security')" id="helpTabBtn-security" class="help-tab-btn px-3 py-1.5 rounded-xl font-semibold transition-all bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-slate-700 flex items-center gap-1.5 shrink-0">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+                    <span>Security & Backups</span>
+                </button>
+                <button onclick="switchHelpTab('faq')" id="helpTabBtn-faq" class="help-tab-btn px-3 py-1.5 rounded-xl font-semibold transition-all bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-slate-700 flex items-center gap-1.5 shrink-0">
+                    <i data-lucide="help-circle" class="w-3.5 h-3.5"></i>
+                    <span>FAQ & Help</span>
+                </button>
+            </div>
+
+            <!-- Tab Content Area -->
+            <div class="flex-1 overflow-y-auto custom-scrollbar py-4 pr-1 text-xs text-gray-700 dark:text-slate-300 space-y-4">
+                <!-- Pane 1: Quick Start & Shortcuts -->
+                <div id="helpPane-shortcuts" class="space-y-3">
+                    <div class="p-3 bg-blue-50/60 dark:bg-blue-900/20 rounded-2xl border border-blue-100 dark:border-blue-800/40 space-y-1.5">
+                        <h4 class="font-bold text-blue-900 dark:text-blue-300 flex items-center gap-1.5">
+                            <i data-lucide="sparkles" class="w-4 h-4"></i>
+                            <span>Real-Time Cloud Clipboard</span>
+                        </h4>
+                        <p class="text-gray-600 dark:text-slate-400 leading-relaxed">
+                            Type or paste any text into the left editor. Your drafts synchronize instantaneously across all devices joined to the same Room.
+                        </p>
+                    </div>
+
+                    <div class="space-y-2">
+                        <h5 class="font-bold uppercase tracking-wider text-[11px] text-gray-400 dark:text-slate-500">Keyboard Shortcuts</h5>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 font-mono text-[11px]">
+                            <div class="flex items-center justify-between p-2.5 bg-gray-50 dark:bg-slate-800/60 rounded-xl border border-gray-100 dark:border-slate-800">
+                                <span class="font-semibold text-gray-800 dark:text-slate-200">Ctrl + Enter</span>
+                                <span class="text-blue-600 dark:text-blue-400 font-sans font-bold">Save Clip</span>
+                            </div>
+                            <div class="flex items-center justify-between p-2.5 bg-gray-50 dark:bg-slate-800/60 rounded-xl border border-gray-100 dark:border-slate-800">
+                                <span class="font-semibold text-gray-800 dark:text-slate-200">Enter</span>
+                                <span class="text-gray-500 dark:text-slate-400 font-sans font-bold">New Line</span>
+                            </div>
+                            <div class="flex items-center justify-between p-2.5 bg-gray-50 dark:bg-slate-800/60 rounded-xl border border-gray-100 dark:border-slate-800">
+                                <span class="font-semibold text-gray-800 dark:text-slate-200">Ctrl + Z / Y</span>
+                                <span class="text-gray-500 dark:text-slate-400 font-sans font-bold">Undo / Redo</span>
+                            </div>
+                            <div class="flex items-center justify-between p-2.5 bg-gray-50 dark:bg-slate-800/60 rounded-xl border border-gray-100 dark:border-slate-800">
+                                <span class="font-semibold text-gray-800 dark:text-slate-200">Escape</span>
+                                <span class="text-gray-500 dark:text-slate-400 font-sans font-bold">Close Modals</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <h5 class="font-bold uppercase tracking-wider text-[11px] text-gray-400 dark:text-slate-500">Floating Toolbar Actions</h5>
+                        <ul class="space-y-1 text-gray-600 dark:text-slate-400">
+                            <li>• <strong>Paste (<i data-lucide="clipboard-paste" class="w-3 h-3 inline"></i>)</strong>: Reads native OS clipboard directly without pressing Ctrl+V.</li>
+                            <li>• <strong>Copy (<i data-lucide="copy" class="w-3 h-3 inline"></i>)</strong>: Copies current textarea text to clipboard.</li>
+                            <li>• <strong>Undo / Redo</strong>: Step backward or forward through text modifications.</li>
+                            <li>• <strong>Clear (<i data-lucide="trash-2" class="w-3 h-3 inline"></i>)</strong>: Clears editor and resets live cloud broadcast.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Pane 2: Sync & Mobile QR -->
+                <div id="helpPane-sync" class="hidden space-y-3">
+                    <div class="p-3 bg-indigo-50/60 dark:bg-indigo-900/20 rounded-2xl border border-indigo-100 dark:border-indigo-800/40 space-y-1.5">
+                        <h4 class="font-bold text-indigo-900 dark:text-indigo-300 flex items-center gap-1.5">
+                            <i data-lucide="smartphone" class="w-4 h-4"></i>
+                            <span>Mobile Device QR Pairing</span>
+                        </h4>
+                        <p class="text-gray-600 dark:text-slate-400 leading-relaxed">
+                            Connect your phone or tablet in seconds without typing URLs or room codes.
+                        </p>
+                    </div>
+
+                    <ol class="space-y-2 list-decimal list-inside text-gray-600 dark:text-slate-400 leading-relaxed">
+                        <li>Click <strong>Pair Mobile</strong> (<i data-lucide="qr-code" class="w-3.5 h-3.5 inline"></i>) in the header bar.</li>
+                        <li>Scan the QR code with your smartphone camera.</li>
+                        <li>Tap the notification to open CloudClip PRO on your mobile device in the same room.</li>
+                        <li>Any text copied or typed on either device syncs immediately in real time.</li>
+                    </ol>
+
+                    <div class="p-2.5 bg-gray-50 dark:bg-slate-800/60 rounded-xl border border-gray-100 dark:border-slate-800 text-[11px] space-y-1">
+                        <p class="font-semibold text-gray-700 dark:text-slate-300">Room Isolation & Offline Cache</p>
+                        <p class="text-gray-500 dark:text-slate-400">Each room name has an independent vault history. If internet is lost, clips are saved to local storage and sync automatically upon reconnection.</p>
+                    </div>
+                </div>
+
+                <!-- Pane 3: Smart Inspectors -->
+                <div id="helpPane-inspectors" class="hidden space-y-3">
+                    <div class="p-3 bg-purple-50/60 dark:bg-purple-900/20 rounded-2xl border border-purple-100 dark:border-purple-800/40 space-y-1.5">
+                        <h4 class="font-bold text-purple-900 dark:text-purple-300 flex items-center gap-1.5">
+                            <i data-lucide="palette" class="w-4 h-4"></i>
+                            <span>Smart Content Intelligence</span>
+                        </h4>
+                        <p class="text-gray-600 dark:text-slate-400 leading-relaxed">
+                            CloudClip PRO detects specialized data formats automatically in your saved clips:
+                        </p>
+                    </div>
+
+                    <div class="space-y-2.5">
+                        <div class="p-2.5 bg-gray-50 dark:bg-slate-800/60 rounded-xl border border-gray-100 dark:border-slate-800 space-y-1">
+                            <span class="font-bold text-gray-800 dark:text-white flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-blue-500 inline-block"></span>
+                                <span>Live Color Swatches</span>
+                            </span>
+                            <p class="text-gray-500 dark:text-slate-400">Detects Hex (<code class="font-mono">#fff</code>, <code class="font-mono">#3b82f6</code>) and <code class="font-mono">rgb(...)</code>/<code class="font-mono">rgba(...)</code> codes. Renders circular preview dots with 1-click copy. Disambiguates 4-digit years (<code class="font-mono">#2026</code>) as tags.</p>
+                        </div>
+
+                        <div class="p-2.5 bg-gray-50 dark:bg-slate-800/60 rounded-xl border border-gray-100 dark:border-slate-800 space-y-1">
+                            <span class="font-bold text-gray-800 dark:text-white flex items-center gap-1.5">
+                                <span class="px-1.5 py-0.5 rounded text-[9px] bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 font-mono font-bold">JSON</span>
+                                <span>Code & JSON Detection</span>
+                            </span>
+                            <p class="text-gray-500 dark:text-slate-400">Automatically formats valid JSON and 12 programming languages in monospace with syntax badges and a dedicated <strong>Copy Raw Code</strong> button.</p>
+                        </div>
+
+                        <div class="p-2.5 bg-gray-50 dark:bg-slate-800/60 rounded-xl border border-gray-100 dark:border-slate-800 space-y-1">
+                            <span class="font-bold text-gray-800 dark:text-white flex items-center gap-1.5">
+                                <span class="px-1.5 py-0.5 rounded text-[9px] bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 font-bold">MD Preview</span>
+                                <span>Markdown Preview Toggle</span>
+                            </span>
+                            <p class="text-gray-500 dark:text-slate-400">Cards with Markdown display an inline toggle button. Renders headings, checklists (<code class="font-mono">- [ ]</code> / <code class="font-mono">- [x]</code>), lists, and bold with strict XSS sanitization.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pane 4: Versions & Diff -->
+                <div id="helpPane-history" class="hidden space-y-3">
+                    <div class="p-3 bg-emerald-50/60 dark:bg-emerald-900/20 rounded-2xl border border-emerald-100 dark:border-emerald-800/40 space-y-1.5">
+                        <h4 class="font-bold text-emerald-900 dark:text-emerald-300 flex items-center gap-1.5">
+                            <i data-lucide="git-branch" class="w-4 h-4"></i>
+                            <span>Edit History & Visual Diffs</span>
+                        </h4>
+                        <p class="text-gray-600 dark:text-slate-400 leading-relaxed">
+                            Every time you edit and save a clip, earlier revisions are preserved in the clip's version history drawer.
+                        </p>
+                    </div>
+
+                    <ul class="space-y-2 text-gray-600 dark:text-slate-400 leading-relaxed">
+                        <li>• <strong>Versions Badge</strong>: Click <code class="font-mono bg-gray-100 dark:bg-slate-800 px-1 py-0.5 rounded">Edits (N)</code> on any modified clip to view previous revisions.</li>
+                        <li>• <strong>Visual Diff Comparison</strong>: Click any historical version to open the delta view. Added text is highlighted in <span class="text-green-600 font-bold">green</span> and removed text in <span class="text-red-600 line-through font-bold">red</span>.</li>
+                        <li>• <strong>One-Click Restore</strong>: Click <strong>Restore This Version</strong> to revert the clip to that exact state.</li>
+                        <li>• <strong>Duplicate Bump</strong>: Saving identical text brings the existing clip to the top instead of creating duplicates.</li>
+                    </ul>
+                </div>
+
+                <!-- Pane 5: Security & Backups -->
+                <div id="helpPane-security" class="hidden space-y-3">
+                    <div class="p-3 bg-amber-50/60 dark:bg-amber-900/20 rounded-2xl border border-amber-100 dark:border-amber-800/40 space-y-1.5">
+                        <h4 class="font-bold text-amber-900 dark:text-amber-300 flex items-center gap-1.5">
+                            <i data-lucide="shield-check" class="w-4 h-4"></i>
+                            <span>Security, PIN & Backups</span>
+                        </h4>
+                        <p class="text-gray-600 dark:text-slate-400 leading-relaxed">
+                            Protect sensitive clipboards and keep snapshots of your vault.
+                        </p>
+                    </div>
+
+                    <div class="space-y-2 text-gray-600 dark:text-slate-400">
+                        <div class="p-2.5 bg-gray-50 dark:bg-slate-800/60 rounded-xl border border-gray-100 dark:border-slate-800 space-y-1">
+                            <p class="font-bold text-gray-800 dark:text-white">Room Password Protection</p>
+                            <p class="text-[11px] text-gray-500 dark:text-slate-400">Click Settings (<i data-lucide="settings" class="w-3 h-3 inline"></i>) → Password Settings to lock the room with client-side SHA-256 PIN hashing.</p>
+                        </div>
+
+                        <div class="p-2.5 bg-gray-50 dark:bg-slate-800/60 rounded-xl border border-gray-100 dark:border-slate-800 space-y-1">
+                            <p class="font-bold text-gray-800 dark:text-white">5-Slot Cloud Backups</p>
+                            <p class="text-[11px] text-gray-500 dark:text-slate-400">Take instant cloud snapshots via <strong>Backups</strong> dropdown. Restore to any previous snapshot with a single click.</p>
+                        </div>
+
+                        <div class="p-2.5 bg-gray-50 dark:bg-slate-800/60 rounded-xl border border-gray-100 dark:border-slate-800 space-y-1">
+                            <p class="font-bold text-gray-800 dark:text-white">Global Speech Speed Setting</p>
+                            <p class="text-[11px] text-gray-500 dark:text-slate-400">Set Reading Speed in the header (0.9x to 2.0x). Applies to all clips and automatically persists as your default.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pane 6: FAQ & Help -->
+                <div id="helpPane-faq" class="hidden space-y-3">
+                    <div class="space-y-2">
+                        <div class="p-2.5 bg-gray-50 dark:bg-slate-800/60 rounded-xl border border-gray-100 dark:border-slate-800 space-y-1">
+                            <p class="font-bold text-gray-800 dark:text-white">Q: Paste button says "PASTE PERMISSION DENIED"?</p>
+                            <p class="text-[11px] text-gray-500 dark:text-slate-400">Click the browser address bar icon and allow Clipboard permissions for this site. Standard Ctrl+V always works as a fallback.</p>
+                        </div>
+
+                        <div class="p-2.5 bg-gray-50 dark:bg-slate-800/60 rounded-xl border border-gray-100 dark:border-slate-800 space-y-1">
+                            <p class="font-bold text-gray-800 dark:text-white">Q: How to export or transfer my clips?</p>
+                            <p class="text-[11px] text-gray-500 dark:text-slate-400">Use <strong>Export JSON</strong> in the History pane header to download all clips and edit histories. Use <strong>Import Backup</strong> to merge on any device.</p>
+                        </div>
+
+                        <div class="p-2.5 bg-gray-50 dark:bg-slate-800/60 rounded-xl border border-gray-100 dark:border-slate-800 space-y-1">
+                            <p class="font-bold text-gray-800 dark:text-white">Q: Is my data private?</p>
+                            <p class="text-[11px] text-gray-500 dark:text-slate-400">Yes. Clips are isolated per Room identifier. For maximum privacy, use a unique room name and enable room PIN encryption.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="pt-3 border-t border-gray-100 dark:border-slate-800 flex justify-between items-center text-[11px] text-gray-400 dark:text-slate-500 shrink-0">
+                <span>See <code class="font-mono bg-gray-100 dark:bg-slate-800 px-1 py-0.5 rounded">USER_MANUAL.md</code> for full details.</span>
+                <button onclick="closeHelpGuideModal()" class="px-3 py-1 bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 text-gray-700 dark:text-slate-200 rounded-lg font-semibold transition-colors">
+                    Close
+                </button>
             </div>
         </div>
     </div>
@@ -1634,6 +1901,54 @@
         window.copyPairUrl = copyPairUrl;
         window.copyQrModalLink = copyPairUrl;
 
+        // Help Guide Modal Functions
+        function openHelpGuideModal(event) {
+            if (event && event.stopPropagation) event.stopPropagation();
+            const modal = document.getElementById('helpGuideModal');
+            if (!modal) return;
+            modal.classList.remove('hidden');
+            safeCreateIcons();
+        }
+        window.openHelpGuideModal = openHelpGuideModal;
+
+        function closeHelpGuideModal() {
+            const modal = document.getElementById('helpGuideModal');
+            if (modal) modal.classList.add('hidden');
+        }
+        window.closeHelpGuideModal = closeHelpGuideModal;
+
+        function handleHelpModalBackdropClick(event) {
+            const modal = document.getElementById('helpGuideModal');
+            if (!event || event.target === modal || !event.target) {
+                closeHelpGuideModal();
+            }
+        }
+        window.handleHelpModalBackdropClick = handleHelpModalBackdropClick;
+
+        function switchHelpTab(tabId) {
+            const tabs = ['shortcuts', 'sync', 'inspectors', 'history', 'security', 'faq'];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`helpTabBtn-${t}`);
+                const pane = document.getElementById(`helpPane-${t}`);
+                if (btn) {
+                    if (t === tabId) {
+                        btn.className = 'help-tab-btn px-3 py-1.5 rounded-xl font-bold transition-all bg-blue-600 text-white shadow-sm flex items-center gap-1.5 shrink-0';
+                    } else {
+                        btn.className = 'help-tab-btn px-3 py-1.5 rounded-xl font-semibold transition-all bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-slate-700 flex items-center gap-1.5 shrink-0';
+                    }
+                }
+                if (pane) {
+                    if (t === tabId) {
+                        pane.classList.remove('hidden');
+                    } else {
+                        pane.classList.add('hidden');
+                    }
+                }
+            });
+            safeCreateIcons();
+        }
+        window.switchHelpTab = switchHelpTab;
+
         // Attach listeners for modal interactions
         const pairModalElement = document.getElementById('qrPairModal');
         if (pairModalElement) {
@@ -1648,12 +1963,25 @@
             copyPairBtnElement.addEventListener('click', copyPairUrl);
         }
 
+        const helpModalElement = document.getElementById('helpGuideModal');
+        if (helpModalElement) {
+            helpModalElement.addEventListener('click', handleHelpModalBackdropClick);
+        }
+        const closeHelpBtnElement = document.getElementById('closeHelpGuideBtn');
+        if (closeHelpBtnElement) {
+            closeHelpBtnElement.addEventListener('click', closeHelpGuideModal);
+        }
+
         // Global Escape keydown listeners (document and window)
         const handleEscapeKey = (e) => {
             if (e && (e.key === 'Escape' || e.key === 'Esc')) {
                 const modal = document.getElementById('qrPairModal') || document.getElementById('qrModalBackdrop');
                 if (modal && !modal.classList.contains('hidden')) {
                     closePairModal();
+                }
+                const helpModal = document.getElementById('helpGuideModal');
+                if (helpModal && !helpModal.classList.contains('hidden')) {
+                    closeHelpGuideModal();
                 }
             }
         };

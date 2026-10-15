@@ -167,14 +167,14 @@ window.PORTAL_CATALOG = {
       "title": "Thela Stock Manager PWA",
       "category": "Productivity & Utilities",
       "icon": "📦",
-      "badge": "PWA • 2-Way Sync",
-      "description": "Mobile-first stock transaction manager with live Firebase sync, offline queue, Web Audio haptics, and 2-way Excel reconciliation.",
+      "badge": "AMOLED PWA • Google Sheets",
+      "description": "Mobile-first AMOLED stock transaction manager with live Google Sheets webhook, real-time stock calculation preview, 50-record history drawer, and SheetJS Excel export.",
       "tags": [
         "thela",
         "stock",
         "inventory",
         "excel",
-        "firebase",
+        "googlesheets",
         "pwa",
         "offline"
       ],

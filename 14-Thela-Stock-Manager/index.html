@@ -23,9 +23,9 @@
        ========================================================================== */
     :root {
       --bg-canvas: #000000;
-      --bg-card: #0f172a;
-      --bg-card-selected: #1e293b;
-      --border-subtle: rgba(255, 255, 255, 0.1);
+      --bg-card: #0b1120;
+      --bg-card-selected: #111827;
+      --border-subtle: rgba(56, 189, 248, 0.18);
       --border-focus: #38bdf8;
       
       --text-main: #f8fafc;
@@ -35,9 +35,11 @@
       --color-out-bg: rgba(239, 68, 68, 0.15);
       --color-in: #10b981;
       --color-in-bg: rgba(16, 185, 129, 0.15);
-      --color-cyan: #0284c7;
+      --color-cyan: #38bdf8;
+      --color-cyan-glow: rgba(56, 189, 248, 0.25);
 
       --min-hitbox: 48px;
+      --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
       --touch-action: manipulation;
     }
 
@@ -134,10 +136,11 @@
       align-items: center;
       justify-content: center;
       touch-action: manipulation;
+      transition: transform 0.12s var(--spring), background 0.15s ease;
     }
 
     .btn-icon:active {
-      transform: scale(0.94);
+      transform: scale(0.96);
       background: rgba(255, 255, 255, 0.12);
     }
 
@@ -164,7 +167,7 @@
     .bag-card {
       min-height: 64px;
       background: var(--bg-card);
-      border: 2px solid var(--border-subtle);
+      border: 1px solid var(--border-subtle);
       border-radius: 14px;
       padding: 10px 12px;
       display: flex;
@@ -172,8 +175,10 @@
       justify-content: space-between;
       cursor: pointer;
       touch-action: manipulation;
-      transition: all 0.15s ease;
+      transition: transform 0.12s var(--spring), border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
       position: relative;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
 
     .bag-card:active {
@@ -182,7 +187,7 @@
 
     .bag-card.selected {
       border-color: #38bdf8;
-      background: #13233c;
+      background: var(--bg-card-selected);
       box-shadow: 0 0 16px rgba(56, 189, 248, 0.25);
     }
 
@@ -233,7 +238,7 @@
       font-weight: 800;
       cursor: pointer;
       touch-action: manipulation;
-      transition: all 0.15s ease;
+      transition: transform 0.12s var(--spring), border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
       color: var(--text-muted);
     }
 
@@ -266,7 +271,7 @@
       min-height: var(--min-hitbox);
       border-radius: 12px;
       background: var(--bg-card);
-      border: 2px solid var(--border-subtle);
+      border: 1px solid var(--border-subtle);
       color: #ffffff;
       font-size: 1.05rem;
       font-weight: 800;
@@ -275,18 +280,18 @@
       justify-content: center;
       cursor: pointer;
       touch-action: manipulation;
-      transition: all 0.15s ease;
+      transition: transform 0.12s var(--spring), border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
     }
 
     .qty-chip:active {
-      transform: scale(0.92);
+      transform: scale(0.96);
     }
 
     .qty-chip.selected {
       border-color: #38bdf8;
-      background: #0284c7;
+      background: rgba(56, 189, 248, 0.2);
       color: #ffffff;
-      box-shadow: 0 0 12px rgba(2, 132, 199, 0.35);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
     }
 
     .custom-qty-row {
@@ -314,7 +319,7 @@
 
     .note-input {
       width: 100%;
-      min-height: 44px;
+      min-height: 48px;
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
       border-radius: 12px;
@@ -346,11 +351,11 @@
       cursor: pointer;
       box-shadow: 0 4px 20px rgba(16, 185, 129, 0.35);
       touch-action: manipulation;
-      transition: all 0.15s ease;
+      transition: transform 0.12s var(--spring), filter 0.15s ease, box-shadow 0.15s ease;
     }
 
     .btn-submit:active {
-      transform: scale(0.97);
+      transform: scale(0.96);
       filter: brightness(0.9);
     }
 
@@ -362,13 +367,16 @@
 
     /* Live Summary Glance Card */
     .summary-glance {
-      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
-      border: 1px solid rgba(56, 189, 248, 0.2);
+      background: linear-gradient(135deg, #0b1120 0%, #111827 100%);
+      border: 1px solid var(--border-subtle);
       border-radius: 14px;
       padding: 12px 14px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
 
     .glance-left {
@@ -397,12 +405,107 @@
       color: #10b981;
     }
 
-    /* STEP 5: Recent Transactions with 1-Tap Undo */
+    /* Dynamic Stock Preview Banner */
+    .stock-preview-banner {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.2s var(--spring);
+    }
+
+    .stock-preview-banner.status-normal {
+      border-color: rgba(56, 189, 248, 0.3);
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.12);
+    }
+
+    .stock-preview-banner.status-low {
+      border-color: rgba(245, 158, 11, 0.5);
+      background: rgba(245, 158, 11, 0.08);
+      box-shadow: 0 0 18px rgba(245, 158, 11, 0.2);
+    }
+
+    .stock-preview-banner.status-deficit {
+      border-color: rgba(239, 68, 68, 0.6);
+      background: rgba(239, 68, 68, 0.1);
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.25);
+    }
+
+    .preview-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .preview-tag {
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-cyan);
+    }
+
+    .preview-delta-tag {
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .preview-delta-tag.out {
+      color: #f87171;
+      background: var(--color-out-bg);
+    }
+
+    .preview-delta-tag.in {
+      color: #34d399;
+      background: var(--color-in-bg);
+    }
+
+    .preview-formula {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+      word-break: break-word;
+    }
+
+    .preview-alert {
+      font-size: 0.85rem;
+      font-weight: 800;
+      padding: 6px 10px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .preview-alert.deficit {
+      color: #fca5a5;
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+    }
+
+    .preview-alert.low {
+      color: #fde68a;
+      background: rgba(245, 158, 11, 0.2);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+
+    /* STEP 6: Recent Transactions with 1-Tap Undo */
     .recent-section {
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
       border-radius: 16px;
       padding: 12px 14px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
 
     .recent-header {
@@ -463,23 +566,417 @@
     }
 
     .btn-undo {
-      min-height: 36px;
-      padding: 0 10px;
-      border-radius: 8px;
+      min-height: 48px;
+      padding: 0 14px;
+      border-radius: 10px;
       background: rgba(239, 68, 68, 0.15);
       border: 1px solid rgba(239, 68, 68, 0.3);
       color: #f87171;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       font-weight: 700;
       cursor: pointer;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 4px;
+      justify-content: center;
+      gap: 6px;
       touch-action: manipulation;
+      transition: transform 0.12s var(--spring), background 0.15s ease;
     }
 
     .btn-undo:active {
-      transform: scale(0.92);
+      transform: scale(0.96);
+    }
+
+    #btn-refresh-data {
+      min-height: 48px;
+    }
+
+    /* ==========================================================================
+       IN-PLACE EXPANDER & HISTORY PILLS
+       ========================================================================== */
+    .history-pill {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 9999px;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: #38bdf8;
+    }
+
+    .btn-action-sm {
+      min-height: 48px;
+      min-width: 48px;
+      padding: 0 12px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      touch-action: manipulation;
+      user-select: none;
+      -webkit-user-select: none;
+      transition: all 0.15s ease;
+    }
+
+    .btn-action-sm:active {
+      transform: scale(0.94);
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .btn-drawer-trigger {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: rgba(56, 189, 248, 0.35);
+      color: #38bdf8;
+    }
+
+    .expander-bar {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .btn-expander {
+      flex: 1;
+      min-height: 48px;
+      background: #0f172a;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 12px;
+      color: #38bdf8;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      touch-action: manipulation;
+      user-select: none;
+      -webkit-user-select: none;
+      transition: all 0.15s ease;
+    }
+
+    .btn-expander:active {
+      transform: scale(0.96);
+      background: rgba(56, 189, 248, 0.15);
+    }
+
+    .btn-expander-collapse {
+      border-color: rgba(255, 255, 255, 0.2);
+      color: var(--text-muted);
+    }
+
+    /* ==========================================================================
+       SLIDING 50-RECORD HISTORY DRAWER (AMOLED CYBER/GLASS)
+       ========================================================================== */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      pointer-events: none;
+      visibility: hidden;
+      transition: visibility 0.3s ease;
+    }
+
+    .drawer-overlay.active {
+      pointer-events: auto;
+      visibility: visible;
+    }
+
+    .drawer-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      opacity: 0;
+      transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .drawer-overlay.active .drawer-backdrop {
+      opacity: 1;
+    }
+
+    .drawer-panel {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      height: 88vh;
+      max-height: 92dvh;
+      background: #0b1120;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-bottom: none;
+      border-radius: 24px 24px 0 0;
+      display: flex;
+      flex-direction: column;
+      transform: translateY(100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.9);
+      padding: 8px 16px env(safe-area-inset-bottom, 16px) 16px;
+      z-index: 1001;
+    }
+
+    .drawer-overlay.active .drawer-panel {
+      transform: translateY(0);
+    }
+
+    .drawer-handle-bar {
+      display: flex;
+      justify-content: center;
+      padding: 6px 0;
+      cursor: grab;
+      touch-action: manipulation;
+    }
+
+    .drawer-handle {
+      width: 44px;
+      height: 5px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0 10px 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .drawer-title-group {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .drawer-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .drawer-subtitle {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .drawer-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .drawer-search-row {
+      margin-top: 10px;
+    }
+
+    .search-input-wrapper {
+      position: relative;
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-prefix-icon {
+      position: absolute;
+      left: 14px;
+      font-size: 1rem;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .drawer-search-input {
+      width: 100%;
+      min-height: 48px;
+      background: #111827;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      padding: 0 48px 0 42px;
+      color: #ffffff;
+      font-size: 0.95rem;
+      outline: none;
+      touch-action: manipulation;
+    }
+
+    .drawer-search-input:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+    }
+
+    .btn-clear-search {
+      position: absolute;
+      right: 2px;
+      min-width: 48px;
+      min-height: 48px;
+      background: transparent;
+      border: none;
+      border-radius: 50%;
+      color: #ffffff;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      touch-action: manipulation;
+    }
+
+    .filter-pills-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .filter-pill {
+      min-height: 48px;
+      padding: 0 14px;
+      border-radius: 9999px;
+      background: #111827;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      touch-action: manipulation;
+      user-select: none;
+      -webkit-user-select: none;
+      transition: all 0.15s ease;
+    }
+
+    .filter-pill:active {
+      transform: scale(0.95);
+    }
+
+    .filter-pill.selected {
+      background: rgba(56, 189, 248, 0.18);
+      border-color: #38bdf8;
+      color: #38bdf8;
+    }
+
+    .filter-pill-out.selected {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: #ef4444;
+      color: #f87171;
+    }
+
+    .filter-pill-in.selected {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: #10b981;
+      color: #34d399;
+    }
+
+    .bag-filter-select {
+      min-height: 48px;
+      background: #111827;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 9999px;
+      color: var(--text-main);
+      padding: 0 14px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      outline: none;
+      touch-action: manipulation;
+    }
+
+    /* Summary Telemetry Bar */
+    .history-telemetry-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-top: 10px;
+      padding: 8px 10px;
+      background: #111827;
+      border: 1px solid rgba(56, 189, 248, 0.18);
+      border-radius: 14px;
+    }
+
+    .telemetry-chip {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+    }
+
+    .telemetry-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+    }
+
+    .telemetry-val {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #ffffff;
+      white-space: nowrap;
+    }
+
+    .telemetry-count .telemetry-val { color: #38bdf8; }
+    .telemetry-out .telemetry-val { color: #f87171; }
+    .telemetry-in .telemetry-val { color: #34d399; }
+    .telemetry-net .telemetry-val { color: #e2e8f0; }
+
+    .drawer-list-container {
+      flex: 1;
+      overflow-y: auto;
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding-right: 4px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .drawer-footer {
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .btn-drawer-export {
+      width: 100%;
+      min-height: 60px;
+      background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
+      border: none;
+      border-radius: 14px;
+      color: #ffffff;
+      font-size: 1rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
+      touch-action: manipulation;
+      user-select: none;
+      -webkit-user-select: none;
+      transition: all 0.15s ease;
+    }
+
+    .btn-drawer-export:active {
+      transform: scale(0.97);
     }
 
     /* Modal Styling */
@@ -502,13 +999,14 @@
     .modal-box {
       width: 100%;
       max-width: 480px;
-      background: #0f172a;
+      background: #0b1120;
       border: 1px solid var(--border-subtle);
       border-radius: 20px;
       padding: 20px;
       display: flex;
       flex-direction: column;
       gap: 14px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), 0 0 16px rgba(56, 189, 248, 0.15);
     }
 
     .modal-title {
@@ -650,25 +1148,151 @@
       <input type="text" id="input-remark" class="note-input" placeholder="Party Name / Note (Optional)">
     </section>
 
+    <!-- Dynamic Stock Preview Banner (Directly above Submit) -->
+    <div id="stock-preview-banner" class="stock-preview-banner">
+      <!-- Injected reactively via updateStockPreviewBanner() -->
+    </div>
+
     <!-- STEP 5: Big Vibrant SAVE ENTRY Button -->
     <button id="btn-submit-entry" class="btn-submit">
       <span>💾</span>
       <span id="submit-btn-text">RECORD TRANSACTION</span>
     </button>
 
-    <!-- STEP 6: Recent Transactions & 1-Tap Undo -->
-    <section class="recent-section">
+    <!-- STEP 6: Recent Transactions with In-Place Expander & Full History Drawer Access -->
+    <section class="recent-section" id="recent-section">
       <div class="recent-header">
-        <span class="step-label" style="margin-bottom: 0;">Recent Entries</span>
-        <button id="btn-refresh-data" class="btn-undo" style="background: rgba(56, 189, 248, 0.15); border-color: rgba(56, 189, 248, 0.3); color: #38bdf8;">
-          🔄 Refresh
-        </button>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span class="step-label" style="margin-bottom: 0;">Recent Entries</span>
+          <span id="recent-count-pill" class="history-pill">5 loaded</span>
+        </div>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <button id="btn-refresh-data" class="btn-action-sm" aria-label="Refresh Data" title="Sync live stock from Google Sheet">
+            🔄 Refresh
+          </button>
+          <button id="btn-open-history-drawer" class="btn-action-sm btn-drawer-trigger" aria-label="Open Full History Drawer" title="Open full 50-record history drawer">
+            📜 History (50) ↗
+          </button>
+        </div>
       </div>
+
       <div id="recent-list" class="recent-list">
         <!-- Rendered via JavaScript -->
       </div>
+
+      <!-- In-Place Expander Bar -->
+      <div class="expander-bar" id="expander-bar">
+        <button id="btn-show-more-10" class="btn-expander" aria-label="Show 10 More Entries">
+          <span>➕ +10 More</span>
+        </button>
+        <button id="btn-show-more-25" class="btn-expander" aria-label="Show 25 More Entries">
+          <span>➕ +25 More</span>
+        </button>
+        <button id="btn-collapse-history" class="btn-expander btn-expander-collapse" aria-label="Collapse History to 5" style="display: none;">
+          <span>▲ Show 5 Only</span>
+        </button>
+      </div>
     </section>
 
+  </div>
+
+  <!-- ========================================================================
+       SLIDING 50-RECORD HISTORY DRAWER (SEARCH, FILTERS, TELEMETRY, UNDO, EXCEL)
+       ======================================================================== -->
+  <div id="drawer-history" class="drawer-overlay" aria-hidden="true">
+    <div class="drawer-backdrop" id="drawer-backdrop"></div>
+    <div class="drawer-panel" id="drawer-panel">
+      
+      <!-- Drawer Grab Handle -->
+      <div class="drawer-handle-bar" id="drawer-handle-bar">
+        <div class="drawer-handle"></div>
+      </div>
+
+      <!-- Drawer Header -->
+      <div class="drawer-header">
+        <div class="drawer-title-group">
+          <h2 class="drawer-title">
+            <span>📜</span>
+            <span>Transaction History</span>
+          </h2>
+          <span class="drawer-subtitle">Up to 50 live records synced from Google Sheet</span>
+        </div>
+        <div class="drawer-header-actions">
+          <button id="btn-drawer-export-excel" class="btn-icon" aria-label="Export Filtered Excel" title="Export Filtered to Excel (.xlsx)">
+            📥
+          </button>
+          <button id="btn-close-drawer" class="btn-icon" aria-label="Close Drawer" title="Close Drawer">
+            ✕
+          </button>
+        </div>
+      </div>
+
+      <!-- Instant Real-Time Search Bar -->
+      <div class="drawer-search-row">
+        <div class="search-input-wrapper">
+          <span class="search-prefix-icon">🔍</span>
+          <input type="text" id="input-history-search" class="drawer-search-input" placeholder="Search bag name, date, party note, SR#..." autocomplete="off">
+          <button id="btn-clear-search" class="btn-clear-search" aria-label="Clear Search" style="display: none;">✕</button>
+        </div>
+      </div>
+
+      <!-- Quick Filter Pills -->
+      <div class="filter-pills-row">
+        <button class="filter-pill selected" data-type="ALL" id="pill-filter-all">
+          All (<span id="pill-all-count">0</span>)
+        </button>
+        <button class="filter-pill filter-pill-out" data-type="OUT" id="pill-filter-out">
+          📤 OUT Only
+        </button>
+        <button class="filter-pill filter-pill-in" data-type="IN" id="pill-filter-in">
+          📥 IN Only
+        </button>
+        
+        <!-- Bag Selector Filter Dropdown -->
+        <select id="select-history-bag" class="bag-filter-select" aria-label="Filter by Bag Name">
+          <option value="ALL">All Bags (6 Items)</option>
+          <option value="1 set">1 set</option>
+          <option value="Kohinoor">Kohinoor</option>
+          <option value="Lining 28">Lining 28</option>
+          <option value="Medium 29">Medium 29</option>
+          <option value="Pink 30">Pink 30</option>
+          <option value="White (6)">White (6)</option>
+        </select>
+      </div>
+
+      <!-- Summary Telemetry Bar -->
+      <div class="history-telemetry-bar" id="history-telemetry-bar">
+        <div class="telemetry-chip telemetry-count">
+          <span class="telemetry-label">Records</span>
+          <span id="telemetry-count-val" class="telemetry-val">0</span>
+        </div>
+        <div class="telemetry-chip telemetry-out">
+          <span class="telemetry-label">Total OUT</span>
+          <span id="telemetry-out-val" class="telemetry-val">0 pcs</span>
+        </div>
+        <div class="telemetry-chip telemetry-in">
+          <span class="telemetry-label">Total IN</span>
+          <span id="telemetry-in-val" class="telemetry-val">0 pcs</span>
+        </div>
+        <div class="telemetry-chip telemetry-net">
+          <span class="telemetry-label">Net Flux</span>
+          <span id="telemetry-net-val" class="telemetry-val">0 pcs</span>
+        </div>
+      </div>
+
+      <!-- Scrollable History Transaction Cards List -->
+      <div class="drawer-list-container" id="drawer-transactions-list">
+        <!-- Injected dynamically via JavaScript -->
+      </div>
+
+      <!-- Drawer Footer Actions -->
+      <div class="drawer-footer">
+        <button id="btn-drawer-export-bottom" class="btn-drawer-export">
+          <span>📊 Export Filtered View to Excel (.xlsx)</span>
+        </button>
+      </div>
+
+    </div>
   </div>
 
   <!-- Settings Modal (Google Apps Script Webhook URL) -->
@@ -676,7 +1300,7 @@
     <div class="modal-box">
       <div class="modal-title">
         <span>⚙️ Google Sheet Webhook</span>
-        <button id="btn-close-settings" class="btn-icon" style="min-width: 36px; min-height: 36px;">✕</button>
+        <button id="btn-close-settings" class="btn-icon" style="min-width: 48px; min-height: 48px;">✕</button>
       </div>
       <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4;">
         Paste your Google Apps Script Web App URL below. Every mobile entry will automatically appear in your live Google Sheet!
@@ -733,6 +1357,13 @@
     let offlineQueue = [];
     let audioCtx = null;
 
+    // History & Drawer State
+    let mainVisibleCount = 5;
+    const DEFAULT_MAIN_VISIBLE_COUNT = 5;
+    let drawerFilterType = "ALL"; // "ALL" | "OUT" | "IN"
+    let drawerFilterBag = "ALL";  // "ALL" | Item Name
+    let drawerSearchQuery = "";
+
     // Local Storage Keys & Default Configuration
     const DEFAULT_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwh2Lfu-M_Ci_L0qcnAN6HkI8phrFbW9px-j_n8DuSdL2k-_ZzbiRCTHasQGDJYvsU/exec";
     const KEY_WEBHOOK_URL = "thela_stock_webhook_url";
@@ -759,12 +1390,12 @@
         }
 
         const now = audioCtx.currentTime;
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
 
         if (type === 'tap') {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
           osc.type = 'sine';
           osc.frequency.setValueAtTime(600, now);
           osc.frequency.exponentialRampToValueAtTime(200, now + 0.04);
@@ -773,14 +1404,40 @@
           osc.start(now);
           osc.stop(now + 0.04);
         } else if (type === 'success') {
-          osc.type = 'triangle';
-          osc.frequency.setValueAtTime(523.25, now); // C5
-          osc.frequency.setValueAtTime(659.25, now + 0.08); // E5
+          // Procedural 3-oscillator simultaneous major chord (C5, E5, G5) decaying over 250ms
+          const freqs = [523.25, 659.25, 783.99]; // C5, E5, G5
+          const dur = 0.25;
+          const masterGain = audioCtx.createGain();
+          masterGain.gain.setValueAtTime(0.18, now);
+          masterGain.gain.exponentialRampToValueAtTime(0.001, now + dur);
+          masterGain.connect(audioCtx.destination);
+
+          freqs.forEach(freq => {
+            const osc = audioCtx.createOscillator();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(freq, now);
+            osc.connect(masterGain);
+            osc.start(now);
+            osc.stop(now + dur);
+          });
+        } else if (type === 'undo') {
+          // Undo acoustic blip: 250Hz -> 380Hz sweep over 80ms
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(250, now);
+          osc.frequency.exponentialRampToValueAtTime(380, now + 0.08);
           gain.gain.setValueAtTime(0.12, now);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
           osc.start(now);
-          osc.stop(now + 0.22);
+          osc.stop(now + 0.08);
         } else if (type === 'warn') {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
           osc.type = 'sine';
           osc.frequency.setValueAtTime(150, now);
           osc.frequency.exponentialRampToValueAtTime(80, now + 0.12);
@@ -823,9 +1480,27 @@
       }
 
       try {
+        setupDynamicStockPreview();
+      } catch (err) {
+        console.error("Bootloader setupDynamicStockPreview error:", err);
+      }
+
+      try {
         setupSubmitListener();
       } catch (err) {
         console.error("Bootloader setupSubmitListener error:", err);
+      }
+
+      try {
+        setupInPlaceHistoryExpansion();
+      } catch (err) {
+        console.error("Bootloader setupInPlaceHistoryExpansion error:", err);
+      }
+
+      try {
+        setupHistoryDrawer();
+      } catch (err) {
+        console.error("Bootloader setupHistoryDrawer error:", err);
       }
 
       try {
@@ -842,6 +1517,7 @@
 
       try {
         updateGlanceBanner();
+        updateStockPreviewBanner();
         renderRecentTransactions();
         checkNetworkStatus();
         fetchLiveFromGoogleSheet(); // Auto-refresh in background
@@ -941,6 +1617,7 @@
           document.querySelectorAll(".bag-card").forEach(c => c.classList.remove("selected"));
           card.classList.add("selected");
           updateGlanceBanner();
+          updateStockPreviewBanner();
         });
 
         grid.appendChild(card);
@@ -974,6 +1651,7 @@
           selectedAction = "OUT";
           btnOut.classList.add("selected");
           if (btnIn) btnIn.classList.remove("selected");
+          updateStockPreviewBanner();
         });
       }
 
@@ -983,6 +1661,7 @@
           selectedAction = "IN";
           btnIn.classList.add("selected");
           if (btnOut) btnOut.classList.remove("selected");
+          updateStockPreviewBanner();
         });
       }
     }
@@ -998,6 +1677,7 @@
           chip.classList.add("selected");
           selectedQuantity = Number(chip.getAttribute("data-qty") || 25);
           if (customInput) customInput.value = "";
+          updateStockPreviewBanner();
         });
       });
 
@@ -1008,21 +1688,109 @@
             selectedQuantity = val;
             chips.forEach(c => c.classList.remove("selected"));
           }
+          updateStockPreviewBanner();
+        });
+        customInput.addEventListener("change", () => {
+          const val = Number(customInput.value);
+          if (val > 0) {
+            selectedQuantity = val;
+            chips.forEach(c => c.classList.remove("selected"));
+          }
+          updateStockPreviewBanner();
         });
       }
     }
 
+    /* ========================================================================
+       DYNAMIC STOCK PREVIEW BANNER ENGINE
+       ======================================================================== */
+    function setupDynamicStockPreview() {
+      const customInput = document.getElementById("input-custom-qty");
+      if (customInput) {
+        customInput.addEventListener("input", () => {
+          updateStockPreviewBanner();
+        });
+        customInput.addEventListener("change", () => {
+          updateStockPreviewBanner();
+        });
+      }
+      updateStockPreviewBanner();
+    }
+
+    function updateStockPreviewBanner() {
+      const banner = document.getElementById("stock-preview-banner");
+      if (!banner) return;
+
+      const item = selectedItem || (CANONICAL_ITEMS[0] || "Kohinoor");
+      const current = (typeof liveBalances[item] === 'number') 
+        ? liveBalances[item] 
+        : (DEFAULT_STOCK[item] ? DEFAULT_STOCK[item].current : 0);
+      const qty = Number(selectedQuantity) || 0;
+      const isOut = (selectedAction === "OUT");
+      const projected = isOut ? (current - qty) : (current + qty);
+      const sign = isOut ? "-" : "+";
+
+      let statusClass = "status-normal";
+      let alertHtml = "";
+
+      if (isOut && projected < 0) {
+        statusClass = "status-deficit";
+        const deficit = Math.abs(projected);
+        alertHtml = `<div class="preview-alert deficit">⚠️ Insufficient Stock: Deficit of ${deficit} pcs!</div>`;
+      } else if (isOut && projected >= 0 && projected <= 50) {
+        statusClass = "status-low";
+        alertHtml = `<div class="preview-alert low">⚡ Low Stock Warning: Only ${projected} pcs remaining</div>`;
+      }
+
+      const formulaText = `${escapeHtml(item)}: ${current} pcs ➔ ${projected} pcs (${sign}${qty} ${selectedAction})`;
+
+      banner.className = `stock-preview-banner ${statusClass}`;
+      banner.innerHTML = `
+        <div class="preview-header">
+          <span class="preview-tag">LIVE STOCK PREVIEW</span>
+          <span class="preview-delta-tag ${isOut ? 'out' : 'in'}">${sign}${qty} ${selectedAction}</span>
+        </div>
+        <div class="preview-formula">${formulaText}</div>
+        ${alertHtml}
+      `;
+    }
+
     function renderRecentTransactions() {
       const list = document.getElementById("recent-list");
+      const countPill = document.getElementById("recent-count-pill");
+      const expanderBar = document.getElementById("expander-bar");
+      const btnShow10 = document.getElementById("btn-show-more-10");
+      const btnShow25 = document.getElementById("btn-show-more-25");
+      const btnCollapse = document.getElementById("btn-collapse-history");
+
       if (!list) return;
       list.innerHTML = "";
 
-      if (recentTransactions.length === 0) {
+      const totalTxs = recentTransactions.length;
+      const shownCount = Math.min(mainVisibleCount, totalTxs);
+
+      if (countPill) {
+        countPill.textContent = totalTxs > 0 ? `Showing ${shownCount} of ${totalTxs}` : "0 loaded";
+      }
+
+      // Update expander bar visibility
+      if (expanderBar) {
+        if (totalTxs <= DEFAULT_MAIN_VISIBLE_COUNT) {
+          expanderBar.style.display = "none";
+        } else {
+          expanderBar.style.display = "flex";
+          if (btnShow10) btnShow10.style.display = (shownCount >= totalTxs) ? "none" : "inline-flex";
+          if (btnShow25) btnShow25.style.display = (shownCount >= totalTxs) ? "none" : "inline-flex";
+          if (btnCollapse) btnCollapse.style.display = (mainVisibleCount > DEFAULT_MAIN_VISIBLE_COUNT) ? "inline-flex" : "none";
+        }
+      }
+
+      if (totalTxs === 0) {
         list.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 12px; font-size: 0.85rem;">No recent transactions yet</div>`;
         return;
       }
 
-      recentTransactions.slice(0, 5).forEach((tx, idx) => {
+      recentTransactions.slice(0, mainVisibleCount).forEach((tx, idx) => {
         const item = document.createElement("div");
         item.className = "recent-item";
 
@@ -1051,6 +1819,294 @@
 
         list.appendChild(item);
       });
+    }
+
+    /* ========================================================================
+       IN-PLACE EXPANDER LOGIC (MAIN SCREEN)
+       ======================================================================== */
+    function setupInPlaceHistoryExpansion() {
+      const btnShow10 = document.getElementById("btn-show-more-10");
+      const btnShow25 = document.getElementById("btn-show-more-25");
+      const btnCollapse = document.getElementById("btn-collapse-history");
+      const btnOpenDrawer = document.getElementById("btn-open-history-drawer");
+
+      if (btnShow10) {
+        btnShow10.addEventListener("click", () => {
+          playSound('tap');
+          mainVisibleCount = Math.min(recentTransactions.length, mainVisibleCount + 10);
+          renderRecentTransactions();
+        });
+      }
+
+      if (btnShow25) {
+        btnShow25.addEventListener("click", () => {
+          playSound('tap');
+          mainVisibleCount = Math.min(recentTransactions.length, mainVisibleCount + 25);
+          renderRecentTransactions();
+        });
+      }
+
+      if (btnCollapse) {
+        btnCollapse.addEventListener("click", () => {
+          playSound('tap');
+          mainVisibleCount = DEFAULT_MAIN_VISIBLE_COUNT;
+          renderRecentTransactions();
+        });
+      }
+
+      if (btnOpenDrawer) {
+        btnOpenDrawer.addEventListener("click", () => {
+          openHistoryDrawer();
+        });
+      }
+    }
+
+    /* ========================================================================
+       SLIDING HISTORY DRAWER LOGIC
+       ======================================================================== */
+    function setupHistoryDrawer() {
+      const drawer = document.getElementById("drawer-history");
+      const backdrop = document.getElementById("drawer-backdrop");
+      const btnClose = document.getElementById("btn-close-drawer");
+      const searchInput = document.getElementById("input-history-search");
+      const clearSearchBtn = document.getElementById("btn-clear-search");
+      const bagSelect = document.getElementById("select-history-bag");
+      const pills = document.querySelectorAll(".filter-pill");
+      const btnExportHeader = document.getElementById("btn-drawer-export-excel");
+      const btnExportBottom = document.getElementById("btn-drawer-export-bottom");
+
+      // Close handlers
+      if (btnClose) btnClose.addEventListener("click", closeHistoryDrawer);
+      if (backdrop) backdrop.addEventListener("click", closeHistoryDrawer);
+
+      // Search input handler
+      if (searchInput) {
+        searchInput.addEventListener("input", () => {
+          drawerSearchQuery = searchInput.value.trim().toLowerCase();
+          if (clearSearchBtn) {
+            clearSearchBtn.style.display = drawerSearchQuery ? "flex" : "none";
+          }
+          renderDrawerTransactions();
+        });
+      }
+
+      if (clearSearchBtn) {
+        clearSearchBtn.addEventListener("click", () => {
+          playSound('tap');
+          if (searchInput) {
+            searchInput.value = "";
+            searchInput.focus();
+          }
+          drawerSearchQuery = "";
+          clearSearchBtn.style.display = "none";
+          renderDrawerTransactions();
+        });
+      }
+
+      // Filter pills (All, OUT, IN)
+      pills.forEach(pill => {
+        pill.addEventListener("click", () => {
+          playSound('tap');
+          pills.forEach(p => p.classList.remove("selected"));
+          pill.classList.add("selected");
+          drawerFilterType = pill.getAttribute("data-type") || "ALL";
+          renderDrawerTransactions();
+        });
+      });
+
+      // Bag dropdown filter
+      if (bagSelect) {
+        bagSelect.addEventListener("change", () => {
+          playSound('tap');
+          drawerFilterBag = bagSelect.value;
+          renderDrawerTransactions();
+        });
+      }
+
+      // Export handlers
+      if (btnExportHeader) {
+        btnExportHeader.addEventListener("click", exportFilteredToExcel);
+      }
+      if (btnExportBottom) {
+        btnExportBottom.addEventListener("click", exportFilteredToExcel);
+      }
+    }
+
+    function openHistoryDrawer() {
+      playSound('tap');
+      const drawer = document.getElementById("drawer-history");
+      if (!drawer) return;
+      drawer.classList.add("active");
+      drawer.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+
+      // Refresh pill count
+      const pillCount = document.getElementById("pill-all-count");
+      if (pillCount) pillCount.textContent = String(recentTransactions.length);
+
+      renderDrawerTransactions();
+    }
+
+    function closeHistoryDrawer() {
+      playSound('tap');
+      const drawer = document.getElementById("drawer-history");
+      if (!drawer) return;
+      drawer.classList.remove("active");
+      drawer.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    function getFilteredTransactions() {
+      const q = drawerSearchQuery;
+      return recentTransactions.filter(tx => {
+        // Type filter
+        if (drawerFilterType !== "ALL" && tx.type !== drawerFilterType) return false;
+
+        // Bag filter
+        if (drawerFilterBag !== "ALL" && tx.itemName !== drawerFilterBag) return false;
+
+        // Query filter
+        if (q) {
+          const nameMatch = (tx.itemName || "").toLowerCase().includes(q);
+          const dateMatch = (tx.date || "").toLowerCase().includes(q);
+          const noteMatch = (tx.remark || "").toLowerCase().includes(q);
+          const srMatch = String(tx.sr || "").toLowerCase().includes(q);
+          const typeMatch = (tx.type || "").toLowerCase() === q;
+          const qtyMatch = String(tx.quantity || "").includes(q);
+          if (!nameMatch && !dateMatch && !noteMatch && !srMatch && !typeMatch && !qtyMatch) {
+            return false;
+          }
+        }
+        return true;
+      });
+    }
+
+    function updateTelemetry(filtered) {
+      const countEl = document.getElementById("telemetry-count-val");
+      const outEl = document.getElementById("telemetry-out-val");
+      const inEl = document.getElementById("telemetry-in-val");
+      const netEl = document.getElementById("telemetry-net-val");
+
+      let totalOut = 0;
+      let totalIn = 0;
+
+      filtered.forEach(tx => {
+        const qty = Number(tx.quantity || 0);
+        if (tx.type === "OUT") totalOut += qty;
+        else if (tx.type === "IN") totalIn += qty;
+      });
+
+      const net = totalOut - totalIn;
+
+      if (countEl) countEl.textContent = String(filtered.length);
+      if (outEl) outEl.textContent = `${totalOut.toLocaleString()} pcs`;
+      if (inEl) inEl.textContent = `${totalIn.toLocaleString()} pcs`;
+      if (netEl) {
+        const prefix = net > 0 ? "+" : "";
+        netEl.textContent = `${prefix}${net.toLocaleString()} pcs`;
+      }
+    }
+
+    function renderDrawerTransactions() {
+      const container = document.getElementById("drawer-transactions-list");
+      if (!container) return;
+      container.innerHTML = "";
+
+      const filtered = getFilteredTransactions();
+      updateTelemetry(filtered);
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div style="text-align: center; color: var(--text-muted); padding: 36px 16px; font-size: 0.95rem;">
+            <div style="font-size: 2rem; margin-bottom: 8px;">🔍</div>
+            No transactions match your search or filter.
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach((tx) => {
+        const item = document.createElement("div");
+        item.className = "recent-item";
+
+        const badgeType = (tx.type === "OUT") ? "out" : "in";
+
+        item.innerHTML = `
+          <div class="recent-item-info">
+            <div class="recent-item-title">${escapeHtml(tx.itemName)}</div>
+            <div class="recent-item-meta">
+              <span>${escapeHtml(tx.date || "")}</span>
+              ${tx.remark ? `<span>•</span><span>${escapeHtml(tx.remark)}</span>` : ""}
+              <span style="color: var(--text-muted); opacity: 0.7;">#${escapeHtml(String(tx.sr || ''))}</span>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="recent-item-badge ${badgeType}">${tx.type} ${tx.quantity}</span>
+            <button class="btn-undo" data-sr="${tx.sr || ''}" title="Undo entry #${tx.sr || ''}">↩ Undo</button>
+          </div>
+        `;
+
+        const undoBtn = item.querySelector(".btn-undo");
+        if (undoBtn) {
+          undoBtn.addEventListener("click", () => {
+            undoTransaction(tx);
+          });
+        }
+
+        container.appendChild(item);
+      });
+    }
+
+    function exportFilteredToExcel() {
+      playSound('tap');
+      try {
+        if (typeof XLSX === 'undefined') {
+          showToast("Excel export library loading...", true);
+          return;
+        }
+
+        const filtered = getFilteredTransactions();
+        if (filtered.length === 0) {
+          showToast("No records to export for this filter!", true);
+          playSound('warn');
+          return;
+        }
+
+        const wb = XLSX.utils.book_new();
+
+        // 1. Transactions Sheet
+        const txData = [
+          ["SR", "Date", "Item Name", "Quantity", "Type", "Remark"]
+        ];
+        filtered.forEach(tx => {
+          txData.push([tx.sr, tx.date, tx.itemName, tx.quantity, tx.type, tx.remark || ""]);
+        });
+        const wsTx = XLSX.utils.aoa_to_sheet(txData);
+        XLSX.utils.book_append_sheet(wb, wsTx, "Transactions");
+
+        // 2. Summary Sheet
+        const summaryData = [
+          ["Item Name", "Current Stock (pcs)"]
+        ];
+        CANONICAL_ITEMS.forEach(item => {
+          summaryData.push([item, liveBalances[item] || 0]);
+        });
+        const wsSummary = XLSX.utils.aoa_to_sheet(summaryData);
+        XLSX.utils.book_append_sheet(wb, wsSummary, "C. Stock Summary");
+
+        const now = new Date();
+        const stamp = `${now.getFullYear()}${("0" + (now.getMonth() + 1)).slice(-2)}${("0" + now.getDate()).slice(-2)}`;
+        const filterTag = (drawerFilterType !== "ALL" || drawerFilterBag !== "ALL" || drawerSearchQuery) ? "_Filtered" : "";
+        const filename = `Thela_Stock_History${filterTag}_${stamp}.xlsx`;
+
+        XLSX.writeFile(wb, filename);
+
+        playSound('success');
+        showToast(`Exported ${filtered.length} transactions to Excel!`);
+      } catch (e) {
+        console.error("Excel export error:", e);
+        showToast("Export failed: " + e.message, true);
+      }
     }
 
     /* ========================================================================
@@ -1107,7 +2163,15 @@
         saveRecent();
         renderBagCards();
         updateGlanceBanner();
+        updateStockPreviewBanner();
         renderRecentTransactions();
+
+        const submitDrawer = document.getElementById("drawer-history");
+        if (submitDrawer && submitDrawer.classList.contains("active")) {
+          const pillCount = document.getElementById("pill-all-count");
+          if (pillCount) pillCount.textContent = String(recentTransactions.length);
+          renderDrawerTransactions();
+        }
 
         if (remarkInput) remarkInput.value = "";
         playSound('success');
@@ -1138,7 +2202,8 @@
           quantity: String(tx.quantity),
           type: tx.type,
           date: tx.date,
-          remark: tx.remark || ""
+          remark: tx.remark || "",
+          limit: "50"
         });
 
         const targetUrl = webhookUrl + (webhookUrl.includes("?") ? "&" : "?") + params.toString();
@@ -1152,6 +2217,12 @@
               tx.sr = result.recorded.sr;
               saveRecent();
               renderRecentTransactions();
+              const pushDrawer = document.getElementById("drawer-history");
+              if (pushDrawer && pushDrawer.classList.contains("active")) {
+                const pillCount = document.getElementById("pill-all-count");
+                if (pillCount) pillCount.textContent = String(recentTransactions.length);
+                renderDrawerTransactions();
+              }
             }
           }
           updateStatusPill(true, "Online (Sheet Synced)");
@@ -1171,7 +2242,7 @@
         return;
       }
 
-      playSound('warn');
+      playSound('undo');
 
       // Revert optimistic stock balance
       if (typeof liveBalances[tx.itemName] === 'number') {
@@ -1188,7 +2259,16 @@
       saveRecent();
       renderBagCards();
       updateGlanceBanner();
+      updateStockPreviewBanner();
       renderRecentTransactions();
+
+      const undoDrawer = document.getElementById("drawer-history");
+      if (undoDrawer && undoDrawer.classList.contains("active")) {
+        const pillCount = document.getElementById("pill-all-count");
+        if (pillCount) pillCount.textContent = String(recentTransactions.length);
+        renderDrawerTransactions();
+      }
+
       showToast("Undone last entry!");
 
       // If webhook configured, send undo command to Google Sheet
@@ -1197,7 +2277,8 @@
         try {
           const params = new URLSearchParams({
             action: "undo",
-            sr: String(tx.sr || "")
+            sr: String(tx.sr || ""),
+            limit: "50"
           });
           const targetUrl = webhookUrl + (webhookUrl.includes("?") ? "&" : "?") + params.toString();
           const response = await fetch(targetUrl, { method: "GET", mode: "cors" });
@@ -1219,7 +2300,8 @@
 
       updateStatusPill(true, "Refreshing...");
       try {
-        const response = await fetch(webhookUrl, { method: "GET", mode: "cors" });
+        const fetchUrl = webhookUrl + (webhookUrl.includes("?") ? "&" : "?") + "limit=50";
+        const response = await fetch(fetchUrl, { method: "GET", mode: "cors" });
         if (response.ok) {
           const res = await response.json();
           if (res && res.status === "success" && res.data) {
@@ -1244,12 +2326,19 @@
         saveBalances();
         renderBagCards();
         updateGlanceBanner();
+        updateStockPreviewBanner();
       }
 
       if (data && Array.isArray(data.recent) && data.recent.length > 0) {
         recentTransactions = data.recent;
         saveRecent();
         renderRecentTransactions();
+        const sheetDrawer = document.getElementById("drawer-history");
+        if (sheetDrawer && sheetDrawer.classList.contains("active")) {
+          const pillCount = document.getElementById("pill-all-count");
+          if (pillCount) pillCount.textContent = String(recentTransactions.length);
+          renderDrawerTransactions();
+        }
       }
     }
 

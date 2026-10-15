@@ -70,9 +70,15 @@
           autocapitalize="off"
           spellcheck="false"
         >
-        <button id="btn-clear-search" class="btn-clear-search" aria-label="Clear search input" style="display: none;">
-          &times;
-        </button>
+        <div class="search-right-actions">
+          <button id="btn-paste-search" class="btn-paste-search" type="button" aria-label="Paste address or pincode from clipboard" title="1-Tap Paste &amp; Extract Pincode">
+            <span class="paste-icon" aria-hidden="true">📋</span>
+            <span class="paste-label">Paste</span>
+          </button>
+          <button id="btn-clear-search" class="btn-clear-search" aria-label="Clear search input" style="display: none;">
+            &times;
+          </button>
+        </div>
       </div>
 
       <!-- Quick Filter Chips -->
@@ -99,6 +105,20 @@
         <span id="stats-speed-badge" class="stats-speed-badge">
           ⚡ &lt; 0.1 ms
         </span>
+      </div>
+
+      <!-- Recent Searches Quick Strip -->
+      <div id="recent-searches-container" class="recent-searches-container" style="display: none;" aria-label="Recent Searches">
+        <div class="recent-label-wrap">
+          <span class="recent-icon" aria-hidden="true">🕒</span>
+          <span class="recent-label">Recent:</span>
+        </div>
+        <div id="recent-chips-list" class="recent-chips-list" role="list">
+          <!-- Dynamic Recent Search Chips -->
+        </div>
+        <button id="btn-clear-recent" class="btn-clear-recent" type="button" title="Clear recent searches" aria-label="Clear recent searches">
+          &times;
+        </button>
       </div>
     </div>
 

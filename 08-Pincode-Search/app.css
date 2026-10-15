@@ -236,7 +236,7 @@ html, body {
   color: var(--text-primary);
   border: 1px solid var(--border-medium);
   border-radius: var(--radius-lg);
-  padding: 0 46px 0 86px;
+  padding: 0 114px 0 86px;
   font-size: 1rem;
   font-weight: 500;
   outline: none;
@@ -255,20 +255,62 @@ html, body {
   background-color: var(--bg-surface-elevated);
 }
 
-.btn-clear-search {
+.search-right-actions {
   position: absolute;
-  right: 4px;
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  min-height: 44px;
+  right: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  z-index: 3;
+}
+
+.btn-paste-search {
+  height: 36px;
+  min-height: 36px;
+  padding: 0 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background-color: rgba(56, 189, 248, 0.12);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: var(--radius-md);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+  transition: all 0.15s ease;
+}
+
+.btn-paste-search:active {
+  transform: scale(0.93);
+  background-color: rgba(56, 189, 248, 0.28);
+}
+
+.btn-paste-search .paste-icon {
+  font-size: 0.88rem;
+  line-height: 1;
+}
+
+.btn-paste-search .paste-label {
+  font-size: 0.76rem;
+  letter-spacing: 0.02em;
+}
+
+.btn-clear-search {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: transparent;
   border: none;
   color: var(--text-muted);
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   cursor: pointer;
   border-radius: var(--radius-full);
   transition: color 0.15s ease, background-color 0.15s ease;
@@ -278,6 +320,123 @@ html, body {
 .btn-clear-search:active {
   color: var(--text-primary);
   background-color: var(--bg-surface-active);
+}
+
+/* Recent Searches Quick Strip */
+.recent-searches-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  padding: 2px 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.recent-searches-container::-webkit-scrollbar {
+  display: none;
+}
+
+.recent-label-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.recent-label-wrap .recent-icon {
+  font-size: 0.82rem;
+}
+
+.recent-chips-list {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.recent-chips-list::-webkit-scrollbar {
+  display: none;
+}
+
+.recent-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  min-height: 30px;
+  padding: 0 10px;
+  border-radius: var(--radius-full);
+  background-color: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  color: var(--text-primary);
+  font-size: 0.76rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+  transition: all 0.12s ease;
+  flex-shrink: 0;
+}
+
+.recent-chip:active {
+  transform: scale(0.94);
+  background-color: #0369a1;
+  border-color: #38bdf8;
+}
+
+.recent-chip .chip-pin {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-weight: 800;
+  color: #38bdf8;
+}
+
+.recent-chip .chip-city {
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+
+.recent-chip .chip-badge-oda {
+  color: #f59e0b;
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.btn-clear-recent {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+  touch-action: manipulation;
+  transition: all 0.15s ease;
+}
+
+.btn-clear-recent:active {
+  color: #ef4444;
+  border-color: #ef4444;
+  background-color: rgba(239, 68, 68, 0.15);
 }
 
 /* 6. Quick Filter Chips Bar */
