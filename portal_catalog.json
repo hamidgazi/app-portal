@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "lastUpdated": "Antigravity Files",
-  "totalApps": 17,
+  "totalApps": 18,
   "categories": [
     "Islamic & Faith",
     "Productivity & Utilities",
@@ -10,6 +10,28 @@
     "Discovered Tools"
   ],
   "apps": [
+    {
+      "id": "15-Quran-Deep-Analyzer__index_html",
+      "title": "Quran Deep Analyzer",
+      "category": "Islamic & Faith",
+      "icon": "📖",
+      "badge": "PWA • Linguistic & Telemetry",
+      "description": "Complete deep analysis of the Holy Quran: 20k+ word frequencies, roots, lemmas, 114 Surah telemetry, 484 thematic topics, and classical Tafsir.",
+      "tags": [
+        "quran",
+        "analysis",
+        "linguistics",
+        "tafsir",
+        "roots",
+        "frequency",
+        "surah",
+        "telemetry"
+      ],
+      "primary": true,
+      "relPath": "15-Quran-Deep-Analyzer/index.html",
+      "portalHref": "./15-Quran-Deep-Analyzer/index.html",
+      "serverHref": "./15-Quran-Deep-Analyzer/index.html"
+    },
     {
       "id": "01-Events-Countdown__index_html",
       "title": "Events Countdown & Tracker",

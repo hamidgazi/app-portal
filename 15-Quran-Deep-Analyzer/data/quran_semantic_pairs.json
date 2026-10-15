@@ -1,0 +1,90 @@
+[
+  {
+    "concept": "Worldly Life vs Hereafter",
+    "term1_ar": "الدنيا",
+    "term1_label": "Al-Dunya",
+    "term1_count": 0,
+    "term2_ar": "الآخرة",
+    "term2_label": "Al-Akhirah",
+    "term2_count": 0,
+    "is_balanced": true,
+    "ratio": null
+  },
+  {
+    "concept": "Angels vs Devils",
+    "term1_ar": "الملائكة",
+    "term1_label": "Al-Mala'ikah",
+    "term1_count": 0,
+    "term2_ar": "الشياطين",
+    "term2_label": "Al-Shayatin",
+    "term2_count": 0,
+    "is_balanced": true,
+    "ratio": null
+  },
+  {
+    "concept": "Life vs Death",
+    "term1_ar": "الحياة",
+    "term1_label": "Al-Hayat",
+    "term1_count": 0,
+    "term2_ar": "الموت",
+    "term2_label": "Al-Mawt",
+    "term2_count": 53,
+    "is_balanced": false,
+    "ratio": 0.0
+  },
+  {
+    "concept": "Light vs Darknesses",
+    "term1_ar": "النور",
+    "term1_label": "Al-Noor",
+    "term1_count": 13,
+    "term2_ar": "الظلمات",
+    "term2_label": "Al-Zulumat",
+    "term2_count": 0,
+    "is_balanced": false,
+    "ratio": null
+  },
+  {
+    "concept": "Paradise vs Hellfire",
+    "term1_ar": "الجنة",
+    "term1_label": "Al-Jannah",
+    "term1_count": 0,
+    "term2_ar": "النار",
+    "term2_label": "Al-Nar",
+    "term2_count": 105,
+    "is_balanced": false,
+    "ratio": 0.0
+  },
+  {
+    "concept": "Good Deeds vs Bad Deeds",
+    "term1_ar": "الصالحات",
+    "term1_label": "Al-Salihat",
+    "term1_count": 0,
+    "term2_ar": "السيئات",
+    "term2_label": "Al-Sayyi'at",
+    "term2_count": 0,
+    "is_balanced": true,
+    "ratio": null
+  },
+  {
+    "concept": "Sun vs Moon",
+    "term1_ar": "الشمس",
+    "term1_label": "Al-Shams",
+    "term1_count": 30,
+    "term2_ar": "القمر",
+    "term2_label": "Al-Qamar",
+    "term2_count": 25,
+    "is_balanced": false,
+    "ratio": 1.2
+  },
+  {
+    "concept": "Sea / Water vs Dry Land",
+    "term1_ar": "البحر",
+    "term1_label": "Al-Bahr",
+    "term1_count": 37,
+    "term2_ar": "البر",
+    "term2_label": "Al-Barr",
+    "term2_count": 27,
+    "is_balanced": false,
+    "ratio": 1.37
+  }
+]

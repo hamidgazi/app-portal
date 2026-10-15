@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Quran Deep Analyzer | Master Linguistic & Quantitative Suite</title>
+  <meta name="description" content="Complete deep analysis of the Holy Quran: Quantitative telemetry, word counts, roots, lemmas, thematic ontology, and classical Tafsir.">
+  <meta name="theme-color" content="#07090e">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+  <!-- App Header -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="app-branding" onclick="switchAppTab('frequency')">
+        <div class="logo-badge">📖</div>
+        <div class="branding-text">
+          <h1>Quran Deep Analyzer</h1>
+          <p>Linguistic • Quantitative • Thematic • Exegetical</p>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="app-nav" aria-label="Main Navigation">
+        <button class="nav-tab-btn active" data-tab="frequency">
+          <span>📊 Word Frequency</span>
+          <span class="tab-badge">20k+</span>
+        </button>
+        <button class="nav-tab-btn" data-tab="surahs">
+          <span>📑 Surah Telemetry</span>
+          <span class="tab-badge">114</span>
+        </button>
+        <button class="nav-tab-btn" data-tab="ayahs">
+          <span>🔍 Deep Ayah Analyzer</span>
+          <span class="tab-badge">6,236</span>
+        </button>
+        <button class="nav-tab-btn" data-tab="thematic">
+          <span>🧠 Thematic Graph</span>
+          <span class="tab-badge">484</span>
+        </button>
+        <button class="nav-tab-btn" data-tab="mutashabihat">
+          <span>⚖️ Mutashabihat</span>
+          <span class="tab-badge">332</span>
+        </button>
+        <button class="nav-tab-btn" data-tab="waqf">
+          <span>🛑 Waqf Rules</span>
+          <span class="tab-badge">15</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="app-main">
+
+    <!-- Global Telemetry Banner -->
+    <section class="metrics-banner" aria-label="Global Corpus Statistics">
+      <div class="metric-pill">
+        <span class="metric-label">Total Word Tokens</span>
+        <span class="metric-val emerald">82,480</span>
+      </div>
+      <div class="metric-pill">
+        <span class="metric-label">Unique Surface Words</span>
+        <span class="metric-val cyan">20,105</span>
+      </div>
+      <div class="metric-pill">
+        <span class="metric-label">Triliteral Roots</span>
+        <span class="metric-val amber">1,642</span>
+      </div>
+      <div class="metric-pill">
+        <span class="metric-label">Dictionary Lemmas</span>
+        <span class="metric-val purple">4,832</span>
+      </div>
+      <div class="metric-pill">
+        <span class="metric-label">Total Canonical Ayat</span>
+        <span class="metric-val">6,236</span>
+      </div>
+      <div class="metric-pill">
+        <span class="metric-label">Surahs</span>
+        <span class="metric-val">114</span>
+      </div>
+    </section>
+
+    <!-- Tab 1: Quantitative Telemetry & Word Frequency -->
+    <section id="tab-frequency" class="tab-panel active">
+      <div class="control-bar">
+        <div class="search-box-wrapper">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="freq-search-input" class="search-input" placeholder="Search Arabic word, clean text, or root...">
+        </div>
+        <div class="filter-pills-group">
+          <button class="filter-btn freq-filter-btn active" data-mode="words">Surface Words (20k)</button>
+          <button class="filter-btn freq-filter-btn" data-mode="roots">Roots (1,642)</button>
+          <button class="filter-btn freq-filter-btn" data-mode="lemmas">Lemmas (4,832)</button>
+          <button class="filter-btn freq-filter-btn" data-mode="hapax">Hapax Legomena (1-Time)</button>
+          <button class="filter-btn freq-filter-btn" data-mode="semantic">Semantic Pairs</button>
+        </div>
+      </div>
+
+      <div id="freq-data-container">
+        <!-- Rendered by telemetry-engine.js -->
+      </div>
+
+      <div id="freq-load-more-container" style="text-align: center; margin-top: 20px; display: none;">
+        <button id="load-more-freq-btn" class="filter-btn" style="padding: 10px 24px; font-size: 0.95rem;">
+          Load More Records ↓
+        </button>
+      </div>
+    </section>
+
+    <!-- Tab 2: Surah Telemetry & Navigator -->
+    <section id="tab-surahs" class="tab-panel">
+      <div class="control-bar">
+        <div class="search-box-wrapper">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="surah-search-input" class="search-input" placeholder="Search Surah by name, number, or revelation order...">
+        </div>
+        <div class="filter-pills-group">
+          <button class="filter-btn surah-filter-btn active" data-filter="all">All 114 Surahs</button>
+          <button class="filter-btn surah-filter-btn" data-filter="makki">Makki (86)</button>
+          <button class="filter-btn surah-filter-btn" data-filter="madani">Madani (28)</button>
+          <button class="filter-btn surah-filter-btn" data-filter="length">Sort by Word Count</button>
+          <button class="filter-btn surah-filter-btn" data-filter="order">Revelation Sequence</button>
+        </div>
+      </div>
+
+      <div id="surah-grid-container" class="surah-grid">
+        <!-- Rendered by corpus-engine.js -->
+      </div>
+    </section>
+
+    <!-- Tab 3: Deep Ayah Analyzer -->
+    <section id="tab-ayahs" class="tab-panel">
+      <div class="ayah-analyzer-header">
+        <div class="surah-selector-group">
+          <label for="active-surah-select" style="font-size: 0.9rem; font-weight: 700; color: var(--text-muted);">Select Surah:</label>
+          <select id="active-surah-select" class="styled-select">
+            <!-- Populated dynamically -->
+          </select>
+        </div>
+        <div style="font-size: 0.85rem; color: var(--text-dim);">
+          Interactive Word-by-Word • Kanzul Iman • Kanzul Irfan • Sirat-ul-Jinan Tafsir
+        </div>
+      </div>
+
+      <div id="active-surah-meta-banner" class="metric-pill" style="margin-bottom: 20px;">
+        <!-- Surah introduction & telemetry header -->
+      </div>
+
+      <div id="ayahs-list-container">
+        <!-- Rendered by corpus-engine.js -->
+      </div>
+    </section>
+
+    <!-- Tab 4: Thematic Knowledge Graph (Matalib al-Quran) -->
+    <section id="tab-thematic" class="tab-panel">
+      <div class="control-bar">
+        <div class="search-box-wrapper">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="thematic-search-input" class="search-input" placeholder="Search 484 Quranic topics in Urdu or English...">
+        </div>
+        <div style="font-size: 0.85rem; color: var(--text-dim);">
+          484 Categorized Topics • 1,311 Canonical Ayah Cross-References
+        </div>
+      </div>
+
+      <div id="thematic-topics-container">
+        <!-- Rendered by corpus-engine.js -->
+      </div>
+    </section>
+
+    <!-- Tab 5: Mutashabihat & Parallel Verses -->
+    <section id="tab-mutashabihat" class="tab-panel">
+      <div class="control-bar">
+        <div>
+          <h3 style="font-size: 1.1rem; color: var(--text-main);">Mutashabihat al-Lafz (متشابهات اللفظ)</h3>
+          <p style="font-size: 0.82rem; color: var(--text-dim);">332 Clusters of Identical and Parallel Verses Across Different Surahs</p>
+        </div>
+      </div>
+
+      <div id="mutashabihat-container">
+        <!-- Rendered by corpus-engine.js -->
+      </div>
+    </section>
+
+    <!-- Tab 6: Waqf Rules -->
+    <section id="tab-waqf" class="tab-panel">
+      <div class="control-bar">
+        <div>
+          <h3 style="font-size: 1.1rem; color: var(--text-main);">Rumoze Auqaf (رموزِ اوقاف)</h3>
+          <p style="font-size: 0.82rem; color: var(--text-dim);">15 Quranic Waqf & Stopping Symbols with Phonetic Injunctions</p>
+        </div>
+      </div>
+
+      <div id="waqf-rules-container">
+        <!-- Rendered by corpus-engine.js -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Occurrence Modal Drawer -->
+  <div id="occurrence-modal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="occ-modal-title">Word Occurrences</h3>
+        <button id="occ-modal-close" class="modal-close-btn" aria-label="Close modal">✕</button>
+      </div>
+      <div id="occ-modal-body" class="modal-body">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- App Footer -->
+  <footer class="app-footer">
+    <p>Quran Deep Analyzer • Canonical Tanzil Uthmanic Text & QuranDB Corpus • 100% Offline Resilience</p>
+  </footer>
+
+  <!-- Application Scripts -->
+  <script src="js/audio-sfx.js"></script>
+  <script src="js/telemetry-engine.js"></script>
+  <script src="js/corpus-engine.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

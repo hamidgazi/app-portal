@@ -1,0 +1,7184 @@
+[
+  {
+    "id": 1,
+    "name_ar": "اَلْفَاتِحَة",
+    "name_roman": "Al Fatihah",
+    "place": "مکیۃ",
+    "revelation_order": 5,
+    "total_ayat": 7,
+    "total_ruku": 1,
+    "total_words": 27,
+    "unique_words": 24,
+    "lexical_diversity_ttr": 88.89,
+    "avg_words_per_ayah": 3.86,
+    "longest_ayah": {
+      "ayah": 7,
+      "word_count": 6
+    },
+    "shortest_ayah": {
+      "ayah": 2,
+      "word_count": 2
+    },
+    "top_10_words": [
+      {
+        "word": "اِیَّاكَ",
+        "count": 2
+      },
+      {
+        "word": "وَ",
+        "count": 2
+      },
+      {
+        "word": "عَلَیْهِمْ",
+        "count": 2
+      },
+      {
+        "word": "اَلْحَمْدُ",
+        "count": 1
+      },
+      {
+        "word": "لِلّٰهِ",
+        "count": 1
+      },
+      {
+        "word": "رَبِّ",
+        "count": 1
+      },
+      {
+        "word": "الْعٰلَمِیْنَ",
+        "count": 1
+      },
+      {
+        "word": "الرَّحْمٰنِ",
+        "count": 1
+      },
+      {
+        "word": "الرَّحِیْمِ",
+        "count": 1
+      },
+      {
+        "word": "مٰلِكِ",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name_ar": "اَلْبَقَرَة",
+    "name_roman": "Al Baqarah",
+    "place": "مدنیۃ",
+    "revelation_order": 87,
+    "total_ayat": 286,
+    "total_ruku": 40,
+    "total_words": 6406,
+    "unique_words": 2714,
+    "lexical_diversity_ttr": 42.37,
+    "avg_words_per_ayah": 22.4,
+    "longest_ayah": {
+      "ayah": 282,
+      "word_count": 131
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 1
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 496
+      },
+      {
+        "word": "لَا",
+        "count": 134
+      },
+      {
+        "word": "مَا",
+        "count": 127
+      },
+      {
+        "word": "اللّٰهُ",
+        "count": 97
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 82
+      },
+      {
+        "word": "مِنْ",
+        "count": 80
+      },
+      {
+        "word": "اللّٰهَ",
+        "count": 73
+      },
+      {
+        "word": "مِّنْ",
+        "count": 53
+      },
+      {
+        "word": "وَّ",
+        "count": 52
+      },
+      {
+        "word": "اللّٰهِ",
+        "count": 50
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name_ar": "اٰلِ عِمْرَان",
+    "name_roman": "Al Imran",
+    "place": "مدنیۃ",
+    "revelation_order": 89,
+    "total_ayat": 200,
+    "total_ruku": 20,
+    "total_words": 3695,
+    "unique_words": 1682,
+    "lexical_diversity_ttr": 45.52,
+    "avg_words_per_ayah": 18.48,
+    "longest_ayah": {
+      "ayah": 154,
+      "word_count": 71
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 1
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 296
+      },
+      {
+        "word": "مَا",
+        "count": 84
+      },
+      {
+        "word": "اللّٰهُ",
+        "count": 79
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 55
+      },
+      {
+        "word": "لَا",
+        "count": 54
+      },
+      {
+        "word": "مِنْ",
+        "count": 51
+      },
+      {
+        "word": "اللّٰهِ",
+        "count": 51
+      },
+      {
+        "word": "اللّٰهَ",
+        "count": 41
+      },
+      {
+        "word": "وَّ",
+        "count": 33
+      },
+      {
+        "word": "فِی",
+        "count": 30
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name_ar": "اَلنِّسَآء",
+    "name_roman": "An Nisa",
+    "place": "مدنیۃ",
+    "revelation_order": 92,
+    "total_ayat": 176,
+    "total_ruku": 24,
+    "total_words": 3986,
+    "unique_words": 1726,
+    "lexical_diversity_ttr": 43.3,
+    "avg_words_per_ayah": 22.65,
+    "longest_ayah": {
+      "ayah": 12,
+      "word_count": 85
+    },
+    "shortest_ayah": {
+      "ayah": 68,
+      "word_count": 4
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 302
+      },
+      {
+        "word": "اللّٰهُ",
+        "count": 78
+      },
+      {
+        "word": "لَا",
+        "count": 70
+      },
+      {
+        "word": "كَانَ",
+        "count": 66
+      },
+      {
+        "word": "مَا",
+        "count": 59
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 57
+      },
+      {
+        "word": "مِنْ",
+        "count": 54
+      },
+      {
+        "word": "اللّٰهَ",
+        "count": 48
+      },
+      {
+        "word": "وَّ",
+        "count": 47
+      },
+      {
+        "word": "اَنْ",
+        "count": 45
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name_ar": "اَلْمَـآئِدَة",
+    "name_roman": "Al Maidah",
+    "place": "مدنیۃ",
+    "revelation_order": 112,
+    "total_ayat": 120,
+    "total_ruku": 16,
+    "total_words": 2953,
+    "unique_words": 1401,
+    "lexical_diversity_ttr": 47.44,
+    "avg_words_per_ayah": 24.61,
+    "longest_ayah": {
+      "ayah": 110,
+      "word_count": 72
+    },
+    "shortest_ayah": {
+      "ayah": 10,
+      "word_count": 9
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 229
+      },
+      {
+        "word": "اللّٰهُ",
+        "count": 63
+      },
+      {
+        "word": "مَا",
+        "count": 60
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 54
+      },
+      {
+        "word": "لَا",
+        "count": 50
+      },
+      {
+        "word": "اللّٰهَ",
+        "count": 36
+      },
+      {
+        "word": "مِنْ",
+        "count": 34
+      },
+      {
+        "word": "مِنَ",
+        "count": 29
+      },
+      {
+        "word": "وَّ",
+        "count": 29
+      },
+      {
+        "word": "اَنْ",
+        "count": 27
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name_ar": "اَلْاَ نْعَام",
+    "name_roman": "Al Anam",
+    "place": "مکیۃ",
+    "revelation_order": 55,
+    "total_ayat": 165,
+    "total_ruku": 20,
+    "total_words": 3222,
+    "unique_words": 1551,
+    "lexical_diversity_ttr": 48.14,
+    "avg_words_per_ayah": 19.53,
+    "longest_ayah": {
+      "ayah": 93,
+      "word_count": 52
+    },
+    "shortest_ayah": {
+      "ayah": 67,
+      "word_count": 5
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 262
+      },
+      {
+        "word": "مَا",
+        "count": 71
+      },
+      {
+        "word": "لَا",
+        "count": 59
+      },
+      {
+        "word": "وَّ",
+        "count": 43
+      },
+      {
+        "word": "اِلَّا",
+        "count": 37
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 36
+      },
+      {
+        "word": "هُوَ",
+        "count": 34
+      },
+      {
+        "word": "اللّٰهِ",
+        "count": 33
+      },
+      {
+        "word": "مِنْ",
+        "count": 32
+      },
+      {
+        "word": "مِّنْ",
+        "count": 25
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name_ar": "اَلْاَعْرَاف",
+    "name_roman": "Al Araf",
+    "place": "مکیۃ",
+    "revelation_order": 39,
+    "total_ayat": 206,
+    "total_ruku": 24,
+    "total_words": 3502,
+    "unique_words": 1742,
+    "lexical_diversity_ttr": 49.74,
+    "avg_words_per_ayah": 17.0,
+    "longest_ayah": {
+      "ayah": 157,
+      "word_count": 49
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 1
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 281
+      },
+      {
+        "word": "لَا",
+        "count": 57
+      },
+      {
+        "word": "مِنْ",
+        "count": 56
+      },
+      {
+        "word": "مَا",
+        "count": 48
+      },
+      {
+        "word": "وَّ",
+        "count": 46
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 38
+      },
+      {
+        "word": "قَالَ",
+        "count": 36
+      },
+      {
+        "word": "مِّنْ",
+        "count": 33
+      },
+      {
+        "word": "اَنْ",
+        "count": 31
+      },
+      {
+        "word": "اللّٰهِ",
+        "count": 25
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name_ar": "اَلْاَ نْفَال",
+    "name_roman": "Al Anfal",
+    "place": "مدنیۃ",
+    "revelation_order": 88,
+    "total_ayat": 75,
+    "total_ruku": 10,
+    "total_words": 1340,
+    "unique_words": 703,
+    "lexical_diversity_ttr": 52.46,
+    "avg_words_per_ayah": 17.87,
+    "longest_ayah": {
+      "ayah": 72,
+      "word_count": 52
+    },
+    "shortest_ayah": {
+      "ayah": 3,
+      "word_count": 7
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 125
+      },
+      {
+        "word": "اللّٰهَ",
+        "count": 34
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 30
+      },
+      {
+        "word": "اللّٰهُ",
+        "count": 27
+      },
+      {
+        "word": "لَا",
+        "count": 18
+      },
+      {
+        "word": "وَّ",
+        "count": 16
+      },
+      {
+        "word": "مَا",
+        "count": 16
+      },
+      {
+        "word": "اِنْ",
+        "count": 14
+      },
+      {
+        "word": "اِذْ",
+        "count": 14
+      },
+      {
+        "word": "فِیْ",
+        "count": 13
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name_ar": "اَلتَّوْبَة",
+    "name_roman": "At Taubah",
+    "place": "مدنیۃ",
+    "revelation_order": 113,
+    "total_ayat": 129,
+    "total_ruku": 16,
+    "total_words": 2675,
+    "unique_words": 1261,
+    "lexical_diversity_ttr": 47.14,
+    "avg_words_per_ayah": 20.74,
+    "longest_ayah": {
+      "ayah": 120,
+      "word_count": 56
+    },
+    "shortest_ayah": {
+      "ayah": 22,
+      "word_count": 7
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 240
+      },
+      {
+        "word": "اللّٰهُ",
+        "count": 67
+      },
+      {
+        "word": "لَا",
+        "count": 60
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 41
+      },
+      {
+        "word": "وَّ",
+        "count": 39
+      },
+      {
+        "word": "مَا",
+        "count": 36
+      },
+      {
+        "word": "اللّٰهِ",
+        "count": 34
+      },
+      {
+        "word": "اللّٰهَ",
+        "count": 33
+      },
+      {
+        "word": "مِنْ",
+        "count": 26
+      },
+      {
+        "word": "فِیْ",
+        "count": 25
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name_ar": "يُوْنُس",
+    "name_roman": "Yunus",
+    "place": "مکیۃ",
+    "revelation_order": 51,
+    "total_ayat": 109,
+    "total_ruku": 11,
+    "total_words": 1903,
+    "unique_words": 982,
+    "lexical_diversity_ttr": 51.6,
+    "avg_words_per_ayah": 17.46,
+    "longest_ayah": {
+      "ayah": 61,
+      "word_count": 48
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 5
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 134
+      },
+      {
+        "word": "لَا",
+        "count": 50
+      },
+      {
+        "word": "مَا",
+        "count": 35
+      },
+      {
+        "word": "مِنْ",
+        "count": 32
+      },
+      {
+        "word": "فِی",
+        "count": 27
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 25
+      },
+      {
+        "word": "اللّٰهِ",
+        "count": 22
+      },
+      {
+        "word": "اِلَّا",
+        "count": 21
+      },
+      {
+        "word": "وَّ",
+        "count": 20
+      },
+      {
+        "word": "اللّٰهُ",
+        "count": 17
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "name_ar": "هُوْد",
+    "name_roman": "Hud",
+    "place": "مکیۃ",
+    "revelation_order": 52,
+    "total_ayat": 123,
+    "total_ruku": 10,
+    "total_words": 2009,
+    "unique_words": 1054,
+    "lexical_diversity_ttr": 52.46,
+    "avg_words_per_ayah": 16.33,
+    "longest_ayah": {
+      "ayah": 17,
+      "word_count": 40
+    },
+    "shortest_ayah": {
+      "ayah": 122,
+      "word_count": 3
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 155
+      },
+      {
+        "word": "مَا",
+        "count": 51
+      },
+      {
+        "word": "لَا",
+        "count": 37
+      },
+      {
+        "word": "مِنْ",
+        "count": 29
+      },
+      {
+        "word": "اِلَّا",
+        "count": 29
+      },
+      {
+        "word": "وَّ",
+        "count": 24
+      },
+      {
+        "word": "اللّٰهِ",
+        "count": 22
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 20
+      },
+      {
+        "word": "فِیْ",
+        "count": 19
+      },
+      {
+        "word": "یٰقَوْمِ",
+        "count": 16
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "name_ar": "يُوْسُف",
+    "name_roman": "Yusuf",
+    "place": "مکیۃ",
+    "revelation_order": 53,
+    "total_ayat": 111,
+    "total_ruku": 12,
+    "total_words": 1843,
+    "unique_words": 1018,
+    "lexical_diversity_ttr": 55.24,
+    "avg_words_per_ayah": 16.6,
+    "longest_ayah": {
+      "ayah": 100,
+      "word_count": 47
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 5
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 130
+      },
+      {
+        "word": "مِنْ",
+        "count": 39
+      },
+      {
+        "word": "قَالَ",
+        "count": 38
+      },
+      {
+        "word": "مَا",
+        "count": 30
+      },
+      {
+        "word": "لَا",
+        "count": 24
+      },
+      {
+        "word": "اِلَّا",
+        "count": 21
+      },
+      {
+        "word": "قَالُوْا",
+        "count": 18
+      },
+      {
+        "word": "عَلٰى",
+        "count": 16
+      },
+      {
+        "word": "فِیْ",
+        "count": 16
+      },
+      {
+        "word": "اَنْ",
+        "count": 16
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "name_ar": "اَلرَّعْد",
+    "name_roman": "Ar Rad",
+    "place": "مدنیۃ",
+    "revelation_order": 96,
+    "total_ayat": 43,
+    "total_ruku": 6,
+    "total_words": 916,
+    "unique_words": 554,
+    "lexical_diversity_ttr": 60.48,
+    "avg_words_per_ayah": 21.3,
+    "longest_ayah": {
+      "ayah": 31,
+      "word_count": 49
+    },
+    "shortest_ayah": {
+      "ayah": 9,
+      "word_count": 6
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 72
+      },
+      {
+        "word": "مِنْ",
+        "count": 18
+      },
+      {
+        "word": "وَّ",
+        "count": 18
+      },
+      {
+        "word": "مَا",
+        "count": 17
+      },
+      {
+        "word": "لَا",
+        "count": 15
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 15
+      },
+      {
+        "word": "فِی",
+        "count": 11
+      },
+      {
+        "word": "مَنْ",
+        "count": 11
+      },
+      {
+        "word": "هُوَ",
+        "count": 10
+      },
+      {
+        "word": "مِّنْ",
+        "count": 10
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "name_ar": "اِبرٰهِيْم",
+    "name_roman": "Ibrahim",
+    "place": "مکیۃ",
+    "revelation_order": 72,
+    "total_ayat": 52,
+    "total_ruku": 7,
+    "total_words": 898,
+    "unique_words": 554,
+    "lexical_diversity_ttr": 61.69,
+    "avg_words_per_ayah": 17.27,
+    "longest_ayah": {
+      "ayah": 22,
+      "word_count": 44
+    },
+    "shortest_ayah": {
+      "ayah": 29,
+      "word_count": 3
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 75
+      },
+      {
+        "word": "مِنْ",
+        "count": 19
+      },
+      {
+        "word": "مَا",
+        "count": 18
+      },
+      {
+        "word": "اللّٰهِ",
+        "count": 13
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 11
+      },
+      {
+        "word": "مِّنْ",
+        "count": 11
+      },
+      {
+        "word": "وَّ",
+        "count": 11
+      },
+      {
+        "word": "فِی",
+        "count": 10
+      },
+      {
+        "word": "اللّٰهُ",
+        "count": 8
+      },
+      {
+        "word": "اللّٰهَ",
+        "count": 8
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "name_ar": "اَلْحِجْر",
+    "name_roman": "Al Hijr",
+    "place": "مکیۃ",
+    "revelation_order": 54,
+    "total_ayat": 99,
+    "total_ruku": 6,
+    "total_words": 721,
+    "unique_words": 449,
+    "lexical_diversity_ttr": 62.27,
+    "avg_words_per_ayah": 7.28,
+    "longest_ayah": {
+      "ayah": 65,
+      "word_count": 17
+    },
+    "shortest_ayah": {
+      "ayah": 46,
+      "word_count": 3
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 65
+      },
+      {
+        "word": "مَا",
+        "count": 15
+      },
+      {
+        "word": "قَالَ",
+        "count": 14
+      },
+      {
+        "word": "اِلَّا",
+        "count": 13
+      },
+      {
+        "word": "مِنْ",
+        "count": 11
+      },
+      {
+        "word": "اِنَّ",
+        "count": 10
+      },
+      {
+        "word": "لَقَدْ",
+        "count": 8
+      },
+      {
+        "word": "مِّنْ",
+        "count": 8
+      },
+      {
+        "word": "اِنَّا",
+        "count": 7
+      },
+      {
+        "word": "لَا",
+        "count": 7
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "name_ar": "اَلنَّحْل",
+    "name_roman": "An Nahl",
+    "place": "مکیۃ",
+    "revelation_order": 70,
+    "total_ayat": 128,
+    "total_ruku": 16,
+    "total_words": 1968,
+    "unique_words": 979,
+    "lexical_diversity_ttr": 49.75,
+    "avg_words_per_ayah": 15.38,
+    "longest_ayah": {
+      "ayah": 35,
+      "word_count": 33
+    },
+    "shortest_ayah": {
+      "ayah": 16,
+      "word_count": 5
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 159
+      },
+      {
+        "word": "لَا",
+        "count": 46
+      },
+      {
+        "word": "مَا",
+        "count": 44
+      },
+      {
+        "word": "مِنْ",
+        "count": 42
+      },
+      {
+        "word": "وَّ",
+        "count": 35
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 31
+      },
+      {
+        "word": "اللّٰهُ",
+        "count": 28
+      },
+      {
+        "word": "اللّٰهِ",
+        "count": 22
+      },
+      {
+        "word": "عَلٰى",
+        "count": 15
+      },
+      {
+        "word": "فِیْ",
+        "count": 14
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "name_ar": "بَنِیْٓ اِسْرَآءِیْل (اَلْاَسْرَاء)",
+    "name_roman": "Al Isra",
+    "place": "مکیۃ",
+    "revelation_order": 50,
+    "total_ayat": 111,
+    "total_ruku": 12,
+    "total_words": 1663,
+    "unique_words": 943,
+    "lexical_diversity_ttr": 56.7,
+    "avg_words_per_ayah": 14.98,
+    "longest_ayah": {
+      "ayah": 12,
+      "word_count": 28
+    },
+    "shortest_ayah": {
+      "ayah": 50,
+      "word_count": 5
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 128
+      },
+      {
+        "word": "كَانَ",
+        "count": 31
+      },
+      {
+        "word": "لَا",
+        "count": 28
+      },
+      {
+        "word": "اِلَّا",
+        "count": 26
+      },
+      {
+        "word": "وَّ",
+        "count": 21
+      },
+      {
+        "word": "مَا",
+        "count": 16
+      },
+      {
+        "word": "فِی",
+        "count": 15
+      },
+      {
+        "word": "اَنْ",
+        "count": 15
+      },
+      {
+        "word": "مَنْ",
+        "count": 13
+      },
+      {
+        "word": "قُلْ",
+        "count": 13
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "name_ar": "اَلْـكَهْف",
+    "name_roman": "Al Kahf",
+    "place": "مکیۃ",
+    "revelation_order": 69,
+    "total_ayat": 110,
+    "total_ruku": 12,
+    "total_words": 1659,
+    "unique_words": 968,
+    "lexical_diversity_ttr": 58.35,
+    "avg_words_per_ayah": 15.08,
+    "longest_ayah": {
+      "ayah": 19,
+      "word_count": 37
+    },
+    "shortest_ayah": {
+      "ayah": 85,
+      "word_count": 2
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 107
+      },
+      {
+        "word": "مِنْ",
+        "count": 31
+      },
+      {
+        "word": "وَّ",
+        "count": 28
+      },
+      {
+        "word": "مَا",
+        "count": 25
+      },
+      {
+        "word": "لَا",
+        "count": 24
+      },
+      {
+        "word": "اَنْ",
+        "count": 21
+      },
+      {
+        "word": "قَالَ",
+        "count": 18
+      },
+      {
+        "word": "عَلٰى",
+        "count": 15
+      },
+      {
+        "word": "مِّنْ",
+        "count": 11
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 11
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "name_ar": "مَرْيَم",
+    "name_roman": "Maryam",
+    "place": "مکیۃ",
+    "revelation_order": 44,
+    "total_ayat": 98,
+    "total_ruku": 6,
+    "total_words": 1035,
+    "unique_words": 620,
+    "lexical_diversity_ttr": 59.9,
+    "avg_words_per_ayah": 10.56,
+    "longest_ayah": {
+      "ayah": 58,
+      "word_count": 31
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 1
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 83
+      },
+      {
+        "word": "وَّ",
+        "count": 25
+      },
+      {
+        "word": "مِنْ",
+        "count": 22
+      },
+      {
+        "word": "مَا",
+        "count": 20
+      },
+      {
+        "word": "كَانَ",
+        "count": 19
+      },
+      {
+        "word": "قَالَ",
+        "count": 12
+      },
+      {
+        "word": "یَوْمَ",
+        "count": 9
+      },
+      {
+        "word": "لَا",
+        "count": 9
+      },
+      {
+        "word": "لَمْ",
+        "count": 8
+      },
+      {
+        "word": "فِی",
+        "count": 8
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "name_ar": "طٰهٰ",
+    "name_roman": "Taha",
+    "place": "مکیۃ",
+    "revelation_order": 45,
+    "total_ayat": 135,
+    "total_ruku": 8,
+    "total_words": 1433,
+    "unique_words": 856,
+    "lexical_diversity_ttr": 59.73,
+    "avg_words_per_ayah": 10.61,
+    "longest_ayah": {
+      "ayah": 40,
+      "word_count": 35
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 1
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 105
+      },
+      {
+        "word": "لَا",
+        "count": 34
+      },
+      {
+        "word": "قَالَ",
+        "count": 28
+      },
+      {
+        "word": "مَا",
+        "count": 24
+      },
+      {
+        "word": "مِنْ",
+        "count": 16
+      },
+      {
+        "word": "مَنْ",
+        "count": 15
+      },
+      {
+        "word": "وَّ",
+        "count": 15
+      },
+      {
+        "word": "اَنْ",
+        "count": 13
+      },
+      {
+        "word": "مِّنْ",
+        "count": 12
+      },
+      {
+        "word": "قَدْ",
+        "count": 11
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "name_ar": "اَلْاَ نْبِيَآء",
+    "name_roman": "Al anbya",
+    "place": "مکیۃ",
+    "revelation_order": 73,
+    "total_ayat": 112,
+    "total_ruku": 7,
+    "total_words": 1258,
+    "unique_words": 719,
+    "lexical_diversity_ttr": 57.15,
+    "avg_words_per_ayah": 11.23,
+    "longest_ayah": {
+      "ayah": 87,
+      "word_count": 24
+    },
+    "shortest_ayah": {
+      "ayah": 14,
+      "word_count": 5
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 112
+      },
+      {
+        "word": "لَا",
+        "count": 23
+      },
+      {
+        "word": "مَا",
+        "count": 22
+      },
+      {
+        "word": "هُمْ",
+        "count": 18
+      },
+      {
+        "word": "مِنْ",
+        "count": 15
+      },
+      {
+        "word": "مِّنْ",
+        "count": 14
+      },
+      {
+        "word": "وَّ",
+        "count": 12
+      },
+      {
+        "word": "مِنَ",
+        "count": 12
+      },
+      {
+        "word": "كُنَّا",
+        "count": 11
+      },
+      {
+        "word": "اِلَّا",
+        "count": 10
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "name_ar": "اَلْحَجّ",
+    "name_roman": "Al Hajj",
+    "place": "مدنیۃ",
+    "revelation_order": 103,
+    "total_ayat": 78,
+    "total_ruku": 10,
+    "total_words": 1359,
+    "unique_words": 762,
+    "lexical_diversity_ttr": 56.07,
+    "avg_words_per_ayah": 17.42,
+    "longest_ayah": {
+      "ayah": 5,
+      "word_count": 73
+    },
+    "shortest_ayah": {
+      "ayah": 21,
+      "word_count": 5
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 105
+      },
+      {
+        "word": "اللّٰهَ",
+        "count": 35
+      },
+      {
+        "word": "مَا",
+        "count": 28
+      },
+      {
+        "word": "مِنْ",
+        "count": 28
+      },
+      {
+        "word": "فِی",
+        "count": 22
+      },
+      {
+        "word": "وَّ",
+        "count": 22
+      },
+      {
+        "word": "اللّٰهِ",
+        "count": 19
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 19
+      },
+      {
+        "word": "مَنْ",
+        "count": 16
+      },
+      {
+        "word": "فِیْ",
+        "count": 14
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "name_ar": "اَلْمُؤْمِنُوْن",
+    "name_roman": "Al Muminun",
+    "place": "مکیۃ",
+    "revelation_order": 74,
+    "total_ayat": 118,
+    "total_ruku": 6,
+    "total_words": 1124,
+    "unique_words": 650,
+    "lexical_diversity_ttr": 57.83,
+    "avg_words_per_ayah": 9.53,
+    "longest_ayah": {
+      "ayah": 27,
+      "word_count": 33
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 3
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 91
+      },
+      {
+        "word": "وَّ",
+        "count": 19
+      },
+      {
+        "word": "مَا",
+        "count": 17
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 16
+      },
+      {
+        "word": "هُمْ",
+        "count": 15
+      },
+      {
+        "word": "مِنْ",
+        "count": 14
+      },
+      {
+        "word": "لَا",
+        "count": 12
+      },
+      {
+        "word": "اِلَّا",
+        "count": 11
+      },
+      {
+        "word": "فِی",
+        "count": 10
+      },
+      {
+        "word": "فِیْ",
+        "count": 9
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "name_ar": "اَلنُّوْر",
+    "name_roman": "An Noor",
+    "place": "مدنیۃ",
+    "revelation_order": 102,
+    "total_ayat": 64,
+    "total_ruku": 9,
+    "total_words": 1389,
+    "unique_words": 733,
+    "lexical_diversity_ttr": 52.77,
+    "avg_words_per_ayah": 21.7,
+    "longest_ayah": {
+      "ayah": 31,
+      "word_count": 82
+    },
+    "shortest_ayah": {
+      "ayah": 18,
+      "word_count": 8
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 101
+      },
+      {
+        "word": "اللّٰهُ",
+        "count": 36
+      },
+      {
+        "word": "لَا",
+        "count": 30
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 26
+      },
+      {
+        "word": "اَوْ",
+        "count": 24
+      },
+      {
+        "word": "مِنْ",
+        "count": 18
+      },
+      {
+        "word": "اللّٰهِ",
+        "count": 17
+      },
+      {
+        "word": "اللّٰهَ",
+        "count": 16
+      },
+      {
+        "word": "اَنْ",
+        "count": 15
+      },
+      {
+        "word": "مَا",
+        "count": 15
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "name_ar": "اَلْفُرْقَان",
+    "name_roman": "Al Furqan",
+    "place": "مکیۃ",
+    "revelation_order": 42,
+    "total_ayat": 77,
+    "total_ruku": 6,
+    "total_words": 988,
+    "unique_words": 592,
+    "lexical_diversity_ttr": 59.92,
+    "avg_words_per_ayah": 12.83,
+    "longest_ayah": {
+      "ayah": 3,
+      "word_count": 29
+    },
+    "shortest_ayah": {
+      "ayah": 46,
+      "word_count": 5
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 79
+      },
+      {
+        "word": "وَّ",
+        "count": 34
+      },
+      {
+        "word": "لَا",
+        "count": 23
+      },
+      {
+        "word": "الَّذِیْ",
+        "count": 13
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 12
+      },
+      {
+        "word": "اِلَّا",
+        "count": 11
+      },
+      {
+        "word": "مَا",
+        "count": 11
+      },
+      {
+        "word": "كَانَ",
+        "count": 10
+      },
+      {
+        "word": "مِنْ",
+        "count": 9
+      },
+      {
+        "word": "اِذَا",
+        "count": 8
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "name_ar": "اَلشُّـعَرَاء",
+    "name_roman": "ash shuara",
+    "place": "مکیۃ",
+    "revelation_order": 47,
+    "total_ayat": 227,
+    "total_ruku": 11,
+    "total_words": 1432,
+    "unique_words": 686,
+    "lexical_diversity_ttr": 47.91,
+    "avg_words_per_ayah": 6.31,
+    "longest_ayah": {
+      "ayah": 227,
+      "word_count": 22
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 1
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 111
+      },
+      {
+        "word": "مَا",
+        "count": 37
+      },
+      {
+        "word": "قَالَ",
+        "count": 32
+      },
+      {
+        "word": "وَّ",
+        "count": 20
+      },
+      {
+        "word": "مِنَ",
+        "count": 20
+      },
+      {
+        "word": "اِنَّ",
+        "count": 18
+      },
+      {
+        "word": "اِلَّا",
+        "count": 17
+      },
+      {
+        "word": "لَا",
+        "count": 15
+      },
+      {
+        "word": "قَالُوْا",
+        "count": 14
+      },
+      {
+        "word": "اِنْ",
+        "count": 12
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "name_ar": "اَلنَّمْل",
+    "name_roman": "An Naml",
+    "place": "مکیۃ",
+    "revelation_order": 48,
+    "total_ayat": 93,
+    "total_ruku": 7,
+    "total_words": 1218,
+    "unique_words": 718,
+    "lexical_diversity_ttr": 58.95,
+    "avg_words_per_ayah": 13.1,
+    "longest_ayah": {
+      "ayah": 40,
+      "word_count": 37
+    },
+    "shortest_ayah": {
+      "ayah": 2,
+      "word_count": 4
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 91
+      },
+      {
+        "word": "لَا",
+        "count": 19
+      },
+      {
+        "word": "وَّ",
+        "count": 15
+      },
+      {
+        "word": "مِنْ",
+        "count": 15
+      },
+      {
+        "word": "مَنْ",
+        "count": 15
+      },
+      {
+        "word": "قَالَ",
+        "count": 14
+      },
+      {
+        "word": "مَا",
+        "count": 14
+      },
+      {
+        "word": "فِی",
+        "count": 13
+      },
+      {
+        "word": "هُمْ",
+        "count": 12
+      },
+      {
+        "word": "اَنْ",
+        "count": 12
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "name_ar": "اَلْقَصَص",
+    "name_roman": "Al Qasas",
+    "place": "مکیۃ",
+    "revelation_order": 49,
+    "total_ayat": 88,
+    "total_ruku": 9,
+    "total_words": 1509,
+    "unique_words": 859,
+    "lexical_diversity_ttr": 56.93,
+    "avg_words_per_ayah": 17.15,
+    "longest_ayah": {
+      "ayah": 15,
+      "word_count": 37
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 1
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 111
+      },
+      {
+        "word": "لَا",
+        "count": 35
+      },
+      {
+        "word": "مِنْ",
+        "count": 30
+      },
+      {
+        "word": "مَا",
+        "count": 27
+      },
+      {
+        "word": "مِنَ",
+        "count": 21
+      },
+      {
+        "word": "اَنْ",
+        "count": 21
+      },
+      {
+        "word": "قَالَ",
+        "count": 15
+      },
+      {
+        "word": "فِی",
+        "count": 12
+      },
+      {
+        "word": "مَنْ",
+        "count": 12
+      },
+      {
+        "word": "وَّ",
+        "count": 11
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "name_ar": "اَلْعَنْـكَبُوْت",
+    "name_roman": "Al Ankabut",
+    "place": "مکیۃ",
+    "revelation_order": 85,
+    "total_ayat": 69,
+    "total_ruku": 7,
+    "total_words": 1050,
+    "unique_words": 598,
+    "lexical_diversity_ttr": 56.95,
+    "avg_words_per_ayah": 15.22,
+    "longest_ayah": {
+      "ayah": 10,
+      "word_count": 32
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 1
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 97
+      },
+      {
+        "word": "مِنْ",
+        "count": 19
+      },
+      {
+        "word": "مَا",
+        "count": 19
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 17
+      },
+      {
+        "word": "اللّٰهِ",
+        "count": 15
+      },
+      {
+        "word": "لَا",
+        "count": 13
+      },
+      {
+        "word": "فِی",
+        "count": 12
+      },
+      {
+        "word": "اِلَّا",
+        "count": 12
+      },
+      {
+        "word": "وَّ",
+        "count": 11
+      },
+      {
+        "word": "اللّٰهُ",
+        "count": 9
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "name_ar": "اَلرُّوْم",
+    "name_roman": "Ar Rum",
+    "place": "مکیۃ",
+    "revelation_order": 84,
+    "total_ayat": 60,
+    "total_ruku": 6,
+    "total_words": 873,
+    "unique_words": 495,
+    "lexical_diversity_ttr": 56.7,
+    "avg_words_per_ayah": 14.55,
+    "longest_ayah": {
+      "ayah": 9,
+      "word_count": 35
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 1
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 71
+      },
+      {
+        "word": "مِنْ",
+        "count": 24
+      },
+      {
+        "word": "مِّنْ",
+        "count": 15
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 14
+      },
+      {
+        "word": "فِیْ",
+        "count": 13
+      },
+      {
+        "word": "لَا",
+        "count": 11
+      },
+      {
+        "word": "ثُمَّ",
+        "count": 11
+      },
+      {
+        "word": "اِذَا",
+        "count": 10
+      },
+      {
+        "word": "مَا",
+        "count": 9
+      },
+      {
+        "word": "فِی",
+        "count": 8
+      }
+    ]
+  },
+  {
+    "id": 31,
+    "name_ar": "لُقْمٰن",
+    "name_roman": "Luqman",
+    "place": "مکیۃ",
+    "revelation_order": 57,
+    "total_ayat": 34,
+    "total_ruku": 4,
+    "total_words": 572,
+    "unique_words": 370,
+    "lexical_diversity_ttr": 64.69,
+    "avg_words_per_ayah": 16.82,
+    "longest_ayah": {
+      "ayah": 20,
+      "word_count": 35
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 1
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 39
+      },
+      {
+        "word": "اللّٰهَ",
+        "count": 15
+      },
+      {
+        "word": "فِی",
+        "count": 14
+      },
+      {
+        "word": "مَا",
+        "count": 14
+      },
+      {
+        "word": "لَا",
+        "count": 10
+      },
+      {
+        "word": "وَّ",
+        "count": 8
+      },
+      {
+        "word": "اللّٰهِ",
+        "count": 8
+      },
+      {
+        "word": "مِنْ",
+        "count": 8
+      },
+      {
+        "word": "مَنْ",
+        "count": 7
+      },
+      {
+        "word": "هُوَ",
+        "count": 7
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "name_ar": "اَلسَّجْدَة",
+    "name_roman": "As Sajda",
+    "place": "مکیۃ",
+    "revelation_order": 75,
+    "total_ayat": 30,
+    "total_ruku": 3,
+    "total_words": 392,
+    "unique_words": 289,
+    "lexical_diversity_ttr": 73.72,
+    "avg_words_per_ayah": 13.07,
+    "longest_ayah": {
+      "ayah": 4,
+      "word_count": 25
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 1
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 28
+      },
+      {
+        "word": "مِنْ",
+        "count": 7
+      },
+      {
+        "word": "مِّنْ",
+        "count": 6
+      },
+      {
+        "word": "ثُمَّ",
+        "count": 6
+      },
+      {
+        "word": "لَا",
+        "count": 5
+      },
+      {
+        "word": "فِیْ",
+        "count": 5
+      },
+      {
+        "word": "الَّذِیْ",
+        "count": 4
+      },
+      {
+        "word": "بِمَا",
+        "count": 4
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 4
+      },
+      {
+        "word": "كَانُوْا",
+        "count": 4
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "name_ar": "اَلْاَحْزَاب",
+    "name_roman": "Al Ahzab",
+    "place": "مدنیۃ",
+    "revelation_order": 90,
+    "total_ayat": 73,
+    "total_ruku": 9,
+    "total_words": 1422,
+    "unique_words": 740,
+    "lexical_diversity_ttr": 52.04,
+    "avg_words_per_ayah": 19.48,
+    "longest_ayah": {
+      "ayah": 53,
+      "word_count": 70
+    },
+    "shortest_ayah": {
+      "ayah": 42,
+      "word_count": 5
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 146
+      },
+      {
+        "word": "اللّٰهُ",
+        "count": 34
+      },
+      {
+        "word": "كَانَ",
+        "count": 32
+      },
+      {
+        "word": "لَا",
+        "count": 28
+      },
+      {
+        "word": "اللّٰهَ",
+        "count": 24
+      },
+      {
+        "word": "مَا",
+        "count": 24
+      },
+      {
+        "word": "اللّٰهِ",
+        "count": 21
+      },
+      {
+        "word": "وَّ",
+        "count": 19
+      },
+      {
+        "word": "مِنْ",
+        "count": 19
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 16
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "name_ar": "سَبَا",
+    "name_roman": "Sabah",
+    "place": "مکیۃ",
+    "revelation_order": 58,
+    "total_ayat": 54,
+    "total_ruku": 6,
+    "total_words": 934,
+    "unique_words": 546,
+    "lexical_diversity_ttr": 58.46,
+    "avg_words_per_ayah": 17.3,
+    "longest_ayah": {
+      "ayah": 33,
+      "word_count": 36
+    },
+    "shortest_ayah": {
+      "ayah": 48,
+      "word_count": 6
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 67
+      },
+      {
+        "word": "مَا",
+        "count": 32
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 16
+      },
+      {
+        "word": "لَا",
+        "count": 16
+      },
+      {
+        "word": "وَّ",
+        "count": 16
+      },
+      {
+        "word": "اِلَّا",
+        "count": 15
+      },
+      {
+        "word": "مِنْ",
+        "count": 14
+      },
+      {
+        "word": "فِی",
+        "count": 13
+      },
+      {
+        "word": "مِّنْ",
+        "count": 12
+      },
+      {
+        "word": "قُلْ",
+        "count": 12
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "name_ar": "اَلْفَاطِر",
+    "name_roman": "Fatir",
+    "place": "مکیۃ",
+    "revelation_order": 43,
+    "total_ayat": 45,
+    "total_ruku": 5,
+    "total_words": 803,
+    "unique_words": 514,
+    "lexical_diversity_ttr": 64.01,
+    "avg_words_per_ayah": 17.84,
+    "longest_ayah": {
+      "ayah": 11,
+      "word_count": 36
+    },
+    "shortest_ayah": {
+      "ayah": 23,
+      "word_count": 4
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 53
+      },
+      {
+        "word": "مِنْ",
+        "count": 25
+      },
+      {
+        "word": "لَا",
+        "count": 18
+      },
+      {
+        "word": "مَا",
+        "count": 15
+      },
+      {
+        "word": "اللّٰهَ",
+        "count": 11
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 11
+      },
+      {
+        "word": "فِی",
+        "count": 10
+      },
+      {
+        "word": "اللّٰهِ",
+        "count": 10
+      },
+      {
+        "word": "اِلَّا",
+        "count": 10
+      },
+      {
+        "word": "وَّ",
+        "count": 10
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "name_ar": "يـٰسٓ",
+    "name_roman": "Yasin",
+    "place": "مکیۃ",
+    "revelation_order": 41,
+    "total_ayat": 83,
+    "total_ruku": 5,
+    "total_words": 780,
+    "unique_words": 477,
+    "lexical_diversity_ttr": 61.15,
+    "avg_words_per_ayah": 9.4,
+    "longest_ayah": {
+      "ayah": 47,
+      "word_count": 24
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 1
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 57
+      },
+      {
+        "word": "مَا",
+        "count": 19
+      },
+      {
+        "word": "لَا",
+        "count": 15
+      },
+      {
+        "word": "وَّ",
+        "count": 15
+      },
+      {
+        "word": "مِنْ",
+        "count": 12
+      },
+      {
+        "word": "اِلَّا",
+        "count": 12
+      },
+      {
+        "word": "لَهُمْ",
+        "count": 10
+      },
+      {
+        "word": "هُمْ",
+        "count": 9
+      },
+      {
+        "word": "عَلٰى",
+        "count": 7
+      },
+      {
+        "word": "اِنْ",
+        "count": 7
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "name_ar": "اَلصّٰٓفّٰت",
+    "name_roman": "As Saffat",
+    "place": "مکیۃ",
+    "revelation_order": 56,
+    "total_ayat": 182,
+    "total_ruku": 5,
+    "total_words": 948,
+    "unique_words": 553,
+    "lexical_diversity_ttr": 58.33,
+    "avg_words_per_ayah": 5.21,
+    "longest_ayah": {
+      "ayah": 102,
+      "word_count": 25
+    },
+    "shortest_ayah": {
+      "ayah": 2,
+      "word_count": 2
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 77
+      },
+      {
+        "word": "مَا",
+        "count": 17
+      },
+      {
+        "word": "اِلَّا",
+        "count": 12
+      },
+      {
+        "word": "اِنَّ",
+        "count": 10
+      },
+      {
+        "word": "اِنَّا",
+        "count": 10
+      },
+      {
+        "word": "وَّ",
+        "count": 10
+      },
+      {
+        "word": "عَلٰى",
+        "count": 10
+      },
+      {
+        "word": "فِی",
+        "count": 10
+      },
+      {
+        "word": "لَا",
+        "count": 9
+      },
+      {
+        "word": "مِنْ",
+        "count": 8
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "name_ar": "صٓ",
+    "name_roman": "Sad",
+    "place": "مکیۃ",
+    "revelation_order": 38,
+    "total_ayat": 88,
+    "total_ruku": 5,
+    "total_words": 780,
+    "unique_words": 511,
+    "lexical_diversity_ttr": 65.51,
+    "avg_words_per_ayah": 8.86,
+    "longest_ayah": {
+      "ayah": 24,
+      "word_count": 36
+    },
+    "shortest_ayah": {
+      "ayah": 56,
+      "word_count": 2
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 59
+      },
+      {
+        "word": "وَّ",
+        "count": 18
+      },
+      {
+        "word": "مَا",
+        "count": 15
+      },
+      {
+        "word": "مِنْ",
+        "count": 11
+      },
+      {
+        "word": "قَالَ",
+        "count": 11
+      },
+      {
+        "word": "هٰذَا",
+        "count": 11
+      },
+      {
+        "word": "اِلَّا",
+        "count": 9
+      },
+      {
+        "word": "اِنَّ",
+        "count": 9
+      },
+      {
+        "word": "فِی",
+        "count": 7
+      },
+      {
+        "word": "لَهٗ",
+        "count": 7
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "name_ar": "اَلزُّمَر",
+    "name_roman": "Az Zumar",
+    "place": "مکیۃ",
+    "revelation_order": 59,
+    "total_ayat": 75,
+    "total_ruku": 8,
+    "total_words": 1190,
+    "unique_words": 696,
+    "lexical_diversity_ttr": 58.49,
+    "avg_words_per_ayah": 15.87,
+    "longest_ayah": {
+      "ayah": 71,
+      "word_count": 36
+    },
+    "shortest_ayah": {
+      "ayah": 30,
+      "word_count": 5
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 76
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 22
+      },
+      {
+        "word": "مِنْ",
+        "count": 22
+      },
+      {
+        "word": "اللّٰهُ",
+        "count": 18
+      },
+      {
+        "word": "مَا",
+        "count": 16
+      },
+      {
+        "word": "لَا",
+        "count": 15
+      },
+      {
+        "word": "فِیْ",
+        "count": 14
+      },
+      {
+        "word": "اللّٰهِ",
+        "count": 13
+      },
+      {
+        "word": "اللّٰهَ",
+        "count": 12
+      },
+      {
+        "word": "مَنْ",
+        "count": 11
+      }
+    ]
+  },
+  {
+    "id": 40,
+    "name_ar": "اَلْمُؤْمِن (اَلْغَافِر)",
+    "name_roman": "Al Momin",
+    "place": "مکیۃ",
+    "revelation_order": 60,
+    "total_ayat": 85,
+    "total_ruku": 9,
+    "total_words": 1275,
+    "unique_words": 713,
+    "lexical_diversity_ttr": 55.92,
+    "avg_words_per_ayah": 15.0,
+    "longest_ayah": {
+      "ayah": 28,
+      "word_count": 40
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 1
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 87
+      },
+      {
+        "word": "مِنْ",
+        "count": 26
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 20
+      },
+      {
+        "word": "اللّٰهِ",
+        "count": 18
+      },
+      {
+        "word": "مَا",
+        "count": 18
+      },
+      {
+        "word": "فِی",
+        "count": 15
+      },
+      {
+        "word": "اللّٰهُ",
+        "count": 14
+      },
+      {
+        "word": "اِلَّا",
+        "count": 13
+      },
+      {
+        "word": "وَّ",
+        "count": 13
+      },
+      {
+        "word": "فِیْ",
+        "count": 12
+      }
+    ]
+  },
+  {
+    "id": 41,
+    "name_ar": "حٰمٓ اَلسَّجْدَۃ (فُصِّلَت)",
+    "name_roman": "Fussilat",
+    "place": "مکیۃ",
+    "revelation_order": 61,
+    "total_ayat": 54,
+    "total_ruku": 6,
+    "total_words": 850,
+    "unique_words": 544,
+    "lexical_diversity_ttr": 64.0,
+    "avg_words_per_ayah": 15.74,
+    "longest_ayah": {
+      "ayah": 44,
+      "word_count": 32
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 1
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 70
+      },
+      {
+        "word": "لَا",
+        "count": 19
+      },
+      {
+        "word": "مِنْ",
+        "count": 19
+      },
+      {
+        "word": "مَا",
+        "count": 15
+      },
+      {
+        "word": "فِیْ",
+        "count": 13
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 12
+      },
+      {
+        "word": "وَّ",
+        "count": 10
+      },
+      {
+        "word": "كَانُوْا",
+        "count": 8
+      },
+      {
+        "word": "الَّذِیْ",
+        "count": 7
+      },
+      {
+        "word": "فِیْهَا",
+        "count": 6
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "name_ar": "اَلشُّوْرٰی",
+    "name_roman": "Ash Shura",
+    "place": "مکیۃ",
+    "revelation_order": 62,
+    "total_ayat": 53,
+    "total_ruku": 5,
+    "total_words": 914,
+    "unique_words": 502,
+    "lexical_diversity_ttr": 54.92,
+    "avg_words_per_ayah": 17.25,
+    "longest_ayah": {
+      "ayah": 13,
+      "word_count": 42
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 1
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 75
+      },
+      {
+        "word": "مَا",
+        "count": 31
+      },
+      {
+        "word": "مِنْ",
+        "count": 21
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 17
+      },
+      {
+        "word": "مِّنْ",
+        "count": 16
+      },
+      {
+        "word": "فِی",
+        "count": 15
+      },
+      {
+        "word": "هُوَ",
+        "count": 13
+      },
+      {
+        "word": "مَنْ",
+        "count": 12
+      },
+      {
+        "word": "اللّٰهُ",
+        "count": 11
+      },
+      {
+        "word": "وَّ",
+        "count": 11
+      }
+    ]
+  },
+  {
+    "id": 43,
+    "name_ar": "اَلزُّخْرُف",
+    "name_roman": "Az Zukhruf",
+    "place": "مکیۃ",
+    "revelation_order": 63,
+    "total_ayat": 89,
+    "total_ruku": 7,
+    "total_words": 906,
+    "unique_words": 557,
+    "lexical_diversity_ttr": 61.48,
+    "avg_words_per_ayah": 10.18,
+    "longest_ayah": {
+      "ayah": 32,
+      "word_count": 25
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 1
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 80
+      },
+      {
+        "word": "وَّ",
+        "count": 14
+      },
+      {
+        "word": "مِنْ",
+        "count": 12
+      },
+      {
+        "word": "الَّذِیْ",
+        "count": 11
+      },
+      {
+        "word": "لَا",
+        "count": 11
+      },
+      {
+        "word": "اِلَّا",
+        "count": 10
+      },
+      {
+        "word": "مَا",
+        "count": 9
+      },
+      {
+        "word": "فِی",
+        "count": 8
+      },
+      {
+        "word": "مِّنْ",
+        "count": 8
+      },
+      {
+        "word": "هُمْ",
+        "count": 8
+      }
+    ]
+  },
+  {
+    "id": 44,
+    "name_ar": "اَلدُّخَان",
+    "name_roman": "Ad Dukhan",
+    "place": "مکیۃ",
+    "revelation_order": 64,
+    "total_ayat": 59,
+    "total_ruku": 3,
+    "total_words": 364,
+    "unique_words": 261,
+    "lexical_diversity_ttr": 71.7,
+    "avg_words_per_ayah": 6.17,
+    "longest_ayah": {
+      "ayah": 8,
+      "word_count": 11
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 1
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 25
+      },
+      {
+        "word": "مَا",
+        "count": 8
+      },
+      {
+        "word": "وَّ",
+        "count": 8
+      },
+      {
+        "word": "لَا",
+        "count": 5
+      },
+      {
+        "word": "اِلَّا",
+        "count": 5
+      },
+      {
+        "word": "مِنْ",
+        "count": 5
+      },
+      {
+        "word": "اِنَّ",
+        "count": 5
+      },
+      {
+        "word": "اِنَّا",
+        "count": 4
+      },
+      {
+        "word": "فِیْ",
+        "count": 4
+      },
+      {
+        "word": "فِیْهَا",
+        "count": 4
+      }
+    ]
+  },
+  {
+    "id": 45,
+    "name_ar": "اَلْجَاثِيَة",
+    "name_roman": "Al Jathiyah",
+    "place": "مکیۃ",
+    "revelation_order": 65,
+    "total_ayat": 37,
+    "total_ruku": 4,
+    "total_words": 527,
+    "unique_words": 331,
+    "lexical_diversity_ttr": 62.81,
+    "avg_words_per_ayah": 14.24,
+    "longest_ayah": {
+      "ayah": 23,
+      "word_count": 26
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 1
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 51
+      },
+      {
+        "word": "مَا",
+        "count": 15
+      },
+      {
+        "word": "لَا",
+        "count": 11
+      },
+      {
+        "word": "اللّٰهِ",
+        "count": 9
+      },
+      {
+        "word": "مِنْ",
+        "count": 9
+      },
+      {
+        "word": "السَّمٰوٰتِ",
+        "count": 6
+      },
+      {
+        "word": "وَّ",
+        "count": 6
+      },
+      {
+        "word": "اِلَّا",
+        "count": 6
+      },
+      {
+        "word": "اللّٰهُ",
+        "count": 5
+      },
+      {
+        "word": "لَهُمْ",
+        "count": 5
+      }
+    ]
+  },
+  {
+    "id": 46,
+    "name_ar": "اَلْاَحْقَاف",
+    "name_roman": "Al Ahqaf",
+    "place": "مکیۃ",
+    "revelation_order": 66,
+    "total_ayat": 35,
+    "total_ruku": 4,
+    "total_words": 676,
+    "unique_words": 427,
+    "lexical_diversity_ttr": 63.17,
+    "avg_words_per_ayah": 19.31,
+    "longest_ayah": {
+      "ayah": 15,
+      "word_count": 50
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 1
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 59
+      },
+      {
+        "word": "مَا",
+        "count": 14
+      },
+      {
+        "word": "اللّٰهِ",
+        "count": 11
+      },
+      {
+        "word": "مِنْ",
+        "count": 11
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 10
+      },
+      {
+        "word": "لَا",
+        "count": 9
+      },
+      {
+        "word": "اِلَّا",
+        "count": 8
+      },
+      {
+        "word": "كَانُوْا",
+        "count": 8
+      },
+      {
+        "word": "مِّنْ",
+        "count": 7
+      },
+      {
+        "word": "مِنَ",
+        "count": 6
+      }
+    ]
+  },
+  {
+    "id": 47,
+    "name_ar": "مُحَمَّد",
+    "name_roman": "Muhammad",
+    "place": "مدنیۃ",
+    "revelation_order": 95,
+    "total_ayat": 38,
+    "total_ruku": 4,
+    "total_words": 582,
+    "unique_words": 348,
+    "lexical_diversity_ttr": 59.79,
+    "avg_words_per_ayah": 15.32,
+    "longest_ayah": {
+      "ayah": 15,
+      "word_count": 45
+    },
+    "shortest_ayah": {
+      "ayah": 5,
+      "word_count": 4
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 52
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 21
+      },
+      {
+        "word": "اللّٰهُ",
+        "count": 15
+      },
+      {
+        "word": "مِّنْ",
+        "count": 9
+      },
+      {
+        "word": "لَهُمْ",
+        "count": 8
+      },
+      {
+        "word": "اٰمَنُوْا",
+        "count": 7
+      },
+      {
+        "word": "مِنْ",
+        "count": 7
+      },
+      {
+        "word": "اللّٰهَ",
+        "count": 7
+      },
+      {
+        "word": "كَفَرُوْا",
+        "count": 6
+      },
+      {
+        "word": "اَعْمَالَهُمْ",
+        "count": 6
+      }
+    ]
+  },
+  {
+    "id": 48,
+    "name_ar": "اَلْفَتْح",
+    "name_roman": "Al Fath",
+    "place": "مدنیۃ",
+    "revelation_order": 111,
+    "total_ayat": 29,
+    "total_ruku": 4,
+    "total_words": 600,
+    "unique_words": 376,
+    "lexical_diversity_ttr": 62.67,
+    "avg_words_per_ayah": 20.69,
+    "longest_ayah": {
+      "ayah": 29,
+      "word_count": 57
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 5
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 43
+      },
+      {
+        "word": "اللّٰهُ",
+        "count": 21
+      },
+      {
+        "word": "وَّ",
+        "count": 12
+      },
+      {
+        "word": "كَانَ",
+        "count": 9
+      },
+      {
+        "word": "مِنْ",
+        "count": 7
+      },
+      {
+        "word": "فِیْ",
+        "count": 7
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 7
+      },
+      {
+        "word": "اللّٰهِ",
+        "count": 6
+      },
+      {
+        "word": "مَنْ",
+        "count": 6
+      },
+      {
+        "word": "لَا",
+        "count": 6
+      }
+    ]
+  },
+  {
+    "id": 49,
+    "name_ar": "اَلْحُجُرٰت",
+    "name_roman": "Al Hujurat",
+    "place": "مدنیۃ",
+    "revelation_order": 106,
+    "total_ayat": 18,
+    "total_ruku": 2,
+    "total_words": 361,
+    "unique_words": 237,
+    "lexical_diversity_ttr": 65.65,
+    "avg_words_per_ayah": 20.06,
+    "longest_ayah": {
+      "ayah": 11,
+      "word_count": 40
+    },
+    "shortest_ayah": {
+      "ayah": 8,
+      "word_count": 8
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 27
+      },
+      {
+        "word": "لَا",
+        "count": 12
+      },
+      {
+        "word": "اللّٰهَ",
+        "count": 10
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 9
+      },
+      {
+        "word": "اَنْ",
+        "count": 7
+      },
+      {
+        "word": "اللّٰهُ",
+        "count": 7
+      },
+      {
+        "word": "یٰاَیُّهَا",
+        "count": 6
+      },
+      {
+        "word": "اٰمَنُوْا",
+        "count": 5
+      },
+      {
+        "word": "اللّٰهِ",
+        "count": 4
+      },
+      {
+        "word": "عَلِیْمٌ",
+        "count": 4
+      }
+    ]
+  },
+  {
+    "id": 50,
+    "name_ar": "قٓ",
+    "name_roman": "Qaf",
+    "place": "مکیۃ",
+    "revelation_order": 34,
+    "total_ayat": 45,
+    "total_ruku": 3,
+    "total_words": 412,
+    "unique_words": 293,
+    "lexical_diversity_ttr": 71.12,
+    "avg_words_per_ayah": 9.16,
+    "longest_ayah": {
+      "ayah": 16,
+      "word_count": 17
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 4
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 39
+      },
+      {
+        "word": "مَا",
+        "count": 14
+      },
+      {
+        "word": "مِنْ",
+        "count": 8
+      },
+      {
+        "word": "فِیْ",
+        "count": 7
+      },
+      {
+        "word": "وَّ",
+        "count": 7
+      },
+      {
+        "word": "هٰذَا",
+        "count": 4
+      },
+      {
+        "word": "فِیْهَا",
+        "count": 3
+      },
+      {
+        "word": "بِهٖ",
+        "count": 3
+      },
+      {
+        "word": "مِّنْ",
+        "count": 3
+      },
+      {
+        "word": "لَقَدْ",
+        "count": 3
+      }
+    ]
+  },
+  {
+    "id": 51,
+    "name_ar": "اَلذّٰرِيـٰت",
+    "name_roman": "Az Zariyat",
+    "place": "مکیۃ",
+    "revelation_order": 67,
+    "total_ayat": 60,
+    "total_ruku": 3,
+    "total_words": 380,
+    "unique_words": 274,
+    "lexical_diversity_ttr": 72.11,
+    "avg_words_per_ayah": 6.33,
+    "longest_ayah": {
+      "ayah": 52,
+      "word_count": 13
+    },
+    "shortest_ayah": {
+      "ayah": 2,
+      "word_count": 2
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 26
+      },
+      {
+        "word": "مَا",
+        "count": 10
+      },
+      {
+        "word": "فِیْ",
+        "count": 8
+      },
+      {
+        "word": "وَّ",
+        "count": 6
+      },
+      {
+        "word": "هُمْ",
+        "count": 5
+      },
+      {
+        "word": "مِنْ",
+        "count": 5
+      },
+      {
+        "word": "كَانُوْا",
+        "count": 4
+      },
+      {
+        "word": "اِذْ",
+        "count": 4
+      },
+      {
+        "word": "فَمَا",
+        "count": 4
+      },
+      {
+        "word": "مِّنْ",
+        "count": 4
+      }
+    ]
+  },
+  {
+    "id": 52,
+    "name_ar": "اَلطُّوْر",
+    "name_roman": "At Tur",
+    "place": "مکیۃ",
+    "revelation_order": 76,
+    "total_ayat": 49,
+    "total_ruku": 2,
+    "total_words": 331,
+    "unique_words": 245,
+    "lexical_diversity_ttr": 74.02,
+    "avg_words_per_ayah": 6.76,
+    "longest_ayah": {
+      "ayah": 21,
+      "word_count": 21
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 2
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 22
+      },
+      {
+        "word": "اَمْ",
+        "count": 16
+      },
+      {
+        "word": "لَا",
+        "count": 7
+      },
+      {
+        "word": "وَّ",
+        "count": 6
+      },
+      {
+        "word": "رَبِّكَ",
+        "count": 5
+      },
+      {
+        "word": "فِیْ",
+        "count": 4
+      },
+      {
+        "word": "اِنَّ",
+        "count": 3
+      },
+      {
+        "word": "عَذَابَ",
+        "count": 3
+      },
+      {
+        "word": "مِنْ",
+        "count": 3
+      },
+      {
+        "word": "هُمْ",
+        "count": 3
+      }
+    ]
+  },
+  {
+    "id": 53,
+    "name_ar": "اَلنَّجْم",
+    "name_roman": "An Najm",
+    "place": "مکیۃ",
+    "revelation_order": 23,
+    "total_ayat": 62,
+    "total_ruku": 3,
+    "total_words": 396,
+    "unique_words": 255,
+    "lexical_diversity_ttr": 64.39,
+    "avg_words_per_ayah": 6.39,
+    "longest_ayah": {
+      "ayah": 32,
+      "word_count": 29
+    },
+    "shortest_ayah": {
+      "ayah": 6,
+      "word_count": 2
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 45
+      },
+      {
+        "word": "مَا",
+        "count": 17
+      },
+      {
+        "word": "هُوَ",
+        "count": 8
+      },
+      {
+        "word": "اِلَّا",
+        "count": 8
+      },
+      {
+        "word": "مِنْ",
+        "count": 6
+      },
+      {
+        "word": "اَنَّهٗ",
+        "count": 6
+      },
+      {
+        "word": "لَا",
+        "count": 4
+      },
+      {
+        "word": "اَعْلَمُ",
+        "count": 4
+      },
+      {
+        "word": "لَقَدْ",
+        "count": 3
+      },
+      {
+        "word": "اِذْ",
+        "count": 3
+      }
+    ]
+  },
+  {
+    "id": 54,
+    "name_ar": "اَلْقَمَر",
+    "name_roman": "Al Qamar",
+    "place": "مکیۃ",
+    "revelation_order": 37,
+    "total_ayat": 55,
+    "total_ruku": 3,
+    "total_words": 376,
+    "unique_words": 241,
+    "lexical_diversity_ttr": 64.1,
+    "avg_words_per_ayah": 6.84,
+    "longest_ayah": {
+      "ayah": 9,
+      "word_count": 11
+    },
+    "shortest_ayah": {
+      "ayah": 23,
+      "word_count": 3
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 33
+      },
+      {
+        "word": "لَقَدْ",
+        "count": 11
+      },
+      {
+        "word": "وَّ",
+        "count": 7
+      },
+      {
+        "word": "مِنْ",
+        "count": 7
+      },
+      {
+        "word": "فَهَلْ",
+        "count": 6
+      },
+      {
+        "word": "مُّدَّكِرٍ",
+        "count": 6
+      },
+      {
+        "word": "عَذَابِیْ",
+        "count": 6
+      },
+      {
+        "word": "نُذُرِ",
+        "count": 6
+      },
+      {
+        "word": "كَانَ",
+        "count": 5
+      },
+      {
+        "word": "اِنَّا",
+        "count": 5
+      }
+    ]
+  },
+  {
+    "id": 55,
+    "name_ar": "اَلرَّحْمٰن",
+    "name_roman": "Ar Rahman",
+    "place": "مکیۃ",
+    "revelation_order": 97,
+    "total_ayat": 78,
+    "total_ruku": 3,
+    "total_words": 385,
+    "unique_words": 191,
+    "lexical_diversity_ttr": 49.61,
+    "avg_words_per_ayah": 4.94,
+    "longest_ayah": {
+      "ayah": 33,
+      "word_count": 17
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 1
+    },
+    "top_10_words": [
+      {
+        "word": "فَبِاَیِّ",
+        "count": 31
+      },
+      {
+        "word": "اٰلَآءِ",
+        "count": 31
+      },
+      {
+        "word": "رَبِّكُمَا",
+        "count": 31
+      },
+      {
+        "word": "تُكَذِّبٰنِ",
+        "count": 31
+      },
+      {
+        "word": "وَ",
+        "count": 26
+      },
+      {
+        "word": "وَّ",
+        "count": 7
+      },
+      {
+        "word": "مِنْ",
+        "count": 6
+      },
+      {
+        "word": "فِی",
+        "count": 4
+      },
+      {
+        "word": "لَا",
+        "count": 4
+      },
+      {
+        "word": "فِیْهِمَا",
+        "count": 4
+      }
+    ]
+  },
+  {
+    "id": 56,
+    "name_ar": "اَلْوَاقِعَة",
+    "name_roman": "Al Waqiah",
+    "place": "مکیۃ",
+    "revelation_order": 46,
+    "total_ayat": 96,
+    "total_ruku": 3,
+    "total_words": 429,
+    "unique_words": 276,
+    "lexical_diversity_ttr": 64.34,
+    "avg_words_per_ayah": 4.47,
+    "longest_ayah": {
+      "ayah": 47,
+      "word_count": 12
+    },
+    "shortest_ayah": {
+      "ayah": 3,
+      "word_count": 2
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 25
+      },
+      {
+        "word": "وَّ",
+        "count": 18
+      },
+      {
+        "word": "لَا",
+        "count": 11
+      },
+      {
+        "word": "نَحْنُ",
+        "count": 10
+      },
+      {
+        "word": "اَصْحٰبُ",
+        "count": 7
+      },
+      {
+        "word": "مَا",
+        "count": 6
+      },
+      {
+        "word": "فِیْ",
+        "count": 5
+      },
+      {
+        "word": "مِّنْ",
+        "count": 5
+      },
+      {
+        "word": "لَّا",
+        "count": 5
+      },
+      {
+        "word": "فَلَوْ",
+        "count": 5
+      }
+    ]
+  },
+  {
+    "id": 57,
+    "name_ar": "اَلْحَدِيْد",
+    "name_roman": "Hadid",
+    "place": "مدنیۃ",
+    "revelation_order": 94,
+    "total_ayat": 29,
+    "total_ruku": 4,
+    "total_words": 626,
+    "unique_words": 387,
+    "lexical_diversity_ttr": 61.82,
+    "avg_words_per_ayah": 21.59,
+    "longest_ayah": {
+      "ayah": 20,
+      "word_count": 44
+    },
+    "shortest_ayah": {
+      "ayah": 5,
+      "word_count": 9
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 65
+      },
+      {
+        "word": "مَا",
+        "count": 13
+      },
+      {
+        "word": "هُوَ",
+        "count": 10
+      },
+      {
+        "word": "اللّٰهِ",
+        "count": 10
+      },
+      {
+        "word": "اللّٰهُ",
+        "count": 8
+      },
+      {
+        "word": "مِنْ",
+        "count": 8
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 8
+      },
+      {
+        "word": "فِی",
+        "count": 7
+      },
+      {
+        "word": "لَا",
+        "count": 7
+      },
+      {
+        "word": "اللّٰهَ",
+        "count": 7
+      }
+    ]
+  },
+  {
+    "id": 58,
+    "name_ar": "اَلْمُجَادَلَة",
+    "name_roman": "Al Mujadilah",
+    "place": "مدنیۃ",
+    "revelation_order": 105,
+    "total_ayat": 22,
+    "total_ruku": 3,
+    "total_words": 484,
+    "unique_words": 294,
+    "lexical_diversity_ttr": 60.74,
+    "avg_words_per_ayah": 22.0,
+    "longest_ayah": {
+      "ayah": 22,
+      "word_count": 52
+    },
+    "shortest_ayah": {
+      "ayah": 15,
+      "word_count": 9
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 37
+      },
+      {
+        "word": "اللّٰهُ",
+        "count": 17
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 12
+      },
+      {
+        "word": "اللّٰهَ",
+        "count": 11
+      },
+      {
+        "word": "بِمَا",
+        "count": 7
+      },
+      {
+        "word": "لَا",
+        "count": 7
+      },
+      {
+        "word": "مِنْ",
+        "count": 6
+      },
+      {
+        "word": "اللّٰهِ",
+        "count": 5
+      },
+      {
+        "word": "اِلَّا",
+        "count": 5
+      },
+      {
+        "word": "اِنَّ",
+        "count": 5
+      }
+    ]
+  },
+  {
+    "id": 59,
+    "name_ar": "اَلْحَشْر",
+    "name_roman": "Al Hashr",
+    "place": "مدنیۃ",
+    "revelation_order": 101,
+    "total_ayat": 24,
+    "total_ruku": 3,
+    "total_words": 465,
+    "unique_words": 299,
+    "lexical_diversity_ttr": 64.3,
+    "avg_words_per_ayah": 19.38,
+    "longest_ayah": {
+      "ayah": 2,
+      "word_count": 41
+    },
+    "shortest_ayah": {
+      "ayah": 17,
+      "word_count": 10
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 30
+      },
+      {
+        "word": "لَا",
+        "count": 14
+      },
+      {
+        "word": "مِنْ",
+        "count": 11
+      },
+      {
+        "word": "اللّٰهَ",
+        "count": 10
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 9
+      },
+      {
+        "word": "اللّٰهُ",
+        "count": 9
+      },
+      {
+        "word": "مَا",
+        "count": 8
+      },
+      {
+        "word": "عَلٰى",
+        "count": 7
+      },
+      {
+        "word": "فِی",
+        "count": 6
+      },
+      {
+        "word": "هُوَ",
+        "count": 6
+      }
+    ]
+  },
+  {
+    "id": 60,
+    "name_ar": "اَلْمُمْتَحِنَة",
+    "name_roman": "Al Mumtahanah",
+    "place": "مدنیۃ",
+    "revelation_order": 91,
+    "total_ayat": 13,
+    "total_ruku": 2,
+    "total_words": 369,
+    "unique_words": 245,
+    "lexical_diversity_ttr": 66.4,
+    "avg_words_per_ayah": 28.38,
+    "longest_ayah": {
+      "ayah": 4,
+      "word_count": 57
+    },
+    "shortest_ayah": {
+      "ayah": 3,
+      "word_count": 12
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 34
+      },
+      {
+        "word": "لَا",
+        "count": 13
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 8
+      },
+      {
+        "word": "اللّٰهُ",
+        "count": 8
+      },
+      {
+        "word": "اَنْ",
+        "count": 6
+      },
+      {
+        "word": "مَا",
+        "count": 5
+      },
+      {
+        "word": "اللّٰهَ",
+        "count": 5
+      },
+      {
+        "word": "یٰاَیُّهَا",
+        "count": 4
+      },
+      {
+        "word": "اٰمَنُوْا",
+        "count": 3
+      },
+      {
+        "word": "قَدْ",
+        "count": 3
+      }
+    ]
+  },
+  {
+    "id": 61,
+    "name_ar": "اَلصَّفّ",
+    "name_roman": "As Saf",
+    "place": "مدنیۃ",
+    "revelation_order": 109,
+    "total_ayat": 14,
+    "total_ruku": 2,
+    "total_words": 233,
+    "unique_words": 164,
+    "lexical_diversity_ttr": 70.39,
+    "avg_words_per_ayah": 16.64,
+    "longest_ayah": {
+      "ayah": 14,
+      "word_count": 34
+    },
+    "shortest_ayah": {
+      "ayah": 2,
+      "word_count": 8
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 19
+      },
+      {
+        "word": "اللّٰهِ",
+        "count": 9
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 5
+      },
+      {
+        "word": "مَا",
+        "count": 4
+      },
+      {
+        "word": "اٰمَنُوْا",
+        "count": 4
+      },
+      {
+        "word": "لَا",
+        "count": 4
+      },
+      {
+        "word": "اللّٰهُ",
+        "count": 4
+      },
+      {
+        "word": "هُوَ",
+        "count": 3
+      },
+      {
+        "word": "یٰاَیُّهَا",
+        "count": 3
+      },
+      {
+        "word": "فِیْ",
+        "count": 3
+      }
+    ]
+  },
+  {
+    "id": 62,
+    "name_ar": "اَلْجُمُعَة",
+    "name_roman": "Al Jumuah",
+    "place": "مدنیۃ",
+    "revelation_order": 110,
+    "total_ayat": 11,
+    "total_ruku": 2,
+    "total_words": 185,
+    "unique_words": 138,
+    "lexical_diversity_ttr": 74.59,
+    "avg_words_per_ayah": 16.82,
+    "longest_ayah": {
+      "ayah": 2,
+      "word_count": 24
+    },
+    "shortest_ayah": {
+      "ayah": 3,
+      "word_count": 9
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 12
+      },
+      {
+        "word": "فِی",
+        "count": 4
+      },
+      {
+        "word": "اِنْ",
+        "count": 4
+      },
+      {
+        "word": "مِنْ",
+        "count": 4
+      },
+      {
+        "word": "اللّٰهِ",
+        "count": 4
+      },
+      {
+        "word": "اللّٰهُ",
+        "count": 4
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 4
+      },
+      {
+        "word": "مَا",
+        "count": 3
+      },
+      {
+        "word": "كُنْتُمْ",
+        "count": 3
+      },
+      {
+        "word": "لِلّٰهِ",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "id": 63,
+    "name_ar": "اَلْمُنٰفِقُوْن",
+    "name_roman": "Al Munafiqun",
+    "place": "مدنیۃ",
+    "revelation_order": 104,
+    "total_ayat": 11,
+    "total_ruku": 2,
+    "total_words": 185,
+    "unique_words": 141,
+    "lexical_diversity_ttr": 76.22,
+    "avg_words_per_ayah": 16.82,
+    "longest_ayah": {
+      "ayah": 10,
+      "word_count": 23
+    },
+    "shortest_ayah": {
+      "ayah": 2,
+      "word_count": 11
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 13
+      },
+      {
+        "word": "لَا",
+        "count": 8
+      },
+      {
+        "word": "اللّٰهُ",
+        "count": 5
+      },
+      {
+        "word": "اِذَا",
+        "count": 4
+      },
+      {
+        "word": "الْمُنٰفِقِیْنَ",
+        "count": 3
+      },
+      {
+        "word": "اِنَّكَ",
+        "count": 2
+      },
+      {
+        "word": "اللّٰهِ-وَ",
+        "count": 2
+      },
+      {
+        "word": "عَنْ",
+        "count": 2
+      },
+      {
+        "word": "ذٰلِكَ",
+        "count": 2
+      },
+      {
+        "word": "اٰمَنُوْا",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "id": 64,
+    "name_ar": "اَلتَّغَابُن",
+    "name_roman": "At Taghabun",
+    "place": "مدنیۃ",
+    "revelation_order": 108,
+    "total_ayat": 18,
+    "total_ruku": 2,
+    "total_words": 265,
+    "unique_words": 188,
+    "lexical_diversity_ttr": 70.94,
+    "avg_words_per_ayah": 14.72,
+    "longest_ayah": {
+      "ayah": 9,
+      "word_count": 28
+    },
+    "shortest_ayah": {
+      "ayah": 18,
+      "word_count": 6
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 27
+      },
+      {
+        "word": "مَا",
+        "count": 7
+      },
+      {
+        "word": "اللّٰهُ",
+        "count": 7
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 4
+      },
+      {
+        "word": "مِنْ",
+        "count": 4
+      },
+      {
+        "word": "اللّٰهَ",
+        "count": 4
+      },
+      {
+        "word": "فِی",
+        "count": 3
+      },
+      {
+        "word": "السَّمٰوٰتِ",
+        "count": 3
+      },
+      {
+        "word": "بِمَا",
+        "count": 3
+      },
+      {
+        "word": "كَفَرُوْا",
+        "count": 3
+      }
+    ]
+  },
+  {
+    "id": 65,
+    "name_ar": "اَلطَّلَاق",
+    "name_roman": "At Talaq",
+    "place": "مدنیۃ",
+    "revelation_order": 99,
+    "total_ayat": 12,
+    "total_ruku": 2,
+    "total_words": 294,
+    "unique_words": 223,
+    "lexical_diversity_ttr": 75.85,
+    "avg_words_per_ayah": 24.5,
+    "longest_ayah": {
+      "ayah": 1,
+      "word_count": 41
+    },
+    "shortest_ayah": {
+      "ayah": 9,
+      "word_count": 8
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 12
+      },
+      {
+        "word": "اللّٰهَ",
+        "count": 9
+      },
+      {
+        "word": "مَنْ",
+        "count": 8
+      },
+      {
+        "word": "مِنْ",
+        "count": 6
+      },
+      {
+        "word": "اللّٰهُ",
+        "count": 6
+      },
+      {
+        "word": "وَّ",
+        "count": 5
+      },
+      {
+        "word": "اللّٰهِ",
+        "count": 4
+      },
+      {
+        "word": "لَا",
+        "count": 3
+      },
+      {
+        "word": "یَّتَّقِ",
+        "count": 3
+      },
+      {
+        "word": "شَیْءٍ",
+        "count": 3
+      }
+    ]
+  },
+  {
+    "id": 66,
+    "name_ar": "اَلتَّحْرِيْم",
+    "name_roman": "At Tahrim",
+    "place": "مدنیۃ",
+    "revelation_order": 107,
+    "total_ayat": 12,
+    "total_ruku": 2,
+    "total_words": 264,
+    "unique_words": 195,
+    "lexical_diversity_ttr": 73.86,
+    "avg_words_per_ayah": 22.0,
+    "longest_ayah": {
+      "ayah": 8,
+      "word_count": 45
+    },
+    "shortest_ayah": {
+      "ayah": 7,
+      "word_count": 10
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 22
+      },
+      {
+        "word": "اللّٰهُ",
+        "count": 8
+      },
+      {
+        "word": "یٰاَیُّهَا",
+        "count": 5
+      },
+      {
+        "word": "مَا",
+        "count": 4
+      },
+      {
+        "word": "وَّ",
+        "count": 4
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 4
+      },
+      {
+        "word": "مِنْ",
+        "count": 4
+      },
+      {
+        "word": "النَّبِیُّ",
+        "count": 3
+      },
+      {
+        "word": "اِنْ",
+        "count": 3
+      },
+      {
+        "word": "اللّٰهِ",
+        "count": 3
+      }
+    ]
+  },
+  {
+    "id": 67,
+    "name_ar": "اَلْمُلْك",
+    "name_roman": "Al Mulk",
+    "place": "مکیۃ",
+    "revelation_order": 77,
+    "total_ayat": 30,
+    "total_ruku": 2,
+    "total_words": 346,
+    "unique_words": 242,
+    "lexical_diversity_ttr": 69.94,
+    "avg_words_per_ayah": 11.53,
+    "longest_ayah": {
+      "ayah": 9,
+      "word_count": 19
+    },
+    "shortest_ayah": {
+      "ayah": 11,
+      "word_count": 4
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 19
+      },
+      {
+        "word": "هُوَ",
+        "count": 10
+      },
+      {
+        "word": "الَّذِیْ",
+        "count": 9
+      },
+      {
+        "word": "فِیْ",
+        "count": 7
+      },
+      {
+        "word": "مِنْ",
+        "count": 6
+      },
+      {
+        "word": "قُلْ",
+        "count": 6
+      },
+      {
+        "word": "وَّ",
+        "count": 5
+      },
+      {
+        "word": "هٰذَا",
+        "count": 4
+      },
+      {
+        "word": "اِنْ",
+        "count": 4
+      },
+      {
+        "word": "عَلٰى",
+        "count": 3
+      }
+    ]
+  },
+  {
+    "id": 68,
+    "name_ar": "اَلْقَلَم",
+    "name_roman": "Al Qalam",
+    "place": "مکیۃ",
+    "revelation_order": 2,
+    "total_ayat": 52,
+    "total_ruku": 2,
+    "total_words": 315,
+    "unique_words": 235,
+    "lexical_diversity_ttr": 74.6,
+    "avg_words_per_ayah": 6.06,
+    "longest_ayah": {
+      "ayah": 51,
+      "word_count": 14
+    },
+    "shortest_ayah": {
+      "ayah": 6,
+      "word_count": 2
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 18
+      },
+      {
+        "word": "لَا",
+        "count": 6
+      },
+      {
+        "word": "هُوَ",
+        "count": 5
+      },
+      {
+        "word": "اِنَّا",
+        "count": 5
+      },
+      {
+        "word": "اَمْ",
+        "count": 5
+      },
+      {
+        "word": "مَا",
+        "count": 4
+      },
+      {
+        "word": "اِنَّ",
+        "count": 4
+      },
+      {
+        "word": "اَنْ",
+        "count": 4
+      },
+      {
+        "word": "مِّنْ",
+        "count": 4
+      },
+      {
+        "word": "لَكُمْ",
+        "count": 4
+      }
+    ]
+  },
+  {
+    "id": 69,
+    "name_ar": "اَلْحَآ قَّة",
+    "name_roman": "Al Haqqah",
+    "place": "مکیۃ",
+    "revelation_order": 78,
+    "total_ayat": 52,
+    "total_ruku": 2,
+    "total_words": 277,
+    "unique_words": 203,
+    "lexical_diversity_ttr": 73.29,
+    "avg_words_per_ayah": 5.33,
+    "longest_ayah": {
+      "ayah": 7,
+      "word_count": 13
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 1
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 19
+      },
+      {
+        "word": "مَا",
+        "count": 7
+      },
+      {
+        "word": "وَّ",
+        "count": 6
+      },
+      {
+        "word": "لَا",
+        "count": 6
+      },
+      {
+        "word": "اِنَّهٗ",
+        "count": 5
+      },
+      {
+        "word": "مِّنْ",
+        "count": 3
+      },
+      {
+        "word": "مَنْ",
+        "count": 3
+      },
+      {
+        "word": "فِی",
+        "count": 3
+      },
+      {
+        "word": "یَوْمَىٕذٍ",
+        "count": 3
+      },
+      {
+        "word": "مِنْكُمْ",
+        "count": 3
+      }
+    ]
+  },
+  {
+    "id": 70,
+    "name_ar": "اَلْمَعَارِ ج",
+    "name_roman": "Al Maarij",
+    "place": "مکیۃ",
+    "revelation_order": 79,
+    "total_ayat": 44,
+    "total_ruku": 2,
+    "total_words": 236,
+    "unique_words": 181,
+    "lexical_diversity_ttr": 76.69,
+    "avg_words_per_ayah": 5.36,
+    "longest_ayah": {
+      "ayah": 4,
+      "word_count": 12
+    },
+    "shortest_ayah": {
+      "ayah": 15,
+      "word_count": 2
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 21
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 9
+      },
+      {
+        "word": "هُمْ",
+        "count": 6
+      },
+      {
+        "word": "عَلٰى",
+        "count": 4
+      },
+      {
+        "word": "فِیْ",
+        "count": 3
+      },
+      {
+        "word": "وَّ",
+        "count": 2
+      },
+      {
+        "word": "یَوْمَ",
+        "count": 2
+      },
+      {
+        "word": "تَكُوْنُ",
+        "count": 2
+      },
+      {
+        "word": "عَذَابِ",
+        "count": 2
+      },
+      {
+        "word": "مَنْ",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "id": 71,
+    "name_ar": "نُوْ ح",
+    "name_roman": "Nuh",
+    "place": "مکیۃ",
+    "revelation_order": 71,
+    "total_ayat": 28,
+    "total_ruku": 2,
+    "total_words": 259,
+    "unique_words": 178,
+    "lexical_diversity_ttr": 68.73,
+    "avg_words_per_ayah": 9.25,
+    "longest_ayah": {
+      "ayah": 23,
+      "word_count": 19
+    },
+    "shortest_ayah": {
+      "ayah": 8,
+      "word_count": 4
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 27
+      },
+      {
+        "word": "لَا",
+        "count": 10
+      },
+      {
+        "word": "وَّ",
+        "count": 9
+      },
+      {
+        "word": "اِنِّیْ",
+        "count": 5
+      },
+      {
+        "word": "اِلَّا",
+        "count": 5
+      },
+      {
+        "word": "قَالَ",
+        "count": 4
+      },
+      {
+        "word": "لَهُمْ",
+        "count": 4
+      },
+      {
+        "word": "لَكُمْ",
+        "count": 3
+      },
+      {
+        "word": "ثُمَّ",
+        "count": 3
+      },
+      {
+        "word": "اللّٰهُ",
+        "count": 3
+      }
+    ]
+  },
+  {
+    "id": 72,
+    "name_ar": "اَلْجِنّ",
+    "name_roman": "Al Jin",
+    "place": "مکیۃ",
+    "revelation_order": 40,
+    "total_ayat": 28,
+    "total_ruku": 2,
+    "total_words": 314,
+    "unique_words": 213,
+    "lexical_diversity_ttr": 67.83,
+    "avg_words_per_ayah": 11.21,
+    "longest_ayah": {
+      "ayah": 23,
+      "word_count": 18
+    },
+    "shortest_ayah": {
+      "ayah": 15,
+      "word_count": 6
+    },
+    "top_10_words": [
+      {
+        "word": "وَّ",
+        "count": 21
+      },
+      {
+        "word": "وَ",
+        "count": 11
+      },
+      {
+        "word": "اَنَّا",
+        "count": 8
+      },
+      {
+        "word": "لَا",
+        "count": 6
+      },
+      {
+        "word": "اللّٰهِ",
+        "count": 6
+      },
+      {
+        "word": "قُلْ",
+        "count": 5
+      },
+      {
+        "word": "اَحَدًا",
+        "count": 5
+      },
+      {
+        "word": "اَنْ",
+        "count": 5
+      },
+      {
+        "word": "مِّنَ",
+        "count": 4
+      },
+      {
+        "word": "لَنْ",
+        "count": 4
+      }
+    ]
+  },
+  {
+    "id": 73,
+    "name_ar": "اَلْمُزَّمِّل",
+    "name_roman": "Al Muzzammil",
+    "place": "مکیۃ",
+    "revelation_order": 3,
+    "total_ayat": 20,
+    "total_ruku": 2,
+    "total_words": 216,
+    "unique_words": 169,
+    "lexical_diversity_ttr": 78.24,
+    "avg_words_per_ayah": 10.8,
+    "longest_ayah": {
+      "ayah": 20,
+      "word_count": 82
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 2
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 17
+      },
+      {
+        "word": "اِنَّ",
+        "count": 5
+      },
+      {
+        "word": "وَّ",
+        "count": 5
+      },
+      {
+        "word": "مَا",
+        "count": 4
+      },
+      {
+        "word": "قَلِیْلًا",
+        "count": 3
+      },
+      {
+        "word": "الَّیْلَ",
+        "count": 2
+      },
+      {
+        "word": "اِلَّا",
+        "count": 2
+      },
+      {
+        "word": "اِنَّا",
+        "count": 2
+      },
+      {
+        "word": "الَّیْلِ",
+        "count": 2
+      },
+      {
+        "word": "فِی",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "id": 74,
+    "name_ar": "اَلْمُدَّثِّر",
+    "name_roman": "Al Mudassir",
+    "place": "مکیۃ",
+    "revelation_order": 4,
+    "total_ayat": 56,
+    "total_ruku": 2,
+    "total_words": 279,
+    "unique_words": 197,
+    "lexical_diversity_ttr": 70.61,
+    "avg_words_per_ayah": 4.98,
+    "longest_ayah": {
+      "ayah": 31,
+      "word_count": 62
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 2
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 23
+      },
+      {
+        "word": "مَا",
+        "count": 9
+      },
+      {
+        "word": "اِلَّا",
+        "count": 8
+      },
+      {
+        "word": "وَّ",
+        "count": 5
+      },
+      {
+        "word": "ثُمَّ",
+        "count": 5
+      },
+      {
+        "word": "لَا",
+        "count": 4
+      },
+      {
+        "word": "اَنْ",
+        "count": 4
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 4
+      },
+      {
+        "word": "مَنْ",
+        "count": 3
+      },
+      {
+        "word": "قَدَّرَ",
+        "count": 3
+      }
+    ]
+  },
+  {
+    "id": 75,
+    "name_ar": "اَلْقِيَامَة",
+    "name_roman": "Al Qiyamah",
+    "place": "مکیۃ",
+    "revelation_order": 31,
+    "total_ayat": 40,
+    "total_ruku": 2,
+    "total_words": 178,
+    "unique_words": 127,
+    "lexical_diversity_ttr": 71.35,
+    "avg_words_per_ayah": 4.45,
+    "longest_ayah": {
+      "ayah": 13,
+      "word_count": 7
+    },
+    "shortest_ayah": {
+      "ayah": 7,
+      "word_count": 3
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 14
+      },
+      {
+        "word": "الْاِنْسَانُ",
+        "count": 6
+      },
+      {
+        "word": "لَا",
+        "count": 5
+      },
+      {
+        "word": "اَنْ",
+        "count": 4
+      },
+      {
+        "word": "اِلٰى",
+        "count": 4
+      },
+      {
+        "word": "ثُمَّ",
+        "count": 4
+      },
+      {
+        "word": "عَلٰى",
+        "count": 3
+      },
+      {
+        "word": "كَلَّا",
+        "count": 3
+      },
+      {
+        "word": "اُقْسِمُ",
+        "count": 2
+      },
+      {
+        "word": "الْقِیٰمَةِ",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "id": 76,
+    "name_ar": "اَلدَّهْر (اَلْاِنْسَان)",
+    "name_roman": "Al Insan",
+    "place": "مدنیۃ",
+    "revelation_order": 98,
+    "total_ayat": 31,
+    "total_ruku": 2,
+    "total_words": 270,
+    "unique_words": 202,
+    "lexical_diversity_ttr": 74.81,
+    "avg_words_per_ayah": 8.71,
+    "longest_ayah": {
+      "ayah": 21,
+      "word_count": 14
+    },
+    "shortest_ayah": {
+      "ayah": 18,
+      "word_count": 4
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 18
+      },
+      {
+        "word": "وَّ",
+        "count": 13
+      },
+      {
+        "word": "كَانَ",
+        "count": 6
+      },
+      {
+        "word": "اِنَّا",
+        "count": 5
+      },
+      {
+        "word": "مِنْ",
+        "count": 5
+      },
+      {
+        "word": "اِنَّ",
+        "count": 4
+      },
+      {
+        "word": "لَا",
+        "count": 4
+      },
+      {
+        "word": "فِیْهَا",
+        "count": 4
+      },
+      {
+        "word": "یَوْمًا",
+        "count": 3
+      },
+      {
+        "word": "عَلَیْهِمْ",
+        "count": 3
+      }
+    ]
+  },
+  {
+    "id": 77,
+    "name_ar": "اَلْمُرْسَلٰت",
+    "name_roman": "Al Mursalat",
+    "place": "مکیۃ",
+    "revelation_order": 33,
+    "total_ayat": 50,
+    "total_ruku": 2,
+    "total_words": 197,
+    "unique_words": 133,
+    "lexical_diversity_ttr": 67.51,
+    "avg_words_per_ayah": 3.94,
+    "longest_ayah": {
+      "ayah": 27,
+      "word_count": 9
+    },
+    "shortest_ayah": {
+      "ayah": 2,
+      "word_count": 2
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 10
+      },
+      {
+        "word": "وَیْلٌ",
+        "count": 10
+      },
+      {
+        "word": "یَّوْمَىٕذٍ",
+        "count": 10
+      },
+      {
+        "word": "لِّلْمُكَذِّبِیْنَ",
+        "count": 10
+      },
+      {
+        "word": "وَّ",
+        "count": 7
+      },
+      {
+        "word": "اِذَا",
+        "count": 4
+      },
+      {
+        "word": "لَا",
+        "count": 4
+      },
+      {
+        "word": "مَا",
+        "count": 3
+      },
+      {
+        "word": "یَوْمُ",
+        "count": 3
+      },
+      {
+        "word": "اَلَمْ",
+        "count": 3
+      }
+    ]
+  },
+  {
+    "id": 78,
+    "name_ar": "اَلنَّبَا",
+    "name_roman": "An Naba",
+    "place": "مکیۃ",
+    "revelation_order": 80,
+    "total_ayat": 40,
+    "total_ruku": 2,
+    "total_words": 198,
+    "unique_words": 151,
+    "lexical_diversity_ttr": 76.26,
+    "avg_words_per_ayah": 4.95,
+    "longest_ayah": {
+      "ayah": 38,
+      "word_count": 16
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 2
+    },
+    "top_10_words": [
+      {
+        "word": "وَّ",
+        "count": 18
+      },
+      {
+        "word": "وَ",
+        "count": 7
+      },
+      {
+        "word": "لَا",
+        "count": 6
+      },
+      {
+        "word": "جَعَلْنَا",
+        "count": 4
+      },
+      {
+        "word": "اِنَّ",
+        "count": 3
+      },
+      {
+        "word": "فِیْهَا",
+        "count": 3
+      },
+      {
+        "word": "اِلَّا",
+        "count": 3
+      },
+      {
+        "word": "كَلَّا",
+        "count": 2
+      },
+      {
+        "word": "سَیَعْلَمُوْنَ",
+        "count": 2
+      },
+      {
+        "word": "یَوْمَ",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "id": 79,
+    "name_ar": "اَلنَّازِعَات",
+    "name_roman": "An Naziat",
+    "place": "مکیۃ",
+    "revelation_order": 81,
+    "total_ayat": 46,
+    "total_ruku": 2,
+    "total_words": 196,
+    "unique_words": 163,
+    "lexical_diversity_ttr": 83.16,
+    "avg_words_per_ayah": 4.26,
+    "longest_ayah": {
+      "ayah": 40,
+      "word_count": 11
+    },
+    "shortest_ayah": {
+      "ayah": 4,
+      "word_count": 2
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 13
+      },
+      {
+        "word": "اِلٰى",
+        "count": 4
+      },
+      {
+        "word": "یَوْمَ",
+        "count": 3
+      },
+      {
+        "word": "هِیَ",
+        "count": 3
+      },
+      {
+        "word": "مَنْ",
+        "count": 3
+      },
+      {
+        "word": "وَّ",
+        "count": 2
+      },
+      {
+        "word": "فَاِذَا",
+        "count": 2
+      },
+      {
+        "word": "هَلْ",
+        "count": 2
+      },
+      {
+        "word": "رَبِّكَ",
+        "count": 2
+      },
+      {
+        "word": "الْكُبْرٰى٘",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "id": 80,
+    "name_ar": "عَبَس",
+    "name_roman": "Abasa",
+    "place": "مکیۃ",
+    "revelation_order": 24,
+    "total_ayat": 42,
+    "total_ruku": 1,
+    "total_words": 152,
+    "unique_words": 119,
+    "lexical_diversity_ttr": 78.29,
+    "avg_words_per_ayah": 3.62,
+    "longest_ayah": {
+      "ayah": 3,
+      "word_count": 6
+    },
+    "shortest_ayah": {
+      "ayah": 14,
+      "word_count": 2
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 11
+      },
+      {
+        "word": "وَّ",
+        "count": 7
+      },
+      {
+        "word": "مَا",
+        "count": 4
+      },
+      {
+        "word": "ثُمَّ",
+        "count": 4
+      },
+      {
+        "word": "مِنْ",
+        "count": 3
+      },
+      {
+        "word": "یَزَّ",
+        "count": 2
+      },
+      {
+        "word": "كّٰى",
+        "count": 2
+      },
+      {
+        "word": "اَمَّا",
+        "count": 2
+      },
+      {
+        "word": "فَاَنْتَ",
+        "count": 2
+      },
+      {
+        "word": "كَلَّا",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "id": 81,
+    "name_ar": "اَلتَّكْوِيْر",
+    "name_roman": "At Takwir",
+    "place": "مکیۃ",
+    "revelation_order": 7,
+    "total_ayat": 29,
+    "total_ruku": 1,
+    "total_words": 122,
+    "unique_words": 85,
+    "lexical_diversity_ttr": 69.67,
+    "avg_words_per_ayah": 4.21,
+    "longest_ayah": {
+      "ayah": 29,
+      "word_count": 9
+    },
+    "shortest_ayah": {
+      "ayah": 16,
+      "word_count": 2
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 18
+      },
+      {
+        "word": "اِذَا",
+        "count": 14
+      },
+      {
+        "word": "مَا",
+        "count": 4
+      },
+      {
+        "word": "هُوَ",
+        "count": 3
+      },
+      {
+        "word": "اِلَّا",
+        "count": 2
+      },
+      {
+        "word": "اَنْ",
+        "count": 2
+      },
+      {
+        "word": "الشَّمْسُ",
+        "count": 1
+      },
+      {
+        "word": "كُوِّرَتْ",
+        "count": 1
+      },
+      {
+        "word": "النُّجُوْمُ",
+        "count": 1
+      },
+      {
+        "word": "انْكَدَرَتْ",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": 82,
+    "name_ar": "اَلْاِنْفِطَار",
+    "name_roman": "Al Infitar",
+    "place": "مکیۃ",
+    "revelation_order": 82,
+    "total_ayat": 19,
+    "total_ruku": 1,
+    "total_words": 88,
+    "unique_words": 62,
+    "lexical_diversity_ttr": 70.45,
+    "avg_words_per_ayah": 4.63,
+    "longest_ayah": {
+      "ayah": 19,
+      "word_count": 9
+    },
+    "shortest_ayah": {
+      "ayah": 11,
+      "word_count": 2
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 8
+      },
+      {
+        "word": "مَا",
+        "count": 7
+      },
+      {
+        "word": "اِذَا",
+        "count": 4
+      },
+      {
+        "word": "اِنَّ",
+        "count": 3
+      },
+      {
+        "word": "الدِّیْنِ",
+        "count": 3
+      },
+      {
+        "word": "نَفْسٌ",
+        "count": 2
+      },
+      {
+        "word": "مَّا",
+        "count": 2
+      },
+      {
+        "word": "لَفِیْ",
+        "count": 2
+      },
+      {
+        "word": "یَوْمَ",
+        "count": 2
+      },
+      {
+        "word": "اَدْرٰىكَ",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "id": 83,
+    "name_ar": "اَلْمُطَفِّفِيْن",
+    "name_roman": "Al Mutaffifin",
+    "place": "مکیۃ",
+    "revelation_order": 86,
+    "total_ayat": 36,
+    "total_ruku": 1,
+    "total_words": 178,
+    "unique_words": 128,
+    "lexical_diversity_ttr": 71.91,
+    "avg_words_per_ayah": 4.94,
+    "longest_ayah": {
+      "ayah": 12,
+      "word_count": 8
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 2
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 9
+      },
+      {
+        "word": "مَا",
+        "count": 7
+      },
+      {
+        "word": "اِذَا",
+        "count": 6
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 5
+      },
+      {
+        "word": "اِنَّ",
+        "count": 5
+      },
+      {
+        "word": "كَلَّا",
+        "count": 4
+      },
+      {
+        "word": "عَلَى",
+        "count": 3
+      },
+      {
+        "word": "لَفِیْ",
+        "count": 3
+      },
+      {
+        "word": "كَانُوْا",
+        "count": 3
+      },
+      {
+        "word": "وَیْلٌ",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "id": 84,
+    "name_ar": "اَلْاِنْشِقَاق",
+    "name_roman": "Al Inshiqaq",
+    "place": "مکیۃ",
+    "revelation_order": 83,
+    "total_ayat": 25,
+    "total_ruku": 1,
+    "total_words": 123,
+    "unique_words": 90,
+    "lexical_diversity_ttr": 73.17,
+    "avg_words_per_ayah": 4.92,
+    "longest_ayah": {
+      "ayah": 25,
+      "word_count": 10
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 3
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 14
+      },
+      {
+        "word": "اِذَا",
+        "count": 4
+      },
+      {
+        "word": "اَذِنَتْ",
+        "count": 2
+      },
+      {
+        "word": "لِرَبِّهَا",
+        "count": 2
+      },
+      {
+        "word": "حُقَّتْ",
+        "count": 2
+      },
+      {
+        "word": "مَا",
+        "count": 2
+      },
+      {
+        "word": "اِلٰى",
+        "count": 2
+      },
+      {
+        "word": "مَنْ",
+        "count": 2
+      },
+      {
+        "word": "اُوْتِیَ",
+        "count": 2
+      },
+      {
+        "word": "كِتٰبَهٗ",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "id": 85,
+    "name_ar": "اَلْبُرُوْج",
+    "name_roman": "Al Buruj",
+    "place": "مکیۃ",
+    "revelation_order": 27,
+    "total_ayat": 22,
+    "total_ruku": 1,
+    "total_words": 123,
+    "unique_words": 96,
+    "lexical_diversity_ttr": 78.05,
+    "avg_words_per_ayah": 5.59,
+    "longest_ayah": {
+      "ayah": 10,
+      "word_count": 16
+    },
+    "shortest_ayah": {
+      "ayah": 2,
+      "word_count": 3
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 11
+      },
+      {
+        "word": "وَّ",
+        "count": 3
+      },
+      {
+        "word": "اِنَّ",
+        "count": 3
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 3
+      },
+      {
+        "word": "هُوَ",
+        "count": 3
+      },
+      {
+        "word": "ذَاتِ",
+        "count": 2
+      },
+      {
+        "word": "هُمْ",
+        "count": 2
+      },
+      {
+        "word": "عَلٰى",
+        "count": 2
+      },
+      {
+        "word": "مَا",
+        "count": 2
+      },
+      {
+        "word": "اللّٰهُ",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "id": 86,
+    "name_ar": "اَلطَّارِق",
+    "name_roman": "At Tariq",
+    "place": "مکیۃ",
+    "revelation_order": 36,
+    "total_ayat": 17,
+    "total_ruku": 1,
+    "total_words": 71,
+    "unique_words": 55,
+    "lexical_diversity_ttr": 77.46,
+    "avg_words_per_ayah": 4.18,
+    "longest_ayah": {
+      "ayah": 7,
+      "word_count": 7
+    },
+    "shortest_ayah": {
+      "ayah": 3,
+      "word_count": 2
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 6
+      },
+      {
+        "word": "مَا",
+        "count": 3
+      },
+      {
+        "word": "مِنْ",
+        "count": 3
+      },
+      {
+        "word": "وَّ",
+        "count": 3
+      },
+      {
+        "word": "السَّمَآءِ",
+        "count": 2
+      },
+      {
+        "word": "خُلِقَ",
+        "count": 2
+      },
+      {
+        "word": "اِنَّهٗ",
+        "count": 2
+      },
+      {
+        "word": "ذَاتِ",
+        "count": 2
+      },
+      {
+        "word": "كَیْدًا",
+        "count": 2
+      },
+      {
+        "word": "الطَّارِقِ",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": 87,
+    "name_ar": "اَلْاَعْلٰی",
+    "name_roman": "Al Ala",
+    "place": "مکیۃ",
+    "revelation_order": 8,
+    "total_ayat": 19,
+    "total_ruku": 1,
+    "total_words": 82,
+    "unique_words": 67,
+    "lexical_diversity_ttr": 81.71,
+    "avg_words_per_ayah": 4.32,
+    "longest_ayah": {
+      "ayah": 7,
+      "word_count": 9
+    },
+    "shortest_ayah": {
+      "ayah": 2,
+      "word_count": 3
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 9
+      },
+      {
+        "word": "الَّذِیْ",
+        "count": 4
+      },
+      {
+        "word": "اسْمَ",
+        "count": 2
+      },
+      {
+        "word": "مَا",
+        "count": 2
+      },
+      {
+        "word": "مَنْ",
+        "count": 2
+      },
+      {
+        "word": "لَا",
+        "count": 2
+      },
+      {
+        "word": "سَبِّحِ",
+        "count": 1
+      },
+      {
+        "word": "رَبِّكَ",
+        "count": 1
+      },
+      {
+        "word": "الْاَعْلَى",
+        "count": 1
+      },
+      {
+        "word": "خَلَقَ",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": 88,
+    "name_ar": "اَلْغَاشِيَة",
+    "name_roman": "Al Ghashiyah",
+    "place": "مکیۃ",
+    "revelation_order": 68,
+    "total_ayat": 26,
+    "total_ruku": 1,
+    "total_words": 100,
+    "unique_words": 79,
+    "lexical_diversity_ttr": 79.0,
+    "avg_words_per_ayah": 3.85,
+    "longest_ayah": {
+      "ayah": 7,
+      "word_count": 8
+    },
+    "shortest_ayah": {
+      "ayah": 3,
+      "word_count": 2
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 5
+      },
+      {
+        "word": "اِلَى",
+        "count": 4
+      },
+      {
+        "word": "كَیْفَ",
+        "count": 4
+      },
+      {
+        "word": "مِنْ",
+        "count": 3
+      },
+      {
+        "word": "فِیْهَا",
+        "count": 3
+      },
+      {
+        "word": "وَّ",
+        "count": 3
+      },
+      {
+        "word": "وُجُوْهٌ",
+        "count": 2
+      },
+      {
+        "word": "یَّوْمَىٕذٍ",
+        "count": 2
+      },
+      {
+        "word": "اِلَّا",
+        "count": 2
+      },
+      {
+        "word": "لَّا",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "id": 89,
+    "name_ar": "اَلْفَجْر",
+    "name_roman": "Al Fajr",
+    "place": "مکیۃ",
+    "revelation_order": 10,
+    "total_ayat": 30,
+    "total_ruku": 1,
+    "total_words": 156,
+    "unique_words": 119,
+    "lexical_diversity_ttr": 76.28,
+    "avg_words_per_ayah": 5.2,
+    "longest_ayah": {
+      "ayah": 15,
+      "word_count": 12
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 2
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 15
+      },
+      {
+        "word": "وَّ",
+        "count": 4
+      },
+      {
+        "word": "اِذَا",
+        "count": 4
+      },
+      {
+        "word": "رَبُّكَ",
+        "count": 3
+      },
+      {
+        "word": "فِیْ",
+        "count": 2
+      },
+      {
+        "word": "فِی",
+        "count": 2
+      },
+      {
+        "word": "الْبِلَادِ",
+        "count": 2
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 2
+      },
+      {
+        "word": "الْاِنْسَانُ",
+        "count": 2
+      },
+      {
+        "word": "مَا",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "id": 90,
+    "name_ar": "اَلْبَـلَد",
+    "name_roman": "Al Balad",
+    "place": "مکیۃ",
+    "revelation_order": 35,
+    "total_ayat": 20,
+    "total_ruku": 1,
+    "total_words": 92,
+    "unique_words": 71,
+    "lexical_diversity_ttr": 77.17,
+    "avg_words_per_ayah": 4.6,
+    "longest_ayah": {
+      "ayah": 17,
+      "word_count": 11
+    },
+    "shortest_ayah": {
+      "ayah": 13,
+      "word_count": 2
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 8
+      },
+      {
+        "word": "مَا",
+        "count": 3
+      },
+      {
+        "word": "بِهٰذَا",
+        "count": 2
+      },
+      {
+        "word": "الْبَلَدِ",
+        "count": 2
+      },
+      {
+        "word": "وَّ",
+        "count": 2
+      },
+      {
+        "word": "فِیْ",
+        "count": 2
+      },
+      {
+        "word": "اَیَحْسَبُ",
+        "count": 2
+      },
+      {
+        "word": "اَنْ",
+        "count": 2
+      },
+      {
+        "word": "اَحَدٌ",
+        "count": 2
+      },
+      {
+        "word": "اَوْ",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "id": 91,
+    "name_ar": "اَلشَّمْس",
+    "name_roman": "Ash Shams",
+    "place": "مکیۃ",
+    "revelation_order": 26,
+    "total_ayat": 15,
+    "total_ruku": 1,
+    "total_words": 68,
+    "unique_words": 48,
+    "lexical_diversity_ttr": 70.59,
+    "avg_words_per_ayah": 4.53,
+    "longest_ayah": {
+      "ayah": 13,
+      "word_count": 8
+    },
+    "shortest_ayah": {
+      "ayah": 11,
+      "word_count": 3
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 14
+      },
+      {
+        "word": "اِذَا",
+        "count": 3
+      },
+      {
+        "word": "مَا",
+        "count": 3
+      },
+      {
+        "word": "قَدْ",
+        "count": 2
+      },
+      {
+        "word": "مَنْ",
+        "count": 2
+      },
+      {
+        "word": "اللّٰهِ",
+        "count": 2
+      },
+      {
+        "word": "الشَّمْسِ",
+        "count": 1
+      },
+      {
+        "word": "ضُحٰىهَا",
+        "count": 1
+      },
+      {
+        "word": "الْقَمَرِ",
+        "count": 1
+      },
+      {
+        "word": "تَلٰىهَا",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": 92,
+    "name_ar": "اَلَّيْل",
+    "name_roman": "Al Lail",
+    "place": "مکیۃ",
+    "revelation_order": 9,
+    "total_ayat": 21,
+    "total_ruku": 1,
+    "total_words": 87,
+    "unique_words": 60,
+    "lexical_diversity_ttr": 68.97,
+    "avg_words_per_ayah": 4.14,
+    "longest_ayah": {
+      "ayah": 11,
+      "word_count": 7
+    },
+    "shortest_ayah": {
+      "ayah": 7,
+      "word_count": 2
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 16
+      },
+      {
+        "word": "اِذَا",
+        "count": 3
+      },
+      {
+        "word": "مَا",
+        "count": 3
+      },
+      {
+        "word": "اِنَّ",
+        "count": 3
+      },
+      {
+        "word": "مَنْ",
+        "count": 2
+      },
+      {
+        "word": "بِالْحُسْنٰى",
+        "count": 2
+      },
+      {
+        "word": "فَسَنُیَسِّرُهٗ",
+        "count": 2
+      },
+      {
+        "word": "كَذَّبَ",
+        "count": 2
+      },
+      {
+        "word": "اِلَّا",
+        "count": 2
+      },
+      {
+        "word": "الَّذِیْ",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "id": 93,
+    "name_ar": "اَلْضُّحٰی",
+    "name_roman": "Ad Duha",
+    "place": "مکیۃ",
+    "revelation_order": 11,
+    "total_ayat": 11,
+    "total_ruku": 1,
+    "total_words": 49,
+    "unique_words": 36,
+    "lexical_diversity_ttr": 73.47,
+    "avg_words_per_ayah": 4.45,
+    "longest_ayah": {
+      "ayah": 3,
+      "word_count": 6
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 2
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 9
+      },
+      {
+        "word": "مَا",
+        "count": 2
+      },
+      {
+        "word": "رَبُّكَ",
+        "count": 2
+      },
+      {
+        "word": "وَجَدَكَ",
+        "count": 2
+      },
+      {
+        "word": "فَلَا",
+        "count": 2
+      },
+      {
+        "word": "اَمَّا",
+        "count": 2
+      },
+      {
+        "word": "الضُّحٰى",
+        "count": 1
+      },
+      {
+        "word": "الَّیْلِ",
+        "count": 1
+      },
+      {
+        "word": "اِذَا",
+        "count": 1
+      },
+      {
+        "word": "سَجٰى",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": 94,
+    "name_ar": "اَلَمْ نَشْرَ ح",
+    "name_roman": "Alam Nashrah",
+    "place": "مکیۃ",
+    "revelation_order": 12,
+    "total_ayat": 8,
+    "total_ruku": 1,
+    "total_words": 30,
+    "unique_words": 24,
+    "lexical_diversity_ttr": 80.0,
+    "avg_words_per_ayah": 3.75,
+    "longest_ayah": {
+      "ayah": 1,
+      "word_count": 4
+    },
+    "shortest_ayah": {
+      "ayah": 3,
+      "word_count": 3
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 3
+      },
+      {
+        "word": "لَكَ",
+        "count": 2
+      },
+      {
+        "word": "مَعَ",
+        "count": 2
+      },
+      {
+        "word": "الْعُسْرِ",
+        "count": 2
+      },
+      {
+        "word": "یُسْرًا",
+        "count": 2
+      },
+      {
+        "word": "اَلَمْ",
+        "count": 1
+      },
+      {
+        "word": "نَشْرَحْ",
+        "count": 1
+      },
+      {
+        "word": "صَدْرَكَ",
+        "count": 1
+      },
+      {
+        "word": "وَضَعْنَا",
+        "count": 1
+      },
+      {
+        "word": "عَنْكَ",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": 95,
+    "name_ar": "اَلتِّیْن",
+    "name_roman": "At Tin",
+    "place": "مکیۃ",
+    "revelation_order": 28,
+    "total_ayat": 8,
+    "total_ruku": 1,
+    "total_words": 39,
+    "unique_words": 35,
+    "lexical_diversity_ttr": 89.74,
+    "avg_words_per_ayah": 4.88,
+    "longest_ayah": {
+      "ayah": 6,
+      "word_count": 10
+    },
+    "shortest_ayah": {
+      "ayah": 2,
+      "word_count": 3
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 5
+      },
+      {
+        "word": "التِّیْنِ",
+        "count": 1
+      },
+      {
+        "word": "الزَّیْتُوْنِ",
+        "count": 1
+      },
+      {
+        "word": "طُوْرِ",
+        "count": 1
+      },
+      {
+        "word": "سِیْنِیْنَ",
+        "count": 1
+      },
+      {
+        "word": "هٰذَا",
+        "count": 1
+      },
+      {
+        "word": "الْبَلَدِ",
+        "count": 1
+      },
+      {
+        "word": "الْاَمِیْنِ",
+        "count": 1
+      },
+      {
+        "word": "لَقَدْ",
+        "count": 1
+      },
+      {
+        "word": "خَلَقْنَا",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": 96,
+    "name_ar": "اَلْعَلَق",
+    "name_roman": "Al Alaq",
+    "place": "مکیۃ",
+    "revelation_order": 1,
+    "total_ayat": 19,
+    "total_ruku": 1,
+    "total_words": 75,
+    "unique_words": 58,
+    "lexical_diversity_ttr": 77.33,
+    "avg_words_per_ayah": 3.95,
+    "longest_ayah": {
+      "ayah": 15,
+      "word_count": 6
+    },
+    "shortest_ayah": {
+      "ayah": 17,
+      "word_count": 2
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 4
+      },
+      {
+        "word": "الَّذِیْ",
+        "count": 3
+      },
+      {
+        "word": "الْاِنْسَانَ",
+        "count": 3
+      },
+      {
+        "word": "اَرَءَیْتَ",
+        "count": 3
+      },
+      {
+        "word": "اِقْرَاْ",
+        "count": 2
+      },
+      {
+        "word": "رَبِّكَ",
+        "count": 2
+      },
+      {
+        "word": "خَلَقَ",
+        "count": 2
+      },
+      {
+        "word": "عَلَّمَ",
+        "count": 2
+      },
+      {
+        "word": "یَعْلَمْ",
+        "count": 2
+      },
+      {
+        "word": "كَلَّا",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "id": 97,
+    "name_ar": "اَلْقَدَر",
+    "name_roman": "Al Qadr",
+    "place": "مکیۃ",
+    "revelation_order": 25,
+    "total_ayat": 5,
+    "total_ruku": 1,
+    "total_words": 31,
+    "unique_words": 26,
+    "lexical_diversity_ttr": 83.87,
+    "avg_words_per_ayah": 6.2,
+    "longest_ayah": {
+      "ayah": 4,
+      "word_count": 9
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 5
+    },
+    "top_10_words": [
+      {
+        "word": "الْقَدْرِ",
+        "count": 3
+      },
+      {
+        "word": "وَ",
+        "count": 2
+      },
+      {
+        "word": "مَا",
+        "count": 2
+      },
+      {
+        "word": "لَیْلَةُ",
+        "count": 2
+      },
+      {
+        "word": "اِنَّا",
+        "count": 1
+      },
+      {
+        "word": "اَنْزَلْنٰهُ",
+        "count": 1
+      },
+      {
+        "word": "فِیْ",
+        "count": 1
+      },
+      {
+        "word": "لَیْلَةِ",
+        "count": 1
+      },
+      {
+        "word": "اَدْرٰىكَ",
+        "count": 1
+      },
+      {
+        "word": "خَیْرٌ",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": 98,
+    "name_ar": "اَلْبَيِّنَة",
+    "name_roman": "Al Baiyinah",
+    "place": "مدنیۃ",
+    "revelation_order": 100,
+    "total_ayat": 8,
+    "total_ruku": 1,
+    "total_words": 99,
+    "unique_words": 72,
+    "lexical_diversity_ttr": 72.73,
+    "avg_words_per_ayah": 12.38,
+    "longest_ayah": {
+      "ayah": 5,
+      "word_count": 20
+    },
+    "shortest_ayah": {
+      "ayah": 3,
+      "word_count": 3
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 9
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 4
+      },
+      {
+        "word": "مِنْ",
+        "count": 4
+      },
+      {
+        "word": "مَا",
+        "count": 3
+      },
+      {
+        "word": "كَفَرُوْا",
+        "count": 2
+      },
+      {
+        "word": "اَهْلِ",
+        "count": 2
+      },
+      {
+        "word": "الْكِتٰبِ",
+        "count": 2
+      },
+      {
+        "word": "الْمُشْرِكِیْنَ",
+        "count": 2
+      },
+      {
+        "word": "الْبَیِّنَةُ",
+        "count": 2
+      },
+      {
+        "word": "فِیْهَا",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "id": 99,
+    "name_ar": "اَلزِّلْزَال",
+    "name_roman": "Az Zilzal",
+    "place": "مدنیۃ",
+    "revelation_order": 93,
+    "total_ayat": 8,
+    "total_ruku": 1,
+    "total_words": 39,
+    "unique_words": 30,
+    "lexical_diversity_ttr": 76.92,
+    "avg_words_per_ayah": 4.88,
+    "longest_ayah": {
+      "ayah": 8,
+      "word_count": 7
+    },
+    "shortest_ayah": {
+      "ayah": 4,
+      "word_count": 3
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 3
+      },
+      {
+        "word": "الْاَرْضُ",
+        "count": 2
+      },
+      {
+        "word": "لَهَا",
+        "count": 2
+      },
+      {
+        "word": "یَوْمَىٕذٍ",
+        "count": 2
+      },
+      {
+        "word": "یَّعْمَلْ",
+        "count": 2
+      },
+      {
+        "word": "مِثْقَالَ",
+        "count": 2
+      },
+      {
+        "word": "ذَرَّةٍ",
+        "count": 2
+      },
+      {
+        "word": "یَّرَهٗ",
+        "count": 2
+      },
+      {
+        "word": "اِذَا",
+        "count": 1
+      },
+      {
+        "word": "زُلْزِلَتِ",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": 100,
+    "name_ar": "اَلْعٰدِيٰت",
+    "name_roman": "Al Adiyat",
+    "place": "مکیۃ",
+    "revelation_order": 14,
+    "total_ayat": 11,
+    "total_ruku": 1,
+    "total_words": 44,
+    "unique_words": 36,
+    "lexical_diversity_ttr": 81.82,
+    "avg_words_per_ayah": 4.0,
+    "longest_ayah": {
+      "ayah": 9,
+      "word_count": 7
+    },
+    "shortest_ayah": {
+      "ayah": 2,
+      "word_count": 2
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 4
+      },
+      {
+        "word": "بِهٖ",
+        "count": 2
+      },
+      {
+        "word": "اِنَّ",
+        "count": 2
+      },
+      {
+        "word": "اِنَّهٗ",
+        "count": 2
+      },
+      {
+        "word": "مَا",
+        "count": 2
+      },
+      {
+        "word": "فِی",
+        "count": 2
+      },
+      {
+        "word": "الْعٰدِیٰتِ",
+        "count": 1
+      },
+      {
+        "word": "ضَبْحًا",
+        "count": 1
+      },
+      {
+        "word": "فَالْمُوْرِیٰتِ",
+        "count": 1
+      },
+      {
+        "word": "قَدْحًا",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": 101,
+    "name_ar": "اَلْقَارِعَة",
+    "name_roman": "Al Qariah",
+    "place": "مکیۃ",
+    "revelation_order": 30,
+    "total_ayat": 11,
+    "total_ruku": 1,
+    "total_words": 39,
+    "unique_words": 29,
+    "lexical_diversity_ttr": 74.36,
+    "avg_words_per_ayah": 3.55,
+    "longest_ayah": {
+      "ayah": 3,
+      "word_count": 5
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 1
+    },
+    "top_10_words": [
+      {
+        "word": "مَا",
+        "count": 4
+      },
+      {
+        "word": "وَ",
+        "count": 4
+      },
+      {
+        "word": "الْقَارِعَةُ",
+        "count": 2
+      },
+      {
+        "word": "اَدْرٰىكَ",
+        "count": 2
+      },
+      {
+        "word": "مَنْ",
+        "count": 2
+      },
+      {
+        "word": "مَوَازِیْنُهٗ",
+        "count": 2
+      },
+      {
+        "word": "اَلْقَارِعَةُ",
+        "count": 1
+      },
+      {
+        "word": "یَوْمَ",
+        "count": 1
+      },
+      {
+        "word": "یَكُوْنُ",
+        "count": 1
+      },
+      {
+        "word": "النَّاسُ",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": 102,
+    "name_ar": "اَلتَّكَاثُر",
+    "name_roman": "At Takasur",
+    "place": "مکیۃ",
+    "revelation_order": 16,
+    "total_ayat": 8,
+    "total_ruku": 1,
+    "total_words": 28,
+    "unique_words": 20,
+    "lexical_diversity_ttr": 71.43,
+    "avg_words_per_ayah": 3.5,
+    "longest_ayah": {
+      "ayah": 5,
+      "word_count": 5
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 2
+    },
+    "top_10_words": [
+      {
+        "word": "كَلَّا",
+        "count": 3
+      },
+      {
+        "word": "تَعْلَمُوْنَ",
+        "count": 3
+      },
+      {
+        "word": "ثُمَّ",
+        "count": 3
+      },
+      {
+        "word": "سَوْفَ",
+        "count": 2
+      },
+      {
+        "word": "الْیَقِیْنِ",
+        "count": 2
+      },
+      {
+        "word": "اَلْهٰىكُمُ",
+        "count": 1
+      },
+      {
+        "word": "التَّكَاثُرُ",
+        "count": 1
+      },
+      {
+        "word": "حَتّٰى",
+        "count": 1
+      },
+      {
+        "word": "زُرْتُمُ",
+        "count": 1
+      },
+      {
+        "word": "الْمَقَابِرَ",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": 103,
+    "name_ar": "اَلْعَصْر",
+    "name_roman": "Al Asr",
+    "place": "مکیۃ",
+    "revelation_order": 13,
+    "total_ayat": 3,
+    "total_ruku": 1,
+    "total_words": 18,
+    "unique_words": 14,
+    "lexical_diversity_ttr": 77.78,
+    "avg_words_per_ayah": 6.0,
+    "longest_ayah": {
+      "ayah": 3,
+      "word_count": 12
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 2
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 4
+      },
+      {
+        "word": "تَوَاصَوْا",
+        "count": 2
+      },
+      {
+        "word": "الْعَصْرِ",
+        "count": 1
+      },
+      {
+        "word": "اِنَّ",
+        "count": 1
+      },
+      {
+        "word": "الْاِنْسَانَ",
+        "count": 1
+      },
+      {
+        "word": "لَفِیْ",
+        "count": 1
+      },
+      {
+        "word": "خُسْرٍ",
+        "count": 1
+      },
+      {
+        "word": "اِلَّا",
+        "count": 1
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 1
+      },
+      {
+        "word": "اٰمَنُوْا",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": 104,
+    "name_ar": "اَلْهُمَزَة",
+    "name_roman": "Al Humazah",
+    "place": "مکیۃ",
+    "revelation_order": 32,
+    "total_ayat": 9,
+    "total_ruku": 1,
+    "total_words": 35,
+    "unique_words": 34,
+    "lexical_diversity_ttr": 97.14,
+    "avg_words_per_ayah": 3.89,
+    "longest_ayah": {
+      "ayah": 2,
+      "word_count": 5
+    },
+    "shortest_ayah": {
+      "ayah": 6,
+      "word_count": 3
+    },
+    "top_10_words": [
+      {
+        "word": "مَا",
+        "count": 2
+      },
+      {
+        "word": "وَیْلٌ",
+        "count": 1
+      },
+      {
+        "word": "لِّكُلِّ",
+        "count": 1
+      },
+      {
+        "word": "هُمَزَةٍ",
+        "count": 1
+      },
+      {
+        "word": "لُّمَزَةِ",
+        "count": 1
+      },
+      {
+        "word": "الَّذِیْ",
+        "count": 1
+      },
+      {
+        "word": "جَمَعَ",
+        "count": 1
+      },
+      {
+        "word": "مَالًا",
+        "count": 1
+      },
+      {
+        "word": "وَّ",
+        "count": 1
+      },
+      {
+        "word": "عَدَّدَهٗ",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": 105,
+    "name_ar": "اَلْفِيْل",
+    "name_roman": "Al Fil",
+    "place": "مکیۃ",
+    "revelation_order": 19,
+    "total_ayat": 5,
+    "total_ruku": 1,
+    "total_words": 24,
+    "unique_words": 23,
+    "lexical_diversity_ttr": 95.83,
+    "avg_words_per_ayah": 4.8,
+    "longest_ayah": {
+      "ayah": 1,
+      "word_count": 7
+    },
+    "shortest_ayah": {
+      "ayah": 5,
+      "word_count": 3
+    },
+    "top_10_words": [
+      {
+        "word": "اَلَمْ",
+        "count": 2
+      },
+      {
+        "word": "تَرَ",
+        "count": 1
+      },
+      {
+        "word": "كَیْفَ",
+        "count": 1
+      },
+      {
+        "word": "فَعَلَ",
+        "count": 1
+      },
+      {
+        "word": "رَبُّكَ",
+        "count": 1
+      },
+      {
+        "word": "بِاَصْحٰبِ",
+        "count": 1
+      },
+      {
+        "word": "الْفِیْلِ",
+        "count": 1
+      },
+      {
+        "word": "یَجْعَلْ",
+        "count": 1
+      },
+      {
+        "word": "كَیْدَهُمْ",
+        "count": 1
+      },
+      {
+        "word": "فِیْ",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": 106,
+    "name_ar": "قُـرَيْش",
+    "name_roman": "Quraish",
+    "place": "مکیۃ",
+    "revelation_order": 29,
+    "total_ayat": 4,
+    "total_ruku": 1,
+    "total_words": 20,
+    "unique_words": 19,
+    "lexical_diversity_ttr": 95.0,
+    "avg_words_per_ayah": 5.0,
+    "longest_ayah": {
+      "ayah": 4,
+      "word_count": 9
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 2
+    },
+    "top_10_words": [
+      {
+        "word": "مِّنْ",
+        "count": 2
+      },
+      {
+        "word": "لِاِیْلٰفِ",
+        "count": 1
+      },
+      {
+        "word": "قُرَیْشٍ",
+        "count": 1
+      },
+      {
+        "word": "اٖلٰفِهِمْ",
+        "count": 1
+      },
+      {
+        "word": "رِحْلَةَ",
+        "count": 1
+      },
+      {
+        "word": "الشِّتَآءِ",
+        "count": 1
+      },
+      {
+        "word": "وَ",
+        "count": 1
+      },
+      {
+        "word": "الصَّیْفِ",
+        "count": 1
+      },
+      {
+        "word": "فَلْیَعْبُدُوْا",
+        "count": 1
+      },
+      {
+        "word": "رَبَّ",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": 107,
+    "name_ar": "اَلْمَاعُوْن",
+    "name_roman": "Al Maun",
+    "place": "مکیۃ",
+    "revelation_order": 17,
+    "total_ayat": 7,
+    "total_ruku": 1,
+    "total_words": 27,
+    "unique_words": 23,
+    "lexical_diversity_ttr": 85.19,
+    "avg_words_per_ayah": 3.86,
+    "longest_ayah": {
+      "ayah": 3,
+      "word_count": 6
+    },
+    "shortest_ayah": {
+      "ayah": 4,
+      "word_count": 2
+    },
+    "top_10_words": [
+      {
+        "word": "الَّذِیْ",
+        "count": 2
+      },
+      {
+        "word": "وَ",
+        "count": 2
+      },
+      {
+        "word": "الَّذِیْنَ",
+        "count": 2
+      },
+      {
+        "word": "هُمْ",
+        "count": 2
+      },
+      {
+        "word": "اَرَءَیْتَ",
+        "count": 1
+      },
+      {
+        "word": "یُكَذِّبُ",
+        "count": 1
+      },
+      {
+        "word": "بِالدِّیْنِ",
+        "count": 1
+      },
+      {
+        "word": "فَذٰلِكَ",
+        "count": 1
+      },
+      {
+        "word": "یَدُعُّ",
+        "count": 1
+      },
+      {
+        "word": "الْیَتِیْمَ",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": 108,
+    "name_ar": "اَلْـكَوْثَر",
+    "name_roman": "Al Kausar",
+    "place": "مکیۃ",
+    "revelation_order": 15,
+    "total_ayat": 3,
+    "total_ruku": 1,
+    "total_words": 11,
+    "unique_words": 11,
+    "lexical_diversity_ttr": 100.0,
+    "avg_words_per_ayah": 3.67,
+    "longest_ayah": {
+      "ayah": 2,
+      "word_count": 4
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 3
+    },
+    "top_10_words": [
+      {
+        "word": "اِنَّا",
+        "count": 1
+      },
+      {
+        "word": "اَعْطَیْنٰكَ",
+        "count": 1
+      },
+      {
+        "word": "الْكَوْثَرَ",
+        "count": 1
+      },
+      {
+        "word": "فَصَلِّ",
+        "count": 1
+      },
+      {
+        "word": "لِرَبِّكَ",
+        "count": 1
+      },
+      {
+        "word": "وَ",
+        "count": 1
+      },
+      {
+        "word": "انْحَرْ",
+        "count": 1
+      },
+      {
+        "word": "اِنَّ",
+        "count": 1
+      },
+      {
+        "word": "شَانِئَكَ",
+        "count": 1
+      },
+      {
+        "word": "هُوَ",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": 109,
+    "name_ar": "اَلْكَافِرُوْن",
+    "name_roman": "Al Kafirun",
+    "place": "مکیۃ",
+    "revelation_order": 18,
+    "total_ayat": 6,
+    "total_ruku": 1,
+    "total_words": 30,
+    "unique_words": 18,
+    "lexical_diversity_ttr": 60.0,
+    "avg_words_per_ayah": 5.0,
+    "longest_ayah": {
+      "ayah": 3,
+      "word_count": 6
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 3
+    },
+    "top_10_words": [
+      {
+        "word": "لَا",
+        "count": 4
+      },
+      {
+        "word": "وَ",
+        "count": 4
+      },
+      {
+        "word": "اَعْبُدُ",
+        "count": 3
+      },
+      {
+        "word": "مَا",
+        "count": 3
+      },
+      {
+        "word": "اَنْتُمْ",
+        "count": 2
+      },
+      {
+        "word": "عٰبِدُوْنَ",
+        "count": 2
+      },
+      {
+        "word": "قُلْ",
+        "count": 1
+      },
+      {
+        "word": "یٰاَیُّهَا",
+        "count": 1
+      },
+      {
+        "word": "الْكٰفِرُوْنَ",
+        "count": 1
+      },
+      {
+        "word": "تَعْبُدُوْنَ",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": 110,
+    "name_ar": "اَلنَّصْر",
+    "name_roman": "An Nasr",
+    "place": "مدنیۃ",
+    "revelation_order": 114,
+    "total_ayat": 3,
+    "total_ruku": 1,
+    "total_words": 21,
+    "unique_words": 18,
+    "lexical_diversity_ttr": 85.71,
+    "avg_words_per_ayah": 7.0,
+    "longest_ayah": {
+      "ayah": 2,
+      "word_count": 8
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 6
+    },
+    "top_10_words": [
+      {
+        "word": "وَ",
+        "count": 3
+      },
+      {
+        "word": "اللّٰهِ",
+        "count": 2
+      },
+      {
+        "word": "اِذَا",
+        "count": 1
+      },
+      {
+        "word": "جَآءَ",
+        "count": 1
+      },
+      {
+        "word": "نَصْرُ",
+        "count": 1
+      },
+      {
+        "word": "الْفَتْحُ",
+        "count": 1
+      },
+      {
+        "word": "رَاَیْتَ",
+        "count": 1
+      },
+      {
+        "word": "النَّاسَ",
+        "count": 1
+      },
+      {
+        "word": "یَدْخُلُوْنَ",
+        "count": 1
+      },
+      {
+        "word": "فِیْ",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": 111,
+    "name_ar": "اَللَّھَب",
+    "name_roman": "Al Lahab",
+    "place": "مکیۃ",
+    "revelation_order": 6,
+    "total_ayat": 5,
+    "total_ruku": 1,
+    "total_words": 25,
+    "unique_words": 22,
+    "lexical_diversity_ttr": 88.0,
+    "avg_words_per_ayah": 5.0,
+    "longest_ayah": {
+      "ayah": 2,
+      "word_count": 7
+    },
+    "shortest_ayah": {
+      "ayah": 4,
+      "word_count": 3
+    },
+    "top_10_words": [
+      {
+        "word": "لَهَبٍ",
+        "count": 2
+      },
+      {
+        "word": "وَّ",
+        "count": 2
+      },
+      {
+        "word": "مَا",
+        "count": 2
+      },
+      {
+        "word": "تَبَّتْ",
+        "count": 1
+      },
+      {
+        "word": "یَدَا",
+        "count": 1
+      },
+      {
+        "word": "اَبِیْ",
+        "count": 1
+      },
+      {
+        "word": "تَبَّ",
+        "count": 1
+      },
+      {
+        "word": "اَغْنٰى",
+        "count": 1
+      },
+      {
+        "word": "عَنْهُ",
+        "count": 1
+      },
+      {
+        "word": "مَالُهٗ",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": 112,
+    "name_ar": "اَلْاِخْلَاص",
+    "name_roman": "Al Ikhlas",
+    "place": "مکیۃ",
+    "revelation_order": 22,
+    "total_ayat": 4,
+    "total_ruku": 1,
+    "total_words": 17,
+    "unique_words": 13,
+    "lexical_diversity_ttr": 76.47,
+    "avg_words_per_ayah": 4.25,
+    "longest_ayah": {
+      "ayah": 4,
+      "word_count": 6
+    },
+    "shortest_ayah": {
+      "ayah": 2,
+      "word_count": 2
+    },
+    "top_10_words": [
+      {
+        "word": "لَمْ",
+        "count": 3
+      },
+      {
+        "word": "اَحَدٌ",
+        "count": 2
+      },
+      {
+        "word": "وَ",
+        "count": 2
+      },
+      {
+        "word": "قُلْ",
+        "count": 1
+      },
+      {
+        "word": "هُوَ",
+        "count": 1
+      },
+      {
+        "word": "اللّٰهُ",
+        "count": 1
+      },
+      {
+        "word": "اَللّٰهُ",
+        "count": 1
+      },
+      {
+        "word": "الصَّمَدُ",
+        "count": 1
+      },
+      {
+        "word": "یَلِدْ",
+        "count": 1
+      },
+      {
+        "word": "یُوْلَدْ",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": 113,
+    "name_ar": "اَلْفَلَق",
+    "name_roman": "Al Falaq",
+    "place": "مکیۃ",
+    "revelation_order": 20,
+    "total_ayat": 5,
+    "total_ruku": 1,
+    "total_words": 26,
+    "unique_words": 17,
+    "lexical_diversity_ttr": 65.38,
+    "avg_words_per_ayah": 5.2,
+    "longest_ayah": {
+      "ayah": 3,
+      "word_count": 6
+    },
+    "shortest_ayah": {
+      "ayah": 1,
+      "word_count": 4
+    },
+    "top_10_words": [
+      {
+        "word": "مِنْ",
+        "count": 4
+      },
+      {
+        "word": "شَرِّ",
+        "count": 4
+      },
+      {
+        "word": "وَ",
+        "count": 3
+      },
+      {
+        "word": "اِذَا",
+        "count": 2
+      },
+      {
+        "word": "قُلْ",
+        "count": 1
+      },
+      {
+        "word": "اَعُوْذُ",
+        "count": 1
+      },
+      {
+        "word": "بِرَبِّ",
+        "count": 1
+      },
+      {
+        "word": "الْفَلَقِ",
+        "count": 1
+      },
+      {
+        "word": "مَا",
+        "count": 1
+      },
+      {
+        "word": "خَلَقَ",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": 114,
+    "name_ar": "اَلنَّاس",
+    "name_roman": "An Nas",
+    "place": "مکیۃ",
+    "revelation_order": 21,
+    "total_ayat": 6,
+    "total_ruku": 1,
+    "total_words": 21,
+    "unique_words": 17,
+    "lexical_diversity_ttr": 80.95,
+    "avg_words_per_ayah": 3.5,
+    "longest_ayah": {
+      "ayah": 5,
+      "word_count": 5
+    },
+    "shortest_ayah": {
+      "ayah": 2,
+      "word_count": 2
+    },
+    "top_10_words": [
+      {
+        "word": "النَّاسِ",
+        "count": 5
+      },
+      {
+        "word": "قُلْ",
+        "count": 1
+      },
+      {
+        "word": "اَعُوْذُ",
+        "count": 1
+      },
+      {
+        "word": "بِرَبِّ",
+        "count": 1
+      },
+      {
+        "word": "مَلِكِ",
+        "count": 1
+      },
+      {
+        "word": "اِلٰهِ",
+        "count": 1
+      },
+      {
+        "word": "مِنْ",
+        "count": 1
+      },
+      {
+        "word": "شَرِّ",
+        "count": 1
+      },
+      {
+        "word": "الْوَسْوَاسِ",
+        "count": 1
+      },
+      {
+        "word": "الْخَنَّاسِ",
+        "count": 1
+      }
+    ]
+  }
+]
