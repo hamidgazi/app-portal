@@ -1078,52 +1078,7 @@
   }
 
   /**
-   * Module 10: Beginner & New Staff Guide Controller
-   */
-  function initBeginnerGuide() {
-    if (typeof document === 'undefined') return;
-    const btnToggle = document.getElementById('btn-toggle-guide');
-    const guideSection = document.getElementById('beginner-guide');
-    const btnClose = document.getElementById('btn-close-guide');
-    if (!guideSection) return;
-
-    function toggleGuide(show) {
-      const isVisible = guideSection.style.display !== 'none';
-      const target = (typeof show === 'boolean') ? show : !isVisible;
-      guideSection.style.display = target ? 'block' : 'none';
-      playPopSound();
-      if (target) {
-        guideSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
-    }
-
-    if (btnToggle) {
-      btnToggle.addEventListener('click', function () {
-        toggleGuide();
-      });
-    }
-
-    if (btnClose) {
-      btnClose.addEventListener('click', function () {
-        toggleGuide(false);
-        try {
-          if (typeof localStorage !== 'undefined') {
-            localStorage.setItem('pincode_guide_seen', '1');
-          }
-        } catch (e) {}
-      });
-    }
-
-    // Default to open for first-time visitors who haven't dismissed it
-    try {
-      if (typeof localStorage !== 'undefined' && !localStorage.getItem('pincode_guide_seen')) {
-        guideSection.style.display = 'block';
-      }
-    } catch (e) {}
-  }
-
-  /**
-   * Module 11: On-Screen Mobile Numeric Keypad Controller
+   * Module 10: On-Screen Mobile Numeric Keypad Controller (Default Docked)
    */
   function initNumberPad() {
     if (typeof document === 'undefined') return;
@@ -1145,6 +1100,13 @@
           mainContent.classList.remove('has-numpad-open');
         }
       }
+      if (btnToggle) {
+        if (target) {
+          btnToggle.classList.add('active');
+        } else {
+          btnToggle.classList.remove('active');
+        }
+      }
       playPopSound();
     }
 
@@ -1159,6 +1121,25 @@
         toggleNumpad(false);
       });
     }
+
+    // Tapping search input in numeric mode opens/re-docks Pin Pad if closed,
+    // and prevents the phone's native keyboard from opening
+    searchInput.addEventListener('click', function () {
+      if (State.keyboardMode === 'numeric') {
+        if (numpad.style.display === 'none') {
+          toggleNumpad(true);
+        }
+      }
+    });
+
+    searchInput.addEventListener('focus', function () {
+      if (State.keyboardMode === 'numeric') {
+        searchInput.setAttribute('inputmode', 'none');
+        if (numpad.style.display === 'none') {
+          toggleNumpad(true);
+        }
+      }
+    });
 
     // Interactive Keypad Delegation
     numpad.addEventListener('click', function (e) {
@@ -1186,8 +1167,7 @@
       }
 
       if (keyAction === 'enter') {
-        toggleNumpad(false);
-        if (searchInput) searchInput.blur();
+        // When Enter is tapped on Pin Pad: save recent search and search, but stay docked!
         if (searchInput && searchInput.value.trim()) {
           saveRecentSearch(searchInput.value.trim());
         }
@@ -1210,22 +1190,27 @@
         if (btnClear) btnClear.style.display = 'inline-flex';
         performSearch();
 
-        // Auto-close on-screen numpad when 6 digits are reached!
+        // When 6 digits are reached: save recent search, search immediately, and remain docked for rapid checking!
         if (searchInput.value.length === 6) {
-          toggleNumpad(false);
           saveRecentSearch(searchInput.value);
         }
       }
     });
+
+    // Ensure numpad is active by default
+    toggleNumpad(true);
   }
 
   /**
-   * Module 12: Mobile Keyboard Mode Switcher (123 Pin vs ABC City)
+   * Module 11: Mobile Keyboard Mode Switcher (123 Pin vs ABC City)
    */
   function initInputModeSwitcher() {
     if (typeof document === 'undefined') return;
     const btnMode = document.getElementById('btn-input-mode');
     const searchInput = document.getElementById('search-input');
+    const numpad = document.getElementById('quick-numpad');
+    const mainContent = document.getElementById('main-content');
+    const btnToggleNumpad = document.getElementById('btn-toggle-numpad');
     if (!btnMode || !searchInput) return;
 
     function setKeyboardMode(mode) {
@@ -1233,29 +1218,41 @@
       const isNum = (mode === 'numeric');
 
       if (isNum) {
-        searchInput.setAttribute('inputmode', 'numeric');
-        searchInput.setAttribute('pattern', '[0-9]*');
-        searchInput.setAttribute('placeholder', 'Enter 6-digit Pincode (or tap 123 for City)...');
+        // Numeric mode: native phone keyboard disabled via inputmode="none", Pin Pad docked
+        searchInput.setAttribute('inputmode', 'none');
+        searchInput.removeAttribute('pattern');
+        searchInput.setAttribute('placeholder', 'Enter 6-digit Pincode (or tap ABC for City)...');
         btnMode.className = 'btn-input-mode mode-numeric';
         btnMode.innerHTML = '<span class="mode-icon" aria-hidden="true">🔢</span><span class="mode-label">123</span>';
         btnMode.setAttribute('title', 'Currently Number Mode: Tap to switch to ABC City Mode');
+
+        // Show docked Pin Pad
+        if (numpad) numpad.style.display = 'block';
+        if (mainContent) mainContent.classList.add('has-numpad-open');
+        if (btnToggleNumpad) btnToggleNumpad.classList.add('active');
+
+        // Dismiss any open native phone keyboard
+        searchInput.blur();
       } else {
+        // Text mode: Pin Pad hidden, native phone keyboard enabled via inputmode="text"
+        if (numpad) numpad.style.display = 'none';
+        if (mainContent) mainContent.classList.remove('has-numpad-open');
+        if (btnToggleNumpad) btnToggleNumpad.classList.remove('active');
+
         searchInput.setAttribute('inputmode', 'text');
         searchInput.removeAttribute('pattern');
         searchInput.setAttribute('placeholder', 'Search City or Hub (e.g. Surat, Delhi)...');
         btnMode.className = 'btn-input-mode mode-text';
         btnMode.innerHTML = '<span class="mode-icon" aria-hidden="true">🔤</span><span class="mode-label">ABC</span>';
         btnMode.setAttribute('title', 'Currently City Mode: Tap to switch to 123 Pincode Mode');
-      }
 
-      playPopSound();
-      // Re-focus input smoothly so mobile OS immediately shifts keyboard
-      if (document.activeElement === searchInput) {
-        searchInput.blur();
+        // Automatically focus search input so phone opens the native QWERTY keyboard
         setTimeout(function () {
           searchInput.focus();
         }, 50);
       }
+
+      playPopSound();
     }
 
     btnMode.addEventListener('click', function (e) {
@@ -1516,7 +1513,6 @@
       { name: 'Web Audio Micro-Haptics', fn: initAudioHaptics, critical: false },
       { name: 'Clipboard & Whole-Card Delegation', fn: initClipboard, critical: true },
       { name: 'Touch Ergonomics & Infinite Scroll', fn: initTouchAndScroll, critical: false },
-      { name: 'Beginner & New Staff Guide', fn: initBeginnerGuide, critical: false },
       { name: 'On-Screen Numeric Pin Keypad', fn: initNumberPad, critical: false },
       { name: 'Input Mode Switcher (123 / ABC)', fn: initInputModeSwitcher, critical: false },
       { name: 'Recent Searches & Smart Paste', fn: initRecentSearches, critical: false },

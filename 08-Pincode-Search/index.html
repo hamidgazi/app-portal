@@ -32,11 +32,7 @@
           </div>
         </div>
         <div class="header-actions">
-          <button id="btn-toggle-guide" class="btn-header-action" title="How to use &amp; logistics terminology" aria-label="Beginner Guide">
-            <span class="btn-icon" aria-hidden="true">💡</span>
-            <span class="btn-label">Guide</span>
-          </button>
-          <button id="btn-toggle-numpad" class="btn-header-action" title="Toggle On-Screen Number Keypad" aria-label="Toggle Pin Pad">
+          <button id="btn-toggle-numpad" class="btn-header-action active" title="Toggle On-Screen Pin Keypad" aria-label="Toggle Pin Pad">
             <span class="btn-icon" aria-hidden="true">🔢</span>
             <span class="btn-label">Pin Pad</span>
           </button>
@@ -60,10 +56,8 @@
           id="search-input"
           class="search-input"
           type="search"
-          inputmode="numeric"
-          pattern="[0-9]*"
-          enterkeyhint="search"
-          placeholder="Enter 6-digit Pincode (or tap 123 for City)..."
+          inputmode="none"
+          placeholder="Enter 6-digit Pincode (or tap ABC for City)..."
           aria-label="Search pincode, city, or delivery hub"
           autocomplete="off"
           autocorrect="off"
@@ -123,42 +117,7 @@
     </div>
 
     <!-- Main Results Feed -->
-    <main id="main-content" class="main-content">
-      <!-- Beginner & New Staff Guide (Collapsible) -->
-      <section id="beginner-guide" class="beginner-guide" style="display: none;" aria-label="How to use and courier terminology guide">
-        <div class="guide-card">
-          <div class="guide-header">
-            <div class="guide-title-wrap">
-              <span class="guide-badge-icon" aria-hidden="true">💡</span>
-              <h2 class="guide-title">New Staff Quick Guide &bull; How to Read Results</h2>
-            </div>
-            <button id="btn-close-guide" class="btn-guide-close" aria-label="Close guide">&times;</button>
-          </div>
-          <div class="guide-body">
-            <div class="guide-term-item term-std">
-              <div class="term-badge">🟢 Standard Delivery</div>
-              <p class="term-desc"><strong>Normal rate &amp; regular speed.</strong> Courier delivery vehicles service this pincode daily on their standard route.</p>
-            </div>
-            <div class="guide-term-item term-oda">
-              <div class="term-badge">⚠️ ODA (Out of Delivery Area)</div>
-              <p class="term-desc"><strong>Remote / rural location.</strong> Outside courier standard boundaries. Courier applies an <strong>extra surcharge</strong> and delivery takes <strong>1&ndash;2 extra days</strong>.</p>
-            </div>
-            <div class="guide-term-item term-hub">
-              <div class="term-badge">🏢 Dispatch Hub</div>
-              <p class="term-desc"><strong>Main sorting facility.</strong> Parcels arrive at this hub before final dispatch to the local delivery executive.</p>
-            </div>
-            <div class="guide-tips">
-              <span class="tips-label">💡 Search Tips:</span>
-              <ul>
-                <li>Type 6 digits for instant pincode match (or tap <strong>🔢 Pin Pad</strong> above).</li>
-                <li>Type any city or town name (e.g. <em>Surat</em>, <em>Kolkata</em>, <em>Patna</em>, <em>Delhi</em>).</li>
-                <li>Tap <strong>📋 Copy</strong> to copy full docket text to clipboard.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
+    <main id="main-content" class="main-content has-numpad-open">
       <!-- Cards Container -->
       <div id="results-container" class="results-container" role="feed" aria-busy="false" aria-live="polite">
         <!-- Pincode Cards Dynamically Injected Here -->
@@ -187,14 +146,14 @@
       <div id="scroll-sentinel" class="scroll-sentinel" aria-hidden="true"></div>
     </main>
 
-    <!-- On-Screen Numeric Keypad for Mobile Thumb Typing -->
-    <div id="quick-numpad" class="quick-numpad" style="display: none;" aria-label="On-Screen Number Keypad">
+    <!-- On-Screen Numeric Keypad for Mobile Thumb Typing (Default Docked) -->
+    <div id="quick-numpad" class="quick-numpad" aria-label="On-Screen Number Keypad">
       <div class="numpad-header">
         <div class="numpad-title-wrap">
           <span class="numpad-icon" aria-hidden="true">🔢</span>
-          <span class="numpad-title">On-Screen Pin Keypad</span>
+          <span class="numpad-title">Pin Keypad</span>
         </div>
-        <button id="btn-close-numpad" class="btn-numpad-close" aria-label="Close Keypad">&times;</button>
+        <button id="btn-close-numpad" class="btn-numpad-close" aria-label="Minimize Keypad" title="Minimize Keypad">⌄</button>
       </div>
       <div class="numpad-grid">
         <button type="button" class="num-key" data-key="1">1</button>

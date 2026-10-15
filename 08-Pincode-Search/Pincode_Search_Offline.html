@@ -559,164 +559,6 @@ html, body {
   padding-bottom: 290px;
 }
 
-/* Beginner & New Staff Guide */
-.beginner-guide {
-  margin-bottom: 14px;
-  animation: slideDownGuide 0.25s var(--spring-timing);
-}
-
-@keyframes slideDownGuide {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.guide-card {
-  background: linear-gradient(180deg, #162032 0%, #101622 100%);
-  border: 1px solid rgba(56, 189, 248, 0.35);
-  border-radius: var(--radius-lg);
-  padding: 14px 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-}
-
-.guide-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.guide-title-wrap {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.guide-badge-icon {
-  font-size: 1.25rem;
-}
-
-.guide-title {
-  font-size: 0.95rem;
-  font-weight: 800;
-  color: #38bdf8;
-  letter-spacing: -0.01em;
-}
-
-.btn-guide-close {
-  min-width: 40px;
-  min-height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  border: none;
-  color: var(--text-muted);
-  font-size: 1.5rem;
-  cursor: pointer;
-  border-radius: var(--radius-sm);
-  touch-action: manipulation;
-}
-
-.btn-guide-close:hover {
-  color: var(--text-primary);
-  background-color: rgba(255, 255, 255, 0.08);
-}
-
-.guide-body {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.guide-term-item {
-  padding: 10px 12px;
-  border-radius: var(--radius-md);
-  border: 1px solid transparent;
-}
-
-.guide-term-item.term-std {
-  background-color: rgba(16, 185, 129, 0.08);
-  border-color: rgba(16, 185, 129, 0.25);
-}
-
-.guide-term-item.term-oda {
-  background-color: rgba(245, 158, 11, 0.08);
-  border-color: rgba(245, 158, 11, 0.25);
-}
-
-.guide-term-item.term-hub {
-  background-color: rgba(56, 189, 248, 0.08);
-  border-color: rgba(56, 189, 248, 0.25);
-}
-
-.term-badge {
-  font-size: 0.85rem;
-  font-weight: 800;
-  margin-bottom: 4px;
-}
-
-.term-std .term-badge {
-  color: #34d399;
-}
-
-.term-oda .term-badge {
-  color: #fbbf24;
-}
-
-.term-hub .term-badge {
-  color: #38bdf8;
-}
-
-.term-desc {
-  font-size: 0.82rem;
-  color: var(--text-secondary);
-  line-height: 1.4;
-}
-
-.term-desc strong {
-  color: var(--text-primary);
-}
-
-.guide-tips {
-  background-color: rgba(0, 0, 0, 0.35);
-  border-radius: var(--radius-md);
-  padding: 10px 12px;
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  border: 1px solid var(--border-subtle);
-}
-
-.tips-label {
-  display: block;
-  font-weight: 700;
-  color: #f1f5f9;
-  margin-bottom: 6px;
-}
-
-.guide-tips ul {
-  padding-left: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.guide-tips li {
-  line-height: 1.35;
-}
-
-.guide-tips em {
-  color: #38bdf8;
-  font-style: normal;
-}
-
 .results-container {
   display: flex;
   flex-direction: column;
@@ -1341,11 +1183,7 @@ html, body {
           </div>
         </div>
         <div class="header-actions">
-          <button id="btn-toggle-guide" class="btn-header-action" title="How to use &amp; logistics terminology" aria-label="Beginner Guide">
-            <span class="btn-icon" aria-hidden="true">💡</span>
-            <span class="btn-label">Guide</span>
-          </button>
-          <button id="btn-toggle-numpad" class="btn-header-action" title="Toggle On-Screen Number Keypad" aria-label="Toggle Pin Pad">
+          <button id="btn-toggle-numpad" class="btn-header-action active" title="Toggle On-Screen Pin Keypad" aria-label="Toggle Pin Pad">
             <span class="btn-icon" aria-hidden="true">🔢</span>
             <span class="btn-label">Pin Pad</span>
           </button>
@@ -1369,10 +1207,8 @@ html, body {
           id="search-input"
           class="search-input"
           type="search"
-          inputmode="numeric"
-          pattern="[0-9]*"
-          enterkeyhint="search"
-          placeholder="Enter 6-digit Pincode (or tap 123 for City)..."
+          inputmode="none"
+          placeholder="Enter 6-digit Pincode (or tap ABC for City)..."
           aria-label="Search pincode, city, or delivery hub"
           autocomplete="off"
           autocorrect="off"
@@ -1432,42 +1268,7 @@ html, body {
     </div>
 
     <!-- Main Results Feed -->
-    <main id="main-content" class="main-content">
-      <!-- Beginner & New Staff Guide (Collapsible) -->
-      <section id="beginner-guide" class="beginner-guide" style="display: none;" aria-label="How to use and courier terminology guide">
-        <div class="guide-card">
-          <div class="guide-header">
-            <div class="guide-title-wrap">
-              <span class="guide-badge-icon" aria-hidden="true">💡</span>
-              <h2 class="guide-title">New Staff Quick Guide &bull; How to Read Results</h2>
-            </div>
-            <button id="btn-close-guide" class="btn-guide-close" aria-label="Close guide">&times;</button>
-          </div>
-          <div class="guide-body">
-            <div class="guide-term-item term-std">
-              <div class="term-badge">🟢 Standard Delivery</div>
-              <p class="term-desc"><strong>Normal rate &amp; regular speed.</strong> Courier delivery vehicles service this pincode daily on their standard route.</p>
-            </div>
-            <div class="guide-term-item term-oda">
-              <div class="term-badge">⚠️ ODA (Out of Delivery Area)</div>
-              <p class="term-desc"><strong>Remote / rural location.</strong> Outside courier standard boundaries. Courier applies an <strong>extra surcharge</strong> and delivery takes <strong>1&ndash;2 extra days</strong>.</p>
-            </div>
-            <div class="guide-term-item term-hub">
-              <div class="term-badge">🏢 Dispatch Hub</div>
-              <p class="term-desc"><strong>Main sorting facility.</strong> Parcels arrive at this hub before final dispatch to the local delivery executive.</p>
-            </div>
-            <div class="guide-tips">
-              <span class="tips-label">💡 Search Tips:</span>
-              <ul>
-                <li>Type 6 digits for instant pincode match (or tap <strong>🔢 Pin Pad</strong> above).</li>
-                <li>Type any city or town name (e.g. <em>Surat</em>, <em>Kolkata</em>, <em>Patna</em>, <em>Delhi</em>).</li>
-                <li>Tap <strong>📋 Copy</strong> to copy full docket text to clipboard.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
+    <main id="main-content" class="main-content has-numpad-open">
       <!-- Cards Container -->
       <div id="results-container" class="results-container" role="feed" aria-busy="false" aria-live="polite">
         <!-- Pincode Cards Dynamically Injected Here -->
@@ -1496,14 +1297,14 @@ html, body {
       <div id="scroll-sentinel" class="scroll-sentinel" aria-hidden="true"></div>
     </main>
 
-    <!-- On-Screen Numeric Keypad for Mobile Thumb Typing -->
-    <div id="quick-numpad" class="quick-numpad" style="display: none;" aria-label="On-Screen Number Keypad">
+    <!-- On-Screen Numeric Keypad for Mobile Thumb Typing (Default Docked) -->
+    <div id="quick-numpad" class="quick-numpad" aria-label="On-Screen Number Keypad">
       <div class="numpad-header">
         <div class="numpad-title-wrap">
           <span class="numpad-icon" aria-hidden="true">🔢</span>
-          <span class="numpad-title">On-Screen Pin Keypad</span>
+          <span class="numpad-title">Pin Keypad</span>
         </div>
-        <button id="btn-close-numpad" class="btn-numpad-close" aria-label="Close Keypad">&times;</button>
+        <button id="btn-close-numpad" class="btn-numpad-close" aria-label="Minimize Keypad" title="Minimize Keypad">⌄</button>
       </div>
       <div class="numpad-grid">
         <button type="button" class="num-key" data-key="1">1</button>
@@ -2649,52 +2450,7 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = window.P
   }
 
   /**
-   * Module 10: Beginner & New Staff Guide Controller
-   */
-  function initBeginnerGuide() {
-    if (typeof document === 'undefined') return;
-    const btnToggle = document.getElementById('btn-toggle-guide');
-    const guideSection = document.getElementById('beginner-guide');
-    const btnClose = document.getElementById('btn-close-guide');
-    if (!guideSection) return;
-
-    function toggleGuide(show) {
-      const isVisible = guideSection.style.display !== 'none';
-      const target = (typeof show === 'boolean') ? show : !isVisible;
-      guideSection.style.display = target ? 'block' : 'none';
-      playPopSound();
-      if (target) {
-        guideSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
-    }
-
-    if (btnToggle) {
-      btnToggle.addEventListener('click', function () {
-        toggleGuide();
-      });
-    }
-
-    if (btnClose) {
-      btnClose.addEventListener('click', function () {
-        toggleGuide(false);
-        try {
-          if (typeof localStorage !== 'undefined') {
-            localStorage.setItem('pincode_guide_seen', '1');
-          }
-        } catch (e) {}
-      });
-    }
-
-    // Default to open for first-time visitors who haven't dismissed it
-    try {
-      if (typeof localStorage !== 'undefined' && !localStorage.getItem('pincode_guide_seen')) {
-        guideSection.style.display = 'block';
-      }
-    } catch (e) {}
-  }
-
-  /**
-   * Module 11: On-Screen Mobile Numeric Keypad Controller
+   * Module 10: On-Screen Mobile Numeric Keypad Controller (Default Docked)
    */
   function initNumberPad() {
     if (typeof document === 'undefined') return;
@@ -2716,6 +2472,13 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = window.P
           mainContent.classList.remove('has-numpad-open');
         }
       }
+      if (btnToggle) {
+        if (target) {
+          btnToggle.classList.add('active');
+        } else {
+          btnToggle.classList.remove('active');
+        }
+      }
       playPopSound();
     }
 
@@ -2730,6 +2493,25 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = window.P
         toggleNumpad(false);
       });
     }
+
+    // Tapping search input in numeric mode opens/re-docks Pin Pad if closed,
+    // and prevents the phone's native keyboard from opening
+    searchInput.addEventListener('click', function () {
+      if (State.keyboardMode === 'numeric') {
+        if (numpad.style.display === 'none') {
+          toggleNumpad(true);
+        }
+      }
+    });
+
+    searchInput.addEventListener('focus', function () {
+      if (State.keyboardMode === 'numeric') {
+        searchInput.setAttribute('inputmode', 'none');
+        if (numpad.style.display === 'none') {
+          toggleNumpad(true);
+        }
+      }
+    });
 
     // Interactive Keypad Delegation
     numpad.addEventListener('click', function (e) {
@@ -2757,8 +2539,7 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = window.P
       }
 
       if (keyAction === 'enter') {
-        toggleNumpad(false);
-        if (searchInput) searchInput.blur();
+        // When Enter is tapped on Pin Pad: save recent search and search, but stay docked!
         if (searchInput && searchInput.value.trim()) {
           saveRecentSearch(searchInput.value.trim());
         }
@@ -2781,22 +2562,27 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = window.P
         if (btnClear) btnClear.style.display = 'inline-flex';
         performSearch();
 
-        // Auto-close on-screen numpad when 6 digits are reached!
+        // When 6 digits are reached: save recent search, search immediately, and remain docked for rapid checking!
         if (searchInput.value.length === 6) {
-          toggleNumpad(false);
           saveRecentSearch(searchInput.value);
         }
       }
     });
+
+    // Ensure numpad is active by default
+    toggleNumpad(true);
   }
 
   /**
-   * Module 12: Mobile Keyboard Mode Switcher (123 Pin vs ABC City)
+   * Module 11: Mobile Keyboard Mode Switcher (123 Pin vs ABC City)
    */
   function initInputModeSwitcher() {
     if (typeof document === 'undefined') return;
     const btnMode = document.getElementById('btn-input-mode');
     const searchInput = document.getElementById('search-input');
+    const numpad = document.getElementById('quick-numpad');
+    const mainContent = document.getElementById('main-content');
+    const btnToggleNumpad = document.getElementById('btn-toggle-numpad');
     if (!btnMode || !searchInput) return;
 
     function setKeyboardMode(mode) {
@@ -2804,29 +2590,41 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = window.P
       const isNum = (mode === 'numeric');
 
       if (isNum) {
-        searchInput.setAttribute('inputmode', 'numeric');
-        searchInput.setAttribute('pattern', '[0-9]*');
-        searchInput.setAttribute('placeholder', 'Enter 6-digit Pincode (or tap 123 for City)...');
+        // Numeric mode: native phone keyboard disabled via inputmode="none", Pin Pad docked
+        searchInput.setAttribute('inputmode', 'none');
+        searchInput.removeAttribute('pattern');
+        searchInput.setAttribute('placeholder', 'Enter 6-digit Pincode (or tap ABC for City)...');
         btnMode.className = 'btn-input-mode mode-numeric';
         btnMode.innerHTML = '<span class="mode-icon" aria-hidden="true">🔢</span><span class="mode-label">123</span>';
         btnMode.setAttribute('title', 'Currently Number Mode: Tap to switch to ABC City Mode');
+
+        // Show docked Pin Pad
+        if (numpad) numpad.style.display = 'block';
+        if (mainContent) mainContent.classList.add('has-numpad-open');
+        if (btnToggleNumpad) btnToggleNumpad.classList.add('active');
+
+        // Dismiss any open native phone keyboard
+        searchInput.blur();
       } else {
+        // Text mode: Pin Pad hidden, native phone keyboard enabled via inputmode="text"
+        if (numpad) numpad.style.display = 'none';
+        if (mainContent) mainContent.classList.remove('has-numpad-open');
+        if (btnToggleNumpad) btnToggleNumpad.classList.remove('active');
+
         searchInput.setAttribute('inputmode', 'text');
         searchInput.removeAttribute('pattern');
         searchInput.setAttribute('placeholder', 'Search City or Hub (e.g. Surat, Delhi)...');
         btnMode.className = 'btn-input-mode mode-text';
         btnMode.innerHTML = '<span class="mode-icon" aria-hidden="true">🔤</span><span class="mode-label">ABC</span>';
         btnMode.setAttribute('title', 'Currently City Mode: Tap to switch to 123 Pincode Mode');
-      }
 
-      playPopSound();
-      // Re-focus input smoothly so mobile OS immediately shifts keyboard
-      if (document.activeElement === searchInput) {
-        searchInput.blur();
+        // Automatically focus search input so phone opens the native QWERTY keyboard
         setTimeout(function () {
           searchInput.focus();
         }, 50);
       }
+
+      playPopSound();
     }
 
     btnMode.addEventListener('click', function (e) {
@@ -3087,7 +2885,6 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = window.P
       { name: 'Web Audio Micro-Haptics', fn: initAudioHaptics, critical: false },
       { name: 'Clipboard & Whole-Card Delegation', fn: initClipboard, critical: true },
       { name: 'Touch Ergonomics & Infinite Scroll', fn: initTouchAndScroll, critical: false },
-      { name: 'Beginner & New Staff Guide', fn: initBeginnerGuide, critical: false },
       { name: 'On-Screen Numeric Pin Keypad', fn: initNumberPad, critical: false },
       { name: 'Input Mode Switcher (123 / ABC)', fn: initInputModeSwitcher, critical: false },
       { name: 'Recent Searches & Smart Paste', fn: initRecentSearches, critical: false },
