@@ -47,6 +47,10 @@
           <span>🛑 Waqf Rules</span>
           <span class="tab-badge">15</span>
         </button>
+        <button class="nav-tab-btn" data-tab="studio">
+          <span>🔬 Analytics Studio</span>
+          <span class="tab-badge" style="background: rgba(168, 85, 247, 0.2); color: #c084fc;">PRO</span>
+        </button>
       </nav>
     </div>
   </header>
@@ -54,42 +58,64 @@
   <!-- Main Container -->
   <main class="app-main">
 
-    <!-- Global Telemetry Banner -->
+    <!-- Global Telemetry Executive KPI Strip -->
     <section class="metrics-banner" aria-label="Global Corpus Statistics">
       <div class="metric-pill">
-        <span class="metric-label">Total Word Tokens</span>
-        <span class="metric-val emerald">82,480</span>
+        <div class="metric-icon">📜</div>
+        <div class="metric-info">
+          <span class="metric-val emerald">82,480</span>
+          <span class="metric-label">Word Tokens</span>
+        </div>
       </div>
       <div class="metric-pill">
-        <span class="metric-label">Unique Surface Words</span>
-        <span class="metric-val cyan">20,105</span>
+        <div class="metric-icon">🔤</div>
+        <div class="metric-info">
+          <span class="metric-val cyan">20,105</span>
+          <span class="metric-label">Unique Words</span>
+        </div>
       </div>
       <div class="metric-pill">
-        <span class="metric-label">Triliteral Roots</span>
-        <span class="metric-val amber">1,642</span>
+        <div class="metric-icon">🌿</div>
+        <div class="metric-info">
+          <span class="metric-val gold">1,642</span>
+          <span class="metric-label">Triliteral Roots</span>
+        </div>
       </div>
       <div class="metric-pill">
-        <span class="metric-label">Dictionary Lemmas</span>
-        <span class="metric-val purple">4,832</span>
+        <div class="metric-icon">📚</div>
+        <div class="metric-info">
+          <span class="metric-val purple">4,832</span>
+          <span class="metric-label">Lemmas</span>
+        </div>
       </div>
       <div class="metric-pill">
-        <span class="metric-label">Total Canonical Ayat</span>
-        <span class="metric-val">6,236</span>
+        <div class="metric-icon">📖</div>
+        <div class="metric-info">
+          <span class="metric-val emerald">6,236</span>
+          <span class="metric-label">Canonical Ayat</span>
+        </div>
       </div>
       <div class="metric-pill">
-        <span class="metric-label">Surahs</span>
-        <span class="metric-val">114</span>
+        <div class="metric-icon">🧭</div>
+        <div class="metric-info">
+          <span class="metric-val gold">114</span>
+          <span class="metric-label">Surahs</span>
+        </div>
       </div>
     </section>
 
     <!-- Tab 1: Quantitative Telemetry & Word Frequency -->
     <section id="tab-frequency" class="tab-panel active">
-      <div class="control-bar">
-        <div class="search-box-wrapper">
-          <span class="search-icon">🔍</span>
-          <input type="text" id="freq-search-input" class="search-input" placeholder="Search Arabic word, clean text, or root...">
+      <div class="control-bar-two-tier">
+        <div class="spotlight-search-row">
+          <div class="search-box-wrapper spotlight-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="freq-search-input" class="search-input spotlight-input" placeholder="Search Arabic text, root, English meaning (e.g. 'Lord', 'say'), or Roman Urdu (e.g. 'farmaya', 'kitab')...">
+            <div class="search-shortcut-chip"><kbd>/</kbd></div>
+            <button id="freq-search-clear" class="search-clear-btn" style="display:none;" aria-label="Clear search">✕</button>
+          </div>
         </div>
-        <div class="filter-pills-group">
+        <div class="segmented-pills-bar">
           <button class="filter-btn freq-filter-btn active" data-mode="words">Surface Words (20k)</button>
           <button class="filter-btn freq-filter-btn" data-mode="roots">Roots (1,642)</button>
           <button class="filter-btn freq-filter-btn" data-mode="lemmas">Lemmas (4,832)</button>
@@ -198,6 +224,56 @@
       </div>
     </section>
 
+    <!-- Tab 7: Analytics Studio (PRO) -->
+    <section id="tab-studio" class="tab-panel">
+      <div class="studio-subtabs-nav">
+        <button class="studio-subtab-btn active" data-subtab="entities">
+          <span>👑 Named Entities</span>
+          <span class="tab-badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399;">25 Prophets</span>
+        </button>
+        <button class="studio-subtab-btn" data-subtab="opposites">
+          <span>⇄ Opposites & Tibaq</span>
+          <span class="tab-badge" style="background: rgba(6, 182, 212, 0.2); color: #38bdf8;">14 Pairs</span>
+        </button>
+        <button class="studio-subtab-btn" data-subtab="chronology">
+          <span>📈 23-Yr Chronology</span>
+          <span class="tab-badge" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24;">114 Epochs</span>
+        </button>
+        <button class="studio-subtab-btn" data-subtab="divine">
+          <span>✨ Divine Names Matrix</span>
+          <span class="tab-badge" style="background: rgba(168, 85, 247, 0.2); color: #c084fc;">Fawasil</span>
+        </button>
+      </div>
+
+      <!-- Studio Subpanel 1: Entities -->
+      <div id="studio-panel-entities" class="studio-subpanel" style="display: block;">
+        <div class="entity-cat-nav">
+          <button class="filter-btn entity-cat-btn active" data-cat="prophets">25 Prophets (الأنبياء)</button>
+          <button class="filter-btn entity-cat-btn" data-cat="places">Sacred Geography (18 Places)</button>
+          <button class="filter-btn entity-cat-btn" data-cat="nations">Historical Nations ('Ad, Thamud...)</button>
+          <button class="filter-btn entity-cat-btn" data-cat="figures">Pious Figures & Angels</button>
+          <button class="filter-btn entity-cat-btn" data-cat="muqattaat">Muqatta'at (14 Disconnected)</button>
+          <button class="filter-btn entity-cat-btn" data-cat="sajdah">15 Sajdah Tilawat</button>
+        </div>
+        <div id="entities-display-container" style="margin-top: 16px;"></div>
+      </div>
+
+      <!-- Studio Subpanel 2: Opposites -->
+      <div id="studio-panel-opposites" class="studio-subpanel" style="display: none;">
+        <div id="opposites-display-container"></div>
+      </div>
+
+      <!-- Studio Subpanel 3: Chronology -->
+      <div id="studio-panel-chronology" class="studio-subpanel" style="display: none;">
+        <div id="chronology-display-container"></div>
+      </div>
+
+      <!-- Studio Subpanel 4: Divine Pairs -->
+      <div id="studio-panel-divine" class="studio-subpanel" style="display: none;">
+        <div id="divine-display-container"></div>
+      </div>
+    </section>
+
   </main>
 
   <!-- Occurrence Modal Drawer -->
@@ -220,9 +296,11 @@
 
   <!-- Application Scripts (Zero-CORS Offline Data Bundle) -->
   <script src="data/quran_core_data.js"></script>
+  <script src="data/quran_advanced_analytics_bundle.js"></script>
   <script src="js/audio-sfx.js"></script>
   <script src="js/telemetry-engine.js"></script>
   <script src="js/corpus-engine.js"></script>
+  <script src="js/analytics-studio.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

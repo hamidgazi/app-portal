@@ -1,6 +1,7 @@
 /**
  * Quantitative Telemetry & Multi-Level Word Frequency Engine
  * Client-Side In-Memory Analytical Core with Zero-CORS Offline Support
+ * Royal Islamic Luxury & Linear Data Studio Edition
  */
 
 class TelemetryEngine {
@@ -53,11 +54,36 @@ class TelemetryEngine {
 
   setupEventListeners() {
     const searchInput = document.getElementById("freq-search-input");
+    const clearBtn = document.getElementById("freq-search-clear");
+
     if (searchInput) {
       searchInput.addEventListener("input", (e) => {
         this.searchQuery = e.target.value.trim().toLowerCase();
+        if (clearBtn) {
+          clearBtn.style.display = this.searchQuery ? "block" : "none";
+        }
         this.displayLimit = 100;
         this.render();
+      });
+
+      // Keyboard shortcut '/' to instantly focus search bar
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "/" && document.activeElement !== searchInput) {
+          e.preventDefault();
+          searchInput.focus();
+        }
+      });
+    }
+
+    if (clearBtn && searchInput) {
+      clearBtn.addEventListener("click", () => {
+        if (window.AudioSFX) window.AudioSFX.playClick();
+        searchInput.value = "";
+        this.searchQuery = "";
+        clearBtn.style.display = "none";
+        this.displayLimit = 100;
+        this.render();
+        searchInput.focus();
       });
     }
 
@@ -85,7 +111,7 @@ class TelemetryEngine {
 
   stripTashkeel(text) {
     if (!text) return "";
-    return text.replace(/[\u064b-\u065f\u0670\u06d6-\u06dc\u06df-\u06e8]/g, "")
+    return text.replace(/[\u064b-\u065f\u0670\u06d6-\u06dc\u06df-\u06e8\ufb50-\ufdff\ufe70-\ufeff\u200c\u200d\u200e\u200f]/g, "")
                .replace(/[إأآٱ]/g, "ا")
                .replace(/[ة]/g, "ه")
                .replace(/[ى]/g, "ي");
@@ -105,16 +131,16 @@ class TelemetryEngine {
 
     if (this.currentMode === "words") {
       items = this.filterWords();
-      headers = ["Rank", "Word (Arabic)", "Clean Text", "Occurrences", "Corpus %", "Surahs", "Action"];
+      headers = ["Rank", "Word (Arabic)", "Meaning (English • Roman Urdu)", "Occurrences", "Corpus %", "Surahs", "Action"];
     } else if (this.currentMode === "roots") {
       items = this.filterRoots();
-      headers = ["Rank", "Root (Arabic)", "Transliteration", "Occurrences", "Unique Lemmas", "Sample Lemmas", "Action"];
+      headers = ["Rank", "Root (Arabic)", "Meaning (English • Roman Urdu)", "Occurrences", "Unique Lemmas", "Sample Lemmas", "Action"];
     } else if (this.currentMode === "lemmas") {
       items = this.filterLemmas();
-      headers = ["Rank", "Lemma (Arabic)", "Root Base", "POS Tag", "Occurrences", "Action"];
+      headers = ["Rank", "Lemma (Arabic)", "Meaning (English • Roman Urdu)", "Root Base", "POS Tag", "Occurrences", "Action"];
     } else if (this.currentMode === "hapax") {
       items = this.filterHapax();
-      headers = ["No.", "Hapax Word", "Normalized", "Location (Surah:Ayah)", "Word Index", "Action"];
+      headers = ["No.", "Hapax Word", "Meaning (English • Roman Urdu)", "Location", "Word Index", "Action"];
     }
 
     const visibleItems = items.slice(0, this.displayLimit);
@@ -132,7 +158,7 @@ class TelemetryEngine {
     `;
 
     if (visibleItems.length === 0) {
-      html += `<tr><td colspan="${headers.length}" style="text-align: center; padding: 30px; color: var(--text-dim);">No matching records found.</td></tr>`;
+      html += `<tr><td colspan="${headers.length}" style="text-align: center; padding: 40px; color: var(--text-dim); font-size: 1rem;">No matching Quranic records found for "${this.searchQuery}".</td></tr>`;
     } else {
       visibleItems.forEach((item, idx) => {
         html += this.renderRow(item, idx + 1);
@@ -157,64 +183,90 @@ class TelemetryEngine {
 
   filterWords() {
     if (!this.searchQuery) return this.words;
-    const qClean = this.stripTashkeel(this.searchQuery);
+    const q = this.searchQuery;
+    const qClean = this.stripTashkeel(q);
     return this.words.filter(w => {
-      return (w.token && w.token.includes(this.searchQuery)) ||
-             (w.clean && (w.clean.includes(this.searchQuery) || w.clean.includes(qClean))) ||
-             (String(w.rank) === this.searchQuery);
+      return (w.token && w.token.includes(q)) ||
+             (w.clean && (w.clean.includes(q) || w.clean.includes(qClean))) ||
+             (w.meaning_en && w.meaning_en.toLowerCase().includes(q)) ||
+             (w.meaning_ur && w.meaning_ur.toLowerCase().includes(q)) ||
+             (String(w.rank) === q);
     });
   }
 
   filterRoots() {
     if (!this.searchQuery) return this.roots;
-    const qClean = this.stripTashkeel(this.searchQuery);
+    const q = this.searchQuery;
+    const qClean = this.stripTashkeel(q);
     return this.roots.filter(r => {
-      return (r.root_ar && (r.root_ar.includes(this.searchQuery) || r.root_ar.includes(qClean))) ||
-             (r.root_bw && r.root_bw.toLowerCase().includes(this.searchQuery)) ||
-             (r.root_display && r.root_display.includes(this.searchQuery));
+      return (r.root_ar && (r.root_ar.includes(q) || r.root_ar.includes(qClean))) ||
+             (r.root_bw && r.root_bw.toLowerCase().includes(q)) ||
+             (r.root_display && r.root_display.includes(q)) ||
+             (r.meaning_en && r.meaning_en.toLowerCase().includes(q)) ||
+             (r.meaning_ur && r.meaning_ur.toLowerCase().includes(q));
     });
   }
 
   filterLemmas() {
     if (!this.searchQuery) return this.lemmas;
-    const qClean = this.stripTashkeel(this.searchQuery);
+    const q = this.searchQuery;
+    const qClean = this.stripTashkeel(q);
     return this.lemmas.filter(l => {
-      return (l.lemma_ar && (l.lemma_ar.includes(this.searchQuery) || l.lemma_ar.includes(qClean))) ||
-             (l.root_ar && l.root_ar.includes(qClean));
+      return (l.lemma_ar && (l.lemma_ar.includes(q) || l.lemma_ar.includes(qClean))) ||
+             (l.root_ar && l.root_ar.includes(qClean)) ||
+             (l.meaning_en && l.meaning_en.toLowerCase().includes(q)) ||
+             (l.meaning_ur && l.meaning_ur.toLowerCase().includes(q));
     });
   }
 
   filterHapax() {
     if (!this.searchQuery) return this.hapax;
-    const qClean = this.stripTashkeel(this.searchQuery);
+    const q = this.searchQuery;
+    const qClean = this.stripTashkeel(q);
     return this.hapax.filter(h => {
-      return (h.token && h.token.includes(this.searchQuery)) ||
-             (h.clean && h.clean.includes(qClean));
+      return (h.token && h.token.includes(q)) ||
+             (h.clean && h.clean.includes(qClean)) ||
+             (h.meaning_en && h.meaning_en.toLowerCase().includes(q)) ||
+             (h.meaning_ur && h.meaning_ur.toLowerCase().includes(q));
     });
   }
 
   renderRow(item, rowNum) {
     if (this.currentMode === "words") {
+      const rankClass = item.rank === 1 ? 'top-1' : (item.rank === 2 ? 'top-2' : (item.rank === 3 ? 'top-3' : ''));
+      const pct = item.percentage || 0;
       return `
         <tr data-type="word" data-token="${item.token}">
-          <td><span class="rank-badge ${item.rank <= 3 ? 'top-3' : ''}">#${item.rank}</span></td>
+          <td><span class="rank-badge ${rankClass}">#${item.rank}</span></td>
           <td class="word-arabic-cell">${item.token}</td>
-          <td>${item.clean}</td>
+          <td class="word-meaning-cell">
+            <div class="meaning-en">${item.meaning_en || '—'}</div>
+            <div class="meaning-ur">${item.meaning_ur || ''}</div>
+          </td>
           <td><span class="count-pill">${item.occurrences.toLocaleString()}</span></td>
-          <td>${item.percentage}%</td>
+          <td class="corpus-pct-cell">
+            <div class="corpus-pct-val">${pct}%</div>
+            <div class="corpus-pct-bar">
+              <div class="pct-bar-fill" style="width: ${Math.min(pct * 12, 100)}%;"></div>
+            </div>
+          </td>
           <td><span class="surah-count-pill">${item.surahs_count} Surahs</span></td>
           <td><button class="filter-btn view-occ-btn" data-type="word" data-val="${encodeURIComponent(JSON.stringify(item))}">View Ayat</button></td>
         </tr>
       `;
     } else if (this.currentMode === "roots") {
+      const rankClass = rowNum === 1 ? 'top-1' : (rowNum === 2 ? 'top-2' : (rowNum === 3 ? 'top-3' : ''));
       return `
         <tr data-type="root" data-root="${item.root_ar}">
-          <td><span class="rank-badge">#${rowNum}</span></td>
+          <td><span class="rank-badge ${rankClass}">#${rowNum}</span></td>
           <td class="root-display-cell">${item.root_display}</td>
-          <td><code>${item.root_bw}</code></td>
+          <td class="word-meaning-cell">
+            <div class="meaning-en">${item.meaning_en || '—'}</div>
+            <div class="meaning-ur">${item.meaning_ur || ''}</div>
+          </td>
           <td><span class="count-pill">${item.occurrences.toLocaleString()}</span></td>
           <td>${item.unique_lemmas_count}</td>
-          <td style="font-family: var(--font-arabic); font-size: 1.1rem; color: #38bdf8;">${(item.lemmas_sample || []).join(' ، ')}</td>
+          <td style="font-family: var(--font-arabic); font-size: 1.25rem; color: #38bdf8; direction: rtl; text-align: right;">${(item.lemmas_sample || []).join(' ، ')}</td>
           <td><button class="filter-btn view-occ-btn" data-type="root" data-val="${encodeURIComponent(JSON.stringify(item))}">View Ayat</button></td>
         </tr>
       `;
@@ -222,8 +274,12 @@ class TelemetryEngine {
       return `
         <tr data-type="lemma" data-lemma="${item.lemma_ar}">
           <td><span class="rank-badge">#${rowNum}</span></td>
-          <td class="word-arabic-cell">${item.lemma_ar}</td>
-          <td class="root-display-cell">${item.root_ar}</td>
+          <td class="word-arabic-cell" style="font-size: 1.55rem;">${item.lemma_ar}</td>
+          <td class="word-meaning-cell">
+            <div class="meaning-en">${item.meaning_en || '—'}</div>
+            <div class="meaning-ur">${item.meaning_ur || ''}</div>
+          </td>
+          <td class="root-display-cell" style="font-size: 1.15rem;">${item.root_ar}</td>
           <td><span class="surah-count-pill">${(item.pos || []).join(', ')}</span></td>
           <td><span class="count-pill">${item.occurrences.toLocaleString()}</span></td>
           <td><button class="filter-btn view-occ-btn" data-type="lemma" data-val="${encodeURIComponent(JSON.stringify(item))}">View Ayat</button></td>
@@ -234,8 +290,11 @@ class TelemetryEngine {
       return `
         <tr data-type="hapax">
           <td><span class="rank-badge">#${rowNum}</span></td>
-          <td class="word-arabic-cell">${item.token}</td>
-          <td>${item.clean}</td>
+          <td class="word-arabic-cell" style="font-size: 1.55rem;">${item.token}</td>
+          <td class="word-meaning-cell">
+            <div class="meaning-en">${item.meaning_en || '—'}</div>
+            <div class="meaning-ur">${item.meaning_ur || ''}</div>
+          </td>
           <td><span class="surah-count-pill">Surah ${loc[0]} : Ayah ${loc[1]}</span></td>
           <td>Word #${loc[2]}</td>
           <td><button class="filter-btn jump-to-ayah-btn" data-surah="${loc[0]}" data-ayah="${loc[1]}">Open Surah</button></td>
@@ -308,21 +367,26 @@ class TelemetryEngine {
     const modalBody = document.getElementById("occ-modal-body");
     if (!modal || !modalTitle || !modalBody) return;
 
-    let titleText = "";
-    let occList = [];
+    let displayWord = data.token || data.root_display || data.lemma_ar;
+    let occList = data.sample_occurrences || [];
+    let meaningEn = data.meaning_en || "";
+    let meaningUr = data.meaning_ur || "";
 
-    if (type === "word") {
-      titleText = `Occurrences for: <span style="font-family: var(--font-arabic); color: #38bdf8; font-size: 1.4rem;">${data.token}</span> (${data.occurrences} times)`;
-      occList = data.sample_occurrences || [];
-    } else if (type === "root") {
-      titleText = `Occurrences for Root: <span style="font-family: var(--font-arabic); color: #34d399; font-size: 1.4rem;">${data.root_display}</span> (${data.occurrences} times)`;
-      occList = data.sample_occurrences || [];
-    } else if (type === "lemma") {
-      titleText = `Occurrences for Lemma: <span style="font-family: var(--font-arabic); color: #38bdf8; font-size: 1.4rem;">${data.lemma_ar}</span> (${data.occurrences} times)`;
-      occList = data.sample_occurrences || [];
-    }
-
-    modalTitle.innerHTML = titleText;
+    modalTitle.innerHTML = `
+      <div style="display: flex; flex-direction: column; gap: 4px; text-align: left;">
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+          <span style="font-family: var(--font-arabic); font-size: 2rem; color: #38bdf8; direction: rtl;">${displayWord}</span>
+          <span class="count-pill">${(data.occurrences || 1).toLocaleString()} Occurrences</span>
+          ${data.surahs_count ? `<span class="surah-count-pill">${data.surahs_count} Surahs</span>` : ''}
+        </div>
+        ${(meaningEn || meaningUr) ? `
+          <div style="font-size: 0.95rem; font-weight: 500; color: #f1f5f9; display: flex; align-items: center; gap: 8px;">
+            <span>${meaningEn}</span>
+            ${meaningUr ? `<span style="color: #fbbf24; font-weight: 600;">• ${meaningUr}</span>` : ''}
+          </div>
+        ` : ''}
+      </div>
+    `;
 
     let bodyHtml = "";
     if (occList.length === 0) {
@@ -336,7 +400,7 @@ class TelemetryEngine {
           <div class="occurrence-item">
             <span class="occ-ref-badge">Surah ${sId} : Ayah ${aNo}</span>
             <span style="font-size: 0.85rem; color: var(--text-dim);">Word #${wIdx}</span>
-            <button class="filter-btn modal-jump-btn" data-surah="${sId}" data-ayah="${aNo}">View in Surah</button>
+            <button class="filter-btn modal-jump-btn" data-surah="${sId}" data-ayah="${aNo}">View in Context</button>
           </div>
         `;
       });

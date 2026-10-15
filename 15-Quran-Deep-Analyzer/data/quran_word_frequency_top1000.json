@@ -271,7 +271,9 @@
         10,
         335
       ]
-    ]
+    ],
+    "meaning_en": "And",
+    "meaning_ur": "Aur"
   },
   {
     "rank": 2,
@@ -532,7 +534,9 @@
         7,
         1317
       ]
-    ]
+    ],
+    "meaning_en": "What / That which / Not",
+    "meaning_ur": "Jo / Kya / Nahi"
   },
   {
     "rank": 3,
@@ -781,7 +785,9 @@
         22,
         1379
       ]
-    ]
+    ],
+    "meaning_en": "No / Not",
+    "meaning_ur": "Nahi / Na"
   },
   {
     "rank": 4,
@@ -1027,7 +1033,9 @@
         5,
         1925
       ]
-    ]
+    ],
+    "meaning_en": "From / Of",
+    "meaning_ur": "Se / Mein se"
   },
   {
     "rank": 5,
@@ -1278,7 +1286,9 @@
         19,
         2297
       ]
-    ]
+    ],
+    "meaning_en": "And",
+    "meaning_ur": "Aur"
   },
   {
     "rank": 6,
@@ -1515,7 +1525,9 @@
         14,
         1807
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الَّذِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (الَّذِیْنَ)"
   },
   {
     "rank": 7,
@@ -1747,7 +1759,9 @@
         9,
         2195
       ]
-    ]
+    ],
+    "meaning_en": "Allah (The One True God)",
+    "meaning_ur": "Allah Ta'ala"
   },
   {
     "rank": 8,
@@ -1988,7 +2002,9 @@
         3,
         4140
       ]
-    ]
+    ],
+    "meaning_en": "Except / Only",
+    "meaning_ur": "Magar / Siwae"
   },
   {
     "rank": 9,
@@ -2218,7 +2234,9 @@
         12,
         3048
       ]
-    ]
+    ],
+    "meaning_en": "Allah (The One True God)",
+    "meaning_ur": "Allah Ta'ala"
   },
   {
     "rank": 10,
@@ -2453,7 +2471,9 @@
         48,
         3887
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (فِی)",
+    "meaning_ur": "Lafz-e-Quran (فِی)"
   },
   {
     "rank": 11,
@@ -2701,7 +2721,9 @@
         41,
         4928
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (فِیْ)",
+    "meaning_ur": "Lafz-e-Quran (فِیْ)"
   },
   {
     "rank": 12,
@@ -2919,7 +2941,9 @@
         11,
         3748
       ]
-    ]
+    ],
+    "meaning_en": "Allah (The One True God)",
+    "meaning_ur": "Allah Ta'ala"
   },
   {
     "rank": 13,
@@ -3157,7 +3181,9 @@
         4,
         2972
       ]
-    ]
+    ],
+    "meaning_en": "From / Of",
+    "meaning_ur": "Se / Mein se"
   },
   {
     "rank": 14,
@@ -3397,7 +3423,9 @@
         10,
         4648
       ]
-    ]
+    ],
+    "meaning_en": "Indeed / Truly",
+    "meaning_ur": "Beshak / Yaqeenan"
   },
   {
     "rank": 15,
@@ -3639,7 +3667,9 @@
         19,
         3581
       ]
-    ]
+    ],
+    "meaning_en": "From / Of",
+    "meaning_ur": "Se / Mein se"
   },
   {
     "rank": 16,
@@ -3876,7 +3906,9 @@
         7,
         3312
       ]
-    ]
+    ],
+    "meaning_en": "From / Of",
+    "meaning_ur": "Se / Mein se"
   },
   {
     "rank": 17,
@@ -4114,7 +4146,9 @@
         4,
         5580
       ]
-    ]
+    ],
+    "meaning_en": "Upon / On",
+    "meaning_ur": "Par / Ooper"
   },
   {
     "rank": 18,
@@ -4347,7 +4381,9 @@
         2,
         4961
       ]
-    ]
+    ],
+    "meaning_en": "Indeed / Truly",
+    "meaning_ur": "Beshak / Yaqeenan"
   },
   {
     "rank": 19,
@@ -4577,7 +4613,9 @@
         10,
         8863
       ]
-    ]
+    ],
+    "meaning_en": "He was / Used to be",
+    "meaning_ur": "Tha / Hua"
   },
   {
     "rank": 20,
@@ -4821,7 +4859,9 @@
         1,
         6076
       ]
-    ]
+    ],
+    "meaning_en": "Indeed / Truly",
+    "meaning_ur": "Beshak / Yaqeenan"
   },
   {
     "rank": 21,
@@ -5054,7 +5094,9 @@
         1,
         6484
       ]
-    ]
+    ],
+    "meaning_en": "He / It",
+    "meaning_ur": "Wo (Muzakkar)"
   },
   {
     "rank": 22,
@@ -5263,7 +5305,9 @@
         3,
         12889
       ]
-    ]
+    ],
+    "meaning_en": "He said",
+    "meaning_ur": "Usne farmaya / Kaha"
   },
   {
     "rank": 23,
@@ -5496,7 +5540,9 @@
         111,
         6272
       ]
-    ]
+    ],
+    "meaning_en": "When",
+    "meaning_ur": "Jab"
   },
   {
     "rank": 24,
@@ -5725,7 +5771,9 @@
         14,
         8346
       ]
-    ]
+    ],
+    "meaning_en": "For they / them",
+    "meaning_ur": "Ke liye Wo sab log"
   },
   {
     "rank": 25,
@@ -5949,7 +5997,9 @@
         3,
         6358
       ]
-    ]
+    ],
+    "meaning_en": "In/With what / that which / not",
+    "meaning_ur": "Saath Jo / Kya / Nahi"
   },
   {
     "rank": 26,
@@ -6179,7 +6229,9 @@
         13,
         7912
       ]
-    ]
+    ],
+    "meaning_en": "Then / Thereafter",
+    "meaning_ur": "Phir / Uske baad"
   },
   {
     "rank": 27,
@@ -6400,7 +6452,9 @@
         20,
         6836
       ]
-    ]
+    ],
+    "meaning_en": "They / Them",
+    "meaning_ur": "Wo sab log"
   },
   {
     "rank": 28,
@@ -6625,7 +6679,9 @@
         34,
         7933
       ]
-    ]
+    ],
+    "meaning_en": "From / Of",
+    "meaning_ur": "Se / Mein se"
   },
   {
     "rank": 29,
@@ -6857,7 +6913,9 @@
         23,
         10151
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الَّذِیْ)",
+    "meaning_ur": "Lafz-e-Quran (الَّذِیْ)"
   },
   {
     "rank": 30,
@@ -7089,7 +7147,9 @@
         15,
         10174
       ]
-    ]
+    ],
+    "meaning_en": "To / Towards",
+    "meaning_ur": "Taraf / Tak"
   },
   {
     "rank": 31,
@@ -7308,7 +7368,9 @@
         42,
         6203
       ]
-    ]
+    ],
+    "meaning_en": "Or",
+    "meaning_ur": "Ya"
   },
   {
     "rank": 32,
@@ -7530,7 +7592,9 @@
         22,
         5081
       ]
-    ]
+    ],
+    "meaning_en": "Upon / On",
+    "meaning_ur": "Par / Ooper"
   },
   {
     "rank": 33,
@@ -7741,7 +7805,9 @@
         24,
         15277
       ]
-    ]
+    ],
+    "meaning_en": "They were",
+    "meaning_ur": "Wo the"
   },
   {
     "rank": 34,
@@ -7962,7 +8028,9 @@
         18,
         7569
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بِهٖ)",
+    "meaning_ur": "Lafz-e-Quran (بِهٖ)"
   },
   {
     "rank": 35,
@@ -8182,7 +8250,9 @@
         32,
         8312
       ]
-    ]
+    ],
+    "meaning_en": "For you (plural)",
+    "meaning_ur": "Ke liye Tum sab"
   },
   {
     "rank": 36,
@@ -8401,7 +8471,9 @@
         12,
         7698
       ]
-    ]
+    ],
+    "meaning_en": "They believed",
+    "meaning_ur": "Wo imaan laye"
   },
   {
     "rank": 37,
@@ -8617,7 +8689,9 @@
         25,
         11301
       ]
-    ]
+    ],
+    "meaning_en": "If / Would that",
+    "meaning_ur": "Agar / Kaash"
   },
   {
     "rank": 38,
@@ -8841,7 +8915,9 @@
         42,
         15789
       ]
-    ]
+    ],
+    "meaning_en": "The Earth",
+    "meaning_ur": "Zameen"
   },
   {
     "rank": 39,
@@ -9055,7 +9131,9 @@
         2,
         9775
       ]
-    ]
+    ],
+    "meaning_en": "They said",
+    "meaning_ur": "Unhone kaha"
   },
   {
     "rank": 40,
@@ -9262,7 +9340,9 @@
         6,
         6549
       ]
-    ]
+    ],
+    "meaning_en": "When / Remember when",
+    "meaning_ur": "Jabke / Yaad karo jab"
   },
   {
     "rank": 41,
@@ -9489,7 +9569,9 @@
         14,
         12949
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (فِیْهَا)",
+    "meaning_ur": "Lafz-e-Quran (فِیْهَا)"
   },
   {
     "rank": 42,
@@ -9705,7 +9787,9 @@
         10,
         11428
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لَهٗ)",
+    "meaning_ur": "Lafz-e-Quran (لَهٗ)"
   },
   {
     "rank": 43,
@@ -9933,7 +10017,9 @@
         4,
         10926
       ]
-    ]
+    ],
+    "meaning_en": "That",
+    "meaning_ur": "Wo"
   },
   {
     "rank": 44,
@@ -10144,7 +10230,9 @@
         26,
         7879
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (كُنْتُمْ)",
+    "meaning_ur": "Lafz-e-Quran (كُنْتُمْ)"
   },
   {
     "rank": 45,
@@ -10359,7 +10447,9 @@
         1,
         17296
       ]
-    ]
+    ],
+    "meaning_en": "Say! (O Prophet)",
+    "meaning_ur": "Farmaiye! / Kaho!"
   },
   {
     "rank": 46,
@@ -10575,7 +10665,9 @@
         3,
         20035
       ]
-    ]
+    ],
+    "meaning_en": "This (masculine)",
+    "meaning_ur": "Yeh"
   },
   {
     "rank": 47,
@@ -10794,7 +10886,9 @@
         7,
         15135
       ]
-    ]
+    ],
+    "meaning_en": "The Heavens / Skies",
+    "meaning_ur": "Aasman"
   },
   {
     "rank": 48,
@@ -11009,7 +11103,9 @@
         4,
         11189
       ]
-    ]
+    ],
+    "meaning_en": "They disbelieved",
+    "meaning_ur": "Unhone kufr kiya"
   },
   {
     "rank": 49,
@@ -11222,7 +11318,9 @@
         2,
         20391
       ]
-    ]
+    ],
+    "meaning_en": "For indeed / already",
+    "meaning_ur": "Ke liye Tehqeeq / Beshak"
   },
   {
     "rank": 50,
@@ -11442,7 +11540,9 @@
         13,
         18509
       ]
-    ]
+    ],
+    "meaning_en": "Did not",
+    "meaning_ur": "Nahi"
   },
   {
     "rank": 51,
@@ -11658,7 +11758,9 @@
         31,
         12266
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (عَلَیْهِمْ)",
+    "meaning_ur": "Lafz-e-Quran (عَلَیْهِمْ)"
   },
   {
     "rank": 52,
@@ -11875,7 +11977,9 @@
         30,
         24470
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَوْمَ)",
+    "meaning_ur": "Lafz-e-Quran (یَوْمَ)"
   },
   {
     "rank": 53,
@@ -12088,7 +12192,9 @@
         2,
         22231
       ]
-    ]
+    ],
+    "meaning_en": "I",
+    "meaning_ur": "Main"
   },
   {
     "rank": 54,
@@ -12303,7 +12409,9 @@
         20,
         14772
       ]
-    ]
+    ],
+    "meaning_en": "What / That which / Not",
+    "meaning_ur": "Jo / Kya / Nahi"
   },
   {
     "rank": 55,
@@ -12516,7 +12624,9 @@
         3,
         11399
       ]
-    ]
+    ],
+    "meaning_en": "To / Towards",
+    "meaning_ur": "Taraf / Tak"
   },
   {
     "rank": 56,
@@ -12727,7 +12837,9 @@
         28,
         15696
       ]
-    ]
+    ],
+    "meaning_en": "From / Concerning",
+    "meaning_ur": "Se / Baabat"
   },
   {
     "rank": 57,
@@ -12941,7 +13053,9 @@
         47,
         14113
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (شَیْءٍ)",
+    "meaning_ur": "Lafz-e-Quran (شَیْءٍ)"
   },
   {
     "rank": 58,
@@ -13156,7 +13270,9 @@
         43,
         10744
       ]
-    ]
+    ],
+    "meaning_en": "So no / not",
+    "meaning_ur": "To Nahi / Na"
   },
   {
     "rank": 59,
@@ -13360,7 +13476,9 @@
         3,
         15131
       ]
-    ]
+    ],
+    "meaning_en": "Indeed / Truly",
+    "meaning_ur": "Beshak / Yaqeenan"
   },
   {
     "rank": 60,
@@ -13557,7 +13675,9 @@
         1,
         11324
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یٰاَیُّهَا)",
+    "meaning_ur": "Lafz-e-Quran (یٰاَیُّهَا)"
   },
   {
     "rank": 61,
@@ -13757,7 +13877,9 @@
         14,
         7360
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (عَلَیْكُمْ)",
+    "meaning_ur": "Lafz-e-Quran (عَلَیْكُمْ)"
   },
   {
     "rank": 62,
@@ -13967,7 +14089,9 @@
         9,
         13882
       ]
-    ]
+    ],
+    "meaning_en": "Indeed / Already",
+    "meaning_ur": "Tehqeeq / Beshak"
   },
   {
     "rank": 63,
@@ -14178,7 +14302,9 @@
         17,
         23338
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (عَلَیْهِ)",
+    "meaning_ur": "Lafz-e-Quran (عَلَیْهِ)"
   },
   {
     "rank": 64,
@@ -14372,7 +14498,9 @@
         17,
         11368
       ]
-    ]
+    ],
+    "meaning_en": "In/With allah (the one true god)",
+    "meaning_ur": "Saath Allah Ta'ala"
   },
   {
     "rank": 65,
@@ -14587,7 +14715,9 @@
         9,
         17796
       ]
-    ]
+    ],
+    "meaning_en": "Every / All",
+    "meaning_ur": "Har ek / Sab"
   },
   {
     "rank": 66,
@@ -14784,7 +14914,9 @@
         5,
         22053
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اِنِّیْ)",
+    "meaning_ur": "Lafz-e-Quran (اِنِّیْ)"
   },
   {
     "rank": 67,
@@ -14995,7 +15127,9 @@
         7,
         18649
       ]
-    ]
+    ],
+    "meaning_en": "No / Not",
+    "meaning_ur": "Nahi / Na"
   },
   {
     "rank": 68,
@@ -15199,7 +15333,9 @@
         20,
         13350
       ]
-    ]
+    ],
+    "meaning_en": "Until",
+    "meaning_ur": "Yahan tak ke"
   },
   {
     "rank": 69,
@@ -15404,7 +15540,9 @@
         12,
         13476
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لِلّٰهِ)",
+    "meaning_ur": "Lafz-e-Quran (لِلّٰهِ)"
   },
   {
     "rank": 70,
@@ -15601,7 +15739,9 @@
         7,
         8665
       ]
-    ]
+    ],
+    "meaning_en": "You (plural)",
+    "meaning_ur": "Tum sab"
   },
   {
     "rank": 71,
@@ -15805,7 +15945,9 @@
         16,
         43235
       ]
-    ]
+    ],
+    "meaning_en": "Or (in questions)",
+    "meaning_ur": "Ya"
   },
   {
     "rank": 72,
@@ -16014,7 +16156,9 @@
         23,
         19368
       ]
-    ]
+    ],
+    "meaning_en": "Near / With / In presence of",
+    "meaning_ur": "Paas / Nazdeek"
   },
   {
     "rank": 73,
@@ -16215,7 +16359,9 @@
         1,
         11630
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اُولٰٓىٕكَ)",
+    "meaning_ur": "Lafz-e-Quran (اُولٰٓىٕكَ)"
   },
   {
     "rank": 74,
@@ -16406,7 +16552,9 @@
         69,
         9229
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (عَلِیْمٌ)",
+    "meaning_ur": "Lafz-e-Quran (عَلِیْمٌ)"
   },
   {
     "rank": 75,
@@ -16609,7 +16757,9 @@
         6,
         22488
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (فِیْهِ)",
+    "meaning_ur": "Lafz-e-Quran (فِیْهِ)"
   },
   {
     "rank": 76,
@@ -16807,7 +16957,9 @@
         11,
         21585
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مِنْهُمْ)",
+    "meaning_ur": "Lafz-e-Quran (مِنْهُمْ)"
   },
   {
     "rank": 77,
@@ -17006,7 +17158,9 @@
         12,
         18272
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الدُّنْیَا)",
+    "meaning_ur": "Lafz-e-Quran (الدُّنْیَا)"
   },
   {
     "rank": 78,
@@ -17214,7 +17368,9 @@
         1,
         23812
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اِنَّمَا)",
+    "meaning_ur": "Lafz-e-Quran (اِنَّمَا)"
   },
   {
     "rank": 79,
@@ -17409,7 +17565,9 @@
         11,
         13756
       ]
-    ]
+    ],
+    "meaning_en": "Mankind / The People",
+    "meaning_ur": "Log / Insaan"
   },
   {
     "rank": 80,
@@ -17601,7 +17759,9 @@
         2,
         35680
       ]
-    ]
+    ],
+    "meaning_en": "Lord / Sustainer",
+    "meaning_ur": "Rab / Palne wala"
   },
   {
     "rank": 81,
@@ -17800,7 +17960,9 @@
         13,
         27513
       ]
-    ]
+    ],
+    "meaning_en": "Besides / Below",
+    "meaning_ur": "Siwa / Chhod kar"
   },
   {
     "rank": 82,
@@ -17999,7 +18161,9 @@
         6,
         28839
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اِلَیْهِ)",
+    "meaning_ur": "Lafz-e-Quran (اِلَیْهِ)"
   },
   {
     "rank": 83,
@@ -18208,7 +18372,9 @@
         9,
         38607
       ]
-    ]
+    ],
+    "meaning_en": "The Earth",
+    "meaning_ur": "Zameen"
   },
   {
     "rank": 84,
@@ -18398,7 +18564,9 @@
         20,
         10434
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بَعْدِ)",
+    "meaning_ur": "Lafz-e-Quran (بَعْدِ)"
   },
   {
     "rank": 85,
@@ -18589,7 +18757,9 @@
         4,
         22725
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مُوْسٰى)",
+    "meaning_ur": "Lafz-e-Quran (مُوْسٰى)"
   },
   {
     "rank": 86,
@@ -18789,7 +18959,9 @@
         28,
         25431
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تَعْمَلُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (تَعْمَلُوْنَ)"
   },
   {
     "rank": 87,
@@ -18986,7 +19158,9 @@
         32,
         21545
       ]
-    ]
+    ],
+    "meaning_en": "A punishment / torment",
+    "meaning_ur": "Azaab"
   },
   {
     "rank": 88,
@@ -19178,7 +19352,9 @@
         17,
         24395
       ]
-    ]
+    ],
+    "meaning_en": "They / Them",
+    "meaning_ur": "Wo sab log"
   },
   {
     "rank": 89,
@@ -19375,7 +19551,9 @@
         13,
         14860
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بَیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (بَیْنَ)"
   },
   {
     "rank": 90,
@@ -19581,7 +19759,9 @@
         7,
         35565
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (السَّمَآءِ)",
+    "meaning_ur": "Lafz-e-Quran (السَّمَآءِ)"
   },
   {
     "rank": 91,
@@ -19773,7 +19953,9 @@
         8,
         11404
       ]
-    ]
+    ],
+    "meaning_en": "The Book / Scripture",
+    "meaning_ur": "Kitab / Asmani Farman"
   },
   {
     "rank": 92,
@@ -19968,7 +20150,9 @@
         17,
         38291
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (كُنَّا)",
+    "meaning_ur": "Lafz-e-Quran (كُنَّا)"
   },
   {
     "rank": 93,
@@ -20161,7 +20345,9 @@
         13,
         11452
       ]
-    ]
+    ],
+    "meaning_en": "The Book / Scripture",
+    "meaning_ur": "Kitab / Asmani Farman"
   },
   {
     "rank": 94,
@@ -20363,7 +20549,9 @@
         1,
         34626
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَلَمْ)",
+    "meaning_ur": "Lafz-e-Quran (اَلَمْ)"
   },
   {
     "rank": 95,
@@ -20553,7 +20741,9 @@
         19,
         32060
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (رَبِّیْ)",
+    "meaning_ur": "Lafz-e-Quran (رَبِّیْ)"
   },
   {
     "rank": 96,
@@ -20745,7 +20935,9 @@
         16,
         16008
       ]
-    ]
+    ],
+    "meaning_en": "Did not",
+    "meaning_ur": "Nahi"
   },
   {
     "rank": 97,
@@ -20943,7 +21135,9 @@
         3,
         31158
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (خَیْرٌ)",
+    "meaning_ur": "Lafz-e-Quran (خَیْرٌ)"
   },
   {
     "rank": 98,
@@ -21145,7 +21339,9 @@
         11,
         26575
       ]
-    ]
+    ],
+    "meaning_en": "From / Concerning",
+    "meaning_ur": "Se / Baabat"
   },
   {
     "rank": 99,
@@ -21341,7 +21537,9 @@
         30,
         20644
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یُؤْمِنُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یُؤْمِنُوْنَ)"
   },
   {
     "rank": 100,
@@ -21535,7 +21733,9 @@
         5,
         32461
       ]
-    ]
+    ],
+    "meaning_en": "We",
+    "meaning_ur": "Hum"
   },
   {
     "rank": 101,
@@ -21730,7 +21930,9 @@
         31,
         32394
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَعْلَمُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یَعْلَمُوْنَ)"
   },
   {
     "rank": 102,
@@ -21924,7 +22126,9 @@
         15,
         37314
       ]
-    ]
+    ],
+    "meaning_en": "He made / appointed",
+    "meaning_ur": "Usne banaya"
   },
   {
     "rank": 103,
@@ -22108,7 +22312,9 @@
         7,
         12357
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (سَبِیْلِ)",
+    "meaning_ur": "Lafz-e-Quran (سَبِیْلِ)"
   },
   {
     "rank": 104,
@@ -22312,7 +22518,9 @@
         17,
         43791
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (رَبِّكَ)",
+    "meaning_ur": "Lafz-e-Quran (رَبِّكَ)"
   },
   {
     "rank": 105,
@@ -22515,7 +22723,9 @@
         7,
         38666
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَقُوْلُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یَقُوْلُوْنَ)"
   },
   {
     "rank": 106,
@@ -22711,7 +22921,9 @@
         4,
         19561
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مِمَّا)",
+    "meaning_ur": "Lafz-e-Quran (مِمَّا)"
   },
   {
     "rank": 107,
@@ -22899,7 +23111,9 @@
         5,
         26738
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْمُؤْمِنِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (الْمُؤْمِنِیْنَ)"
   },
   {
     "rank": 108,
@@ -23093,7 +23307,9 @@
         18,
         31271
       ]
-    ]
+    ],
+    "meaning_en": "You (singular)",
+    "meaning_ur": "Tu / Aap"
   },
   {
     "rank": 109,
@@ -23289,7 +23505,9 @@
         7,
         32909
       ]
-    ]
+    ],
+    "meaning_en": "He came",
+    "meaning_ur": "Wo aaya"
   },
   {
     "rank": 110,
@@ -23482,7 +23700,9 @@
         9,
         28059
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (كَیْفَ)",
+    "meaning_ur": "Lafz-e-Quran (كَیْفَ)"
   },
   {
     "rank": 111,
@@ -23670,7 +23890,9 @@
         10,
         38943
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (جَعَلْنَا)",
+    "meaning_ur": "Lafz-e-Quran (جَعَلْنَا)"
   },
   {
     "rank": 112,
@@ -23864,7 +24086,9 @@
         9,
         33477
       ]
-    ]
+    ],
+    "meaning_en": "I",
+    "meaning_ur": "Main"
   },
   {
     "rank": 113,
@@ -24060,7 +24284,9 @@
         14,
         26307
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مِنْهَا)",
+    "meaning_ur": "Lafz-e-Quran (مِنْهَا)"
   },
   {
     "rank": 114,
@@ -24263,7 +24489,9 @@
         37,
         45478
       ]
-    ]
+    ],
+    "meaning_en": "So what / that which / not",
+    "meaning_ur": "To Jo / Kya / Nahi"
   },
   {
     "rank": 115,
@@ -24454,7 +24682,9 @@
         8,
         24176
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مِنْكُمْ)",
+    "meaning_ur": "Lafz-e-Quran (مِنْكُمْ)"
   },
   {
     "rank": 116,
@@ -24651,7 +24881,9 @@
         6,
         42463
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَعْلَمُ)",
+    "meaning_ur": "Lafz-e-Quran (یَعْلَمُ)"
   },
   {
     "rank": 117,
@@ -24841,7 +25073,9 @@
         7,
         33568
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اِلَیْكَ)",
+    "meaning_ur": "Lafz-e-Quran (اِلَیْكَ)"
   },
   {
     "rank": 118,
@@ -25031,7 +25265,9 @@
         19,
         28596
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الظّٰلِمِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (الظّٰلِمِیْنَ)"
   },
   {
     "rank": 119,
@@ -25224,7 +25460,9 @@
         10,
         13521
       ]
-    ]
+    ],
+    "meaning_en": "So indeed / truly",
+    "meaning_ur": "To Beshak / Yaqeenan"
   },
   {
     "rank": 120,
@@ -25415,7 +25653,9 @@
         1,
         47496
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اِنَّهٗ)",
+    "meaning_ur": "Lafz-e-Quran (اِنَّهٗ)"
   },
   {
     "rank": 121,
@@ -25601,7 +25841,9 @@
         9,
         22390
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لَنَا)",
+    "meaning_ur": "Lafz-e-Quran (لَنَا)"
   },
   {
     "rank": 122,
@@ -25790,7 +26032,9 @@
         3,
         28630
       ]
-    ]
+    ],
+    "meaning_en": "From / Of",
+    "meaning_ur": "Se / Mein se"
   },
   {
     "rank": 123,
@@ -25990,7 +26234,9 @@
         19,
         49012
       ]
-    ]
+    ],
+    "meaning_en": "He created",
+    "meaning_ur": "Usne paida farmaya"
   },
   {
     "rank": 124,
@@ -26179,7 +26425,9 @@
         1,
         35470
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (كَذٰلِكَ)",
+    "meaning_ur": "Lafz-e-Quran (كَذٰلِكَ)"
   },
   {
     "rank": 125,
@@ -26365,7 +26613,9 @@
         6,
         35914
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْعٰلَمِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (الْعٰلَمِیْنَ)"
   },
   {
     "rank": 126,
@@ -26552,7 +26802,9 @@
         1,
         32881
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (فَلَمَّا)",
+    "meaning_ur": "Lafz-e-Quran (فَلَمَّا)"
   },
   {
     "rank": 127,
@@ -26737,7 +26989,9 @@
         42,
         19995
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لَعَلَّكُمْ)",
+    "meaning_ur": "Lafz-e-Quran (لَعَلَّكُمْ)"
   },
   {
     "rank": 128,
@@ -26925,7 +27179,9 @@
         8,
         27040
       ]
-    ]
+    ],
+    "meaning_en": "Never / Will not",
+    "meaning_ur": "Hargiz nahi"
   },
   {
     "rank": 129,
@@ -27122,7 +27378,9 @@
         3,
         42073
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الَّتِیْ)",
+    "meaning_ur": "Lafz-e-Quran (الَّتِیْ)"
   },
   {
     "rank": 130,
@@ -27311,7 +27569,9 @@
         10,
         18666
       ]
-    ]
+    ],
+    "meaning_en": "He sent down",
+    "meaning_ur": "Usne naazil kiya"
   },
   {
     "rank": 131,
@@ -27499,7 +27759,9 @@
         14,
         33291
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَعْلَمُ)",
+    "meaning_ur": "Lafz-e-Quran (اَعْلَمُ)"
   },
   {
     "rank": 132,
@@ -27684,7 +27946,9 @@
         12,
         25657
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (رَّحِیْمٌ)",
+    "meaning_ur": "Lafz-e-Quran (رَّحِیْمٌ)"
   },
   {
     "rank": 133,
@@ -27877,7 +28141,9 @@
         16,
         29848
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (عَنْهُمْ)",
+    "meaning_ur": "Lafz-e-Quran (عَنْهُمْ)"
   },
   {
     "rank": 134,
@@ -28065,7 +28331,9 @@
         30,
         25875
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (كَمَا)",
+    "meaning_ur": "Lafz-e-Quran (كَمَا)"
   },
   {
     "rank": 135,
@@ -28255,7 +28523,9 @@
         2,
         32834
       ]
-    ]
+    ],
+    "meaning_en": "For what / that which / not",
+    "meaning_ur": "Ke liye Jo / Kya / Nahi"
   },
   {
     "rank": 136,
@@ -28448,7 +28718,9 @@
         5,
         26454
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بَعْدَ)",
+    "meaning_ur": "Lafz-e-Quran (بَعْدَ)"
   },
   {
     "rank": 137,
@@ -28643,7 +28915,9 @@
         1,
         47328
       ]
-    ]
+    ],
+    "meaning_en": "Rather / Nay",
+    "meaning_ur": "Balke"
   },
   {
     "rank": 138,
@@ -28840,7 +29114,9 @@
         4,
         45997
       ]
-    ]
+    ],
+    "meaning_en": "They did deeds",
+    "meaning_ur": "Unhone amal kiye"
   },
   {
     "rank": 139,
@@ -29029,7 +29305,9 @@
         13,
         25312
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَعْمَلُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یَعْمَلُوْنَ)"
   },
   {
     "rank": 140,
@@ -29222,7 +29500,9 @@
         8,
         27228
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بِهَا)",
+    "meaning_ur": "Lafz-e-Quran (بِهَا)"
   },
   {
     "rank": 141,
@@ -29418,7 +29698,9 @@
         6,
         52892
       ]
-    ]
+    ],
+    "meaning_en": "So when",
+    "meaning_ur": "To Jab"
   },
   {
     "rank": 142,
@@ -29609,7 +29891,9 @@
         12,
         28548
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لٰـكِنْ)",
+    "meaning_ur": "Lafz-e-Quran (لٰـكِنْ)"
   },
   {
     "rank": 143,
@@ -29797,7 +30081,9 @@
         3,
         39392
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لَكَ)",
+    "meaning_ur": "Lafz-e-Quran (لَكَ)"
   },
   {
     "rank": 144,
@@ -29984,7 +30270,9 @@
         1,
         35145
       ]
-    ]
+    ],
+    "meaning_en": "Our Lord!",
+    "meaning_ur": "Aye hamare Rab!"
   },
   {
     "rank": 145,
@@ -30175,7 +30463,9 @@
         10,
         36194
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (شَآءَ)",
+    "meaning_ur": "Lafz-e-Quran (شَآءَ)"
   },
   {
     "rank": 146,
@@ -30363,7 +30653,9 @@
         19,
         30801
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مِّمَّا)",
+    "meaning_ur": "Lafz-e-Quran (مِّمَّا)"
   },
   {
     "rank": 147,
@@ -30559,7 +30851,9 @@
         8,
         45373
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الصّٰلِحٰتِ)",
+    "meaning_ur": "Lafz-e-Quran (الصّٰلِحٰتِ)"
   },
   {
     "rank": 148,
@@ -30743,7 +31037,9 @@
         3,
         37927
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (رَبَّكَ)",
+    "meaning_ur": "Lafz-e-Quran (رَبَّكَ)"
   },
   {
     "rank": 149,
@@ -30937,7 +31233,9 @@
         6,
         45922
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (هِیَ)",
+    "meaning_ur": "Lafz-e-Quran (هِیَ)"
   },
   {
     "rank": 150,
@@ -31126,7 +31424,9 @@
         22,
         30441
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْكٰفِرِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (الْكٰفِرِیْنَ)"
   },
   {
     "rank": 151,
@@ -31315,7 +31615,9 @@
         8,
         27819
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مِّنْهُمْ)",
+    "meaning_ur": "Lafz-e-Quran (مِّنْهُمْ)"
   },
   {
     "rank": 152,
@@ -31510,7 +31812,9 @@
         6,
         43628
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (هَلْ)",
+    "meaning_ur": "Lafz-e-Quran (هَلْ)"
   },
   {
     "rank": 153,
@@ -31702,7 +32006,9 @@
         2,
         46918
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَرْسَلْنَا)",
+    "meaning_ur": "Lafz-e-Quran (اَرْسَلْنَا)"
   },
   {
     "rank": 154,
@@ -31887,7 +32193,9 @@
         11,
         25656
       ]
-    ]
+    ],
+    "meaning_en": "Oft-Forgiving",
+    "meaning_ur": "Bakhshne Wala"
   },
   {
     "rank": 155,
@@ -32077,7 +32385,9 @@
         4,
         37772
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لِلَّذِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (لِلَّذِیْنَ)"
   },
   {
     "rank": 156,
@@ -32267,7 +32577,9 @@
         4,
         37331
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (عَلَیْكَ)",
+    "meaning_ur": "Lafz-e-Quran (عَلَیْكَ)"
   },
   {
     "rank": 157,
@@ -32456,7 +32768,9 @@
         4,
         42252
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بِاٰیٰتِنَا)",
+    "meaning_ur": "Lafz-e-Quran (بِاٰیٰتِنَا)"
   },
   {
     "rank": 158,
@@ -32647,7 +32961,9 @@
         5,
         37766
       ]
-    ]
+    ],
+    "meaning_en": "The Hereafter",
+    "meaning_ur": "Aakhirat"
   },
   {
     "rank": 159,
@@ -32835,7 +33151,9 @@
         13,
         30517
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لَیْسَ)",
+    "meaning_ur": "Lafz-e-Quran (لَیْسَ)"
   },
   {
     "rank": 160,
@@ -33031,7 +33349,9 @@
         16,
         44186
       ]
-    ]
+    ],
+    "meaning_en": "Every / All",
+    "meaning_ur": "Har ek / Sab"
   },
   {
     "rank": 161,
@@ -33214,7 +33534,9 @@
         19,
         33296
       ]
-    ]
+    ],
+    "meaning_en": "You know",
+    "meaning_ur": "Tum jaante ho"
   },
   {
     "rank": 162,
@@ -33401,7 +33723,9 @@
         8,
         27586
       ]
-    ]
+    ],
+    "meaning_en": "With",
+    "meaning_ur": "Saath"
   },
   {
     "rank": 163,
@@ -33577,7 +33901,9 @@
         10,
         16147
       ]
-    ]
+    ],
+    "meaning_en": "He sent down",
+    "meaning_ur": "Usne naazil kiya"
   },
   {
     "rank": 164,
@@ -33768,7 +34094,9 @@
         3,
         51951
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (قِیْلَ)",
+    "meaning_ur": "Lafz-e-Quran (قِیْلَ)"
   },
   {
     "rank": 165,
@@ -33954,7 +34282,9 @@
         1,
         49326
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَصْحٰبُ)",
+    "meaning_ur": "Lafz-e-Quran (اَصْحٰبُ)"
   },
   {
     "rank": 166,
@@ -34145,7 +34475,9 @@
         17,
         41832
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (شَیْــٴًـا)",
+    "meaning_ur": "Lafz-e-Quran (شَیْــٴًـا)"
   },
   {
     "rank": 167,
@@ -34336,7 +34668,9 @@
         2,
         46823
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لَىٕنْ)",
+    "meaning_ur": "Lafz-e-Quran (لَىٕنْ)"
   },
   {
     "rank": 168,
@@ -34523,7 +34857,9 @@
         29,
         40562
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (رَبُّكَ)",
+    "meaning_ur": "Lafz-e-Quran (رَبُّكَ)"
   },
   {
     "rank": 169,
@@ -34714,7 +35050,9 @@
         5,
         47029
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (رَبِّهِمْ)",
+    "meaning_ur": "Lafz-e-Quran (رَبِّهِمْ)"
   },
   {
     "rank": 170,
@@ -34892,7 +35230,9 @@
         11,
         31021
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یٰقَوْمِ)",
+    "meaning_ur": "Lafz-e-Quran (یٰقَوْمِ)"
   },
   {
     "rank": 171,
@@ -35072,7 +35412,9 @@
         23,
         24935
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اللّٰهِؕ-وَ)",
+    "meaning_ur": "Lafz-e-Quran (اللّٰهِؕ-وَ)"
   },
   {
     "rank": 172,
@@ -35260,7 +35602,9 @@
         18,
         37535
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (عَمَّا)",
+    "meaning_ur": "Lafz-e-Quran (عَمَّا)"
   },
   {
     "rank": 173,
@@ -35447,7 +35791,9 @@
         13,
         43690
       ]
-    ]
+    ],
+    "meaning_en": "The Resurrection",
+    "meaning_ur": "Qayamat ka din"
   },
   {
     "rank": 174,
@@ -35633,7 +35979,9 @@
         30,
         48481
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَّشَآءُ)",
+    "meaning_ur": "Lafz-e-Quran (یَّشَآءُ)"
   },
   {
     "rank": 175,
@@ -35822,7 +36170,9 @@
         17,
         62229
       ]
-    ]
+    ],
+    "meaning_en": "The Fire / Hell",
+    "meaning_ur": "Aag / Dozakh"
   },
   {
     "rank": 176,
@@ -36014,7 +36364,9 @@
         14,
         47347
       ]
-    ]
+    ],
+    "meaning_en": "Every / All",
+    "meaning_ur": "Har ek / Sab"
   },
   {
     "rank": 177,
@@ -36201,7 +36553,9 @@
         1,
         54386
       ]
-    ]
+    ],
+    "meaning_en": "Or",
+    "meaning_ur": "Ya"
   },
   {
     "rank": 178,
@@ -36391,7 +36745,9 @@
         17,
         49860
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بِالْحَقِّ)",
+    "meaning_ur": "Lafz-e-Quran (بِالْحَقِّ)"
   },
   {
     "rank": 179,
@@ -36582,7 +36938,9 @@
         6,
         56133
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْعَزِیْزُ)",
+    "meaning_ur": "Lafz-e-Quran (الْعَزِیْزُ)"
   },
   {
     "rank": 180,
@@ -36769,7 +37127,9 @@
         10,
         44039
       ]
-    ]
+    ],
+    "meaning_en": "For you (plural)",
+    "meaning_ur": "Ke liye Tum sab"
   },
   {
     "rank": 181,
@@ -36962,7 +37322,9 @@
         10,
         45375
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تَجْرِیْ)",
+    "meaning_ur": "Lafz-e-Quran (تَجْرِیْ)"
   },
   {
     "rank": 182,
@@ -37152,7 +37514,9 @@
         14,
         51820
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (ذَا)",
+    "meaning_ur": "Lafz-e-Quran (ذَا)"
   },
   {
     "rank": 183,
@@ -37336,7 +37700,9 @@
         11,
         31148
       ]
-    ]
+    ],
+    "meaning_en": "Mankind / The People",
+    "meaning_ur": "Log / Insaan"
   },
   {
     "rank": 184,
@@ -37522,7 +37888,9 @@
         10,
         36643
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَنَّهُمْ)",
+    "meaning_ur": "Lafz-e-Quran (اَنَّهُمْ)"
   },
   {
     "rank": 185,
@@ -37713,7 +38081,9 @@
         13,
         39334
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (عَلَیْنَا)",
+    "meaning_ur": "Lafz-e-Quran (عَلَیْنَا)"
   },
   {
     "rank": 186,
@@ -37905,7 +38275,9 @@
         8,
         42393
       ]
-    ]
+    ],
+    "meaning_en": "For they / them",
+    "meaning_ur": "Ke liye Wo sab log"
   },
   {
     "rank": 187,
@@ -38095,7 +38467,9 @@
         12,
         54009
       ]
-    ]
+    ],
+    "meaning_en": "For from / of",
+    "meaning_ur": "Ke liye Se / Mein se"
   },
   {
     "rank": 188,
@@ -38275,7 +38649,9 @@
         15,
         28677
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (كَذَّبُوْا)",
+    "meaning_ur": "Lafz-e-Quran (كَذَّبُوْا)"
   },
   {
     "rank": 189,
@@ -38463,7 +38839,9 @@
         7,
         36266
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مِنْهُ)",
+    "meaning_ur": "Lafz-e-Quran (مِنْهُ)"
   },
   {
     "rank": 190,
@@ -38649,7 +39027,9 @@
         8,
         43097
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (فَاُولٰٓىٕكَ)",
+    "meaning_ur": "Lafz-e-Quran (فَاُولٰٓىٕكَ)"
   },
   {
     "rank": 191,
@@ -38839,7 +39219,9 @@
         7,
         43294
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (قَبْلُ)",
+    "meaning_ur": "Lafz-e-Quran (قَبْلُ)"
   },
   {
     "rank": 192,
@@ -39025,7 +39407,9 @@
         2,
         43441
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بَیْنَهُمْ)",
+    "meaning_ur": "Lafz-e-Quran (بَیْنَهُمْ)"
   },
   {
     "rank": 193,
@@ -39210,7 +39594,9 @@
         5,
         35651
       ]
-    ]
+    ],
+    "meaning_en": "Except / Only",
+    "meaning_ur": "Magar / Siwae"
   },
   {
     "rank": 194,
@@ -39393,7 +39779,9 @@
         3,
         52715
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (فِرْعَوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (فِرْعَوْنَ)"
   },
   {
     "rank": 195,
@@ -39577,7 +39965,9 @@
         5,
         25009
       ]
-    ]
+    ],
+    "meaning_en": "So indeed / already",
+    "meaning_ur": "To Tehqeeq / Beshak"
   },
   {
     "rank": 196,
@@ -39763,7 +40153,9 @@
         7,
         52872
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لِیْ)",
+    "meaning_ur": "Lafz-e-Quran (لِیْ)"
   },
   {
     "rank": 197,
@@ -39951,7 +40343,9 @@
         17,
         54922
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مُّبِیْنٌ)",
+    "meaning_ur": "Lafz-e-Quran (مُّبِیْنٌ)"
   },
   {
     "rank": 198,
@@ -40136,7 +40530,9 @@
         3,
         45988
       ]
-    ]
+    ],
+    "meaning_en": "Mankind / The People",
+    "meaning_ur": "Log / Insaan"
   },
   {
     "rank": 199,
@@ -40324,7 +40720,9 @@
         11,
         43947
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (خٰلِدِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (خٰلِدِیْنَ)"
   },
   {
     "rank": 200,
@@ -40501,7 +40899,9 @@
         15,
         16761
       ]
-    ]
+    ],
+    "meaning_en": "Fear Allah / Be mindful",
+    "meaning_ur": "Allah se daro / Taqwa ikhtiyar karo"
   },
   {
     "rank": 201,
@@ -40686,7 +41086,9 @@
         15,
         35159
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الصَّلٰوةَ)",
+    "meaning_ur": "Lafz-e-Quran (الصَّلٰوةَ)"
   },
   {
     "rank": 202,
@@ -40877,7 +41279,9 @@
         2,
         68142
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (جَنّٰتٍ)",
+    "meaning_ur": "Lafz-e-Quran (جَنّٰتٍ)"
   },
   {
     "rank": 203,
@@ -41060,7 +41464,9 @@
         18,
         31497
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (غَیْرَ)",
+    "meaning_ur": "Lafz-e-Quran (غَیْرَ)"
   },
   {
     "rank": 204,
@@ -41245,7 +41651,9 @@
         8,
         53295
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بِغَیْرِ)",
+    "meaning_ur": "Lafz-e-Quran (بِغَیْرِ)"
   },
   {
     "rank": 205,
@@ -41432,7 +41840,9 @@
         4,
         63182
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اِنَّهُمْ)",
+    "meaning_ur": "Lafz-e-Quran (اِنَّهُمْ)"
   },
   {
     "rank": 206,
@@ -41615,7 +42025,9 @@
         21,
         60043
       ]
-    ]
+    ],
+    "meaning_en": "So they / them",
+    "meaning_ur": "To Wo sab log"
   },
   {
     "rank": 207,
@@ -41793,7 +42205,9 @@
         9,
         42772
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اِسْرَآءِیْلَ)",
+    "meaning_ur": "Lafz-e-Quran (اِسْرَآءِیْلَ)"
   },
   {
     "rank": 208,
@@ -41988,7 +42402,9 @@
         3,
         64586
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (عَلَیْهَا)",
+    "meaning_ur": "Lafz-e-Quran (عَلَیْهَا)"
   },
   {
     "rank": 209,
@@ -42168,7 +42584,9 @@
         7,
         21229
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یُحِبُّ)",
+    "meaning_ur": "Lafz-e-Quran (یُحِبُّ)"
   },
   {
     "rank": 210,
@@ -42352,7 +42770,9 @@
         4,
         44446
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اِبْرٰهِیْمَ)",
+    "meaning_ur": "Lafz-e-Quran (اِبْرٰهِیْمَ)"
   },
   {
     "rank": 211,
@@ -42538,7 +42958,9 @@
         14,
         56793
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (جَهَنَّمَ)",
+    "meaning_ur": "Lafz-e-Quran (جَهَنَّمَ)"
   },
   {
     "rank": 212,
@@ -42721,7 +43143,9 @@
         10,
         43669
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (هُدًى)",
+    "meaning_ur": "Lafz-e-Quran (هُدًى)"
   },
   {
     "rank": 213,
@@ -42907,7 +43331,9 @@
         7,
         44570
       ]
-    ]
+    ],
+    "meaning_en": "These",
+    "meaning_ur": "Yeh log"
   },
   {
     "rank": 214,
@@ -43095,7 +43521,9 @@
         11,
         54340
       ]
-    ]
+    ],
+    "meaning_en": "For you (plural)",
+    "meaning_ur": "Ke liye Tum sab"
   },
   {
     "rank": 215,
@@ -43280,7 +43708,9 @@
         16,
         58220
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (عَذَابًا)",
+    "meaning_ur": "Lafz-e-Quran (عَذَابًا)"
   },
   {
     "rank": 216,
@@ -43469,7 +43899,9 @@
         7,
         49358
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَقُوْلُ)",
+    "meaning_ur": "Lafz-e-Quran (یَقُوْلُ)"
   },
   {
     "rank": 217,
@@ -43655,7 +44087,9 @@
         5,
         53761
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اِلٰهَ)",
+    "meaning_ur": "Lafz-e-Quran (اِلٰهَ)"
   },
   {
     "rank": 218,
@@ -43837,7 +44271,9 @@
         3,
         42639
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (كَثِیْرًا)",
+    "meaning_ur": "Lafz-e-Quran (كَثِیْرًا)"
   },
   {
     "rank": 219,
@@ -44022,7 +44458,9 @@
         25,
         48962
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَلِیْمٌ)",
+    "meaning_ur": "Lafz-e-Quran (اَلِیْمٌ)"
   },
   {
     "rank": 220,
@@ -44208,7 +44646,9 @@
         2,
         73619
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَمَّا)",
+    "meaning_ur": "Lafz-e-Quran (اَمَّا)"
   },
   {
     "rank": 221,
@@ -44391,7 +44831,9 @@
         15,
         46809
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْحَیٰوةِ)",
+    "meaning_ur": "Lafz-e-Quran (الْحَیٰوةِ)"
   },
   {
     "rank": 222,
@@ -44573,7 +45015,9 @@
         3,
         53355
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (كُنْتَ)",
+    "meaning_ur": "Lafz-e-Quran (كُنْتَ)"
   },
   {
     "rank": 223,
@@ -44754,7 +45198,9 @@
         6,
         44516
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لَعَلَّهُمْ)",
+    "meaning_ur": "Lafz-e-Quran (لَعَلَّهُمْ)"
   },
   {
     "rank": 224,
@@ -44937,7 +45383,9 @@
         17,
         56890
       ]
-    ]
+    ],
+    "meaning_en": "Punishment / Torment",
+    "meaning_ur": "Azaab"
   },
   {
     "rank": 225,
@@ -45129,7 +45577,9 @@
         28,
         62797
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لَهُ)",
+    "meaning_ur": "Lafz-e-Quran (لَهُ)"
   },
   {
     "rank": 226,
@@ -45318,7 +45768,9 @@
         7,
         66939
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (قَوْمًا)",
+    "meaning_ur": "Lafz-e-Quran (قَوْمًا)"
   },
   {
     "rank": 227,
@@ -45505,7 +45957,9 @@
         5,
         54927
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَنْزَلْنَا)",
+    "meaning_ur": "Lafz-e-Quran (اَنْزَلْنَا)"
   },
   {
     "rank": 228,
@@ -45683,7 +46137,9 @@
         7,
         54663
       ]
-    ]
+    ],
+    "meaning_en": "For people / tribe",
+    "meaning_ur": "Ke liye Qawm / Giroh"
   },
   {
     "rank": 229,
@@ -45870,7 +46326,9 @@
         5,
         60381
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مُّبِیْنٍ)",
+    "meaning_ur": "Lafz-e-Quran (مُّبِیْنٍ)"
   },
   {
     "rank": 230,
@@ -46056,7 +46514,9 @@
         12,
         69549
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تَحْتِهَا)",
+    "meaning_ur": "Lafz-e-Quran (تَحْتِهَا)"
   },
   {
     "rank": 231,
@@ -46240,7 +46700,9 @@
         3,
         50256
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لِلنَّاسِ)",
+    "meaning_ur": "Lafz-e-Quran (لِلنَّاسِ)"
   },
   {
     "rank": 232,
@@ -46422,7 +46884,9 @@
         23,
         57401
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (قَلِیْلًا)",
+    "meaning_ur": "Lafz-e-Quran (قَلِیْلًا)"
   },
   {
     "rank": 233,
@@ -46599,7 +47063,9 @@
         6,
         35595
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (حَكِیْمٌ)",
+    "meaning_ur": "Lafz-e-Quran (حَكِیْمٌ)"
   },
   {
     "rank": 234,
@@ -46787,7 +47253,9 @@
         1,
         77775
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَوْمَىٕذٍ)",
+    "meaning_ur": "Lafz-e-Quran (یَوْمَىٕذٍ)"
   },
   {
     "rank": 235,
@@ -46970,7 +47438,9 @@
         22,
         65725
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (قَدِیْرٌ)",
+    "meaning_ur": "Lafz-e-Quran (قَدِیْرٌ)"
   },
   {
     "rank": 236,
@@ -47152,7 +47622,9 @@
         3,
         49345
       ]
-    ]
+    ],
+    "meaning_en": "The truth / true",
+    "meaning_ur": "Haq / Sach"
   },
   {
     "rank": 237,
@@ -47336,7 +47808,9 @@
         5,
         51765
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اِلَیْهِمْ)",
+    "meaning_ur": "Lafz-e-Quran (اِلَیْهِمْ)"
   },
   {
     "rank": 238,
@@ -47517,7 +47991,9 @@
         1,
         64789
       ]
-    ]
+    ],
+    "meaning_en": "Allah (The One True God)",
+    "meaning_ur": "Allah Ta'ala"
   },
   {
     "rank": 239,
@@ -47703,7 +48179,9 @@
         11,
         66166
       ]
-    ]
+    ],
+    "meaning_en": "In/With every / all",
+    "meaning_ur": "Saath Har ek / Sab"
   },
   {
     "rank": 240,
@@ -47886,7 +48364,9 @@
         4,
         47028
       ]
-    ]
+    ],
+    "meaning_en": "In/With verses / signs",
+    "meaning_ur": "Saath Aayaat / Nishaniyan"
   },
   {
     "rank": 241,
@@ -48070,7 +48550,9 @@
         1,
         63179
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اِنَّكَ)",
+    "meaning_ur": "Lafz-e-Quran (اِنَّكَ)"
   },
   {
     "rank": 242,
@@ -48253,7 +48735,9 @@
         4,
         60527
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لَهَا)",
+    "meaning_ur": "Lafz-e-Quran (لَهَا)"
   },
   {
     "rank": 243,
@@ -48418,7 +48902,9 @@
         1,
         73140
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (فَبِاَیِّ)",
+    "meaning_ur": "Lafz-e-Quran (فَبِاَیِّ)"
   },
   {
     "rank": 244,
@@ -48596,7 +49082,9 @@
         21,
         36526
       ]
-    ]
+    ],
+    "meaning_en": "Themselves",
+    "meaning_ur": "Apni jaano par"
   },
   {
     "rank": 245,
@@ -48783,7 +49271,9 @@
         10,
         73649
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْحَكِیْمُ)",
+    "meaning_ur": "Lafz-e-Quran (الْحَكِیْمُ)"
   },
   {
     "rank": 246,
@@ -48966,7 +49456,9 @@
         12,
         59186
       ]
-    ]
+    ],
+    "meaning_en": "They wronged / transgressed",
+    "meaning_ur": "Unhone zulm kiya"
   },
   {
     "rank": 247,
@@ -49145,7 +49637,9 @@
         6,
         68564
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْاَرْضِؕ-وَ)",
+    "meaning_ur": "Lafz-e-Quran (الْاَرْضِؕ-وَ)"
   },
   {
     "rank": 248,
@@ -49331,7 +49825,9 @@
         1,
         56056
       ]
-    ]
+    ],
+    "meaning_en": "That (feminine)",
+    "meaning_ur": "Wo"
   },
   {
     "rank": 249,
@@ -49519,7 +50015,9 @@
         2,
         79147
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الَّیْلِ)",
+    "meaning_ur": "Lafz-e-Quran (الَّیْلِ)"
   },
   {
     "rank": 250,
@@ -49702,7 +50200,9 @@
         3,
         60363
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (دُوْنِهٖ)",
+    "meaning_ur": "Lafz-e-Quran (دُوْنِهٖ)"
   },
   {
     "rank": 251,
@@ -49866,7 +50366,9 @@
         2,
         73141
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اٰلَآءِ)",
+    "meaning_ur": "Lafz-e-Quran (اٰلَآءِ)"
   },
   {
     "rank": 252,
@@ -50046,7 +50548,9 @@
         13,
         51708
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (عَظِیْمٌ)",
+    "meaning_ur": "Lafz-e-Quran (عَظِیْمٌ)"
   },
   {
     "rank": 253,
@@ -50222,7 +50726,9 @@
         7,
         62312
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (حَیْثُ)",
+    "meaning_ur": "Lafz-e-Quran (حَیْثُ)"
   },
   {
     "rank": 254,
@@ -50404,7 +50910,9 @@
         4,
         46044
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الشَّیْطٰنُ)",
+    "meaning_ur": "Lafz-e-Quran (الشَّیْطٰنُ)"
   },
   {
     "rank": 255,
@@ -50584,7 +51092,9 @@
         3,
         67997
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (عَلَیْهِمُ)",
+    "meaning_ur": "Lafz-e-Quran (عَلَیْهِمُ)"
   },
   {
     "rank": 256,
@@ -50761,7 +51271,9 @@
         9,
         51224
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بَنِیْ)",
+    "meaning_ur": "Lafz-e-Quran (بَنِیْ)"
   },
   {
     "rank": 257,
@@ -50939,7 +51451,9 @@
         2,
         33750
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مِّنْكُمْ)",
+    "meaning_ur": "Lafz-e-Quran (مِّنْكُمْ)"
   },
   {
     "rank": 258,
@@ -51118,7 +51632,9 @@
         2,
         64929
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تَرَ)",
+    "meaning_ur": "Lafz-e-Quran (تَرَ)"
   },
   {
     "rank": 259,
@@ -51304,7 +51820,9 @@
         35,
         74908
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (عَنْهُ)",
+    "meaning_ur": "Lafz-e-Quran (عَنْهُ)"
   },
   {
     "rank": 260,
@@ -51467,7 +51985,9 @@
         3,
         73148
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (رَبِّكُمَا)",
+    "meaning_ur": "Lafz-e-Quran (رَبِّكُمَا)"
   },
   {
     "rank": 261,
@@ -51630,7 +52150,9 @@
         4,
         73149
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تُكَذِّبٰنِ)",
+    "meaning_ur": "Lafz-e-Quran (تُكَذِّبٰنِ)"
   },
   {
     "rank": 262,
@@ -51812,7 +52334,9 @@
         2,
         62642
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَوْمِ)",
+    "meaning_ur": "Lafz-e-Quran (یَوْمِ)"
   },
   {
     "rank": 263,
@@ -51994,7 +52518,9 @@
         18,
         69718
       ]
-    ]
+    ],
+    "meaning_en": "Their hearts",
+    "meaning_ur": "Unke dil"
   },
   {
     "rank": 264,
@@ -52182,7 +52708,9 @@
         34,
         69215
       ]
-    ]
+    ],
+    "meaning_en": "In/With they / them",
+    "meaning_ur": "Saath Wo sab log"
   },
   {
     "rank": 265,
@@ -52366,7 +52894,9 @@
         17,
         70919
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (صٰدِقِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (صٰدِقِیْنَ)"
   },
   {
     "rank": 266,
@@ -52547,7 +53077,9 @@
         1,
         51326
       ]
-    ]
+    ],
+    "meaning_en": "So indeed / truly",
+    "meaning_ur": "To Beshak / Yaqeenan"
   },
   {
     "rank": 267,
@@ -52723,7 +53255,9 @@
         3,
         61551
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْمُحْسِنِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (الْمُحْسِنِیْنَ)"
   },
   {
     "rank": 268,
@@ -52907,7 +53441,9 @@
         4,
         61308
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (جُ)",
+    "meaning_ur": "Lafz-e-Quran (جُ)"
   },
   {
     "rank": 269,
@@ -53088,7 +53624,9 @@
         1,
         59476
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَلَّذِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (اَلَّذِیْنَ)"
   },
   {
     "rank": 270,
@@ -53269,7 +53807,9 @@
         13,
         54889
       ]
-    ]
+    ],
+    "meaning_en": "When",
+    "meaning_ur": "Jab"
   },
   {
     "rank": 271,
@@ -53448,7 +53988,9 @@
         11,
         76424
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (خَیْرًا)",
+    "meaning_ur": "Lafz-e-Quran (خَیْرًا)"
   },
   {
     "rank": 272,
@@ -53626,7 +54168,9 @@
         15,
         64355
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یُرِیْدُ)",
+    "meaning_ur": "Lafz-e-Quran (یُرِیْدُ)"
   },
   {
     "rank": 273,
@@ -53806,7 +54350,9 @@
         3,
         73353
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْاَوَّلِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (الْاَوَّلِیْنَ)"
   },
   {
     "rank": 274,
@@ -53984,7 +54530,9 @@
         5,
         53724
       ]
-    ]
+    ],
+    "meaning_en": "He believed",
+    "meaning_ur": "Wo imaan laya"
   },
   {
     "rank": 275,
@@ -54164,7 +54712,9 @@
         11,
         65384
       ]
-    ]
+    ],
+    "meaning_en": "The a punishment / torment",
+    "meaning_ur": "Azaab"
   },
   {
     "rank": 276,
@@ -54345,7 +54895,9 @@
         5,
         67909
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اِنَّكُمْ)",
+    "meaning_ur": "Lafz-e-Quran (اِنَّكُمْ)"
   },
   {
     "rank": 277,
@@ -54528,7 +55080,9 @@
         3,
         78845
       ]
-    ]
+    ],
+    "meaning_en": "The Earth",
+    "meaning_ur": "Zameen"
   },
   {
     "rank": 278,
@@ -54712,7 +55266,9 @@
         1,
         68177
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (فَاِنَّمَا)",
+    "meaning_ur": "Lafz-e-Quran (فَاِنَّمَا)"
   },
   {
     "rank": 279,
@@ -54892,7 +55448,9 @@
         9,
         52961
       ]
-    ]
+    ],
+    "meaning_en": "The people / tribe",
+    "meaning_ur": "Qawm / Giroh"
   },
   {
     "rank": 280,
@@ -55071,7 +55629,9 @@
         2,
         72393
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَنَّهٗ)",
+    "meaning_ur": "Lafz-e-Quran (اَنَّهٗ)"
   },
   {
     "rank": 281,
@@ -55247,7 +55807,9 @@
         3,
         59340
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اٰمَنَّا)",
+    "meaning_ur": "Lafz-e-Quran (اٰمَنَّا)"
   },
   {
     "rank": 282,
@@ -55429,7 +55991,9 @@
         6,
         67848
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْعَلِیْمُ)",
+    "meaning_ur": "Lafz-e-Quran (الْعَلِیْمُ)"
   },
   {
     "rank": 283,
@@ -55607,7 +56171,9 @@
         7,
         68102
       ]
-    ]
+    ],
+    "meaning_en": "The Especially Merciful",
+    "meaning_ur": "Bohot Raham Wala"
   },
   {
     "rank": 284,
@@ -55782,7 +56348,9 @@
         14,
         36629
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لٰـكِنَّ)",
+    "meaning_ur": "Lafz-e-Quran (لٰـكِنَّ)"
   },
   {
     "rank": 285,
@@ -55958,7 +56526,9 @@
         30,
         66198
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْمُشْرِكِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (الْمُشْرِكِیْنَ)"
   },
   {
     "rank": 286,
@@ -56138,7 +56708,9 @@
         14,
         63520
       ]
-    ]
+    ],
+    "meaning_en": "For verses / signs",
+    "meaning_ur": "Ke liye Aayaat / Nishaniyan"
   },
   {
     "rank": 287,
@@ -56321,7 +56893,9 @@
         4,
         72314
       ]
-    ]
+    ],
+    "meaning_en": "So he / it",
+    "meaning_ur": "To Wo (Muzakkar)"
   },
   {
     "rank": 288,
@@ -56500,7 +57074,9 @@
         20,
         76818
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْمَلٰٓىٕكَةُ)",
+    "meaning_ur": "Lafz-e-Quran (الْمَلٰٓىٕكَةُ)"
   },
   {
     "rank": 289,
@@ -56684,7 +57260,9 @@
         13,
         73852
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْیَوْمَ)",
+    "meaning_ur": "Lafz-e-Quran (الْیَوْمَ)"
   },
   {
     "rank": 290,
@@ -56862,7 +57440,9 @@
         5,
         61415
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (قَوْمِهٖ)",
+    "meaning_ur": "Lafz-e-Quran (قَوْمِهٖ)"
   },
   {
     "rank": 291,
@@ -57045,7 +57625,9 @@
         23,
         72172
       ]
-    ]
+    ],
+    "meaning_en": "There came to them",
+    "meaning_ur": "Unke paas aaya"
   },
   {
     "rank": 292,
@@ -57225,7 +57807,9 @@
         19,
         77007
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (كَانَتْ)",
+    "meaning_ur": "Lafz-e-Quran (كَانَتْ)"
   },
   {
     "rank": 293,
@@ -57405,7 +57989,9 @@
         12,
         75294
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بَصِیْرٌ)",
+    "meaning_ur": "Lafz-e-Quran (بَصِیْرٌ)"
   },
   {
     "rank": 294,
@@ -57584,7 +58170,9 @@
         16,
         79096
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اُوْتُوا)",
+    "meaning_ur": "Lafz-e-Quran (اُوْتُوا)"
   },
   {
     "rank": 295,
@@ -57764,7 +58352,9 @@
         15,
         70880
       ]
-    ]
+    ],
+    "meaning_en": "Themselves",
+    "meaning_ur": "Apni jaano par"
   },
   {
     "rank": 296,
@@ -57947,7 +58537,9 @@
         11,
         66372
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بِهِ)",
+    "meaning_ur": "Lafz-e-Quran (بِهِ)"
   },
   {
     "rank": 297,
@@ -58129,7 +58721,9 @@
         29,
         76712
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْاَنْهٰرُ)",
+    "meaning_ur": "Lafz-e-Quran (الْاَنْهٰرُ)"
   },
   {
     "rank": 298,
@@ -58308,7 +58902,9 @@
         19,
         64846
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (رَبُّكُمْ)",
+    "meaning_ur": "Lafz-e-Quran (رَبُّكُمْ)"
   },
   {
     "rank": 299,
@@ -58492,7 +59088,9 @@
         3,
         81874
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْاِنْسَانَ)",
+    "meaning_ur": "Lafz-e-Quran (الْاِنْسَانَ)"
   },
   {
     "rank": 300,
@@ -58674,7 +59272,9 @@
         1,
         80333
       ]
-    ]
+    ],
+    "meaning_en": "So from / of",
+    "meaning_ur": "To Se / Mein se"
   },
   {
     "rank": 301,
@@ -58852,7 +59452,9 @@
         3,
         65822
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اٰتَیْنَا)",
+    "meaning_ur": "Lafz-e-Quran (اٰتَیْنَا)"
   },
   {
     "rank": 302,
@@ -59036,7 +59638,9 @@
         13,
         76317
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (صَالِحًا)",
+    "meaning_ur": "Lafz-e-Quran (صَالِحًا)"
   },
   {
     "rank": 303,
@@ -59218,7 +59822,9 @@
         5,
         76966
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لِّلَّذِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (لِّلَّذِیْنَ)"
   },
   {
     "rank": 304,
@@ -59395,7 +60001,9 @@
         6,
         75868
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَّشَآءُؕ-وَ)",
+    "meaning_ur": "Lafz-e-Quran (یَّشَآءُؕ-وَ)"
   },
   {
     "rank": 305,
@@ -59576,7 +60184,9 @@
         50,
         75264
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (ضَلَّ)",
+    "meaning_ur": "Lafz-e-Quran (ضَلَّ)"
   },
   {
     "rank": 306,
@@ -59752,7 +60362,9 @@
         10,
         69229
       ]
-    ]
+    ],
+    "meaning_en": "The verses / signs",
+    "meaning_ur": "Aayaat / Nishaniyan"
   },
   {
     "rank": 307,
@@ -59933,7 +60545,9 @@
         5,
         77450
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (رَّبِّكَ)",
+    "meaning_ur": "Lafz-e-Quran (رَّبِّكَ)"
   },
   {
     "rank": 308,
@@ -60114,7 +60728,9 @@
         3,
         80757
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لَفِیْ)",
+    "meaning_ur": "Lafz-e-Quran (لَفِیْ)"
   },
   {
     "rank": 309,
@@ -60294,7 +60910,9 @@
         2,
         78729
       ]
-    ]
+    ],
+    "meaning_en": "From / Of",
+    "meaning_ur": "Se / Mein se"
   },
   {
     "rank": 310,
@@ -60473,7 +61091,9 @@
         16,
         68555
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَكْثَرَ)",
+    "meaning_ur": "Lafz-e-Quran (اَكْثَرَ)"
   },
   {
     "rank": 311,
@@ -60650,7 +61270,9 @@
         15,
         76090
       ]
-    ]
+    ],
+    "meaning_en": "The people / tribe",
+    "meaning_ur": "Qawm / Giroh"
   },
   {
     "rank": 312,
@@ -60826,7 +61448,9 @@
         18,
         74518
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْمُؤْمِنُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (الْمُؤْمِنُوْنَ)"
   },
   {
     "rank": 313,
@@ -61005,7 +61629,9 @@
         3,
         75057
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (جَمِیْعًا)",
+    "meaning_ur": "Lafz-e-Quran (جَمِیْعًا)"
   },
   {
     "rank": 314,
@@ -61184,7 +61810,9 @@
         8,
         69518
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (عَاقِبَةُ)",
+    "meaning_ur": "Lafz-e-Quran (عَاقِبَةُ)"
   },
   {
     "rank": 315,
@@ -61361,7 +61989,9 @@
         7,
         81452
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْاِنْسَانُ)",
+    "meaning_ur": "Lafz-e-Quran (الْاِنْسَانُ)"
   },
   {
     "rank": 316,
@@ -61543,7 +62173,9 @@
         2,
         79734
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَوْمٍ)",
+    "meaning_ur": "Lafz-e-Quran (یَوْمٍ)"
   },
   {
     "rank": 317,
@@ -61723,7 +62355,9 @@
         15,
         66811
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (رَحْمَةً)",
+    "meaning_ur": "Lafz-e-Quran (رَحْمَةً)"
   },
   {
     "rank": 318,
@@ -61905,7 +62539,9 @@
         4,
         80699
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الدِّیْنِ)",
+    "meaning_ur": "Lafz-e-Quran (الدِّیْنِ)"
   },
   {
     "rank": 319,
@@ -62077,7 +62713,9 @@
         17,
         73769
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مُّؤْمِنِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (مُّؤْمِنِیْنَ)"
   },
   {
     "rank": 320,
@@ -62255,7 +62893,9 @@
         7,
         70633
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَكْثَرُهُمْ)",
+    "meaning_ur": "Lafz-e-Quran (اَكْثَرُهُمْ)"
   },
   {
     "rank": 321,
@@ -62435,7 +63075,9 @@
         4,
         82431
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لَّهٗ)",
+    "meaning_ur": "Lafz-e-Quran (لَّهٗ)"
   },
   {
     "rank": 322,
@@ -62615,7 +63257,9 @@
         10,
         78193
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (قَبْلِ)",
+    "meaning_ur": "Lafz-e-Quran (قَبْلِ)"
   },
   {
     "rank": 323,
@@ -62793,7 +63437,9 @@
         9,
         71650
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مِّنْهُ)",
+    "meaning_ur": "Lafz-e-Quran (مِّنْهُ)"
   },
   {
     "rank": 324,
@@ -62976,7 +63622,9 @@
         3,
         79927
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الَّیْلَ)",
+    "meaning_ur": "Lafz-e-Quran (الَّیْلَ)"
   },
   {
     "rank": 325,
@@ -63148,7 +63796,9 @@
         4,
         76296
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (رَسُوْلِهٖ)",
+    "meaning_ur": "Lafz-e-Quran (رَسُوْلِهٖ)"
   },
   {
     "rank": 326,
@@ -63325,7 +63975,9 @@
         20,
         75074
       ]
-    ]
+    ],
+    "meaning_en": "People / Tribe",
+    "meaning_ur": "Qawm / Giroh"
   },
   {
     "rank": 327,
@@ -63507,7 +64159,9 @@
         17,
         76130
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لٰكِنَّ)",
+    "meaning_ur": "Lafz-e-Quran (لٰكِنَّ)"
   },
   {
     "rank": 328,
@@ -63687,7 +64341,9 @@
         3,
         81899
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (كَذَّبَ)",
+    "meaning_ur": "Lafz-e-Quran (كَذَّبَ)"
   },
   {
     "rank": 329,
@@ -63869,7 +64525,9 @@
         8,
         80563
       ]
-    ]
+    ],
+    "meaning_en": "Lord / Sustainer",
+    "meaning_ur": "Rab / Palne wala"
   },
   {
     "rank": 330,
@@ -64037,7 +64695,9 @@
         14,
         74649
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (خٰلِدُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (خٰلِدُوْنَ)"
   },
   {
     "rank": 331,
@@ -64209,7 +64869,9 @@
         1,
         71770
       ]
-    ]
+    ],
+    "meaning_en": "This (feminine)",
+    "meaning_ur": "Yeh"
   },
   {
     "rank": 332,
@@ -64382,7 +65044,9 @@
         12,
         73967
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تَعْقِلُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (تَعْقِلُوْنَ)"
   },
   {
     "rank": 333,
@@ -64550,7 +65214,9 @@
         2,
         76031
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بِاَنَّهُمْ)",
+    "meaning_ur": "Lafz-e-Quran (بِاَنَّهُمْ)"
   },
   {
     "rank": 334,
@@ -64719,7 +65385,9 @@
         10,
         75839
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اٰیٰتِهٖ)",
+    "meaning_ur": "Lafz-e-Quran (اٰیٰتِهٖ)"
   },
   {
     "rank": 335,
@@ -64890,7 +65558,9 @@
         4,
         69185
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (فِیْمَا)",
+    "meaning_ur": "Lafz-e-Quran (فِیْمَا)"
   },
   {
     "rank": 336,
@@ -65060,7 +65730,9 @@
         6,
         76967
       ]
-    ]
+    ],
+    "meaning_en": "They believed",
+    "meaning_ur": "Wo imaan laye"
   },
   {
     "rank": 337,
@@ -65234,7 +65906,9 @@
         1,
         81628
       ]
-    ]
+    ],
+    "meaning_en": "So he said",
+    "meaning_ur": "To Usne farmaya / Kaha"
   },
   {
     "rank": 338,
@@ -65409,7 +66083,9 @@
         12,
         77344
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (ضَلٰلٍ)",
+    "meaning_ur": "Lafz-e-Quran (ضَلٰلٍ)"
   },
   {
     "rank": 339,
@@ -65576,7 +66252,9 @@
         11,
         78690
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (رَسُوْلَهٗ)",
+    "meaning_ur": "Lafz-e-Quran (رَسُوْلَهٗ)"
   },
   {
     "rank": 340,
@@ -65745,7 +66423,9 @@
         1,
         80375
       ]
-    ]
+    ],
+    "meaning_en": "I",
+    "meaning_ur": "Main"
   },
   {
     "rank": 341,
@@ -65913,7 +66593,9 @@
         49,
         79129
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَهْدِیْ)",
+    "meaning_ur": "Lafz-e-Quran (یَهْدِیْ)"
   },
   {
     "rank": 342,
@@ -66078,7 +66760,9 @@
         3,
         75133
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تَكُوْنُوْا)",
+    "meaning_ur": "Lafz-e-Quran (تَكُوْنُوْا)"
   },
   {
     "rank": 343,
@@ -66244,7 +66928,9 @@
         2,
         77503
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بَعْضُهُمْ)",
+    "meaning_ur": "Lafz-e-Quran (بَعْضُهُمْ)"
   },
   {
     "rank": 344,
@@ -66408,7 +67094,9 @@
         6,
         81948
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بِاِذْنِ)",
+    "meaning_ur": "Lafz-e-Quran (بِاِذْنِ)"
   },
   {
     "rank": 345,
@@ -66570,7 +67258,9 @@
         5,
         82015
       ]
-    ]
+    ],
+    "meaning_en": "People of / Family",
+    "meaning_ur": "Ghar wale / Ahle"
   },
   {
     "rank": 346,
@@ -66734,7 +67424,9 @@
         45,
         78935
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اللّٰهِ-وَ)",
+    "meaning_ur": "Lafz-e-Quran (اللّٰهِ-وَ)"
   },
   {
     "rank": 347,
@@ -66900,7 +67592,9 @@
         5,
         68084
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَجْمَعِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (اَجْمَعِیْنَ)"
   },
   {
     "rank": 348,
@@ -67069,7 +67763,9 @@
         2,
         81651
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (النَّهَارِ)",
+    "meaning_ur": "Lafz-e-Quran (النَّهَارِ)"
   },
   {
     "rank": 349,
@@ -67239,7 +67935,9 @@
         3,
         81321
       ]
-    ]
+    ],
+    "meaning_en": "The a punishment / torment",
+    "meaning_ur": "Azaab"
   },
   {
     "rank": 350,
@@ -67401,7 +68099,9 @@
         9,
         74697
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (عَزِیْزٌ)",
+    "meaning_ur": "Lafz-e-Quran (عَزِیْزٌ)"
   },
   {
     "rank": 351,
@@ -67569,7 +68269,9 @@
         8,
         75718
       ]
-    ]
+    ],
+    "meaning_en": "The truth / true",
+    "meaning_ur": "Haq / Sach"
   },
   {
     "rank": 352,
@@ -67737,7 +68439,9 @@
         23,
         75445
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الظّٰلِمُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (الظّٰلِمُوْنَ)"
   },
   {
     "rank": 353,
@@ -67903,7 +68607,9 @@
         12,
         76304
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (خَبِیْرٌ)",
+    "meaning_ur": "Lafz-e-Quran (خَبِیْرٌ)"
   },
   {
     "rank": 354,
@@ -68063,7 +68769,9 @@
         4,
         61900
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْمُرْسَلِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (الْمُرْسَلِیْنَ)"
   },
   {
     "rank": 355,
@@ -68231,7 +68939,9 @@
         3,
         78855
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اِلَیْكُمْ)",
+    "meaning_ur": "Lafz-e-Quran (اِلَیْكُمْ)"
   },
   {
     "rank": 356,
@@ -68389,7 +69099,9 @@
         13,
         70510
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (كَفٰى)",
+    "meaning_ur": "Lafz-e-Quran (كَفٰى)"
   },
   {
     "rank": 357,
@@ -68544,7 +69256,9 @@
         8,
         79678
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (سَبِیْلًا)",
+    "meaning_ur": "Lafz-e-Quran (سَبِیْلًا)"
   },
   {
     "rank": 358,
@@ -68710,7 +69424,9 @@
         1,
         78204
       ]
-    ]
+    ],
+    "meaning_en": "Indeed / Truly",
+    "meaning_ur": "Beshak / Yaqeenan"
   },
   {
     "rank": 359,
@@ -68869,7 +69585,9 @@
         17,
         76561
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (-وَ)",
+    "meaning_ur": "Lafz-e-Quran (-وَ)"
   },
   {
     "rank": 360,
@@ -69024,7 +69742,9 @@
         5,
         74055
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (رَّبِّكُمْ)",
+    "meaning_ur": "Lafz-e-Quran (رَّبِّكُمْ)"
   },
   {
     "rank": 361,
@@ -69178,7 +69898,9 @@
         2,
         80959
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْیَوْمِ)",
+    "meaning_ur": "Lafz-e-Quran (الْیَوْمِ)"
   },
   {
     "rank": 362,
@@ -69337,7 +70059,9 @@
         19,
         75464
       ]
-    ]
+    ],
+    "meaning_en": "For they / them",
+    "meaning_ur": "Ke liye Wo sab log"
   },
   {
     "rank": 363,
@@ -69498,7 +70222,9 @@
         8,
         77080
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْمَصِیْرُ)",
+    "meaning_ur": "Lafz-e-Quran (الْمَصِیْرُ)"
   },
   {
     "rank": 364,
@@ -69655,7 +70381,9 @@
         11,
         76268
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تَوَلَّوْا)",
+    "meaning_ur": "Lafz-e-Quran (تَوَلَّوْا)"
   },
   {
     "rank": 365,
@@ -69814,7 +70542,9 @@
         26,
         76616
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بَیْنَكُمْ)",
+    "meaning_ur": "Lafz-e-Quran (بَیْنَكُمْ)"
   },
   {
     "rank": 366,
@@ -69971,7 +70701,9 @@
         14,
         76089
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَهْدِی)",
+    "meaning_ur": "Lafz-e-Quran (یَهْدِی)"
   },
   {
     "rank": 367,
@@ -70131,7 +70863,9 @@
         7,
         68577
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اُمَّةٍ)",
+    "meaning_ur": "Lafz-e-Quran (اُمَّةٍ)"
   },
   {
     "rank": 368,
@@ -70289,7 +71023,9 @@
         6,
         67384
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (قَبْلِكَ)",
+    "meaning_ur": "Lafz-e-Quran (قَبْلِكَ)"
   },
   {
     "rank": 369,
@@ -70438,7 +71174,9 @@
         10,
         79688
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (عَلِیْمًا)",
+    "meaning_ur": "Lafz-e-Quran (عَلِیْمًا)"
   },
   {
     "rank": 370,
@@ -70598,7 +71336,9 @@
         22,
         75316
       ]
-    ]
+    ],
+    "meaning_en": "In/With you (plural)",
+    "meaning_ur": "Saath Tum sab"
   },
   {
     "rank": 371,
@@ -70757,7 +71497,9 @@
         3,
         73379
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (قَبْلَ)",
+    "meaning_ur": "Lafz-e-Quran (قَبْلَ)"
   },
   {
     "rank": 372,
@@ -70914,7 +71656,9 @@
         3,
         66873
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَوْحَیْنَا)",
+    "meaning_ur": "Lafz-e-Quran (اَوْحَیْنَا)"
   },
   {
     "rank": 373,
@@ -71068,7 +71812,9 @@
         1,
         82237
       ]
-    ]
+    ],
+    "meaning_en": "Nay! / By no means!",
+    "meaning_ur": "Hargiz nahi!"
   },
   {
     "rank": 374,
@@ -71218,7 +71964,9 @@
         1,
         80668
       ]
-    ]
+    ],
+    "meaning_en": "Except / Only",
+    "meaning_ur": "Magar / Siwae"
   },
   {
     "rank": 375,
@@ -71369,7 +72117,9 @@
         3,
         79461
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لِلْكٰفِرِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (لِلْكٰفِرِیْنَ)"
   },
   {
     "rank": 376,
@@ -71518,7 +72268,9 @@
         2,
         81051
       ]
-    ]
+    ],
+    "meaning_en": "For what / that which / not",
+    "meaning_ur": "Ke liye Jo / Kya / Nahi"
   },
   {
     "rank": 377,
@@ -71664,7 +72416,9 @@
         6,
         68865
       ]
-    ]
+    ],
+    "meaning_en": "Near / With / In presence of",
+    "meaning_ur": "Paas / Nazdeek"
   },
   {
     "rank": 378,
@@ -71818,7 +72572,9 @@
         31,
         76906
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَیْدِیْهِمْ)",
+    "meaning_ur": "Lafz-e-Quran (اَیْدِیْهِمْ)"
   },
   {
     "rank": 379,
@@ -71965,7 +72721,9 @@
         2,
         76990
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مَرْیَمَ)",
+    "meaning_ur": "Lafz-e-Quran (مَرْیَمَ)"
   },
   {
     "rank": 380,
@@ -72117,7 +72875,9 @@
         14,
         63587
       ]
-    ]
+    ],
+    "meaning_en": "For from / of",
+    "meaning_ur": "Ke liye Se / Mein se"
   },
   {
     "rank": 381,
@@ -72270,7 +73030,9 @@
         4,
         81721
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (عِنْدَهٗ)",
+    "meaning_ur": "Lafz-e-Quran (عِنْدَهٗ)"
   },
   {
     "rank": 382,
@@ -72426,7 +73188,9 @@
         2,
         72185
       ]
-    ]
+    ],
+    "meaning_en": "You (plural)",
+    "meaning_ur": "Tum sab"
   },
   {
     "rank": 383,
@@ -72579,7 +73343,9 @@
         5,
         70517
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مَعَهٗ)",
+    "meaning_ur": "Lafz-e-Quran (مَعَهٗ)"
   },
   {
     "rank": 384,
@@ -72731,7 +73497,9 @@
         4,
         76687
       ]
-    ]
+    ],
+    "meaning_en": "Verses / Signs",
+    "meaning_ur": "Aayaat / Nishaniyan"
   },
   {
     "rank": 385,
@@ -72880,7 +73648,9 @@
         9,
         76970
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (قَالَتْ)",
+    "meaning_ur": "Lafz-e-Quran (قَالَتْ)"
   },
   {
     "rank": 386,
@@ -73031,7 +73801,9 @@
         8,
         82034
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (خَیْرُ)",
+    "meaning_ur": "Lafz-e-Quran (خَیْرُ)"
   },
   {
     "rank": 387,
@@ -73187,7 +73959,9 @@
         3,
         78445
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اِلَیَّ)",
+    "meaning_ur": "Lafz-e-Quran (اِلَیَّ)"
   },
   {
     "rank": 388,
@@ -73329,7 +74103,9 @@
         57,
         70569
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (عَظِیْمًا)",
+    "meaning_ur": "Lafz-e-Quran (عَظِیْمًا)"
   },
   {
     "rank": 389,
@@ -73477,7 +74253,9 @@
         3,
         77612
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَجْرًا)",
+    "meaning_ur": "Lafz-e-Quran (اَجْرًا)"
   },
   {
     "rank": 390,
@@ -73631,7 +74409,9 @@
         9,
         81841
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (غَیْرُ)",
+    "meaning_ur": "Lafz-e-Quran (غَیْرُ)"
   },
   {
     "rank": 391,
@@ -73788,7 +74568,9 @@
         7,
         80049
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بَیْنَهُمَا)",
+    "meaning_ur": "Lafz-e-Quran (بَیْنَهُمَا)"
   },
   {
     "rank": 392,
@@ -73940,7 +74722,9 @@
         13,
         75100
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَخَافُ)",
+    "meaning_ur": "Lafz-e-Quran (اَخَافُ)"
   },
   {
     "rank": 393,
@@ -74091,7 +74875,9 @@
         7,
         79457
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اِمَّا)",
+    "meaning_ur": "Lafz-e-Quran (اِمَّا)"
   },
   {
     "rank": 394,
@@ -74245,7 +75031,9 @@
         2,
         81824
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (خَلَقْنَا)",
+    "meaning_ur": "Lafz-e-Quran (خَلَقْنَا)"
   },
   {
     "rank": 395,
@@ -74396,7 +75184,9 @@
         5,
         78202
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (نَذِیْرٌ)",
+    "meaning_ur": "Lafz-e-Quran (نَذِیْرٌ)"
   },
   {
     "rank": 396,
@@ -74541,7 +75331,9 @@
         11,
         67614
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَشْعُرُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یَشْعُرُوْنَ)"
   },
   {
     "rank": 397,
@@ -74688,7 +75480,9 @@
         4,
         80630
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (عَنْهَا)",
+    "meaning_ur": "Lafz-e-Quran (عَنْهَا)"
   },
   {
     "rank": 398,
@@ -74835,7 +75629,9 @@
         12,
         69430
       ]
-    ]
+    ],
+    "meaning_en": "The truth / true",
+    "meaning_ur": "Haq / Sach"
   },
   {
     "rank": 399,
@@ -74981,7 +75777,9 @@
         16,
         82006
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الزَّكٰوةَ)",
+    "meaning_ur": "Lafz-e-Quran (الزَّكٰوةَ)"
   },
   {
     "rank": 400,
@@ -75124,7 +75922,9 @@
         2,
         80015
       ]
-    ]
+    ],
+    "meaning_en": "So never / will not",
+    "meaning_ur": "To Hargiz nahi"
   },
   {
     "rank": 401,
@@ -75268,7 +76068,9 @@
         4,
         82347
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تَعْبُدُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (تَعْبُدُوْنَ)"
   },
   {
     "rank": 402,
@@ -75411,7 +76213,9 @@
         17,
         75231
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (جَآءَكُمْ)",
+    "meaning_ur": "Lafz-e-Quran (جَآءَكُمْ)"
   },
   {
     "rank": 403,
@@ -75558,7 +76362,9 @@
         4,
         81210
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (رَبِّهٖ)",
+    "meaning_ur": "Lafz-e-Quran (رَبِّهٖ)"
   },
   {
     "rank": 404,
@@ -75707,7 +76513,9 @@
         6,
         77205
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (قَبْلِهِمْ)",
+    "meaning_ur": "Lafz-e-Quran (قَبْلِهِمْ)"
   },
   {
     "rank": 405,
@@ -75854,7 +76662,9 @@
         5,
         77650
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الصّٰلِحِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (الصّٰلِحِیْنَ)"
   },
   {
     "rank": 406,
@@ -75997,7 +76807,9 @@
         14,
         76271
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اللّٰهُؕ-وَ)",
+    "meaning_ur": "Lafz-e-Quran (اللّٰهُؕ-وَ)"
   },
   {
     "rank": 407,
@@ -76143,7 +76955,9 @@
         2,
         79851
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْمُتَّقِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (الْمُتَّقِیْنَ)"
   },
   {
     "rank": 408,
@@ -76286,7 +77100,9 @@
         18,
         74283
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (سَمِیْعٌ)",
+    "meaning_ur": "Lafz-e-Quran (سَمِیْعٌ)"
   },
   {
     "rank": 409,
@@ -76437,7 +77253,9 @@
         3,
         82343
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْكٰفِرُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (الْكٰفِرُوْنَ)"
   },
   {
     "rank": 410,
@@ -76585,7 +77403,9 @@
         4,
         72556
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اٰیَةً)",
+    "meaning_ur": "Lafz-e-Quran (اٰیَةً)"
   },
   {
     "rank": 411,
@@ -76734,7 +77554,9 @@
         3,
         79931
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (النَّهَارَ)",
+    "meaning_ur": "Lafz-e-Quran (النَّهَارَ)"
   },
   {
     "rank": 412,
@@ -76880,7 +77702,9 @@
         9,
         75223
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَوْلِیَآءَ)",
+    "meaning_ur": "Lafz-e-Quran (اَوْلِیَآءَ)"
   },
   {
     "rank": 413,
@@ -77027,7 +77851,9 @@
         3,
         81507
       ]
-    ]
+    ],
+    "meaning_en": "Never / Will not",
+    "meaning_ur": "Hargiz nahi"
   },
   {
     "rank": 414,
@@ -77175,7 +78001,9 @@
         5,
         71507
       ]
-    ]
+    ],
+    "meaning_en": "People / Tribe",
+    "meaning_ur": "Qawm / Giroh"
   },
   {
     "rank": 415,
@@ -77313,7 +78141,9 @@
         15,
         70201
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (غَفُوْرًا)",
+    "meaning_ur": "Lafz-e-Quran (غَفُوْرًا)"
   },
   {
     "rank": 416,
@@ -77461,7 +78291,9 @@
         2,
         79672
       ]
-    ]
+    ],
+    "meaning_en": "This (feminine)",
+    "meaning_ur": "Yeh"
   },
   {
     "rank": 417,
@@ -77607,7 +78439,9 @@
         5,
         69236
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اتَّخَذُوْا)",
+    "meaning_ur": "Lafz-e-Quran (اتَّخَذُوْا)"
   },
   {
     "rank": 418,
@@ -77755,7 +78589,9 @@
         4,
         81162
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (جَ)",
+    "meaning_ur": "Lafz-e-Quran (جَ)"
   },
   {
     "rank": 419,
@@ -77901,7 +78737,9 @@
         5,
         79624
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْقُرْاٰنَ)",
+    "meaning_ur": "Lafz-e-Quran (الْقُرْاٰنَ)"
   },
   {
     "rank": 420,
@@ -78042,7 +78880,9 @@
         2,
         81261
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَّوْمَىٕذٍ)",
+    "meaning_ur": "Lafz-e-Quran (یَّوْمَىٕذٍ)"
   },
   {
     "rank": 421,
@@ -78181,7 +79021,9 @@
         5,
         72208
       ]
-    ]
+    ],
+    "meaning_en": "In/With the hereafter",
+    "meaning_ur": "Saath Aakhirat"
   },
   {
     "rank": 422,
@@ -78316,7 +79158,9 @@
         2,
         78871
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تَتَّقُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (تَتَّقُوْنَ)"
   },
   {
     "rank": 423,
@@ -78460,7 +79304,9 @@
         5,
         79946
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مَآءً)",
+    "meaning_ur": "Lafz-e-Quran (مَآءً)"
   },
   {
     "rank": 424,
@@ -78600,7 +79446,9 @@
         10,
         68361
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تُرْجَعُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (تُرْجَعُوْنَ)"
   },
   {
     "rank": 425,
@@ -78741,7 +79589,9 @@
         15,
         77277
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تَشْكُرُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (تَشْكُرُوْنَ)"
   },
   {
     "rank": 426,
@@ -78877,7 +79727,9 @@
         4,
         78778
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (قَوْلًا)",
+    "meaning_ur": "Lafz-e-Quran (قَوْلًا)"
   },
   {
     "rank": 427,
@@ -79017,7 +79869,9 @@
         2,
         68353
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (عَمِلَ)",
+    "meaning_ur": "Lafz-e-Quran (عَمِلَ)"
   },
   {
     "rank": 428,
@@ -79156,7 +80010,9 @@
         2,
         80192
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَشَدُّ)",
+    "meaning_ur": "Lafz-e-Quran (اَشَدُّ)"
   },
   {
     "rank": 429,
@@ -79292,7 +80148,9 @@
         1,
         81970
       ]
-    ]
+    ],
+    "meaning_en": "Messenger",
+    "meaning_ur": "Rasool / Paighambar"
   },
   {
     "rank": 430,
@@ -79432,7 +80290,9 @@
         6,
         76263
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بِالْبَیِّنٰتِ)",
+    "meaning_ur": "Lafz-e-Quran (بِالْبَیِّنٰتِ)"
   },
   {
     "rank": 431,
@@ -79572,7 +80432,9 @@
         3,
         80994
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مُلْكُ)",
+    "meaning_ur": "Lafz-e-Quran (مُلْكُ)"
   },
   {
     "rank": 432,
@@ -79714,7 +80576,9 @@
         5,
         80075
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اتَّخَذَ)",
+    "meaning_ur": "Lafz-e-Quran (اتَّخَذَ)"
   },
   {
     "rank": 433,
@@ -79855,7 +80719,9 @@
         5,
         67847
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (السَّمِیْعُ)",
+    "meaning_ur": "Lafz-e-Quran (السَّمِیْعُ)"
   },
   {
     "rank": 434,
@@ -79994,7 +80860,9 @@
         2,
         81324
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اِلَیْنَا)",
+    "meaning_ur": "Lafz-e-Quran (اِلَیْنَا)"
   },
   {
     "rank": 435,
@@ -80135,7 +81003,9 @@
         11,
         77261
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (صِرَاطٍ)",
+    "meaning_ur": "Lafz-e-Quran (صِرَاطٍ)"
   },
   {
     "rank": 436,
@@ -80275,7 +81145,9 @@
         12,
         77262
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مُّسْتَقِیْمٍ)",
+    "meaning_ur": "Lafz-e-Quran (مُّسْتَقِیْمٍ)"
   },
   {
     "rank": 437,
@@ -80419,7 +81291,9 @@
         1,
         68156
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَدْعُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یَدْعُوْنَ)"
   },
   {
     "rank": 438,
@@ -80559,7 +81433,9 @@
         2,
         81605
       ]
-    ]
+    ],
+    "meaning_en": "A soul / person",
+    "meaning_ur": "Jaan / Nafs"
   },
   {
     "rank": 439,
@@ -80697,7 +81573,9 @@
         11,
         69138
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الصّٰدِقِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (الصّٰدِقِیْنَ)"
   },
   {
     "rank": 440,
@@ -80837,7 +81715,9 @@
         6,
         77627
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تَكُنْ)",
+    "meaning_ur": "Lafz-e-Quran (تَكُنْ)"
   },
   {
     "rank": 441,
@@ -80970,7 +81850,9 @@
         7,
         78727
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَحَدًا)",
+    "meaning_ur": "Lafz-e-Quran (اَحَدًا)"
   },
   {
     "rank": 442,
@@ -81106,7 +81988,9 @@
         2,
         53568
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (قَالُـوْا)",
+    "meaning_ur": "Lafz-e-Quran (قَالُـوْا)"
   },
   {
     "rank": 443,
@@ -81244,7 +82128,9 @@
         2,
         78865
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (فِرْعَوْنُ)",
+    "meaning_ur": "Lafz-e-Quran (فِرْعَوْنُ)"
   },
   {
     "rank": 444,
@@ -81383,7 +82269,9 @@
         17,
         75197
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یُشْرِكُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یُشْرِكُوْنَ)"
   },
   {
     "rank": 445,
@@ -81513,7 +82401,9 @@
         8,
         80050
       ]
-    ]
+    ],
+    "meaning_en": "The Most Gracious",
+    "meaning_ur": "Nihayat Meharban"
   },
   {
     "rank": 446,
@@ -81642,7 +82532,9 @@
         13,
         66653
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یُنْفِقُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یُنْفِقُوْنَ)"
   },
   {
     "rank": 447,
@@ -81775,7 +82667,9 @@
         40,
         79120
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَرَادَ)",
+    "meaning_ur": "Lafz-e-Quran (اَرَادَ)"
   },
   {
     "rank": 448,
@@ -81903,7 +82797,9 @@
         8,
         77109
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (قُلْنَا)",
+    "meaning_ur": "Lafz-e-Quran (قُلْنَا)"
   },
   {
     "rank": 449,
@@ -82038,7 +82934,9 @@
         16,
         75015
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مَعَكُمْ)",
+    "meaning_ur": "Lafz-e-Quran (مَعَكُمْ)"
   },
   {
     "rank": 450,
@@ -82165,7 +83063,9 @@
         8,
         52941
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یٰمُوْسٰى)",
+    "meaning_ur": "Lafz-e-Quran (یٰمُوْسٰى)"
   },
   {
     "rank": 451,
@@ -82299,7 +83199,9 @@
         12,
         68534
       ]
-    ]
+    ],
+    "meaning_en": "They said",
+    "meaning_ur": "Unhone kaha"
   },
   {
     "rank": 452,
@@ -82427,7 +83329,9 @@
         4,
         63821
       ]
-    ]
+    ],
+    "meaning_en": "They feared Allah / Were pious",
+    "meaning_ur": "Unhone taqwa apnaya"
   },
   {
     "rank": 453,
@@ -82561,7 +83465,9 @@
         4,
         68769
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مِمَّنْ)",
+    "meaning_ur": "Lafz-e-Quran (مِمَّنْ)"
   },
   {
     "rank": 454,
@@ -82694,7 +83600,9 @@
         8,
         77027
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَحْسَنُ)",
+    "meaning_ur": "Lafz-e-Quran (اَحْسَنُ)"
   },
   {
     "rank": 455,
@@ -82825,7 +83733,9 @@
         3,
         78866
       ]
-    ]
+    ],
+    "meaning_en": "The Messenger",
+    "meaning_ur": "Rasool / Paighambar"
   },
   {
     "rank": 456,
@@ -82960,7 +83870,9 @@
         5,
         81893
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْهُدٰى)",
+    "meaning_ur": "Lafz-e-Quran (الْهُدٰى)"
   },
   {
     "rank": 457,
@@ -83094,7 +84006,9 @@
         6,
         72932
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْبَحْرِ)",
+    "meaning_ur": "Lafz-e-Quran (الْبَحْرِ)"
   },
   {
     "rank": 458,
@@ -83223,7 +84137,9 @@
         14,
         49857
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (حَرَّمَ)",
+    "meaning_ur": "Lafz-e-Quran (حَرَّمَ)"
   },
   {
     "rank": 459,
@@ -83347,7 +84263,9 @@
         2,
         70668
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اعْلَمُوْا)",
+    "meaning_ur": "Lafz-e-Quran (اعْلَمُوْا)"
   },
   {
     "rank": 460,
@@ -83480,7 +84398,9 @@
         3,
         82430
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَكُنْ)",
+    "meaning_ur": "Lafz-e-Quran (یَكُنْ)"
   },
   {
     "rank": 461,
@@ -83614,7 +84534,9 @@
         16,
         76977
       ]
-    ]
+    ],
+    "meaning_en": "Paradise / The Garden",
+    "meaning_ur": "Jannat / Baagh"
   },
   {
     "rank": 462,
@@ -83750,7 +84672,9 @@
         8,
         78218
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَجَلٍ)",
+    "meaning_ur": "Lafz-e-Quran (اَجَلٍ)"
   },
   {
     "rank": 463,
@@ -83885,7 +84809,9 @@
         5,
         80536
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْغَیْبِ)",
+    "meaning_ur": "Lafz-e-Quran (الْغَیْبِ)"
   },
   {
     "rank": 464,
@@ -84021,7 +84947,9 @@
         1,
         82157
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (فَاَمَّا)",
+    "meaning_ur": "Lafz-e-Quran (فَاَمَّا)"
   },
   {
     "rank": 465,
@@ -84156,7 +85084,9 @@
         9,
         80990
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْعَزِیْزِ)",
+    "meaning_ur": "Lafz-e-Quran (الْعَزِیْزِ)"
   },
   {
     "rank": 466,
@@ -84291,7 +85221,9 @@
         2,
         80674
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (عَظِیْمٍ)",
+    "meaning_ur": "Lafz-e-Quran (عَظِیْمٍ)"
   },
   {
     "rank": 467,
@@ -84425,7 +85357,9 @@
         2,
         74008
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَنَّمَا)",
+    "meaning_ur": "Lafz-e-Quran (اَنَّمَا)"
   },
   {
     "rank": 468,
@@ -84558,7 +85492,9 @@
         1,
         80883
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (فَسَوْفَ)",
+    "meaning_ur": "Lafz-e-Quran (فَسَوْفَ)"
   },
   {
     "rank": 469,
@@ -84689,7 +85625,9 @@
         15,
         70512
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (شَهِیْدًا)",
+    "meaning_ur": "Lafz-e-Quran (شَهِیْدًا)"
   },
   {
     "rank": 470,
@@ -84816,7 +85754,9 @@
         6,
         76926
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْمُنٰفِقِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (الْمُنٰفِقِیْنَ)"
   },
   {
     "rank": 471,
@@ -84951,7 +85891,9 @@
         3,
         77211
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَرَوْا)",
+    "meaning_ur": "Lafz-e-Quran (یَرَوْا)"
   },
   {
     "rank": 472,
@@ -85086,7 +86028,9 @@
         2,
         68694
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْحَمْدُ)",
+    "meaning_ur": "Lafz-e-Quran (الْحَمْدُ)"
   },
   {
     "rank": 473,
@@ -85222,7 +86166,9 @@
         2,
         79178
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْمُجْرِمِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (الْمُجْرِمِیْنَ)"
   },
   {
     "rank": 474,
@@ -85351,7 +86297,9 @@
         4,
         78521
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (السَّمَآءَ)",
+    "meaning_ur": "Lafz-e-Quran (السَّمَآءَ)"
   },
   {
     "rank": 475,
@@ -85473,7 +86421,9 @@
         3,
         59420
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اذْكُرُوْا)",
+    "meaning_ur": "Lafz-e-Quran (اذْكُرُوْا)"
   },
   {
     "rank": 476,
@@ -85599,7 +86549,9 @@
         3,
         77791
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَنِّیْ)",
+    "meaning_ur": "Lafz-e-Quran (اَنِّیْ)"
   },
   {
     "rank": 477,
@@ -85722,7 +86674,9 @@
         4,
         67625
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (عَلَیْكُمُ)",
+    "meaning_ur": "Lafz-e-Quran (عَلَیْكُمُ)"
   },
   {
     "rank": 478,
@@ -85849,7 +86803,9 @@
         4,
         77505
       ]
-    ]
+    ],
+    "meaning_en": "Some / Part",
+    "meaning_ur": "Baaz / Kuch"
   },
   {
     "rank": 479,
@@ -85970,7 +86926,9 @@
         1,
         82224
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (وَیْلٌ)",
+    "meaning_ur": "Lafz-e-Quran (وَیْلٌ)"
   },
   {
     "rank": 480,
@@ -86096,7 +87054,9 @@
         26,
         73888
       ]
-    ]
+    ],
+    "meaning_en": "The a punishment / torment",
+    "meaning_ur": "Azaab"
   },
   {
     "rank": 481,
@@ -86225,7 +87185,9 @@
         1,
         80751
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (كِتٰبٌ)",
+    "meaning_ur": "Lafz-e-Quran (كِتٰبٌ)"
   },
   {
     "rank": 482,
@@ -86352,7 +87314,9 @@
         4,
         78581
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (سَمِعْنَا)",
+    "meaning_ur": "Lafz-e-Quran (سَمِعْنَا)"
   },
   {
     "rank": 483,
@@ -86477,7 +87441,9 @@
         5,
         67619
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (عَدُوٌّ)",
+    "meaning_ur": "Lafz-e-Quran (عَدُوٌّ)"
   },
   {
     "rank": 484,
@@ -86603,7 +87569,9 @@
         5,
         81318
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (كَفَرَ)",
+    "meaning_ur": "Lafz-e-Quran (كَفَرَ)"
   },
   {
     "rank": 485,
@@ -86731,7 +87699,9 @@
         1,
         81047
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (ذُو)",
+    "meaning_ur": "Lafz-e-Quran (ذُو)"
   },
   {
     "rank": 486,
@@ -86858,7 +87828,9 @@
         3,
         79901
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْعَظِیْمِ)",
+    "meaning_ur": "Lafz-e-Quran (الْعَظِیْمِ)"
   },
   {
     "rank": 487,
@@ -86986,7 +87958,9 @@
         2,
         77513
       ]
-    ]
+    ],
+    "meaning_en": "Our Lord!",
+    "meaning_ur": "Aye hamare Rab!"
   },
   {
     "rank": 488,
@@ -87113,7 +88087,9 @@
         3,
         71990
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اِلٰهٌ)",
+    "meaning_ur": "Lafz-e-Quran (اِلٰهٌ)"
   },
   {
     "rank": 489,
@@ -87239,7 +88215,9 @@
         11,
         72045
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (حِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (حِیْنَ)"
   },
   {
     "rank": 490,
@@ -87364,7 +88342,9 @@
         1,
         77512
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (عَسٰى)",
+    "meaning_ur": "Lafz-e-Quran (عَسٰى)"
   },
   {
     "rank": 491,
@@ -87492,7 +88472,9 @@
         2,
         82148
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَكُوْنُ)",
+    "meaning_ur": "Lafz-e-Quran (یَكُوْنُ)"
   },
   {
     "rank": 492,
@@ -87619,7 +88601,9 @@
         4,
         76649
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (قَرْیَةٍ)",
+    "meaning_ur": "Lafz-e-Quran (قَرْیَةٍ)"
   },
   {
     "rank": 493,
@@ -87741,7 +88725,9 @@
         9,
         79596
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (كَبِیْرًا)",
+    "meaning_ur": "Lafz-e-Quran (كَبِیْرًا)"
   },
   {
     "rank": 494,
@@ -87866,7 +88852,9 @@
         18,
         69249
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَفْتَرُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یَفْتَرُوْنَ)"
   },
   {
     "rank": 495,
@@ -87988,7 +88976,9 @@
         5,
         76367
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَطِیْعُوا)",
+    "meaning_ur": "Lafz-e-Quran (اَطِیْعُوا)"
   },
   {
     "rank": 496,
@@ -88109,7 +89099,9 @@
         3,
         73633
       ]
-    ]
+    ],
+    "meaning_en": "For he / it",
+    "meaning_ur": "Ke liye Wo (Muzakkar)"
   },
   {
     "rank": 497,
@@ -88227,7 +89219,9 @@
         16,
         70202
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (رَّحِیْمًا)",
+    "meaning_ur": "Lafz-e-Quran (رَّحِیْمًا)"
   },
   {
     "rank": 498,
@@ -88350,7 +89344,9 @@
         2,
         78205
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اعْبُدُوا)",
+    "meaning_ur": "Lafz-e-Quran (اعْبُدُوا)"
   },
   {
     "rank": 499,
@@ -88479,7 +89475,9 @@
         9,
         78451
       ]
-    ]
+    ],
+    "meaning_en": "So they said",
+    "meaning_ur": "To Unhone kaha"
   },
   {
     "rank": 500,
@@ -88605,7 +89603,9 @@
         26,
         68762
       ]
-    ]
+    ],
+    "meaning_en": "He knew",
+    "meaning_ur": "Usne jaana"
   },
   {
     "rank": 501,
@@ -88734,7 +89734,9 @@
         7,
         76940
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (نُوْحٍ)",
+    "meaning_ur": "Lafz-e-Quran (نُوْحٍ)"
   },
   {
     "rank": 502,
@@ -88863,7 +89865,9 @@
         3,
         72797
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَهْلَكْنَا)",
+    "meaning_ur": "Lafz-e-Quran (اَهْلَكْنَا)"
   },
   {
     "rank": 503,
@@ -88990,7 +89994,9 @@
         6,
         77901
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تَذَكَّرُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (تَذَكَّرُوْنَ)"
   },
   {
     "rank": 504,
@@ -89114,7 +90120,9 @@
         1,
         80043
       ]
-    ]
+    ],
+    "meaning_en": "Lord / Sustainer",
+    "meaning_ur": "Rab / Palne wala"
   },
   {
     "rank": 505,
@@ -89233,7 +90241,9 @@
         12,
         69231
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَرْجِعُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یَرْجِعُوْنَ)"
   },
   {
     "rank": 506,
@@ -89355,7 +90365,9 @@
         3,
         78301
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (خَلَقَكُمْ)",
+    "meaning_ur": "Lafz-e-Quran (خَلَقَكُمْ)"
   },
   {
     "rank": 507,
@@ -89473,7 +90485,9 @@
         13,
         48263
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (قَبْلِكُمْ)",
+    "meaning_ur": "Lafz-e-Quran (قَبْلِكُمْ)"
   },
   {
     "rank": 508,
@@ -89592,7 +90606,9 @@
         2,
         80262
       ]
-    ]
+    ],
+    "meaning_en": "Paradise / The Garden",
+    "meaning_ur": "Jannat / Baagh"
   },
   {
     "rank": 509,
@@ -89712,7 +90728,9 @@
         16,
         65434
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَوَّلَ)",
+    "meaning_ur": "Lafz-e-Quran (اَوَّلَ)"
   },
   {
     "rank": 510,
@@ -89831,7 +90849,9 @@
         8,
         79659
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَوْمًا)",
+    "meaning_ur": "Lafz-e-Quran (یَوْمًا)"
   },
   {
     "rank": 511,
@@ -89952,7 +90972,9 @@
         1,
         68676
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (ذٰلِكُمْ)",
+    "meaning_ur": "Lafz-e-Quran (ذٰلِكُمْ)"
   },
   {
     "rank": 512,
@@ -90072,7 +91094,9 @@
         12,
         76887
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (عَنْكُمْ)",
+    "meaning_ur": "Lafz-e-Quran (عَنْكُمْ)"
   },
   {
     "rank": 513,
@@ -90191,7 +91215,9 @@
         4,
         77922
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَحَدٍ)",
+    "meaning_ur": "Lafz-e-Quran (اَحَدٍ)"
   },
   {
     "rank": 514,
@@ -90309,7 +91335,9 @@
         4,
         80732
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْجَحِیْمِ)",
+    "meaning_ur": "Lafz-e-Quran (الْجَحِیْمِ)"
   },
   {
     "rank": 515,
@@ -90429,7 +91457,9 @@
         5,
         78460
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بِهٖؕ-وَ)",
+    "meaning_ur": "Lafz-e-Quran (بِهٖؕ-وَ)"
   },
   {
     "rank": 516,
@@ -90548,7 +91578,9 @@
         11,
         78863
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (رَسُوْلًا)",
+    "meaning_ur": "Lafz-e-Quran (رَسُوْلًا)"
   },
   {
     "rank": 517,
@@ -90669,7 +91701,9 @@
         6,
         71647
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اِلٰهًا)",
+    "meaning_ur": "Lafz-e-Quran (اِلٰهًا)"
   },
   {
     "rank": 518,
@@ -90788,7 +91822,9 @@
         5,
         68267
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اٰیٰتِنَا)",
+    "meaning_ur": "Lafz-e-Quran (اٰیٰتِنَا)"
   },
   {
     "rank": 519,
@@ -90907,7 +91943,9 @@
         2,
         78764
       ]
-    ]
+    ],
+    "meaning_en": "Or",
+    "meaning_ur": "Ya"
   },
   {
     "rank": 520,
@@ -91019,7 +92057,9 @@
         29,
         75474
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (جُنَاحَ)",
+    "meaning_ur": "Lafz-e-Quran (جُنَاحَ)"
   },
   {
     "rank": 521,
@@ -91136,7 +92176,9 @@
         13,
         80067
       ]
-    ]
+    ],
+    "meaning_en": "The Most Gracious",
+    "meaning_ur": "Nihayat Meharban"
   },
   {
     "rank": 522,
@@ -91256,7 +92298,9 @@
         12,
         75884
       ]
-    ]
+    ],
+    "meaning_en": "Like / Equal to",
+    "meaning_ur": "Misl / Jaise"
   },
   {
     "rank": 523,
@@ -91378,7 +92422,9 @@
         5,
         81901
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تَوَلّٰى)",
+    "meaning_ur": "Lafz-e-Quran (تَوَلّٰى)"
   },
   {
     "rank": 524,
@@ -91501,7 +92547,9 @@
         2,
         81288
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَنْظُرُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یَنْظُرُوْنَ)"
   },
   {
     "rank": 525,
@@ -91620,7 +92668,9 @@
         5,
         61611
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (هٰرُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (هٰرُوْنَ)"
   },
   {
     "rank": 526,
@@ -91740,7 +92790,9 @@
         28,
         76332
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْعَظِیْمُ)",
+    "meaning_ur": "Lafz-e-Quran (الْعَظِیْمُ)"
   },
   {
     "rank": 527,
@@ -91855,7 +92907,9 @@
         2,
         76922
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (النَّبِیُّ)",
+    "meaning_ur": "Lafz-e-Quran (النَّبِیُّ)"
   },
   {
     "rank": 528,
@@ -91975,7 +93029,9 @@
         2,
         80709
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تُتْلٰى)",
+    "meaning_ur": "Lafz-e-Quran (تُتْلٰى)"
   },
   {
     "rank": 529,
@@ -92092,7 +93148,9 @@
         13,
         74490
       ]
-    ]
+    ],
+    "meaning_en": "The Messenger",
+    "meaning_ur": "Rasool / Paighambar"
   },
   {
     "rank": 530,
@@ -92213,7 +93271,9 @@
         8,
         81840
       ]
-    ]
+    ],
+    "meaning_en": "A reward",
+    "meaning_ur": "Ajr / Sawaab"
   },
   {
     "rank": 531,
@@ -92334,7 +93394,9 @@
         14,
         81032
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْفَوْزُ)",
+    "meaning_ur": "Lafz-e-Quran (الْفَوْزُ)"
   },
   {
     "rank": 532,
@@ -92455,7 +93517,9 @@
         15,
         80093
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (كُنْتُ)",
+    "meaning_ur": "Lafz-e-Quran (كُنْتُ)"
   },
   {
     "rank": 533,
@@ -92573,7 +93637,9 @@
         6,
         78598
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مِنَّا)",
+    "meaning_ur": "Lafz-e-Quran (مِنَّا)"
   },
   {
     "rank": 534,
@@ -92691,7 +93757,9 @@
         5,
         80642
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَوْمُ)",
+    "meaning_ur": "Lafz-e-Quran (یَوْمُ)"
   },
   {
     "rank": 535,
@@ -92810,7 +93878,9 @@
         1,
         81952
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (سَلٰمٌ)",
+    "meaning_ur": "Lafz-e-Quran (سَلٰمٌ)"
   },
   {
     "rank": 536,
@@ -92933,7 +94003,9 @@
         8,
         78318
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الشَّمْسَ)",
+    "meaning_ur": "Lafz-e-Quran (الشَّمْسَ)"
   },
   {
     "rank": 537,
@@ -93050,7 +94122,9 @@
         3,
         79869
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (نَجْزِی)",
+    "meaning_ur": "Lafz-e-Quran (نَجْزِی)"
   },
   {
     "rank": 538,
@@ -93167,7 +94241,9 @@
         10,
         78505
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْجِنِّ)",
+    "meaning_ur": "Lafz-e-Quran (الْجِنِّ)"
   },
   {
     "rank": 539,
@@ -93288,7 +94364,9 @@
         33,
         76716
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَحْسَنَ)",
+    "meaning_ur": "Lafz-e-Quran (اَحْسَنَ)"
   },
   {
     "rank": 540,
@@ -93406,7 +94484,9 @@
         2,
         68322
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (سَخَّرَ)",
+    "meaning_ur": "Lafz-e-Quran (سَخَّرَ)"
   },
   {
     "rank": 541,
@@ -93525,7 +94605,9 @@
         6,
         81750
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْاُوْلٰى)",
+    "meaning_ur": "Lafz-e-Quran (الْاُوْلٰى)"
   },
   {
     "rank": 542,
@@ -93640,7 +94722,9 @@
         6,
         71907
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (رَیْبَ)",
+    "meaning_ur": "Lafz-e-Quran (رَیْبَ)"
   },
   {
     "rank": 543,
@@ -93753,7 +94837,9 @@
         4,
         80647
       ]
-    ]
+    ],
+    "meaning_en": "A soul / person",
+    "meaning_ur": "Jaan / Nafs"
   },
   {
     "rank": 544,
@@ -93863,7 +94949,9 @@
         20,
         57157
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَخَذْنَا)",
+    "meaning_ur": "Lafz-e-Quran (اَخَذْنَا)"
   },
   {
     "rank": 545,
@@ -93978,7 +95066,9 @@
         5,
         80979
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَفْعَلُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یَفْعَلُوْنَ)"
   },
   {
     "rank": 546,
@@ -94091,7 +95181,9 @@
         6,
         78733
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (فَاِنَّهٗ)",
+    "meaning_ur": "Lafz-e-Quran (فَاِنَّهٗ)"
   },
   {
     "rank": 547,
@@ -94205,7 +95297,9 @@
         10,
         78737
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَدَیْهِ)",
+    "meaning_ur": "Lafz-e-Quran (یَدَیْهِ)"
   },
   {
     "rank": 548,
@@ -94315,7 +95409,9 @@
         6,
         75609
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تَقُوْلُوْا)",
+    "meaning_ur": "Lafz-e-Quran (تَقُوْلُوْا)"
   },
   {
     "rank": 549,
@@ -94428,7 +95524,9 @@
         6,
         77517
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مِّنْهَا)",
+    "meaning_ur": "Lafz-e-Quran (مِّنْهَا)"
   },
   {
     "rank": 550,
@@ -94541,7 +95639,9 @@
         8,
         64569
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اللّٰهِؕ-اِنَّ)",
+    "meaning_ur": "Lafz-e-Quran (اللّٰهِؕ-اِنَّ)"
   },
   {
     "rank": 551,
@@ -94653,7 +95753,9 @@
         3,
         75682
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَظْلَمُ)",
+    "meaning_ur": "Lafz-e-Quran (اَظْلَمُ)"
   },
   {
     "rank": 552,
@@ -94768,7 +95870,9 @@
         2,
         80107
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَمْرًا)",
+    "meaning_ur": "Lafz-e-Quran (اَمْرًا)"
   },
   {
     "rank": 553,
@@ -94879,7 +95983,9 @@
         24,
         55563
       ]
-    ]
+    ],
+    "meaning_en": "For people / tribe",
+    "meaning_ur": "Ke liye Qawm / Giroh"
   },
   {
     "rank": 554,
@@ -94993,7 +96099,9 @@
         34,
         74210
       ]
-    ]
+    ],
+    "meaning_en": "Truth / True",
+    "meaning_ur": "Haq / Sach"
   },
   {
     "rank": 555,
@@ -95107,7 +96215,9 @@
         7,
         77079
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بِئْسَ)",
+    "meaning_ur": "Lafz-e-Quran (بِئْسَ)"
   },
   {
     "rank": 556,
@@ -95220,7 +96330,9 @@
         31,
         74904
       ]
-    ]
+    ],
+    "meaning_en": "The Messenger",
+    "meaning_ur": "Rasool / Paighambar"
   },
   {
     "rank": 557,
@@ -95330,7 +96442,9 @@
         40,
         74913
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (شَدِیْدُ)",
+    "meaning_ur": "Lafz-e-Quran (شَدِیْدُ)"
   },
   {
     "rank": 558,
@@ -95441,7 +96555,9 @@
         6,
         82081
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَعْمَالَهُمْ)",
+    "meaning_ur": "Lafz-e-Quran (اَعْمَالَهُمْ)"
   },
   {
     "rank": 559,
@@ -95552,7 +96668,9 @@
         8,
         76677
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْاَلْبَابِ)",
+    "meaning_ur": "Lafz-e-Quran (الْاَلْبَابِ)"
   },
   {
     "rank": 560,
@@ -95662,7 +96780,9 @@
         7,
         75901
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَنَّكُمْ)",
+    "meaning_ur": "Lafz-e-Quran (اَنَّكُمْ)"
   },
   {
     "rank": 561,
@@ -95775,7 +96895,9 @@
         30,
         52931
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تَكُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (تَكُوْنَ)"
   },
   {
     "rank": 562,
@@ -95887,7 +97009,9 @@
         79,
         78969
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اللّٰهَؕ-اِنَّ)",
+    "meaning_ur": "Lafz-e-Quran (اللّٰهَؕ-اِنَّ)"
   },
   {
     "rank": 563,
@@ -96001,7 +97125,9 @@
         40,
         74046
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْحَیٰوةُ)",
+    "meaning_ur": "Lafz-e-Quran (الْحَیٰوةُ)"
   },
   {
     "rank": 564,
@@ -96116,7 +97242,9 @@
         10,
         74447
       ]
-    ]
+    ],
+    "meaning_en": "For what / that which / not",
+    "meaning_ur": "Ke liye Jo / Kya / Nahi"
   },
   {
     "rank": 565,
@@ -96230,7 +97358,9 @@
         10,
         77582
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَسْتَطِیْعُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یَسْتَطِیْعُوْنَ)"
   },
   {
     "rank": 566,
@@ -96344,7 +97474,9 @@
         11,
         69073
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یُظْلَمُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یُظْلَمُوْنَ)"
   },
   {
     "rank": 567,
@@ -96458,7 +97590,9 @@
         20,
         82055
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (رَبَّهٗ)",
+    "meaning_ur": "Lafz-e-Quran (رَبَّهٗ)"
   },
   {
     "rank": 568,
@@ -96570,7 +97704,9 @@
         1,
         68540
       ]
-    ]
+    ],
+    "meaning_en": "Say! (O Prophet)",
+    "meaning_ur": "Farmaiye! / Kaho!"
   },
   {
     "rank": 569,
@@ -96679,7 +97815,9 @@
         6,
         78085
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مَلَكَتْ)",
+    "meaning_ur": "Lafz-e-Quran (مَلَكَتْ)"
   },
   {
     "rank": 570,
@@ -96791,7 +97929,9 @@
         1,
         80421
       ]
-    ]
+    ],
+    "meaning_en": "For every / all",
+    "meaning_ur": "Ke liye Har ek / Sab"
   },
   {
     "rank": 571,
@@ -96897,7 +98037,9 @@
         11,
         79689
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (حَكِیْمًا)",
+    "meaning_ur": "Lafz-e-Quran (حَكِیْمًا)"
   },
   {
     "rank": 572,
@@ -97008,7 +98150,9 @@
         2,
         77709
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تَرٰى)",
+    "meaning_ur": "Lafz-e-Quran (تَرٰى)"
   },
   {
     "rank": 573,
@@ -97123,7 +98267,9 @@
         12,
         76374
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْمُبِیْنُ)",
+    "meaning_ur": "Lafz-e-Quran (الْمُبِیْنُ)"
   },
   {
     "rank": 574,
@@ -97235,7 +98381,9 @@
         10,
         72032
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَكْثَرَهُمْ)",
+    "meaning_ur": "Lafz-e-Quran (اَكْثَرَهُمْ)"
   },
   {
     "rank": 575,
@@ -97347,7 +98495,9 @@
         4,
         68740
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تَدْعُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (تَدْعُوْنَ)"
   },
   {
     "rank": 576,
@@ -97457,7 +98607,9 @@
         8,
         74881
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْقُرٰى)",
+    "meaning_ur": "Lafz-e-Quran (الْقُرٰى)"
   },
   {
     "rank": 577,
@@ -97567,7 +98719,9 @@
         1,
         77708
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (فَهَلْ)",
+    "meaning_ur": "Lafz-e-Quran (فَهَلْ)"
   },
   {
     "rank": 578,
@@ -97679,7 +98833,9 @@
         11,
         67218
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (كٰفِرُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (كٰفِرُوْنَ)"
   },
   {
     "rank": 579,
@@ -97790,7 +98946,9 @@
         2,
         72677
       ]
-    ]
+    ],
+    "meaning_en": "People / Tribe",
+    "meaning_ur": "Qawm / Giroh"
   },
   {
     "rank": 580,
@@ -97902,7 +99060,9 @@
         2,
         73841
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تَرَى)",
+    "meaning_ur": "Lafz-e-Quran (تَرَى)"
   },
   {
     "rank": 581,
@@ -98016,7 +99176,9 @@
         4,
         73185
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (قَبْلَهُمْ)",
+    "meaning_ur": "Lafz-e-Quran (قَبْلَهُمْ)"
   },
   {
     "rank": 582,
@@ -98118,7 +99280,9 @@
         8,
         74705
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْاٰخِرِ)",
+    "meaning_ur": "Lafz-e-Quran (الْاٰخِرِ)"
   },
   {
     "rank": 583,
@@ -98222,7 +99386,9 @@
         4,
         76965
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مَثَلًا)",
+    "meaning_ur": "Lafz-e-Quran (مَثَلًا)"
   },
   {
     "rank": 584,
@@ -98329,7 +99495,9 @@
         9,
         71589
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (حِیْنٍ)",
+    "meaning_ur": "Lafz-e-Quran (حِیْنٍ)"
   },
   {
     "rank": 585,
@@ -98433,7 +99601,9 @@
         9,
         68933
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (خَوْفٌ)",
+    "meaning_ur": "Lafz-e-Quran (خَوْفٌ)"
   },
   {
     "rank": 586,
@@ -98540,7 +99710,9 @@
         16,
         76638
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (نَفْسًا)",
+    "meaning_ur": "Lafz-e-Quran (نَفْسًا)"
   },
   {
     "rank": 587,
@@ -98648,7 +99820,9 @@
         2,
         80032
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَسْمَعُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یَسْمَعُوْنَ)"
   },
   {
     "rank": 588,
@@ -98756,7 +99930,9 @@
         8,
         80722
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَكْسِبُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یَكْسِبُوْنَ)"
   },
   {
     "rank": 589,
@@ -98866,7 +100042,9 @@
         4,
         80583
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (قَدَّمَتْ)",
+    "meaning_ur": "Lafz-e-Quran (قَدَّمَتْ)"
   },
   {
     "rank": 590,
@@ -98968,7 +100146,9 @@
         69,
         78959
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (خَیْرٍ)",
+    "meaning_ur": "Lafz-e-Quran (خَیْرٍ)"
   },
   {
     "rank": 591,
@@ -99076,7 +100256,9 @@
         5,
         78067
       ]
-    ]
+    ],
+    "meaning_en": "A punishment / torment",
+    "meaning_ur": "Azaab"
   },
   {
     "rank": 592,
@@ -99182,7 +100364,9 @@
         7,
         67262
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اُمَّةً)",
+    "meaning_ur": "Lafz-e-Quran (اُمَّةً)"
   },
   {
     "rank": 593,
@@ -99285,7 +100469,9 @@
         4,
         80879
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اُوْتِیَ)",
+    "meaning_ur": "Lafz-e-Quran (اُوْتِیَ)"
   },
   {
     "rank": 594,
@@ -99388,7 +100574,9 @@
         7,
         70405
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْمَسْجِدِ)",
+    "meaning_ur": "Lafz-e-Quran (الْمَسْجِدِ)"
   },
   {
     "rank": 595,
@@ -99493,7 +100681,9 @@
         1,
         79874
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (كُلُوْا)",
+    "meaning_ur": "Lafz-e-Quran (كُلُوْا)"
   },
   {
     "rank": 596,
@@ -99600,7 +100790,9 @@
         1,
         82072
       ]
-    ]
+    ],
+    "meaning_en": "In/With indeed / truly",
+    "meaning_ur": "Saath Beshak / Yaqeenan"
   },
   {
     "rank": 597,
@@ -99707,7 +100899,9 @@
         9,
         73682
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَیَّامٍ)",
+    "meaning_ur": "Lafz-e-Quran (اَیَّامٍ)"
   },
   {
     "rank": 598,
@@ -99814,7 +101008,9 @@
         7,
         65395
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَتَّقُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یَتَّقُوْنَ)"
   },
   {
     "rank": 599,
@@ -99918,7 +101114,9 @@
         1,
         80265
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَسْــٴَـلُوْنَكَ)",
+    "meaning_ur": "Lafz-e-Quran (یَسْــٴَـلُوْنَكَ)"
   },
   {
     "rank": 600,
@@ -100023,7 +101221,9 @@
         41,
         74914
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْعِقَابِ)",
+    "meaning_ur": "Lafz-e-Quran (الْعِقَابِ)"
   },
   {
     "rank": 601,
@@ -100133,7 +101333,9 @@
         5,
         77910
       ]
-    ]
+    ],
+    "meaning_en": "Some / Part",
+    "meaning_ur": "Baaz / Kuch"
   },
   {
     "rank": 602,
@@ -100241,7 +101443,9 @@
         4,
         69367
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اُولُوا)",
+    "meaning_ur": "Lafz-e-Quran (اُولُوا)"
   },
   {
     "rank": 603,
@@ -100348,7 +101552,9 @@
         1,
         80154
       ]
-    ]
+    ],
+    "meaning_en": "So say! (o prophet)",
+    "meaning_ur": "To Farmaiye! / Kaho!"
   },
   {
     "rank": 604,
@@ -100457,7 +101663,9 @@
         3,
         80943
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَلِیْمٍ)",
+    "meaning_ur": "Lafz-e-Quran (اَلِیْمٍ)"
   },
   {
     "rank": 605,
@@ -100563,7 +101771,9 @@
         1,
         78870
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (فَكَیْفَ)",
+    "meaning_ur": "Lafz-e-Quran (فَكَیْفَ)"
   },
   {
     "rank": 606,
@@ -100666,7 +101876,9 @@
         2,
         69103
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اذْكُرْ)",
+    "meaning_ur": "Lafz-e-Quran (اذْكُرْ)"
   },
   {
     "rank": 607,
@@ -100773,7 +101985,9 @@
         7,
         70592
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (فَوْقَ)",
+    "meaning_ur": "Lafz-e-Quran (فَوْقَ)"
   },
   {
     "rank": 608,
@@ -100876,7 +102090,9 @@
         8,
         62528
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اِلٰهٍ)",
+    "meaning_ur": "Lafz-e-Quran (اِلٰهٍ)"
   },
   {
     "rank": 609,
@@ -100981,7 +102197,9 @@
         3,
         76748
       ]
-    ]
+    ],
+    "meaning_en": "Did not",
+    "meaning_ur": "Nahi"
   },
   {
     "rank": 610,
@@ -101090,7 +102308,9 @@
         5,
         82133
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الصُّدُوْرِ)",
+    "meaning_ur": "Lafz-e-Quran (الصُّدُوْرِ)"
   },
   {
     "rank": 611,
@@ -101197,7 +102417,9 @@
         4,
         73541
       ]
-    ]
+    ],
+    "meaning_en": "If / Would that",
+    "meaning_ur": "Agar / Kaash"
   },
   {
     "rank": 612,
@@ -101305,7 +102527,9 @@
         2,
         82135
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (رَبَّهُمْ)",
+    "meaning_ur": "Lafz-e-Quran (رَبَّهُمْ)"
   },
   {
     "rank": 613,
@@ -101410,7 +102634,9 @@
         1,
         75698
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یُرِیْدُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یُرِیْدُوْنَ)"
   },
   {
     "rank": 614,
@@ -101513,7 +102739,9 @@
         2,
         65691
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اسْتَكْبَرُوْا)",
+    "meaning_ur": "Lafz-e-Quran (اسْتَكْبَرُوْا)"
   },
   {
     "rank": 615,
@@ -101620,7 +102848,9 @@
         12,
         74188
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اٰتَیْنٰهُ)",
+    "meaning_ur": "Lafz-e-Quran (اٰتَیْنٰهُ)"
   },
   {
     "rank": 616,
@@ -101728,7 +102958,9 @@
         8,
         77755
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (وَّاحِدَةً)",
+    "meaning_ur": "Lafz-e-Quran (وَّاحِدَةً)"
   },
   {
     "rank": 617,
@@ -101837,7 +103069,9 @@
         38,
         69219
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَسْتَهْزِءُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یَسْتَهْزِءُوْنَ)"
   },
   {
     "rank": 618,
@@ -101941,7 +103175,9 @@
         5,
         78469
       ]
-    ]
+    ],
+    "meaning_en": "Our Lord!",
+    "meaning_ur": "Aye hamare Rab!"
   },
   {
     "rank": 619,
@@ -102045,7 +103281,9 @@
         2,
         77347
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَرَءَیْتُمْ)",
+    "meaning_ur": "Lafz-e-Quran (اَرَءَیْتُمْ)"
   },
   {
     "rank": 620,
@@ -102151,7 +103389,9 @@
         4,
         74701
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یُّؤْمِنُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یُّؤْمِنُوْنَ)"
   },
   {
     "rank": 621,
@@ -102261,7 +103501,9 @@
         5,
         81385
       ]
-    ]
+    ],
+    "meaning_en": "A punishment / torment",
+    "meaning_ur": "Azaab"
   },
   {
     "rank": 622,
@@ -102370,7 +103612,9 @@
         2,
         81048
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْعَرْشِ)",
+    "meaning_ur": "Lafz-e-Quran (الْعَرْشِ)"
   },
   {
     "rank": 623,
@@ -102479,7 +103723,9 @@
         3,
         82154
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْجِبَالُ)",
+    "meaning_ur": "Lafz-e-Quran (الْجِبَالُ)"
   },
   {
     "rank": 624,
@@ -102585,7 +103831,9 @@
         3,
         70933
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْقُرْاٰنِ)",
+    "meaning_ur": "Lafz-e-Quran (الْقُرْاٰنِ)"
   },
   {
     "rank": 625,
@@ -102689,7 +103937,9 @@
         1,
         81622
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (كَذَّبَتْ)",
+    "meaning_ur": "Lafz-e-Quran (كَذَّبَتْ)"
   },
   {
     "rank": 626,
@@ -102798,7 +104048,9 @@
         2,
         80832
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (السَّمَآءُ)",
+    "meaning_ur": "Lafz-e-Quran (السَّمَآءُ)"
   },
   {
     "rank": 627,
@@ -102896,7 +104148,9 @@
         7,
         74225
       ]
-    ]
+    ],
+    "meaning_en": "They believed",
+    "meaning_ur": "Wo imaan laye"
   },
   {
     "rank": 628,
@@ -102994,7 +104248,9 @@
         14,
         68938
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَحْزَنُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یَحْزَنُوْنَ)"
   },
   {
     "rank": 629,
@@ -103094,7 +104350,9 @@
         1,
         82253
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اِنَّهَا)",
+    "meaning_ur": "Lafz-e-Quran (اِنَّهَا)"
   },
   {
     "rank": 630,
@@ -103194,7 +104452,9 @@
         4,
         72732
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اٰلَ)",
+    "meaning_ur": "Lafz-e-Quran (اٰلَ)"
   },
   {
     "rank": 631,
@@ -103295,7 +104555,9 @@
         22,
         64401
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بَعْدِهٖ)",
+    "meaning_ur": "Lafz-e-Quran (بَعْدِهٖ)"
   },
   {
     "rank": 632,
@@ -103395,7 +104657,9 @@
         4,
         65823
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مُوْسَى)",
+    "meaning_ur": "Lafz-e-Quran (مُوْسَى)"
   },
   {
     "rank": 633,
@@ -103494,7 +104758,9 @@
         5,
         66689
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَظْلِمُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یَظْلِمُوْنَ)"
   },
   {
     "rank": 634,
@@ -103595,7 +104861,9 @@
         7,
         69940
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (جْ)",
+    "meaning_ur": "Lafz-e-Quran (جْ)"
   },
   {
     "rank": 635,
@@ -103694,7 +104962,9 @@
         16,
         66746
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْخٰسِرِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (الْخٰسِرِیْنَ)"
   },
   {
     "rank": 636,
@@ -103797,7 +105067,9 @@
         11,
         76343
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (فِیْهَاؕ-وَ)",
+    "meaning_ur": "Lafz-e-Quran (فِیْهَاؕ-وَ)"
   },
   {
     "rank": 637,
@@ -103895,7 +105167,9 @@
         8,
         55694
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (ابْنَ)",
+    "meaning_ur": "Lafz-e-Quran (ابْنَ)"
   },
   {
     "rank": 638,
@@ -103994,7 +105268,9 @@
         18,
         78697
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَبَدًا)",
+    "meaning_ur": "Lafz-e-Quran (اَبَدًا)"
   },
   {
     "rank": 639,
@@ -104095,7 +105371,9 @@
         2,
         70076
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَرْسَلْنٰكَ)",
+    "meaning_ur": "Lafz-e-Quran (اَرْسَلْنٰكَ)"
   },
   {
     "rank": 640,
@@ -104196,7 +105474,9 @@
         4,
         75368
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (فِیْهِمْ)",
+    "meaning_ur": "Lafz-e-Quran (فِیْهِمْ)"
   },
   {
     "rank": 641,
@@ -104293,7 +105573,9 @@
         4,
         79169
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (كَسَبَتْ)",
+    "meaning_ur": "Lafz-e-Quran (كَسَبَتْ)"
   },
   {
     "rank": 642,
@@ -104393,7 +105675,9 @@
         20,
         75019
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (فِیْكُمْ)",
+    "meaning_ur": "Lafz-e-Quran (فِیْكُمْ)"
   },
   {
     "rank": 643,
@@ -104488,7 +105772,9 @@
         1,
         45161
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (كُتِبَ)",
+    "meaning_ur": "Lafz-e-Quran (كُتِبَ)"
   },
   {
     "rank": 644,
@@ -104582,7 +105868,9 @@
         71,
         48892
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یُبَیِّنُ)",
+    "meaning_ur": "Lafz-e-Quran (یُبَیِّنُ)"
   },
   {
     "rank": 645,
@@ -104680,7 +105968,9 @@
         15,
         64264
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْحِسَابِ)",
+    "meaning_ur": "Lafz-e-Quran (الْحِسَابِ)"
   },
   {
     "rank": 646,
@@ -104781,7 +106071,9 @@
         2,
         78620
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (فِیْهِؕ-وَ)",
+    "meaning_ur": "Lafz-e-Quran (فِیْهِؕ-وَ)"
   },
   {
     "rank": 647,
@@ -104878,7 +106170,9 @@
         9,
         81454
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَنّٰى)",
+    "meaning_ur": "Lafz-e-Quran (اَنّٰى)"
   },
   {
     "rank": 648,
@@ -104980,7 +106274,9 @@
         2,
         68235
       ]
-    ]
+    ],
+    "meaning_en": "Verses / Signs",
+    "meaning_ur": "Aayaat / Nishaniyan"
   },
   {
     "rank": 649,
@@ -105080,7 +106376,9 @@
         5,
         74977
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بَعْدِهِمْ)",
+    "meaning_ur": "Lafz-e-Quran (بَعْدِهِمْ)"
   },
   {
     "rank": 650,
@@ -105179,7 +106477,9 @@
         32,
         76622
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اُخْرٰى)",
+    "meaning_ur": "Lafz-e-Quran (اُخْرٰى)"
   },
   {
     "rank": 651,
@@ -105279,7 +106579,9 @@
         12,
         67011
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْاَنْعَامِ)",
+    "meaning_ur": "Lafz-e-Quran (الْاَنْعَامِ)"
   },
   {
     "rank": 652,
@@ -105377,7 +106679,9 @@
         11,
         68390
       ]
-    ]
+    ],
+    "meaning_en": "There came to them",
+    "meaning_ur": "Unke paas aaya"
   },
   {
     "rank": 653,
@@ -105471,7 +106775,9 @@
         6,
         57239
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یٰاَهْلَ)",
+    "meaning_ur": "Lafz-e-Quran (یٰاَهْلَ)"
   },
   {
     "rank": 654,
@@ -105571,7 +106877,9 @@
         6,
         82433
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَحَدٌ)",
+    "meaning_ur": "Lafz-e-Quran (اَحَدٌ)"
   },
   {
     "rank": 655,
@@ -105672,7 +106980,9 @@
         5,
         75684
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (افْتَرٰى)",
+    "meaning_ur": "Lafz-e-Quran (افْتَرٰى)"
   },
   {
     "rank": 656,
@@ -105774,7 +107084,9 @@
         4,
         79295
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (اَیْنَ)"
   },
   {
     "rank": 657,
@@ -105875,7 +107187,9 @@
         4,
         60242
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اتَّبَعَ)",
+    "meaning_ur": "Lafz-e-Quran (اتَّبَعَ)"
   },
   {
     "rank": 658,
@@ -105973,7 +107287,9 @@
         2,
         79460
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَعْتَدْنَا)",
+    "meaning_ur": "Lafz-e-Quran (اَعْتَدْنَا)"
   },
   {
     "rank": 659,
@@ -106067,7 +107383,9 @@
         5,
         69974
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مُّبِیْنًا)",
+    "meaning_ur": "Lafz-e-Quran (مُّبِیْنًا)"
   },
   {
     "rank": 660,
@@ -106163,7 +107481,9 @@
         11,
         70361
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (وَلِیًّا)",
+    "meaning_ur": "Lafz-e-Quran (وَلِیًّا)"
   },
   {
     "rank": 661,
@@ -106261,7 +107581,9 @@
         2,
         76577
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَمْرُ)",
+    "meaning_ur": "Lafz-e-Quran (اَمْرُ)"
   },
   {
     "rank": 662,
@@ -106360,7 +107682,9 @@
         5,
         80903
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بَصِیْرًا)",
+    "meaning_ur": "Lafz-e-Quran (بَصِیْرًا)"
   },
   {
     "rank": 663,
@@ -106455,7 +107779,9 @@
         10,
         78812
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (وَكِیْلًا)",
+    "meaning_ur": "Lafz-e-Quran (وَكِیْلًا)"
   },
   {
     "rank": 664,
@@ -106552,7 +107878,9 @@
         7,
         79696
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَعَدَّ)",
+    "meaning_ur": "Lafz-e-Quran (اَعَدَّ)"
   },
   {
     "rank": 665,
@@ -106651,7 +107979,9 @@
         33,
         73819
       ]
-    ]
+    ],
+    "meaning_en": "Nay! / By no means!",
+    "meaning_ur": "Hargiz nahi!"
   },
   {
     "rank": 666,
@@ -106752,7 +108082,9 @@
         4,
         67872
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (شَكٍّ)",
+    "meaning_ur": "Lafz-e-Quran (شَكٍّ)"
   },
   {
     "rank": 667,
@@ -106852,7 +108184,9 @@
         4,
         65194
       ]
-    ]
+    ],
+    "meaning_en": "In/With worse / evil",
+    "meaning_ur": "Saath Bura / Buraai"
   },
   {
     "rank": 668,
@@ -106952,7 +108286,9 @@
         2,
         82153
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تَكُوْنُ)",
+    "meaning_ur": "Lafz-e-Quran (تَكُوْنُ)"
   },
   {
     "rank": 669,
@@ -107054,7 +108390,9 @@
         5,
         80189
       ]
-    ]
+    ],
+    "meaning_en": "For from / of",
+    "meaning_ur": "Ke liye Se / Mein se"
   },
   {
     "rank": 670,
@@ -107153,7 +108491,9 @@
         12,
         78495
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (كَذِبًا)",
+    "meaning_ur": "Lafz-e-Quran (كَذِبًا)"
   },
   {
     "rank": 671,
@@ -107252,7 +108592,9 @@
         1,
         73585
       ]
-    ]
+    ],
+    "meaning_en": "So if / would that",
+    "meaning_ur": "To Agar / Kaash"
   },
   {
     "rank": 672,
@@ -107352,7 +108694,9 @@
         17,
         75071
       ]
-    ]
+    ],
+    "meaning_en": "Their hearts",
+    "meaning_ur": "Unke dil"
   },
   {
     "rank": 673,
@@ -107444,7 +108788,9 @@
         4,
         33316
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یُوْسُفَ)",
+    "meaning_ur": "Lafz-e-Quran (یُوْسُفَ)"
   },
   {
     "rank": 674,
@@ -107546,7 +108892,9 @@
         2,
         81927
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَنْزَلْنٰهُ)",
+    "meaning_ur": "Lafz-e-Quran (اَنْزَلْنٰهُ)"
   },
   {
     "rank": 675,
@@ -107646,7 +108994,9 @@
         9,
         68360
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (رَبِّكُمْ)",
+    "meaning_ur": "Lafz-e-Quran (رَبِّكُمْ)"
   },
   {
     "rank": 676,
@@ -107744,7 +109094,9 @@
         9,
         77630
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (نَادٰى)",
+    "meaning_ur": "Lafz-e-Quran (نَادٰى)"
   },
   {
     "rank": 677,
@@ -107842,7 +109194,9 @@
         3,
         72613
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مِّنَّا)",
+    "meaning_ur": "Lafz-e-Quran (مِّنَّا)"
   },
   {
     "rank": 678,
@@ -107942,7 +109296,9 @@
         5,
         76118
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْمَدِیْنَةِ)",
+    "meaning_ur": "Lafz-e-Quran (الْمَدِیْنَةِ)"
   },
   {
     "rank": 679,
@@ -108041,7 +109397,9 @@
         6,
         73050
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْمُجْرِمُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (الْمُجْرِمُوْنَ)"
   },
   {
     "rank": 680,
@@ -108141,7 +109499,9 @@
         1,
         77251
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَفَمَنْ)",
+    "meaning_ur": "Lafz-e-Quran (اَفَمَنْ)"
   },
   {
     "rank": 681,
@@ -108240,7 +109600,9 @@
         11,
         78475
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (وَلَدًا)",
+    "meaning_ur": "Lafz-e-Quran (وَلَدًا)"
   },
   {
     "rank": 682,
@@ -108340,7 +109702,9 @@
         3,
         82243
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَدْرٰىكَ)",
+    "meaning_ur": "Lafz-e-Quran (اَدْرٰىكَ)"
   },
   {
     "rank": 683,
@@ -108436,7 +109800,9 @@
         12,
         68373
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (رَزَقْنٰهُمْ)",
+    "meaning_ur": "Lafz-e-Quran (رَزَقْنٰهُمْ)"
   },
   {
     "rank": 684,
@@ -108531,7 +109897,9 @@
         19,
         76432
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْمُفْلِحُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (الْمُفْلِحُوْنَ)"
   },
   {
     "rank": 685,
@@ -108621,7 +109989,9 @@
         8,
         75880
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (كَمَثَلِ)",
+    "meaning_ur": "Lafz-e-Quran (كَمَثَلِ)"
   },
   {
     "rank": 686,
@@ -108712,7 +110082,9 @@
         9,
         75781
       ]
-    ]
+    ],
+    "meaning_en": "In/With worse / evil",
+    "meaning_ur": "Saath Bura / Buraai"
   },
   {
     "rank": 687,
@@ -108807,7 +110179,9 @@
         4,
         81493
       ]
-    ]
+    ],
+    "meaning_en": "In/With this (masculine)",
+    "meaning_ur": "Saath Yeh"
   },
   {
     "rank": 688,
@@ -108899,7 +110273,9 @@
         16,
         75282
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تَكْفُرُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (تَكْفُرُوْنَ)"
   },
   {
     "rank": 689,
@@ -108989,7 +110365,9 @@
         10,
         69277
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مُصَدِّقًا)",
+    "meaning_ur": "Lafz-e-Quran (مُصَدِّقًا)"
   },
   {
     "rank": 690,
@@ -109083,7 +110461,9 @@
         55,
         78945
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَقِیْمُوا)",
+    "meaning_ur": "Lafz-e-Quran (اَقِیْمُوا)"
   },
   {
     "rank": 691,
@@ -109177,7 +110557,9 @@
         2,
         67365
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بِالَّذِیْ)",
+    "meaning_ur": "Lafz-e-Quran (بِالَّذِیْ)"
   },
   {
     "rank": 692,
@@ -109271,7 +110653,9 @@
         13,
         59665
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَكْفُرُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یَكْفُرُوْنَ)"
   },
   {
     "rank": 693,
@@ -109364,7 +110748,9 @@
         23,
         66080
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (فَرِیْقٌ)",
+    "meaning_ur": "Lafz-e-Quran (فَرِیْقٌ)"
   },
   {
     "rank": 694,
@@ -109460,7 +110846,9 @@
         2,
         71771
       ]
-    ]
+    ],
+    "meaning_en": "The Fire / Hell",
+    "meaning_ur": "Aag / Dozakh"
   },
   {
     "rank": 695,
@@ -109554,7 +110942,9 @@
         1,
         79266
       ]
-    ]
+    ],
+    "meaning_en": "Yes indeed! / Nay!",
+    "meaning_ur": "Kyun nahi!"
   },
   {
     "rank": 696,
@@ -109645,7 +111035,9 @@
         9,
         58814
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (فَرِیْقًا)",
+    "meaning_ur": "Lafz-e-Quran (فَرِیْقًا)"
   },
   {
     "rank": 697,
@@ -109741,7 +111133,9 @@
         3,
         81214
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْحَیٰوةَ)",
+    "meaning_ur": "Lafz-e-Quran (الْحَیٰوةَ)"
   },
   {
     "rank": 698,
@@ -109832,7 +111226,9 @@
         1,
         70838
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (قَالَتِ)",
+    "meaning_ur": "Lafz-e-Quran (قَالَتِ)"
   },
   {
     "rank": 699,
@@ -109926,7 +111322,9 @@
         4,
         80322
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (جَآءَكَ)",
+    "meaning_ur": "Lafz-e-Quran (جَآءَكَ)"
   },
   {
     "rank": 700,
@@ -110019,7 +111417,9 @@
         6,
         58942
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لِّلنَّاسِ)",
+    "meaning_ur": "Lafz-e-Quran (لِّلنَّاسِ)"
   },
   {
     "rank": 701,
@@ -110112,7 +111512,9 @@
         4,
         62361
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَهْلَهٗ)",
+    "meaning_ur": "Lafz-e-Quran (اَهْلَهٗ)"
   },
   {
     "rank": 702,
@@ -110205,7 +111607,9 @@
         8,
         62391
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَعْقُوْبَ)",
+    "meaning_ur": "Lafz-e-Quran (یَعْقُوْبَ)"
   },
   {
     "rank": 703,
@@ -110299,7 +111703,9 @@
         4,
         80194
       ]
-    ]
+    ],
+    "meaning_en": "Or (in questions)",
+    "meaning_ur": "Ya"
   },
   {
     "rank": 704,
@@ -110390,7 +111796,9 @@
         25,
         61516
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الصّٰبِرِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (الصّٰبِرِیْنَ)"
   },
   {
     "rank": 705,
@@ -110483,7 +111891,9 @@
         22,
         75076
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَعْقِلُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یَعْقِلُوْنَ)"
   },
   {
     "rank": 706,
@@ -110576,7 +111986,9 @@
         6,
         71206
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بَعِیْدٍ)",
+    "meaning_ur": "Lafz-e-Quran (بَعِیْدٍ)"
   },
   {
     "rank": 707,
@@ -110668,7 +112080,9 @@
         5,
         80412
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَخِیْهِ)",
+    "meaning_ur": "Lafz-e-Quran (اَخِیْهِ)"
   },
   {
     "rank": 708,
@@ -110762,7 +112176,9 @@
         3,
         68908
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (قَبْلِهٖ)",
+    "meaning_ur": "Lafz-e-Quran (قَبْلِهٖ)"
   },
   {
     "rank": 709,
@@ -110854,7 +112270,9 @@
         2,
         81726
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (ابْتِغَآءَ)",
+    "meaning_ur": "Lafz-e-Quran (ابْتِغَآءَ)"
   },
   {
     "rank": 710,
@@ -110948,7 +112366,9 @@
         4,
         77853
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یُؤْمِنُ)",
+    "meaning_ur": "Lafz-e-Quran (یُؤْمِنُ)"
   },
   {
     "rank": 711,
@@ -111042,7 +112462,9 @@
         3,
         79920
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَزْوَاجًا)",
+    "meaning_ur": "Lafz-e-Quran (اَزْوَاجًا)"
   },
   {
     "rank": 712,
@@ -111131,7 +112553,9 @@
         6,
         57603
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (النِّسَآءِ)",
+    "meaning_ur": "Lafz-e-Quran (النِّسَآءِ)"
   },
   {
     "rank": 713,
@@ -111223,7 +112647,9 @@
         26,
         58613
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لَاٰیَةً)",
+    "meaning_ur": "Lafz-e-Quran (لَاٰیَةً)"
   },
   {
     "rank": 714,
@@ -111317,7 +112743,9 @@
         2,
         75089
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الشَّیْطٰنِ)",
+    "meaning_ur": "Lafz-e-Quran (الشَّیْطٰنِ)"
   },
   {
     "rank": 715,
@@ -111409,7 +112837,9 @@
         17,
         53277
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لِّیْ)",
+    "meaning_ur": "Lafz-e-Quran (لِّیْ)"
   },
   {
     "rank": 716,
@@ -111500,7 +112930,9 @@
         10,
         75792
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (ابْنُ)",
+    "meaning_ur": "Lafz-e-Quran (ابْنُ)"
   },
   {
     "rank": 717,
@@ -111596,7 +113028,9 @@
         13,
         74089
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (كِتٰبٍ)",
+    "meaning_ur": "Lafz-e-Quran (كِتٰبٍ)"
   },
   {
     "rank": 718,
@@ -111692,7 +113126,9 @@
         5,
         78053
       ]
-    ]
+    ],
+    "meaning_en": "Truth / True",
+    "meaning_ur": "Haq / Sach"
   },
   {
     "rank": 719,
@@ -111787,7 +113223,9 @@
         1,
         80675
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَّوْمَ)",
+    "meaning_ur": "Lafz-e-Quran (یَّوْمَ)"
   },
   {
     "rank": 720,
@@ -111882,7 +113320,9 @@
         8,
         77154
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بِذَاتِ)",
+    "meaning_ur": "Lafz-e-Quran (بِذَاتِ)"
   },
   {
     "rank": 721,
@@ -111976,7 +113416,9 @@
         5,
         80013
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (كِتٰبًا)",
+    "meaning_ur": "Lafz-e-Quran (كِتٰبًا)"
   },
   {
     "rank": 722,
@@ -112068,7 +113510,9 @@
         10,
         79699
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَلِیْمًا)",
+    "meaning_ur": "Lafz-e-Quran (اَلِیْمًا)"
   },
   {
     "rank": 723,
@@ -112161,7 +113605,9 @@
         6,
         78395
       ]
-    ]
+    ],
+    "meaning_en": "So did not",
+    "meaning_ur": "To Nahi"
   },
   {
     "rank": 724,
@@ -112250,7 +113696,9 @@
         14,
         70364
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (نَصِیْرًا)",
+    "meaning_ur": "Lafz-e-Quran (نَصِیْرًا)"
   },
   {
     "rank": 725,
@@ -112342,7 +113790,9 @@
         2,
         79172
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَصْحٰبَ)",
+    "meaning_ur": "Lafz-e-Quran (اَصْحٰبَ)"
   },
   {
     "rank": 726,
@@ -112434,7 +113884,9 @@
         7,
         70909
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (عَلَیَّ)",
+    "meaning_ur": "Lafz-e-Quran (عَلَیَّ)"
   },
   {
     "rank": 727,
@@ -112528,7 +113980,9 @@
         5,
         64622
       ]
-    ]
+    ],
+    "meaning_en": "Every / All",
+    "meaning_ur": "Har ek / Sab"
   },
   {
     "rank": 728,
@@ -112621,7 +114075,9 @@
         22,
         76113
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَفْقَهُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یَفْقَهُوْنَ)"
   },
   {
     "rank": 729,
@@ -112713,7 +114169,9 @@
         4,
         62099
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (دَاوٗدَ)",
+    "meaning_ur": "Lafz-e-Quran (دَاوٗدَ)"
   },
   {
     "rank": 730,
@@ -112806,7 +114264,9 @@
         11,
         74580
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تَابَ)",
+    "meaning_ur": "Lafz-e-Quran (تَابَ)"
   },
   {
     "rank": 731,
@@ -112898,7 +114358,9 @@
         14,
         56560
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْبَرِّ)",
+    "meaning_ur": "Lafz-e-Quran (الْبَرِّ)"
   },
   {
     "rank": 732,
@@ -112994,7 +114456,9 @@
         5,
         79057
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (سِحْرٌ)",
+    "meaning_ur": "Lafz-e-Quran (سِحْرٌ)"
   },
   {
     "rank": 733,
@@ -113084,7 +114548,9 @@
         5,
         72765
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (السَّاعَةُ)",
+    "meaning_ur": "Lafz-e-Quran (السَّاعَةُ)"
   },
   {
     "rank": 734,
@@ -113178,7 +114644,9 @@
         19,
         68852
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یُوْحٰى)",
+    "meaning_ur": "Lafz-e-Quran (یُوْحٰى)"
   },
   {
     "rank": 735,
@@ -113274,7 +114742,9 @@
         5,
         67045
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (عِبَادِهٖ)",
+    "meaning_ur": "Lafz-e-Quran (عِبَادِهٖ)"
   },
   {
     "rank": 736,
@@ -113368,7 +114838,9 @@
         61,
         79141
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (ذِكْرٰى)",
+    "meaning_ur": "Lafz-e-Quran (ذِكْرٰى)"
   },
   {
     "rank": 737,
@@ -113462,7 +114934,9 @@
         2,
         79716
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تُوْعَدُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (تُوْعَدُوْنَ)"
   },
   {
     "rank": 738,
@@ -113552,7 +115026,9 @@
         3,
         61950
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْمَلَاُ)",
+    "meaning_ur": "Lafz-e-Quran (الْمَلَاُ)"
   },
   {
     "rank": 739,
@@ -113642,7 +115118,9 @@
         3,
         64343
       ]
-    ]
+    ],
+    "meaning_en": "People / Tribe",
+    "meaning_ur": "Qawm / Giroh"
   },
   {
     "rank": 740,
@@ -113735,7 +115213,9 @@
         15,
         73982
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (كَرِیْمٌ)",
+    "meaning_ur": "Lafz-e-Quran (كَرِیْمٌ)"
   },
   {
     "rank": 741,
@@ -113829,7 +115309,9 @@
         9,
         61089
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَعْبُدُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یَعْبُدُوْنَ)"
   },
   {
     "rank": 742,
@@ -113923,7 +115405,9 @@
         23,
         69037
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (وَعْدَ)",
+    "meaning_ur": "Lafz-e-Quran (وَعْدَ)"
   },
   {
     "rank": 743,
@@ -114017,7 +115501,9 @@
         3,
         71184
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْقَوْلُ)",
+    "meaning_ur": "Lafz-e-Quran (الْقَوْلُ)"
   },
   {
     "rank": 744,
@@ -114104,7 +115590,9 @@
         3,
         80695
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لِّلْمُكَذِّبِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (لِّلْمُكَذِّبِیْنَ)"
   },
   {
     "rank": 745,
@@ -114193,7 +115681,9 @@
         4,
         71937
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (غَیْرِ)",
+    "meaning_ur": "Lafz-e-Quran (غَیْرِ)"
   },
   {
     "rank": 746,
@@ -114275,7 +115765,9 @@
         1,
         76414
       ]
-    ]
+    ],
+    "meaning_en": "So fear allah / be mindful",
+    "meaning_ur": "To Allah se daro / Taqwa ikhtiyar karo"
   },
   {
     "rank": 747,
@@ -114360,7 +115852,9 @@
         16,
         76091
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْفٰسِقِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (الْفٰسِقِیْنَ)"
   },
   {
     "rank": 748,
@@ -114447,7 +115941,9 @@
         18,
         76151
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْخٰسِرُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (الْخٰسِرُوْنَ)"
   },
   {
     "rank": 749,
@@ -114533,7 +116029,9 @@
         6,
         78308
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (سَبْعَ)",
+    "meaning_ur": "Lafz-e-Quran (سَبْعَ)"
   },
   {
     "rank": 750,
@@ -114618,7 +116116,9 @@
         5,
         60730
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اٰدَمَ)",
+    "meaning_ur": "Lafz-e-Quran (اٰدَمَ)"
   },
   {
     "rank": 751,
@@ -114702,7 +116202,9 @@
         7,
         75654
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یٰبَنِیْ)",
+    "meaning_ur": "Lafz-e-Quran (یٰبَنِیْ)"
   },
   {
     "rank": 752,
@@ -114787,7 +116289,9 @@
         5,
         76844
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَنْفُسَكُمْ)",
+    "meaning_ur": "Lafz-e-Quran (اَنْفُسَكُمْ)"
   },
   {
     "rank": 753,
@@ -114874,7 +116378,9 @@
         15,
         75043
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یُنْصَرُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یُنْصَرُوْنَ)"
   },
   {
     "rank": 754,
@@ -114961,7 +116467,9 @@
         1,
         81625
       ]
-    ]
+    ],
+    "meaning_en": "When / Remember when",
+    "meaning_ur": "Jabke / Yaad karo jab"
   },
   {
     "rank": 755,
@@ -115045,7 +116553,9 @@
         2,
         75864
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (فَضْلُ)",
+    "meaning_ur": "Lafz-e-Quran (فَضْلُ)"
   },
   {
     "rank": 756,
@@ -115130,7 +116640,9 @@
         5,
         62051
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لَّنَا)",
+    "meaning_ur": "Lafz-e-Quran (لَّنَا)"
   },
   {
     "rank": 757,
@@ -115219,7 +116731,9 @@
         3,
         81372
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (ذِی)",
+    "meaning_ur": "Lafz-e-Quran (ذِی)"
   },
   {
     "rank": 758,
@@ -115305,7 +116819,9 @@
         14,
         74887
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْقُرْبٰى)",
+    "meaning_ur": "Lafz-e-Quran (الْقُرْبٰى)"
   },
   {
     "rank": 759,
@@ -115387,7 +116903,9 @@
         16,
         74889
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْیَتٰمٰى)",
+    "meaning_ur": "Lafz-e-Quran (الْیَتٰمٰى)"
   },
   {
     "rank": 760,
@@ -115472,7 +116990,9 @@
         9,
         75791
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (عِیْسَى)",
+    "meaning_ur": "Lafz-e-Quran (عِیْسَى)"
   },
   {
     "rank": 761,
@@ -115558,7 +117078,9 @@
         13,
         68317
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (فَضْلِهٖ)",
+    "meaning_ur": "Lafz-e-Quran (فَضْلِهٖ)"
   },
   {
     "rank": 762,
@@ -115647,7 +117169,9 @@
         12,
         78435
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لِلْمُؤْمِنِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (لِلْمُؤْمِنِیْنَ)"
   },
   {
     "rank": 763,
@@ -115732,7 +117256,9 @@
         7,
         78348
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اتَّبَعُوْا)",
+    "meaning_ur": "Lafz-e-Quran (اتَّبَعُوْا)"
   },
   {
     "rank": 764,
@@ -115819,7 +117345,9 @@
         52,
         75266
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (السَّبِیْلِ)",
+    "meaning_ur": "Lafz-e-Quran (السَّبِیْلِ)"
   },
   {
     "rank": 765,
@@ -115907,7 +117435,9 @@
         11,
         64926
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (كُنْ)",
+    "meaning_ur": "Lafz-e-Quran (كُنْ)"
   },
   {
     "rank": 766,
@@ -115995,7 +117525,9 @@
         11,
         77131
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَصْحٰبِ)",
+    "meaning_ur": "Lafz-e-Quran (اَصْحٰبِ)"
   },
   {
     "rank": 767,
@@ -116082,7 +117614,9 @@
         2,
         50541
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اجْعَلْ)",
+    "meaning_ur": "Lafz-e-Quran (اجْعَلْ)"
   },
   {
     "rank": 768,
@@ -116166,7 +117700,9 @@
         6,
         62085
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْحِكْمَةَ)",
+    "meaning_ur": "Lafz-e-Quran (الْحِكْمَةَ)"
   },
   {
     "rank": 769,
@@ -116254,7 +117790,9 @@
         9,
         81999
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الدِّیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (الدِّیْنَ)"
   },
   {
     "rank": 770,
@@ -116341,7 +117879,9 @@
         6,
         62389
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اِسْحٰقَ)",
+    "meaning_ur": "Lafz-e-Quran (اِسْحٰقَ)"
   },
   {
     "rank": 771,
@@ -116425,7 +117965,9 @@
         8,
         59382
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْمَلٰٓىٕكَةِ)",
+    "meaning_ur": "Lafz-e-Quran (الْمَلٰٓىٕكَةِ)"
   },
   {
     "rank": 772,
@@ -116513,7 +118055,9 @@
         10,
         67009
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْفُلْكِ)",
+    "meaning_ur": "Lafz-e-Quran (الْفُلْكِ)"
   },
   {
     "rank": 773,
@@ -116601,7 +118145,9 @@
         3,
         71566
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (عَادٍ)",
+    "meaning_ur": "Lafz-e-Quran (عَادٍ)"
   },
   {
     "rank": 774,
@@ -116688,7 +118234,9 @@
         10,
         77111
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (نَزَّلَ)",
+    "meaning_ur": "Lafz-e-Quran (نَزَّلَ)"
   },
   {
     "rank": 775,
@@ -116776,7 +118324,9 @@
         7,
         73776
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بَیِّنٰتٍ)",
+    "meaning_ur": "Lafz-e-Quran (بَیِّنٰتٍ)"
   },
   {
     "rank": 776,
@@ -116864,7 +118414,9 @@
         12,
         68845
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بِیْ)",
+    "meaning_ur": "Lafz-e-Quran (بِیْ)"
   },
   {
     "rank": 777,
@@ -116950,7 +118502,9 @@
         2,
         66958
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَشَدَّ)",
+    "meaning_ur": "Lafz-e-Quran (اَشَدَّ)"
   },
   {
     "rank": 778,
@@ -117038,7 +118592,9 @@
         11,
         76972
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (ابْنِ)",
+    "meaning_ur": "Lafz-e-Quran (ابْنِ)"
   },
   {
     "rank": 779,
@@ -117127,7 +118683,9 @@
         8,
         76552
       ]
-    ]
+    ],
+    "meaning_en": "Indeed / Truly",
+    "meaning_ur": "Beshak / Yaqeenan"
   },
   {
     "rank": 780,
@@ -117209,7 +118767,9 @@
         40,
         75560
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لَهُنَّ)",
+    "meaning_ur": "Lafz-e-Quran (لَهُنَّ)"
   },
   {
     "rank": 781,
@@ -117295,7 +118855,9 @@
         10,
         74086
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَنْفُسِكُمْ)",
+    "meaning_ur": "Lafz-e-Quran (اَنْفُسِكُمْ)"
   },
   {
     "rank": 782,
@@ -117384,7 +118946,9 @@
         2,
         78425
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اغْفِرْ)",
+    "meaning_ur": "Lafz-e-Quran (اغْفِرْ)"
   },
   {
     "rank": 783,
@@ -117471,7 +119035,9 @@
         6,
         80649
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (شَیْــٴًـاؕ-وَ)",
+    "meaning_ur": "Lafz-e-Quran (شَیْــٴًـاؕ-وَ)"
   },
   {
     "rank": 784,
@@ -117559,7 +119125,9 @@
         23,
         69459
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَشَآءُ)",
+    "meaning_ur": "Lafz-e-Quran (یَشَآءُ)"
   },
   {
     "rank": 785,
@@ -117645,7 +119213,9 @@
         22,
         65034
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بِاٰیَةٍ)",
+    "meaning_ur": "Lafz-e-Quran (بِاٰیَةٍ)"
   },
   {
     "rank": 786,
@@ -117733,7 +119303,9 @@
         7,
         79429
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْمَوْتٰى)",
+    "meaning_ur": "Lafz-e-Quran (الْمَوْتٰى)"
   },
   {
     "rank": 787,
@@ -117815,7 +119387,9 @@
         7,
         78210
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَطِیْعُوْنِ)",
+    "meaning_ur": "Lafz-e-Quran (اَطِیْعُوْنِ)"
   },
   {
     "rank": 788,
@@ -117903,7 +119477,9 @@
         25,
         75319
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بَیْنَنَا)",
+    "meaning_ur": "Lafz-e-Quran (بَیْنَنَا)"
   },
   {
     "rank": 789,
@@ -117988,7 +119564,9 @@
         13,
         73765
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَخَذَ)",
+    "meaning_ur": "Lafz-e-Quran (اَخَذَ)"
   },
   {
     "rank": 790,
@@ -118076,7 +119654,9 @@
         11,
         81002
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (شَهِیْدٌ)",
+    "meaning_ur": "Lafz-e-Quran (شَهِیْدٌ)"
   },
   {
     "rank": 791,
@@ -118165,7 +119745,9 @@
         2,
         80020
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لِلْمُتَّقِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (لِلْمُتَّقِیْنَ)"
   },
   {
     "rank": 792,
@@ -118252,7 +119834,9 @@
         5,
         70369
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (خَلَتْ)",
+    "meaning_ur": "Lafz-e-Quran (خَلَتْ)"
   },
   {
     "rank": 793,
@@ -118340,7 +119924,9 @@
         2,
         82406
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (نَارًا)",
+    "meaning_ur": "Lafz-e-Quran (نَارًا)"
   },
   {
     "rank": 794,
@@ -118428,7 +120014,9 @@
         8,
         76026
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (سَآءَ)",
+    "meaning_ur": "Lafz-e-Quran (سَآءَ)"
   },
   {
     "rank": 795,
@@ -118511,7 +120099,9 @@
         35,
         70151
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (خَبِیْرًا)",
+    "meaning_ur": "Lafz-e-Quran (خَبِیْرًا)"
   },
   {
     "rank": 796,
@@ -118595,7 +120185,9 @@
         10,
         70374
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تَجِدَ)",
+    "meaning_ur": "Lafz-e-Quran (تَجِدَ)"
   },
   {
     "rank": 797,
@@ -118681,7 +120273,9 @@
         3,
         82188
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (سَوْفَ)",
+    "meaning_ur": "Lafz-e-Quran (سَوْفَ)"
   },
   {
     "rank": 798,
@@ -118769,7 +120363,9 @@
         5,
         67260
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَّكُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یَّكُوْنَ)"
   },
   {
     "rank": 799,
@@ -118855,7 +120451,9 @@
         12,
         69681
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (جَآءَتْهُمْ)",
+    "meaning_ur": "Lafz-e-Quran (جَآءَتْهُمْ)"
   },
   {
     "rank": 800,
@@ -118944,7 +120542,9 @@
         5,
         77533
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (جَنّٰتِ)",
+    "meaning_ur": "Lafz-e-Quran (جَنّٰتِ)"
   },
   {
     "rank": 801,
@@ -119030,7 +120630,9 @@
         2,
         71525
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (وَجَدْنَا)",
+    "meaning_ur": "Lafz-e-Quran (وَجَدْنَا)"
   },
   {
     "rank": 802,
@@ -119117,7 +120719,9 @@
         7,
         80650
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْاَمْرُ)",
+    "meaning_ur": "Lafz-e-Quran (الْاَمْرُ)"
   },
   {
     "rank": 803,
@@ -119202,7 +120806,9 @@
         16,
         66258
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اُمِرْتُ)",
+    "meaning_ur": "Lafz-e-Quran (اُمِرْتُ)"
   },
   {
     "rank": 804,
@@ -119290,7 +120896,9 @@
         18,
         68828
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بَیْنِیْ)",
+    "meaning_ur": "Lafz-e-Quran (بَیْنِیْ)"
   },
   {
     "rank": 805,
@@ -119376,7 +120984,9 @@
         2,
         78444
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اُوْحِیَ)",
+    "meaning_ur": "Lafz-e-Quran (اُوْحِیَ)"
   },
   {
     "rank": 806,
@@ -119463,7 +121073,9 @@
         7,
         67610
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بَغْتَةً)",
+    "meaning_ur": "Lafz-e-Quran (بَغْتَةً)"
   },
   {
     "rank": 807,
@@ -119550,7 +121162,9 @@
         3,
         78313
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْقَمَرَ)",
+    "meaning_ur": "Lafz-e-Quran (الْقَمَرَ)"
   },
   {
     "rank": 808,
@@ -119634,7 +121248,9 @@
         12,
         66422
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَسْــٴَـلُكُمْ)",
+    "meaning_ur": "Lafz-e-Quran (اَسْــٴَـلُكُمْ)"
   },
   {
     "rank": 809,
@@ -119719,7 +121335,9 @@
         2,
         71116
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (جَآءَتْ)",
+    "meaning_ur": "Lafz-e-Quran (جَآءَتْ)"
   },
   {
     "rank": 810,
@@ -119806,7 +121424,9 @@
         2,
         73401
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اٰبَآؤُنَا)",
+    "meaning_ur": "Lafz-e-Quran (اٰبَآؤُنَا)"
   },
   {
     "rank": 811,
@@ -119894,7 +121514,9 @@
         2,
         77536
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْمُسْلِمِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (الْمُسْلِمِیْنَ)"
   },
   {
     "rank": 812,
@@ -119983,7 +121605,9 @@
         5,
         72938
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (ٜ)",
+    "meaning_ur": "Lafz-e-Quran (ٜ)"
   },
   {
     "rank": 813,
@@ -120069,7 +121693,9 @@
         9,
         64637
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (رَبَّكُمْ)",
+    "meaning_ur": "Lafz-e-Quran (رَبَّكُمْ)"
   },
   {
     "rank": 814,
@@ -120158,7 +121784,9 @@
         2,
         81365
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (ثَمُوْدَ)",
+    "meaning_ur": "Lafz-e-Quran (ثَمُوْدَ)"
   },
   {
     "rank": 815,
@@ -120244,7 +121872,9 @@
         5,
         76262
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (رُسُلُهُمْ)",
+    "meaning_ur": "Lafz-e-Quran (رُسُلُهُمْ)"
   },
   {
     "rank": 816,
@@ -120333,7 +121963,9 @@
         4,
         80711
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اٰیٰتُنَا)",
+    "meaning_ur": "Lafz-e-Quran (اٰیٰتُنَا)"
   },
   {
     "rank": 817,
@@ -120415,7 +122047,9 @@
         7,
         77257
       ]
-    ]
+    ],
+    "meaning_en": "He believed",
+    "meaning_ur": "Wo imaan laya"
   },
   {
     "rank": 818,
@@ -120501,7 +122135,9 @@
         2,
         72402
       ]
-    ]
+    ],
+    "meaning_en": "People / Tribe",
+    "meaning_ur": "Qawm / Giroh"
   },
   {
     "rank": 819,
@@ -120590,7 +122226,9 @@
         3,
         81045
       ]
-    ]
+    ],
+    "meaning_en": "The oft-forgiving",
+    "meaning_ur": "Bakhshne Wala"
   },
   {
     "rank": 820,
@@ -120678,7 +122316,9 @@
         1,
         79626
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (فَاصْبِرْ)",
+    "meaning_ur": "Lafz-e-Quran (فَاصْبِرْ)"
   },
   {
     "rank": 821,
@@ -120765,7 +122405,9 @@
         1,
         80123
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (ءَاِذَا)",
+    "meaning_ur": "Lafz-e-Quran (ءَاِذَا)"
   },
   {
     "rank": 822,
@@ -120851,7 +122493,9 @@
         5,
         66494
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الرِّزْقَ)",
+    "meaning_ur": "Lafz-e-Quran (الرِّزْقَ)"
   },
   {
     "rank": 823,
@@ -120939,7 +122583,9 @@
         4,
         69673
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (السَّاعَةَ)",
+    "meaning_ur": "Lafz-e-Quran (السَّاعَةَ)"
   },
   {
     "rank": 824,
@@ -121028,7 +122674,9 @@
         42,
         74431
       ]
-    ]
+    ],
+    "meaning_en": "They did deeds",
+    "meaning_ur": "Unhone amal kiye"
   },
   {
     "rank": 825,
@@ -121107,7 +122755,9 @@
         3,
         77380
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یُبْصِرُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یُبْصِرُوْنَ)"
   },
   {
     "rank": 826,
@@ -121187,7 +122837,9 @@
         36,
         76719
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (رِزْقًا)",
+    "meaning_ur": "Lafz-e-Quran (رِزْقًا)"
   },
   {
     "rank": 827,
@@ -121267,7 +122919,9 @@
         3,
         81194
       ]
-    ]
+    ],
+    "meaning_en": "The Fire / Hell",
+    "meaning_ur": "Aag / Dozakh"
   },
   {
     "rank": 828,
@@ -121349,7 +123003,9 @@
         11,
         73684
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اسْتَوٰى)",
+    "meaning_ur": "Lafz-e-Quran (اسْتَوٰى)"
   },
   {
     "rank": 829,
@@ -121429,7 +123085,9 @@
         9,
         75592
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْاَرْضِ-وَ)",
+    "meaning_ur": "Lafz-e-Quran (الْاَرْضِ-وَ)"
   },
   {
     "rank": 830,
@@ -121506,7 +123164,9 @@
         6,
         37564
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (ثَمَنًا)",
+    "meaning_ur": "Lafz-e-Quran (ثَمَنًا)"
   },
   {
     "rank": 831,
@@ -121584,7 +123244,9 @@
         58,
         78948
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اٰتُوا)",
+    "meaning_ur": "Lafz-e-Quran (اٰتُوا)"
   },
   {
     "rank": 832,
@@ -121664,7 +123326,9 @@
         5,
         62897
       ]
-    ]
+    ],
+    "meaning_en": "Fear Allah / Be mindful",
+    "meaning_ur": "Allah se daro / Taqwa ikhtiyar karo"
   },
   {
     "rank": 833,
@@ -121744,7 +123408,9 @@
         5,
         75628
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لِقَوْمِهٖ)",
+    "meaning_ur": "Lafz-e-Quran (لِقَوْمِهٖ)"
   },
   {
     "rank": 834,
@@ -121826,7 +123492,9 @@
         13,
         70525
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (سُجَّدًا)",
+    "meaning_ur": "Lafz-e-Quran (سُجَّدًا)"
   },
   {
     "rank": 835,
@@ -121904,7 +123572,9 @@
         5,
         57142
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (النَّبِیّٖنَ)",
+    "meaning_ur": "Lafz-e-Quran (النَّبِیّٖنَ)"
   },
   {
     "rank": 836,
@@ -121984,7 +123654,9 @@
         4,
         75786
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (كُوْنُوْا)",
+    "meaning_ur": "Lafz-e-Quran (كُوْنُوْا)"
   },
   {
     "rank": 837,
@@ -122064,7 +123736,9 @@
         3,
         77022
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْمَوْتَ)",
+    "meaning_ur": "Lafz-e-Quran (الْمَوْتَ)"
   },
   {
     "rank": 838,
@@ -122143,7 +123817,9 @@
         5,
         67418
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اٰیَةٍ)",
+    "meaning_ur": "Lafz-e-Quran (اٰیَةٍ)"
   },
   {
     "rank": 839,
@@ -122221,7 +123897,9 @@
         8,
         66717
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (وَّلِیٍّ)",
+    "meaning_ur": "Lafz-e-Quran (وَّلِیٍّ)"
   },
   {
     "rank": 840,
@@ -122301,7 +123979,9 @@
         1,
         64341
       ]
-    ]
+    ],
+    "meaning_en": "Like / Equal to",
+    "meaning_ur": "Misl / Jaise"
   },
   {
     "rank": 841,
@@ -122382,7 +124062,9 @@
         6,
         64921
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (قَضٰى)",
+    "meaning_ur": "Lafz-e-Quran (قَضٰى)"
   },
   {
     "rank": 842,
@@ -122461,7 +124143,9 @@
         5,
         72468
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَهْوَآءَهُمْ)",
+    "meaning_ur": "Lafz-e-Quran (اَهْوَآءَهُمْ)"
   },
   {
     "rank": 843,
@@ -122540,7 +124224,9 @@
         3,
         62409
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اِسْمٰعِیْلَ)",
+    "meaning_ur": "Lafz-e-Quran (اِسْمٰعِیْلَ)"
   },
   {
     "rank": 844,
@@ -122622,7 +124308,9 @@
         4,
         81748
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لَّكَ)",
+    "meaning_ur": "Lafz-e-Quran (لَّكَ)"
   },
   {
     "rank": 845,
@@ -122699,7 +124387,9 @@
         16,
         37502
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اُمَّةٌ)",
+    "meaning_ur": "Lafz-e-Quran (اُمَّةٌ)"
   },
   {
     "rank": 846,
@@ -122781,7 +124471,9 @@
         5,
         59686
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَاْتِ)",
+    "meaning_ur": "Lafz-e-Quran (یَاْتِ)"
   },
   {
     "rank": 847,
@@ -122862,7 +124554,9 @@
         25,
         63966
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تَابُوْا)",
+    "meaning_ur": "Lafz-e-Quran (تَابُوْا)"
   },
   {
     "rank": 848,
@@ -122942,7 +124636,9 @@
         8,
         68206
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (دَآبَّةٍ)",
+    "meaning_ur": "Lafz-e-Quran (دَآبَّةٍ)"
   },
   {
     "rank": 849,
@@ -123023,7 +124719,9 @@
         17,
         56652
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَهْتَدُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یَهْتَدُوْنَ)"
   },
   {
     "rank": 850,
@@ -123104,7 +124802,9 @@
         4,
         64138
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بِالْحَقِّؕ-وَ)",
+    "meaning_ur": "Lafz-e-Quran (بِالْحَقِّؕ-وَ)"
   },
   {
     "rank": 851,
@@ -123182,7 +124882,9 @@
         6,
         68385
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اخْتَلَفُوْا)",
+    "meaning_ur": "Lafz-e-Quran (اخْتَلَفُوْا)"
   },
   {
     "rank": 852,
@@ -123261,7 +124963,9 @@
         6,
         56287
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بِالْمَعْرُوْفِ)",
+    "meaning_ur": "Lafz-e-Quran (بِالْمَعْرُوْفِ)"
   },
   {
     "rank": 853,
@@ -123340,7 +125044,9 @@
         11,
         76162
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْمَوْتُ)",
+    "meaning_ur": "Lafz-e-Quran (الْمَوْتُ)"
   },
   {
     "rank": 854,
@@ -123419,7 +125125,9 @@
         17,
         75978
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تُفْلِحُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (تُفْلِحُوْنَ)"
   },
   {
     "rank": 855,
@@ -123499,7 +125207,9 @@
         13,
         69262
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (قُضِیَ)",
+    "meaning_ur": "Lafz-e-Quran (قُضِیَ)"
   },
   {
     "rank": 856,
@@ -123580,7 +125290,9 @@
         2,
         68381
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اٰتَیْنٰهُمْ)",
+    "meaning_ur": "Lafz-e-Quran (اٰتَیْنٰهُمْ)"
   },
   {
     "rank": 857,
@@ -123658,7 +125370,9 @@
         8,
         67421
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَكْبَرُ)",
+    "meaning_ur": "Lafz-e-Quran (اَكْبَرُ)"
   },
   {
     "rank": 858,
@@ -123736,7 +125450,9 @@
         12,
         70877
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (جٰهَدُوْا)",
+    "meaning_ur": "Lafz-e-Quran (جٰهَدُوْا)"
   },
   {
     "rank": 859,
@@ -123815,7 +125531,9 @@
         4,
         80003
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَرْجُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یَرْجُوْنَ)"
   },
   {
     "rank": 860,
@@ -123894,7 +125612,9 @@
         13,
         64801
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (فَضْلٍ)",
+    "meaning_ur": "Lafz-e-Quran (فَضْلٍ)"
   },
   {
     "rank": 861,
@@ -123974,7 +125694,9 @@
         13,
         67243
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بَعْضَهُمْ)",
+    "meaning_ur": "Lafz-e-Quran (بَعْضَهُمْ)"
   },
   {
     "rank": 862,
@@ -124054,7 +125776,9 @@
         15,
         76698
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الظُّلُمٰتِ)",
+    "meaning_ur": "Lafz-e-Quran (الظُّلُمٰتِ)"
   },
   {
     "rank": 863,
@@ -124131,7 +125855,9 @@
         7,
         57520
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَمْوَالَهُمْ)",
+    "meaning_ur": "Lafz-e-Quran (اَمْوَالَهُمْ)"
   },
   {
     "rank": 864,
@@ -124212,7 +125938,9 @@
         10,
         64121
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لِلظّٰلِمِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (لِلظّٰلِمِیْنَ)"
   },
   {
     "rank": 865,
@@ -124292,7 +126020,9 @@
         6,
         66646
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَقَامُوا)",
+    "meaning_ur": "Lafz-e-Quran (اَقَامُوا)"
   },
   {
     "rank": 866,
@@ -124373,7 +126103,9 @@
         20,
         66230
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مُّسَمًّى)",
+    "meaning_ur": "Lafz-e-Quran (مُّسَمًّى)"
   },
   {
     "rank": 867,
@@ -124450,7 +126182,9 @@
         2,
         60541
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اٰیَةٌ)",
+    "meaning_ur": "Lafz-e-Quran (اٰیَةٌ)"
   },
   {
     "rank": 868,
@@ -124530,7 +126264,9 @@
         2,
         80942
       ]
-    ]
+    ],
+    "meaning_en": "In/With a punishment / torment",
+    "meaning_ur": "Saath Azaab"
   },
   {
     "rank": 869,
@@ -124611,7 +126347,9 @@
         1,
         78211
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَغْفِرْ)",
+    "meaning_ur": "Lafz-e-Quran (یَغْفِرْ)"
   },
   {
     "rank": 870,
@@ -124693,7 +126431,9 @@
         3,
         78186
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (نُوْحًا)",
+    "meaning_ur": "Lafz-e-Quran (نُوْحًا)"
   },
   {
     "rank": 871,
@@ -124774,7 +126514,9 @@
         3,
         67353
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بِكَ)",
+    "meaning_ur": "Lafz-e-Quran (بِكَ)"
   },
   {
     "rank": 872,
@@ -124854,7 +126596,9 @@
         2,
         81424
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تَاْكُلُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (تَاْكُلُوْنَ)"
   },
   {
     "rank": 873,
@@ -124935,7 +126679,9 @@
         13,
         54156
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْكٰذِبِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (الْكٰذِبِیْنَ)"
   },
   {
     "rank": 874,
@@ -125011,7 +126757,9 @@
         8,
         75687
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْكَذِبَ)",
+    "meaning_ur": "Lafz-e-Quran (الْكَذِبَ)"
   },
   {
     "rank": 875,
@@ -125089,7 +126837,9 @@
         11,
         70677
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْاَمْرِ)",
+    "meaning_ur": "Lafz-e-Quran (الْاَمْرِ)"
   },
   {
     "rank": 876,
@@ -125169,7 +126919,9 @@
         8,
         78087
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (فَاِنَّهُمْ)",
+    "meaning_ur": "Lafz-e-Quran (فَاِنَّهُمْ)"
   },
   {
     "rank": 877,
@@ -125251,7 +127003,9 @@
         7,
         77143
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مَّغْفِرَةٌ)",
+    "meaning_ur": "Lafz-e-Quran (مَّغْفِرَةٌ)"
   },
   {
     "rank": 878,
@@ -125333,7 +127087,9 @@
         1,
         81060
       ]
-    ]
+    ],
+    "meaning_en": "Rather / Nay",
+    "meaning_ur": "Balke"
   },
   {
     "rank": 879,
@@ -125414,7 +127170,9 @@
         1,
         71387
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (ذُوْقُوْا)",
+    "meaning_ur": "Lafz-e-Quran (ذُوْقُوْا)"
   },
   {
     "rank": 880,
@@ -125493,7 +127251,9 @@
         3,
         67886
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (عَنَّا)",
+    "meaning_ur": "Lafz-e-Quran (عَنَّا)"
   },
   {
     "rank": 881,
@@ -125569,7 +127329,9 @@
         30,
         57975
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الّٰتِیْ)",
+    "meaning_ur": "Lafz-e-Quran (الّٰتِیْ)"
   },
   {
     "rank": 882,
@@ -125649,7 +127411,9 @@
         6,
         81008
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْمُؤْمِنٰتِ)",
+    "meaning_ur": "Lafz-e-Quran (الْمُؤْمِنٰتِ)"
   },
   {
     "rank": 883,
@@ -125730,7 +127494,9 @@
         1,
         82122
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَفَلَا)",
+    "meaning_ur": "Lafz-e-Quran (اَفَلَا)"
   },
   {
     "rank": 884,
@@ -125810,7 +127576,9 @@
         2,
         75855
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اٰخَرِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (اٰخَرِیْنَ)"
   },
   {
     "rank": 885,
@@ -125888,7 +127656,9 @@
         15,
         74950
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَجِدُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یَجِدُوْنَ)"
   },
   {
     "rank": 886,
@@ -125968,7 +127738,9 @@
         8,
         70183
       ]
-    ]
+    ],
+    "meaning_en": "So i",
+    "meaning_ur": "To Main"
   },
   {
     "rank": 887,
@@ -126049,7 +127821,9 @@
         4,
         79485
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَخَافُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یَخَافُوْنَ)"
   },
   {
     "rank": 888,
@@ -126129,7 +127903,9 @@
         35,
         79115
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مَّرَضٌ)",
+    "meaning_ur": "Lafz-e-Quran (مَّرَضٌ)"
   },
   {
     "rank": 889,
@@ -126207,7 +127983,9 @@
         6,
         54586
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْمُفْسِدِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (الْمُفْسِدِیْنَ)"
   },
   {
     "rank": 890,
@@ -126289,7 +128067,9 @@
         5,
         82205
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (النَّعِیْمِ)",
+    "meaning_ur": "Lafz-e-Quran (النَّعِیْمِ)"
   },
   {
     "rank": 891,
@@ -126370,7 +128150,9 @@
         6,
         78624
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (ذِكْرِ)",
+    "meaning_ur": "Lafz-e-Quran (ذِكْرِ)"
   },
   {
     "rank": 892,
@@ -126449,7 +128231,9 @@
         9,
         81409
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (فَیَقُوْلُ)",
+    "meaning_ur": "Lafz-e-Quran (فَیَقُوْلُ)"
   },
   {
     "rank": 893,
@@ -126530,7 +128314,9 @@
         3,
         73508
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (جَعَلْنٰهُ)",
+    "meaning_ur": "Lafz-e-Quran (جَعَلْنٰهُ)"
   },
   {
     "rank": 894,
@@ -126610,7 +128396,9 @@
         4,
         75683
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مِمَّنِ)",
+    "meaning_ur": "Lafz-e-Quran (مِمَّنِ)"
   },
   {
     "rank": 895,
@@ -126690,7 +128478,9 @@
         2,
         82267
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَجْعَلْ)",
+    "meaning_ur": "Lafz-e-Quran (یَجْعَلْ)"
   },
   {
     "rank": 896,
@@ -126771,7 +128561,9 @@
         2,
         82225
       ]
-    ]
+    ],
+    "meaning_en": "For every / all",
+    "meaning_ur": "Ke liye Har ek / Sab"
   },
   {
     "rank": 897,
@@ -126851,7 +128643,9 @@
         2,
         73507
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (نَشَآءُ)",
+    "meaning_ur": "Lafz-e-Quran (نَشَآءُ)"
   },
   {
     "rank": 898,
@@ -126932,7 +128726,9 @@
         5,
         68444
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (السَّیِّاٰتِ)",
+    "meaning_ur": "Lafz-e-Quran (السَّیِّاٰتِ)"
   },
   {
     "rank": 899,
@@ -127012,7 +128808,9 @@
         2,
         81356
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (ذَاتِ)",
+    "meaning_ur": "Lafz-e-Quran (ذَاتِ)"
   },
   {
     "rank": 900,
@@ -127092,7 +128890,9 @@
         10,
         76442
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لَكُمْؕ-وَ)",
+    "meaning_ur": "Lafz-e-Quran (لَكُمْؕ-وَ)"
   },
   {
     "rank": 901,
@@ -127174,7 +128974,9 @@
         9,
         77271
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (السَّمْعَ)",
+    "meaning_ur": "Lafz-e-Quran (السَّمْعَ)"
   },
   {
     "rank": 902,
@@ -127256,7 +129058,9 @@
         3,
         81686
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یُغْنِیْ)",
+    "meaning_ur": "Lafz-e-Quran (یُغْنِیْ)"
   },
   {
     "rank": 903,
@@ -127337,7 +129141,9 @@
         2,
         81623
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (ثَمُوْدُ)",
+    "meaning_ur": "Lafz-e-Quran (ثَمُوْدُ)"
   },
   {
     "rank": 904,
@@ -127416,7 +129222,9 @@
         2,
         77497
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (سُبْحٰنَ)",
+    "meaning_ur": "Lafz-e-Quran (سُبْحٰنَ)"
   },
   {
     "rank": 905,
@@ -127497,7 +129305,9 @@
         10,
         80052
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَمْلِكُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یَمْلِكُوْنَ)"
   },
   {
     "rank": 906,
@@ -127576,7 +129386,9 @@
         2,
         76963
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (ضَرَبَ)",
+    "meaning_ur": "Lafz-e-Quran (ضَرَبَ)"
   },
   {
     "rank": 907,
@@ -127657,7 +129469,9 @@
         2,
         82386
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بِحَمْدِ)",
+    "meaning_ur": "Lafz-e-Quran (بِحَمْدِ)"
   },
   {
     "rank": 908,
@@ -127735,7 +129549,9 @@
         2,
         78125
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْیَمِیْنِ)",
+    "meaning_ur": "Lafz-e-Quran (الْیَمِیْنِ)"
   },
   {
     "rank": 909,
@@ -127814,7 +129630,9 @@
         2,
         79711
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (ذِكْرًا)",
+    "meaning_ur": "Lafz-e-Quran (ذِكْرًا)"
   },
   {
     "rank": 910,
@@ -127888,7 +129706,9 @@
         3,
         79622
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (نَزَّلْنَا)",
+    "meaning_ur": "Lafz-e-Quran (نَزَّلْنَا)"
   },
   {
     "rank": 911,
@@ -127958,7 +129778,9 @@
         9,
         74578
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تَفْعَلُوْا)",
+    "meaning_ur": "Lafz-e-Quran (تَفْعَلُوْا)"
   },
   {
     "rank": 912,
@@ -128032,7 +129854,9 @@
         4,
         62569
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لِلْمَلٰٓىٕكَةِ)",
+    "meaning_ur": "Lafz-e-Quran (لِلْمَلٰٓىٕكَةِ)"
   },
   {
     "rank": 913,
@@ -128105,7 +129929,9 @@
         4,
         59178
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بَعْضُكُمْ)",
+    "meaning_ur": "Lafz-e-Quran (بَعْضُكُمْ)"
   },
   {
     "rank": 914,
@@ -128179,7 +130005,9 @@
         10,
         48077
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مَتَاعٌ)",
+    "meaning_ur": "Lafz-e-Quran (مَتَاعٌ)"
   },
   {
     "rank": 915,
@@ -128250,7 +130078,9 @@
         23,
         33684
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (النَّارِ-هُمْ)",
+    "meaning_ur": "Lafz-e-Quran (النَّارِ-هُمْ)"
   },
   {
     "rank": 916,
@@ -128323,7 +130153,9 @@
         27,
         74999
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (ٛ)",
+    "meaning_ur": "Lafz-e-Quran (ٛ)"
   },
   {
     "rank": 917,
@@ -128397,7 +130229,9 @@
         6,
         64270
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اٰلِ)",
+    "meaning_ur": "Lafz-e-Quran (اٰلِ)"
   },
   {
     "rank": 918,
@@ -128469,7 +130303,9 @@
         8,
         70845
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (قُوْلُوْا)",
+    "meaning_ur": "Lafz-e-Quran (قُوْلُوْا)"
   },
   {
     "rank": 919,
@@ -128542,7 +130378,9 @@
         6,
         78896
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَدْنٰى)",
+    "meaning_ur": "Lafz-e-Quran (اَدْنٰى)"
   },
   {
     "rank": 920,
@@ -128615,7 +130453,9 @@
         4,
         75898
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (هَادُوْا)",
+    "meaning_ur": "Lafz-e-Quran (هَادُوْا)"
   },
   {
     "rank": 921,
@@ -128689,7 +130529,9 @@
         4,
         62924
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَكُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (اَكُوْنَ)"
   },
   {
     "rank": 922,
@@ -128760,7 +130602,9 @@
         10,
         52620
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بِغَافِلٍ)",
+    "meaning_ur": "Lafz-e-Quran (بِغَافِلٍ)"
   },
   {
     "rank": 923,
@@ -128833,7 +130677,9 @@
         13,
         48571
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مُّعْرِضُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (مُّعْرِضُوْنَ)"
   },
   {
     "rank": 924,
@@ -128907,7 +130753,9 @@
         2,
         73128
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (جَزَآءُ)",
+    "meaning_ur": "Lafz-e-Quran (جَزَآءُ)"
   },
   {
     "rank": 925,
@@ -128980,7 +130828,9 @@
         10,
         54720
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (مُّوْسٰى)",
+    "meaning_ur": "Lafz-e-Quran (مُّوْسٰى)"
   },
   {
     "rank": 926,
@@ -129052,7 +130902,9 @@
         15,
         69865
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تَبَیَّنَ)",
+    "meaning_ur": "Lafz-e-Quran (تَبَیَّنَ)"
   },
   {
     "rank": 927,
@@ -129125,7 +130977,9 @@
         4,
         54043
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (فَلَهٗ)",
+    "meaning_ur": "Lafz-e-Quran (فَلَهٗ)"
   },
   {
     "rank": 928,
@@ -129198,7 +131052,9 @@
         22,
         68401
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَخْتَلِفُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یَخْتَلِفُوْنَ)"
   },
   {
     "rank": 929,
@@ -129265,7 +131121,9 @@
         6,
         5540
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اِبْرٰهٖمَ)",
+    "meaning_ur": "Lafz-e-Quran (اِبْرٰهٖمَ)"
   },
   {
     "rank": 930,
@@ -129339,7 +131197,9 @@
         6,
         81394
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (رَبُّهٗ)",
+    "meaning_ur": "Lafz-e-Quran (رَبُّهٗ)"
   },
   {
     "rank": 931,
@@ -129412,7 +131272,9 @@
         2,
         50324
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اٰمَنْتُمْ)",
+    "meaning_ur": "Lafz-e-Quran (اٰمَنْتُمْ)"
   },
   {
     "rank": 932,
@@ -129484,7 +131346,9 @@
         24,
         74897
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَكُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یَكُوْنَ)"
   },
   {
     "rank": 933,
@@ -129554,7 +131418,9 @@
         17,
         54109
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تَكُوْنَنَّ)",
+    "meaning_ur": "Lafz-e-Quran (تَكُوْنَنَّ)"
   },
   {
     "rank": 934,
@@ -129627,7 +131493,9 @@
         24,
         68233
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَّعْقِلُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یَّعْقِلُوْنَ)"
   },
   {
     "rank": 935,
@@ -129700,7 +131568,9 @@
         4,
         75502
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (شَیْءٌ)",
+    "meaning_ur": "Lafz-e-Quran (شَیْءٌ)"
   },
   {
     "rank": 936,
@@ -129770,7 +131640,9 @@
         9,
         60160
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تَرَكَ)",
+    "meaning_ur": "Lafz-e-Quran (تَرَكَ)"
   },
   {
     "rank": 937,
@@ -129840,7 +131712,9 @@
         14,
         58235
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اِثْمًا)",
+    "meaning_ur": "Lafz-e-Quran (اِثْمًا)"
   },
   {
     "rank": 938,
@@ -129913,7 +131787,9 @@
         8,
         70406
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْحَرَامِ)",
+    "meaning_ur": "Lafz-e-Quran (الْحَرَامِ)"
   },
   {
     "rank": 939,
@@ -129984,7 +131860,9 @@
         17,
         57096
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (جُنَاحٌ)",
+    "meaning_ur": "Lafz-e-Quran (جُنَاحٌ)"
   },
   {
     "rank": 940,
@@ -130058,7 +131936,9 @@
         10,
         64110
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (سَرِیْعُ)",
+    "meaning_ur": "Lafz-e-Quran (سَرِیْعُ)"
   },
   {
     "rank": 941,
@@ -130132,7 +132012,9 @@
         9,
         77286
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تُحْشَرُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (تُحْشَرُوْنَ)"
   },
   {
     "rank": 942,
@@ -130207,7 +132089,9 @@
         13,
         70164
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (زُیِّنَ)",
+    "meaning_ur": "Lafz-e-Quran (زُیِّنَ)"
   },
   {
     "rank": 943,
@@ -130282,7 +132166,9 @@
         3,
         77289
       ]
-    ]
+    ],
+    "meaning_en": "When",
+    "meaning_ur": "Kab"
   },
   {
     "rank": 944,
@@ -130354,7 +132240,9 @@
         4,
         80892
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَهْلِهٖ)",
+    "meaning_ur": "Lafz-e-Quran (اَهْلِهٖ)"
   },
   {
     "rank": 945,
@@ -130426,7 +132314,9 @@
         3,
         46120
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (هَاجَرُوْا)",
+    "meaning_ur": "Lafz-e-Quran (هَاجَرُوْا)"
   },
   {
     "rank": 946,
@@ -130496,7 +132386,9 @@
         5,
         76456
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (النِّسَآءَ)",
+    "meaning_ur": "Lafz-e-Quran (النِّسَآءَ)"
   },
   {
     "rank": 947,
@@ -130566,7 +132458,9 @@
         10,
         69927
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تَتَّقُوْا)",
+    "meaning_ur": "Lafz-e-Quran (تَتَّقُوْا)"
   },
   {
     "rank": 948,
@@ -130639,7 +132533,9 @@
         13,
         76445
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (حَلِیْمٌ)",
+    "meaning_ur": "Lafz-e-Quran (حَلِیْمٌ)"
   },
   {
     "rank": 949,
@@ -130711,7 +132607,9 @@
         28,
         57768
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَحَقُّ)",
+    "meaning_ur": "Lafz-e-Quran (اَحَقُّ)"
   },
   {
     "rank": 950,
@@ -130782,7 +132680,9 @@
         17,
         76607
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (عَلَیْهِنَّ)",
+    "meaning_ur": "Lafz-e-Quran (عَلَیْهِنَّ)"
   },
   {
     "rank": 951,
@@ -130855,7 +132755,9 @@
         5,
         75219
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تَتَّخِذُوْا)",
+    "meaning_ur": "Lafz-e-Quran (تَتَّخِذُوْا)"
   },
   {
     "rank": 952,
@@ -130927,7 +132829,9 @@
         12,
         48339
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الصَّلٰوةِ)",
+    "meaning_ur": "Lafz-e-Quran (الصَّلٰوةِ)"
   },
   {
     "rank": 953,
@@ -131001,7 +132905,9 @@
         5,
         76437
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (حَسَنًا)",
+    "meaning_ur": "Lafz-e-Quran (حَسَنًا)"
   },
   {
     "rank": 954,
@@ -131073,7 +132979,9 @@
         2,
         76624
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (ذُوْ)",
+    "meaning_ur": "Lafz-e-Quran (ذُوْ)"
   },
   {
     "rank": 955,
@@ -131147,7 +133055,9 @@
         15,
         65149
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (هُنَالِكَ)",
+    "meaning_ur": "Lafz-e-Quran (هُنَالِكَ)"
   },
   {
     "rank": 956,
@@ -131221,7 +133131,9 @@
         13,
         75829
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْحَكِیْمِ)",
+    "meaning_ur": "Lafz-e-Quran (الْحَكِیْمِ)"
   },
   {
     "rank": 957,
@@ -131296,7 +133208,9 @@
         7,
         72210
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْمَلٰٓىٕكَةَ)",
+    "meaning_ur": "Lafz-e-Quran (الْمَلٰٓىٕكَةَ)"
   },
   {
     "rank": 958,
@@ -131369,7 +133283,9 @@
         4,
         75134
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (كَالَّذِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (كَالَّذِیْنَ)"
   },
   {
     "rank": 959,
@@ -131442,7 +133358,9 @@
         11,
         79250
       ]
-    ]
+    ],
+    "meaning_en": "People of / Family",
+    "meaning_ur": "Ghar wale / Ahle"
   },
   {
     "rank": 960,
@@ -131515,7 +133433,9 @@
         8,
         76382
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (فَلْیَتَوَكَّلِ)",
+    "meaning_ur": "Lafz-e-Quran (فَلْیَتَوَكَّلِ)"
   },
   {
     "rank": 961,
@@ -131589,7 +133509,9 @@
         2,
         66025
       ]
-    ]
+    ],
+    "meaning_en": "The Heavens / Skies",
+    "meaning_ur": "Aasman"
   },
   {
     "rank": 962,
@@ -131664,7 +133586,9 @@
         17,
         74193
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (قُلُوْبِ)",
+    "meaning_ur": "Lafz-e-Quran (قُلُوْبِ)"
   },
   {
     "rank": 963,
@@ -131735,7 +133659,9 @@
         15,
         45430
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَشْرَكُوْا)",
+    "meaning_ur": "Lafz-e-Quran (اَشْرَكُوْا)"
   },
   {
     "rank": 964,
@@ -131807,7 +133733,9 @@
         15,
         78905
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (طَآىٕفَةٌ)",
+    "meaning_ur": "Lafz-e-Quran (طَآىٕفَةٌ)"
   },
   {
     "rank": 965,
@@ -131881,7 +133809,9 @@
         2,
         80895
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (ظَنَّ)",
+    "meaning_ur": "Lafz-e-Quran (ظَنَّ)"
   },
   {
     "rank": 966,
@@ -131955,7 +133885,9 @@
         7,
         68437
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (رَحْمَةٌ)",
+    "meaning_ur": "Lafz-e-Quran (رَحْمَةٌ)"
   },
   {
     "rank": 967,
@@ -132028,7 +133960,9 @@
         3,
         74975
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (جَآءُوْ)",
+    "meaning_ur": "Lafz-e-Quran (جَآءُوْ)"
   },
   {
     "rank": 968,
@@ -132103,7 +134037,9 @@
         4,
         81639
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (رَبُّهُمْ)",
+    "meaning_ur": "Lafz-e-Quran (رَبُّهُمْ)"
   },
   {
     "rank": 969,
@@ -132176,7 +134112,9 @@
         7,
         78561
       ]
-    ]
+    ],
+    "meaning_en": "Besides / Below",
+    "meaning_ur": "Siwa / Chhod kar"
   },
   {
     "rank": 970,
@@ -132250,7 +134188,9 @@
         14,
         76072
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَصُدُّوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (یَصُدُّوْنَ)"
   },
   {
     "rank": 971,
@@ -132322,7 +134262,9 @@
         9,
         68258
       ]
-    ]
+    ],
+    "meaning_en": "He was / Used to be",
+    "meaning_ur": "Tha / Hua"
   },
   {
     "rank": 972,
@@ -132396,7 +134338,9 @@
         7,
         76047
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَّقُوْلُوْا)",
+    "meaning_ur": "Lafz-e-Quran (یَّقُوْلُوْا)"
   },
   {
     "rank": 973,
@@ -132466,7 +134410,9 @@
         3,
         48574
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَّكُنْ)",
+    "meaning_ur": "Lafz-e-Quran (یَّكُنْ)"
   },
   {
     "rank": 974,
@@ -132538,7 +134484,9 @@
         12,
         66770
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یُّضْلِلِ)",
+    "meaning_ur": "Lafz-e-Quran (یُّضْلِلِ)"
   },
   {
     "rank": 975,
@@ -132610,7 +134558,9 @@
         4,
         55648
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (سُلْطٰنًا)",
+    "meaning_ur": "Lafz-e-Quran (سُلْطٰنًا)"
   },
   {
     "rank": 976,
@@ -132683,7 +134633,9 @@
         3,
         64749
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یَسْتَوِی)",
+    "meaning_ur": "Lafz-e-Quran (یَسْتَوِی)"
   },
   {
     "rank": 977,
@@ -132756,7 +134708,9 @@
         4,
         65016
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (رُسُلًا)",
+    "meaning_ur": "Lafz-e-Quran (رُسُلًا)"
   },
   {
     "rank": 978,
@@ -132830,7 +134784,9 @@
         3,
         81630
       ]
-    ]
+    ],
+    "meaning_en": "Messenger",
+    "meaning_ur": "Rasool / Paighambar"
   },
   {
     "rank": 979,
@@ -132902,7 +134858,9 @@
         3,
         81209
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اسْمَ)",
+    "meaning_ur": "Lafz-e-Quran (اسْمَ)"
   },
   {
     "rank": 980,
@@ -132975,7 +134933,9 @@
         33,
         75815
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (فَاَصْبَحُوْا)",
+    "meaning_ur": "Lafz-e-Quran (فَاَصْبَحُوْا)"
   },
   {
     "rank": 981,
@@ -133044,7 +135004,9 @@
         12,
         57724
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (رَسُوْلُهٗ)",
+    "meaning_ur": "Lafz-e-Quran (رَسُوْلُهٗ)"
   },
   {
     "rank": 982,
@@ -133117,7 +135079,9 @@
         5,
         72039
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (فَاِنَّكَ)",
+    "meaning_ur": "Lafz-e-Quran (فَاِنَّكَ)"
   },
   {
     "rank": 983,
@@ -133190,7 +135154,9 @@
         13,
         67391
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اٰلِهَةً)",
+    "meaning_ur": "Lafz-e-Quran (اٰلِهَةً)"
   },
   {
     "rank": 984,
@@ -133263,7 +135229,9 @@
         10,
         75097
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بَرِیْٓءٌ)",
+    "meaning_ur": "Lafz-e-Quran (بَرِیْٓءٌ)"
   },
   {
     "rank": 985,
@@ -133335,7 +135303,9 @@
         26,
         54023
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یُفْلِحُ)",
+    "meaning_ur": "Lafz-e-Quran (یُفْلِحُ)"
   },
   {
     "rank": 986,
@@ -133410,7 +135380,9 @@
         6,
         80713
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَسَاطِیْرُ)",
+    "meaning_ur": "Lafz-e-Quran (اَسَاطِیْرُ)"
   },
   {
     "rank": 987,
@@ -133484,7 +135456,9 @@
         17,
         76018
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لَكٰذِبُوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (لَكٰذِبُوْنَ)"
   },
   {
     "rank": 988,
@@ -133556,7 +135530,9 @@
         15,
         81017
       ]
-    ]
+    ],
+    "meaning_en": "A punishment / torment",
+    "meaning_ur": "Azaab"
   },
   {
     "rank": 989,
@@ -133631,7 +135607,9 @@
         39,
         75333
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (لِاَبِیْهِ)",
+    "meaning_ur": "Lafz-e-Quran (لِاَبِیْهِ)"
   },
   {
     "rank": 990,
@@ -133706,7 +135684,9 @@
         7,
         76872
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (تُجْزَوْنَ)",
+    "meaning_ur": "Lafz-e-Quran (تُجْزَوْنَ)"
   },
   {
     "rank": 991,
@@ -133781,7 +135761,9 @@
         2,
         79919
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (خَلَقْنٰكُمْ)",
+    "meaning_ur": "Lafz-e-Quran (خَلَقْنٰكُمْ)"
   },
   {
     "rank": 992,
@@ -133854,7 +135836,9 @@
         7,
         78247
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (جَعَلُوْا)",
+    "meaning_ur": "Lafz-e-Quran (جَعَلُوْا)"
   },
   {
     "rank": 993,
@@ -133926,7 +135910,9 @@
         6,
         78501
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (الْاِنْسِ)",
+    "meaning_ur": "Lafz-e-Quran (الْاِنْسِ)"
   },
   {
     "rank": 994,
@@ -133998,7 +135984,9 @@
         6,
         77501
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (ظٰلِمِیْنَ)",
+    "meaning_ur": "Lafz-e-Quran (ظٰلِمِیْنَ)"
   },
   {
     "rank": 995,
@@ -134072,7 +136060,9 @@
         4,
         81105
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (بَیْنِ)",
+    "meaning_ur": "Lafz-e-Quran (بَیْنِ)"
   },
   {
     "rank": 996,
@@ -134147,7 +136137,9 @@
         2,
         82399
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَغْنٰى)",
+    "meaning_ur": "Lafz-e-Quran (اَغْنٰى)"
   },
   {
     "rank": 997,
@@ -134218,7 +136210,9 @@
         8,
         67933
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَمِیْنٌ)",
+    "meaning_ur": "Lafz-e-Quran (اَمِیْنٌ)"
   },
   {
     "rank": 998,
@@ -134292,7 +136286,9 @@
         7,
         76652
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (اَمْرِ)",
+    "meaning_ur": "Lafz-e-Quran (اَمْرِ)"
   },
   {
     "rank": 999,
@@ -134362,7 +136358,9 @@
         2,
         72718
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (عَذَابِیْ)",
+    "meaning_ur": "Lafz-e-Quran (عَذَابِیْ)"
   },
   {
     "rank": 1000,
@@ -134436,6 +136434,8 @@
         3,
         73772
       ]
-    ]
+    ],
+    "meaning_en": "Quranic word (یُنَزِّلُ)",
+    "meaning_ur": "Lafz-e-Quran (یُنَزِّلُ)"
   }
 ]

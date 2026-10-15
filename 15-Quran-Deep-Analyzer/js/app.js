@@ -78,7 +78,8 @@ function bootApp() {
     { name: "Tabs", init: () => initTabs() },
     { name: "ModalHandlers", init: () => initModalHandlers() },
     { name: "TelemetryEngine", init: () => window.TelemetryEngine && window.TelemetryEngine.init() },
-    { name: "CorpusEngine", init: () => window.CorpusEngine && window.CorpusEngine.init() }
+    { name: "CorpusEngine", init: () => window.CorpusEngine && window.CorpusEngine.init() },
+    { name: "AnalyticsStudio", init: () => window.AnalyticsStudio && window.AnalyticsStudio.init() }
   ];
 
   modules.forEach(mod => {
