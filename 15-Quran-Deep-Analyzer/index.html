@@ -45,6 +45,10 @@
           <span>🔍 Deep Ayah Analyzer</span>
           <span class="tab-badge">6,236</span>
         </button>
+        <button class="nav-tab-btn" data-tab="roots" id="tab-btn-roots">
+          <span>🌿 Root & Morphology</span>
+          <span class="tab-badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399;">1,642</span>
+        </button>
         <button class="nav-tab-btn" data-tab="thematic">
           <span>🧠 Thematic Graph</span>
           <span class="tab-badge">484</span>
@@ -350,6 +354,53 @@
       </div>
     </section>
 
+    <!-- Tab: Root & Lemma Morphology (علم الصرف) -->
+    <section id="tab-roots" class="tab-panel">
+      <!-- Morphology Header & Filter Bar -->
+      <div class="roots-header-banner">
+        <div class="roots-title-row">
+          <div>
+            <h2 class="roots-main-title">🌿 Quranic Root & Lemma Explorer (علم الصرف)</h2>
+            <p class="roots-subtitle">Interactive Derivational Analysis of 1,642 Roots into Verb Forms (I–X), Participles (*Ism Fa'il / Maf'ul*), and Verbal Nouns (*Masdar*)</p>
+          </div>
+          <div class="roots-stats-pill" id="roots-stats-badge">
+            <span class="stat-highlight">1,642</span> Roots • <span class="stat-highlight">4,832</span> Lemmas
+          </div>
+        </div>
+
+        <!-- 28 Arabic Letters Alphabet Ribbon -->
+        <div class="roots-alphabet-wrapper">
+          <div class="roots-alphabet-ribbon" id="roots-alphabet-ribbon" role="tablist" aria-label="Arabic Alphabet Filter">
+            <button class="alphabet-chip active" data-letter="all">كُلّ (All)</button>
+            <!-- Injected dynamically: أ, ب, ت... ي -->
+          </div>
+        </div>
+
+        <!-- Search & Sorting Controls -->
+        <div class="roots-controls-bar">
+          <div class="roots-search-box">
+            <span class="roots-search-icon">🔍</span>
+            <input type="text" id="roots-search-input" class="roots-search-input" placeholder="Search by Arabic root (e.g. رحم), English meaning (mercy), or Roman Urdu (reham)..." autocomplete="off" spellcheck="false">
+            <button id="roots-search-clear" class="roots-clear-btn" style="display: none;">✕</button>
+          </div>
+          <div class="roots-sort-group">
+            <label for="roots-sort-select" class="roots-sort-label">Sort:</label>
+            <select id="roots-sort-select" class="cyber-select">
+              <option value="freq-desc">Frequency (Highest First)</option>
+              <option value="freq-asc">Frequency (Lowest First)</option>
+              <option value="forms-desc">Most Verb Forms (I–X)</option>
+              <option value="alpha-asc">Alphabetical (Arabic أ–ي)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Roots Cards Grid Container -->
+      <div id="roots-grid-container" class="roots-cards-grid">
+        <!-- Rendered dynamically by morphology-engine.js -->
+      </div>
+    </section>
+
     <!-- Tab 7: Analytics Studio (PRO) -->
     <section id="tab-studio" class="tab-panel">
       <div class="studio-subtabs-nav">
@@ -504,6 +555,26 @@
     </div>
   </div>
 
+  <!-- Cyber-Glass Sarf Root Inspector Modal -->
+  <div id="root-inspector-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="inspector-root-ar" style="display: none;">
+    <div class="modal-card root-inspector-card">
+      <div class="modal-header root-inspector-header">
+        <div class="inspector-header-left">
+          <span class="inspector-root-calligraphy" id="inspector-root-ar">ر - ح - م</span>
+          <div class="inspector-header-text">
+            <div class="inspector-root-meanings" id="inspector-root-meanings">Mercy / To have compassion • Reham karna</div>
+            <div class="inspector-root-meta" id="inspector-root-meta">339 Occurrences • Found in 85 Surahs • 1 Verb Form</div>
+          </div>
+        </div>
+        <button id="root-inspector-close" class="modal-close-btn" aria-label="Close root inspector">✕</button>
+      </div>
+
+      <div class="modal-body root-inspector-body" id="root-inspector-content">
+        <!-- Sarf Matrix, Verb Forms, Participles, Verbal Nouns rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
   <!-- Floating Always-Visible Return to Origin Pill -->
   <button id="floating-return-pill" class="floating-return-pill" style="display: none;" title="Return to where you left off (Alt+Left)">
     <span class="return-arrow" style="font-size: 1.15rem;">↩</span>
@@ -524,6 +595,7 @@
   <script src="js/telemetry-engine.js"></script>
   <script src="js/corpus-engine.js"></script>
   <script src="js/analytics-studio.js"></script>
+  <script src="js/morphology-engine.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

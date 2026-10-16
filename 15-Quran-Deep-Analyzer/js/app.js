@@ -31,7 +31,11 @@ function switchAppTab(tabName) {
   const banner = document.getElementById("global-metrics-banner");
   const btnIcon = document.getElementById("telemetry-btn-icon");
   const btnText = document.getElementById("telemetry-btn-text");
-  const readingTabs = ["ayahs", "thematic", "mutashabihat", "waqf"];
+  const readingTabs = ["ayahs", "roots", "thematic", "mutashabihat", "waqf"];
+
+  if (tabName === "roots" && window.MorphologyEngine) {
+    window.MorphologyEngine.onTabActivated();
+  }
 
   if (readingTabs.includes(tabName)) {
     if (banner && !banner.classList.contains("user-pinned-open")) {
@@ -611,6 +615,37 @@ const OmnisearchEngine = {
       });
     }
 
+    // 6. Triliteral & Quadrilateral Roots (Morphology)
+    if (this.activeCategory === "all" || this.activeCategory === "words") {
+      const rootsList = (window.MorphologyEngine && window.MorphologyEngine.allRoots && window.MorphologyEngine.allRoots.length)
+        ? window.MorphologyEngine.allRoots
+        : (window.QURAN_ROOTS || []);
+      const matchedRoots = rootsList.filter(r => {
+        if (!q) return false;
+        return (r.root_ar && r.root_ar.includes(rawQuery)) ||
+               (r.root_bw && r.root_bw.toLowerCase().includes(q)) ||
+               (r.meaning_en && r.meaning_en.toLowerCase().includes(q)) ||
+               (r.meaning_ur && r.meaning_ur.toLowerCase().includes(q));
+      }).slice(0, 4);
+
+      matchedRoots.forEach(r => {
+        this.results.push({
+          category: "Root",
+          categoryClass: "prophet",
+          title: `Root ${r.root_display || r.root_ar} (${r.meaning_en})`,
+          subtitle: `${r.meaning_ur || ''} • ${(r.total_occurrences || r.occurrences || 0).toLocaleString()} Ayat in Quran`,
+          action: () => {
+            if (window.switchAppTab) window.switchAppTab("roots");
+            if (window.MorphologyEngine) {
+              window.MorphologyEngine.onTabActivated().then(() => {
+                window.MorphologyEngine.openRootInspector(r.root_bw);
+              });
+            }
+          }
+        });
+      });
+    }
+
     if (this.results.length === 0) {
       resultsContainer.innerHTML = `
         <div style="text-align: center; padding: 30px; color: var(--text-dim); font-size: 0.9rem;">
@@ -693,7 +728,8 @@ function bootApp() {
     { name: "NavigationHistory", init: () => window.NavigationHistory && window.NavigationHistory.init() },
     { name: "TelemetryEngine", init: () => window.TelemetryEngine && window.TelemetryEngine.init() },
     { name: "CorpusEngine", init: () => window.CorpusEngine && window.CorpusEngine.init() },
-    { name: "AnalyticsStudio", init: () => window.AnalyticsStudio && window.AnalyticsStudio.init() }
+    { name: "AnalyticsStudio", init: () => window.AnalyticsStudio && window.AnalyticsStudio.init() },
+    { name: "MorphologyEngine", init: () => window.MorphologyEngine && window.MorphologyEngine.init() }
   ];
 
   modules.forEach(mod => {
