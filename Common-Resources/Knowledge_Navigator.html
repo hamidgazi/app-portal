@@ -894,9 +894,9 @@ with open("dist/Pincode_Search_Offline.html", "w", encoding="utf-8") as out:
         desc: "Workstation maintenance suite with fluent WPF XAML GUI, dual-loop Winget CLI and direct vendor registry feed resolution, and Pro License Shield protection.",
         badges: ["PowerShell 5.1", "WPF XAML", "Winget CLI", "Registry Feeds"],
         launchers: [
-          { label: "⚡ Run Updater (BAT)", href: "../06-Update Softwares/Update_PC_Software.bat", type: "primary" },
-          { label: "🖥️ Silent VBS Launcher", href: "../06-Update Softwares/Update_PC_Software.vbs", type: "secondary" },
-          { label: "📄 Documentation", href: "../06-Update Softwares/README.md", type: "subtle" }
+          { label: "⚡ Run Updater (BAT)", href: "../06-Update-Software/Update_PC_Software.bat", type: "primary" },
+          { label: "🖥️ Silent VBS Launcher", href: "../06-Update-Software/Update_PC_Software.vbs", type: "secondary" },
+          { label: "📄 Documentation", href: "../06-Update-Software/README.md", type: "subtle" }
         ]
       },
       {
@@ -907,10 +907,10 @@ with open("dist/Pincode_Search_Offline.html", "w", encoding="utf-8") as out:
         desc: "Workstation performance tuning suite for Intel Core i5 systems, capping Windows Defender scans to 15% CPU and reclaiming ~600MB RAM via Intel SUR/DSA telemetry decommissioning.",
         badges: ["PowerShell", "Defender Throttling", "Intel SUR Decommission", "Reversible Tweaks"],
         launchers: [
-          { label: "⚡ Optimize Defender (BAT)", href: "../07-System Acceleration/Optimize_Windows_Defender.bat", type: "primary" },
-          { label: "⚡ Disable Intel Telemetry (BAT)", href: "../07-System Acceleration/Disable_Intel_Usage_Report.bat", type: "secondary" },
-          { label: "🔄 Rollback Defender (BAT)", href: "../07-System Acceleration/Rollback_Windows_Defender.bat", type: "subtle" },
-          { label: "📄 README Docs", href: "../07-System Acceleration/README.md", type: "subtle" }
+          { label: "⚡ Optimize Defender (BAT)", href: "../07-System-Acceleration/Optimize_Windows_Defender.bat", type: "primary" },
+          { label: "⚡ Disable Intel Telemetry (BAT)", href: "../07-System-Acceleration/Disable_Intel_Usage_Report.bat", type: "secondary" },
+          { label: "🔄 Rollback Defender (BAT)", href: "../07-System-Acceleration/Rollback_Windows_Defender.bat", type: "subtle" },
+          { label: "📄 README Docs", href: "../07-System-Acceleration/README.md", type: "subtle" }
         ]
       },
       {
@@ -934,11 +934,11 @@ with open("dist/Pincode_Search_Offline.html", "w", encoding="utf-8") as out:
         desc: "High-precision dual-edition publishing pipeline compiling 300,000+ words with OpenXML sub-element mixed-script parsing, Traditional Arabic typography, and sub-2s COM bookmark pagination.",
         badges: ["Python OpenXML", "PyMuPDF", "Word COM Automation", "Classical Arabic Typeset"],
         launchers: [
-          { label: "📄 Book 1: Ghalat Fehmiyan (A4 Print)", href: "../05-Roman Project/01-Ghalat-Fehmiyan/Ghalat_Fehmiyan_Aur_Unki_Islaah_A4_Print.pdf", type: "primary" },
-          { label: "📱 Book 1: Mobile (A5 Reading)", href: "../05-Roman Project/01-Ghalat-Fehmiyan/Ghalat_Fehmiyan_Aur_Unki_Islaah_A5_Mobile.pdf", type: "secondary" },
-          { label: "📄 Book 2: Qareena-e-Zindagi (A4 Print)", href: "../05-Roman Project/02-Qareena-e-Zindagi/Qareena_E_Zindagi_A4_Print.pdf", type: "secondary" },
-          { label: "📱 Book 2: Mobile (A5 Reading)", href: "../05-Roman Project/02-Qareena-e-Zindagi/Qareena_E_Zindagi_A5_Mobile.pdf", type: "secondary" },
-          { label: "📄 Project README", href: "../05-Roman Project/README.md", type: "subtle" }
+          { label: "📄 Book 1: Ghalat Fehmiyan (A4 Print)", href: "../05-Roman-Project/01-Ghalat-Fehmiyan/Ghalat_Fehmiyan_Aur_Unki_Islaah_A4_Print.pdf", type: "primary" },
+          { label: "📱 Book 1: Mobile (A5 Reading)", href: "../05-Roman-Project/01-Ghalat-Fehmiyan/Ghalat_Fehmiyan_Aur_Unki_Islaah_A5_Mobile.pdf", type: "secondary" },
+          { label: "📄 Book 2: Qareena-e-Zindagi (A4 Print)", href: "../05-Roman-Project/02-Qareena-e-Zindagi/Qareena_E_Zindagi_A4_Print.pdf", type: "secondary" },
+          { label: "📱 Book 2: Mobile (A5 Reading)", href: "../05-Roman-Project/02-Qareena-e-Zindagi/Qareena_E_Zindagi_A5_Mobile.pdf", type: "secondary" },
+          { label: "📄 Project README", href: "../05-Roman-Project/README.md", type: "subtle" }
         ]
       },
       {
@@ -964,6 +964,68 @@ with open("dist/Pincode_Search_Offline.html", "w", encoding="utf-8") as out:
         launchers: [
           { label: "📘 Android Apps Master Guide (MD)", href: "../11-Essential-Android-Apps-Suite/Essential_Android_Apps_Master_Guide.md", type: "primary" },
           { label: "📄 README Docs", href: "../11-Essential-Android-Apps-Suite/README.md", type: "secondary" }
+        ]
+      },
+      {
+        num: "12",
+        pillarId: "pillar-3",
+        pillarName: "Digital Publishing",
+        name: "Fatawa Razviya Encyclopedia Reader",
+        desc: "Grand Islamic Jurisprudence Encyclopedia & Reader compiling 924+ short fatwas across 30 volumes with Roman Urdu transliteration, topic categorization, and sub-millisecond search.",
+        badges: ["Urdu Fiqh", "Roman Transliteration", "SQLite Extraction", "HTML Reader"],
+        launchers: [
+          { label: "📖 Launch Fatawa Reader", href: "../12-Fatawa-Project/output/fatawa_reader.html", type: "primary" },
+          { label: "📄 README Docs", href: "../12-Fatawa-Project/README.md", type: "subtle" }
+        ]
+      },
+      {
+        num: "13",
+        pillarId: "pillar-1",
+        pillarName: "Web Applications",
+        name: "Sustainable Weight Gain Suite",
+        desc: "Clinical physiological nutrition & calisthenics hypertrophy dashboard for ectomorphs featuring gastric decoupling protocols, macro calculators, and 3-1-1 tempo logs.",
+        badges: ["Physiology", "Biomechanics", "Interactive Dashboard", "PWA"],
+        launchers: [
+          { label: "🥗 Open Dashboard", href: "../13-Sustainable-Weight-Gain-Guide/Weight_Gain_Dashboard.html", type: "primary" },
+          { label: "📘 Master Guide (MD)", href: "../13-Sustainable-Weight-Gain-Guide/MASTER_WEIGHT_GAIN_GUIDE.md", type: "secondary" },
+          { label: "📄 README Docs", href: "../13-Sustainable-Weight-Gain-Guide/README.md", type: "subtle" }
+        ]
+      },
+      {
+        num: "14",
+        pillarId: "pillar-1",
+        pillarName: "Web Applications",
+        name: "Thela Stock Manager PWA",
+        desc: "Mobile-first inventory & stock management suite with Firestore real-time cloud sync, offline queue, Web Audio acoustic feedback, and 2-way OpenXML Excel reconciliation.",
+        badges: ["PWA", "Firestore Cloud", "Excel Sync", "Offline-First"],
+        launchers: [
+          { label: "📦 Launch Stock Manager", href: "../14-Thela-Stock-Manager/index.html", type: "primary" },
+          { label: "📄 README Docs", href: "../14-Thela-Stock-Manager/README.md", type: "subtle" }
+        ]
+      },
+      {
+        num: "15",
+        pillarId: "pillar-1",
+        pillarName: "Web Applications",
+        name: "Quran Deep Analyzer Studio",
+        desc: "High-density quantitative corpus linguistics studio covering 114 Surahs, 30 Paras, authentic Mutashabihat concordance, triliteral root morphology, and zero-music UI acoustics.",
+        badges: ["Linguistics", "Morphology", "Mutashabihat", "Cyber-Glass PWA"],
+        launchers: [
+          { label: "📖 Launch Quran Analyzer", href: "../15-Quran-Deep-Analyzer/index.html", type: "primary" },
+          { label: "📄 README Docs", href: "../15-Quran-Deep-Analyzer/README.md", type: "subtle" }
+        ]
+      },
+      {
+        num: "16",
+        pillarId: "pillar-4",
+        pillarName: "Master Guides",
+        name: "Smartphone Hardware & Decision Studio",
+        desc: "Practical mobile telemetry evaluation studio evaluating sustained HBM nits, high-frequency PWM eye strain, 200g wrist fatigue limits, and real-world sensor architectures.",
+        badges: ["Display PWM", "Thermal Telemetry", "Hardware Benchmarks", "Interactive Matrix"],
+        launchers: [
+          { label: "📱 Open Decision Studio", href: "../16-Mobile-Phone-Analysis/index.html", type: "primary" },
+          { label: "📘 Practical Analysis Report", href: "../16-Mobile-Phone-Analysis/PRACTICAL_MOBILE_ANALYSIS_REPORT.md", type: "secondary" },
+          { label: "📄 README Docs", href: "../16-Mobile-Phone-Analysis/README.md", type: "subtle" }
         ]
       }
     ];

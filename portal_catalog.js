@@ -2,7 +2,7 @@
 window.PORTAL_CATALOG = {
   "version": "1.0.0",
   "lastUpdated": "Antigravity Files",
-  "totalApps": 18,
+  "totalApps": 20,
   "categories": [
     "Islamic & Faith",
     "Productivity & Utilities",
@@ -11,28 +11,6 @@ window.PORTAL_CATALOG = {
     "Discovered Tools"
   ],
   "apps": [
-    {
-      "id": "15-Quran-Deep-Analyzer__index_html",
-      "title": "Quran Deep Analyzer",
-      "category": "Islamic & Faith",
-      "icon": "📖",
-      "badge": "PWA • Linguistic & Telemetry",
-      "description": "Complete deep analysis of the Holy Quran: 20k+ word frequencies, roots, lemmas, 114 Surah telemetry, 484 thematic topics, and classical Tafsir.",
-      "tags": [
-        "quran",
-        "analysis",
-        "linguistics",
-        "tafsir",
-        "roots",
-        "frequency",
-        "surah",
-        "telemetry"
-      ],
-      "primary": true,
-      "relPath": "15-Quran-Deep-Analyzer/index.html",
-      "portalHref": "./15-Quran-Deep-Analyzer/index.html",
-      "serverHref": "./15-Quran-Deep-Analyzer/index.html"
-    },
     {
       "id": "01-Events-Countdown__index_html",
       "title": "Events Countdown & Tracker",
@@ -53,7 +31,7 @@ window.PORTAL_CATALOG = {
       "serverHref": "./01-Events-Countdown/index.html"
     },
     {
-      "id": "12- Fatawa Project__output__fatawa_reader_html",
+      "id": "12-Fatawa-Project__output__fatawa_reader_html",
       "title": "Fatawa Razviya Encyclopedia",
       "category": "Islamic & Faith",
       "icon": "📖",
@@ -68,9 +46,9 @@ window.PORTAL_CATALOG = {
         "reader"
       ],
       "primary": true,
-      "relPath": "12- Fatawa Project/output/fatawa_reader.html",
-      "portalHref": "./12- Fatawa Project/output/fatawa_reader.html",
-      "serverHref": "./12- Fatawa Project/output/fatawa_reader.html"
+      "relPath": "12-Fatawa-Project/output/fatawa_reader.html",
+      "portalHref": "./12-Fatawa-Project/output/fatawa_reader.html",
+      "serverHref": "./12-Fatawa-Project/output/fatawa_reader.html"
     },
     {
       "id": "02-Namaz-Prayer-Times__index_html",
@@ -91,6 +69,27 @@ window.PORTAL_CATALOG = {
       "relPath": "02-Namaz-Prayer-Times/index.html",
       "portalHref": "./02-Namaz-Prayer-Times/index.html",
       "serverHref": "./02-Namaz-Prayer-Times/index.html"
+    },
+    {
+      "id": "15-Quran-Deep-Analyzer__index_html",
+      "title": "Quran Deep Analyzer Studio",
+      "category": "Islamic & Faith",
+      "icon": "📖",
+      "badge": "114 Surahs • Morphology",
+      "description": "High-density quantitative corpus linguistics studio with 114 lazy-loaded surahs, 30 Paras, Mutashabihat concordance, and zero-music acoustics.",
+      "tags": [
+        "quran",
+        "islamic",
+        "arabic",
+        "morphology",
+        "roots",
+        "mutashabihat",
+        "pwa"
+      ],
+      "primary": true,
+      "relPath": "15-Quran-Deep-Analyzer/index.html",
+      "portalHref": "./15-Quran-Deep-Analyzer/index.html",
+      "serverHref": "./15-Quran-Deep-Analyzer/index.html"
     },
     {
       "id": "01-Events-Countdown__events_visitor_html",
@@ -185,18 +184,38 @@ window.PORTAL_CATALOG = {
       "serverHref": "./08-Pincode-Search/index.html"
     },
     {
+      "id": "16-Mobile-Phone-Analysis__index_html",
+      "title": "Smartphone Hardware & Decision Studio",
+      "category": "Productivity & Utilities",
+      "icon": "📱",
+      "badge": "Hardware Telemetry",
+      "description": "Practical smartphone hardware comparison and decision studio with PWM eye-safety metrics, thermal stress tests, and dynamic score weightings.",
+      "tags": [
+        "mobile",
+        "hardware",
+        "smartphone",
+        "pwm",
+        "display",
+        "benchmarks"
+      ],
+      "primary": true,
+      "relPath": "16-Mobile-Phone-Analysis/index.html",
+      "portalHref": "./16-Mobile-Phone-Analysis/index.html",
+      "serverHref": "./16-Mobile-Phone-Analysis/index.html"
+    },
+    {
       "id": "14-Thela-Stock-Manager__index_html",
       "title": "Thela Stock Manager PWA",
       "category": "Productivity & Utilities",
       "icon": "📦",
-      "badge": "AMOLED PWA • Google Sheets",
-      "description": "Mobile-first AMOLED stock transaction manager with live Google Sheets webhook, real-time stock calculation preview, 50-record history drawer, and SheetJS Excel export.",
+      "badge": "PWA • 2-Way Sync",
+      "description": "Mobile-first stock transaction manager with live Firebase sync, offline queue, Web Audio haptics, and 2-way Excel reconciliation.",
       "tags": [
         "thela",
         "stock",
         "inventory",
         "excel",
-        "googlesheets",
+        "firebase",
         "pwa",
         "offline"
       ],
@@ -261,6 +280,27 @@ window.PORTAL_CATALOG = {
       "relPath": "Common-Resources/Knowledge_Navigator.html",
       "portalHref": "./Common-Resources/Knowledge_Navigator.html",
       "serverHref": "./Common-Resources/Knowledge_Navigator.html"
+    },
+    {
+      "id": "Common-Resources__AI-Search-Kit__demo_html",
+      "title": "AI Search Engine v2.0 Demo",
+      "category": "Knowledge & Engineering",
+      "icon": "⚡",
+      "badge": "AI Search v2.0",
+      "description": "Enterprise-grade multimodal client-side search engine featuring BM25, Soundex/Metaphone, Roman Urdu transliteration, and voice search.",
+      "tags": [
+        "ai",
+        "search",
+        "bm25",
+        "voice",
+        "transliteration",
+        "soundex",
+        "metaphone"
+      ],
+      "primary": false,
+      "relPath": "Common-Resources/AI-Search-Kit/demo.html",
+      "portalHref": "./Common-Resources/AI-Search-Kit/demo.html",
+      "serverHref": "./Common-Resources/AI-Search-Kit/demo.html"
     },
     {
       "id": "Common-Resources__WhatsApp-Gate-Kit__admin_dashboard_html",
