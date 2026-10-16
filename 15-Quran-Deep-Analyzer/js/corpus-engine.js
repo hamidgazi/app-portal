@@ -298,7 +298,7 @@ class CorpusEngine {
       if (surahId === p.end_surah && ayahNumber > p.end_ayah) continue;
       return p;
     }
-    return { para: 1, name_ar: "الم", name_roman: "Alif Lam Meem", start_surah: 1, start_ayah: 1 };
+    return { para: 1, name_ar: "الم", name_roman: "Alif Lam Meem", start_surah: 1, start_ayah: 1, total_ayat: 148 };
   }
 
   getParasForSurah(surahId) {
@@ -533,10 +533,11 @@ class CorpusEngine {
     const pMeta = document.getElementById("current-para-meta");
     if (surahParas.length > 0) {
       const firstP = surahParas[0];
-      if (pBadge) pBadge.textContent = firstP.para;
-      if (pTitle) pTitle.textContent = `Para ${firstP.para}`;
-      if (pAr) pAr.textContent = firstP.name_ar;
-      if (pMeta) pMeta.textContent = `${firstP.total_ayat} Ayat`;
+      const fullP = (this.paras && this.paras.find(p => p.para === firstP.para)) || firstP;
+      if (pBadge) pBadge.textContent = fullP.para;
+      if (pTitle) pTitle.textContent = `Para ${fullP.para}`;
+      if (pAr) pAr.textContent = fullP.name_ar;
+      if (pMeta) pMeta.textContent = `${fullP.total_ayat || 148} Ayat`;
     }
 
     if (headerContainer) {
@@ -1320,7 +1321,7 @@ class CorpusEngine {
               </div>
               <div class="card-meta-row">
                 <span>Starts: Surah ${p.start_surah}:${p.start_ayah}</span>
-                <span>${p.total_ayat} Ayat</span>
+                <span>${p.total_ayat || 148} Ayat</span>
               </div>
             </div>
           </div>
