@@ -737,25 +737,27 @@ class CorpusEngine {
           `;
         } else {
           const s = data.surah;
-          const a = data.ayah;
-          drawer.innerHTML = `
-            <div class="thematic-preview-header">
-              <div style="display: flex; align-items: center; gap: 8px;">
-                <span class="para-badge jump-to-para-btn" data-para="${paraObj.para}" title="Para ${paraObj.para}: ${paraObj.name_ar} (${paraObj.name_roman}) • Click to jump">Para ${paraObj.para}</span>
-                <span class="preview-badge">${s.name_roman || 'Surah ' + sId} (${sId}:${aNo})</span>
-                ${s.name_ar ? `<span style="font-family: var(--font-arabic); font-size: 1.1rem; color: var(--accent-gold);">${s.name_ar}</span>` : ''}
+            const ar = a.arabic || a.arabicText || a.text || '';
+            const en = a.translation_english || a.translation_en || '';
+            const ur = a.translation_urdu_kanzul_iman || a.translation_ur_ki || a.translation_ur || '';
+            drawer.innerHTML = `
+              <div class="thematic-preview-header">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span class="para-badge jump-to-para-btn" data-para="${paraObj.para}" title="Para ${paraObj.para}: ${paraObj.name_ar} (${paraObj.name_roman}) • Click to jump">Para ${paraObj.para}</span>
+                  <span class="preview-badge">${s.name_roman || 'Surah ' + sId} (${sId}:${aNo})</span>
+                  ${s.name_ar ? `<span style="font-family: var(--font-arabic); font-size: 1.1rem; color: var(--accent-gold);">${s.name_ar}</span>` : ''}
+                </div>
+                <button class="filter-btn jump-to-ayah-btn" data-surah="${sId}" data-ayah="${aNo}">
+                  📖 Read in Context ↗
+                </button>
               </div>
-              <button class="filter-btn jump-to-ayah-btn" data-surah="${sId}" data-ayah="${aNo}">
-                📖 Read in Context ↗
-              </button>
-            </div>
-            <div class="thematic-preview-arabic" dir="rtl">${a.arabicText}</div>
-            <div class="thematic-preview-translations">
-              ${a.translation_en ? `<div class="preview-trans-en"><strong>EN:</strong> ${a.translation_en}</div>` : ''}
-              ${a.translation_ur_ki ? `<div class="preview-trans-ur" dir="rtl"><span class="compact-trans-tag ur-ki">کنز الایمان</span> ${a.translation_ur_ki}</div>` : ''}
-            </div>
-          `;
-        }
+              ${ar ? `<div class="thematic-preview-arabic" dir="rtl">${ar}</div>` : ''}
+              <div class="thematic-preview-translations">
+                ${en ? `<div class="preview-trans-en"><strong>EN:</strong> ${en}</div>` : ''}
+                ${ur ? `<div class="preview-trans-ur" dir="rtl"><span class="compact-trans-tag ur-ki">کنز الایمان</span> ${ur}</div>` : ''}
+              </div>
+            `;
+          }
 
         const jumpBtn = drawer.querySelector(".jump-to-ayah-btn");
         if (jumpBtn) {
@@ -781,8 +783,8 @@ class CorpusEngine {
 
       if (isRefrain) {
         // High-Frequency Master Refrain Anchor + Interactive Citation Matrix Grid
-        const sampleEn = firstOcc.translation_en || "";
-        const sampleUr = firstOcc.translation_ur || firstOcc.translation_ur_ki || "";
+        const sampleEn = firstOcc.translation_english || firstOcc.translation_en || "";
+        const sampleUr = firstOcc.translation_urdu_kanzul_iman || firstOcc.translation_ur_ki || firstOcc.translation_ur || "";
 
         html += `
           <div class="mutashabihat-refrain-card">
@@ -841,7 +843,8 @@ class CorpusEngine {
               ${occs.map(occ => {
                 const sRoman = occ.surah_name_roman || occ.surah_roman || 'Surah ' + occ.surah_id;
                 const sAr = occ.surah_name_ar || occ.surah_arabic || '';
-                const urTrans = occ.translation_ur || occ.translation_ur_ki || '';
+                const urTrans = occ.translation_urdu_kanzul_iman || occ.translation_ur_ki || occ.translation_ur || '';
+                const enTrans = occ.translation_english || occ.translation_en || '';
                 const p = this.getParaForAyah(occ.surah_id, occ.ayat_number);
                 return `
                 <div class="parallel-verse-node">
@@ -858,7 +861,7 @@ class CorpusEngine {
                   </div>
                   <div class="parallel-arabic" dir="rtl">${occ.arabic}</div>
                   <div class="parallel-translations">
-                    ${occ.translation_en ? `<div class="parallel-trans-en"><strong>EN:</strong> ${occ.translation_en}</div>` : ''}
+                    ${enTrans ? `<div class="parallel-trans-en"><strong>EN:</strong> ${enTrans}</div>` : ''}
                     ${urTrans ? `<div class="parallel-trans-ur" dir="rtl"><span class="compact-trans-tag ur-ki">کنز الایمان</span> ${urTrans}</div>` : ''}
                   </div>
                 </div>
