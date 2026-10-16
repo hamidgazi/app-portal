@@ -1,0 +1,497 @@
+[
+  {
+    "para": 1,
+    "name_ar": "الم",
+    "name_roman": "Alif Lam Meem",
+    "start_surah": 1,
+    "start_ayah": 1,
+    "end_surah": 2,
+    "end_ayah": 141,
+    "surahs": [
+      1,
+      2
+    ],
+    "total_ayat": 148
+  },
+  {
+    "para": 2,
+    "name_ar": "سَيَقُولُ",
+    "name_roman": "Sayaqool",
+    "start_surah": 2,
+    "start_ayah": 142,
+    "end_surah": 2,
+    "end_ayah": 252,
+    "surahs": [
+      2
+    ],
+    "total_ayat": 111
+  },
+  {
+    "para": 3,
+    "name_ar": "تِلْكَ الرُّسُلُ",
+    "name_roman": "Tilkar Rusul",
+    "start_surah": 2,
+    "start_ayah": 253,
+    "end_surah": 3,
+    "end_ayah": 91,
+    "surahs": [
+      2,
+      3
+    ],
+    "total_ayat": 125
+  },
+  {
+    "para": 4,
+    "name_ar": "لَنْ تَنَالُوا",
+    "name_roman": "Lan Tanaalu",
+    "start_surah": 3,
+    "start_ayah": 92,
+    "end_surah": 4,
+    "end_ayah": 23,
+    "surahs": [
+      3,
+      4
+    ],
+    "total_ayat": 132
+  },
+  {
+    "para": 5,
+    "name_ar": "وَالْمُحْصَنَاتُ",
+    "name_roman": "Wal Muhsanat",
+    "start_surah": 4,
+    "start_ayah": 24,
+    "end_surah": 4,
+    "end_ayah": 147,
+    "surahs": [
+      4
+    ],
+    "total_ayat": 124
+  },
+  {
+    "para": 6,
+    "name_ar": "لَا يُحِبُّ اللَّهُ",
+    "name_roman": "La Yuhibbullah",
+    "start_surah": 4,
+    "start_ayah": 148,
+    "end_surah": 5,
+    "end_ayah": 81,
+    "surahs": [
+      4,
+      5
+    ],
+    "total_ayat": 110
+  },
+  {
+    "para": 7,
+    "name_ar": "وَإِذَا سَمِعُوا",
+    "name_roman": "Wa Iza Samiu",
+    "start_surah": 5,
+    "start_ayah": 82,
+    "end_surah": 6,
+    "end_ayah": 110,
+    "surahs": [
+      5,
+      6
+    ],
+    "total_ayat": 149
+  },
+  {
+    "para": 8,
+    "name_ar": "وَلَوْ أَنَّنَا",
+    "name_roman": "Wa Lau Annana",
+    "start_surah": 6,
+    "start_ayah": 111,
+    "end_surah": 7,
+    "end_ayah": 87,
+    "surahs": [
+      6,
+      7
+    ],
+    "total_ayat": 142
+  },
+  {
+    "para": 9,
+    "name_ar": "قَالَ الْمَلَأُ",
+    "name_roman": "Qalal Malau",
+    "start_surah": 7,
+    "start_ayah": 88,
+    "end_surah": 8,
+    "end_ayah": 40,
+    "surahs": [
+      7,
+      8
+    ],
+    "total_ayat": 159
+  },
+  {
+    "para": 10,
+    "name_ar": "وَاعْلَمُوا",
+    "name_roman": "Walamu",
+    "start_surah": 8,
+    "start_ayah": 41,
+    "end_surah": 9,
+    "end_ayah": 92,
+    "surahs": [
+      8,
+      9
+    ],
+    "total_ayat": 127
+  },
+  {
+    "para": 11,
+    "name_ar": "يَعْتَذِرُونَ",
+    "name_roman": "Yataziroon",
+    "start_surah": 9,
+    "start_ayah": 93,
+    "end_surah": 11,
+    "end_ayah": 5,
+    "surahs": [
+      9,
+      10,
+      11
+    ],
+    "total_ayat": 151
+  },
+  {
+    "para": 12,
+    "name_ar": "وَمَا مِنْ دَابَّةٍ",
+    "name_roman": "Wa Mamin Daabbah",
+    "start_surah": 11,
+    "start_ayah": 6,
+    "end_surah": 12,
+    "end_ayah": 52,
+    "surahs": [
+      11,
+      12
+    ],
+    "total_ayat": 170
+  },
+  {
+    "para": 13,
+    "name_ar": "وَمَا أُبَرِّئُ",
+    "name_roman": "Wa Ma Ubarriu",
+    "start_surah": 12,
+    "start_ayah": 53,
+    "end_surah": 14,
+    "end_ayah": 52,
+    "surahs": [
+      12,
+      13,
+      14
+    ],
+    "total_ayat": 154
+  },
+  {
+    "para": 14,
+    "name_ar": "رُبَمَا",
+    "name_roman": "Rubama",
+    "start_surah": 15,
+    "start_ayah": 1,
+    "end_surah": 16,
+    "end_ayah": 128,
+    "surahs": [
+      15,
+      16
+    ],
+    "total_ayat": 227
+  },
+  {
+    "para": 15,
+    "name_ar": "سُبْحَانَ الَّذِي",
+    "name_roman": "Subhanallazi",
+    "start_surah": 17,
+    "start_ayah": 1,
+    "end_surah": 18,
+    "end_ayah": 74,
+    "surahs": [
+      17,
+      18
+    ],
+    "total_ayat": 185
+  },
+  {
+    "para": 16,
+    "name_ar": "قَالَ أَلَمْ",
+    "name_roman": "Qala Alam",
+    "start_surah": 18,
+    "start_ayah": 75,
+    "end_surah": 20,
+    "end_ayah": 135,
+    "surahs": [
+      18,
+      19,
+      20
+    ],
+    "total_ayat": 269
+  },
+  {
+    "para": 17,
+    "name_ar": "اقْتَرَبَ لِلنَّاسِ",
+    "name_roman": "Iqtaraba Lin Nas",
+    "start_surah": 21,
+    "start_ayah": 1,
+    "end_surah": 22,
+    "end_ayah": 78,
+    "surahs": [
+      21,
+      22
+    ],
+    "total_ayat": 190
+  },
+  {
+    "para": 18,
+    "name_ar": "قَدْ أَفْلَحَ",
+    "name_roman": "Qad Aflaha",
+    "start_surah": 23,
+    "start_ayah": 1,
+    "end_surah": 25,
+    "end_ayah": 20,
+    "surahs": [
+      23,
+      24,
+      25
+    ],
+    "total_ayat": 202
+  },
+  {
+    "para": 19,
+    "name_ar": "وَقَالَ الَّذِينَ",
+    "name_roman": "Wa Qalallazina",
+    "start_surah": 25,
+    "start_ayah": 21,
+    "end_surah": 27,
+    "end_ayah": 59,
+    "surahs": [
+      25,
+      26,
+      27
+    ],
+    "total_ayat": 343
+  },
+  {
+    "para": 20,
+    "name_ar": "أَمَّنْ خَلَقَ",
+    "name_roman": "Amman Khalaqa",
+    "start_surah": 27,
+    "start_ayah": 60,
+    "end_surah": 29,
+    "end_ayah": 44,
+    "surahs": [
+      27,
+      28,
+      29
+    ],
+    "total_ayat": 166
+  },
+  {
+    "para": 21,
+    "name_ar": "اتْلُ مَا أُوحِيَ",
+    "name_roman": "Utlu Ma Oohiya",
+    "start_surah": 29,
+    "start_ayah": 45,
+    "end_surah": 33,
+    "end_ayah": 30,
+    "surahs": [
+      29,
+      30,
+      31,
+      32,
+      33
+    ],
+    "total_ayat": 179
+  },
+  {
+    "para": 22,
+    "name_ar": "وَمَنْ يَقْنُتْ",
+    "name_roman": "Wa Man Yaqnut",
+    "start_surah": 33,
+    "start_ayah": 31,
+    "end_surah": 36,
+    "end_ayah": 27,
+    "surahs": [
+      33,
+      34,
+      35,
+      36
+    ],
+    "total_ayat": 169
+  },
+  {
+    "para": 23,
+    "name_ar": "وَمَا أَنْزَلْنَا",
+    "name_roman": "Wa Maliya",
+    "start_surah": 36,
+    "start_ayah": 28,
+    "end_surah": 39,
+    "end_ayah": 31,
+    "surahs": [
+      36,
+      37,
+      38,
+      39
+    ],
+    "total_ayat": 357
+  },
+  {
+    "para": 24,
+    "name_ar": "فَمَنْ أَظْلَمُ",
+    "name_roman": "Fa Man Azlamu",
+    "start_surah": 39,
+    "start_ayah": 32,
+    "end_surah": 41,
+    "end_ayah": 46,
+    "surahs": [
+      39,
+      40,
+      41
+    ],
+    "total_ayat": 175
+  },
+  {
+    "para": 25,
+    "name_ar": "إِلَيْهِ يُرَدُّ",
+    "name_roman": "Ilayhi Yuraddu",
+    "start_surah": 41,
+    "start_ayah": 47,
+    "end_surah": 45,
+    "end_ayah": 37,
+    "surahs": [
+      41,
+      42,
+      43,
+      44,
+      45
+    ],
+    "total_ayat": 246
+  },
+  {
+    "para": 26,
+    "name_ar": "حم",
+    "name_roman": "Ha Meem",
+    "start_surah": 46,
+    "start_ayah": 1,
+    "end_surah": 51,
+    "end_ayah": 30,
+    "surahs": [
+      46,
+      47,
+      48,
+      49,
+      50,
+      51
+    ],
+    "total_ayat": 195
+  },
+  {
+    "para": 27,
+    "name_ar": "قَالَ فَمَا خَطْبُكُمْ",
+    "name_roman": "Qala Fama Khatbukum",
+    "start_surah": 51,
+    "start_ayah": 31,
+    "end_surah": 57,
+    "end_ayah": 29,
+    "surahs": [
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57
+    ],
+    "total_ayat": 399
+  },
+  {
+    "para": 28,
+    "name_ar": "قَدْ سَمِعَ اللَّهُ",
+    "name_roman": "Qad Samiallah",
+    "start_surah": 58,
+    "start_ayah": 1,
+    "end_surah": 66,
+    "end_ayah": 12,
+    "surahs": [
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66
+    ],
+    "total_ayat": 137
+  },
+  {
+    "para": 29,
+    "name_ar": "تَبَارَكَ الَّذِي",
+    "name_roman": "Tabarakallazi",
+    "start_surah": 67,
+    "start_ayah": 1,
+    "end_surah": 77,
+    "end_ayah": 50,
+    "surahs": [
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77
+    ],
+    "total_ayat": 431
+  },
+  {
+    "para": 30,
+    "name_ar": "عَمَّ",
+    "name_roman": "Amma Yatasaaloon",
+    "start_surah": 78,
+    "start_ayah": 1,
+    "end_surah": 114,
+    "end_ayah": 6,
+    "surahs": [
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111,
+      112,
+      113,
+      114
+    ],
+    "total_ayat": 564
+  }
+]
