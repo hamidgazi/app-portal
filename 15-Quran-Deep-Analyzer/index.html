@@ -13,16 +13,26 @@
   <!-- App Header -->
   <header class="app-header">
     <div class="header-inner">
-      <div class="app-branding" onclick="switchAppTab('frequency')">
-        <div class="logo-badge">📖</div>
-        <div class="branding-text">
-          <h1>Quran Deep Analyzer</h1>
-          <p>Linguistic • Quantitative • Thematic • Exegetical</p>
+      <!-- Tier 1: Branding and Global Omnisearch Command -->
+      <div class="header-tier-top">
+        <div class="app-branding" onclick="switchAppTab('frequency')">
+          <div class="logo-badge">📖</div>
+          <div class="branding-text">
+            <h1>Quran Deep Analyzer</h1>
+            <p>Linguistic • Quantitative • Thematic • Exegetical</p>
+          </div>
         </div>
+
+        <!-- Global Omnisearch Trigger Button -->
+        <button id="open-omnisearch-btn" class="omnisearch-trigger-btn" title="Open Global Omnisearch (Ctrl+K or /)">
+          <span class="omnisearch-icon">🔍</span>
+          <span class="omnisearch-btn-text">Quick Search...</span>
+          <kbd>Ctrl K</kbd>
+        </button>
       </div>
 
-      <!-- Navigation Tabs -->
-      <nav class="app-nav" aria-label="Main Navigation">
+      <!-- Tier 2: Dedicated Full-Width Segmented Tab Navigation Strip -->
+      <nav class="app-nav app-nav-tier" aria-label="Main Navigation">
         <button class="nav-tab-btn active" data-tab="frequency">
           <span>📊 Word Frequency</span>
           <span class="tab-badge">20k+</span>
@@ -52,13 +62,6 @@
           <span class="tab-badge" style="background: rgba(168, 85, 247, 0.2); color: #c084fc;">PRO</span>
         </button>
       </nav>
-
-      <!-- Global Omnisearch Trigger Button -->
-      <button id="open-omnisearch-btn" class="omnisearch-trigger-btn" title="Open Global Omnisearch (Ctrl+K or /)">
-        <span class="omnisearch-icon">🔍</span>
-        <span class="omnisearch-btn-text">Quick Search...</span>
-        <kbd>Ctrl K</kbd>
-      </button>
     </div>
   </header>
 

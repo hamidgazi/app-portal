@@ -296,9 +296,16 @@ class CorpusEngine {
       const stickySelect = document.getElementById("sticky-surah-select");
       if (stickySelect) stickySelect.value = surahId;
 
-      // 1. Check if already loaded in memory
-      if (window.QURAN_SURAHS && window.QURAN_SURAHS[surahId]) {
-        this.currentSurahData = window.QURAN_SURAHS[surahId];
+      const sName = String(surahId).padStart(3, '0');
+
+      // 1. Check if already loaded in memory under any namespace
+      let loaded = (window.QURAN_SURAHS && window.QURAN_SURAHS[surahId]) ||
+                   window[`SURAH_${sName}_DATA`] ||
+                   window[`SURAH_${surahId}_DATA`];
+      if (loaded) {
+        window.QURAN_SURAHS = window.QURAN_SURAHS || {};
+        window.QURAN_SURAHS[surahId] = loaded;
+        this.currentSurahData = loaded;
         this.renderAyahAnalyzer();
         return;
       }
@@ -306,7 +313,7 @@ class CorpusEngine {
       // 2. Try HTTP fetch if online
       if (window.location.protocol.startsWith("http")) {
         try {
-          const filename = String(surahId).padStart(3, '0') + '.json';
+          const filename = `${sName}.json`;
           const res = await fetch(`data/surahs/${filename}`);
           if (res.ok) {
             this.currentSurahData = await res.json();
@@ -322,12 +329,16 @@ class CorpusEngine {
 
       // 3. Dynamic script injection (Zero-CORS offline under file://)
       await new Promise((resolve, reject) => {
-        const sName = String(surahId).padStart(3, '0');
         const script = document.createElement("script");
         script.src = `data/surahs_js/${sName}.js`;
         script.onload = () => {
-          if (window.QURAN_SURAHS && window.QURAN_SURAHS[surahId]) {
-            this.currentSurahData = window.QURAN_SURAHS[surahId];
+          const loadedScriptData = (window.QURAN_SURAHS && window.QURAN_SURAHS[surahId]) ||
+                                   window[`SURAH_${sName}_DATA`] ||
+                                   window[`SURAH_${surahId}_DATA`];
+          if (loadedScriptData) {
+            window.QURAN_SURAHS = window.QURAN_SURAHS || {};
+            window.QURAN_SURAHS[surahId] = loadedScriptData;
+            this.currentSurahData = loadedScriptData;
             this.renderAyahAnalyzer();
             resolve();
           } else {
@@ -525,37 +536,45 @@ class CorpusEngine {
   }
 
   async getAyahData(surahId, ayahNumber) {
-    if (window.QURAN_SURAHS && window.QURAN_SURAHS[surahId]) {
-      const s = window.QURAN_SURAHS[surahId];
-      const ayah = s.ayat.find(a => a.ayatNumber === ayahNumber);
+    const sName = String(surahId).padStart(3, '0');
+    let s = (window.QURAN_SURAHS && window.QURAN_SURAHS[surahId]) ||
+            window[`SURAH_${sName}_DATA`] ||
+            window[`SURAH_${surahId}_DATA`];
+
+    if (s && s.ayat) {
+      const ayah = s.ayat.find(a => (a.number === ayahNumber || a.ayatNumber === ayahNumber));
       return { surah: s, ayah };
     }
+
     // Attempt HTTP fetch first if http/https
     if (window.location.protocol.startsWith("http")) {
       try {
-        const filename = String(surahId).padStart(3, '0') + '.json';
-        const res = await fetch(`data/surahs/${filename}`);
+        const res = await fetch(`data/surahs/${sName}.json`);
         if (res.ok) {
-          const s = await res.json();
+          s = await res.json();
           window.QURAN_SURAHS = window.QURAN_SURAHS || {};
           window.QURAN_SURAHS[surahId] = s;
-          const ayah = s.ayat.find(a => a.ayatNumber === ayahNumber);
+          const ayah = s.ayat.find(a => (a.number === ayahNumber || a.ayatNumber === ayahNumber));
           return { surah: s, ayah };
         }
       } catch (e) {}
     }
+
     // Fallback to script injection for offline Zero-CORS
     await new Promise((resolve) => {
-      const sName = String(surahId).padStart(3, '0');
       const script = document.createElement("script");
       script.src = `data/surahs_js/${sName}.js`;
       script.onload = () => resolve();
       script.onerror = () => resolve();
       document.head.appendChild(script);
     });
-    if (window.QURAN_SURAHS && window.QURAN_SURAHS[surahId]) {
-      const s = window.QURAN_SURAHS[surahId];
-      const ayah = s.ayat.find(a => a.ayatNumber === ayahNumber);
+
+    s = (window.QURAN_SURAHS && window.QURAN_SURAHS[surahId]) ||
+        window[`SURAH_${sName}_DATA`] ||
+        window[`SURAH_${surahId}_DATA`];
+
+    if (s && s.ayat) {
+      const ayah = s.ayat.find(a => (a.number === ayahNumber || a.ayatNumber === ayahNumber));
       return { surah: s, ayah };
     }
     return null;
