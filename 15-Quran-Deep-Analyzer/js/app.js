@@ -528,9 +528,54 @@ const OmnisearchEngine = {
           subtitle: `${t.references_count} Ayat indexed • Matalib al-Quran`,
           action: () => {
             if (window.switchAppTab) window.switchAppTab("thematic");
-            const searchInput = document.getElementById("thematic-search-input");
-            if (searchInput) searchInput.value = t.heading;
-            if (window.CorpusEngine) window.CorpusEngine.renderThematicGraph(t.heading.toLowerCase());
+            if (window.CorpusEngine) {
+              window.CorpusEngine.thematicMode = "matalib";
+              const sBtn = document.getElementById("thematic-mode-sirat");
+              const mBtn = document.getElementById("thematic-mode-matalib");
+              if (sBtn && mBtn) {
+                mBtn.classList.add("active");
+                sBtn.classList.remove("active");
+              }
+              const searchInput = document.getElementById("thematic-search-input");
+              if (searchInput) searchInput.value = t.heading;
+              window.CorpusEngine.renderThematicGraph(t.heading.toLowerCase());
+            }
+          }
+        });
+      });
+    }
+
+    // 4b. Sirat-ul-Jinan Exegetical Topics (3,513 Items)
+    if (this.activeCategory === "all" || this.activeCategory === "topics") {
+      const exeTopics = (window.CorpusEngine && window.CorpusEngine.exegeticalTopics) || window.QURAN_EXEGETICAL_TOPICS || [];
+      const matchedExe = exeTopics.filter(t => {
+        if (!q) return false;
+        return (t.heading && t.heading.toLowerCase().includes(q)) ||
+               (t.roman_heading && t.roman_heading.toLowerCase().includes(q)) ||
+               (t.surah_name && t.surah_name.toLowerCase().includes(q));
+      }).slice(0, 6);
+
+      matchedExe.forEach(t => {
+        const ref = (t.references && t.references[0]) || { surah_id: 1, ayat_number: 1, para_id: 1 };
+        this.results.push({
+          category: "Exegesis",
+          categoryClass: "theme",
+          title: t.heading,
+          subtitle: `${t.roman_heading ? t.roman_heading + ' • ' : ''}Surah ${ref.surah_id}:${ref.ayat_number} (Para ${ref.para_id})`,
+          action: () => {
+            if (window.switchAppTab) window.switchAppTab("thematic");
+            if (window.CorpusEngine) {
+              window.CorpusEngine.thematicMode = "sirat";
+              const sBtn = document.getElementById("thematic-mode-sirat");
+              const mBtn = document.getElementById("thematic-mode-matalib");
+              if (sBtn && mBtn) {
+                sBtn.classList.add("active");
+                mBtn.classList.remove("active");
+              }
+              const searchInput = document.getElementById("thematic-search-input");
+              if (searchInput) searchInput.value = t.heading;
+              window.CorpusEngine.renderThematicGraph(t.heading.toLowerCase());
+            }
           }
         });
       });

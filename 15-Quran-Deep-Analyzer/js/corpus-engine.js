@@ -524,6 +524,8 @@ class CorpusEngine {
     if (sTitle) sTitle.textContent = s.name_roman;
     if (sAr) sAr.textContent = s.name_ar;
     if (sMeta) sMeta.textContent = `${s.total_ayat} Ayat • ${isMakki ? 'Makki' : 'Madani'}`;
+    const stickySel = document.getElementById("sticky-surah-select");
+    if (stickySel) stickySel.value = s.surah_id;
 
     const pBadge = document.getElementById("current-para-badge");
     const pTitle = document.getElementById("current-para-title");
@@ -724,26 +726,58 @@ class CorpusEngine {
     return null;
   }
 
-  renderThematicGraph(query = "") {
+  renderThematicGraph(query = null) {
     const container = document.getElementById("thematic-topics-container");
     if (!container) return;
 
-    let topics = this.thematicGraph;
-    if (query) {
-      topics = topics.filter(t => t.heading.toLowerCase().includes(query));
+    if (query !== null) {
+      this.thematicSearchQuery = query.toLowerCase();
+    }
+    const q = this.thematicSearchQuery || "";
+
+    const isMatalib = this.thematicMode !== "sirat";
+    let rawTopics = isMatalib ? (this.thematicGraph || []) : (this.exegeticalTopics || []);
+
+    const badge = document.getElementById("thematic-stats-badge");
+    if (badge) {
+      if (isMatalib) {
+        badge.textContent = `484 Canonical Topics • 1,311 Ayah Cross-References`;
+      } else {
+        badge.textContent = `${rawTopics.length.toLocaleString()} Detailed Exegetical Topics • Sirat-ul-Jinan Index`;
+      }
     }
 
+    let topics = rawTopics;
+    if (q) {
+      topics = topics.filter(t => {
+        const h = (t.heading || "").toLowerCase();
+        const r = (t.roman_heading || "").toLowerCase();
+        const s = (t.surah_name || "").toLowerCase();
+        return h.includes(q) || r.includes(q) || s.includes(q);
+      });
+    }
+
+    const currentLimit = this.thematicLimit || 80;
+    const visibleTopics = topics.slice(0, currentLimit);
+
     let html = "";
-    if (topics.length === 0) {
-      html = `<div style="text-align: center; padding: 40px; color: var(--text-dim);">No topics found matching "${query}".</div>`;
+    if (visibleTopics.length === 0) {
+      html = `<div style="text-align: center; padding: 40px; color: var(--text-dim);">No topics found matching "${q}".</div>`;
     } else {
-      topics.slice(0, 80).forEach((t, idx) => {
-        const topicId = t.matalib_id || (idx + 1);
+      visibleTopics.forEach((t, idx) => {
+        const topicId = t.topic_id || (idx + 1);
+        const refCount = t.references_count || (t.references ? t.references.length : 1);
         html += `
           <div class="thematic-topic-card" id="thematic-topic-${topicId}">
             <div class="thematic-card-header" dir="rtl">
-              <h4 class="thematic-heading-urdu" dir="rtl">${t.heading}</h4>
-              <span class="count-pill">${t.references_count} Ayat</span>
+              <div class="thematic-heading-wrap" style="display: flex; align-items: flex-start; gap: 10px; flex: 1;">
+                <span class="thematic-seq-badge">#${idx + 1}</span>
+                <div style="display: flex; flex-direction: column; gap: 3px; text-align: right; width: 100%;">
+                  <h4 class="thematic-heading-urdu" dir="rtl">${t.heading}</h4>
+                  ${t.roman_heading ? `<span class="thematic-sub-roman" dir="ltr">${t.roman_heading}</span>` : ''}
+                </div>
+              </div>
+              <span class="count-pill">${refCount} ${refCount === 1 ? 'Ayah' : 'Ayat'}</span>
             </div>
             <div class="thematic-citations-row">
               ${(t.references || []).map(r => {
@@ -758,9 +792,28 @@ class CorpusEngine {
           </div>
         `;
       });
+
+      if (topics.length > currentLimit) {
+        html += `
+          <div class="thematic-load-more-wrap" style="text-align: center; padding: 24px 0;">
+            <button id="btn-load-more-thematic" class="filter-btn" style="padding: 10px 24px; font-size: 0.95rem; font-weight: 700; background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.4); color: #34d399;">
+              Load More Topics (${visibleTopics.length} of ${topics.length}) ▾
+            </button>
+          </div>
+        `;
+      }
     }
 
     container.innerHTML = html;
+
+    const loadMoreBtn = document.getElementById("btn-load-more-thematic");
+    if (loadMoreBtn) {
+      loadMoreBtn.addEventListener("click", () => {
+        if (window.AudioSFX) window.AudioSFX.playClick();
+        this.thematicLimit += 80;
+        this.renderThematicGraph();
+      });
+    }
 
     container.querySelectorAll(".thematic-citation-pill").forEach(pill => {
       pill.addEventListener("click", async (e) => {
@@ -804,6 +857,8 @@ class CorpusEngine {
           const s = data.surah;
           const a = data.ayah;
           const ar = a.arabic || a.arabicText || a.text || '';
+          const ur = a.translation_urdu_kanzul_iman || a.translation_ur_ki || a.translation_ur || '';
+          const en = a.translation_english || a.translation_en || '';
           drawer.innerHTML = `
             <div class="thematic-preview-header">
               <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
@@ -816,6 +871,18 @@ class CorpusEngine {
               </button>
             </div>
             ${ar ? `<div class="thematic-preview-arabic" dir="rtl">${ar}</div>` : ''}
+            ${ur ? `
+              <div class="thematic-preview-trans ur" dir="rtl">
+                <span class="compact-trans-tag ur-ki">کنز الایمان</span>
+                <span class="thematic-trans-text">${ur}</span>
+              </div>
+            ` : ''}
+            ${en ? `
+              <div class="thematic-preview-trans en" dir="ltr">
+                <span class="compact-trans-tag en">EN</span>
+                <span class="thematic-trans-text">${en}</span>
+              </div>
+            ` : ''}
           `;
         }
 
@@ -832,6 +899,22 @@ class CorpusEngine {
               });
             }
             this.jumpToAyah(sId, aNo);
+          });
+        }
+
+        const paraJumpBtn = drawer.querySelector(".jump-to-para-btn");
+        if (paraJumpBtn) {
+          paraJumpBtn.addEventListener("click", () => {
+            if (window.AudioSFX) window.AudioSFX.playTab();
+            if (window.NavigationHistory) {
+              window.NavigationHistory.pushReturnContext({
+                originTab: "thematic",
+                originScrollY: window.scrollY,
+                modalOpen: false,
+                label: `Thematic Graph (Para ${paraObj.para})`
+              });
+            }
+            this.jumpToPara(paraObj.para);
           });
         }
       });
@@ -1037,7 +1120,7 @@ class CorpusEngine {
     // Show/hide on scroll
     window.addEventListener("scroll", () => {
       const tabAyahs = document.getElementById("tab-ayahs");
-      if (tabAyahs && tabAyahs.classList.contains("active") && window.scrollY > 300) {
+      if (tabAyahs && tabAyahs.classList.contains("active") && window.scrollY > 450) {
         stickyCtrl.classList.add("visible");
       } else {
         stickyCtrl.classList.remove("visible");
