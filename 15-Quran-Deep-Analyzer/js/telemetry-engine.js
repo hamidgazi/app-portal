@@ -602,15 +602,7 @@ class TelemetryEngine {
               badgeEl.innerHTML = `${paraBadge}Surah ${s.name_roman} (${sId}:${aNo})`;
             }
             const ar = a.arabic || a.arabicText || a.text || '';
-            const ur = a.translation_urdu_kanzul_iman || a.translation_ur_ki || a.translation_ur || '';
-            const en = a.translation_english || a.translation_en || '';
-            contentEl.innerHTML = `
-              ${ar ? `<div class="occ-ayah-arabic" dir="rtl">${ar}</div>` : ''}
-              <div class="occ-translations">
-                ${ur ? `<div class="occ-trans-ur" dir="rtl"><span class="compact-trans-tag ur-ki">کنز الایمان</span> ${ur}</div>` : ''}
-                ${en ? `<div class="occ-trans-en"><strong>EN:</strong> ${en}</div>` : ''}
-              </div>
-            `;
+            contentEl.innerHTML = ar ? `<div class="occ-ayah-arabic" dir="rtl">${ar}</div>` : '';
             return;
           }
         } catch (e) {
