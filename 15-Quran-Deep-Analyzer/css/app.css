@@ -640,15 +640,16 @@ table.analytics-table tbody tr:hover {
 
 .word-arabic-cell {
   font-family: var(--font-arabic);
-  font-size: 2.6rem;
-  line-height: 1.6;
+  font-size: 2.8rem;
+  line-height: 1.5;
   color: #f8fafc;
   direction: rtl;
   text-align: right;
   font-weight: 600;
-  text-shadow: 0 0 16px rgba(56, 189, 248, 0.3);
+  text-shadow: 0 0 16px rgba(56, 189, 248, 0.35);
   white-space: nowrap;
   padding: 14px 20px;
+  text-rendering: optimizeLegibility;
 }
 
 .word-meaning-cell {
@@ -699,14 +700,15 @@ table.analytics-table tbody tr:hover {
 
 .root-display-cell {
   font-family: var(--font-arabic);
-  font-size: 2.2rem;
+  font-size: 2.5rem;
   line-height: 1.5;
   letter-spacing: 4px;
   color: #34d399;
   direction: rtl;
   font-weight: 600;
-  text-shadow: 0 0 16px rgba(16, 185, 129, 0.3);
+  text-shadow: 0 0 16px rgba(16, 185, 129, 0.35);
   padding: 14px 20px;
+  text-rendering: optimizeLegibility;
 }
 
 .count-pill {
@@ -981,9 +983,9 @@ table.analytics-table tbody tr:hover {
 .ayah-card {
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  padding: 24px;
-  margin-bottom: 20px;
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  margin-bottom: 8px;
   box-shadow: var(--shadow-card);
   transition: border-color 0.2s ease;
 }
@@ -996,8 +998,8 @@ table.analytics-table tbody tr:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
-  gap: 12px;
+  margin-bottom: 6px;
+  gap: 8px;
 }
 
 .ayah-badge {
@@ -1074,13 +1076,14 @@ table.analytics-table tbody tr:hover {
 
 .ayah-arabic-text {
   font-family: var(--font-arabic);
-  font-size: calc(2.45rem * var(--ayah-font-scale));
-  line-height: 2.4;
+  font-size: calc(1.85rem * var(--ayah-font-scale));
+  line-height: 1.65;
   color: #f8fafc;
   direction: rtl;
   text-align: right;
-  margin-bottom: 20px;
-  word-spacing: 5px;
+  margin-bottom: 8px;
+  word-spacing: 3px;
+  text-rendering: optimizeLegibility;
 }
 
 .ayah-words-pills-container {
@@ -1164,8 +1167,8 @@ table.analytics-table tbody tr:hover {
 
 .trans-text.urdu {
   font-family: var(--font-urdu);
-  font-size: calc(1.95rem * var(--ayah-font-scale));
-  line-height: 2.4;
+  font-size: calc(1.3rem * var(--ayah-font-scale));
+  line-height: 1.65;
   color: #f8fafc;
   direction: rtl;
   text-align: right;
@@ -1175,8 +1178,8 @@ table.analytics-table tbody tr:hover {
 }
 
 .trans-text.english {
-  font-size: 0.98rem;
-  line-height: 1.6;
+  font-size: calc(0.92rem * var(--ayah-font-scale));
+  line-height: 1.5;
   color: #cbd5e1;
   direction: ltr;
   text-align: left;
@@ -1325,14 +1328,14 @@ table.analytics-table tbody tr:hover {
 /* Compact Reading Mode for Ayah Cards */
 .compact-mode .ayah-card,
 .ayah-card.compact-card {
-  padding: 14px 18px;
-  margin-bottom: 12px;
+  padding: 10px 16px;
+  margin-bottom: 8px;
   border-radius: var(--radius-sm);
   background: rgba(12, 16, 26, 0.85);
 }
 
 .compact-mode .ayah-card-meta {
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .ayah-meta-left {
@@ -1387,15 +1390,15 @@ table.analytics-table tbody tr:hover {
 
 .compact-mode .ayah-arabic-text {
   font-family: var(--font-arabic);
-  font-size: calc(2.45rem * var(--ayah-font-scale));
-  line-height: 2.3;
-  margin-bottom: 18px;
+  font-size: calc(1.85rem * var(--ayah-font-scale));
+  line-height: 1.65;
+  margin-bottom: 8px;
   color: #f8fafc;
 }
 
 .compact-mode .translations-block {
-  padding-top: 10px;
-  gap: 8px;
+  padding-top: 4px;
+  gap: 4px;
 }
 
 .compact-mode .translation-item {
@@ -3082,44 +3085,189 @@ footer.app-footer {
   flex-shrink: 0;
 }
 
-/* Ayah Card Compact Density */
+/* High-Density Compact Reading View (Fits 4-6 Ayat on Screen) */
 .compact-mode .ayah-card,
 .ayah-card.compact-card {
-  padding: 16px 20px;
-  margin-bottom: 16px;
-  border-radius: var(--radius-md);
+  padding: 10px 16px;
+  margin-bottom: 8px;
+  border-radius: var(--radius-sm);
   background: rgba(12, 16, 26, 0.85);
 }
 
 .compact-mode .ayah-arabic-text,
 .ayah-card.compact-card .ayah-arabic-text {
-  font-size: calc(2.45rem * var(--ayah-font-scale));
-  line-height: 2.3;
-  margin-bottom: 18px;
+  font-size: calc(1.85rem * var(--ayah-font-scale));
+  line-height: 1.65;
+  margin-bottom: 8px;
   color: #f8fafc;
 }
 
 .compact-mode .translations-block,
 .ayah-card.compact-card .translations-block {
-  gap: 8px;
-  padding-top: 12px;
+  gap: 4px;
+  padding-top: 4px;
 }
 
 .compact-mode .translation-item,
 .ayah-card.compact-card .translation-item {
-  padding: 6px 10px;
+  padding: 4px 8px;
 }
 
 .compact-mode .trans-text.urdu,
 .ayah-card.compact-card .trans-text.urdu {
   font-family: var(--font-urdu);
-  font-size: calc(1.95rem * var(--ayah-font-scale));
-  line-height: 2.3;
+  font-size: calc(1.3rem * var(--ayah-font-scale));
+  line-height: 1.65;
   color: #f8fafc;
   direction: rtl;
   text-align: right;
   letter-spacing: 0;
   font-weight: 500;
+}
+
+/* Deep View Mode (When User Explicitly Toggles Deep Analysis) */
+.deep-mode .ayah-card,
+.ayah-card.deep-card {
+  padding: 16px 20px;
+  margin-bottom: 14px;
+  border-radius: var(--radius-md);
+  background: rgba(12, 16, 26, 0.9);
+}
+
+.deep-mode .ayah-arabic-text,
+.ayah-card.deep-card .ayah-arabic-text {
+  font-size: calc(2.15rem * var(--ayah-font-scale));
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+
+.deep-mode .trans-text.urdu,
+.ayah-card.deep-card .trans-text.urdu {
+  font-size: calc(1.5rem * var(--ayah-font-scale));
+  line-height: 1.8;
+}
+
+/* Sticky Quick-Nav Controller Modernization */
+.sticky-ayah-controller {
+  position: fixed;
+  top: 76px;
+  left: 50%;
+  transform: translate(-50%, -20px);
+  z-index: 999;
+  width: calc(100% - 32px);
+  max-width: 900px;
+  background: rgba(10, 14, 24, 0.96);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: var(--radius-full);
+  padding: 6px 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(212, 175, 55, 0.18);
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
+}
+
+.sticky-ayah-controller.visible {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+.sticky-select {
+  padding: 6px 14px;
+  min-height: 34px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: var(--radius-full);
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.sticky-select:hover,
+.sticky-select:focus {
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.3);
+}
+
+.sticky-select option {
+  background: #090e18;
+  color: #f1f5f9;
+  padding: 8px 12px;
+}
+
+/* Thematic Knowledge Graph Enhancements */
+.thematic-seq-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #fbbf24;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.5px;
+  min-width: 42px;
+  flex-shrink: 0;
+}
+
+.thematic-sub-roman {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+.thematic-preview-trans {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: var(--radius-sm);
+  margin-top: 6px;
+}
+
+.thematic-preview-trans.ur {
+  font-family: var(--font-urdu);
+  font-size: 1.25rem;
+  line-height: 1.7;
+  color: #f1f5f9;
+}
+
+.thematic-preview-trans.en {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: #cbd5e1;
+}
+
+.thematic-trans-text {
+  flex: 1;
+}
+
+.thematic-mode-btn.active {
+  background: rgba(16, 185, 129, 0.25);
+  border-color: #10b981;
+  color: #34d399;
+  font-weight: 700;
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.3);
+}
+
+/* Occurrences Modal Ayah Boost */
+.occ-ayah-arabic {
+  font-size: 2.1rem;
+  line-height: 1.8;
+  padding: 12px 18px;
 }
 
 /* Mobile Touch Ergonomics */
@@ -3133,15 +3281,15 @@ footer.app-footer {
   .ayah-arabic-text,
   .compact-mode .ayah-arabic-text,
   .ayah-card.compact-card .ayah-arabic-text {
-    font-size: calc(2.15rem * var(--ayah-font-scale));
-    line-height: 2.3;
-    margin-bottom: 14px;
+    font-size: calc(1.65rem * var(--ayah-font-scale));
+    line-height: 1.65;
+    margin-bottom: 6px;
   }
   .trans-text.urdu,
   .compact-mode .trans-text.urdu,
   .ayah-card.compact-card .trans-text.urdu {
-    font-size: calc(1.75rem * var(--ayah-font-scale));
-    line-height: 2.3;
+    font-size: calc(1.2rem * var(--ayah-font-scale));
+    line-height: 1.65;
   }
   .surah-grid {
     grid-template-columns: 1fr;

@@ -294,15 +294,26 @@
       </div>
     </section>
 
-    <!-- Tab 4: Thematic Knowledge Graph (Matalib al-Quran) -->
+    <!-- Tab 4: Thematic Knowledge Graph (Matalib al-Quran & Sirat-ul-Jinan) -->
     <section id="tab-thematic" class="tab-panel">
-      <div class="control-bar">
-        <div class="search-box-wrapper">
-          <span class="search-icon">🔍</span>
-          <input type="text" id="thematic-search-input" class="search-input" placeholder="Search 484 Quranic topics in Urdu or English...">
+      <div class="control-bar" style="flex-direction: column; align-items: stretch; gap: 12px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+          <div class="thematic-mode-switcher" style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button id="thematic-mode-matalib" class="filter-btn thematic-mode-btn active" data-mode="matalib">
+              📚 Matalib al-Quran (484 Canonical Themes)
+            </button>
+            <button id="thematic-mode-sirat" class="filter-btn thematic-mode-btn" data-mode="sirat">
+              📖 Sirat-ul-Jinan Exegetical Index (3,513 Topics)
+            </button>
+          </div>
+          <div id="thematic-stats-badge" style="font-size: 0.85rem; color: var(--accent-gold); font-weight: 600;">
+            484 Canonical Topics • 1,311 Ayah Cross-References
+          </div>
         </div>
-        <div style="font-size: 0.85rem; color: var(--text-dim);">
-          484 Categorized Topics • 1,311 Canonical Ayah Cross-References
+
+        <div class="search-box-wrapper" style="width: 100%;">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="thematic-search-input" class="search-input" placeholder="Search topics across Urdu, Arabic, or English (e.g. Namaz, Hajj, Taqwa)...">
         </div>
       </div>
 
@@ -505,6 +516,7 @@
 
   <!-- Application Scripts (Zero-CORS Offline Data Bundle) -->
   <script src="data/quran_core_data.js"></script>
+  <script src="data/quran_exegetical_topics_bundle.js"></script>
   <script src="data/quran_advanced_analytics_bundle.js"></script>
   <script src="js/audio-sfx.js"></script>
   <script src="js/telemetry-engine.js"></script>

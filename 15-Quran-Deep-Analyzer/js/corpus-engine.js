@@ -7,6 +7,7 @@ class CorpusEngine {
   constructor() {
     this.surahsTelemetry = [];
     this.thematicGraph = [];
+    this.exegeticalTopics = [];
     this.mutashabihat = [];
     this.waqfRules = [];
     this.paras = [];
@@ -20,6 +21,9 @@ class CorpusEngine {
     this.showKanzulIman = true;
     this.showKanzulIrfan = false;
     this.showWordPills = false;
+    this.thematicMode = "matalib"; // "matalib" | "sirat"
+    this.thematicLimit = 80;
+    this.thematicSearchQuery = "";
   }
 
   async init() {
@@ -29,15 +33,17 @@ class CorpusEngine {
       if (window.QURAN_CORE_DATA) {
         this.surahsTelemetry = window.QURAN_CORE_DATA.surahsTelemetry || [];
         this.thematicGraph = window.QURAN_CORE_DATA.thematicGraph || [];
+        this.exegeticalTopics = window.QURAN_EXEGETICAL_TOPICS || window.QURAN_CORE_DATA.exegeticalTopics || [];
         this.mutashabihat = window.QURAN_CORE_DATA.mutashabihat || [];
         this.waqfRules = window.QURAN_CORE_DATA.waqfRules || [];
         this.paras = window.QURAN_PARAS || window.QURAN_CORE_DATA.paras || [];
         console.log("[CorpusEngine] Loaded from window.QURAN_CORE_DATA (Zero-CORS)");
       } else {
         console.log("[CorpusEngine] Fetching metadata via HTTP...");
-        const [sRes, tRes, mRes, wRes, pRes] = await Promise.all([
+        const [sRes, tRes, eRes, mRes, wRes, pRes] = await Promise.all([
           fetch('data/quran_surah_telemetry.json').then(r => r.json()).catch(() => []),
           fetch('data/quran_thematic_graph.json').then(r => r.json()).catch(() => []),
+          fetch('data/quran_exegetical_topics.json').then(r => r.json()).catch(() => []),
           fetch('data/quran_mutashabihat.json').then(r => r.json()).catch(() => []),
           fetch('data/quran_waqf_rules.json').then(r => r.json()).catch(() => []),
           fetch('data/quran_paras.json').then(r => r.json()).catch(() => [])
@@ -45,9 +51,21 @@ class CorpusEngine {
 
         this.surahsTelemetry = sRes;
         this.thematicGraph = tRes;
+        this.exegeticalTopics = (window.QURAN_EXEGETICAL_TOPICS && window.QURAN_EXEGETICAL_TOPICS.length) ? window.QURAN_EXEGETICAL_TOPICS : eRes;
         this.mutashabihat = mRes;
         this.waqfRules = wRes;
         this.paras = (window.QURAN_PARAS && window.QURAN_PARAS.length) ? window.QURAN_PARAS : pRes;
+      }
+
+      if (!this.exegeticalTopics || this.exegeticalTopics.length === 0) {
+        if (window.QURAN_EXEGETICAL_TOPICS && window.QURAN_EXEGETICAL_TOPICS.length) {
+          this.exegeticalTopics = window.QURAN_EXEGETICAL_TOPICS;
+        } else {
+          fetch('data/quran_exegetical_topics.json')
+            .then(r => r.json())
+            .then(data => { this.exegeticalTopics = data; })
+            .catch(() => []);
+        }
       }
 
       this.renderSurahNavigator();
@@ -103,7 +121,30 @@ class CorpusEngine {
     const thematicSearch = document.getElementById("thematic-search-input");
     if (thematicSearch) {
       thematicSearch.addEventListener("input", (e) => {
-        this.renderThematicGraph(e.target.value.trim().toLowerCase());
+        this.thematicSearchQuery = e.target.value.trim().toLowerCase();
+        this.thematicLimit = 80;
+        this.renderThematicGraph();
+      });
+    }
+
+    const matalibBtn = document.getElementById("thematic-mode-matalib");
+    const siratBtn = document.getElementById("thematic-mode-sirat");
+    if (matalibBtn && siratBtn) {
+      matalibBtn.addEventListener("click", () => {
+        if (window.AudioSFX) window.AudioSFX.playClick();
+        this.thematicMode = "matalib";
+        matalibBtn.classList.add("active");
+        siratBtn.classList.remove("active");
+        this.thematicLimit = 80;
+        this.renderThematicGraph();
+      });
+      siratBtn.addEventListener("click", () => {
+        if (window.AudioSFX) window.AudioSFX.playClick();
+        this.thematicMode = "sirat";
+        siratBtn.classList.add("active");
+        matalibBtn.classList.remove("active");
+        this.thematicLimit = 80;
+        this.renderThematicGraph();
       });
     }
 
