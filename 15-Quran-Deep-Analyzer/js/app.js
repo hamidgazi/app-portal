@@ -234,7 +234,63 @@ const OmnisearchEngine = {
       }
     }
 
-    // 2. Surahs
+    // 2. Direct Para / Juz Pattern
+    const paraMatch = rawQuery.match(/^(?:para|juz|p|پارہ)\s*(\d{1,2})$/i);
+    if (paraMatch) {
+      const pNum = parseInt(paraMatch[1], 10);
+      if (pNum >= 1 && pNum <= 30) {
+        const pList = window.QURAN_PARAS || (window.CorpusEngine && window.CorpusEngine.paras) || [];
+        const pObj = pList.find(p => p.para === pNum);
+        if (pObj) {
+          const startSurah = (window.CorpusEngine && window.CorpusEngine.surahsTelemetry)
+            ? window.CorpusEngine.surahsTelemetry.find(s => s.id === pObj.start_surah) : null;
+          const sName = startSurah ? startSurah.name_roman : `Surah ${pObj.start_surah}`;
+          this.results.push({
+            category: `Para #${pObj.para}`,
+            categoryClass: "para",
+            title: `Jump to Para ${pObj.para}: ${pObj.name_roman} (${pObj.name_ar})`,
+            subtitle: `Starts at Surah ${sName} ${pObj.start_surah}:${pObj.start_ayah} • Spans ${pObj.surahs ? pObj.surahs.length : ''} Surahs`,
+            action: () => {
+              if (window.CorpusEngine) window.CorpusEngine.jumpToPara(pObj.para);
+            }
+          });
+        }
+      }
+    }
+
+    // 3. Paras (Juz 1-30) Query Matching
+    if ((this.activeCategory === "all" || this.activeCategory === "paras") && (window.QURAN_PARAS || (window.CorpusEngine && window.CorpusEngine.paras))) {
+      const pList = window.QURAN_PARAS || (window.CorpusEngine && window.CorpusEngine.paras) || [];
+      const matchedParas = pList.filter(p => {
+        if (!q) return this.activeCategory === "paras";
+        const nameNorm = (p.name_roman || "").toLowerCase().replace(/-/g, " ");
+        const qNorm = q.replace(/-/g, " ");
+        return nameNorm.includes(qNorm) ||
+               (p.name_ar && p.name_ar.includes(rawQuery)) ||
+               String(p.para) === q ||
+               q.startsWith("para") ||
+               q.startsWith("juz") ||
+               rawQuery.includes("پارہ");
+      }).slice(0, (this.activeCategory === "paras" ? 30 : 4));
+
+      matchedParas.forEach(p => {
+        if (this.results.some(r => r.title && r.title.includes(`Para ${p.para}:`))) return;
+        const startSurah = (window.CorpusEngine && window.CorpusEngine.surahsTelemetry)
+          ? window.CorpusEngine.surahsTelemetry.find(s => s.id === p.start_surah) : null;
+        const sName = startSurah ? startSurah.name_roman : `Surah ${p.start_surah}`;
+        this.results.push({
+          category: `Para #${p.para}`,
+          categoryClass: "para",
+          title: `Para ${p.para}: ${p.name_roman} (${p.name_ar})`,
+          subtitle: `Starts at Surah ${sName} ${p.start_surah}:${p.start_ayah} • Spans ${p.surahs ? p.surahs.length : ''} Surahs`,
+          action: () => {
+            if (window.CorpusEngine) window.CorpusEngine.jumpToPara(p.para);
+          }
+        });
+      });
+    }
+
+    // 4. Surahs
     if ((this.activeCategory === "all" || this.activeCategory === "surahs") && window.CorpusEngine && window.CorpusEngine.surahsTelemetry) {
       const matchedSurahs = window.CorpusEngine.surahsTelemetry.filter(s => {
         if (!q) return true;

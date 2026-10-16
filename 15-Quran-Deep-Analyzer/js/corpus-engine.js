@@ -9,6 +9,7 @@ class CorpusEngine {
     this.thematicGraph = [];
     this.mutashabihat = [];
     this.waqfRules = [];
+    this.paras = [];
 
     this.activeSurahId = 1;
     this.currentSurahData = null;
@@ -30,34 +31,39 @@ class CorpusEngine {
         this.thematicGraph = window.QURAN_CORE_DATA.thematicGraph || [];
         this.mutashabihat = window.QURAN_CORE_DATA.mutashabihat || [];
         this.waqfRules = window.QURAN_CORE_DATA.waqfRules || [];
+        this.paras = window.QURAN_PARAS || window.QURAN_CORE_DATA.paras || [];
         console.log("[CorpusEngine] Loaded from window.QURAN_CORE_DATA (Zero-CORS)");
       } else {
         console.log("[CorpusEngine] Fetching metadata via HTTP...");
-        const [sRes, tRes, mRes, wRes] = await Promise.all([
+        const [sRes, tRes, mRes, wRes, pRes] = await Promise.all([
           fetch('data/quran_surah_telemetry.json').then(r => r.json()).catch(() => []),
           fetch('data/quran_thematic_graph.json').then(r => r.json()).catch(() => []),
           fetch('data/quran_mutashabihat.json').then(r => r.json()).catch(() => []),
-          fetch('data/quran_waqf_rules.json').then(r => r.json()).catch(() => [])
+          fetch('data/quran_waqf_rules.json').then(r => r.json()).catch(() => []),
+          fetch('data/quran_paras.json').then(r => r.json()).catch(() => [])
         ]);
 
         this.surahsTelemetry = sRes;
         this.thematicGraph = tRes;
         this.mutashabihat = mRes;
         this.waqfRules = wRes;
+        this.paras = (window.QURAN_PARAS && window.QURAN_PARAS.length) ? window.QURAN_PARAS : pRes;
       }
 
       this.renderSurahNavigator();
       this.populateSurahDropdown();
+      this.populateParaDropdown();
       this.renderThematicGraph();
       this.renderMutashabihat();
       this.renderWaqfRules();
       this.setupSurahControls();
+      this.setupParaControls();
       this.setupStickyController();
 
       // Load initial Surah (Al-Fatihah)
       await this.loadSurah(1);
 
-      console.log(`[CorpusEngine] Initialized with ${this.surahsTelemetry.length} Surahs.`);
+      console.log(`[CorpusEngine] Initialized with ${this.surahsTelemetry.length} Surahs and ${this.paras.length} Paras.`);
     } catch (err) {
       console.error("[CorpusEngine] Failed to initialize:", err);
     }
@@ -130,6 +136,26 @@ class CorpusEngine {
     setupToggle("toggle-layer-ki", "showKanzulIman", "chip-layer-ki");
     setupToggle("toggle-layer-kr", "showKanzulIrfan", "chip-layer-kr");
     setupToggle("toggle-layer-words", "showWordPills", "chip-layer-words");
+  }
+
+  setupParaControls() {
+    const select = document.getElementById("active-para-select");
+    if (select) {
+      select.addEventListener("change", (e) => {
+        const pNum = parseInt(e.target.value, 10);
+        if (pNum) this.jumpToPara(pNum);
+      });
+    }
+
+    // Delegated click listener for any .jump-to-para-btn across the DOM
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest(".jump-to-para-btn");
+      if (btn && btn.dataset.para) {
+        e.stopPropagation();
+        const pNum = parseInt(btn.dataset.para, 10);
+        if (pNum) this.jumpToPara(pNum);
+      }
+    });
   }
 
   setAyahViewMode(mode) {
@@ -207,6 +233,44 @@ class CorpusEngine {
       html += `<option value="${s.id}">${s.id}. ${s.name_roman} (${s.name_ar}) - ${s.total_ayat} Ayat</option>`;
     });
     select.innerHTML = html;
+  }
+
+  populateParaDropdown() {
+    const select = document.getElementById("active-para-select");
+    if (!select) return;
+    const list = (this.paras && this.paras.length) ? this.paras : (window.QURAN_PARAS || []);
+    let html = "";
+    list.forEach(p => {
+      html += `<option value="${p.para}">Para ${p.para}: ${p.name_roman} (${p.name_ar}) - Starts ${p.start_surah}:${p.start_ayah}</option>`;
+    });
+    select.innerHTML = html;
+  }
+
+  getParaForAyah(surahId, ayahNumber) {
+    const list = (this.paras && this.paras.length) ? this.paras : (window.QURAN_PARAS || []);
+    for (let i = 0; i < list.length; i++) {
+      const p = list[i];
+      if (surahId < p.start_surah || surahId > p.end_surah) continue;
+      if (surahId === p.start_surah && ayahNumber < p.start_ayah) continue;
+      if (surahId === p.end_surah && ayahNumber > p.end_ayah) continue;
+      return p;
+    }
+    return { para: 1, name_ar: "الم", name_roman: "Alif Lam Meem", start_surah: 1, start_ayah: 1 };
+  }
+
+  getParasForSurah(surahId) {
+    const list = (this.paras && this.paras.length) ? this.paras : (window.QURAN_PARAS || []);
+    return list.filter(p => p.surahs && p.surahs.includes(surahId));
+  }
+
+  jumpToPara(paraNumber) {
+    const list = (this.paras && this.paras.length) ? this.paras : (window.QURAN_PARAS || []);
+    const p = list.find(item => item.para === paraNumber);
+    if (!p) return;
+    if (window.AudioSFX) window.AudioSFX.playTab();
+    const paraSelect = document.getElementById("active-para-select");
+    if (paraSelect) paraSelect.value = p.para;
+    this.jumpToAyah(p.start_surah, p.start_ayah);
   }
 
   renderSurahNavigator() {
@@ -395,12 +459,25 @@ class CorpusEngine {
     const s = this.currentSurahData;
     const isMakki = (s.place || "").toLowerCase().includes("makki") || /مک|مك/.test(s.place || "");
 
+    const surahParas = this.getParasForSurah(s.surah_id);
+    let paraSpanText = "";
+    if (surahParas.length === 1) {
+      paraSpanText = `Para ${surahParas[0].para} (${surahParas[0].name_roman} • ${surahParas[0].name_ar})`;
+    } else if (surahParas.length > 1) {
+      paraSpanText = `Paras ${surahParas[0].para}–${surahParas[surahParas.length - 1].para}`;
+    }
+
+    const paraSelect = document.getElementById("active-para-select");
+    if (paraSelect && surahParas.length > 0) {
+      paraSelect.value = surahParas[0].para;
+    }
+
     if (headerContainer) {
       headerContainer.innerHTML = `
         <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; flex-wrap: wrap; gap: 12px;">
           <div>
             <h2 style="font-size: 1.35rem; color: var(--text-main);">${s.surah_id}. Surah ${s.name_roman}</h2>
-            <p style="font-size: 0.85rem; color: var(--text-dim);">${isMakki ? 'Makki (مکی)' : 'Madani (مدنی)'} • Revelation Order: #${s.revelation_order} • ${s.total_ayat} Ayat • ${s.total_ruku} Ruku</p>
+            <p style="font-size: 0.85rem; color: var(--text-dim);">${isMakki ? 'Makki (مکی)' : 'Madani (مدنی)'} • Revelation Order: #${s.revelation_order} • ${s.total_ayat} Ayat • ${s.total_ruku} Ruku${paraSpanText ? ' • <span style="color: #fbbf24; font-weight: 600;">' + paraSpanText + '</span>' : ''}</p>
           </div>
           <div style="font-family: var(--font-arabic); font-size: 2.2rem; color: #38bdf8;">${s.name_ar}</div>
         </div>
@@ -410,11 +487,13 @@ class CorpusEngine {
 
     let html = "";
     (s.ayat || []).forEach(a => {
+      const p = this.getParaForAyah(s.surah_id, a.number);
       html += `
         <div class="ayah-card ${this.ayahViewMode === 'compact' ? 'compact-card' : ''}" id="ayah-node-${a.number}">
           <div class="ayah-card-meta">
             <div class="ayah-meta-left">
               <span class="ayah-badge">Ayah ${s.surah_id}:${a.number}</span>
+              <span class="para-badge jump-to-para-btn" data-para="${p.para}" title="Para ${p.para}: ${p.name_ar} (${p.name_roman}) • Click to jump to start of Para">Para ${p.para}</span>
               <span class="ayah-stat-chip">${a.word_count} Words</span>
             </div>
             <div class="ayah-meta-actions">
@@ -602,11 +681,13 @@ class CorpusEngine {
               <span class="count-pill">${t.references_count} Ayat</span>
             </div>
             <div class="thematic-citations-row">
-              ${(t.references || []).map(r => `
+              ${(t.references || []).map(r => {
+                const p = this.getParaForAyah(r.surah_id, r.ayat_number);
+                return `
                 <button class="thematic-citation-pill" data-surah="${r.surah_id}" data-ayah="${r.ayat_number}" data-topic="${topicId}">
-                  Surah ${r.surah_id}:${r.ayat_number}
+                  <span class="pill-pnum">P.${p.para}</span> Surah ${r.surah_id}:${r.ayat_number}
                 </button>
-              `).join("")}
+              `;}).join("")}
             </div>
             <div id="topic-preview-${topicId}" class="thematic-preview-drawer" style="display: none;"></div>
           </div>
@@ -645,9 +726,11 @@ class CorpusEngine {
         drawer.innerHTML = `<div style="padding: 12px; color: var(--text-dim); text-align: center;">Loading Ayah ${sId}:${aNo} preview...</div>`;
 
         const data = await this.getAyahData(sId, aNo);
+        const paraObj = this.getParaForAyah(sId, aNo);
         if (!data || !data.ayah) {
           drawer.innerHTML = `
             <div class="thematic-preview-header">
+              <span class="para-badge jump-to-para-btn" data-para="${paraObj.para}" title="Para ${paraObj.para}: ${paraObj.name_ar} • Click to jump">Para ${paraObj.para}</span>
               <span class="preview-badge">Surah ${sId}:${aNo}</span>
               <button class="filter-btn jump-to-ayah-btn" data-surah="${sId}" data-ayah="${aNo}">Read in Ayah Analyzer ↗</button>
             </div>
@@ -658,6 +741,7 @@ class CorpusEngine {
           drawer.innerHTML = `
             <div class="thematic-preview-header">
               <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="para-badge jump-to-para-btn" data-para="${paraObj.para}" title="Para ${paraObj.para}: ${paraObj.name_ar} (${paraObj.name_roman}) • Click to jump">Para ${paraObj.para}</span>
                 <span class="preview-badge">${s.name_roman || 'Surah ' + sId} (${sId}:${aNo})</span>
                 ${s.name_ar ? `<span style="font-family: var(--font-arabic); font-size: 1.1rem; color: var(--accent-gold);">${s.name_ar}</span>` : ''}
               </div>
@@ -729,8 +813,10 @@ class CorpusEngine {
             <div class="refrain-matrix-grid">
               ${occs.map(occ => {
                 const sRoman = occ.surah_name_roman || occ.surah_roman || 'Surah ' + occ.surah_id;
+                const p = this.getParaForAyah(occ.surah_id, occ.ayat_number);
                 return `
-                  <div class="occurrence-chip jump-to-ayah-chip" data-surah="${occ.surah_id}" data-ayah="${occ.ayat_number}" title="Jump to Surah ${sRoman} Ayah ${occ.ayat_number}">
+                  <div class="occurrence-chip jump-to-ayah-chip" data-surah="${occ.surah_id}" data-ayah="${occ.ayat_number}" title="Jump to Surah ${sRoman} Ayah ${occ.ayat_number} (Para ${p.para}: ${p.name_ar})">
+                    <span class="chip-para">P.${p.para}</span>
                     <span class="chip-loc">${occ.surah_id}:${occ.ayat_number}</span>
                     <span class="chip-name">${sRoman}</span>
                     <span class="chip-arrow">↗</span>
@@ -756,10 +842,12 @@ class CorpusEngine {
                 const sRoman = occ.surah_name_roman || occ.surah_roman || 'Surah ' + occ.surah_id;
                 const sAr = occ.surah_name_ar || occ.surah_arabic || '';
                 const urTrans = occ.translation_ur || occ.translation_ur_ki || '';
+                const p = this.getParaForAyah(occ.surah_id, occ.ayat_number);
                 return `
                 <div class="parallel-verse-node">
                   <div class="parallel-node-header">
                     <div class="parallel-location-badge">
+                      <span class="para-badge jump-to-para-btn" data-para="${p.para}" title="Para ${p.para}: ${p.name_ar} (${p.name_roman}) • Click to jump">Para ${p.para}</span>
                       <span class="surah-count-pill">${occ.surah_id}. ${sRoman}</span>
                       <span class="ayah-coord-pill">Ayah ${occ.ayat_number}</span>
                       ${sAr ? `<span class="arabic-mini-name">${sAr}</span>` : ''}

@@ -407,24 +407,8 @@ class AnalyticsStudio {
       <span class="count-pill">${data.count} Mentions</span>
     `;
 
-    let html = "";
-    const occs = data.occurrences || [];
-    if (occs.length === 0) {
-      html = `<p style="text-align: center; color: var(--text-dim); padding: 20px;">No exact verse references mapped.</p>`;
-    } else {
-      occs.forEach(occ => {
-        html += `
-          <div class="occurrence-item">
-            <span class="occ-ref-badge">Surah ${occ[0]} : Ayah ${occ[1]}</span>
-            <button class="filter-btn studio-jump-btn" data-surah="${occ[0]}" data-ayah="${occ[1]}">View in Context</button>
-          </div>
-        `;
-      });
-    }
-
-    modalBody.innerHTML = html;
+    this.renderOccurrenceCards(modalBody, data.occurrences || []);
     modal.classList.add("open");
-    this.bindStudioJumpBtns(modalBody);
   }
 
   openDivineModal(data) {
@@ -439,19 +423,75 @@ class AnalyticsStudio {
       <span class="count-pill">${data.count} Ayat</span>
     `;
 
+    this.renderOccurrenceCards(modalBody, data.occurrences || []);
+    modal.classList.add("open");
+  }
+
+  renderOccurrenceCards(container, occs) {
+    if (!occs || occs.length === 0) {
+      container.innerHTML = `<p style="text-align: center; color: var(--text-dim); padding: 20px;">No exact verse references mapped.</p>`;
+      return;
+    }
+
     let html = "";
-    (data.occurrences || []).forEach(occ => {
+    occs.forEach((occ, idx) => {
+      const sId = occ[0];
+      const aNo = occ[1];
+      const p = (window.CorpusEngine && window.CorpusEngine.getParaForAyah) ? window.CorpusEngine.getParaForAyah(sId, aNo) : null;
+      const pBadge = p ? `<span class="para-badge-inline" title="Para ${p.para}: ${p.name_ar}">Para ${p.para}</span> ` : '';
       html += `
-        <div class="occurrence-item">
-          <span class="occ-ref-badge">Surah ${occ[0]} : Ayah ${occ[1]}</span>
-          <button class="filter-btn studio-jump-btn" data-surah="${occ[0]}" data-ayah="${occ[1]}">View in Context</button>
+        <div class="occurrence-item occ-verse-card" id="studio-occ-card-${idx}">
+          <div class="occ-card-top">
+            <span class="occ-ref-badge" id="studio-occ-badge-${idx}">${pBadge}Surah ${sId} : Ayah ${aNo}</span>
+            <button class="occ-arrow-btn studio-jump-btn" data-surah="${sId}" data-ayah="${aNo}" title="Open Surah ${sId}:${aNo} in Ayah Analyzer" aria-label="Go to Ayah">
+              <span class="jump-arrow">↗</span>
+            </button>
+          </div>
+          <div class="occ-verse-content" id="studio-occ-content-${idx}">
+            <div class="occ-loading-spinner">Loading Ayah ${sId}:${aNo}...</div>
+          </div>
         </div>
       `;
     });
 
-    modalBody.innerHTML = html;
-    modal.classList.add("open");
-    this.bindStudioJumpBtns(modalBody);
+    container.innerHTML = html;
+    this.bindStudioJumpBtns(container);
+
+    // Asynchronously populate Ayah text and translations
+    Promise.all(occs.map(async (occ, idx) => {
+      const sId = occ[0];
+      const aNo = occ[1];
+      const contentEl = document.getElementById(`studio-occ-content-${idx}`);
+      const badgeEl = document.getElementById(`studio-occ-badge-${idx}`);
+      if (!contentEl) return;
+
+      const p = (window.CorpusEngine && window.CorpusEngine.getParaForAyah) ? window.CorpusEngine.getParaForAyah(sId, aNo) : null;
+
+      if (window.CorpusEngine && window.CorpusEngine.getAyahData) {
+        try {
+          const ayahObj = await window.CorpusEngine.getAyahData(sId, aNo);
+          if (ayahObj && ayahObj.ayah) {
+            const a = ayahObj.ayah;
+            const s = ayahObj.surah;
+            if (badgeEl && s && s.name_roman) {
+              const paraBadge = p ? `<span class="para-badge-inline" title="Para ${p.para}: ${p.name_ar} (${p.name_roman})">Para ${p.para}</span> ` : '';
+              badgeEl.innerHTML = `${paraBadge}Surah ${s.name_roman} (${sId}:${aNo})`;
+            }
+            contentEl.innerHTML = `
+              <div class="occ-ayah-arabic" dir="rtl">${a.arabicText || a.text || ''}</div>
+              <div class="occ-translations">
+                ${a.translation_ur_ki ? `<div class="occ-trans-ur" dir="rtl"><span class="compact-trans-tag ur-ki">کنز الایمان</span> ${a.translation_ur_ki}</div>` : ''}
+                ${a.translation_en ? `<div class="occ-trans-en"><strong>EN:</strong> ${a.translation_en}</div>` : ''}
+              </div>
+            `;
+            return;
+          }
+        } catch (e) {
+          console.error("Error loading ayah:", e);
+        }
+      }
+      contentEl.innerHTML = `<div style="color: var(--text-dim); font-size: 0.85rem;">Ayah ${sId}:${aNo}</div>`;
+    }));
   }
 
   bindStudioJumpBtns(container) {

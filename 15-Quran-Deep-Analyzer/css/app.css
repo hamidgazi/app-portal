@@ -929,7 +929,8 @@ table.analytics-table tbody tr:hover {
   flex-wrap: wrap;
 }
 
-.surah-selector-group {
+.surah-selector-group,
+.para-selector-group {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -984,6 +985,66 @@ table.analytics-table tbody tr:hover {
   border-radius: var(--radius-full);
   font-size: 0.82rem;
   font-weight: 700;
+}
+
+.para-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  color: #fbbf24;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition: all 0.15s ease;
+  user-select: none;
+  min-height: 28px;
+  touch-action: manipulation;
+}
+
+.para-badge.jump-to-para-btn {
+  cursor: pointer;
+}
+
+.para-badge.jump-to-para-btn:hover {
+  background: rgba(245, 158, 11, 0.28);
+  border-color: #f59e0b;
+  color: #fef08a;
+  transform: translateY(-1px);
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.3);
+}
+
+.para-badge-inline {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: #fbbf24;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-right: 4px;
+}
+
+.chip-para {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #fbbf24;
+  background: rgba(245, 158, 11, 0.12);
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin-right: 4px;
+}
+
+.pill-pnum {
+  color: #fbbf24;
+  font-weight: 700;
+  font-size: 0.75rem;
+  margin-right: 4px;
 }
 
 .ayah-arabic-text {
@@ -1078,12 +1139,14 @@ table.analytics-table tbody tr:hover {
 
 .trans-text.urdu {
   font-family: var(--font-urdu);
-  font-size: 1.35rem;
-  line-height: 2;
-  color: #e2e8f0;
+  font-size: 1.75rem;
+  line-height: 2.3;
+  color: #f8fafc;
   direction: rtl;
   text-align: right;
   width: 100%;
+  letter-spacing: 0;
+  font-weight: 500;
 }
 
 .trans-text.english {
@@ -1126,11 +1189,12 @@ table.analytics-table tbody tr:hover {
   padding: 18px;
   margin-top: 12px;
   font-family: var(--font-urdu);
-  font-size: 1.25rem;
-  line-height: 2.1;
+  font-size: 1.45rem;
+  line-height: 2.2;
   color: #f1f5f9;
   direction: rtl;
   text-align: right;
+  letter-spacing: 0;
 }
 
 .tafsir-content-drawer.open {
@@ -1360,11 +1424,12 @@ table.analytics-table tbody tr:hover {
   color: #fbbf24;
   border: 1px solid rgba(212, 175, 55, 0.3);
   font-family: var(--font-urdu);
-  font-size: 0.92rem;
-  line-height: 1.2;
-  padding: 2px 8px;
+  font-size: 1.05rem;
+  line-height: 1.3;
+  padding: 3px 9px;
   letter-spacing: 0;
   text-transform: none;
+  border-radius: var(--radius-sm);
 }
 
 .compact-trans-tag.ur-kr {
@@ -1372,16 +1437,17 @@ table.analytics-table tbody tr:hover {
   color: #34d399;
   border: 1px solid rgba(16, 185, 129, 0.3);
   font-family: var(--font-urdu);
-  font-size: 0.92rem;
-  line-height: 1.2;
-  padding: 2px 8px;
+  font-size: 1.05rem;
+  line-height: 1.3;
+  padding: 3px 9px;
   letter-spacing: 0;
   text-transform: none;
+  border-radius: var(--radius-sm);
 }
 
 .compact-mode .trans-text.english {
-  font-size: 0.92rem;
-  line-height: 1.5;
+  font-size: 0.95rem;
+  line-height: 1.6;
   color: #cbd5e1;
   direction: ltr;
   text-align: left;
@@ -1389,11 +1455,13 @@ table.analytics-table tbody tr:hover {
 
 .compact-mode .trans-text.urdu {
   font-family: var(--font-urdu);
-  font-size: 1.25rem;
-  line-height: 1.9;
-  color: #e2e8f0;
+  font-size: 1.65rem;
+  line-height: 2.2;
+  color: #f8fafc;
   direction: rtl;
   text-align: right;
+  letter-spacing: 0;
+  font-weight: 500;
 }
 
 .stat-urdu-badge {
@@ -1429,9 +1497,9 @@ table.analytics-table tbody tr:hover {
   background: #0f1522;
   border: 1px solid var(--border-accent);
   border-radius: var(--radius-lg);
-  max-width: 800px;
+  max-width: 880px;
   width: 100%;
-  max-height: 85vh;
+  max-height: 88vh;
   display: flex;
   flex-direction: column;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), var(--shadow-glow);
@@ -1488,25 +1556,128 @@ table.analytics-table tbody tr:hover {
 }
 
 .occurrence-item {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(15, 23, 42, 0.7);
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
-  padding: 14px;
-  margin-bottom: 10px;
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  transition: all 0.2s ease;
+}
+
+.occurrence-item:hover {
+  border-color: rgba(56, 189, 248, 0.4);
+  background: rgba(15, 23, 42, 0.9);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
+}
+
+.occ-card-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 12px;
 }
 
 .occ-ref-badge {
   background: rgba(16, 185, 129, 0.15);
   color: #34d399;
-  padding: 4px 10px;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 4px 12px;
   border-radius: var(--radius-full);
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 700;
   white-space: nowrap;
+}
+
+/* Sleek Small Arrow Jump Action */
+.occ-arrow-btn {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: var(--radius-sm);
+  color: #38bdf8;
+  font-size: 1.15rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0;
+  touch-action: manipulation;
+  position: relative;
+}
+
+.occ-arrow-btn::after {
+  content: "";
+  position: absolute;
+  inset: -6px; /* Expand touch hitbox to >= 48px on mobile */
+}
+
+.occ-arrow-btn:hover {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.3) 0%, rgba(6, 182, 212, 0.3) 100%);
+  border-color: #34d399;
+  color: #ffffff;
+  transform: translateY(-1px) scale(1.05);
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.35);
+}
+
+.occ-verse-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.occ-ayah-arabic {
+  font-family: var(--font-arabic);
+  font-size: 1.55rem;
+  line-height: 2.1;
+  color: #f8fafc;
+  direction: rtl;
+  text-align: right;
+  padding: 10px 14px;
+  background: rgba(0, 0, 0, 0.28);
+  border-radius: var(--radius-sm);
+  border-right: 3px solid var(--accent-emerald);
+}
+
+.occ-translations {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 4px;
+}
+
+.occ-trans-ur {
+  font-family: var(--font-urdu);
+  font-size: 1.45rem;
+  line-height: 2.1;
+  color: #fbbf24;
+  direction: rtl;
+  text-align: right;
+  letter-spacing: 0;
+}
+
+.occ-trans-en {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: #cbd5e1;
+  direction: ltr;
+  text-align: left;
+}
+
+.occ-loading-spinner {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  text-align: center;
+  padding: 8px 0;
+  font-style: italic;
 }
 
 /* Semantic Balance Grid */
@@ -1842,36 +2013,48 @@ footer.app-footer {
   color: var(--text-dim);
 }
 
+.parallel-arabic,
 .parallel-arabic-text {
   font-family: var(--font-arabic);
-  font-size: 1.55rem;
-  line-height: 1.9;
+  font-size: 1.7rem;
+  line-height: 2.1;
   color: #f8fafc;
   direction: rtl;
   text-align: right;
-  padding: 8px 0;
+  padding: 10px 14px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: var(--radius-sm);
+  border-right: 3px solid var(--accent-emerald);
   word-spacing: 2px;
+  margin: 6px 0;
 }
 
+.parallel-translations,
 .parallel-trans {
-  font-size: 0.86rem;
-  line-height: 1.45;
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
   gap: 6px;
+  margin-top: 6px;
 }
 
+.parallel-trans-en,
 .parallel-trans.en {
+  font-size: 0.92rem;
+  line-height: 1.55;
   color: #cbd5e1;
+  direction: ltr;
+  text-align: left;
 }
 
+.parallel-trans-ur,
 .parallel-trans.ur {
   font-family: var(--font-urdu);
-  font-size: 1.15rem;
-  color: #e2e8f0;
-  line-height: 1.7;
+  font-size: 1.55rem;
+  color: #fbbf24;
+  line-height: 2.2;
   direction: rtl;
   text-align: right;
+  letter-spacing: 0;
 }
 
 /* ==========================================================================
@@ -2124,6 +2307,7 @@ footer.app-footer {
 }
 
 .omni-category-badge.surah { background: rgba(56, 189, 248, 0.15); color: #38bdf8; }
+.omni-category-badge.para { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
 .omni-category-badge.verse { background: rgba(16, 185, 129, 0.15); color: #34d399; }
 .omni-category-badge.prophet { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
 .omni-category-badge.theme { background: rgba(192, 132, 252, 0.15); color: #c084fc; }
@@ -2199,18 +2383,23 @@ footer.app-footer {
   gap: 8px;
 }
 
-.refrain-anchor-arabic {
+.refrain-anchor-arabic,
+.cluster-arabic-anchor {
   font-family: var(--font-arabic);
   font-size: 1.85rem;
   color: #38bdf8;
-  line-height: 1.9;
+  line-height: 2;
   text-align: right;
   direction: rtl;
-  margin-bottom: 12px;
-  padding: 8px 14px;
-  background: rgba(6, 182, 212, 0.05);
+  padding: 6px 14px;
+  background: rgba(6, 182, 212, 0.08);
   border-radius: var(--radius-sm);
   border-right: 3px solid #38bdf8;
+}
+
+.refrain-anchor-arabic {
+  margin-bottom: 12px;
+  display: block;
 }
 
 .refrain-anchor-translations {
@@ -2227,16 +2416,17 @@ footer.app-footer {
 .refrain-trans-en {
   font-size: 0.92rem;
   color: #e2e8f0;
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 .refrain-trans-ur {
   font-family: var(--font-urdu);
-  font-size: 1.05rem;
-  color: #f1f5f9;
+  font-size: 1.55rem;
+  color: #fbbf24;
   direction: rtl;
   text-align: right;
-  line-height: 1.7;
+  line-height: 2.2;
+  letter-spacing: 0;
 }
 
 .refrain-matrix-title {

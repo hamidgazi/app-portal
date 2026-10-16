@@ -203,8 +203,14 @@
 
       <div class="ayah-analyzer-header">
         <div class="surah-selector-group">
-          <label for="active-surah-select" style="font-size: 0.9rem; font-weight: 700; color: var(--text-muted);">Select Surah:</label>
+          <label for="active-surah-select" style="font-size: 0.9rem; font-weight: 700; color: var(--text-muted);">Surah:</label>
           <select id="active-surah-select" class="styled-select">
+            <!-- Populated dynamically -->
+          </select>
+        </div>
+        <div class="para-selector-group">
+          <label for="active-para-select" style="font-size: 0.9rem; font-weight: 700; color: var(--text-muted);">Para (Juz):</label>
+          <select id="active-para-select" class="styled-select">
             <!-- Populated dynamically -->
           </select>
         </div>
@@ -373,6 +379,7 @@
       <div class="omnisearch-quick-filters">
         <button class="omni-filter-chip active" data-cat="all">All</button>
         <button class="omni-filter-chip" data-cat="surahs">Surahs (114)</button>
+        <button class="omni-filter-chip" data-cat="paras">Paras (30)</button>
         <button class="omni-filter-chip" data-cat="ayahs">Ayat (6,236)</button>
         <button class="omni-filter-chip" data-cat="prophets">Prophets (25)</button>
         <button class="omni-filter-chip" data-cat="topics">Topics (484)</button>

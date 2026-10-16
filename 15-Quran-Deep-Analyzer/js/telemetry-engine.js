@@ -481,14 +481,20 @@ class TelemetryEngine {
       if (tibaqList.length === 0) {
         bodyHtml = `<p style="color: var(--text-dim); text-align: center; padding: 20px;">No sample verses recorded.</p>`;
       } else {
-        tibaqList.forEach(v => {
+        tibaqList.forEach((v, idx) => {
+          const p = (window.CorpusEngine && window.CorpusEngine.getParaForAyah) ? window.CorpusEngine.getParaForAyah(v.surah, v.ayah) : null;
+          const pBadge = p ? `<span class="para-badge-inline" title="Para ${p.para}: ${p.name_ar}">Para ${p.para}</span> ` : '';
           bodyHtml += `
-            <div class="occurrence-item" style="flex-direction: column; align-items: stretch; gap: 8px; margin-bottom: 12px; padding: 14px; background: rgba(255, 255, 255, 0.02); border-left: 3px solid #d4af37; border-radius: var(--radius-sm);">
-              <div style="display: flex; align-items: center; justify-content: space-between;">
-                <span class="occ-ref-badge">Surah ${v.surah} : Ayah ${v.ayah}</span>
-                <button class="filter-btn modal-jump-btn" data-surah="${v.surah}" data-ayah="${v.ayah}">View in Context</button>
+            <div class="occurrence-item occ-verse-card">
+              <div class="occ-card-top">
+                <span class="occ-ref-badge">${pBadge}Surah ${v.surah} : Ayah ${v.ayah}</span>
+                <button class="occ-arrow-btn modal-jump-btn" data-surah="${v.surah}" data-ayah="${v.ayah}" title="Open Surah ${v.surah}:${v.ayah} in Ayah Analyzer" aria-label="Go to Ayah">
+                  <span class="jump-arrow">↗</span>
+                </button>
               </div>
-              <div style="font-family: var(--font-arabic); font-size: 1.4rem; line-height: 1.8; color: #f8fafc; direction: rtl; text-align: right;">${v.arabic}</div>
+              <div class="occ-verse-content">
+                <div class="occ-ayah-arabic" dir="rtl">${v.arabic}</div>
+              </div>
             </div>
           `;
         });
@@ -535,15 +541,26 @@ class TelemetryEngine {
     if (occList.length === 0) {
       bodyHtml = `<p style="color: var(--text-dim); text-align: center; padding: 20px;">No sample occurrences recorded.</p>`;
     } else {
-      occList.forEach(occ => {
+      occList.forEach((occ, idx) => {
         const sId = occ[0];
         const aNo = occ[1];
         const wIdx = occ[2] || 1;
+        const p = (window.CorpusEngine && window.CorpusEngine.getParaForAyah) ? window.CorpusEngine.getParaForAyah(sId, aNo) : null;
+        const pBadge = p ? `<span class="para-badge-inline" title="Para ${p.para}: ${p.name_ar}">Para ${p.para}</span> ` : '';
         bodyHtml += `
-          <div class="occurrence-item">
-            <span class="occ-ref-badge">Surah ${sId} : Ayah ${aNo}</span>
-            <span style="font-size: 0.85rem; color: var(--text-dim);">Word #${wIdx}</span>
-            <button class="filter-btn modal-jump-btn" data-surah="${sId}" data-ayah="${aNo}">View in Context</button>
+          <div class="occurrence-item occ-verse-card" id="telemetry-occ-card-${idx}">
+            <div class="occ-card-top">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="occ-ref-badge" id="telemetry-occ-badge-${idx}">${pBadge}Surah ${sId} : Ayah ${aNo}</span>
+                <span style="font-size: 0.8rem; color: var(--text-dim);">Word #${wIdx}</span>
+              </div>
+              <button class="occ-arrow-btn modal-jump-btn" data-surah="${sId}" data-ayah="${aNo}" title="Open Surah ${sId}:${aNo} in Ayah Analyzer" aria-label="Go to Ayah">
+                <span class="jump-arrow">↗</span>
+              </button>
+            </div>
+            <div class="occ-verse-content" id="telemetry-occ-content-${idx}">
+              <div class="occ-loading-spinner">Loading Ayah ${sId}:${aNo}...</div>
+            </div>
           </div>
         `;
       });
@@ -563,6 +580,42 @@ class TelemetryEngine {
         }
       });
     });
+
+    // Asynchronously populate Ayah text and translations for word occurrences
+    Promise.all(occList.map(async (occ, idx) => {
+      const sId = occ[0];
+      const aNo = occ[1];
+      const contentEl = document.getElementById(`telemetry-occ-content-${idx}`);
+      const badgeEl = document.getElementById(`telemetry-occ-badge-${idx}`);
+      if (!contentEl) return;
+
+      const p = (window.CorpusEngine && window.CorpusEngine.getParaForAyah) ? window.CorpusEngine.getParaForAyah(sId, aNo) : null;
+
+      if (window.CorpusEngine && window.CorpusEngine.getAyahData) {
+        try {
+          const ayahObj = await window.CorpusEngine.getAyahData(sId, aNo);
+          if (ayahObj && ayahObj.ayah) {
+            const a = ayahObj.ayah;
+            const s = ayahObj.surah;
+            if (badgeEl && s && s.name_roman) {
+              const paraBadge = p ? `<span class="para-badge-inline" title="Para ${p.para}: ${p.name_ar} (${p.name_roman})">Para ${p.para}</span> ` : '';
+              badgeEl.innerHTML = `${paraBadge}Surah ${s.name_roman} (${sId}:${aNo})`;
+            }
+            contentEl.innerHTML = `
+              <div class="occ-ayah-arabic" dir="rtl">${a.arabicText || a.text || ''}</div>
+              <div class="occ-translations">
+                ${a.translation_ur_ki ? `<div class="occ-trans-ur" dir="rtl"><span class="compact-trans-tag ur-ki">کنز الایمان</span> ${a.translation_ur_ki}</div>` : ''}
+                ${a.translation_en ? `<div class="occ-trans-en"><strong>EN:</strong> ${a.translation_en}</div>` : ''}
+              </div>
+            `;
+            return;
+          }
+        } catch (e) {
+          console.error("Error loading ayah:", e);
+        }
+      }
+      contentEl.innerHTML = `<div style="color: var(--text-dim); font-size: 0.85rem;">Ayah ${sId}:${aNo}</div>`;
+    }));
   }
 }
 
