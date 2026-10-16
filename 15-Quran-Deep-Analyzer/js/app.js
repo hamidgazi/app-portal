@@ -26,6 +26,26 @@ function switchAppTab(tabName) {
 
   window.location.hash = tabName;
   window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Auto-collapse telemetry banner on reading tabs to maximize vertical reading area
+  const banner = document.getElementById("global-metrics-banner");
+  const btnIcon = document.getElementById("telemetry-btn-icon");
+  const btnText = document.getElementById("telemetry-btn-text");
+  const readingTabs = ["ayahs", "thematic", "mutashabihat", "waqf"];
+
+  if (readingTabs.includes(tabName)) {
+    if (banner && !banner.classList.contains("user-pinned-open")) {
+      banner.classList.add("collapsed");
+      if (btnIcon) btnIcon.textContent = "▼";
+      if (btnText) btnText.textContent = "Show Telemetry";
+    }
+  } else {
+    if (banner && !banner.classList.contains("user-pinned-closed")) {
+      banner.classList.remove("collapsed");
+      if (btnIcon) btnIcon.textContent = "▲";
+      if (btnText) btnText.textContent = "Collapse Telemetry";
+    }
+  }
 }
 window.switchAppTab = switchAppTab;
 
@@ -363,7 +383,31 @@ const OmnisearchEngine = {
     }
   }
 };
-window.OmnisearchEngine = OmnisearchEngine;
+function initTelemetryToolbar() {
+  const toggleBtn = document.getElementById("toggle-telemetry-btn");
+  const banner = document.getElementById("global-metrics-banner");
+  const btnIcon = document.getElementById("telemetry-btn-icon");
+  const btnText = document.getElementById("telemetry-btn-text");
+  if (!toggleBtn || !banner) return;
+
+  toggleBtn.addEventListener("click", () => {
+    if (window.AudioSFX) window.AudioSFX.playClick();
+    const isCollapsed = banner.classList.contains("collapsed");
+    if (isCollapsed) {
+      banner.classList.remove("collapsed");
+      banner.classList.remove("user-pinned-closed");
+      banner.classList.add("user-pinned-open");
+      if (btnIcon) btnIcon.textContent = "▲";
+      if (btnText) btnText.textContent = "Collapse Telemetry";
+    } else {
+      banner.classList.add("collapsed");
+      banner.classList.remove("user-pinned-open");
+      banner.classList.add("user-pinned-closed");
+      if (btnIcon) btnIcon.textContent = "▼";
+      if (btnText) btnText.textContent = "Show Telemetry";
+    }
+  });
+}
 
 function bootApp() {
   console.log("[BOOT] Starting Quran Deep Analyzer bootloader...");
@@ -371,6 +415,7 @@ function bootApp() {
   const modules = [
     { name: "AudioSFX", init: () => window.AudioSFX && window.AudioSFX.init() },
     { name: "Tabs", init: () => initTabs() },
+    { name: "TelemetryToolbar", init: () => initTelemetryToolbar() },
     { name: "ModalHandlers", init: () => initModalHandlers() },
     { name: "OmnisearchEngine", init: () => window.OmnisearchEngine && window.OmnisearchEngine.init() },
     { name: "TelemetryEngine", init: () => window.TelemetryEngine && window.TelemetryEngine.init() },

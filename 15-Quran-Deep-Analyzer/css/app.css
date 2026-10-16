@@ -84,64 +84,68 @@ header.app-header {
 }
 
 .header-inner {
-  max-width: 1400px;
+  max-width: 1440px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
+  gap: 12px;
+  flex-wrap: nowrap;
 }
 
 .app-branding {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .app-branding .logo-badge {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 800;
   color: #000;
   box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
 }
 
 .branding-text h1 {
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   background: linear-gradient(to right, #f8fafc, #94a3b8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  white-space: nowrap;
 }
 
 .branding-text p {
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   color: var(--accent-emerald);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 /* Navigation Tabs */
 nav.app-nav {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   overflow-x: auto;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
-  padding: 4px;
+  padding: 3px 5px;
   background: rgba(15, 20, 32, 0.6);
   border-radius: var(--radius-full);
   border: 1px solid var(--border-subtle);
+  flex-shrink: 1;
 }
 
 nav.app-nav::-webkit-scrollbar {
@@ -153,16 +157,16 @@ nav.app-nav::-webkit-scrollbar {
   color: var(--text-muted);
   border: none;
   border-radius: var(--radius-full);
-  padding: 8px 16px;
-  font-size: 0.88rem;
+  padding: 6px 12px;
+  font-size: 0.82rem;
   font-weight: 600;
   cursor: pointer;
   white-space: nowrap;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
-  gap: 8px;
-  min-height: 44px;
+  gap: 6px;
+  min-height: 38px;
   touch-action: manipulation;
 }
 
@@ -181,58 +185,125 @@ nav.app-nav::-webkit-scrollbar {
 .nav-tab-btn .tab-badge {
   background: rgba(16, 185, 129, 0.2);
   color: #34d399;
-  font-size: 0.7rem;
-  padding: 2px 7px;
+  font-size: 0.68rem;
+  padding: 2px 6px;
   border-radius: var(--radius-full);
   font-weight: 700;
+}
+
+/* Header Omnisearch Trigger */
+.omnisearch-trigger-btn {
+  flex-shrink: 0;
+}
+
+/* Screen widths under 1400px: streamline to guarantee 100% visibility for Waqf Rules & Analytics Studio */
+@media (max-width: 1400px) {
+  .nav-tab-btn .tab-badge {
+    display: none;
+  }
+  .branding-text p {
+    display: none;
+  }
+  .app-branding .logo-badge {
+    width: 34px;
+    height: 34px;
+    font-size: 17px;
+  }
+  .branding-text h1 {
+    font-size: 1.05rem;
+  }
+  .omnisearch-btn-text {
+    display: none;
+  }
+  .omnisearch-trigger-btn {
+    padding: 6px 10px;
+  }
 }
 
 /* Main Container */
 main.app-main {
   flex: 1;
-  max-width: 1400px;
+  max-width: 1440px;
   width: 100%;
   margin: 0 auto;
-  padding: 20px;
+  padding: 16px 20px;
 }
 
-/* Executive Horizontal KPI Strip */
+/* Executive Horizontal KPI Ribbon */
+.metrics-banner-container {
+  margin-bottom: 16px;
+}
+
+.telemetry-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 6px;
+}
+
+.telemetry-toggle-btn {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  color: var(--text-dim);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s ease;
+  touch-action: manipulation;
+}
+
+.telemetry-toggle-btn:hover {
+  color: var(--accent-gold);
+  border-color: rgba(212, 175, 55, 0.5);
+  background: rgba(212, 175, 55, 0.08);
+}
+
 .metrics-banner {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 12px;
-  margin-bottom: 20px;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+}
+
+.metrics-banner.collapsed {
+  display: none;
 }
 
 .metric-pill {
   background: rgba(15, 23, 42, 0.7);
   border: 1px solid rgba(212, 175, 55, 0.18);
-  border-radius: var(--radius-md);
-  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  gap: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  min-height: 42px;
 }
 
 .metric-pill:hover {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
   border-color: rgba(212, 175, 55, 0.45);
-  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.12);
+  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.12);
 }
 
 .metric-icon {
-  font-size: 1.5rem;
-  width: 40px;
-  height: 40px;
+  font-size: 1.15rem;
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: rgba(255, 255, 255, 0.04);
-  border-radius: var(--radius-sm);
+  border-radius: 4px;
   border: 1px solid rgba(255, 255, 255, 0.05);
   flex-shrink: 0;
 }
@@ -240,12 +311,12 @@ main.app-main {
 .metric-info {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
   min-width: 0;
 }
 
 .metric-val {
-  font-size: 1.35rem;
+  font-size: 1.05rem;
   font-weight: 800;
   line-height: 1.1;
   letter-spacing: -0.02em;
@@ -257,12 +328,26 @@ main.app-main {
 .metric-val.purple { color: #c084fc; }
 
 .metric-label {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   color: var(--text-dim);
   text-transform: uppercase;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.06em;
   font-weight: 600;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 1024px) {
+  .metrics-banner {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .metrics-banner {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /* Two-Tier Control Bar */
@@ -2048,6 +2133,211 @@ footer.app-footer {
   padding: 1px 5px;
   font-size: 0.68rem;
   color: var(--text-muted);
+}
+
+/* Mutashabihat Refrain Matrix Styles */
+.mutashabihat-refrain-card {
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  margin-bottom: 18px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.refrain-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+}
+
+.refrain-badge-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.refrain-anchor-arabic {
+  font-family: var(--font-arabic);
+  font-size: 1.85rem;
+  color: #38bdf8;
+  line-height: 1.9;
+  text-align: right;
+  direction: rtl;
+  margin-bottom: 12px;
+  padding: 8px 14px;
+  background: rgba(6, 182, 212, 0.05);
+  border-radius: var(--radius-sm);
+  border-right: 3px solid #38bdf8;
+}
+
+.refrain-anchor-translations {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+  padding: 10px 14px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+}
+
+.refrain-trans-en {
+  font-size: 0.92rem;
+  color: #e2e8f0;
+  line-height: 1.5;
+}
+
+.refrain-trans-ur {
+  font-family: var(--font-urdu);
+  font-size: 1.05rem;
+  color: #f1f5f9;
+  direction: rtl;
+  text-align: right;
+  line-height: 1.7;
+}
+
+.refrain-matrix-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+}
+
+.refrain-matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 8px;
+}
+
+.occurrence-chip {
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-sm);
+  padding: 7px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  min-height: 40px;
+}
+
+.occurrence-chip:hover {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: rgba(16, 185, 129, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
+.chip-loc {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #38bdf8;
+  font-family: monospace;
+}
+
+.chip-name {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  max-width: 65px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chip-arrow {
+  font-size: 0.75rem;
+  color: var(--accent-emerald);
+  opacity: 0.7;
+}
+
+.occurrence-chip:hover .chip-arrow {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
+/* Semantic Insight & Tibaq Explainer */
+.tibaq-explainer-banner {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.12) 0%, rgba(16, 185, 129, 0.08) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  margin-bottom: 20px;
+}
+
+.tibaq-banner-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fbbf24;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tibaq-banner-desc {
+  font-size: 0.85rem;
+  color: #cbd5e1;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.semantic-insight-box {
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 3px solid var(--accent-gold);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 8px 12px;
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  line-height: 1.45;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.semantic-insight-box .insight-icon {
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+/* Ayah Card Compact Density */
+.ayah-card.compact-card {
+  padding: 12px 16px;
+  margin-bottom: 12px;
+}
+
+.ayah-card.compact-card .ayah-arabic-text {
+  font-size: 1.85rem;
+  line-height: 1.85;
+  margin-bottom: 10px;
+}
+
+.ayah-card.compact-card .translations-block {
+  gap: 6px;
+}
+
+.ayah-card.compact-card .translation-item {
+  padding: 6px 10px;
+}
+
+.ayah-card.compact-card .trans-text.urdu {
+  font-size: 1.05rem;
+  line-height: 1.6;
 }
 
 /* Mobile Touch Ergonomics */

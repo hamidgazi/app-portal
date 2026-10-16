@@ -15,7 +15,7 @@ class CorpusEngine {
     this.surahFilterMode = "all"; // "all" | "makki" | "madani" | "length" | "order"
     this.surahSearchQuery = "";
     this.ayahViewMode = "compact"; // "compact" | "deep"
-    this.showEnglish = true;
+    this.showEnglish = false;
     this.showKanzulIman = true;
     this.showKanzulIrfan = false;
     this.showWordPills = false;
@@ -143,7 +143,7 @@ class CorpusEngine {
       if (btnDeep) btnDeep.classList.remove("active");
       if (container) container.classList.add("compact-mode");
       if (container) container.classList.remove("deep-mode");
-      this.showEnglish = true;
+      this.showEnglish = false;
       this.showKanzulIman = true;
       this.showKanzulIrfan = false;
       this.showWordPills = false;
@@ -363,6 +363,19 @@ class CorpusEngine {
     });
   }
 
+  cleanTafsirHtml(text) {
+    if (!text || typeof text !== "string") return "";
+    return text
+      .replace(/\/\*\s*Style Definitions\s*\*\/[\s\S]*?\{[\s\S]*?\}/g, "")
+      .replace(/(?:table|p|span|div|a|li)\.Mso\w*\s*\{[^}]*\}/g, "")
+      .replace(/@page\s*\{[^}]*\}/g, "")
+      .replace(/@font-face\s*\{[^}]*\}/g, "")
+      .replace(/<!--\[if[\s\S]*?<!\[endif\]-->/g, "")
+      .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "")
+      .replace(/mso-[a-zA-Z0-9\-]+:[^;"]+;?/g, "")
+      .trim();
+  }
+
   renderAyahAnalyzer() {
     const headerContainer = document.getElementById("active-surah-meta-banner");
     const ayatContainer = document.getElementById("ayahs-list-container");
@@ -444,7 +457,7 @@ class CorpusEngine {
 
           ${a.tafseer_sirat_ul_jinan ? `
             <div class="tafsir-content-drawer" id="tafsir-box-${a.number}">
-              ${a.tafseer_sirat_ul_jinan}
+              ${this.cleanTafsirHtml(a.tafseer_sirat_ul_jinan)}
             </div>
           ` : ''}
         </div>
@@ -658,48 +671,100 @@ class CorpusEngine {
 
     let html = "";
     this.mutashabihat.forEach(c => {
-      const sampleText = c.preview_text || c.arabic_sample || (c.occurrences && c.occurrences[0] && c.occurrences[0].arabic) || "";
-      html += `
-        <div class="mutashabihat-cluster-card">
-          <div class="cluster-card-header">
-            <div class="cluster-title-group">
-              <span class="ayah-badge" style="background: rgba(6, 182, 212, 0.15); color: #38bdf8;">Cluster #${c.cluster_id}</span>
-              <span class="count-pill gold">${c.match_count} Parallel Verses</span>
-            </div>
-            <div class="cluster-arabic-anchor" dir="rtl">${sampleText}</div>
-          </div>
-          <div class="mutashabihat-comparison-grid">
-            ${(c.occurrences || []).map(occ => {
-              const sRoman = occ.surah_name_roman || occ.surah_roman || 'Surah ' + occ.surah_id;
-              const sAr = occ.surah_name_ar || occ.surah_arabic || '';
-              const urTrans = occ.translation_ur || occ.translation_ur_ki || '';
-              return `
-              <div class="parallel-verse-node">
-                <div class="parallel-node-header">
-                  <div class="parallel-location-badge">
-                    <span class="surah-count-pill">${occ.surah_id}. ${sRoman}</span>
-                    <span class="ayah-coord-pill">Ayah ${occ.ayat_number}</span>
-                    ${sAr ? `<span class="arabic-mini-name">${sAr}</span>` : ''}
-                  </div>
-                  <button class="filter-btn jump-to-ayah-btn" data-surah="${occ.surah_id}" data-ayah="${occ.ayat_number}">
-                    Open in Ayah Analyzer ↗
-                  </button>
-                </div>
-                <div class="parallel-arabic" dir="rtl">${occ.arabic}</div>
-                <div class="parallel-translations">
-                  ${occ.translation_en ? `<div class="parallel-trans-en"><strong>EN:</strong> ${occ.translation_en}</div>` : ''}
-                  ${urTrans ? `<div class="parallel-trans-ur" dir="rtl"><span class="compact-trans-tag ur-ki">کنز الایمان</span> ${urTrans}</div>` : ''}
-                </div>
+      const occs = c.occurrences || [];
+      const firstOcc = occs[0] || {};
+      const sampleText = c.preview_text || c.arabic_sample || firstOcc.arabic || "";
+      const isRefrain = occs.length >= 4;
+
+      if (isRefrain) {
+        // High-Frequency Master Refrain Anchor + Interactive Citation Matrix Grid
+        const sampleEn = firstOcc.translation_en || "";
+        const sampleUr = firstOcc.translation_ur || firstOcc.translation_ur_ki || "";
+
+        html += `
+          <div class="mutashabihat-refrain-card">
+            <div class="refrain-header">
+              <div class="refrain-badge-group">
+                <span class="ayah-badge" style="background: rgba(6, 182, 212, 0.15); color: #38bdf8;">Cluster #${c.cluster_id}</span>
+                <span class="count-pill gold">🔁 Refrain: Repeated ${c.match_count} Times</span>
               </div>
-            `;}).join("")}
+              <div style="font-size: 0.8rem; color: var(--text-dim);">
+                Master Anchor Verse • Click any occurrence below to jump to Ayah Analyzer
+              </div>
+            </div>
+
+            <!-- Canonical Anchor Verse Rendered ONCE -->
+            <div class="refrain-anchor-arabic" dir="rtl">${sampleText}</div>
+
+            <div class="refrain-anchor-translations">
+              ${sampleEn ? `<div class="refrain-trans-en"><strong>EN:</strong> ${sampleEn}</div>` : ''}
+              ${sampleUr ? `<div class="refrain-trans-ur" dir="rtl"><span class="compact-trans-tag ur-ki">کنز الایمان</span> ${sampleUr}</div>` : ''}
+            </div>
+
+            <!-- Citation Matrix Grid of Interactive Location Chips -->
+            <div class="refrain-matrix-title">
+              <span>📍 Citation Matrix (${occs.length} Occurrences across Quran)</span>
+              <span style="font-size: 0.72rem; color: var(--text-muted); text-transform: none;">Click chip to open in Ayah Analyzer</span>
+            </div>
+
+            <div class="refrain-matrix-grid">
+              ${occs.map(occ => {
+                const sRoman = occ.surah_name_roman || occ.surah_roman || 'Surah ' + occ.surah_id;
+                return `
+                  <div class="occurrence-chip jump-to-ayah-chip" data-surah="${occ.surah_id}" data-ayah="${occ.ayat_number}" title="Jump to Surah ${sRoman} Ayah ${occ.ayat_number}">
+                    <span class="chip-loc">${occ.surah_id}:${occ.ayat_number}</span>
+                    <span class="chip-name">${sRoman}</span>
+                    <span class="chip-arrow">↗</span>
+                  </div>
+                `;
+              }).join("")}
+            </div>
           </div>
-        </div>
-      `;
+        `;
+      } else {
+        // Standard Comparative Layout for 2 to 3 Nuanced Parallel Verses
+        html += `
+          <div class="mutashabihat-cluster-card">
+            <div class="cluster-card-header">
+              <div class="cluster-title-group">
+                <span class="ayah-badge" style="background: rgba(6, 182, 212, 0.15); color: #38bdf8;">Cluster #${c.cluster_id}</span>
+                <span class="count-pill gold">${c.match_count} Parallel Verses</span>
+              </div>
+              <div class="cluster-arabic-anchor" dir="rtl">${sampleText}</div>
+            </div>
+            <div class="mutashabihat-comparison-grid">
+              ${occs.map(occ => {
+                const sRoman = occ.surah_name_roman || occ.surah_roman || 'Surah ' + occ.surah_id;
+                const sAr = occ.surah_name_ar || occ.surah_arabic || '';
+                const urTrans = occ.translation_ur || occ.translation_ur_ki || '';
+                return `
+                <div class="parallel-verse-node">
+                  <div class="parallel-node-header">
+                    <div class="parallel-location-badge">
+                      <span class="surah-count-pill">${occ.surah_id}. ${sRoman}</span>
+                      <span class="ayah-coord-pill">Ayah ${occ.ayat_number}</span>
+                      ${sAr ? `<span class="arabic-mini-name">${sAr}</span>` : ''}
+                    </div>
+                    <button class="filter-btn jump-to-ayah-btn" data-surah="${occ.surah_id}" data-ayah="${occ.ayat_number}">
+                      Open in Ayah Analyzer ↗
+                    </button>
+                  </div>
+                  <div class="parallel-arabic" dir="rtl">${occ.arabic}</div>
+                  <div class="parallel-translations">
+                    ${occ.translation_en ? `<div class="parallel-trans-en"><strong>EN:</strong> ${occ.translation_en}</div>` : ''}
+                    ${urTrans ? `<div class="parallel-trans-ur" dir="rtl"><span class="compact-trans-tag ur-ki">کنز الایمان</span> ${urTrans}</div>` : ''}
+                  </div>
+                </div>
+              `;}).join("")}
+            </div>
+          </div>
+        `;
+      }
     });
 
     container.innerHTML = html;
 
-    container.querySelectorAll(".jump-to-ayah-btn").forEach(btn => {
+    container.querySelectorAll(".jump-to-ayah-btn, .jump-to-ayah-chip").forEach(btn => {
       btn.addEventListener("click", () => {
         if (window.AudioSFX) window.AudioSFX.playTab();
         const sId = parseInt(btn.dataset.surah, 10);

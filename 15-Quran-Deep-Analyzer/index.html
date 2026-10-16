@@ -65,51 +65,59 @@
   <!-- Main Container -->
   <main class="app-main">
 
-    <!-- Global Telemetry Executive KPI Strip -->
-    <section class="metrics-banner" aria-label="Global Corpus Statistics">
-      <div class="metric-pill">
-        <div class="metric-icon">📜</div>
-        <div class="metric-info">
-          <span class="metric-val emerald">82,480</span>
-          <span class="metric-label">Word Tokens</span>
-        </div>
+    <!-- Global Telemetry Executive KPI Ribbon -->
+    <div class="metrics-banner-container">
+      <div class="telemetry-toolbar">
+        <button id="toggle-telemetry-btn" class="telemetry-toggle-btn" title="Toggle Executive Telemetry Ribbon">
+          <span id="telemetry-btn-icon">▲</span>
+          <span id="telemetry-btn-text">Collapse Telemetry</span>
+        </button>
       </div>
-      <div class="metric-pill">
-        <div class="metric-icon">🔤</div>
-        <div class="metric-info">
-          <span class="metric-val cyan">20,105</span>
-          <span class="metric-label">Unique Words</span>
+      <section id="global-metrics-banner" class="metrics-banner" aria-label="Global Corpus Statistics">
+        <div class="metric-pill">
+          <div class="metric-icon">📜</div>
+          <div class="metric-info">
+            <span class="metric-val emerald">82,480</span>
+            <span class="metric-label">Word Tokens</span>
+          </div>
         </div>
-      </div>
-      <div class="metric-pill">
-        <div class="metric-icon">🌿</div>
-        <div class="metric-info">
-          <span class="metric-val gold">1,642</span>
-          <span class="metric-label">Triliteral Roots</span>
+        <div class="metric-pill">
+          <div class="metric-icon">🔤</div>
+          <div class="metric-info">
+            <span class="metric-val cyan">20,105</span>
+            <span class="metric-label">Unique Words</span>
+          </div>
         </div>
-      </div>
-      <div class="metric-pill">
-        <div class="metric-icon">📚</div>
-        <div class="metric-info">
-          <span class="metric-val purple">4,832</span>
-          <span class="metric-label">Lemmas</span>
+        <div class="metric-pill">
+          <div class="metric-icon">🌿</div>
+          <div class="metric-info">
+            <span class="metric-val gold">1,642</span>
+            <span class="metric-label">Triliteral Roots</span>
+          </div>
         </div>
-      </div>
-      <div class="metric-pill">
-        <div class="metric-icon">📖</div>
-        <div class="metric-info">
-          <span class="metric-val emerald">6,236</span>
-          <span class="metric-label">Canonical Ayat</span>
+        <div class="metric-pill">
+          <div class="metric-icon">📚</div>
+          <div class="metric-info">
+            <span class="metric-val purple">4,832</span>
+            <span class="metric-label">Lemmas</span>
+          </div>
         </div>
-      </div>
-      <div class="metric-pill">
-        <div class="metric-icon">🧭</div>
-        <div class="metric-info">
-          <span class="metric-val gold">114</span>
-          <span class="metric-label">Surahs</span>
+        <div class="metric-pill">
+          <div class="metric-icon">📖</div>
+          <div class="metric-info">
+            <span class="metric-val emerald">6,236</span>
+            <span class="metric-label">Canonical Ayat</span>
+          </div>
         </div>
-      </div>
-    </section>
+        <div class="metric-pill">
+          <div class="metric-icon">🧭</div>
+          <div class="metric-info">
+            <span class="metric-val gold">114</span>
+            <span class="metric-label">Surahs</span>
+          </div>
+        </div>
+      </section>
+    </div>
 
     <!-- Tab 1: Quantitative Telemetry & Word Frequency -->
     <section id="tab-frequency" class="tab-panel active">
@@ -213,8 +221,8 @@
           </button>
         </div>
         <div class="layer-toggles-group">
-          <label class="toggle-chip active" id="chip-layer-en">
-            <input type="checkbox" id="toggle-layer-en" checked>
+          <label class="toggle-chip" id="chip-layer-en">
+            <input type="checkbox" id="toggle-layer-en">
             <span>English</span>
           </label>
           <label class="toggle-chip active" id="chip-layer-ki">

@@ -359,7 +359,17 @@ class TelemetryEngine {
       return;
     }
 
-    let html = `<div class="semantic-grid">`;
+    let html = `
+      <div class="tibaq-explainer-banner">
+        <div class="tibaq-banner-title">⚖️ Quranic Semantic Balances & Rhetorical Tibaq (علم البديع - الطباق)</div>
+        <p class="tibaq-banner-desc">
+          <strong>Tibaq (طباق)</strong> is classical Arabic antithesis—the rhetorical art of juxtaposing contrasting concepts in revelation. 
+          <strong>Exact Mathematical Pairs (1:1)</strong> reflect divine linguistic equilibrium (e.g. <em>Life & Death 145:145</em>, <em>Qul & Qalu 332:332</em>). 
+          Click <em>"View Tibaq Verses"</em> on any pair to inspect the exact Ayahs where both opposing words appear in the very same verse!
+        </p>
+      </div>
+      <div class="semantic-grid">
+    `;
     pairs.forEach(p => {
       const isBalanced = p.is_balanced || p.term1_count === p.term2_count;
       const tibaqCount = p.tibaq_count || (p.tibaq_sample ? p.tibaq_sample.length : 0);
@@ -385,6 +395,12 @@ class TelemetryEngine {
           <div class="balance-status-badge ${isBalanced ? 'balanced' : ''}">
             ${isBalanced ? '✓ Exact Mathematical Balance (1:1)' : `Ratio: ${ratioDisplay}`}
           </div>
+          ${p.insight ? `
+            <div class="semantic-insight-box">
+              <span class="insight-icon">💡</span>
+              <div>${p.insight}</div>
+            </div>
+          ` : ''}
           ${tibaqCount > 0 ? `
             <button class="filter-btn view-tibaq-btn" style="margin-top: 12px; width: 100%; justify-content: center; background: rgba(212, 175, 55, 0.12); color: #fbbf24; border-color: rgba(212, 175, 55, 0.3);" data-val="${encodeURIComponent(JSON.stringify(p))}">
               📖 View Tibaq Verses (${tibaqCount} Ayat)
