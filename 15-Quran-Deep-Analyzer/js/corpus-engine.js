@@ -1270,8 +1270,8 @@ class CorpusEngine {
   }
 
   setupFontScaler() {
-    const scales = [0.85, 1.0, 1.15, 1.3];
-    let currentIdx = 1; // Default: 1.0
+    const scales = [0.85, 1.0, 1.15, 1.3, 1.5, 1.75];
+    let currentIdx = 1; // Default: 1.0 (100%)
 
     const saved = localStorage.getItem("quran_font_scale");
     if (saved) {
@@ -1280,33 +1280,39 @@ class CorpusEngine {
       if (foundIdx !== -1) currentIdx = foundIdx;
     }
 
+    const decBtn = document.getElementById("btn-font-dec");
+    const incBtn = document.getElementById("btn-font-inc");
+    const resetBtn = document.getElementById("btn-font-reset");
+
     const applyScale = () => {
       const scale = scales[currentIdx];
       document.documentElement.style.setProperty('--ayah-font-scale', scale);
       localStorage.setItem("quran_font_scale", scale);
 
-      const resetBtn = document.getElementById("btn-font-reset");
       if (resetBtn) {
-        if (scale === 1.0) {
-          resetBtn.classList.add("active");
-          resetBtn.textContent = "A";
-        } else {
-          resetBtn.classList.remove("active");
-          resetBtn.textContent = `${Math.round(scale * 100)}%`;
-        }
+        resetBtn.classList.toggle("active", scale === 1.0);
+        resetBtn.textContent = `${Math.round(scale * 100)}%`;
+      }
+
+      if (decBtn) {
+        decBtn.disabled = (currentIdx === 0);
+        decBtn.style.opacity = (currentIdx === 0) ? "0.4" : "1";
+        decBtn.style.cursor = (currentIdx === 0) ? "not-allowed" : "pointer";
+      }
+
+      if (incBtn) {
+        incBtn.disabled = (currentIdx === scales.length - 1);
+        incBtn.style.opacity = (currentIdx === scales.length - 1) ? "0.4" : "1";
+        incBtn.style.cursor = (currentIdx === scales.length - 1) ? "not-allowed" : "pointer";
       }
     };
 
     applyScale();
 
-    const decBtn = document.getElementById("btn-font-dec");
-    const incBtn = document.getElementById("btn-font-inc");
-    const resetBtn = document.getElementById("btn-font-reset");
-
     if (decBtn) {
       decBtn.addEventListener("click", () => {
-        if (window.AudioSFX) window.AudioSFX.playClick();
         if (currentIdx > 0) {
+          if (window.AudioSFX) window.AudioSFX.playClick();
           currentIdx--;
           applyScale();
         }
@@ -1315,8 +1321,8 @@ class CorpusEngine {
 
     if (incBtn) {
       incBtn.addEventListener("click", () => {
-        if (window.AudioSFX) window.AudioSFX.playClick();
         if (currentIdx < scales.length - 1) {
+          if (window.AudioSFX) window.AudioSFX.playClick();
           currentIdx++;
           applyScale();
         }
@@ -1326,7 +1332,7 @@ class CorpusEngine {
     if (resetBtn) {
       resetBtn.addEventListener("click", () => {
         if (window.AudioSFX) window.AudioSFX.playClick();
-        currentIdx = 1;
+        currentIdx = 1; // 1.0 (100%)
         applyScale();
       });
     }

@@ -640,14 +640,15 @@ table.analytics-table tbody tr:hover {
 
 .word-arabic-cell {
   font-family: var(--font-arabic);
-  font-size: 1.85rem;
-  line-height: 1.35;
+  font-size: 2.6rem;
+  line-height: 1.6;
   color: #f8fafc;
   direction: rtl;
   text-align: right;
-  font-weight: 500;
-  text-shadow: 0 0 12px rgba(56, 189, 248, 0.2);
+  font-weight: 600;
+  text-shadow: 0 0 16px rgba(56, 189, 248, 0.3);
   white-space: nowrap;
+  padding: 14px 20px;
 }
 
 .word-meaning-cell {
@@ -658,17 +659,17 @@ table.analytics-table tbody tr:hover {
 }
 
 .word-meaning-cell .meaning-en {
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   font-weight: 600;
   color: #f1f5f9;
-  line-height: 1.25;
+  line-height: 1.3;
 }
 
 .word-meaning-cell .meaning-ur {
-  font-size: 0.82rem;
+  font-size: 0.88rem;
   font-weight: 500;
   color: #fbbf24;
-  line-height: 1.2;
+  line-height: 1.25;
 }
 
 .corpus-pct-cell {
@@ -698,11 +699,14 @@ table.analytics-table tbody tr:hover {
 
 .root-display-cell {
   font-family: var(--font-arabic);
-  font-size: 1.35rem;
-  letter-spacing: 3px;
+  font-size: 2.2rem;
+  line-height: 1.5;
+  letter-spacing: 4px;
   color: #34d399;
   direction: rtl;
   font-weight: 600;
+  text-shadow: 0 0 16px rgba(16, 185, 129, 0.3);
+  padding: 14px 20px;
 }
 
 .count-pill {
@@ -918,23 +922,43 @@ table.analytics-table tbody tr:hover {
 
 /* Deep Ayah Analyzer View */
 .ayah-analyzer-header {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
+  background: rgba(12, 18, 30, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.22);
   border-radius: var(--radius-md);
-  padding: 20px;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  padding: 18px 22px;
+  margin-bottom: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 16px;
-  flex-wrap: wrap;
+  align-items: stretch;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 .surah-selector-group,
 .para-selector-group {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  width: 100%;
+}
+
+.surah-meta-banner {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.88) 0%, rgba(6, 78, 59, 0.35) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
   gap: 12px;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  margin-bottom: 20px;
 }
 
 .styled-select {
@@ -1362,9 +1386,10 @@ table.analytics-table tbody tr:hover {
 }
 
 .compact-mode .ayah-arabic-text {
-  font-size: calc(2.05rem * var(--ayah-font-scale));
-  line-height: 2.15;
-  margin-bottom: 10px;
+  font-family: var(--font-arabic);
+  font-size: calc(2.45rem * var(--ayah-font-scale));
+  line-height: 2.3;
+  margin-bottom: 18px;
   color: #f8fafc;
 }
 
@@ -1456,8 +1481,8 @@ table.analytics-table tbody tr:hover {
 
 .compact-mode .trans-text.urdu {
   font-family: var(--font-urdu);
-  font-size: calc(1.75rem * var(--ayah-font-scale));
-  line-height: 2.2;
+  font-size: calc(1.95rem * var(--ayah-font-scale));
+  line-height: 2.3;
   color: #f8fafc;
   direction: rtl;
   text-align: right;
@@ -2063,9 +2088,9 @@ footer.app-footer {
    ========================================================================== */
 .sticky-ayah-controller {
   position: fixed;
-  top: 70px;
+  top: 75px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -20px);
   z-index: 999;
   width: calc(100% - 32px);
   max-width: 900px;
@@ -2076,7 +2101,17 @@ footer.app-footer {
   border-radius: var(--radius-full);
   padding: 6px 14px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(212, 175, 55, 0.15);
-  animation: slideDownFade 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
+}
+
+.sticky-ayah-controller.visible {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+  transform: translate(-50%, 0);
 }
 
 @keyframes slideDownFade {
@@ -3048,28 +3083,43 @@ footer.app-footer {
 }
 
 /* Ayah Card Compact Density */
+.compact-mode .ayah-card,
 .ayah-card.compact-card {
-  padding: 12px 16px;
-  margin-bottom: 12px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  border-radius: var(--radius-md);
+  background: rgba(12, 16, 26, 0.85);
 }
 
+.compact-mode .ayah-arabic-text,
 .ayah-card.compact-card .ayah-arabic-text {
-  font-size: 1.85rem;
-  line-height: 1.85;
-  margin-bottom: 10px;
+  font-size: calc(2.45rem * var(--ayah-font-scale));
+  line-height: 2.3;
+  margin-bottom: 18px;
+  color: #f8fafc;
 }
 
+.compact-mode .translations-block,
 .ayah-card.compact-card .translations-block {
-  gap: 6px;
+  gap: 8px;
+  padding-top: 12px;
 }
 
+.compact-mode .translation-item,
 .ayah-card.compact-card .translation-item {
   padding: 6px 10px;
 }
 
+.compact-mode .trans-text.urdu,
 .ayah-card.compact-card .trans-text.urdu {
-  font-size: 1.05rem;
-  line-height: 1.6;
+  font-family: var(--font-urdu);
+  font-size: calc(1.95rem * var(--ayah-font-scale));
+  line-height: 2.3;
+  color: #f8fafc;
+  direction: rtl;
+  text-align: right;
+  letter-spacing: 0;
+  font-weight: 500;
 }
 
 /* Mobile Touch Ergonomics */
@@ -3078,11 +3128,20 @@ footer.app-footer {
     padding: 10px 14px;
   }
   main.app-main {
-    padding: 14px;
+    padding: 12px;
   }
-  .ayah-arabic-text {
-    font-size: 1.7rem;
-    line-height: 2;
+  .ayah-arabic-text,
+  .compact-mode .ayah-arabic-text,
+  .ayah-card.compact-card .ayah-arabic-text {
+    font-size: calc(2.15rem * var(--ayah-font-scale));
+    line-height: 2.3;
+    margin-bottom: 14px;
+  }
+  .trans-text.urdu,
+  .compact-mode .trans-text.urdu,
+  .ayah-card.compact-card .trans-text.urdu {
+    font-size: calc(1.75rem * var(--ayah-font-scale));
+    line-height: 2.3;
   }
   .surah-grid {
     grid-template-columns: 1fr;

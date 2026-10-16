@@ -299,7 +299,7 @@ class TelemetryEngine {
           </td>
           <td><span class="count-pill">${item.occurrences.toLocaleString()}</span></td>
           <td>${item.unique_lemmas_count}</td>
-          <td style="font-family: var(--font-arabic); font-size: 1.25rem; color: #38bdf8; direction: rtl; text-align: right;">${(item.lemmas_sample || []).join(' ، ')}</td>
+          <td style="font-family: var(--font-arabic); font-size: 1.85rem; line-height: 1.6; color: #38bdf8; direction: rtl; text-align: right;">${(item.lemmas_sample || []).join(' ، ')}</td>
           <td><button class="filter-btn view-occ-btn" data-type="root" data-val="${encodeURIComponent(JSON.stringify(item))}">View Ayat</button></td>
         </tr>
       `;
@@ -307,12 +307,12 @@ class TelemetryEngine {
       return `
         <tr data-type="lemma" data-lemma="${item.lemma_ar}">
           <td><span class="rank-badge">#${rowNum}</span></td>
-          <td class="word-arabic-cell" style="font-size: 1.55rem;">${item.lemma_ar}</td>
+          <td class="word-arabic-cell">${item.lemma_ar}</td>
           <td class="word-meaning-cell">
             <div class="meaning-en">${item.meaning_en || '—'}</div>
             <div class="meaning-ur">${item.meaning_ur || ''}</div>
           </td>
-          <td class="root-display-cell" style="font-size: 1.15rem;">${item.root_ar}</td>
+          <td class="root-display-cell" style="font-size: 1.85rem;">${item.root_ar}</td>
           <td><span class="surah-count-pill">${(item.pos || []).join(', ')}</span></td>
           <td><span class="count-pill">${item.occurrences.toLocaleString()}</span></td>
           <td><button class="filter-btn view-occ-btn" data-type="lemma" data-val="${encodeURIComponent(JSON.stringify(item))}">View Ayat</button></td>
@@ -323,7 +323,7 @@ class TelemetryEngine {
       return `
         <tr data-type="hapax">
           <td><span class="rank-badge">#${rowNum}</span></td>
-          <td class="word-arabic-cell" style="font-size: 1.55rem;">${item.token}</td>
+          <td class="word-arabic-cell">${item.token}</td>
           <td class="word-meaning-cell">
             <div class="meaning-en">${item.meaning_en || '—'}</div>
             <div class="meaning-ur">${item.meaning_ur || ''}</div>
