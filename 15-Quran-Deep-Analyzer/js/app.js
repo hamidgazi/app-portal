@@ -46,6 +46,10 @@ function switchAppTab(tabName) {
       if (btnText) btnText.textContent = "Collapse Telemetry";
     }
   }
+
+  if (window.NavigationHistory) {
+    window.NavigationHistory.updateBanner();
+  }
 }
 window.switchAppTab = switchAppTab;
 
@@ -89,6 +93,154 @@ function initModalHandlers() {
     }
   });
 }
+
+const NavigationHistory = {
+  stack: [],
+
+  init() {
+    const returnBtn = document.getElementById("btn-return-to-origin");
+    const stickyReturnBtn = document.getElementById("sticky-return-btn");
+    const dismissBtn = document.getElementById("btn-dismiss-return");
+
+    if (returnBtn) {
+      returnBtn.addEventListener("click", () => {
+        this.returnToOrigin();
+      });
+    }
+
+    if (stickyReturnBtn) {
+      stickyReturnBtn.addEventListener("click", () => {
+        this.returnToOrigin();
+      });
+    }
+
+    if (dismissBtn) {
+      dismissBtn.addEventListener("click", () => {
+        if (window.AudioSFX) window.AudioSFX.playClick();
+        this.clear();
+      });
+    }
+
+    // Browser and mobile hardware back navigation support
+    window.addEventListener("popstate", (e) => {
+      if (this.hasContext()) {
+        const currentTab = (document.querySelector(".nav-tab-btn.active") || {}).dataset?.tab;
+        if (currentTab === "ayahs") {
+          this.returnToOrigin();
+        }
+      }
+    });
+
+    // Keyboard shortcut: Alt+ArrowLeft
+    document.addEventListener("keydown", (e) => {
+      if (e.altKey && e.key === "ArrowLeft") {
+        if (this.hasContext()) {
+          const currentTab = (document.querySelector(".nav-tab-btn.active") || {}).dataset?.tab;
+          if (currentTab === "ayahs") {
+            e.preventDefault();
+            this.returnToOrigin();
+          }
+        }
+      }
+    });
+
+    this.updateBanner();
+  },
+
+  pushReturnContext(ctx) {
+    this.stack.push({
+      originTab: ctx.originTab || "analytics",
+      originScrollY: typeof ctx.originScrollY === "number" ? ctx.originScrollY : window.scrollY,
+      modalOpen: !!ctx.modalOpen,
+      modalScrollTop: ctx.modalScrollTop || 0,
+      label: ctx.label || "Previous Location"
+    });
+    this.updateBanner();
+
+    // Push browser history state for seamless back gesture
+    try {
+      history.pushState({ isAyahJump: true }, "", "#ayahs");
+    } catch (e) {}
+  },
+
+  hasContext() {
+    return this.stack.length > 0;
+  },
+
+  getLatest() {
+    return this.stack.length > 0 ? this.stack[this.stack.length - 1] : null;
+  },
+
+  popContext() {
+    return this.stack.pop();
+  },
+
+  clear() {
+    this.stack = [];
+    this.updateBanner();
+  },
+
+  updateBanner() {
+    const banner = document.getElementById("ayah-return-banner");
+    const labelEl = document.getElementById("return-banner-text");
+    const stickyReturnBtn = document.getElementById("sticky-return-btn");
+    const stickyReturnLabel = document.getElementById("sticky-return-label");
+    const returnDivider = document.querySelector(".sticky-divider.return-divider");
+
+    const ctx = this.getLatest();
+    const currentTab = (document.querySelector(".nav-tab-btn.active") || {}).dataset?.tab;
+
+    if (ctx && currentTab === "ayahs") {
+      if (banner) banner.style.display = "flex";
+      if (labelEl) labelEl.textContent = ctx.label;
+      if (stickyReturnBtn) {
+        stickyReturnBtn.style.display = "inline-flex";
+        if (stickyReturnLabel) {
+          const shortLabel = ctx.label.length > 20 ? ctx.label.substring(0, 18) + '...' : ctx.label;
+          stickyReturnLabel.textContent = `Back: ${shortLabel}`;
+        }
+      }
+      if (returnDivider) returnDivider.style.display = "block";
+    } else {
+      if (banner) banner.style.display = "none";
+      if (stickyReturnBtn) stickyReturnBtn.style.display = "none";
+      if (returnDivider) returnDivider.style.display = "none";
+    }
+  },
+
+  returnToOrigin() {
+    const ctx = this.popContext();
+    if (!ctx) return;
+
+    if (window.AudioSFX) window.AudioSFX.playTab();
+
+    // 1. Switch back to the origin tab
+    if (window.switchAppTab) {
+      window.switchAppTab(ctx.originTab);
+    }
+
+    // 2. Restore window scroll position and modal state
+    setTimeout(() => {
+      window.scrollTo({ top: ctx.originScrollY, behavior: "smooth" });
+
+      if (ctx.modalOpen) {
+        const modal = document.getElementById("occurrence-modal");
+        const modalBody = document.getElementById("occ-modal-body");
+        if (modal) {
+          modal.classList.add("open");
+          if (modalBody && typeof ctx.modalScrollTop === "number") {
+            setTimeout(() => {
+              modalBody.scrollTop = ctx.modalScrollTop;
+            }, 60);
+          }
+        }
+      }
+    }, 120);
+
+    this.updateBanner();
+  }
+};
+window.NavigationHistory = NavigationHistory;
 
 const OmnisearchEngine = {
   isOpen: false,
@@ -474,6 +626,7 @@ function bootApp() {
     { name: "TelemetryToolbar", init: () => initTelemetryToolbar() },
     { name: "ModalHandlers", init: () => initModalHandlers() },
     { name: "OmnisearchEngine", init: () => window.OmnisearchEngine && window.OmnisearchEngine.init() },
+    { name: "NavigationHistory", init: () => window.NavigationHistory && window.NavigationHistory.init() },
     { name: "TelemetryEngine", init: () => window.TelemetryEngine && window.TelemetryEngine.init() },
     { name: "CorpusEngine", init: () => window.CorpusEngine && window.CorpusEngine.init() },
     { name: "AnalyticsStudio", init: () => window.AnalyticsStudio && window.AnalyticsStudio.init() }

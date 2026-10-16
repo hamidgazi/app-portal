@@ -494,6 +494,21 @@ class AnalyticsStudio {
       btn.addEventListener("click", () => {
         if (window.AudioSFX) window.AudioSFX.playTab();
         const modal = document.getElementById("occurrence-modal");
+        const modalBody = document.getElementById("occ-modal-body");
+        const modalTitle = document.getElementById("occ-modal-title");
+        const titleText = modalTitle ? modalTitle.innerText.trim() : "Analytics Studio";
+        const scrollTop = modalBody ? modalBody.scrollTop : 0;
+
+        if (window.NavigationHistory) {
+          window.NavigationHistory.pushReturnContext({
+            originTab: "analytics",
+            originScrollY: window.scrollY,
+            modalOpen: true,
+            modalScrollTop: scrollTop,
+            label: titleText
+          });
+        }
+
         if (modal) modal.classList.remove("open");
 
         const sId = parseInt(btn.dataset.surah, 10);

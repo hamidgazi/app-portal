@@ -505,7 +505,23 @@ class TelemetryEngine {
       modalBody.querySelectorAll(".modal-jump-btn").forEach(btn => {
         btn.addEventListener("click", () => {
           if (window.AudioSFX) window.AudioSFX.playTab();
-          modal.classList.remove("open");
+          const modal = document.getElementById("occurrence-modal");
+          const modalBody = document.getElementById("occ-modal-body");
+          const modalTitle = document.getElementById("occ-modal-title");
+          const titleText = modalTitle ? modalTitle.innerText.trim() : "Semantic Pairs";
+          const scrollTop = modalBody ? modalBody.scrollTop : 0;
+
+          if (window.NavigationHistory) {
+            window.NavigationHistory.pushReturnContext({
+              originTab: "frequency",
+              originScrollY: window.scrollY,
+              modalOpen: true,
+              modalScrollTop: scrollTop,
+              label: titleText
+            });
+          }
+
+          if (modal) modal.classList.remove("open");
           const sId = parseInt(btn.dataset.surah, 10);
           const aNo = parseInt(btn.dataset.ayah, 10);
           if (window.CorpusEngine) {
@@ -572,7 +588,23 @@ class TelemetryEngine {
     modalBody.querySelectorAll(".modal-jump-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         if (window.AudioSFX) window.AudioSFX.playTab();
-        modal.classList.remove("open");
+        const modal = document.getElementById("occurrence-modal");
+        const modalBody = document.getElementById("occ-modal-body");
+        const modalTitle = document.getElementById("occ-modal-title");
+        const titleText = modalTitle ? modalTitle.innerText.trim() : "Word Frequency";
+        const scrollTop = modalBody ? modalBody.scrollTop : 0;
+
+        if (window.NavigationHistory) {
+          window.NavigationHistory.pushReturnContext({
+            originTab: "frequency",
+            originScrollY: window.scrollY,
+            modalOpen: true,
+            modalScrollTop: scrollTop,
+            label: titleText
+          });
+        }
+
+        if (modal) modal.classList.remove("open");
         const sId = parseInt(btn.dataset.surah, 10);
         const aNo = parseInt(btn.dataset.ayah, 10);
         if (window.CorpusEngine) {

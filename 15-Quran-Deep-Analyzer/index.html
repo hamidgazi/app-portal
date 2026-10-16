@@ -180,6 +180,11 @@
       <!-- Sticky Floating Quick-Nav Controller -->
       <div id="sticky-ayah-controller" class="sticky-ayah-controller" aria-label="Quick Ayah Navigation">
         <div class="sticky-inner-wrapper">
+          <button id="sticky-return-btn" class="sticky-return-btn" style="display: none;" title="Return to where you left off">
+            <span class="return-arrow">↩</span>
+            <span id="sticky-return-label" class="sticky-return-label">Back</span>
+          </button>
+          <div class="sticky-divider return-divider" style="display: none;"></div>
           <div class="sticky-select-wrap">
             <select id="sticky-surah-select" class="sticky-select" aria-label="Select Surah">
               <!-- Populated dynamically -->
@@ -199,6 +204,17 @@
             ▲
           </button>
         </div>
+      </div>
+
+      <!-- Floating Cyber-Glass Return to Origin Breadcrumb Banner -->
+      <div id="ayah-return-banner" class="ayah-return-banner" style="display: none;">
+        <button id="btn-return-to-origin" class="return-pill-action" title="Click or press Alt+Left to return to where you left off">
+          <span class="return-icon">↩</span>
+          <span class="return-prefix">Back to:</span>
+          <span id="return-banner-text" class="return-label-highlight">Previous Location</span>
+          <span class="return-hint-tag">Where you left off ↵</span>
+        </button>
+        <button id="btn-dismiss-return" class="return-dismiss-btn" title="Dismiss return banner" aria-label="Dismiss">✕</button>
       </div>
 
       <div class="ayah-analyzer-header">

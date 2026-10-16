@@ -763,6 +763,14 @@ class CorpusEngine {
         if (jumpBtn) {
           jumpBtn.addEventListener("click", () => {
             if (window.AudioSFX) window.AudioSFX.playTab();
+            if (window.NavigationHistory) {
+              window.NavigationHistory.pushReturnContext({
+                originTab: "thematic",
+                originScrollY: window.scrollY,
+                modalOpen: false,
+                label: `Thematic Graph (Surah ${sId}:${aNo})`
+              });
+            }
             this.jumpToAyah(sId, aNo);
           });
         }
@@ -879,6 +887,14 @@ class CorpusEngine {
         if (window.AudioSFX) window.AudioSFX.playTab();
         const sId = parseInt(btn.dataset.surah, 10);
         const aNo = parseInt(btn.dataset.ayah, 10);
+        if (window.NavigationHistory) {
+          window.NavigationHistory.pushReturnContext({
+            originTab: "mutashabihat",
+            originScrollY: window.scrollY,
+            modalOpen: false,
+            label: `Mutashabihat (Parallel Verses)`
+          });
+        }
         this.jumpToAyah(sId, aNo);
       });
     });
