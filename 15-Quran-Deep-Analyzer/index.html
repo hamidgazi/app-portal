@@ -219,19 +219,33 @@
 
       <div class="ayah-analyzer-header">
         <div class="surah-selector-group">
-          <label for="active-surah-select" style="font-size: 0.9rem; font-weight: 700; color: var(--text-muted);">Surah:</label>
-          <select id="active-surah-select" class="styled-select">
-            <!-- Populated dynamically -->
-          </select>
+          <label class="selector-label" style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Surah:</label>
+          <button id="btn-open-surah-picker" class="glass-picker-trigger" aria-haspopup="dialog" title="Click to browse and search all 114 Surahs">
+            <span class="picker-num-badge" id="current-surah-badge">1</span>
+            <div class="picker-text-group">
+              <span class="picker-title-text" id="current-surah-title">Al-Fatihah</span>
+              <span class="picker-sub-text" id="current-surah-arabic">الفاتحة</span>
+            </div>
+            <span class="picker-meta-text" id="current-surah-meta">7 Ayat • Makki</span>
+            <span class="picker-chevron">▼</span>
+          </button>
+          <select id="active-surah-select" style="display: none;"></select>
         </div>
         <div class="para-selector-group">
-          <label for="active-para-select" style="font-size: 0.9rem; font-weight: 700; color: var(--text-muted);">Para (Juz):</label>
-          <select id="active-para-select" class="styled-select">
-            <!-- Populated dynamically -->
-          </select>
+          <label class="selector-label" style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Para (Juz):</label>
+          <button id="btn-open-para-picker" class="glass-picker-trigger" aria-haspopup="dialog" title="Click to browse all 30 Paras">
+            <span class="picker-num-badge gold" id="current-para-badge">1</span>
+            <div class="picker-text-group">
+              <span class="picker-title-text" id="current-para-title">Para 1</span>
+              <span class="picker-sub-text" id="current-para-arabic">الم</span>
+            </div>
+            <span class="picker-meta-text" id="current-para-meta">148 Ayat</span>
+            <span class="picker-chevron">▼</span>
+          </button>
+          <select id="active-para-select" style="display: none;"></select>
         </div>
-        <div style="font-size: 0.85rem; color: var(--text-dim);">
-          Interactive Word-by-Word • Kanzul Iman • Kanzul Irfan • Sirat-ul-Jinan Tafsir
+        <div style="font-size: 0.82rem; color: var(--text-dim); display: flex; align-items: center; gap: 8px;">
+          <span>Interactive Word-by-Word • Kanzul Iman • Sirat-ul-Jinan Tafsir</span>
         </div>
       </div>
 
@@ -262,6 +276,12 @@
             <input type="checkbox" id="toggle-layer-words">
             <span>Word Breakdown</span>
           </label>
+        </div>
+        <div class="font-scale-group" aria-label="Font Size Scaler">
+          <span class="font-scale-label">Font Size:</span>
+          <button id="btn-font-dec" class="font-scale-btn" title="Decrease font size">A−</button>
+          <button id="btn-font-reset" class="font-scale-btn active" title="Reset default font size">A</button>
+          <button id="btn-font-inc" class="font-scale-btn" title="Increase font size">A+</button>
         </div>
       </div>
 
@@ -410,7 +430,73 @@
         <span><kbd>Esc</kbd> Close</span>
       </div>
     </div>
+  <!-- Surah Quick-Picker Luxury Cyber-Glass Modal -->
+  <div id="surah-picker-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="surah-picker-title" style="display: none;">
+    <div class="modal-card picker-modal-card">
+      <div class="modal-header picker-modal-header">
+        <div class="picker-header-title-wrap">
+          <span class="picker-header-icon">📑</span>
+          <div>
+            <h3 id="surah-picker-title" class="picker-header-title">Select Surah (سُورَة)</h3>
+            <span class="picker-header-subtitle">114 Surahs of the Holy Quran</span>
+          </div>
+        </div>
+        <button id="surah-picker-close" class="modal-close-btn" aria-label="Close Surah Picker">✕</button>
+      </div>
+
+      <div class="picker-toolbar">
+        <div class="search-box-wrapper picker-search-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="surah-picker-search" class="search-input" placeholder="Search Surah by name (Baqarah, Yasin), number (36), or Arabic (يس, الملك)...">
+          <button id="surah-picker-search-clear" class="search-clear-btn" style="display:none;" aria-label="Clear search">✕</button>
+        </div>
+        <div class="picker-filters-row">
+          <button class="filter-btn surah-cat-filter-btn active" data-filter="all">All (114)</button>
+          <button class="filter-btn surah-cat-filter-btn" data-filter="makki">🕋 Makki (87)</button>
+          <button class="filter-btn surah-cat-filter-btn" data-filter="madani">🕌 Madani (27)</button>
+        </div>
+      </div>
+
+      <div id="surah-picker-grid" class="picker-grid-container">
+        <!-- Rendered dynamically by corpus-engine.js -->
+      </div>
+    </div>
   </div>
+
+  <!-- Para (Juz) Quick-Picker Luxury Cyber-Glass Modal -->
+  <div id="para-picker-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="para-picker-title" style="display: none;">
+    <div class="modal-card picker-modal-card">
+      <div class="modal-header picker-modal-header">
+        <div class="picker-header-title-wrap">
+          <span class="picker-header-icon" style="color: #fbbf24;">🧭</span>
+          <div>
+            <h3 id="para-picker-title" class="picker-header-title">Select Para / Juz (پارہ / جزء)</h3>
+            <span class="picker-header-subtitle">30 Paras of the Holy Quran</span>
+          </div>
+        </div>
+        <button id="para-picker-close" class="modal-close-btn" aria-label="Close Para Picker">✕</button>
+      </div>
+
+      <div class="picker-toolbar">
+        <div class="search-box-wrapper picker-search-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="para-picker-search" class="search-input" placeholder="Search Para by number (1-30), Arabic name (الم, سيقول), or meaning...">
+          <button id="para-picker-search-clear" class="search-clear-btn" style="display:none;" aria-label="Clear search">✕</button>
+        </div>
+      </div>
+
+      <div id="para-picker-grid" class="picker-grid-container">
+        <!-- Rendered dynamically by corpus-engine.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Always-Visible Return to Origin Pill -->
+  <button id="floating-return-pill" class="floating-return-pill" style="display: none;" title="Return to where you left off (Alt+Left)">
+    <span class="return-arrow" style="font-size: 1.15rem;">↩</span>
+    <span class="floating-return-prefix" style="font-size: 0.8rem; text-transform: uppercase; opacity: 0.85;">Back:</span>
+    <span id="floating-return-label">Previous Location</span>
+  </button>
 
   <!-- App Footer -->
   <footer class="app-footer">

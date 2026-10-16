@@ -59,6 +59,8 @@ class CorpusEngine {
       this.setupSurahControls();
       this.setupParaControls();
       this.setupStickyController();
+      this.setupPickerModals();
+      this.setupFontScaler();
 
       // Load initial Surah (Al-Fatihah)
       await this.loadSurah(1);
@@ -472,6 +474,28 @@ class CorpusEngine {
       paraSelect.value = surahParas[0].para;
     }
 
+    // Update Glass Picker Triggers in header
+    const sBadge = document.getElementById("current-surah-badge");
+    const sTitle = document.getElementById("current-surah-title");
+    const sAr = document.getElementById("current-surah-arabic");
+    const sMeta = document.getElementById("current-surah-meta");
+    if (sBadge) sBadge.textContent = s.surah_id;
+    if (sTitle) sTitle.textContent = s.name_roman;
+    if (sAr) sAr.textContent = s.name_ar;
+    if (sMeta) sMeta.textContent = `${s.total_ayat} Ayat • ${isMakki ? 'Makki' : 'Madani'}`;
+
+    const pBadge = document.getElementById("current-para-badge");
+    const pTitle = document.getElementById("current-para-title");
+    const pAr = document.getElementById("current-para-arabic");
+    const pMeta = document.getElementById("current-para-meta");
+    if (surahParas.length > 0) {
+      const firstP = surahParas[0];
+      if (pBadge) pBadge.textContent = firstP.para;
+      if (pTitle) pTitle.textContent = `Para ${firstP.para}`;
+      if (pAr) pAr.textContent = firstP.name_ar;
+      if (pMeta) pMeta.textContent = `${firstP.total_ayat} Ayat`;
+    }
+
     if (headerContainer) {
       headerContainer.innerHTML = `
         <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; flex-wrap: wrap; gap: 12px;">
@@ -737,27 +761,22 @@ class CorpusEngine {
           `;
         } else {
           const s = data.surah;
-            const ar = a.arabic || a.arabicText || a.text || '';
-            const en = a.translation_english || a.translation_en || '';
-            const ur = a.translation_urdu_kanzul_iman || a.translation_ur_ki || a.translation_ur || '';
-            drawer.innerHTML = `
-              <div class="thematic-preview-header">
-                <div style="display: flex; align-items: center; gap: 8px;">
-                  <span class="para-badge jump-to-para-btn" data-para="${paraObj.para}" title="Para ${paraObj.para}: ${paraObj.name_ar} (${paraObj.name_roman}) • Click to jump">Para ${paraObj.para}</span>
-                  <span class="preview-badge">${s.name_roman || 'Surah ' + sId} (${sId}:${aNo})</span>
-                  ${s.name_ar ? `<span style="font-family: var(--font-arabic); font-size: 1.1rem; color: var(--accent-gold);">${s.name_ar}</span>` : ''}
-                </div>
-                <button class="filter-btn jump-to-ayah-btn" data-surah="${sId}" data-ayah="${aNo}">
-                  📖 Read in Context ↗
-                </button>
+          const a = data.ayah;
+          const ar = a.arabic || a.arabicText || a.text || '';
+          drawer.innerHTML = `
+            <div class="thematic-preview-header">
+              <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <span class="para-badge jump-to-para-btn" data-para="${paraObj.para}" title="Para ${paraObj.para}: ${paraObj.name_ar} (${paraObj.name_roman}) • Click to jump">Para ${paraObj.para}</span>
+                <span class="preview-badge">${s.name_roman || 'Surah ' + sId} (${sId}:${aNo})</span>
+                ${s.name_ar ? `<span style="font-family: var(--font-arabic); font-size: 1.15rem; color: var(--accent-gold);">${s.name_ar}</span>` : ''}
               </div>
-              ${ar ? `<div class="thematic-preview-arabic" dir="rtl">${ar}</div>` : ''}
-              <div class="thematic-preview-translations">
-                ${en ? `<div class="preview-trans-en"><strong>EN:</strong> ${en}</div>` : ''}
-                ${ur ? `<div class="preview-trans-ur" dir="rtl"><span class="compact-trans-tag ur-ki">کنز الایمان</span> ${ur}</div>` : ''}
-              </div>
-            `;
-          }
+              <button class="filter-btn jump-to-ayah-btn" data-surah="${sId}" data-ayah="${aNo}">
+                📖 Read in Ayah Analyzer ↗
+              </button>
+            </div>
+            ${ar ? `<div class="thematic-preview-arabic" dir="rtl">${ar}</div>` : ''}
+          `;
+        }
 
         const jumpBtn = drawer.querySelector(".jump-to-ayah-btn");
         if (jumpBtn) {
@@ -1011,6 +1030,306 @@ class CorpusEngine {
     html += `</div>`;
 
     container.innerHTML = html;
+  }
+
+  setupPickerModals() {
+    // 1. Surah Picker Modal
+    const surahModal = document.getElementById("surah-picker-modal");
+    const openSurahBtn = document.getElementById("btn-open-surah-picker");
+    const closeSurahBtn = document.getElementById("surah-picker-close");
+    const surahSearch = document.getElementById("surah-picker-search");
+    const surahClear = document.getElementById("surah-picker-search-clear");
+    const surahGrid = document.getElementById("surah-picker-grid");
+    const surahCatBtns = document.querySelectorAll(".surah-cat-filter-btn");
+
+    let currentSurahFilter = "all";
+    let currentSurahSearch = "";
+
+    const renderSurahPickerCards = () => {
+      if (!surahGrid || !this.surahsTelemetry) return;
+      let list = [...this.surahsTelemetry];
+
+      if (currentSurahFilter === "makki") {
+        list = list.filter(s => (s.place || "").toLowerCase().includes("makki") || /مک|مك/.test(s.place || ""));
+      } else if (currentSurahFilter === "madani") {
+        list = list.filter(s => (s.place || "").toLowerCase().includes("madani") || /مدن/.test(s.place || ""));
+      }
+
+      if (currentSurahSearch) {
+        const q = currentSurahSearch.toLowerCase().replace(/-/g, ' ');
+        list = list.filter(s => {
+          const rName = (s.name_roman || '').toLowerCase().replace(/-/g, ' ');
+          return rName.includes(q) ||
+                 (s.name_ar && s.name_ar.includes(currentSurahSearch)) ||
+                 String(s.id) === currentSurahSearch ||
+                 String(s.revelation_order) === currentSurahSearch;
+        });
+      }
+
+      if (list.length === 0) {
+        surahGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-dim);">No Surahs match your search.</div>`;
+        return;
+      }
+
+      let html = "";
+      list.forEach(s => {
+        const isMakki = (s.place || "").toLowerCase().includes("makki") || /مک|مك/.test(s.place || "");
+        const isActive = this.activeSurahId === s.id;
+        html += `
+          <div class="surah-picker-card ${isActive ? 'active' : ''}" data-surah="${s.id}">
+            <div class="card-num-box ${isMakki ? 'makki' : 'madani'}">${s.id}</div>
+            <div class="card-info-box">
+              <div class="card-title-row">
+                <span class="card-roman-name">${s.name_roman}</span>
+                <span class="card-arabic-name">${s.name_ar}</span>
+              </div>
+              <div class="card-meta-row">
+                <span class="card-place-tag ${isMakki ? 'makki' : 'madani'}">${isMakki ? 'Makki' : 'Madani'}</span>
+                <span>${s.total_ayat} Ayat</span>
+                <span>Rev #${s.revelation_order}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+      surahGrid.innerHTML = html;
+
+      surahGrid.querySelectorAll(".surah-picker-card").forEach(card => {
+        card.addEventListener("click", () => {
+          if (window.AudioSFX) window.AudioSFX.playClick();
+          const sId = parseInt(card.dataset.surah, 10);
+          this.loadSurah(sId);
+          if (surahModal) surahModal.style.display = "none";
+        });
+      });
+    };
+
+    if (openSurahBtn && surahModal) {
+      openSurahBtn.addEventListener("click", () => {
+        if (window.AudioSFX) window.AudioSFX.playClick();
+        surahModal.style.display = "flex";
+        renderSurahPickerCards();
+        setTimeout(() => surahSearch && surahSearch.focus(), 100);
+      });
+    }
+
+    if (closeSurahBtn && surahModal) {
+      closeSurahBtn.addEventListener("click", () => {
+        if (window.AudioSFX) window.AudioSFX.playClick();
+        surahModal.style.display = "none";
+      });
+    }
+
+    if (surahModal) {
+      surahModal.addEventListener("click", (e) => {
+        if (e.target === surahModal) {
+          surahModal.style.display = "none";
+        }
+      });
+    }
+
+    if (surahSearch) {
+      surahSearch.addEventListener("input", (e) => {
+        currentSurahSearch = e.target.value.trim();
+        if (surahClear) surahClear.style.display = currentSurahSearch ? "block" : "none";
+        renderSurahPickerCards();
+      });
+    }
+
+    if (surahClear) {
+      surahClear.addEventListener("click", () => {
+        surahSearch.value = "";
+        currentSurahSearch = "";
+        surahClear.style.display = "none";
+        renderSurahPickerCards();
+      });
+    }
+
+    surahCatBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        if (window.AudioSFX) window.AudioSFX.playClick();
+        surahCatBtns.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        currentSurahFilter = btn.dataset.filter;
+        renderSurahPickerCards();
+      });
+    });
+
+    // 2. Para (Juz) Picker Modal
+    const paraModal = document.getElementById("para-picker-modal");
+    const openParaBtn = document.getElementById("btn-open-para-picker");
+    const closeParaBtn = document.getElementById("para-picker-close");
+    const paraSearch = document.getElementById("para-picker-search");
+    const paraClear = document.getElementById("para-picker-search-clear");
+    const paraGrid = document.getElementById("para-picker-grid");
+
+    let currentParaSearch = "";
+
+    const renderParaPickerCards = () => {
+      if (!paraGrid) return;
+      const list = (this.paras && this.paras.length) ? this.paras : (window.QURAN_PARAS || []);
+      let filtered = [...list];
+
+      if (currentParaSearch) {
+        const q = currentParaSearch.toLowerCase();
+        filtered = filtered.filter(p => {
+          return String(p.para) === q ||
+                 (p.name_roman && p.name_roman.toLowerCase().includes(q)) ||
+                 (p.name_ar && p.name_ar.includes(currentParaSearch));
+        });
+      }
+
+      if (filtered.length === 0) {
+        paraGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-dim);">No Paras match your search.</div>`;
+        return;
+      }
+
+      let html = "";
+      filtered.forEach(p => {
+        html += `
+          <div class="para-picker-card" data-para="${p.para}" data-start-surah="${p.start_surah}" data-start-ayah="${p.start_ayah}">
+            <div class="card-num-box makki">${p.para}</div>
+            <div class="card-info-box">
+              <div class="card-title-row">
+                <span class="card-roman-name">${p.name_roman}</span>
+                <span class="card-arabic-name">${p.name_ar}</span>
+              </div>
+              <div class="card-meta-row">
+                <span>Starts: Surah ${p.start_surah}:${p.start_ayah}</span>
+                <span>${p.total_ayat} Ayat</span>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+      paraGrid.innerHTML = html;
+
+      paraGrid.querySelectorAll(".para-picker-card").forEach(card => {
+        card.addEventListener("click", () => {
+          if (window.AudioSFX) window.AudioSFX.playClick();
+          const sId = parseInt(card.dataset.startSurah, 10);
+          const aNo = parseInt(card.dataset.startAyah, 10);
+          this.jumpToAyah(sId, aNo);
+          if (paraModal) paraModal.style.display = "none";
+        });
+      });
+    };
+
+    if (openParaBtn && paraModal) {
+      openParaBtn.addEventListener("click", () => {
+        if (window.AudioSFX) window.AudioSFX.playClick();
+        paraModal.style.display = "flex";
+        renderParaPickerCards();
+        setTimeout(() => paraSearch && paraSearch.focus(), 100);
+      });
+    }
+
+    if (closeParaBtn && paraModal) {
+      closeParaBtn.addEventListener("click", () => {
+        if (window.AudioSFX) window.AudioSFX.playClick();
+        paraModal.style.display = "none";
+      });
+    }
+
+    if (paraModal) {
+      paraModal.addEventListener("click", (e) => {
+        if (e.target === paraModal) {
+          paraModal.style.display = "none";
+        }
+      });
+    }
+
+    if (paraSearch) {
+      paraSearch.addEventListener("input", (e) => {
+        currentParaSearch = e.target.value.trim();
+        if (paraClear) paraClear.style.display = currentParaSearch ? "block" : "none";
+        renderParaPickerCards();
+      });
+    }
+
+    if (paraClear) {
+      paraClear.addEventListener("click", () => {
+        paraSearch.value = "";
+        currentParaSearch = "";
+        paraClear.style.display = "none";
+        renderParaPickerCards();
+      });
+    }
+
+    // ESC to close any open picker
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        if (surahModal && surahModal.style.display !== "none") {
+          surahModal.style.display = "none";
+        }
+        if (paraModal && paraModal.style.display !== "none") {
+          paraModal.style.display = "none";
+        }
+      }
+    });
+  }
+
+  setupFontScaler() {
+    const scales = [0.85, 1.0, 1.15, 1.3];
+    let currentIdx = 1; // Default: 1.0
+
+    const saved = localStorage.getItem("quran_font_scale");
+    if (saved) {
+      const val = parseFloat(saved);
+      const foundIdx = scales.indexOf(val);
+      if (foundIdx !== -1) currentIdx = foundIdx;
+    }
+
+    const applyScale = () => {
+      const scale = scales[currentIdx];
+      document.documentElement.style.setProperty('--ayah-font-scale', scale);
+      localStorage.setItem("quran_font_scale", scale);
+
+      const resetBtn = document.getElementById("btn-font-reset");
+      if (resetBtn) {
+        if (scale === 1.0) {
+          resetBtn.classList.add("active");
+          resetBtn.textContent = "A";
+        } else {
+          resetBtn.classList.remove("active");
+          resetBtn.textContent = `${Math.round(scale * 100)}%`;
+        }
+      }
+    };
+
+    applyScale();
+
+    const decBtn = document.getElementById("btn-font-dec");
+    const incBtn = document.getElementById("btn-font-inc");
+    const resetBtn = document.getElementById("btn-font-reset");
+
+    if (decBtn) {
+      decBtn.addEventListener("click", () => {
+        if (window.AudioSFX) window.AudioSFX.playClick();
+        if (currentIdx > 0) {
+          currentIdx--;
+          applyScale();
+        }
+      });
+    }
+
+    if (incBtn) {
+      incBtn.addEventListener("click", () => {
+        if (window.AudioSFX) window.AudioSFX.playClick();
+        if (currentIdx < scales.length - 1) {
+          currentIdx++;
+          applyScale();
+        }
+      });
+    }
+
+    if (resetBtn) {
+      resetBtn.addEventListener("click", () => {
+        if (window.AudioSFX) window.AudioSFX.playClick();
+        currentIdx = 1;
+        applyScale();
+      });
+    }
   }
 }
 

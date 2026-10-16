@@ -101,6 +101,7 @@ const NavigationHistory = {
     const returnBtn = document.getElementById("btn-return-to-origin");
     const stickyReturnBtn = document.getElementById("sticky-return-btn");
     const dismissBtn = document.getElementById("btn-dismiss-return");
+    const floatingReturnBtn = document.getElementById("floating-return-pill");
 
     if (returnBtn) {
       returnBtn.addEventListener("click", () => {
@@ -110,6 +111,12 @@ const NavigationHistory = {
 
     if (stickyReturnBtn) {
       stickyReturnBtn.addEventListener("click", () => {
+        this.returnToOrigin();
+      });
+    }
+
+    if (floatingReturnBtn) {
+      floatingReturnBtn.addEventListener("click", () => {
         this.returnToOrigin();
       });
     }
@@ -148,8 +155,9 @@ const NavigationHistory = {
   },
 
   pushReturnContext(ctx) {
+    const origin = (ctx.originTab === "analytics") ? "studio" : (ctx.originTab || "studio");
     this.stack.push({
-      originTab: ctx.originTab || "analytics",
+      originTab: origin,
       originScrollY: typeof ctx.originScrollY === "number" ? ctx.originScrollY : window.scrollY,
       modalOpen: !!ctx.modalOpen,
       modalScrollTop: ctx.modalScrollTop || 0,
@@ -186,6 +194,8 @@ const NavigationHistory = {
     const stickyReturnBtn = document.getElementById("sticky-return-btn");
     const stickyReturnLabel = document.getElementById("sticky-return-label");
     const returnDivider = document.querySelector(".sticky-divider.return-divider");
+    const floatingPill = document.getElementById("floating-return-pill");
+    const floatingLabel = document.getElementById("floating-return-label");
 
     const ctx = this.getLatest();
     const currentTab = (document.querySelector(".nav-tab-btn.active") || {}).dataset?.tab;
@@ -201,10 +211,18 @@ const NavigationHistory = {
         }
       }
       if (returnDivider) returnDivider.style.display = "block";
+      if (floatingPill) {
+        floatingPill.style.display = "inline-flex";
+        if (floatingLabel) {
+          const shortLabel = ctx.label.length > 25 ? ctx.label.substring(0, 22) + '...' : ctx.label;
+          floatingLabel.textContent = shortLabel;
+        }
+      }
     } else {
       if (banner) banner.style.display = "none";
       if (stickyReturnBtn) stickyReturnBtn.style.display = "none";
       if (returnDivider) returnDivider.style.display = "none";
+      if (floatingPill) floatingPill.style.display = "none";
     }
   },
 
@@ -215,8 +233,9 @@ const NavigationHistory = {
     if (window.AudioSFX) window.AudioSFX.playTab();
 
     // 1. Switch back to the origin tab
+    const targetTab = (ctx.originTab === "analytics") ? "studio" : (ctx.originTab || "studio");
     if (window.switchAppTab) {
-      window.switchAppTab(ctx.originTab);
+      window.switchAppTab(targetTab);
     }
 
     // 2. Restore window scroll position and modal state

@@ -134,8 +134,12 @@ class AnalyticsStudio {
 
           <div class="surah-stats-row">
             <div class="surah-stat-col">
-              <div class="stat-title">Mentions</div>
-              <div class="stat-number" style="color: #34d399; font-size: 1.25rem;">${item.count}</div>
+              <div class="stat-title">${item.tokens_count && item.verses_count && item.tokens_count !== item.verses_count ? 'Words / Verses' : 'Mentions'}</div>
+              <div class="stat-number" style="color: #34d399; font-size: 1.1rem; white-space: nowrap;">
+                ${item.tokens_count && item.verses_count && item.tokens_count !== item.verses_count 
+                  ? `${item.tokens_count}w • ${item.verses_count}v` 
+                  : (item.tokens_count || item.count)}
+              </div>
             </div>
             <div class="surah-stat-col">
               <div class="stat-title">Surahs</div>
@@ -198,19 +202,25 @@ class AnalyticsStudio {
     const items = this.entities.sajdah_verses || [];
     let html = `<div class="surah-grid">`;
     items.forEach((s, idx) => {
+      const p = (window.CorpusEngine && window.CorpusEngine.getParaForAyah) ? window.CorpusEngine.getParaForAyah(s.surah, s.ayah) : null;
+      const pBadge = p ? `<span class="para-badge-inline" title="Para ${p.para}: ${p.name_ar}">Para ${p.para}</span> ` : '';
+      const labelText = `Sajdah: Surah ${s.surah_name} (${s.surah}:${s.ayah})`;
       html += `
-        <div class="surah-card">
+        <div class="surah-card" style="display: flex; flex-direction: column; justify-content: space-between;">
           <div class="surah-card-header">
             <div class="surah-num-badge" style="color: #fbbf24;">۩ ${idx + 1}</div>
             <div class="surah-titles">
-              <div class="surah-name-roman">Surah ${s.surah_name}</div>
+              <div class="surah-name-roman">${pBadge}Surah ${s.surah_name}</div>
               <span class="surah-type-badge ${s.school === 'Unanimous' ? 'madani' : 'makki'}">${s.school}</span>
             </div>
             <div class="count-pill">Ayah ${s.surah}:${s.ayah}</div>
           </div>
+          <div id="sajdah-card-ayah-${idx}" class="occ-verse-content" style="margin: 12px 0; min-height: 48px;">
+            <div class="occ-loading-spinner" style="font-size: 0.8rem;">Loading Ayah ${s.surah}:${s.ayah}...</div>
+          </div>
           <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
-            <button class="filter-btn studio-jump-btn" data-surah="${s.surah}" data-ayah="${s.ayah}">
-              Open Ayah in Reader
+            <button class="filter-btn studio-jump-btn" data-surah="${s.surah}" data-ayah="${s.ayah}" data-label="${labelText}">
+              Open Ayah in Reader ↗
             </button>
           </div>
         </div>
@@ -219,6 +229,23 @@ class AnalyticsStudio {
     html += `</div>`;
     container.innerHTML = html;
     this.bindStudioJumpBtns(container);
+
+    // Asynchronously populate clean Arabic text for all 15 Sajdah verses
+    items.forEach(async (s, idx) => {
+      const el = document.getElementById(`sajdah-card-ayah-${idx}`);
+      if (!el) return;
+      if (window.CorpusEngine && window.CorpusEngine.getAyahData) {
+        try {
+          const ayahObj = await window.CorpusEngine.getAyahData(s.surah, s.ayah);
+          if (ayahObj && ayahObj.ayah) {
+            const ar = ayahObj.ayah.arabic || ayahObj.ayah.arabicText || ayahObj.ayah.text || '';
+            el.innerHTML = ar ? `<div class="occ-ayah-arabic" dir="rtl" style="font-size: 1.35rem; line-height: 1.9; color: #f8fafc;">${ar}</div>` : '';
+            return;
+          }
+        } catch (e) {}
+      }
+      el.innerHTML = `<div style="color: var(--text-dim); font-size: 0.85rem;">Ayah ${s.surah}:${s.ayah}</div>`;
+    });
   }
 
   // 2. OPPOSITE WORDS & RHETORICAL TIBAQ
@@ -401,10 +428,14 @@ class AnalyticsStudio {
     const modalBody = document.getElementById("occ-modal-body");
     if (!modal || !modalTitle || !modalBody) return;
 
+    const dualText = (data.tokens_count && data.verses_count && data.tokens_count !== data.verses_count)
+      ? `${data.tokens_count} Words • ${data.verses_count} Verses`
+      : `${data.tokens_count || data.count} Mentions`;
+
     modalTitle.innerHTML = `
       <span>${data.name_en}</span>
       <span style="font-family: var(--font-arabic); font-size: 1.5rem; color: #38bdf8;">${data.name_ar}</span>
-      <span class="count-pill">${data.count} Mentions</span>
+      <span class="count-pill">${dualText}</span>
     `;
 
     this.renderOccurrenceCards(modalBody, data.occurrences || []);
@@ -496,14 +527,17 @@ class AnalyticsStudio {
         const modal = document.getElementById("occurrence-modal");
         const modalBody = document.getElementById("occ-modal-body");
         const modalTitle = document.getElementById("occ-modal-title");
-        const titleText = modalTitle ? modalTitle.innerText.trim() : "Analytics Studio";
-        const scrollTop = modalBody ? modalBody.scrollTop : 0;
+        const isModalOpen = modal && modal.classList.contains("open");
+        const titleText = isModalOpen
+          ? (modalTitle ? modalTitle.innerText.trim() : "Word Occurrences")
+          : (btn.dataset.label || "Analytics Studio");
+        const scrollTop = (isModalOpen && modalBody) ? modalBody.scrollTop : 0;
 
         if (window.NavigationHistory) {
           window.NavigationHistory.pushReturnContext({
-            originTab: "analytics",
+            originTab: "studio",
             originScrollY: window.scrollY,
-            modalOpen: true,
+            modalOpen: isModalOpen,
             modalScrollTop: scrollTop,
             label: titleText
           });

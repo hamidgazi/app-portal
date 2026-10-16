@@ -4,7 +4,9 @@
       "name_en": "Musa",
       "name_ar": "موسى",
       "title": "Kalimullah (Spoke with God)",
-      "count": 131,
+      "count": 136,
+      "tokens_count": 136,
+      "verses_count": 131,
       "surahs_count": 34,
       "surahs": [
         2,
@@ -573,7 +575,9 @@
       "name_en": "Ibrahim",
       "name_ar": "إبراهيم",
       "title": "Khalilullah (Friend of God)",
-      "count": 63,
+      "count": 69,
+      "tokens_count": 69,
+      "verses_count": 63,
       "surahs_count": 25,
       "surahs": [
         2,
@@ -862,6 +866,8 @@
       "name_ar": "نوح",
       "title": "Najiyullah (Rescued by God)",
       "count": 43,
+      "tokens_count": 43,
+      "verses_count": 43,
       "surahs_count": 28,
       "surahs": [
         3,
@@ -1069,10 +1075,132 @@
       ]
     },
     {
+      "name_en": "Yusuf",
+      "name_ar": "يوسف",
+      "title": "Al-Siddiq (The Truthful)",
+      "count": 27,
+      "tokens_count": 27,
+      "verses_count": 26,
+      "surahs_count": 3,
+      "surahs": [
+        6,
+        12,
+        40
+      ],
+      "occurrences": [
+        [
+          6,
+          84
+        ],
+        [
+          12,
+          4
+        ],
+        [
+          12,
+          7
+        ],
+        [
+          12,
+          8
+        ],
+        [
+          12,
+          9
+        ],
+        [
+          12,
+          10
+        ],
+        [
+          12,
+          11
+        ],
+        [
+          12,
+          17
+        ],
+        [
+          12,
+          21
+        ],
+        [
+          12,
+          29
+        ],
+        [
+          12,
+          46
+        ],
+        [
+          12,
+          51
+        ],
+        [
+          12,
+          56
+        ],
+        [
+          12,
+          58
+        ],
+        [
+          12,
+          69
+        ],
+        [
+          12,
+          76
+        ],
+        [
+          12,
+          77
+        ],
+        [
+          12,
+          80
+        ],
+        [
+          12,
+          84
+        ],
+        [
+          12,
+          85
+        ],
+        [
+          12,
+          87
+        ],
+        [
+          12,
+          89
+        ],
+        [
+          12,
+          90
+        ],
+        [
+          12,
+          94
+        ],
+        [
+          12,
+          99
+        ],
+        [
+          40,
+          34
+        ]
+      ]
+    },
+    {
       "name_en": "Lut",
       "name_ar": "لوط",
       "title": "Prophet to Sodom & Gomorrah",
       "count": 27,
+      "tokens_count": 27,
+      "verses_count": 27,
       "surahs_count": 14,
       "surahs": [
         6,
@@ -1202,128 +1330,12 @@
       ]
     },
     {
-      "name_en": "Yusuf",
-      "name_ar": "يوسف",
-      "title": "Al-Siddiq (The Truthful)",
-      "count": 26,
-      "surahs_count": 3,
-      "surahs": [
-        6,
-        12,
-        40
-      ],
-      "occurrences": [
-        [
-          6,
-          84
-        ],
-        [
-          12,
-          4
-        ],
-        [
-          12,
-          7
-        ],
-        [
-          12,
-          8
-        ],
-        [
-          12,
-          9
-        ],
-        [
-          12,
-          10
-        ],
-        [
-          12,
-          11
-        ],
-        [
-          12,
-          17
-        ],
-        [
-          12,
-          21
-        ],
-        [
-          12,
-          29
-        ],
-        [
-          12,
-          46
-        ],
-        [
-          12,
-          51
-        ],
-        [
-          12,
-          56
-        ],
-        [
-          12,
-          58
-        ],
-        [
-          12,
-          69
-        ],
-        [
-          12,
-          76
-        ],
-        [
-          12,
-          77
-        ],
-        [
-          12,
-          80
-        ],
-        [
-          12,
-          84
-        ],
-        [
-          12,
-          85
-        ],
-        [
-          12,
-          87
-        ],
-        [
-          12,
-          89
-        ],
-        [
-          12,
-          90
-        ],
-        [
-          12,
-          94
-        ],
-        [
-          12,
-          99
-        ],
-        [
-          40,
-          34
-        ]
-      ]
-    },
-    {
       "name_en": "Adam",
       "name_ar": "آدم",
       "title": "Abu al-Bashar (Father of Mankind)",
       "count": 25,
+      "tokens_count": 25,
+      "verses_count": 25,
       "surahs_count": 9,
       "surahs": [
         2,
@@ -1444,6 +1456,8 @@
       "name_ar": "عيسى",
       "title": "Al-Masih & Ruhullah (Spirit from God)",
       "count": 25,
+      "tokens_count": 25,
+      "verses_count": 25,
       "surahs_count": 11,
       "surahs": [
         2,
@@ -1566,6 +1580,8 @@
       "name_ar": "هارون",
       "title": "Brother of Musa & High Priest",
       "count": 20,
+      "tokens_count": 20,
+      "verses_count": 20,
       "surahs_count": 13,
       "surahs": [
         2,
@@ -1669,7 +1685,9 @@
       "name_en": "Ishaq",
       "name_ar": "إسحاق",
       "title": "Son of Ibrahim & Patriarch",
-      "count": 16,
+      "count": 17,
+      "tokens_count": 17,
+      "verses_count": 16,
       "surahs_count": 12,
       "surahs": [
         2,
@@ -1756,7 +1774,9 @@
       "name_en": "Sulayman",
       "name_ar": "سليمان",
       "title": "King & Prophet of Wisdom",
-      "count": 16,
+      "count": 17,
+      "tokens_count": 17,
+      "verses_count": 16,
       "surahs_count": 7,
       "surahs": [
         2,
@@ -1839,6 +1859,8 @@
       "name_ar": "يعقوب",
       "title": "Isra'il (Servant of God)",
       "count": 16,
+      "tokens_count": 16,
+      "verses_count": 16,
       "surahs_count": 10,
       "surahs": [
         2,
@@ -1924,6 +1946,8 @@
       "name_ar": "داوود",
       "title": "King & Prophet granted Zabur",
       "count": 16,
+      "tokens_count": 16,
+      "verses_count": 16,
       "surahs_count": 9,
       "surahs": [
         2,
@@ -2008,6 +2032,8 @@
       "name_ar": "إسماعيل",
       "title": "Dhabihullah (The Sacrificed)",
       "count": 12,
+      "tokens_count": 12,
+      "verses_count": 12,
       "surahs_count": 8,
       "surahs": [
         2,
@@ -2074,7 +2100,9 @@
       "name_en": "Shu'ayb",
       "name_ar": "شعيب",
       "title": "Khatib al-Anbiya (Prophet to Madyan)",
-      "count": 10,
+      "count": 11,
+      "tokens_count": 11,
+      "verses_count": 10,
       "surahs_count": 4,
       "surahs": [
         7,
@@ -2130,6 +2158,8 @@
       "name_ar": "صالح",
       "title": "Prophet to Thamud & She-Camel",
       "count": 9,
+      "tokens_count": 9,
+      "verses_count": 9,
       "surahs_count": 4,
       "surahs": [
         7,
@@ -2177,10 +2207,53 @@
       ]
     },
     {
+      "name_en": "Zakariyya",
+      "name_ar": "زكريا",
+      "title": "Father of Yahya & Guardian of Maryam",
+      "count": 7,
+      "tokens_count": 7,
+      "verses_count": 6,
+      "surahs_count": 4,
+      "surahs": [
+        3,
+        6,
+        19,
+        21
+      ],
+      "occurrences": [
+        [
+          3,
+          37
+        ],
+        [
+          3,
+          38
+        ],
+        [
+          6,
+          85
+        ],
+        [
+          19,
+          2
+        ],
+        [
+          19,
+          7
+        ],
+        [
+          21,
+          89
+        ]
+      ]
+    },
+    {
       "name_en": "Hud",
       "name_ar": "هود",
       "title": "Prophet to Ancient 'Ad",
       "count": 7,
+      "tokens_count": 7,
+      "verses_count": 7,
       "surahs_count": 3,
       "surahs": [
         7,
@@ -2219,49 +2292,12 @@
       ]
     },
     {
-      "name_en": "Zakariyya",
-      "name_ar": "زكريا",
-      "title": "Father of Yahya & Guardian of Maryam",
-      "count": 6,
-      "surahs_count": 4,
-      "surahs": [
-        3,
-        6,
-        19,
-        21
-      ],
-      "occurrences": [
-        [
-          3,
-          37
-        ],
-        [
-          3,
-          38
-        ],
-        [
-          6,
-          85
-        ],
-        [
-          19,
-          2
-        ],
-        [
-          19,
-          7
-        ],
-        [
-          21,
-          89
-        ]
-      ]
-    },
-    {
       "name_en": "Yahya",
       "name_ar": "يحيى",
       "title": "John the Baptist (Al-Hasoor)",
       "count": 5,
+      "tokens_count": 5,
+      "verses_count": 5,
       "surahs_count": 4,
       "surahs": [
         3,
@@ -2295,15 +2331,16 @@
     {
       "name_en": "Muhammad",
       "name_ar": "محمد",
-      "title": "Khatam an-Nabiyyin (incl. Ahmad)",
-      "count": 5,
-      "surahs_count": 5,
+      "title": "Khatam an-Nabiyyin (Seal of Prophets)",
+      "count": 4,
+      "tokens_count": 4,
+      "verses_count": 4,
+      "surahs_count": 4,
       "surahs": [
         3,
         33,
         47,
-        48,
-        61
+        48
       ],
       "occurrences": [
         [
@@ -2321,10 +2358,6 @@
         [
           48,
           29
-        ],
-        [
-          61,
-          6
         ]
       ]
     },
@@ -2333,6 +2366,8 @@
       "name_ar": "أيوب",
       "title": "The Exemplar of Sabr (Patience)",
       "count": 4,
+      "tokens_count": 4,
+      "verses_count": 4,
       "surahs_count": 4,
       "surahs": [
         4,
@@ -2364,6 +2399,8 @@
       "name_ar": "يونس",
       "title": "Dhun-Nun (Companion of the Fish)",
       "count": 4,
+      "tokens_count": 4,
+      "verses_count": 4,
       "surahs_count": 4,
       "surahs": [
         4,
@@ -2395,6 +2432,8 @@
       "name_ar": "إلياس",
       "title": "Prophet Elijah",
       "count": 3,
+      "tokens_count": 3,
+      "verses_count": 3,
       "surahs_count": 2,
       "surahs": [
         6,
@@ -2420,6 +2459,8 @@
       "name_ar": "إدريس",
       "title": "Elevated to High Station (Enoch)",
       "count": 2,
+      "tokens_count": 2,
+      "verses_count": 2,
       "surahs_count": 2,
       "surahs": [
         19,
@@ -2441,6 +2482,8 @@
       "name_ar": "اليسع",
       "title": "Prophet Elisha",
       "count": 2,
+      "tokens_count": 2,
+      "verses_count": 2,
       "surahs_count": 2,
       "surahs": [
         6,
@@ -2462,6 +2505,8 @@
       "name_ar": "ذو الكفل",
       "title": "The Constant & Patient",
       "count": 2,
+      "tokens_count": 2,
+      "verses_count": 2,
       "surahs_count": 2,
       "surahs": [
         21,
@@ -2477,6 +2522,24 @@
           48
         ]
       ]
+    },
+    {
+      "name_en": "Ahmad",
+      "name_ar": "أحمد",
+      "title": "Prophesied Name of Muhammad ﷺ",
+      "count": 1,
+      "tokens_count": 1,
+      "verses_count": 1,
+      "surahs_count": 1,
+      "surahs": [
+        61
+      ],
+      "occurrences": [
+        [
+          61,
+          6
+        ]
+      ]
     }
   ],
   "places": [
@@ -2484,6 +2547,8 @@
       "name_en": "Al-Masjid al-Haram",
       "name_ar": "المسجد الحرام",
       "count": 15,
+      "tokens_count": 15,
+      "verses_count": 15,
       "surahs_count": 7,
       "surahs": [
         2,
@@ -2561,6 +2626,8 @@
       "name_en": "Al-Madinah",
       "name_ar": "المدينة",
       "count": 14,
+      "tokens_count": 14,
+      "verses_count": 14,
       "surahs_count": 10,
       "surahs": [
         7,
@@ -2637,6 +2704,8 @@
       "name_en": "Misr (Egypt)",
       "name_ar": "مصر",
       "count": 5,
+      "tokens_count": 5,
+      "verses_count": 5,
       "surahs_count": 4,
       "surahs": [
         2,
@@ -2671,6 +2740,8 @@
       "name_en": "Tur Sina / Mount Sinai",
       "name_ar": "طور سيناء",
       "count": 2,
+      "tokens_count": 2,
+      "verses_count": 2,
       "surahs_count": 2,
       "surahs": [
         23,
@@ -2691,6 +2762,8 @@
       "name_en": "Saba' (Sheba)",
       "name_ar": "سبأ",
       "count": 2,
+      "tokens_count": 2,
+      "verses_count": 2,
       "surahs_count": 2,
       "surahs": [
         27,
@@ -2711,6 +2784,8 @@
       "name_en": "Sacred Valley Tuwa",
       "name_ar": "طوى",
       "count": 2,
+      "tokens_count": 2,
+      "verses_count": 2,
       "surahs_count": 2,
       "surahs": [
         20,
@@ -2728,9 +2803,28 @@
       ]
     },
     {
+      "name_en": "Al-Safa & Al-Marwah",
+      "name_ar": "الصفا والمروة",
+      "count": 2,
+      "tokens_count": 2,
+      "verses_count": 1,
+      "surahs_count": 1,
+      "surahs": [
+        2
+      ],
+      "occurrences": [
+        [
+          2,
+          158
+        ]
+      ]
+    },
+    {
       "name_en": "Makkah",
       "name_ar": "مكة",
       "count": 1,
+      "tokens_count": 1,
+      "verses_count": 1,
       "surahs_count": 1,
       "surahs": [
         48
@@ -2746,6 +2840,8 @@
       "name_en": "Bakkah",
       "name_ar": "بكة",
       "count": 1,
+      "tokens_count": 1,
+      "verses_count": 1,
       "surahs_count": 1,
       "surahs": [
         3
@@ -2761,6 +2857,8 @@
       "name_en": "Yathrib",
       "name_ar": "يثرب",
       "count": 1,
+      "tokens_count": 1,
+      "verses_count": 1,
       "surahs_count": 1,
       "surahs": [
         33
@@ -2776,6 +2874,8 @@
       "name_en": "Babil (Babylon)",
       "name_ar": "بابل",
       "count": 1,
+      "tokens_count": 1,
+      "verses_count": 1,
       "surahs_count": 1,
       "surahs": [
         2
@@ -2791,6 +2891,8 @@
       "name_en": "Iram (Pillars)",
       "name_ar": "إرم",
       "count": 1,
+      "tokens_count": 1,
+      "verses_count": 1,
       "surahs_count": 1,
       "surahs": [
         89
@@ -2806,6 +2908,8 @@
       "name_en": "Al-Ahqaf (Sand Dunes)",
       "name_ar": "الأحقاف",
       "count": 1,
+      "tokens_count": 1,
+      "verses_count": 1,
       "surahs_count": 1,
       "surahs": [
         46
@@ -2821,6 +2925,8 @@
       "name_en": "Mount Judi",
       "name_ar": "الجودي",
       "count": 1,
+      "tokens_count": 1,
+      "verses_count": 1,
       "surahs_count": 1,
       "surahs": [
         11
@@ -2836,6 +2942,8 @@
       "name_en": "Badr",
       "name_ar": "بدر",
       "count": 1,
+      "tokens_count": 1,
+      "verses_count": 1,
       "surahs_count": 1,
       "surahs": [
         3
@@ -2851,6 +2959,8 @@
       "name_en": "Hunayn",
       "name_ar": "حنين",
       "count": 1,
+      "tokens_count": 1,
+      "verses_count": 1,
       "surahs_count": 1,
       "surahs": [
         9
@@ -2866,6 +2976,8 @@
       "name_en": "Al-Masjid al-Aqsa",
       "name_ar": "المسجد الأقصى",
       "count": 1,
+      "tokens_count": 1,
+      "verses_count": 1,
       "surahs_count": 1,
       "surahs": [
         17
@@ -2878,24 +2990,11 @@
       ]
     },
     {
-      "name_en": "Al-Safa & Al-Marwah",
-      "name_ar": "الصفا والمروة",
-      "count": 1,
-      "surahs_count": 1,
-      "surahs": [
-        2
-      ],
-      "occurrences": [
-        [
-          2,
-          158
-        ]
-      ]
-    },
-    {
       "name_en": "Arafat",
       "name_ar": "عرفات",
       "count": 1,
+      "tokens_count": 1,
+      "verses_count": 1,
       "surahs_count": 1,
       "surahs": [
         2
@@ -2912,7 +3011,9 @@
     {
       "name_en": "Bani Isra'il (Children of Israel)",
       "name_ar": "بنو إسرائيل",
-      "count": 41,
+      "count": 43,
+      "tokens_count": 43,
+      "verses_count": 41,
       "surahs_count": 17,
       "surahs": [
         2,
@@ -3103,7 +3204,9 @@
     {
       "name_en": "Thamud (People of Salih)",
       "name_ar": "ثمود",
-      "count": 25,
+      "count": 26,
+      "tokens_count": 26,
+      "verses_count": 25,
       "surahs_count": 21,
       "surahs": [
         7,
@@ -3234,7 +3337,9 @@
     {
       "name_en": "'Ad (People of Hud)",
       "name_ar": "عاد",
-      "count": 23,
+      "count": 24,
+      "tokens_count": 24,
+      "verses_count": 23,
       "surahs_count": 18,
       "surahs": [
         7,
@@ -3355,6 +3460,8 @@
       "name_en": "Madyan (People of Shu'ayb)",
       "name_ar": "مدين",
       "count": 10,
+      "tokens_count": 10,
+      "verses_count": 10,
       "surahs_count": 7,
       "surahs": [
         7,
@@ -3412,6 +3519,8 @@
       "name_en": "Ashab al-Ayka (Dwellers of the Wood)",
       "name_ar": "أصحاب الأيكة",
       "count": 4,
+      "tokens_count": 4,
+      "verses_count": 4,
       "surahs_count": 4,
       "surahs": [
         15,
@@ -3439,29 +3548,11 @@
       ]
     },
     {
-      "name_en": "Ashab al-Rass",
-      "name_ar": "أصحاب الرس",
-      "count": 2,
-      "surahs_count": 2,
-      "surahs": [
-        25,
-        50
-      ],
-      "occurrences": [
-        [
-          25,
-          38
-        ],
-        [
-          50,
-          12
-        ]
-      ]
-    },
-    {
       "name_en": "Yajuj & Majuj (Gog & Magog)",
       "name_ar": "يأجوج ومأجوج",
-      "count": 2,
+      "count": 4,
+      "tokens_count": 4,
+      "verses_count": 2,
       "surahs_count": 2,
       "surahs": [
         18,
@@ -3479,9 +3570,33 @@
       ]
     },
     {
+      "name_en": "Ashab al-Rass",
+      "name_ar": "أصحاب الرس",
+      "count": 2,
+      "tokens_count": 2,
+      "verses_count": 2,
+      "surahs_count": 2,
+      "surahs": [
+        25,
+        50
+      ],
+      "occurrences": [
+        [
+          25,
+          38
+        ],
+        [
+          50,
+          12
+        ]
+      ]
+    },
+    {
       "name_en": "Qawm Tubba'",
       "name_ar": "قوم تبع",
       "count": 2,
+      "tokens_count": 2,
+      "verses_count": 2,
       "surahs_count": 2,
       "surahs": [
         44,
@@ -3502,6 +3617,8 @@
       "name_en": "Quraysh",
       "name_ar": "قريش",
       "count": 1,
+      "tokens_count": 1,
+      "verses_count": 1,
       "surahs_count": 1,
       "surahs": [
         106
@@ -3517,6 +3634,8 @@
       "name_en": "Al-Rum (Byzantines)",
       "name_ar": "الروم",
       "count": 1,
+      "tokens_count": 1,
+      "verses_count": 1,
       "surahs_count": 1,
       "surahs": [
         30
@@ -3532,6 +3651,8 @@
       "name_en": "Ashab al-Kahf (People of the Cave)",
       "name_ar": "أصحاب الكهف",
       "count": 1,
+      "tokens_count": 1,
+      "verses_count": 1,
       "surahs_count": 1,
       "surahs": [
         18
@@ -3547,6 +3668,8 @@
       "name_en": "Ashab al-Ukhdud (People of the Ditch)",
       "name_ar": "أصحاب الأخدود",
       "count": 1,
+      "tokens_count": 1,
+      "verses_count": 1,
       "surahs_count": 1,
       "surahs": [
         85
@@ -3564,7 +3687,9 @@
       "name_en": "Fir'awn (Pharaoh)",
       "name_ar": "فرعون",
       "category": "Adversary",
-      "count": 67,
+      "count": 74,
+      "tokens_count": 74,
+      "verses_count": 67,
       "surahs_count": 27,
       "surahs": [
         2,
@@ -3870,7 +3995,9 @@
       "name_en": "Maryam (Mary)",
       "name_ar": "مريم",
       "category": "Pious Figure (Only Named Woman)",
-      "count": 31,
+      "count": 34,
+      "tokens_count": 34,
+      "verses_count": 31,
       "surahs_count": 12,
       "surahs": [
         2,
@@ -4018,6 +4145,8 @@
       "name_ar": "إبليس",
       "category": "Adversary",
       "count": 11,
+      "tokens_count": 11,
+      "verses_count": 11,
       "surahs_count": 9,
       "surahs": [
         2,
@@ -4082,6 +4211,8 @@
       "name_ar": "هامان",
       "category": "Adversary",
       "count": 6,
+      "tokens_count": 6,
+      "verses_count": 6,
       "surahs_count": 3,
       "surahs": [
         28,
@@ -4120,6 +4251,8 @@
       "name_ar": "قارون",
       "category": "Adversary",
       "count": 4,
+      "tokens_count": 4,
+      "verses_count": 4,
       "surahs_count": 3,
       "surahs": [
         28,
@@ -4150,6 +4283,8 @@
       "name_ar": "السامري",
       "category": "Adversary",
       "count": 3,
+      "tokens_count": 3,
+      "verses_count": 3,
       "surahs_count": 1,
       "surahs": [
         20
@@ -4174,6 +4309,8 @@
       "name_ar": "جبريل",
       "category": "Archangel",
       "count": 3,
+      "tokens_count": 3,
+      "verses_count": 3,
       "surahs_count": 2,
       "surahs": [
         2,
@@ -4199,6 +4336,8 @@
       "name_ar": "ذو القرنين",
       "category": "Righteous Ruler",
       "count": 3,
+      "tokens_count": 3,
+      "verses_count": 3,
       "surahs_count": 1,
       "surahs": [
         18
@@ -4223,6 +4362,8 @@
       "name_ar": "جالوت",
       "category": "Tyrant / Adversary",
       "count": 3,
+      "tokens_count": 3,
+      "verses_count": 3,
       "surahs_count": 1,
       "surahs": [
         2
@@ -4243,10 +4384,30 @@
       ]
     },
     {
+      "name_en": "Harut & Marut",
+      "name_ar": "هاروت وماروت",
+      "category": "Angels at Babylon",
+      "count": 2,
+      "tokens_count": 2,
+      "verses_count": 1,
+      "surahs_count": 1,
+      "surahs": [
+        2
+      ],
+      "occurrences": [
+        [
+          2,
+          102
+        ]
+      ]
+    },
+    {
       "name_en": "Luqman al-Hakim",
       "name_ar": "لقمان",
       "category": "Pious Sage",
       "count": 2,
+      "tokens_count": 2,
+      "verses_count": 2,
       "surahs_count": 1,
       "surahs": [
         31
@@ -4267,6 +4428,8 @@
       "name_ar": "طالوت",
       "category": "Righteous King",
       "count": 2,
+      "tokens_count": 2,
+      "verses_count": 2,
       "surahs_count": 1,
       "surahs": [
         2
@@ -4287,6 +4450,8 @@
       "name_ar": "ميكائيل",
       "category": "Archangel",
       "count": 1,
+      "tokens_count": 1,
+      "verses_count": 1,
       "surahs_count": 1,
       "surahs": [
         2
@@ -4303,6 +4468,8 @@
       "name_ar": "مالك",
       "category": "Angel",
       "count": 1,
+      "tokens_count": 1,
+      "verses_count": 1,
       "surahs_count": 1,
       "surahs": [
         43
@@ -4315,26 +4482,12 @@
       ]
     },
     {
-      "name_en": "Harut & Marut",
-      "name_ar": "هاروت وماروت",
-      "category": "Angels at Babylon",
-      "count": 1,
-      "surahs_count": 1,
-      "surahs": [
-        2
-      ],
-      "occurrences": [
-        [
-          2,
-          102
-        ]
-      ]
-    },
-    {
       "name_en": "Zayd ibn Harithah",
       "name_ar": "زيد",
       "category": "Sahabi (Only Named Companion)",
       "count": 1,
+      "tokens_count": 1,
+      "verses_count": 1,
       "surahs_count": 1,
       "surahs": [
         33
@@ -4351,6 +4504,8 @@
       "name_ar": "أبو لهب",
       "category": "Adversary",
       "count": 1,
+      "tokens_count": 1,
+      "verses_count": 1,
       "surahs_count": 1,
       "surahs": [
         111
@@ -4367,6 +4522,8 @@
       "name_ar": "عزير",
       "category": "Prophetic Figure",
       "count": 1,
+      "tokens_count": 1,
+      "verses_count": 1,
       "surahs_count": 1,
       "surahs": [
         9
