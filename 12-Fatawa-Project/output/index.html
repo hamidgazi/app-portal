@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta name="theme-color" content="#1e3a8a">
   <title>فتاویٰ رضویہ - جامع دائرۃ المعارف و ڈیجیٹل پورٹل</title>
+  <link rel="stylesheet" href="ai_search.css">
   <style>
     :root {
       --bg-primary: #f8fafc;
@@ -129,11 +130,20 @@
       justify-content: center;
       transition: all 0.2s ease;
       text-decoration: none;
+      touch-action: manipulation;
     }
 
     .btn:hover {
       border-color: var(--primary);
       color: var(--primary);
+    }
+
+    .btn-search {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: var(--primary);
+      font-weight: 700;
+      gap: 6px;
     }
 
     .lang-group {
@@ -154,6 +164,7 @@
       padding: 5px 10px;
       border-radius: 6px;
       cursor: pointer;
+      touch-action: manipulation;
     }
 
     .lang-btn.active {
@@ -188,6 +199,56 @@
       font-size: 1rem;
       max-width: 750px;
       margin: 0 auto;
+    }
+
+    /* Interactive Hero Search Box */
+    .hero-search-wrapper {
+      max-width: 680px;
+      margin: 22px auto 0 auto;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: 30px;
+      padding: 12px 22px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+      transition: all 0.2s ease;
+      touch-action: manipulation;
+    }
+
+    .hero-search-wrapper:hover {
+      border-color: var(--primary);
+      box-shadow: 0 6px 20px rgba(30, 58, 138, 0.15);
+      transform: translateY(-1px);
+    }
+
+    .hero-search-icon {
+      font-size: 1.2rem;
+      color: var(--accent);
+    }
+
+    .hero-search-text {
+      flex: 1;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      text-align: right;
+    }
+
+    .ro-text.hero-search-text {
+      text-align: left;
+    }
+
+    .hero-search-badge kbd {
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 3px 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      font-family: inherit;
     }
 
     .metrics-bar {
@@ -228,69 +289,68 @@
 
     .parts-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 20px;
-      margin-bottom: 30px;
     }
 
     .part-card {
       background: var(--bg-card);
-      border: 2px solid var(--border);
-      border-radius: 14px;
-      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: all 0.25s ease;
       box-shadow: var(--shadow);
+      transition: all 0.25s ease;
       text-decoration: none;
       color: inherit;
-      position: relative;
     }
 
     .part-card:hover {
       border-color: var(--primary);
-      transform: translateY(-4px);
       box-shadow: var(--card-hover);
+      transform: translateY(-2px);
     }
 
     .part-badge {
       display: inline-block;
-      align-self: flex-start;
-      padding: 4px 10px;
+      padding: 4px 12px;
       border-radius: 20px;
       font-size: 0.75rem;
       font-weight: 700;
+      text-transform: uppercase;
       margin-bottom: 12px;
+      width: fit-content;
     }
 
     .badge-part1 { background: #dcfce7; color: #15803d; }
-    .badge-part2 { background: #fef3c7; color: #b45309; }
+    .badge-part2 { background: #fef9c3; color: #854d0e; }
     .badge-part3 { background: #e0f2fe; color: #0369a1; }
     .badge-part4 { background: #f3e8ff; color: #7e22ce; }
 
     .part-card h3 {
       font-size: 1.25rem;
-      color: var(--primary);
       margin-bottom: 8px;
+      color: var(--primary);
     }
 
     .part-card p {
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
       margin-bottom: 16px;
-      flex-grow: 1;
+      line-height: 1.5;
     }
 
     .part-meta {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-top: 12px;
       border-top: 1px dashed var(--border);
-      font-size: 0.82rem;
-      font-weight: 600;
+      padding-top: 14px;
+      font-size: 0.85rem;
       color: var(--text-muted);
+      font-weight: 600;
     }
 
     .part-btn-link {
@@ -303,36 +363,38 @@
 
     .resources-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 14px;
-      margin-bottom: 30px;
+      margin-top: 16px;
     }
 
     .resource-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px 18px;
+      border-radius: 12px;
+      padding: 16px;
       display: flex;
       align-items: center;
       gap: 12px;
       text-decoration: none;
       color: inherit;
-      transition: all 0.2s ease;
+      transition: all 0.2s;
     }
 
     .resource-card:hover {
-      border-color: var(--primary);
+      border-color: var(--accent);
       background: var(--primary-light);
     }
 
     .resource-icon {
-      font-size: 1.4rem;
+      font-size: 1.5rem;
+      color: var(--primary);
     }
 
     .resource-info h4 {
       font-size: 0.95rem;
       color: var(--primary);
+      margin-bottom: 2px;
     }
 
     .resource-info span {
@@ -357,9 +419,10 @@
       <div class="brand">
         <h1 class="ur-text">فتاویٰ رضویہ - جامع ڈیجیٹل انسائیکلوپیڈیا</h1>
         <h1 class="ro-text">Fatawa Razviya - Digital Encyclopedia Hub</h1>
-        <p>30 Volumes • 19,709 Pages • 5,568 Authentic Legal Inquiries & Rulings</p>
+        <p>30 Volumes • 19,709 Pages • 5,568 Authentic Legal Inquiries & 185 Classical Monographs</p>
       </div>
       <div class="header-controls">
+        <button class="btn btn-search" id="aiSearchBtn" onclick="if(window.AISearch) AISearch.open()" title="پورے انسائیکلوپیڈیا میں تلاش کریں (Ctrl+K)">🔍 تلاش (Ctrl+K)</button>
         <div class="lang-group">
           <button class="lang-btn active" id="btnUr" onclick="setLang('ur')">اردو</button>
           <button class="lang-btn" id="btnRo" onclick="setLang('roman')">Roman</button>
@@ -377,30 +440,37 @@
       <p class="ur-text">برصغیر پاک و ہند کے عظیم ترین حنفی دائرۃ المعارف کا مستند، منظم اور سہ لسانی ڈیجیٹل ایڈیشن مع آف لائن ایپس</p>
       <p class="ro-text">Authentic, categorized & bilingual digital edition of the 30-volume Hanafi Fiqh encyclopedia with offline-first PWAs.</p>
 
+      <div class="hero-search-wrapper" onclick="if(window.AISearch) AISearch.open()" role="button" tabindex="0" title="Click to search or press Ctrl+K">
+        <span class="hero-search-icon">🔍</span>
+        <span class="hero-search-text ur-text">تمام ۵,۵۶۸ فتاویٰ و ۱۸۵ رسائل میں فوری AI تلاش کریں (Ctrl+K)...</span>
+        <span class="hero-search-text ro-text">Instant AI Search across all 5,568 Fatwas & 185 Treatises (Ctrl+K)...</span>
+        <span class="hero-search-badge"><kbd>Ctrl+K</kbd></span>
+      </div>
+
       <div class="metrics-bar">
         <div class="metric-card">
           <div class="metric-val">۳۰</div>
           <div class="metric-label">جلدیں (Volumes)</div>
         </div>
         <div class="metric-card">
-          <div class="metric-val">۱۹,۷۰۹</div>
-          <div class="metric-label">مطبوعہ صفحات (Pages)</div>
-        </div>
-        <div class="metric-card">
           <div class="metric-val">۵,۵۶۸</div>
-          <div class="metric-label">کل فتاویٰ و رسائل (Corpus)</div>
+          <div class="metric-label">فتاویٰ و سوالات (Fatwas)</div>
         </div>
         <div class="metric-card">
-          <div class="metric-val">۱۶</div>
-          <div class="metric-label">فقہی ابواب (Chapters)</div>
+          <div class="metric-val">۱۸۵</div>
+          <div class="metric-label">علمی رسائل و کتب (Treatises)</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-val">۱۹,۷۰۹</div>
+          <div class="metric-label">صفحات (Total Pages)</div>
         </div>
       </div>
     </div>
 
     <h2 class="section-title">
       <span>📚</span>
-      <span class="ur-text">فتاویٰ رضویہ کی ۴ سطحی درجہ بندی (4-Tier Corpus Readers)</span>
-      <span class="ro-text">4-Tier Categorized Readers & Applications</span>
+      <span class="ur-text">۴ سطحی ڈیجیٹل ریڈرز (4-Tier Encyclopedia Readers)</span>
+      <span class="ro-text">4-Tier Encyclopedia Readers</span>
     </h2>
 
     <div class="parts-grid">
@@ -410,11 +480,11 @@
           <span class="part-badge badge-part1">🟢 حصہ ۱ (Part 1)</span>
           <h3 class="ur-text">مختصر فتاویٰ (Short Answers)</h3>
           <h3 class="ro-text">Mukhtasar Fatawa (Short Answers)</h3>
-          <p class="ur-text">۶۰ الفاظ یا کم پر مشتمل واضح، دو ٹوک اور فوری شرعی رہنمائی کے ۹۲۴ مستند فتاویٰ۔</p>
-          <p class="ro-text">Concise legal answers (<= 60 words) providing immediate, definitive rulings.</p>
+          <p class="ur-text">۶۰ الفاظ یا اس سے کم پر مشتمل فوری اور دو ٹوک احکام و فتاویٰ۔ عام فہم روزمرہ مسائل کے لیے بہترین۔</p>
+          <p class="ro-text">Direct, succinct verdicts of 60 words or fewer. Ideal for rapid daily reference and layman consultations.</p>
         </div>
         <div class="part-meta">
-          <span>۹۲۴ فتاویٰ (924 Fatwas)</span>
+          <span>۹۲۴ فتاویٰ (100% مکمل)</span>
           <span class="part-btn-link">ریڈر کھولیں &larr;</span>
         </div>
       </a>
@@ -425,11 +495,11 @@
           <span class="part-badge badge-part2">🟡 حصہ ۲ (Part 2)</span>
           <h3 class="ur-text">متوسط فتاویٰ (Medium Answers)</h3>
           <h3 class="ro-text">Mutawassit Fatawa (Medium Answers)</h3>
-          <p class="ur-text">۶۱ تا ۲۵۰ الفاظ کے ۲,۲۷۰ فتاویٰ مع ائمہ حنفیہ کے دلائل، کتبِ فقہ کے فقہی حوالہ جات اور جزئیات۔</p>
-          <p class="ro-text">Standard legal answers (61 - 250 words) with essential jurisprudential reasoning & citations.</p>
+          <p class="ur-text">۶۱ تا ۲۵۰ الفاظ پر مشتمل فتاویٰ مع دلائلِ شرعیہ، ائمہ احناف کے اقوال اور تحقیقی فقہی عبارات۔</p>
+          <p class="ro-text">Standard juristic answers of 61 to 250 words with primary evidentiary sources, textual jurisprudence, and citations.</p>
         </div>
         <div class="part-meta">
-          <span>۲,۲۷۰ فتاویٰ (2,270 Fatwas)</span>
+          <span>۲,۲۷۰ فتاویٰ (100% مکمل)</span>
           <span class="part-btn-link">ریڈر کھولیں &larr;</span>
         </div>
       </a>
@@ -440,11 +510,11 @@
           <span class="part-badge badge-part3">🔵 حصہ ۳ (Part 3)</span>
           <h3 class="ur-text">مفصل فتاویٰ (Long Answers)</h3>
           <h3 class="ro-text">Mufassal Fatawa (Long Answers)</h3>
-          <p class="ur-text">۲۵۱ تا ۱,۰۰۰ الفاظ کے ۱,۶۵۰ علمی فتاویٰ مع مفصل شرعی دلائل، آیات، احادیث اور تقابلی مباحث۔</p>
-          <p class="ro-text">Detailed juristic treatises (251 - 1,000 words) with extensive Quranic, Hadith & classical citations.</p>
+          <p class="ur-text">۲۵۱ تا ۱,۰۰۰ الفاظ پر مشتمل گہری علمی ابحاث، فقہی تخریج، ردِ اعتراضات اور استدلالات۔</p>
+          <p class="ro-text">Exhaustive scholarly rulings of 251 to 1,000 words featuring multi-point legal deductions, rebuttal of counter-arguments, and classical text synthesis.</p>
         </div>
         <div class="part-meta">
-          <span>۱,۶۵۰ فتاویٰ (1,650 Fatwas)</span>
+          <span>۱,۶۵۰ فتاویٰ (100% مکمل)</span>
           <span class="part-btn-link">ریڈر کھولیں &larr;</span>
         </div>
       </a>
@@ -459,7 +529,7 @@
           <p class="ro-text">185 named independent academic treatises plus 724 extended monographs (> 1,000 words) in a dual-tab reader.</p>
         </div>
         <div class="part-meta">
-          <span>۱۸۵ رسائل + ۷۲۴ فتاویٰ</span>
+          <span>۱۸۵ رسائل + ۷۲۴ فتاویٰ (100% مکمل)</span>
           <span class="part-btn-link">ریڈر کھولیں &larr;</span>
         </div>
       </a>
@@ -549,6 +619,9 @@
     <p>فتاویٰ رضویہ ڈیجیٹل پروجیکٹ • کتب خانہ رضویہ • تمام حقوق محفوظ ہیں ۲۰۲۶ء</p>
   </footer>
 
+  <script src="global_search_index.js"></script>
+  <script src="ai_search.js"></script>
+
   <script>
     // Theme & Language Controls
     function setLang(lang) {
@@ -569,7 +642,7 @@
       localStorage.setItem('fatawa_portal_theme', next);
     }
 
-    // Init saved preferences
+    // Init saved preferences & AI Search
     (function init() {
       try {
         const savedLang = localStorage.getItem('fatawa_portal_lang') || 'ur';
@@ -578,6 +651,19 @@
         document.documentElement.setAttribute('data-theme', savedTheme);
         const icon = savedTheme === 'light' ? '☀️' : (savedTheme === 'sepia' ? '📜' : '🌙');
         document.getElementById('themeBtn').textContent = icon;
+
+        // Initialize Universal AI Search Kit
+        if (typeof AISearch !== 'undefined' && window.FATAWA_SEARCH_INDEX) {
+          AISearch.init({
+            autoCrawl: false,
+            data: window.FATAWA_SEARCH_INDEX,
+            categories: ['All', 'Part 1 (Short)', 'Part 2 (Medium)', 'Part 3 (Long)', 'Part 4 (Rasail & Kutub)'],
+            placeholder: 'پورے انسائیکلوپیڈیا میں تلاش کریں (طہارت، وضو، nikah, roza, safha)...',
+            onSelect: function(item) {
+              if (item.url) window.location.href = item.url;
+            }
+          });
+        }
       } catch (e) {
         console.error('Initialization error:', e);
       }

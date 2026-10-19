@@ -5,7 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta name="theme-color" content="#1e3a8a">
   <title>فتاویٰ رضویہ - مختصر سوالات و جوابات (انسائیکلوپیڈیا)</title>
+  <link rel="stylesheet" href="ai_search.css">
   <style>
+    .btn-search {
+      background: var(--primary-light) !important;
+      color: var(--primary) !important;
+      border-color: var(--primary) !important;
+      font-weight: 700 !important;
+      gap: 6px;
+    }
+
     :root {
       --bg-primary: #f8fafc;
       --bg-card: #ffffff;
@@ -801,6 +810,7 @@
       <a href="fatawa_reader.html" class="part-nav-btn active">🟢 مختصر (924)</a>
       <a href="medium_reader.html" class="part-nav-btn">🟡 متوسط (2,270)</a>
       <a href="long_reader.html" class="part-nav-btn">🔵 مفصل (1,650)</a>
+      <a href="rasail_reader.html" class="part-nav-btn">🟣 رسائل و کتب (185+724)</a>
       <a href="index.html" class="part-nav-btn">🏛️ جامع پورٹل (Hub)</a>
     </nav>
 
@@ -810,6 +820,9 @@
         <span id="appHeaderSubtitle">Fatawa Razviya Short Q&A • 924 Verified Fatwas (<= 60 words)</span>
       </div>
       <div class="tools">
+        <!-- AI Spotlight Search Trigger -->
+        <button class="btn btn-search" id="aiSearchBtn" onclick="if(window.AISearch) AISearch.open()" title="پورے انسائیکلوپیڈیا میں تلاش کریں (Ctrl+K)">🔍 تلاش (Ctrl+K)</button>
+
         <!-- 3-Way Language Switcher -->
         <div class="lang-switch-group">
           <button class="lang-btn active" id="btnLangUr" onclick="setLanguage('ur')" title="صرف اردو نستعلیق">اردو</button>
@@ -835,7 +848,7 @@
     <!-- Search Input Bar -->
     <div class="search-box">
       <span class="search-icon">🔍</span>
-      <input type="search" id="searchInput" class="search-input" placeholder="تلاش کریں (وضو، نماز، روزہ، nikah, talaq, safha)..." autocomplete="off">
+      <input type="search" id="searchInput" class="search-input" placeholder="صفحہ پر تلاش کریں یا Ctrl+K دبائیں (وضو، نماز، روزہ، nikah, talaq, safha)..." autocomplete="off">
       <button id="clearSearch" class="clear-btn">✕</button>
     </div>
 
@@ -1187,10 +1200,11 @@
 
       const fragment = document.createDocumentFragment();
       nextBatch.forEach(item => {
+        const globalId = item.topic_global_seq || item.global_id;
         const card = document.createElement('div');
         card.className = 'card';
+        card.id = `fatwa-${globalId}`;
 
-        const globalId = item.topic_global_seq || item.global_id;
         const isBookmarked = bookmarks.includes(globalId);
 
         // Sequence numbers
@@ -1722,6 +1736,78 @@
       document.addEventListener('DOMContentLoaded', bootloader);
     } else {
       bootloader();
+    }
+  </script>
+
+  <!-- Universal AI Search Kit & Global Index -->
+  <script src="global_search_index.js"></script>
+  <script src="ai_search.js"></script>
+
+  <script>
+    // Global Deep Link & Target Focus Engine
+    function focusAndPulseElement(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        el.classList.remove('ai-search-target-pulse');
+        void el.offsetWidth;
+        el.classList.add('ai-search-target-pulse');
+        setTimeout(() => el.classList.remove('ai-search-target-pulse'), 3200);
+      }
+    }
+
+    function handleDeepLink(hash) {
+      if (!hash) return;
+      const cleanHash = hash.replace(/^#/, '');
+      if (cleanHash.startsWith('fatwa-')) {
+        const targetGid = cleanHash.replace('fatwa-', '');
+        currentTopic = 0;
+        searchQuery = '';
+        if (searchInput) {
+          searchInput.value = '';
+          if (clearSearch) clearSearch.style.display = 'none';
+        }
+        if (topicChips) {
+          topicChips.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+          const allChip = topicChips.querySelector('[data-topic="0"]');
+          if (allChip) allChip.classList.add('active');
+        }
+        applyFilters();
+
+        const idx = filteredList.findIndex(f => String(f.topic_global_seq || f.global_id || f.id) === targetGid);
+        if (idx !== -1 && idx >= renderedCount) {
+          renderedCount = idx + 15;
+          renderNextBatch();
+        }
+        setTimeout(() => focusAndPulseElement('fatwa-' + targetGid), 150);
+      }
+    }
+
+    // Initialize AI Search Spotlight Engine
+    const CURRENT_PART = 1;
+    const PART_CAT = (CURRENT_PART === 1) ? 'Part 1 (Short)' : ((CURRENT_PART === 2) ? 'Part 2 (Medium)' : 'Part 3 (Long)');
+
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof AISearch !== 'undefined' && window.FATAWA_SEARCH_INDEX) {
+        AISearch.init({
+          autoCrawl: false,
+          data: window.FATAWA_SEARCH_INDEX,
+          categories: ['All', PART_CAT, 'Part 1 (Short)', 'Part 2 (Medium)', 'Part 3 (Long)', 'Part 4 (Rasail & Kutub)'],
+          placeholder: 'پورے انسائیکلوپیڈیا میں تلاش کریں (طہارت، وضو، nikah, roza, safha)...',
+          onSelect: function(item) {
+            if (item.part === CURRENT_PART) {
+              handleDeepLink(item.target_id);
+            } else if (item.url) {
+              window.location.href = item.url;
+            }
+          }
+        });
+      }
+    });
+
+    window.addEventListener('hashchange', () => handleDeepLink(window.location.hash));
+    if (window.location.hash) {
+      setTimeout(() => handleDeepLink(window.location.hash), 300);
     }
   </script>
 </body>

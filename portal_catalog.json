@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "lastUpdated": "Antigravity Files",
-  "totalApps": 20,
+  "totalApps": 24,
   "categories": [
     "Islamic & Faith",
     "Productivity & Utilities",
@@ -35,7 +35,7 @@
       "category": "Islamic & Faith",
       "icon": "🏛️",
       "badge": "5,568 Fatwas • 4 Parts",
-      "description": "Master portal and executive navigation hub across all 4 parts of Fatawa Razviya (Short, Medium, Long, Rasail).",
+      "description": "Master portal and executive navigation hub across all 4 parts of Fatawa Razviya (Short, Medium, Long, Rasail) with universal Spotlight AI Search.",
       "tags": [
         "fatawa",
         "urdu",
@@ -43,72 +43,13 @@
         "jurisprudence",
         "islamic",
         "hub",
-        "reader"
+        "reader",
+        "search"
       ],
       "primary": true,
       "relPath": "12-Fatawa-Project/output/index.html",
       "portalHref": "./12-Fatawa-Project/output/index.html",
       "serverHref": "./12-Fatawa-Project/output/index.html"
-    },
-    {
-      "id": "12-Fatawa-Project__output__fatawa_reader_html",
-      "title": "Fatawa Razviya Part 1 (Short)",
-      "category": "Islamic & Faith",
-      "icon": "🟢",
-      "badge": "924 Short Fatwas",
-      "description": "Short Q&A legal answers (<= 60 words) providing immediate, definitive rulings in Urdu & Roman.",
-      "tags": [
-        "fatawa",
-        "urdu",
-        "roman",
-        "jurisprudence",
-        "short",
-        "reader"
-      ],
-      "primary": false,
-      "relPath": "12-Fatawa-Project/output/fatawa_reader.html",
-      "portalHref": "./12-Fatawa-Project/output/fatawa_reader.html",
-      "serverHref": "./12-Fatawa-Project/output/fatawa_reader.html"
-    },
-    {
-      "id": "12-Fatawa-Project__output__medium_reader_html",
-      "title": "Fatawa Razviya Part 2 (Medium)",
-      "category": "Islamic & Faith",
-      "icon": "🟡",
-      "badge": "2,270 Medium Fatwas",
-      "description": "Standard legal answers (61-250 words) with Hanafi reasoning and jurisprudential citations.",
-      "tags": [
-        "fatawa",
-        "urdu",
-        "roman",
-        "jurisprudence",
-        "medium",
-        "reader"
-      ],
-      "primary": false,
-      "relPath": "12-Fatawa-Project/output/medium_reader.html",
-      "portalHref": "./12-Fatawa-Project/output/medium_reader.html",
-      "serverHref": "./12-Fatawa-Project/output/medium_reader.html"
-    },
-    {
-      "id": "12-Fatawa-Project__output__long_reader_html",
-      "title": "Fatawa Razviya Part 3 (Long)",
-      "category": "Islamic & Faith",
-      "icon": "🔵",
-      "badge": "1,650 Long Fatwas",
-      "description": "Detailed juristic treatises (251-1,000 words) with extensive Quranic, Hadith and comparative discussions.",
-      "tags": [
-        "fatawa",
-        "urdu",
-        "roman",
-        "jurisprudence",
-        "long",
-        "reader"
-      ],
-      "primary": false,
-      "relPath": "12-Fatawa-Project/output/long_reader.html",
-      "portalHref": "./12-Fatawa-Project/output/long_reader.html",
-      "serverHref": "./12-Fatawa-Project/output/long_reader.html"
     },
     {
       "id": "02-Namaz-Prayer-Times__index_html",
@@ -184,6 +125,89 @@
       "relPath": "01-Events-Countdown/events.html",
       "portalHref": "./01-Events-Countdown/events.html",
       "serverHref": "./01-Events-Countdown/events.html"
+    },
+    {
+      "id": "12-Fatawa-Project__output__fatawa_reader_html",
+      "title": "Fatawa Razviya Part 1 (Short)",
+      "category": "Islamic & Faith",
+      "icon": "🟢",
+      "badge": "924 Short Fatwas",
+      "description": "Short Q&A legal answers (<= 60 words) providing immediate, definitive rulings in Urdu & Roman with AI Search.",
+      "tags": [
+        "fatawa",
+        "urdu",
+        "roman",
+        "jurisprudence",
+        "short",
+        "reader"
+      ],
+      "primary": false,
+      "relPath": "12-Fatawa-Project/output/fatawa_reader.html",
+      "portalHref": "./12-Fatawa-Project/output/fatawa_reader.html",
+      "serverHref": "./12-Fatawa-Project/output/fatawa_reader.html"
+    },
+    {
+      "id": "12-Fatawa-Project__output__medium_reader_html",
+      "title": "Fatawa Razviya Part 2 (Medium)",
+      "category": "Islamic & Faith",
+      "icon": "🟡",
+      "badge": "2,270 Medium Fatwas",
+      "description": "Standard legal answers (61-250 words) with Hanafi reasoning and jurisprudential citations with AI Search.",
+      "tags": [
+        "fatawa",
+        "urdu",
+        "roman",
+        "jurisprudence",
+        "medium",
+        "reader"
+      ],
+      "primary": false,
+      "relPath": "12-Fatawa-Project/output/medium_reader.html",
+      "portalHref": "./12-Fatawa-Project/output/medium_reader.html",
+      "serverHref": "./12-Fatawa-Project/output/medium_reader.html"
+    },
+    {
+      "id": "12-Fatawa-Project__output__long_reader_html",
+      "title": "Fatawa Razviya Part 3 (Long)",
+      "category": "Islamic & Faith",
+      "icon": "🔵",
+      "badge": "1,650 Long Fatwas",
+      "description": "Detailed juristic treatises (251-1,000 words) with extensive Quranic, Hadith and comparative discussions with AI Search.",
+      "tags": [
+        "fatawa",
+        "urdu",
+        "roman",
+        "jurisprudence",
+        "long",
+        "reader"
+      ],
+      "primary": false,
+      "relPath": "12-Fatawa-Project/output/long_reader.html",
+      "portalHref": "./12-Fatawa-Project/output/long_reader.html",
+      "serverHref": "./12-Fatawa-Project/output/long_reader.html"
+    },
+    {
+      "id": "12-Fatawa-Project__output__rasail_reader_html",
+      "title": "Fatawa Razviya Part 4 (Rasail & Extended)",
+      "category": "Islamic & Faith",
+      "icon": "🟣",
+      "badge": "185 Rasail • 724 Extended",
+      "description": "Dual-tab scholarly reader with 185 complete classical monographs/treatises and 724 extended monumental fatwas (> 1,000 words) with AI Search.",
+      "tags": [
+        "fatawa",
+        "urdu",
+        "roman",
+        "rasail",
+        "treatises",
+        "books",
+        "monographs",
+        "extended",
+        "reader"
+      ],
+      "primary": false,
+      "relPath": "12-Fatawa-Project/output/rasail_reader.html",
+      "portalHref": "./12-Fatawa-Project/output/rasail_reader.html",
+      "serverHref": "./12-Fatawa-Project/output/rasail_reader.html"
     },
     {
       "id": "02-Namaz-Prayer-Times__widget_html",
