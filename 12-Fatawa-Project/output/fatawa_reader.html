@@ -98,6 +98,52 @@
       direction: ltr !important;
     }
 
+    /* 4-Tier Master Navigation Bar */
+    .part-nav-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      scrollbar-width: thin;
+      -webkit-overflow-scrolling: touch;
+      direction: ltr !important;
+    }
+
+    .part-nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+      background: var(--bg-primary);
+      color: var(--text-muted);
+      border: 1.5px solid var(--border);
+      min-height: 32px;
+      user-select: none;
+      touch-action: manipulation;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .part-nav-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .part-nav-btn.active {
+      background: var(--primary);
+      color: #ffffff !important;
+      border-color: var(--primary);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+
     .header-top {
       display: flex;
       justify-content: space-between;
@@ -750,10 +796,18 @@
 
   <!-- Universal Stable Header -->
   <header>
+    <!-- 4-Tier Master Navigation Bar -->
+    <nav class="part-nav-bar" aria-label="Fatawa Classification Navigation">
+      <a href="fatawa_reader.html" class="part-nav-btn active">🟢 مختصر (924)</a>
+      <a href="medium_reader.html" class="part-nav-btn">🟡 متوسط (2,270)</a>
+      <a href="long_reader.html" class="part-nav-btn">🔵 مفصل (1,650)</a>
+      <a href="index.html" class="part-nav-btn">🏛️ جامع پورٹل (Hub)</a>
+    </nav>
+
     <div class="header-top">
       <div class="title-area">
         <h1 id="appHeaderTitle">فتاویٰ رضویہ - مختصر انسائیکلوپیڈیا</h1>
-        <span id="appHeaderSubtitle">Fatawa Razviya Short Q&A • 924 Verified Fatwas</span>
+        <span id="appHeaderSubtitle">Fatawa Razviya Short Q&A • 924 Verified Fatwas (<= 60 words)</span>
       </div>
       <div class="tools">
         <!-- 3-Way Language Switcher -->

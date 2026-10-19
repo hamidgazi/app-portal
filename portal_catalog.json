@@ -30,24 +30,85 @@
       "serverHref": "./01-Events-Countdown/index.html"
     },
     {
-      "id": "12-Fatawa-Project__output__fatawa_reader_html",
-      "title": "Fatawa Razviya Encyclopedia",
+      "id": "12-Fatawa-Project__output__index_html",
+      "title": "Fatawa Razviya Master Hub",
       "category": "Islamic & Faith",
-      "icon": "📖",
-      "badge": "Encyclopedia Reader",
-      "description": "Comprehensive searchable Islamic jurisprudence questions, answers, references, and Urdu/Roman reader.",
+      "icon": "🏛️",
+      "badge": "5,568 Fatwas • 4 Parts",
+      "description": "Master portal and executive navigation hub across all 4 parts of Fatawa Razviya (Short, Medium, Long, Rasail).",
       "tags": [
         "fatawa",
         "urdu",
         "roman",
         "jurisprudence",
         "islamic",
+        "hub",
         "reader"
       ],
       "primary": true,
+      "relPath": "12-Fatawa-Project/output/index.html",
+      "portalHref": "./12-Fatawa-Project/output/index.html",
+      "serverHref": "./12-Fatawa-Project/output/index.html"
+    },
+    {
+      "id": "12-Fatawa-Project__output__fatawa_reader_html",
+      "title": "Fatawa Razviya Part 1 (Short)",
+      "category": "Islamic & Faith",
+      "icon": "🟢",
+      "badge": "924 Short Fatwas",
+      "description": "Short Q&A legal answers (<= 60 words) providing immediate, definitive rulings in Urdu & Roman.",
+      "tags": [
+        "fatawa",
+        "urdu",
+        "roman",
+        "jurisprudence",
+        "short",
+        "reader"
+      ],
+      "primary": false,
       "relPath": "12-Fatawa-Project/output/fatawa_reader.html",
       "portalHref": "./12-Fatawa-Project/output/fatawa_reader.html",
       "serverHref": "./12-Fatawa-Project/output/fatawa_reader.html"
+    },
+    {
+      "id": "12-Fatawa-Project__output__medium_reader_html",
+      "title": "Fatawa Razviya Part 2 (Medium)",
+      "category": "Islamic & Faith",
+      "icon": "🟡",
+      "badge": "2,270 Medium Fatwas",
+      "description": "Standard legal answers (61-250 words) with Hanafi reasoning and jurisprudential citations.",
+      "tags": [
+        "fatawa",
+        "urdu",
+        "roman",
+        "jurisprudence",
+        "medium",
+        "reader"
+      ],
+      "primary": false,
+      "relPath": "12-Fatawa-Project/output/medium_reader.html",
+      "portalHref": "./12-Fatawa-Project/output/medium_reader.html",
+      "serverHref": "./12-Fatawa-Project/output/medium_reader.html"
+    },
+    {
+      "id": "12-Fatawa-Project__output__long_reader_html",
+      "title": "Fatawa Razviya Part 3 (Long)",
+      "category": "Islamic & Faith",
+      "icon": "🔵",
+      "badge": "1,650 Long Fatwas",
+      "description": "Detailed juristic treatises (251-1,000 words) with extensive Quranic, Hadith and comparative discussions.",
+      "tags": [
+        "fatawa",
+        "urdu",
+        "roman",
+        "jurisprudence",
+        "long",
+        "reader"
+      ],
+      "primary": false,
+      "relPath": "12-Fatawa-Project/output/long_reader.html",
+      "portalHref": "./12-Fatawa-Project/output/long_reader.html",
+      "serverHref": "./12-Fatawa-Project/output/long_reader.html"
     },
     {
       "id": "02-Namaz-Prayer-Times__index_html",

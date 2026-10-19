@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="ur" data-lang="ur" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="theme-color" content="#1e3a8a">
+  <title>فتاویٰ رضویہ - جامع دائرۃ المعارف و ڈیجیٹل پورٹل</title>
+  <style>
+    :root {
+      --bg-primary: #f8fafc;
+      --bg-card: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --primary: #1e3a8a;
+      --primary-light: #eff6ff;
+      --accent: #0284c7;
+      --border: #e2e8f0;
+      --shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+      --card-hover: 0 8px 24px rgba(30, 58, 138, 0.12);
+    }
+
+    [data-theme="sepia"] {
+      --bg-primary: #fbf1dc;
+      --bg-card: #f6ebd3;
+      --text-main: #2b2118;
+      --text-muted: #786350;
+      --primary: #85370e;
+      --primary-light: #eddcc0;
+      --accent: #b45309;
+      --border: #e2d3ba;
+      --shadow: 0 4px 16px rgba(70, 45, 15, 0.08);
+      --card-hover: 0 8px 24px rgba(133, 55, 14, 0.15);
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #090d16;
+      --bg-card: #131c2e;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --primary: #60a5fa;
+      --primary-light: #1e293b;
+      --accent: #38bdf8;
+      --border: #243048;
+      --shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+      --card-hover: 0 8px 24px rgba(96, 165, 250, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: var(--bg-primary);
+      color: var(--text-main);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      padding-bottom: 60px;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    .ur-text {
+      font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Amiri', serif;
+      direction: rtl;
+    }
+
+    .ro-text {
+      font-family: 'Inter', system-ui, sans-serif;
+      direction: ltr;
+      display: none;
+    }
+
+    [data-lang="roman"] .ur-text { display: none !important; }
+    [data-lang="roman"] .ro-text { display: block !important; }
+    [data-lang="both"] .ur-text { display: block !important; }
+    [data-lang="both"] .ro-text { display: block !important; margin-top: 6px; }
+
+    header {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 16px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .brand h1 {
+      font-size: 1.35rem;
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    .brand p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn {
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 6px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      min-height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .lang-group {
+      display: inline-flex;
+      background: var(--bg-primary);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 2px;
+      gap: 2px;
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .lang-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+
+    .hero-banner {
+      background: linear-gradient(135deg, var(--bg-card) 0%, var(--primary-light) 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 30px;
+      text-align: center;
+      margin-bottom: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-banner h2 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .hero-banner p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      max-width: 750px;
+      margin: 0 auto;
+    }
+
+    .metrics-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .metric-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      text-align: center;
+    }
+
+    .metric-val {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .metric-label {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 32px 0 16px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .parts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .part-card {
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s ease;
+      box-shadow: var(--shadow);
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+    }
+
+    .part-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-4px);
+      box-shadow: var(--card-hover);
+    }
+
+    .part-badge {
+      display: inline-block;
+      align-self: flex-start;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .badge-part1 { background: #dcfce7; color: #15803d; }
+    .badge-part2 { background: #fef3c7; color: #b45309; }
+    .badge-part3 { background: #e0f2fe; color: #0369a1; }
+    .badge-part4 { background: #f3e8ff; color: #7e22ce; }
+
+    .part-card h3 {
+      font-size: 1.25rem;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .part-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      flex-grow: 1;
+    }
+
+    .part-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 12px;
+      border-top: 1px dashed var(--border);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .part-btn-link {
+      color: var(--primary);
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-bottom: 30px;
+    }
+
+    .resource-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s ease;
+    }
+
+    .resource-card:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .resource-icon {
+      font-size: 1.4rem;
+    }
+
+    .resource-info h4 {
+      font-size: 0.95rem;
+      color: var(--primary);
+    }
+
+    .resource-info span {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px 16px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <h1 class="ur-text">فتاویٰ رضویہ - جامع ڈیجیٹل انسائیکلوپیڈیا</h1>
+        <h1 class="ro-text">Fatawa Razviya - Digital Encyclopedia Hub</h1>
+        <p>30 Volumes • 19,709 Pages • 5,568 Authentic Legal Inquiries & Rulings</p>
+      </div>
+      <div class="header-controls">
+        <div class="lang-group">
+          <button class="lang-btn active" id="btnUr" onclick="setLang('ur')">اردو</button>
+          <button class="lang-btn" id="btnRo" onclick="setLang('roman')">Roman</button>
+          <button class="lang-btn" id="btnBoth" onclick="setLang('both')">دونوں</button>
+        </div>
+        <button class="btn" id="themeBtn" onclick="toggleTheme()" title="تھیم تبدیل کریں">☀️</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="hero-banner">
+      <h2 class="ur-text">امامِ اہلِ سنت مجدد دین و ملت الشاہ احمد رضا خان قادری قدس سرہ</h2>
+      <h2 class="ro-text">Imam Ahmad Raza Khan Qadri (Rahmatullahi Alayh)</h2>
+      <p class="ur-text">برصغیر پاک و ہند کے عظیم ترین حنفی دائرۃ المعارف کا مستند، منظم اور سہ لسانی ڈیجیٹل ایڈیشن مع آف لائن ایپس</p>
+      <p class="ro-text">Authentic, categorized & bilingual digital edition of the 30-volume Hanafi Fiqh encyclopedia with offline-first PWAs.</p>
+
+      <div class="metrics-bar">
+        <div class="metric-card">
+          <div class="metric-val">۳۰</div>
+          <div class="metric-label">جلدیں (Volumes)</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-val">۱۹,۷۰۹</div>
+          <div class="metric-label">مطبوعہ صفحات (Pages)</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-val">۵,۵۶۸</div>
+          <div class="metric-label">کل فتاویٰ و رسائل (Corpus)</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-val">۱۶</div>
+          <div class="metric-label">فقہی ابواب (Chapters)</div>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-title">
+      <span>📚</span>
+      <span class="ur-text">فتاویٰ رضویہ کی ۴ سطحی درجہ بندی (4-Tier Corpus Readers)</span>
+      <span class="ro-text">4-Tier Categorized Readers & Applications</span>
+    </h2>
+
+    <div class="parts-grid">
+      <!-- Part 1 -->
+      <a href="fatawa_reader.html" class="part-card">
+        <div>
+          <span class="part-badge badge-part1">🟢 حصہ ۱ (Part 1)</span>
+          <h3 class="ur-text">مختصر فتاویٰ (Short Answers)</h3>
+          <h3 class="ro-text">Mukhtasar Fatawa (Short Answers)</h3>
+          <p class="ur-text">۶۰ الفاظ یا کم پر مشتمل واضح، دو ٹوک اور فوری شرعی رہنمائی کے ۹۲۴ مستند فتاویٰ۔</p>
+          <p class="ro-text">Concise legal answers (<= 60 words) providing immediate, definitive rulings.</p>
+        </div>
+        <div class="part-meta">
+          <span>۹۲۴ فتاویٰ (924 Fatwas)</span>
+          <span class="part-btn-link">ریڈر کھولیں &larr;</span>
+        </div>
+      </a>
+
+      <!-- Part 2 -->
+      <a href="medium_reader.html" class="part-card">
+        <div>
+          <span class="part-badge badge-part2">🟡 حصہ ۲ (Part 2)</span>
+          <h3 class="ur-text">متوسط فتاویٰ (Medium Answers)</h3>
+          <h3 class="ro-text">Mutawassit Fatawa (Medium Answers)</h3>
+          <p class="ur-text">۶۱ تا ۲۵۰ الفاظ کے ۲,۲۷۰ فتاویٰ مع ائمہ حنفیہ کے دلائل، کتبِ فقہ کے فقہی حوالہ جات اور جزئیات۔</p>
+          <p class="ro-text">Standard legal answers (61 - 250 words) with essential jurisprudential reasoning & citations.</p>
+        </div>
+        <div class="part-meta">
+          <span>۲,۲۷۰ فتاویٰ (2,270 Fatwas)</span>
+          <span class="part-btn-link">ریڈر کھولیں &larr;</span>
+        </div>
+      </a>
+
+      <!-- Part 3 -->
+      <a href="long_reader.html" class="part-card">
+        <div>
+          <span class="part-badge badge-part3">🔵 حصہ ۳ (Part 3)</span>
+          <h3 class="ur-text">مفصل فتاویٰ (Long Answers)</h3>
+          <h3 class="ro-text">Mufassal Fatawa (Long Answers)</h3>
+          <p class="ur-text">۲۵۱ تا ۱,۰۰۰ الفاظ کے ۱,۶۵۰ علمی فتاویٰ مع مفصل شرعی دلائل، آیات، احادیث اور تقابلی مباحث۔</p>
+          <p class="ro-text">Detailed juristic treatises (251 - 1,000 words) with extensive Quranic, Hadith & classical citations.</p>
+        </div>
+        <div class="part-meta">
+          <span>۱,۶۵۰ فتاویٰ (1,650 Fatwas)</span>
+          <span class="part-btn-link">ریڈر کھولیں &larr;</span>
+        </div>
+      </a>
+
+      <!-- Part 4 -->
+      <div class="part-card" style="opacity: 0.95;">
+        <div>
+          <span class="part-badge badge-part4">🟣 حصہ ۴ (Part 4)</span>
+          <h3 class="ur-text">رسائل و کتب (Booklets & Monographs)</h3>
+          <h3 class="ro-text">Rasail & Kutub (Treatises & Booklets)</h3>
+          <p class="ur-text">۱,۰۰۰ الفاظ سے زائد کے ۷۲۴ طویل ترین تحقیقی فتاویٰ اور امام احمد رضا کے ۱۸۵ نامور مستقل فقہی و کلامی رسائل۔</p>
+          <p class="ro-text">724 extended monographs and 185 named independent academic treatises by Imam Ahmad Raza.</p>
+        </div>
+        <div class="part-meta">
+          <span>۷۲۴ رسائل و فتاویٰ</span>
+          <span class="part-btn-link">منصوبہ بندی جاری</span>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-title">
+      <span>📖</span>
+      <span class="ur-text">معاون دستاویزات و ڈیٹا سیٹس (Master Resources & Datasets)</span>
+      <span class="ro-text">Master Resources & Datasets</span>
+    </h2>
+
+    <div class="resources-grid">
+      <a href="glossary_farhang.md" class="resource-card">
+        <span class="resource-icon">📜</span>
+        <div class="resource-info">
+          <h4>فرہنگِ اصطلاحاتِ فقہیہ</h4>
+          <span>Glossary of Classical Fiqh</span>
+        </div>
+      </a>
+      <a href="short_fatawa_by_topic.md" class="resource-card">
+        <span class="resource-icon">📄</span>
+        <div class="resource-info">
+          <h4>مختصر فتاویٰ مارک ڈاؤن (اردو)</h4>
+          <span>Part 1 Urdu Master (1.1 MB)</span>
+        </div>
+      </a>
+      <a href="medium_fatawa_by_topic.md" class="resource-card">
+        <span class="resource-icon">📄</span>
+        <div class="resource-info">
+          <h4>متوسط فتاویٰ مارک ڈاؤن (اردو)</h4>
+          <span>Part 2 Urdu Master (5.7 MB)</span>
+        </div>
+      </a>
+      <a href="long_fatawa_by_topic.md" class="resource-card">
+        <span class="resource-icon">📄</span>
+        <div class="resource-info">
+          <h4>مفصل فتاویٰ مارک ڈاؤن (اردو)</h4>
+          <span>Part 3 Urdu Master (9.8 MB)</span>
+        </div>
+      </a>
+      <a href="short_fatawa_by_topic_roman.md" class="resource-card">
+        <span class="resource-icon">📝</span>
+        <div class="resource-info">
+          <h4>Short Fatawa Roman Urdu</h4>
+          <span>Part 1 Roman Master (835 KB)</span>
+        </div>
+      </a>
+      <a href="medium_fatawa_by_topic_roman.md" class="resource-card">
+        <span class="resource-icon">📝</span>
+        <div class="resource-info">
+          <h4>Medium Fatawa Roman Urdu</h4>
+          <span>Part 2 Roman Master (4.0 MB)</span>
+        </div>
+      </a>
+      <a href="long_fatawa_by_topic_roman.md" class="resource-card">
+        <span class="resource-icon">📝</span>
+        <div class="resource-info">
+          <h4>Long Fatawa Roman Urdu</h4>
+          <span>Part 3 Roman Master (6.8 MB)</span>
+        </div>
+      </a>
+      <a href="medium_fatawa_by_topic.json" class="resource-card">
+        <span class="resource-icon">💾</span>
+        <div class="resource-info">
+          <h4>Medium JSON Dataset</h4>
+          <span>34 MB Full Bilingual API Data</span>
+        </div>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    <p>فتاویٰ رضویہ ڈیجیٹل پروجیکٹ • کتب خانہ رضویہ • تمام حقوق محفوظ ہیں ۲۰۲۶ء</p>
+  </footer>
+
+  <script>
+    // Theme & Language Controls
+    function setLang(lang) {
+      document.documentElement.setAttribute('data-lang', lang);
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      if (lang === 'ur') document.getElementById('btnUr').classList.add('active');
+      else if (lang === 'roman') document.getElementById('btnRo').classList.add('active');
+      else if (lang === 'both') document.getElementById('btnBoth').classList.add('active');
+      localStorage.setItem('fatawa_portal_lang', lang);
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      const next = current === 'light' ? 'sepia' : (current === 'sepia' ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', next);
+      const icon = next === 'light' ? '☀️' : (next === 'sepia' ? '📜' : '🌙');
+      document.getElementById('themeBtn').textContent = icon;
+      localStorage.setItem('fatawa_portal_theme', next);
+    }
+
+    // Init saved preferences
+    (function init() {
+      try {
+        const savedLang = localStorage.getItem('fatawa_portal_lang') || 'ur';
+        setLang(savedLang);
+        const savedTheme = localStorage.getItem('fatawa_portal_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        const icon = savedTheme === 'light' ? '☀️' : (savedTheme === 'sepia' ? '📜' : '🌙');
+        document.getElementById('themeBtn').textContent = icon;
+      } catch (e) {
+        console.error('Initialization error:', e);
+      }
+    })();
+  </script>
+</body>
+</html>
