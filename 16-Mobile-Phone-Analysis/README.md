@@ -25,6 +25,7 @@ Welcome to the **Expert Mobile Phone Analysis & Purchasing Hub**. This repositor
 
 | Deliverable | Format | Direct Clickable Link | Description |
 | :--- | :--- | :--- | :--- |
+| **Samsung Tri-Battle (Galaxy M47 vs M56 vs A56)** | Markdown (`.md`) | [SAMSUNG_TRIPLE_COMPARISON.md](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/16-Mobile-Phone-Analysis/SAMSUNG_TRIPLE_COMPARISON.md) | Exhaustive side-by-side comparison of Samsung's mid-range trio across ₹22k, ₹28k, and ₹36k budget tiers. |
 | **₹35,000 Head-to-Head Deep Dive (A56 vs Nord CE 6 vs Edge 70 Pro)** | Markdown (`.md`) | [THREE_WAY_35K_DEEP_DIVE.md](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/16-Mobile-Phone-Analysis/THREE_WAY_35K_DEEP_DIVE.md) | Exhaustive pros, cons, and 4-5 year aging breakdown comparing Galaxy A56, OnePlus Nord CE 6 (₹35k edition), and Moto Edge 70 Pro. |
 | **Top 3 Head-to-Head Comparison & Positives/Negatives** | Markdown (`.md`) | [TOP_3_DETAILED_COMPARISON.md](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/16-Mobile-Phone-Analysis/TOP_3_DETAILED_COMPARISON.md) | In-depth color-coded winner matrix comparing Samsung Galaxy A56, Moto Edge 70 Pro, and Edge 70 Fusion with comprehensive pros/cons. |
 | **Complete Practical Analysis Report** | Markdown (`.md`) | [PRACTICAL_MOBILE_ANALYSIS_REPORT.md](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/16-Mobile-Phone-Analysis/PRACTICAL_MOBILE_ANALYSIS_REPORT.md) | Exhaustive breakdown of display PWM, thermal throttling, shutter lag, bloatware audits, battery reality, and rankings. |
@@ -38,6 +39,7 @@ Welcome to the **Expert Mobile Phone Analysis & Purchasing Hub**. This repositor
 ```
 16-Mobile-Phone-Analysis/
 ├── README.md                           # Master navigation hub & executive summary
+├── SAMSUNG_TRIPLE_COMPARISON.md        # Samsung Tri-Battle (M47 vs M56 vs A56)
 ├── THREE_WAY_35K_DEEP_DIVE.md          # Dedicated ₹35k comparison (A56 vs Nord CE 6 vs Edge 70 Pro)
 ├── TOP_3_DETAILED_COMPARISON.md        # Top 3 head-to-head comparison with green winner badges
 ├── PRACTICAL_MOBILE_ANALYSIS_REPORT.md # Comprehensive practical analysis & comparison
