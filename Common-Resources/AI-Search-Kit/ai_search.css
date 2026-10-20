@@ -1059,3 +1059,463 @@ mark.ai-search-highlight {
     display: none !important;
   }
 }
+
+/* ==========================================================================
+   AI Search v3.0: Scope Switcher Bar (Page vs Workspace Apps)
+   ========================================================================== */
+.ai-search-scope-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px 4px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(11, 15, 25, 0.6);
+}
+
+.ai-search-scope-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 5px 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  color: var(--ai-search-text-muted);
+  font-family: var(--ai-search-font);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  transition: all 0.2s ease;
+}
+
+.ai-search-scope-pill:hover {
+  background: rgba(56, 189, 248, 0.08);
+  border-color: rgba(56, 189, 248, 0.25);
+  color: var(--ai-search-text-main);
+}
+
+.ai-search-scope-pill.ai-search-scope-active {
+  background: rgba(56, 189, 248, 0.16);
+  border-color: rgba(56, 189, 248, 0.5);
+  color: #38bdf8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.2);
+}
+
+.ai-search-scope-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: inherit;
+}
+
+.ai-search-scope-active .ai-search-scope-badge {
+  background: rgba(56, 189, 248, 0.3);
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   AI Search v3.0: Match Source Badges
+   ========================================================================== */
+.ai-search-match-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  line-height: 1.2;
+}
+
+.ai-search-badge-exact {
+  background: rgba(16, 185, 129, 0.14);
+  color: #34d399;
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.ai-search-badge-phonetic {
+  background: rgba(168, 85, 247, 0.14);
+  color: #c084fc;
+  border-color: rgba(168, 85, 247, 0.3);
+}
+
+.ai-search-badge-synonym {
+  background: rgba(245, 158, 11, 0.14);
+  color: #fbbf24;
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.ai-search-badge-transliterated {
+  background: rgba(56, 189, 248, 0.14);
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.3);
+}
+
+.ai-search-badge-app {
+  background: rgba(99, 102, 241, 0.14);
+  color: #818cf8;
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+.ai-search-badge-calc {
+  background: rgba(16, 185, 129, 0.14);
+  color: #34d399;
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.ai-search-badge-action {
+  background: rgba(236, 72, 153, 0.14);
+  color: #f472b6;
+  border-color: rgba(236, 72, 153, 0.3);
+}
+
+.ai-search-badge-relevant {
+  background: rgba(148, 163, 184, 0.12);
+  color: #cbd5e1;
+  border-color: rgba(148, 163, 184, 0.25);
+}
+
+/* ==========================================================================
+   AI Search v3.0: Result Pinning & Pinned Shortcuts Section
+   ========================================================================== */
+.ai-search-item-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.ai-search-pin-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: var(--ai-search-text-dim);
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.ai-search-pin-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fbbf24;
+  border-color: rgba(251, 191, 36, 0.2);
+}
+
+.ai-search-pin-btn.ai-search-pin-active {
+  color: #fbbf24;
+  text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+}
+
+.ai-search-pinned-section {
+  padding: 8px 16px 14px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  margin-bottom: 8px;
+}
+
+.ai-search-pinned-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.ai-search-pinned-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #fbbf24;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ai-search-clear-pins-btn {
+  background: transparent;
+  border: none;
+  color: var(--ai-search-text-dim);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: color 0.15s ease;
+}
+
+.ai-search-clear-pins-btn:hover {
+  color: #f87171;
+}
+
+.ai-search-pinned-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ai-search-pinned-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 6px 14px;
+  background: rgba(251, 191, 36, 0.08);
+  border: 1px solid rgba(251, 191, 36, 0.25);
+  border-radius: 9999px;
+  color: #fef08a;
+  font-family: var(--ai-search-font);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  transition: all 0.2s ease;
+}
+
+.ai-search-pinned-chip:hover {
+  background: rgba(251, 191, 36, 0.18);
+  border-color: rgba(251, 191, 36, 0.45);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   AI Search v3.0: Safe Math Calculator Card
+   ========================================================================== */
+.ai-search-calc-card {
+  margin: 12px 16px;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(6, 78, 59, 0.15));
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 16px rgba(16, 185, 129, 0.1);
+  animation: ai-search-slide-in 0.2s ease;
+}
+
+.ai-search-calc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.ai-search-calc-badge {
+  font-size: 12px;
+  font-weight: 700;
+  color: #34d399;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.ai-search-calc-body {
+  margin-bottom: 14px;
+}
+
+.ai-search-calc-expr {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 14px;
+  color: var(--ai-search-text-muted);
+  margin-bottom: 4px;
+}
+
+.ai-search-calc-result {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 32px;
+  font-weight: 700;
+  color: #f0fdf4;
+  letter-spacing: -0.02em;
+  text-shadow: 0 0 16px rgba(52, 211, 153, 0.35);
+}
+
+.ai-search-calc-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.ai-search-calc-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 8px 16px;
+  background: #10b981;
+  border: none;
+  border-radius: 8px;
+  color: #ffffff;
+  font-family: var(--ai-search-font);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
+}
+
+.ai-search-calc-copy-btn:hover {
+  background: #059669;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.45);
+}
+
+.ai-search-calc-copy-btn.ai-search-copy-success {
+  background: #059669;
+  color: #ecfdf5;
+}
+
+.ai-search-calc-hint {
+  font-size: 11px;
+  color: var(--ai-search-text-dim);
+}
+
+/* ==========================================================================
+   AI Search v3.0: Action Studio Commands List
+   ========================================================================== */
+.ai-search-actions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ai-search-action-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 52px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  transition: all 0.15s ease;
+}
+
+.ai-search-action-item:hover,
+.ai-search-action-item.ai-search-item-selected {
+  background: rgba(236, 72, 153, 0.12);
+  border-left: 3px solid #ec4899;
+  padding-left: 13px;
+}
+
+.ai-search-action-icon {
+  font-size: 20px;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.ai-search-action-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.ai-search-action-name-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.ai-search-action-name {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: #f472b6;
+}
+
+.ai-search-action-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ai-search-text-main);
+  margin-bottom: 2px;
+}
+
+.ai-search-action-desc {
+  font-size: 12px;
+  color: var(--ai-search-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ai-search-action-shortcut {
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   AI Search v3.0: Federated Workspace Catalog Cards & Divider
+   ========================================================================== */
+.ai-search-catalog-divider {
+  margin: 14px 16px 8px 16px;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.12);
+}
+
+.ai-search-catalog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #818cf8;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.ai-search-switch-scope-btn {
+  background: rgba(99, 102, 241, 0.15);
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  border-radius: 6px;
+  color: #a5b4fc;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  touch-action: manipulation;
+}
+
+.ai-search-switch-scope-btn:hover {
+  background: rgba(99, 102, 241, 0.28);
+  color: #ffffff;
+}
+
+.ai-search-catalog-item {
+  border-left: 2px solid rgba(99, 102, 241, 0.4);
+}
+
+.ai-search-catalog-item:hover {
+  border-left-color: #818cf8;
+}
+

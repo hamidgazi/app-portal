@@ -506,6 +506,428 @@
   RecentSearches.remove = RecentSearches.remove.bind(RecentSearches);
   RecentSearches.clear = RecentSearches.clear.bind(RecentSearches);
 
+  // --- 2.85 LOCALSTORAGE PINNED SHORTCUTS & FAVORITES MANAGER ---
+  const PinnedSearches = {
+    STORAGE_KEY: 'antigravity_pinned_searches',
+    MAX_ITEMS: 6,
+    _memoryFallback: [],
+
+    _getStorage() {
+      try {
+        if (typeof window !== 'undefined' && window.localStorage) return window.localStorage;
+        if (typeof globalThis !== 'undefined' && globalThis.localStorage) return globalThis.localStorage;
+        if (typeof localStorage !== 'undefined') return localStorage;
+      } catch (e) {}
+      return null;
+    },
+
+    getAll() {
+      const storage = PinnedSearches._getStorage();
+      try {
+        if (storage) {
+          const raw = storage.getItem(PinnedSearches.STORAGE_KEY);
+          if (!raw) return [];
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed)) {
+            return parsed.filter(item => item && (typeof item === 'object' ? (item.title || item.query) : (typeof item === 'string' && item.trim().length > 0)));
+          }
+          PinnedSearches.clear();
+          return [];
+        }
+      } catch (err) {
+        try {
+          if (storage) storage.removeItem(PinnedSearches.STORAGE_KEY);
+        } catch (e) {}
+      }
+      return PinnedSearches._memoryFallback || [];
+    },
+
+    add(item) {
+      if (!item) return;
+      const entry = typeof item === 'string' ? { id: item, title: item, query: item, isQuery: true } : item;
+      if (!entry.title && !entry.query) return;
+      const entryId = entry.id || entry.url || entry.title || entry.query;
+
+      let list = PinnedSearches.getAll();
+      list = list.filter(p => {
+        const pid = typeof p === 'string' ? p : (p.id || p.url || p.title || p.query);
+        return pid !== entryId;
+      });
+      list.unshift(entry);
+      if (list.length > PinnedSearches.MAX_ITEMS) {
+        list = list.slice(0, PinnedSearches.MAX_ITEMS);
+      }
+
+      PinnedSearches._memoryFallback = list;
+      const storage = PinnedSearches._getStorage();
+      try {
+        if (storage) storage.setItem(PinnedSearches.STORAGE_KEY, JSON.stringify(list));
+      } catch (err) {}
+    },
+
+    remove(id) {
+      if (!id) return;
+      let list = PinnedSearches.getAll().filter(p => {
+        const pid = typeof p === 'string' ? p : (p.id || p.url || p.title || p.query);
+        return pid !== id;
+      });
+      PinnedSearches._memoryFallback = list;
+      const storage = PinnedSearches._getStorage();
+      try {
+        if (storage) storage.setItem(PinnedSearches.STORAGE_KEY, JSON.stringify(list));
+      } catch (err) {}
+    },
+
+    isPinned(id) {
+      if (!id) return false;
+      const list = PinnedSearches.getAll();
+      return list.some(p => {
+        const pid = typeof p === 'string' ? p : (p.id || p.url || p.title || p.query);
+        return pid === id;
+      });
+    },
+
+    toggle(item) {
+      if (!item) return false;
+      const id = typeof item === 'string' ? item : (item.id || item.url || item.title || item.query);
+      if (PinnedSearches.isPinned(id)) {
+        PinnedSearches.remove(id);
+        return false;
+      } else {
+        PinnedSearches.add(item);
+        return true;
+      }
+    },
+
+    clear() {
+      PinnedSearches._memoryFallback = [];
+      const storage = PinnedSearches._getStorage();
+      try {
+        if (storage) storage.removeItem(PinnedSearches.STORAGE_KEY);
+      } catch (err) {}
+    }
+  };
+
+  PinnedSearches.getAll = PinnedSearches.getAll.bind(PinnedSearches);
+  PinnedSearches.add = PinnedSearches.add.bind(PinnedSearches);
+  PinnedSearches.remove = PinnedSearches.remove.bind(PinnedSearches);
+  PinnedSearches.isPinned = PinnedSearches.isPinned.bind(PinnedSearches);
+  PinnedSearches.toggle = PinnedSearches.toggle.bind(PinnedSearches);
+  PinnedSearches.clear = PinnedSearches.clear.bind(PinnedSearches);
+
+  // --- 2.9 IN-MODAL PROCEDURAL MATH EVALUATOR (Safe zero-eval calculator) ---
+  const MathEvaluator = {
+    isMathQuery(query) {
+      if (!query || typeof query !== 'string') return false;
+      const q = query.trim();
+      if (q.startsWith('=') && q.length > 1) return true;
+      if (/^(calc|cal):/i.test(q)) return true;
+      const cleaned = q.replace(/,/g, '').replace(/×/g, '*').replace(/÷/g, '/');
+      if (/^[0-9+\-*/%^().\s]+$/.test(cleaned) && /[0-9]/.test(cleaned) && /[+\-*/%^]/.test(cleaned)) {
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(q) && !/^-\d+$/.test(q)) {
+          return true;
+        }
+      }
+      return false;
+    },
+
+    evaluate(query) {
+      if (!query || typeof query !== 'string') return null;
+      let clean = query.trim();
+      if (clean.startsWith('=')) clean = clean.substring(1).trim();
+      if (/^(calc|cal):/i.test(clean)) clean = clean.replace(/^(calc|cal):/i, '').trim();
+
+      clean = clean.replace(/,/g, '').replace(/×/g, '*').replace(/÷/g, '/');
+
+      // Percentage phrase replacements
+      clean = clean.replace(/([0-9.]+)%\s*(?:of|\*)\s*([0-9.]+)/gi, function (_, p1, p2) {
+        return '(' + p1 + ' / 100 * ' + p2 + ')';
+      });
+      clean = clean.replace(/([0-9.]+)\s*([+-])\s*([0-9.]+)%/gi, function (_, p1, op, p2) {
+        return '(' + p1 + ' ' + op + ' (' + p1 + ' * ' + p2 + ' / 100))';
+      });
+      clean = clean.replace(/([0-9.]+)%/gi, function (_, p1) {
+        return '(' + p1 + ' / 100)';
+      });
+
+      if (!/^[0-9+\-*/().^%\s]|sqrt|abs|round|floor|ceil|pi|e/i.test(clean)) return null;
+      const stripped = clean.replace(/sqrt|abs|round|floor|ceil|pi|e/gi, '');
+      if (/[a-zA-Z]/.test(stripped)) return null;
+
+      try {
+        const tokens = clean.match(/([0-9.]+|[+\-*/^()]|sqrt|abs|round|floor|ceil|pi|e)/gi);
+        if (!tokens || tokens.length === 0) return null;
+
+        let pos = 0;
+        function peek() { return tokens[pos]; }
+        function consume(expected) {
+          const t = tokens[pos++];
+          if (expected && t !== expected) throw new Error('Expected ' + expected);
+          return t;
+        }
+
+        function parseExpr() {
+          let val = parseTerm();
+          while (pos < tokens.length && (peek() === '+' || peek() === '-')) {
+            const op = consume();
+            const next = parseTerm();
+            val = (op === '+') ? val + next : val - next;
+          }
+          return val;
+        }
+
+        function parseTerm() {
+          let val = parseFactor();
+          while (pos < tokens.length && (peek() === '*' || peek() === '/' || peek() === '%')) {
+            const op = consume();
+            const next = parseFactor();
+            if (op === '/') {
+              if (next === 0) return Infinity;
+              val = val / next;
+            } else if (op === '%') {
+              val = val % next;
+            } else {
+              val = val * next;
+            }
+          }
+          return val;
+        }
+
+        function parseFactor() {
+          let val = parsePrimary();
+          while (pos < tokens.length && peek() === '^') {
+            consume();
+            const next = parsePrimary();
+            val = Math.pow(val, next);
+          }
+          return val;
+        }
+
+        function parsePrimary() {
+          const t = peek();
+          if (!t) throw new Error('Unexpected end of input');
+          if (t === '+') { consume(); return parsePrimary(); }
+          if (t === '-') { consume(); return -parsePrimary(); }
+          if (t === '(') {
+            consume('(');
+            const val = parseExpr();
+            consume(')');
+            return val;
+          }
+          if (/^sqrt$/i.test(t)) {
+            consume();
+            consume('(');
+            const val = parseExpr();
+            consume(')');
+            return Math.sqrt(val);
+          }
+          if (/^abs$/i.test(t)) {
+            consume();
+            consume('(');
+            const val = parseExpr();
+            consume(')');
+            return Math.abs(val);
+          }
+          if (/^round$/i.test(t)) {
+            consume();
+            consume('(');
+            const val = parseExpr();
+            consume(')');
+            return Math.round(val);
+          }
+          if (/^floor$/i.test(t)) {
+            consume();
+            consume('(');
+            const val = parseExpr();
+            consume(')');
+            return Math.floor(val);
+          }
+          if (/^ceil$/i.test(t)) {
+            consume();
+            consume('(');
+            const val = parseExpr();
+            consume(')');
+            return Math.ceil(val);
+          }
+          if (/^pi$/i.test(t)) { consume(); return Math.PI; }
+          if (/^e$/i.test(t)) { consume(); return Math.E; }
+          if (!isNaN(Number(t))) {
+            consume();
+            return Number(t);
+          }
+          throw new Error('Unexpected token: ' + t);
+        }
+
+        const rawResult = parseExpr();
+        if (pos < tokens.length) return null;
+
+        if (!isFinite(rawResult) || isNaN(rawResult)) {
+          return null; // Division by zero, overflow, or NaN safely returns null
+        }
+
+        const rounded = Math.round(rawResult * 1000000) / 1000000;
+        const formattedResult = rounded.toLocaleString('en-US', { maximumFractionDigits: 6 });
+
+        return {
+          expression: query.replace(/^(=|calc:|cal:)\s*/i, '').trim(),
+          rawResult,
+          formattedResult
+        };
+      } catch (e) {
+        return null;
+      }
+    }
+  };
+
+  // --- 2.10 RAYCAST-STYLE ACTION STUDIO & COMMAND PALETTE ---
+  const ActionStudio = {
+    isActionQuery(query) {
+      if (!query || typeof query !== 'string') return false;
+      return query.trim().startsWith('>');
+    },
+
+    getCommands(paletteInstance) {
+      return [
+        {
+          id: 'cmd-theme',
+          name: '> theme',
+          title: 'Toggle Theme (Dark / Light / AMOLED)',
+          description: 'Switch between Dark, Light, and AMOLED Black modes',
+          icon: '🌓',
+          shortcut: '↵ to toggle',
+          execute: () => {
+            if (typeof document === 'undefined') return 'Theme toggled';
+            const html = document.documentElement;
+            const current = (html && typeof html.getAttribute === 'function' ? html.getAttribute('data-theme') : null) ||
+              (document.body && document.body.classList && document.body.classList.contains('light-theme') ? 'light' : 'dark');
+            const next = current === 'dark' || current === 'amoled' ? 'light' : 'dark';
+            if (html && typeof html.setAttribute === 'function') {
+              html.setAttribute('data-theme', next);
+            }
+            if (document.body && document.body.classList) {
+              if (next === 'light') {
+                document.body.classList.add('light-theme');
+              } else {
+                document.body.classList.remove('light-theme');
+              }
+            }
+            return `Switched to ${next.toUpperCase()} theme`;
+          }
+        },
+        {
+          id: 'cmd-copy-url',
+          name: '> copy-url',
+          title: 'Copy Current Page URL',
+          description: 'Copies browser location address or anchor link to clipboard',
+          icon: '📋',
+          shortcut: '↵ to copy',
+          execute: () => {
+            if (typeof window === 'undefined') return 'URL copied';
+            const url = window.location.href;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(url).catch(() => {});
+            }
+            return `Copied: ${url}`;
+          }
+        },
+        {
+          id: 'cmd-export-results',
+          name: '> export-results',
+          title: 'Export Search Results to Markdown',
+          description: 'Downloads current query results as a structured Markdown file',
+          icon: '📥',
+          shortcut: '↵ to export',
+          execute: (palette) => {
+            if (typeof document === 'undefined' || !palette) return 'Exported';
+            const results = palette.results || palette.unfilteredResults || [];
+            if (results.length === 0) return 'No results to export';
+            let md = `# Search Export Report\n\n- Generated: ${new Date().toISOString()}\n- Total Matches: ${results.length}\n\n| # | Title | Score | Category | Content Preview |\n|---|---|---|---|---|\n`;
+            results.forEach((r, idx) => {
+              const cleanContent = (r.content || '').replace(/[\r\n]+/g, ' ').slice(0, 100);
+              md += `| ${idx + 1} | ${r.title || 'Untitled'} | ${r.score || 0} | ${r.category || 'General'} | ${cleanContent}... |\n`;
+            });
+            const blob = new Blob([md], { type: 'text/markdown' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `search-export-${Date.now()}.md`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            return `Exported ${results.length} results to Markdown`;
+          }
+        },
+        {
+          id: 'cmd-clear-history',
+          name: '> clear-history',
+          title: 'Clear All Search History & Pinned Shortcuts',
+          description: 'Purges localStorage recent searches and resets pinned items',
+          icon: '🗑️',
+          shortcut: '↵ to purge',
+          execute: (palette) => {
+            if (typeof RecentSearches !== 'undefined') RecentSearches.clear();
+            if (typeof PinnedSearches !== 'undefined') PinnedSearches.clear();
+            if (palette) palette.renderEmptyState();
+            return 'Search history and pins wiped';
+          }
+        },
+        {
+          id: 'cmd-scroll-top',
+          name: '> scroll-top',
+          title: 'Scroll to Top of Page',
+          description: 'Smoothly scrolls the browser viewport to the top',
+          icon: '⬆️',
+          shortcut: '↵ to scroll',
+          execute: () => {
+            if (typeof window !== 'undefined') {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            return 'Scrolled to top';
+          }
+        },
+        {
+          id: 'cmd-scroll-bottom',
+          name: '> scroll-bottom',
+          title: 'Scroll to Bottom of Page',
+          description: 'Smoothly scrolls the browser viewport to the bottom',
+          icon: '⬇️',
+          shortcut: '↵ to scroll',
+          execute: () => {
+            if (typeof window !== 'undefined') {
+              window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            }
+            return 'Scrolled to bottom';
+          }
+        },
+        {
+          id: 'cmd-help',
+          name: '> help',
+          title: 'Open Search Shortcuts & Help Cheatsheet',
+          description: 'View the interactive keyboard controls and power features overlay',
+          icon: '❓',
+          shortcut: '↵ to view',
+          execute: (palette) => {
+            if (palette) palette.renderHelpState();
+            return 'Help opened';
+          }
+        }
+      ];
+    },
+
+    matchCommands(query, paletteInstance) {
+      const raw = (query || '').trim();
+      const clean = raw.startsWith('>') ? raw.substring(1).trim().toLowerCase() : raw.toLowerCase();
+      const all = ActionStudio.getCommands(paletteInstance);
+      if (!clean) return all;
+      return all.filter(c => 
+        c.name.toLowerCase().includes(clean) || 
+        c.title.toLowerCase().includes(clean) || 
+        c.description.toLowerCase().includes(clean)
+      );
+    }
+  };
+
   // --- 3. TOKENIZER & TEXT UTILITIES ---
   function tokenize(text) {
     if (!text || typeof text !== 'string') return [];
@@ -572,6 +994,102 @@
     }
 
     return 0.0;
+  }
+
+  // --- 3.5 DYNAMIC CENTERED KEYWORD WINDOWING & MATCH CLASSIFIER ---
+  function extractDynamicSnippet(content, queryTokens, maxLength = 160) {
+    if (!content || typeof content !== 'string') {
+      return { snippet: '', matchType: 'Exact' };
+    }
+
+    const rawTokens = (queryTokens || [])
+      .map(t => (t || '').toLowerCase().trim())
+      .filter(t => t.length > 0);
+
+    if (rawTokens.length === 0) {
+      let clean = content.replace(/\s+/g, ' ').trim();
+      let snip = clean.length > maxLength ? clean.slice(0, maxLength) + '...' : clean;
+      return { snippet: snip, matchType: 'Exact' };
+    }
+
+    const cleanContent = content.replace(/\s+/g, ' ').trim();
+    const words = cleanContent.split(' ');
+    const lowerWords = words.map(w => w.toLowerCase().replace(/[^a-z0-9\u0600-\u06FF\u0900-\u097F]/g, ''));
+
+    let bestWordIndex = -1;
+    let detectedMatchType = 'Exact';
+
+    for (let i = 0; i < lowerWords.length; i++) {
+      const lw = lowerWords[i];
+      if (!lw) continue;
+
+      for (const qt of rawTokens) {
+        if (lw === qt || lw.includes(qt) || (qt.length > 3 && qt.includes(lw))) {
+          bestWordIndex = i;
+          detectedMatchType = 'Exact';
+          break;
+        }
+        if (typeof ROMAN_TRANSLITERATION !== 'undefined' && ROMAN_TRANSLITERATION[qt]) {
+          const trans = ROMAN_TRANSLITERATION[qt];
+          if (lw === trans || lw.includes(trans)) {
+            bestWordIndex = i;
+            detectedMatchType = 'Transliterated';
+            break;
+          }
+        }
+        if (typeof soundex === 'function' && qt.length >= 3 && lw.length >= 3) {
+          if (soundex(qt) === soundex(lw)) {
+            bestWordIndex = i;
+            detectedMatchType = 'Phonetic';
+            break;
+          }
+        }
+        if (typeof DEFAULT_SYNONYMS !== 'undefined' && DEFAULT_SYNONYMS[qt]) {
+          if (DEFAULT_SYNONYMS[qt].some(s => lw === s || lw.includes(s))) {
+            bestWordIndex = i;
+            detectedMatchType = 'Synonym';
+            break;
+          }
+        }
+      }
+      if (bestWordIndex !== -1 && detectedMatchType === 'Exact') break;
+    }
+
+    if (bestWordIndex === -1) {
+      let snippet = words.slice(0, 24).join(' ');
+      if (words.length > 24) snippet += '...';
+      return { snippet, matchType: 'Relevant' };
+    }
+
+    const startWordIdx = Math.max(0, bestWordIndex - 10);
+    const endWordIdx = Math.min(words.length, bestWordIndex + 16);
+
+    let snippetWords = words.slice(startWordIdx, endWordIdx);
+    let snippet = snippetWords.join(' ');
+
+    if (startWordIdx > 0) snippet = '... ' + snippet;
+    if (endWordIdx < words.length) snippet = snippet + ' ...';
+
+    // Highlight tokens
+    const highlightTokens = new Set(rawTokens);
+    rawTokens.forEach(qt => {
+      if (typeof ROMAN_TRANSLITERATION !== 'undefined' && ROMAN_TRANSLITERATION[qt]) {
+        highlightTokens.add(ROMAN_TRANSLITERATION[qt]);
+      }
+      if (typeof DEFAULT_SYNONYMS !== 'undefined' && DEFAULT_SYNONYMS[qt]) {
+        DEFAULT_SYNONYMS[qt].forEach(s => highlightTokens.add(s));
+      }
+    });
+
+    highlightTokens.forEach(tok => {
+      if (tok && tok.length > 1) {
+        const escaped = tok.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const regex = new RegExp(`\\b(${escaped}[a-z]*)\\b`, 'gi');
+        snippet = snippet.replace(regex, '<mark class="ai-search-highlight">$1</mark>');
+      }
+    });
+
+    return { snippet, matchType: detectedMatchType };
   }
 
   // --- 4. BM25 PROBABILISTIC RANKING ENGINE ---
@@ -746,10 +1264,12 @@
       scores.forEach((score, docIndex) => {
         if (score > 0.05) {
           const doc = this.documents[docIndex];
+          const dynamicResult = extractDynamicSnippet(doc.content, rawTokens, 160);
           ranked.push({
             ...doc,
             score: Math.round(score * 100) / 100,
-            snippet: this.generateSnippet(doc.content, rawTokens)
+            snippet: dynamicResult.snippet,
+            matchType: dynamicResult.matchType
           });
         }
       });
@@ -780,36 +1300,8 @@
 
     generateSnippet(content, queryTokens, maxLength = 160) {
       if (!content) return '';
-      const lower = content.toLowerCase();
-      let bestPos = -1;
-
-      for (const tok of queryTokens) {
-        const pos = lower.indexOf(tok);
-        if (pos !== -1) {
-          bestPos = pos;
-          break;
-        }
-      }
-
-      let start = 0;
-      if (bestPos > 40) {
-        start = Math.max(0, bestPos - 30);
-      }
-
-      let end = Math.min(content.length, start + maxLength);
-      let snippet = content.substring(start, end).trim();
-      if (start > 0) snippet = '...' + snippet;
-      if (end < content.length) snippet = snippet + '...';
-
-      // Highlight query tokens
-      queryTokens.forEach(tok => {
-        if (tok.length > 2) {
-          const regex = new RegExp(`(${tok})`, 'gi');
-          snippet = snippet.replace(regex, '<mark class="ai-search-highlight">$1</mark>');
-        }
-      });
-
-      return snippet;
+      const res = extractDynamicSnippet(content, queryTokens, maxLength);
+      return res.snippet;
     }
 
     /**
@@ -1189,6 +1681,110 @@
     return documents;
   }
 
+  // --- 5.5 DEFAULT WORKSPACE APPS CATALOG (Offline fallback) ---
+  const DEFAULT_WORKSPACE_CATALOG = [
+    {
+      id: 'app-quran-analyzer',
+      title: 'Quran Deep Analyzer',
+      description: 'Authoritative multidimensional analytical system, morphology & roots for the Holy Quran.',
+      category: 'Islamic & Faith',
+      badge: '114 Surahs • Corpus',
+      icon: '📖',
+      tags: ['quran', 'ayat', 'surah', 'arabic', 'tafsir', 'morphology', 'concordance'],
+      url: '../../15-Quran-Deep-Analyzer/index.html'
+    },
+    {
+      id: 'app-hadith-portal',
+      title: 'Faizan-e-Hadees (Roman Urdu Portal)',
+      description: 'Complete 6-book classical Hadith encyclopedia with full Arabic text, Urdu and Roman Urdu search.',
+      category: 'Islamic & Faith',
+      badge: '7,882 Hadiths • AI Search',
+      icon: '📜',
+      tags: ['hadith', 'hadees', 'bukhari', 'muslim', 'sunnah', 'roman urdu'],
+      url: '../../03-Hadith-Roman-Urdu/web/index.html'
+    },
+    {
+      id: 'app-namaz-times',
+      title: 'Namaz Prayer Times & Qibla',
+      description: 'Precision astronomical solar engine, Jean Meeus ephemeris prayer times and Qibla compass.',
+      category: 'Islamic & Faith',
+      badge: 'Astronomical • PWA',
+      icon: '🕌',
+      tags: ['namaz', 'prayer', 'salah', 'fajr', 'zuhr', 'asr', 'maghrib', 'isha', 'qibla'],
+      url: '../../02-Namaz-Prayer-Times/index.html'
+    },
+    {
+      id: 'app-pincode-search',
+      title: 'India Pincode Search & Postal Directory',
+      description: 'Sub-millisecond offline post office locator and district pincode search engine.',
+      category: 'Productivity & Utilities',
+      badge: 'Offline • 155k Pincodes',
+      icon: '📮',
+      tags: ['pincode', 'postal', 'post office', 'india', 'courier', 'delivery'],
+      url: '../../08-Pincode-Search/index.html'
+    },
+    {
+      id: 'app-weight-gain',
+      title: 'Sustainable Weight Gain Guide & Dashboard',
+      description: 'Precision human physiology, liquid calorie surplus, and calisthenics hypertrophy protocols.',
+      category: 'Health & Nutrition',
+      badge: 'Health • Dashboard',
+      icon: '🥗',
+      tags: ['weight', 'diet', 'calories', 'food', 'nutrition', 'fitness', 'gain', 'khana'],
+      url: '../../13-Sustainable-Weight-Gain-Guide/Weight_Gain_Dashboard.html'
+    },
+    {
+      id: 'app-thela-stock',
+      title: 'Thela Stock Manager',
+      description: 'Inventory management and real-time Google Sheets webhook sync for logistics.',
+      category: 'Productivity & Utilities',
+      badge: 'Inventory • Cloud Sync',
+      icon: '📦',
+      tags: ['stock', 'inventory', 'thela', 'courier', 'sheets', 'warehouse'],
+      url: '../../14-Thela-Stock-Manager/index.html'
+    },
+    {
+      id: 'app-fatawa-reader',
+      title: 'Fatawa Razviya Short Rulings Reader',
+      description: 'Imam Ahmad Raza Khan 30-volume rulings encyclopedia with thematic search.',
+      category: 'Islamic & Faith',
+      badge: '30 Volumes • Fiqh',
+      icon: '📚',
+      tags: ['fatawa', 'razvia', 'razviya', 'fiqh', 'rulings', 'shariat', 'masail'],
+      url: '../../12-Fatawa-Project/output/fatawa_reader.html'
+    },
+    {
+      id: 'app-system-accel',
+      title: 'System Acceleration Suite',
+      description: 'Zero-bloat Windows performance tuning, SSD optimization, and RAM reclaim scripts.',
+      category: 'Knowledge & Engineering',
+      badge: 'Windows OS • Tuning',
+      icon: '⚡',
+      tags: ['system', 'windows', 'acceleration', 'ram', 'cleaner', 'pc', 'speed'],
+      url: '../../07-System-Acceleration/README.md'
+    },
+    {
+      id: 'app-update-software',
+      title: 'PC Software Updater & Winget Hub',
+      description: 'Automated Windows software package management and driver assistant auditor.',
+      category: 'Knowledge & Engineering',
+      badge: 'Winget • Desktop',
+      icon: '🔄',
+      tags: ['update', 'software', 'winget', 'pc', 'apps', 'install'],
+      url: '../../06-Update-Software/README.md'
+    },
+    {
+      id: 'app-events-countdown',
+      title: 'Events Countdown & Tracker',
+      description: 'Milestone and Islamic calendar event countdown manager with local storage.',
+      category: 'Islamic & Faith',
+      badge: 'PWA • Storage',
+      icon: '📅',
+      tags: ['events', 'countdown', 'calendar', 'dates', 'tracker'],
+      url: '../../01-Events-Countdown/index.html'
+    }
+  ];
+
   // --- 6. SPOTLIGHT COMMAND PALETTE UI ---
   class SpotlightUI {
     constructor(engine, options = {}) {
@@ -1198,7 +1794,9 @@
         geminiApiKey: '',
         enableSound: true,
         categories: null,
-        onSelect: null
+        onSelect: null,
+        catalogEngine: null,
+        catalogItems: null
       }, options);
 
       this.isOpen = false;
@@ -1208,6 +1806,36 @@
       this.activeCategory = 'All';
       this.autocompleteSuggestions = [];
       this.activeAutocompleteIndex = -1;
+
+      // Scope & Actions state
+      this.activeScope = 'page'; // 'page' or 'apps'
+      this.catalogEngine = this.options.catalogEngine || null;
+      const rawCatalog = this.options.catalogItems ||
+        (typeof window !== 'undefined' && window.PORTAL_CATALOG && Array.isArray(window.PORTAL_CATALOG.apps) ? window.PORTAL_CATALOG.apps : null) ||
+        (typeof window !== 'undefined' && Array.isArray(window.PORTAL_CATALOG) ? window.PORTAL_CATALOG : null) ||
+        (typeof DEFAULT_WORKSPACE_CATALOG !== 'undefined' ? DEFAULT_WORKSPACE_CATALOG : []);
+      this.catalogItems = Array.isArray(rawCatalog) ? rawCatalog : [];
+      if (!this.catalogEngine && Array.isArray(this.catalogItems) && this.catalogItems.length > 0) {
+        try {
+          this.catalogEngine = new BM25Engine({ synonyms: this.options.synonyms || {} });
+          this.catalogItems.forEach(item => {
+            this.catalogEngine.addDocument({
+              id: item.id || item.url || item.title,
+              title: item.title,
+              content: (item.description || '') + ' ' + (Array.isArray(item.tags) ? item.tags.join(' ') : (item.tags || '')),
+              category: item.category || 'Workspace App',
+              url: item.url || '#',
+              icon: item.icon || '🚀',
+              isApp: true
+            });
+          });
+        } catch (catErr) {
+          console.warn('[AISearch] Default catalog indexing warning:', catErr);
+        }
+      }
+      this.scopeBar = null;
+      this.activeCalcCopy = null;
+      this.lastCatalogHits = [];
 
       this.modalEl = null;
       this.inputEl = null;
@@ -1256,6 +1884,18 @@
             </div>
           </div>
 
+          <div class="ai-search-scope-bar" id="ai-search-scope-bar" role="tablist" aria-label="Search Scope">
+            <button type="button" class="ai-search-scope-pill ai-search-scope-active" data-scope="page" role="tab" aria-selected="true" id="ai-scope-page">
+              <span class="ai-search-scope-icon">📄</span>
+              <span class="ai-search-scope-label">This Page</span>
+            </button>
+            <button type="button" class="ai-search-scope-pill" data-scope="apps" role="tab" aria-selected="false" id="ai-scope-apps">
+              <span class="ai-search-scope-icon">📦</span>
+              <span class="ai-search-scope-label">All Workspace Apps</span>
+              <span class="ai-search-scope-count" id="ai-scope-apps-count"></span>
+            </button>
+          </div>
+
           <div class="ai-search-categories-bar" id="ai-search-categories" role="tablist" aria-label="Search Categories" style="display: none;"></div>
           <div id="ai-search-autocomplete" class="ai-search-autocomplete" style="display: none;" role="region" aria-label="Suggestions"></div>
 
@@ -1295,12 +1935,14 @@
       this.resultsContainer = root.querySelector('#ai-search-results');
       this.aiCardContainer = root.querySelector('#ai-search-ai-answer');
       this.categoriesBar = root.querySelector('#ai-search-categories');
+      this.scopeBar = root.querySelector('#ai-search-scope-bar');
       this.autocompleteContainer = root.querySelector('#ai-search-autocomplete');
       this.dymEl = root.querySelector('#ai-search-dym');
       this.micBtn = root.querySelector('#ai-search-mic-btn');
       this.isListening = false;
       this.recognition = null;
       this.initVoiceRecognition();
+      this.updateScopeCounts();
 
       // Floating Action Pill for Mobile Ergonomics (Directive 5)
       if (this.options.enableFloatingPill !== false && typeof document !== 'undefined') {
@@ -1585,6 +2227,10 @@
           this.moveActive(-1);
         } else if (e.key === 'Enter') {
           e.preventDefault();
+          if (this.activeCalcCopy) {
+            this.activeCalcCopy();
+            return;
+          }
           if (this.activeIndex >= 0 && this.results[this.activeIndex]) {
             this.selectResult(this.results[this.activeIndex]);
           } else if (this.results.length > 0) {
@@ -1592,6 +2238,18 @@
           }
         }
       });
+
+      // Scope switching pills click delegation
+      if (this.scopeBar) {
+        this.scopeBar.querySelectorAll('.ai-search-scope-pill').forEach(pill => {
+          pill.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const sc = pill.getAttribute('data-scope');
+            if (sc) this.setScope(sc);
+          });
+        });
+      }
 
       // Document-level delegation for any elements with class .ai-search-trigger
       document.addEventListener('click', (e) => {
@@ -1647,6 +2305,40 @@
     toggle() {
       if (this.isOpen) this.close();
       else this.open();
+    }
+
+    updateScopeCounts() {
+      if (!this.modalEl) return;
+      const countEl = this.modalEl.querySelector('#ai-scope-apps-count');
+      if (countEl) {
+        const count = this.catalogItems ? this.catalogItems.length : 0;
+        countEl.textContent = count > 0 ? count : '';
+        countEl.style.display = count > 0 ? 'inline-block' : 'none';
+      }
+    }
+
+    setScope(scope) {
+      if (!scope || (scope !== 'page' && scope !== 'apps')) return;
+      this.activeScope = scope;
+      if (this.options.enableSound) SoundFX.click();
+      if (this.scopeBar) {
+        this.scopeBar.querySelectorAll('.ai-search-scope-pill').forEach(p => {
+          const isAct = p.getAttribute('data-scope') === scope;
+          if (isAct) {
+            p.classList.add('ai-search-scope-active');
+            p.setAttribute('aria-selected', 'true');
+          } else {
+            p.classList.remove('ai-search-scope-active');
+            p.setAttribute('aria-selected', 'false');
+          }
+        });
+      }
+      const q = this.inputEl ? this.inputEl.value.trim() : '';
+      if (q) {
+        this.performSearch(q);
+      } else {
+        this.renderEmptyState();
+      }
     }
 
     renderAutocomplete(query) {
@@ -1889,25 +2581,63 @@
     }
 
     performSearch(query) {
+      const cleanQ = (query || '').trim();
+      this.activeCalcCopy = null;
+
+      // 1. Math Calculation check
+      if (typeof MathEvaluator !== 'undefined' && MathEvaluator.isMathQuery(cleanQ)) {
+        const calcRes = MathEvaluator.evaluate(cleanQ);
+        if (calcRes) {
+          this.renderCalculation(calcRes);
+          return;
+        }
+      }
+
+      // 2. Action Studio check
+      if (typeof ActionStudio !== 'undefined' && ActionStudio.isActionQuery(cleanQ)) {
+        const cmds = ActionStudio.matchCommands(cleanQ, this);
+        this.renderActions(cmds);
+        return;
+      }
+
+      // 3. History tracking
       if (this.options.enableHistory !== false && typeof RecentSearches !== 'undefined') {
-        const cleanQ = (query || '').trim();
-        if (cleanQ && cleanQ !== '?' && cleanQ.toLowerCase() !== 'help') {
+        if (cleanQ && cleanQ !== '?' && cleanQ.toLowerCase() !== 'help' && !cleanQ.startsWith('>')) {
           RecentSearches.add(cleanQ);
         }
       }
 
-      this.unfilteredResults = this.engine.search(query, 16);
+      // 4. Scope-dependent search
+      if (this.activeScope === 'apps' && this.catalogEngine) {
+        this.unfilteredResults = this.catalogEngine.search(cleanQ, 20);
+      } else {
+        this.unfilteredResults = this.engine.search(cleanQ, 16);
+      }
       this.activeIndex = -1;
 
-      const rawTokens = tokenize(query);
-      const suggestion = this.engine.getSpellingSuggestion(rawTokens, this.unfilteredResults);
+      const rawTokens = tokenize(cleanQ);
+      const activeEng = (this.activeScope === 'apps' && this.catalogEngine) ? this.catalogEngine : this.engine;
+      const suggestion = activeEng.getSpellingSuggestion(rawTokens, this.unfilteredResults);
       this.renderDidYouMean(suggestion);
 
       if (this.unfilteredResults.length === 0) {
+        // Fallback: If page search yielded zero hits, check if catalog apps match
+        let catalogFallback = [];
+        if (this.activeScope === 'page' && this.catalogEngine) {
+          catalogFallback = this.catalogEngine.search(cleanQ, 4).filter(r => r.score >= 0.8);
+        }
+
+        if (catalogFallback.length > 0) {
+          this.results = [];
+          this.renderNoPageMatchesWithCatalogFallback(cleanQ, catalogFallback);
+          this.aiCardContainer.style.display = 'none';
+          return;
+        }
+
         this.results = [];
         this.resultsContainer.innerHTML = `
           <div class="ai-search-empty-state">
-            <p class="ai-search-empty-title">No matching sections found</p>
+            <p class="ai-search-empty-title">No matching ${this.activeScope === 'apps' ? 'apps' : 'sections'} found</p>
             <p class="ai-search-empty-desc">Try searching for broader keywords, synonyms, or check your spelling.</p>
           </div>
         `;
@@ -1919,37 +2649,388 @@
 
       // Trigger optional Gemini AI synthesis if configured
       if (this.options.geminiApiKey) {
-        this.synthesizeGeminiAnswer(query, this.results.length > 0 ? this.results : this.unfilteredResults);
+        this.synthesizeGeminiAnswer(cleanQ, this.results.length > 0 ? this.results : this.unfilteredResults);
       } else {
         this.aiCardContainer.style.display = 'none';
+      }
+    }
+
+    renderHelpState() {
+      this.results = [];
+      this.unfilteredResults = [];
+      this.activeIndex = -1;
+      this.hideAutocomplete();
+      if (this.dymEl) {
+        this.dymEl.style.display = 'none';
+        this.dymEl.innerHTML = '';
+      }
+      this.aiCardContainer.style.display = 'none';
+
+      this.resultsContainer.innerHTML = `
+        <div class="ai-search-help-panel">
+          <div class="ai-search-help-header">
+            <span class="ai-search-help-title">💡 Antigravity Search & Command Palette Cheatsheet</span>
+            <span class="ai-search-help-badge">v3.0 Hybrid</span>
+          </div>
+          <div class="ai-search-help-grid">
+            <div class="ai-search-help-card">
+              <div class="ai-search-help-card-title">Keyboard Navigation</div>
+              <ul class="ai-search-help-card-list">
+                <li><kbd>Ctrl+K</kbd> / <kbd>Cmd+K</kbd> Open / focus palette</li>
+                <li><kbd>↑</kbd> <kbd>↓</kbd> Navigate search results</li>
+                <li><kbd>Enter</kbd> Select result or execute</li>
+                <li><kbd>Tab</kbd> Accept top query suggestion</li>
+                <li><kbd>Esc</kbd> Close command palette</li>
+              </ul>
+            </div>
+            <div class="ai-search-help-card">
+              <div class="ai-search-help-card-title">Omnisearch & Actions</div>
+              <ul class="ai-search-help-card-list">
+                <li><code>= 25 * 40</code> Instant safe math calculator</li>
+                <li><code>> theme</code> Toggle dark / light theme</li>
+                <li><code>> copy-url</code> Copy current page link</li>
+                <li><code>> export-results</code> Export search results</li>
+                <li><code>[This Page] / [All Apps]</code> Scope switcher</li>
+              </ul>
+            </div>
+            <div class="ai-search-help-card">
+              <div class="ai-search-help-card-title">Multilingual & Transliteration</div>
+              <ul class="ai-search-help-card-list">
+                <li><code>khana</code> ➔ food &amp; nutrition</li>
+                <li><code>wazan</code> ➔ weight &amp; mass</li>
+                <li><code>dawa</code> ➔ medicine &amp; health</li>
+                <li><code>namaz</code> ➔ prayer timing &amp; fiqh</li>
+                <li><code>khat</code> ➔ post &amp; logistics</li>
+              </ul>
+            </div>
+            <div class="ai-search-help-card">
+              <div class="ai-search-help-card-title">Smart Features</div>
+              <ul class="ai-search-help-card-list">
+                <li><code>⭐ Pin</code> Pin search shortcuts to top</li>
+                <li><code>🎙️ Voice</code> Native Indian English / Hindi speech</li>
+                <li><code>Typo tolerance</code> Automatic BM25 fuzzy matching</li>
+                <li><code>Did you mean?</code> Intelligent spelling suggestions</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    renderCalculation(calcRes) {
+      this.results = [];
+      this.unfilteredResults = [];
+      this.activeIndex = 0;
+      this.hideAutocomplete();
+      if (this.dymEl) this.dymEl.style.display = 'none';
+      this.aiCardContainer.style.display = 'none';
+
+      const escapeHtml = (str) => {
+        return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      };
+
+      this.resultsContainer.innerHTML = `
+        <div class="ai-search-calc-card">
+          <div class="ai-search-calc-header">
+            <span class="ai-search-calc-badge">⚡ Instant Calculator</span>
+            <span class="ai-search-match-badge ai-search-badge-calc">Math Engine</span>
+          </div>
+          <div class="ai-search-calc-body">
+            <div class="ai-search-calc-expr">${escapeHtml(calcRes.expression)}</div>
+            <div class="ai-search-calc-result">= ${calcRes.formattedResult}</div>
+          </div>
+          <div class="ai-search-calc-footer">
+            <button type="button" class="ai-search-calc-copy-btn" id="ai-search-copy-calc">
+              📋 Copy Result (${calcRes.formattedResult})
+            </button>
+            <span class="ai-search-calc-hint"><kbd>↵</kbd> to copy</span>
+          </div>
+        </div>
+      `;
+
+      const copyBtn = this.resultsContainer.querySelector('#ai-search-copy-calc');
+      if (copyBtn) {
+        const doCopy = () => {
+          if (this.options.enableSound) SoundFX.click();
+          if (typeof navigator !== 'undefined' && navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(String(calcRes.rawResult)).catch(() => {});
+          }
+          copyBtn.innerHTML = `✓ Copied to Clipboard!`;
+          copyBtn.classList.add('ai-search-copy-success');
+          setTimeout(() => {
+            if (copyBtn) {
+              copyBtn.innerHTML = `📋 Copy Result (${calcRes.formattedResult})`;
+              copyBtn.classList.remove('ai-search-copy-success');
+            }
+          }, 1800);
+        };
+        copyBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          doCopy();
+        });
+        this.activeCalcCopy = doCopy;
+      }
+    }
+
+    renderActions(cmds) {
+      this.results = cmds.map(c => ({
+        ...c,
+        isAction: true
+      }));
+      this.unfilteredResults = this.results;
+      this.activeIndex = this.results.length > 0 ? 0 : -1;
+      this.hideAutocomplete();
+      if (this.dymEl) this.dymEl.style.display = 'none';
+      this.aiCardContainer.style.display = 'none';
+
+      if (cmds.length === 0) {
+        this.resultsContainer.innerHTML = `
+          <div class="ai-search-empty-state">
+            <p class="ai-search-empty-title">No matching action commands</p>
+            <p class="ai-search-empty-desc">Type <code>&gt;</code> to view all available commands.</p>
+          </div>
+        `;
+        return;
+      }
+
+      let html = '<div class="ai-search-actions-list">';
+      cmds.forEach((cmd, idx) => {
+        const isSel = idx === 0;
+        html += `
+          <div class="ai-search-action-item ${isSel ? 'ai-search-item-selected' : ''}" data-index="${idx}" role="option">
+            <span class="ai-search-action-icon">${cmd.icon}</span>
+            <div class="ai-search-action-info">
+              <div class="ai-search-action-name-row">
+                <span class="ai-search-action-name">${cmd.name}</span>
+                <span class="ai-search-match-badge ai-search-badge-action">Command</span>
+              </div>
+              <div class="ai-search-action-title">${cmd.title}</div>
+              <div class="ai-search-action-desc">${cmd.description}</div>
+            </div>
+            <span class="ai-search-action-shortcut"><kbd>${cmd.shortcut}</kbd></span>
+          </div>
+        `;
+      });
+      html += '</div>';
+
+      this.resultsContainer.innerHTML = html;
+
+      this.resultsContainer.querySelectorAll('.ai-search-action-item').forEach(el => {
+        el.addEventListener('click', () => {
+          const idx = parseInt(el.getAttribute('data-index'), 10);
+          if (this.results[idx]) {
+            this.executeAction(this.results[idx]);
+          }
+        });
+      });
+    }
+
+    executeAction(cmd) {
+      if (!cmd) return;
+      if (this.options.enableSound) SoundFX.select();
+      if (typeof cmd.execute === 'function') {
+        try {
+          cmd.execute(this);
+        } catch (e) {}
+      }
+      this.close();
+    }
+
+    renderNoPageMatchesWithCatalogFallback(query, fallbackApps) {
+      let html = `
+        <div class="ai-search-empty-state" style="padding-bottom: 8px;">
+          <p class="ai-search-empty-title">No matching sections on this page</p>
+          <p class="ai-search-empty-desc">Found <strong>${fallbackApps.length}</strong> matching application${fallbackApps.length === 1 ? '' : 's'} across the workspace for "<em>${query}</em>":</p>
+        </div>
+        <div class="ai-search-catalog-divider" style="margin-top: 0;">
+          <div class="ai-search-catalog-header">
+            <span>📦 Workspace Apps &amp; Tools</span>
+            <button type="button" class="ai-search-switch-scope-btn" id="ai-search-fallback-switch">View All Apps</button>
+          </div>
+        </div>
+      `;
+
+      fallbackApps.forEach((catApp, cIdx) => {
+        const itemId = catApp.id || catApp.url || catApp.title;
+        const isPinned = typeof PinnedSearches !== 'undefined' ? PinnedSearches.isPinned(itemId) : false;
+        html += `
+          <div class="ai-search-result-item ai-search-catalog-item" data-catalog-index="${cIdx}" role="option">
+            <div class="ai-search-item-header">
+              <span class="ai-search-item-icon">${catApp.icon || '🚀'}</span>
+              <span class="ai-search-item-title">${catApp.title}</span>
+              <div class="ai-search-item-meta">
+                <span class="ai-search-match-badge ai-search-badge-app">App</span>
+                <span class="ai-search-score-pill">BM25: ${catApp.score}</span>
+                <button type="button" class="ai-search-pin-btn ${isPinned ? 'ai-search-pin-active' : ''}" data-catalog-index="${cIdx}" title="${isPinned ? 'Unpin' : 'Pin to top'}">
+                  ${isPinned ? '★' : '☆'}
+                </button>
+              </div>
+            </div>
+            <div class="ai-search-item-snippet">${catApp.snippet}</div>
+          </div>
+        `;
+      });
+
+      this.resultsContainer.innerHTML = html;
+      this.lastCatalogHits = fallbackApps;
+
+      this.resultsContainer.querySelectorAll('.ai-search-catalog-item').forEach(el => {
+        el.addEventListener('click', (e) => {
+          if (e.target.closest('.ai-search-pin-btn')) return;
+          const cIdx = parseInt(el.getAttribute('data-catalog-index'), 10);
+          if (this.lastCatalogHits && this.lastCatalogHits[cIdx]) {
+            this.selectResult(this.lastCatalogHits[cIdx]);
+          }
+        });
+      });
+
+      this.resultsContainer.querySelectorAll('.ai-search-pin-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const cIdx = parseInt(btn.getAttribute('data-catalog-index'), 10);
+          const item = this.lastCatalogHits ? this.lastCatalogHits[cIdx] : null;
+          if (item && typeof PinnedSearches !== 'undefined') {
+            const isNowPinned = PinnedSearches.toggle(item);
+            if (this.options.enableSound) SoundFX.click();
+            btn.innerHTML = isNowPinned ? '★' : '☆';
+            btn.classList.toggle('ai-search-pin-active', isNowPinned);
+          }
+        });
+      });
+
+      const fallbackSwitchBtn = this.resultsContainer.querySelector('#ai-search-fallback-switch');
+      if (fallbackSwitchBtn) {
+        fallbackSwitchBtn.addEventListener('click', () => this.setScope('apps'));
       }
     }
 
     renderResults(results) {
       let html = '';
       results.forEach((item, index) => {
+        const itemId = item.id || item.url || item.title;
+        const isPinned = typeof PinnedSearches !== 'undefined' ? PinnedSearches.isPinned(itemId) : false;
+        const matchType = item.isApp ? 'App' : (item.matchType || 'Exact');
+        const badgeClass = `ai-search-badge-${matchType.toLowerCase()}`;
+        const icon = item.icon || (item.isApp ? '📦' : '📄');
+
         html += `
-          <div class="ai-search-result-item" data-index="${index}" role="option">
+          <div class="ai-search-result-item ${index === this.activeIndex ? 'ai-search-item-selected' : ''}" data-index="${index}" role="option">
             <div class="ai-search-item-header">
+              <span class="ai-search-item-icon">${icon}</span>
               <span class="ai-search-item-title">${item.title}</span>
-              <span class="ai-search-score-pill">BM25: ${item.score}</span>
+              <div class="ai-search-item-meta">
+                <span class="ai-search-match-badge ${badgeClass}">${matchType}</span>
+                <span class="ai-search-score-pill">BM25: ${item.score}</span>
+                <button type="button" class="ai-search-pin-btn ${isPinned ? 'ai-search-pin-active' : ''}" data-index="${index}" title="${isPinned ? 'Unpin' : 'Pin to top'}">
+                  ${isPinned ? '★' : '☆'}
+                </button>
+              </div>
             </div>
             <div class="ai-search-item-snippet">${item.snippet}</div>
           </div>
         `;
       });
 
+      // Auto-blend: if in page scope and catalog items matched
+      if (this.activeScope === 'page' && this.catalogEngine && this.inputEl) {
+        const q = this.inputEl.value.trim();
+        if (q && q.length > 2 && !q.startsWith('>') && !q.startsWith('=')) {
+          const catHits = this.catalogEngine.search(q, 3).filter(c => c.score >= 0.9);
+          if (catHits.length > 0) {
+            html += `
+              <div class="ai-search-catalog-divider">
+                <div class="ai-search-catalog-header">
+                  <span>📦 Matching Workspace Apps &amp; Tools</span>
+                  <button type="button" class="ai-search-switch-scope-btn" id="ai-search-switch-to-apps">
+                    View All Apps
+                  </button>
+                </div>
+              </div>
+            `;
+            catHits.forEach((catApp, cIdx) => {
+              const itemId = catApp.id || catApp.url || catApp.title;
+              const isPinned = typeof PinnedSearches !== 'undefined' ? PinnedSearches.isPinned(itemId) : false;
+              html += `
+                <div class="ai-search-result-item ai-search-catalog-item" data-catalog-index="${cIdx}" role="option">
+                  <div class="ai-search-item-header">
+                    <span class="ai-search-item-icon">${catApp.icon || '🚀'}</span>
+                    <span class="ai-search-item-title">${catApp.title}</span>
+                    <div class="ai-search-item-meta">
+                      <span class="ai-search-match-badge ai-search-badge-app">App</span>
+                      <span class="ai-search-score-pill">BM25: ${catApp.score}</span>
+                      <button type="button" class="ai-search-pin-btn ${isPinned ? 'ai-search-pin-active' : ''}" data-catalog-index="${cIdx}" title="${isPinned ? 'Unpin' : 'Pin to top'}">
+                        ${isPinned ? '★' : '☆'}
+                      </button>
+                    </div>
+                  </div>
+                  <div class="ai-search-item-snippet">${catApp.snippet}</div>
+                </div>
+              `;
+            });
+            this.lastCatalogHits = catHits;
+          } else {
+            this.lastCatalogHits = [];
+          }
+        }
+      }
+
       this.resultsContainer.innerHTML = html;
 
-      // Click binding
-      this.resultsContainer.querySelectorAll('.ai-search-result-item').forEach(el => {
-        el.addEventListener('click', () => {
+      // Click binding on normal results
+      this.resultsContainer.querySelectorAll('.ai-search-result-item:not(.ai-search-catalog-item)').forEach(el => {
+        el.addEventListener('click', (e) => {
+          if (e.target.closest('.ai-search-pin-btn')) return;
           const idx = parseInt(el.getAttribute('data-index'), 10);
           if (this.results[idx]) {
             this.selectResult(this.results[idx]);
           }
         });
       });
+
+      // Click binding on catalog items
+      this.resultsContainer.querySelectorAll('.ai-search-catalog-item').forEach(el => {
+        el.addEventListener('click', (e) => {
+          if (e.target.closest('.ai-search-pin-btn')) return;
+          const cIdx = parseInt(el.getAttribute('data-catalog-index'), 10);
+          if (this.lastCatalogHits && this.lastCatalogHits[cIdx]) {
+            this.selectResult(this.lastCatalogHits[cIdx]);
+          }
+        });
+      });
+
+      // Pin button binding
+      this.resultsContainer.querySelectorAll('.ai-search-pin-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          let item = null;
+          if (btn.hasAttribute('data-index')) {
+            const idx = parseInt(btn.getAttribute('data-index'), 10);
+            item = this.results[idx];
+          } else if (btn.hasAttribute('data-catalog-index')) {
+            const cIdx = parseInt(btn.getAttribute('data-catalog-index'), 10);
+            item = this.lastCatalogHits ? this.lastCatalogHits[cIdx] : null;
+          }
+          if (item && typeof PinnedSearches !== 'undefined') {
+            const isNowPinned = PinnedSearches.toggle(item);
+            if (this.options.enableSound) SoundFX.click();
+            btn.innerHTML = isNowPinned ? '★' : '☆';
+            btn.classList.toggle('ai-search-pin-active', isNowPinned);
+          }
+        });
+      });
+
+      // Switch to apps scope button
+      const switchBtn = this.resultsContainer.querySelector('#ai-search-switch-to-apps');
+      if (switchBtn) {
+        switchBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          this.setScope('apps');
+        });
+      }
     }
 
     renderEmptyState() {
@@ -1963,9 +3044,38 @@
       }
       this.aiCardContainer.style.display = 'none';
 
+      const pinnedList = (typeof PinnedSearches !== 'undefined')
+        ? PinnedSearches.getAll()
+        : [];
+
       const recentList = (this.options.enableHistory !== false && typeof RecentSearches !== 'undefined')
         ? RecentSearches.getAll()
         : [];
+
+      let pinnedHtml = '';
+      if (pinnedList.length > 0) {
+        pinnedHtml = `
+          <div class="ai-search-pinned-section">
+            <div class="ai-search-pinned-header">
+              <span class="ai-search-pinned-title">⭐ Pinned Shortcuts</span>
+              <button type="button" class="ai-search-clear-pins-btn" id="ai-search-clear-pins">Clear</button>
+            </div>
+            <div class="ai-search-pinned-chips">
+              ${pinnedList.map(item => {
+                const title = typeof item === 'object' ? (item.title || item.query) : item;
+                const id = typeof item === 'object' ? (item.id || item.url || item.title || item.query) : item;
+                const icon = (typeof item === 'object' && item.icon) ? item.icon : '📌';
+                return `
+                  <button type="button" class="ai-search-pinned-chip" data-id="${id.replace(/"/g, '&quot;')}" title="${title}">
+                    <span class="ai-search-pinned-icon">${icon}</span>
+                    <span class="ai-search-pinned-label">${title.replace(/</g, '&lt;')}</span>
+                  </button>
+                `;
+              }).join('')}
+            </div>
+          </div>
+        `;
+      }
 
       let recentHtml = '';
       if (recentList.length > 0) {
@@ -1988,18 +3098,30 @@
 
       this.resultsContainer.innerHTML = `
         <div class="ai-search-empty-state">
+          ${pinnedHtml}
           ${recentHtml}
-          <p class="ai-search-empty-title">Instant Semantic Search</p>
-          <p class="ai-search-empty-desc">Type keywords, typos, or natural queries. BM25 and fuzzy logic index this page in real time.</p>
+          <p class="ai-search-empty-title">Instant Semantic Omnisearch</p>
+          <p class="ai-search-empty-desc">Type keywords, math (<code>= 25*40</code>), commands (<code>&gt; theme</code>), or voice queries.</p>
           <div class="ai-search-tip-chips">
             <span class="ai-search-chip">⚡ Sub-millisecond</span>
-            <span class="ai-search-chip">🔒 100% Offline</span>
-            <span class="ai-search-chip">🎯 Typo-Tolerant</span>
+            <span class="ai-search-chip">📦 26+ Apps Omnisearch</span>
+            <span class="ai-search-chip">🧮 Math &amp; Commands</span>
           </div>
         </div>
       `;
 
-      // Wire clear history button and recent chips
+      // Wire clear pins & clear history
+      const clearPinsBtn = this.resultsContainer.querySelector('#ai-search-clear-pins');
+      if (clearPinsBtn) {
+        clearPinsBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (this.options.enableSound) SoundFX.click();
+          if (typeof PinnedSearches !== 'undefined') PinnedSearches.clear();
+          this.renderEmptyState();
+        });
+      }
+
       const clearHistoryBtn = this.resultsContainer.querySelector('#ai-search-clear-history');
       if (clearHistoryBtn) {
         clearHistoryBtn.addEventListener('click', (e) => {
@@ -2011,6 +3133,29 @@
         });
       }
 
+      // Wire pinned chips click
+      this.resultsContainer.querySelectorAll('.ai-search-pinned-chip').forEach(chip => {
+        chip.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const id = chip.getAttribute('data-id');
+          const pList = typeof PinnedSearches !== 'undefined' ? PinnedSearches.getAll() : [];
+          const found = pList.find(p => (typeof p === 'object' ? (p.id || p.url || p.title || p.query) : p) === id);
+          if (found && typeof found === 'object' && !found.isQuery) {
+            this.selectResult(found);
+          } else {
+            const q = (found && typeof found === 'object') ? (found.query || found.title) : id;
+            if (q) {
+              if (this.options.enableSound) SoundFX.click();
+              this.inputEl.value = q;
+              this.performSearch(q);
+              this.inputEl.focus();
+            }
+          }
+        });
+      });
+
+      // Wire recent chips click
       this.resultsContainer.querySelectorAll('.ai-search-recent-chip').forEach(chip => {
         chip.addEventListener('click', (e) => {
           e.preventDefault();
@@ -2029,55 +3174,12 @@
       });
     }
 
-    renderHelpState() {
-      this.results = [];
-      this.unfilteredResults = [];
-      this.activeIndex = -1;
-      this.hideAutocomplete();
-      if (this.dymEl) {
-        this.dymEl.style.display = 'none';
-        this.dymEl.innerHTML = '';
-      }
-      this.aiCardContainer.style.display = 'none';
-      this.resultsContainer.innerHTML = `
-        <div class="ai-search-help-panel">
-          <div class="ai-search-help-header">
-            <span class="ai-search-help-title">🚀 Search Shortcuts & Power Features</span>
-            <span class="ai-search-help-badge">100% Offline Engine</span>
-          </div>
-          <div class="ai-search-help-grid">
-            <div class="ai-search-help-card">
-              <div class="ai-search-help-card-title">⌨️ Keyboard Controls</div>
-              <ul class="ai-search-help-card-list">
-                <li><kbd>Ctrl+K</kbd> / <kbd>Cmd+K</kbd> : Toggle search modal</li>
-                <li><kbd>/</kbd> : Quick search (outside inputs)</li>
-                <li><kbd>↓</kbd> <kbd>↑</kbd> : Cycle ranked cards</li>
-                <li><kbd>↵</kbd> : Jump to section & pulse</li>
-                <li><kbd>ESC</kbd> : Close modal</li>
-              </ul>
-            </div>
-            <div class="ai-search-help-card">
-              <div class="ai-search-help-card-title">🧠 Smart Features</div>
-              <ul class="ai-search-help-card-list">
-                <li><strong>Typo Tolerance:</strong> Levenshtein edit distance</li>
-                <li><strong>Synonyms:</strong> Semantic concept graph</li>
-                <li><strong>Stemming:</strong> Strips suffixes (-ing, -ly, -ed)</li>
-                <li><strong>BM25 Scoring:</strong> Title matches score 3x</li>
-              </ul>
-            </div>
-          </div>
-          <div class="ai-search-help-tip">
-            💡 <span>Tip: Type any search query or delete '?' to return to instant search.</span>
-          </div>
-        </div>
-      `;
-    }
-
     selectResult(result) {
+      if (!result) return;
       if (this.options.enableSound) SoundFX.select();
       if (this.options.enableHistory !== false && typeof RecentSearches !== 'undefined') {
         const q = this.inputEl ? this.inputEl.value.trim() : '';
-        if (q && q !== '?' && q.toLowerCase() !== 'help') {
+        if (q && q !== '?' && q.toLowerCase() !== 'help' && !q.startsWith('>')) {
           RecentSearches.add(q);
         }
       }
@@ -2085,6 +3187,22 @@
 
       if (typeof this.options.onSelect === 'function') {
         this.options.onSelect(result);
+        return;
+      }
+
+      // Check if result is an Action Command
+      if (result.isAction && typeof result.execute === 'function') {
+        try {
+          result.execute(this);
+        } catch (e) {}
+        return;
+      }
+
+      // Check if result is a Workspace App
+      if (result.isApp) {
+        if (result.url) {
+          window.location.href = result.url;
+        }
         return;
       }
 
@@ -2099,7 +3217,11 @@
           result.element.classList.remove('ai-search-target-pulse');
         }, 3200);
       } else if (result.url) {
-        window.location.hash = result.url.replace(/^#/, '');
+        if (result.url.startsWith('#')) {
+          window.location.hash = result.url.replace(/^#/, '');
+        } else {
+          window.location.href = result.url;
+        }
       }
     }
 
@@ -2149,6 +3271,7 @@
   // --- 7. PUBLIC API FACADE ---
   const AISearch = {
     engine: null,
+    catalogEngine: null,
     ui: null,
 
     init(options = {}) {
@@ -2158,6 +3281,7 @@
           containerSelector: '',
           excludeSelector: '',
           data: null,
+          catalog: null,
           synonyms: {},
           geminiApiKey: '',
           enableSound: true,
@@ -2169,6 +3293,29 @@
         // Ingest custom JSON data feed if provided
         if (Array.isArray(config.data)) {
           config.data.forEach(item => this.engine.addDocument(item));
+        }
+
+        // Build workspace catalog engine if catalog data exists or fallback
+        const catalogSource = Array.isArray(config.catalog) ? config.catalog :
+          (typeof window !== 'undefined' && window.PORTAL_CATALOG && Array.isArray(window.PORTAL_CATALOG.apps)) ? window.PORTAL_CATALOG.apps :
+          (typeof window !== 'undefined' && Array.isArray(window.PORTAL_CATALOG)) ? window.PORTAL_CATALOG :
+          (typeof DEFAULT_WORKSPACE_CATALOG !== 'undefined' ? DEFAULT_WORKSPACE_CATALOG : []);
+
+        if (Array.isArray(catalogSource) && catalogSource.length > 0) {
+          this.catalogEngine = new BM25Engine({ synonyms: config.synonyms });
+          catalogSource.forEach(item => {
+            this.catalogEngine.addDocument({
+              id: item.id || item.url || item.title,
+              title: item.title,
+              content: (item.description || '') + ' ' + (Array.isArray(item.tags) ? item.tags.join(' ') : (item.tags || '')),
+              category: item.category || 'Workspace App',
+              url: item.url || '#',
+              icon: item.icon || '🚀',
+              isApp: true
+            });
+          });
+          config.catalogEngine = this.catalogEngine;
+          config.catalogItems = catalogSource;
         }
 
         // 1. Initialize UI FIRST in browser environment so shortcuts and triggers ALWAYS work
@@ -2208,6 +3355,12 @@
       return this.engine ? this.engine.search(query, options) : [];
     },
 
+    searchCatalog(query, options = 5) {
+      if (!this.catalogEngine) return [];
+      const hits = this.catalogEngine.search(query, options);
+      return hits.map(h => ({ ...h, isApp: true }));
+    },
+
     // Classes & utilities exported for modular usage and testing
     BM25Engine,
     tokenize,
@@ -2221,7 +3374,19 @@
     addRecentSearch: (q) => RecentSearches.add(q),
     getRecentSearches: () => RecentSearches.getAll(),
     clearRecentSearches: () => RecentSearches.clear(),
-    DEFAULT_SYNONYMS
+    DEFAULT_SYNONYMS,
+    DEFAULT_WORKSPACE_CATALOG,
+    MathEvaluator,
+    evaluateMath: (expr) => MathEvaluator.evaluate(expr),
+    ActionStudio,
+    getActionCommands: () => ActionStudio.getCommands(),
+    executeAction: (id, ctx) => ActionStudio.execute(id, ctx),
+    PinnedSearches,
+    addPinnedSearch: (q) => PinnedSearches.add(q),
+    removePinnedSearch: (q) => PinnedSearches.remove(q),
+    getPinnedSearches: () => PinnedSearches.getAll(),
+    clearPinnedSearches: () => PinnedSearches.clear(),
+    extractDynamicSnippet
   };
 
   // Node.js / CommonJS vs Browser export

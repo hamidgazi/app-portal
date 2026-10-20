@@ -151,24 +151,20 @@ Common-Resources/AI-Search-Kit/
 
 ---
 
-## 7. Antigravity AI Search v2.0 Feature Suite
+## 7. Antigravity AI Search v2.0 & v3.0 Feature Suites
 
-### 1. Precision Search & Category Filtering
-- **Dynamic "Did you mean: [word]?"**: Evaluates edit distance and phonetic match candidates when verbatim queries yield zero hits.
-- **Prefix Autocompletion**: Live suggestions matching vocabulary prefixes with tab/click insertion.
-- **Category Filter Pills**: 0ms in-memory filtering across domain categories (`All`, `Headings`, `Health`, `Logistics`, `Postal`).
+### Antigravity AI Search v2.0 Feature Suite
+1. **Precision Search & Category Filtering**: Dynamic "Did you mean: [word]?", Prefix Autocompletion chips, 0ms in-memory Category Filter Pills (`All`, `Headings`, `Health`, `Logistics`, `Postal`).
+2. **Phonetics & Roman Urdu/Hindi Transliteration**: Soundex & Metaphone consonant encoders; 120+ colloquial South Asian roots mapped to English concepts (`khana` $\rightarrow$ `food`, `wazan` $\rightarrow$ `weight`, `dawa` $\rightarrow$ `medicine`, `namaz` $\rightarrow$ `prayer`).
+3. **Voice Search & Mobile Ergonomics**: Browser-native Web Speech API (`en-IN`), AMOLED floating glassmorphic action pill (`.ai-search-floating-pill`) with $\ge 48\text{px}$ touch target (Directive 5).
+4. **Search History & In-Modal Help**: LocalStorage search history (`antigravity_recent_searches`) and in-modal cheatsheet overlay (`?` or `help`).
 
-### 2. Phonetics & Roman Urdu/Hindi Transliteration
-- **Soundex & Metaphone Hashing**: Consonant clustering and phonetic encoding mapping homophones (`quick`/`kuik`, `tracking`/`traaking`).
-- **Multilingual Transliteration**: 120+ colloquial South Asian terms mapped to English roots (`khana` $\rightarrow$ `food`, `wazan` $\rightarrow$ `weight`, `dawa` $\rightarrow$ `medicine`, `namaz` $\rightarrow$ `prayer`, `roza` $\rightarrow$ `fasting`, `khat` $\rightarrow$ `post`).
-
-### 3. Voice Search & Mobile Ergonomics
-- **Browser-Native Voice Search**: Web Speech API integration defaulting to Indian English (`en-IN`) with active pulsing indicator.
-- **Floating Action Pill**: Fixed AMOLED glassmorphic action button (`.ai-search-floating-pill`) docked bottom-right on screens $\le 768\text{px}$ with $\ge 48\text{px}$ touch target (Directive 5).
-
-### 4. Search History & In-Modal Help
-- **LocalStorage Persistence**: Stores last 6 searches in `antigravity_recent_searches` with 1-tap re-run chips and "Clear all".
-- **In-Modal Help Cheatsheet**: Interactive help overlay triggered on `?`, `help`, or button.
+### Antigravity AI Search v3.0 Enterprise Power Suite
+1. **Federated Workspace Omnisearch**: Smart Scope Toggle (`[This Page]` | `[All Apps]`) with auto-blend ranking, allowing discovery and deep-linking into all 26+ workspace apps from the search palette.
+2. **Raycast-Style Action Studio**: System action commands via `>` (`> theme`, `> copy-url`, `> export-results`, `> clear-history`, `> scroll-top`, `> scroll-bottom`, `> help`).
+3. **Safe Procedural Math Evaluator**: Non-`eval()` recursive descent math engine supporting arithmetic, percentages (`X% of Y`, `X + Y%`), scientific functions (`sqrt`, `round`, `abs`), constants (`pi`, `e`), and 1-tap clipboard copy.
+4. **Dynamic Centered Keyword Windowing**: Slices a focused $\pm 12$-word contextual window around matched search terms with `<mark class="ai-search-highlight">` and match-source badges (`[Exact]`, `[Phonetic]`, `[Synonym]`, `[Transliterated]`, `[App]`, `[Math]`, `[Command]`).
+5. **Result Pinning**: 1-tap `⭐ Pin` button that persists favorites in `localStorage` (`antigravity_pinned_searches`) and displays them as pinned shortcuts in the empty palette state.
 
 ---
 
@@ -180,11 +176,13 @@ Run the test suite at any time via PowerShell:
 python "c:\Users\Shop PC 2\OneDrive\Desktop\Antigravity Files\Common-Resources\AI-Search-Kit\tests\test_ai_search.py"
 ```
 
-### Test Suite Coverage (69 Tests Across 4 Tiers):
+### Test Suite Coverage (87 Tests Across 6 Tiers):
 - **Baseline Tests (6)**: JS syntax compilation (`node --check`), BM25 scoring, demo HTML scripts, Directive 7 zero-music compliance, CSS structure, documentation integrity.
 - **Tier 1 Feature Tests (25)**: R1-R5 core features (Did You Mean, Autocomplete, Categories, Soundex, Metaphone, Transliteration, Voice search, History, Help).
 - **Tier 2 Boundary Tests (25)**: Edge cases (unmatchable gibberish, empty prefix, non-alpha Soundex, casing variations, punctuation stripping, storage quota/corruption, iPhone safe-area insets).
 - **Tier 3 Pairwise Combinations (8)**: Transliteration + Categories, Voice + History, Did You Mean + History, Soundex vs BM25 weighting.
 - **Tier 4 Real-World Workload Tests (5)**: App Portal, India Pincode Search, Weight Gain Guide, Namaz Prayer Times, 375px mobile viewport.
+- **Tier 5 v3.0 Feature Tests (10)**: MathEvaluator arithmetic, percentages, math functions, division by zero guard, ActionStudio commands, PinnedSearches CRUD, centered windowing, catalog indexing, spelling suggestions, transliteration badges.
+- **Tier 6 Architecture & Integrity Tests (8)**: Strict zero-`eval` security policy, Directive 5 touch hitbox ($\ge 48\text{px}$), Directive 7 zero-music compliance, AMOLED glassmorphic tokens, `demo.html` script compilation, `ai_search.js` compilation, theme toggle execution, portal catalog federation.
 
-**Result: 69/69 Tests Passing (100% Green).**
+**Result: 87/87 Tests Passing (100% Green).**

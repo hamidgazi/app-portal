@@ -284,20 +284,44 @@
     
     <!-- Hero Header -->
     <div class="hero-banner">
-      <span class="hero-badge">Pure Vanilla ES6 · 0 Dependencies</span>
+      <span class="hero-badge">AI Search v3.0 • Omnisearch • Action Studio • Safe Math</span>
       <h1 class="hero-title">Instant Offline Semantic Search</h1>
       <p class="hero-sub">
-        Solves the fragility of traditional Ctrl+F search. Tolerates typos, expands semantic synonyms, and calculates probabilistic BM25 relevance scores directly in your browser.
+        Next-generation browser search palette. Features federated multi-scope workspace app discovery, safe procedural math evaluation, Raycast-style action commands, BM25 ranking, and phonetic roman transliteration.
       </p>
     </div>
 
     <!-- Quick Test Interactive Chips -->
     <div class="demo-chips-box">
-      <div class="demo-chips-title">⚡ Click to Test AI Search Capabilities:</div>
+      <div class="demo-chips-title">⚡ Click to Test AI Search v3.0 Capabilities:</div>
       <div class="chips-wrapper">
         <button class="test-chip" data-query="kuik traking">
           <span>"kuik traking"</span>
           <span class="chip-badge">Fuzzy Typo</span>
+        </button>
+        <button class="test-chip" data-query="= 25 * 40 + 10">
+          <span>"= 25 * 40 + 10"</span>
+          <span class="chip-badge" style="background: rgba(16,185,129,0.18); color: #34d399;">Safe Math</span>
+        </button>
+        <button class="test-chip" data-query="= 18% of 2450">
+          <span>"= 18% of 2450"</span>
+          <span class="chip-badge" style="background: rgba(16,185,129,0.18); color: #34d399;">Percentage</span>
+        </button>
+        <button class="test-chip" data-query="> theme">
+          <span>"&gt; theme"</span>
+          <span class="chip-badge" style="background: rgba(236,72,153,0.18); color: #f472b6;">Action Command</span>
+        </button>
+        <button class="test-chip" data-query="> copy-url">
+          <span>"&gt; copy-url"</span>
+          <span class="chip-badge" style="background: rgba(236,72,153,0.18); color: #f472b6;">Action Command</span>
+        </button>
+        <button class="test-chip" data-query="pincode lookup">
+          <span>"pincode lookup"</span>
+          <span class="chip-badge" style="background: rgba(99,102,241,0.18); color: #818cf8;">Workspace App</span>
+        </button>
+        <button class="test-chip" data-query="thela stock">
+          <span>"thela stock"</span>
+          <span class="chip-badge" style="background: rgba(99,102,241,0.18); color: #818cf8;">Workspace App</span>
         </button>
         <button class="test-chip" data-query="khana calories">
           <span>"khana calories"</span>
@@ -307,21 +331,9 @@
           <span>"wazan bulk"</span>
           <span class="chip-badge">Transliteration</span>
         </button>
-        <button class="test-chip" data-query="food calories">
-          <span>"food calories"</span>
-          <span class="chip-badge">Synonym Graph</span>
-        </button>
-        <button class="test-chip" data-query="delhii pincode">
-          <span>"delhii pincode"</span>
-          <span class="chip-badge">Typo + Concept</span>
-        </button>
         <button class="test-chip" data-query="namaz timing">
           <span>"namaz timing"</span>
           <span class="chip-badge">Islamic Fiqh</span>
-        </button>
-        <button class="test-chip" data-query="khat speed post">
-          <span>"khat speed post"</span>
-          <span class="chip-badge">Urdu Postal</span>
         </button>
         <button class="test-chip" data-query="mobile ergonomics">
           <span>"mobile ergonomics"</span>
@@ -428,6 +440,8 @@
 
   </div>
 
+  <!-- Workspace Catalog (Zero-CORS Federated Omnisearch) -->
+  <script src="../App-Portal/portal_catalog.js"></script>
   <!-- AI Search Kit Script -->
   <script src="ai_search.js"></script>
 
@@ -439,7 +453,7 @@
         const search = AISearch.init({
           autoCrawl: true,
           enableSound: true,
-          placeholder: 'Type "kuik traking", "food", or "pincode"...'
+          placeholder: 'Search page, workspace apps, math (= 25*40), or actions (> theme)...'
         });
 
         // Explicitly wire top search button

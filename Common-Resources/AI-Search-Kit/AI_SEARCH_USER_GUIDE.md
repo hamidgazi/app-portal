@@ -430,3 +430,71 @@ Colloquial South Asian terms are seamlessly resolved to canonical English concep
 - Stores the last 6 searches in `localStorage` under `antigravity_recent_searches` with 1-tap re-run chips and a "Clear all" button.
 - On viewports $\le 768\text{px}$, an AMOLED floating glassmorphic action pill (`.ai-search-floating-pill`) is docked at the bottom-right with a touch target $\ge 48\text{px}$ adhering to Directive 5.
 
+---
+
+## 8. Antigravity AI Search v3.0 Enterprise Architecture & Power Suite
+
+AI Search v3.0 elevates the search engine from a page-level indexing tool into an operating-system-level command palette and universal productivity cockpit.
+
+### 8.1 Federated Workspace Omnisearch & Dual-Scope Switcher
+- **Smart Scope Bar (`.ai-search-scope-bar`)**: Allows users to toggle instantaneously between **`[This Page]`** (in-depth document/DOM sections) and **`[All Apps]`** (all 26+ Antigravity workspace applications and tools).
+- **Auto-Blend Cross-App Discovery**: When searching in `[This Page]` mode, if high-relevance matches are detected across workspace apps, an unobtrusive cross-app section is rendered beneath page results with a 1-tap switch button.
+- **Zero-CORS Fallback**: Seamlessly ingests `window.PORTAL_CATALOG` or falls back to `DEFAULT_WORKSPACE_CATALOG` with offline durability under `file://`.
+
+### 8.2 Safe Procedural Math Evaluator
+- **Zero-`eval()` Security**: Built with a recursive descent parser (`parseExpr` $\rightarrow$ `parseTerm` $\rightarrow$ `parseFactor` $\rightarrow$ `parsePrimary`) that eliminates all code-injection risks.
+- **Expression Triggers**: Activated instantly by typing `=` or `calc:` (e.g. `= 25 * 40 + 10`).
+- **Rich Operator & Percentage Support**:
+  - Arithmetic: `+`, `-`, `*`, `/`, `%` (modulo), `^` (exponentiation), nested parentheses `(...)`.
+  - Business Percentages: `18% of 2450` ($= 441$), `100 + 15%` ($= 115$), `200 - 20%` ($= 160$).
+  - Mathematical Functions: `sqrt(144)` ($= 12$), `round(10.75)` ($= 11$), `abs(-42)` ($= 42$), constants `pi` and `e`.
+- **1-Tap Clipboard Copy**: Features a dedicated copy button and keyboard shortcut (`Enter` to copy result).
+
+### 8.3 Raycast-Style Action Studio
+- **Command Mode Trigger (`>`)**: Typing `>` instantly shifts the search palette into action execution mode.
+- **Pre-Packaged System Commands**:
+  - `> theme`: Cycles interface theme between Dark, Light, and AMOLED modes.
+  - `> copy-url`: Copies canonical page URL or anchor link to clipboard.
+  - `> export-results`: Exports active search results as a formatted JSON document.
+  - `> clear-history`: Wipes all recent search entries from `localStorage`.
+  - `> scroll-top` / `> scroll-bottom`: Smoothly scrolls active document viewport.
+  - `> help`: Summons interactive cheatsheet and keyboard guide.
+
+### 8.4 Dynamic Centered Keyword Windowing
+- **Focused $\pm 12$-Word Context Window**: Replaces naive beginning-of-paragraph snippets with an intelligent centered window around the first occurrence of the search term.
+- **Highlight Tagging**: Wraps matched terms in `<mark class="ai-search-highlight">` with boundary ellipsis (`...`).
+- **Match Source Badges**: Color-coded pill tags explicitly identifying the matching mechanism:
+  - `[Exact]`: Verbatim token match (Emerald).
+  - `[Phonetic]`: Soundex/Metaphone sound match (Purple).
+  - `[Synonym]`: Semantic concept expansion (Amber).
+  - `[Transliterated]`: Roman Urdu/Hindi root resolution (Sky Blue).
+  - `[App]`: Federated workspace application (Indigo).
+  - `[Math]`: Calculation result (Emerald).
+  - `[Command]`: System action command (Pink).
+
+### 8.5 LocalStorage Result Pinning
+- **1-Tap Result Pinning (`⭐ Pin`)**: Every search result features a pin button that persists the result in `localStorage` under `antigravity_pinned_searches`.
+- **Pinned Shortcuts Empty State**: Pinned items are displayed at the very top of the empty search state, providing an instant 1-tap launcher for favorite pages, apps, or queries.
+
+### 8.6 Complete v3.0 Public API Reference
+
+```javascript
+// Evaluate mathematical expressions safely
+const calc = AISearch.evaluateMath("18% of 2450");
+console.log(calc.formattedResult); // "441"
+
+// Federated cross-app catalog search
+const appHits = AISearch.searchCatalog("thela");
+
+// Action Studio commands
+const actions = AISearch.getActionCommands();
+AISearch.executeAction("cmd-theme");
+
+// Result Pinning
+AISearch.addPinnedSearch("namaz timing");
+const pinned = AISearch.getPinnedSearches();
+AISearch.removePinnedSearch("namaz timing");
+AISearch.clearPinnedSearches();
+```
+
+
