@@ -689,6 +689,11 @@
           <kbd class="hide-mobile" style="background: rgba(255,255,255,0.1); padding: 1px 4px; border-radius: 3px; font-size: 0.68rem; font-family: monospace;">Ctrl+K</kbd>
         </button>
 
+        <a href="top_100_short_hadiths.html" class="control-btn" style="background: rgba(251, 191, 36, 0.15); border-color: rgba(251, 191, 36, 0.4); color: #fbbf24; text-decoration: none;" title="View Top 100 Short Hadiths (Smallest to Largest)">
+          <span>🌟</span>
+          <span>Top 100 Short</span>
+        </a>
+
         <button type="button" class="control-btn" id="btn-font-dec" title="Decrease Font Size">A-</button>
         <button type="button" class="control-btn" id="btn-font-inc" title="Increase Font Size">A+</button>
       </div>
@@ -865,7 +870,18 @@
           const container = document.getElementById('book-pills-bar');
           if (!container || !window.HADITH_METADATA || !window.HADITH_METADATA.books) return;
 
-          let html = '';
+          let html = `
+            <a 
+              href="top_100_short_hadiths.html" 
+              class="book-pill" 
+              style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.2), rgba(245, 158, 11, 0.2)); border-color: rgba(251, 191, 36, 0.5); color: #fbbf24; text-decoration: none;"
+              title="View Top 100 Short Hadiths (Smallest to Largest)"
+            >
+              <span>🌟</span>
+              <span>Top 100 Short</span>
+              <span style="font-size: 0.7rem; opacity: 0.85;">(100)</span>
+            </a>
+          `;
           window.HADITH_METADATA.books.forEach(b => {
             const isActive = Number(b.id) === Number(State.activeBookId);
             html += `

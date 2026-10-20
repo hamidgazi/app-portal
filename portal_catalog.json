@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "lastUpdated": "Antigravity Files",
-  "totalApps": 25,
+  "totalApps": 26,
   "categories": [
     "Islamic & Faith",
     "Productivity & Utilities",
@@ -113,6 +113,28 @@
       "relPath": "15-Quran-Deep-Analyzer/index.html",
       "portalHref": "./15-Quran-Deep-Analyzer/index.html",
       "serverHref": "./15-Quran-Deep-Analyzer/index.html"
+    },
+    {
+      "id": "03-Hadith-Roman-Urdu__web__top_100_short_hadiths_html",
+      "title": "Top 100 Short Hadiths",
+      "category": "Islamic & Faith",
+      "icon": "🌟",
+      "badge": "Ranked #1–#100 • 11–17 Words",
+      "description": "Profound, authentic Hadiths ordered strictly from smallest to largest by Arabic word count, with Roman Urdu, Arabic, and Urdu translations.",
+      "tags": [
+        "hadith",
+        "short",
+        "hadees",
+        "roman",
+        "urdu",
+        "arabic",
+        "top100",
+        "pwa"
+      ],
+      "primary": true,
+      "relPath": "03-Hadith-Roman-Urdu/web/top_100_short_hadiths.html",
+      "portalHref": "./03-Hadith-Roman-Urdu/web/top_100_short_hadiths.html",
+      "serverHref": "./03-Hadith-Roman-Urdu/web/top_100_short_hadiths.html"
     },
     {
       "id": "01-Events-Countdown__events_visitor_html",
