@@ -2,7 +2,7 @@
 window.PORTAL_CATALOG = {
   "version": "1.0.0",
   "lastUpdated": "Antigravity Files",
-  "totalApps": 24,
+  "totalApps": 25,
   "categories": [
     "Islamic & Faith",
     "Productivity & Utilities",
@@ -29,6 +29,28 @@ window.PORTAL_CATALOG = {
       "relPath": "01-Events-Countdown/index.html",
       "portalHref": "./01-Events-Countdown/index.html",
       "serverHref": "./01-Events-Countdown/index.html"
+    },
+    {
+      "id": "03-Hadith-Roman-Urdu__web__index_html",
+      "title": "Faizan-e-Hadees (Roman Urdu Portal)",
+      "category": "Islamic & Faith",
+      "icon": "📜",
+      "badge": "7,882 Hadiths • AI Search",
+      "description": "Complete 6-book classical Hadith encyclopedia with full Arabic text, Urdu translations, Roman Urdu transliterations, and dual-layer AI search.",
+      "tags": [
+        "hadith",
+        "hadees",
+        "roman",
+        "urdu",
+        "arabic",
+        "ai-search",
+        "sunnah",
+        "pwa"
+      ],
+      "primary": true,
+      "relPath": "03-Hadith-Roman-Urdu/web/index.html",
+      "portalHref": "./03-Hadith-Roman-Urdu/web/index.html",
+      "serverHref": "./03-Hadith-Roman-Urdu/web/index.html"
     },
     {
       "id": "12-Fatawa-Project__output__index_html",

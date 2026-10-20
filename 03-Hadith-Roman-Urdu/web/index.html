@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Faizan-e-Hadees • Roman Urdu & AI Search Portal</title>
+  
+  <!-- Meta & PWA Tags -->
+  <meta name="description" content="Complete 6-Book Classical Hadith Encyclopedia with full Arabic Matan, Urdu translations, standardized Roman Urdu transliterations, and sub-15ms AI Search.">
+  <meta name="theme-color" content="#0b0f19">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- Typography: Web Fonts with Robust System Fallbacks -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Nastaliq+Urdu:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- AI Search Kit CSS -->
+  <link rel="stylesheet" href="ai_search.css">
+
+  <style>
+    :root {
+      --bg-dark: #070a12;
+      --bg-surface: #0b0f19;
+      --bg-card: #0f172a;
+      --bg-card-hover: #1e293b;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(56, 189, 248, 0.3);
+      --primary: #38bdf8;
+      --primary-rgb: 56, 189, 248;
+      --primary-glow: rgba(56, 189, 248, 0.2);
+      --gold: #fbbf24;
+      --emerald: #10b981;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --font-latin: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-arabic: 'Amiri', 'Traditional Arabic', serif;
+      --font-urdu: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif;
+      --app-max-width: 900px;
+      --base-font-scale: 1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-latin);
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Sticky Header */
+    header.app-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11, 15, 25, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 10px 16px;
+    }
+
+    .header-inner {
+      max-width: var(--app-max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .brand-icon {
+      font-size: 1.7rem;
+      line-height: 1;
+    }
+
+    .brand-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-sub {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .control-btn {
+      min-height: 40px;
+      padding: 8px 12px;
+      border-radius: 10px;
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      touch-action: manipulation;
+    }
+
+    .control-btn:hover, .control-btn:active {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .search-trigger-btn {
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: var(--primary);
+    }
+
+    /* Sub-header Navigation: Book Carousel & Volume Pills */
+    .nav-bar {
+      background: rgba(15, 23, 42, 0.7);
+      border-bottom: 1px solid var(--border-color);
+      padding: 10px 16px;
+      position: sticky;
+      top: 61px;
+      z-index: 90;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .nav-inner {
+      max-width: var(--app-max-width);
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* Horizontal Scrolling Book Pills */
+    .book-scroll-wrapper {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 2px;
+    }
+    .book-scroll-wrapper::-webkit-scrollbar { display: none; }
+
+    .book-pill {
+      min-height: 42px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      touch-action: manipulation;
+    }
+
+    .book-pill.active {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(129, 140, 248, 0.25));
+      border-color: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+    }
+
+    /* Volume Pills & View Config Bar */
+    .subnav-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .vol-pills-container {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      flex: 1;
+    }
+    .vol-pills-container::-webkit-scrollbar { display: none; }
+
+    .vol-pill {
+      min-height: 36px;
+      padding: 4px 12px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      touch-action: manipulation;
+    }
+
+    .vol-pill.active {
+      background: var(--primary);
+      color: #020617;
+      border-color: var(--primary);
+      font-weight: 700;
+    }
+
+    /* Script Switcher Pills */
+    .script-switcher {
+      display: inline-flex;
+      background: rgba(11, 15, 25, 0.8);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 3px;
+      gap: 2px;
+    }
+
+    .script-btn {
+      min-height: 32px;
+      padding: 4px 10px;
+      border-radius: 7px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.74rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      touch-action: manipulation;
+    }
+
+    .script-btn.active {
+      background: var(--primary);
+      color: #020617;
+      font-weight: 700;
+    }
+
+    /* Main Container */
+    main.app-main {
+      flex: 1;
+      max-width: var(--app-max-width);
+      width: 100%;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    /* Active Context Banner */
+    .context-banner {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.9));
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 14px 18px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .banner-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+
+    .banner-meta {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .banner-stats {
+      font-size: 0.8rem;
+      color: var(--primary);
+      font-weight: 700;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    /* Hadith Feed Container */
+    .hadith-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Hadith Card */
+    .hadith-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+    }
+
+    .hadith-card:hover {
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+
+    .hadith-card.highlight-pulse {
+      animation: pulseGlow 2.5s ease-out;
+      border-color: #38bdf8;
+    }
+
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7); }
+      50% { box-shadow: 0 0 35px 8px rgba(56, 189, 248, 0.4); }
+      100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
+    }
+
+    /* Card Header */
+    .card-header {
+      padding: 12px 18px;
+      background: rgba(30, 41, 59, 0.4);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      cursor: pointer;
+      user-select: none;
+      touch-action: manipulation;
+    }
+
+    .card-badges {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .badge-no {
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 0.76rem;
+      padding: 3px 9px;
+      border-radius: 6px;
+      letter-spacing: 0.02em;
+    }
+
+    .badge-vol {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .card-chapter-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      direction: rtl;
+      font-family: var(--font-urdu);
+      text-align: right;
+    }
+
+    /* Card Body Sections */
+    .card-body {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Arabic Matan */
+    .arabic-text {
+      font-family: var(--font-arabic);
+      font-size: calc(1.35rem * var(--base-font-scale));
+      line-height: 2.1;
+      direction: rtl;
+      text-align: justify;
+      text-align-last: right;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.03);
+      padding: 14px 16px;
+      border-radius: 12px;
+      border-right: 4px solid var(--primary);
+      word-spacing: 2px;
+    }
+
+    /* Urdu Translation */
+    .urdu-text {
+      font-family: var(--font-urdu);
+      font-size: calc(1.15rem * var(--base-font-scale));
+      line-height: 2.3;
+      direction: rtl;
+      text-align: justify;
+      text-align-last: right;
+      color: #f1f5f9;
+      padding: 8px 12px;
+      border-right: 3px solid #10b981;
+      background: rgba(16, 185, 129, 0.02);
+      border-radius: 8px;
+    }
+
+    /* Roman Urdu Translation */
+    .roman-text {
+      font-family: var(--font-latin);
+      font-size: calc(0.95rem * var(--base-font-scale));
+      line-height: 1.7;
+      color: #e2e8f0;
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.02);
+      border-left: 3px solid #fbbf24;
+      border-radius: 8px;
+      letter-spacing: 0.01em;
+    }
+
+    .roman-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #fbbf24;
+      margin-bottom: 4px;
+      letter-spacing: 0.05em;
+    }
+
+    /* Collapsible Commentary (Tashreeh) */
+    .tashreeh-wrapper {
+      margin-top: 4px;
+      border-top: 1px dashed var(--border-color);
+      padding-top: 12px;
+    }
+
+    .tashreeh-toggle-btn {
+      min-height: 38px;
+      padding: 6px 14px;
+      border-radius: 8px;
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px solid var(--border-color);
+      color: #94a3b8;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      touch-action: manipulation;
+    }
+
+    .tashreeh-toggle-btn:hover {
+      background: rgba(56, 189, 248, 0.1);
+      color: var(--primary);
+    }
+
+    .tashreeh-content {
+      display: none;
+      margin-top: 10px;
+      padding: 14px;
+      border-radius: 10px;
+      background: rgba(11, 15, 25, 0.9);
+      border: 1px solid var(--border-color);
+      font-family: var(--font-urdu);
+      font-size: calc(0.98rem * var(--base-font-scale));
+      line-height: 2.2;
+      direction: rtl;
+      text-align: right;
+      color: #cbd5e1;
+    }
+
+    .tashreeh-content.open {
+      display: block;
+      animation: fadeIn 0.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Card Action Footer */
+    .card-footer {
+      padding: 10px 18px;
+      background: rgba(11, 15, 25, 0.6);
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .footer-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .action-btn {
+      min-height: 38px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.74rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.15s ease;
+      touch-action: manipulation;
+    }
+
+    .action-btn:hover, .action-btn:active {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .action-btn.bookmarked {
+      color: #fbbf24;
+      border-color: rgba(251, 191, 36, 0.4);
+      background: rgba(251, 191, 36, 0.1);
+    }
+
+    /* Floating Quick Search Bar (Mobile AMOLED ergonomics) */
+    .mobile-floating-search {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 95;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--primary);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.8), 0 0 20px var(--primary-glow);
+      border-radius: 30px;
+      padding: 8px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      user-select: none;
+      touch-action: manipulation;
+      min-height: 48px;
+      max-width: 90vw;
+    }
+
+    .floating-search-text {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #ffffff;
+      white-space: nowrap;
+    }
+
+    .floating-search-badge {
+      background: var(--primary);
+      color: #020617;
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 10px;
+    }
+
+    /* Pagination / Infinite Scroll Loading */
+    .feed-loader {
+      text-align: center;
+      padding: 30px 16px;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .load-more-btn {
+      min-height: 48px;
+      padding: 10px 28px;
+      border-radius: 24px;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      touch-action: manipulation;
+    }
+
+    .load-more-btn:hover {
+      background: var(--primary);
+      color: #020617;
+    }
+
+    /* Toast Notification */
+    .toast-pill {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #0f172a;
+      border: 1px solid var(--primary);
+      color: #f8fafc;
+      padding: 10px 20px;
+      border-radius: 24px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.8);
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .toast-pill.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 640px) {
+      .header-controls .hide-mobile { display: none; }
+      .brand-sub { display: none; }
+      .card-body { padding: 14px; gap: 12px; }
+      .arabic-text { font-size: calc(1.2rem * var(--base-font-scale)); line-height: 2.0; padding: 12px; }
+      .urdu-text { font-size: calc(1.05rem * var(--base-font-scale)); line-height: 2.1; }
+      .roman-text { font-size: calc(0.88rem * var(--base-font-scale)); }
+      .context-banner { flex-direction: column; align-items: flex-start; }
+      .banner-stats { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. STICKY TOP HEADER -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand-group" id="header-brand-btn" title="Faizan-e-Hadees Home">
+        <span class="brand-icon">📜</span>
+        <div>
+          <div class="brand-title">Faizan-e-Hadees</div>
+          <div class="brand-sub">7,882 Classical Hadiths • Roman Urdu & AI</div>
+        </div>
+      </div>
+
+      <div class="header-controls">
+        <button type="button" class="control-btn search-trigger-btn" id="header-search-btn" title="Open AI Search (Ctrl+K)">
+          <span>🔍</span>
+          <span class="hide-mobile">AI Search</span>
+          <kbd class="hide-mobile" style="background: rgba(255,255,255,0.1); padding: 1px 4px; border-radius: 3px; font-size: 0.68rem; font-family: monospace;">Ctrl+K</kbd>
+        </button>
+
+        <button type="button" class="control-btn" id="btn-font-dec" title="Decrease Font Size">A-</button>
+        <button type="button" class="control-btn" id="btn-font-inc" title="Increase Font Size">A+</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. NAVIGATION BAR: BOOK PILLS & VOLUME CHUNKS -->
+  <nav class="nav-bar">
+    <div class="nav-inner">
+      <!-- Book Carousel Pills -->
+      <div class="book-scroll-wrapper" id="book-pills-bar">
+        <!-- Dynamically rendered from HADITH_METADATA -->
+      </div>
+
+      <!-- Volume Selectors & Script Switcher -->
+      <div class="subnav-row">
+        <div class="vol-pills-container" id="vol-pills-bar">
+          <!-- Dynamically populated based on active book -->
+        </div>
+
+        <div class="script-switcher" id="script-switcher-group">
+          <button type="button" class="script-btn active" data-script="all" title="Show All Scripts">All</button>
+          <button type="button" class="script-btn" data-script="roman" title="Show Roman Urdu Only">🔤 Roman</button>
+          <button type="button" class="script-btn" data-script="urdu" title="Show Urdu Translation Only">📜 اردو</button>
+          <button type="button" class="script-btn" data-script="arabic" title="Show Arabic Matan Only">📖 عربی</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 3. MAIN CONTENT FEED -->
+  <main class="app-main">
+    <!-- Active Context Banner -->
+    <div class="context-banner" id="context-banner">
+      <div>
+        <div class="banner-title" id="banner-book-title">Loading Encyclopedia...</div>
+        <div class="banner-meta" id="banner-book-meta">Connecting canonical database...</div>
+      </div>
+      <div class="banner-stats" id="banner-stats">7,882 Hadiths</div>
+    </div>
+
+    <!-- Feed List -->
+    <div class="hadith-feed" id="hadith-feed-container">
+      <!-- Dynamically populated cards -->
+    </div>
+
+    <!-- Pagination / Lazy Loading Trigger -->
+    <div class="feed-loader" id="feed-loader">
+      <button type="button" class="load-more-btn" id="btn-load-more" style="display: none;">
+        <span>Load More Hadiths</span>
+        <span>↓</span>
+      </button>
+    </div>
+  </main>
+
+  <!-- 4. FLOATING MOBILE SEARCH BUTTON -->
+  <div class="mobile-floating-search" id="mobile-floating-search-btn" title="Tap to Search 7,882 Hadiths">
+    <span style="font-size: 1.2rem;">🔍</span>
+    <span class="floating-search-text">Search 7,882 Hadiths</span>
+    <span class="floating-search-badge">AI Fast</span>
+  </div>
+
+  <!-- 5. TOAST PILL -->
+  <div class="toast-pill" id="app-toast">Hadith copied to clipboard!</div>
+
+  <!-- 6. DATASETS & SEARCH SCRIPT LOADER -->
+  <script src="data/hadith_metadata.js"></script>
+  <script src="data/hadith_search_index.js"></script>
+  <script src="ai_search.js"></script>
+
+  <!-- 7. DEFENSIVE COMPONENT BOOTLOADER (Directive 5 Compliant) -->
+  <script>
+    (function () {
+      'use strict';
+
+      // --- APPLICATION STATE ---
+      const State = {
+        activeBookId: 1, // Default: Mir'at al-Manajih
+        activeVolNumber: "1", // Default: Volume 1
+        activeScript: "all", // "all", "roman", "urdu", "arabic"
+        fontScale: 1.0,
+        loadedChunkKey: null,
+        currentHadiths: [],
+        displayedCount: 0,
+        pageSize: 25,
+        bookmarks: new Set()
+      };
+
+      // --- PROCEDURAL ACOUSTIC FEEDBACK (Directive 7) ---
+      const AudioFX = {
+        ctx: null,
+        init() {
+          if (!this.ctx && window.AudioContext) {
+            try { this.ctx = new AudioContext(); } catch (e) {}
+          }
+        },
+        click() {
+          try {
+            this.init();
+            if (!this.ctx) return;
+            if (this.ctx.state === 'suspended') this.ctx.resume();
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(500, this.ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(150, this.ctx.currentTime + 0.02);
+            gain.gain.setValueAtTime(0.03, this.ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.02);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start();
+            osc.stop(this.ctx.currentTime + 0.02);
+          } catch (e) {}
+        },
+        success() {
+          try {
+            this.init();
+            if (!this.ctx) return;
+            if (this.ctx.state === 'suspended') this.ctx.resume();
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(587.33, this.ctx.currentTime); // D5
+            osc.frequency.exponentialRampToValueAtTime(880, this.ctx.currentTime + 0.06); // A5
+            gain.gain.setValueAtTime(0.04, this.ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.06);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start();
+            osc.stop(this.ctx.currentTime + 0.06);
+          } catch (e) {}
+        }
+      };
+
+      // Toast Notification Helper
+      function showToast(msg) {
+        const toast = document.getElementById('app-toast');
+        if (!toast) return;
+        toast.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2400);
+      }
+
+      // --- MASTER HADITH READER CONTROLLER ---
+      const HadithReader = {
+        // 1. Initialize Books and Header
+        init() {
+          console.log('[HadithReader] Initializing application...');
+          this.loadBookmarks();
+          this.renderBookPills();
+          this.bindControls();
+          this.handleHashOrInitialLoad();
+        },
+
+        loadBookmarks() {
+          try {
+            const raw = localStorage.getItem('faizan_hadith_bookmarks');
+            if (raw) {
+              const list = JSON.parse(raw);
+              if (Array.isArray(list)) {
+                State.bookmarks = new Set(list);
+              }
+            }
+          } catch (e) {}
+        },
+
+        saveBookmarks() {
+          try {
+            localStorage.setItem('faizan_hadith_bookmarks', JSON.stringify(Array.from(State.bookmarks)));
+          } catch (e) {}
+        },
+
+        renderBookPills() {
+          const container = document.getElementById('book-pills-bar');
+          if (!container || !window.HADITH_METADATA || !window.HADITH_METADATA.books) return;
+
+          let html = '';
+          window.HADITH_METADATA.books.forEach(b => {
+            const isActive = Number(b.id) === Number(State.activeBookId);
+            html += `
+              <button 
+                type="button" 
+                class="book-pill ${isActive ? 'active' : ''}" 
+                data-book-id="${b.id}"
+                title="${b.romanName}"
+              >
+                <span>${b.icon}</span>
+                <span>${b.shortName}</span>
+                <span style="font-size: 0.7rem; opacity: 0.75;">(${b.totalHadiths})</span>
+              </button>
+            `;
+          });
+          container.innerHTML = html;
+
+          // Event Delegation on container
+          container.addEventListener('click', (e) => {
+            const btn = e.target.closest('.book-pill');
+            if (!btn) return;
+            AudioFX.click();
+            const bookId = Number(btn.getAttribute('data-book-id'));
+            this.switchBook(bookId);
+          });
+        },
+
+        switchBook(bookId) {
+          State.activeBookId = bookId;
+
+          // Update active book pill styling
+          const pills = document.querySelectorAll('.book-pill');
+          pills.forEach(p => {
+            if (Number(p.getAttribute('data-book-id')) === bookId) p.classList.add('active');
+            else p.classList.remove('active');
+          });
+
+          // Reset to Volume 1 for this book
+          const bookMeta = window.HADITH_METADATA.books.find(b => Number(b.id) === bookId);
+          const firstVol = bookMeta && bookMeta.volumes && bookMeta.volumes.length > 0 ? bookMeta.volumes[0].volNumber : "1";
+          State.activeVolNumber = firstVol;
+
+          this.renderVolumePills(bookMeta);
+          this.loadVolumeChunk(bookId, State.activeVolNumber);
+        },
+
+        renderVolumePills(bookMeta) {
+          const container = document.getElementById('vol-pills-bar');
+          if (!container) return;
+
+          if (!bookMeta) {
+            bookMeta = window.HADITH_METADATA.books.find(b => Number(b.id) === Number(State.activeBookId));
+          }
+
+          if (!bookMeta || !bookMeta.volumes || bookMeta.volumes.length <= 1) {
+            container.innerHTML = `<span style="font-size: 0.75rem; color: #64748b; padding: 4px 6px;">Single Volume Collection</span>`;
+            return;
+          }
+
+          let html = '';
+          bookMeta.volumes.forEach(v => {
+            const isActive = String(v.volNumber).trim() === String(State.activeVolNumber).trim();
+            html += `
+              <button 
+                type="button" 
+                class="vol-pill ${isActive ? 'active' : ''}" 
+                data-vol="${v.volNumber}"
+              >
+                Vol ${v.volNumber} (${v.count})
+              </button>
+            `;
+          });
+          container.innerHTML = html;
+
+          container.addEventListener('click', (e) => {
+            const btn = e.target.closest('.vol-pill');
+            if (!btn) return;
+            AudioFX.click();
+            const vol = btn.getAttribute('data-vol');
+            this.switchVolume(vol);
+          });
+        },
+
+        switchVolume(volNumber) {
+          State.activeVolNumber = String(volNumber).trim();
+
+          const pills = document.querySelectorAll('.vol-pill');
+          pills.forEach(p => {
+            if (p.getAttribute('data-vol') === State.activeVolNumber) p.classList.add('active');
+            else p.classList.remove('active');
+          });
+
+          this.loadVolumeChunk(State.activeBookId, State.activeVolNumber);
+        },
+
+        // Dynamically loads the modular chunk JS file
+        loadVolumeChunk(bookId, volNumber, scrollToId = null) {
+          const chunkKey = `${bookId}_${volNumber}`;
+          State.loadedChunkKey = chunkKey;
+          window.location.hash = `b=${bookId}&v=${volNumber}`;
+
+          // Check if already in memory
+          if (window.HADITH_CHUNKS && window.HADITH_CHUNKS[chunkKey]) {
+            this.onChunkReady(chunkKey, scrollToId);
+            return;
+          }
+
+          // Show loader
+          const feed = document.getElementById('hadith-feed-container');
+          feed.innerHTML = `
+            <div style="text-align: center; padding: 40px 16px; color: #94a3b8;">
+              <div style="font-size: 2rem; margin-bottom: 10px; animation: spin 1s infinite linear;">⚙️</div>
+              <div>Loading Volume ${volNumber}...</div>
+            </div>
+          `;
+
+          const script = document.createElement('script');
+          script.src = `data/books/chunk_${chunkKey}.js`;
+          script.onload = () => {
+            this.onChunkReady(chunkKey, scrollToId);
+          };
+          script.onerror = () => {
+            feed.innerHTML = `
+              <div style="text-align: center; padding: 40px 16px; color: #ef4444;">
+                <div style="font-size: 1.8rem; margin-bottom: 8px;">⚠️</div>
+                <div>Could not load Volume ${volNumber}. Please verify network connection.</div>
+              </div>
+            `;
+          };
+          document.body.appendChild(script);
+        },
+
+        onChunkReady(chunkKey, scrollToId = null) {
+          const items = (window.HADITH_CHUNKS && window.HADITH_CHUNKS[chunkKey]) || [];
+          State.currentHadiths = items;
+          State.displayedCount = 0;
+
+          // Update banner info
+          const bookMeta = window.HADITH_METADATA.books.find(b => Number(b.id) === Number(State.activeBookId));
+          const titleEl = document.getElementById('banner-book-title');
+          const metaEl = document.getElementById('banner-book-meta');
+          const statsEl = document.getElementById('banner-stats');
+
+          if (bookMeta) {
+            titleEl.textContent = `${bookMeta.romanName} — Volume ${State.activeVolNumber}`;
+            metaEl.textContent = `${bookMeta.author} • ${bookMeta.urduName}`;
+            statsEl.textContent = `${items.length} Hadiths in Volume`;
+          }
+
+          // Render initial batch
+          const feed = document.getElementById('hadith-feed-container');
+          feed.innerHTML = '';
+          this.renderNextBatch();
+
+          if (scrollToId) {
+            setTimeout(() => {
+              this.scrollToHadith(scrollToId);
+            }, 100);
+          }
+        },
+
+        renderNextBatch() {
+          const feed = document.getElementById('hadith-feed-container');
+          const loadMoreBtn = document.getElementById('btn-load-more');
+          if (!feed) return;
+
+          const start = State.displayedCount;
+          const end = Math.min(start + State.pageSize, State.currentHadiths.length);
+
+          const bookNames = {
+            1: "Mir'at al-Manajih",
+            9: "Arba'een Hanafi",
+            10: "Muntakhab Hadithen",
+            12: "Faizan-e-Riaz-us-Saliheen",
+            13: "Sharh Arba'een Nawawi",
+            14: "Anwar-ul-Hadith"
+          };
+
+          for (let i = start; i < end; i++) {
+            const h = State.currentHadiths[i];
+            const isBookmarked = State.bookmarks.has(h.id);
+            const bName = bookNames[h.bookId] || `Book ${h.bookId}`;
+
+            const card = document.createElement('div');
+            card.className = 'hadith-card';
+            card.id = `hadith-card-${h.id}`;
+            card.setAttribute('data-id', h.id);
+
+            card.innerHTML = `
+              <!-- Card Header -->
+              <div class="card-header" data-card-target="${h.id}">
+                <div class="card-badges">
+                  <span class="badge-no">Hadith #${h.hadithNo}</span>
+                  <span class="badge-vol">${bName} • Vol ${h.volNo}</span>
+                  ${h.narrator ? `<span class="badge-vol" style="color: #38bdf8;">🎙️ ${h.narrator}</span>` : ''}
+                </div>
+                <div class="card-chapter-title">
+                  ${h.chapter || ''}
+                </div>
+              </div>
+
+              <!-- Card Body Content -->
+              <div class="card-body">
+                <!-- Arabic Matan -->
+                <div class="arabic-text script-block-arabic" style="${State.activeScript === 'roman' || State.activeScript === 'urdu' ? 'display: none;' : ''}">
+                  ${h.arabic || ''}
+                </div>
+
+                <!-- Urdu Translation -->
+                <div class="urdu-text script-block-urdu" style="${State.activeScript === 'roman' || State.activeScript === 'arabic' ? 'display: none;' : ''}">
+                  ${h.urdu || ''}
+                </div>
+
+                <!-- Roman Urdu Translation -->
+                <div class="roman-text script-block-roman" style="${State.activeScript === 'urdu' || State.activeScript === 'arabic' ? 'display: none;' : ''}">
+                  <div class="roman-label">Roman Urdu Translation</div>
+                  <div>${h.roman || 'No Roman transliteration available.'}</div>
+                </div>
+
+                <!-- Collapsible Urdu Commentary (Tashreeh) -->
+                ${h.explanation ? `
+                  <div class="tashreeh-wrapper">
+                    <button type="button" class="tashreeh-toggle-btn" data-tashreeh-target="tashreeh-${h.id}">
+                      <span>📖</span>
+                      <span>Tashreeh / Explanation (Urdu)</span>
+                    </button>
+                    <div class="tashreeh-content" id="tashreeh-${h.id}">
+                      ${h.explanation}
+                    </div>
+                  </div>
+                ` : ''}
+              </div>
+
+              <!-- Card Action Footer -->
+              <div class="card-footer">
+                <div class="footer-actions">
+                  <button type="button" class="action-btn copy-btn" data-id="${h.id}" title="Copy Hadith">
+                    <span>📋</span>
+                    <span>Copy</span>
+                  </button>
+                  <button type="button" class="action-btn share-btn" data-id="${h.id}" title="Share on WhatsApp">
+                    <span>💬</span>
+                    <span>WhatsApp</span>
+                  </button>
+                  <button type="button" class="action-btn bookmark-btn ${isBookmarked ? 'bookmarked' : ''}" data-id="${h.id}" title="Bookmark">
+                    <span>${isBookmarked ? '★' : '☆'}</span>
+                    <span>Save</span>
+                  </button>
+                </div>
+                <div style="font-size: 0.72rem; color: #64748b;">
+                  Ref: #${h.hadithNo}
+                </div>
+              </div>
+            `;
+
+            feed.appendChild(card);
+          }
+
+          State.displayedCount = end;
+
+          if (State.displayedCount < State.currentHadiths.length) {
+            loadMoreBtn.style.display = 'inline-flex';
+            loadMoreBtn.querySelector('span').textContent = `Load More (${State.displayedCount} of ${State.currentHadiths.length})`;
+          } else {
+            loadMoreBtn.style.display = 'none';
+          }
+        },
+
+        bindControls() {
+          // Load More button
+          const loadMoreBtn = document.getElementById('btn-load-more');
+          if (loadMoreBtn) {
+            loadMoreBtn.addEventListener('click', () => {
+              AudioFX.click();
+              this.renderNextBatch();
+            });
+          }
+
+          // Script switcher buttons
+          const scriptGroup = document.getElementById('script-switcher-group');
+          if (scriptGroup) {
+            scriptGroup.addEventListener('click', (e) => {
+              const btn = e.target.closest('.script-btn');
+              if (!btn) return;
+              AudioFX.click();
+              const script = btn.getAttribute('data-script');
+              State.activeScript = script;
+
+              scriptGroup.querySelectorAll('.script-btn').forEach(b => b.classList.remove('active'));
+              btn.classList.add('active');
+
+              this.applyScriptVisibility();
+            });
+          }
+
+          // Font scale controls
+          const btnDec = document.getElementById('btn-font-dec');
+          const btnInc = document.getElementById('btn-font-inc');
+          if (btnDec && btnInc) {
+            btnDec.addEventListener('click', () => {
+              AudioFX.click();
+              State.fontScale = Math.max(0.8, State.fontScale - 0.1);
+              document.documentElement.style.setProperty('--base-font-scale', State.fontScale);
+            });
+            btnInc.addEventListener('click', () => {
+              AudioFX.click();
+              State.fontScale = Math.min(1.4, State.fontScale + 0.1);
+              document.documentElement.style.setProperty('--base-font-scale', State.fontScale);
+            });
+          }
+
+          // Search triggers
+          const headerSearchBtn = document.getElementById('header-search-btn');
+          const floatingSearchBtn = document.getElementById('mobile-floating-search-btn');
+
+          if (headerSearchBtn) {
+            headerSearchBtn.addEventListener('click', () => {
+              if (window.HadithAISearch) window.HadithAISearch.open();
+            });
+          }
+
+          if (floatingSearchBtn) {
+            floatingSearchBtn.addEventListener('click', () => {
+              if (window.HadithAISearch) window.HadithAISearch.open();
+            });
+          }
+
+          // Feed Delegation (Copy, Share, Bookmark, Tashreeh)
+          const feed = document.getElementById('hadith-feed-container');
+          if (feed) {
+            feed.addEventListener('click', (e) => {
+              // 1. Tashreeh Toggle
+              const tashBtn = e.target.closest('.tashreeh-toggle-btn');
+              if (tashBtn) {
+                AudioFX.click();
+                const targetId = tashBtn.getAttribute('data-tashreeh-target');
+                const content = document.getElementById(targetId);
+                if (content) {
+                  content.classList.toggle('open');
+                }
+                return;
+              }
+
+              // 2. Copy Hadith
+              const copyBtn = e.target.closest('.copy-btn');
+              if (copyBtn) {
+                AudioFX.success();
+                const id = Number(copyBtn.getAttribute('data-id'));
+                const h = State.currentHadiths.find(x => x.id === id);
+                if (h) {
+                  const clip = `📜 Hadith #${h.hadithNo} (${h.chapter})\n\n📖 Arabic:\n${h.arabic}\n\n📜 Urdu:\n${h.urdu}\n\n🔤 Roman Urdu:\n${h.roman}\n\n— Faizan-e-Hadees Portal`;
+                  navigator.clipboard.writeText(clip).then(() => showToast('Hadith copied to clipboard!'));
+                }
+                return;
+              }
+
+              // 3. WhatsApp Share
+              const shareBtn = e.target.closest('.share-btn');
+              if (shareBtn) {
+                AudioFX.click();
+                const id = Number(shareBtn.getAttribute('data-id'));
+                const h = State.currentHadiths.find(x => x.id === id);
+                if (h) {
+                  const clip = `*Hadith #${h.hadithNo}* (${h.chapter})\n\n*Arabic:*\n${h.arabic}\n\n*Roman Urdu:*\n${h.roman}\n\n*Urdu:*\n${h.urdu}\n\n_Read on Faizan-e-Hadees Portal_`;
+                  const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(clip)}`;
+                  window.open(url, '_blank');
+                }
+                return;
+              }
+
+              // 4. Bookmark
+              const bmarkBtn = e.target.closest('.bookmark-btn');
+              if (bmarkBtn) {
+                AudioFX.click();
+                const id = Number(bmarkBtn.getAttribute('data-id'));
+                if (State.bookmarks.has(id)) {
+                  State.bookmarks.delete(id);
+                  bmarkBtn.classList.remove('bookmarked');
+                  bmarkBtn.querySelector('span').textContent = '☆';
+                  showToast('Removed from Bookmarks');
+                } else {
+                  State.bookmarks.add(id);
+                  bmarkBtn.classList.add('bookmarked');
+                  bmarkBtn.querySelector('span').textContent = '★';
+                  showToast('Saved to Bookmarks');
+                }
+                this.saveBookmarks();
+                return;
+              }
+            });
+          }
+        },
+
+        applyScriptVisibility() {
+          const feed = document.getElementById('hadith-feed-container');
+          if (!feed) return;
+
+          const arBlocks = feed.querySelectorAll('.script-block-arabic');
+          const urBlocks = feed.querySelectorAll('.script-block-urdu');
+          const roBlocks = feed.querySelectorAll('.script-block-roman');
+
+          if (State.activeScript === 'all') {
+            arBlocks.forEach(b => b.style.display = '');
+            urBlocks.forEach(b => b.style.display = '');
+            roBlocks.forEach(b => b.style.display = '');
+          } else if (State.activeScript === 'roman') {
+            arBlocks.forEach(b => b.style.display = 'none');
+            urBlocks.forEach(b => b.style.display = 'none');
+            roBlocks.forEach(b => b.style.display = '');
+          } else if (State.activeScript === 'urdu') {
+            arBlocks.forEach(b => b.style.display = 'none');
+            urBlocks.forEach(b => b.style.display = '');
+            roBlocks.forEach(b => b.style.display = 'none');
+          } else if (State.activeScript === 'arabic') {
+            arBlocks.forEach(b => b.style.display = '');
+            urBlocks.forEach(b => b.style.display = 'none');
+            roBlocks.forEach(b => b.style.display = 'none');
+          }
+        },
+
+        // Search Selection Target Scroll
+        loadAndScrollTo(bookId, volNo, hadithId) {
+          const targetVol = String(volNo).trim();
+          const targetBook = Number(bookId);
+
+          if (State.activeBookId !== targetBook || State.activeVolNumber !== targetVol) {
+            State.activeBookId = targetBook;
+            State.activeVolNumber = targetVol;
+
+            // Re-render book and volume pills
+            const pills = document.querySelectorAll('.book-pill');
+            pills.forEach(p => {
+              if (Number(p.getAttribute('data-book-id')) === targetBook) p.classList.add('active');
+              else p.classList.remove('active');
+            });
+
+            this.renderVolumePills();
+            this.loadVolumeChunk(targetBook, targetVol, hadithId);
+          } else {
+            this.scrollToHadith(hadithId);
+          }
+        },
+
+        scrollToHadith(hadithId) {
+          // If hadith is beyond currently rendered count, expand pageSize
+          const idx = State.currentHadiths.findIndex(h => h.id === hadithId);
+          if (idx >= State.displayedCount) {
+            State.pageSize = Math.max(State.pageSize, idx + 10);
+            this.renderNextBatch();
+          }
+
+          const card = document.getElementById(`hadith-card-${hadithId}`);
+          if (card) {
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            card.classList.remove('highlight-pulse');
+            void card.offsetWidth; // Reflow
+            card.classList.add('highlight-pulse');
+            setTimeout(() => card.classList.remove('highlight-pulse'), 3000);
+          }
+        },
+
+        handleHashOrInitialLoad() {
+          const hash = window.location.hash.replace(/^#/, '');
+          const params = new URLSearchParams(hash);
+          const b = params.get('b');
+          const v = params.get('v');
+
+          if (b && window.HADITH_METADATA.books.some(x => Number(x.id) === Number(b))) {
+            State.activeBookId = Number(b);
+          }
+          if (v) {
+            State.activeVolNumber = String(v).trim();
+          }
+
+          // Update active book styling
+          const pills = document.querySelectorAll('.book-pill');
+          pills.forEach(p => {
+            if (Number(p.getAttribute('data-book-id')) === State.activeBookId) p.classList.add('active');
+            else p.classList.remove('active');
+          });
+
+          this.renderVolumePills();
+          this.loadVolumeChunk(State.activeBookId, State.activeVolNumber);
+        }
+      };
+
+      // Expose to window for global access
+      window.HadithReader = HadithReader;
+
+      // --- INITIALIZE APPLICATION SAFELY ON DOM READY ---
+      document.addEventListener('DOMContentLoaded', () => {
+        // Module 1: Reader Controller
+        try {
+          HadithReader.init();
+        } catch (err) {
+          console.error('[Bootloader] Error initializing HadithReader:', err);
+        }
+
+        // Module 2: AI Search Spotlight
+        try {
+          if (window.HadithAISearch) {
+            window.HadithAISearch.init({
+              onSelect: function (hadith) {
+                HadithReader.loadAndScrollTo(hadith.b, hadith.v, hadith.id);
+              }
+            });
+          }
+        } catch (err) {
+          console.error('[Bootloader] Error initializing HadithAISearch:', err);
+        }
+      });
+
+    })();
+  </script>
+</body>
+</html>
