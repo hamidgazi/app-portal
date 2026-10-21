@@ -146,20 +146,13 @@ nav.app-nav-tier {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 6px;
+  flex-wrap: wrap;
+  gap: 6px 8px;
   width: 100%;
-  padding: 4px 6px;
-  background: rgba(15, 20, 32, 0.65);
-  border-radius: var(--radius-full);
+  padding: 6px 8px;
+  background: rgba(15, 20, 32, 0.75);
+  border-radius: var(--radius-lg);
   border: 1px solid var(--border-subtle);
-  overflow-x: auto;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-}
-
-nav.app-nav::-webkit-scrollbar,
-nav.app-nav-tier::-webkit-scrollbar {
-  display: none;
 }
 
 .nav-tab-btn {
@@ -176,9 +169,17 @@ nav.app-nav-tier::-webkit-scrollbar {
   display: flex;
   align-items: center;
   gap: 6px;
-  min-height: 36px;
+  min-height: 38px;
   touch-action: manipulation;
   user-select: none;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+a.nav-tab-btn,
+.nav-tab-link {
+  text-decoration: none;
+  color: var(--text-muted);
 }
 
 .nav-tab-btn:hover {

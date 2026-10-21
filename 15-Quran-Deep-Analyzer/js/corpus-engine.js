@@ -24,6 +24,8 @@ class CorpusEngine {
     this.thematicMode = "matalib"; // "matalib" | "sirat"
     this.thematicLimit = 80;
     this.thematicSearchQuery = "";
+    this.mutashabihatFilter = "all"; // "all" | "refrains" | "parallels"
+    this.mutashabihatQuery = "";
   }
 
   async init() {
@@ -76,6 +78,7 @@ class CorpusEngine {
       this.renderWaqfRules();
       this.setupSurahControls();
       this.setupParaControls();
+      this.setupMutashabihatControls();
       this.setupStickyController();
       this.setupPickerModals();
       this.setupFontScaler();
@@ -922,12 +925,84 @@ class CorpusEngine {
     });
   }
 
+  setupMutashabihatControls() {
+    const searchInput = document.getElementById("mutashabihat-search-input");
+    const clearBtn = document.getElementById("mutashabihat-search-clear");
+    if (searchInput) {
+      searchInput.addEventListener("input", (e) => {
+        this.mutashabihatQuery = e.target.value.trim().toLowerCase();
+        if (clearBtn) clearBtn.style.display = this.mutashabihatQuery ? "block" : "none";
+        this.renderMutashabihat();
+      });
+    }
+
+    if (clearBtn && searchInput) {
+      clearBtn.addEventListener("click", () => {
+        searchInput.value = "";
+        this.mutashabihatQuery = "";
+        clearBtn.style.display = "none";
+        this.renderMutashabihat();
+      });
+    }
+
+    const filterBtns = document.querySelectorAll(".mutashabihat-filter-btn");
+    filterBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        if (window.AudioSFX) window.AudioSFX.playClick();
+        filterBtns.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        this.mutashabihatFilter = btn.dataset.filter;
+        this.renderMutashabihat();
+      });
+    });
+  }
+
   renderMutashabihat() {
     const container = document.getElementById("mutashabihat-container");
     if (!container) return;
 
+    let filtered = this.mutashabihat || [];
+
+    // 1. Category Filter
+    if (this.mutashabihatFilter === "refrains") {
+      filtered = filtered.filter(c => (c.occurrences || []).length >= 4);
+    } else if (this.mutashabihatFilter === "parallels") {
+      filtered = filtered.filter(c => (c.occurrences || []).length < 4);
+    }
+
+    // 2. Query Search
+    if (this.mutashabihatQuery) {
+      const q = this.mutashabihatQuery;
+      filtered = filtered.filter(c => {
+        const occs = c.occurrences || [];
+        const sampleText = c.preview_text || c.arabic_sample || (occs[0] && occs[0].arabic) || "";
+        const clusterIdStr = String(c.cluster_id || "");
+        if (clusterIdStr === q || sampleText.includes(q)) return true;
+
+        return occs.some(occ => {
+          const sRoman = (occ.surah_name_roman || occ.surah_roman || "").toLowerCase();
+          const sAr = occ.surah_name_ar || occ.surah_arabic || "";
+          const ur = (occ.translation_urdu_kanzul_iman || occ.translation_ur_ki || occ.translation_ur || "").toLowerCase();
+          const en = (occ.translation_english || occ.translation_en || "").toLowerCase();
+          const coord = `${occ.surah_id}:${occ.ayat_number}`;
+          return sRoman.includes(q) || sAr.includes(q) || ur.includes(q) || en.includes(q) || coord.includes(q);
+        });
+      });
+    }
+
+    if (filtered.length === 0) {
+      container.innerHTML = `
+        <div style="text-align: center; padding: 50px 20px; color: var(--text-dim); background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); margin-top: 16px;">
+          <div style="font-size: 2.2rem; margin-bottom: 10px;">🔍</div>
+          <div style="font-size: 1.1rem; font-weight: 700; color: #fbbf24;">No Mutashabihat clusters found</div>
+          <p style="margin-top: 6px; font-size: 0.85rem;">Try searching for another Surah name (e.g. 'Baqarah', 'Rahman'), verse coordinate, or Arabic text.</p>
+        </div>
+      `;
+      return;
+    }
+
     let html = "";
-    this.mutashabihat.forEach(c => {
+    filtered.forEach(c => {
       const occs = c.occurrences || [];
       const firstOcc = occs[0] || {};
       const sampleText = c.preview_text || c.arabic_sample || firstOcc.arabic || "";

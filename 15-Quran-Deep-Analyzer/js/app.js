@@ -62,7 +62,9 @@ function initTabs() {
   navBtns.forEach(btn => {
     btn.addEventListener("click", () => {
       const tabName = btn.dataset.tab;
-      switchAppTab(tabName);
+      if (tabName) {
+        switchAppTab(tabName);
+      }
     });
   });
 
@@ -690,6 +692,8 @@ const OmnisearchEngine = {
     }
   }
 };
+window.OmnisearchEngine = OmnisearchEngine;
+
 function initTelemetryToolbar() {
   const toggleBtn = document.getElementById("toggle-telemetry-btn");
   const banner = document.getElementById("global-metrics-banner");

@@ -65,6 +65,10 @@
           <span>🔬 Analytics Studio</span>
           <span class="tab-badge" style="background: rgba(168, 85, 247, 0.2); color: #c084fc;">PRO</span>
         </button>
+        <a href="manners.html" class="nav-tab-btn nav-tab-link" id="tab-btn-manners" title="Quranic Manners & Social Ethics Compendium (Kanzul Iman)">
+          <span>🌿 Quranic Manners</span>
+          <span class="tab-badge" style="background: rgba(251, 191, 36, 0.2); color: #fbbf24;">67</span>
+        </a>
       </nav>
     </div>
   </header>
@@ -328,10 +332,18 @@
 
     <!-- Tab 5: Mutashabihat & Parallel Verses -->
     <section id="tab-mutashabihat" class="tab-panel">
-      <div class="control-bar">
-        <div>
-          <h3 style="font-size: 1.1rem; color: var(--text-main);">Mutashabihat al-Lafz (متشابهات اللفظ)</h3>
-          <p style="font-size: 0.82rem; color: var(--text-dim);">332 Clusters of Identical and Parallel Verses Across Different Surahs</p>
+      <div class="control-bar-two-tier">
+        <div class="spotlight-search-row">
+          <div class="search-box-wrapper spotlight-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="mutashabihat-search-input" class="search-input spotlight-input" placeholder="Search parallel verses, Surah name, or Arabic text in Mutashabihat...">
+            <button id="mutashabihat-search-clear" class="search-clear-btn" style="display:none;" aria-label="Clear search">✕</button>
+          </div>
+        </div>
+        <div class="segmented-pills-bar">
+          <button class="filter-btn mutashabihat-filter-btn active" data-filter="all">All Clusters (95)</button>
+          <button class="filter-btn mutashabihat-filter-btn" data-filter="refrains">Refrains (≥ 4)</button>
+          <button class="filter-btn mutashabihat-filter-btn" data-filter="parallels">Parallels (2–3)</button>
         </div>
       </div>
 
