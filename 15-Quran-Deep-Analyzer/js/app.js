@@ -267,6 +267,29 @@ const NavigationHistory = {
 };
 window.NavigationHistory = NavigationHistory;
 
+function normalizeArabicUrdu(str) {
+  if (!str) return "";
+  return String(str)
+    .replace(/[\u064B-\u065F\u0670\u06D6-\u06ED]/g, "") // Diacritics / Harakat
+    .replace(/\u0640/g, "") // Tatweel
+    .replace(/[\u0622\u0623\u0625\u0671]/g, "\u0627") // Alif variants
+    .replace(/[\u06CC\u0649\u0626]/g, "\u064A") // Yeh variants
+    .replace(/\u06A9/g, "\u0643") // Kaf variants
+    .replace(/[\u06C1\u06C2\u0629]/g, "\u0647") // Heh variants
+    .replace(/\u0624/g, "\u0648") // Waw variants
+    .trim()
+    .toLowerCase();
+}
+
+const FAMOUS_AYAT = [
+  { keywords: ["kursi", "kursiy", "كرسي", "الكرسي", "ayatul kursi", "آیت الکرسی"], surah: 2, ayah: 255, name: "Ayat al-Kursi (آيَةُ الْكُرْسِي)", title: "The Throne Verse", subtitle: "Surah Al-Baqarah 2:255 • Master verse of Divine Majesty & Protection" },
+  { keywords: ["amanar rasool", "rasul", "امن الرسول", "آمن الرسول"], surah: 2, ayah: 285, name: "Amanar Rasool (آمَنَ الرَّسُولُ)", title: "Closing of Surah Al-Baqarah", subtitle: "Surah Al-Baqarah 2:285–286 • Nightly protection & supplication" },
+  { keywords: ["nur", "noor", "نور", "النور", "ayat an-nur"], surah: 24, ayah: 35, name: "Ayat an-Nur (آيَةُ النُّور)", title: "Parable of the Divine Light", subtitle: "Surah An-Nur 24:35 • Allah is the Light of the heavens & earth" },
+  { keywords: ["shifa", "شفاء", "healing"], surah: 9, ayah: 14, name: "Ayat ash-Shifa (آيَةُ الشِّفَاء)", title: "Verse of Spiritual & Physical Healing", subtitle: "Surah At-Tawbah 9:14 • Healing for the breasts of believers" },
+  { keywords: ["birr", "righteousness", "بر"], surah: 2, ayah: 177, name: "Ayat al-Birr (آيَةُ الْبِرّ)", title: "The Essence of True Righteousness", subtitle: "Surah Al-Baqarah 2:177 • Complete standard of faith, charity & integrity" },
+  { keywords: ["mulk", "kingdom", "مالك الملك", "qulillahumma"], surah: 3, ayah: 26, name: "Ayat al-Mulk (آيَةُ الْمُلْك)", title: "Sovereignty of Allah", subtitle: "Surah Ali 'Imran 3:26 • Sovereign Owner of all dominion" }
+];
+
 const OmnisearchEngine = {
   isOpen: false,
   activeCategory: "all",
@@ -277,10 +300,29 @@ const OmnisearchEngine = {
     const modal = document.getElementById("omnisearch-modal");
     const openBtn = document.getElementById("open-omnisearch-btn");
     const input = document.getElementById("omnisearch-input");
+    const closeBtn = document.getElementById("omnisearch-close-btn");
+    const escHint = modal ? modal.querySelector(".omnisearch-esc-hint") : null;
     if (!modal || !input) return;
 
     if (openBtn) {
-      openBtn.addEventListener("click", () => this.open());
+      openBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        this.open();
+      });
+      openBtn.onclick = (e) => {
+        e && e.preventDefault && e.preventDefault();
+        this.open();
+      };
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener("click", () => this.close());
+      closeBtn.onclick = () => this.close();
+    }
+
+    if (escHint) {
+      escHint.addEventListener("click", () => this.close());
+      escHint.onclick = () => this.close();
     }
 
     const chips = modal.querySelectorAll(".omni-filter-chip");
@@ -343,7 +385,7 @@ const OmnisearchEngine = {
     if (window.AudioSFX) window.AudioSFX.playClick();
     if (input) {
       input.value = "";
-      input.focus();
+      setTimeout(() => input.focus(), 60);
     }
     this.executeSearch("");
   },
@@ -388,16 +430,172 @@ const OmnisearchEngine = {
 
     this.results = [];
     this.selectedIndex = -1;
-    const q = rawQuery.toLowerCase();
+    const q = rawQuery.toLowerCase().trim();
+    const qNorm = normalizeArabicUrdu(rawQuery);
 
-    // 1. Coordinate Pattern
-    const coordMatch = rawQuery.match(/^(\d{1,3})[:,\s]+(\d{1,3})$/);
+    // 0. Empty query default curated views
+    if (!q) {
+      if (this.activeCategory === "all") {
+        // High-value quick shortcuts
+        this.results.push({
+          category: "Manners",
+          categoryClass: "prophet",
+          title: "🌿 Quranic Manners & Social Ethics (67 Injunctions)",
+          subtitle: "Authentic Kanzul Iman Urdu translation across 9 life spheres • Jump to Manners Compendium",
+          action: () => { window.location.href = "manners.html"; }
+        });
+        this.results.push({
+          category: "Parallels",
+          categoryClass: "surah",
+          title: "⚖️ Mutashabihat al-Lafz Concordance (95 Clusters)",
+          subtitle: "Explore high-frequency repeated verses, refrain matrices & search filters",
+          action: () => { if (window.switchAppTab) window.switchAppTab("mutashabihat"); }
+        });
+        this.results.push({
+          category: "Morphology",
+          categoryClass: "word",
+          title: "🌿 Root & Morphology Explorer (1,642 Roots)",
+          subtitle: "Augmented Verb Forms I–X, participles, verbal nouns & Sarf classifications",
+          action: () => { if (window.switchAppTab) window.switchAppTab("roots"); }
+        });
+        this.results.push({
+          category: "Ayah",
+          categoryClass: "verse",
+          title: "Ayat al-Kursi (آيَةُ الْكُرْسِي) [2:255]",
+          subtitle: "Surah Al-Baqarah 2:255 • Master verse of Divine Majesty & Protection",
+          action: () => { if (window.CorpusEngine) window.CorpusEngine.jumpToAyah(2, 255); }
+        });
+        this.results.push({
+          category: "Surah",
+          categoryClass: "surah",
+          title: "1. Al-Fatihah (اَلْفَاتِحَة)",
+          subtitle: "The Opening • 7 Ayat • 29 Words",
+          action: () => { if (window.CorpusEngine) window.CorpusEngine.jumpToAyah(1, 1); }
+        });
+        this.results.push({
+          category: "Surah",
+          categoryClass: "surah",
+          title: "18. Al-Kahf (اَلْـكَهْف)",
+          subtitle: "The Cave • 110 Ayat • 1,583 Words • Friday recitation",
+          action: () => { if (window.CorpusEngine) window.CorpusEngine.jumpToAyah(18, 1); }
+        });
+        this.results.push({
+          category: "Surah",
+          categoryClass: "surah",
+          title: "36. Ya-Sin (يٰسٓ)",
+          subtitle: "The Heart of the Quran • 83 Ayat • 733 Words",
+          action: () => { if (window.CorpusEngine) window.CorpusEngine.jumpToAyah(36, 1); }
+        });
+        this.results.push({
+          category: "Surah",
+          categoryClass: "surah",
+          title: "67. Al-Mulk (اَلْمُلْك)",
+          subtitle: "The Dominion • 30 Ayat • 337 Words • Nightly protector",
+          action: () => { if (window.CorpusEngine) window.CorpusEngine.jumpToAyah(67, 1); }
+        });
+      } else if (this.activeCategory === "surahs") {
+        const sList = (window.CorpusEngine && window.CorpusEngine.surahsTelemetry) || (window.QURAN_CORE_DATA && window.QURAN_CORE_DATA.surahsTelemetry) || [];
+        sList.slice(0, 16).forEach(s => {
+          this.results.push({
+            category: `Surah #${s.id}`,
+            categoryClass: "surah",
+            title: `${s.id}. ${s.name_roman} (${s.name_ar})`,
+            subtitle: `${s.place} • ${s.total_ayat} Ayat • ${s.total_words.toLocaleString()} Words`,
+            action: () => { if (window.CorpusEngine) window.CorpusEngine.jumpToAyah(s.id, 1); }
+          });
+        });
+      } else if (this.activeCategory === "paras") {
+        const pList = window.QURAN_PARAS || (window.CorpusEngine && window.CorpusEngine.paras) || [];
+        pList.forEach(p => {
+          this.results.push({
+            category: `Para #${p.para}`,
+            categoryClass: "para",
+            title: `Para ${p.para}: ${p.name_roman} (${p.name_ar})`,
+            subtitle: `Starts at Surah ${p.start_surah}:${p.start_ayah} • Spans ${p.surahs ? p.surahs.length : ''} Surahs`,
+            action: () => { if (window.CorpusEngine) window.CorpusEngine.jumpToPara(p.para); }
+          });
+        });
+      } else if (this.activeCategory === "ayahs") {
+        FAMOUS_AYAT.forEach(fa => {
+          this.results.push({
+            category: "Famous Ayah",
+            categoryClass: "verse",
+            title: `${fa.name} [${fa.surah}:${fa.ayah}]`,
+            subtitle: fa.subtitle,
+            action: () => { if (window.CorpusEngine) window.CorpusEngine.jumpToAyah(fa.surah, fa.ayah); }
+          });
+        });
+      } else if (this.activeCategory === "prophets") {
+        const prophets = (window.QURAN_ADVANCED_ANALYTICS && window.QURAN_ADVANCED_ANALYTICS.entities && window.QURAN_ADVANCED_ANALYTICS.entities.prophets) || [];
+        prophets.forEach(p => {
+          this.results.push({
+            category: "Prophet",
+            categoryClass: "prophet",
+            title: `Prophet ${p.name_en} (${p.name_ar})`,
+            subtitle: `${p.title || ''} • Mentioned ${p.count} times across ${p.surahs_count} Surahs`,
+            action: () => {
+              if (window.switchAppTab) window.switchAppTab("studio");
+              if (window.AnalyticsStudio) {
+                window.AnalyticsStudio.switchSubTab("entities");
+                window.AnalyticsStudio.switchEntityCategory("prophets");
+              }
+            }
+          });
+        });
+      } else if (this.activeCategory === "topics") {
+        const topics = (window.CorpusEngine && window.CorpusEngine.thematicGraph) || (window.QURAN_CORE_DATA && window.QURAN_CORE_DATA.thematicGraph) || [];
+        topics.slice(0, 16).forEach(t => {
+          this.results.push({
+            category: "Theme",
+            categoryClass: "theme",
+            title: t.heading,
+            subtitle: `${t.references_count} Ayat indexed • Matalib al-Quran`,
+            action: () => {
+              if (window.switchAppTab) window.switchAppTab("thematic");
+              if (window.CorpusEngine) {
+                window.CorpusEngine.thematicMode = "matalib";
+                const sBtn = document.getElementById("thematic-mode-sirat");
+                const mBtn = document.getElementById("thematic-mode-matalib");
+                if (sBtn && mBtn) { mBtn.classList.add("active"); sBtn.classList.remove("active"); }
+                const searchInput = document.getElementById("thematic-search-input");
+                if (searchInput) searchInput.value = t.heading;
+                window.CorpusEngine.renderThematicGraph(t.heading.toLowerCase());
+              }
+            }
+          });
+        });
+      } else if (this.activeCategory === "words") {
+        const pairs = (window.TelemetryEngine && window.TelemetryEngine.semanticPairs) || [];
+        pairs.slice(0, 8).forEach(p => {
+          this.results.push({
+            category: "Pair",
+            categoryClass: "word",
+            title: `${p.term1_ar} (${p.term1_count}) ⇄ ${p.term2_ar} (${p.term2_count})`,
+            subtitle: `${p.concept} • ${p.is_balanced ? 'Exact 1:1 Symmetrical Parity' : 'Ratio ' + p.ratio + ':1'}`,
+            action: () => {
+              if (window.switchAppTab) window.switchAppTab("frequency");
+              if (window.TelemetryEngine) {
+                window.TelemetryEngine.currentMode = "semantic";
+                const sBtns = document.querySelectorAll(".freq-filter-btn");
+                sBtns.forEach(b => b.classList.toggle("active", b.dataset.mode === "semantic"));
+                window.TelemetryEngine.render();
+              }
+            }
+          });
+        });
+      }
+      this.renderOmnisearchItems(resultsContainer, rawQuery);
+      return;
+    }
+
+    // 1. Flexible Coordinate Pattern (e.g. "2:255", "surah 2:255", "2 255", "surah 18 ayah 10")
+    const coordMatch = rawQuery.match(/(?:surah\s*)?(\d{1,3})\s*[:\s,]\s*(?:ayah\s*)?(\d{1,3})/i);
     if (coordMatch) {
       const sId = parseInt(coordMatch[1], 10);
       const aNo = parseInt(coordMatch[2], 10);
       if (sId >= 1 && sId <= 114) {
-        const surah = (window.CorpusEngine && window.CorpusEngine.surahsTelemetry)
-          ? window.CorpusEngine.surahsTelemetry.find(s => s.id === sId) : null;
+        const surahs = (window.CorpusEngine && window.CorpusEngine.surahsTelemetry) || (window.QURAN_CORE_DATA && window.QURAN_CORE_DATA.surahsTelemetry) || [];
+        const surah = surahs.find(s => s.id === sId);
         const sName = surah ? surah.name_roman : `Surah ${sId}`;
         this.results.push({
           category: "Verse",
@@ -411,55 +609,84 @@ const OmnisearchEngine = {
       }
     }
 
-    // 2. Direct Para / Juz Pattern
-    const paraMatch = rawQuery.match(/^(?:para|juz|p|پارہ)\s*(\d{1,2})$/i);
-    if (paraMatch) {
-      const pNum = parseInt(paraMatch[1], 10);
-      if (pNum >= 1 && pNum <= 30) {
-        const pList = window.QURAN_PARAS || (window.CorpusEngine && window.CorpusEngine.paras) || [];
-        const pObj = pList.find(p => p.para === pNum);
-        if (pObj) {
-          const startSurah = (window.CorpusEngine && window.CorpusEngine.surahsTelemetry)
-            ? window.CorpusEngine.surahsTelemetry.find(s => s.id === pObj.start_surah) : null;
-          const sName = startSurah ? startSurah.name_roman : `Surah ${pObj.start_surah}`;
+    // 2. Famous Ayat Keyword Recognition
+    FAMOUS_AYAT.forEach(fa => {
+      const isMatch = fa.keywords.some(k => q.includes(k) || (qNorm && normalizeArabicUrdu(k).includes(qNorm)));
+      if (isMatch) {
+        if (!this.results.some(r => r.title && r.title.includes(`[${fa.surah}:${fa.ayah}]`))) {
           this.results.push({
-            category: `Para #${pObj.para}`,
-            categoryClass: "para",
-            title: `Jump to Para ${pObj.para}: ${pObj.name_roman} (${pObj.name_ar})`,
-            subtitle: `Starts at Surah ${sName} ${pObj.start_surah}:${pObj.start_ayah} • Spans ${pObj.surahs ? pObj.surahs.length : ''} Surahs`,
-            action: () => {
-              if (window.CorpusEngine) window.CorpusEngine.jumpToPara(pObj.para);
-            }
+            category: "Famous Ayah",
+            categoryClass: "verse",
+            title: `${fa.name} [${fa.surah}:${fa.ayah}]`,
+            subtitle: fa.subtitle,
+            action: () => { if (window.CorpusEngine) window.CorpusEngine.jumpToAyah(fa.surah, fa.ayah); }
           });
         }
       }
+    });
+
+    // 3. Module & Portal Keywords
+    if (q.includes("manner") || q.includes("adab") || q.includes("akhlaq") || qNorm.includes(normalizeArabicUrdu("ادب")) || qNorm.includes(normalizeArabicUrdu("اخلاق"))) {
+      this.results.push({
+        category: "Manners",
+        categoryClass: "prophet",
+        title: "🌿 Quranic Manners & Social Ethics (67 Injunctions)",
+        subtitle: "Authentic Kanzul Iman Urdu translation across 9 life spheres • Standalone PWA Viewer",
+        action: () => { window.location.href = "manners.html"; }
+      });
     }
 
-    // 3. Paras (Juz 1-30) Query Matching
-    if ((this.activeCategory === "all" || this.activeCategory === "paras") && (window.QURAN_PARAS || (window.CorpusEngine && window.CorpusEngine.paras))) {
+    if (q.includes("mutashab") || q.includes("parallel") || q.includes("refrain") || qNorm.includes(normalizeArabicUrdu("متشابہ"))) {
+      this.results.push({
+        category: "Parallels",
+        categoryClass: "surah",
+        title: "⚖️ Mutashabihat al-Lafz Concordance (95 Clusters)",
+        subtitle: "Explore repeated verses, refrain matrix grids & instant cluster search",
+        action: () => { if (window.switchAppTab) window.switchAppTab("mutashabihat"); }
+      });
+    }
+
+    if (q.includes("waqf") || q.includes("stop") || q.includes("pause") || qNorm.includes(normalizeArabicUrdu("وقف"))) {
+      this.results.push({
+        category: "Waqf",
+        categoryClass: "theme",
+        title: "⏸️ Phonetic & Stopping Science (Waqf)",
+        subtitle: "15 Quranic stopping symbols, definitions & recitation rules",
+        action: () => { if (window.switchAppTab) window.switchAppTab("waqf"); }
+      });
+    }
+
+    if (q.includes("root") || q.includes("sarf") || q.includes("morph") || qNorm.includes(normalizeArabicUrdu("صرف"))) {
+      this.results.push({
+        category: "Morphology",
+        categoryClass: "word",
+        title: "🌿 Root & Morphology Explorer (علم الصرف)",
+        subtitle: "Derivational analysis of 1,642 roots into Verb Forms I–X, participles & verbal nouns",
+        action: () => { if (window.switchAppTab) window.switchAppTab("roots"); }
+      });
+    }
+
+    // 4. Paras (Juz 1-30) Query Matching
+    if (this.activeCategory === "all" || this.activeCategory === "paras") {
       const pList = window.QURAN_PARAS || (window.CorpusEngine && window.CorpusEngine.paras) || [];
       const matchedParas = pList.filter(p => {
-        if (!q) return this.activeCategory === "paras";
         const nameNorm = (p.name_roman || "").toLowerCase().replace(/-/g, " ");
-        const qNorm = q.replace(/-/g, " ");
-        return nameNorm.includes(qNorm) ||
-               (p.name_ar && p.name_ar.includes(rawQuery)) ||
+        const arNorm = normalizeArabicUrdu(p.name_ar);
+        const qClean = q.replace(/-/g, " ");
+        return nameNorm.includes(qClean) ||
+               (arNorm && arNorm.includes(qNorm)) ||
                String(p.para) === q ||
-               q.startsWith("para") ||
-               q.startsWith("juz") ||
-               rawQuery.includes("پارہ");
+               q === `para ${p.para}` ||
+               q === `juz ${p.para}`;
       }).slice(0, (this.activeCategory === "paras" ? 30 : 4));
 
       matchedParas.forEach(p => {
         if (this.results.some(r => r.title && r.title.includes(`Para ${p.para}:`))) return;
-        const startSurah = (window.CorpusEngine && window.CorpusEngine.surahsTelemetry)
-          ? window.CorpusEngine.surahsTelemetry.find(s => s.id === p.start_surah) : null;
-        const sName = startSurah ? startSurah.name_roman : `Surah ${p.start_surah}`;
         this.results.push({
           category: `Para #${p.para}`,
           categoryClass: "para",
           title: `Para ${p.para}: ${p.name_roman} (${p.name_ar})`,
-          subtitle: `Starts at Surah ${sName} ${p.start_surah}:${p.start_ayah} • Spans ${p.surahs ? p.surahs.length : ''} Surahs`,
+          subtitle: `Starts at Surah ${p.start_surah}:${p.start_ayah} • Spans ${p.surahs ? p.surahs.length : ''} Surahs`,
           action: () => {
             if (window.CorpusEngine) window.CorpusEngine.jumpToPara(p.para);
           }
@@ -467,24 +694,26 @@ const OmnisearchEngine = {
       });
     }
 
-    // 4. Surahs
-    if ((this.activeCategory === "all" || this.activeCategory === "surahs") && window.CorpusEngine && window.CorpusEngine.surahsTelemetry) {
-      const matchedSurahs = window.CorpusEngine.surahsTelemetry.filter(s => {
-        if (!q) return true;
+    // 5. Surahs Query Matching (Arabic normalized, Roman, English meaning, number)
+    if (this.activeCategory === "all" || this.activeCategory === "surahs") {
+      const surahs = (window.CorpusEngine && window.CorpusEngine.surahsTelemetry) || (window.QURAN_CORE_DATA && window.QURAN_CORE_DATA.surahsTelemetry) || [];
+      const matchedSurahs = surahs.filter(s => {
         const nameNorm = (s.name_roman || "").toLowerCase().replace(/-/g, " ");
-        const qNorm = q.replace(/-/g, " ");
-        return nameNorm.includes(qNorm) ||
-               (s.name_ar && s.name_ar.includes(rawQuery)) ||
+        const arNorm = normalizeArabicUrdu(s.name_ar);
+        const qClean = q.replace(/-/g, " ");
+        return nameNorm.includes(qClean) ||
+               (arNorm && arNorm.includes(qNorm)) ||
                String(s.id) === q ||
                (s.meaning_en && s.meaning_en.toLowerCase().includes(q));
-      }).slice(0, (q ? 8 : 4));
+      }).slice(0, (this.activeCategory === "surahs" ? 25 : 8));
 
       matchedSurahs.forEach(s => {
+        if (this.results.some(r => r.title && r.title.startsWith(`${s.id}. `))) return;
         this.results.push({
           category: `Surah #${s.id}`,
           categoryClass: "surah",
           title: `${s.id}. ${s.name_roman} (${s.name_ar})`,
-          subtitle: `${s.place} • ${s.total_ayat} Ayat • ${s.total_words.toLocaleString()} Words`,
+          subtitle: `${s.place} • ${s.total_ayat} Ayat • ${s.total_words.toLocaleString()} Words • ${s.meaning_en || ''}`,
           action: () => {
             if (window.CorpusEngine) window.CorpusEngine.jumpToAyah(s.id, 1);
           }
@@ -492,22 +721,22 @@ const OmnisearchEngine = {
       });
     }
 
-    // 3. Prophets & Sacred Figures
-    if ((this.activeCategory === "all" || this.activeCategory === "prophets") && window.QURAN_ADVANCED_ANALYTICS && window.QURAN_ADVANCED_ANALYTICS.entities) {
-      const prophets = window.QURAN_ADVANCED_ANALYTICS.entities.prophets || [];
+    // 6. Prophets & Sacred Figures
+    if (this.activeCategory === "all" || this.activeCategory === "prophets") {
+      const prophets = (window.QURAN_ADVANCED_ANALYTICS && window.QURAN_ADVANCED_ANALYTICS.entities && window.QURAN_ADVANCED_ANALYTICS.entities.prophets) || [];
       const matched = prophets.filter(p => {
-        if (!q) return false;
+        const arNorm = normalizeArabicUrdu(p.name_ar);
         return p.name_en.toLowerCase().includes(q) ||
-               p.name_ar.includes(rawQuery) ||
+               (arNorm && arNorm.includes(qNorm)) ||
                (p.title && p.title.toLowerCase().includes(q));
-      }).slice(0, 5);
+      }).slice(0, (this.activeCategory === "prophets" ? 26 : 5));
 
       matched.forEach(p => {
         this.results.push({
           category: "Prophet",
           categoryClass: "prophet",
           title: `Prophet ${p.name_en} (${p.name_ar})`,
-          subtitle: `${p.title} • Mentioned ${p.count} times across ${p.surahs_count} Surahs`,
+          subtitle: `${p.title || ''} • Mentioned ${p.count} times across ${p.surahs_count} Surahs`,
           action: () => {
             if (window.switchAppTab) window.switchAppTab("studio");
             if (window.AnalyticsStudio) {
@@ -519,14 +748,15 @@ const OmnisearchEngine = {
       });
     }
 
-    // 4. Thematic Topics (Matalib al-Quran)
-    if ((this.activeCategory === "all" || this.activeCategory === "topics") && window.CorpusEngine && window.CorpusEngine.thematicGraph) {
-      const matchedTopics = window.CorpusEngine.thematicGraph.filter(t => {
-        if (!q) return false;
-        return t.heading.toLowerCase().includes(q);
+    // 7. Thematic Topics (Matalib al-Quran & Sirat-ul-Jinan)
+    if (this.activeCategory === "all" || this.activeCategory === "topics") {
+      const matalibTopics = (window.CorpusEngine && window.CorpusEngine.thematicGraph) || (window.QURAN_CORE_DATA && window.QURAN_CORE_DATA.thematicGraph) || [];
+      const matchedMatalib = matalibTopics.filter(t => {
+        const hNorm = normalizeArabicUrdu(t.heading);
+        return t.heading.toLowerCase().includes(q) || (hNorm && hNorm.includes(qNorm));
       }).slice(0, 6);
 
-      matchedTopics.forEach(t => {
+      matchedMatalib.forEach(t => {
         this.results.push({
           category: "Theme",
           categoryClass: "theme",
@@ -538,10 +768,7 @@ const OmnisearchEngine = {
               window.CorpusEngine.thematicMode = "matalib";
               const sBtn = document.getElementById("thematic-mode-sirat");
               const mBtn = document.getElementById("thematic-mode-matalib");
-              if (sBtn && mBtn) {
-                mBtn.classList.add("active");
-                sBtn.classList.remove("active");
-              }
+              if (sBtn && mBtn) { mBtn.classList.add("active"); sBtn.classList.remove("active"); }
               const searchInput = document.getElementById("thematic-search-input");
               if (searchInput) searchInput.value = t.heading;
               window.CorpusEngine.renderThematicGraph(t.heading.toLowerCase());
@@ -549,14 +776,11 @@ const OmnisearchEngine = {
           }
         });
       });
-    }
 
-    // 4b. Sirat-ul-Jinan Exegetical Topics (3,513 Items)
-    if (this.activeCategory === "all" || this.activeCategory === "topics") {
       const exeTopics = (window.CorpusEngine && window.CorpusEngine.exegeticalTopics) || window.QURAN_EXEGETICAL_TOPICS || [];
       const matchedExe = exeTopics.filter(t => {
-        if (!q) return false;
-        return (t.heading && t.heading.toLowerCase().includes(q)) ||
+        const hNorm = normalizeArabicUrdu(t.heading);
+        return (t.heading && (t.heading.toLowerCase().includes(q) || (hNorm && hNorm.includes(qNorm)))) ||
                (t.roman_heading && t.roman_heading.toLowerCase().includes(q)) ||
                (t.surah_name && t.surah_name.toLowerCase().includes(q));
       }).slice(0, 6);
@@ -574,10 +798,7 @@ const OmnisearchEngine = {
               window.CorpusEngine.thematicMode = "sirat";
               const sBtn = document.getElementById("thematic-mode-sirat");
               const mBtn = document.getElementById("thematic-mode-matalib");
-              if (sBtn && mBtn) {
-                sBtn.classList.add("active");
-                mBtn.classList.remove("active");
-              }
+              if (sBtn && mBtn) { sBtn.classList.add("active"); mBtn.classList.remove("active"); }
               const searchInput = document.getElementById("thematic-search-input");
               if (searchInput) searchInput.value = t.heading;
               window.CorpusEngine.renderThematicGraph(t.heading.toLowerCase());
@@ -587,15 +808,17 @@ const OmnisearchEngine = {
       });
     }
 
-    // 5. Semantic Pairs
-    if ((this.activeCategory === "all" || this.activeCategory === "words") && window.TelemetryEngine && window.TelemetryEngine.semanticPairs) {
-      const matchedPairs = window.TelemetryEngine.semanticPairs.filter(p => {
-        if (!q) return false;
+    // 8. Semantic Pairs & Roots
+    if (this.activeCategory === "all" || this.activeCategory === "words") {
+      const pairs = (window.TelemetryEngine && window.TelemetryEngine.semanticPairs) || [];
+      const matchedPairs = pairs.filter(p => {
+        const t1Norm = normalizeArabicUrdu(p.term1_ar);
+        const t2Norm = normalizeArabicUrdu(p.term2_ar);
         return (p.concept && p.concept.toLowerCase().includes(q)) ||
                (p.term1_label && p.term1_label.toLowerCase().includes(q)) ||
                (p.term2_label && p.term2_label.toLowerCase().includes(q)) ||
-               (p.term1_ar && p.term1_ar.includes(rawQuery)) ||
-               (p.term2_ar && p.term2_ar.includes(rawQuery));
+               (t1Norm && t1Norm.includes(qNorm)) ||
+               (t2Norm && t2Norm.includes(qNorm));
       }).slice(0, 4);
 
       matchedPairs.forEach(p => {
@@ -615,20 +838,17 @@ const OmnisearchEngine = {
           }
         });
       });
-    }
 
-    // 6. Triliteral & Quadrilateral Roots (Morphology)
-    if (this.activeCategory === "all" || this.activeCategory === "words") {
       const rootsList = (window.MorphologyEngine && window.MorphologyEngine.allRoots && window.MorphologyEngine.allRoots.length)
         ? window.MorphologyEngine.allRoots
         : (window.QURAN_ROOTS || []);
       const matchedRoots = rootsList.filter(r => {
-        if (!q) return false;
-        return (r.root_ar && r.root_ar.includes(rawQuery)) ||
+        const rNorm = normalizeArabicUrdu(r.root_ar);
+        return (rNorm && rNorm.includes(qNorm)) ||
                (r.root_bw && r.root_bw.toLowerCase().includes(q)) ||
                (r.meaning_en && r.meaning_en.toLowerCase().includes(q)) ||
                (r.meaning_ur && r.meaning_ur.toLowerCase().includes(q));
-      }).slice(0, 4);
+      }).slice(0, 5);
 
       matchedRoots.forEach(r => {
         this.results.push({
@@ -648,11 +868,15 @@ const OmnisearchEngine = {
       });
     }
 
+    this.renderOmnisearchItems(resultsContainer, rawQuery);
+  },
+
+  renderOmnisearchItems(resultsContainer, rawQuery) {
     if (this.results.length === 0) {
       resultsContainer.innerHTML = `
         <div style="text-align: center; padding: 30px; color: var(--text-dim); font-size: 0.9rem;">
-          <p style="margin-bottom: 6px;">No results found for "${rawQuery}"</p>
-          <span style="font-size: 0.78rem; color: #64748b;">Try searching for a Surah ("Kahf", "18"), coordinate ("2:255"), or Prophet ("Musa").</span>
+          <p style="margin-bottom: 6px;">No matches found for "${rawQuery}"</p>
+          <span style="font-size: 0.78rem; color: #64748b;">Try searching for a Surah ("Kahf", "18", "کہف"), coordinate ("2:255"), Prophet ("Musa", "موسی"), or topic.</span>
         </div>
       `;
       return;
@@ -693,6 +917,8 @@ const OmnisearchEngine = {
   }
 };
 window.OmnisearchEngine = OmnisearchEngine;
+window.openOmnisearch = () => OmnisearchEngine.open();
+window.closeOmnisearch = () => OmnisearchEngine.close();
 
 function initTelemetryToolbar() {
   const toggleBtn = document.getElementById("toggle-telemetry-btn");
@@ -748,4 +974,8 @@ function bootApp() {
   console.log("[BOOT] Application successfully mounted.");
 }
 
-document.addEventListener("DOMContentLoaded", bootApp);
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", bootApp);
+} else {
+  bootApp();
+}

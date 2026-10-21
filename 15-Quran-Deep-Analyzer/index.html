@@ -6,7 +6,34 @@
   <title>Quran Deep Analyzer | Master Linguistic & Quantitative Suite</title>
   <meta name="description" content="Complete deep analysis of the Holy Quran: Quantitative telemetry, word counts, roots, lemmas, thematic ontology, and classical Tafsir.">
   <meta name="theme-color" content="#07090e">
-  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/app.css?v=20261021_rev3">
+  <script>
+    function openOmnisearch() {
+      if (window.OmnisearchEngine && typeof window.OmnisearchEngine.open === 'function') {
+        window.OmnisearchEngine.open();
+      } else {
+        const modal = document.getElementById('omnisearch-modal');
+        if (modal) {
+          modal.style.display = 'flex';
+          const input = document.getElementById('omnisearch-input');
+          if (input) {
+            input.value = '';
+            setTimeout(function() { input.focus(); }, 60);
+          }
+        }
+      }
+    }
+    function closeOmnisearch() {
+      if (window.OmnisearchEngine && typeof window.OmnisearchEngine.close === 'function') {
+        window.OmnisearchEngine.close();
+      } else {
+        const modal = document.getElementById('omnisearch-modal');
+        if (modal) modal.style.display = 'none';
+      }
+    }
+    window.openOmnisearch = openOmnisearch;
+    window.closeOmnisearch = closeOmnisearch;
+  </script>
 </head>
 <body>
 
@@ -24,7 +51,7 @@
         </div>
 
         <!-- Global Omnisearch Trigger Button -->
-        <button id="open-omnisearch-btn" class="omnisearch-trigger-btn" title="Open Global Omnisearch (Ctrl+K or /)">
+        <button id="open-omnisearch-btn" class="omnisearch-trigger-btn" onclick="openOmnisearch()" title="Open Global Omnisearch (Ctrl+K or /)">
           <span class="omnisearch-icon">🔍</span>
           <span class="omnisearch-btn-text">Quick Search...</span>
           <kbd>Ctrl K</kbd>
@@ -484,7 +511,8 @@
       <div class="omnisearch-header">
         <span class="omnisearch-icon">⚡</span>
         <input type="text" id="omnisearch-input" class="omnisearch-input" placeholder="Search Surahs, Ayats (e.g. 2:255), Prophets, Topics, or Words..." autocomplete="off" spellcheck="false">
-        <kbd class="omnisearch-esc-hint">ESC</kbd>
+        <kbd class="omnisearch-esc-hint" onclick="closeOmnisearch()" style="cursor: pointer;" title="Close search (ESC)">ESC</kbd>
+        <button id="omnisearch-close-btn" class="omnisearch-close-btn" onclick="closeOmnisearch()" aria-label="Close search">✕</button>
       </div>
       <div class="omnisearch-quick-filters">
         <button class="omni-filter-chip active" data-cat="all">All</button>
@@ -600,14 +628,14 @@
   </footer>
 
   <!-- Application Scripts (Zero-CORS Offline Data Bundle) -->
-  <script src="data/quran_core_data.js"></script>
-  <script src="data/quran_exegetical_topics_bundle.js"></script>
-  <script src="data/quran_advanced_analytics_bundle.js"></script>
-  <script src="js/audio-sfx.js"></script>
-  <script src="js/telemetry-engine.js"></script>
-  <script src="js/corpus-engine.js"></script>
-  <script src="js/analytics-studio.js"></script>
-  <script src="js/morphology-engine.js"></script>
-  <script src="js/app.js"></script>
+  <script src="data/quran_core_data.js?v=20261021_rev3"></script>
+  <script src="data/quran_exegetical_topics_bundle.js?v=20261021_rev3"></script>
+  <script src="data/quran_advanced_analytics_bundle.js?v=20261021_rev3"></script>
+  <script src="js/audio-sfx.js?v=20261021_rev3"></script>
+  <script src="js/telemetry-engine.js?v=20261021_rev3"></script>
+  <script src="js/corpus-engine.js?v=20261021_rev3"></script>
+  <script src="js/analytics-studio.js?v=20261021_rev3"></script>
+  <script src="js/morphology-engine.js?v=20261021_rev3"></script>
+  <script src="js/app.js?v=20261021_rev3"></script>
 </body>
 </html>
