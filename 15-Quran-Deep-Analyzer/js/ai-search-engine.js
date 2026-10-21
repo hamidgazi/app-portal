@@ -164,7 +164,24 @@
     'waqf': ['stopping', 'pause', 'phonetics', 'recitation', 'tajweed', 'symbols', 'وقف'],
     'prophet': ['rasool', 'nabi', 'messenger', 'musa', 'ibrahim', 'muhammad', 'isa', 'nuh', 'adam', 'نبی', 'رسول'],
     'water': ['bahr', 'sea', 'ocean', 'river', 'rain', 'matar', 'ماء', 'بحر'],
-    'iron': ['hadid', 'atomic', 'metal', 'fe57', 'حديد', 'لوہا']
+    'iron': ['hadid', 'atomic', 'metal', 'fe57', 'حديد', 'لوہا'],
+    'heavens': ['sky', 'skies', 'universe', 'firmament', 'earth', 'cosmos', 'سماء', 'آسمان'],
+    'heaven': ['sky', 'skies', 'paradise', 'jannah', 'heavens', 'سماء', 'آسمان'],
+    'earth': ['ground', 'land', 'soil', 'world', 'ard', 'زمین', 'ارض'],
+    'guidance': ['hidayah', 'guide', 'straight path', 'sirat', 'mustaqeem', 'truth', 'ہدایت', 'صراط'],
+    'path': ['way', 'sirat', 'sabeel', 'road', 'straight path', 'mustaqeem', 'صراط', 'سبیل'],
+    'straight': ['mustaqeem', 'path', 'sirat', 'upright', 'مستقیم'],
+    'day of judgment': ['qiyamah', 'resurrection', 'hereafter', 'akhira', 'day of recompense', 'hour', 'حساب', 'قیامت'],
+    'recompense': ['day of judgment', 'reward', 'punishment', 'jaza', 'deen', 'جزاء'],
+    'knowledge': ['ilm', 'wisdom', 'hikmah', 'learn', 'scholar', 'عالم', 'علم', 'حکمت'],
+    'angels': ['angel', 'malaikah', 'jibril', 'gabriel', 'mikail', 'فرشتہ', 'ملائکہ'],
+    'devil': ['satan', 'shaytan', 'iblis', 'evil', 'whisper', 'شیطان', 'ابلیس'],
+    'satan': ['devil', 'shaytan', 'iblis', 'evil', 'whisper', 'شیطان'],
+    'sustenance': ['provision', 'rizq', 'food', 'wealth', 'cattle', 'رزق'],
+    'covenant': ['promise', 'pledge', 'treaty', 'contract', 'mithaq', 'ahd', 'عہد', 'میثاق'],
+    'worship': ['ibadah', 'praise', 'hamd', 'serve', 'glorify', 'tasbih', 'عبادت', 'حمد'],
+    'gratitude': ['thankful', 'grateful', 'shukr', 'praise', 'شکر'],
+    'creation': ['creator', 'create', 'khalq', 'universe', 'خلق', 'پیدائش']
   };
 
   // --- 6. FAMOUS AYAT DIRECT DICTIONARY ---
@@ -325,6 +342,26 @@
         }
       }
 
+      // Exact phrase scanner guarantee: Any document containing the exact multi-word phrase gets instant top score
+      if (rawQ.length >= 3) {
+        for (let i = 0; i < this.docs.length; i++) {
+          const doc = this.docs[i];
+          if (category !== 'all' && doc.categoryType !== category) continue;
+          const sub = (doc.subtitle || '').toLowerCase();
+          const tit = (doc.title || '').toLowerCase();
+          const cont = (doc.content || '').toLowerCase();
+          if (sub.includes(rawQ)) {
+            scores.set(i, (scores.get(i) || 0) + 45.0);
+          } else if (tit.includes(rawQ)) {
+            scores.set(i, (scores.get(i) || 0) + 50.0);
+          } else if (cont.includes(rawQ)) {
+            scores.set(i, (scores.get(i) || 0) + 30.0);
+          } else if (normQ && normQ.length >= 2 && normalizeArabicUrdu(cont).includes(normQ)) {
+            scores.set(i, (scores.get(i) || 0) + 40.0);
+          }
+        }
+      }
+
       // Filter and rank results
       const results = [];
       for (const [docId, score] of scores.entries()) {
@@ -333,9 +370,16 @@
 
         // Exact substring bonus
         let finalScore = score;
-        const fullText = (doc.title + ' ' + doc.subtitle + ' ' + (doc.content || '')).toLowerCase();
-        if (fullText.includes(rawQ)) finalScore += 5.0;
-        if (normQ && normalizeArabicUrdu(fullText).includes(normQ)) finalScore += 6.0;
+        const subLower = (doc.subtitle || '').toLowerCase();
+        const titLower = (doc.title || '').toLowerCase();
+        const contLower = (doc.content || '').toLowerCase();
+
+        if (subLower.includes(rawQ)) finalScore += 25.0;
+        if (titLower.includes(rawQ)) finalScore += 30.0;
+        if (normQ && normQ.length >= 2) {
+          if (normalizeArabicUrdu(doc.arabic || '').includes(normQ)) finalScore += 35.0;
+          if (normalizeArabicUrdu(doc.urdu || '').includes(normQ)) finalScore += 35.0;
+        }
 
         results.push({
           docId,
@@ -345,6 +389,12 @@
           categoryType: doc.categoryType,
           title: doc.title,
           subtitle: doc.subtitle,
+          arabic: doc.arabic || '',
+          urdu: doc.urdu || '',
+          surahId: doc.surahId,
+          ayahNum: doc.ayahNum,
+          surahNameRoman: doc.surahNameRoman || '',
+          surahNameAr: doc.surahNameAr || '',
           content: doc.content || '',
           action: doc.action
         });
@@ -552,10 +602,74 @@
         });
       });
 
-      this.index.build();
+      // 11. Index Full 6,236 Ayat Corpus if available
+      const ayatData = (typeof window !== 'undefined' && window.QURAN_AYAT_SEARCH_DATA) || [];
+      if (Array.isArray(ayatData) && ayatData.length > 0) {
+        this.indexAyatCorpus(ayatData);
+      } else {
+        this.index.build();
+      }
+
       const elapsed = (performance.now() - t0).toFixed(1);
       console.log(`[AISearch] ✓ Index built with ${this.index.docCount} records in ${elapsed}ms.`);
       this.isReady = true;
+    },
+
+    indexAyatCorpus(data) {
+      if (!data || !data.length || this.ayatIndexed) return;
+      console.log(`[AISearch] Indexing ${data.length} Ayat into omnipresent BM25 engine...`);
+      const t0 = performance.now();
+      for (let i = 0; i < data.length; i++) {
+        const item = data[i];
+        const sId = item[0];
+        const aNum = item[1];
+        const sNameRoman = item[2];
+        const sNameAr = item[3];
+        const arClean = item[4];
+        const enTrans = item[5];
+        const urTrans = item[6];
+
+        this.index.addDocument({
+          categoryType: 'ayahs',
+          category: `Ayah #${sId}:${aNum}`,
+          categoryClass: 'verse',
+          title: `${sNameRoman} [${sId}:${aNum}]`,
+          subtitle: enTrans,
+          arabic: arClean,
+          urdu: urTrans,
+          surahId: sId,
+          ayahNum: aNum,
+          surahNameRoman: sNameRoman,
+          surahNameAr: sNameAr,
+          content: `${sNameRoman} ${sNameAr} ${sId}:${aNum} ${arClean} ${enTrans} ${urTrans}`,
+          action: () => {
+            if (window.CorpusEngine) window.CorpusEngine.jumpToAyah(sId, aNum);
+          }
+        });
+      }
+      this.index.build();
+      this.ayatIndexed = true;
+      const elapsed = (performance.now() - t0).toFixed(1);
+      console.log(`[AISearch] ✓ Indexed ${data.length} Ayat into BM25 in ${elapsed}ms. Total corpus docs: ${this.index.docCount}`);
+    },
+
+    highlightMatches(text, query) {
+      if (!text || !query) return text || '';
+      const cleanQ = query.trim();
+      if (!cleanQ) return text;
+      // Match full multi-word phrase first
+      const safeQ = cleanQ.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const phraseRe = new RegExp(`(${safeQ})`, 'gi');
+      if (phraseRe.test(text)) {
+        return text.replace(phraseRe, '<mark class="search-highlight">$1</mark>');
+      }
+      // Otherwise match individual words > 2 chars
+      const tokens = cleanQ.split(/\s+/).filter(t => t.length > 2);
+      if (tokens.length === 0) return text;
+      tokens.sort((a, b) => b.length - a.length);
+      const pattern = tokens.map(t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
+      const re = new RegExp(`(${pattern})`, 'gi');
+      return text.replace(re, '<mark class="search-highlight">$1</mark>');
     },
 
     search(query, category = 'all', limit = 25) {
@@ -762,5 +876,10 @@ User Question: "${q}"`;
   // Export to global window namespace immediately
   window.QuranAISearchEngine = QuranAISearchEngine;
   window.normalizeArabicUrdu = normalizeArabicUrdu;
+
+  // Auto-hydrate 6,236 Ayat bundle if already present in window
+  if (typeof window !== 'undefined' && window.QURAN_AYAT_SEARCH_DATA && Array.isArray(window.QURAN_AYAT_SEARCH_DATA)) {
+    QuranAISearchEngine.indexAyatCorpus(window.QURAN_AYAT_SEARCH_DATA);
+  }
 
 })(typeof window !== 'undefined' ? window : global);

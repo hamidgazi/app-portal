@@ -3192,6 +3192,105 @@ footer.app-footer {
   flex-shrink: 0;
 }
 
+/* Luxury Scriptural Ayah Card in Omnisearch */
+.omni-item.omni-item-ayah-luxury {
+  display: block;
+  padding: 12px 16px;
+  background: rgba(15, 23, 42, 0.45);
+  border: 1px solid rgba(212, 175, 55, 0.18);
+  border-radius: var(--radius-md);
+  margin-bottom: 8px;
+  transition: all 0.2s ease;
+}
+
+.omni-item.omni-item-ayah-luxury:hover,
+.omni-item.omni-item-ayah-luxury.selected {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5), 0 0 12px rgba(212, 175, 55, 0.15);
+  transform: translateY(-1px);
+}
+
+.omni-ayah-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.omni-ayah-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.omni-ayah-pill-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.omni-ayah-coord-pill {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #fbbf24;
+  letter-spacing: 0.02em;
+}
+
+.omni-ayah-jump-hint {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #34d399;
+  background: rgba(16, 185, 129, 0.12);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  transition: all 0.15s ease;
+}
+
+.omni-item.omni-item-ayah-luxury:hover .omni-ayah-jump-hint {
+  background: rgba(16, 185, 129, 0.25);
+  color: #a7f3d0;
+}
+
+.omni-ayah-card-arabic {
+  font-family: var(--font-arabic), serif;
+  font-size: 1.35rem;
+  line-height: 1.6;
+  color: #f8fafc;
+  direction: rtl;
+  text-align: right;
+  padding: 2px 0;
+}
+
+.omni-ayah-card-trans {
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: #e2e8f0;
+  font-weight: 400;
+}
+
+.omni-ayah-card-urdu {
+  font-family: var(--font-urdu), serif;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #94a3b8;
+  direction: rtl;
+  text-align: right;
+  border-top: 1px dashed rgba(255, 255, 255, 0.08);
+  padding-top: 4px;
+}
+
+/* Luminous Search Highlights */
+mark.search-highlight {
+  background: rgba(245, 158, 11, 0.35);
+  color: #fef08a;
+  font-weight: 700;
+  padding: 1px 4px;
+  border-radius: 3px;
+  border-bottom: 2px solid #f59e0b;
+}
+
 .omnisearch-footer {
   display: flex;
   align-items: center;

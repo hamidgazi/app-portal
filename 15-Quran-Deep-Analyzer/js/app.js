@@ -896,14 +896,30 @@ const OmnisearchEngine = {
       });
     }
 
-    // 9. Sub-millisecond BM25 Probabilistic Ranking & Synonym Expansion
+    // 9. Sub-millisecond BM25 Probabilistic Ranking & Ayah Translation Search
     if (window.QuranAISearchEngine) {
-      const bm25Matches = window.QuranAISearchEngine.search(rawQuery, this.activeCategory, 35);
-      bm25Matches.forEach(bm => {
-        if (!this.results.some(r => r.title === bm.title)) {
-          this.results.push(bm);
-        }
-      });
+      const limit = this.activeCategory === 'ayahs' ? 50 : 35;
+      const bm25Matches = window.QuranAISearchEngine.search(rawQuery, this.activeCategory, limit);
+
+      if (this.activeCategory === 'ayahs') {
+        this.results = bm25Matches;
+      } else {
+        const highMatches = [];
+        const lowMatches = [];
+        bm25Matches.forEach(bm => {
+          if (!this.results.some(r => r.title === bm.title)) {
+            if (bm.score >= 30.0) {
+              highMatches.push(bm);
+            } else {
+              lowMatches.push(bm);
+            }
+          }
+        });
+        // Insert high matches near the top (after any exact coordinate match)
+        const insertIdx = (this.results.length > 0 && this.results[0].category === 'Verse' && this.results[0].title.startsWith('Jump to')) ? 1 : 0;
+        this.results.splice(insertIdx, 0, ...highMatches);
+        this.results.push(...lowMatches);
+      }
     }
 
     this.renderOmnisearchItems(resultsContainer, rawQuery);
@@ -914,7 +930,7 @@ const OmnisearchEngine = {
       resultsContainer.innerHTML = `
         <div style="text-align: center; padding: 30px; color: var(--text-dim); font-size: 0.9rem;">
           <p style="margin-bottom: 6px;">No matches found for "${rawQuery}"</p>
-          <span style="font-size: 0.78rem; color: #64748b;">Try searching for a Surah ("Kahf", "18", "کہف"), coordinate ("2:255"), Prophet ("Musa", "موسی"), or topic.</span>
+          <span style="font-size: 0.78rem; color: #64748b;">Try searching for English phrases ("straight path", "mercy"), Surahs ("Kahf", "18"), coordinates ("2:255"), or topics.</span>
         </div>
       `;
       return;
@@ -922,18 +938,50 @@ const OmnisearchEngine = {
 
     let html = "";
     this.results.forEach((item, idx) => {
-      html += `
-        <div class="omni-item" data-index="${idx}">
-          <div class="omni-item-left">
-            <span class="omni-category-badge ${item.categoryClass || 'word'}">${item.category}</span>
-            <div style="min-width: 0;">
-              <div class="omni-item-title">${item.title}</div>
-              <div class="omni-item-desc">${item.subtitle}</div>
+      if (item.categoryType === 'ayahs') {
+        const highlightedEn = window.QuranAISearchEngine
+          ? window.QuranAISearchEngine.highlightMatches(item.subtitle, rawQuery)
+          : item.subtitle;
+        const highlightedAr = item.arabic || '';
+        const highlightedUr = (item.urdu && item.urdu !== item.subtitle) ? item.urdu : '';
+
+        html += `
+          <div class="omni-item omni-item-ayah-luxury" data-index="${idx}">
+            <div class="omni-ayah-card-body">
+              <div class="omni-ayah-card-header">
+                <div class="omni-ayah-pill-wrap">
+                  <span class="omni-category-badge verse">Ayah</span>
+                  <span class="omni-ayah-coord-pill">${item.title}</span>
+                </div>
+                <span class="omni-ayah-jump-hint">📖 Read in Analyzer ↗</span>
+              </div>
+              ${highlightedAr ? `<div class="omni-ayah-card-arabic" dir="rtl">${highlightedAr}</div>` : ''}
+              <div class="omni-ayah-card-trans">${highlightedEn}</div>
+              ${highlightedUr ? `<div class="omni-ayah-card-urdu" dir="rtl">${highlightedUr}</div>` : ''}
             </div>
           </div>
-          <div class="omni-item-right">↵</div>
-        </div>
-      `;
+        `;
+      } else {
+        const highlightedTitle = window.QuranAISearchEngine
+          ? window.QuranAISearchEngine.highlightMatches(item.title, rawQuery)
+          : item.title;
+        const highlightedSub = window.QuranAISearchEngine
+          ? window.QuranAISearchEngine.highlightMatches(item.subtitle, rawQuery)
+          : item.subtitle;
+
+        html += `
+          <div class="omni-item" data-index="${idx}">
+            <div class="omni-item-left">
+              <span class="omni-category-badge ${item.categoryClass || 'word'}">${item.category}</span>
+              <div style="min-width: 0;">
+                <div class="omni-item-title">${highlightedTitle}</div>
+                <div class="omni-item-desc">${highlightedSub}</div>
+              </div>
+            </div>
+            <div class="omni-item-right">↵</div>
+          </div>
+        `;
+      }
     });
     resultsContainer.innerHTML = html;
 
