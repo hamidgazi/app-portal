@@ -2,7 +2,7 @@
 window.PORTAL_CATALOG = {
   "version": "1.0.0",
   "lastUpdated": "Antigravity Files",
-  "totalApps": 26,
+  "totalApps": 27,
   "categories": [
     "Islamic & Faith",
     "Productivity & Utilities",
@@ -114,6 +114,28 @@ window.PORTAL_CATALOG = {
       "relPath": "15-Quran-Deep-Analyzer/index.html",
       "portalHref": "./15-Quran-Deep-Analyzer/index.html",
       "serverHref": "./15-Quran-Deep-Analyzer/index.html"
+    },
+    {
+      "id": "15-Quran-Deep-Analyzer__manners_html",
+      "title": "Quranic Manners Compendium (قرآنی اخلاق و آداب)",
+      "category": "Islamic & Faith",
+      "icon": "🌿",
+      "badge": "67 Injunctions • Kanzul Iman",
+      "description": "Comprehensive encyclopedia of Quranic manners, ethics, and social etiquette strictly translated in Kanzul Iman by Imam Ahmad Raza Khan across 9 life spheres.",
+      "tags": [
+        "quran",
+        "manners",
+        "akhlaq",
+        "adab",
+        "kanzul-iman",
+        "urdu",
+        "ethics",
+        "pwa"
+      ],
+      "primary": true,
+      "relPath": "15-Quran-Deep-Analyzer/manners.html",
+      "portalHref": "./15-Quran-Deep-Analyzer/manners.html",
+      "serverHref": "./15-Quran-Deep-Analyzer/manners.html"
     },
     {
       "id": "03-Hadith-Roman-Urdu__web__top_100_short_hadiths_html",
