@@ -181,7 +181,11 @@
     'covenant': ['promise', 'pledge', 'treaty', 'contract', 'mithaq', 'ahd', 'عہد', 'میثاق'],
     'worship': ['ibadah', 'praise', 'hamd', 'serve', 'glorify', 'tasbih', 'عبادت', 'حمد'],
     'gratitude': ['thankful', 'grateful', 'shukr', 'praise', 'شکر'],
-    'creation': ['creator', 'create', 'khalq', 'universe', 'خلق', 'پیدائش']
+    'creation': ['creator', 'create', 'khalq', 'universe', 'خلق', 'پیدائش'],
+    'favour': ['favor', 'blessing', 'bounty', 'grace', 'bestowed', 'nimat', 'نعمت', 'احسان'],
+    'favor': ['favour', 'blessing', 'bounty', 'grace', 'bestowed', 'nimat', 'نعمت'],
+    'blessing': ['favour', 'favor', 'bounty', 'grace', 'barakah', 'nimat', 'نعمت', 'برکت'],
+    'bounty': ['favour', 'favor', 'blessing', 'grace', 'fazl', 'فضل', 'نعمت']
   };
 
   // --- 6. FAMOUS AYAT DIRECT DICTIONARY ---
@@ -222,6 +226,12 @@
         if (st !== w) tokens.push(st);
         const normAr = normalizeArabicUrdu(w);
         if (normAr && normAr !== w) tokens.push(normAr);
+        // British / American spelling equivalence (e.g. favour <-> favor, honour <-> honor)
+        if (w.includes('our')) {
+          tokens.push(w.replace(/our/g, 'or'));
+        } else if (w.includes('or') && w.length >= 4) {
+          tokens.push(w.replace(/or/g, 'our'));
+        }
       }
       return tokens;
     }
@@ -344,17 +354,23 @@
 
       // Exact phrase scanner guarantee: Any document containing the exact multi-word phrase gets instant top score
       if (rawQ.length >= 3) {
+        const rawQAlt = rawQ.includes('our') ? rawQ.replace(/our/g, 'or') : (rawQ.includes('or') ? rawQ.replace(/or/g, 'our') : null);
         for (let i = 0; i < this.docs.length; i++) {
           const doc = this.docs[i];
           if (category !== 'all' && doc.categoryType !== category) continue;
           const sub = (doc.subtitle || '').toLowerCase();
           const tit = (doc.title || '').toLowerCase();
           const cont = (doc.content || '').toLowerCase();
-          if (sub.includes(rawQ)) {
+
+          const hasSub = sub.includes(rawQ) || (rawQAlt && sub.includes(rawQAlt));
+          const hasTit = tit.includes(rawQ) || (rawQAlt && tit.includes(rawQAlt));
+          const hasCont = cont.includes(rawQ) || (rawQAlt && cont.includes(rawQAlt));
+
+          if (hasSub) {
             scores.set(i, (scores.get(i) || 0) + 45.0);
-          } else if (tit.includes(rawQ)) {
+          } else if (hasTit) {
             scores.set(i, (scores.get(i) || 0) + 50.0);
-          } else if (cont.includes(rawQ)) {
+          } else if (hasCont) {
             scores.set(i, (scores.get(i) || 0) + 30.0);
           } else if (normQ && normQ.length >= 2 && normalizeArabicUrdu(cont).includes(normQ)) {
             scores.set(i, (scores.get(i) || 0) + 40.0);
@@ -364,6 +380,7 @@
 
       // Filter and rank results
       const results = [];
+      const rawQAlt = rawQ.includes('our') ? rawQ.replace(/our/g, 'or') : (rawQ.includes('or') ? rawQ.replace(/or/g, 'our') : null);
       for (const [docId, score] of scores.entries()) {
         const doc = this.docs[docId];
         if (category !== 'all' && doc.categoryType !== category) continue;
@@ -374,8 +391,8 @@
         const titLower = (doc.title || '').toLowerCase();
         const contLower = (doc.content || '').toLowerCase();
 
-        if (subLower.includes(rawQ)) finalScore += 25.0;
-        if (titLower.includes(rawQ)) finalScore += 30.0;
+        if (subLower.includes(rawQ) || (rawQAlt && subLower.includes(rawQAlt))) finalScore += 25.0;
+        if (titLower.includes(rawQ) || (rawQAlt && titLower.includes(rawQAlt))) finalScore += 30.0;
         if (normQ && normQ.length >= 2) {
           if (normalizeArabicUrdu(doc.arabic || '').includes(normQ)) finalScore += 35.0;
           if (normalizeArabicUrdu(doc.urdu || '').includes(normQ)) finalScore += 35.0;
@@ -400,7 +417,16 @@
         });
       }
 
-      results.sort((a, b) => b.score - a.score);
+      results.sort((a, b) => {
+        if (Math.abs(b.score - a.score) > 0.01) {
+          return b.score - a.score;
+        }
+        // Canonical scriptural order tiebreaker: Surah ID then Ayah number ascending
+        const sA = a.surahId || 999;
+        const sB = b.surahId || 999;
+        if (sA !== sB) return sA - sB;
+        return (a.ayahNum || 0) - (b.ayahNum || 0);
+      });
       return results.slice(0, limit);
     }
   }
@@ -651,6 +677,14 @@
       this.ayatIndexed = true;
       const elapsed = (performance.now() - t0).toFixed(1);
       console.log(`[AISearch] ✓ Indexed ${data.length} Ayat into BM25 in ${elapsed}ms. Total corpus docs: ${this.index.docCount}`);
+
+      // If search modal is already open with an active query, refresh results immediately
+      if (typeof window !== 'undefined' && window.OmnisearchEngine && window.OmnisearchEngine.isOpen) {
+        const input = document.getElementById('omnisearch-input');
+        if (input && input.value.trim()) {
+          window.OmnisearchEngine.executeSearch(input.value.trim());
+        }
+      }
     },
 
     highlightMatches(text, query) {
