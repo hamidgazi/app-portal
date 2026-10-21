@@ -4499,6 +4499,7 @@
       const dhuhrStartRaw = dhuhrTransit + (1.0 / 60.0); // +1 min solar disc clearance precaution
       const dhuhr = roundForward(dhuhrStartRaw);
       const asr = roundForward(asrRaw);
+      const sunset = roundBackward(maghribRaw);
       const maghrib = roundForward(maghribRaw + (maghribBufferMin / 60.0));
       const isha = roundForward(ishaRaw);
       const suhoor = roundBackward(fajrRaw - (suhoorBufferMin / 60.0));
@@ -4510,7 +4511,7 @@
       const nightDuration = fixHour(24.0 - maghribRaw + fajrRaw);
       const tahajjudStart = roundBackward(fixHour(maghribRaw + (nightDuration * (2.0 / 3.0))));
 
-      return { fajr, sunrise, dhuhr, asr, maghrib, isha, suhoor, dahwa, zawalStart, ishraq, chasht, tahajjudStart, shafiAsr, dhuhrTransit, noonAltitude, noonShadow };
+      return { fajr, sunrise, dhuhr, asr, sunset, maghrib, isha, suhoor, dahwa, zawalStart, ishraq, chasht, tahajjudStart, shafiAsr, dhuhrTransit, noonAltitude, noonShadow };
     }
 
     function formatTime12(decimalHour) {
@@ -5087,6 +5088,7 @@
       const tZawal = decimalToDateTime(todaySchedule.zawalStart, todayDate);
       const tDhuhr = decimalToDateTime(todaySchedule.dhuhr, todayDate);
       const tAsr = decimalToDateTime(todaySchedule.asr, todayDate);
+      const tSunset = decimalToDateTime(todaySchedule.sunset || todaySchedule.maghrib, todayDate);
       const tMaghrib = decimalToDateTime(todaySchedule.maghrib, todayDate);
       const tIsha = decimalToDateTime(todaySchedule.isha, todayDate);
 
@@ -5166,23 +5168,40 @@
           silentPrayer: dhuhrName,
           silentStart: tDhuhr
         };
-      } else if (now >= tAsr && now < tMaghrib) {
-        const isAsrMakruh = (now >= new Date(tMaghrib.getTime() - 20 * 60 * 1000));
+      } else if (now >= tAsr && now < tSunset) {
+        const isAsrMakruh = (now >= new Date(tSunset.getTime() - 20 * 60 * 1000));
         state = {
           theme: 'theme-asr',
           title: 'Asr',
           arabic: 'العصر',
           tag: isAsrMakruh ? '⚠️ Makruh Time &bull; Sun Pale (Isfirar)' : 'Current Salah &bull; Active Now',
-          desc: isAsrMakruh ? `Only today's delayed Fard allowed &bull; Maghrib in &le; 20 min` : `Window: ${formatTime12(todaySchedule.asr)} &ndash; ${formatTime12(todaySchedule.maghrib)} (Hanafi 2&times;)`,
-          target: `Next: Maghrib at ${formatTime12(todaySchedule.maghrib)} (Sunset &amp; Iftar)`,
+          desc: isAsrMakruh ? `Only today's delayed Fard allowed &bull; Sunset in &le; 20 min` : `Window: ${formatTime12(todaySchedule.asr)} &ndash; ${formatTime12(todaySchedule.sunset)} (Hanafi 2&times;)`,
+          target: `Next: Maghrib at ${formatTime12(todaySchedule.sunset)} (Sunset)`,
           countdownLabel: 'Remaining in Asr',
-          targetDate: tMaghrib,
+          targetDate: tSunset,
           prevDate: tAsr,
           prevLabel: `Asr ${formatTime12(todaySchedule.asr)}`,
-          nextLabel: `Maghrib ${formatTime12(todaySchedule.maghrib)}`,
+          nextLabel: `Sunset ${formatTime12(todaySchedule.sunset)}`,
           activeRowId: 'rowAsr',
           silentPrayer: 'Asr',
           silentStart: tAsr
+        };
+      } else if (now >= tSunset && now < tMaghrib) {
+        state = {
+          theme: 'theme-maghrib',
+          title: 'Maghrib',
+          arabic: 'المغرب',
+          tag: '⏳ Iftar Precaution (احتیاط افطار) &bull; Sun Has Set',
+          desc: `Asr is finished &bull; Sun set at ${formatTime12(todaySchedule.sunset)} &bull; Break fast at ${formatTime12(todaySchedule.maghrib)} (+3m Ihtiyat)`,
+          target: `Iftar &amp; Adhan at ${formatTime12(todaySchedule.maghrib)}`,
+          countdownLabel: 'Iftar &amp; Adhan in',
+          targetDate: tMaghrib,
+          prevDate: tSunset,
+          prevLabel: `Sunset ${formatTime12(todaySchedule.sunset)}`,
+          nextLabel: `Iftar ${formatTime12(todaySchedule.maghrib)}`,
+          activeRowId: 'rowMaghrib',
+          silentPrayer: 'Maghrib',
+          silentStart: tSunset
         };
       } else if (now >= tMaghrib && now < tIsha) {
         const isMaghribMakruh = (now >= new Date(tIsha.getTime() - 15 * 60 * 1000));
@@ -5191,16 +5210,16 @@
           title: 'Maghrib',
           arabic: 'المغرب',
           tag: isMaghribMakruh ? '⚠️ Makruh Delay &bull; Stars Clustered' : 'Current Salah &bull; Active Now',
-          desc: isMaghribMakruh ? `Makruh Tahrimi to delay past dense stars &bull; Isha in &le; 15 min` : `Window: ${formatTime12(todaySchedule.maghrib)} &ndash; ${formatTime12(todaySchedule.isha)} (Ta'jeel Mustahabb)`,
+          desc: isMaghribMakruh ? `Makruh Tahrimi to delay past dense stars &bull; Isha in &le; 15 min` : `Window: ${formatTime12(todaySchedule.sunset)} &ndash; ${formatTime12(todaySchedule.isha)} (Ta'jeel Mustahabb)`,
           target: `Next: Isha at ${formatTime12(todaySchedule.isha)} (Karachi 18&deg;)`,
           countdownLabel: 'Remaining in Maghrib',
           targetDate: tIsha,
-          prevDate: tMaghrib,
-          prevLabel: `Maghrib ${formatTime12(todaySchedule.maghrib)}`,
+          prevDate: tSunset,
+          prevLabel: `Maghrib ${formatTime12(todaySchedule.sunset)}`,
           nextLabel: `Isha ${formatTime12(todaySchedule.isha)}`,
           activeRowId: 'rowMaghrib',
           silentPrayer: 'Maghrib',
-          silentStart: tMaghrib
+          silentStart: tSunset
         };
       } else if (now >= tIsha) {
         const nightSpanMs = tNextFajr.getTime() - tMaghrib.getTime();
