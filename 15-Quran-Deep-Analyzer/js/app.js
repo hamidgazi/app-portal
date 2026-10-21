@@ -340,8 +340,23 @@ const OmnisearchEngine = {
       this.executeSearch(e.target.value.trim());
     });
 
+    const askAiBtn = document.getElementById("omnisearch-ask-ai-btn");
+    const settingsBtn = document.getElementById("omnisearch-settings-btn");
+
+    if (askAiBtn) {
+      askAiBtn.addEventListener("click", () => this.triggerAISynthesis());
+    }
+    if (settingsBtn) {
+      settingsBtn.addEventListener("click", () => {
+        if (window.QuranAISearchEngine) window.QuranAISearchEngine.openKeyModal();
+      });
+    }
+
     input.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowDown") {
+      if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
+        e.preventDefault();
+        this.triggerAISynthesis();
+      } else if (e.key === "ArrowDown") {
         e.preventDefault();
         this.navigateResults(1);
       } else if (e.key === "ArrowUp") {
@@ -379,15 +394,28 @@ const OmnisearchEngine = {
   open() {
     const modal = document.getElementById("omnisearch-modal");
     const input = document.getElementById("omnisearch-input");
+    const aiContainer = document.getElementById("omnisearch-ai-container");
     if (!modal) return;
     this.isOpen = true;
     modal.style.display = "flex";
+    if (aiContainer) aiContainer.style.display = "none";
     if (window.AudioSFX) window.AudioSFX.playClick();
     if (input) {
       input.value = "";
       setTimeout(() => input.focus(), 60);
     }
     this.executeSearch("");
+  },
+
+  triggerAISynthesis() {
+    const input = document.getElementById("omnisearch-input");
+    const aiContainer = document.getElementById("omnisearch-ai-container");
+    if (!input || !aiContainer) return;
+    const q = input.value.trim();
+    if (!q) return;
+    if (window.QuranAISearchEngine) {
+      window.QuranAISearchEngine.synthesizeGeminiAnswer(q, aiContainer);
+    }
   },
 
   close() {
@@ -868,6 +896,16 @@ const OmnisearchEngine = {
       });
     }
 
+    // 9. Sub-millisecond BM25 Probabilistic Ranking & Synonym Expansion
+    if (window.QuranAISearchEngine) {
+      const bm25Matches = window.QuranAISearchEngine.search(rawQuery, this.activeCategory, 35);
+      bm25Matches.forEach(bm => {
+        if (!this.results.some(r => r.title === bm.title)) {
+          this.results.push(bm);
+        }
+      });
+    }
+
     this.renderOmnisearchItems(resultsContainer, rawQuery);
   },
 
@@ -954,6 +992,7 @@ function bootApp() {
     { name: "Tabs", init: () => initTabs() },
     { name: "TelemetryToolbar", init: () => initTelemetryToolbar() },
     { name: "ModalHandlers", init: () => initModalHandlers() },
+    { name: "QuranAISearchEngine", init: () => window.QuranAISearchEngine && window.QuranAISearchEngine.init() },
     { name: "OmnisearchEngine", init: () => window.OmnisearchEngine && window.OmnisearchEngine.init() },
     { name: "NavigationHistory", init: () => window.NavigationHistory && window.NavigationHistory.init() },
     { name: "TelemetryEngine", init: () => window.TelemetryEngine && window.TelemetryEngine.init() },

@@ -510,7 +510,11 @@
     <div class="omnisearch-box">
       <div class="omnisearch-header">
         <span class="omnisearch-icon">⚡</span>
-        <input type="text" id="omnisearch-input" class="omnisearch-input" placeholder="Search Surahs, Ayats (e.g. 2:255), Prophets, Topics, or Words..." autocomplete="off" spellcheck="false">
+        <input type="text" id="omnisearch-input" class="omnisearch-input" placeholder="Search Surahs, Ayats (e.g. 2:255), Prophets, Topics, or Ask AI..." autocomplete="off" spellcheck="false">
+        <button id="omnisearch-ask-ai-btn" class="omnisearch-ask-btn" title="Synthesize AI Answer (Ctrl+Enter)">
+          <span class="ai-sparkle">✨</span> Ask AI
+        </button>
+        <button id="omnisearch-settings-btn" class="omnisearch-settings-btn" onclick="window.QuranAISearchEngine && window.QuranAISearchEngine.openKeyModal()" title="Gemini AI Key Settings">⚙️</button>
         <kbd class="omnisearch-esc-hint" onclick="closeOmnisearch()" style="cursor: pointer;" title="Close search (ESC)">ESC</kbd>
         <button id="omnisearch-close-btn" class="omnisearch-close-btn" onclick="closeOmnisearch()" aria-label="Close search">✕</button>
       </div>
@@ -523,13 +527,49 @@
         <button class="omni-filter-chip" data-cat="topics">Topics (484)</button>
         <button class="omni-filter-chip" data-cat="words">Words</button>
       </div>
+      <!-- Top Tier: AI Scholar Synthesis Card -->
+      <div id="omnisearch-ai-container" class="omnisearch-ai-container" style="display: none;"></div>
+      <!-- Main Tier: BM25 Ranked Results -->
       <div id="omnisearch-results" class="omnisearch-results">
         <!-- Live matches rendered here -->
       </div>
       <div class="omnisearch-footer">
+        <span><kbd>Ctrl+↵</kbd> Ask AI</span>
         <span><kbd>↑</kbd> <kbd>↓</kbd> Navigate</span>
         <span><kbd>Enter</kbd> Select</span>
         <span><kbd>Esc</kbd> Close</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gemini AI API Key Settings Modal -->
+  <div id="ai-search-key-modal" class="modal-overlay" role="dialog" aria-modal="true" style="display: none;">
+    <div class="modal-card ai-key-modal-card">
+      <div class="modal-header">
+        <div class="picker-header-title-wrap">
+          <span class="picker-header-icon">⚙️</span>
+          <div>
+            <h3 class="picker-header-title">Gemini AI Key Configuration</h3>
+            <span class="picker-header-subtitle">Powering 24/7 Quranic AI Synthesis & Answers</span>
+          </div>
+        </div>
+        <button id="ai-key-modal-close" class="modal-close-btn" onclick="window.QuranAISearchEngine && window.QuranAISearchEngine.closeKeyModal()" aria-label="Close settings">✕</button>
+      </div>
+      <div class="modal-body ai-key-modal-body">
+        <p class="ai-key-desc">
+          Enter your personal Google Gemini API key to enable instant AI scholarship answers across the entire Quran corpus. Your key is stored securely in your browser's <code>localStorage</code> and is never sent to any third-party server.
+        </p>
+        <div class="ai-key-input-wrap">
+          <label for="ai-api-key-input">Gemini API Key</label>
+          <input type="password" id="ai-api-key-input" class="ai-key-input" placeholder="AIzaSy..." autocomplete="off">
+        </div>
+        <div class="ai-key-actions">
+          <button id="ai-key-save-btn" class="btn btn-primary" onclick="window.QuranAISearchEngine && window.QuranAISearchEngine.saveKey(document.getElementById('ai-api-key-input').value)">Save API Key</button>
+          <button id="ai-key-clear-btn" class="btn btn-secondary" onclick="window.QuranAISearchEngine && window.QuranAISearchEngine.saveKey('')">Clear Key</button>
+        </div>
+        <div class="ai-key-help">
+          <span>Need a free API key? Get one instantly at <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">Google AI Studio ↗</a></span>
+        </div>
       </div>
     </div>
   </div>
@@ -628,14 +668,15 @@
   </footer>
 
   <!-- Application Scripts (Zero-CORS Offline Data Bundle) -->
-  <script src="data/quran_core_data.js?v=20261021_rev3"></script>
-  <script src="data/quran_exegetical_topics_bundle.js?v=20261021_rev3"></script>
-  <script src="data/quran_advanced_analytics_bundle.js?v=20261021_rev3"></script>
-  <script src="js/audio-sfx.js?v=20261021_rev3"></script>
-  <script src="js/telemetry-engine.js?v=20261021_rev3"></script>
-  <script src="js/corpus-engine.js?v=20261021_rev3"></script>
-  <script src="js/analytics-studio.js?v=20261021_rev3"></script>
-  <script src="js/morphology-engine.js?v=20261021_rev3"></script>
-  <script src="js/app.js?v=20261021_rev3"></script>
+  <script src="data/quran_core_data.js?v=20261021_rev4"></script>
+  <script src="data/quran_exegetical_topics_bundle.js?v=20261021_rev4"></script>
+  <script src="data/quran_advanced_analytics_bundle.js?v=20261021_rev4"></script>
+  <script src="js/audio-sfx.js?v=20261021_rev4"></script>
+  <script src="js/telemetry-engine.js?v=20261021_rev4"></script>
+  <script src="js/corpus-engine.js?v=20261021_rev4"></script>
+  <script src="js/analytics-studio.js?v=20261021_rev4"></script>
+  <script src="js/morphology-engine.js?v=20261021_rev4"></script>
+  <script src="js/ai-search-engine.js?v=20261021_rev4"></script>
+  <script src="js/app.js?v=20261021_rev4"></script>
 </body>
 </html>
