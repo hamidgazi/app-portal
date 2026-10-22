@@ -242,6 +242,12 @@ const NavigationHistory = {
 
     if (window.AudioSFX) window.AudioSFX.playTab();
 
+    // If navigating back to Quranic Manners standalone app
+    if (ctx.originTab === "manners") {
+      window.location.href = "manners.html";
+      return;
+    }
+
     // 1. Switch back to the origin tab
     const targetTab = (ctx.originTab === "analytics") ? "studio" : (ctx.originTab || "studio");
     if (window.switchAppTab) {
@@ -1079,6 +1085,30 @@ function bootApp() {
   });
 
   console.log("[BOOT] Application successfully mounted.");
+
+  // Handle URL parameters for deep-linking (e.g. from manners.html?surah=2&ayah=83#ayahs)
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const surahParam = urlParams.get("surah");
+    const ayahParam = urlParams.get("ayah");
+    const fromParam = urlParams.get("from");
+    if (surahParam && window.CorpusEngine) {
+      const sId = parseInt(surahParam, 10);
+      const aNum = ayahParam ? parseInt(ayahParam, 10) : 1;
+      if (window.NavigationHistory) {
+        window.NavigationHistory.pushReturnContext({
+          originTab: fromParam === "manners" ? "manners" : "search",
+          originScrollY: 0,
+          label: fromParam === "manners" ? "Quranic Manners (67)" : "Previous Location"
+        });
+      }
+      setTimeout(() => {
+        window.CorpusEngine.jumpToAyah(sId, aNum);
+      }, 250);
+    }
+  } catch (e) {
+    console.warn("[BOOT] Deep link parse warning:", e);
+  }
 }
 
 if (document.readyState === "loading") {
