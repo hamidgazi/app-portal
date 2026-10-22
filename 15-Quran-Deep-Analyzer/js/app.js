@@ -31,7 +31,11 @@ function switchAppTab(tabName) {
   const banner = document.getElementById("global-metrics-banner");
   const btnIcon = document.getElementById("telemetry-btn-icon");
   const btnText = document.getElementById("telemetry-btn-text");
-  const readingTabs = ["ayahs", "roots", "thematic", "mutashabihat", "waqf"];
+  const readingTabs = ["search", "ayahs", "roots", "thematic", "mutashabihat", "waqf"];
+
+  if (tabName === "search" && window.SearchStudioEngine) {
+    window.SearchStudioEngine.onActivated();
+  }
 
   if (tabName === "roots" && window.MorphologyEngine) {
     window.MorphologyEngine.onTabActivated();
@@ -373,13 +377,24 @@ const OmnisearchEngine = {
     document.addEventListener("keydown", (e) => {
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
-        if (this.isOpen) this.close();
-        else this.open();
+        if (typeof window.switchAppTab === "function") {
+          window.switchAppTab("search");
+          if (window.SearchStudioEngine) window.SearchStudioEngine.onActivated();
+        } else if (this.isOpen) {
+          this.close();
+        } else {
+          this.open();
+        }
       } else if (e.key === "/" && !this.isOpen) {
         const activeTag = document.activeElement ? document.activeElement.tagName : "";
         if (activeTag !== "INPUT" && activeTag !== "TEXTAREA" && activeTag !== "SELECT") {
           e.preventDefault();
-          this.open();
+          if (typeof window.switchAppTab === "function") {
+            window.switchAppTab("search");
+            if (window.SearchStudioEngine) window.SearchStudioEngine.onActivated();
+          } else {
+            this.open();
+          }
         }
       } else if (e.key === "Escape" && this.isOpen) {
         this.close();
@@ -392,6 +407,11 @@ const OmnisearchEngine = {
   },
 
   open() {
+    if (typeof window.switchAppTab === "function") {
+      window.switchAppTab("search");
+      if (window.SearchStudioEngine) window.SearchStudioEngine.onActivated();
+      return;
+    }
     const modal = document.getElementById("omnisearch-modal");
     const input = document.getElementById("omnisearch-input");
     const aiContainer = document.getElementById("omnisearch-ai-container");

@@ -6,10 +6,19 @@
   <title>Quran Deep Analyzer | Master Linguistic & Quantitative Suite</title>
   <meta name="description" content="Complete deep analysis of the Holy Quran: Quantitative telemetry, word counts, roots, lemmas, thematic ontology, and classical Tafsir.">
   <meta name="theme-color" content="#07090e">
-  <link rel="stylesheet" href="css/app.css?v=20261021_rev3">
+  <link rel="stylesheet" href="css/app.css?v=20261021_rev7">
   <script>
     function openOmnisearch() {
-      if (window.OmnisearchEngine && typeof window.OmnisearchEngine.open === 'function') {
+      if (typeof window.switchAppTab === 'function') {
+        window.switchAppTab('search');
+        setTimeout(function() {
+          const input = document.getElementById('search-studio-input');
+          if (input) {
+            input.focus();
+            input.select();
+          }
+        }, 50);
+      } else if (window.OmnisearchEngine && typeof window.OmnisearchEngine.open === 'function') {
         window.OmnisearchEngine.open();
       } else {
         const modal = document.getElementById('omnisearch-modal');
@@ -60,6 +69,10 @@
 
       <!-- Tier 2: Dedicated Full-Width Segmented Tab Navigation Strip -->
       <nav class="app-nav app-nav-tier" aria-label="Main Navigation">
+        <button class="nav-tab-btn" data-tab="search" id="nav-tab-search">
+          <span>🔍 Search Studio</span>
+          <span class="tab-badge" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24;">Live</span>
+        </button>
         <button class="nav-tab-btn active" data-tab="frequency">
           <span>📊 Word Frequency</span>
           <span class="tab-badge">20k+</span>
@@ -156,6 +169,63 @@
         </div>
       </section>
     </div>
+
+    <!-- Tab 0: Native Full-Page Live Search Studio -->
+    <section id="tab-search" class="tab-panel">
+      <div class="search-studio-container">
+        
+        <!-- Sticky Hero Controller -->
+        <div class="search-studio-hero" id="search-studio-hero">
+          <div class="search-studio-input-wrap">
+            <span class="search-studio-icon">⚡</span>
+            <input type="text" id="search-studio-input" class="search-studio-input" placeholder="Search 6,236 Ayat by English translation, Arabic text, Urdu Kanzul Iman, Surah (e.g. 52:16), or Topic..." autocomplete="off" spellcheck="false">
+            <button id="search-studio-clear" class="search-studio-clear-btn" style="display: none;" title="Clear search (Esc)" aria-label="Clear search">✕</button>
+            <button id="search-studio-ask-ai-btn" class="search-studio-ask-btn" title="Synthesize AI Scholar Summary (Ctrl+Enter)">
+              <span class="ai-sparkle">✨</span> Ask AI
+            </button>
+            <button id="search-studio-settings-btn" class="search-studio-settings-btn" onclick="window.QuranAISearchEngine && window.QuranAISearchEngine.openKeyModal()" title="Gemini AI Key Settings" aria-label="Settings">⚙️</button>
+          </div>
+
+          <!-- Dual Filter Toolbars -->
+          <div class="search-studio-toolbar">
+            <div class="search-filter-pills" id="search-category-filters">
+              <button class="search-filter-chip active" data-cat="all">All (6,236)</button>
+              <button class="search-filter-chip" data-cat="ayahs">Ayat (6,236)</button>
+              <button class="search-filter-chip" data-cat="surahs">Surahs (114)</button>
+              <button class="search-filter-chip" data-cat="paras">Paras (30)</button>
+              <button class="search-filter-chip" data-cat="topics">Topics (484)</button>
+              <button class="search-filter-chip" data-cat="prophets">Prophets (25)</button>
+            </div>
+
+            <div class="search-revelation-pills" id="search-revelation-filters">
+              <button class="search-rev-chip active" data-rev="all">All Revelation</button>
+              <button class="search-rev-chip" data-rev="makki">Makki 🕋 (87)</button>
+              <button class="search-rev-chip" data-rev="madani">Madani 🕌 (27)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Telemetry & Live Count Badge -->
+        <div class="search-studio-metrics-bar" id="search-studio-metrics">
+          <div class="search-metrics-left">
+            <span class="search-metrics-badge" id="search-studio-counter">Ready • 6,236 Canonical Ayat Indexed</span>
+          </div>
+          <div class="search-metrics-right">
+            <span class="search-shortcut-hint"><kbd>Ctrl+↵</kbd> Ask AI</span>
+            <span class="search-shortcut-hint"><kbd>Esc</kbd> Clear</span>
+          </div>
+        </div>
+
+        <!-- Top AI Scholar Synthesis Card (Collapsible/Dynamic) -->
+        <div id="search-studio-ai-container" class="search-studio-ai-container" style="display: none;"></div>
+
+        <!-- Main Full-Width Results Stream -->
+        <div id="search-studio-results" class="search-studio-results">
+          <!-- Live cards dynamically rendered by SearchStudioEngine -->
+        </div>
+
+      </div>
+    </section>
 
     <!-- Tab 1: Quantitative Telemetry & Word Frequency -->
     <section id="tab-frequency" class="tab-panel active">
@@ -668,16 +738,17 @@
   </footer>
 
   <!-- Application Scripts (Zero-CORS Offline Data Bundle) -->
-  <script src="data/quran_core_data.js?v=20261021_rev6"></script>
-  <script src="data/quran_exegetical_topics_bundle.js?v=20261021_rev6"></script>
-  <script src="data/quran_advanced_analytics_bundle.js?v=20261021_rev6"></script>
-  <script src="data/quran_ayat_search_bundle.js?v=20261021_rev6"></script>
-  <script src="js/audio-sfx.js?v=20261021_rev6"></script>
-  <script src="js/telemetry-engine.js?v=20261021_rev6"></script>
-  <script src="js/corpus-engine.js?v=20261021_rev6"></script>
-  <script src="js/analytics-studio.js?v=20261021_rev6"></script>
-  <script src="js/morphology-engine.js?v=20261021_rev6"></script>
-  <script src="js/ai-search-engine.js?v=20261021_rev6"></script>
-  <script src="js/app.js?v=20261021_rev6"></script>
+  <script src="data/quran_core_data.js?v=20261021_rev7"></script>
+  <script src="data/quran_exegetical_topics_bundle.js?v=20261021_rev7"></script>
+  <script src="data/quran_advanced_analytics_bundle.js?v=20261021_rev7"></script>
+  <script src="data/quran_ayat_search_bundle.js?v=20261021_rev7"></script>
+  <script src="js/audio-sfx.js?v=20261021_rev7"></script>
+  <script src="js/telemetry-engine.js?v=20261021_rev7"></script>
+  <script src="js/corpus-engine.js?v=20261021_rev7"></script>
+  <script src="js/analytics-studio.js?v=20261021_rev7"></script>
+  <script src="js/morphology-engine.js?v=20261021_rev7"></script>
+  <script src="js/ai-search-engine.js?v=20261021_rev7"></script>
+  <script src="js/search-studio.js?v=20261021_rev7"></script>
+  <script src="js/app.js?v=20261021_rev7"></script>
 </body>
 </html>
