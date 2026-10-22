@@ -105,6 +105,10 @@
           <span>🔬 Analytics Studio</span>
           <span class="tab-badge" style="background: rgba(168, 85, 247, 0.2); color: #c084fc;">PRO</span>
         </button>
+        <button class="nav-tab-btn" data-tab="notebook" id="tab-btn-notebook">
+          <span>📝 Tadabbur Studio</span>
+          <span class="tab-badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399;">v2.0</span>
+        </button>
         <a href="manners.html" class="nav-tab-btn nav-tab-link" id="tab-btn-manners" title="Quranic Manners & Social Ethics Compendium (Kanzul Iman)">
           <span>🌿 Quranic Manners</span>
           <span class="tab-badge" style="background: rgba(251, 191, 36, 0.2); color: #fbbf24;">67</span>
@@ -382,6 +386,10 @@
             <input type="checkbox" id="toggle-layer-words">
             <span>Word Breakdown</span>
           </label>
+          <label class="toggle-chip" id="chip-layer-tajweed">
+            <input type="checkbox" id="toggle-layer-tajweed">
+            <span>🎨 تجوید (Tajweed)</span>
+          </label>
         </div>
         <div class="font-scale-group" aria-label="Font Size Scaler">
           <span class="font-scale-label">Font Size:</span>
@@ -390,6 +398,9 @@
           <button id="btn-font-inc" class="font-scale-btn" title="Increase font size">A+</button>
         </div>
       </div>
+
+      <!-- Dynamic Phonological Tajweed Legend Mount -->
+      <div id="tajweed-legend-mount"></div>
 
       <div id="active-surah-meta-banner" class="surah-meta-banner">
         <!-- Surah introduction & telemetry header -->
@@ -559,6 +570,11 @@
       <div id="studio-panel-divine" class="studio-subpanel" style="display: none;">
         <div id="divine-display-container"></div>
       </div>
+    </section>
+
+    <!-- Tab 10: Personal Research Notebook & Tadabbur Studio (Version 2.0) -->
+    <section id="tab-notebook" class="tab-panel">
+      <div id="notebook-studio-mount"></div>
     </section>
 
   </main>
@@ -750,6 +766,9 @@
   <script src="js/morphology-engine.js?v=20261021_rev7"></script>
   <script src="js/ai-search-engine.js?v=20261021_rev7"></script>
   <script src="js/search-studio.js?v=20261021_rev7"></script>
-  <script src="js/app.js?v=20261021_rev7"></script>
+  <script src="js/audio-player.js?v=20261022_v2"></script>
+  <script src="js/tajweed-engine.js?v=20261022_v2"></script>
+  <script src="js/notebook-engine.js?v=20261022_v2"></script>
+  <script src="js/app.js?v=20261022_v2"></script>
 </body>
 </html>

@@ -31,7 +31,7 @@ function switchAppTab(tabName) {
   const banner = document.getElementById("global-metrics-banner");
   const btnIcon = document.getElementById("telemetry-btn-icon");
   const btnText = document.getElementById("telemetry-btn-text");
-  const readingTabs = ["search", "ayahs", "roots", "thematic", "mutashabihat", "waqf"];
+  const readingTabs = ["search", "ayahs", "roots", "thematic", "mutashabihat", "waqf", "notebook"];
 
   if (tabName === "search" && window.SearchStudioEngine) {
     window.SearchStudioEngine.onActivated();
@@ -39,6 +39,10 @@ function switchAppTab(tabName) {
 
   if (tabName === "roots" && window.MorphologyEngine) {
     window.MorphologyEngine.onTabActivated();
+  }
+
+  if (tabName === "notebook" && window.NotebookEngine) {
+    window.NotebookEngine.render();
   }
 
   if (readingTabs.includes(tabName)) {
@@ -1072,7 +1076,10 @@ function bootApp() {
     { name: "TelemetryEngine", init: () => window.TelemetryEngine && window.TelemetryEngine.init() },
     { name: "CorpusEngine", init: () => window.CorpusEngine && window.CorpusEngine.init() },
     { name: "AnalyticsStudio", init: () => window.AnalyticsStudio && window.AnalyticsStudio.init() },
-    { name: "MorphologyEngine", init: () => window.MorphologyEngine && window.MorphologyEngine.init() }
+    { name: "MorphologyEngine", init: () => window.MorphologyEngine && window.MorphologyEngine.init() },
+    { name: "AudioTartilCompanion", init: () => window.AudioTartilCompanion && window.AudioTartilCompanion.init() },
+    { name: "TajweedEngine", init: () => window.TajweedEngine && window.TajweedEngine.init() },
+    { name: "NotebookEngine", init: () => window.NotebookEngine && window.NotebookEngine.init() }
   ];
 
   modules.forEach(mod => {

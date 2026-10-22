@@ -5000,4 +5000,485 @@ mark.search-highlight {
   }
 }
 
+/* ====================================================================
+   QURAN DEEP ANALYZER VERSION 2.0 DESIGN SUITE
+   ==================================================================== */
 
+/* 1. Dynamic Phonological Tajweed Rules */
+#tab-ayahs:not(.tajweed-active) .ayah-arabic-text span[class^="tj-"] {
+  color: inherit !important;
+  font-weight: inherit !important;
+  text-shadow: none !important;
+}
+#tab-ayahs:not(.tajweed-active) .tajweed-legend-bar {
+  display: none !important;
+}
+.tj-ghunnah { color: #10b981 !important; font-weight: 700; text-shadow: 0 0 10px rgba(16, 185, 129, 0.4); }
+.tj-qalqalah { color: #38bdf8 !important; font-weight: 700; text-shadow: 0 0 10px rgba(56, 189, 248, 0.4); }
+.tj-madd { color: #f43f5e !important; font-weight: 700; text-shadow: 0 0 10px rgba(244, 63, 94, 0.4); }
+.tj-ikhfa { color: #2dd4bf !important; font-weight: 700; }
+.tj-idgham { color: #c084fc !important; font-weight: 700; }
+.tj-iqlab { color: #f59e0b !important; font-weight: 700; }
+
+.tajweed-legend-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 8px 14px;
+  margin: 10px 0 16px 0;
+}
+
+.tajweed-legend-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fbbf24;
+}
+
+.tajweed-legend-pills {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tj-pill {
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tj-pill:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 10px currentColor;
+}
+
+/* 2. Floating Cyber-Glass Audio Companion Bar */
+.audio-companion-bar {
+  position: fixed;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(10, 15, 30, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius-full);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6), 0 0 20px rgba(251, 191, 36, 0.2);
+  z-index: 1000;
+  padding: 6px 16px;
+  max-width: 90vw;
+  width: auto;
+  direction: ltr;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.audio-companion-inner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.audio-meta-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.audio-wave-anim {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 16px;
+}
+
+.audio-wave-anim span {
+  width: 3px;
+  height: 6px;
+  background: #10b981;
+  border-radius: 2px;
+  animation: audioWave 1s infinite alternate;
+}
+
+.audio-companion-bar.playing .audio-wave-anim span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.audio-companion-bar.playing .audio-wave-anim span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes audioWave {
+  0% { height: 4px; }
+  100% { height: 16px; }
+}
+
+.audio-info-texts {
+  display: flex;
+  flex-direction: column;
+}
+
+.audio-verse-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fbbf24;
+}
+
+.audio-reciter-select {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid var(--border-subtle);
+  color: #94a3b8;
+  font-size: 0.75rem;
+  border-radius: 4px;
+  padding: 1px 4px;
+  outline: none;
+}
+
+.audio-controls-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.audio-control-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #f8fafc;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.audio-control-btn:hover {
+  background: rgba(251, 191, 36, 0.25);
+  border-color: #fbbf24;
+  color: #fbbf24;
+}
+
+.audio-control-btn.play-btn {
+  background: #10b981;
+  border-color: #059669;
+  color: #022c22;
+  width: 38px;
+  height: 38px;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.audio-control-btn.play-btn:hover {
+  background: #34d399;
+  transform: scale(1.08);
+}
+
+.audio-toggles-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.audio-pill-toggle {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #cbd5e1;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.audio-pill-toggle:hover {
+  border-color: #fbbf24;
+  color: #fbbf24;
+}
+
+/* Active Reciting Verse Glow */
+.ayah-card.reciting-active {
+  border-color: #10b981 !important;
+  box-shadow: 0 0 28px rgba(16, 185, 129, 0.45), 0 8px 30px rgba(0, 0, 0, 0.5) !important;
+  transform: scale(1.006);
+}
+
+/* 3. Comparative Split-View Drawer */
+.comparative-drawer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+  background: rgba(10, 15, 30, 0.88);
+  border: 1px solid rgba(251, 191, 36, 0.25);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  margin-top: 12px;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.compare-col {
+  display: flex;
+  flex-direction: column;
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+}
+
+.compare-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding-bottom: 6px;
+  margin-bottom: 8px;
+}
+
+.compare-badge {
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+}
+
+.compare-badge.gold { background: rgba(251, 191, 36, 0.2); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.4); }
+.compare-badge.blue { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); }
+.compare-badge.green { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+
+.compare-author {
+  font-size: 0.74rem;
+  color: #94a3b8;
+}
+
+.compare-text {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: #e2e8f0;
+}
+
+.compare-text.urdu {
+  font-family: var(--font-urdu), serif;
+  font-size: 1.12rem;
+  text-align: right;
+  direction: rtl;
+}
+
+.compare-text.english {
+  direction: ltr;
+  text-align: left;
+}
+
+/* 4. Tadabbur Notebook Studio */
+.notebook-studio-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.notebook-kpi-ribbon {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+}
+
+.notebook-folders-ribbon {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-border) transparent;
+}
+
+.notebook-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--bg-card-glass);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 10px 14px;
+  flex-wrap: wrap;
+}
+
+.notebook-add-btn {
+  background: rgba(16, 185, 129, 0.18);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #34d399;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  font-size: 0.86rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.notebook-add-btn:hover {
+  background: #10b981;
+  color: #022c22;
+  transform: translateY(-1px);
+}
+
+.notebook-creator-drawer {
+  background: rgba(10, 15, 30, 0.95);
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.creator-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+  color: #fbbf24;
+  font-weight: 700;
+}
+
+.creator-close-btn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.creator-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.creator-row input {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid var(--border-subtle);
+  color: #f8fafc;
+  padding: 7px 10px;
+  border-radius: 6px;
+  outline: none;
+}
+
+.creator-textarea {
+  width: 100%;
+  min-height: 100px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid var(--border-subtle);
+  color: #f8fafc;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  outline: none;
+  resize: vertical;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+}
+
+.creator-textarea:focus {
+  border-color: var(--gold-primary);
+}
+
+.notebook-save-btn {
+  background: #fbbf24;
+  color: #070a12;
+  border: none;
+  padding: 8px 20px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.notebook-save-btn:hover {
+  background: #f59e0b;
+}
+
+.notebook-notes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.notebook-card {
+  background: var(--bg-card-glass);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 14px 18px;
+  transition: all 0.2s ease;
+}
+
+.notebook-card:hover {
+  border-color: var(--gold-border);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+}
+
+.notebook-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.notebook-meta-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.notebook-folder-badge {
+  font-size: 0.78rem;
+  font-weight: 700;
+  border: 1px solid;
+  padding: 1px 7px;
+  border-radius: var(--radius-full);
+}
+
+.notebook-card-body {
+  font-size: 0.94rem;
+  line-height: 1.65;
+  color: #e2e8f0;
+  margin-bottom: 8px;
+}
+
+.notebook-tags-wrap {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.note-tag-chip {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+  font-size: 0.75rem;
+  padding: 1px 7px;
+  border-radius: var(--radius-full);
+}
