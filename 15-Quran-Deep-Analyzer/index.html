@@ -174,53 +174,54 @@
     <section id="tab-search" class="tab-panel">
       <div class="search-studio-container">
         
-        <!-- Sticky Hero Controller -->
+        <!-- Ultra-Slim Sticky Hero Controller (~78px) -->
         <div class="search-studio-hero" id="search-studio-hero">
-          <div class="search-studio-input-wrap">
-            <span class="search-studio-icon">⚡</span>
-            <input type="text" id="search-studio-input" class="search-studio-input" placeholder="Search 6,236 Ayat by English translation, Arabic text, Urdu Kanzul Iman, Surah (e.g. 52:16), or Topic..." autocomplete="off" spellcheck="false">
-            <button id="search-studio-clear" class="search-studio-clear-btn" style="display: none;" title="Clear search (Esc)" aria-label="Clear search">✕</button>
+          <!-- Row 1: Search Input, Ask AI, Density Toggle, Settings -->
+          <div class="search-hero-row-main">
+            <div class="search-studio-input-wrap">
+              <span class="search-studio-icon">⚡</span>
+              <input type="text" id="search-studio-input" class="search-studio-input" placeholder="Search 6,236 Ayat by English translation, Arabic text, Urdu Kanzul Iman, Surah:Ayah (e.g. 52:16), or Topic..." autocomplete="off" spellcheck="false">
+              <button id="search-studio-clear" class="search-studio-clear-btn" style="display: none;" title="Clear search (Esc)" aria-label="Clear search">✕</button>
+            </div>
             <button id="search-studio-ask-ai-btn" class="search-studio-ask-btn" title="Synthesize AI Scholar Summary (Ctrl+Enter)">
               <span class="ai-sparkle">✨</span> Ask AI
+            </button>
+            <button id="search-density-toggle" class="search-density-btn active" title="Toggle Compact Density (D)">
+              <span id="density-icon">🗜️</span> <span id="density-text">Dense</span>
             </button>
             <button id="search-studio-settings-btn" class="search-studio-settings-btn" onclick="window.QuranAISearchEngine && window.QuranAISearchEngine.openKeyModal()" title="Gemini AI Key Settings" aria-label="Settings">⚙️</button>
           </div>
 
-          <!-- Dual Filter Toolbars -->
-          <div class="search-studio-toolbar">
-            <div class="search-filter-pills" id="search-category-filters">
-              <button class="search-filter-chip active" data-cat="all">All (6,236)</button>
-              <button class="search-filter-chip" data-cat="ayahs">Ayat (6,236)</button>
-              <button class="search-filter-chip" data-cat="surahs">Surahs (114)</button>
-              <button class="search-filter-chip" data-cat="paras">Paras (30)</button>
-              <button class="search-filter-chip" data-cat="topics">Topics (484)</button>
-              <button class="search-filter-chip" data-cat="prophets">Prophets (25)</button>
+          <!-- Row 2: Unified Micro-Filter Strip + Inline Count Metrics -->
+          <div class="search-hero-row-sub">
+            <div class="search-micro-pills" id="search-category-filters">
+              <button class="search-micro-chip active" data-cat="all">All (6,236)</button>
+              <button class="search-micro-chip" data-cat="ayahs">Ayat</button>
+              <button class="search-micro-chip" data-cat="surahs">Surahs</button>
+              <button class="search-micro-chip" data-cat="paras">Paras</button>
+              <button class="search-micro-chip" data-cat="topics">Topics</button>
+              <button class="search-micro-chip" data-cat="prophets">Prophets</button>
             </div>
 
-            <div class="search-revelation-pills" id="search-revelation-filters">
-              <button class="search-rev-chip active" data-rev="all">All Revelation</button>
-              <button class="search-rev-chip" data-rev="makki">Makki 🕋 (87)</button>
-              <button class="search-rev-chip" data-rev="madani">Madani 🕌 (27)</button>
-            </div>
-          </div>
-        </div>
+            <span class="search-strip-sep"></span>
 
-        <!-- Telemetry & Live Count Badge -->
-        <div class="search-studio-metrics-bar" id="search-studio-metrics">
-          <div class="search-metrics-left">
-            <span class="search-metrics-badge" id="search-studio-counter">Ready • 6,236 Canonical Ayat Indexed</span>
-          </div>
-          <div class="search-metrics-right">
-            <span class="search-shortcut-hint"><kbd>Ctrl+↵</kbd> Ask AI</span>
-            <span class="search-shortcut-hint"><kbd>Esc</kbd> Clear</span>
+            <div class="search-micro-pills" id="search-revelation-filters">
+              <button class="search-rev-chip active" data-rev="all">All Rev</button>
+              <button class="search-rev-chip" data-rev="makki">Makki 🕋</button>
+              <button class="search-rev-chip" data-rev="madani">Madani 🕌</button>
+            </div>
+
+            <div class="search-inline-metrics">
+              <span id="search-studio-counter">Ready • 6,236 Ayat Indexed</span>
+            </div>
           </div>
         </div>
 
         <!-- Top AI Scholar Synthesis Card (Collapsible/Dynamic) -->
         <div id="search-studio-ai-container" class="search-studio-ai-container" style="display: none;"></div>
 
-        <!-- Main Full-Width Results Stream -->
-        <div id="search-studio-results" class="search-studio-results">
+        <!-- Main Full-Width Results Stream (Default High-Density) -->
+        <div id="search-studio-results" class="search-studio-results search-dense-mode">
           <!-- Live cards dynamically rendered by SearchStudioEngine -->
         </div>
 

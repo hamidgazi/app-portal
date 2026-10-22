@@ -4335,82 +4335,88 @@ mark.search-highlight {
 }
 
 /* ==========================================================================
-   Native Full-Page Live Search Studio (#tab-search)
+   Native Full-Page Live Search Studio (#tab-search) — High-Density Redesign
    ========================================================================== */
 
 .search-studio-container {
   width: 100%;
   max-width: 1360px;
   margin: 0 auto;
-  padding: 16px 20px 60px 20px;
+  padding: 8px 16px 40px 16px;
 }
 
-/* Sticky Hero Search Controller */
+/* Ultra-Slim Sticky Hero Search Controller (~78px total height) */
 .search-studio-hero {
   position: sticky;
-  top: 68px;
+  top: 64px;
   z-index: 35;
-  background: rgba(7, 9, 14, 0.95);
+  background: rgba(7, 9, 14, 0.96);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(212, 175, 55, 0.24);
-  border-radius: var(--radius-lg);
-  padding: 18px 22px;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.65), 0 0 20px rgba(212, 175, 55, 0.08);
-  margin-bottom: 22px;
-  transition: all 0.25s ease;
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 14px rgba(212, 175, 55, 0.08);
+  margin-bottom: 10px;
+  transition: all 0.2s ease;
+}
+
+/* Row 1: Search Input, Ask AI, Density Toggle, Settings */
+.search-hero-row-main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
 }
 
 .search-studio-input-wrap {
   position: relative;
+  flex: 1;
   display: flex;
   align-items: center;
-  gap: 12px;
-  width: 100%;
 }
 
 .search-studio-icon {
   position: absolute;
-  left: 18px;
-  font-size: 1.35rem;
+  left: 12px;
+  font-size: 1.05rem;
   color: #f59e0b;
   pointer-events: none;
   z-index: 2;
 }
 
 .search-studio-input {
-  flex: 1;
   width: 100%;
-  height: 54px;
-  padding: 0 95px 0 54px;
+  height: 40px;
+  padding: 0 36px 0 36px;
   background: rgba(15, 23, 42, 0.85);
-  border: 1.5px solid rgba(212, 175, 55, 0.32);
-  border-radius: var(--radius-md);
+  border: 1.2px solid rgba(212, 175, 55, 0.3);
+  border-radius: var(--radius-sm);
   color: #f8fafc;
-  font-size: 1.15rem;
+  font-size: 0.98rem;
   font-family: inherit;
   font-weight: 500;
   outline: none;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
+  transition: all 0.15s ease;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .search-studio-input:focus {
   border-color: #f59e0b;
-  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.22), inset 0 2px 6px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.5);
   background: rgba(15, 23, 42, 0.98);
 }
 
 .search-studio-input::placeholder {
   color: #64748b;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 .search-studio-clear-btn {
   position: absolute;
-  right: 175px;
-  width: 32px;
-  height: 32px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   background: rgba(148, 163, 184, 0.15);
   border: 1px solid rgba(148, 163, 184, 0.25);
@@ -4419,7 +4425,7 @@ mark.search-highlight {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 0.75rem;
   transition: all 0.15s ease;
   z-index: 2;
 }
@@ -4432,20 +4438,20 @@ mark.search-highlight {
 }
 
 .search-studio-ask-btn {
-  height: 52px;
-  padding: 0 20px;
+  height: 40px;
+  padding: 0 14px;
   background: linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(245, 158, 11, 0.35));
-  border: 1.5px solid rgba(245, 158, 11, 0.6);
-  border-radius: var(--radius-md);
+  border: 1.2px solid rgba(245, 158, 11, 0.6);
+  border-radius: var(--radius-sm);
   color: #fef3c7;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   cursor: pointer;
   white-space: nowrap;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
   flex-shrink: 0;
   touch-action: manipulation;
 }
@@ -4455,23 +4461,54 @@ mark.search-highlight {
   border-color: #fbbf24;
   color: #ffffff;
   transform: translateY(-1px);
-  box-shadow: 0 4px 18px rgba(245, 158, 11, 0.3);
+  box-shadow: 0 2px 10px rgba(245, 158, 11, 0.25);
+}
+
+.search-density-btn {
+  height: 40px;
+  padding: 0 12px;
+  border-radius: var(--radius-sm);
+  background: rgba(30, 41, 59, 0.7);
+  border: 1.2px solid rgba(148, 163, 184, 0.25);
+  color: #cbd5e1;
+  font-size: 0.84rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+  touch-action: manipulation;
+}
+
+.search-density-btn:hover {
+  background: rgba(51, 65, 85, 0.9);
+  border-color: rgba(212, 175, 55, 0.4);
+  color: #fbbf24;
+}
+
+.search-density-btn.active {
+  background: rgba(245, 158, 11, 0.18);
+  border-color: #f59e0b;
+  color: #fbbf24;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.2);
 }
 
 .search-studio-settings-btn {
-  width: 52px;
-  height: 52px;
-  border-radius: var(--radius-md);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
   background: rgba(30, 41, 59, 0.7);
-  border: 1px solid rgba(148, 163, 184, 0.25);
+  border: 1.2px solid rgba(148, 163, 184, 0.25);
   color: #cbd5e1;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 1.15rem;
+  font-size: 1rem;
   flex-shrink: 0;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
   touch-action: manipulation;
 }
 
@@ -4479,59 +4516,54 @@ mark.search-highlight {
   background: rgba(51, 65, 85, 0.9);
   border-color: rgba(212, 175, 55, 0.4);
   color: #fbbf24;
-  transform: translateY(-1px);
 }
 
-/* Dual Filter Toolbars */
-.search-studio-toolbar {
+/* Row 2: Unified Micro-Filter Strip + Inline Count Metrics */
+.search-hero-row-sub {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: 14px;
-  padding-top: 14px;
-  border-top: 1px solid rgba(148, 163, 184, 0.12);
+  gap: 6px;
+  margin-top: 6px;
+  flex-wrap: wrap;
 }
 
-.search-filter-pills,
-.search-revelation-pills {
+.search-micro-pills {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
   align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
 }
 
-.search-filter-chip,
+.search-micro-chip,
 .search-rev-chip {
-  padding: 7px 15px;
-  border-radius: var(--radius-full);
+  padding: 3px 9px;
+  border-radius: 13px;
   background: rgba(30, 41, 59, 0.6);
   border: 1px solid rgba(148, 163, 184, 0.2);
   color: #94a3b8;
-  font-size: 0.86rem;
+  font-size: 0.78rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.12s ease;
   touch-action: manipulation;
-  min-height: 38px;
+  min-height: 26px;
   display: inline-flex;
   align-items: center;
 }
 
-.search-filter-chip:hover,
+.search-micro-chip:hover,
 .search-rev-chip:hover {
   background: rgba(51, 65, 85, 0.8);
   color: #f1f5f9;
   border-color: rgba(212, 175, 55, 0.35);
 }
 
-.search-filter-chip.active {
+.search-micro-chip.active {
   background: rgba(245, 158, 11, 0.2);
   border-color: #f59e0b;
   color: #fbbf24;
   font-weight: 600;
-  box-shadow: 0 0 12px rgba(245, 158, 11, 0.2);
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.2);
 }
 
 .search-rev-chip.active {
@@ -4539,124 +4571,102 @@ mark.search-highlight {
   border-color: #10b981;
   color: #6ee7b7;
   font-weight: 600;
-  box-shadow: 0 0 12px rgba(16, 185, 129, 0.2);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.2);
 }
 
-/* Telemetry & Metrics Strip */
-.search-studio-metrics-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 18px;
-  padding: 10px 16px;
-  background: rgba(15, 23, 42, 0.45);
-  border: 1px solid rgba(148, 163, 184, 0.12);
-  border-radius: var(--radius-md);
-  font-size: 0.88rem;
+.search-strip-sep {
+  width: 1px;
+  height: 16px;
+  background: rgba(148, 163, 184, 0.22);
+  margin: 0 3px;
+}
+
+.search-inline-metrics {
+  margin-left: auto;
+  font-size: 0.8rem;
   color: #94a3b8;
-}
-
-.search-metrics-badge {
-  color: #e2e8f0;
-  font-weight: 500;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.search-metrics-badge strong {
-  color: #fbbf24;
-}
-
-.search-shortcut-hint {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  margin-left: 14px;
-  font-size: 0.8rem;
-  color: #64748b;
+  white-space: nowrap;
 }
 
-.search-shortcut-hint kbd {
-  background: rgba(30, 41, 59, 0.8);
-  border: 1px solid rgba(148, 163, 184, 0.3);
-  border-radius: 4px;
-  padding: 2px 6px;
-  font-family: inherit;
-  font-size: 0.76rem;
-  color: #cbd5e1;
+.search-inline-metrics strong {
+  color: #fbbf24;
 }
 
 /* AI Scholar Synthesis Container */
 .search-studio-ai-container {
-  margin-bottom: 24px;
+  margin-bottom: 14px;
 }
 
 /* Results Stream */
 .search-studio-results {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
   min-height: 200px;
 }
 
-/* Luxury Full-Width Scripture Ayah Card */
+/* Luxury High-Density Scripture Ayah Card */
 .search-ayah-card {
-  background: rgba(15, 23, 42, 0.72);
-  border: 1.5px solid rgba(212, 175, 55, 0.22);
-  border-radius: var(--radius-lg);
-  padding: 24px 28px;
-  box-shadow: 0 4px 22px rgba(0, 0, 0, 0.45);
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: var(--radius-md);
+  padding: 12px 18px;
+  margin-bottom: 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
 }
 
 .search-ayah-card:hover {
-  background: rgba(20, 30, 52, 0.85);
-  border-color: rgba(212, 175, 55, 0.55);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 20px rgba(212, 175, 55, 0.16);
-  transform: translateY(-2px);
+  background: rgba(20, 30, 52, 0.9);
+  border-color: rgba(212, 175, 55, 0.45);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), 0 0 12px rgba(212, 175, 55, 0.12);
+  transform: translateY(-1px);
 }
 
+/* Header Row with Integrated Actions (No separate bottom bar!) */
 .search-ayah-card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
-  margin-bottom: 16px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.12);
+  gap: 10px;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.1);
 }
 
 .search-ayah-meta-left {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
 }
 
 .search-ayah-coord-badge {
   background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(245, 158, 11, 0.25));
   border: 1px solid rgba(245, 158, 11, 0.45);
   color: #fef08a;
-  padding: 4px 12px;
+  padding: 2px 9px;
   border-radius: var(--radius-full);
   font-weight: 700;
-  font-size: 0.88rem;
-  letter-spacing: 0.5px;
+  font-size: 0.82rem;
+  letter-spacing: 0.4px;
 }
 
 .search-surah-title-badge {
-  color: #e2e8f0;
+  color: #f1f5f9;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
 }
 
 .search-rev-badge {
-  padding: 3px 10px;
+  padding: 1px 7px;
   border-radius: var(--radius-full);
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 600;
 }
 
@@ -4674,133 +4684,152 @@ mark.search-highlight {
 
 .search-ayah-rank-badge {
   color: #64748b;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 500;
 }
 
-/* Grand Sacred Arabic Calligraphy */
+/* Header-Integrated Micro-Actions */
+.search-ayah-meta-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.search-micro-action {
+  padding: 3px 9px;
+  border-radius: 12px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  touch-action: manipulation;
+  min-height: 24px;
+  border: 1px solid;
+}
+
+.search-micro-action.tafsir-btn {
+  background: rgba(56, 189, 248, 0.12);
+  border-color: rgba(56, 189, 248, 0.35);
+  color: #7dd3fc;
+}
+
+.search-micro-action.tafsir-btn:hover,
+.search-micro-action.tafsir-btn.active {
+  background: rgba(56, 189, 248, 0.28);
+  border-color: #38bdf8;
+  color: #ffffff;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.3);
+}
+
+.search-micro-action.analyzer-btn {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.35);
+  color: #6ee7b7;
+}
+
+.search-micro-action.analyzer-btn:hover {
+  background: rgba(16, 185, 129, 0.28);
+  border-color: #10b981;
+  color: #ffffff;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.3);
+}
+
+.search-micro-action.copy-btn {
+  background: rgba(148, 163, 184, 0.1);
+  border-color: rgba(148, 163, 184, 0.22);
+  color: #cbd5e1;
+}
+
+.search-micro-action.copy-btn:hover {
+  background: rgba(148, 163, 184, 0.22);
+  color: #ffffff;
+}
+
+/* Golden-Ratio Typography Scale */
 .search-ayah-arabic {
   font-family: var(--font-arabic), "Scheherazade New", serif;
-  font-size: 2.25rem;
-  line-height: 1.85;
+  font-size: 1.7rem;
+  line-height: 1.65;
   color: #f8fafc;
   direction: rtl;
   text-align: right;
-  margin: 14px 0 18px 0;
-  padding: 4px 0;
-  word-spacing: 4px;
+  margin: 4px 0 6px 0;
+  padding: 0;
+  word-spacing: 2px;
 }
 
-/* English Translation with Highlighting */
 .search-ayah-english {
-  font-size: 1.08rem;
-  line-height: 1.75;
+  font-size: 0.94rem;
+  line-height: 1.55;
   color: #e2e8f0;
-  margin-bottom: 14px;
+  margin-bottom: 5px;
   font-weight: 400;
 }
 
-/* Urdu Kanzul Iman Translation */
 .search-ayah-urdu {
   font-family: var(--font-urdu), "Jameel Noori Nastaleeq", "Noto Nastaliq Urdu", serif;
-  font-size: 1.38rem;
-  line-height: 1.85;
+  font-size: 1.18rem;
+  line-height: 1.65;
   color: #cbd5e1;
   direction: rtl;
   text-align: right;
-  margin-bottom: 18px;
-  padding: 2px 0;
+  margin-bottom: 2px;
+  padding: 0;
 }
 
 /* Keyword Highlighting */
 mark.search-highlight {
-  background: rgba(245, 158, 11, 0.32);
+  background: rgba(245, 158, 11, 0.28);
   color: #fef08a;
-  padding: 2px 6px;
-  border-radius: 4px;
+  padding: 1px 4px;
+  border-radius: 3px;
   font-weight: 600;
-  border-bottom: 2px solid #f59e0b;
-  text-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
+  border-bottom: 1.5px solid #f59e0b;
+  text-shadow: 0 0 8px rgba(245, 158, 11, 0.35);
 }
 
-/* Card Action Toolbar */
-.search-ayah-actions {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 14px;
-  padding-top: 14px;
-  border-top: 1px solid rgba(148, 163, 184, 0.12);
+/* Ultra-Dense Density Mode (.search-dense-mode) — 4-5 verses visible on screen */
+.search-dense-mode .search-ayah-card {
+  padding: 9px 14px;
 }
 
-.search-action-btn {
-  padding: 8px 16px;
-  border-radius: var(--radius-full);
-  font-size: 0.86rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.18s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  touch-action: manipulation;
-  min-height: 40px;
+.search-dense-mode .search-ayah-arabic {
+  font-size: 1.52rem;
+  line-height: 1.55;
+  margin: 2px 0 4px 0;
 }
 
-.search-action-btn.tafsir-btn {
-  background: rgba(56, 189, 248, 0.15);
-  border: 1px solid rgba(56, 189, 248, 0.4);
-  color: #7dd3fc;
+.search-dense-mode .search-ayah-english {
+  font-size: 0.88rem;
+  line-height: 1.45;
+  margin-bottom: 4px;
 }
 
-.search-action-btn.tafsir-btn:hover,
-.search-action-btn.tafsir-btn.active {
-  background: rgba(56, 189, 248, 0.3);
-  border-color: #38bdf8;
-  color: #ffffff;
-  box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
-}
-
-.search-action-btn.analyzer-btn {
-  background: rgba(16, 185, 129, 0.15);
-  border: 1px solid rgba(16, 185, 129, 0.4);
-  color: #6ee7b7;
-}
-
-.search-action-btn.analyzer-btn:hover {
-  background: rgba(16, 185, 129, 0.3);
-  border-color: #10b981;
-  color: #ffffff;
-  box-shadow: 0 0 12px rgba(16, 185, 129, 0.3);
-}
-
-.search-action-btn.copy-btn {
-  background: rgba(148, 163, 184, 0.12);
-  border: 1px solid rgba(148, 163, 184, 0.25);
-  color: #cbd5e1;
-}
-
-.search-action-btn.copy-btn:hover {
-  background: rgba(148, 163, 184, 0.25);
-  color: #ffffff;
+.search-dense-mode .search-ayah-urdu {
+  font-size: 1.08rem;
+  line-height: 1.55;
+  margin-bottom: 0;
 }
 
 /* Inline Expandable Tafsir Drawer */
 .search-tafsir-drawer {
-  margin-top: 18px;
-  padding: 22px 24px;
-  background: rgba(8, 13, 24, 0.9);
-  border: 1.5px solid rgba(56, 189, 248, 0.35);
-  border-radius: var(--radius-md);
-  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
-  animation: tafsirSlideDown 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  margin-top: 10px;
+  padding: 14px 18px;
+  background: rgba(8, 13, 24, 0.92);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5);
+  animation: tafsirSlideDown 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes tafsirSlideDown {
   from {
     opacity: 0;
-    transform: translateY(-8px);
+    transform: translateY(-6px);
   }
   to {
     opacity: 1;
@@ -4812,145 +4841,162 @@ mark.search-highlight {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 14px;
-  padding-bottom: 10px;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
   border-bottom: 1px solid rgba(56, 189, 248, 0.2);
 }
 
 .search-tafsir-title {
   color: #7dd3fc;
-  font-size: 0.98rem;
+  font-size: 0.9rem;
   font-weight: 700;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .search-tafsir-author {
   color: #94a3b8;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
 }
 
 .search-tafsir-body {
   color: #e2e8f0;
-  font-size: 1.05rem;
-  line-height: 1.85;
+  font-size: 0.95rem;
+  line-height: 1.75;
 }
 
 .search-tafsir-body p {
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 /* Celebrated Landing Screen & Topic Pills */
 .search-studio-welcome {
-  padding: 30px;
+  padding: 18px 22px;
   background: rgba(15, 23, 42, 0.6);
   border: 1px solid rgba(212, 175, 55, 0.2);
-  border-radius: var(--radius-lg);
-  margin-bottom: 24px;
+  border-radius: var(--radius-md);
+  margin-bottom: 14px;
 }
 
 .search-welcome-title {
-  font-size: 1.4rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: #f8fafc;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .search-welcome-subtitle {
   color: #94a3b8;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  margin-bottom: 20px;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  margin-bottom: 14px;
 }
 
 .search-quick-topics-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 12px;
+  gap: 8px;
+  margin-top: 8px;
 }
 
 .search-topic-chip {
-  padding: 10px 18px;
+  padding: 6px 14px;
   border-radius: var(--radius-full);
   background: rgba(30, 41, 59, 0.7);
   border: 1px solid rgba(212, 175, 55, 0.25);
   color: #e2e8f0;
-  font-size: 0.92rem;
+  font-size: 0.84rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
   touch-action: manipulation;
-  min-height: 44px;
+  min-height: 34px;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .search-topic-chip:hover {
   background: rgba(245, 158, 11, 0.2);
   border-color: #f59e0b;
   color: #fef08a;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 10px rgba(245, 158, 11, 0.2);
 }
 
 .search-topic-ar {
   font-family: var(--font-arabic), serif;
-  font-size: 1.15rem;
+  font-size: 1rem;
   color: #fcd34d;
 }
 
 /* Mobile Responsiveness for Search Studio */
 @media (max-width: 768px) {
   .search-studio-container {
-    padding: 10px 12px 60px 12px;
+    padding: 6px 8px 40px 8px;
   }
 
   .search-studio-hero {
-    top: 58px;
-    padding: 14px 16px;
-    margin-bottom: 16px;
+    top: 54px;
+    padding: 6px 8px;
+    margin-bottom: 8px;
   }
 
   .search-studio-input {
-    height: 48px;
-    padding: 0 80px 0 44px;
-    font-size: 1rem;
+    height: 38px;
+    padding: 0 32px 0 32px;
+    font-size: 0.92rem;
   }
 
   .search-studio-clear-btn {
-    right: 145px;
+    right: 6px;
   }
 
   .search-studio-ask-btn {
-    height: 48px;
-    padding: 0 14px;
-    font-size: 0.88rem;
+    height: 38px;
+    padding: 0 10px;
+    font-size: 0.82rem;
+  }
+
+  .search-density-btn {
+    height: 38px;
+    padding: 0 8px;
+    font-size: 0.78rem;
   }
 
   .search-studio-settings-btn {
-    width: 48px;
-    height: 48px;
+    width: 38px;
+    height: 38px;
   }
 
   .search-ayah-card {
-    padding: 18px 18px;
+    padding: 10px 12px;
   }
 
   .search-ayah-arabic {
-    font-size: 1.75rem;
-    line-height: 1.7;
+    font-size: 1.45rem;
+    line-height: 1.6;
   }
 
   .search-ayah-urdu {
-    font-size: 1.2rem;
-    line-height: 1.7;
+    font-size: 1.05rem;
+    line-height: 1.6;
   }
 
   .search-ayah-english {
-    font-size: 0.98rem;
-    line-height: 1.6;
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .search-ayah-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .search-ayah-meta-right {
+    width: 100%;
+    justify-content: flex-end;
   }
 }
 

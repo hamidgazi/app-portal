@@ -153,6 +153,7 @@
   // --- 3. MASTER SEARCH STUDIO ENGINE ---
   const SearchStudioEngine = {
     isInitialized: false,
+    isDenseMode: true,
     activeCategory: 'all',
     activeRevelation: 'all',
     debounceTimer: null,
@@ -207,8 +208,53 @@
           });
         }
 
+        // Density Switcher Setup
+        const densityBtn = document.getElementById('search-density-toggle');
+        const resultsEl = document.getElementById('search-studio-results');
+        try {
+          const savedDensity = localStorage.getItem('quran_search_density');
+          if (savedDensity === 'relaxed') {
+            this.isDenseMode = false;
+            if (resultsEl) resultsEl.classList.remove('search-dense-mode');
+            if (densityBtn) {
+              densityBtn.classList.remove('active');
+              const icon = document.getElementById('density-icon');
+              const text = document.getElementById('density-text');
+              if (icon) icon.textContent = '📖';
+              if (text) text.textContent = 'Relaxed';
+            }
+          } else {
+            this.isDenseMode = true;
+            if (resultsEl) resultsEl.classList.add('search-dense-mode');
+            if (densityBtn) {
+              densityBtn.classList.add('active');
+              const icon = document.getElementById('density-icon');
+              const text = document.getElementById('density-text');
+              if (icon) icon.textContent = '🗜️';
+              if (text) text.textContent = 'Dense';
+            }
+          }
+        } catch (e) {}
+
+        if (densityBtn) {
+          densityBtn.addEventListener('click', () => {
+            this.toggleDensity();
+          });
+        }
+
+        // Keyboard Shortcut 'D' for Density Toggle
+        document.addEventListener('keydown', (e) => {
+          if ((e.key === 'd' || e.key === 'D') && !e.ctrlKey && !e.metaKey && !e.altKey) {
+            const tag = document.activeElement ? document.activeElement.tagName : '';
+            if (tag !== 'INPUT' && tag !== 'TEXTAREA' && tag !== 'SELECT') {
+              e.preventDefault();
+              this.toggleDensity();
+            }
+          }
+        });
+
         // Category Filter Chips
-        const catChips = document.querySelectorAll('#search-category-filters .search-filter-chip');
+        const catChips = document.querySelectorAll('#search-category-filters button');
         catChips.forEach((chip) => {
           chip.addEventListener('click', () => {
             StudioSound.playClick();
@@ -221,7 +267,7 @@
         });
 
         // Revelation Filter Chips (All, Makki, Madani)
-        const revChips = document.querySelectorAll('#search-revelation-filters .search-rev-chip');
+        const revChips = document.querySelectorAll('#search-revelation-filters button');
         revChips.forEach((chip) => {
           chip.addEventListener('click', () => {
             StudioSound.playClick();
@@ -252,6 +298,29 @@
       if (!this.lastQuery) {
         this.renderCelebratedLanding();
       }
+    },
+
+    toggleDensity() {
+      this.isDenseMode = !this.isDenseMode;
+      const resultsEl = document.getElementById('search-studio-results');
+      const densityBtn = document.getElementById('search-density-toggle');
+      const icon = document.getElementById('density-icon');
+      const text = document.getElementById('density-text');
+
+      if (this.isDenseMode) {
+        if (resultsEl) resultsEl.classList.add('search-dense-mode');
+        if (densityBtn) densityBtn.classList.add('active');
+        if (icon) icon.textContent = '🗜️';
+        if (text) text.textContent = 'Dense';
+        try { localStorage.setItem('quran_search_density', 'dense'); } catch(e) {}
+      } else {
+        if (resultsEl) resultsEl.classList.remove('search-dense-mode');
+        if (densityBtn) densityBtn.classList.remove('active');
+        if (icon) icon.textContent = '📖';
+        if (text) text.textContent = 'Relaxed';
+        try { localStorage.setItem('quran_search_density', 'relaxed'); } catch(e) {}
+      }
+      StudioSound.playClick();
     },
 
     clearSearch() {
@@ -467,25 +536,26 @@
               <span class="search-ayah-coord-badge">[Surah ${v.surahId}:${v.ayahNum}]</span>
               <span class="search-surah-title-badge">${v.surahRoman} (${v.surahAr})</span>
               ${revBadge}
+              ${rankNum ? `<span class="search-ayah-rank-badge">#${rankNum}</span>` : ''}
             </div>
-            ${rankNum ? `<span class="search-ayah-rank-badge">#${rankNum}</span>` : ''}
+
+            <!-- Header-Integrated Micro-Actions (Eliminating separate bottom toolbar) -->
+            <div class="search-ayah-meta-right">
+              <button class="search-micro-action tafsir-btn" data-surah="${v.surahId}" data-ayah="${v.ayahNum}" title="Read Tafsir Sirat-ul-Jinan">
+                <span>📖 Tafsir</span>
+              </button>
+              <button class="search-micro-action analyzer-btn" data-surah="${v.surahId}" data-ayah="${v.ayahNum}" title="Open in Deep Ayah Analyzer">
+                <span>🔍 Analyzer ↗</span>
+              </button>
+              <button class="search-micro-action copy-btn" data-surah="${v.surahId}" data-ayah="${v.ayahNum}" data-arabic="${this.escapeAttr(v.arabic)}" data-english="${this.escapeAttr(v.english)}" data-urdu="${this.escapeAttr(v.urdu)}" title="Copy Verse">
+                <span>📋 Copy</span>
+              </button>
+            </div>
           </div>
 
           <div class="search-ayah-arabic">${v.arabic}</div>
           <div class="search-ayah-english">${highlightedEn}</div>
           <div class="search-ayah-urdu">${highlightedUr}</div>
-
-          <div class="search-ayah-actions">
-            <button class="search-action-btn tafsir-btn" data-surah="${v.surahId}" data-ayah="${v.ayahNum}">
-              <span>📖 Read Tafsir (Sirat-ul-Jinan)</span>
-            </button>
-            <button class="search-action-btn analyzer-btn" data-surah="${v.surahId}" data-ayah="${v.ayahNum}">
-              <span>🔍 Open in Ayah Analyzer ↗</span>
-            </button>
-            <button class="search-action-btn copy-btn" data-surah="${v.surahId}" data-ayah="${v.ayahNum}" data-arabic="${this.escapeAttr(v.arabic)}" data-english="${this.escapeAttr(v.english)}" data-urdu="${this.escapeAttr(v.urdu)}">
-              <span>📋 Copy Verse</span>
-            </button>
-          </div>
 
           <div class="search-tafsir-drawer" id="search-tafsir-${v.surahId}-${v.ayahNum}" style="display: none;">
             <div class="search-tafsir-header">
@@ -515,18 +585,17 @@
                 ${this.escapeHtml(m.category || 'General')}
               </span>
               <span class="search-surah-title-badge">${highlightedTitle}</span>
+              ${rankNum ? `<span class="search-ayah-rank-badge">#${rankNum}</span>` : ''}
             </div>
-            ${rankNum ? `<span class="search-ayah-rank-badge">#${rankNum}</span>` : ''}
+            <div class="search-ayah-meta-right">
+              <button class="search-micro-action analyzer-btn" onclick="(${m.action.toString()})()">
+                <span>Explore ↗</span>
+              </button>
+            </div>
           </div>
 
-          <div class="search-ayah-english" style="font-size: 1.02rem; margin-top: 10px;">
+          <div class="search-ayah-english" style="font-size: 0.94rem; margin-top: 6px;">
             ${highlightedSub}
-          </div>
-
-          <div class="search-ayah-actions">
-            <button class="search-action-btn analyzer-btn" onclick="(${m.action.toString()})()">
-              <span>Explore Reference ↗</span>
-            </button>
           </div>
         </article>
       `;
@@ -583,13 +652,13 @@
       if (isVisible) {
         drawer.style.display = 'none';
         btn.classList.remove('active');
-        btn.innerHTML = '<span>📖 Read Tafsir (Sirat-ul-Jinan)</span>';
+        btn.innerHTML = '<span>📖 Tafsir</span>';
         return;
       }
 
       drawer.style.display = 'block';
       btn.classList.add('active');
-      btn.innerHTML = '<span>▲ Close Tafsir</span>';
+      btn.innerHTML = '<span>▲ Close</span>';
 
       const cacheKey = `${surahId}:${ayahNum}`;
       if (this.tafsirCache.has(cacheKey)) {
