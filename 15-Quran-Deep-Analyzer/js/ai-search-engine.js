@@ -691,19 +691,46 @@
       if (!text || !query) return text || '';
       const cleanQ = query.trim();
       if (!cleanQ) return text;
-      // Match full multi-word phrase first
-      const safeQ = cleanQ.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      const phraseRe = new RegExp(`(${safeQ})`, 'gi');
-      if (phraseRe.test(text)) {
-        return text.replace(phraseRe, '<mark class="search-highlight">$1</mark>');
+
+      // 1. Exact multi-word phrase boundary match
+      if (cleanQ.includes(' ')) {
+        const safePhrase = cleanQ.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const phraseRe = new RegExp('(^|[^\\p{L}\\p{M}\\d])(' + safePhrase + ')(?=[^\\p{L}\\p{M}\\d]|$)', 'giu');
+        if (phraseRe.test(text)) {
+          return text.replace(phraseRe, '$1<mark class="search-highlight">$2</mark>');
+        }
       }
-      // Otherwise match individual words > 2 chars
-      const tokens = cleanQ.split(/\s+/).filter(t => t.length > 2);
-      if (tokens.length === 0) return text;
+
+      // 2. Individual tokens (length >= 3) with Whole-Word Token Boundary Expansion
+      const tokens = cleanQ
+        .split(/\s+/)
+        .map((t) => t.trim())
+        .filter((t) => t.length >= 3);
+
+      if (tokens.length === 0) {
+        const shortToken = cleanQ.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const shortRe = new RegExp('(^|[^\\p{L}\\p{M}\\d])(' + shortToken + ')(?=[^\\p{L}\\p{M}\\d]|$)', 'giu');
+        return text.replace(shortRe, '$1<mark class="search-highlight">$2</mark>');
+      }
+
+      // Sort tokens descending by length so longer patterns take precedence
       tokens.sort((a, b) => b.length - a.length);
-      const pattern = tokens.map(t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
-      const re = new RegExp(`(${pattern})`, 'gi');
-      return text.replace(re, '<mark class="search-highlight">$1</mark>');
+
+      const ARABIC_DIACRITICS = '[\\u064B-\\u065F\\u0670\\u06D6-\\u06ED]';
+      const tokenPatterns = tokens.map((t) => {
+        const isArabicScript = /[\u0600-\u06FF]/.test(t);
+        if (isArabicScript) {
+          const letters = t.split('').map((ch) => ch.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+          const flexPattern = letters.join(ARABIC_DIACRITICS + '*');
+          return '[\\p{L}\\p{M}\\d]*' + flexPattern + '[\\p{L}\\p{M}\\d]*';
+        } else {
+          const safeT = t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          return '[\\p{L}\\p{M}\\d]*' + safeT + '[\\p{L}\\p{M}\\d]*';
+        }
+      }).join('|');
+
+      const wordRe = new RegExp('(^|[^\\p{L}\\p{M}\\d])(' + tokenPatterns + ')(?=[^\\p{L}\\p{M}\\d]|$)', 'giu');
+      return text.replace(wordRe, '$1<mark class="search-highlight">$2</mark>');
     },
 
     search(query, category = 'all', limit = 25) {

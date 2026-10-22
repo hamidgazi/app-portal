@@ -291,7 +291,7 @@
       const input = document.getElementById('search-studio-input');
       if (input) {
         setTimeout(() => {
-          input.focus();
+          input.focus({ preventScroll: true });
           input.select();
         }, 60);
       }
@@ -522,6 +522,7 @@
     },
 
     buildAyahCardHtml(v, query, rankNum) {
+      const highlightedAr = this.highlightText(v.arabic, query);
       const highlightedEn = this.highlightText(v.english, query);
       const highlightedUr = this.highlightText(v.urdu, query);
       const revBadge =
@@ -553,7 +554,7 @@
             </div>
           </div>
 
-          <div class="search-ayah-arabic">${v.arabic}</div>
+          <div class="search-ayah-arabic">${highlightedAr}</div>
           <div class="search-ayah-english">${highlightedEn}</div>
           <div class="search-ayah-urdu">${highlightedUr}</div>
 
@@ -747,6 +748,14 @@
     },
 
     jumpToAnalyzer(surahId, ayahNum) {
+      if (window.NavigationHistory) {
+        const queryLabel = this.lastQuery ? `Search ("${this.lastQuery}")` : 'Live Search Studio';
+        window.NavigationHistory.pushReturnContext({
+          originTab: 'search',
+          originScrollY: window.scrollY,
+          label: queryLabel
+        });
+      }
       if (window.CorpusEngine && typeof window.CorpusEngine.jumpToAyah === 'function') {
         window.CorpusEngine.jumpToAyah(surahId, ayahNum);
       } else if (window.switchAppTab) {
@@ -781,27 +790,50 @@
     },
 
     highlightText(text, query) {
-      if (!text) return '';
-      if (!query || !query.trim()) return text;
-
+      if (!text || !query) return text || '';
       const cleanQ = query.trim();
-      // 1. Try full exact phrase first
-      const safePhrase = cleanQ.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      const phraseRe = new RegExp(`(${safePhrase})`, 'gi');
-      if (phraseRe.test(text)) {
-        return text.replace(phraseRe, '<mark class="search-highlight">$1</mark>');
+      if (!cleanQ) return text;
+
+      // 1. Exact multi-word phrase boundary match
+      if (cleanQ.includes(' ')) {
+        const safePhrase = cleanQ.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const phraseRe = new RegExp('(^|[^\\p{L}\\p{M}\\d])(' + safePhrase + ')(?=[^\\p{L}\\p{M}\\d]|$)', 'giu');
+        if (phraseRe.test(text)) {
+          return text.replace(phraseRe, '$1<mark class="search-highlight">$2</mark>');
+        }
       }
 
-      // 2. Individual tokens > 2 characters
+      // 2. Individual tokens (length >= 3) with Whole-Word Token Boundary Expansion
       const tokens = cleanQ
         .split(/\s+/)
         .map((t) => t.trim())
-        .filter((t) => t.length > 2);
+        .filter((t) => t.length >= 3);
 
-      if (tokens.length === 0) return text;
-      const pattern = tokens.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
-      const tokenRe = new RegExp(`(${pattern})`, 'gi');
-      return text.replace(tokenRe, '<mark class="search-highlight">$1</mark>');
+      if (tokens.length === 0) {
+        const shortToken = cleanQ.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const shortRe = new RegExp('(^|[^\\p{L}\\p{M}\\d])(' + shortToken + ')(?=[^\\p{L}\\p{M}\\d]|$)', 'giu');
+        return text.replace(shortRe, '$1<mark class="search-highlight">$2</mark>');
+      }
+
+      // Sort tokens descending by length so longer patterns take precedence
+      tokens.sort((a, b) => b.length - a.length);
+
+      const ARABIC_DIACRITICS = '[\\u064B-\\u065F\\u0670\\u06D6-\\u06ED]';
+      const tokenPatterns = tokens.map((t) => {
+        const isArabicScript = /[\u0600-\u06FF]/.test(t);
+        if (isArabicScript) {
+          // Allow optional Quranic diacritics/tashkeel between each Arabic letter
+          const letters = t.split('').map((ch) => ch.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+          const flexPattern = letters.join(ARABIC_DIACRITICS + '*');
+          return '[\\p{L}\\p{M}\\d]*' + flexPattern + '[\\p{L}\\p{M}\\d]*';
+        } else {
+          const safeT = t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          return '[\\p{L}\\p{M}\\d]*' + safeT + '[\\p{L}\\p{M}\\d]*';
+        }
+      }).join('|');
+
+      const wordRe = new RegExp('(^|[^\\p{L}\\p{M}\\d])(' + tokenPatterns + ')(?=[^\\p{L}\\p{M}\\d]|$)', 'giu');
+      return text.replace(wordRe, '$1<mark class="search-highlight">$2</mark>');
     },
 
     escapeHtml(str) {
