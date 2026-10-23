@@ -15,7 +15,7 @@ Users can search in English / Roman Urdu regardless of transliteration style, ma
 | Output Deliverable | Format | Access Link | Description |
 | :--- | :---: | :--- | :--- |
 | **Roman Naat Studio Web App** | Web App / PWA | [index.html](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/17.%20Roman%20Naat/index.html) | Standalone client-side application with instant phonetic search, WhatsApp export, full reader modal, and recitation deck. |
-| **Zero-CORS Client Data Bundle** | JavaScript | [naat_library_data.js](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/17.%20Roman%20Naat/data/naat_library_data.js) | Pre-compiled 1.79 MB dataset with 363 kalams and 7,893 shers. Works offline via `file:///`. |
+| **Zero-CORS Client Data Bundle** | JavaScript | [naat_library_data.js](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/17.%20Roman%20Naat/data/naat_library_data.js) | Pre-compiled 1.79 MB dataset with 346 kalams and 7,766 shers. Works offline via `file:///`. |
 | **Canonical JSON Dataset** | JSON | [naat_library.json](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/17.%20Roman%20Naat/data/naat_library.json) | Clean structured JSON representing the entire 4-book Bareilly corpus. |
 | **Phonetic Search Engine** | JavaScript | [search-engine.js](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/17.%20Roman%20Naat/js/search-engine.js) | Sub-15ms multi-token search engine with diacritic stripping and vowel/consonant harmonization. |
 | **Tactile Acoustic FX Engine** | JavaScript | [audio-sfx.js](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/17.%20Roman%20Naat/js/audio-sfx.js) | Zero-music Web Audio API procedural sound engine for tactile clicks and success chimes (Directive 7 compliant). |
@@ -44,7 +44,7 @@ c:/Users/Shop PC 2/OneDrive/Desktop/Antigravity Files/17. Roman Naat/
 │   ├── search-engine.js                              # Smart Phonetic & Diacritic-Tolerant Engine
 │   └── audio-sfx.js                                  # Procedural Web Audio FX (Zero Music)
 ├── data/
-│   ├── naat_library_data.js                          # Zero-CORS Browser Bundle (363 Kalams, 7,893 Shers)
+│   ├── naat_library_data.js                          # Zero-CORS Browser Bundle (346 Kalams, 7,766 Shers)
 │   └── naat_library.json                             # Canonical JSON Corpus
 ├── scripts/
 │   └── extract_and_build_dataset.py                  # PyMuPDF Parser & Ingestion Pipeline
