@@ -19,7 +19,6 @@
         activeView: 'search', // 'search', 'browser', or 'diwan'
         reciteFontSize: 20,
         diwanFontSize: 18,
-        diwanCols: 2, // 2 or 1
         showTranslation: true,
         activeKalamId: null,
         activeDeckTab: 'shers', // 'shers' or 'kalams'
@@ -77,7 +76,6 @@
                 diwanPrevBtn: document.getElementById('diwan-prev-btn'),
                 diwanNextBtn: document.getElementById('diwan-next-btn'),
                 diwanChapIndicator: document.getElementById('diwan-chap-indicator'),
-                diwanColsBtn: document.getElementById('diwan-cols-btn'),
                 diwanTransBtn: document.getElementById('diwan-trans-btn'),
                 diwanTransLabel: document.getElementById('diwan-trans-label'),
                 diwanZoomOut: document.getElementById('diwan-zoom-out'),
@@ -137,10 +135,6 @@
             const savedTrans = localStorage.getItem('roman_naat_show_translation');
             if (savedTrans !== null) {
                 state.showTranslation = (savedTrans === 'true');
-            }
-            const savedCols = localStorage.getItem('roman_naat_diwan_cols');
-            if (savedCols) {
-                state.diwanCols = parseInt(savedCols, 10) || 2;
             }
             const savedMode = localStorage.getItem('roman_naat_search_mode');
             if (savedMode && (savedMode === 'shers' || savedMode === 'kalams')) {
@@ -389,13 +383,6 @@
             });
         }
 
-        if (dom.diwanColsBtn) {
-            dom.diwanColsBtn.addEventListener('click', function () {
-                if (window.AudioSFX) window.AudioSFX.playClick();
-                toggleDiwanColumns();
-            });
-        }
-
         if (dom.diwanZoomIn) {
             dom.diwanZoomIn.addEventListener('click', function () {
                 if (window.AudioSFX) window.AudioSFX.playClick();
@@ -494,40 +481,20 @@
      */
     function syncDiwanTranslationUI() {
         if (!dom.diwanTransBtn || !dom.diwanReaderView) return;
-        const bodyWrap = dom.diwanReaderView.querySelector('.diwan-body-wrap');
+        const bookPage = dom.diwanReaderView.querySelector('.diwan-book-page') || dom.diwanReaderView;
 
         if (state.showTranslation) {
             dom.diwanTransBtn.classList.add('active');
             if (dom.diwanTransLabel) dom.diwanTransLabel.textContent = 'Translation: ON';
-            if (bodyWrap) bodyWrap.classList.remove('hide-translations');
+            bookPage.classList.remove('hide-translations');
         } else {
             dom.diwanTransBtn.classList.remove('active');
             if (dom.diwanTransLabel) dom.diwanTransLabel.textContent = 'Translation: OFF';
-            if (bodyWrap) bodyWrap.classList.add('hide-translations');
+            bookPage.classList.add('hide-translations');
         }
     }
 
-    /**
-     * Synchronize Diwan Columns Toggle UI
-     */
-    function toggleDiwanColumns() {
-        state.diwanCols = state.diwanCols === 2 ? 1 : 2;
-        try { localStorage.setItem('roman_naat_diwan_cols', String(state.diwanCols)); } catch (e) {}
-        syncDiwanColumnsUI();
-    }
-
-    function syncDiwanColumnsUI() {
-        if (!dom.diwanVersesContainer || !dom.diwanColsBtn) return;
-        if (state.diwanCols === 1) {
-            dom.diwanVersesContainer.classList.remove('cols-2');
-            dom.diwanVersesContainer.classList.add('cols-1');
-            dom.diwanColsBtn.textContent = '🔲 1-Column';
-        } else {
-            dom.diwanVersesContainer.classList.remove('cols-1');
-            dom.diwanVersesContainer.classList.add('cols-2');
-            dom.diwanColsBtn.textContent = '🔲 2-Column';
-        }
-    }
+    function toggleDiwanColumns() {}
 
     /**
      * Synchronize Diwan Bookmark Button
@@ -911,7 +878,6 @@
         // 4. Sync UI Controls
         syncDiwanBookmarkUI();
         syncDiwanTranslationUI();
-        syncDiwanColumnsUI();
 
         if (dom.diwanVersesContainer) {
             dom.diwanVersesContainer.style.fontSize = `${state.diwanFontSize}px`;
@@ -949,7 +915,7 @@
             }
         }
 
-        // 7. Render Continuous Verses (Clean High-Density Layout)
+        // 7. Render Continuous Single-Column Poetry Flow (Left-Aligned, Minimal Spacing)
         if (dom.diwanVersesContainer) {
             let vHtml = '';
             for (let i = 0; i < kalam.shers.length; i++) {
@@ -957,10 +923,12 @@
                 const isTarget = (targetSherIndex && s.sher_index === Number(targetSherIndex));
 
                 vHtml += `
-                    <div class="diwan-verse-item ${isTarget ? 'target-verse-highlight' : ''}" id="diwan-verse-${s.sher_index}">
-                        <div class="diwan-verse-num">COUPLET ${s.sher_index}</div>
-                        <div class="diwan-misra">${escapeHtml(s.roman)}</div>
-                        ${s.english ? `<div class="diwan-trans">🇬🇧 ${escapeHtml(s.english)}</div>` : ''}
+                    <div class="diwan-stanza-row ${isTarget ? 'target-verse-highlight' : ''}" id="diwan-verse-${s.sher_index}">
+                        <div class="diwan-stanza-num">${s.sher_index}</div>
+                        <div class="diwan-stanza-text">
+                            <div class="diwan-misra-line">${escapeHtml(s.roman)}</div>
+                            ${s.english ? `<div class="diwan-trans-line">🇬🇧 ${escapeHtml(s.english)}</div>` : ''}
+                        </div>
                     </div>
                 `;
             }

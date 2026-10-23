@@ -10,6 +10,8 @@ Users can search in English / Roman Urdu regardless of transliteration style, ma
 - **Dual Search Modes**: Instant 1-tap switching between **Couplets (Shers)** and **Full Naats (Kalams)**.
 - **Deep Verse Matching**: Searching in Full Naat mode searches titles and internal verses, previewing the matched couplet snippet and jumping straight to it upon opening.
 - **Dedicated Reciter-Centric Reader**:
+  - Continuous single-column poetry book page (zero box borders, zero uppercase banners, minimal vertical scrolling).
+  - Subtle, faint gold margin numbering (`1`, `2`, `3`) with left-aligned couplets for fast, rhythmic scanning.
   - English Translation toggle (`ON` / `OFF`) for clean, distraction-free Roman Urdu recitation at gatherings.
   - Dynamic Font Zoom controls (`A-` / `A+`).
   - Sequential chapter flipping (`⬅️ Previous Naat` and `Next Naat ➡️`) to read through books continuously.
@@ -70,24 +72,24 @@ c:/Users/Shop PC 2/OneDrive/Desktop/Antigravity Files/10-Roman-Naat/
 ## ⚡ Quick-Start & Maintenance Commands
 
 ### 1. Open the Web Application
-Open [index.html](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/17.%20Roman%20Naat/index.html) directly in any web browser (Chrome, Edge, Firefox, Safari). No web server or Python daemon required.
+Open [index.html](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/10-Roman-Naat/index.html) directly in any web browser (Chrome, Edge, Firefox, Safari). No web server or Python daemon required.
 
 ### 2. Re-extract & Recompile Dataset
 If you add more poems or books, re-run the ingestion pipeline:
 ```powershell
-python "c:/Users/Shop PC 2/OneDrive/Desktop/Antigravity Files/17. Roman Naat/scripts/extract_and_build_dataset.py"
+python "c:/Users/Shop PC 2/OneDrive/Desktop/Antigravity Files/10-Roman-Naat/scripts/extract_and_build_dataset.py"
 ```
 
 ### 3. Run Automated Quality Test Suites
 ```powershell
 # Run Dataset Schema & Integrity Test
-python "c:/Users/Shop PC 2/OneDrive/Desktop/Antigravity Files/17. Roman Naat/tests/test_dataset_integrity.py"
+python "c:/Users/Shop PC 2/OneDrive/Desktop/Antigravity Files/10-Roman-Naat/tests/test_dataset_integrity.py"
 
 # Run Search Accuracy & Phonetics Test
-python "c:/Users/Shop PC 2/OneDrive/Desktop/Antigravity Files/17. Roman Naat/tests/test_search_accuracy.py"
+python "c:/Users/Shop PC 2/OneDrive/Desktop/Antigravity Files/10-Roman-Naat/tests/test_search_accuracy.py"
 
 # Run Script Compilation Test (node --check)
-node "c:/Users/Shop PC 2/OneDrive/Desktop/Antigravity Files/17. Roman Naat/tests/test_script_compilation.js"
+node "c:/Users/Shop PC 2/OneDrive/Desktop/Antigravity Files/10-Roman-Naat/tests/test_script_compilation.js"
 ```
 
 ---
