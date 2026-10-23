@@ -31,7 +31,7 @@ window.PORTAL_CATALOG = {
       "serverHref": "./01-Events-Countdown/index.html"
     },
     {
-      "id": "03-Hadith-Roman-Urdu__web__index_html",
+      "id": "08-Hadith-Roman-Urdu__web__index_html",
       "title": "Faizan-e-Hadees (Roman Urdu Portal)",
       "category": "Islamic & Faith",
       "icon": "📜",
@@ -48,12 +48,12 @@ window.PORTAL_CATALOG = {
         "pwa"
       ],
       "primary": true,
-      "relPath": "03-Hadith-Roman-Urdu/web/index.html",
-      "portalHref": "./03-Hadith-Roman-Urdu/web/index.html",
-      "serverHref": "./03-Hadith-Roman-Urdu/web/index.html"
+      "relPath": "08-Hadith-Roman-Urdu/web/index.html",
+      "portalHref": "./08-Hadith-Roman-Urdu/web/index.html",
+      "serverHref": "./08-Hadith-Roman-Urdu/web/index.html"
     },
     {
-      "id": "12-Fatawa-Project__output__index_html",
+      "id": "09-Fatawa-Project__output__index_html",
       "title": "Fatawa Razviya Next-Gen Studio",
       "category": "Islamic & Faith",
       "icon": "🏛️",
@@ -71,9 +71,9 @@ window.PORTAL_CATALOG = {
         "60fps"
       ],
       "primary": true,
-      "relPath": "12-Fatawa-Project/output/index.html",
-      "portalHref": "./12-Fatawa-Project/output/index.html",
-      "serverHref": "./12-Fatawa-Project/output/index.html"
+      "relPath": "09-Fatawa-Project/output/index.html",
+      "portalHref": "./09-Fatawa-Project/output/index.html",
+      "serverHref": "./09-Fatawa-Project/output/index.html"
     },
     {
       "id": "02-Namaz-Prayer-Times__index_html",
@@ -96,7 +96,7 @@ window.PORTAL_CATALOG = {
       "serverHref": "./02-Namaz-Prayer-Times/index.html"
     },
     {
-      "id": "15-Quran-Deep-Analyzer__index_html",
+      "id": "07-Quran-Deep-Analyzer__index_html",
       "title": "Quran Deep Analyzer Studio",
       "category": "Islamic & Faith",
       "icon": "📖",
@@ -112,12 +112,12 @@ window.PORTAL_CATALOG = {
         "pwa"
       ],
       "primary": true,
-      "relPath": "15-Quran-Deep-Analyzer/index.html",
-      "portalHref": "./15-Quran-Deep-Analyzer/index.html",
-      "serverHref": "./15-Quran-Deep-Analyzer/index.html"
+      "relPath": "07-Quran-Deep-Analyzer/index.html",
+      "portalHref": "./07-Quran-Deep-Analyzer/index.html",
+      "serverHref": "./07-Quran-Deep-Analyzer/index.html"
     },
     {
-      "id": "15-Quran-Deep-Analyzer__manners_html",
+      "id": "07-Quran-Deep-Analyzer__manners_html",
       "title": "Quranic Manners Compendium (قرآنی اخلاق و آداب)",
       "category": "Islamic & Faith",
       "icon": "🌿",
@@ -134,12 +134,12 @@ window.PORTAL_CATALOG = {
         "pwa"
       ],
       "primary": true,
-      "relPath": "15-Quran-Deep-Analyzer/manners.html",
-      "portalHref": "./15-Quran-Deep-Analyzer/manners.html",
-      "serverHref": "./15-Quran-Deep-Analyzer/manners.html"
+      "relPath": "07-Quran-Deep-Analyzer/manners.html",
+      "portalHref": "./07-Quran-Deep-Analyzer/manners.html",
+      "serverHref": "./07-Quran-Deep-Analyzer/manners.html"
     },
     {
-      "id": "17_ Roman Naat__index_html",
+      "id": "10-Roman-Naat__index_html",
       "title": "Roman Naat Studio (Bareilly Diwans)",
       "category": "Islamic & Faith",
       "icon": "✨",
@@ -158,12 +158,12 @@ window.PORTAL_CATALOG = {
         "recitation"
       ],
       "primary": true,
-      "relPath": "17. Roman Naat/index.html",
-      "portalHref": "./17. Roman Naat/index.html",
-      "serverHref": "./17. Roman Naat/index.html"
+      "relPath": "10-Roman-Naat/index.html",
+      "portalHref": "./10-Roman-Naat/index.html",
+      "serverHref": "./10-Roman-Naat/index.html"
     },
     {
-      "id": "03-Hadith-Roman-Urdu__web__top_100_short_hadiths_html",
+      "id": "08-Hadith-Roman-Urdu__web__top_100_short_hadiths_html",
       "title": "Top 100 Short Hadiths",
       "category": "Islamic & Faith",
       "icon": "🌟",
@@ -180,9 +180,9 @@ window.PORTAL_CATALOG = {
         "pwa"
       ],
       "primary": true,
-      "relPath": "03-Hadith-Roman-Urdu/web/top_100_short_hadiths.html",
-      "portalHref": "./03-Hadith-Roman-Urdu/web/top_100_short_hadiths.html",
-      "serverHref": "./03-Hadith-Roman-Urdu/web/top_100_short_hadiths.html"
+      "relPath": "08-Hadith-Roman-Urdu/web/top_100_short_hadiths.html",
+      "portalHref": "./08-Hadith-Roman-Urdu/web/top_100_short_hadiths.html",
+      "serverHref": "./08-Hadith-Roman-Urdu/web/top_100_short_hadiths.html"
     },
     {
       "id": "01-Events-Countdown__events_visitor_html",
@@ -219,7 +219,7 @@ window.PORTAL_CATALOG = {
       "serverHref": "./01-Events-Countdown/events.html"
     },
     {
-      "id": "12-Fatawa-Project__output__fatawa_reader_html",
+      "id": "09-Fatawa-Project__output__fatawa_reader_html",
       "title": "Fatawa Razviya Part 1 (Short)",
       "category": "Islamic & Faith",
       "icon": "🟢",
@@ -234,12 +234,12 @@ window.PORTAL_CATALOG = {
         "reader"
       ],
       "primary": false,
-      "relPath": "12-Fatawa-Project/output/fatawa_reader.html",
-      "portalHref": "./12-Fatawa-Project/output/fatawa_reader.html",
-      "serverHref": "./12-Fatawa-Project/output/fatawa_reader.html"
+      "relPath": "09-Fatawa-Project/output/fatawa_reader.html",
+      "portalHref": "./09-Fatawa-Project/output/fatawa_reader.html",
+      "serverHref": "./09-Fatawa-Project/output/fatawa_reader.html"
     },
     {
-      "id": "12-Fatawa-Project__output__medium_reader_html",
+      "id": "09-Fatawa-Project__output__medium_reader_html",
       "title": "Fatawa Razviya Part 2 (Medium)",
       "category": "Islamic & Faith",
       "icon": "🟡",
@@ -254,12 +254,12 @@ window.PORTAL_CATALOG = {
         "reader"
       ],
       "primary": false,
-      "relPath": "12-Fatawa-Project/output/medium_reader.html",
-      "portalHref": "./12-Fatawa-Project/output/medium_reader.html",
-      "serverHref": "./12-Fatawa-Project/output/medium_reader.html"
+      "relPath": "09-Fatawa-Project/output/medium_reader.html",
+      "portalHref": "./09-Fatawa-Project/output/medium_reader.html",
+      "serverHref": "./09-Fatawa-Project/output/medium_reader.html"
     },
     {
-      "id": "12-Fatawa-Project__output__long_reader_html",
+      "id": "09-Fatawa-Project__output__long_reader_html",
       "title": "Fatawa Razviya Part 3 (Long)",
       "category": "Islamic & Faith",
       "icon": "🔵",
@@ -274,12 +274,12 @@ window.PORTAL_CATALOG = {
         "reader"
       ],
       "primary": false,
-      "relPath": "12-Fatawa-Project/output/long_reader.html",
-      "portalHref": "./12-Fatawa-Project/output/long_reader.html",
-      "serverHref": "./12-Fatawa-Project/output/long_reader.html"
+      "relPath": "09-Fatawa-Project/output/long_reader.html",
+      "portalHref": "./09-Fatawa-Project/output/long_reader.html",
+      "serverHref": "./09-Fatawa-Project/output/long_reader.html"
     },
     {
-      "id": "12-Fatawa-Project__output__rasail_reader_html",
+      "id": "09-Fatawa-Project__output__rasail_reader_html",
       "title": "Fatawa Razviya Part 4 (Rasail & Extended)",
       "category": "Islamic & Faith",
       "icon": "🟣",
@@ -297,12 +297,12 @@ window.PORTAL_CATALOG = {
         "reader"
       ],
       "primary": false,
-      "relPath": "12-Fatawa-Project/output/rasail_reader.html",
-      "portalHref": "./12-Fatawa-Project/output/rasail_reader.html",
-      "serverHref": "./12-Fatawa-Project/output/rasail_reader.html"
+      "relPath": "09-Fatawa-Project/output/rasail_reader.html",
+      "portalHref": "./09-Fatawa-Project/output/rasail_reader.html",
+      "serverHref": "./09-Fatawa-Project/output/rasail_reader.html"
     },
     {
-      "id": "12-Fatawa-Project__output__studio_html",
+      "id": "09-Fatawa-Project__output__studio_html",
       "title": "Fatawa Razviya Studio Edition",
       "category": "Islamic & Faith",
       "icon": "⚡",
@@ -315,9 +315,9 @@ window.PORTAL_CATALOG = {
         "reader"
       ],
       "primary": false,
-      "relPath": "12-Fatawa-Project/output/studio.html",
-      "portalHref": "./12-Fatawa-Project/output/studio.html",
-      "serverHref": "./12-Fatawa-Project/output/studio.html"
+      "relPath": "09-Fatawa-Project/output/studio.html",
+      "portalHref": "./09-Fatawa-Project/output/studio.html",
+      "serverHref": "./09-Fatawa-Project/output/studio.html"
     },
     {
       "id": "02-Namaz-Prayer-Times__widget_html",
@@ -338,7 +338,7 @@ window.PORTAL_CATALOG = {
       "serverHref": "./02-Namaz-Prayer-Times/widget.html"
     },
     {
-      "id": "04-Cloud-Clipboard__index_html",
+      "id": "05-Cloud-Clipboard__index_html",
       "title": "CloudClip PRO",
       "category": "Productivity & Utilities",
       "icon": "📋",
@@ -353,12 +353,12 @@ window.PORTAL_CATALOG = {
         "productivity"
       ],
       "primary": true,
-      "relPath": "04-Cloud-Clipboard/index.html",
-      "portalHref": "./04-Cloud-Clipboard/index.html",
-      "serverHref": "./04-Cloud-Clipboard/index.html"
+      "relPath": "05-Cloud-Clipboard/index.html",
+      "portalHref": "./05-Cloud-Clipboard/index.html",
+      "serverHref": "./05-Cloud-Clipboard/index.html"
     },
     {
-      "id": "08-Pincode-Search__index_html",
+      "id": "04-Pincode-Search__index_html",
       "title": "Courier Pincode Search PWA",
       "category": "Productivity & Utilities",
       "icon": "📦",
@@ -373,12 +373,12 @@ window.PORTAL_CATALOG = {
         "search"
       ],
       "primary": true,
-      "relPath": "08-Pincode-Search/index.html",
-      "portalHref": "./08-Pincode-Search/index.html",
-      "serverHref": "./08-Pincode-Search/index.html"
+      "relPath": "04-Pincode-Search/index.html",
+      "portalHref": "./04-Pincode-Search/index.html",
+      "serverHref": "./04-Pincode-Search/index.html"
     },
     {
-      "id": "16-Mobile-Phone-Analysis__index_html",
+      "id": "15-Mobile-Phone-Analysis__index_html",
       "title": "Smartphone Hardware & Decision Studio",
       "category": "Productivity & Utilities",
       "icon": "📱",
@@ -393,12 +393,12 @@ window.PORTAL_CATALOG = {
         "benchmarks"
       ],
       "primary": true,
-      "relPath": "16-Mobile-Phone-Analysis/index.html",
-      "portalHref": "./16-Mobile-Phone-Analysis/index.html",
-      "serverHref": "./16-Mobile-Phone-Analysis/index.html"
+      "relPath": "15-Mobile-Phone-Analysis/index.html",
+      "portalHref": "./15-Mobile-Phone-Analysis/index.html",
+      "serverHref": "./15-Mobile-Phone-Analysis/index.html"
     },
     {
-      "id": "14-Thela-Stock-Manager__index_html",
+      "id": "03-Thela-Stock-Manager__index_html",
       "title": "Thela Stock Manager PWA",
       "category": "Productivity & Utilities",
       "icon": "📦",
@@ -414,12 +414,12 @@ window.PORTAL_CATALOG = {
         "offline"
       ],
       "primary": true,
-      "relPath": "14-Thela-Stock-Manager/index.html",
-      "portalHref": "./14-Thela-Stock-Manager/index.html",
-      "serverHref": "./14-Thela-Stock-Manager/index.html"
+      "relPath": "03-Thela-Stock-Manager/index.html",
+      "portalHref": "./03-Thela-Stock-Manager/index.html",
+      "serverHref": "./03-Thela-Stock-Manager/index.html"
     },
     {
-      "id": "08-Pincode-Search__Pincode_Search_Offline_html",
+      "id": "04-Pincode-Search__Pincode_Search_Offline_html",
       "title": "Pincode Search (Standalone Offline)",
       "category": "Productivity & Utilities",
       "icon": "⚡",
@@ -432,12 +432,12 @@ window.PORTAL_CATALOG = {
         "courier"
       ],
       "primary": false,
-      "relPath": "08-Pincode-Search/Pincode_Search_Offline.html",
-      "portalHref": "./08-Pincode-Search/Pincode_Search_Offline.html",
-      "serverHref": "./08-Pincode-Search/Pincode_Search_Offline.html"
+      "relPath": "04-Pincode-Search/Pincode_Search_Offline.html",
+      "portalHref": "./04-Pincode-Search/Pincode_Search_Offline.html",
+      "serverHref": "./04-Pincode-Search/Pincode_Search_Offline.html"
     },
     {
-      "id": "13-Sustainable-Weight-Gain-Guide__Weight_Gain_Dashboard_html",
+      "id": "06-Sustainable-Weight-Gain-Guide__Weight_Gain_Dashboard_html",
       "title": "Sustainable Weight Gain Suite",
       "category": "Health & Nutrition",
       "icon": "🥗",
@@ -452,9 +452,9 @@ window.PORTAL_CATALOG = {
         "fitness"
       ],
       "primary": true,
-      "relPath": "13-Sustainable-Weight-Gain-Guide/Weight_Gain_Dashboard.html",
-      "portalHref": "./13-Sustainable-Weight-Gain-Guide/Weight_Gain_Dashboard.html",
-      "serverHref": "./13-Sustainable-Weight-Gain-Guide/Weight_Gain_Dashboard.html"
+      "relPath": "06-Sustainable-Weight-Gain-Guide/Weight_Gain_Dashboard.html",
+      "portalHref": "./06-Sustainable-Weight-Gain-Guide/Weight_Gain_Dashboard.html",
+      "serverHref": "./06-Sustainable-Weight-Gain-Guide/Weight_Gain_Dashboard.html"
     },
     {
       "id": "Common-Resources__Knowledge_Navigator_html",
@@ -549,52 +549,52 @@ window.PORTAL_CATALOG = {
       "serverHref": "./01-Events-Countdown/android/app/src/main/assets/index.html"
     },
     {
-      "id": "04-Cloud-Clipboard__Clipboard Sync_html",
+      "id": "05-Cloud-Clipboard__Clipboard Sync_html",
       "title": "My Cloud Clipboard Pro",
       "category": "Discovered Tools",
       "icon": "📄",
-      "badge": "04-Cloud-Clipboard",
-      "description": "HTML application located in 04-Cloud-Clipboard.",
+      "badge": "05-Cloud-Clipboard",
+      "description": "HTML application located in 05-Cloud-Clipboard.",
       "tags": [
-        "04-cloud-clipboard",
+        "05-cloud-clipboard",
         "clipboard sync.html"
       ],
       "primary": false,
-      "relPath": "04-Cloud-Clipboard/Clipboard Sync.html",
-      "portalHref": "./04-Cloud-Clipboard/Clipboard Sync.html",
-      "serverHref": "./04-Cloud-Clipboard/Clipboard Sync.html"
+      "relPath": "05-Cloud-Clipboard/Clipboard Sync.html",
+      "portalHref": "./05-Cloud-Clipboard/Clipboard Sync.html",
+      "serverHref": "./05-Cloud-Clipboard/Clipboard Sync.html"
     },
     {
-      "id": "08-Pincode-Search__phone_qr_html",
+      "id": "04-Pincode-Search__phone_qr_html",
       "title": "Scan with Phone — Courier Pincode Search",
       "category": "Discovered Tools",
       "icon": "📄",
-      "badge": "08-Pincode-Search",
-      "description": "HTML application located in 08-Pincode-Search.",
+      "badge": "04-Pincode-Search",
+      "description": "HTML application located in 04-Pincode-Search.",
       "tags": [
-        "08-pincode-search",
+        "04-pincode-search",
         "phone_qr.html"
       ],
       "primary": false,
-      "relPath": "08-Pincode-Search/phone_qr.html",
-      "portalHref": "./08-Pincode-Search/phone_qr.html",
-      "serverHref": "./08-Pincode-Search/phone_qr.html"
+      "relPath": "04-Pincode-Search/phone_qr.html",
+      "portalHref": "./04-Pincode-Search/phone_qr.html",
+      "serverHref": "./04-Pincode-Search/phone_qr.html"
     },
     {
-      "id": "15-Quran-Deep-Analyzer__commands_html",
-      "title": "📜 احکامِ الٰہی و طرزِ زندگی • Divine Commands & Injunctions for Human Living",
+      "id": "07-Quran-Deep-Analyzer__commands_html",
+      "title": "📜 Divine Commands & Injunctions • Quranic Blueprint for Human Living",
       "category": "Discovered Tools",
       "icon": "📄",
-      "badge": "15-Quran-Deep-Analyzer",
-      "description": "قرآن حکیم کے 80 منتخب اوامر و نواہی (احکامِ الٰہی): خوراک، صحت، شائستہ گفتگو، غریب پروری، اخلاق، دیانت اور انسانی فلاح کا جامع قرآنی چارٹر مع کنز الایمان و حکمت۔",
+      "badge": "07-Quran-Deep-Analyzer",
+      "description": "The 80 Canonical Divine Directives (Commands & Prohibitions) of the Holy Quran for Human Living, Health, Ethics, Compassion & Social Harmony with Kanzul Iman & Saheeh International.",
       "tags": [
-        "15-quran-deep-analyzer",
+        "07-quran-deep-analyzer",
         "commands.html"
       ],
       "primary": false,
-      "relPath": "15-Quran-Deep-Analyzer/commands.html",
-      "portalHref": "./15-Quran-Deep-Analyzer/commands.html",
-      "serverHref": "./15-Quran-Deep-Analyzer/commands.html"
+      "relPath": "07-Quran-Deep-Analyzer/commands.html",
+      "portalHref": "./07-Quran-Deep-Analyzer/commands.html",
+      "serverHref": "./07-Quran-Deep-Analyzer/commands.html"
     }
   ]
 };

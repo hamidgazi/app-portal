@@ -16,12 +16,14 @@
         bookmarks: new Set(), // Couplet keys: "kalamId:sherIndex"
         kalamBookmarks: new Set(), // Full Kalam IDs: "kalamId"
         theme: 'dark',
-        activeView: 'search', // 'search' or 'browser'
+        activeView: 'search', // 'search', 'browser', or 'diwan'
         reciteFontSize: 20,
-        readerFontSize: 19,
+        diwanFontSize: 18,
+        diwanCols: 2, // 2 or 1
         showTranslation: true,
         activeKalamId: null,
-        activeDeckTab: 'shers' // 'shers' or 'kalams'
+        activeDeckTab: 'shers', // 'shers' or 'kalams'
+        previousScrollY: 0
     };
 
     // DOM Elements Cache
@@ -37,6 +39,7 @@
         try {
             dom = {
                 body: document.body,
+                searchHero: document.querySelector('.search-hero'),
                 searchInput: document.getElementById('search-input'),
                 searchClearBtn: document.getElementById('search-clear-btn'),
                 bookPills: document.querySelectorAll('.pill-btn[data-book]'),
@@ -61,24 +64,30 @@
                 deckToggleBtn: document.getElementById('deck-toggle-btn'),
                 deckBadge: document.getElementById('deck-badge'),
                 
-                // Full Kalam Modal & Reader Controls
-                kalamModal: document.getElementById('kalam-modal'),
-                modalTitle: document.getElementById('modal-title'),
-                modalMeta: document.getElementById('modal-meta'),
-                modalBody: document.getElementById('modal-body'),
-                modalCloseBtn: document.getElementById('modal-close-btn'),
-                modalCopyAllBtn: document.getElementById('modal-copy-all-btn'),
-                modalWhatsappAllBtn: document.getElementById('modal-whatsapp-all-btn'),
-                readerTransToggle: document.getElementById('reader-trans-toggle'),
-                transBtnLabel: document.getElementById('trans-btn-label'),
-                readerZoomIn: document.getElementById('reader-zoom-in'),
-                readerZoomOut: document.getElementById('reader-zoom-out'),
-                readerBookmarkBtn: document.getElementById('reader-bookmark-btn'),
-                readerBookmarkLabel: document.getElementById('reader-bookmark-label'),
-                readerLinkBtn: document.getElementById('reader-link-btn'),
-                readerPrevBtn: document.getElementById('reader-prev-btn'),
-                readerNextBtn: document.getElementById('reader-next-btn'),
-                readerPositionBadge: document.getElementById('reader-position-badge'),
+                // Dedicated Full-Page Diwan Reader Elements
+                diwanReaderView: document.getElementById('diwan-reader-view'),
+                diwanBackBtn: document.getElementById('diwan-back-btn'),
+                diwanTitle: document.getElementById('diwan-title'),
+                diwanBookBadge: document.getElementById('diwan-book-badge'),
+                diwanAuthorBadge: document.getElementById('diwan-author-badge'),
+                diwanPageBadge: document.getElementById('diwan-page-badge'),
+                diwanVerseCount: document.getElementById('diwan-verse-count'),
+                diwanWhatsappBtn: document.getElementById('diwan-whatsapp-btn'),
+                diwanCopyBtn: document.getElementById('diwan-copy-btn'),
+                diwanPrevBtn: document.getElementById('diwan-prev-btn'),
+                diwanNextBtn: document.getElementById('diwan-next-btn'),
+                diwanChapIndicator: document.getElementById('diwan-chap-indicator'),
+                diwanColsBtn: document.getElementById('diwan-cols-btn'),
+                diwanTransBtn: document.getElementById('diwan-trans-btn'),
+                diwanTransLabel: document.getElementById('diwan-trans-label'),
+                diwanZoomOut: document.getElementById('diwan-zoom-out'),
+                diwanZoomIn: document.getElementById('diwan-zoom-in'),
+                diwanBookmarkBtn: document.getElementById('diwan-bookmark-btn'),
+                diwanBookmarkLabel: document.getElementById('diwan-bookmark-label'),
+                diwanShareLinkBtn: document.getElementById('diwan-share-link-btn'),
+                diwanIntroNote: document.getElementById('diwan-intro-note'),
+                diwanVersesContainer: document.getElementById('diwan-verses-container'),
+                diwanFootnote: document.getElementById('diwan-footnote'),
                 
                 // Recitation Deck Drawer
                 deckDrawer: document.getElementById('deck-drawer'),
@@ -129,6 +138,10 @@
             if (savedTrans !== null) {
                 state.showTranslation = (savedTrans === 'true');
             }
+            const savedCols = localStorage.getItem('roman_naat_diwan_cols');
+            if (savedCols) {
+                state.diwanCols = parseInt(savedCols, 10) || 2;
+            }
             const savedMode = localStorage.getItem('roman_naat_search_mode');
             if (savedMode && (savedMode === 'shers' || savedMode === 'kalams')) {
                 state.searchMode = savedMode;
@@ -178,6 +191,7 @@
         try {
             checkUrlDeepLink();
             window.addEventListener('hashchange', checkUrlDeepLink);
+            window.addEventListener('popstate', handlePopState);
         } catch (err) {
             console.warn("[Bootloader] Deep link initialization failure:", err);
         }
@@ -359,45 +373,59 @@
             });
         }
 
-        // Reciter-Centric Toolbar in Full Kalam Reader
-        if (dom.readerTransToggle) {
-            dom.readerTransToggle.addEventListener('click', function () {
+        // Dedicated Diwan Reader Controls
+        if (dom.diwanBackBtn) {
+            dom.diwanBackBtn.addEventListener('click', function () {
+                closeDiwanReader();
+            });
+        }
+
+        if (dom.diwanTransBtn) {
+            dom.diwanTransBtn.addEventListener('click', function () {
                 if (window.AudioSFX) window.AudioSFX.playClick();
                 state.showTranslation = !state.showTranslation;
                 try { localStorage.setItem('roman_naat_show_translation', String(state.showTranslation)); } catch (e) {}
-                syncTranslationToggleUI();
+                syncDiwanTranslationUI();
             });
         }
 
-        if (dom.readerZoomIn) {
-            dom.readerZoomIn.addEventListener('click', function () {
+        if (dom.diwanColsBtn) {
+            dom.diwanColsBtn.addEventListener('click', function () {
                 if (window.AudioSFX) window.AudioSFX.playClick();
-                if (state.readerFontSize < 32) {
-                    state.readerFontSize += 2;
-                    if (dom.modalBody) dom.modalBody.style.fontSize = `${state.readerFontSize}px`;
+                toggleDiwanColumns();
+            });
+        }
+
+        if (dom.diwanZoomIn) {
+            dom.diwanZoomIn.addEventListener('click', function () {
+                if (window.AudioSFX) window.AudioSFX.playClick();
+                if (state.diwanFontSize < 30) {
+                    state.diwanFontSize += 2;
+                    if (dom.diwanVersesContainer) dom.diwanVersesContainer.style.fontSize = `${state.diwanFontSize}px`;
                 }
             });
         }
-        if (dom.readerZoomOut) {
-            dom.readerZoomOut.addEventListener('click', function () {
+        if (dom.diwanZoomOut) {
+            dom.diwanZoomOut.addEventListener('click', function () {
                 if (window.AudioSFX) window.AudioSFX.playClick();
-                if (state.readerFontSize > 15) {
-                    state.readerFontSize -= 2;
-                    if (dom.modalBody) dom.modalBody.style.fontSize = `${state.readerFontSize}px`;
+                if (state.diwanFontSize > 15) {
+                    state.diwanFontSize -= 2;
+                    if (dom.diwanVersesContainer) dom.diwanVersesContainer.style.fontSize = `${state.diwanFontSize}px`;
                 }
             });
         }
 
-        if (dom.readerBookmarkBtn) {
-            dom.readerBookmarkBtn.addEventListener('click', function () {
+        if (dom.diwanBookmarkBtn) {
+            dom.diwanBookmarkBtn.addEventListener('click', function () {
                 if (state.activeKalamId) {
                     toggleKalamBookmark(state.activeKalamId);
+                    syncDiwanBookmarkUI();
                 }
             });
         }
 
-        if (dom.readerLinkBtn) {
-            dom.readerLinkBtn.addEventListener('click', function () {
+        if (dom.diwanShareLinkBtn) {
+            dom.diwanShareLinkBtn.addEventListener('click', function () {
                 if (!state.activeKalamId) return;
                 const url = window.location.origin + window.location.pathname + '#kalam=' + state.activeKalamId;
                 navigator.clipboard.writeText(url).then(() => {
@@ -409,49 +437,34 @@
             });
         }
 
-        // Sequential Navigation Buttons
-        if (dom.readerPrevBtn) {
-            dom.readerPrevBtn.addEventListener('click', function () {
+        if (dom.diwanPrevBtn) {
+            dom.diwanPrevBtn.addEventListener('click', function () {
                 navigateSequentialKalam(-1);
             });
         }
-        if (dom.readerNextBtn) {
-            dom.readerNextBtn.addEventListener('click', function () {
+        if (dom.diwanNextBtn) {
+            dom.diwanNextBtn.addEventListener('click', function () {
                 navigateSequentialKalam(1);
             });
         }
 
-        // Modal Close Button
-        if (dom.modalCloseBtn) {
-            dom.modalCloseBtn.addEventListener('click', function () {
-                if (window.AudioSFX) window.AudioSFX.playClick();
-                closeKalamModal();
-            });
-        }
-        if (dom.kalamModal) {
-            dom.kalamModal.addEventListener('click', function (e) {
-                if (e.target === dom.kalamModal) {
-                    closeKalamModal();
-                }
-            });
-        }
-
-        // Full Kalam Copy & WhatsApp Buttons
-        if (dom.modalCopyAllBtn) {
-            dom.modalCopyAllBtn.addEventListener('click', function () {
-                copyFullKalam(state.activeKalamId);
-            });
-        }
-        if (dom.modalWhatsappAllBtn) {
-            dom.modalWhatsappAllBtn.addEventListener('click', function () {
+        if (dom.diwanWhatsappBtn) {
+            dom.diwanWhatsappBtn.addEventListener('click', function () {
                 shareFullKalamToWhatsApp(state.activeKalamId);
             });
         }
+        if (dom.diwanCopyBtn) {
+            dom.diwanCopyBtn.addEventListener('click', function () {
+                copyFullKalam(state.activeKalamId);
+            });
+        }
 
-        // Escape Key Listener to Close Modals
+        // Escape Key Listener to Close Modals / Return from Diwan
         window.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') {
-                closeKalamModal();
+                if (state.activeView === 'diwan') {
+                    closeDiwanReader();
+                }
                 closeRecitationDeck();
             }
         });
@@ -477,18 +490,55 @@
     }
 
     /**
-     * Synchronize Translation Toggle UI & DOM Class
+     * Synchronize Diwan Translation Toggle UI
      */
-    function syncTranslationToggleUI() {
-        if (!dom.readerTransToggle || !dom.modalBody) return;
+    function syncDiwanTranslationUI() {
+        if (!dom.diwanTransBtn || !dom.diwanReaderView) return;
+        const bodyWrap = dom.diwanReaderView.querySelector('.diwan-body-wrap');
+
         if (state.showTranslation) {
-            dom.readerTransToggle.classList.add('active');
-            if (dom.transBtnLabel) dom.transBtnLabel.textContent = 'Translation: ON';
-            dom.modalBody.classList.remove('hide-translations');
+            dom.diwanTransBtn.classList.add('active');
+            if (dom.diwanTransLabel) dom.diwanTransLabel.textContent = 'Translation: ON';
+            if (bodyWrap) bodyWrap.classList.remove('hide-translations');
         } else {
-            dom.readerTransToggle.classList.remove('active');
-            if (dom.transBtnLabel) dom.transBtnLabel.textContent = 'Translation: OFF';
-            dom.modalBody.classList.add('hide-translations');
+            dom.diwanTransBtn.classList.remove('active');
+            if (dom.diwanTransLabel) dom.diwanTransLabel.textContent = 'Translation: OFF';
+            if (bodyWrap) bodyWrap.classList.add('hide-translations');
+        }
+    }
+
+    /**
+     * Synchronize Diwan Columns Toggle UI
+     */
+    function toggleDiwanColumns() {
+        state.diwanCols = state.diwanCols === 2 ? 1 : 2;
+        try { localStorage.setItem('roman_naat_diwan_cols', String(state.diwanCols)); } catch (e) {}
+        syncDiwanColumnsUI();
+    }
+
+    function syncDiwanColumnsUI() {
+        if (!dom.diwanVersesContainer || !dom.diwanColsBtn) return;
+        if (state.diwanCols === 1) {
+            dom.diwanVersesContainer.classList.remove('cols-2');
+            dom.diwanVersesContainer.classList.add('cols-1');
+            dom.diwanColsBtn.textContent = '🔲 1-Column';
+        } else {
+            dom.diwanVersesContainer.classList.remove('cols-1');
+            dom.diwanVersesContainer.classList.add('cols-2');
+            dom.diwanColsBtn.textContent = '🔲 2-Column';
+        }
+    }
+
+    /**
+     * Synchronize Diwan Bookmark Button
+     */
+    function syncDiwanBookmarkUI() {
+        if (!dom.diwanBookmarkLabel || !state.activeKalamId) return;
+        const isStarred = state.kalamBookmarks.has(state.activeKalamId);
+        dom.diwanBookmarkLabel.textContent = isStarred ? 'Saved ⭐' : 'Bookmark';
+        if (dom.diwanBookmarkBtn) {
+            if (isStarred) dom.diwanBookmarkBtn.classList.add('active');
+            else dom.diwanBookmarkBtn.classList.remove('active');
         }
     }
 
@@ -498,15 +548,19 @@
     function toggleView(view) {
         state.activeView = view;
         if (view === 'browser') {
+            if (dom.searchHero) dom.searchHero.style.display = 'none';
             if (dom.resultsContainer) dom.resultsContainer.style.display = 'none';
             if (dom.browserContainer) dom.browserContainer.style.display = 'block';
+            if (dom.diwanReaderView) dom.diwanReaderView.style.display = 'none';
             if (dom.browserToggleBtn) {
                 dom.browserToggleBtn.style.borderColor = 'var(--accent-gold)';
                 dom.browserToggleBtn.innerHTML = '🔍 Search View';
             }
         } else {
+            if (dom.searchHero) dom.searchHero.style.display = 'block';
             if (dom.resultsContainer) dom.resultsContainer.style.display = 'block';
             if (dom.browserContainer) dom.browserContainer.style.display = 'none';
+            if (dom.diwanReaderView) dom.diwanReaderView.style.display = 'none';
             if (dom.browserToggleBtn) {
                 dom.browserToggleBtn.style.borderColor = 'var(--border-subtle)';
                 dom.browserToggleBtn.innerHTML = '📚 Book Index';
@@ -623,8 +677,8 @@
                             </button>
                         </div>
                         <button class="btn-open-kalam" 
-                                onclick="window.App.openKalamModal('${item.kalamId}', ${item.sherIndex})">
-                            📖 Full Kalam
+                                onclick="window.App.openDiwanReader('${item.kalamId}', ${item.sherIndex})">
+                            📖 Read Full Kalam →
                         </button>
                     </div>
                 </div>
@@ -737,7 +791,7 @@
                             </button>
                         </div>
                         <button class="btn-open-kalam" style="background: var(--accent-gold); color: #06110a; font-weight: 700;"
-                                onclick="window.App.openKalamModal('${k.id}', ${res.matchedSherIndex})">
+                                onclick="window.App.openDiwanReader('${k.id}', ${res.matchedSherIndex})">
                             📖 Read Full Naat (${k.shers.length}) →
                         </button>
                     </div>
@@ -785,7 +839,7 @@
             for (let k = 0; k < bookKalams.length; k++) {
                 const item = bookKalams[k];
                 html += `
-                    <div class="kalam-toc-item" onclick="window.App.openKalamModal('${item.id}', 1)">
+                    <div class="kalam-toc-item" onclick="window.App.openDiwanReader('${item.id}', 1)">
                         <div>
                             <strong>#${item.kalam_number}.</strong> ${escapeHtml(item.title)}
                             <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">
@@ -826,127 +880,143 @@
     }
 
     /**
-     * Open Full Kalam Modal with Reciter-Centric Controls & Auto-Scroll
+     * Open Full-Page Dedicated Diwan Reader (No Modals, Minimal Scrolling)
      */
-    function openKalamModal(kalamId, targetSherIndex = 1) {
-        if (!dom.kalamModal || !window.NAAT_LIBRARY) return;
+    function openDiwanReader(kalamId, targetSherIndex = 1) {
+        if (!dom.diwanReaderView || !window.NAAT_LIBRARY) return;
         if (window.AudioSFX) window.AudioSFX.playClick();
 
         const kalam = window.NAAT_LIBRARY.kalams.find(k => k.id === kalamId);
         if (!kalam) return;
 
         state.activeKalamId = kalamId;
+        state.previousScrollY = window.scrollY;
+        state.activeView = 'diwan';
 
-        // Title & Meta
-        if (dom.modalTitle) {
-            dom.modalTitle.textContent = kalam.title;
+        // 1. Hide search hero, results container, and browser container
+        if (dom.searchHero) dom.searchHero.style.display = 'none';
+        if (dom.resultsContainer) dom.resultsContainer.style.display = 'none';
+        if (dom.browserContainer) dom.browserContainer.style.display = 'none';
+
+        // 2. Unhide Diwan Reader View
+        dom.diwanReaderView.style.display = 'block';
+
+        // 3. Populate Header Info
+        if (dom.diwanTitle) dom.diwanTitle.textContent = kalam.title;
+        if (dom.diwanBookBadge) dom.diwanBookBadge.textContent = `📖 ${kalam.book_title}`;
+        if (dom.diwanAuthorBadge) dom.diwanAuthorBadge.textContent = `✍️ ${kalam.author}`;
+        if (dom.diwanPageBadge) dom.diwanPageBadge.textContent = `Pg. ${kalam.start_page}`;
+        if (dom.diwanVerseCount) dom.diwanVerseCount.textContent = `${kalam.shers.length} Couplets`;
+
+        // 4. Sync UI Controls
+        syncDiwanBookmarkUI();
+        syncDiwanTranslationUI();
+        syncDiwanColumnsUI();
+
+        if (dom.diwanVersesContainer) {
+            dom.diwanVersesContainer.style.fontSize = `${state.diwanFontSize}px`;
         }
-        if (dom.modalMeta) {
-            dom.modalMeta.textContent = `${kalam.book_title} | ${kalam.author} | Pg. ${kalam.start_page} | ${kalam.shers.length} Couplets`;
-        }
 
-        // Bookmark Button in Reader
-        if (dom.readerBookmarkLabel) {
-            const isStarred = state.kalamBookmarks.has(kalamId);
-            dom.readerBookmarkLabel.textContent = isStarred ? 'Saved ⭐' : 'Bookmark';
-        }
-
-        // Translation toggle sync
-        syncTranslationToggleUI();
-
-        // Font size sync
-        if (dom.modalBody) {
-            dom.modalBody.style.fontSize = `${state.readerFontSize}px`;
-        }
-
-        // Sequential Navigation Sync
+        // 5. Sequential Navigation Flipper
         const bookKalams = window.NAAT_LIBRARY.kalams.filter(k => k.book_id === kalam.book_id);
         const currentIdx = bookKalams.findIndex(k => k.id === kalamId);
 
-        if (dom.readerPositionBadge) {
-            dom.readerPositionBadge.textContent = `${kalam.book_title} — Kalam ${currentIdx + 1} of ${bookKalams.length}`;
+        if (dom.diwanChapIndicator) {
+            dom.diwanChapIndicator.textContent = `${kalam.book_title} — Kalam ${currentIdx + 1} of ${bookKalams.length}`;
         }
-        if (dom.readerPrevBtn) {
-            dom.readerPrevBtn.disabled = (currentIdx <= 0);
+        if (dom.diwanPrevBtn) {
+            dom.diwanPrevBtn.disabled = (currentIdx <= 0);
         }
-        if (dom.readerNextBtn) {
-            dom.readerNextBtn.disabled = (currentIdx >= bookKalams.length - 1);
+        if (dom.diwanNextBtn) {
+            dom.diwanNextBtn.disabled = (currentIdx >= bookKalams.length - 1);
         }
 
-        // Build Couplets HTML
-        if (dom.modalBody) {
-            let bodyHtml = '';
+        // 6. Intro Note & Footnote
+        if (dom.diwanIntroNote) {
             if (kalam.intro_note) {
-                bodyHtml += `
-                    <div class="kalam-intro-note">
-                        <span class="note-icon">ℹ️</span>
-                        <div>${escapeHtml(kalam.intro_note)}</div>
-                    </div>
-                `;
+                dom.diwanIntroNote.style.display = 'flex';
+                dom.diwanIntroNote.innerHTML = `<span class="note-icon">ℹ️</span><div>${escapeHtml(kalam.intro_note)}</div>`;
+            } else {
+                dom.diwanIntroNote.style.display = 'none';
             }
+        }
+        if (dom.diwanFootnote) {
+            if (kalam.footnote) {
+                dom.diwanFootnote.style.display = 'flex';
+                dom.diwanFootnote.innerHTML = `<span class="note-icon">📜</span><div>${escapeHtml(kalam.footnote)}</div>`;
+            } else {
+                dom.diwanFootnote.style.display = 'none';
+            }
+        }
 
+        // 7. Render Continuous Verses (Clean High-Density Layout)
+        if (dom.diwanVersesContainer) {
+            let vHtml = '';
             for (let i = 0; i < kalam.shers.length; i++) {
                 const s = kalam.shers[i];
                 const isTarget = (targetSherIndex && s.sher_index === Number(targetSherIndex));
-                const sherKey = `${kalam.id}:${s.sher_index}`;
-                const isSherStarred = state.bookmarks.has(sherKey);
 
-                bodyHtml += `
-                    <div class="full-kalam-sher-row ${isTarget ? 'target-verse-highlight' : ''}" id="sher-stanza-${s.sher_index}">
-                        <div class="sher-num-badge">${s.sher_index}</div>
-                        <div class="sher-content-main">
-                            <div class="sher-couplet-text" style="margin-bottom: 8px;">${escapeHtml(s.roman)}</div>
-                            ${s.english ? `<div class="sher-english" style="margin-bottom: 8px;">🇬🇧 ${escapeHtml(s.english)}</div>` : ''}
-                            <div style="display: flex; gap: 8px; margin-top: 6px;">
-                                <button class="action-btn-secondary" style="min-height: 32px; padding: 4px 10px; font-size: 0.75rem;"
-                                        onclick="window.App.copySher('${kalam.id}', ${s.sher_index})">
-                                    📋 Copy
-                                </button>
-                                <button class="action-btn-primary" style="min-height: 32px; padding: 4px 10px; font-size: 0.75rem;"
-                                        onclick="window.App.shareToWhatsApp('${kalam.id}', ${s.sher_index})">
-                                    📲 WhatsApp
-                                </button>
-                                <button class="btn-icon-action ${isSherStarred ? 'starred' : ''}" style="min-width: 32px; min-height: 32px; font-size: 0.9rem;"
-                                        title="${isSherStarred ? 'Remove from Deck' : 'Save Sher to Deck'}"
-                                        onclick="window.App.toggleBookmark('${kalam.id}', ${s.sher_index}, this)">
-                                    ${isSherStarred ? '⭐' : '☆'}
-                                </button>
-                            </div>
-                        </div>
+                vHtml += `
+                    <div class="diwan-verse-item ${isTarget ? 'target-verse-highlight' : ''}" id="diwan-verse-${s.sher_index}">
+                        <div class="diwan-verse-num">COUPLET ${s.sher_index}</div>
+                        <div class="diwan-misra">${escapeHtml(s.roman)}</div>
+                        ${s.english ? `<div class="diwan-trans">🇬🇧 ${escapeHtml(s.english)}</div>` : ''}
                     </div>
                 `;
             }
-
-            if (kalam.footnote) {
-                bodyHtml += `
-                    <div class="kalam-footnote">
-                        <span class="note-icon">📜</span>
-                        <div>${escapeHtml(kalam.footnote)}</div>
-                    </div>
-                `;
-            }
-            dom.modalBody.innerHTML = bodyHtml;
+            dom.diwanVersesContainer.innerHTML = vHtml;
         }
 
-        // Open Modal
-        dom.kalamModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-
-        // Update URL Hash Deep Link
-        try {
-            history.replaceState(null, '', `#kalam=${kalamId}&verse=${targetSherIndex || 1}`);
-        } catch (e) {}
-
-        // Auto-Scroll to Target Verse if requested
+        // 8. Scroll to Target Verse or Top
+        window.scrollTo({ top: 0, behavior: 'auto' });
         if (targetSherIndex && targetSherIndex > 1) {
             setTimeout(() => {
-                const targetEl = document.getElementById(`sher-stanza-${targetSherIndex}`);
-                if (targetEl && dom.modalBody) {
+                const targetEl = document.getElementById(`diwan-verse-${targetSherIndex}`);
+                if (targetEl) {
                     targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
-            }, 180);
-        } else if (dom.modalBody) {
-            dom.modalBody.scrollTop = 0;
+            }, 120);
+        }
+
+        // 9. Update URL Deep Link
+        try {
+            history.replaceState({ view: 'diwan', kalamId: kalamId }, '', `#kalam=${kalamId}&verse=${targetSherIndex || 1}`);
+        } catch (e) {}
+    }
+
+    /**
+     * Close Full-Page Diwan Reader and Return to Search
+     */
+    function closeDiwanReader() {
+        if (!dom.diwanReaderView) return;
+        if (window.AudioSFX) window.AudioSFX.playClick();
+
+        state.activeKalamId = null;
+        state.activeView = 'search';
+
+        dom.diwanReaderView.style.display = 'none';
+        if (dom.searchHero) dom.searchHero.style.display = 'block';
+        if (dom.resultsContainer) dom.resultsContainer.style.display = 'block';
+
+        // Clean URL hash without reload
+        try {
+            if (window.location.hash.startsWith('#kalam=')) {
+                history.replaceState({ view: 'search' }, '', window.location.pathname + window.location.search);
+            }
+        } catch (e) {}
+
+        // Restore scroll position
+        window.scrollTo({ top: state.previousScrollY || 0, behavior: 'auto' });
+    }
+
+    /**
+     * Handle Browser Back/Forward navigation
+     */
+    function handlePopState(e) {
+        if (window.location.hash.startsWith('#kalam=')) {
+            checkUrlDeepLink();
+        } else if (state.activeView === 'diwan') {
+            closeDiwanReader();
         }
     }
 
@@ -963,25 +1033,7 @@
         const targetIdx = currentIdx + direction;
 
         if (targetIdx >= 0 && targetIdx < bookKalams.length) {
-            openKalamModal(bookKalams[targetIdx].id, 1);
-        }
-    }
-
-    /**
-     * Close Full Kalam Modal
-     */
-    function closeKalamModal() {
-        if (dom.kalamModal) {
-            dom.kalamModal.classList.remove('active');
-            document.body.style.overflow = '';
-            state.activeKalamId = null;
-
-            // Clean URL hash without reload
-            try {
-                if (window.location.hash.startsWith('#kalam=')) {
-                    history.replaceState(null, '', window.location.pathname + window.location.search);
-                }
-            } catch (e) {}
+            openDiwanReader(bookKalams[targetIdx].id, 1);
         }
     }
 
@@ -997,7 +1049,7 @@
         const verse = parseInt(params.get('verse') || '1', 10);
 
         if (kalamId && window.NAAT_LIBRARY) {
-            openKalamModal(kalamId, verse);
+            openDiwanReader(kalamId, verse);
         }
     }
 
@@ -1124,8 +1176,8 @@
                                 📲 WhatsApp
                             </button>
                             <button class="btn-open-kalam" style="background: var(--accent-gold); color: #06110a; font-weight: 700;"
-                                    onclick="window.App.openKalamModal('${kId}', 1)">
-                                📖 Read Naat →
+                                    onclick="window.App.openDiwanReader('${kId}', 1)">
+                                📖 Read Full Naat →
                             </button>
                         </div>
                     </div>
@@ -1171,9 +1223,6 @@
                 btnEl.classList.remove('starred');
                 btnEl.textContent = '☆';
             }
-            if (dom.readerBookmarkLabel && state.activeKalamId === kalamId) {
-                dom.readerBookmarkLabel.textContent = 'Bookmark';
-            }
             showToast('Removed Naat from Recitation Deck');
         } else {
             state.kalamBookmarks.add(kalamId);
@@ -1181,14 +1230,12 @@
                 btnEl.classList.add('starred');
                 btnEl.textContent = '⭐';
             }
-            if (dom.readerBookmarkLabel && state.activeKalamId === kalamId) {
-                dom.readerBookmarkLabel.textContent = 'Saved ⭐';
-            }
             if (window.AudioSFX) window.AudioSFX.playSuccess();
             showToast('Full Naat saved to Recitation Deck ⭐');
         }
         saveBookmarks();
         updateDeckBadge();
+        syncDiwanBookmarkUI();
         if (dom.deckDrawer && dom.deckDrawer.classList.contains('active')) {
             renderRecitationDeck();
         }
@@ -1388,8 +1435,12 @@
         toggleBookmark: toggleBookmark,
         toggleKalamBookmark: toggleKalamBookmark,
         removeBookmark: removeBookmark,
-        openKalamModal: openKalamModal,
-        closeKalamModal: closeKalamModal,
+        openDiwanReader: openDiwanReader,
+        closeDiwanReader: closeDiwanReader,
+        openKalamModal: openDiwanReader, // Alias for backward compatibility
+        closeKalamModal: closeDiwanReader, // Alias for backward compatibility
+        toggleDiwanColumns: toggleDiwanColumns,
+        navigateSequentialKalam: navigateSequentialKalam,
         toggleAccordion: toggleAccordion,
         shareToWhatsApp: shareToWhatsApp,
         copySher: copySher,

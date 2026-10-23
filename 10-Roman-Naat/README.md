@@ -25,23 +25,23 @@ Users can search in English / Roman Urdu regardless of transliteration style, ma
 
 | Output Deliverable | Format | Access Link | Description |
 | :--- | :---: | :--- | :--- |
-| **Roman Naat Studio Web App** | Web App / PWA | [index.html](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/17.%20Roman%20Naat/index.html) | Standalone client-side application with instant phonetic search, WhatsApp export, full reader modal, and recitation deck. |
-| **Zero-CORS Client Data Bundle** | JavaScript | [naat_library_data.js](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/17.%20Roman%20Naat/data/naat_library_data.js) | Pre-compiled 1.79 MB dataset with 346 kalams and 7,766 shers. Works offline via `file:///`. |
-| **Canonical JSON Dataset** | JSON | [naat_library.json](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/17.%20Roman%20Naat/data/naat_library.json) | Clean structured JSON representing the entire 4-book Bareilly corpus. |
-| **Phonetic Search Engine** | JavaScript | [search-engine.js](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/17.%20Roman%20Naat/js/search-engine.js) | Sub-15ms multi-token search engine with diacritic stripping and vowel/consonant harmonization. |
-| **Tactile Acoustic FX Engine** | JavaScript | [audio-sfx.js](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/17.%20Roman%20Naat/js/audio-sfx.js) | Zero-music Web Audio API procedural sound engine for tactile clicks and success chimes (Directive 7 compliant). |
-| **Luxury Emerald & Gold Styling** | CSS | [app.css](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/17.%20Roman%20Naat/css/app.css) | AMOLED Islamic dark theme + daylight reading theme with mobile touch ergonomics ($\ge 48\text{px}$). |
-| **Master Ingestion Pipeline** | Python | [extract_and_build_dataset.py](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/17.%20Roman%20Naat/scripts/extract_and_build_dataset.py) | PyMuPDF pipeline that extracts, cleans, pairs translations, and indexes all 4 books. |
-| **Dataset Integrity Test Suite** | Python | [test_dataset_integrity.py](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/17.%20Roman%20Naat/tests/test_dataset_integrity.py) | Unit test validating coverage, schema fields, and 100% unique kalam IDs. |
-| **Search Accuracy Test Suite** | Python | [test_search_accuracy.py](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/17.%20Roman%20Naat/tests/test_search_accuracy.py) | Automated test validating recall and phonetic tolerance across varied Roman queries. |
-| **Script Compilation Test** | Node.js | [test_script_compilation.js](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/17.%20Roman%20Naat/tests/test_script_compilation.js) | `node --check` test verifying 0 syntax errors across all JavaScript scripts. |
+| **Roman Naat Studio Web App** | Web App / PWA | [index.html](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/10-Roman-Naat/index.html) | Standalone client-side application with instant phonetic search, WhatsApp export, full reader modal, and recitation deck. |
+| **Zero-CORS Client Data Bundle** | JavaScript | [naat_library_data.js](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/10-Roman-Naat/data/naat_library_data.js) | Pre-compiled 1.79 MB dataset with 346 kalams and 7,766 shers. Works offline via `file:///`. |
+| **Canonical JSON Dataset** | JSON | [naat_library.json](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/10-Roman-Naat/data/naat_library.json) | Clean structured JSON representing the entire 4-book Bareilly corpus. |
+| **Phonetic Search Engine** | JavaScript | [search-engine.js](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/10-Roman-Naat/js/search-engine.js) | Sub-15ms multi-token search engine with diacritic stripping and vowel/consonant harmonization. |
+| **Tactile Acoustic FX Engine** | JavaScript | [audio-sfx.js](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/10-Roman-Naat/js/audio-sfx.js) | Zero-music Web Audio API procedural sound engine for tactile clicks and success chimes (Directive 7 compliant). |
+| **Luxury Emerald & Gold Styling** | CSS | [app.css](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/10-Roman-Naat/css/app.css) | AMOLED Islamic dark theme + daylight reading theme with mobile touch ergonomics ($\ge 48\text{px}$). |
+| **Master Ingestion Pipeline** | Python | [extract_and_build_dataset.py](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/10-Roman-Naat/scripts/extract_and_build_dataset.py) | PyMuPDF pipeline that extracts, cleans, pairs translations, and indexes all 4 books. |
+| **Dataset Integrity Test Suite** | Python | [test_dataset_integrity.py](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/10-Roman-Naat/tests/test_dataset_integrity.py) | Unit test validating coverage, schema fields, and 100% unique kalam IDs. |
+| **Search Accuracy Test Suite** | Python | [test_search_accuracy.py](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/10-Roman-Naat/tests/test_search_accuracy.py) | Automated test validating recall and phonetic tolerance across varied Roman queries. |
+| **Script Compilation Test** | Node.js | [test_script_compilation.js](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/10-Roman-Naat/tests/test_script_compilation.js) | `node --check` test verifying 0 syntax errors across all JavaScript scripts. |
 
 ---
 
 ## 📂 Visual Directory Tree
 
 ```
-c:/Users/Shop PC 2/OneDrive/Desktop/Antigravity Files/17. Roman Naat/
+c:/Users/Shop PC 2/OneDrive/Desktop/Antigravity Files/10-Roman-Naat/
 ├── HadaiqeBakhshishRoman.pdf                         # 319 Pages (Imam Ahmad Raza Khan Bareilvi)
 ├── Saaman E BAKSHISH THE PROVISIONS FOR SALVATION .pdf# 441 Pages (Huzoor Mufti-e-Azam Hind)
 ├── safeena e bakshish-Roman.pdf                      # 146 Pages (Huzoor Tajush Shariah)

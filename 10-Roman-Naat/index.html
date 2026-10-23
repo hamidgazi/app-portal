@@ -104,65 +104,89 @@
         </div>
     </main>
 
-    <!-- Full Kalam Reader Modal -->
-    <div id="kalam-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-        <div class="modal-sheet">
-            <div class="modal-header">
-                <div>
-                    <h2 id="modal-title">Kalam Title</h2>
-                    <p id="modal-meta">Book Details & Author</p>
-                </div>
-                <button id="modal-close-btn" class="modal-close-btn" title="Close" aria-label="Close Modal">✕</button>
-            </div>
-
-            <!-- Reciter-Centric Toolbar -->
-            <div class="reader-toolbar">
-                <div class="toolbar-left">
-                    <button id="reader-trans-toggle" class="toolbar-pill-btn active" title="Toggle English Translation">
-                        <span class="toolbar-icon">🔤</span> <span id="trans-btn-label">Translation: ON</span>
-                    </button>
-                    <div class="reader-zoom-group">
-                        <button id="reader-zoom-out" class="toolbar-zoom-btn" title="Decrease Font Size">A-</button>
-                        <button id="reader-zoom-in" class="toolbar-zoom-btn" title="Increase Font Size">A+</button>
+    <!-- Dedicated Full-Page Diwan Reader View (Zero Modal, Edge-to-Edge) -->
+    <section id="diwan-reader-view" class="diwan-reader-view" style="display: none;">
+        <!-- Sticky Diwan Header -->
+        <header class="diwan-sticky-header">
+            <div class="diwan-header-top">
+                <button id="diwan-back-btn" class="diwan-back-btn" title="Back to Search Results">
+                    ← Back to Search
+                </button>
+                <div class="diwan-title-meta">
+                    <h2 id="diwan-title">Kalam Title</h2>
+                    <div class="diwan-sub-meta">
+                        <span id="diwan-book-badge" class="tag-badge book-badge">📖 Book Title</span>
+                        <span id="diwan-author-badge" class="diwan-author-tag">✍️ Author</span>
+                        <span id="diwan-page-badge" class="tag-badge page-badge">Pg. 1</span>
+                        <span id="diwan-verse-count" class="kalam-verse-count-badge">0 Couplets</span>
                     </div>
                 </div>
-                <div class="toolbar-right">
-                    <button id="reader-bookmark-btn" class="toolbar-pill-btn" title="Bookmark this entire Naat">
-                        ⭐ <span id="reader-bookmark-label">Bookmark</span>
+                <div class="diwan-header-actions">
+                    <button id="diwan-whatsapp-btn" class="action-btn-primary" title="Share Complete Naat to WhatsApp">
+                        📲 WhatsApp
                     </button>
-                    <button id="reader-link-btn" class="toolbar-pill-btn" title="Copy Direct Link to this Naat">
+                    <button id="diwan-copy-btn" class="action-btn-secondary" title="Copy Entire Naat">
+                        📋 Copy All
+                    </button>
+                </div>
+            </div>
+
+            <!-- Diwan Controls & Navigation Ribbon -->
+            <div class="diwan-header-controls">
+                <div class="diwan-nav-chapters">
+                    <button id="diwan-prev-btn" class="diwan-ctrl-btn" title="Previous Naat in Book">
+                        ⬅️ Prev Naat
+                    </button>
+                    <span id="diwan-chap-indicator" class="diwan-chap-indicator">Kalam 1 of 124</span>
+                    <button id="diwan-next-btn" class="diwan-ctrl-btn" title="Next Naat in Book">
+                        Next Naat ➡️
+                    </button>
+                </div>
+                <div class="diwan-display-options">
+                    <button id="diwan-cols-btn" class="diwan-ctrl-btn" title="Toggle 2 Columns / 1 Column">
+                        🔲 2-Column
+                    </button>
+                    <button id="diwan-trans-btn" class="diwan-ctrl-btn active" title="Toggle English Translation">
+                        <span class="toolbar-icon">🔤</span> <span id="diwan-trans-label">Translation: ON</span>
+                    </button>
+                    <div class="diwan-zoom-group">
+                        <button id="diwan-zoom-out" class="diwan-zoom-btn" title="Decrease Font Size">A-</button>
+                        <button id="diwan-zoom-in" class="diwan-zoom-btn" title="Increase Font Size">A+</button>
+                    </div>
+                    <button id="diwan-bookmark-btn" class="diwan-ctrl-btn" title="Bookmark this Naat">
+                        ⭐ <span id="diwan-bookmark-label">Bookmark</span>
+                    </button>
+                    <button id="diwan-share-link-btn" class="diwan-ctrl-btn" title="Copy Direct Link to this Naat">
                         🔗 Share Link
                     </button>
                 </div>
             </div>
+        </header>
 
-            <div id="modal-body" class="modal-body">
-                <!-- Couplets populated dynamically -->
+        <!-- Diwan Body & Multi-Column Verses -->
+        <main class="diwan-body-wrap">
+            <div id="diwan-intro-note" class="kalam-intro-note" style="display: none;"></div>
+            <div id="diwan-verses-container" class="diwan-verses-flow cols-2">
+                <!-- Continuous couplets populated dynamically -->
             </div>
+            <div id="diwan-footnote" class="kalam-footnote" style="display: none;"></div>
 
-            <div class="modal-footer">
-                <!-- Sequential Chapter Navigation Bar -->
-                <div class="reader-nav-bar">
-                    <button id="reader-prev-btn" class="reader-nav-btn" title="Go to Previous Naat in this Book">
+            <!-- Bottom Navigation Bar -->
+            <div class="diwan-bottom-bar">
+                <button class="diwan-back-btn" onclick="window.App.closeDiwanReader()">
+                    ← Back to Search Results
+                </button>
+                <div class="diwan-nav-chapters">
+                    <button class="diwan-ctrl-btn" onclick="window.App.navigateSequentialKalam(-1)">
                         ⬅️ Previous Naat
                     </button>
-                    <span id="reader-position-badge" class="reader-position-badge">Kalam 1 of 124</span>
-                    <button id="reader-next-btn" class="reader-nav-btn" title="Go to Next Naat in this Book">
+                    <button class="diwan-ctrl-btn" onclick="window.App.navigateSequentialKalam(1)">
                         Next Naat ➡️
                     </button>
                 </div>
-
-                <div class="modal-action-row">
-                    <button id="modal-whatsapp-all-btn" class="action-btn-primary">
-                        📲 Share Naat to WhatsApp
-                    </button>
-                    <button id="modal-copy-all-btn" class="action-btn-secondary">
-                        📋 Copy Entire Naat
-                    </button>
-                </div>
             </div>
-        </div>
-    </div>
+        </main>
+    </section>
 
     <!-- Recitation Deck Slide-Over Drawer -->
     <div id="deck-backdrop" class="drawer-backdrop"></div>
