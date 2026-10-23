@@ -26,6 +26,15 @@ function switchAppTab(tabName) {
 
   window.location.hash = tabName;
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Synchronize mobile bottom dock buttons
+  const dockBtns = document.querySelectorAll(".mobile-dock-btn");
+  dockBtns.forEach(btn => {
+    btn.classList.remove("active");
+    if (tabName === "ayahs" && btn.id === "dock-btn-read") btn.classList.add("active");
+    else if (tabName === "search" && btn.id === "dock-btn-search") btn.classList.add("active");
+    else if (tabName === "studio" && btn.id === "dock-btn-studio") btn.classList.add("active");
+  });
+
 
   // Auto-collapse telemetry banner on reading tabs to maximize vertical reading area
   const banner = document.getElementById("global-metrics-banner");
@@ -81,6 +90,29 @@ function initTabs() {
   if (hash && document.getElementById(`tab-${hash}`)) {
     switchAppTab(hash);
   }
+  // Mobile dock internal tab switches
+  const dockRead = document.getElementById("dock-btn-read");
+  if (dockRead) {
+    dockRead.addEventListener("click", (e) => {
+      e.preventDefault();
+      switchAppTab("ayahs");
+    });
+  }
+  const dockSearch = document.getElementById("dock-btn-search");
+  if (dockSearch) {
+    dockSearch.addEventListener("click", (e) => {
+      e.preventDefault();
+      switchAppTab("search");
+    });
+  }
+  const dockStudio = document.getElementById("dock-btn-studio");
+  if (dockStudio) {
+    dockStudio.addEventListener("click", (e) => {
+      e.preventDefault();
+      switchAppTab("studio");
+    });
+  }
+
 }
 
 function initModalHandlers() {
