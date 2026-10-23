@@ -1,6 +1,6 @@
 {
-  "version": "2.0.0",
+  "version": "3.0.0",
   "name": "Thela Stock Manager",
-  "updated": "2026-10-15",
-  "changelog": "v2.0.0: Full AMOLED Cyber/Glass maximum UI upgrade with pure black theme (#000000), glowing neon accents, live dynamic calculation delta preview banner, in-place expandable history (+10/+25/Collapse), 88vh sliding 50-record History Drawer with instant search, multi-filter pills, summary telemetry flux bar, 1-tap Undo with balance rollback, SheetJS Excel export, and Google Apps Script webhook integration."
+  "updated": "2026-10-23",
+  "changelog": "v3.0.0: Super-Easy, Ultra-Fast & Ergonomic Redesign based on cognitive psychology and thumb-zone optimization: (1) Fixed Bottom Action Bar (#sticky-bottom-bar) docking live stock equation preview and 60px RECORD TRANSACTION button for instant <=2s entry with zero scrolling, (2) Distinct color-coded bag identity (data-item) with glowing health indicator dots (Green/Amber/Pulsing Rose) and bold stock numbers, (3) Smart stepper controls (-10, -5, +5, +10) plus quick chips (25, 50, 100, 200, 500) eliminating keyboard popups, (4) Instant party/remark suggestion chips auto-populated from recent transactions, (5) Floating 5-second undo snackbar with 1-tap rollback, (6) 1-tap acoustic UI sound toggle with localStorage persistence adhering to Zero-Music jurisprudence."
 }

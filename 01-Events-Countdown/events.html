@@ -9,14 +9,14 @@
     <meta name="theme-color" content="#0d1117">
     <title>Events Countdown</title>
     <!-- Mobile Home Screen Icons & Favicon -->
-    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-app-192.png?v=1.1.2">
-    <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-app-512.png?v=1.1.2">
-    <link rel="icon" type="image/svg+xml" href="icons/icon.svg?v=1.1.2">
-    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png?v=1.1.2">
-    <link rel="apple-touch-icon" sizes="512x512" href="icons/icon-app-512.png?v=1.1.2">
-    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=1.1.2">
-    <link rel="shortcut icon" href="icons/icon-app-192.png?v=1.1.2">
-    <link rel="manifest" href="manifest.json?v=1.1.2">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-app-192.png?v=1.2.0">
+    <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-app-512.png?v=1.2.0">
+    <link rel="icon" type="image/svg+xml" href="icons/icon.svg?v=1.2.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png?v=1.2.0">
+    <link rel="apple-touch-icon" sizes="512x512" href="icons/icon-app-512.png?v=1.2.0">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=1.2.0">
+    <link rel="shortcut icon" href="icons/icon-app-192.png?v=1.2.0">
+    <link rel="manifest" href="manifest.json?v=1.2.0">
     <style>
         /* ============================================
            CSS VARIABLES (Deep OLED Glassmorphic)
@@ -1429,7 +1429,7 @@
 <div id="updateBanner" style="display:none; align-items:center; justify-content:space-between; background:linear-gradient(90deg, #1f6feb, #238636); color:#fff; padding:10px 16px; font-size:13px; font-weight:600; position:sticky; top:0; z-index:999; box-shadow:0 4px 14px rgba(0,0,0,0.5);">
     <div style="display:flex; align-items:center; gap:8px;">
         <span>✨</span>
-        <span>New update available! (<span id="txtNewVersion">v1.1.2</span>)</span>
+        <span>New update available! (<span id="txtNewVersion">v1.2.0</span>)</span>
     </div>
     <button id="btnReloadUpdate" style="background:#fff; color:#0d1117; border:none; padding:6px 12px; border-radius:8px; font-weight:700; font-size:12px; cursor:pointer;">Update Now</button>
 </div>
@@ -1700,7 +1700,7 @@
         <div style="font-size:40px; margin-bottom:6px;">🚀</div>
         <h3 style="font-size:18px; margin-bottom:4px; color:#fff;">New Update Available!</h3>
         <p style="font-size:13.5px; color:var(--text-2); margin-bottom:14px;">
-            A newer version <b id="popup-new-version" style="color:#3dd68c;">v1.1.2</b> is ready for you.
+            A newer version <b id="popup-new-version" style="color:#3dd68c;">v1.2.0</b> is ready for you.
         </p>
         <div id="popup-changelog-box" style="background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:10px; padding:12px; font-size:12px; color:var(--text-1); text-align:left; margin-bottom:18px; line-height:1.45;">
             <b style="color:var(--text-3); font-size:11px; text-transform:uppercase;">What's New:</b><br>
@@ -2836,9 +2836,12 @@ function openModal(evtId) {
     document.getElementById('f-id').value    = '';
     document.getElementById('f-name').value  = '';
     document.getElementById('f-date').value  = '';
-    document.getElementById('f-cat').value   = 'general'; // Default saving option is 'General'
+    document.getElementById('f-cat').value   = 'general';
     document.getElementById('f-notes').value = '';
     highlightActiveQuickChip(-999);
+    selectCategoryChip('general');
+    const autoBadge = document.getElementById('cat-auto-badge');
+    if (autoBadge) autoBadge.style.display = 'none';
 
     if (evtId) {
         const ev = events.find(function(e) { return e.id === evtId; });
@@ -2850,24 +2853,29 @@ function openModal(evtId) {
             document.getElementById('f-date').value  = ev.date;
             document.getElementById('f-cat').value   = ev.category || 'general';
             document.getElementById('f-notes').value = ev.notes || '';
+            selectCategoryChip(ev.category || 'general');
             const d = daysLeft(ev.date);
             highlightActiveQuickChip(d);
         }
     } else {
         title.textContent   = '✨ New Event';
         saveLbl.textContent = 'Save Event';
-        // Default quick date to Today
         setQuickDate(0);
+        selectCategoryChip('general');
     }
 
     overlay.classList.add('on');
     modal.classList.add('on');
+    SoundFX.playPop();
+    doHaptic(10);
     setTimeout(function() { document.getElementById('f-name').focus(); }, 420);
 }
 
 function closeModal() {
     document.getElementById('modal').classList.remove('on');
     document.getElementById('overlay').classList.remove('on');
+    const autoBadge = document.getElementById('cat-auto-badge');
+    if (autoBadge) autoBadge.style.display = 'none';
 }
 
 function doEdit(id, e) {
@@ -3261,6 +3269,56 @@ if (fDateInput) {
     });
 }
 
+// Category chips click listeners in modal
+document.querySelectorAll('.cat-chip').forEach(function(chip) {
+    chip.addEventListener('click', function() {
+        selectCategoryChip(this.dataset.cat);
+        SoundFX.playTick();
+        doHaptic(8);
+        const autoBadge = document.getElementById('cat-auto-badge');
+        if (autoBadge) autoBadge.style.display = 'none';
+    });
+});
+
+// Auto-detect category on title typing
+const fNameEl = document.getElementById('f-name');
+if (fNameEl) {
+    fNameEl.addEventListener('input', function(e) {
+        checkAutoCategorize(e.target.value);
+    });
+}
+
+// Bottom Dock buttons
+const dockBtnFilter = document.getElementById('dock-btn-filter');
+if (dockBtnFilter) {
+    dockBtnFilter.addEventListener('click', function() {
+        SoundFX.playTick();
+        doHaptic(10);
+        const fb = document.getElementById('filter-bar');
+        if (fb) {
+            fb.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            fb.style.transition = 'box-shadow 0.3s ease';
+            fb.style.boxShadow = '0 0 16px rgba(10, 132, 255, 0.4)';
+            setTimeout(function() { fb.style.boxShadow = ''; }, 600);
+        }
+    });
+}
+
+const dockBtnMore = document.getElementById('dock-btn-more');
+if (dockBtnMore) {
+    dockBtnMore.addEventListener('click', openMoreModal);
+}
+
+['more-close', 'more-bg'].forEach(function(id) {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('click', closeMoreModal);
+});
+
+['detail-close', 'detail-bg'].forEach(function(id) {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('click', closeDetailModal);
+});
+
 SoundFX.updateUI();
 load();
 render();
@@ -3268,7 +3326,7 @@ render();
 /* =====================================================
    ONLINE AUTO-UPDATE SYSTEM (PWA & Service Worker)
 ===================================================== */
-const CURRENT_APP_VERSION = "1.1.2";
+const CURRENT_APP_VERSION = "1.2.0";
 
 // Display current version in footer on load
 const versionBadge = document.getElementById('app-version-display');
