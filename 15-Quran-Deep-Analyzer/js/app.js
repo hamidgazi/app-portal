@@ -251,6 +251,11 @@ const NavigationHistory = {
       window.location.href = "manners.html";
       return;
     }
+    // If navigating back to Divine Commands standalone app
+    if (ctx.originTab === "commands") {
+      window.location.href = "commands.html";
+      return;
+    }
 
     // 1. Switch back to the origin tab
     const targetTab = (ctx.originTab === "analytics") ? "studio" : (ctx.originTab || "studio");
@@ -495,6 +500,13 @@ const OmnisearchEngine = {
     if (!q) {
       if (this.activeCategory === "all") {
         // High-value quick shortcuts
+        this.results.push({
+          category: "Commands",
+          categoryClass: "prophet",
+          title: "📜 Divine Commands & Injunctions (80 Directives)",
+          subtitle: "Health, diet, gentle speech, financial ethics & human flourishing • Jump to Commands Studio",
+          action: () => { window.location.href = "commands.html"; }
+        });
         this.results.push({
           category: "Manners",
           categoryClass: "prophet",
@@ -1103,10 +1115,19 @@ function bootApp() {
       const sId = parseInt(surahParam, 10);
       const aNum = ayahParam ? parseInt(ayahParam, 10) : 1;
       if (window.NavigationHistory) {
+        let originTab = "search";
+        let label = "Previous Location";
+        if (fromParam === "manners") {
+          originTab = "manners";
+          label = "Quranic Manners (67)";
+        } else if (fromParam === "commands") {
+          originTab = "commands";
+          label = "Divine Commands (80)";
+        }
         window.NavigationHistory.pushReturnContext({
-          originTab: fromParam === "manners" ? "manners" : "search",
+          originTab,
           originScrollY: 0,
-          label: fromParam === "manners" ? "Quranic Manners (67)" : "Previous Location"
+          label
         });
       }
       setTimeout(() => {
