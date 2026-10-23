@@ -51,6 +51,16 @@
             <button id="search-clear-btn" class="search-clear-btn" title="Clear Search">✕</button>
         </div>
 
+        <!-- Search Mode Toggle Bar (Shers vs Full Kalams) -->
+        <div class="mode-toggle-bar" role="tablist" aria-label="Search and Reading Mode">
+            <button class="mode-btn active" id="mode-shers-btn" data-mode="shers" role="tab" aria-selected="true">
+                <span class="mode-icon">📝</span> Couplets (Shers) <span class="mode-count" id="mode-sher-count">7,766</span>
+            </button>
+            <button class="mode-btn" id="mode-kalams-btn" data-mode="kalams" role="tab" aria-selected="false">
+                <span class="mode-icon">📖</span> Full Naats (Kalams) <span class="mode-count" id="mode-kalam-count">346</span>
+            </button>
+        </div>
+
         <!-- Book Scope Filter Pills -->
         <div class="filter-row">
             <span class="filter-group-label">Books:</span>
@@ -104,20 +114,51 @@
                 </div>
                 <button id="modal-close-btn" class="modal-close-btn" title="Close" aria-label="Close Modal">✕</button>
             </div>
+
+            <!-- Reciter-Centric Toolbar -->
+            <div class="reader-toolbar">
+                <div class="toolbar-left">
+                    <button id="reader-trans-toggle" class="toolbar-pill-btn active" title="Toggle English Translation">
+                        <span class="toolbar-icon">🔤</span> <span id="trans-btn-label">Translation: ON</span>
+                    </button>
+                    <div class="reader-zoom-group">
+                        <button id="reader-zoom-out" class="toolbar-zoom-btn" title="Decrease Font Size">A-</button>
+                        <button id="reader-zoom-in" class="toolbar-zoom-btn" title="Increase Font Size">A+</button>
+                    </div>
+                </div>
+                <div class="toolbar-right">
+                    <button id="reader-bookmark-btn" class="toolbar-pill-btn" title="Bookmark this entire Naat">
+                        ⭐ <span id="reader-bookmark-label">Bookmark</span>
+                    </button>
+                    <button id="reader-link-btn" class="toolbar-pill-btn" title="Copy Direct Link to this Naat">
+                        🔗 Share Link
+                    </button>
+                </div>
+            </div>
+
             <div id="modal-body" class="modal-body">
                 <!-- Couplets populated dynamically -->
             </div>
+
             <div class="modal-footer">
-                <div style="display: flex; gap: 8px;">
-                    <button id="modal-whatsapp-all-btn" class="action-btn-primary">
-                        📲 Share Kalam to WhatsApp
+                <!-- Sequential Chapter Navigation Bar -->
+                <div class="reader-nav-bar">
+                    <button id="reader-prev-btn" class="reader-nav-btn" title="Go to Previous Naat in this Book">
+                        ⬅️ Previous Naat
                     </button>
-                    <button id="modal-copy-all-btn" class="action-btn-secondary">
-                        📋 Copy Entire Kalam
+                    <span id="reader-position-badge" class="reader-position-badge">Kalam 1 of 124</span>
+                    <button id="reader-next-btn" class="reader-nav-btn" title="Go to Next Naat in this Book">
+                        Next Naat ➡️
                     </button>
                 </div>
-                <div style="font-size: 0.8rem; color: var(--text-muted);">
-                    Bareilly Sharif Classical Corpus
+
+                <div class="modal-action-row">
+                    <button id="modal-whatsapp-all-btn" class="action-btn-primary">
+                        📲 Share Naat to WhatsApp
+                    </button>
+                    <button id="modal-copy-all-btn" class="action-btn-secondary">
+                        📋 Copy Entire Naat
+                    </button>
                 </div>
             </div>
         </div>
@@ -136,8 +177,19 @@
                 <button id="deck-close-btn" class="modal-close-btn" style="min-width: 36px; min-height: 36px; font-size: 16px;" title="Close Deck">✕</button>
             </div>
         </div>
+
+        <!-- Recitation Deck Tab Switcher -->
+        <div class="deck-tabs">
+            <button id="deck-tab-shers" class="deck-tab-btn active">
+                ⭐ Couplets (<span id="deck-sher-tab-count">0</span>)
+            </button>
+            <button id="deck-tab-kalams" class="deck-tab-btn">
+                📖 Full Naats (<span id="deck-kalam-tab-count">0</span>)
+            </button>
+        </div>
+
         <div id="deck-body" class="drawer-body">
-            <!-- Bookmarked shers rendered here -->
+            <!-- Bookmarked shers or kalams rendered here -->
         </div>
     </aside>
 

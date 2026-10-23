@@ -7,6 +7,8 @@ class RomanSearchEngine {
     constructor() {
         this.cache = new Map();
         this.index = [];
+        this.kalamIndex = [];
+        this.rawKalams = [];
         this.isIndexed = false;
     }
 
@@ -47,7 +49,6 @@ class RomanSearchEngine {
              .replace(/ie/g, 'i');
              
         // 4. Consonant harmonization for common Roman Urdu spellings
-        // Note: We harmonize to common phonetic bases
         s = s.replace(/kh/g, 'k')
              .replace(/gh/g, 'g')
              .replace(/q/g, 'k')
@@ -58,7 +59,7 @@ class RomanSearchEngine {
              .replace(/ch/g, 'c')
              .replace(/sh/g, 's');
              
-        // 5. Deduplicate double consonants (e.g. mustafaa / mustuffa, hussain / husain)
+        // 5. Deduplicate double consonants
         s = s.replace(/([b-df-hj-np-tv-z])\1+/g, '$1');
         
         // 6. Clean whitespace
@@ -75,21 +76,28 @@ class RomanSearchEngine {
     }
 
     /**
-     * Pre-indexes all couplets across all books for instant sub-10ms search
+     * Pre-indexes all couplets and kalams across all books for instant sub-10ms search
      */
     buildIndex(kalams) {
+        this.rawKalams = kalams;
         this.index = [];
+        this.kalamIndex = [];
+
         for (let i = 0; i < kalams.length; i++) {
             const k = kalams[i];
             const kTitleNorm = this.normalize(k.title);
             const kAuthorNorm = this.normalize(k.author);
             
+            const indexedShers = [];
+            let allShersNormText = '';
+
             for (let j = 0; j < k.shers.length; j++) {
                 const s = k.shers[j];
                 const sRomanNorm = this.normalize(s.roman);
                 const sEngNorm = s.english ? this.normalize(s.english) : '';
-                
-                this.index.push({
+                allShersNormText += ` ${sRomanNorm} ${sEngNorm}`;
+
+                const sherItem = {
                     kalamId: k.id,
                     kalamTitle: k.title,
                     kalamTitleNorm: kTitleNorm,
@@ -104,21 +112,37 @@ class RomanSearchEngine {
                     romanNorm: sRomanNorm,
                     english: s.english || '',
                     englishNorm: sEngNorm,
-                    // Pre-combined full text for high-speed multi-term matching
                     fullTextNorm: `${kTitleNorm} ${sRomanNorm} ${sEngNorm}`
-                });
+                };
+
+                this.index.push(sherItem);
+                indexedShers.push(sherItem);
             }
+
+            this.kalamIndex.push({
+                kalam: k,
+                id: k.id,
+                title: k.title,
+                titleNorm: kTitleNorm,
+                bookId: k.book_id,
+                bookTitle: k.book_title,
+                author: k.author,
+                authorNorm: kAuthorNorm,
+                category: k.category,
+                page: k.page,
+                totalShers: k.shers.length,
+                matla: k.shers.length > 0 ? k.shers[0] : null,
+                shers: indexedShers,
+                fullKalamNorm: `${kTitleNorm} ${kAuthorNorm} ${allShersNormText}`
+            });
         }
+
         this.isIndexed = true;
-        console.log(`[SearchEngine] Indexed ${this.index.length} couplets across ${kalams.length} kalams.`);
+        console.log(`[SearchEngine] Indexed ${this.index.length} couplets and ${this.kalamIndex.length} full kalams.`);
     }
 
     /**
-     * Executes instant multi-term phonetic search with filtering
-     * @param {string} query Search input string
-     * @param {string} bookFilter 'all' or specific book_id
-     * @param {string} categoryFilter 'all' or specific category (Naat, Hamd, Salaam, etc.)
-     * @param {number} limit Max results to return (default: 150)
+     * Executes instant multi-term phonetic search for individual couplets (shers)
      */
     search(query, bookFilter = 'all', categoryFilter = 'all', limit = 150) {
         if (!this.isIndexed) return [];
@@ -126,7 +150,6 @@ class RomanSearchEngine {
         const qRaw = (query || '').trim();
         const tokens = this.tokenize(qRaw);
         
-        // If query is empty, return latest / initial slice or filtered results
         if (tokens.length === 0) {
             let res = this.index;
             if (bookFilter !== 'all') {
@@ -144,20 +167,10 @@ class RomanSearchEngine {
         for (let i = 0; i < this.index.length; i++) {
             const item = this.index[i];
 
-            // 1. Check book filter
-            if (bookFilter !== 'all' && item.bookId !== bookFilter) {
-                continue;
-            }
+            if (bookFilter !== 'all' && item.bookId !== bookFilter) continue;
+            if (categoryFilter !== 'all' && item.category !== categoryFilter) continue;
 
-            // 2. Check category filter
-            if (categoryFilter !== 'all' && item.category !== categoryFilter) {
-                continue;
-            }
-
-            // 3. Scoring & Matching
             let score = 0;
-
-            // Direct literal substring match in original text receives highest priority
             const romanLower = item.roman.toLowerCase();
             const titleLower = item.kalamTitle.toLowerCase();
             
@@ -165,7 +178,6 @@ class RomanSearchEngine {
                 score += 150;
             }
 
-            // Tokenized phonetic matching across normalized full text
             let allTokensFound = true;
             for (let t = 0; t < tokens.length; t++) {
                 const token = tokens[t];
@@ -178,17 +190,124 @@ class RomanSearchEngine {
             }
 
             if (allTokensFound) {
-                results.push({
-                    item: item,
-                    score: score
-                });
+                results.push({ item: item, score: score });
             }
         }
 
-        // Sort by relevance score descending
         results.sort((a, b) => b.score - a.score);
-
         return results.slice(0, limit).map(r => r.item);
+    }
+
+    /**
+     * Executes deep search across full Kalams (matching titles and internal verses)
+     * @returns {Array} Array of { kalam, score, matchedSherIndex, matchedSher, matchType }
+     */
+    searchKalams(query, bookFilter = 'all', categoryFilter = 'all', limit = 100) {
+        if (!this.isIndexed) return [];
+
+        const qRaw = (query || '').trim();
+        const tokens = this.tokenize(qRaw);
+
+        // If query is empty, return kalams according to filters
+        if (tokens.length === 0) {
+            let list = this.kalamIndex;
+            if (bookFilter !== 'all') {
+                list = list.filter(k => k.bookId === bookFilter);
+            }
+            if (categoryFilter !== 'all') {
+                list = list.filter(k => k.category === categoryFilter);
+            }
+            return list.slice(0, limit).map(item => ({
+                kalam: item.kalam,
+                score: 1,
+                matchedSherIndex: 1,
+                matchedSher: item.matla,
+                matchType: 'default'
+            }));
+        }
+
+        const rawLower = qRaw.toLowerCase();
+        const results = [];
+
+        for (let i = 0; i < this.kalamIndex.length; i++) {
+            const kItem = this.kalamIndex[i];
+
+            if (bookFilter !== 'all' && kItem.bookId !== bookFilter) continue;
+            if (categoryFilter !== 'all' && kItem.category !== categoryFilter) continue;
+
+            // Check if all tokens match anywhere in the entire Kalam
+            let allTokensFoundInKalam = true;
+            for (let t = 0; t < tokens.length; t++) {
+                if (!kItem.fullKalamNorm.includes(tokens[t])) {
+                    allTokensFoundInKalam = false;
+                    break;
+                }
+            }
+            if (!allTokensFoundInKalam) continue;
+
+            let score = 0;
+            let matchType = 'verse';
+            let bestSherIndex = 1;
+            let bestSher = kItem.matla;
+            let maxSherTokenMatches = -1;
+
+            const titleLower = kItem.title.toLowerCase();
+
+            // 1. Title match boost
+            if (titleLower.includes(rawLower)) {
+                score += 500;
+                matchType = 'title';
+            } else {
+                let titleTokenMatches = 0;
+                for (let t = 0; t < tokens.length; t++) {
+                    if (kItem.titleNorm.includes(tokens[t])) titleTokenMatches++;
+                }
+                if (titleTokenMatches > 0) {
+                    score += titleTokenMatches * 60;
+                    matchType = 'title';
+                }
+            }
+
+            // 2. Identify best matching internal sher for snippet preview
+            for (let j = 0; j < kItem.shers.length; j++) {
+                const s = kItem.shers[j];
+                let sTokensFound = 0;
+                const sRomanLower = s.roman.toLowerCase();
+
+                if (sRomanLower.includes(rawLower)) {
+                    sTokensFound += 10;
+                }
+                for (let t = 0; t < tokens.length; t++) {
+                    if (s.romanNorm.includes(tokens[t]) || s.englishNorm.includes(tokens[t])) {
+                        sTokensFound++;
+                    }
+                }
+
+                if (sTokensFound > maxSherTokenMatches) {
+                    maxSherTokenMatches = sTokensFound;
+                    bestSherIndex = s.sherIndex;
+                    bestSher = kItem.kalam.shers[j];
+                }
+            }
+
+            score += Math.max(0, maxSherTokenMatches * 30);
+
+            if (bestSherIndex === 1 && matchType !== 'title') {
+                matchType = 'matla';
+                score += 40;
+            }
+
+            results.push({
+                kalam: kItem.kalam,
+                score: score,
+                matchedSherIndex: bestSherIndex,
+                matchedSher: bestSher,
+                matchType: matchType
+            });
+        }
+
+        results.sort((a, b) => b.score - a.score);
+        return results.slice(0, limit);
     }
 
     /**
@@ -200,7 +319,7 @@ class RomanSearchEngine {
         const rawWords = query.trim().split(/\s+/).filter(w => w.length > 1);
         if (rawWords.length === 0) return text;
 
-        // Escape regex special characters
+        // Escape regex special characters and build pattern
         const escaped = rawWords.map(w => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
         const pattern = new RegExp(`(${escaped.join('|')})`, 'gi');
         
