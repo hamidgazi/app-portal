@@ -6,8 +6,11 @@
  * - Mathematical Integer Range Binary Search (< 0.1 ms) for 6-digit Pincodes
  * - Dictionary-Interned Multi-Token Text Filter Search (< 2 ms) for City / Hub
  * - Top-50 DOM Virtualization Window + Dynamic Total Match Counter
- * - High-Visibility Logistics ODA Badging System
- * - Zero-Dependency Web Audio Micro-Haptic Feedback (Pop sound) & 1-Tap Copy
+ * - 100% Thumb-Zone Bottom Console (Search, Numpad, Chips in Natural Reach)
+ * - Peripheral Status Glow (Emerald Green = Standard, Alert Red = ODA)
+ * - Cognitive Chunking of 6-digit Pincodes (395 003) per Miller's Law
+ * - Procedural Web Audio UI: Tactile Clicks, Status Verdicts (Ping / Thud)
+ * - Strict Zero-Music Jurisprudence (GEMINI.md Directive 7)
  * - Defensive Bootloader Isolation (try/catch per module) per LESSONS §20.1
  * - Strict DOM Hygiene & Element Verification per LESSONS §20.2 & GEMINI.md
  * ============================================================================
@@ -37,6 +40,7 @@
     searchDebounceTimer: null,
     audioContext: null,
     audioAvailable: false,
+    isMuted: (typeof localStorage !== 'undefined') ? (localStorage.getItem('pincode_audio_muted') === '1') : false,
     keyboardMode: 'numeric',
     recentSearches: []
   };
@@ -150,7 +154,6 @@
     const rows = State.db.r;
 
     if (tokens.length === 0) {
-      // Return all records filtered
       return getAllFiltered(filterType);
     }
 
@@ -171,7 +174,6 @@
       }
 
       if (!anyMatch) {
-        // Token matched zero dictionary strings -> impossible to match any record
         return { matches: [], total: 0 };
       }
 
@@ -184,12 +186,10 @@
     for (let i = 0; i < rows.length; i++) {
       const row = rows[i];
 
-      // Check active filter first for fast discard
       if (!passesFilter(row, filterType)) {
         continue;
       }
 
-      // Check all tokens against [disp, orig, ret, city, state]
       let allTokensMatch = true;
       for (let t = 0; t < numTokens; t++) {
         const mask = tokenMasks[t];
@@ -234,20 +234,15 @@
 
   /**
    * Smart Address Extractor: Extracts 6-digit Indian postal code from messy address or text string.
-   * Handles formats:
-   * - Pure: "395003" -> "395003"
-   * - Embedded: "Plot 12, GIDC, Surat - 395002, Gujarat" -> "395002"
-   * - Spaced/Hyphenated: "Surat 395 003" or "Surat 395-003" -> "395003"
-   * - Word boundary guard: does not match inside 10-digit phone numbers (e.g. 9876543210)
    */
   function extractPincodeFromText(text) {
     if (!text || typeof text !== 'string') return null;
-    // 1. Check for spaced or hyphenated 6-digit pincode: 395 003 or 395-003
+    // 1. Spaced or hyphenated 6-digit pincode: 395 003 or 395-003
     const spacedMatch = text.match(/\b([1-9][0-9]{2})\s*[- ]\s*([0-9]{3})\b/);
     if (spacedMatch) {
       return spacedMatch[1] + spacedMatch[2];
     }
-    // 2. Check for standard 6-digit pincode with word boundaries
+    // 2. Standard 6-digit pincode with word boundaries
     const pinMatch = text.match(/\b([1-9][0-9]{5})\b/);
     if (pinMatch) {
       return pinMatch[1];
@@ -267,7 +262,6 @@
     if (/^\d+$/.test(q)) {
       return searchPincodePrefix(q, filterType);
     } else {
-      // Check if text query contains a 6-digit pincode embedded in it
       const embeddedPin = extractPincodeFromText(q);
       if (embeddedPin) {
         return searchPincodePrefix(embeddedPin, filterType);
@@ -316,7 +310,7 @@
   }
 
   /* ==========================================================================
-     3. Web Audio Micro-Haptics Module (LESSONS §3.1)
+     3. Procedural Web Audio Micro-Haptics Engine (Strict Zero-Music Compliance)
      ========================================================================== */
 
   function getAudioContext() {
@@ -336,9 +330,90 @@
   }
 
   /**
+   * Procedural Key Click: 15ms subtle tactile acoustic click
+   */
+  function playKeyClick() {
+    if (State.isMuted) return;
+    try {
+      const ctx = getAudioContext();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(1200, now);
+      osc.frequency.exponentialRampToValueAtTime(300, now + 0.015);
+
+      gain.gain.setValueAtTime(0.001, now);
+      gain.gain.exponentialRampToValueAtTime(0.09, now + 0.002);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.015);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.016);
+    } catch (e) {}
+  }
+
+  /**
+   * Procedural Status Verdict Sound:
+   * - Standard Delivery: Crisp upward confirmation ping (540Hz -> 880Hz, 50ms)
+   * - ODA Remote Area: Cautionary dual-frequency thud (260Hz + 200Hz, 75ms)
+   */
+  function playStatusVerdictSound(isOda) {
+    if (State.isMuted) return;
+    try {
+      const ctx = getAudioContext();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+
+      if (!isOda) {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(540, now);
+        osc.frequency.exponentialRampToValueAtTime(880, now + 0.045);
+
+        gain.gain.setValueAtTime(0.001, now);
+        gain.gain.exponentialRampToValueAtTime(0.16, now + 0.008);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.05);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.055);
+      } else {
+        const osc1 = ctx.createOscillator();
+        const osc2 = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc1.type = 'sine';
+        osc2.type = 'triangle';
+        osc1.frequency.setValueAtTime(260, now);
+        osc2.frequency.setValueAtTime(200, now);
+
+        gain.gain.setValueAtTime(0.001, now);
+        gain.gain.exponentialRampToValueAtTime(0.2, now + 0.01);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.075);
+
+        osc1.connect(gain);
+        osc2.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc1.start(now);
+        osc2.start(now);
+        osc1.stop(now + 0.08);
+        osc2.stop(now + 0.08);
+      }
+    } catch (e) {}
+  }
+
+  /**
    * Synthesizes 520Hz -> 300Hz Sine Wave Pop (70ms duration) on 1-tap copy
    */
   function playPopSound() {
+    if (State.isMuted) return;
     try {
       const ctx = getAudioContext();
       if (!ctx) return;
@@ -359,32 +434,40 @@
 
       osc.start(now);
       osc.stop(now + 0.07);
-    } catch (e) {
-      // Micro-haptics is non-critical; never throw
-    }
+    } catch (e) {}
   }
 
   /* ==========================================================================
-     4. UI Rendering Engine & Virtual Windowing (Top-50 + Load More)
+     4. UI Rendering Engine & Cognitive Chunking Cards
      ========================================================================== */
 
   /**
-   * Generates HTML card markup for a single courier record
+   * Generates HTML card markup for a single courier record with Peripheral Status Glow
    */
   function renderCardHTML(row, index) {
     const rec = resolveRecord(row);
     if (!rec) return '';
 
-    // Plain-English Delivery & ODA Status Badges
+    // Cognitive Chunking: 395003 -> 395 003 per Miller's Law
+    const pinStr = String(rec.pincode);
+    const chunkedPin = (pinStr.length === 6)
+      ? pinStr.slice(0, 3) + ' ' + pinStr.slice(3)
+      : pinStr;
+
+    // Plain-English Delivery & ODA Status Badges with Peripheral Glow class
+    let statusClass = 'status-unspecified';
     let badgeHTML = '';
+
     if (rec.oda === 1) {
+      statusClass = 'status-oda';
       badgeHTML = (
         '<span class="oda-badge oda-badge-warning" aria-label="ODA: Remote Area (Extra Charges / 1-2 Days Extra)">' +
           '<span class="badge-headline">⚠️ ODA: Remote Area</span>' +
-          '<span class="badge-subtext">Extra Charges &bull; +1&ndash;2 Days</span>' +
+          '<span class="badge-subtext">Extra Surcharge &bull; +1&ndash;2 Days</span>' +
         '</span>'
       );
     } else if (rec.oda === 0) {
+      statusClass = 'status-standard';
       badgeHTML = (
         '<span class="oda-badge oda-badge-standard" aria-label="Standard Delivery (Normal Rate & Regular Speed)">' +
           '<span class="badge-headline">🟢 Standard Delivery</span>' +
@@ -420,9 +503,9 @@
     }
 
     return (
-      '<article class="pincode-card" data-index="' + index + '" data-pin="' + rec.pincode + '" role="article" tabindex="0">' +
+      '<article class="pincode-card ' + statusClass + '" data-index="' + index + '" data-pin="' + rec.pincode + '" role="article" tabindex="0">' +
         '<div class="card-header-row">' +
-          '<span class="card-pincode">' + rec.pincode + '</span>' +
+          '<span class="card-pincode">' + escapeHTML(chunkedPin) + '</span>' +
           badgeHTML +
         '</div>' +
         '<div class="card-location-row">' +
@@ -626,7 +709,6 @@
       return;
     }
 
-    // Fallback: check if we should fetch data/pincodes.json
     console.log('[DataStore] window.PINCODE_DB not found, fetching data/pincodes.json...');
     fetch('data/pincodes.json')
       .then(function (res) {
@@ -652,14 +734,12 @@
     const r = data.r;
     const total = r.length;
 
-    // Pre-extract Uint32Array for fast binary search
     const pins = new Uint32Array(total);
     for (let i = 0; i < total; i++) {
       pins[i] = r[i][0];
     }
     State.pins = pins;
 
-    // Pre-compute lowercased dictionary strings
     const d = data.d;
     const dLower = new Array(d.length);
     for (let i = 0; i < d.length; i++) {
@@ -667,7 +747,6 @@
     }
     State.dLower = dLower;
 
-    // Pre-compute Metro mask
     const metroMask = new Uint8Array(d.length);
     for (let i = 0; i < d.length; i++) {
       const str = dLower[i];
@@ -691,7 +770,6 @@
       console.warn('[SearchEngine] Database not yet loaded; waiting for hydration.');
       return;
     }
-    // Prime initial search (all records)
     const result = getAllFiltered(State.activeFilter);
     State.currentMatches = result.matches;
     State.totalMatchesCount = result.total;
@@ -713,35 +791,24 @@
         State.currentQuery = val;
         const trimmed = val.trim();
 
-        // Toggle clear button
         if (btnClearSearch) {
           btnClearSearch.style.display = val.length > 0 ? 'inline-flex' : 'none';
         }
 
-        // 6th Digit Auto-Dismiss: If exactly 6 digits are typed, auto-hide keyboard immediately
+        // 6th Digit Auto-Search & Multisensory Sound
         if (/^\d{6}$/.test(trimmed)) {
           if (State.searchDebounceTimer) {
             clearTimeout(State.searchDebounceTimer);
           }
           searchInput.blur();
-
-          // Also close on-screen numpad if open
-          const numpad = document.getElementById('quick-numpad');
-          if (numpad && numpad.style.display !== 'none') {
-            numpad.style.display = 'none';
-            const mainContent = document.getElementById('main-content');
-            if (mainContent) mainContent.classList.remove('has-numpad-open');
-          }
-
-          playPopSound();
           performSearch();
+          if (State.currentMatches.length > 0) {
+            playStatusVerdictSound(State.currentMatches[0][6] === 1);
+          }
           saveRecentSearch(trimmed);
           return;
         }
 
-        // Adaptive zero-lag debounce:
-        // Pure digits: 0-10ms (instant binary search)
-        // Text: 25ms
         const debounceMs = /^\d+$/.test(trimmed) ? 5 : 25;
 
         if (State.searchDebounceTimer) {
@@ -753,7 +820,7 @@
         }, debounceMs);
       });
 
-      // Direct paste listener: automatically extracts 6-digit pincode if present in pasted text
+      // Direct paste listener
       searchInput.addEventListener('paste', function (e) {
         const pasted = (e.clipboardData || window.clipboardData).getData('text');
         if (pasted) {
@@ -764,30 +831,37 @@
             State.currentQuery = extracted;
             if (btnClearSearch) btnClearSearch.style.display = 'inline-flex';
             searchInput.blur();
-            playPopSound();
-            showToast('📋 Extracted Pincode: ' + extracted);
             performSearch();
+            if (State.currentMatches.length > 0) {
+              playStatusVerdictSound(State.currentMatches[0][6] === 1);
+            } else {
+              playPopSound();
+            }
+            showToast('📋 Extracted Pincode: ' + extracted);
             saveRecentSearch(extracted);
           }
         }
       });
 
-      // Enter / Search key on native mobile keyboard: auto-hide keyboard and show results
+      // Enter key
       searchInput.addEventListener('keydown', function (e) {
         if (e.key === 'Enter') {
           e.preventDefault();
-          searchInput.blur(); // Dismisses mobile OS keyboard immediately
-          playPopSound();
+          searchInput.blur();
           if (State.currentQuery && State.currentQuery.trim()) {
             saveRecentSearch(State.currentQuery.trim());
           }
           performSearch();
+          if (State.currentMatches.length > 0) {
+            playStatusVerdictSound(State.currentMatches[0][6] === 1);
+          }
         }
       });
 
       // 1-Tap Smart Paste Button
       if (btnPasteSearch) {
         btnPasteSearch.addEventListener('click', function () {
+          playKeyClick();
           handleSmartPaste();
         });
       }
@@ -795,6 +869,7 @@
       // Clear search button
       if (btnClearSearch) {
         btnClearSearch.addEventListener('click', function () {
+          playKeyClick();
           searchInput.value = '';
           State.currentQuery = '';
           btnClearSearch.style.display = 'none';
@@ -806,6 +881,7 @@
       // Empty state reset button
       if (btnResetEmpty) {
         btnResetEmpty.addEventListener('click', function () {
+          playKeyClick();
           searchInput.value = '';
           State.currentQuery = '';
           if (btnClearSearch) btnClearSearch.style.display = 'none';
@@ -828,7 +904,7 @@
       chip.addEventListener('click', function () {
         const filterType = chip.getAttribute('data-filter') || 'all';
         setActiveFilter(filterType);
-        playPopSound();
+        playKeyClick();
       });
     });
   }
@@ -849,11 +925,10 @@
   }
 
   /**
-   * Module 5: Web Audio Micro-Haptics Pre-Warm
+   * Module 5: Web Audio Micro-Haptics Pre-Warm & Header Sound Toggle
    */
   function initAudioHaptics() {
     if (typeof window === 'undefined' || !window.addEventListener) return;
-    // Unlock AudioContext on first user interaction per browser autoplay policy
     const unlockAudio = function () {
       getAudioContext();
       window.removeEventListener('click', unlockAudio);
@@ -861,6 +936,46 @@
     };
     window.addEventListener('click', unlockAudio, { passive: true });
     window.addEventListener('touchstart', unlockAudio, { passive: true });
+  }
+
+  function initSoundToggle() {
+    if (typeof document === 'undefined') return;
+    const btn = document.getElementById('btn-toggle-sound');
+    const icon = document.getElementById('sound-icon');
+    const label = document.getElementById('sound-label');
+    if (!btn) return;
+
+    function updateUI() {
+      if (State.isMuted) {
+        btn.className = 'btn-header-action sound-muted';
+        if (icon) icon.textContent = '🔇';
+        if (label) label.textContent = 'Muted';
+        btn.setAttribute('title', 'Sound Muted: Tap to enable SFX');
+      } else {
+        btn.className = 'btn-header-action sound-active';
+        if (icon) icon.textContent = '🔊';
+        if (label) label.textContent = 'Sound';
+        btn.setAttribute('title', 'Sound Active: Tap to mute');
+      }
+    }
+
+    btn.addEventListener('click', function () {
+      State.isMuted = !State.isMuted;
+      try {
+        if (typeof localStorage !== 'undefined') {
+          localStorage.setItem('pincode_audio_muted', State.isMuted ? '1' : '0');
+        }
+      } catch (e) {}
+      updateUI();
+      if (!State.isMuted) {
+        playKeyClick();
+        showToast('🔊 Sound effects enabled');
+      } else {
+        showToast('🔇 Sound effects muted');
+      }
+    });
+
+    updateUI();
   }
 
   /**
@@ -871,7 +986,6 @@
     const container = document.getElementById('results-container');
     if (!container) return;
 
-    // Whole-card & button click delegation
     container.addEventListener('click', function (e) {
       const card = e.target.closest('.pincode-card');
       if (!card) return;
@@ -883,12 +997,10 @@
       const rec = resolveRecord(row);
       if (!rec) return;
 
-      // Handle Copy button or whole-card tap
       const payload = formatCopyPayload(rec);
       copyTextToClipboard(payload, '✓ Copied ' + rec.pincode + ' details!');
     });
 
-    // Keyboard accessibility for cards
     container.addEventListener('keydown', function (e) {
       if (e.key === 'Enter' || e.key === ' ') {
         const card = e.target.closest('.pincode-card');
@@ -901,6 +1013,21 @@
   }
 
   /**
+   * Dynamically synchronizes #main-content padding with #bottom-control-console height
+   */
+  function syncConsolePadding() {
+    if (typeof document === 'undefined') return;
+    const consoleEl = document.getElementById('bottom-control-console');
+    const mainEl = document.getElementById('main-content');
+    if (!consoleEl || !mainEl) return;
+    const rect = consoleEl.getBoundingClientRect();
+    const h = Math.round(rect.height);
+    if (h > 0) {
+      mainEl.style.paddingBottom = (h + 16) + 'px';
+    }
+  }
+
+  /**
    * Module 7: Touch Ergonomics, Load More & Infinite Scroll
    */
   function initTouchAndScroll() {
@@ -908,12 +1035,11 @@
     const btnLoadMore = document.getElementById('btn-load-more');
     if (btnLoadMore) {
       btnLoadMore.addEventListener('click', function () {
-        playPopSound();
+        playKeyClick();
         renderResults(true);
       });
     }
 
-    // Auto load more using IntersectionObserver on sentinel
     const sentinel = document.getElementById('scroll-sentinel');
     if (sentinel && typeof window !== 'undefined' && 'IntersectionObserver' in window) {
       const observer = new IntersectionObserver(function (entries) {
@@ -927,6 +1053,13 @@
       });
       observer.observe(sentinel);
     }
+
+    // Dynamic Console Padding sync on resize
+    syncConsolePadding();
+    window.addEventListener('resize', syncConsolePadding, { passive: true });
+    window.addEventListener('orientationchange', function () {
+      setTimeout(syncConsolePadding, 100);
+    }, { passive: true });
   }
 
   /**
@@ -948,7 +1081,7 @@
 
     function openModal() {
       modal.style.display = 'flex';
-      playPopSound();
+      playKeyClick();
       if (statusDiv) statusDiv.style.display = 'none';
     }
 
@@ -1078,7 +1211,7 @@
   }
 
   /**
-   * Module 10: On-Screen Mobile Numeric Keypad Controller (Default Docked)
+   * Module 10: On-Screen Mobile Numeric Keypad Controller (Inside Bottom Console)
    */
   function initNumberPad() {
     if (typeof document === 'undefined') return;
@@ -1090,24 +1223,23 @@
     if (!numpad || !searchInput) return;
 
     function toggleNumpad(show) {
-      const isVisible = numpad.style.display !== 'none';
+      const isVisible = !numpad.classList.contains('numpad-minimized') && numpad.style.display !== 'none';
       const target = (typeof show === 'boolean') ? show : !isVisible;
-      numpad.style.display = target ? 'block' : 'none';
-      if (mainContent) {
-        if (target) {
-          mainContent.classList.add('has-numpad-open');
-        } else {
-          mainContent.classList.remove('has-numpad-open');
-        }
+
+      if (target) {
+        numpad.classList.remove('numpad-minimized');
+        numpad.style.display = 'block';
+        if (mainContent) mainContent.classList.remove('numpad-collapsed');
+        if (btnToggle) btnToggle.classList.add('active');
+      } else {
+        numpad.classList.add('numpad-minimized');
+        numpad.style.display = 'none';
+        if (mainContent) mainContent.classList.add('numpad-collapsed');
+        if (btnToggle) btnToggle.classList.remove('active');
       }
-      if (btnToggle) {
-        if (target) {
-          btnToggle.classList.add('active');
-        } else {
-          btnToggle.classList.remove('active');
-        }
-      }
-      playPopSound();
+
+      setTimeout(syncConsolePadding, 50);
+      playKeyClick();
     }
 
     if (btnToggle) {
@@ -1122,11 +1254,10 @@
       });
     }
 
-    // Tapping search input in numeric mode opens/re-docks Pin Pad if closed,
-    // and prevents the phone's native keyboard from opening
+    // Tapping search input in numeric mode opens/re-docks Pin Pad if minimized
     searchInput.addEventListener('click', function () {
       if (State.keyboardMode === 'numeric') {
-        if (numpad.style.display === 'none') {
+        if (numpad.classList.contains('numpad-minimized') || numpad.style.display === 'none') {
           toggleNumpad(true);
         }
       }
@@ -1135,7 +1266,7 @@
     searchInput.addEventListener('focus', function () {
       if (State.keyboardMode === 'numeric') {
         searchInput.setAttribute('inputmode', 'none');
-        if (numpad.style.display === 'none') {
+        if (numpad.classList.contains('numpad-minimized') || numpad.style.display === 'none') {
           toggleNumpad(true);
         }
       }
@@ -1146,7 +1277,7 @@
       const keyBtn = e.target.closest('.num-key');
       if (!keyBtn) return;
       const keyAction = keyBtn.getAttribute('data-key');
-      playPopSound();
+      playKeyClick();
 
       if (keyAction === 'clear') {
         searchInput.value = '';
@@ -1167,22 +1298,22 @@
       }
 
       if (keyAction === 'enter') {
-        // When Enter is tapped on Pin Pad: save recent search and search, but stay docked!
         if (searchInput && searchInput.value.trim()) {
           saveRecentSearch(searchInput.value.trim());
         }
         performSearch();
+        if (State.currentMatches.length > 0) {
+          playStatusVerdictSound(State.currentMatches[0][6] === 1);
+        }
         return;
       }
 
       if (/^\d$/.test(keyAction)) {
         if (!/^\d*$/.test(searchInput.value)) {
-          // If search was previously text, start fresh numeric entry
           searchInput.value = keyAction;
         } else if (searchInput.value.length < 6) {
           searchInput.value += keyAction;
         } else {
-          // If already 6 digits, replace with new starting digit
           searchInput.value = keyAction;
         }
         State.currentQuery = searchInput.value;
@@ -1190,14 +1321,17 @@
         if (btnClear) btnClear.style.display = 'inline-flex';
         performSearch();
 
-        // When 6 digits are reached: save recent search, search immediately, and remain docked for rapid checking!
+        // When 6 digits are reached: play status verdict chime and save recent search
         if (searchInput.value.length === 6) {
           saveRecentSearch(searchInput.value);
+          if (State.currentMatches.length > 0) {
+            playStatusVerdictSound(State.currentMatches[0][6] === 1);
+          }
         }
       }
     });
 
-    // Ensure numpad is active by default
+    // Initialize with numpad active by default
     toggleNumpad(true);
   }
 
@@ -1218,7 +1352,6 @@
       const isNum = (mode === 'numeric');
 
       if (isNum) {
-        // Numeric mode: native phone keyboard disabled via inputmode="none", Pin Pad docked
         searchInput.setAttribute('inputmode', 'none');
         searchInput.removeAttribute('pattern');
         searchInput.setAttribute('placeholder', 'Enter 6-digit Pincode (or tap ABC for City)...');
@@ -1226,17 +1359,20 @@
         btnMode.innerHTML = '<span class="mode-icon" aria-hidden="true">🔢</span><span class="mode-label">123</span>';
         btnMode.setAttribute('title', 'Currently Number Mode: Tap to switch to ABC City Mode');
 
-        // Show docked Pin Pad
-        if (numpad) numpad.style.display = 'block';
-        if (mainContent) mainContent.classList.add('has-numpad-open');
+        if (numpad) {
+          numpad.classList.remove('numpad-minimized');
+          numpad.style.display = 'block';
+        }
+        if (mainContent) mainContent.classList.remove('numpad-collapsed');
         if (btnToggleNumpad) btnToggleNumpad.classList.add('active');
 
-        // Dismiss any open native phone keyboard
         searchInput.blur();
       } else {
-        // Text mode: Pin Pad hidden, native phone keyboard enabled via inputmode="text"
-        if (numpad) numpad.style.display = 'none';
-        if (mainContent) mainContent.classList.remove('has-numpad-open');
+        if (numpad) {
+          numpad.classList.add('numpad-minimized');
+          numpad.style.display = 'none';
+        }
+        if (mainContent) mainContent.classList.add('numpad-collapsed');
         if (btnToggleNumpad) btnToggleNumpad.classList.remove('active');
 
         searchInput.setAttribute('inputmode', 'text');
@@ -1246,13 +1382,13 @@
         btnMode.innerHTML = '<span class="mode-icon" aria-hidden="true">🔤</span><span class="mode-label">ABC</span>';
         btnMode.setAttribute('title', 'Currently City Mode: Tap to switch to 123 Pincode Mode');
 
-        // Automatically focus search input so phone opens the native QWERTY keyboard
         setTimeout(function () {
           searchInput.focus();
         }, 50);
       }
 
-      playPopSound();
+      setTimeout(syncConsolePadding, 50);
+      playKeyClick();
     }
 
     btnMode.addEventListener('click', function (e) {
@@ -1261,7 +1397,6 @@
       setKeyboardMode(nextMode);
     });
 
-    // Initialize with numeric mode
     setKeyboardMode('numeric');
   }
 
@@ -1291,7 +1426,6 @@
     if (!cleanQuery) return;
 
     let recent = loadRecentSearches();
-    // Filter out if duplicate
     recent = recent.filter(function (item) {
       return item.query.toLowerCase() !== cleanQuery.toLowerCase();
     });
@@ -1299,7 +1433,6 @@
     let cityLabel = '';
     let isOda = false;
 
-    // If query is a 6-digit pincode, lookup details in State.db
     if (/^\d{6}$/.test(cleanQuery) && State.db && State.pins) {
       const pinInt = parseInt(cleanQuery, 10);
       const idx = lowerBound(State.pins, pinInt);
@@ -1359,6 +1492,7 @@
     if (!recent || recent.length === 0) {
       container.style.display = 'none';
       chipsList.innerHTML = '';
+      setTimeout(syncConsolePadding, 30);
       return;
     }
 
@@ -1377,6 +1511,8 @@
         '</button>'
       );
     }).join('');
+
+    setTimeout(syncConsolePadding, 30);
   }
 
   function handleSmartPaste() {
@@ -1401,18 +1537,20 @@
           searchInput.blur();
         }
         if (btnClearSearch) btnClearSearch.style.display = 'inline-flex';
-        playPopSound();
-        showToast('📋 Extracted Pincode: ' + extractedPin);
         performSearch();
+        if (State.currentMatches.length > 0) {
+          playStatusVerdictSound(State.currentMatches[0][6] === 1);
+        } else {
+          playPopSound();
+        }
+        showToast('📋 Extracted Pincode: ' + extractedPin);
         saveRecentSearch(extractedPin);
       } else {
-        // Fallback: paste full text (e.g. city or hub)
         if (searchInput) {
           searchInput.value = cleanText;
           State.currentQuery = cleanText;
           searchInput.blur();
         }
-        // If mode was numeric, switch to text mode
         if (State.keyboardMode === 'numeric' && /[a-zA-Z]/.test(cleanText)) {
           const btnMode = document.getElementById('btn-input-mode');
           if (btnMode) {
@@ -1452,19 +1590,18 @@
         const q = chip.getAttribute('data-query');
         if (!q) return;
 
-        playPopSound();
+        playKeyClick();
         searchInput.value = q;
         State.currentQuery = q;
         if (btnClearSearch) btnClearSearch.style.display = 'inline-flex';
 
-        // Set appropriate keyboard mode
         if (/^\d+$/.test(q)) {
           if (State.keyboardMode !== 'numeric') {
             const btnMode = document.getElementById('btn-input-mode');
             State.keyboardMode = 'numeric';
-            searchInput.setAttribute('inputmode', 'numeric');
-            searchInput.setAttribute('pattern', '[0-9]*');
-            searchInput.setAttribute('placeholder', 'Enter 6-digit Pincode (or tap 123 for City)...');
+            searchInput.setAttribute('inputmode', 'none');
+            searchInput.removeAttribute('pattern');
+            searchInput.setAttribute('placeholder', 'Enter 6-digit Pincode (or tap ABC for City)...');
             if (btnMode) {
               btnMode.className = 'btn-input-mode mode-numeric';
               btnMode.innerHTML = '<span class="mode-icon" aria-hidden="true">🔢</span><span class="mode-label">123</span>';
@@ -1486,12 +1623,15 @@
 
         searchInput.blur();
         performSearch();
+        if (State.currentMatches.length > 0) {
+          playStatusVerdictSound(State.currentMatches[0][6] === 1);
+        }
       });
     }
 
     if (btnClear) {
       btnClear.addEventListener('click', function () {
-        playPopSound();
+        playKeyClick();
         clearRecentSearches();
         showToast('Recent searches cleared');
       });
@@ -1511,6 +1651,7 @@
       { name: 'Search UI & Debounce Handlers', fn: initSearchUI, critical: true },
       { name: 'Filter Chips Controller', fn: initFilterChips, critical: true },
       { name: 'Web Audio Micro-Haptics', fn: initAudioHaptics, critical: false },
+      { name: 'Sound Toggle Button', fn: initSoundToggle, critical: false },
       { name: 'Clipboard & Whole-Card Delegation', fn: initClipboard, critical: true },
       { name: 'Touch Ergonomics & Infinite Scroll', fn: initTouchAndScroll, critical: false },
       { name: 'On-Screen Numeric Pin Keypad', fn: initNumberPad, critical: false },
@@ -1536,7 +1677,6 @@
 
     if (!hasCriticalFailure) {
       console.log('[Bootloader] All Pincode Search modules online.');
-      // Execute initial search display
       performSearch();
     } else {
       console.error('[Bootloader] Critical module failure encountered during boot.');

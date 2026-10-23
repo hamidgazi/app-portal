@@ -71,6 +71,7 @@
       display: flex;
       flex-direction: column;
       gap: 14px;
+      padding-bottom: 180px;
     }
 
     /* Top Navigation Header */
@@ -165,7 +166,7 @@
     }
 
     .bag-card {
-      min-height: 64px;
+      min-height: 72px;
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
       border-radius: 14px;
@@ -185,23 +186,114 @@
       transform: scale(0.96);
     }
 
+    /* Distinct Color Coding per Bag */
+    .bag-card[data-item="1 set"] { border-color: rgba(16, 185, 129, 0.28); }
+    .bag-card[data-item="1 set"].selected {
+      border-color: #10b981;
+      background: rgba(16, 185, 129, 0.14);
+      box-shadow: 0 0 18px rgba(16, 185, 129, 0.35);
+    }
+
+    .bag-card[data-item="Kohinoor"] { border-color: rgba(245, 158, 11, 0.28); }
+    .bag-card[data-item="Kohinoor"].selected {
+      border-color: #f59e0b;
+      background: rgba(245, 158, 11, 0.14);
+      box-shadow: 0 0 18px rgba(245, 158, 11, 0.35);
+    }
+
+    .bag-card[data-item="Lining 28"] { border-color: rgba(129, 140, 248, 0.28); }
+    .bag-card[data-item="Lining 28"].selected {
+      border-color: #818cf8;
+      background: rgba(129, 140, 248, 0.14);
+      box-shadow: 0 0 18px rgba(129, 140, 248, 0.35);
+    }
+
+    .bag-card[data-item="Medium 29"] { border-color: rgba(56, 189, 248, 0.28); }
+    .bag-card[data-item="Medium 29"].selected {
+      border-color: #38bdf8;
+      background: rgba(56, 189, 248, 0.14);
+      box-shadow: 0 0 18px rgba(56, 189, 248, 0.35);
+    }
+
+    .bag-card[data-item="Pink 30"] { border-color: rgba(244, 63, 94, 0.28); }
+    .bag-card[data-item="Pink 30"].selected {
+      border-color: #f43f5e;
+      background: rgba(244, 63, 94, 0.14);
+      box-shadow: 0 0 18px rgba(244, 63, 94, 0.35);
+    }
+
+    .bag-card[data-item="White (6)"] { border-color: rgba(248, 250, 252, 0.28); }
+    .bag-card[data-item="White (6)"].selected {
+      border-color: #f8fafc;
+      background: rgba(248, 250, 252, 0.14);
+      box-shadow: 0 0 18px rgba(248, 250, 252, 0.35);
+    }
+
     .bag-card.selected {
       border-color: #38bdf8;
       background: var(--bg-card-selected);
       box-shadow: 0 0 16px rgba(56, 189, 248, 0.25);
     }
 
+    .bag-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
     .bag-name {
-      font-size: 1rem;
-      font-weight: 700;
+      font-size: 1.02rem;
+      font-weight: 800;
       color: #ffffff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .health-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #94a3b8;
+    }
+
+    .health-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 6px #10b981;
+      flex-shrink: 0;
+    }
+    .health-dot.low {
+      background: #f59e0b;
+      box-shadow: 0 0 6px #f59e0b;
+    }
+    .health-dot.empty {
+      background: #ef4444;
+      box-shadow: 0 0 8px #ef4444;
+      animation: pulseDotAlert 1.5s infinite;
+    }
+
+    @keyframes pulseDotAlert {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.2); }
     }
 
     .bag-stock-row {
       display: flex;
-      align-items: center;
+      align-items: baseline;
       justify-content: space-between;
-      margin-top: 4px;
+      margin-top: 6px;
+    }
+
+    .bag-stock-number {
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: #ffffff;
     }
 
     .bag-stock-badge {
@@ -294,6 +386,36 @@
       box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
     }
 
+    /* STEP 3: Quantity Steppers */
+    .qty-stepper-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .btn-stepper {
+      min-height: var(--min-hitbox);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(56, 189, 248, 0.22);
+      color: #38bdf8;
+      font-size: 1rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: transform 0.12s var(--spring), background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .btn-stepper:active {
+      transform: scale(0.94);
+      background: rgba(56, 189, 248, 0.18);
+      border-color: #38bdf8;
+    }
+
     .custom-qty-row {
       display: flex;
       gap: 8px;
@@ -317,6 +439,46 @@
       border-color: #38bdf8;
     }
 
+    /* STEP 4: Party Chips */
+    .party-chips-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      margin-bottom: 8px;
+      padding-bottom: 4px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .party-chip {
+      min-height: var(--min-hitbox);
+      padding: 0 14px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      font-size: 0.85rem;
+      font-weight: 700;
+      white-space: nowrap;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      touch-action: manipulation;
+      transition: all 0.15s ease;
+    }
+
+    .party-chip:active {
+      transform: scale(0.95);
+      background: rgba(56, 189, 248, 0.2);
+    }
+
+    .party-chip.selected {
+      background: rgba(56, 189, 248, 0.18);
+      border-color: #38bdf8;
+      color: #38bdf8;
+    }
+
     .note-input {
       width: 100%;
       min-height: 48px;
@@ -333,7 +495,7 @@
       border-color: #38bdf8;
     }
 
-    /* STEP 4: Full-Width Primary Submit Button */
+    /* STEP 5: Full-Width Primary Submit Button */
     .btn-submit {
       width: 100%;
       min-height: 60px;
@@ -363,6 +525,91 @@
       opacity: 0.4;
       cursor: not-allowed;
       box-shadow: none;
+    }
+
+    /* Fixed Bottom Action Bar (Thumb Zone Optimization) */
+    .sticky-bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 520px;
+      padding: 10px 14px calc(12px + env(safe-area-inset-bottom, 12px)) 14px;
+      background: rgba(11, 17, 32, 0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 20px 20px 0 0;
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.85);
+      z-index: 90;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* Floating Undo Snack-Bar */
+    .undo-snackbar {
+      position: fixed;
+      bottom: calc(152px + env(safe-area-inset-bottom, 12px));
+      left: 50%;
+      transform: translateX(-50%) translateY(30px);
+      width: calc(100% - 24px);
+      max-width: 492px;
+      background: #0f172a;
+      border: 1px solid #10b981;
+      border-radius: 14px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.9), 0 0 16px rgba(16, 185, 129, 0.25);
+      z-index: 95;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .undo-snackbar.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .undo-snackbar-content {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #ffffff;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .btn-snackbar-undo {
+      min-height: var(--min-hitbox);
+      padding: 0 16px;
+      border-radius: 10px;
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid rgba(239, 68, 68, 0.5);
+      color: #fca5a5;
+      font-size: 0.85rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      touch-action: manipulation;
+      transition: transform 0.12s var(--spring), background 0.15s ease;
+    }
+
+    .btn-snackbar-undo:active {
+      transform: scale(0.95);
+      background: rgba(239, 68, 68, 0.35);
     }
 
     /* Live Summary Glance Card */
@@ -1077,6 +1324,9 @@
           <span id="status-dot" class="status-dot"></span>
           <span id="status-text">Online</span>
         </div>
+        <button id="btn-sound-toggle" class="btn-icon" aria-label="Toggle Sound" title="Sound Effects (Mute / Unmute)">
+          🔊
+        </button>
         <button id="btn-settings" class="btn-icon" aria-label="Settings" title="Google Sheet Webhook Settings">
           ⚙️
         </button>
@@ -1126,7 +1376,7 @@
       </div>
     </section>
 
-    <!-- STEP 3: Choose Quantity (Quick Chips) -->
+    <!-- STEP 3: Choose Quantity (Quick Chips & Steppers) -->
     <section>
       <div class="step-label">
         <span>Step 3: Quantity (Pieces)</span>
@@ -1138,28 +1388,30 @@
         <button class="qty-chip" data-qty="200">200</button>
         <button class="qty-chip" data-qty="500">500</button>
       </div>
+      <div class="qty-stepper-row" id="qty-stepper-row">
+        <button class="btn-stepper" data-step="-10" aria-label="Minus 10 pieces">−10</button>
+        <button class="btn-stepper" data-step="-5" aria-label="Minus 5 pieces">−5</button>
+        <button class="btn-stepper" data-step="5" aria-label="Plus 5 pieces">+5</button>
+        <button class="btn-stepper" data-step="10" aria-label="Plus 10 pieces">+10</button>
+      </div>
       <div class="custom-qty-row">
         <input type="number" id="input-custom-qty" class="custom-qty-input" placeholder="Or enter custom number..." min="1" step="1">
       </div>
     </section>
 
-    <!-- STEP 4: Optional Party Name / Remark -->
+    <!-- STEP 4: Optional Party Name / Remark with Quick Suggestion Chips -->
     <section>
-      <input type="text" id="input-remark" class="note-input" placeholder="Party Name / Note (Optional)">
+      <div class="step-label">
+        <span>Step 4: Party Name / Note</span>
+        <span style="font-size: 0.75rem; color: #94a3b8;">Optional</span>
+      </div>
+      <div id="party-chips-row" class="party-chips-row">
+        <!-- Injected via renderPartySuggestions() -->
+      </div>
+      <input type="text" id="input-remark" class="note-input" placeholder="Party Name / Note (e.g. Walk-in, Shop)...">
     </section>
 
-    <!-- Dynamic Stock Preview Banner (Directly above Submit) -->
-    <div id="stock-preview-banner" class="stock-preview-banner">
-      <!-- Injected reactively via updateStockPreviewBanner() -->
-    </div>
-
-    <!-- STEP 5: Big Vibrant SAVE ENTRY Button -->
-    <button id="btn-submit-entry" class="btn-submit">
-      <span>💾</span>
-      <span id="submit-btn-text">RECORD TRANSACTION</span>
-    </button>
-
-    <!-- STEP 6: Recent Transactions with In-Place Expander & Full History Drawer Access -->
+    <!-- STEP 5: Recent Transactions with In-Place Expander & Full History Drawer Access -->
     <section class="recent-section" id="recent-section">
       <div class="recent-header">
         <div style="display: flex; align-items: center; gap: 8px;">
@@ -1193,6 +1445,32 @@
         </button>
       </div>
     </section>
+
+    <!-- Instant Floating Undo Snack-Bar -->
+    <div id="undo-snackbar" class="undo-snackbar" aria-live="polite">
+      <div class="undo-snackbar-content">
+        <span class="undo-snackbar-icon">✅</span>
+        <span id="undo-snackbar-text" class="undo-snackbar-text">Recorded: 50 Kohinoor OUT</span>
+      </div>
+      <button id="btn-snackbar-undo" class="btn-snackbar-undo" aria-label="Undo Transaction">
+        <span>↩️</span>
+        <span id="snackbar-undo-label">Undo (5s)</span>
+      </button>
+    </div>
+
+    <!-- Fixed Bottom Action Bar (Thumb Zone Optimization) -->
+    <div id="sticky-bottom-bar" class="sticky-bottom-bar">
+      <!-- Dynamic Stock Preview Banner -->
+      <div id="stock-preview-banner" class="stock-preview-banner">
+        <!-- Injected reactively via updateStockPreviewBanner() -->
+      </div>
+
+      <!-- STEP 5: Big Vibrant SAVE ENTRY Button -->
+      <button id="btn-submit-entry" class="btn-submit">
+        <span>💾</span>
+        <span id="submit-btn-text">RECORD TRANSACTION</span>
+      </button>
+    </div>
 
   </div>
 
@@ -1356,6 +1634,7 @@
     let recentTransactions = [];
     let offlineQueue = [];
     let audioCtx = null;
+    let isSoundMuted = false;
 
     // History & Drawer State
     let mainVisibleCount = 5;
@@ -1370,6 +1649,7 @@
     const KEY_BALANCES = "thela_stock_balances";
     const KEY_RECENT = "thela_stock_recent";
     const KEY_QUEUE = "thela_stock_offline_queue";
+    const KEY_SOUND_MUTED = "thela_stock_sound_muted";
 
     /* ========================================================================
        ACOUSTIC UI (ZERO-MUSIC PROCEDURAL WEB AUDIO SYNTHESIS)
@@ -1382,6 +1662,7 @@
     }
 
     function playSound(type) {
+      if (isSoundMuted) return;
       try {
         if (!audioCtx) initAudio();
         if (!audioCtx) return;
@@ -1462,6 +1743,12 @@
       }
 
       try {
+        setupSoundToggle();
+      } catch (err) {
+        console.error("Bootloader setupSoundToggle error:", err);
+      }
+
+      try {
         renderBagCards();
       } catch (err) {
         console.error("Bootloader renderBagCards error:", err);
@@ -1477,6 +1764,18 @@
         setupQuantityChips();
       } catch (err) {
         console.error("Bootloader setupQuantityChips error:", err);
+      }
+
+      try {
+        setupQuantitySteppers();
+      } catch (err) {
+        console.error("Bootloader setupQuantitySteppers error:", err);
+      }
+
+      try {
+        renderPartySuggestions();
+      } catch (err) {
+        console.error("Bootloader renderPartySuggestions error:", err);
       }
 
       try {
@@ -1565,6 +1864,39 @@
       } catch (e) {
         offlineQueue = [];
       }
+
+      try {
+        isSoundMuted = localStorage.getItem(KEY_SOUND_MUTED) === "true";
+        updateSoundToggleButton();
+      } catch (e) {
+        isSoundMuted = false;
+      }
+    }
+
+    function updateSoundToggleButton() {
+      const btn = document.getElementById("btn-sound-toggle");
+      if (btn) {
+        btn.textContent = isSoundMuted ? "🔇" : "🔊";
+        btn.setAttribute("title", isSoundMuted ? "Sound Effects Muted (Tap to Unmute)" : "Sound Effects On (Tap to Mute)");
+      }
+    }
+
+    function setupSoundToggle() {
+      const btn = document.getElementById("btn-sound-toggle");
+      if (!btn) return;
+      btn.addEventListener("click", () => {
+        isSoundMuted = !isSoundMuted;
+        try {
+          localStorage.setItem(KEY_SOUND_MUTED, String(isSoundMuted));
+        } catch (e) {}
+        updateSoundToggleButton();
+        if (!isSoundMuted) {
+          playSound('tap');
+          showToast("Sound effects unmuted 🔊");
+        } else {
+          showToast("Sound effects muted 🔇");
+        }
+      });
     }
 
     function saveBalances() {
@@ -1600,14 +1932,29 @@
 
         const currentStock = (typeof liveBalances[item] === 'number') ? liveBalances[item] : 0;
         let badgeClass = "bag-stock-badge";
-        if (currentStock <= 0) badgeClass += " empty";
-        else if (currentStock <= 50) badgeClass += " low";
+        let healthText = "In Stock";
+        let dotClass = "health-dot";
+        if (currentStock <= 0) {
+          badgeClass += " empty";
+          healthText = "Empty";
+          dotClass += " empty";
+        } else if (currentStock <= 50) {
+          badgeClass += " low";
+          healthText = "Low";
+          dotClass += " low";
+        }
 
         card.innerHTML = `
-          <div class="bag-name">${escapeHtml(item)}</div>
+          <div class="bag-header-row">
+            <span class="bag-name">${escapeHtml(item)}</span>
+            <span class="health-pill">
+              <span class="${dotClass}"></span>
+              <span>${healthText}</span>
+            </span>
+          </div>
           <div class="bag-stock-row">
             <span style="font-size: 0.75rem; color: #94a3b8;">Available:</span>
-            <span class="${badgeClass}">${currentStock} pcs</span>
+            <span class="${badgeClass}"><strong class="bag-stock-number">${currentStock}</strong> pcs</span>
           </div>
         `;
 

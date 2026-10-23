@@ -32,6 +32,10 @@
           </div>
         </div>
         <div class="header-actions">
+          <button id="btn-toggle-sound" class="btn-header-action" title="Toggle Sound SFX" aria-label="Toggle Sound Effects">
+            <span id="sound-icon" class="btn-icon" aria-hidden="true">🔊</span>
+            <span id="sound-label" class="btn-label">Sound</span>
+          </button>
           <button id="btn-toggle-numpad" class="btn-header-action active" title="Toggle On-Screen Pin Keypad" aria-label="Toggle Pin Pad">
             <span class="btn-icon" aria-hidden="true">🔢</span>
             <span class="btn-label">Pin Pad</span>
@@ -42,56 +46,7 @@
           </button>
         </div>
       </div>
-    </header>
-
-    <!-- Sticky Search & Filter Toolbar -->
-    <div id="search-sticky-zone" class="search-sticky-zone">
-      <!-- Search Input Bar -->
-      <div class="search-box-wrapper">
-        <button id="btn-input-mode" class="btn-input-mode mode-numeric" type="button" aria-label="Switch between Number and Text keyboard" title="Switch keyboard mode">
-          <span class="mode-icon" aria-hidden="true">🔢</span>
-          <span class="mode-label">123</span>
-        </button>
-        <input
-          id="search-input"
-          class="search-input"
-          type="search"
-          inputmode="none"
-          placeholder="Enter 6-digit Pincode (or tap ABC for City)..."
-          aria-label="Search pincode, city, or delivery hub"
-          autocomplete="off"
-          autocorrect="off"
-          autocapitalize="off"
-          spellcheck="false"
-        >
-        <div class="search-right-actions">
-          <button id="btn-paste-search" class="btn-paste-search" type="button" aria-label="Paste address or pincode from clipboard" title="1-Tap Paste &amp; Extract Pincode">
-            <span class="paste-icon" aria-hidden="true">📋</span>
-            <span class="paste-label">Paste</span>
-          </button>
-          <button id="btn-clear-search" class="btn-clear-search" aria-label="Clear search input" style="display: none;">
-            &times;
-          </button>
-        </div>
-      </div>
-
-      <!-- Quick Filter Chips -->
-      <nav class="filter-chips-bar" aria-label="Search filters">
-        <button id="chip-filter-all" class="filter-chip active" data-filter="all" type="button">
-          All (21,865)
-        </button>
-        <button id="chip-filter-oda" class="filter-chip chip-oda" data-filter="oda" type="button">
-          ⚠️ ODA Only
-        </button>
-        <button id="chip-filter-std" class="filter-chip chip-std" data-filter="standard" type="button">
-          ✓ Standard Only
-        </button>
-        <button id="chip-filter-metro" class="filter-chip chip-metro" data-filter="metro" type="button">
-          🏢 Metro Hubs
-        </button>
-      </nav>
-
-      <!-- Live Search Stats & Latency Bar -->
+      <!-- Live Search Stats & Latency Bar (Top Micro-Banner) -->
       <div id="search-stats-bar" class="search-stats-bar">
         <span id="stats-match-badge" class="stats-badge">
           Showing 50 of 21,865 pincodes
@@ -100,23 +55,9 @@
           ⚡ &lt; 0.1 ms
         </span>
       </div>
+    </header>
 
-      <!-- Recent Searches Quick Strip -->
-      <div id="recent-searches-container" class="recent-searches-container" style="display: none;" aria-label="Recent Searches">
-        <div class="recent-label-wrap">
-          <span class="recent-icon" aria-hidden="true">🕒</span>
-          <span class="recent-label">Recent:</span>
-        </div>
-        <div id="recent-chips-list" class="recent-chips-list" role="list">
-          <!-- Dynamic Recent Search Chips -->
-        </div>
-        <button id="btn-clear-recent" class="btn-clear-recent" type="button" title="Clear recent searches" aria-label="Clear recent searches">
-          &times;
-        </button>
-      </div>
-    </div>
-
-    <!-- Main Results Feed -->
+    <!-- Main Results Feed (Scrollable Viewport) -->
     <main id="main-content" class="main-content has-numpad-open">
       <!-- Cards Container -->
       <div id="results-container" class="results-container" role="feed" aria-busy="false" aria-live="polite">
@@ -146,32 +87,97 @@
       <div id="scroll-sentinel" class="scroll-sentinel" aria-hidden="true"></div>
     </main>
 
-    <!-- On-Screen Numeric Keypad for Mobile Thumb Typing (Default Docked) -->
-    <div id="quick-numpad" class="quick-numpad" aria-label="On-Screen Number Keypad">
-      <div class="numpad-header">
-        <div class="numpad-title-wrap">
-          <span class="numpad-icon" aria-hidden="true">🔢</span>
-          <span class="numpad-title">Pin Keypad</span>
+    <!-- 100% Thumb-Zone Bottom Console (Ergonomic Deck) -->
+    <div id="bottom-control-console" class="bottom-control-console" aria-label="Pincode Search Console">
+      <!-- Console Upper Tray: Filter Chips & Recent Searches -->
+      <div class="console-tray">
+        <!-- Quick Filter Chips -->
+        <nav class="filter-chips-bar" aria-label="Search filters">
+          <button id="chip-filter-all" class="filter-chip active" data-filter="all" type="button">
+            All (21,865)
+          </button>
+          <button id="chip-filter-oda" class="filter-chip chip-oda" data-filter="oda" type="button">
+            ⚠️ ODA Only
+          </button>
+          <button id="chip-filter-std" class="filter-chip chip-std" data-filter="standard" type="button">
+            ✓ Standard Only
+          </button>
+          <button id="chip-filter-metro" class="filter-chip chip-metro" data-filter="metro" type="button">
+            🏢 Metro Hubs
+          </button>
+        </nav>
+
+        <!-- Recent Searches Quick Strip -->
+        <div id="recent-searches-container" class="recent-searches-container" style="display: none;" aria-label="Recent Searches">
+          <div class="recent-label-wrap">
+            <span class="recent-icon" aria-hidden="true">🕒</span>
+            <span class="recent-label">Recent:</span>
+          </div>
+          <div id="recent-chips-list" class="recent-chips-list" role="list">
+            <!-- Dynamic Recent Search Chips -->
+          </div>
+          <button id="btn-clear-recent" class="btn-clear-recent" type="button" title="Clear recent searches" aria-label="Clear recent searches">
+            &times;
+          </button>
         </div>
-        <button id="btn-close-numpad" class="btn-numpad-close" aria-label="Minimize Keypad" title="Minimize Keypad">⌄</button>
       </div>
-      <div class="numpad-grid">
-        <button type="button" class="num-key" data-key="1">1</button>
-        <button type="button" class="num-key" data-key="2">2</button>
-        <button type="button" class="num-key" data-key="3">3</button>
-        <button type="button" class="num-key" data-key="4">4</button>
-        <button type="button" class="num-key" data-key="5">5</button>
-        <button type="button" class="num-key" data-key="6">6</button>
-        <button type="button" class="num-key" data-key="7">7</button>
-        <button type="button" class="num-key" data-key="8">8</button>
-        <button type="button" class="num-key" data-key="9">9</button>
-        <button type="button" class="num-key num-key-action num-key-backspace" data-key="backspace" aria-label="Backspace">⌫</button>
-        <button type="button" class="num-key" data-key="0">0</button>
-        <button type="button" class="num-key num-key-action num-key-enter" data-key="enter" aria-label="Search and Close">↵ Search</button>
+
+      <!-- Console Search Input Bar -->
+      <div class="search-box-wrapper">
+        <button id="btn-input-mode" class="btn-input-mode mode-numeric" type="button" aria-label="Switch between Number and Text keyboard" title="Switch keyboard mode">
+          <span class="mode-icon" aria-hidden="true">🔢</span>
+          <span class="mode-label">123</span>
+        </button>
+        <input
+          id="search-input"
+          class="search-input"
+          type="search"
+          inputmode="none"
+          placeholder="Enter 6-digit Pincode (or tap ABC for City)..."
+          aria-label="Search pincode, city, or delivery hub"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="false"
+        >
+        <div class="search-right-actions">
+          <button id="btn-paste-search" class="btn-paste-search" type="button" aria-label="Paste address or pincode from clipboard" title="1-Tap Paste &amp; Extract Pincode">
+            <span class="paste-icon" aria-hidden="true">📋</span>
+            <span class="paste-label">Paste</span>
+          </button>
+          <button id="btn-clear-search" class="btn-clear-search" aria-label="Clear search input" style="display: none;">
+            &times;
+          </button>
+        </div>
+      </div>
+
+      <!-- On-Screen Numeric Keypad for Mobile Thumb Typing -->
+      <div id="quick-numpad" class="quick-numpad" aria-label="On-Screen Number Keypad">
+        <div class="numpad-header">
+          <div class="numpad-title-wrap">
+            <span class="numpad-icon" aria-hidden="true">🔢</span>
+            <span class="numpad-title">Pin Keypad</span>
+          </div>
+          <button id="btn-close-numpad" class="btn-numpad-close" aria-label="Minimize Keypad" title="Minimize Keypad">⌄</button>
+        </div>
+        <div class="numpad-grid">
+          <button type="button" class="num-key" data-key="1">1</button>
+          <button type="button" class="num-key" data-key="2">2</button>
+          <button type="button" class="num-key" data-key="3">3</button>
+          <button type="button" class="num-key" data-key="4">4</button>
+          <button type="button" class="num-key" data-key="5">5</button>
+          <button type="button" class="num-key" data-key="6">6</button>
+          <button type="button" class="num-key" data-key="7">7</button>
+          <button type="button" class="num-key" data-key="8">8</button>
+          <button type="button" class="num-key" data-key="9">9</button>
+          <button type="button" class="num-key num-key-action num-key-backspace" data-key="backspace" aria-label="Backspace">⌫</button>
+          <button type="button" class="num-key" data-key="0">0</button>
+          <button type="button" class="num-key num-key-action num-key-enter" data-key="enter" aria-label="Search">↵ Search</button>
+        </div>
       </div>
     </div>
 
-    <!-- Excel Updater Modal / Sheet (Hook for M4) -->
+    <!-- Excel Updater Modal / Sheet -->
     <div id="updater-modal" class="updater-modal" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="updater-modal-title">
       <div class="updater-backdrop" id="updater-backdrop"></div>
       <div class="updater-dialog">
