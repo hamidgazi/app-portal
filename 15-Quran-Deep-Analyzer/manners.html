@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-  <title>قرآن کے اخلاق و آداب — Kanzul Iman Manners & Social Ethics Studio</title>
-  <meta name="description" content="قرآن کریم کے 67 اخلاقی احکام اور معاشرتی آداب کا جامع انسائیکلوپیڈیا، امام احمد رضا خان کے کنز الایمان شریف کے ساتھ">
+  <title>🌿 Quranic Manners & Social Ethics • Islamic Code of Conduct</title>
+  <meta name="description" content="The 67 Quranic Injunctions for Social Ethics, Etiquette, Manners and Character (Adaab-e-Zindagi) with Kanzul Iman and Saheeh International.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
   <link rel="stylesheet" href="css/app.css">
   <style>
@@ -922,8 +922,8 @@
       <div class="header-branding">
         <div class="header-logo-icon">📖</div>
         <div class="header-titles">
-          <h1>قرآن کے اخلاق و آداب</h1>
-          <p>امام احمد رضا خان (کنز الایمان شریف) کے مبارک اردو ترجمہ کے ساتھ — 67 قرآنی احکام</p>
+          <h1 style="direction: ltr; text-align: left;">Quranic Manners & Social Ethics</h1>
+          <p style="direction: ltr; text-align: left;">The Islamic Code of Conduct (Adaab-e-Zindagi) with Kanzul Iman — 67 Injunctions</p>
         </div>
       </div>
 
@@ -949,19 +949,19 @@
     <div class="manners-kpi-ribbon">
       <div class="kpi-pill">
         <span class="kpi-num">67</span>
-        <span class="kpi-label">قرآنی احکام (Injunctions)</span>
+        <span class="kpi-label">Injunctions</span>
       </div>
       <div class="kpi-pill">
         <span class="kpi-num">9</span>
-        <span class="kpi-label">اخلاقی شعبے (Life Spheres)</span>
+        <span class="kpi-label">Life Spheres</span>
       </div>
       <div class="kpi-pill">
         <span class="kpi-num">24</span>
-        <span class="kpi-label">سورتیں (Surahs Mapped)</span>
+        <span class="kpi-label">Surahs Mapped</span>
       </div>
       <div class="kpi-pill gold">
         <span class="kpi-num">100%</span>
-        <span class="kpi-label">کنز الایمان شریف</span>
+        <span class="kpi-label">Kanzul Iman & English</span>
       </div>
     </div>
 
@@ -974,52 +974,52 @@
     <div class="manners-toolbar">
       <div class="toolbar-row-main">
         <div class="search-input-wrap">
-          <span class="search-icon">🔍</span>
-          <input type="text" id="manners-search" class="manners-search-field" placeholder="تلاش کریں: سچ، والدین، غیبت، صبر، آیت یا سورت...">
-          <button id="manners-search-clear" class="search-clear-btn" style="display: none;" title="Clear Search">✕</button>
+          <span class="search-icon" style="left: 14px; right: auto;">🔍</span>
+          <input type="text" id="manners-search" class="manners-search-field" placeholder="Search manners: speech, parents, forgiveness, humility, 17:23..." style="direction: ltr; text-align: left; padding: 8px 36px 8px 38px;">
+          <button id="manners-search-clear" class="search-clear-btn" style="right: 14px; left: auto; display: none;" title="Clear Search">✕</button>
         </div>
 
         <div class="toolbar-controls-group">
-          <!-- Tri-Mode Language Switcher -->
-          <div class="segmented-control" id="lang-mode-toggle" title="Language Display Mode">
-            <button class="segment-btn active" data-lang="both">تمام</button>
-            <button class="segment-btn" data-lang="ur">صرف اردو</button>
-            <button class="segment-btn" data-lang="en">English</button>
+          <!-- Sort Selector -->
+          <div class="sort-selector-wrap">
+            <label for="manners-sort-select" class="sort-label">Sort:</label>
+            <select id="manners-sort-select" class="manners-sort-select" aria-label="Sort Ayat" style="direction: ltr;">
+              <option value="default">🔢 Default Order (#1..#67)</option>
+              <option value="words_asc">📏 Shortest First (Words ⬆)</option>
+              <option value="words_desc">📜 Longest First (Words ⬇)</option>
+              <option value="alpha">🔤 Alphabetical (Alif - Yaa)</option>
+              <option value="surah">📖 Quranic Order (Surah 1..114)</option>
+            </select>
           </div>
 
           <!-- Dual View Switcher -->
           <div class="segmented-control" id="view-mode-toggle" title="Layout View Mode">
-            <button class="segment-btn active" data-view="cards" title="Detailed Cards">🎴 کارڈز</button>
-            <button class="segment-btn" data-view="compact" title="Compact Checklist">📋 خلاصہ</button>
+            <button class="segment-btn active" data-view="cards" title="Detailed Cards">🃏 Cards</button>
+            <button class="segment-btn" data-view="compact" title="Compact Checklist">📋 Checklist</button>
           </div>
 
-          <!-- Sort Selector -->
-          <div class="sort-selector-wrap">
-            <label for="manners-sort-select" class="sort-label">ترتیب:</label>
-            <select id="manners-sort-select" class="manners-sort-select" aria-label="Sort Ayat">
-              <option value="default">🔢 حسبِ ترتیب (#1..#67)</option>
-              <option value="words_asc">📏 مختصر آیات (الفاظ ⬆)</option>
-              <option value="words_desc">📜 طویل آیات (الفاظ ⬇)</option>
-              <option value="alpha">🔤 حروفِ تہجی (ا تا ی)</option>
-              <option value="surah">📖 حسبِ مصحف (1..114)</option>
-            </select>
+          <!-- Tri-Mode Language Switcher -->
+          <div class="segmented-control" id="lang-mode-toggle" title="Language Display Mode">
+            <button class="segment-btn active" data-lang="both">Both</button>
+            <button class="segment-btn" data-lang="ur">Urdu</button>
+            <button class="segment-btn" data-lang="en">English</button>
           </div>
 
           <div id="manners-count-badge" class="manners-count-badge">
-            جملہ احکام: 67
+            67 Manners
           </div>
         </div>
       </div>
 
       <!-- Quick Topic Exploration Pills -->
       <div class="toolbar-row-topics">
-        <span class="quick-topic-label">💡 فوری موضوعات:</span>
-        <button class="quick-topic-pill" data-q="والدین">والدین (Parents)</button>
-        <button class="quick-topic-pill" data-q="سچ">سچ اور نرمی (Truth)</button>
-        <button class="quick-topic-pill" data-q="غیبت">غیبت و تمسخر (Backbiting)</button>
-        <button class="quick-topic-pill" data-q="صبر">صبر و درگزر (Patience)</button>
-        <button class="quick-topic-pill" data-q="سلام">سلام و اجازت (Greeting)</button>
-        <button class="quick-topic-pill" data-q="انصاف">عدل و انصاف (Justice)</button>
+        <span class="quick-topic-label">💡 Quick Topics:</span>
+        <button class="quick-topic-pill" data-q="والدین">Parents (والدین)</button>
+        <button class="quick-topic-pill" data-q="سچ">Truth & Speech (سچ)</button>
+        <button class="quick-topic-pill" data-q="غیبت">Backbiting (غیبت)</button>
+        <button class="quick-topic-pill" data-q="صبر">Patience (صبر)</button>
+        <button class="quick-topic-pill" data-q="سلام">Greeting & Privacy (سلام)</button>
+        <button class="quick-topic-pill" data-q="انصاف">Justice & Fairness (انصاف)</button>
       </div>
     </div>
 
@@ -1030,7 +1030,7 @@
 
   </main>
 
-  <div id="copy-toast" class="copy-toast">✓ کنز الایمان کا حوالہ کاپی ہو گیا!</div>
+  <div id="copy-toast" class="copy-toast">Copied to clipboard!</div>
 
   <!-- Audio SFX -->
   <script src="js/audio-sfx.js"></script>
@@ -1078,8 +1078,10 @@
         const idx = list.indexOf(serial);
         if (idx > -1) {
           list.splice(idx, 1);
+          showToast("Bookmark removed");
         } else {
           list.push(serial);
+          showToast("Saved to bookmarks! (★)");
         }
         try {
           localStorage.setItem("quran_manners_bookmarks", JSON.stringify(list));
@@ -1161,21 +1163,34 @@
         applyFontScale(fontScale + 0.1);
       });
 
+      const moduleEnTitles = {
+        speech: "Speech & Truth",
+        parents: "Parents & Kinship",
+        humility: "Humility & Demeanor",
+        privacy: "Privacy & Respect",
+        forgiveness: "Forgiveness & Kindness",
+        justice: "Justice & Trusts",
+        financial: "Financial Integrity",
+        vulnerable: "Care for Vulnerable",
+        dialogue: "Dialogue & Debate"
+      };
+
       // Modules Navigation Bar
       const navContainer = document.getElementById("modules-nav");
       function renderNavRibbon() {
         let navHtml = `
           <button class="module-tab-btn active" data-mod="all">
-            <span>تمام احکام</span>
-            <span class="module-tab-badge">${data.metadata.total_injunctions}</span>
+            <span>✨</span>
+            <span>All Manners (${data.metadata.total_injunctions})</span>
           </button>
         `;
 
         data.modules.forEach(m => {
+          const enTitle = moduleEnTitles[m.id] || m.title_en || m.title_ur;
           navHtml += `
             <button class="module-tab-btn" data-mod="${m.id}">
               <span>${m.icon || '📖'}</span>
-              <span>${m.title_ur}</span>
+              <span>${enTitle}</span>
               <span class="module-tab-badge">${m.total_ayat}</span>
             </button>
           `;
@@ -1185,7 +1200,7 @@
         navHtml += `
           <button class="module-tab-btn bookmark-tab-btn" data-mod="bookmarked" id="tab-bookmarked">
             <span>⭐</span>
-            <span>محفوظ شدہ</span>
+            <span>Saved</span>
             <span class="module-tab-badge" id="bookmark-badge-num">${bCount}</span>
           </button>
         `;
@@ -1369,13 +1384,13 @@
         if (isVisible) {
           drawer.style.display = "none";
           btn.classList.remove("active");
-          btn.innerHTML = "<span>📖 تفسیر</span>";
+          btn.innerHTML = "<span>📖 Tafsir</span>";
           return;
         }
 
         drawer.style.display = "block";
         btn.classList.add("active");
-        btn.innerHTML = "<span>✕ بند کریں</span>";
+        btn.innerHTML = "<span>✕ Close</span>";
 
         const cacheKey = `${surahId}:${ayahNum}`;
         if (tafsirCache.has(cacheKey)) {
@@ -1383,7 +1398,7 @@
           return;
         }
 
-        body.innerHTML = `<div style="color: #94a3b8; font-style: italic;">تفسیر صراط الجنان حاصل کی جا رہی ہے...</div>`;
+        body.innerHTML = `<div style="color: #94a3b8; font-style: italic;">Loading Tafsir Sirat-ul-Jinan...</div>`;
         try {
           const text = await fetchAyahTafsir(surahId, ayahNum);
           const cleaned = cleanTafsirHtml(text);
@@ -1458,15 +1473,15 @@
         }
 
         if (countBadge) {
-          countBadge.textContent = `جملہ احکام: ${allItems.length}`;
+          countBadge.textContent = `${allItems.length} Manners`;
         }
 
         if (allItems.length === 0) {
           listContainer.innerHTML = `
             <div style="text-align: center; padding: 60px 20px; color: var(--text-dim); background: var(--bg-card-glass); border-radius: var(--radius-lg);">
               <div style="font-size: 2.5rem; margin-bottom: 10px;">🔍</div>
-              <div style="font-size: 1.15rem; font-weight: 700; color: #fbbf24;">کوئی حکم یا ادب نہیں ملا</div>
-              <p style="margin-top: 6px; font-size: 0.9rem;">براہ کرم کوئی دوسرا لفظ تلاش کریں یا موضوع کا انتخاب تبدیل کریں۔</p>
+              <div style="font-size: 1.15rem; font-weight: 700; color: #fbbf24;">No manners found</div>
+              <p style="margin-top: 6px; font-size: 0.9rem;">Please try a different search query or select another category.</p>
             </div>
           `;
           return;
@@ -1489,60 +1504,70 @@
             const showUrdu = (langMode === "both" || langMode === "ur");
             const showEnglish = (langMode === "both" || langMode === "en") && !!it.english;
 
+            const enModTitle = moduleEnTitles[it.module_id] || it.module_title || "Ethics";
             html += `
               <article class="manner-card" id="manner-card-${serialNum}">
                 <div class="manner-card-header">
-                  <div class="manner-headline">
-                    <span class="manner-serial-pill">#${serialNum} <span class="ur-num">(${urNum})</span></span>
+                  <div class="manner-headline" style="direction: ltr; display: flex; align-items: center; gap: 8px;">
+                    <span class="manner-serial-pill">#${serialNum}</span>
                     <span>${it.module_icon || '📖'}</span>
-                    <span>${hTitle}</span>
+                    <span style="font-weight: 700; color: #fbbf24;">${enModTitle}</span>
+                    <span class="manner-words-pill">📏 ${it.word_count} Words</span>
                   </div>
-                  <div class="manner-header-actions">
-                    <button class="manner-star-btn ${bookmarked ? 'bookmarked' : ''}" data-serial="${serialNum}" title="${bookmarked ? 'محفوظ شدہ سے ہٹائیں' : 'پسندیدہ میں شامل کریں'}">${starChar}</button>
-                    <span class="manner-words-pill">📏 ${it.word_count} الفاظ</span>
-                    <div class="manner-ref-badge">${it.reference_badge}</div>
+                  <div class="manner-header-actions" style="direction: ltr;">
+                    <button class="manner-star-btn ${bookmarked ? 'bookmarked' : ''}" data-serial="${serialNum}" title="${bookmarked ? 'Remove bookmark' : 'Save bookmark'}">
+                      <span>${starChar} ${bookmarked ? 'Saved' : 'Save'}</span>
+                    </button>
+                    <div class="manner-ref-badge">Surah ${it.surah_name_roman} [${it.surah_id}:${it.ayah_num}]</div>
                   </div>
                 </div>
 
-                <div class="manner-arabic-text">«${hAr}»</div>
+                <!-- Centered Open Sacred Arabic Scripture -->
+                <div class="manner-arabic-text" style="font-family: var(--font-arabic), serif; font-size: var(--arabic-font-size); line-height: 2.1; color: #fef08a; text-align: center; padding: 14px 20px; background: rgba(251, 191, 36, 0.03); border: 1px solid rgba(251, 191, 36, 0.12); border-radius: var(--radius-md); letter-spacing: 0.01em;">«${hAr}»</div>
+
+                <div class="manner-headline-ur" style="font-family: var(--font-urdu), serif; font-size: 1.25rem; font-weight: 700; color: #f8fafc; text-align: right; direction: rtl; margin-top: 6px;">
+                  ${hTitle}
+                </div>
 
                 ${showUrdu ? `
-                  <div class="manner-urdu-box">
+                  <div class="manner-urdu-box" style="background: transparent; border: none; padding: 4px 0;">
+                    <div style="font-size: 0.74rem; font-weight: 700; color: #fbbf24; margin-bottom: 4px; direction: rtl;">کنز الایمان (امام احمد رضا خان):</div>
                     <div class="manner-urdu-kanzuliman">${hUr}</div>
                   </div>
                 ` : ''}
 
                 ${showEnglish ? `
-                  <div class="manner-en-translation">
-                    ${hEn} <span style="color: #64748b; font-size: 0.8rem; margin-right: 6px;">• ${it.chapter_coordinate || ''}</span>
+                  <div class="manner-en-translation" style="background: transparent; border: none; border-top: 1px solid rgba(255, 255, 255, 0.06); padding: 8px 0; margin-top: 6px; direction: ltr; text-align: left;">
+                    <div style="font-size: 0.74rem; font-weight: 700; color: #38bdf8; margin-bottom: 4px;">Saheeh International (English):</div>
+                    ${hEn} <span style="color: #64748b; font-size: 0.8rem; margin-left: 6px;">• ${it.chapter_coordinate || ''}</span>
                   </div>
                 ` : ''}
 
                 <div class="manner-card-footer">
-                  <div class="manner-actions-left">
+                  <div class="manner-actions-left" style="direction: ltr;">
                     <button class="manner-btn-pill tafsir-btn" data-surah="${it.surah_id}" data-ayah="${it.ayah_num}" data-serial="${serialNum}">
-                      <span>📖 تفسیر</span>
+                      <span>📖 Tafsir</span>
                     </button>
                     <a href="index.html?surah=${it.surah_id}&ayah=${it.ayah_num}&from=manners#ayahs" class="manner-btn-pill analyzer-btn" title="Open in Deep Ayah Analyzer">
-                      <span>🔍 Analyzer ↗</span>
+                      <span>🔍 Deep Analyzer ↗</span>
                     </a>
                     <button class="manner-btn-pill whatsapp-btn" data-idx="${idx}" title="Share on WhatsApp">
                       <span>📲 WhatsApp</span>
                     </button>
-                    <button class="manner-btn-pill copy-manner-btn" data-text="#${serialNum} • ${it.title_ur}&#10;«${it.arabic}»&#10;&#10;اردو ترجمہ (کنز الایمان شریف):&#10;${it.urdu_kanzul_iman}&#10;&#10;${it.reference_badge} (${it.reference_code})">
-                      <span>📋 نقل کریں</span>
+                    <button class="manner-btn-pill copy-manner-btn" data-text="#${serialNum} • ${it.title_ur}&#10;«${it.arabic}»&#10;&#10;Kanzul Iman:&#10;${it.urdu_kanzul_iman}&#10;&#10;English:&#10;${it.english}&#10;&#10;${it.reference_badge} (${it.reference_code})">
+                      <span>📋 Copy</span>
                     </button>
                   </div>
-                  <span style="font-size: 0.78rem; color: #64748b;">${it.surah_name_roman} [${it.surah_id}:${it.ayah_num}]</span>
+                  <span style="font-size: 0.78rem; color: #64748b;">Surah ${it.surah_name_roman} [${it.surah_id}:${it.ayah_num}]</span>
                 </div>
 
                 <div class="manner-tafsir-drawer" id="manner-tafsir-${serialNum}" style="display: none;">
                   <div class="manner-tafsir-header">
-                    <span>📖 تفسیر صراط الجنان — ${it.surah_name_roman} [${it.surah_id}:${it.ayah_num}]</span>
-                    <span class="tafsir-author">مفتی محمد قاسم قادری</span>
+                    <span>📖 Tafsir Sirat-ul-Jinan — Surah ${it.surah_name_roman} [${it.surah_id}:${it.ayah_num}]</span>
+                    <span class="tafsir-author">Mufti Muhammad Qasim Qadri</span>
                   </div>
                   <div class="manner-tafsir-body" id="manner-tafsir-body-${serialNum}">
-                    <div style="color: #94a3b8; font-style: italic;">تفسیر حاصل کی جا رہی ہے...</div>
+                    <div style="color: #94a3b8; font-style: italic;">Loading Tafsir commentary...</div>
                   </div>
                 </div>
               </article>
@@ -1629,7 +1654,7 @@
             if (window.AudioSFX) window.AudioSFX.playClick();
             const textToCopy = btn.dataset.text;
             navigator.clipboard.writeText(textToCopy).then(() => {
-              showToast("✓ کنز الایمان کا مبارک ادب کاپی ہو گیا!");
+              showToast("Manner copied to clipboard!");
             }).catch(() => {
               const tempInput = document.createElement("textarea");
               tempInput.value = textToCopy;
@@ -1637,7 +1662,7 @@
               tempInput.select();
               document.execCommand("copy");
               document.body.removeChild(tempInput);
-              showToast("✓ کنز الایمان کا مبارک ادب کاپی ہو گیا!");
+              showToast("Manner copied to clipboard!");
             });
           });
         });
@@ -1650,23 +1675,23 @@
   <nav class="mobile-bottom-dock" aria-label="Mobile Navigation Dock">
     <a href="index.html#ayahs" class="mobile-dock-btn" id="dock-btn-read">
       <span class="mobile-dock-icon">📖</span>
-      <span class="mobile-dock-label">تلاوت</span>
+      <span class="mobile-dock-label">Recite</span>
     </a>
     <a href="index.html#search" class="mobile-dock-btn" id="dock-btn-search">
       <span class="mobile-dock-icon">⚡</span>
-      <span class="mobile-dock-label">تلاش</span>
+      <span class="mobile-dock-label">Search</span>
     </a>
     <a href="commands.html" class="mobile-dock-btn" id="dock-btn-commands">
       <span class="mobile-dock-icon">📜</span>
-      <span class="mobile-dock-label">اوامر</span>
+      <span class="mobile-dock-label">Commands</span>
     </a>
-    <a href="manners.html" class="mobile-dock-btn active" id="dock-btn-manners" class="mobile-dock-btn active">
+    <a href="manners.html" class="mobile-dock-btn active" id="dock-btn-manners">
       <span class="mobile-dock-icon">🌿</span>
-      <span class="mobile-dock-label">آداب</span>
+      <span class="mobile-dock-label">Manners</span>
     </a>
     <a href="index.html#studio" class="mobile-dock-btn" id="dock-btn-studio">
       <span class="mobile-dock-icon">🔬</span>
-      <span class="mobile-dock-label">تحقیق</span>
+      <span class="mobile-dock-label">Studio</span>
     </a>
   </nav>
 
