@@ -13,6 +13,7 @@
     "term2_count": 332,
     "is_balanced": true,
     "ratio": 1.0,
+    "ratio_label": "Exact 1:1 Parity (332 : 332)",
     "tibaq_count": 8,
     "tibaq_sample": [
       {
@@ -57,6 +58,7 @@
     "term2_count": 145,
     "is_balanced": true,
     "ratio": 1.0,
+    "ratio_label": "Exact 1:1 Parity (145 : 145)",
     "tibaq_count": 5,
     "tibaq_sample": [
       {
@@ -101,6 +103,7 @@
     "term2_count": 115,
     "is_balanced": true,
     "ratio": 1.0,
+    "ratio_label": "Exact 1:1 Parity (115 : 115)",
     "tibaq_count": 4,
     "tibaq_sample": [
       {
@@ -140,6 +143,7 @@
     "term2_count": 88,
     "is_balanced": true,
     "ratio": 1.0,
+    "ratio_label": "Exact 1:1 Parity (88 : 88)",
     "tibaq_count": 3,
     "tibaq_sample": [
       {
@@ -174,6 +178,7 @@
     "term2_count": 12,
     "is_balanced": true,
     "ratio": 1.0,
+    "ratio_label": "Exact 1:1 Parity (12 : 12)",
     "tibaq_count": 4,
     "tibaq_sample": [
       {
@@ -213,6 +218,7 @@
     "term2_count": 20,
     "is_balanced": true,
     "ratio": 1.0,
+    "ratio_label": "Exact 1:1 Parity (20 : 20)",
     "tibaq_count": 4,
     "tibaq_sample": [
       {
@@ -252,6 +258,7 @@
     "term2_count": 30,
     "is_balanced": true,
     "ratio": 1.0,
+    "ratio_label": "Exact 1:1 Parity (30 : 30)",
     "tibaq_count": 4,
     "tibaq_sample": [
       {
@@ -291,6 +298,7 @@
     "term2_count": 16,
     "is_balanced": true,
     "ratio": 1.0,
+    "ratio_label": "Exact 1:1 Parity (16 : 16)",
     "tibaq_count": 3,
     "tibaq_sample": [
       {
@@ -325,6 +333,7 @@
     "term2_count": 11,
     "is_balanced": true,
     "ratio": 1.0,
+    "ratio_label": "Exact 1:1 Parity (11 : 11)",
     "tibaq_count": 2,
     "tibaq_sample": [
       {
@@ -354,6 +363,7 @@
     "term2_count": 20,
     "is_balanced": true,
     "ratio": 1.0,
+    "ratio_label": "Exact 1:1 Parity (20 : 20)",
     "tibaq_count": 2,
     "tibaq_sample": [
       {
@@ -383,6 +393,7 @@
     "term2_count": 8,
     "is_balanced": true,
     "ratio": 1.0,
+    "ratio_label": "Exact 1:1 Parity (8 : 8)",
     "tibaq_count": 2,
     "tibaq_sample": [
       {
@@ -412,6 +423,7 @@
     "term2_count": 32,
     "is_balanced": true,
     "ratio": 1.0,
+    "ratio_label": "Exact 1:1 Parity (32 : 32)",
     "tibaq_count": 2,
     "tibaq_sample": [
       {
@@ -441,6 +453,7 @@
     "term2_count": 365,
     "is_balanced": false,
     "ratio": 0.03,
+    "ratio_label": "12 Months : 365 Days",
     "tibaq_count": 1,
     "tibaq_sample": [
       {
@@ -465,6 +478,7 @@
     "term2_count": 13,
     "is_balanced": false,
     "ratio": 2.46,
+    "ratio_label": "71.1% Sea : 28.9% Land (32 : 13)",
     "tibaq_count": 4,
     "tibaq_sample": [
       {
@@ -504,6 +518,7 @@
     "term2_count": 23,
     "is_balanced": false,
     "ratio": 1.87,
+    "ratio_label": "Singular (43) vs Plural (23)",
     "tibaq_count": 4,
     "tibaq_sample": [
       {
@@ -543,6 +558,7 @@
     "term2_count": 145,
     "is_balanced": false,
     "ratio": 0.53,
+    "ratio_label": "Ratio: 0.53 (77 : 145)",
     "tibaq_count": 4,
     "tibaq_sample": [
       {
@@ -577,6 +593,7 @@
     "term2_count": 26,
     "is_balanced": false,
     "ratio": 9.5,
+    "ratio_label": "Ratio: 9.5 (247 : 26)",
     "tibaq_count": 4,
     "tibaq_sample": [
       {
@@ -616,6 +633,7 @@
     "term2_count": 57,
     "is_balanced": false,
     "ratio": 1.61,
+    "ratio_label": "Ratio: 1.61 (92 : 57)",
     "tibaq_count": 4,
     "tibaq_sample": [
       {
@@ -650,6 +668,7 @@
     "term2_count": 27,
     "is_balanced": false,
     "ratio": 1.22,
+    "ratio_label": "Ratio: 1.22 (33 : 27)",
     "tibaq_count": 4,
     "tibaq_sample": [
       {
@@ -689,6 +708,7 @@
     "term2_count": 129,
     "is_balanced": false,
     "ratio": 1.41,
+    "ratio_label": "Ratio: 1.41 (182 : 129)",
     "tibaq_count": 4,
     "tibaq_sample": [
       {
@@ -728,6 +748,7 @@
     "term2_count": 37,
     "is_balanced": false,
     "ratio": 2.3,
+    "ratio_label": "Ratio: 2.3 (85 : 37)",
     "tibaq_count": 4,
     "tibaq_sample": [
       {

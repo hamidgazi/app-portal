@@ -253,48 +253,61 @@ class AnalyticsStudio {
     const container = document.getElementById("opposites-display-container");
     if (!container) return;
 
-    let html = `<div style="display: flex; flex-direction: column; gap: 16px;">`;
+    let html = `<div style="display: flex; flex-direction: column; gap: 14px;">`;
 
-    this.opposites.forEach(op => {
+    this.opposites.forEach((op, idx) => {
+      let badgeHTML = '';
+      if (op.is_balanced) {
+        badgeHTML = `<span class="count-pill" style="background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); font-weight: 700; padding: 3px 12px; border-radius: var(--radius-full);">✓ Exact 1:1 Parity (${op.term1_count} : ${op.term2_count})</span>`;
+      } else if (op.ratio_label) {
+        badgeHTML = `<span class="count-pill" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.35); font-weight: 700; padding: 3px 12px; border-radius: var(--radius-full);">${op.ratio_label}</span>`;
+      } else {
+        badgeHTML = `<span class="count-pill" style="background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.35); font-weight: 700; padding: 3px 12px; border-radius: var(--radius-full);">Ratio: ${op.ratio} (${op.term1_count} : ${op.term2_count})</span>`;
+      }
+
       html += `
-        <div class="ayah-card" style="margin-bottom: 0;">
-          <div class="ayah-card-meta">
-            <span class="ayah-badge" style="background: rgba(6, 182, 212, 0.15); color: #38bdf8;">
+        <div class="ayah-card" id="opposite-card-${idx}" style="margin-bottom: 0; padding: 14px 18px; border-radius: var(--radius-lg); transition: all 0.2s ease;">
+          <div class="ayah-card-meta" style="display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;">
+            <span class="ayah-badge" style="background: rgba(6, 182, 212, 0.15); color: #38bdf8; font-weight: 700;">
               ${op.concept}
             </span>
-            <span class="count-pill">
-              ${op.is_balanced ? '✓ Exact Mathematical Balance' : `Ratio: ${op.ratio}`}
-            </span>
+            ${badgeHTML}
           </div>
 
-          <div class="semantic-terms-row" style="margin: 16px 0; background: rgba(0, 0, 0, 0.3); padding: 16px; border-radius: var(--radius-sm);">
+          <div class="semantic-terms-row" style="margin: 12px 0; background: rgba(0, 0, 0, 0.35); padding: 14px 18px; border-radius: var(--radius-md); border: 1px solid rgba(255, 255, 255, 0.06);">
             <div class="semantic-term-box">
-              <span class="arabic-term">${op.term1_ar}</span>
-              <span class="stat-title">${op.term1_en}</span>
-              <span class="term-count">${op.term1_count}</span>
+              <span class="arabic-term" style="font-size: 1.8rem; color: #fef08a;">${op.term1_ar}</span>
+              <span class="stat-title" style="color: #cbd5e1;">${op.term1_en}</span>
+              <span class="term-count" style="font-size: 1.4rem; color: ${op.is_balanced ? '#34d399' : '#fbbf24'}; font-weight: 800;">${op.term1_count}</span>
             </div>
-            <div style="font-size: 2rem; color: var(--text-dim); font-weight: 300;">⇄</div>
+            <div style="font-size: 1.8rem; color: var(--text-dim); font-weight: 300; user-select: none;">⇄</div>
             <div class="semantic-term-box">
-              <span class="arabic-term">${op.term2_ar}</span>
-              <span class="stat-title">${op.term2_en}</span>
-              <span class="term-count">${op.term2_count}</span>
+              <span class="arabic-term" style="font-size: 1.8rem; color: #fef08a;">${op.term2_ar}</span>
+              <span class="stat-title" style="color: #cbd5e1;">${op.term2_en}</span>
+              <span class="term-count" style="font-size: 1.4rem; color: ${op.is_balanced ? '#34d399' : '#fbbf24'}; font-weight: 800;">${op.term2_count}</span>
             </div>
           </div>
 
-          <div style="font-size: 0.92rem; color: #e2e8f0; line-height: 1.6; border-left: 3px solid #10b981; padding-left: 12px; margin-bottom: 12px;">
-            <strong>Linguistic & Rhetorical Insight:</strong> ${op.insight}
+          <div style="font-size: 0.90rem; color: #e2e8f0; line-height: 1.6; border-left: 3px solid #10b981; padding-left: 12px; margin-bottom: 8px;">
+            <strong style="color: #10b981;">Linguistic & Rhetorical Insight:</strong> ${op.insight}
           </div>
 
-          ${op.tibaq_count > 0 ? `
-            <div style="border-top: 1px solid var(--border-subtle); padding-top: 12px; margin-top: 12px;">
-              <span class="stat-title" style="color: #fbbf24;">Tibaq (Where Both Opposites Meet in the Same Ayah): ${op.tibaq_count} Verses</span>
-              <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
-                ${op.tibaq_sample.map(t => `
-                  <div style="background: rgba(255, 255, 255, 0.02); padding: 10px 14px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: space-between; gap: 12px;">
-                    <div style="font-family: var(--font-arabic); font-size: 1.25rem; color: #f1f5f9; direction: rtl; text-align: right; flex: 1;">${t.arabic}</div>
-                    <button class="filter-btn studio-jump-btn" data-surah="${t.surah}" data-ayah="${t.ayah}">Surah ${t.surah}:${t.ayah}</button>
-                  </div>
-                `).join("")}
+          ${(op.tibaq_count > 0 && op.tibaq_sample && op.tibaq_sample.length > 0) ? `
+            <div style="border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 10px; margin-top: 10px; display: flex; flex-direction: column; gap: 8px;">
+              <div>
+                <button class="tibaq-toggle-btn card-action-btn" onclick="window.AnalyticsStudio.toggleTibaq(${idx}, this)" style="background: rgba(251, 191, 36, 0.1); border: 1px solid rgba(251, 191, 36, 0.3); color: #fbbf24; padding: 4px 12px; border-radius: var(--radius-full); font-size: 0.78rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; touch-action: manipulation;">
+                  <span>📖 شواہد آیاتِ طباق (${op.tibaq_count} Verses) ▼</span>
+                </button>
+              </div>
+              <div id="tibaq-drawer-${idx}" class="tibaq-verses-drawer" style="display: none; animation: fadeIn 0.25s ease-out; margin-top: 6px;">
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                  ${op.tibaq_sample.map(t => `
+                    <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.06); padding: 10px 14px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+                      <div style="font-family: var(--font-arabic); font-size: 1.22rem; color: #f1f5f9; direction: rtl; text-align: right; flex: 1 1 240px; line-height: 1.9;">${t.arabic}</div>
+                      <button class="filter-btn studio-jump-btn" data-surah="${t.surah}" data-ayah="${t.ayah}" style="flex-shrink: 0;">Surah ${t.surah}:${t.ayah} ↗</button>
+                    </div>
+                  `).join("")}
+                </div>
               </div>
             </div>
           ` : ''}
@@ -305,6 +318,24 @@ class AnalyticsStudio {
     html += `</div>`;
     container.innerHTML = html;
     this.bindStudioJumpBtns(container);
+  }
+
+  toggleTibaq(idx, btn) {
+    if (window.AudioSFX) window.AudioSFX.playClick();
+    const drawer = document.getElementById(`tibaq-drawer-${idx}`);
+    if (!drawer) return;
+    const isHidden = (drawer.style.display === "none" || !drawer.style.display);
+    if (isHidden) {
+      drawer.style.display = "block";
+      btn.innerHTML = btn.innerHTML.replace("▼", "▲");
+      btn.style.background = "rgba(251, 191, 36, 0.22)";
+      btn.style.borderColor = "#fbbf24";
+    } else {
+      drawer.style.display = "none";
+      btn.innerHTML = btn.innerHTML.replace("▲", "▼");
+      btn.style.background = "rgba(251, 191, 36, 0.1)";
+      btn.style.borderColor = "rgba(251, 191, 36, 0.3)";
+    }
   }
 
   // 3. CHRONOLOGICAL STYLOMETRICS (PROCEDURAL SVG TIMELINE)

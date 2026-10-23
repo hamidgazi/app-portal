@@ -525,6 +525,15 @@
 
         if (dom.modalBody) {
             let bodyHtml = '';
+            if (kalam.intro_note) {
+                bodyHtml += `
+                    <div class="kalam-intro-note">
+                        <span class="note-icon">ℹ️</span>
+                        <div>${escapeHtml(kalam.intro_note)}</div>
+                    </div>
+                `;
+            }
+
             for (let i = 0; i < kalam.shers.length; i++) {
                 const s = kalam.shers[i];
                 bodyHtml += `
@@ -544,6 +553,15 @@
                                 </button>
                             </div>
                         </div>
+                    </div>
+                `;
+            }
+
+            if (kalam.footnote) {
+                bodyHtml += `
+                    <div class="kalam-footnote">
+                        <span class="note-icon">📜</span>
+                        <div>${escapeHtml(kalam.footnote)}</div>
                     </div>
                 `;
             }

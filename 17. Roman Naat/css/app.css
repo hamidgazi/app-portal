@@ -750,6 +750,37 @@ body {
     flex: 1;
 }
 
+.kalam-intro-note {
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid var(--border-gold);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    font-size: 0.88rem;
+    color: var(--text-gold);
+    line-height: 1.6;
+    display: flex;
+    gap: 10px;
+}
+
+.kalam-footnote {
+    background: rgba(255, 255, 255, 0.04);
+    border-left: 3px solid var(--accent-emerald);
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin-top: 24px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    display: flex;
+    gap: 10px;
+}
+
+.note-icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
 .full-kalam-sher-row {
     padding: 16px 0;
     border-bottom: 1px solid var(--border-subtle);
