@@ -12,6 +12,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Gulzar&family=Inter:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;600;700&display=swap" rel="stylesheet">
   
+  <!-- PWA Manifest & Meta -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+
   <!-- AI Search Engine Stylesheet -->
   <link rel="stylesheet" href="ai_search.css">
 
@@ -2037,14 +2041,56 @@ ${text}...
 
     function jumpToBookmark(key) {
       closeDrawers();
-      // Parse key e.g. fatwa-part2-14
-      const parts = key.split('-');
-      if (parts.length >= 2) {
-        const pKey = parts[1];
-        if (pKey.startsWith('part')) {
-          setPart(pKey);
-        }
+      if (key.startsWith('resala-')) {
+        setPart('part4_rasail');
+      } else if (key.includes('part1')) {
+        setPart('part1');
+      } else if (key.includes('part2')) {
+        setPart('part2');
+      } else if (key.includes('part3')) {
+        setPart('part3');
+      } else if (key.includes('part4')) {
+        setPart('part4_ext');
       }
+      setTimeout(() => {
+        const el = document.getElementById(`card-${key}`);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          el.classList.add('illuminated-card');
+          setTimeout(() => el.classList.remove('illuminated-card'), 3000);
+        }
+      }, 600);
+    }
+
+    function viewCardModal(cardKey) {
+      AudioFX.click();
+      const item = StudioState.activeDataset.find(it => {
+        const gid = it.global_id || it.catalog_id || it.id;
+        return `${StudioState.currentPart}-${gid}` === cardKey;
+      });
+      if (!item) return;
+
+      const cardEl = (StudioState.currentPart === 'part4_rasail') ?
+                     createRasailCard(item, 1) :
+                     createFatwaCard(item, 1, 'detailed');
+
+      const modalEl = document.createElement('div');
+      modalEl.className = 'drawer-overlay active';
+      modalEl.innerHTML = `
+        <div class="drawer-sheet" style="max-height:90vh;overflow-y:auto;">
+          <div class="drawer-header">
+            <h3>معائنہ فتویٰ</h3>
+            <button class="btn-close-drawer" id="btnCloseModal">✕</button>
+          </div>
+          <div id="modal-card-content"></div>
+        </div>
+      `;
+      modalEl.querySelector('#modal-card-content').appendChild(cardEl);
+      modalEl.querySelector('#btnCloseModal').addEventListener('click', () => modalEl.remove());
+      modalEl.addEventListener('click', (e) => {
+        if (e.target === modalEl) modalEl.remove();
+      });
+      document.body.appendChild(modalEl);
     }
 
     // --- 11. THEME & TYPOGRAPHY SYSTEM ---
@@ -2303,6 +2349,40 @@ ${text}...
         renderActivePart();
       } catch (err) {
         console.error('Module 4 Error:', err);
+      }
+
+      // Module 5: URL Hash Routing & Deep Linking
+      try {
+        const hash = window.location.hash;
+        if (hash) {
+          if (hash.includes('part1')) setPart('part1');
+          else if (hash.includes('part2')) setPart('part2');
+          else if (hash.includes('part3')) setPart('part3');
+          else if (hash.includes('part4') || hash.includes('resala')) setPart('part4_rasail');
+          
+          if (hash.includes('fatwa') || hash.includes('resala')) {
+            setTimeout(() => {
+              const targetId = 'card-' + hash.replace('#', '');
+              const el = document.getElementById(targetId);
+              if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                el.classList.add('illuminated-card');
+                setTimeout(() => el.classList.remove('illuminated-card'), 3500);
+              }
+            }, 800);
+          }
+        }
+      } catch (err) {
+        console.error('Module 5 Error:', err);
+      }
+
+      // Module 6: PWA Service Worker Registration
+      try {
+        if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
+          navigator.serviceWorker.register('sw.js').catch(() => {});
+        }
+      } catch (err) {
+        console.error('Module 6 Error:', err);
       }
     }
 

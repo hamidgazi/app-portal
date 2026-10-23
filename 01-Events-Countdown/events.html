@@ -1811,8 +1811,33 @@ const SoundFX = {
     updateUI() {
         const icon = document.getElementById('sound-icon');
         const btn  = document.getElementById('btn-sound-toggle');
+        const desc = document.getElementById('sound-desc');
         if (icon) icon.textContent = this.enabled ? '🔊' : '🔇';
         if (btn) btn.title = this.enabled ? 'Sound Effects: On' : 'Sound Effects: Muted';
+        if (desc) desc.textContent = this.enabled ? 'Tactile non-musical acoustic clicks (On)' : 'Sound effects muted (Off)';
+    },
+
+    playTick() {
+        if (!this.enabled) return;
+        try {
+            this.init();
+            if (!this.audioCtx) return;
+            const now = this.audioCtx.currentTime;
+            const osc = this.audioCtx.createOscillator();
+            const gain = this.audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(620, now);
+            osc.frequency.exponentialRampToValueAtTime(320, now + 0.025);
+
+            gain.gain.setValueAtTime(0.001, now);
+            gain.gain.exponentialRampToValueAtTime(0.08, now + 0.005);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.03);
+
+            osc.connect(gain);
+            gain.connect(this.audioCtx.destination);
+            osc.start(now);
+            osc.stop(now + 0.035);
+        } catch (_) {}
     },
 
     playPop() {

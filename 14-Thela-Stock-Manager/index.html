@@ -166,7 +166,7 @@
     }
 
     .bag-card {
-      min-height: 72px;
+      min-height: 64px;
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
       border-radius: 14px;
@@ -2048,6 +2048,88 @@
       }
     }
 
+    function setupQuantitySteppers() {
+      const stepperBtns = document.querySelectorAll(".btn-stepper");
+      const chips = document.querySelectorAll(".qty-chip");
+      const customInput = document.getElementById("input-custom-qty");
+
+      stepperBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          playSound('tap');
+          const step = Number(btn.getAttribute("data-step") || 0);
+          let newQty = Math.max(1, (Number(selectedQuantity) || 0) + step);
+          selectedQuantity = newQty;
+
+          let matched = false;
+          chips.forEach(c => {
+            if (Number(c.getAttribute("data-qty")) === newQty) {
+              c.classList.add("selected");
+              matched = true;
+            } else {
+              c.classList.remove("selected");
+            }
+          });
+
+          if (!matched && customInput) {
+            customInput.value = String(newQty);
+          } else if (matched && customInput) {
+            customInput.value = "";
+          }
+
+          updateStockPreviewBanner();
+        });
+      });
+    }
+
+    function renderPartySuggestions() {
+      const container = document.getElementById("party-chips-row");
+      const remarkInput = document.getElementById("input-remark");
+      if (!container) return;
+
+      const suggestions = [];
+      const seen = new Set();
+      const defaultParties = ["Walk-in", "Shop", "Factory"];
+      defaultParties.forEach(p => {
+        if (!seen.has(p.toLowerCase())) {
+          seen.add(p.toLowerCase());
+          suggestions.push(p);
+        }
+      });
+
+      if (Array.isArray(recentTransactions)) {
+        for (let i = 0; i < recentTransactions.length; i++) {
+          const rem = String(recentTransactions[i].remark || "").trim();
+          if (rem && !seen.has(rem.toLowerCase())) {
+            seen.add(rem.toLowerCase());
+            suggestions.push(rem);
+            if (suggestions.length >= 6) break;
+          }
+        }
+      }
+
+      container.innerHTML = "";
+      suggestions.slice(0, 5).forEach(party => {
+        const chip = document.createElement("button");
+        chip.className = "party-chip";
+        chip.type = "button";
+        chip.innerHTML = `<span>🏷️</span> <span>${escapeHtml(party)}</span>`;
+        chip.addEventListener("click", () => {
+          playSound('tap');
+          if (remarkInput) {
+            if (remarkInput.value === party) {
+              remarkInput.value = "";
+              chip.classList.remove("selected");
+            } else {
+              remarkInput.value = party;
+              document.querySelectorAll(".party-chip").forEach(c => c.classList.remove("selected"));
+              chip.classList.add("selected");
+            }
+          }
+        });
+        container.appendChild(chip);
+      });
+    }
+
     /* ========================================================================
        DYNAMIC STOCK PREVIEW BANNER ENGINE
        ======================================================================== */
@@ -2457,6 +2539,105 @@
     }
 
     /* ========================================================================
+       INSTANT FLOATING UNDO SNACKBAR ENGINE
+       ======================================================================== */
+    let snackbarTimer = null;
+    let snackbarCountdown = null;
+
+    function showUndoSnackbar(tx) {
+      const snackbar = document.getElementById("undo-snackbar");
+      const textEl = document.getElementById("undo-snackbar-text");
+      const undoBtn = document.getElementById("btn-snackbar-undo");
+      const labelEl = document.getElementById("snackbar-undo-label");
+      if (!snackbar || !textEl || !undoBtn) return;
+
+      if (snackbarTimer) clearTimeout(snackbarTimer);
+      if (snackbarCountdown) clearInterval(snackbarCountdown);
+
+      textEl.textContent = `Recorded: ${tx.quantity} ${tx.itemName} ${tx.type}`;
+
+      let secondsLeft = 5;
+      if (labelEl) labelEl.textContent = `Undo (${secondsLeft}s)`;
+
+      snackbar.classList.add("show");
+
+      undoBtn.onclick = async () => {
+        if (snackbarTimer) clearTimeout(snackbarTimer);
+        if (snackbarCountdown) clearInterval(snackbarCountdown);
+        snackbar.classList.remove("show");
+        await executeInstantUndo(tx);
+      };
+
+      snackbarCountdown = setInterval(() => {
+        secondsLeft--;
+        if (secondsLeft <= 0) {
+          clearInterval(snackbarCountdown);
+          snackbar.classList.remove("show");
+        } else if (labelEl) {
+          labelEl.textContent = `Undo (${secondsLeft}s)`;
+        }
+      }, 1000);
+
+      snackbarTimer = setTimeout(() => {
+        snackbar.classList.remove("show");
+      }, 5000);
+    }
+
+    async function executeInstantUndo(tx) {
+      playSound('undo');
+
+      // Revert optimistic stock balance
+      if (typeof liveBalances[tx.itemName] === 'number') {
+        if (tx.type === "OUT") {
+          liveBalances[tx.itemName] += tx.quantity;
+        } else {
+          liveBalances[tx.itemName] = Math.max(0, liveBalances[tx.itemName] - tx.quantity);
+        }
+      }
+
+      // Remove from recent
+      recentTransactions = recentTransactions.filter(t => t.sr !== tx.sr);
+      saveBalances();
+      saveRecent();
+      renderBagCards();
+      updateGlanceBanner();
+      updateStockPreviewBanner();
+      renderRecentTransactions();
+      renderPartySuggestions();
+
+      const undoDrawer = document.getElementById("drawer-history");
+      if (undoDrawer && undoDrawer.classList.contains("active")) {
+        const pillCount = document.getElementById("pill-all-count");
+        if (pillCount) pillCount.textContent = String(recentTransactions.length);
+        renderDrawerTransactions();
+      }
+
+      showToast("Undone last entry!");
+
+      // If webhook configured, send undo command to Google Sheet
+      const webhookUrl = getWebhookUrl();
+      if (webhookUrl) {
+        try {
+          const params = new URLSearchParams({
+            action: "undo",
+            sr: String(tx.sr || ""),
+            limit: "50"
+          });
+          const targetUrl = webhookUrl + (webhookUrl.includes("?") ? "&" : "?") + params.toString();
+          const response = await fetch(targetUrl, { method: "GET", mode: "cors" });
+          if (response.ok) {
+            const res = await response.json();
+            if (res && res.data) {
+              applyUpdatedGoogleSheetData(res.data);
+            }
+          }
+        } catch (e) {
+          console.warn("Undo webhook call failed:", e);
+        }
+      }
+    }
+
+    /* ========================================================================
        TRANSACTION SUBMISSION & GOOGLE APPS SCRIPT WEBHOOK ENGINE
        ======================================================================== */
     function setupSubmitListener() {
@@ -2512,6 +2693,7 @@
         updateGlanceBanner();
         updateStockPreviewBanner();
         renderRecentTransactions();
+        renderPartySuggestions();
 
         const submitDrawer = document.getElementById("drawer-history");
         if (submitDrawer && submitDrawer.classList.contains("active")) {
@@ -2523,6 +2705,7 @@
         if (remarkInput) remarkInput.value = "";
         playSound('success');
         showToast(`Recorded: ${qty} ${selectedItem} ${selectedAction}!`);
+        showUndoSnackbar(newTx);
 
         // Send to Google Sheets Webhook
         await pushTransactionToGoogleSheet(newTx);
@@ -2608,6 +2791,7 @@
       updateGlanceBanner();
       updateStockPreviewBanner();
       renderRecentTransactions();
+      renderPartySuggestions();
 
       const undoDrawer = document.getElementById("drawer-history");
       if (undoDrawer && undoDrawer.classList.contains("active")) {
@@ -2686,6 +2870,7 @@
           if (pillCount) pillCount.textContent = String(recentTransactions.length);
           renderDrawerTransactions();
         }
+        renderPartySuggestions();
       }
     }
 
