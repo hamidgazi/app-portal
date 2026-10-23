@@ -397,6 +397,53 @@
       box-shadow: 0 0 10px rgba(251, 191, 36, 0.2);
     }
 
+    .sort-selector-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(10, 15, 30, 0.9);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-full);
+      padding: 3px 10px;
+    }
+
+    .sort-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #fbbf24;
+      white-space: nowrap;
+    }
+
+    .manners-sort-select {
+      background: transparent;
+      border: none;
+      color: #f8fafc;
+      font-size: 0.80rem;
+      font-weight: 600;
+      outline: none;
+      cursor: pointer;
+      padding: 2px 4px;
+      direction: rtl;
+    }
+
+    .manners-sort-select option {
+      background: #0f172a;
+      color: #f8fafc;
+    }
+
+    .manner-words-pill {
+      background: rgba(148, 163, 184, 0.12);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      color: #cbd5e1;
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+
     .manners-count-badge {
       color: #fbbf24;
       font-weight: 700;
@@ -946,6 +993,18 @@
             <button class="segment-btn" data-view="compact" title="Compact Checklist">📋 خلاصہ</button>
           </div>
 
+          <!-- Sort Selector -->
+          <div class="sort-selector-wrap">
+            <label for="manners-sort-select" class="sort-label">ترتیب:</label>
+            <select id="manners-sort-select" class="manners-sort-select" aria-label="Sort Ayat">
+              <option value="default">🔢 حسبِ ترتیب (#1..#67)</option>
+              <option value="words_asc">📏 مختصر آیات (الفاظ ⬆)</option>
+              <option value="words_desc">📜 طویل آیات (الفاظ ⬇)</option>
+              <option value="alpha">🔤 حروفِ تہجی (ا تا ی)</option>
+              <option value="surah">📖 حسبِ مصحف (1..114)</option>
+            </select>
+          </div>
+
           <div id="manners-count-badge" class="manners-count-badge">
             جملہ احکام: 67
           </div>
@@ -985,12 +1044,23 @@
   <script>
     (function() {
       const data = window.QURAN_MANNERS_DATA;
+      if (data && data.modules) {
+        data.modules.forEach(m => {
+          m.items.forEach(it => {
+            const words = (it.arabic || "").trim().split(/\s+/).filter(Boolean);
+            it.word_count = words.length;
+            const rawFirstWord = words[0] || "";
+            it.clean_first_word = rawFirstWord.replace(/[\u064B-\u065F\u0670\u06D6-\u06ED]/g, "");
+          });
+        });
+      }
       if (!data || !data.modules) return;
 
       let activeModuleId = "all";
       let searchQuery = "";
       let langMode = "both";   // 'both', 'ur', 'en'
-      let viewMode = "cards";  // 'cards', 'compact'
+      let viewMode = "cards";
+      let activeSortMode = "default";  // 'cards', 'compact'
       const tafsirCache = new Map();
 
       // Bookmarks Management
@@ -1140,6 +1210,15 @@
       }
 
       // Search Field & Clear Button
+      const sortSelect = document.getElementById("manners-sort-select");
+      if (sortSelect) {
+        sortSelect.addEventListener("change", (e) => {
+          if (window.AudioSFX) window.AudioSFX.playClick();
+          activeSortMode = e.target.value;
+          renderList();
+        });
+      }
+
       const searchInput = document.getElementById("manners-search");
       const clearBtn = document.getElementById("manners-search-clear");
 
@@ -1365,6 +1444,19 @@
           });
         }
 
+        // Apply Active Sort Mode
+        if (activeSortMode === "words_asc") {
+          allItems.sort((a, b) => a.word_count - b.word_count || a.global_serial - b.global_serial);
+        } else if (activeSortMode === "words_desc") {
+          allItems.sort((a, b) => b.word_count - a.word_count || a.global_serial - b.global_serial);
+        } else if (activeSortMode === "alpha") {
+          allItems.sort((a, b) => a.clean_first_word.localeCompare(b.clean_first_word, "ar") || a.global_serial - b.global_serial);
+        } else if (activeSortMode === "surah") {
+          allItems.sort((a, b) => (a.surah_id - b.surah_id) || (a.ayah_num - b.ayah_num) || a.global_serial - b.global_serial);
+        } else {
+          allItems.sort((a, b) => a.global_serial - b.global_serial);
+        }
+
         if (countBadge) {
           countBadge.textContent = `جملہ احکام: ${allItems.length}`;
         }
@@ -1407,6 +1499,7 @@
                   </div>
                   <div class="manner-header-actions">
                     <button class="manner-star-btn ${bookmarked ? 'bookmarked' : ''}" data-serial="${serialNum}" title="${bookmarked ? 'محفوظ شدہ سے ہٹائیں' : 'پسندیدہ میں شامل کریں'}">${starChar}</button>
+                    <span class="manner-words-pill">📏 ${it.word_count} الفاظ</span>
                     <div class="manner-ref-badge">${it.reference_badge}</div>
                   </div>
                 </div>
