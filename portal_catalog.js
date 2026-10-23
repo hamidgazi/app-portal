@@ -2,7 +2,7 @@
 window.PORTAL_CATALOG = {
   "version": "1.0.0",
   "lastUpdated": "Antigravity Files",
-  "totalApps": 29,
+  "totalApps": 30,
   "categories": [
     "Islamic & Faith",
     "Productivity & Utilities",
@@ -54,20 +54,21 @@ window.PORTAL_CATALOG = {
     },
     {
       "id": "12-Fatawa-Project__output__index_html",
-      "title": "Fatawa Razviya Master Hub",
+      "title": "Fatawa Razviya Next-Gen Studio",
       "category": "Islamic & Faith",
       "icon": "🏛️",
-      "badge": "5,568 Fatwas • 4 Parts",
-      "description": "Master portal and executive navigation hub across all 4 parts of Fatawa Razviya (Short, Medium, Long, Rasail) with universal Spotlight AI Search.",
+      "badge": "5,753 Works • 60 FPS PWA",
+      "description": "Unified, blazing-fast PWA Studio for all 5,753 fatwas and treatises. Features on-demand modular bundling, 60 FPS sentinel virtualization, Tri-Mode density switching, and Spotlight AI Search.",
       "tags": [
         "fatawa",
         "urdu",
         "roman",
         "jurisprudence",
         "islamic",
-        "hub",
-        "reader",
-        "search"
+        "studio",
+        "pwa",
+        "search",
+        "60fps"
       ],
       "primary": true,
       "relPath": "12-Fatawa-Project/output/index.html",
@@ -299,6 +300,24 @@ window.PORTAL_CATALOG = {
       "relPath": "12-Fatawa-Project/output/rasail_reader.html",
       "portalHref": "./12-Fatawa-Project/output/rasail_reader.html",
       "serverHref": "./12-Fatawa-Project/output/rasail_reader.html"
+    },
+    {
+      "id": "12-Fatawa-Project__output__studio_html",
+      "title": "Fatawa Razviya Studio Edition",
+      "category": "Islamic & Faith",
+      "icon": "⚡",
+      "badge": "Studio Edition",
+      "description": "Direct link to the unified high-performance reading studio with 4 sacred themes, mobile bottom command dock, and offline bookmarks.",
+      "tags": [
+        "fatawa",
+        "studio",
+        "pwa",
+        "reader"
+      ],
+      "primary": false,
+      "relPath": "12-Fatawa-Project/output/studio.html",
+      "portalHref": "./12-Fatawa-Project/output/studio.html",
+      "serverHref": "./12-Fatawa-Project/output/studio.html"
     },
     {
       "id": "02-Namaz-Prayer-Times__widget_html",

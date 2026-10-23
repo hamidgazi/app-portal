@@ -1,0 +1,2413 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl" data-theme="emerald" data-lang="ur">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="theme-color" content="#051a14">
+  <meta name="description" content="فتاویٰ رضویہ - جدید ترین ڈیجیٹل اسٹوڈیو و ریسرچ پورٹل۔ امام احمد رضا خان قادری علیہ الرحمہ کے ۵،۷۵۳ فتاویٰ و ۱۸۵ رسائل کا مکمل ذخیرہ۔">
+  <title>فتاویٰ رضویہ - جدید ترین ڈیجیٹل اسٹوڈیو (Fatawa Razviya Next-Gen Studio)</title>
+  
+  <!-- Preconnect and Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Gulzar&family=Inter:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- PWA Manifest & Meta -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+
+  <!-- AI Search Engine Stylesheet -->
+  <link rel="stylesheet" href="ai_search.css">
+
+  <style>
+    /* ==========================================================================
+       1. SACRED COLOR THEMES & CSS VARIABLES
+       ========================================================================== */
+    :root {
+      --font-nastaliq: 'Noto Nastaliq Urdu', 'Gulzar', 'Jameel Noori Nastaleeq', serif;
+      --font-arabic: 'Amiri', 'Scheherazade New', serif;
+      --font-latin: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-size-base: 18px;
+      --line-height-ur: 2.1;
+      --line-height-ro: 1.65;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      --transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* 🟢 THEME 1: ROYAL ISLAMIC EMERALD (DEFAULT LUXURY) */
+    [data-theme="emerald"] {
+      --bg-body: #041410;
+      --bg-surface: #08211a;
+      --bg-card: #0d2e24;
+      --bg-card-hover: #123b2f;
+      --bg-accent-subtle: rgba(16, 185, 129, 0.12);
+      --border-subtle: #174537;
+      --border-focus: #10b981;
+      --text-main: #f0fdf4;
+      --text-muted: #86efac;
+      --text-sub: #a7f3d0;
+      --primary: #10b981;
+      --primary-hover: #059669;
+      --accent-gold: #fbbf24;
+      --accent-gold-bg: rgba(251, 191, 36, 0.12);
+      --verdict-border: #059669;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+      --shadow-gold: 0 0 24px rgba(251, 191, 36, 0.35);
+      --dock-bg: rgba(8, 33, 26, 0.88);
+    }
+
+    /* 🌙 THEME 2: AMOLED DARK (DEEP NIGHT / BATTERY SAVER) */
+    [data-theme="dark"] {
+      --bg-body: #000000;
+      --bg-surface: #0a0a0a;
+      --bg-card: #121212;
+      --bg-card-hover: #1a1a1a;
+      --bg-accent-subtle: rgba(56, 189, 248, 0.12);
+      --border-subtle: #242424;
+      --border-focus: #38bdf8;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-sub: #cbd5e1;
+      --primary: #38bdf8;
+      --primary-hover: #0284c7;
+      --accent-gold: #f59e0b;
+      --accent-gold-bg: rgba(245, 158, 11, 0.12);
+      --verdict-border: #0284c7;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.6);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.8);
+      --shadow-gold: 0 0 24px rgba(245, 158, 11, 0.3);
+      --dock-bg: rgba(10, 10, 10, 0.92);
+    }
+
+    /* 📜 THEME 3: WARM PARCHMENT / SEPIA (ANTIQUE MANUSCRIPT) */
+    [data-theme="sepia"] {
+      --bg-body: #fbf2de;
+      --bg-surface: #f4e4c3;
+      --bg-card: #fff9ed;
+      --bg-card-hover: #ffffff;
+      --bg-accent-subtle: rgba(180, 83, 9, 0.08);
+      --border-subtle: #e2d3b5;
+      --border-focus: #b45309;
+      --text-main: #2b1f14;
+      --text-muted: #755940;
+      --text-sub: #523e2c;
+      --primary: #85370e;
+      --primary-hover: #9a3412;
+      --accent-gold: #b45309;
+      --accent-gold-bg: rgba(180, 83, 9, 0.12);
+      --verdict-border: #b45309;
+      --shadow-sm: 0 2px 8px rgba(90, 50, 15, 0.06);
+      --shadow-md: 0 8px 24px rgba(90, 50, 15, 0.1);
+      --shadow-gold: 0 0 20px rgba(180, 83, 9, 0.25);
+      --dock-bg: rgba(244, 228, 195, 0.92);
+    }
+
+    /* ☀️ THEME 4: CRISP LIGHT (CLEAN & MODERN) */
+    [data-theme="light"] {
+      --bg-body: #f8fafc;
+      --bg-surface: #f1f5f9;
+      --bg-card: #ffffff;
+      --bg-card-hover: #fcfcfc;
+      --bg-accent-subtle: rgba(2, 132, 199, 0.08);
+      --border-subtle: #e2e8f0;
+      --border-focus: #0284c7;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-sub: #475569;
+      --primary: #0284c7;
+      --primary-hover: #0369a1;
+      --accent-gold: #d97706;
+      --accent-gold-bg: rgba(217, 119, 6, 0.1);
+      --verdict-border: #0284c7;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+      --shadow-gold: 0 0 20px rgba(217, 119, 6, 0.2);
+      --dock-bg: rgba(255, 255, 255, 0.92);
+    }
+
+    /* ==========================================================================
+       2. GLOBAL RESET & BASE TYPOGRAPHY
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: var(--bg-body);
+      color: var(--text-main);
+      font-family: var(--font-nastaliq);
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-ur);
+      direction: rtl;
+      text-align: right;
+      padding-bottom: 90px; /* Space for mobile bottom dock */
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    [data-lang="roman"] body {
+      font-family: var(--font-latin);
+      line-height: var(--line-height-ro);
+      direction: ltr;
+      text-align: left;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+      outline: none;
+      user-select: none;
+      touch-action: manipulation;
+    }
+
+    /* ==========================================================================
+       3. TOP EXECUTIVE HEADER & CONTROLS
+       ========================================================================== */
+    .studio-header {
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-icon {
+      font-size: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      background: var(--bg-accent-subtle);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .brand-text h1 {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--text-main);
+    }
+
+    .brand-text span {
+      font-size: 11px;
+      font-family: var(--font-latin);
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+      direction: ltr;
+      display: block;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: var(--radius-full);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      font-size: 13px;
+      font-family: var(--font-latin);
+      font-weight: 500;
+      transition: var(--transition);
+      min-height: 42px;
+    }
+
+    .header-btn:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-focus);
+      transform: translateY(-1px);
+    }
+
+    .btn-search-hero {
+      background: var(--bg-accent-subtle);
+      border-color: var(--border-focus);
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .btn-search-hero kbd {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-right: 4px;
+    }
+
+    /* ==========================================================================
+       4. SUB-BAR: 4-PART SELECTOR & DENSITY CONTROLLER
+       ========================================================================== */
+    .control-deck {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 8px 16px;
+    }
+
+    .control-deck-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    /* 4-Tier Part Pills */
+    .part-pills-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      scrollbar-width: none;
+    }
+
+    .part-pills-group::-webkit-scrollbar {
+      display: none;
+    }
+
+    .part-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: var(--transition);
+      min-height: 40px;
+    }
+
+    .part-pill .pill-badge {
+      font-size: 11px;
+      font-family: var(--font-latin);
+      padding: 2px 7px;
+      border-radius: var(--radius-full);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .part-pill:hover {
+      background: var(--bg-card-hover);
+      color: var(--text-main);
+    }
+
+    .part-pill.active {
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    }
+
+    .part-pill[data-part="part1"].active {
+      background: linear-gradient(135deg, #10b981, #047857);
+    }
+
+    .part-pill[data-part="part2"].active {
+      background: linear-gradient(135deg, #f59e0b, #b45309);
+    }
+
+    .part-pill[data-part="part3"].active {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+    }
+
+    .part-pill[data-part="part4"].active {
+      background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+    }
+
+    /* Tri-Mode View Mode Controls */
+    .density-selector {
+      display: flex;
+      align-items: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-full);
+      padding: 3px;
+      gap: 2px;
+    }
+
+    .density-btn {
+      padding: 6px 12px;
+      border-radius: var(--radius-full);
+      color: var(--text-muted);
+      font-size: 12px;
+      font-family: var(--font-latin);
+      font-weight: 500;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      min-height: 34px;
+    }
+
+    .density-btn:hover {
+      color: var(--text-main);
+    }
+
+    .density-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    /* Sub-Tabs for Part 4 (Rasail vs Extended Fatwas) */
+    .part4-subtabs-bar {
+      display: none;
+      background: var(--bg-body);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 6px 16px;
+    }
+
+    .part4-subtabs-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: flex;
+      gap: 8px;
+    }
+
+    .subtab-btn {
+      padding: 6px 16px;
+      border-radius: var(--radius-full);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .subtab-btn.active {
+      background: #8b5cf6;
+      color: #ffffff;
+      border-color: #8b5cf6;
+    }
+
+    /* ==========================================================================
+       5. FILTER CHIPS & TELEMETRY BAR
+       ========================================================================== */
+    .telemetry-bar {
+      max-width: 1300px;
+      margin: 12px auto;
+      padding: 0 16px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text-muted);
+      font-family: var(--font-latin);
+    }
+
+    .active-filter-chips {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-accent-subtle);
+      border: 1px solid var(--border-subtle);
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      color: var(--text-main);
+      font-size: 12px;
+    }
+
+    .chip-remove {
+      font-size: 14px;
+      line-height: 1;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .chip-remove:hover {
+      color: #ef4444;
+    }
+
+    /* ==========================================================================
+       6. MAIN CONTENT CARDS CONTAINER
+       ========================================================================== */
+    .studio-main {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 8px 16px;
+    }
+
+    #cards-container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Loading Spinner */
+    .loading-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+    }
+
+    .spinner {
+      width: 44px;
+      height: 44px;
+      border: 4px solid var(--border-subtle);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 16px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* --- MODE 1: DETAILED LUXURY CARDS --- */
+    .fatwa-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .fatwa-card:hover {
+      background: var(--bg-card-hover);
+      box-shadow: var(--shadow-md);
+      border-color: var(--border-focus);
+    }
+
+    .card-top-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed var(--border-subtle);
+    }
+
+    .meta-pills-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .part-tag {
+      font-size: 11px;
+      font-family: var(--font-latin);
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: var(--radius-full);
+      color: #ffffff;
+    }
+
+    .part-tag.p1 { background: #10b981; }
+    .part-tag.p2 { background: #f59e0b; }
+    .part-tag.p3 { background: #0284c7; }
+    .part-tag.p4 { background: #8b5cf6; }
+
+    .serial-pill {
+      font-family: var(--font-latin);
+      font-weight: 700;
+      font-size: 12px;
+      color: var(--text-muted);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+    }
+
+    .topic-pill {
+      font-size: 12px;
+      color: var(--text-sub);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      padding: 2px 10px;
+      border-radius: var(--radius-full);
+    }
+
+    .ref-pill {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: var(--font-latin);
+      margin-right: auto;
+    }
+
+    .btn-star-card {
+      font-size: 18px;
+      color: var(--text-muted);
+      padding: 4px;
+      transition: var(--transition);
+    }
+
+    .btn-star-card.starred {
+      color: var(--accent-gold);
+      transform: scale(1.15);
+    }
+
+    /* Inquirer Context Badge */
+    .inquirer-context-pill {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-right: 3px solid var(--accent-gold);
+      border-radius: var(--radius-sm);
+      padding: 8px 12px;
+      font-size: 14px;
+      margin-bottom: 12px;
+      color: var(--text-sub);
+    }
+
+    [data-lang="roman"] .inquirer-context-pill {
+      border-right: 1px solid var(--border-subtle);
+      border-left: 3px solid var(--accent-gold);
+    }
+
+    /* Question & Verdict */
+    .qa-section {
+      margin-bottom: 12px;
+    }
+
+    .qa-label {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--primary);
+      display: inline-block;
+      margin-left: 6px;
+    }
+
+    [data-lang="roman"] .qa-label {
+      margin-left: 0;
+      margin-right: 6px;
+    }
+
+    .qa-text-ur {
+      margin-bottom: 8px;
+      color: var(--text-main);
+    }
+
+    .qa-text-ro {
+      font-family: var(--font-latin);
+      font-size: 14px;
+      color: var(--text-sub);
+      background: var(--bg-surface);
+      border-radius: var(--radius-sm);
+      padding: 8px 12px;
+      margin-top: 6px;
+      line-height: var(--line-height-ro);
+      direction: ltr;
+      text-align: left;
+    }
+
+    .verdict-box {
+      background: var(--bg-accent-subtle);
+      border: 1px solid var(--verdict-border);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      margin-top: 12px;
+      position: relative;
+    }
+
+    .verdict-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    /* Card Action Bar */
+    .card-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .card-action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: var(--radius-full);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-sub);
+      font-size: 12px;
+      font-family: var(--font-latin);
+      font-weight: 500;
+      transition: var(--transition);
+      min-height: 36px;
+    }
+
+    .card-action-btn:hover {
+      background: var(--bg-card);
+      border-color: var(--border-focus);
+      color: var(--text-main);
+    }
+
+    .btn-action-whatsapp:hover {
+      background: #25D366;
+      border-color: #25D366;
+      color: #ffffff;
+    }
+
+    /* Target Illuminator */
+    .illuminated-card {
+      border-color: var(--accent-gold) !important;
+      box-shadow: var(--shadow-gold) !important;
+      animation: pulseGold 2s ease infinite;
+    }
+
+    @keyframes pulseGold {
+      0%, 100% { border-color: var(--accent-gold); }
+      50% { border-color: var(--primary); }
+    }
+
+    /* --- MODE 2: COLLAPSIBLE ACCORDION CARDS --- */
+    .accordion-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .accordion-card:hover {
+      border-color: var(--border-focus);
+    }
+
+    .accordion-header {
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      cursor: pointer;
+      user-select: none;
+      min-height: 54px;
+    }
+
+    .accordion-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .accordion-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-main);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .accordion-chevron {
+      font-size: 14px;
+      color: var(--text-muted);
+      transition: transform 0.25s ease;
+    }
+
+    .accordion-card.open .accordion-chevron {
+      transform: rotate(180deg);
+    }
+
+    .accordion-body {
+      display: none;
+      padding: 0 16px 16px;
+      border-top: 1px dashed var(--border-subtle);
+    }
+
+    .accordion-card.open .accordion-body {
+      display: block;
+      animation: fadeIn 0.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- MODE 3: HIGH-DENSITY COMPACT CHECKLIST --- */
+    .checklist-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--bg-card);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .checklist-table th,
+    .checklist-table td {
+      padding: 10px 14px;
+      text-align: right;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 14px;
+    }
+
+    [data-lang="roman"] .checklist-table th,
+    [data-lang="roman"] .checklist-table td {
+      text-align: left;
+    }
+
+    .checklist-table th {
+      background: var(--bg-surface);
+      font-weight: 700;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-family: var(--font-latin);
+    }
+
+    .checklist-table tr:hover {
+      background: var(--bg-card-hover);
+    }
+
+    /* ==========================================================================
+       7. SCROLL SENTINEL & EMPTY STATE
+       ========================================================================== */
+    #scroll-sentinel {
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-family: var(--font-latin);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 80px 20px;
+      color: var(--text-muted);
+    }
+
+    .empty-state .icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+
+    /* ==========================================================================
+       8. OFF-CANVAS DRAWERS (TOPICS, BOOKMARKS, SETTINGS)
+       ========================================================================== */
+    .drawer-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .drawer-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .drawer-sheet {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      max-height: 85vh;
+      overflow-y: auto;
+      z-index: 1001;
+      transform: translateY(100%);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: var(--shadow-md);
+      padding: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .drawer-sheet {
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: auto;
+        width: 440px;
+        max-height: 100vh;
+        border-radius: 0;
+        border-left: 1px solid var(--border-subtle);
+        transform: translateX(100%);
+      }
+    }
+
+    .drawer-overlay.active .drawer-sheet {
+      transform: translateY(0);
+    }
+
+    @media (min-width: 768px) {
+      .drawer-overlay.active .drawer-sheet {
+        transform: translateX(0);
+      }
+    }
+
+    .drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .drawer-header h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .btn-close-drawer {
+      font-size: 20px;
+      color: var(--text-muted);
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-full);
+      background: var(--bg-card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* 16 Topics Grid in Drawer */
+    .topics-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .topic-card-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      color: var(--text-main);
+      text-align: right;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .topic-card-btn:hover,
+    .topic-card-btn.active {
+      background: var(--bg-card-hover);
+      border-color: var(--border-focus);
+      transform: translateX(-2px);
+    }
+
+    .topic-card-btn.active {
+      border-color: var(--primary);
+      background: var(--bg-accent-subtle);
+    }
+
+    .topic-icon {
+      font-size: 24px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-surface);
+      border-radius: var(--radius-sm);
+    }
+
+    .topic-info h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .topic-info span {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-family: var(--font-latin);
+      display: block;
+    }
+
+    /* Settings Controls in Drawer */
+    .settings-group {
+      margin-bottom: 20px;
+    }
+
+    .settings-group label {
+      display: block;
+      font-size: 13px;
+      color: var(--text-muted);
+      font-family: var(--font-latin);
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .theme-picker {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .theme-opt-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      color: var(--text-main);
+      font-size: 13px;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .theme-opt-btn.active {
+      border-color: var(--primary);
+      background: var(--bg-accent-subtle);
+      color: var(--primary);
+    }
+
+    .font-scaler-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      padding: 8px 16px;
+      border-radius: var(--radius-md);
+    }
+
+    .font-scaler-bar button {
+      padding: 6px 14px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-family: var(--font-latin);
+    }
+
+    /* ==========================================================================
+       9. UNIVERSAL MOBILE BOTTOM COMMAND DOCK (FITTS'S LAW)
+       ========================================================================== */
+    .mobile-bottom-dock {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 62px;
+      background: var(--dock-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border-subtle);
+      z-index: 950;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0 8px;
+      box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (min-width: 900px) {
+      .mobile-bottom-dock {
+        display: none !important;
+      }
+      body {
+        padding-bottom: 30px;
+      }
+    }
+
+    .dock-target-btn {
+      flex: 1;
+      height: 52px;
+      min-width: 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      color: var(--text-muted);
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+    }
+
+    .dock-target-btn .dock-icon {
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .dock-target-btn .dock-label {
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .dock-target-btn:active,
+    .dock-target-btn.active {
+      color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    /* Toast Notification */
+    .toast-pill {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--text-main);
+      color: var(--bg-body);
+      padding: 8px 18px;
+      border-radius: var(--radius-full);
+      font-size: 13px;
+      font-family: var(--font-latin);
+      font-weight: 600;
+      box-shadow: var(--shadow-md);
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .toast-pill.visible {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ========================================================================
+       TOP EXECUTIVE APP BAR
+       ======================================================================== -->
+  <header class="studio-header">
+    <div class="header-inner">
+      <div class="brand-group">
+        <div class="brand-icon">🏛️</div>
+        <div class="brand-text">
+          <h1>فتاویٰ رضویہ اسٹوڈیو</h1>
+          <span>Fatawa Razviya Next-Gen Studio • 5,753 Works</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <!-- Spotlight Search Hero Button -->
+        <button class="header-btn btn-search-hero" id="btnTopSearch" title="پورے ذخیرے میں تلاش کریں (Ctrl+K)">
+          <span>⚡ تلاش</span>
+          <kbd>Ctrl+K</kbd>
+        </button>
+
+        <!-- Topic Drawer Toggle (Desktop) -->
+        <button class="header-btn" id="btnTopTopics" title="موضوعاتی ابواب">
+          <span>📑 موضوعات</span>
+        </button>
+
+        <!-- Bookmarks Drawer Toggle (Desktop) -->
+        <button class="header-btn" id="btnTopBookmarks" title="محفوظ شدہ فتاویٰ">
+          <span>⭐ محفوظ</span>
+          <span class="pill-badge" id="bookmarksCountBadge">0</span>
+        </button>
+
+        <!-- Settings Drawer Toggle (Desktop) -->
+        <button class="header-btn" id="btnTopSettings" title="ترتیبات">
+          <span>⚙️</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       CONTROL DECK: 4-PART SELECTOR & DENSITY CONTROLLER
+       ======================================================================== -->
+  <section class="control-deck">
+    <div class="control-deck-inner">
+      <!-- 4-Tier Part Toggles -->
+      <div class="part-pills-group" role="tablist">
+        <button class="part-pill active" data-part="part1" role="tab" aria-selected="true">
+          <span>🟢 حصہ ۱ (مختصر)</span>
+          <span class="pill-badge">924</span>
+        </button>
+        <button class="part-pill" data-part="part2" role="tab" aria-selected="false">
+          <span>🟡 حصہ ۲ (متوسط)</span>
+          <span class="pill-badge">2,270</span>
+        </button>
+        <button class="part-pill" data-part="part3" role="tab" aria-selected="false">
+          <span>🔵 حصہ ۳ (تفصیلی)</span>
+          <span class="pill-badge">1,650</span>
+        </button>
+        <button class="part-pill" data-part="part4" role="tab" aria-selected="false">
+          <span>🟣 حصہ ۴ (رسائل و کتب)</span>
+          <span class="pill-badge">909</span>
+        </button>
+      </div>
+
+      <!-- Density Switcher (Detailed / Accordion / Checklist) -->
+      <div class="density-selector" title="لے آؤٹ موڈ تبدیل کریں">
+        <button class="density-btn active" data-density="detailed" title="تفصیلی کارڈز">
+          <span>📖 تفصیلی</span>
+        </button>
+        <button class="density-btn" data-density="accordion" title="مختصر خلاصہ کارڈز">
+          <span>📑 کارڈز</span>
+        </button>
+        <button class="density-btn" data-density="checklist" title="ہائی ڈینسٹی فہرست">
+          <span>📋 لسٹ</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sub-Tabs for Part 4 (Rasail vs Extended Fatwas) -->
+  <div class="part4-subtabs-bar" id="part4SubtabsBar">
+    <div class="part4-subtabs-inner">
+      <button class="subtab-btn active" id="btnSubtabRasail">
+        <span>📜 ۱۸۵ مستقل رسائل و کتب</span>
+      </button>
+      <button class="subtab-btn" id="btnSubtabExtended">
+        <span>📚 ۷۲۴ طویل شاہکار فتاویٰ</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Telemetry & Filter Bar -->
+  <div class="telemetry-bar">
+    <div class="active-filter-chips" id="activeFilterChips">
+      <!-- Injected dynamically -->
+    </div>
+    <div class="telemetry-stats" id="telemetryStats">
+      لوڈ ہو رہا ہے...
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MAIN CARDS VIEWPORT
+       ======================================================================== -->
+  <main class="studio-main">
+    <div id="cards-container">
+      <!-- Injected dynamically via progressive sentinel chunking -->
+    </div>
+
+    <!-- Invisible IntersectionObserver Sentinel -->
+    <div id="scroll-sentinel">
+      <div class="spinner" style="width:24px;height:24px;border-width:2px;display:none;" id="sentinelSpinner"></div>
+    </div>
+  </main>
+
+  <!-- ========================================================================
+       OFF-CANVAS DRAWERS
+       ======================================================================== -->
+  <!-- 1. Topics Drawer -->
+  <div class="drawer-overlay" id="topicsDrawer">
+    <div class="drawer-sheet">
+      <div class="drawer-header">
+        <h3>📑 موضوعاتی ابواب (۱۶ ابواب)</h3>
+        <button class="btn-close-drawer" id="btnCloseTopics">✕</button>
+      </div>
+      <div class="topics-grid" id="topicsDrawerGrid">
+        <!-- Injected dynamically from FATAWA_META -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Bookmarks Drawer -->
+  <div class="drawer-overlay" id="bookmarksDrawer">
+    <div class="drawer-sheet">
+      <div class="drawer-header">
+        <h3>⭐ محفوظ شدہ فتاویٰ (بک مارکس)</h3>
+        <button class="btn-close-drawer" id="btnCloseBookmarks">✕</button>
+      </div>
+      <div id="bookmarksListContainer">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Settings Drawer -->
+  <div class="drawer-overlay" id="settingsDrawer">
+    <div class="drawer-sheet">
+      <div class="drawer-header">
+        <h3>⚙️ اسٹوڈیو ترتیبات</h3>
+        <button class="btn-close-drawer" id="btnCloseSettings">✕</button>
+      </div>
+
+      <!-- Theme Selector -->
+      <div class="settings-group">
+        <label>🎨 تھیم منتخب کریں (4 Sacred Themes):</label>
+        <div class="theme-picker">
+          <button class="theme-opt-btn active" data-theme-val="emerald">🟢 Royal Emerald</button>
+          <button class="theme-opt-btn" data-theme-val="dark">🌙 AMOLED Dark</button>
+          <button class="theme-opt-btn" data-theme-val="sepia">📜 Warm Sepia</button>
+          <button class="theme-opt-btn" data-theme-val="light">☀️ Crisp Light</button>
+        </div>
+      </div>
+
+      <!-- Language Selector -->
+      <div class="settings-group">
+        <label>🌐 زبان و رسم الخط (Language & Transliteration):</label>
+        <div class="theme-picker">
+          <button class="theme-opt-btn active" id="btnLangUr">اردو نستعلیق</button>
+          <button class="theme-opt-btn" id="btnLangRo">Roman Urdu</button>
+          <button class="theme-opt-btn" id="btnLangBoth">دونوں (Both)</button>
+        </div>
+      </div>
+
+      <!-- Font Size Scaler -->
+      <div class="settings-group">
+        <label>🔠 خط کا سائز (Typography Scaler):</label>
+        <div class="font-scaler-bar">
+          <button id="btnFontDec">A -</button>
+          <span id="fontSizeDisplay" style="font-family:var(--font-latin);font-weight:600;">18 px</span>
+          <button id="btnFontInc">A +</button>
+        </div>
+      </div>
+
+      <!-- Sound FX Toggle -->
+      <div class="settings-group">
+        <label>🔊 آواز کے تاثرات (Tactile Sound FX):</label>
+        <button class="theme-opt-btn active" id="btnToggleSound" style="width:100%;">
+          <span>🔊 Sound Effects: Active</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       UNIVERSAL MOBILE BOTTOM COMMAND DOCK (FITTS'S LAW)
+       ======================================================================== -->
+  <nav class="mobile-bottom-dock" aria-label="Mobile Navigation">
+    <button class="dock-target-btn active" id="dockBtnParts" title="حصص منتخب کریں">
+      <span class="dock-icon">📚</span>
+      <span class="dock-label">حصص</span>
+    </button>
+    <button class="dock-target-btn" id="dockBtnSearch" title="تلاش">
+      <span class="dock-icon">⚡</span>
+      <span class="dock-label">تلاش</span>
+    </button>
+    <button class="dock-target-btn" id="dockBtnTopics" title="موضوعات">
+      <span class="dock-icon">📑</span>
+      <span class="dock-label">موضوعات</span>
+    </button>
+    <button class="dock-target-btn" id="dockBtnBookmarks" title="بک مارکس">
+      <span class="dock-icon">⭐</span>
+      <span class="dock-label">محفوظ</span>
+    </button>
+    <button class="dock-target-btn" id="dockBtnSettings" title="ترتیبات">
+      <span class="dock-icon">⚙️</span>
+      <span class="dock-label">ترتیبات</span>
+    </button>
+  </nav>
+
+  <!-- Toast Notification Pill -->
+  <div class="toast-pill" id="toastPill">کاپی ہو گیا!</div>
+
+  <!-- ========================================================================
+       SCRIPTS: METADATA & CORE STUDIO LOGIC
+       ======================================================================== -->
+  <script src="global_search_index.js"></script>
+  <script src="ai_search.js"></script>
+  <script src="data/fatawa_meta.js"></script>
+
+  <script>
+    /**
+     * ============================================================================
+     * FATAWA RAZVIYA UNIFIED PWA STUDIO ENGINE
+     * ============================================================================
+     * High-performance, fault-tolerant, zero-CORS modular application engine.
+     * Complies with Antigravity Workspace Directives 5 & 7.
+     * ============================================================================
+     */
+    'use strict';
+
+    // --- 1. PROCEDURAL SOUND SYNTHESIZER (Directive 7 Zero-Music Compliant) ---
+    const AudioFX = {
+      ctx: null,
+      enabled: true,
+      init() {
+        if (!this.ctx && typeof window !== 'undefined') {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) {
+            try { this.ctx = new AudioContext(); } catch (e) { this.ctx = null; }
+          }
+        }
+      },
+      resume() {
+        if (this.ctx && this.ctx.state === 'suspended') {
+          this.ctx.resume().catch(() => {});
+        }
+      },
+      // Subtle tactile button click (20ms)
+      click() {
+        if (!this.enabled) return;
+        try {
+          this.init();
+          if (!this.ctx) return;
+          this.resume();
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(650, this.ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(180, this.ctx.currentTime + 0.025);
+          gain.gain.setValueAtTime(0.04, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.025);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.025);
+        } catch (e) {}
+      },
+      // Gentle bookmark chime (100ms)
+      chime() {
+        if (!this.enabled) return;
+        try {
+          this.init();
+          if (!this.ctx) return;
+          this.resume();
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(880, this.ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(1320, this.ctx.currentTime + 0.12);
+          gain.gain.setValueAtTime(0.05, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.12);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.12);
+        } catch (e) {}
+      }
+    };
+
+    // --- 2. GLOBAL STUDIO STATE ---
+    const StudioState = {
+      currentPart: 'part1', // 'part1', 'part2', 'part3', 'part4_rasail', 'part4_ext'
+      viewMode: 'detailed', // 'detailed', 'accordion', 'checklist'
+      langMode: 'ur',       // 'ur', 'roman', 'both'
+      theme: 'emerald',     // 'emerald', 'dark', 'sepia', 'light'
+      fontSize: 18,
+      selectedTopicId: 0,   // 0 = all
+      selectedVolume: 0,    // 0 = all
+      renderedCount: 0,
+      pageSize: 15,
+      activeDataset: [],
+      bookmarks: [],
+      dataCache: {
+        part1: null,
+        part2: null,
+        part3: null,
+        part4_ext: null,
+        rasail: null
+      }
+    };
+
+    // --- 3. DYNAMIC ON-DEMAND DATA BUNDLE LOADER ---
+    function loadPartBundle(partKey, callback) {
+      if (StudioState.dataCache[partKey]) {
+        callback(StudioState.dataCache[partKey]);
+        return;
+      }
+
+      showLoadingSpinner();
+
+      const fileMap = {
+        'part1': 'data/fatawa_part1.js',
+        'part2': 'data/fatawa_part2.js',
+        'part3': 'data/fatawa_part3.js',
+        'part4_ext': 'data/fatawa_part4.js',
+        'part4_rasail': 'data/fatawa_rasail.js'
+      };
+
+      const varMap = {
+        'part1': 'FATAWA_PART1',
+        'part2': 'FATAWA_PART2',
+        'part3': 'FATAWA_PART3',
+        'part4_ext': 'FATAWA_PART4',
+        'part4_rasail': 'FATAWA_RASAIL'
+      };
+
+      const script = document.createElement('script');
+      script.src = fileMap[partKey];
+      script.onload = () => {
+        StudioState.dataCache[partKey] = window[varMap[partKey]];
+        hideLoadingSpinner();
+        callback(StudioState.dataCache[partKey]);
+      };
+      script.onerror = () => {
+        hideLoadingSpinner();
+        alert('ڈیٹا لوڈ کرنے میں دشواری پیش آئی: ' + fileMap[partKey]);
+      };
+      document.head.appendChild(script);
+    }
+
+    function showLoadingSpinner() {
+      const container = document.getElementById('cards-container');
+      if (container) {
+        container.innerHTML = `
+          <div class="loading-state">
+            <div class="spinner"></div>
+            <p>حصہ کا مستند ڈیٹا لوڈ کیا جا رہا ہے...</p>
+          </div>
+        `;
+      }
+    }
+
+    function hideLoadingSpinner() {
+      const sp = document.querySelector('.loading-state');
+      if (sp) sp.remove();
+    }
+
+    // --- 4. DATA FILTERING & DATASET COMPILATION ---
+    function compileActiveDataset(rawItems) {
+      if (!Array.isArray(rawItems)) return [];
+
+      return rawItems.filter(item => {
+        // Topic filter
+        if (StudioState.selectedTopicId > 0) {
+          const itemTopicId = item.topic_id || item.chapter_id || (item.topic ? item.topic.id : 0);
+          if (itemTopicId && itemTopicId !== StudioState.selectedTopicId) {
+            return false;
+          }
+        }
+        // Volume filter
+        if (StudioState.selectedVolume > 0) {
+          const itemVol = parseInt(item.volume_num || item.volume || 0, 10);
+          if (itemVol && itemVol !== StudioState.selectedVolume) {
+            return false;
+          }
+        }
+        return true;
+      });
+    }
+
+    // --- 5. PROGRESSIVE SENTINEL VIRTUALIZER (60 FPS Locked) ---
+    let sentinelObserver = null;
+
+    function setupSentinel() {
+      if (sentinelObserver) {
+        sentinelObserver.disconnect();
+      }
+
+      const sentinel = document.getElementById('scroll-sentinel');
+      if (!sentinel) return;
+
+      sentinelObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            renderNextBatch();
+          }
+        });
+      }, { rootMargin: '450px' });
+
+      sentinelObserver.observe(sentinel);
+    }
+
+    function renderActivePart() {
+      const partKey = StudioState.currentPart;
+      loadPartBundle(partKey, (items) => {
+        StudioState.activeDataset = compileActiveDataset(items);
+        StudioState.renderedCount = 0;
+
+        const container = document.getElementById('cards-container');
+        if (container) container.innerHTML = '';
+
+        if (StudioState.activeDataset.length === 0) {
+          container.innerHTML = `
+            <div class="empty-state">
+              <div class="icon">🔍</div>
+              <h3>کوئی فتویٰ نہیں ملا</h3>
+              <p>منتخب کردہ فلٹرز کے ساتھ کوئی مواد دستیاب نہیں۔ براہ کرم فلٹر ختم کریں۔</p>
+            </div>
+          `;
+          updateTelemetryBar();
+          return;
+        }
+
+        renderNextBatch();
+        setupSentinel();
+        updateTelemetryBar();
+      });
+    }
+
+    function renderNextBatch() {
+      if (StudioState.renderedCount >= StudioState.activeDataset.length) {
+        const sentinel = document.getElementById('scroll-sentinel');
+        if (sentinel) sentinel.style.display = 'none';
+        return;
+      }
+
+      const container = document.getElementById('cards-container');
+      const sentinel = document.getElementById('scroll-sentinel');
+      if (sentinel) sentinel.style.display = 'flex';
+
+      const nextItems = StudioState.activeDataset.slice(
+        StudioState.renderedCount,
+        StudioState.renderedCount + StudioState.pageSize
+      );
+
+      const isTableMode = (StudioState.viewMode === 'checklist');
+
+      if (isTableMode) {
+        let table = container.querySelector('.checklist-table');
+        if (!table) {
+          table = document.createElement('table');
+          table.className = 'checklist-table';
+          table.innerHTML = `
+            <thead>
+              <tr>
+                <th style="width:50px;">شمار</th>
+                <th style="width:70px;">جلد</th>
+                <th>عنوان / مسئلہ</th>
+                <th style="width:80px;">کارروائی</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          `;
+          container.appendChild(table);
+        }
+        const tbody = table.querySelector('tbody');
+        const frag = document.createDocumentFragment();
+        nextItems.forEach((item, idx) => {
+          frag.appendChild(createChecklistRow(item, StudioState.renderedCount + idx + 1));
+        });
+        tbody.appendChild(frag);
+      } else {
+        const frag = document.createDocumentFragment();
+        nextItems.forEach((item, idx) => {
+          if (StudioState.currentPart === 'part4_rasail') {
+            frag.appendChild(createRasailCard(item, StudioState.renderedCount + idx + 1));
+          } else {
+            frag.appendChild(createFatwaCard(item, StudioState.renderedCount + idx + 1, StudioState.viewMode));
+          }
+        });
+        container.appendChild(frag);
+      }
+
+      StudioState.renderedCount += nextItems.length;
+      updateTelemetryBar();
+    }
+
+    // --- 6. DOM CARD FACTORIES ---
+    function isBookmarked(key) {
+      return StudioState.bookmarks.includes(key);
+    }
+
+    function toggleBookmark(key) {
+      AudioFX.chime();
+      const idx = StudioState.bookmarks.indexOf(key);
+      if (idx > -1) {
+        StudioState.bookmarks.splice(idx, 1);
+        showToast('بک مارک ہٹا دیا گیا');
+      } else {
+        StudioState.bookmarks.push(key);
+        showToast('⭐ بک مارک میں محفوظ کر لیا گیا');
+      }
+      localStorage.setItem('fatawa_studio_bookmarks', JSON.stringify(StudioState.bookmarks));
+      updateBookmarksBadge();
+      updateStarButtons(key);
+    }
+
+    function updateStarButtons(key) {
+      document.querySelectorAll(`[data-star-target="${key}"]`).forEach(btn => {
+        if (isBookmarked(key)) {
+          btn.classList.add('starred');
+          btn.textContent = '★';
+        } else {
+          btn.classList.remove('starred');
+          btn.textContent = '☆';
+        }
+      });
+    }
+
+    // Card Factory for Standard Fatwas (Detailed & Accordion)
+    function createFatwaCard(item, seqNum, mode) {
+      const gid = item.global_id || item.id || seqNum;
+      const cardKey = `fatwa-${StudioState.currentPart}-${gid}`;
+      const isStarred = isBookmarked(cardKey);
+
+      const partTagClass = StudioState.currentPart === 'part1' ? 'p1' :
+                           StudioState.currentPart === 'part2' ? 'p2' :
+                           StudioState.currentPart === 'part3' ? 'p3' : 'p4';
+
+      const partTagName = StudioState.currentPart === 'part1' ? 'مختصر' :
+                          StudioState.currentPart === 'part2' ? 'متوسط' :
+                          StudioState.currentPart === 'part3' ? 'تفصیلی' : 'طویل';
+
+      // Clean Inquirer & Question
+      const inquirer = item.inquirer_extracted || item.inquirer_clean || item.inquirer || '';
+      const inquirerRo = item.inquirer_roman || '';
+      const questionUr = item.question_clean || item.question || '';
+      const questionRo = item.question_roman || '';
+      const answerUr = item.answer || '';
+      const answerRo = item.answer_roman || '';
+      const reference = item.reference || `فتاویٰ رضویہ، جلد ${item.volume || ''}، صفحہ ${item.page || ''}`;
+
+      if (mode === 'accordion') {
+        const accEl = document.createElement('div');
+        accEl.className = 'accordion-card';
+        accEl.id = `card-${cardKey}`;
+        accEl.innerHTML = `
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-left">
+              <span class="part-tag ${partTagClass}">${partTagName}</span>
+              <span class="serial-pill">#${seqNum}</span>
+              <span class="accordion-title">${escapeHtml(questionUr.substring(0, 90))}...</span>
+            </div>
+            <button class="btn-star-card ${isStarred ? 'starred' : ''}" data-star-target="${cardKey}" onclick="event.stopPropagation(); toggleBookmark('${cardKey}')">
+              ${isStarred ? '★' : '☆'}
+            </button>
+            <span class="accordion-chevron">▼</span>
+          </div>
+          <div class="accordion-body">
+            ${inquirer ? `<div class="inquirer-context-pill"><strong>سائل کا استفسار:</strong> ${escapeHtml(inquirer)}</div>` : ''}
+            <div class="qa-section">
+              <span class="qa-label">سوال:</span>
+              <div class="qa-text-ur">${formatParagraphs(questionUr)}</div>
+              ${StudioState.langMode !== 'ur' && questionRo ? `<div class="qa-text-ro">${escapeHtml(questionRo)}</div>` : ''}
+            </div>
+            <div class="verdict-box">
+              <div class="verdict-header">
+                <span>⚖️</span>
+                <span>الجواب بعون الملک الوھاب:</span>
+              </div>
+              <div class="qa-text-ur">${formatParagraphs(answerUr)}</div>
+              ${StudioState.langMode !== 'ur' && answerRo ? `<div class="qa-text-ro">${escapeHtml(answerRo)}</div>` : ''}
+            </div>
+            <div class="card-actions">
+              <button class="card-action-btn" onclick="copyCardText('${cardKey}')">📋 نقل کریں (Copy)</button>
+              <button class="card-action-btn btn-action-whatsapp" onclick="shareWhatsApp('${cardKey}')">💬 واٹس ایپ شیئر</button>
+              <span class="ref-pill">${escapeHtml(reference)}</span>
+            </div>
+          </div>
+        `;
+        return accEl;
+      }
+
+      // Detailed Luxury Mode
+      const cardEl = document.createElement('article');
+      cardEl.className = 'fatwa-card';
+      cardEl.id = `card-${cardKey}`;
+      cardEl.innerHTML = `
+        <div class="card-top-meta">
+          <div class="meta-pills-left">
+            <span class="part-tag ${partTagClass}">${partTagName}</span>
+            <span class="serial-pill">#${seqNum}</span>
+            <span class="ref-pill">${escapeHtml(reference)}</span>
+          </div>
+          <button class="btn-star-card ${isStarred ? 'starred' : ''}" data-star-target="${cardKey}" onclick="toggleBookmark('${cardKey}')" title="بک مارک کریں">
+            ${isStarred ? '★' : '☆'}
+          </button>
+        </div>
+
+        ${inquirer ? `<div class="inquirer-context-pill"><strong>سائل کا استفسار:</strong> ${escapeHtml(inquirer)}</div>` : ''}
+
+        <div class="qa-section">
+          <span class="qa-label">سوال:</span>
+          <div class="qa-text-ur">${formatParagraphs(questionUr)}</div>
+          ${StudioState.langMode !== 'ur' && questionRo ? `<div class="qa-text-ro">${escapeHtml(questionRo)}</div>` : ''}
+        </div>
+
+        <div class="verdict-box">
+          <div class="verdict-header">
+            <span>⚖️</span>
+            <span>الجواب بعون الملک الوھاب:</span>
+          </div>
+          <div class="qa-text-ur">${formatParagraphs(answerUr)}</div>
+          ${StudioState.langMode !== 'ur' && answerRo ? `<div class="qa-text-ro">${escapeHtml(answerRo)}</div>` : ''}
+        </div>
+
+        <div class="card-actions">
+          <button class="card-action-btn" onclick="copyCardText('${cardKey}')">📋 نقل کریں (Copy)</button>
+          <button class="card-action-btn btn-action-whatsapp" onclick="shareWhatsApp('${cardKey}')">💬 واٹس ایپ شیئر</button>
+        </div>
+      `;
+      return cardEl;
+    }
+
+    // Card Factory for 185 Monographs (Rasail)
+    function createRasailCard(resala, seqNum) {
+      const rid = resala.catalog_id || seqNum;
+      const cardKey = `resala-${rid}`;
+      const isStarred = isBookmarked(cardKey);
+
+      const cardEl = document.createElement('article');
+      cardEl.className = 'fatwa-card';
+      cardEl.id = `card-${cardKey}`;
+      cardEl.innerHTML = `
+        <div class="card-top-meta">
+          <div class="meta-pills-left">
+            <span class="part-tag p4">رسالہ مبارکہ</span>
+            <span class="serial-pill">#${seqNum}</span>
+            <span class="ref-pill">${escapeHtml(resala.reference || '')}</span>
+          </div>
+          <button class="btn-star-card ${isStarred ? 'starred' : ''}" data-star-target="${cardKey}" onclick="toggleBookmark('${cardKey}')" title="بک مارک کریں">
+            ${isStarred ? '★' : '☆'}
+          </button>
+        </div>
+
+        <h3 style="font-size:20px;font-weight:700;color:var(--text-main);margin-bottom:8px;">
+          ${escapeHtml(resala.title_ur || '')}
+        </h3>
+
+        ${resala.title_roman ? `<div style="font-family:var(--font-latin);font-size:13px;color:var(--text-muted);margin-bottom:12px;direction:ltr;text-align:left;">${escapeHtml(resala.title_roman)}</div>` : ''}
+
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;">
+          <span class="topic-pill">📖 ${escapeHtml(resala.page_span_ur || '')}</span>
+          <span class="topic-pill">📑 ${resala.sections_count || 0} ابواب و فصول</span>
+          <span class="topic-pill">🔤 تقریباً ${resala.estimated_words ? resala.estimated_words.toLocaleString() : 0} الفاظ</span>
+        </div>
+
+        <div class="card-actions">
+          <button class="card-action-btn" onclick="copyCardText('${cardKey}')">📋 معلومات کاپی کریں</button>
+          <button class="card-action-btn btn-action-whatsapp" onclick="shareWhatsApp('${cardKey}')">💬 واٹس ایپ شیئر</button>
+        </div>
+      `;
+      return cardEl;
+    }
+
+    // Checklist Row Factory
+    function createChecklistRow(item, seqNum) {
+      const gid = item.global_id || item.catalog_id || seqNum;
+      const cardKey = `${StudioState.currentPart}-${gid}`;
+      const title = item.question_clean || item.question || item.title_ur || '';
+      const vol = item.volume || item.volume_num || '';
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td style="font-family:var(--font-latin);font-weight:600;">#${seqNum}</td>
+        <td>جلد ${escapeHtml(String(vol))}</td>
+        <td>${escapeHtml(title.substring(0, 80))}...</td>
+        <td>
+          <button class="card-action-btn" style="padding:4px 8px;min-height:28px;" onclick="viewCardModal('${cardKey}')">معائنہ 👁️</button>
+        </td>
+      `;
+      return tr;
+    }
+
+    function toggleAccordion(header) {
+      AudioFX.click();
+      const parent = header.closest('.accordion-card');
+      if (parent) parent.classList.toggle('open');
+    }
+
+    // --- 7. TELEMETRY & FILTERS UI ---
+    function updateTelemetryBar() {
+      const el = document.getElementById('telemetryStats');
+      if (el) {
+        const total = StudioState.activeDataset.length;
+        const current = Math.min(StudioState.renderedCount, total);
+        el.textContent = `نمائش: ${current.toLocaleString()} از ${total.toLocaleString()} (${getPartTitle(StudioState.currentPart)})`;
+      }
+
+      // Filter Chips
+      const chipsEl = document.getElementById('activeFilterChips');
+      if (chipsEl) {
+        let html = '';
+        if (StudioState.selectedTopicId > 0 && window.FATAWA_META && window.FATAWA_META.chapters) {
+          const chap = window.FATAWA_META.chapters.find(c => c.id === StudioState.selectedTopicId);
+          if (chap) {
+            html += `
+              <span class="filter-chip">
+                <span>باب: ${chap.title_ur}</span>
+                <span class="chip-remove" onclick="removeTopicFilter()">✕</span>
+              </span>
+            `;
+          }
+        }
+        chipsEl.innerHTML = html;
+      }
+    }
+
+    function removeTopicFilter() {
+      AudioFX.click();
+      StudioState.selectedTopicId = 0;
+      renderActivePart();
+    }
+
+    function getPartTitle(p) {
+      switch(p) {
+        case 'part1': return 'حصہ ۱ مختصر فتاویٰ';
+        case 'part2': return 'حصہ ۲ متوسط فتاویٰ';
+        case 'part3': return 'حصہ ۳ تفصیلی فتاویٰ';
+        case 'part4_ext': return 'حصہ ۴ طویل فتاویٰ';
+        case 'part4_rasail': return 'حصہ ۴ رسائل و کتب';
+        default: return 'فتاویٰ رضویہ';
+      }
+    }
+
+    // --- 8. WHATSAPP & COPY ENGINE ---
+    function shareWhatsApp(cardKey) {
+      AudioFX.click();
+      const card = document.getElementById(`card-${cardKey}`);
+      if (!card) return;
+
+      const title = card.querySelector('h3, .qa-text-ur, .accordion-title');
+      const text = title ? title.innerText.substring(0, 150) : 'فتاویٰ رضویہ شریف';
+      const ref = card.querySelector('.ref-pill');
+      const refText = ref ? ref.innerText : '';
+      const url = window.location.origin + window.location.pathname + `#${cardKey}`;
+
+      const msg = `*فتاویٰ رضویہ شریف*
+
+${text}...
+
+📖 *حوالہ:* ${refText}
+🔗 *آن لائن پڑھیں:* ${url}`;
+      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    function copyCardText(cardKey) {
+      AudioFX.click();
+      const card = document.getElementById(`card-${cardKey}`);
+      if (!card) return;
+
+      const q = card.querySelector('.qa-text-ur');
+      const v = card.querySelector('.verdict-box .qa-text-ur');
+      const ref = card.querySelector('.ref-pill');
+
+      let str = 'فتاویٰ رضویہ شریف\n';
+      if (ref) str += `حوالہ: ${ref.innerText}\n\n`;
+      if (q) str += `سوال: ${q.innerText}\n\n`;
+      if (v) str += `الجواب: ${v.innerText}\n`;
+
+      navigator.clipboard.writeText(str).then(() => {
+        showToast('متن کامیابی سے کاپی ہو گیا!');
+      }).catch(() => {
+        showToast('کاپی کرنے میں معذرت');
+      });
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toastPill');
+      if (t) {
+        t.textContent = msg;
+        t.classList.add('visible');
+        setTimeout(() => t.classList.remove('visible'), 2400);
+      }
+    }
+
+    // --- 9. TOPICS DRAWER INJECTION ---
+    function populateTopicsDrawer() {
+      const grid = document.getElementById('topicsDrawerGrid');
+      if (!grid || !window.FATAWA_META || !window.FATAWA_META.chapters) return;
+
+      grid.innerHTML = `
+        <button class="topic-card-btn ${StudioState.selectedTopicId === 0 ? 'active' : ''}" onclick="selectTopic(0)">
+          <div class="topic-icon">📚</div>
+          <div class="topic-info">
+            <h4>تمام ابواب (All Topics)</h4>
+            <span>پورے انسائیکلوپیڈیا کے تمام فتاویٰ دکھائیں</span>
+          </div>
+        </button>
+      ` + window.FATAWA_META.chapters.map(c => `
+        <button class="topic-card-btn ${StudioState.selectedTopicId === c.id ? 'active' : ''}" onclick="selectTopic(${c.id})">
+          <div class="topic-icon">${c.icon || '📑'}</div>
+          <div class="topic-info">
+            <h4>${c.title_ur}</h4>
+            <span>${c.title_ro || c.title_en || ''}</span>
+          </div>
+        </button>
+      `).join('');
+    }
+
+    function selectTopic(id) {
+      AudioFX.click();
+      StudioState.selectedTopicId = id;
+      closeDrawers();
+      renderActivePart();
+    }
+
+    function openDrawer(id) {
+      AudioFX.click();
+      closeDrawers();
+      const d = document.getElementById(id);
+      if (d) d.classList.add('active');
+    }
+
+    function closeDrawers() {
+      document.querySelectorAll('.drawer-overlay').forEach(d => d.classList.remove('active'));
+    }
+
+    // --- 10. BOOKMARKS LOGIC ---
+    function updateBookmarksBadge() {
+      const b = document.getElementById('bookmarksCountBadge');
+      if (b) b.textContent = StudioState.bookmarks.length;
+    }
+
+    function populateBookmarksDrawer() {
+      const container = document.getElementById('bookmarksListContainer');
+      if (!container) return;
+
+      if (StudioState.bookmarks.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div class="icon">⭐</div>
+            <h4>کوئی محفوظ شدہ فتویٰ نہیں</h4>
+            <p>کسی بھی فتوے کے کارڈ پر ستارہ (★) دبا کر اسے یہاں محفوظ کریں۔</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = `
+        <div style="display:flex;justify-content:space-between;margin-bottom:12px;">
+          <span>کل محفوظ شدہ: <strong>${StudioState.bookmarks.length}</strong></span>
+          <button style="color:#ef4444;font-size:12px;" onclick="clearAllBookmarks()">سب مٹائیں</button>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          ${StudioState.bookmarks.map(key => `
+            <div style="display:flex;align-items:center;justify-content:space-between;background:var(--bg-card);padding:10px 14px;border-radius:var(--radius-sm);border:1px solid var(--border-subtle);">
+              <span style="font-family:var(--font-latin);font-weight:600;">${key}</span>
+              <button class="card-action-btn" style="padding:4px 8px;min-height:28px;" onclick="jumpToBookmark('${key}')">کھولیں ↗</button>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function clearAllBookmarks() {
+      if (confirm('کیا آپ تمام محفوظ شدہ بک مارکس حذف کرنا چاہتے ہیں؟')) {
+        StudioState.bookmarks = [];
+        localStorage.removeItem('fatawa_studio_bookmarks');
+        updateBookmarksBadge();
+        populateBookmarksDrawer();
+        renderActivePart();
+      }
+    }
+
+    function jumpToBookmark(key) {
+      closeDrawers();
+      if (key.startsWith('resala-')) {
+        setPart('part4_rasail');
+      } else if (key.includes('part1')) {
+        setPart('part1');
+      } else if (key.includes('part2')) {
+        setPart('part2');
+      } else if (key.includes('part3')) {
+        setPart('part3');
+      } else if (key.includes('part4')) {
+        setPart('part4_ext');
+      }
+      setTimeout(() => {
+        const el = document.getElementById(`card-${key}`);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          el.classList.add('illuminated-card');
+          setTimeout(() => el.classList.remove('illuminated-card'), 3000);
+        }
+      }, 600);
+    }
+
+    function viewCardModal(cardKey) {
+      AudioFX.click();
+      const item = StudioState.activeDataset.find(it => {
+        const gid = it.global_id || it.catalog_id || it.id;
+        return `${StudioState.currentPart}-${gid}` === cardKey;
+      });
+      if (!item) return;
+
+      const cardEl = (StudioState.currentPart === 'part4_rasail') ?
+                     createRasailCard(item, 1) :
+                     createFatwaCard(item, 1, 'detailed');
+
+      const modalEl = document.createElement('div');
+      modalEl.className = 'drawer-overlay active';
+      modalEl.innerHTML = `
+        <div class="drawer-sheet" style="max-height:90vh;overflow-y:auto;">
+          <div class="drawer-header">
+            <h3>معائنہ فتویٰ</h3>
+            <button class="btn-close-drawer" id="btnCloseModal">✕</button>
+          </div>
+          <div id="modal-card-content"></div>
+        </div>
+      `;
+      modalEl.querySelector('#modal-card-content').appendChild(cardEl);
+      modalEl.querySelector('#btnCloseModal').addEventListener('click', () => modalEl.remove());
+      modalEl.addEventListener('click', (e) => {
+        if (e.target === modalEl) modalEl.remove();
+      });
+      document.body.appendChild(modalEl);
+    }
+
+    // --- 11. THEME & TYPOGRAPHY SYSTEM ---
+    function setTheme(t) {
+      StudioState.theme = t;
+      document.documentElement.setAttribute('data-theme', t);
+      localStorage.setItem('fatawa_studio_theme', t);
+      document.querySelectorAll('.theme-opt-btn[data-theme-val]').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-theme-val') === t);
+      });
+    }
+
+    function setLangMode(m) {
+      StudioState.langMode = m;
+      document.documentElement.setAttribute('data-lang', m);
+      localStorage.setItem('fatawa_studio_lang', m);
+      renderActivePart();
+    }
+
+    function setDensity(d) {
+      StudioState.viewMode = d;
+      document.querySelectorAll('.density-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-density') === d);
+      });
+      localStorage.setItem('fatawa_studio_density', d);
+      renderActivePart();
+    }
+
+    function setPart(p) {
+      AudioFX.click();
+      StudioState.currentPart = p;
+
+      // Update Top Pills
+      document.querySelectorAll('.part-pill').forEach(btn => {
+        const isPart = (btn.getAttribute('data-part') === p) ||
+                       (btn.getAttribute('data-part') === 'part4' && (p === 'part4_rasail' || p === 'part4_ext'));
+        btn.classList.toggle('active', isPart);
+        btn.setAttribute('aria-selected', isPart ? 'true' : 'false');
+      });
+
+      // Show/Hide Part 4 Subtabs
+      const subtabs = document.getElementById('part4SubtabsBar');
+      if (subtabs) {
+        subtabs.style.display = (p === 'part4_rasail' || p === 'part4_ext') ? 'block' : 'none';
+      }
+
+      renderActivePart();
+    }
+
+    // --- 12. SPOTLIGHT AI SEARCH ZERO-RELOAD INTERCEPTOR ---
+    function setupAISearchInterceptor() {
+      if (typeof AISearch !== 'undefined' && window.FATAWA_SEARCH_INDEX) {
+        AISearch.init({
+          autoCrawl: false,
+          data: window.FATAWA_SEARCH_INDEX,
+          categories: ['All', 'Part 1 (Short)', 'Part 2 (Medium)', 'Part 3 (Long)', 'Part 4 (Rasail & Kutub)'],
+          placeholder: 'پورے ۵،۷۵۳ فتاویٰ و رسائل میں تلاش کریں (طہارت، وضو، roza, nikah)...',
+          onSelect: function(item) {
+            handleSearchItemSelect(item);
+          }
+        });
+      }
+    }
+
+    function handleSearchItemSelect(item) {
+      // Determine part from item
+      let targetPart = 'part1';
+      if (item.category && item.category.includes('Part 2')) targetPart = 'part2';
+      else if (item.category && item.category.includes('Part 3')) targetPart = 'part3';
+      else if (item.category && item.category.includes('Part 4')) {
+        targetPart = (item.url && item.url.includes('#resala-')) ? 'part4_rasail' : 'part4_ext';
+      }
+
+      setPart(targetPart);
+
+      // Attempt to scroll to card after render
+      setTimeout(() => {
+        let cardId = null;
+        if (item.url && item.url.includes('#')) {
+          cardId = 'card-' + item.url.split('#')[1];
+        }
+        if (cardId) {
+          const el = document.getElementById(cardId);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            el.classList.add('illuminated-card');
+            setTimeout(() => el.classList.remove('illuminated-card'), 4000);
+          }
+        }
+      }, 500);
+    }
+
+    // --- 13. DEFENSIVE BOOTLOADER ISOLATION (Directive 5 Compliance) ---
+    function bootApp() {
+      // Module 1: Load Saved Preferences
+      try {
+        const savedTheme = localStorage.getItem('fatawa_studio_theme') || 'emerald';
+        setTheme(savedTheme);
+
+        const savedLang = localStorage.getItem('fatawa_studio_lang') || 'ur';
+        StudioState.langMode = savedLang;
+        document.documentElement.setAttribute('data-lang', savedLang);
+
+        const savedDensity = localStorage.getItem('fatawa_studio_density') || 'detailed';
+        StudioState.viewMode = savedDensity;
+        document.querySelectorAll('.density-btn').forEach(btn => {
+          btn.classList.toggle('active', btn.getAttribute('data-density') === savedDensity);
+        });
+
+        const savedBookmarks = localStorage.getItem('fatawa_studio_bookmarks');
+        if (savedBookmarks) {
+          StudioState.bookmarks = JSON.parse(savedBookmarks);
+          updateBookmarksBadge();
+        }
+      } catch (err) {
+        console.error('Module 1 Error:', err);
+      }
+
+      // Module 2: Event Listeners for Nav & Drawers
+      try {
+        // Part Toggles
+        document.querySelectorAll('.part-pill').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const part = btn.getAttribute('data-part');
+            setPart(part === 'part4' ? 'part4_rasail' : part);
+          });
+        });
+
+        // Part 4 Subtabs
+        const btnSubRasail = document.getElementById('btnSubtabRasail');
+        const btnSubExt = document.getElementById('btnSubtabExtended');
+        if (btnSubRasail) {
+          btnSubRasail.addEventListener('click', () => {
+            btnSubRasail.classList.add('active');
+            if (btnSubExt) btnSubExt.classList.remove('active');
+            setPart('part4_rasail');
+          });
+        }
+        if (btnSubExt) {
+          btnSubExt.addEventListener('click', () => {
+            btnSubExt.classList.add('active');
+            if (btnSubRasail) btnSubRasail.classList.remove('active');
+            setPart('part4_ext');
+          });
+        }
+
+        // Density Switcher
+        document.querySelectorAll('.density-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            AudioFX.click();
+            setDensity(btn.getAttribute('data-density'));
+          });
+        });
+
+        // Search Triggers
+        const btnSearch = document.getElementById('btnTopSearch');
+        if (btnSearch) {
+          btnSearch.addEventListener('click', () => {
+            AudioFX.click();
+            if (typeof AISearch !== 'undefined') AISearch.open();
+          });
+        }
+
+        // Drawer Triggers
+        document.getElementById('btnTopTopics')?.addEventListener('click', () => openDrawer('topicsDrawer'));
+        document.getElementById('dockBtnTopics')?.addEventListener('click', () => openDrawer('topicsDrawer'));
+        document.getElementById('btnCloseTopics')?.addEventListener('click', closeDrawers);
+
+        document.getElementById('btnTopBookmarks')?.addEventListener('click', () => {
+          populateBookmarksDrawer();
+          openDrawer('bookmarksDrawer');
+        });
+        document.getElementById('dockBtnBookmarks')?.addEventListener('click', () => {
+          populateBookmarksDrawer();
+          openDrawer('bookmarksDrawer');
+        });
+        document.getElementById('btnCloseBookmarks')?.addEventListener('click', closeDrawers);
+
+        document.getElementById('btnTopSettings')?.addEventListener('click', () => openDrawer('settingsDrawer'));
+        document.getElementById('dockBtnSettings')?.addEventListener('click', () => openDrawer('settingsDrawer'));
+        document.getElementById('btnCloseSettings')?.addEventListener('click', closeDrawers);
+
+        // Mobile Dock Search
+        document.getElementById('dockBtnSearch')?.addEventListener('click', () => {
+          AudioFX.click();
+          if (typeof AISearch !== 'undefined') AISearch.open();
+        });
+
+        // Mobile Dock Parts Toggle
+        document.getElementById('dockBtnParts')?.addEventListener('click', () => {
+          AudioFX.click();
+          // Cycle through parts
+          const parts = ['part1', 'part2', 'part3', 'part4_rasail'];
+          const nextIdx = (parts.indexOf(StudioState.currentPart) + 1) % parts.length;
+          setPart(parts[nextIdx]);
+        });
+
+        // Overlay Click to close
+        document.querySelectorAll('.drawer-overlay').forEach(d => {
+          d.addEventListener('click', (e) => {
+            if (e.target === d) closeDrawers();
+          });
+        });
+
+        // Theme Pickers
+        document.querySelectorAll('.theme-opt-btn[data-theme-val]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            AudioFX.click();
+            setTheme(btn.getAttribute('data-theme-val'));
+          });
+        });
+
+        // Font Scaler
+        document.getElementById('btnFontInc')?.addEventListener('click', () => {
+          AudioFX.click();
+          StudioState.fontSize = Math.min(26, StudioState.fontSize + 2);
+          document.body.style.setProperty('--font-size-base', `${StudioState.fontSize}px`);
+          document.getElementById('fontSizeDisplay').textContent = `${StudioState.fontSize} px`;
+        });
+        document.getElementById('btnFontDec')?.addEventListener('click', () => {
+          AudioFX.click();
+          StudioState.fontSize = Math.max(14, StudioState.fontSize - 2);
+          document.body.style.setProperty('--font-size-base', `${StudioState.fontSize}px`);
+          document.getElementById('fontSizeDisplay').textContent = `${StudioState.fontSize} px`;
+        });
+
+        // Language Buttons
+        document.getElementById('btnLangUr')?.addEventListener('click', () => { AudioFX.click(); setLangMode('ur'); });
+        document.getElementById('btnLangRo')?.addEventListener('click', () => { AudioFX.click(); setLangMode('roman'); });
+        document.getElementById('btnLangBoth')?.addEventListener('click', () => { AudioFX.click(); setLangMode('both'); });
+
+        // Sound Toggle
+        const btnSnd = document.getElementById('btnToggleSound');
+        if (btnSnd) {
+          btnSnd.addEventListener('click', () => {
+            AudioFX.enabled = !AudioFX.enabled;
+            AudioFX.click();
+            btnSnd.classList.toggle('active', AudioFX.enabled);
+            btnSnd.innerHTML = `<span>🔊 Sound Effects: ${AudioFX.enabled ? 'Active' : 'Muted'}</span>`;
+          });
+        }
+      } catch (err) {
+        console.error('Module 2 Error:', err);
+      }
+
+      // Module 3: Initialize Topics Drawer & AI Search
+      try {
+        populateTopicsDrawer();
+        setupAISearchInterceptor();
+      } catch (err) {
+        console.error('Module 3 Error:', err);
+      }
+
+      // Module 4: Initial Render
+      try {
+        renderActivePart();
+      } catch (err) {
+        console.error('Module 4 Error:', err);
+      }
+
+      // Module 5: URL Hash Routing & Deep Linking
+      try {
+        const hash = window.location.hash;
+        if (hash) {
+          if (hash.includes('part1')) setPart('part1');
+          else if (hash.includes('part2')) setPart('part2');
+          else if (hash.includes('part3')) setPart('part3');
+          else if (hash.includes('part4') || hash.includes('resala')) setPart('part4_rasail');
+          
+          if (hash.includes('fatwa') || hash.includes('resala')) {
+            setTimeout(() => {
+              const targetId = 'card-' + hash.replace('#', '');
+              const el = document.getElementById(targetId);
+              if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                el.classList.add('illuminated-card');
+                setTimeout(() => el.classList.remove('illuminated-card'), 3500);
+              }
+            }, 800);
+          }
+        }
+      } catch (err) {
+        console.error('Module 5 Error:', err);
+      }
+
+      // Module 6: PWA Service Worker Registration
+      try {
+        if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
+          navigator.serviceWorker.register('sw.js').catch(() => {});
+        }
+      } catch (err) {
+        console.error('Module 6 Error:', err);
+      }
+    }
+
+    // Helper Functions
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function formatParagraphs(text) {
+      if (!text) return '';
+      return escapeHtml(text).split('\n').filter(p => p.trim()).map(p => `<p style="margin-bottom:6px;">${p}</p>`).join('');
+    }
+
+    // Start on DOM ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', bootApp);
+    } else {
+      bootApp();
+    }
+  </script>
+</body>
+</html>

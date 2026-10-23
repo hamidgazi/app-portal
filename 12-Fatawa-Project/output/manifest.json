@@ -1,0 +1,12 @@
+{
+  "name": "فتاویٰ رضویہ اسٹوڈیو - Fatawa Razviya Studio",
+  "short_name": "فتاویٰ رضویہ",
+  "description": "امام احمد رضا خان قادری کے ۵،۷۵۳ فتاویٰ و ۱۸۵ رسائل کا مکمل ڈیجیٹل اسٹوڈیو",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#041410",
+  "theme_color": "#041410",
+  "categories": ["books", "reference", "education"]
+}
