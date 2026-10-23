@@ -657,8 +657,391 @@ body {
 }
 
 /* ==========================================================================
-   Full Kalam Modal & Slide-Over Drawer
+   Full Naat Search & Reciter-Centric Reader Studio
    ========================================================================== */
+
+/* Mode Toggle Bar (Shers vs Kalams) */
+.mode-toggle-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 5px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border-subtle);
+    max-width: 480px;
+}
+
+[data-theme="light"] .mode-toggle-bar {
+    background: #eef4f0;
+    border-color: #d0e0d6;
+}
+
+.mode-btn {
+    flex: 1;
+    min-height: 44px;
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.25s ease;
+    touch-action: manipulation;
+}
+
+.mode-btn:hover {
+    color: var(--text-primary);
+}
+
+.mode-btn.active {
+    background: var(--accent-gold);
+    color: #06110a;
+    font-weight: 700;
+    border-color: var(--accent-gold);
+    box-shadow: 0 4px 14px rgba(212, 175, 55, 0.35);
+}
+
+.mode-count {
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: var(--radius-pill);
+    background: rgba(0, 0, 0, 0.25);
+    color: inherit;
+    font-weight: 600;
+}
+
+.mode-btn.active .mode-count {
+    background: rgba(0, 0, 0, 0.2);
+    color: #06110a;
+    font-weight: 800;
+}
+
+/* Kalam Result Cards */
+.kalam-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 20px 22px;
+    position: relative;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.25s ease;
+    border-left: 5px solid var(--accent-gold);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.kalam-card:hover {
+    border-color: var(--border-gold);
+    background: var(--bg-card-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.kalam-card[data-book="hadaiq"] { border-left-color: var(--color-hadaiq); }
+.kalam-card[data-book="saaman"] { border-left-color: var(--color-saaman); }
+.kalam-card[data-book="safeena"] { border-left-color: var(--color-safeena); }
+.kalam-card[data-book="zauq"] { border-left-color: var(--color-zauq); }
+
+.kalam-title-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.kalam-title-text {
+    font-size: 1.12rem;
+    font-weight: 700;
+    color: var(--text-gold);
+    line-height: 1.35;
+}
+
+.kalam-badge-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+}
+
+.kalam-verse-count-badge {
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--accent-emerald);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    padding: 3px 8px;
+    border-radius: var(--radius-pill);
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+
+.kalam-matla-box {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    border-left: 3px solid var(--accent-gold);
+}
+
+[data-theme="light"] .kalam-matla-box {
+    background: #f4f8f5;
+}
+
+.kalam-matla-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+}
+
+.kalam-matla-text {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+    font-style: italic;
+    white-space: pre-line;
+}
+
+.kalam-matla-eng {
+    font-size: 0.86rem;
+    color: var(--text-secondary);
+    margin-top: 6px;
+    line-height: 1.45;
+}
+
+.kalam-match-snippet {
+    background: rgba(212, 175, 55, 0.08);
+    border: 1px dashed var(--border-gold);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    margin-top: 2px;
+}
+
+.kalam-match-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent-gold);
+    margin-bottom: 4px;
+}
+
+.kalam-snippet-text {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--text-primary);
+    white-space: pre-line;
+}
+
+/* Reciter-Centric Reader Toolbar */
+.reader-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid var(--border-subtle);
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+[data-theme="light"] .reader-toolbar {
+    background: #eef4f0;
+}
+
+.toolbar-left, .toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.toolbar-pill-btn {
+    min-height: 38px;
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+    touch-action: manipulation;
+}
+
+.toolbar-pill-btn:hover {
+    border-color: var(--accent-gold);
+    color: var(--text-primary);
+}
+
+.toolbar-pill-btn.active {
+    background: rgba(16, 185, 129, 0.15);
+    border-color: var(--accent-emerald);
+    color: var(--accent-emerald);
+}
+
+.reader-zoom-group {
+    display: flex;
+    gap: 4px;
+}
+
+.toolbar-zoom-btn {
+    min-width: 38px;
+    min-height: 38px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-card);
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toolbar-zoom-btn:hover {
+    border-color: var(--accent-gold);
+}
+
+/* When translations are toggled OFF */
+.modal-body.hide-translations .sher-english {
+    display: none !important;
+}
+
+.modal-body.hide-translations .sher-roman {
+    font-size: 1.15em;
+    line-height: 1.85;
+    color: var(--text-gold);
+    text-align: center;
+}
+
+.modal-body.hide-translations .sher-content-main {
+    text-align: center;
+}
+
+/* Sequential Chapter Navigation */
+.reader-nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 4px 0 14px;
+    border-bottom: 1px solid var(--border-subtle);
+    margin-bottom: 8px;
+}
+
+.reader-nav-btn {
+    min-height: 42px;
+    padding: 8px 18px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+    touch-action: manipulation;
+}
+
+.reader-nav-btn:hover:not(:disabled) {
+    border-color: var(--accent-gold);
+    background: var(--bg-card-hover);
+    color: var(--text-gold);
+}
+
+.reader-nav-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.reader-position-badge {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.modal-action-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+/* Target verse pulse highlight animation */
+@keyframes pulseVerseGlow {
+    0% {
+        background-color: rgba(212, 175, 55, 0.4);
+        box-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
+    }
+    40% {
+        background-color: rgba(212, 175, 55, 0.25);
+        box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+    }
+    100% {
+        background-color: transparent;
+        box-shadow: none;
+    }
+}
+
+.target-verse-highlight {
+    border-radius: var(--radius-sm);
+    animation: pulseVerseGlow 4.5s ease-out forwards;
+}
+
+/* Recitation Deck Tabs */
+.deck-tabs {
+    display: flex;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 6px;
+    border-bottom: 1px solid var(--border-subtle);
+    gap: 8px;
+}
+
+[data-theme="light"] .deck-tabs {
+    background: #eef4f0;
+}
+
+.deck-tab-btn {
+    flex: 1;
+    min-height: 40px;
+    border-radius: var(--radius-sm);
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    touch-action: manipulation;
+}
+
+.deck-tab-btn.active {
+    background: var(--bg-card);
+    color: var(--accent-gold);
+    border-color: var(--border-gold);
+}
+
 .modal-backdrop {
     position: fixed;
     top: 0;

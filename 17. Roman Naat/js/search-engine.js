@@ -46,7 +46,8 @@ class RomanSearchEngine {
              .replace(/oo+/g, 'u')
              .replace(/ou+/g, 'u')
              .replace(/ai/g, 'ay')
-             .replace(/ie/g, 'i');
+             .replace(/ie/g, 'i')
+             .replace(/eh/g, 'ah'); // Rehmat <-> Rahmat, Mehfil <-> Mahfil
              
         // 4. Consonant harmonization for common Roman Urdu spellings
         s = s.replace(/kh/g, 'k')

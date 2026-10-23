@@ -6,7 +6,18 @@ An ultra-fast, beautifully designed, client-side digital portal and recitation s
 3. **Safeena-e-Bakhshish (سفینہء بخشش)** — Huzoor Tajush Shariah Mufti Akhtar Raza Khan
 4. **Zauq-e-Na'at (ذوق نعت)** — Ustaaz-e-Zaman Allama Hasan Raza Khan
 
-Users can search in English / Roman Urdu regardless of transliteration style, macrons (`ā`/`ī`/`ū`), or vowel variations (`aa`/`a`, `ee`/`i`, `oo`/`u`), instantly receiving matching couplets with one-tap WhatsApp sharing, full poem reader view with English translations, interactive book browser, and a personal recitation deck.
+Users can search in English / Roman Urdu regardless of transliteration style, macrons (`ā`/`ī`/`ū`), or vowel variations (`aa`/`a`, `ee`/`i`, `oo`/`u`). The studio features:
+- **Dual Search Modes**: Instant 1-tap switching between **Couplets (Shers)** and **Full Naats (Kalams)**.
+- **Deep Verse Matching**: Searching in Full Naat mode searches titles and internal verses, previewing the matched couplet snippet and jumping straight to it upon opening.
+- **Dedicated Reciter-Centric Reader**:
+  - English Translation toggle (`ON` / `OFF`) for clean, distraction-free Roman Urdu recitation at gatherings.
+  - Dynamic Font Zoom controls (`A-` / `A+`).
+  - Sequential chapter flipping (`⬅️ Previous Naat` and `Next Naat ➡️`) to read through books continuously.
+  - Automatic scrolling & gold pulse glow on matched verses.
+- **Smart WhatsApp Sharing**: Full-kalam formatted export with automatic clipboard copy fallback for long poems.
+- **URL Deep Linking**: Direct shareable links (`#kalam=...&verse=...`) for WhatsApp and social media.
+- **Personal Recitation Deck**: Bookmarking individual couplets or entire Naats for gatherings and mehfils.
+- **Interactive Book Browser**: Full Table of Contents across all 4 books.
 
 ---
 
