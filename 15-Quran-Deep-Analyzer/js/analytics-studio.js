@@ -248,93 +248,152 @@ class AnalyticsStudio {
     });
   }
 
-  // 2. OPPOSITE WORDS & RHETORICAL TIBAQ
+  // 2. OPPOSITE WORDS & RHETORICAL TIBAQ (HIGH-DENSITY RESPONSIVE GRID)
   renderOpposites() {
     const container = document.getElementById("opposites-display-container");
     if (!container) return;
 
-    let html = `<div style="display: flex; flex-direction: column; gap: 14px;">`;
+    this.activeOppositesFilter = this.activeOppositesFilter || "all";
 
-    this.opposites.forEach((op, idx) => {
+    const totalCount = this.opposites.length;
+    const balancedCount = this.opposites.filter(op => op.is_balanced).length;
+    const cosmicCount = this.opposites.filter(op => Boolean(op.ratio_label)).length;
+    const theologicalCount = this.opposites.filter(op => !op.is_balanced && !op.ratio_label).length;
+
+    let filtered = this.opposites;
+    if (this.activeOppositesFilter === "balanced") {
+      filtered = this.opposites.filter(op => op.is_balanced);
+    } else if (this.activeOppositesFilter === "cosmic") {
+      filtered = this.opposites.filter(op => Boolean(op.ratio_label));
+    } else if (this.activeOppositesFilter === "theological") {
+      filtered = this.opposites.filter(op => !op.is_balanced && !op.ratio_label);
+    }
+
+    let html = `
+      <div class="opposites-filter-ribbon">
+        <span style="font-size: 0.80rem; font-weight: 700; color: #fbbf24; margin-right: 4px;">فہرست زمرہ جات:</span>
+        <button class="opposites-filter-chip ${this.activeOppositesFilter === 'all' ? 'active' : ''}" onclick="window.AnalyticsStudio.setOppositesFilter('all')">
+          🌟 سبھی جوڑے (${totalCount})
+        </button>
+        <button class="opposites-filter-chip ${this.activeOppositesFilter === 'balanced' ? 'active' : ''}" onclick="window.AnalyticsStudio.setOppositesFilter('balanced')">
+          ⚖️ برابری 1:1 (${balancedCount})
+        </button>
+        <button class="opposites-filter-chip ${this.activeOppositesFilter === 'cosmic' ? 'active' : ''}" onclick="window.AnalyticsStudio.setOppositesFilter('cosmic')">
+          🪐 کائناتی و سائنسی (${cosmicCount})
+        </button>
+        <button class="opposites-filter-chip ${this.activeOppositesFilter === 'theological' ? 'active' : ''}" onclick="window.AnalyticsStudio.setOppositesFilter('theological')">
+          ⚡ بلاغتی و ایمانی (${theologicalCount})
+        </button>
+      </div>
+
+      <div class="opposites-grid">
+    `;
+
+    filtered.forEach((op) => {
+      const origIdx = this.opposites.indexOf(op);
+      let cardClass = "theological";
       let badgeHTML = '';
+
       if (op.is_balanced) {
-        badgeHTML = `<span class="count-pill" style="background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); font-weight: 700; padding: 3px 12px; border-radius: var(--radius-full);">✓ Exact 1:1 Parity (${op.term1_count} : ${op.term2_count})</span>`;
+        cardClass = "balanced";
+        badgeHTML = `<span class="count-pill" style="background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); font-weight: 700; padding: 2px 9px; font-size: 0.74rem; border-radius: var(--radius-full);">✓ 1:1 Parity</span>`;
       } else if (op.ratio_label) {
-        badgeHTML = `<span class="count-pill" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.35); font-weight: 700; padding: 3px 12px; border-radius: var(--radius-full);">${op.ratio_label}</span>`;
+        cardClass = "cosmic";
+        badgeHTML = `<span class="count-pill" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.35); font-weight: 700; padding: 2px 9px; font-size: 0.74rem; border-radius: var(--radius-full);">${op.ratio_label}</span>`;
       } else {
-        badgeHTML = `<span class="count-pill" style="background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.35); font-weight: 700; padding: 3px 12px; border-radius: var(--radius-full);">Ratio: ${op.ratio} (${op.term1_count} : ${op.term2_count})</span>`;
+        cardClass = "theological";
+        badgeHTML = `<span class="count-pill" style="background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.35); font-weight: 700; padding: 2px 9px; font-size: 0.74rem; border-radius: var(--radius-full);">Ratio: ${op.ratio}</span>`;
       }
 
       html += `
-        <div class="ayah-card" id="opposite-card-${idx}" style="margin-bottom: 0; padding: 14px 18px; border-radius: var(--radius-lg); transition: all 0.2s ease;">
-          <div class="ayah-card-meta" style="display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;">
-            <span class="ayah-badge" style="background: rgba(6, 182, 212, 0.15); color: #38bdf8; font-weight: 700;">
+        <article class="opposite-compact-card ${cardClass}" id="opposite-card-${origIdx}">
+          <div class="opposite-card-head">
+            <span class="ayah-badge" style="background: rgba(6, 182, 212, 0.15); color: #38bdf8; font-weight: 700; font-size: 0.78rem;">
               ${op.concept}
             </span>
             ${badgeHTML}
           </div>
 
-          <div class="semantic-terms-row" style="margin: 12px 0; background: rgba(0, 0, 0, 0.35); padding: 14px 18px; border-radius: var(--radius-md); border: 1px solid rgba(255, 255, 255, 0.06);">
-            <div class="semantic-term-box">
-              <span class="arabic-term" style="font-size: 1.8rem; color: #fef08a;">${op.term1_ar}</span>
-              <span class="stat-title" style="color: #cbd5e1;">${op.term1_en}</span>
-              <span class="term-count" style="font-size: 1.4rem; color: ${op.is_balanced ? '#34d399' : '#fbbf24'}; font-weight: 800;">${op.term1_count}</span>
+          <div class="opposite-terms-compact-row">
+            <div class="opposite-term-unit">
+              <span class="ar-term">${op.term1_ar}</span>
+              <span class="en-label">${op.term1_en}</span>
+              <span class="cnt-num" style="color: ${op.is_balanced ? '#34d399' : '#fbbf24'};">${op.term1_count}</span>
             </div>
-            <div style="font-size: 1.8rem; color: var(--text-dim); font-weight: 300; user-select: none;">⇄</div>
-            <div class="semantic-term-box">
-              <span class="arabic-term" style="font-size: 1.8rem; color: #fef08a;">${op.term2_ar}</span>
-              <span class="stat-title" style="color: #cbd5e1;">${op.term2_en}</span>
-              <span class="term-count" style="font-size: 1.4rem; color: ${op.is_balanced ? '#34d399' : '#fbbf24'}; font-weight: 800;">${op.term2_count}</span>
+            <div style="font-size: 1.3rem; color: var(--text-dim); font-weight: 300; user-select: none;">⇄</div>
+            <div class="opposite-term-unit">
+              <span class="ar-term">${op.term2_ar}</span>
+              <span class="en-label">${op.term2_en}</span>
+              <span class="cnt-num" style="color: ${op.is_balanced ? '#34d399' : '#fbbf24'};">${op.term2_count}</span>
             </div>
           </div>
 
-          <div style="font-size: 0.90rem; color: #e2e8f0; line-height: 1.6; border-left: 3px solid #10b981; padding-left: 12px; margin-bottom: 8px;">
-            <strong style="color: #10b981;">Linguistic & Rhetorical Insight:</strong> ${op.insight}
+          <div class="opposite-compact-insight">
+            ${op.insight}
           </div>
 
-          ${(op.tibaq_count > 0 && op.tibaq_sample && op.tibaq_sample.length > 0) ? `
-            <div style="border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 10px; margin-top: 10px; display: flex; flex-direction: column; gap: 8px;">
-              <div>
-                <button class="tibaq-toggle-btn card-action-btn" onclick="window.AnalyticsStudio.toggleTibaq(${idx}, this)" style="background: rgba(251, 191, 36, 0.1); border: 1px solid rgba(251, 191, 36, 0.3); color: #fbbf24; padding: 4px 12px; border-radius: var(--radius-full); font-size: 0.78rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; touch-action: manipulation;">
-                  <span>📖 شواہد آیاتِ طباق (${op.tibaq_count} Verses) ▼</span>
-                </button>
-              </div>
-              <div id="tibaq-drawer-${idx}" class="tibaq-verses-drawer" style="display: none; animation: fadeIn 0.25s ease-out; margin-top: 6px;">
-                <div style="display: flex; flex-direction: column; gap: 8px;">
-                  ${op.tibaq_sample.map(t => `
-                    <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.06); padding: 10px 14px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
-                      <div style="font-family: var(--font-arabic); font-size: 1.22rem; color: #f1f5f9; direction: rtl; text-align: right; flex: 1 1 240px; line-height: 1.9;">${t.arabic}</div>
-                      <button class="filter-btn studio-jump-btn" data-surah="${t.surah}" data-ayah="${t.ayah}" style="flex-shrink: 0;">Surah ${t.surah}:${t.ayah} ↗</button>
-                    </div>
-                  `).join("")}
-                </div>
-              </div>
-            </div>
-          ` : ''}
-        </div>
+          <div class="opposite-actions-row">
+            ${(op.tibaq_count > 0 && op.tibaq_sample && op.tibaq_sample.length > 0) ? `
+              <button class="card-action-btn" onclick="window.AnalyticsStudio.openTibaqModal(${origIdx})" style="background: rgba(251, 191, 36, 0.12); border: 1px solid rgba(251, 191, 36, 0.35); color: #fbbf24; padding: 3px 10px; font-size: 0.74rem; font-weight: 600; cursor: pointer; border-radius: var(--radius-full); display: inline-flex; align-items: center; gap: 4px;">
+                <span>📖 شواہد آیاتِ طباق (${op.tibaq_count}) ↗</span>
+              </button>
+            ` : `<span style="font-size: 0.74rem; color: #64748b;">(قرآنی الفاظ کا مفہومی تقابل)</span>`}
+            <span style="font-size: 0.72rem; color: #94a3b8; font-weight: 600;">#${origIdx + 1}</span>
+          </div>
+        </article>
       `;
     });
 
     html += `</div>`;
     container.innerHTML = html;
-    this.bindStudioJumpBtns(container);
   }
 
-  toggleTibaq(idx, btn) {
+  setOppositesFilter(filter) {
     if (window.AudioSFX) window.AudioSFX.playClick();
-    const drawer = document.getElementById(`tibaq-drawer-${idx}`);
-    if (!drawer) return;
-    const isHidden = (drawer.style.display === "none" || !drawer.style.display);
-    if (isHidden) {
-      drawer.style.display = "block";
-      btn.innerHTML = btn.innerHTML.replace("▼", "▲");
-      btn.style.background = "rgba(251, 191, 36, 0.22)";
-      btn.style.borderColor = "#fbbf24";
+    this.activeOppositesFilter = filter;
+    this.renderOpposites();
+  }
+
+  openTibaqModal(idx) {
+    if (window.AudioSFX) window.AudioSFX.playClick();
+    const op = this.opposites[idx];
+    if (!op) return;
+
+    const modal = document.getElementById("tibaq-modal");
+    const title = document.getElementById("tibaq-modal-title");
+    const meta = document.getElementById("tibaq-modal-meta");
+    const body = document.getElementById("tibaq-modal-body");
+    if (!modal || !title || !meta || !body) return;
+
+    title.innerHTML = `شواہد آیاتِ طباق: ${op.term1_ar} (${op.term1_count}) ⇄ ${op.term2_ar} (${op.term2_count})`;
+    meta.innerHTML = `<strong>${op.concept}:</strong> ${op.insight} • مجموعی آیاتِ طباق: ${op.tibaq_count || op.tibaq_sample.length}`;
+
+    if (op.tibaq_sample && op.tibaq_sample.length > 0) {
+      body.innerHTML = `
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          ${op.tibaq_sample.map(t => `
+            <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); padding: 12px 16px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;">
+              <div style="font-family: var(--font-arabic); font-size: 1.28rem; color: #fef08a; direction: rtl; text-align: right; flex: 1 1 280px; line-height: 2.0;">${t.arabic}</div>
+              <button class="filter-btn studio-jump-btn" data-surah="${t.surah}" data-ayah="${t.ayah}" onclick="window.AnalyticsStudio.closeTibaqModal()" style="flex-shrink: 0; background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.35); color: #38bdf8; font-weight: 700; padding: 5px 12px; border-radius: var(--radius-full); cursor: pointer;">Surah ${t.surah}:${t.ayah} ↗</button>
+            </div>
+          `).join("")}
+        </div>
+      `;
     } else {
-      drawer.style.display = "none";
-      btn.innerHTML = btn.innerHTML.replace("▲", "▼");
-      btn.style.background = "rgba(251, 191, 36, 0.1)";
-      btn.style.borderColor = "rgba(251, 191, 36, 0.3)";
+      body.innerHTML = `<div style="text-align: center; color: #94a3b8; padding: 20px;">کوئی نمونہ آیات دستیاب نہیں ہیں۔</div>`;
+    }
+
+    modal.classList.add("open");
+    modal.style.display = "flex";
+    this.bindStudioJumpBtns(body);
+  }
+
+  closeTibaqModal() {
+    if (window.AudioSFX) window.AudioSFX.playClick();
+    const modal = document.getElementById("tibaq-modal");
+    if (modal) {
+      modal.classList.remove("open");
+      modal.style.display = "none";
     }
   }
 

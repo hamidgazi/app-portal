@@ -746,7 +746,26 @@
     </div>
   </div>
 
-  <!-- Floating Always-Visible Return to Origin Pill -->
+    <!-- Dedicated Cyber-Glass Modal Sheet for Tibaq Verses -->
+  <div id="tibaq-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true" style="display: none;">
+    <div class="modal-card picker-modal-card" style="max-width: 720px; width: 100%;">
+      <div class="modal-header picker-modal-header" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid var(--border-subtle);">
+        <div class="picker-header-title-wrap" style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 1.5rem;">⚖️</span>
+          <div>
+            <h3 id="tibaq-modal-title" style="margin: 0; color: #fbbf24; font-size: 1.15rem; font-weight: 700;">شواہد آیاتِ طباق</h3>
+            <p id="tibaq-modal-meta" style="margin: 2px 0 0 0; font-size: 0.78rem; color: #94a3b8;"></p>
+          </div>
+        </div>
+        <button id="tibaq-modal-close" class="modal-close-btn" onclick="window.AnalyticsStudio.closeTibaqModal()" title="Close" style="background: rgba(255, 255, 255, 0.08); border: none; color: #f8fafc; width: 28px; height: 28px; border-radius: 50%; cursor: pointer;">✕</button>
+      </div>
+      <div id="tibaq-modal-body" class="picker-modal-body" style="padding: 16px; max-height: 65vh; overflow-y: auto;">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+<!-- Floating Always-Visible Return to Origin Pill -->
   <button id="floating-return-pill" class="floating-return-pill" style="display: none;" title="Return to where you left off (Alt+Left)">
     <span class="return-arrow" style="font-size: 1.15rem;">↩</span>
     <span class="floating-return-prefix" style="font-size: 0.8rem; text-transform: uppercase; opacity: 0.85;">Back:</span>
