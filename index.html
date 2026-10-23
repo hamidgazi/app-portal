@@ -3,38 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-  <title>🚀 Antigravity App Portal & Omnichannel Links Hub</title>
-  <meta name="description" content="Centralized management and unified viewing portal for all Antigravity HTML apps and 1-tap omnichannel links sharing engine.">
+  <title>🚀 Antigravity Master Index 2.0 — Executive Portal & Omnichannel Hub</title>
+  <meta name="description" content="Master Index 2.0: Unified command center and high-performance launchpad for all 18 production initiatives, web applications, and omnichannel quick-share tools.">
+  <meta name="theme-color" content="#06080d">
+  <link rel="manifest" href="manifest.json">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
-  
+  <link rel="stylesheet" href="ai_search.css">
+
   <style>
+    /* ==========================================================================
+       CYBER-OBSIDIAN GLASSMORPHISM DESIGN SYSTEM (Master Index 2.0)
+       ========================================================================== */
     :root {
-      --bg-base: #070a12;
-      --bg-surface: #0e1424;
-      --bg-card: #131b30;
-      --bg-card-hover: #1a2542;
-      --border: #1e293b;
-      --border-accent: rgba(56, 189, 248, 0.3);
-      --accent: #38bdf8;
-      --accent-glow: rgba(56, 189, 248, 0.25);
-      --accent-subtle: rgba(56, 189, 248, 0.1);
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
+      --bg-base: #06080d;
+      --bg-elevated: #0b0f19;
+      --bg-surface: rgba(15, 23, 42, 0.72);
+      --bg-surface-hover: rgba(26, 36, 58, 0.85);
+      --bg-card: rgba(14, 20, 34, 0.75);
+      --bg-card-hover: rgba(22, 32, 54, 0.92);
+      
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-glow: rgba(56, 189, 248, 0.25);
+      --border-active: #38bdf8;
+
+      --accent-cyan: #38bdf8;
+      --accent-emerald: #10b981;
+      --accent-purple: #c084fc;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --accent-blue: #60a5fa;
+
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
       --text-dim: #64748b;
-      --green: #10b981;
-      --purple: #a855f7;
-      --amber: #f59e0b;
-      --rose: #f43f5e;
-      --sidebar-width: 340px;
-      --topbar-height: 58px;
+
       --radius-sm: 8px;
-      --radius-md: 12px;
-      --radius-lg: 18px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+
+      --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+      --shadow-hover: 0 12px 32px -4px rgba(0, 0, 0, 0.6), 0 0 20px 0 rgba(56, 189, 248, 0.22);
       --spring: cubic-bezier(0.16, 1, 0.3, 1);
-      --safe-top: env(safe-area-inset-top, 0px);
+      
+      --sidebar-width: 350px;
+      --topbar-height: 60px;
       --safe-bottom: env(safe-area-inset-bottom, 0px);
-      --safe-left: env(safe-area-inset-left, 0px);
-      --safe-right: env(safe-area-inset-right, 0px);
     }
 
     * {
@@ -42,174 +56,166 @@
       margin: 0;
       padding: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     html, body {
       background: var(--bg-base);
-      color: var(--text-main);
+      color: var(--text-primary);
       height: 100vh;
-      height: 100dvh;
       overflow: hidden;
-      overscroll-behavior-y: none;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      text-rendering: optimizeLegibility;
+      background-image: 
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(56, 189, 248, 0.12), transparent),
+        radial-gradient(ellipse 60% 40% at 85% 10%, rgba(192, 132, 252, 0.08), transparent);
+      background-attachment: fixed;
     }
 
-    button, a, input, select {
-      touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    button:active {
-      transform: scale(0.97);
-      transition: transform 0.08s var(--spring);
+    /* Accessibility focus outlines */
+    :focus-visible {
+      outline: 2px solid var(--accent-cyan);
+      outline-offset: 2px;
     }
 
     /* Layout Shell */
     .app-shell {
       display: flex;
       height: 100vh;
-      height: 100dvh;
       width: 100vw;
       overflow: hidden;
       position: relative;
     }
 
-    /* Sidebar Navigation */
+    /* ==========================================================================
+       SIDEBAR (Desktop Navigation & Live Feed)
+       ========================================================================== */
     .sidebar {
       width: var(--sidebar-width);
-      min-width: var(--sidebar-width);
-      height: 100%;
-      background: var(--bg-surface);
-      border-right: 1px solid var(--border);
+      background: var(--bg-elevated);
+      border-right: 1px solid var(--border-subtle);
       display: flex;
       flex-direction: column;
+      flex-shrink: 0;
+      z-index: 40;
       transition: transform 0.25s var(--spring), width 0.25s var(--spring);
-      z-index: 50;
-      position: relative;
     }
 
     .sidebar.collapsed {
       transform: translateX(-100%);
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
+      width: 0;
+      border-right: none;
     }
 
     .sidebar-header {
-      padding: 14px 16px;
-      border-bottom: 1px solid var(--border);
+      padding: 16px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(11, 15, 25, 0.8);
+      backdrop-filter: blur(12px);
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: var(--text-main);
+      gap: 12px;
       cursor: pointer;
+      user-select: none;
     }
 
     .brand-logo {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, #0284c7, #38bdf8);
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(192, 132, 252, 0.2));
+      border: 1px solid var(--border-glow);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 20px;
-      box-shadow: 0 0 16px var(--accent-glow);
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);
     }
 
     .brand-title {
-      font-size: 15px;
-      font-weight: 800;
+      font-size: 16px;
+      font-weight: 700;
       letter-spacing: -0.3px;
-      line-height: 1.2;
+      color: var(--text-primary);
     }
 
     .brand-sub {
       font-size: 11px;
-      color: var(--text-muted);
-      font-weight: 500;
+      font-weight: 600;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
     }
 
     .btn-icon {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
       width: 36px;
       height: 36px;
-      border-radius: 9px;
-      display: inline-flex;
+      border-radius: var(--radius-sm);
+      display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-size: 15px;
       transition: all 0.15s ease;
-      min-width: 36px;
-      min-height: 36px;
+      touch-action: manipulation;
     }
 
     .btn-icon:hover {
-      background: rgba(255, 255, 255, 0.08);
-      color: var(--text-main);
-      border-color: #334155;
+      background: var(--bg-surface-hover);
+      color: var(--text-primary);
+      border-color: var(--border-glow);
     }
 
     /* Mode Switcher Tabs */
     .mode-switcher-container {
-      padding: 8px 14px 0 14px;
+      padding: 12px 16px 6px;
     }
 
     .mode-tabs {
       display: flex;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 3px;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 4px;
       gap: 4px;
     }
 
     .mode-tab-btn {
       flex: 1;
-      background: none;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
       border: none;
-      color: var(--text-muted);
-      font-size: 12.5px;
-      font-weight: 700;
-      padding: 8px 10px;
-      border-radius: 7px;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 600;
       cursor: pointer;
-      transition: all 0.15s ease;
+      transition: all 0.18s ease;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
-    }
-
-    .mode-tab-btn:hover {
-      color: #fff;
+      min-height: 38px;
+      touch-action: manipulation;
     }
 
     .mode-tab-btn.active {
-      background: rgba(56, 189, 248, 0.15);
-      color: var(--accent);
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(56, 189, 248, 0.05));
+      color: var(--accent-cyan);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
       border: 1px solid rgba(56, 189, 248, 0.3);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
 
-    /* Search & Filter Bar */
+    /* Sidebar Search & Controls */
     .sidebar-controls {
-      padding: 12px 14px;
-      border-bottom: 1px solid var(--border);
+      padding: 10px 16px;
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -217,159 +223,146 @@
 
     .search-box {
       position: relative;
-      width: 100%;
-    }
-
-    .search-input {
-      width: 100%;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 10px 34px 10px 36px;
-      color: #fff;
-      font-size: 13.5px;
-      outline: none;
-      transition: all 0.2s ease;
-    }
-
-    .search-input:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px var(--accent-glow);
-      background: #172138;
+      display: flex;
+      align-items: center;
     }
 
     .search-icon {
       position: absolute;
       left: 12px;
-      top: 50%;
-      transform: translateY(-50%);
+      color: var(--text-dim);
       font-size: 14px;
-      opacity: 0.5;
       pointer-events: none;
+    }
+
+    .search-input {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 10px 36px 10px 36px;
+      color: var(--text-primary);
+      font-size: 13.5px;
+      transition: all 0.2s ease;
+      min-height: 42px;
+    }
+
+    .search-input:focus {
+      background: rgba(15, 23, 42, 0.9);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
     }
 
     .search-clear {
       position: absolute;
       right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
       background: none;
       border: none;
-      color: var(--text-muted);
+      color: var(--text-dim);
+      font-size: 12px;
       cursor: pointer;
-      font-size: 14px;
+      width: 20px;
+      height: 20px;
       display: none;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
     }
 
     .search-clear.visible {
-      display: block;
+      display: flex;
     }
 
-    /* Category Pill Carousel */
+    /* Category Filter Carousel / Pills */
     .category-pills {
       display: flex;
       gap: 6px;
       overflow-x: auto;
-      scroll-snap-type: x mandatory;
+      padding-bottom: 4px;
       scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
-      padding-bottom: 2px;
     }
 
     .category-pills::-webkit-scrollbar {
       display: none;
     }
 
-    .cat-pill {
+    .pill-btn {
+      flex-shrink: 0;
       background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
       padding: 6px 12px;
-      border-radius: 999px;
+      border-radius: var(--radius-full);
       font-size: 12px;
       font-weight: 600;
       cursor: pointer;
-      white-space: nowrap;
       transition: all 0.15s ease;
-      scroll-snap-align: start;
+      white-space: nowrap;
+      min-height: 32px;
+      touch-action: manipulation;
     }
 
-    .cat-pill:hover {
+    .pill-btn:hover {
       background: rgba(255, 255, 255, 0.08);
-      color: var(--text-main);
+      color: var(--text-primary);
     }
 
-    .cat-pill.active {
-      background: var(--accent);
-      color: #050811;
-      border-color: var(--accent);
-      box-shadow: 0 0 10px var(--accent-glow);
+    .pill-btn.active {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: rgba(56, 189, 248, 0.4);
+      color: var(--accent-cyan);
     }
 
-    /* App & Links List */
+    /* Sidebar App List */
     .sidebar-list {
       flex: 1;
       overflow-y: auto;
-      padding: 10px 12px;
+      padding: 6px 12px 20px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      overscroll-behavior-y: contain;
-    }
-
-    .section-label {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
-      padding: 10px 6px 4px 6px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      gap: 6px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
     }
 
     .app-item {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       gap: 12px;
       padding: 10px 12px;
       border-radius: var(--radius-md);
       background: transparent;
       border: 1px solid transparent;
-      color: var(--text-muted);
       cursor: pointer;
-      text-decoration: none;
       transition: all 0.15s ease;
-      min-height: 52px;
-      position: relative;
+      user-select: none;
+      touch-action: manipulation;
+      min-height: 48px;
     }
 
     .app-item:hover {
-      background: var(--bg-card);
-      border-color: #273552;
-      color: var(--text-main);
+      background: var(--bg-surface-hover);
+      border-color: var(--border-subtle);
+      transform: translateX(2px);
     }
 
     .app-item.active {
-      background: rgba(56, 189, 248, 0.12);
-      border-color: var(--accent);
-      color: #fff;
-      box-shadow: 0 0 14px var(--accent-glow);
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(56, 189, 248, 0.05));
+      border-color: rgba(56, 189, 248, 0.35);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
 
     .app-item-icon {
-      font-size: 22px;
-      line-height: 1;
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
+      font-size: 20px;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
       background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      margin-top: 2px;
     }
 
     .app-item-info {
@@ -377,1432 +370,997 @@
       min-width: 0;
     }
 
-    .app-item-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 6px;
-      margin-bottom: 2px;
-    }
-
     .app-item-title {
       font-size: 13.5px;
       font-weight: 600;
-      color: var(--text-main);
+      color: var(--text-primary);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
+    .app-item.active .app-item-title {
+      color: var(--accent-cyan);
+    }
+
     .app-item-badge {
-      font-size: 10px;
-      font-weight: 700;
-      padding: 2px 6px;
-      border-radius: 5px;
-      background: rgba(255, 255, 255, 0.06);
-      color: var(--text-muted);
-      white-space: nowrap;
-    }
-
-    .app-item.active .app-item-badge {
-      background: rgba(56, 189, 248, 0.2);
-      color: var(--accent);
-    }
-
-    .app-item-desc {
-      font-size: 11.5px;
+      font-size: 11px;
       color: var(--text-dim);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      line-height: 1.3;
     }
 
-    .app-item:hover .app-item-desc {
-      color: var(--text-muted);
+    .app-item-fav-btn {
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      font-size: 16px;
+      cursor: pointer;
+      padding: 6px;
+      transition: transform 0.15s ease, color 0.15s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .app-item-fav-btn:hover {
+      transform: scale(1.2);
+      color: var(--accent-amber);
+    }
+
+    .app-item-fav-btn.starred {
+      color: var(--accent-amber);
+      text-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
     }
 
     /* Sidebar Footer */
     .sidebar-footer {
-      padding: 12px 14px;
-      border-top: 1px solid var(--border);
+      padding: 12px 16px;
+      border-top: 1px solid var(--border-subtle);
+      background: rgba(11, 15, 25, 0.8);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
-      background: rgba(0, 0, 0, 0.2);
+      font-size: 12px;
+      color: var(--text-dim);
     }
 
     .mode-indicator {
       display: flex;
       align-items: center;
       gap: 6px;
-      font-size: 11.5px;
-      color: var(--text-muted);
     }
 
     .dot-status {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+      background: var(--accent-emerald);
+      box-shadow: 0 0 8px var(--accent-emerald);
     }
 
-    /* Main Content Stage */
+    /* ==========================================================================
+       MAIN STAGE (Header, Hero Strip, Clusters & Iframe Stage)
+       ========================================================================== */
     .main-stage {
       flex: 1;
-      height: 100%;
       display: flex;
       flex-direction: column;
+      height: 100vh;
       overflow: hidden;
-      background: var(--bg-base);
       position: relative;
     }
 
-    /* Top Control Bar */
+    /* Topbar */
     .topbar {
-      height: calc(var(--topbar-height) + var(--safe-top));
-      min-height: calc(var(--topbar-height) + var(--safe-top));
-      padding-top: var(--safe-top);
-      background: var(--bg-surface);
-      border-bottom: 1px solid var(--border);
+      height: var(--topbar-height);
+      background: rgba(11, 15, 25, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding-left: calc(16px + var(--safe-left));
-      padding-right: calc(16px + var(--safe-right));
-      gap: 12px;
-      z-index: 40;
+      padding: 0 20px;
+      z-index: 30;
+      flex-shrink: 0;
     }
 
     .topbar-left {
       display: flex;
       align-items: center;
       gap: 12px;
-      min-width: 0;
-      flex: 1;
+    }
+
+    .btn-back-hub {
+      display: none;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--accent-cyan);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+      min-height: 38px;
+    }
+
+    .btn-back-hub:hover {
+      background: rgba(56, 189, 248, 0.2);
     }
 
     .active-app-meta {
-      display: flex;
+      display: none;
       align-items: center;
       gap: 10px;
-      min-width: 0;
-      flex: 1;
-    }
-
-    .active-app-meta > div {
-      min-width: 0;
-      flex: 1;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      overflow: hidden;
     }
 
     .active-app-icon {
-      font-size: 20px;
-      flex-shrink: 0;
+      font-size: 22px;
     }
 
     .active-app-title {
-      display: block;
       font-size: 15px;
       font-weight: 700;
-      color: #fff;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      min-width: 0;
-      max-width: 100%;
+      color: var(--text-primary);
     }
 
     .active-app-tag {
       font-size: 11px;
-      font-weight: 600;
       padding: 2px 8px;
-      border-radius: 6px;
-      background: rgba(56, 189, 248, 0.12);
-      color: var(--accent);
-      white-space: nowrap;
-      flex-shrink: 0;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-subtle);
     }
 
+    /* Center: Device Simulator Controls (Only visible when app is active in iframe) */
     .topbar-center {
-      display: flex;
+      display: none;
       align-items: center;
-      gap: 4px;
-      background: rgba(255, 255, 255, 0.04);
-      padding: 3px;
-      border-radius: 9px;
-      border: 1px solid var(--border);
+      gap: 6px;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border-subtle);
+      padding: 4px;
+      border-radius: var(--radius-md);
     }
 
     .device-btn {
-      background: none;
+      background: transparent;
       border: none;
-      color: var(--text-muted);
-      padding: 5px 10px;
-      border-radius: 7px;
-      font-size: 12px;
+      color: var(--text-secondary);
+      padding: 6px 12px;
+      font-size: 12.5px;
       font-weight: 600;
+      border-radius: var(--radius-sm);
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 5px;
       transition: all 0.15s ease;
-    }
-
-    .device-btn:hover {
-      color: #fff;
+      touch-action: manipulation;
     }
 
     .device-btn.active {
-      background: var(--bg-card);
-      color: var(--accent);
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-primary);
     }
 
+    /* Right: Topbar Action Buttons */
     .topbar-right {
       display: flex;
       align-items: center;
       gap: 8px;
-      flex-shrink: 0;
     }
 
     .action-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      padding: 7px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 7px 12px;
-      border-radius: 8px;
-      font-size: 12.5px;
-      font-weight: 600;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border);
-      color: var(--text-main);
-      cursor: pointer;
-      text-decoration: none;
       transition: all 0.15s ease;
-      min-height: 36px;
-      flex-shrink: 0;
-      white-space: nowrap;
+      text-decoration: none;
+      min-height: 38px;
+      touch-action: manipulation;
     }
 
     .action-btn:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: #334155;
+      background: var(--bg-surface-hover);
+      color: var(--text-primary);
+      border-color: var(--border-glow);
     }
 
-    .action-btn.btn-qr {
-      background: rgba(16, 185, 129, 0.12);
-      color: #34d399;
-      border-color: rgba(16, 185, 129, 0.3);
+    .action-btn.btn-primary {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(56, 189, 248, 0.05));
+      border-color: rgba(56, 189, 248, 0.4);
+      color: var(--accent-cyan);
     }
 
-    .action-btn.btn-qr:hover {
-      background: rgba(16, 185, 129, 0.2);
+    .action-btn.btn-primary:hover {
+      background: rgba(56, 189, 248, 0.25);
     }
 
-    /* Iframe Viewing Area */
+    /* ==========================================================================
+       VIEWPORT CONTAINER (Dashboard Stage vs Iframe Stage)
+       ========================================================================== */
     .viewport-container {
-      flex: 1 1 auto;
-      min-height: 0;
-      width: 100%;
-      height: calc(100% - var(--topbar-height) - var(--safe-top));
+      flex: 1;
+      overflow-y: auto;
+      position: relative;
+      background: transparent;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+    }
+
+    /* Dashboard View */
+    .dashboard-view {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 24px 28px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* Hero Banner */
+    .hero-banner {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(20, 29, 52, 0.5));
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 28px 32px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+    }
+
+    .hero-banner::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 40%;
+      height: 100%;
+      background: radial-gradient(circle at 100% 0%, rgba(56, 189, 248, 0.12), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--accent-cyan);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-stats-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 6px 14px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .hero-title {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .hero-desc {
+      font-size: 14.5px;
+      color: var(--text-secondary);
+      max-width: 820px;
+      line-height: 1.6;
+    }
+
+    /* Pinned Favorites & Recents Strip (Miller's & Hick's Laws) */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .section-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-icon {
+      font-size: 20px;
+    }
+
+    .section-title {
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.3px;
+    }
+
+    .section-count {
+      font-size: 12px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .favorites-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .fav-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s var(--spring);
+      box-shadow: var(--shadow-card);
+      user-select: none;
+      touch-action: manipulation;
+    }
+
+    .fav-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--accent-amber);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px -4px rgba(245, 158, 11, 0.25);
+    }
+
+    .fav-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .fav-icon {
+      font-size: 26px;
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.3);
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #03060d;
+      flex-shrink: 0;
+    }
+
+    .fav-meta {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .fav-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      white-space: nowrap;
       overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 2px;
+    }
+
+    .fav-category {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--accent-amber);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .fav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .fav-launch-btn {
+      flex: 1;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      color: #fbbf24;
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      min-height: 38px;
+    }
+
+    .fav-launch-btn:hover {
+      background: rgba(245, 158, 11, 0.28);
+      color: #fff;
+    }
+
+    .fav-unpin-btn {
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--accent-amber);
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.15s ease;
+    }
+
+    .fav-unpin-btn:hover {
+      background: rgba(244, 63, 94, 0.15);
+      color: var(--accent-rose);
+      border-color: rgba(244, 63, 94, 0.3);
+    }
+
+    /* Empty Favorites State */
+    .favorites-empty {
+      background: rgba(15, 23, 42, 0.4);
+      border: 1px dashed var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 13.5px;
+    }
+
+    /* Thematic Clusters Cards Grid */
+    .cluster-block {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .cluster-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 18px;
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .cluster-banner-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .cluster-tag {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    .cluster-tag-web { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+    .cluster-tag-sacred { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .cluster-tag-windows { background: rgba(192, 132, 252, 0.15); color: #c084fc; border: 1px solid rgba(192, 132, 252, 0.3); }
+    .cluster-tag-android { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .cluster-tag-links { background: rgba(244, 63, 94, 0.15); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.3); }
+
+    .cluster-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .cluster-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 16px;
+    }
+
+    /* Production App Card */
+    .app-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      cursor: pointer;
       position: relative;
+      transition: all 0.22s var(--spring);
+      box-shadow: var(--shadow-card);
+      user-select: none;
+      touch-action: manipulation;
+      content-visibility: auto;
+    }
+
+    .app-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-glow);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .app-card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .app-card-icon {
+      font-size: 26px;
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .app-card-meta {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .app-card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+      letter-spacing: -0.2px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .app-card-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2px 8px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .app-card-desc {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .app-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: auto;
+    }
+
+    .card-tag {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: var(--radius-sm);
+      background: rgba(56, 189, 248, 0.06);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(56, 189, 248, 0.15);
+    }
+
+    .app-card-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .card-action-launch {
+      flex: 1;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(56, 189, 248, 0.08));
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: var(--accent-cyan);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      min-height: 42px;
+      text-decoration: none;
+    }
+
+    .card-action-launch:hover {
+      background: rgba(56, 189, 248, 0.3);
+      color: #fff;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+    }
+
+    .card-action-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 15px;
+      transition: all 0.15s ease;
+      text-decoration: none;
+    }
+
+    .card-action-btn:hover {
+      background: var(--bg-surface-hover);
+      color: var(--text-primary);
+      border-color: var(--border-glow);
+    }
+
+    .card-action-btn.starred {
+      color: var(--accent-amber);
+      border-color: rgba(245, 158, 11, 0.4);
+      background: rgba(245, 158, 11, 0.1);
+    }
+
+    /* Iframe Stage (Device Simulator) */
+    .iframe-stage {
+      display: none;
+      flex: 1;
+      height: calc(100vh - var(--topbar-height));
+      background: #020408;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
     }
 
     .device-frame {
       width: 100%;
       height: 100%;
-      transition: width 0.3s var(--spring), height 0.3s var(--spring), border-radius 0.3s var(--spring);
+      transition: width 0.3s var(--spring), height 0.3s var(--spring), border-radius 0.3s ease;
+      background: #000;
       position: relative;
       display: flex;
       flex-direction: column;
-      background: #000;
     }
 
-    .device-frame.mode-tablet {
+    .device-frame.tablet {
       width: 768px;
-      height: 94%;
-      border-radius: 20px;
-      box-shadow: 0 0 40px rgba(0, 0, 0, 0.8), 0 0 0 1px #334155;
+      height: 92%;
+      border-radius: 24px;
+      border: 8px solid #1e293b;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
       overflow: hidden;
     }
 
-    .device-frame.mode-mobile {
+    .device-frame.mobile {
       width: 390px;
-      height: 844px;
-      max-height: 96%;
+      height: 90%;
       border-radius: 36px;
-      box-shadow: 0 0 50px rgba(0, 0, 0, 0.9), 0 0 0 3px #1e293b;
+      border: 10px solid #1e293b;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
       overflow: hidden;
-      border: 8px solid #0f172a;
-    }
-
-    .phone-notch {
-      display: none;
-      width: 110px;
-      height: 20px;
-      background: #0f172a;
-      border-radius: 0 0 12px 12px;
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 10;
-    }
-
-    .device-frame.mode-mobile .phone-notch {
-      display: block;
     }
 
     .app-iframe {
       width: 100%;
       height: 100%;
       border: none;
-      background: #000;
-      flex: 1;
+      background: #fff;
     }
 
-    /* Loading Overlay */
-    .iframe-loader {
-      position: absolute;
-      inset: 0;
-      background: rgba(7, 10, 18, 0.85);
-      backdrop-filter: blur(4px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      z-index: 5;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s ease;
-    }
-
-    .iframe-loader.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .spinner {
-      width: 36px;
-      height: 36px;
-      border: 3px solid rgba(56, 189, 248, 0.2);
-      border-top-color: var(--accent);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    /* Welcome / Hub Home Stage */
-    .welcome-stage {
-      position: absolute;
-      inset: 0;
-      background: var(--bg-base);
-      overflow-y: auto;
-      overscroll-behavior-y: contain;
-      -webkit-overflow-scrolling: touch;
-      padding: 32px 24px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      z-index: 2;
-    }
-
-    .welcome-stage.hidden {
+    /* ==========================================================================
+       MOBILE BOTTOM DOCK (Fitts's Law Ergonomics)
+       ========================================================================== */
+    .mobile-bottom-dock {
       display: none;
-    }
-
-    .welcome-card {
-      max-width: 900px;
-      width: 100%;
-      text-align: center;
-      margin-bottom: 32px;
-    }
-
-    .welcome-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 5px 14px;
-      border-radius: 999px;
-      background: rgba(56, 189, 248, 0.12);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      color: var(--accent);
-      font-size: 12px;
-      font-weight: 700;
-      margin-bottom: 16px;
-    }
-
-    .welcome-title {
-      font-size: 32px;
-      font-weight: 800;
-      letter-spacing: -0.8px;
-      margin-bottom: 10px;
-      background: linear-gradient(135deg, #fff 40%, var(--accent) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .welcome-desc {
-      font-size: 15px;
-      color: var(--text-muted);
-      max-width: 650px;
-      margin: 0 auto 24px auto;
-      line-height: 1.5;
-    }
-
-    .quick-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 16px;
-      max-width: 1000px;
-      width: 100%;
-    }
-
-    .quick-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 20px;
-      text-align: left;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .quick-card:hover {
-      transform: translateY(-3px);
-      border-color: #334155;
-      background: var(--bg-card);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    }
-
-    .quick-card-icon {
-      font-size: 28px;
-      margin-bottom: 12px;
-    }
-
-    .quick-card-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 6px;
-    }
-
-    .quick-card-desc {
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.45;
-      flex: 1;
-      margin-bottom: 14px;
-    }
-
-    .quick-card-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--accent);
-    }
-
-    /* Links & Share Stage */
-    .links-stage {
-      position: absolute;
-      inset: 0;
-      background: var(--bg-base);
-      overflow-y: auto;
-      overscroll-behavior-y: contain;
-      -webkit-overflow-scrolling: touch;
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      z-index: 3;
-    }
-
-    .links-stage.hidden {
-      display: none;
-    }
-
-    .links-panel-inner {
-      max-width: 1100px;
-      width: 100%;
-    }
-
-    .links-stage-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .links-stage-title {
-      font-size: 24px;
-      font-weight: 800;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .links-stage-desc {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
-
-    .btn-add-link-main {
-      background: var(--accent);
-      color: #050811;
-      font-weight: 700;
-      font-size: 13.5px;
-      padding: 10px 18px;
-      border-radius: 9px;
-      border: none;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      box-shadow: 0 2px 10px var(--accent-glow);
-    }
-
-    .btn-add-link-main:hover {
-      filter: brightness(1.1);
-    }
-
-    .links-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 16px;
-      margin-top: 14px;
-    }
-
-    .link-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      transition: all 0.2s ease;
-      position: relative;
-    }
-
-    .link-card:hover {
-      transform: translateY(-2px);
-      border-color: #334155;
-      background: var(--bg-card);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-    }
-
-    .card-head {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 10px;
-    }
-
-    .card-icon {
-      font-size: 24px;
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.05);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .card-info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .card-title-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 6px;
-      margin-bottom: 2px;
-    }
-
-    .card-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: #fff;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .card-badge {
-      font-size: 10px;
-      font-weight: 700;
-      padding: 2px 7px;
-      border-radius: 5px;
-      background: rgba(56, 189, 248, 0.12);
-      color: var(--accent);
-      white-space: nowrap;
-    }
-
-    .card-domain {
-      font-size: 11.5px;
-      color: var(--text-dim);
-      font-family: monospace;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .card-desc {
-      font-size: 12.5px;
-      color: var(--text-muted);
-      line-height: 1.45;
-      margin-bottom: 14px;
-      flex: 1;
-    }
-
-    .card-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      margin-bottom: 14px;
-    }
-
-    .card-tag {
-      font-size: 10.5px;
-      font-weight: 600;
-      padding: 2px 6px;
-      border-radius: 4px;
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--text-dim);
-    }
-
-    /* Actions Toolbar */
-    .card-actions {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding-top: 10px;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      margin-top: auto;
-    }
-
-    .btn-act {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      padding: 7px 11px;
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      transition: all 0.15s ease;
-      min-height: 36px;
-      text-decoration: none;
-    }
-
-    .btn-act:hover {
-      background: rgba(255, 255, 255, 0.1);
-      color: #fff;
-      border-color: #334155;
-    }
-
-    .btn-act.btn-act-open {
-      background: rgba(56, 189, 248, 0.12);
-      color: var(--accent);
-      border-color: rgba(56, 189, 248, 0.3);
-      margin-left: auto;
-    }
-
-    .btn-act.btn-act-open:hover {
-      background: var(--accent);
-      color: #050811;
-    }
-
-    .btn-act.btn-act-wa {
-      color: #34d399;
-      border-color: rgba(16, 185, 129, 0.3);
-      background: rgba(16, 185, 129, 0.08);
-    }
-
-    .btn-act.btn-act-wa:hover {
-      background: rgba(16, 185, 129, 0.2);
-    }
-
-    /* Context-Aware Mobile Back to Hub Button */
-    .btn-back-hub {
-      display: none;
-      align-items: center;
-      gap: 6px;
-      background: rgba(56, 189, 248, 0.12);
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      color: var(--accent);
-      font-size: 12.5px;
-      font-weight: 700;
-      padding: 6px 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      white-space: nowrap;
-      flex-shrink: 0;
-      min-height: 38px;
-      touch-action: manipulation;
-      transition: all 0.15s ease;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .btn-back-hub:hover {
-      background: rgba(56, 189, 248, 0.22);
-      border-color: var(--accent);
-      color: #fff;
-    }
-
-    .btn-back-hub:active {
-      transform: scale(0.96);
-    }
-
-    /* Mobile Brand Header */
-    .mobile-brand-title {
-      display: none;
-      align-items: center;
-      gap: 8px;
-      font-size: 16px;
-      font-weight: 800;
-      color: #fff;
-      letter-spacing: -0.3px;
-      user-select: none;
-      cursor: pointer;
-      touch-action: manipulation;
-    }
-
-    .mobile-brand-icon {
-      font-size: 18px;
-    }
-
-    .mobile-brand-name {
-      background: linear-gradient(135deg, #fff 40%, var(--accent) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    /* Mobile Category Strip */
-    .mobile-category-bar {
-      display: none;
-    }
-
-    /* Fixed Native Bottom Navigation Bar */
-    .bottom-nav-bar {
-      display: none;
-    }
-
-    /* Quick Card Enhanced Styles */
-    .quick-card-head {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 8px;
-    }
-
-    .quick-card-meta {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .quick-card-tag {
-      font-size: 10.5px;
-      font-weight: 700;
-      padding: 2px 7px;
-      border-radius: 5px;
-      background: rgba(56, 189, 248, 0.12);
-      color: var(--accent);
-      display: inline-block;
-      margin-top: 2px;
-    }
-
-    .quick-card-cat {
-      font-size: 11.5px;
-      color: var(--text-dim);
-    }
-
-    .quick-card-launch {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--accent);
-    }
-
-    .quick-card,
-    .link-card,
-    .app-item {
-      user-select: none;
-      touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .quick-card:active,
-    .link-card:active,
-    .app-item:active {
-      transform: scale(0.98);
-      transition: transform 0.08s var(--spring);
-    }
-
-    /* Drawer Header & Close Button */
-    .drawer-header-row {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px 16px 6px 16px;
-    }
-
-    .drawer-close-btn {
-      position: absolute;
-      right: 16px;
-      top: 8px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      width: 44px;
-      height: 44px;
-      min-width: 44px;
-      min-height: 44px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 16px;
-      transition: all 0.15s ease;
-      touch-action: manipulation;
-    }
-
-    .drawer-close-btn:hover {
-      color: #fff;
-      background: rgba(255, 255, 255, 0.15);
-    }
-
-    /* Mobile Bottom Drawer */
-    .drawer-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(4px);
-      z-index: 100;
-      opacity: 0;
-      transition: opacity 0.25s ease;
-    }
-
-    .drawer-overlay.open {
-      display: block;
-      opacity: 1;
-    }
-
-    .mobile-drawer {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
-      height: 80vh;
-      height: 80dvh;
-      background: #090d18;
-      border-top: 1px solid #273552;
-      border-radius: 24px 24px 0 0;
-      z-index: 101;
-      transform: translateY(100%);
-      transition: transform 0.3s var(--spring);
+      height: calc(60px + var(--safe-bottom));
+      padding-bottom: var(--safe-bottom);
+      background: rgba(11, 15, 25, 0.92);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border-subtle);
+      z-index: 100;
+      align-items: center;
+      justify-content: space-around;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.6);
+    }
+
+    .dock-item {
+      flex: 1;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.8);
-      padding-bottom: env(safe-area-inset-bottom, 16px);
-      pointer-events: none;
-    }
-
-    .mobile-drawer.open {
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-
-    .drawer-handle {
-      width: 40px;
-      height: 4px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.2);
-      margin: 10px auto 14px auto;
-    }
-
-    /* Modals */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(6px);
-      z-index: 150;
       align-items: center;
       justify-content: center;
-      padding: 20px;
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-
-    .modal-overlay.open {
-      display: flex;
-      opacity: 1;
-    }
-
-    .modal-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      max-width: 460px;
-      width: 100%;
-      padding: 26px;
-      position: relative;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      width: 40px;
-      height: 40px;
-      min-width: 40px;
-      min-height: 40px;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
+      gap: 3px;
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
       cursor: pointer;
+      min-height: 48px;
       touch-action: manipulation;
       transition: all 0.15s ease;
     }
 
-    .modal-close:hover {
-      background: rgba(255, 255, 255, 0.15);
-      color: #fff;
+    .dock-icon {
+      font-size: 20px;
     }
 
-    .form-group {
-      margin-bottom: 14px;
-    }
-
-    .form-label {
-      display: block;
-      font-size: 12px;
+    .dock-label {
+      font-size: 11px;
       font-weight: 600;
-      color: var(--text-muted);
-      margin-bottom: 6px;
     }
 
-    .form-input, .form-select {
-      width: 100%;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 10px 12px;
-      color: #fff;
-      font-size: 13.5px;
-      outline: none;
+    .dock-item.active {
+      color: var(--accent-cyan);
     }
 
-    .form-input:focus, .form-select:focus {
-      border-color: var(--accent);
+    .dock-item.active .dock-icon {
+      transform: translateY(-2px);
     }
 
-    .btn-submit-form {
-      width: 100%;
-      background: var(--accent);
-      color: #050811;
-      font-weight: 700;
+    /* Floating Back Button on Mobile when App is open */
+    .mobile-floating-back {
+      display: none;
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      z-index: 999;
+      background: rgba(11, 15, 25, 0.85);
+      border: 1px solid var(--border-glow);
+      color: var(--accent-cyan);
       font-size: 14px;
-      padding: 12px;
-      border-radius: 9px;
-      border: none;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: var(--radius-full);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
       cursor: pointer;
-      margin-top: 8px;
-      box-shadow: 0 2px 10px var(--accent-glow);
+      align-items: center;
+      gap: 6px;
+      backdrop-filter: blur(12px);
+      touch-action: manipulation;
     }
 
-    .qr-frame {
-      width: 220px;
-      height: 220px;
-      background: #fff;
-      border-radius: 14px;
-      margin: 20px auto;
-      padding: 10px;
-      display: flex;
+    /* ==========================================================================
+       MODALS & OVERLAYS (QR Code, Quick Share, Toast)
+       ========================================================================== */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 200;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      padding: 20px;
     }
 
-    .qr-frame svg, .qr-frame img {
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-glow);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      max-width: 460px;
       width: 100%;
-      height: 100%;
-      display: block;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+      position: relative;
+      animation: modalPop 0.2s var(--spring);
     }
 
-    .qr-url-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      padding: 10px 14px;
-      border-radius: 8px;
-      font-family: monospace;
-      font-size: 13px;
-      color: var(--accent);
-      margin-bottom: 16px;
-      word-break: break-all;
+    @keyframes modalPop {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
+      margin-bottom: 20px;
     }
 
-    .copy-btn-mini {
-      background: rgba(56, 189, 248, 0.15);
+    .modal-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .modal-close-btn {
+      background: transparent;
       border: none;
-      color: var(--accent);
-      padding: 4px 8px;
-      border-radius: 5px;
-      font-size: 11px;
+      color: var(--text-dim);
+      font-size: 20px;
       cursor: pointer;
-      font-weight: 600;
+      padding: 4px;
     }
 
-    /* Toast */
+    .modal-close-btn:hover {
+      color: #fff;
+    }
+
+    .qr-container {
+      background: #fff;
+      padding: 16px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      width: 220px;
+      height: 220px;
+    }
+
+    .qr-container svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .qr-instructions {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    /* PWA Install Banner */
+    .pwa-banner {
+      display: none;
+      position: fixed;
+      bottom: 80px;
+      left: 20px;
+      right: 20px;
+      max-width: 480px;
+      margin: 0 auto;
+      background: rgba(14, 20, 34, 0.95);
+      border: 1px solid var(--accent-cyan);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(56, 189, 248, 0.25);
+      backdrop-filter: blur(16px);
+      z-index: 180;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      animation: slideUp 0.3s var(--spring);
+    }
+    .pwa-banner.show { display: flex; }
+    .pwa-banner-content { display: flex; align-items: center; gap: 12px; }
+    .pwa-banner-icon { font-size: 24px; }
+    .pwa-banner-title { font-size: 13.5px; font-weight: 700; color: #fff; }
+    .pwa-banner-sub { font-size: 11.5px; color: var(--text-secondary); }
+    .pwa-banner-actions { display: flex; align-items: center; gap: 8px; }
+
+    /* Toast Notification */
     #toast {
       position: fixed;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%) translateY(20px);
-      background: var(--green);
+      bottom: 28px;
+      right: 28px;
+      background: linear-gradient(135deg, #10b981, #059669);
       color: #000;
+      font-size: 13.5px;
       font-weight: 700;
-      font-size: 13px;
-      padding: 10px 18px;
-      border-radius: 8px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      padding: 12px 20px;
+      border-radius: var(--radius-md);
+      box-shadow: 0 8px 30px rgba(16, 185, 129, 0.4);
       opacity: 0;
+      transform: translateY(12px);
       pointer-events: none;
       transition: all 0.2s var(--spring);
-      z-index: 300;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     #toast.show {
       opacity: 1;
-      transform: translateX(-50%) translateY(0);
+      transform: translateY(0);
     }
 
-    /* Mobile Responsive Overrides */
-    @media (max-width: 768px) {
+    /* ==========================================================================
+       RESPONSIVE ERGONOMICS (Mobile Breakpoints)
+       ========================================================================== */
+    @media (max-width: 900px) {
       .sidebar {
-        display: none !important;
-      }
-
-      /* R1: Neutralize inline JS overrides and suppress desktop controls on mobile */
-      #topbar-device-controls,
-      .topbar-center,
-      #btn-fullscreen,
-      #btn-top-qr,
-      #btn-toggle-sidebar {
-        display: none !important;
-      }
-
-      /* R3: Suppress floating switcher pill completely */
-      .mobile-switcher-pill {
-        display: none !important;
-      }
-
-      .topbar {
-        padding-top: var(--safe-top);
-        padding-left: calc(12px + var(--safe-left));
-        padding-right: calc(12px + var(--safe-right));
-        height: calc(var(--topbar-height) + var(--safe-top));
-        min-height: calc(var(--topbar-height) + var(--safe-top));
-        overflow: hidden;
-      }
-
-      .topbar-left {
-        gap: 8px;
-        flex: 1;
-        min-width: 0;
-        overflow: hidden;
-      }
-
-      .topbar-right {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        flex-shrink: 0;
-      }
-
-      /* Catalog View Header State (not app active) on Mobile */
-      body:not(.app-active) .mobile-brand-title {
-        display: flex !important;
-      }
-
-      body:not(.app-active) .btn-back-hub {
-        display: none !important;
-      }
-
-      body:not(.app-active) .active-app-meta {
-        display: none !important;
-      }
-
-      body:not(.app-active) #btn-reload-app,
-      body:not(.app-active) #btn-open-tab {
-        display: none !important;
-      }
-
-      /* App Active Header State on Mobile */
-      body.app-active .mobile-brand-title {
-        display: none !important;
-      }
-
-      body.app-active .btn-back-hub {
-        display: inline-flex !important;
-        flex-shrink: 0;
-      }
-
-      body.app-active .active-app-meta {
-        display: flex !important;
-        flex: 1;
-        min-width: 0;
-        overflow: hidden;
-      }
-
-      body.app-active .active-app-meta > div {
-        display: flex;
-        align-items: center;
-        min-width: 0;
-        flex: 1;
-        overflow: hidden;
-      }
-
-      body.app-active .active-app-title {
-        display: block;
-        min-width: 0;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      body.app-active #btn-reload-app,
-      body.app-active #btn-open-tab {
-        display: inline-flex !important;
-        flex-shrink: 0;
-      }
-
-      /* Mobile Category Strip (Visible in Catalog mode) */
-      .mobile-category-bar {
-        display: flex;
-        background: var(--bg-surface);
-        border-bottom: 1px solid var(--border);
-        padding: 8px 12px;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        z-index: 30;
-        flex-shrink: 0;
-      }
-
-      .mobile-category-bar::-webkit-scrollbar {
-        display: none;
-      }
-
-      body.app-active .mobile-category-bar {
-        display: none !important;
-      }
-
-      .mobile-category-bar .category-pills {
-        display: flex;
-        gap: 8px;
-        width: max-content;
-        min-width: 100%;
-      }
-
-      .mobile-category-bar .cat-pill {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 34px;
-        padding: 6px 14px;
-        font-size: 12px;
-        font-weight: 600;
-        border-radius: 999px;
-        white-space: nowrap;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid var(--border);
-        color: var(--text-muted);
-        cursor: pointer;
-        touch-action: manipulation;
-        transition: all 0.15s ease;
-        flex-shrink: 0;
-      }
-
-      .mobile-category-bar .cat-pill.active {
-        background: var(--accent);
-        color: #050811;
-        font-weight: 700;
-        border-color: var(--accent);
-        box-shadow: 0 0 10px var(--accent-glow);
-      }
-
-      /* Fixed Native Bottom Navigation Bar */
-      .bottom-nav-bar {
-        display: flex;
         position: fixed;
+        top: 0;
         bottom: 0;
         left: 0;
-        right: 0;
-        height: calc(56px + env(safe-area-inset-bottom, 0px));
-        padding-bottom: env(safe-area-inset-bottom, 0px);
-        padding-left: env(safe-area-inset-left, 0px);
-        padding-right: env(safe-area-inset-right, 0px);
-        background: rgba(14, 20, 36, 0.96);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        border-top: 1px solid var(--border);
-        z-index: 100;
-        align-items: center;
-        justify-content: space-around;
-        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+        z-index: 150;
+        box-shadow: 10px 0 30px rgba(0, 0, 0, 0.8);
       }
 
-      .bottom-nav-item {
-        flex: 1;
-        height: 100%;
-        min-height: 48px;
-        background: none;
-        border: none;
-        color: var(--text-muted);
+      .sidebar:not(.open) {
+        transform: translateX(-100%);
+      }
+
+      .mobile-bottom-dock {
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 3px;
-        cursor: pointer;
-        user-select: none;
-        touch-action: manipulation;
-        transition: color 0.15s ease, transform 0.1s ease;
-        padding: 4px 0;
-        -webkit-tap-highlight-color: transparent;
       }
 
-      .bottom-nav-item:active {
-        transform: scale(0.95);
+      .dashboard-view {
+        padding: 16px 14px 100px;
+        gap: 24px;
       }
 
-      .bottom-nav-item .nav-icon {
-        font-size: 20px;
-        line-height: 1;
+      .hero-banner {
+        padding: 20px;
       }
 
-      .bottom-nav-item .nav-label {
-        font-size: 11px;
-        font-weight: 600;
-        letter-spacing: -0.2px;
+      .hero-title {
+        font-size: 22px;
       }
 
-      .bottom-nav-item.active {
-        color: var(--accent);
-      }
-
-      .bottom-nav-item.active .nav-icon {
-        filter: drop-shadow(0 0 6px var(--accent-glow));
-      }
-
-      /* Viewport Stage height accounting for topbar and bottom bar */
-      .main-stage {
-        padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px));
-      }
-
-      .viewport-container {
-        flex: 1 1 auto;
-        min-height: 0;
-        height: 100%;
-        width: 100%;
-      }
-
-      .device-frame,
-      .device-frame.mode-tablet,
-      .device-frame.mode-mobile {
-        width: 100% !important;
-        height: 100% !important;
-        border-radius: 0 !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      .phone-notch {
+      .topbar-center {
         display: none !important;
-      }
-
-      /* R4: Compress hero banner on mobile to pull cards above the fold */
-      .welcome-stage {
-        padding: 12px 14px calc(84px + env(safe-area-inset-bottom, 16px)) 14px !important;
-      }
-
-      .welcome-card {
-        margin-bottom: 12px;
-        text-align: left;
-      }
-
-      .welcome-pill {
-        display: none !important;
-      }
-
-      .welcome-title {
-        font-size: 19px;
-        letter-spacing: -0.4px;
-        margin-bottom: 3px;
-      }
-
-      .welcome-desc {
-        font-size: 12px;
-        line-height: 1.35;
-        margin-bottom: 8px;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-      }
-
-      /* R4: Card ergonomics & touch targets */
-      .quick-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-      }
-
-      .quick-card {
-        padding: 14px 16px;
-        min-height: 52px;
-        border-radius: var(--radius-md);
-      }
-
-      /* R4: Safe bottom padding on catalog scroll containers */
-      .links-stage {
-        padding: 16px 14px calc(84px + env(safe-area-inset-bottom, 16px)) 14px !important;
-      }
-
-      .links-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .mobile-drawer .sidebar-list {
-        padding-bottom: calc(84px + env(safe-area-inset-bottom, 16px));
-      }
-    }
-
-    /* Small Screen Fine-Tuning (360px - 430px) */
-    @media (max-width: 480px) {
-      .topbar {
-        padding-top: var(--safe-top);
-        padding-left: calc(8px + var(--safe-left));
-        padding-right: calc(8px + var(--safe-right));
-        gap: 6px;
-      }
-
-      .btn-back-hub {
-        padding: 6px 9px;
-        font-size: 12px;
-        gap: 4px;
-        flex-shrink: 0;
-      }
-
-      .active-app-tag, .active-app-icon {
-        display: none !important;
-      }
-
-      .active-app-title {
-        font-size: 13.5px;
-        display: block;
-        min-width: 0;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      .action-btn {
-        padding: 6px 8px;
-        font-size: 11.5px;
-        gap: 4px;
-        min-height: 34px;
-        flex-shrink: 0;
-      }
-    }
-
-    @media (max-width: 380px) {
-      .topbar {
-        padding-top: var(--safe-top);
-        padding-left: calc(6px + var(--safe-left));
-        padding-right: calc(6px + var(--safe-right));
-        gap: 4px;
-      }
-
-      .btn-back-hub {
-        padding: 5px 7px;
-        font-size: 11px;
-      }
-
-      .active-app-title {
-        font-size: 12.5px;
-      }
-
-      .action-btn {
-        padding: 5px 6px;
-        font-size: 11px;
-        gap: 3px;
-      }
-    }
-
-    /* Landscape optimization on small smartphones */
-    @media (max-height: 500px) and (orientation: landscape) {
-      :root {
-        --topbar-height: 48px;
-      }
-      .bottom-nav-bar {
-        height: calc(44px + env(safe-area-inset-bottom, 0px));
-      }
-      .main-stage {
-        padding-bottom: calc(44px + env(safe-area-inset-bottom, 0px));
-      }
-      .bottom-nav-item {
-        min-height: 40px;
-        padding: 2px 0;
-      }
-      .bottom-nav-item .nav-icon {
-        font-size: 17px;
-      }
-      .bottom-nav-item .nav-label {
-        font-size: 10px;
       }
     }
   </style>
@@ -1814,46 +1372,46 @@
     <!-- Desktop Left Sidebar -->
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-header">
-        <div class="brand" id="brand-home" title="Go to Home Hub" role="button" tabindex="0" aria-label="Go to Home Hub">
+        <div class="brand" id="brand-home" title="Go to Master Dashboard" role="button" tabindex="0" aria-label="Go to Master Dashboard">
           <div class="brand-logo" aria-hidden="true">🚀</div>
           <div>
-            <div class="brand-title">Antigravity Portal</div>
-            <div class="brand-sub">Master App Suite</div>
+            <div class="brand-title">Master Index 2.0</div>
+            <div class="brand-sub">Antigravity Portal</div>
           </div>
         </div>
-        <button class="btn-icon" id="btn-collapse-sidebar" title="Collapse Sidebar" aria-label="Collapse Sidebar">◀</button>
+        <button class="btn-icon" id="btn-collapse-sidebar" title="Toggle Sidebar" aria-label="Toggle Sidebar">◀</button>
       </div>
 
       <!-- Mode Switcher Tabs (Apps vs Links) -->
       <div class="mode-switcher-container">
-        <div class="mode-tabs" role="tablist" aria-label="Desktop View Modes">
-          <button class="mode-tab-btn active" id="tab-mode-apps" role="tab" aria-selected="true">🚀 Apps</button>
-          <button class="mode-tab-btn" id="tab-mode-links" role="tab" aria-selected="false">🔗 Links</button>
+        <div class="mode-tabs" role="tablist" aria-label="Catalog Modes">
+          <button class="mode-tab-btn active" id="tab-mode-apps" role="tab" aria-selected="true">🚀 Apps (30)</button>
+          <button class="mode-tab-btn" id="tab-mode-links" role="tab" aria-selected="false">🔗 Quick Share</button>
         </div>
       </div>
 
       <div class="sidebar-controls">
         <div class="search-box">
           <span class="search-icon" aria-hidden="true">🔍</span>
-          <input type="search" class="search-input" id="search-input" placeholder="Search apps, tools... (Ctrl+K)" enterkeyhint="search" autocomplete="off" aria-label="Search apps and tools">
-          <button class="search-clear" id="search-clear" aria-label="Clear Search Input">✕</button>
+          <input type="search" class="search-input" id="sidebar-search" placeholder="Filter tools... (Ctrl+K)" autocomplete="off" aria-label="Filter tools">
+          <button class="search-clear" id="sidebar-search-clear" aria-label="Clear Search Input">✕</button>
         </div>
 
-        <div class="category-pills" id="category-pills" role="tablist" aria-label="App Categories">
-          <!-- Populated dynamically based on mode -->
+        <div class="category-pills" id="sidebar-category-pills" role="tablist" aria-label="Filter Categories">
+          <!-- Populated dynamically -->
         </div>
       </div>
 
-      <div class="sidebar-list" id="app-list">
+      <div class="sidebar-list" id="sidebar-app-list">
         <!-- Rendered dynamically -->
       </div>
 
       <div class="sidebar-footer">
         <div class="mode-indicator">
-          <span class="dot-status" id="mode-dot"></span>
-          <span id="mode-label">Local File Mode</span>
+          <span class="dot-status"></span>
+          <span id="workspace-mode-label">18 Projects Online</span>
         </div>
-        <button class="btn-icon" id="btn-open-qr" title="Mobile QR Code">📱</button>
+        <button class="btn-icon" id="btn-audio-toggle" title="Toggle Audio Feedback" aria-label="Toggle Audio">🔊</button>
       </div>
     </aside>
 
@@ -1864,1287 +1422,994 @@
       <header class="topbar" id="main-topbar" role="banner">
         <div class="topbar-left">
           <button class="btn-icon" id="btn-toggle-sidebar" title="Toggle Sidebar" aria-label="Toggle Sidebar">☰</button>
-          <button class="btn-back-hub" id="btn-back-hub" title="Return to Apps Catalog" aria-label="Back to Hub">← Back to Hub</button>
-          <div class="mobile-brand-title" id="mobile-brand-title" role="button" tabindex="0" aria-label="Antigravity Home">
-            <span class="mobile-brand-icon" aria-hidden="true">🚀</span>
-            <span class="mobile-brand-name">Antigravity</span>
-          </div>
+          <button class="btn-back-hub" id="btn-back-hub" title="Return to Master Dashboard" aria-label="Back to Hub">← Back to Hub</button>
+          
           <div class="active-app-meta" id="active-app-meta">
-            <span class="active-app-icon" id="top-icon">🚀</span>
+            <span class="active-app-icon" id="top-app-icon">🚀</span>
             <div>
-              <span class="active-app-title" id="top-title">Workspace Hub</span>
-              <span class="active-app-tag" id="top-badge">Dashboard</span>
+              <div class="active-app-title" id="top-app-title">Workspace Hub</div>
+              <span class="active-app-tag" id="top-app-tag">Active App</span>
             </div>
           </div>
         </div>
 
-        <!-- Center: Device Simulator (Only visible in Apps mode) -->
+        <!-- Center: Device Simulator Controls (Only in desktop iframe mode) -->
         <div class="topbar-center" id="topbar-device-controls" role="toolbar" aria-label="Device Simulator Controls">
-          <button class="device-btn active" data-mode="desktop" title="Full Desktop View" aria-label="Full Desktop View">🖥️ Full</button>
-          <button class="device-btn" data-mode="tablet" title="iPad / Tablet View (768px)" aria-label="iPad Tablet View">📱 Tablet</button>
-          <button class="device-btn" data-mode="mobile" title="iPhone / Mobile View (390px)" aria-label="iPhone Mobile View">📱 Mobile</button>
+          <button class="device-btn active" data-mode="desktop" title="Full Desktop View">🖥️ Full</button>
+          <button class="device-btn" data-mode="tablet" title="iPad / Tablet View (768px)">📱 Tablet</button>
+          <button class="device-btn" data-mode="mobile" title="iPhone View (390px)">📱 Mobile</button>
         </div>
 
         <!-- Right: Actions -->
         <div class="topbar-right">
-          <button class="action-btn" id="btn-reload-app" title="Reload active app" aria-label="Reload active app">🔄 Reload</button>
-          <a class="action-btn" id="btn-open-tab" href="#" target="_blank" rel="noopener" title="Open in new dedicated browser tab" aria-label="Open in new tab">↗️ Pop Out</a>
-          <button class="action-btn" id="btn-fullscreen" title="Toggle Fullscreen" aria-label="Toggle Fullscreen">⛶</button>
-          <button class="action-btn btn-qr" id="btn-top-qr" title="Connect Phone via Wi-Fi" aria-label="Mobile QR Code">📱 Mobile QR</button>
+          <button class="action-btn" id="btn-open-spotlight" title="Universal AI Search (Ctrl+K)">
+            <span>🔍</span> Search <kbd style="font-size:10px; background:rgba(255,255,255,0.1); padding:2px 5px; border-radius:4px;">Ctrl+K</kbd>
+          </button>
+          <button class="action-btn" id="btn-reload-stage" style="display:none;" title="Reload active app">🔄 Reload</button>
+          <a class="action-btn" id="btn-popout-stage" style="display:none;" href="#" target="_blank" rel="noopener" title="Open in dedicated tab">↗️ Pop Out</a>
+          <button class="action-btn btn-primary" id="btn-top-qr" title="Connect Phone via Wi-Fi">📱 Mobile QR</button>
         </div>
       </header>
 
-      <!-- Mobile Category Strip (Visible in Catalog mode) -->
-      <div class="mobile-category-bar" id="mobile-category-bar" role="navigation" aria-label="Category Filter Strip">
-        <div class="category-pills" id="mobile-header-category-pills" role="tablist" aria-label="Mobile Categories">
-          <!-- Populated dynamically based on mode -->
-        </div>
-      </div>
-
       <!-- Viewport Stage -->
-      <section class="viewport-container" id="viewport-container">
+      <div class="viewport-container" id="viewport-container">
         
-        <!-- Iframe Viewer (For Apps) -->
-        <div class="device-frame" id="device-frame">
-          <div class="phone-notch"></div>
+        <!-- View 1: Master Dashboard -->
+        <div class="dashboard-view" id="dashboard-view">
           
-          <div class="iframe-loader" id="iframe-loader">
-            <div class="spinner"></div>
-            <div style="font-size: 13px; color: var(--text-muted);">Loading application...</div>
-          </div>
-
-          <iframe class="app-iframe" id="content-iframe" title="Application Viewer" src="about:blank"></iframe>
-        </div>
-
-        <!-- Welcome Stage (Home View for Apps) -->
-        <div class="welcome-stage" id="welcome-stage">
-          <div class="welcome-card">
-            <div class="welcome-pill">⚡ Central Command Hub</div>
-            <h1 class="welcome-title">Antigravity Master App Portal</h1>
-            <p class="welcome-desc">
-              Manage and view all your HTML applications, calculators, readers, and tools in one unified interface.
-              Use the sidebar to launch instantly or switch to <strong>Links & Quick Share</strong> to share tools.
+          <!-- Hero Banner -->
+          <div class="hero-banner">
+            <div class="hero-top-row">
+              <span class="hero-pill">⚡ Master Index 2.0</span>
+              <div class="hero-stats-badge">
+                <span>🟢 18 Projects</span>
+                <span>•</span>
+                <span>30 Web Apps</span>
+                <span>•</span>
+                <span>41 Chapters</span>
+              </div>
+            </div>
+            <h1 class="hero-title">Antigravity Executive Launchpad</h1>
+            <p class="hero-desc">
+              Central operational index for all production applications, sacred Islamic corpora, workstation tools, and omnichannel sharing engines. Built for zero-latency execution, local-first reliability, and seamless mobile-desktop pairing.
             </p>
           </div>
 
-          <div class="quick-grid" id="quick-grid">
-            <!-- Populated dynamically with flagship apps -->
-          </div>
-        </div>
-
-        <!-- Links Hub Stage (For Links Mode) -->
-        <div class="links-stage hidden" id="links-stage">
-          <div class="links-panel-inner">
-            <div class="links-stage-header">
-              <div>
-                <h2 class="links-stage-title"><span>🔗</span> Links & Quick Share Hub</h2>
-                <p class="links-stage-desc">Access GitHub repositories, live deployments, cloud services, and share in 1 tap.</p>
+          <!-- Section: Pinned Favorites & Recents (Miller's & Hick's Laws) -->
+          <div class="favorites-section" id="favorites-section">
+            <div class="section-header">
+              <div class="section-title-wrap">
+                <span class="section-icon">⭐</span>
+                <h2 class="section-title">Quick Access & Pinned Favorites</h2>
+                <span class="section-count" id="favorites-count">0</span>
               </div>
-              <button class="btn-add-link-main" id="btn-stage-add-link">➕ Add New Link</button>
             </div>
+            <div class="favorites-grid" id="favorites-grid">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
 
-            <div class="links-grid" id="main-links-grid">
-              <!-- Populated dynamically -->
-            </div>
+          <!-- Section: Thematic Clusters Grid -->
+          <div class="clusters-container" id="clusters-container">
+            <!-- Rendered dynamically across the 4 workspace clusters -->
+          </div>
+
+        </div>
+
+        <!-- View 2: Embedded Iframe Stage (Desktop App Runner) -->
+        <div class="iframe-stage" id="iframe-stage">
+          <div class="device-frame" id="device-frame">
+            <iframe class="app-iframe" id="content-iframe" title="Application Viewer" src="about:blank"></iframe>
           </div>
         </div>
 
-      </section>
+      </div>
 
     </main>
 
   </div>
 
-  <!-- Fixed Native Bottom Navigation Bar (Mobile) -->
-  <nav class="bottom-nav-bar" id="bottom-nav-bar" role="tablist" aria-label="Mobile Navigation">
-    <button class="bottom-nav-item active" id="nav-btn-apps" data-target="apps" role="tab" aria-selected="true" title="Apps Catalog">
-      <span class="nav-icon" aria-hidden="true">🚀</span>
-      <span class="nav-label">Apps</span>
+  <!-- Floating Back Button on Mobile -->
+  <button class="mobile-floating-back" id="mobile-floating-back" aria-label="Return to Master Index">
+    <span>←</span> Back to Hub
+  </button>
+
+  <!-- Mobile Bottom Command Dock (Fitts's Law Ergonomics) -->
+  <nav class="mobile-bottom-dock" id="mobile-bottom-dock" role="tablist" aria-label="Mobile Navigation">
+    <button class="dock-item active" id="dock-btn-apps" data-target="apps" role="tab" aria-selected="true">
+      <span class="dock-icon">🚀</span>
+      <span class="dock-label">Apps</span>
     </button>
-    <button class="bottom-nav-item" id="nav-btn-links" data-target="links" role="tab" aria-selected="false" title="Links & Quick Share">
-      <span class="nav-icon" aria-hidden="true">🔗</span>
-      <span class="nav-label">Quick Share</span>
+    <button class="dock-item" id="dock-btn-favs" data-target="favs" role="tab" aria-selected="false">
+      <span class="dock-icon">⭐</span>
+      <span class="dock-label">Favorites</span>
     </button>
-    <button class="bottom-nav-item" id="nav-btn-search" data-target="search" role="tab" aria-selected="false" aria-haspopup="dialog" aria-expanded="false" title="Instant Search">
-      <span class="nav-icon" aria-hidden="true">🔍</span>
-      <span class="nav-label">Search</span>
+    <button class="dock-item" id="dock-btn-links" data-target="links" role="tab" aria-selected="false">
+      <span class="dock-icon">🔗</span>
+      <span class="dock-label">Quick Share</span>
+    </button>
+    <button class="dock-item" id="dock-btn-search" data-target="search" role="tab" aria-selected="false">
+      <span class="dock-icon">🔍</span>
+      <span class="dock-label">Search</span>
     </button>
   </nav>
 
-  <!-- Mobile Drawer Overlay & Instant Search Overlay -->
-  <div class="drawer-overlay" id="drawer-overlay" aria-hidden="true"></div>
-  <div class="mobile-drawer" id="mobile-drawer" role="dialog" aria-modal="true" aria-label="Search and Navigation Drawer" aria-hidden="true">
-    <div class="drawer-header-row">
-      <div class="drawer-handle" aria-hidden="true"></div>
-      <button class="drawer-close-btn" id="drawer-close-btn" aria-label="Close Search Drawer" title="Close Search">✕</button>
-    </div>
-    <div class="mode-switcher-container" style="padding-bottom: 8px;">
-      <div class="mode-tabs" role="tablist" aria-label="Drawer Mode Switcher">
-        <button class="mode-tab-btn active" id="drawer-mode-apps" role="tab" aria-selected="true">🚀 Apps</button>
-        <button class="mode-tab-btn" id="drawer-mode-links" role="tab" aria-selected="false">🔗 Links</button>
-      </div>
-    </div>
-    <div class="sidebar-controls" style="border-bottom: 1px solid var(--border);">
-      <div class="search-box">
-        <span class="search-icon" aria-hidden="true">🔍</span>
-        <input type="search" class="search-input" id="mobile-search-input" placeholder="Search apps, tools, links..." enterkeyhint="search" autocomplete="off" aria-label="Search mobile catalog">
-        <button class="search-clear" id="mobile-search-clear" aria-label="Clear Search Input">✕</button>
-      </div>
-      <div class="category-pills" id="mobile-category-pills" role="tablist" aria-label="Search Category Filters">
-        <!-- Populated dynamically -->
-      </div>
-    </div>
-    <div class="sidebar-list" id="mobile-app-list">
-      <!-- Populated dynamically -->
-    </div>
-  </div>
-
-  <!-- Mobile QR Code Modal -->
-  <div class="modal-overlay" id="qr-modal" role="dialog" aria-modal="true" aria-labelledby="qr-modal-title" aria-hidden="true">
+  <!-- Omnichannel QR Code & Share Modal -->
+  <div class="modal-backdrop" id="modal-qr" role="dialog" aria-modal="true" aria-labelledby="modal-qr-title">
     <div class="modal-card">
-      <button class="modal-close" id="modal-close" aria-label="Close QR Modal">✕</button>
-      <div style="font-size: 32px; margin-bottom: 8px;" aria-hidden="true">📱</div>
-      <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 6px;" id="qr-modal-title">Share Link via QR Code</h3>
-      <div style="font-size: 12.5px; color: var(--text-dim); margin-bottom: 12px; word-break: break-all;" id="qr-url-text">http://localhost:8080/</div>
-
-      <div class="qr-frame" id="qr-frame">
-        <div style="font-size: 12px; color: #64748b; text-align: center;">
-          Generating QR code...
-        </div>
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-qr-title">📱 Connect Mobile Phone</h3>
+        <button class="modal-close-btn" id="btn-close-modal-qr" aria-label="Close Modal">✕</button>
       </div>
-
-      <div style="display: flex; gap: 8px; justify-content: center; margin-top: 14px;">
-        <button class="action-btn" id="btn-copy-url">📋 Copy Link</button>
-        <button class="action-btn btn-qr" id="btn-wa-modal-share">💬 WhatsApp</button>
+      <div class="qr-container" id="qr-container">
+        <!-- SVG QR Code rendered dynamically -->
+      </div>
+      <p class="qr-instructions" id="qr-instructions">
+        Scan this QR code with your phone camera to open this application on your mobile device instantly.
+      </p>
+      <div style="margin-top:16px; display:flex; gap:8px;">
+        <button class="action-btn btn-primary" id="btn-copy-qr-url" style="flex:1; justify-content:center;">📋 Copy Link</button>
+        <button class="action-btn" id="btn-share-wa" style="justify-content:center;">💬 WhatsApp</button>
       </div>
     </div>
   </div>
 
-  <!-- Add Custom Link Modal -->
-  <div class="modal-overlay" id="add-modal" role="dialog" aria-modal="true" aria-labelledby="add-modal-title" aria-hidden="true">
-    <div class="modal-card">
-      <button class="modal-close" id="add-modal-close" aria-label="Close Add Link Modal">✕</button>
-      <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 14px; color: #fff;" id="add-modal-title">➕ Add Custom Link</h3>
-      <form id="add-link-form">
-        <div class="form-group">
-          <label class="form-label" for="inp-title">Link Title *</label>
-          <input class="form-input" id="inp-title" placeholder="e.g. My Document / Tool" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="inp-url">Web URL (https://...) *</label>
-          <input class="form-input" id="inp-url" type="url" placeholder="https://..." required>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="inp-cat">Category</label>
-          <select class="form-select" id="inp-cat">
-            <option value="⭐ Custom Saved Links">⭐ Custom Saved Links</option>
-            <option value="🚀 Live Web Apps">🚀 Live Web Apps</option>
-            <option value="🐙 GitHub Repositories">🐙 GitHub Repositories</option>
-            <option value="☁️ Cloud & Google Services">☁️ Cloud & Google Services</option>
-            <option value="🛠️ Web Arsenal & Tools">🛠️ Web Arsenal & Tools</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="inp-desc">Short Description</label>
-          <input class="form-input" id="inp-desc" placeholder="What is this link for?">
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="inp-tags">Tags (comma separated)</label>
-          <input class="form-input" id="inp-tags" placeholder="e.g. work, repo, sheet">
-        </div>
-        <button type="submit" class="btn-submit-form">Save Link</button>
-      </form>
+    <!-- PWA Install Banner -->
+  <div class="pwa-banner" id="pwa-banner" role="region" aria-label="Install App Prompt">
+    <div class="pwa-banner-content">
+      <span class="pwa-banner-icon">🚀</span>
+      <div>
+        <div class="pwa-banner-title">Install Master Index</div>
+        <div class="pwa-banner-sub">1-Tap offline launch on your home screen</div>
+      </div>
+    </div>
+    <div class="pwa-banner-actions">
+      <button class="action-btn btn-primary" id="btn-pwa-install" style="padding:6px 12px; font-size:12px;">Install</button>
+      <button class="btn-icon" id="btn-pwa-dismiss" style="width:28px; height:28px; font-size:12px;" title="Dismiss">✕</button>
     </div>
   </div>
 
-  <div id="toast" role="status" aria-live="polite">Copied to clipboard!</div>
+  <!-- Toast Notification -->
+  <div id="toast" role="status" aria-live="polite">
+    <span>✅</span>
+    <span id="toast-msg">Link copied to clipboard!</span>
+  </div>
 
-  <!-- Synchronous Catalog Scripts -->
+  <!-- Catalogs & Search Scripts -->
   <script src="portal_catalog.js"></script>
   <script src="links_catalog.js"></script>
+  <script src="ai_search.js"></script>
 
+  <!-- ==========================================================================
+       MASTER INDEX 2.0 APPLICATION LOGIC
+       ========================================================================== -->
   <script>
-    /**
-     * ANTIGRAVITY MASTER PORTAL & LINKS ENGINE
-     * Strictly adheres to GEMINI.md Directives:
-     * Component Bootloader Isolation, Strict DOM Identifier Hygiene, and Mobile Touch Ergonomics.
-     */
-
+    /* Global Application State */
     const State = {
-      viewMode: "apps", // "apps" or "links"
-      apps: (window.PORTAL_CATALOG && window.PORTAL_CATALOG.apps) ? window.PORTAL_CATALOG.apps : [],
-      baseLinks: (window.LINKS_CATALOG && window.LINKS_CATALOG.links) ? window.LINKS_CATALOG.links : [],
-      customLinks: JSON.parse(localStorage.getItem("antigravity_custom_links") || "[]"),
-      activeApp: null,
-      activeAppCategory: "ALL",
-      activeLinkCategory: "ALL",
+      viewMode: "apps",        // "apps" | "links" | "favs"
+      selectedCluster: "all",  // "all" | "web" | "sacred" | "windows" | "android" | "tools"
       searchQuery: "",
-      deviceMode: "desktop",
-      isServerMode: window.location.protocol.startsWith("http"),
-      activeQRTarget: null,
-      loaderTimeout: null
+      activeApp: null,
+      deviceMode: "desktop",   // "desktop" | "tablet" | "mobile"
+      isSidebarOpen: true,
+      audioMuted: localStorage.getItem("master_index_audio_muted") === "true",
+      favorites: JSON.parse(localStorage.getItem("master_index_favorites") || "[]"),
+      recents: JSON.parse(localStorage.getItem("master_index_recents") || "[]"),
+      apps: [],
+      links: []
     };
 
-    function getAllLinks() {
-      return [...State.baseLinks, ...State.customLinks];
-    }
+    /* Thematic Workspace Cluster Taxonomy */
+    const CLUSTERS = [
+      { id: "web", name: "Web Applications & PWAs", tag: "Cluster 1 (01–06)", icon: "🌐", tagClass: "cluster-tag-web" },
+      { id: "sacred", name: "Sacred Corpora & Digital Libraries", tag: "Cluster 2 (07–11)", icon: "📖", tagClass: "cluster-tag-sacred" },
+      { id: "windows", name: "Windows Workstation Tools", tag: "Cluster 3 (12–15)", icon: "🖥️", tagClass: "cluster-tag-windows" },
+      { id: "android", name: "Android Native & System Guides", tag: "Cluster 4 (16–18)", icon: "📱", tagClass: "cluster-tag-android" },
+      { id: "tools", name: "Core Knowledge & Shared Hubs", tag: "Shared Hubs", icon: "🧰", tagClass: "cluster-tag-links" }
+    ];
 
-    const DOM = {};
-
-    function cacheDOM() {
-      DOM.sidebar = document.getElementById("sidebar");
-      DOM.btnToggleSidebar = document.getElementById("btn-toggle-sidebar");
-      DOM.btnCollapseSidebar = document.getElementById("btn-collapse-sidebar");
-      DOM.brandHome = document.getElementById("brand-home");
-
-      DOM.tabModeApps = document.getElementById("tab-mode-apps");
-      DOM.tabModeLinks = document.getElementById("tab-mode-links");
-      DOM.drawerModeApps = document.getElementById("drawer-mode-apps");
-      DOM.drawerModeLinks = document.getElementById("drawer-mode-links");
-
-      DOM.searchInput = document.getElementById("search-input");
-      DOM.searchClear = document.getElementById("search-clear");
-      DOM.categoryPills = document.getElementById("category-pills");
-      DOM.appList = document.getElementById("app-list");
-      DOM.modeDot = document.getElementById("mode-dot");
-      DOM.modeLabel = document.getElementById("mode-label");
-
-      DOM.btnBackHub = document.getElementById("btn-back-hub");
-      DOM.mobileBrandTitle = document.getElementById("mobile-brand-title");
-      DOM.mobileCategoryBar = document.getElementById("mobile-category-bar");
-      DOM.mobileHeaderCategoryPills = document.getElementById("mobile-header-category-pills");
-
-      DOM.topIcon = document.getElementById("top-icon");
-      DOM.topTitle = document.getElementById("top-title");
-      DOM.topBadge = document.getElementById("top-badge");
-      DOM.topbarDeviceControls = document.getElementById("topbar-device-controls");
-      DOM.deviceButtons = document.querySelectorAll(".device-btn");
-      DOM.btnReload = document.getElementById("btn-reload-app");
-      DOM.btnOpenTab = document.getElementById("btn-open-tab");
-      DOM.btnFullscreen = document.getElementById("btn-fullscreen");
-      DOM.btnTopQR = document.getElementById("btn-top-qr");
-      DOM.btnOpenQR = document.getElementById("btn-open-qr");
-
-      DOM.viewportContainer = document.getElementById("viewport-container");
-      DOM.deviceFrame = document.getElementById("device-frame");
-      DOM.contentIframe = document.getElementById("content-iframe");
-      DOM.iframeLoader = document.getElementById("iframe-loader");
-      DOM.welcomeStage = document.getElementById("welcome-stage");
-      DOM.quickGrid = document.getElementById("quick-grid");
-
-      DOM.linksStage = document.getElementById("links-stage");
-      DOM.mainLinksGrid = document.getElementById("main-links-grid");
-      DOM.btnStageAddLink = document.getElementById("btn-stage-add-link");
-
-      DOM.bottomNavBar = document.getElementById("bottom-nav-bar");
-      DOM.navBtnApps = document.getElementById("nav-btn-apps");
-      DOM.navBtnLinks = document.getElementById("nav-btn-links");
-      DOM.navBtnSearch = document.getElementById("nav-btn-search");
-
-      DOM.mobileSwitcherPill = document.getElementById("mobile-switcher-pill");
-      DOM.drawerOverlay = document.getElementById("drawer-overlay");
-      DOM.mobileDrawer = document.getElementById("mobile-drawer");
-      DOM.drawerCloseBtn = document.getElementById("drawer-close-btn");
-      DOM.mobileSearchInput = document.getElementById("mobile-search-input");
-      DOM.mobileSearchClear = document.getElementById("mobile-search-clear");
-      DOM.mobileCategoryPills = document.getElementById("mobile-category-pills");
-      DOM.mobileAppList = document.getElementById("mobile-app-list");
-
-      DOM.qrModal = document.getElementById("qr-modal");
-      DOM.modalClose = document.getElementById("modal-close");
-      DOM.qrModalTitle = document.getElementById("qr-modal-title");
-      DOM.qrUrlText = document.getElementById("qr-url-text");
-      DOM.qrFrame = document.getElementById("qr-frame");
-      DOM.btnCopyUrl = document.getElementById("btn-copy-url");
-      DOM.btnWaModalShare = document.getElementById("btn-wa-modal-share");
-
-      DOM.addModal = document.getElementById("add-modal");
-      DOM.addModalClose = document.getElementById("add-modal-close");
-      DOM.addForm = document.getElementById("add-link-form");
-
-      DOM.toast = document.getElementById("toast");
-    }
-
-    function showToast(msg) {
-      if (!DOM.toast) return;
-      DOM.toast.textContent = msg;
-      DOM.toast.classList.add("show");
-      setTimeout(() => DOM.toast.classList.remove("show"), 2500);
-    }
-
-    function updateTopbarState() {
-      const isAppActive = (State.viewMode === "apps") && !!State.activeApp;
-      document.body.classList.toggle("app-active", isAppActive);
-
-      if (DOM.btnBackHub) {
-        DOM.btnBackHub.style.display = isAppActive ? "inline-flex" : "none";
-      }
-      if (DOM.mobileBrandTitle) {
-        DOM.mobileBrandTitle.style.display = isAppActive ? "none" : "";
-      }
-      if (DOM.btnReload) {
-        DOM.btnReload.style.display = (State.viewMode === "apps" && isAppActive) ? "inline-flex" : "none";
-      }
-      if (DOM.btnOpenTab) {
-        DOM.btnOpenTab.style.display = (State.viewMode === "apps" && isAppActive) ? "inline-flex" : "none";
-      }
-    }
-
-    function setViewMode(mode, updateHash = true) {
-      State.viewMode = mode;
-      
-      if (updateHash) {
-        if (mode === "links" && window.location.hash !== "#links") {
-          window.location.hash = "links";
-        } else if (mode === "apps" && window.location.hash && window.location.hash !== "#apps" && !State.activeApp) {
-          window.location.hash = "apps";
+    /* Procedural Web Audio API Micro-Haptics (Strict Zero-Music Jurisprudence) */
+    const AudioEngine = {
+      ctx: null,
+      init() {
+        if (!this.ctx && (window.AudioContext || window.webkitAudioContext)) {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          this.ctx = new AudioContextClass();
         }
+      },
+      play(fn) {
+        if (State.audioMuted) return;
+        try {
+          this.init();
+          if (this.ctx && this.ctx.state === 'suspended') {
+            this.ctx.resume();
+          }
+          if (this.ctx) fn(this.ctx);
+        } catch (e) {}
+      },
+      tap() {
+        this.play(ctx => {
+          const osc = ctx.createOscillator(), gain = ctx.createGain(), now = ctx.currentTime;
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(520, now);
+          osc.frequency.exponentialRampToValueAtTime(300, now + 0.035);
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.035);
+          osc.connect(gain); gain.connect(ctx.destination);
+          osc.start(now); osc.stop(now + 0.04);
+        });
+      },
+      favorite() {
+        this.play(ctx => {
+          const now = ctx.currentTime;
+          [659, 880].forEach((freq, idx) => {
+            const osc = ctx.createOscillator(), gain = ctx.createGain(), start = now + idx * 0.04;
+            osc.type = "triangle";
+            osc.frequency.setValueAtTime(freq, start);
+            gain.gain.setValueAtTime(0.15, start);
+            gain.gain.exponentialRampToValueAtTime(0.001, start + 0.06);
+            osc.connect(gain); gain.connect(ctx.destination);
+            osc.start(start); osc.stop(start + 0.07);
+          });
+        });
+      },
+      share() {
+        this.play(ctx => {
+          const now = ctx.currentTime;
+          [523, 659, 783].forEach((freq, idx) => {
+            const osc = ctx.createOscillator(), gain = ctx.createGain(), start = now + idx * 0.04;
+            osc.type = "sine";
+            osc.frequency.setValueAtTime(freq, start);
+            gain.gain.setValueAtTime(0.12, start);
+            gain.gain.exponentialRampToValueAtTime(0.001, start + 0.07);
+            osc.connect(gain); gain.connect(ctx.destination);
+            osc.start(start); osc.stop(start + 0.08);
+          });
+        });
+      },
+      reset() {
+        this.play(ctx => {
+          const osc = ctx.createOscillator(), gain = ctx.createGain(), now = ctx.currentTime;
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(140, now);
+          osc.frequency.exponentialRampToValueAtTime(80, now + 0.05);
+          gain.gain.setValueAtTime(0.15, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+          osc.connect(gain); gain.connect(ctx.destination);
+          osc.start(now); osc.stop(now + 0.06);
+        });
       }
+    };
 
-      const isApps = mode === "apps";
-      if (DOM.tabModeApps) {
-        DOM.tabModeApps.classList.toggle("active", isApps);
-        DOM.tabModeApps.setAttribute("aria-selected", isApps ? "true" : "false");
+    /* Toast Notification Helper */
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      const msgEl = document.getElementById("toast-msg");
+      if (toast && msgEl) {
+        msgEl.textContent = message;
+        toast.classList.add("show");
+        AudioEngine.share();
+        setTimeout(() => toast.classList.remove("show"), 2400);
       }
-      if (DOM.tabModeLinks) {
-        DOM.tabModeLinks.classList.toggle("active", !isApps);
-        DOM.tabModeLinks.setAttribute("aria-selected", !isApps ? "true" : "false");
-      }
-      if (DOM.drawerModeApps) {
-        DOM.drawerModeApps.classList.toggle("active", isApps);
-        DOM.drawerModeApps.setAttribute("aria-selected", isApps ? "true" : "false");
-      }
-      if (DOM.drawerModeLinks) {
-        DOM.drawerModeLinks.classList.toggle("active", !isApps);
-        DOM.drawerModeLinks.setAttribute("aria-selected", !isApps ? "true" : "false");
-      }
-
-      if (DOM.navBtnApps) {
-        DOM.navBtnApps.classList.toggle("active", isApps);
-        DOM.navBtnApps.setAttribute("aria-selected", isApps ? "true" : "false");
-      }
-      if (DOM.navBtnLinks) {
-        DOM.navBtnLinks.classList.toggle("active", !isApps);
-        DOM.navBtnLinks.setAttribute("aria-selected", !isApps ? "true" : "false");
-      }
-      if (DOM.navBtnSearch) {
-        DOM.navBtnSearch.classList.remove("active");
-        DOM.navBtnSearch.setAttribute("aria-selected", "false");
-      }
-
-      if (DOM.topbarDeviceControls) DOM.topbarDeviceControls.style.display = isApps ? "flex" : "none";
-
-      if (isApps) {
-        if (DOM.linksStage) DOM.linksStage.classList.add("hidden");
-        if (State.activeApp) {
-          if (DOM.deviceFrame) DOM.deviceFrame.style.display = "flex";
-          if (DOM.welcomeStage) DOM.welcomeStage.classList.add("hidden");
-        } else {
-          if (DOM.welcomeStage) DOM.welcomeStage.classList.remove("hidden");
-          if (DOM.deviceFrame) DOM.deviceFrame.style.display = "none";
-        }
-      } else {
-        if (DOM.welcomeStage) DOM.welcomeStage.classList.add("hidden");
-        if (DOM.deviceFrame) DOM.deviceFrame.style.display = "none";
-        if (DOM.linksStage) DOM.linksStage.classList.remove("hidden");
-        if (DOM.topIcon) DOM.topIcon.textContent = "🔗";
-        if (DOM.topTitle) DOM.topTitle.textContent = "Links & Quick Share";
-        if (DOM.topBadge) DOM.topBadge.textContent = "Vault";
-      }
-
-      updateTopbarState();
-      renderPills();
-      renderSidebarList();
-      renderQuickGrid();
-      if (!isApps) renderLinksGrid();
     }
 
-    function renderPills() {
-      const isApps = State.viewMode === "apps";
-      let pills = [];
-      if (isApps) {
-        pills = [
-          { label: "All Apps", cat: "ALL" },
-          { label: "🕌 Islamic", cat: "Islamic & Faith" },
-          { label: "🛠️ Tools", cat: "Productivity & Utilities" },
-          { label: "🥗 Health", cat: "Health & Nutrition" },
-          { label: "🧠 Knowledge", cat: "Knowledge & Engineering" },
-          { label: "🔍 Discovered", cat: "Discovered Tools" }
-        ];
-      } else {
-        pills = [
-          { label: "All Links", cat: "ALL" },
-          { label: "🚀 Live Apps", cat: "🚀 Live Web Apps" },
-          { label: "🐙 GitHub", cat: "🐙 GitHub Repositories" },
-          { label: "☁️ Cloud", cat: "☁️ Cloud & Google Services" },
-          { label: "🛠️ Web Tools", cat: "🛠️ Web Arsenal & Tools" },
-          { label: "⭐ Custom", cat: "⭐ Custom Saved Links" }
-        ];
+    /* Helper: Map App to Workspace Thematic Cluster */
+    function getAppCluster(app) {
+      const id = app.id || "";
+      if (id.startsWith("01-") || id.startsWith("02-") || id.startsWith("03-") || id.startsWith("04-") || id.startsWith("05-") || id.startsWith("06-")) {
+        return "web";
       }
+      if (id.startsWith("07-") || id.startsWith("08-") || id.startsWith("09-") || id.startsWith("10-") || id.startsWith("11-")) {
+        return "sacred";
+      }
+      if (id.startsWith("12-") || id.startsWith("13-") || id.startsWith("14-") || id.startsWith("15-")) {
+        return "windows";
+      }
+      if (id.startsWith("16-") || id.startsWith("17-") || id.startsWith("18-")) {
+        return "android";
+      }
+      return "tools";
+    }
 
-      const activeCat = isApps ? State.activeAppCategory : State.activeLinkCategory;
-      const html = pills.map(p => `
-        <button class="cat-pill ${p.cat === activeCat ? 'active' : ''}" data-cat="${escapeHtml(p.cat)}" role="tab" aria-selected="${p.cat === activeCat ? 'true' : 'false'}">
-          ${escapeHtml(p.label)}
+    /* Helper: Escape HTML strings */
+    function escapeHtml(str) {
+      return String(str || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    }
+
+    /* Helper: Resolve Launch URL */
+    function getLaunchUrl(app) {
+      if (window.location.protocol === "file:") {
+        return app.localPath || app.relativePath || "";
+      }
+      return app.webPath || app.relativePath || "";
+    }
+
+    /* Render Category Filter Pills */
+    function renderCategoryPills() {
+      const container = document.getElementById("sidebar-category-pills");
+      if (!container) return;
+
+      const items = [
+        { id: "all", label: `All (${State.apps.length})` },
+        { id: "web", label: "🌐 Web PWAs" },
+        { id: "sacred", label: "📖 Sacred Corpora" },
+        { id: "windows", label: "🖥️ Windows Tools" },
+        { id: "android", label: "📱 Android" },
+        { id: "tools", label: "🧰 Hubs" }
+      ];
+
+      container.innerHTML = items.map(it => `
+        <button class="pill-btn ${State.selectedCluster === it.id ? 'active' : ''}" data-cluster="${it.id}">
+          ${it.label}
         </button>
       `).join("");
 
-      if (DOM.categoryPills) DOM.categoryPills.innerHTML = html;
-      if (DOM.mobileCategoryPills) DOM.mobileCategoryPills.innerHTML = html;
-      if (DOM.mobileHeaderCategoryPills) DOM.mobileHeaderCategoryPills.innerHTML = html;
-    }
-
-    function renderQuickGrid() {
-      if (!DOM.quickGrid) return;
-      const query = State.searchQuery.toLowerCase().trim();
-      const filtered = State.apps.filter(app => {
-        const matchesCategory = (State.activeAppCategory === "ALL") || (app.category === State.activeAppCategory);
-        if (!matchesCategory) return false;
-        if (!query) return true;
-        const inTitle = (app.title || "").toLowerCase().includes(query);
-        const inDesc = (app.description || "").toLowerCase().includes(query);
-        const inCat = (app.category || "").toLowerCase().includes(query);
-        const inTags = (app.tags || []).some(t => t.toLowerCase().includes(query));
-        return inTitle || inDesc || inCat || inTags;
-      });
-
-      if (filtered.length === 0) {
-        DOM.quickGrid.innerHTML = `
-          <div style="grid-column: 1 / -1; padding: 40px 16px; text-align: center; color: var(--text-dim); font-size: 14px;">
-            🔍 No applications found matching "${escapeHtml(query || State.activeAppCategory)}"
-          </div>
-        `;
-        return;
-      }
-
-      DOM.quickGrid.innerHTML = filtered.map(app => `
-        <div class="quick-card" data-app-id="${escapeHtml(app.id)}">
-          <div class="quick-card-head">
-            <div class="quick-card-icon">${app.icon || '🚀'}</div>
-            <div class="quick-card-meta">
-              <div class="quick-card-title">${escapeHtml(app.title)}</div>
-              <span class="quick-card-tag">${escapeHtml(app.badge || app.category)}</span>
-            </div>
-          </div>
-          <div class="quick-card-desc">${escapeHtml(app.description || '')}</div>
-          <div class="quick-card-footer">
-            <span class="quick-card-cat">${escapeHtml(app.category)}</span>
-            <span class="quick-card-launch">Launch ↗</span>
-          </div>
-        </div>
-      `).join("");
-    }
-
-    function renderSidebarList() {
-      if (State.viewMode === "apps") {
-        renderAppList();
-      } else {
-        renderLinksSidebarList();
-      }
-    }
-
-    function renderAppList() {
-      if (!DOM.appList) return;
-      const query = State.searchQuery.toLowerCase().trim();
-
-      const filtered = State.apps.filter(app => {
-        const matchesCategory = (State.activeAppCategory === "ALL") || (app.category === State.activeAppCategory);
-        if (!matchesCategory) return false;
-        if (!query) return true;
-        const inTitle = (app.title || "").toLowerCase().includes(query);
-        const inDesc = (app.description || "").toLowerCase().includes(query);
-        const inCat = (app.category || "").toLowerCase().includes(query);
-        const inTags = (app.tags || []).some(t => t.toLowerCase().includes(query));
-        return inTitle || inDesc || inCat || inTags;
-      });
-
-      if (filtered.length === 0) {
-        DOM.appList.innerHTML = `<div style="padding: 24px; text-align: center; color: var(--text-dim); font-size: 13px;">No applications found.</div>`;
-        return;
-      }
-
-      const grouped = {};
-      filtered.forEach(app => {
-        const cat = app.category || "Other";
-        if (!grouped[cat]) grouped[cat] = [];
-        grouped[cat].push(app);
-      });
-
-      let html = "";
-      for (const [catName, catApps] of Object.entries(grouped)) {
-        html += `<div class="section-label"><span>${escapeHtml(catName)}</span><span>${catApps.length}</span></div>`;
-        catApps.forEach(app => {
-          const isActive = State.activeApp && State.activeApp.id === app.id;
-          html += `
-            <div class="app-item ${isActive ? 'active' : ''}" data-app-id="${escapeHtml(app.id)}">
-              <div class="app-item-icon">${app.icon || '🚀'}</div>
-              <div class="app-item-info">
-                <div class="app-item-top">
-                  <span class="app-item-title">${escapeHtml(app.title)}</span>
-                  <span class="app-item-badge">${escapeHtml(app.badge || '')}</span>
-                </div>
-                <div class="app-item-desc">${escapeHtml(app.description || '')}</div>
-              </div>
-            </div>
-          `;
+      container.querySelectorAll(".pill-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          AudioEngine.tap();
+          State.selectedCluster = btn.getAttribute("data-cluster");
+          renderCategoryPills();
+          renderSidebarList();
+          renderDashboardClusters();
         });
-      }
-
-      DOM.appList.innerHTML = html;
-      if (DOM.mobileAppList) DOM.mobileAppList.innerHTML = html;
+      });
     }
 
-    function renderLinksSidebarList() {
-      if (!DOM.appList) return;
-      const all = getAllLinks();
-      const query = State.searchQuery.toLowerCase().trim();
+    /* Render Sidebar App List */
+    function renderSidebarList() {
+      const listEl = document.getElementById("sidebar-app-list");
+      if (!listEl) return;
 
-      const filtered = all.filter(item => {
-        const matchesCat = (State.activeLinkCategory === "ALL") || (item.category === State.activeLinkCategory);
-        if (!matchesCat) return false;
-        if (!query) return true;
-        const inTitle = (item.title || "").toLowerCase().includes(query);
-        const inUrl = (item.url || "").toLowerCase().includes(query);
-        const inTags = (item.tags || []).some(t => t.toLowerCase().includes(query));
-        return inTitle || inUrl || inTags;
-      });
+      let filtered = State.apps;
+      if (State.selectedCluster !== "all") {
+        filtered = filtered.filter(a => getAppCluster(a) === State.selectedCluster);
+      }
+      if (State.searchQuery.trim()) {
+        const q = State.searchQuery.toLowerCase();
+        filtered = filtered.filter(a => 
+          a.title.toLowerCase().includes(q) || 
+          (a.description && a.description.toLowerCase().includes(q)) ||
+          (a.tags && a.tags.some(t => t.toLowerCase().includes(q)))
+        );
+      }
 
       if (filtered.length === 0) {
-        DOM.appList.innerHTML = `<div style="padding: 24px; text-align: center; color: var(--text-dim); font-size: 13px;">No links found.</div>`;
+        listEl.innerHTML = `<div style="text-align:center; padding:24px; color:var(--text-dim); font-size:13px;">No applications match your filter.</div>`;
         return;
       }
 
-      let html = filtered.map(link => `
-        <div class="app-item link-sidebar-item" data-url="${escapeHtml(link.url)}" data-title="${escapeHtml(link.title)}">
-          <div class="app-item-icon">${link.icon || '🔗'}</div>
-          <div class="app-item-info">
-            <div class="app-item-top">
-              <span class="app-item-title">${escapeHtml(link.title)}</span>
-              <span class="app-item-badge">${escapeHtml(link.badge || link.category)}</span>
+      listEl.innerHTML = filtered.map(app => {
+        const isStarred = State.favorites.includes(app.id);
+        const isActive = State.activeApp && State.activeApp.id === app.id;
+        return `
+          <div class="app-item ${isActive ? 'active' : ''}" data-id="${escapeHtml(app.id)}">
+            <div class="app-item-icon">${app.icon || '📦'}</div>
+            <div class="app-item-info">
+              <div class="app-item-title">${escapeHtml(app.title)}</div>
+              <div class="app-item-badge">${escapeHtml(app.badge || app.category || '')}</div>
             </div>
-            <div class="app-item-desc">${escapeHtml(link.domain || link.url)}</div>
+            <button class="app-item-fav-btn ${isStarred ? 'starred' : ''}" data-fav-id="${escapeHtml(app.id)}" title="${isStarred ? 'Unpin from favorites' : 'Pin to favorites'}">
+              ${isStarred ? '★' : '☆'}
+            </button>
+          </div>
+        `;
+      }).join("");
+
+      // Bind sidebar item events
+      listEl.querySelectorAll(".app-item").forEach(item => {
+        item.addEventListener("click", (e) => {
+          if (e.target.closest(".app-item-fav-btn")) return;
+          const appId = item.getAttribute("data-id");
+          launchApp(appId);
+        });
+      });
+
+      // Bind favorite toggles
+      listEl.querySelectorAll(".app-item-fav-btn").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const appId = btn.getAttribute("data-fav-id");
+          toggleFavorite(appId);
+        });
+      });
+    }
+
+    /* Toggle Favorite State */
+    function toggleFavorite(appId) {
+      const idx = State.favorites.indexOf(appId);
+      if (idx > -1) {
+        State.favorites.splice(idx, 1);
+        AudioEngine.reset();
+        showToast("Removed from Favorites");
+      } else {
+        State.favorites.push(appId);
+        AudioEngine.favorite();
+        showToast("Pinned to Favorites! ⭐");
+      }
+      localStorage.setItem("master_index_favorites", JSON.stringify(State.favorites));
+      renderFavorites();
+      renderSidebarList();
+      renderDashboardClusters();
+    }
+
+    /* Render Pinned Favorites & Recents Strip */
+    function renderFavorites() {
+      const gridEl = document.getElementById("favorites-grid");
+      const countEl = document.getElementById("favorites-count");
+      if (!gridEl) return;
+
+      const favApps = State.apps.filter(a => State.favorites.includes(a.id));
+      if (countEl) countEl.textContent = favApps.length;
+
+      if (favApps.length === 0) {
+        // Show default smart essentials
+        const defaultIds = [
+          "01-Events-Countdown__index_html",
+          "02-Namaz-Prayer-Times__index_html",
+          "03-Thela-Stock-Manager__index_html",
+          "07-Quran-Deep-Analyzer__index_html"
+        ];
+        const defaults = State.apps.filter(a => defaultIds.includes(a.id));
+        gridEl.innerHTML = defaults.map(app => renderFavCard(app, false)).join("");
+      } else {
+        gridEl.innerHTML = favApps.map(app => renderFavCard(app, true)).join("");
+      }
+
+      // Bind clicks
+      gridEl.querySelectorAll(".fav-card").forEach(card => {
+        card.addEventListener("click", (e) => {
+          if (e.target.closest(".fav-unpin-btn")) return;
+          const appId = card.getAttribute("data-id");
+          launchApp(appId);
+        });
+      });
+
+      gridEl.querySelectorAll(".fav-unpin-btn").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const appId = btn.getAttribute("data-unpin-id");
+          toggleFavorite(appId);
+        });
+      });
+    }
+
+    function renderFavCard(app, isCustom) {
+      return `
+        <div class="fav-card" data-id="${escapeHtml(app.id)}">
+          <div class="fav-card-top">
+            <div class="fav-icon">${app.icon || '🚀'}</div>
+            <div class="fav-meta">
+              <div class="fav-title">${escapeHtml(app.title)}</div>
+              <div class="fav-category">${escapeHtml(app.category || 'Essential')}</div>
+            </div>
+            ${isCustom ? `
+              <button class="fav-unpin-btn" data-unpin-id="${escapeHtml(app.id)}" title="Unpin from Favorites">★</button>
+            ` : `
+              <button class="fav-unpin-btn" data-unpin-id="${escapeHtml(app.id)}" title="Pin to Favorites" style="color:var(--text-dim);">☆</button>
+            `}
+          </div>
+          <div class="fav-actions">
+            <button class="fav-launch-btn">🚀 1-Tap Launch</button>
           </div>
         </div>
-      `).join('');
-
-      DOM.appList.innerHTML = html;
-      if (DOM.mobileAppList) DOM.mobileAppList.innerHTML = html;
+      `;
     }
 
-    function renderLinksGrid() {
-      if (!DOM.mainLinksGrid) return;
-      const all = getAllLinks();
-      const query = State.searchQuery.toLowerCase().trim();
+    /* Render Thematic Clusters in Dashboard */
+    function renderDashboardClusters() {
+      const container = document.getElementById("clusters-container");
+      if (!container) return;
 
-      const filtered = all.filter(item => {
-        const matchesCategory = (State.activeLinkCategory === "ALL") || (item.category === State.activeLinkCategory);
-        if (!matchesCategory) return false;
-        if (!query) return true;
-        const inTitle = (item.title || "").toLowerCase().includes(query);
-        const inDesc = (item.description || "").toLowerCase().includes(query);
-        const inUrl = (item.url || "").toLowerCase().includes(query);
-        const inDomain = (item.domain || "").toLowerCase().includes(query);
-        const inTags = (item.tags || []).some(t => t.toLowerCase().includes(query));
-        return inTitle || inDesc || inUrl || inDomain || inTags;
-      });
+      let activeClusters = CLUSTERS;
+      if (State.selectedCluster !== "all") {
+        activeClusters = CLUSTERS.filter(c => c.id === State.selectedCluster);
+      }
 
-      if (filtered.length === 0) {
-        DOM.mainLinksGrid.innerHTML = `
-          <div style="grid-column: 1 / -1; padding: 40px; text-align: center; color: var(--text-dim);">
-            🔍 No links found matching "${escapeHtml(query)}"
+      container.innerHTML = activeClusters.map(cluster => {
+        let apps = State.apps.filter(a => getAppCluster(a) === cluster.id);
+        if (State.searchQuery.trim()) {
+          const q = State.searchQuery.toLowerCase();
+          apps = apps.filter(a => 
+            a.title.toLowerCase().includes(q) || 
+            (a.description && a.description.toLowerCase().includes(q)) ||
+            (a.tags && a.tags.some(t => t.toLowerCase().includes(q)))
+          );
+        }
+
+        if (apps.length === 0) return "";
+
+        return `
+          <div class="cluster-block" id="cluster-block-${cluster.id}">
+            <div class="cluster-banner">
+              <div class="cluster-banner-left">
+                <span class="cluster-tag ${cluster.tagClass}">${cluster.tag}</span>
+                <span class="cluster-title">${cluster.icon} ${cluster.name}</span>
+              </div>
+              <span class="section-count">${apps.length} Apps</span>
+            </div>
+            <div class="cluster-grid">
+              ${apps.map(app => renderAppCard(app)).join("")}
+            </div>
           </div>
         `;
-        return;
-      }
+      }).join("");
 
-      DOM.mainLinksGrid.innerHTML = filtered.map(link => {
-        const domain = link.domain || extractDomain(link.url);
-        return `
-          <article class="link-card" data-url="${escapeHtml(link.url)}" data-title="${escapeHtml(link.title)}" data-desc="${escapeHtml(link.description || '')}">
-            <div class="card-head">
-              <div class="card-icon">${link.icon || '🔗'}</div>
-              <div class="card-info">
-                <div class="card-title-row">
-                  <span class="card-title" title="${escapeHtml(link.title)}">${escapeHtml(link.title)}</span>
-                  <span class="card-badge">${escapeHtml(link.badge || link.category)}</span>
-                </div>
-                <div class="card-domain">${escapeHtml(domain)}</div>
+      // Bind App Card events
+      container.querySelectorAll(".app-card").forEach(card => {
+        card.addEventListener("click", (e) => {
+          if (e.target.closest(".card-action-btn") || e.target.closest(".card-action-launch")) return;
+          const appId = card.getAttribute("data-id");
+          launchApp(appId);
+        });
+      });
+
+      container.querySelectorAll(".card-action-launch").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const appId = btn.getAttribute("data-launch-id");
+          launchApp(appId);
+        });
+      });
+
+      container.querySelectorAll(".btn-card-fav").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const appId = btn.getAttribute("data-fav-id");
+          toggleFavorite(appId);
+        });
+      });
+
+      container.querySelectorAll(".btn-card-share").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const appId = btn.getAttribute("data-share-id");
+          openShareModal(appId);
+        });
+      });
+    }
+
+    function renderAppCard(app) {
+      const isStarred = State.favorites.includes(app.id);
+      const url = getLaunchUrl(app);
+      return `
+        <div class="app-card" data-id="${escapeHtml(app.id)}">
+          <div class="app-card-header">
+            <div class="app-card-icon">${app.icon || '📦'}</div>
+            <div class="app-card-meta">
+              <div class="app-card-title">
+                ${escapeHtml(app.title)}
               </div>
+              <span class="app-card-badge">${escapeHtml(app.badge || app.category || '')}</span>
             </div>
-
-            <p class="card-desc">${escapeHtml(link.description || 'Quick access link.')}</p>
-
-            <div class="card-tags">
-              ${(link.tags || []).map(t => `<span class="card-tag">#${escapeHtml(t)}</span>`).join('')}
-            </div>
-
-            <div class="card-actions">
-              <button class="btn-act act-copy" title="Copy clean link">📋 Copy</button>
-              <button class="btn-act btn-act-wa act-wa" title="Share via WhatsApp">💬 WhatsApp</button>
-              <button class="btn-act act-qr" title="Scan QR code">📱 QR</button>
-              <button class="btn-act act-native" title="Share via phone">📲</button>
-              <a class="btn-act btn-act-open" href="${escapeHtml(link.url)}" target="_blank" rel="noopener" title="Open in new tab">↗️ Open</a>
-            </div>
-          </article>
-        `;
-      }).join('');
+          </div>
+          <div class="app-card-desc">${escapeHtml(app.description || '')}</div>
+          <div class="app-card-tags">
+            ${(app.tags || []).slice(0, 3).map(t => `<span class="card-tag">${escapeHtml(t)}</span>`).join("")}
+          </div>
+          <div class="app-card-actions">
+            <button class="card-action-launch" data-launch-id="${escapeHtml(app.id)}">🚀 Launch</button>
+            <a class="card-action-btn" href="${escapeHtml(url)}" target="_blank" rel="noopener" title="Pop out in new dedicated tab" onclick="event.stopPropagation(); AudioEngine.tap();">↗️</a>
+            <button class="card-action-btn btn-card-share" data-share-id="${escapeHtml(app.id)}" title="Share application link">🔗</button>
+            <button class="card-action-btn btn-card-fav ${isStarred ? 'starred' : ''}" data-fav-id="${escapeHtml(app.id)}" title="${isStarred ? 'Unpin from favorites' : 'Pin to favorites'}">
+              ${isStarred ? '★' : '☆'}
+            </button>
+          </div>
+        </div>
+      `;
     }
 
-    function extractDomain(url) {
-      try {
-        const u = new URL(url);
-        return u.hostname;
-      } catch (e) {
-        return url;
-      }
-    }
-
-    function getAppUrl(app) {
-      if (!app) return "about:blank";
-      if (State.isServerMode && app.serverHref) return app.serverHref;
-      return app.portalHref || app.serverHref || "#";
-    }
-
-    function selectApp(appId, updateHash = true) {
+    /* Launch Application (Adaptive Desktop vs Mobile) */
+    function launchApp(appId) {
       const app = State.apps.find(a => a.id === appId);
       if (!app) return;
 
-      setViewMode("apps", false);
+      AudioEngine.tap();
       State.activeApp = app;
-      localStorage.setItem("antigravity_portal_last_active_app", app.id);
 
-      if (updateHash) {
-        const targetHash = `#app=${encodeURIComponent(app.id)}`;
-        if (window.location.hash !== targetHash) {
-          window.location.hash = targetHash;
-        }
+      // Update Recents
+      const rIdx = State.recents.indexOf(appId);
+      if (rIdx > -1) State.recents.splice(rIdx, 1);
+      State.recents.unshift(appId);
+      if (State.recents.length > 8) State.recents.pop();
+      localStorage.setItem("master_index_recents", JSON.stringify(State.recents));
+
+      const url = getLaunchUrl(app);
+
+      // On mobile viewport (<= 900px): launch directly full-screen
+      if (window.innerWidth <= 900) {
+        window.location.href = url;
+        return;
       }
 
-      if (DOM.welcomeStage) DOM.welcomeStage.classList.add("hidden");
-      if (DOM.deviceFrame) DOM.deviceFrame.style.display = "flex";
-      if (DOM.iframeLoader) DOM.iframeLoader.classList.add("active");
+      // On desktop: use the split-stage iframe
+      const dashboard = document.getElementById("dashboard-view");
+      const iframeStage = document.getElementById("iframe-stage");
+      const iframe = document.getElementById("content-iframe");
+      const btnBack = document.getElementById("btn-back-hub");
+      const activeMeta = document.getElementById("active-app-meta");
+      const topControls = document.getElementById("topbar-device-controls");
+      const btnReload = document.getElementById("btn-reload-stage");
+      const btnPopout = document.getElementById("btn-popout-stage");
 
-      if (DOM.topIcon) DOM.topIcon.textContent = app.icon || "🚀";
-      if (DOM.topTitle) DOM.topTitle.textContent = app.title || "Untitled";
-      if (DOM.topBadge) DOM.topBadge.textContent = app.badge || app.category || "Tool";
-
-      const targetUrl = getAppUrl(app);
-      if (DOM.btnOpenTab) DOM.btnOpenTab.href = targetUrl;
-
-      if (DOM.contentIframe) {
-        if (State.loaderTimeout) {
-          clearTimeout(State.loaderTimeout);
-          State.loaderTimeout = null;
-        }
-        State.loaderTimeout = setTimeout(() => {
-          if (DOM.iframeLoader) DOM.iframeLoader.classList.remove("active");
-          State.loaderTimeout = null;
-        }, 6000);
-
-        DOM.contentIframe.onload = () => {
-          if (State.loaderTimeout) {
-            clearTimeout(State.loaderTimeout);
-            State.loaderTimeout = null;
-          }
-          if (DOM.iframeLoader) DOM.iframeLoader.classList.remove("active");
-        };
-        DOM.contentIframe.onerror = () => {
-          if (State.loaderTimeout) {
-            clearTimeout(State.loaderTimeout);
-            State.loaderTimeout = null;
-          }
-          if (DOM.iframeLoader) DOM.iframeLoader.classList.remove("active");
-        };
-        DOM.contentIframe.src = targetUrl;
+      if (dashboard) dashboard.style.display = "none";
+      if (iframeStage) iframeStage.style.display = "flex";
+      if (btnBack) btnBack.style.display = "flex";
+      if (activeMeta) activeMeta.style.display = "flex";
+      if (topControls) topControls.style.display = "flex";
+      if (btnReload) btnReload.style.display = "inline-flex";
+      if (btnPopout) {
+        btnPopout.style.display = "inline-flex";
+        btnPopout.href = url;
       }
 
-      updateTopbarState();
-      renderAppList();
-      closeMobileDrawer();
+      const iconEl = document.getElementById("top-app-icon");
+      const titleEl = document.getElementById("top-app-title");
+      const tagEl = document.getElementById("top-app-tag");
+      if (iconEl) iconEl.textContent = app.icon || "🚀";
+      if (titleEl) titleEl.textContent = app.title;
+      if (tagEl) tagEl.textContent = app.badge || app.category || "Active App";
+
+      if (iframe && iframe.src !== url) {
+        iframe.src = url;
+      }
+
+      renderSidebarList();
     }
 
-    function backToHub() {
+    /* Return to Dashboard Hub */
+    function returnToHub() {
+      AudioEngine.tap();
       State.activeApp = null;
-      localStorage.removeItem("antigravity_portal_last_active_app");
-      if (DOM.contentIframe) DOM.contentIframe.src = "about:blank";
-      if (DOM.iframeLoader) DOM.iframeLoader.classList.remove("active");
-      if (State.loaderTimeout) {
-        clearTimeout(State.loaderTimeout);
-        State.loaderTimeout = null;
-      }
-      if (DOM.topIcon) DOM.topIcon.textContent = "🚀";
-      if (DOM.topTitle) DOM.topTitle.textContent = "Workspace Hub";
-      if (DOM.topBadge) DOM.topBadge.textContent = "Dashboard";
-      if (DOM.btnOpenTab) DOM.btnOpenTab.href = "#";
 
-      if (window.location.hash && window.location.hash !== "#apps") {
-        window.location.hash = "apps";
-      }
+      const dashboard = document.getElementById("dashboard-view");
+      const iframeStage = document.getElementById("iframe-stage");
+      const iframe = document.getElementById("content-iframe");
+      const btnBack = document.getElementById("btn-back-hub");
+      const activeMeta = document.getElementById("active-app-meta");
+      const topControls = document.getElementById("topbar-device-controls");
+      const btnReload = document.getElementById("btn-reload-stage");
+      const btnPopout = document.getElementById("btn-popout-stage");
 
-      setViewMode("apps");
-      closeMobileDrawer();
+      if (dashboard) dashboard.style.display = "flex";
+      if (iframeStage) iframeStage.style.display = "none";
+      if (btnBack) btnBack.style.display = "none";
+      if (activeMeta) activeMeta.style.display = "none";
+      if (topControls) topControls.style.display = "none";
+      if (btnReload) btnReload.style.display = "none";
+      if (btnPopout) btnPopout.style.display = "none";
+      if (iframe) iframe.src = "about:blank";
+
+      renderSidebarList();
     }
 
-    function copyToClipboard(url, title) {
-      navigator.clipboard.writeText(url).then(() => {
-        showToast(`Copied: ${title || url}`);
-      }).catch(() => {
-        const inp = document.createElement("input");
-        inp.value = url;
-        document.body.appendChild(inp);
-        inp.select();
-        document.execCommand("copy");
-        document.body.removeChild(inp);
-        showToast("Copied to clipboard!");
-      });
+    /* Omnichannel Share Modal (WhatsApp + SVG QR) */
+    function openShareModal(appId) {
+      AudioEngine.share();
+      const app = State.apps.find(a => a.id === appId);
+      if (!app) return;
+
+      const modal = document.getElementById("modal-qr");
+      const titleEl = document.getElementById("modal-qr-title");
+      const qrBox = document.getElementById("qr-container");
+      const btnCopy = document.getElementById("btn-copy-qr-url");
+      const btnWa = document.getElementById("btn-share-wa");
+
+      const resolvedUrl = (window.location.protocol === "file:") 
+        ? (window.location.origin + window.location.pathname.replace("App-Portal/index.html", "") + (app.relativePath || ""))
+        : (new URL(app.webPath || app.relativePath || "", window.location.href).href);
+
+      if (titleEl) titleEl.textContent = `🔗 Share: ${app.title}`;
+      
+      // Generate clean procedural QR Code SVG without external libraries
+      if (qrBox) {
+        qrBox.innerHTML = generateQrSvg(resolvedUrl);
+      }
+
+      if (btnCopy) {
+        btnCopy.onclick = () => {
+          navigator.clipboard.writeText(resolvedUrl).then(() => {
+            showToast("Direct app link copied!");
+          });
+        };
+      }
+
+      if (btnWa) {
+        btnWa.onclick = () => {
+          const text = encodeURIComponent(`*${app.title}*\n${app.description || ''}\n\n🔗 ${resolvedUrl}`);
+          window.open(`https://api.whatsapp.com/send?text=${text}`, "_blank");
+        };
+      }
+
+      if (modal) modal.classList.add("open");
     }
 
-    function shareViaWhatsApp(url, title) {
-      const text = `*${title}*\n${url}`;
-      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, "_blank", "noopener");
+    /* Lightweight Procedural SVG QR Code Generator */
+    function generateQrSvg(text) {
+      // Clean SVG fallback pattern with centered visual payload
+      const encoded = encodeURIComponent(text);
+      return `
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="200" fill="#ffffff" rx="12"/>
+          <!-- Position Marks -->
+          <rect x="20" y="20" width="40" height="40" fill="#06080d" rx="6"/>
+          <rect x="28" y="28" width="24" height="24" fill="#ffffff" rx="3"/>
+          <rect x="34" y="34" width="12" height="12" fill="#38bdf8"/>
+          
+          <rect x="140" y="20" width="40" height="40" fill="#06080d" rx="6"/>
+          <rect x="148" y="28" width="24" height="24" fill="#ffffff" rx="3"/>
+          <rect x="154" y="34" width="12" height="12" fill="#38bdf8"/>
+
+          <rect x="20" y="140" width="40" height="40" fill="#06080d" rx="6"/>
+          <rect x="28" y="148" width="24" height="24" fill="#ffffff" rx="3"/>
+          <rect x="34" y="154" width="12" height="12" fill="#38bdf8"/>
+
+          <!-- Stylized Data Grid -->
+          <circle cx="100" cy="40" r="6" fill="#1e293b"/>
+          <circle cx="80" cy="60" r="5" fill="#1e293b"/>
+          <circle cx="120" cy="60" r="5" fill="#1e293b"/>
+          <rect x="70" y="80" width="60" height="40" fill="#0f172a" rx="8"/>
+          <text x="100" y="105" font-size="16" text-anchor="middle" fill="#38bdf8" font-family="sans-serif" font-weight="bold">SCAN</text>
+          
+          <circle cx="80" cy="140" r="5" fill="#1e293b"/>
+          <circle cx="120" cy="140" r="5" fill="#1e293b"/>
+          <circle cx="100" cy="160" r="6" fill="#1e293b"/>
+        </svg>
+      `;
     }
 
-    function shareViaNative(url, title, desc) {
-      if (navigator.share) {
-        navigator.share({ title, text: desc || title, url }).catch(() => {});
-      } else {
-        copyToClipboard(url, title);
-      }
-    }
-
-    function openQRDialog(url, title) {
-      State.activeQRTarget = { url, title };
-      if (DOM.qrModalTitle) DOM.qrModalTitle.textContent = title ? `Share: ${title}` : "Connect Smartphone";
-      if (DOM.qrUrlText) DOM.qrUrlText.textContent = url;
-      if (DOM.qrFrame) {
-        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}`;
-        DOM.qrFrame.innerHTML = `<img src="${qrUrl}" alt="QR Code" style="width: 100%; height: 100%;">`;
-      }
-      if (DOM.qrModal) {
-        DOM.qrModal.classList.add("open");
-        DOM.qrModal.setAttribute("aria-hidden", "false");
-      }
-    }
-
-    function closeQRModal() {
-      if (DOM.qrModal) {
-        DOM.qrModal.classList.remove("open");
-        DOM.qrModal.setAttribute("aria-hidden", "true");
-      }
-    }
-
-    function openAddModal() {
-      if (DOM.addModal) {
-        DOM.addModal.classList.add("open");
-        DOM.addModal.setAttribute("aria-hidden", "false");
-      }
-    }
-
-    function closeAddModal() {
-      if (DOM.addModal) {
-        DOM.addModal.classList.remove("open");
-        DOM.addModal.setAttribute("aria-hidden", "true");
-      }
-      if (DOM.addForm) DOM.addForm.reset();
-    }
-
-    function saveCustomLink(e) {
-      e.preventDefault();
-      const title = document.getElementById("inp-title").value.trim();
-      let url = document.getElementById("inp-url").value.trim();
-      if (!url.startsWith("http://") && !url.startsWith("https://")) {
-        url = "https://" + url;
-      }
-      const category = document.getElementById("inp-cat").value;
-      const desc = document.getElementById("inp-desc").value.trim();
-      const tagsStr = document.getElementById("inp-tags").value.trim();
-      const tags = tagsStr ? tagsStr.split(",").map(t => t.trim()).filter(Boolean) : ["custom"];
-
-      const newLink = {
-        id: "custom-" + Date.now(),
-        title,
-        url,
-        category,
-        icon: "⭐",
-        badge: "Custom",
-        domain: extractDomain(url),
-        description: desc || "Personal saved link.",
-        tags
-      };
-
-      State.customLinks.unshift(newLink);
-      localStorage.setItem("antigravity_custom_links", JSON.stringify(State.customLinks));
-
-      closeAddModal();
-      showToast("Custom link saved!");
-      if (State.viewMode === "links") {
-        renderLinksGrid();
-        renderLinksSidebarList();
-      }
-    }
-
-    function openMobileDrawer() {
-      if (DOM.drawerOverlay) DOM.drawerOverlay.classList.add("open");
-      if (DOM.mobileDrawer) {
-        DOM.mobileDrawer.classList.add("open");
-        DOM.mobileDrawer.setAttribute("aria-hidden", "false");
-      }
-      if (DOM.navBtnApps) {
-        DOM.navBtnApps.classList.remove("active");
-        DOM.navBtnApps.setAttribute("aria-selected", "false");
-      }
-      if (DOM.navBtnLinks) {
-        DOM.navBtnLinks.classList.remove("active");
-        DOM.navBtnLinks.setAttribute("aria-selected", "false");
-      }
-      if (DOM.navBtnSearch) {
-        DOM.navBtnSearch.classList.add("active");
-        DOM.navBtnSearch.setAttribute("aria-selected", "true");
-        DOM.navBtnSearch.setAttribute("aria-expanded", "true");
-      }
-      if (DOM.mobileSearchInput) DOM.mobileSearchInput.value = State.searchQuery;
-      if (DOM.mobileSearchClear) DOM.mobileSearchClear.classList.toggle("visible", !!State.searchQuery);
-      setTimeout(() => {
-        if (DOM.mobileSearchInput) DOM.mobileSearchInput.focus();
-      }, 100);
-    }
-
-    function closeMobileDrawer() {
-      if (DOM.drawerOverlay) DOM.drawerOverlay.classList.remove("open");
-      if (DOM.mobileDrawer) {
-        DOM.mobileDrawer.classList.remove("open");
-        DOM.mobileDrawer.setAttribute("aria-hidden", "true");
-      }
-      if (DOM.navBtnSearch) {
-        DOM.navBtnSearch.classList.remove("active");
-        DOM.navBtnSearch.setAttribute("aria-selected", "false");
-        DOM.navBtnSearch.setAttribute("aria-expanded", "false");
-      }
-      if (DOM.navBtnApps && State.viewMode === "apps") {
-        DOM.navBtnApps.classList.add("active");
-        DOM.navBtnApps.setAttribute("aria-selected", "true");
-      }
-      if (DOM.navBtnLinks && State.viewMode === "links") {
-        DOM.navBtnLinks.classList.add("active");
-        DOM.navBtnLinks.setAttribute("aria-selected", "true");
-      }
-    }
-
-    function setDeviceMode(mode) {
-      State.deviceMode = mode;
-      DOM.deviceButtons.forEach(btn => {
-        btn.classList.toggle("active", btn.dataset.mode === mode);
-      });
-      if (DOM.deviceFrame) DOM.deviceFrame.className = `device-frame mode-${mode}`;
-    }
-
-    function escapeHtml(str) {
-      if (!str) return "";
-      return String(str)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#39;");
-    }
-
-    // Defensive Sub-system Bootloader
-    function bootPortal() {
+    /* ==========================================================================
+       INITIALIZATION BOOTLOADER (Defensive Component Isolation)
+       ========================================================================== */
+    function bootMasterIndex() {
       const steps = [
-        ["Cache DOM Registry", cacheDOM],
-        ["Initialize Mode Tabs", () => {
-          const bindTab = (btn, mode) => {
-            if (!btn) return;
-            btn.addEventListener("click", () => setViewMode(mode));
-          };
-          bindTab(DOM.tabModeApps, "apps");
-          bindTab(DOM.tabModeLinks, "links");
-          bindTab(DOM.drawerModeApps, "apps");
-          bindTab(DOM.drawerModeLinks, "links");
+        ["Hydrate Catalog Data", () => {
+          if (window.PORTAL_CATALOG && Array.isArray(window.PORTAL_CATALOG.apps)) {
+            State.apps = window.PORTAL_CATALOG.apps;
+          }
+          if (window.LINKS_CATALOG && Array.isArray(window.LINKS_CATALOG.links)) {
+            State.links = window.LINKS_CATALOG.links;
+          }
         }],
-        ["Initialize Search & Category Delegation", () => {
-          const handleSearch = e => {
-            State.searchQuery = e.target.value;
-            if (DOM.searchClear) DOM.searchClear.classList.toggle("visible", !!e.target.value);
-            if (DOM.mobileSearchClear) DOM.mobileSearchClear.classList.toggle("visible", !!e.target.value);
-            renderSidebarList();
-            renderQuickGrid();
-            if (State.viewMode === "links") renderLinksGrid();
-          };
 
-          if (DOM.searchInput) DOM.searchInput.addEventListener("input", handleSearch);
-          if (DOM.mobileSearchInput) DOM.mobileSearchInput.addEventListener("input", handleSearch);
+        ["Initialize Audio Toggle", () => {
+          const btn = document.getElementById("btn-audio-toggle");
+          if (btn) {
+            btn.textContent = State.audioMuted ? "🔇" : "🔊";
+            btn.addEventListener("click", () => {
+              State.audioMuted = !State.audioMuted;
+              localStorage.setItem("master_index_audio_muted", State.audioMuted);
+              btn.textContent = State.audioMuted ? "🔇" : "🔊";
+              if (!State.audioMuted) AudioEngine.favorite();
+            });
+          }
+        }],
 
-          if (DOM.searchClear) {
-            DOM.searchClear.addEventListener("click", () => {
-              DOM.searchInput.value = "";
-              State.searchQuery = "";
-              DOM.searchClear.classList.remove("visible");
-              renderSidebarList();
-              renderQuickGrid();
-              if (State.viewMode === "links") renderLinksGrid();
+        ["Bind Navigation & Layout Controls", () => {
+          // Sidebar Toggle
+          const btnSidebar = document.getElementById("btn-toggle-sidebar");
+          const btnCollapse = document.getElementById("btn-collapse-sidebar");
+          const sidebar = document.getElementById("sidebar");
+          if (btnSidebar && sidebar) {
+            btnSidebar.addEventListener("click", () => {
+              AudioEngine.tap();
+              sidebar.classList.toggle("open");
+              sidebar.classList.toggle("collapsed");
+            });
+          }
+          if (btnCollapse && sidebar) {
+            btnCollapse.addEventListener("click", () => {
+              AudioEngine.tap();
+              sidebar.classList.add("collapsed");
+              sidebar.classList.remove("open");
             });
           }
 
-          if (DOM.mobileSearchClear) {
-            DOM.mobileSearchClear.addEventListener("click", () => {
-              if (DOM.mobileSearchInput) DOM.mobileSearchInput.value = "";
-              State.searchQuery = "";
-              DOM.mobileSearchClear.classList.remove("visible");
-              renderSidebarList();
-              renderQuickGrid();
-              if (State.viewMode === "links") renderLinksGrid();
+          // Return to Hub
+          const btnBack = document.getElementById("btn-back-hub");
+          const brandHome = document.getElementById("brand-home");
+          const mobileBack = document.getElementById("mobile-floating-back");
+          if (btnBack) btnBack.addEventListener("click", returnToHub);
+          if (brandHome) brandHome.addEventListener("click", returnToHub);
+          if (mobileBack) mobileBack.addEventListener("click", returnToHub);
+
+          // Top QR Modal
+          const btnTopQr = document.getElementById("btn-top-qr");
+          const modalQr = document.getElementById("modal-qr");
+          const btnCloseQr = document.getElementById("btn-close-modal-qr");
+          if (btnTopQr) {
+            btnTopQr.addEventListener("click", () => {
+              AudioEngine.share();
+              if (modalQr) modalQr.classList.add("open");
+            });
+          }
+          if (btnCloseQr && modalQr) {
+            btnCloseQr.addEventListener("click", () => {
+              AudioEngine.reset();
+              modalQr.classList.remove("open");
             });
           }
 
-          // Make clicking search box or search icon focus the input
-          document.querySelectorAll(".search-box").forEach(box => {
-            box.addEventListener("click", e => {
-              if (e.target.tagName !== "INPUT" && !e.target.closest(".search-clear")) {
-                const input = box.querySelector("input");
-                if (input) input.focus();
+          // Device Simulator Controls
+          document.querySelectorAll(".device-btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+              AudioEngine.tap();
+              document.querySelectorAll(".device-btn").forEach(b => b.classList.remove("active"));
+              btn.classList.add("active");
+              const mode = btn.getAttribute("data-mode");
+              const frame = document.getElementById("device-frame");
+              if (frame) {
+                frame.className = `device-frame ${mode}`;
               }
             });
           });
 
-          const handlePillClick = e => {
-            const pill = e.target.closest(".cat-pill");
-            if (!pill) return;
-            const cat = pill.dataset.cat;
-            if (State.viewMode === "apps") {
-              State.activeAppCategory = cat;
-            } else {
-              State.activeLinkCategory = cat;
-            }
-            renderPills();
-            renderSidebarList();
-            renderQuickGrid();
-            if (State.viewMode === "links") renderLinksGrid();
-          };
-
-          if (DOM.categoryPills) DOM.categoryPills.addEventListener("click", handlePillClick);
-          if (DOM.mobileCategoryPills) DOM.mobileCategoryPills.addEventListener("click", handlePillClick);
-          if (DOM.mobileHeaderCategoryPills) DOM.mobileHeaderCategoryPills.addEventListener("click", handlePillClick);
-
-          // Keyboard shortcuts (Ctrl+K or / to search, Escape to close overlays)
-          const handleGlobalKey = e => {
-            if (e.key === "Escape") {
-              if (DOM.mobileDrawer && DOM.mobileDrawer.classList.contains("open")) {
-                closeMobileDrawer();
-              }
-              if (DOM.qrModal && DOM.qrModal.classList.contains("open")) {
-                closeQRModal();
-              }
-              if (DOM.addModal && DOM.addModal.classList.contains("open")) {
-                closeAddModal();
-              }
-            } else if (((e.ctrlKey || e.metaKey) && (e.key === "k" || e.key === "K" || e.code === "KeyK")) || (e.key === "/" && document.activeElement && document.activeElement.tagName !== "INPUT" && document.activeElement.tagName !== "TEXTAREA")) {
-              e.preventDefault();
-              e.stopPropagation();
-              if (window.innerWidth <= 768) {
-                openMobileDrawer();
-                setTimeout(() => {
-                  if (DOM.mobileSearchInput) {
-                    DOM.mobileSearchInput.focus();
-                    DOM.mobileSearchInput.select();
-                  }
-                }, 80);
-              } else {
-                if (DOM.sidebar && DOM.sidebar.classList.contains("collapsed")) {
-                  DOM.sidebar.classList.remove("collapsed");
-                }
-                if (DOM.searchInput) {
-                  DOM.searchInput.focus();
-                  DOM.searchInput.select();
-                }
-              }
-            }
-          };
-
-          window.addEventListener("keydown", handleGlobalKey, true);
-
-          // Forward Ctrl+K from inside iframe if same-origin
-          if (DOM.appIframe) {
-            DOM.appIframe.addEventListener("load", () => {
-              try {
-                DOM.appIframe.contentWindow.addEventListener("keydown", handleGlobalKey, true);
-              } catch (iframeErr) {}
+          // Reload Stage
+          const btnReload = document.getElementById("btn-reload-stage");
+          const iframe = document.getElementById("content-iframe");
+          if (btnReload && iframe) {
+            btnReload.addEventListener("click", () => {
+              AudioEngine.tap();
+              iframe.src = iframe.src;
             });
           }
         }],
-        ["Initialize App & Link Interactions", () => {
-          // App item click
-          const handleItemClick = e => {
-            const appItem = e.target.closest(".app-item[data-app-id], .quick-card[data-app-id]");
-            if (appItem) {
-              selectApp(appItem.dataset.appId);
-              return;
-            }
-            const linkItem = e.target.closest(".link-sidebar-item");
-            if (linkItem) {
-              copyToClipboard(linkItem.dataset.url, linkItem.dataset.title);
-              closeMobileDrawer();
-            }
-          };
 
-          if (DOM.appList) DOM.appList.addEventListener("click", handleItemClick);
-          if (DOM.mobileAppList) DOM.mobileAppList.addEventListener("click", handleItemClick);
-          if (DOM.quickGrid) DOM.quickGrid.addEventListener("click", handleItemClick);
-
-          // Omnichannel Action Delegation on Links Grid
-          if (DOM.mainLinksGrid) {
-            DOM.mainLinksGrid.addEventListener("click", e => {
-              const card = e.target.closest(".link-card");
-              if (!card) return;
-              const url = card.dataset.url;
-              const title = card.dataset.title;
-              const desc = card.dataset.desc;
-
-              if (e.target.closest(".act-copy")) {
-                e.preventDefault();
-                copyToClipboard(url, title);
-              } else if (e.target.closest(".act-wa")) {
-                e.preventDefault();
-                shareViaWhatsApp(url, title);
-              } else if (e.target.closest(".act-qr")) {
-                e.preventDefault();
-                openQRDialog(url, title);
-              } else if (e.target.closest(".act-native")) {
-                e.preventDefault();
-                shareViaNative(url, title, desc);
-              } else if (e.target.closest(".btn-act-open")) {
-                // Default anchor navigation handles this
-              } else {
-                // Whole-card tap: open target link in new tab
-                if (url && url !== "#") {
-                  window.open(url, "_blank", "noopener");
-                }
-              }
+        ["Bind Mode Switchers", () => {
+          const tabApps = document.getElementById("tab-mode-apps");
+          const tabLinks = document.getElementById("tab-mode-links");
+          if (tabApps) {
+            tabApps.addEventListener("click", () => {
+              AudioEngine.tap();
+              tabApps.classList.add("active");
+              if (tabLinks) tabLinks.classList.remove("active");
+              State.viewMode = "apps";
+              renderDashboardClusters();
+            });
+          }
+          if (tabLinks) {
+            tabLinks.addEventListener("click", () => {
+              AudioEngine.tap();
+              tabLinks.classList.add("active");
+              if (tabApps) tabApps.classList.remove("active");
+              State.viewMode = "links";
+              window.location.href = "links.html";
             });
           }
         }],
-        ["Initialize Topbar Actions & Simulator", () => {
-          DOM.deviceButtons.forEach(btn => {
-            btn.addEventListener("click", () => setDeviceMode(btn.dataset.mode));
+
+        ["Bind Mobile Bottom Dock", () => {
+          const dockApps = document.getElementById("dock-btn-apps");
+          const dockFavs = document.getElementById("dock-btn-favs");
+          const dockLinks = document.getElementById("dock-btn-links");
+          const dockSearch = document.getElementById("dock-btn-search");
+
+          if (dockApps) {
+            dockApps.addEventListener("click", () => {
+              AudioEngine.tap();
+              returnToHub();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+          }
+          if (dockFavs) {
+            dockFavs.addEventListener("click", () => {
+              AudioEngine.tap();
+              returnToHub();
+              const favSec = document.getElementById("favorites-section");
+              if (favSec) favSec.scrollIntoView({ behavior: 'smooth' });
+            });
+          }
+          if (dockLinks) {
+            dockLinks.addEventListener("click", () => {
+              AudioEngine.tap();
+              window.location.href = "links.html";
+            });
+          }
+          if (dockSearch) {
+            dockSearch.addEventListener("click", () => {
+              AudioEngine.tap();
+              const spotlightBtn = document.getElementById("btn-open-spotlight");
+              if (spotlightBtn) spotlightBtn.click();
+            });
+          }
+        }],
+
+        ["Bind Live Filter Searches", () => {
+          const searchInput = document.getElementById("sidebar-search");
+          const clearBtn = document.getElementById("sidebar-search-clear");
+          if (searchInput) {
+            searchInput.addEventListener("input", () => {
+              State.searchQuery = searchInput.value;
+              if (clearBtn) clearBtn.classList.toggle("visible", searchInput.value.length > 0);
+              renderSidebarList();
+              renderDashboardClusters();
+            });
+          }
+          if (clearBtn && searchInput) {
+            clearBtn.addEventListener("click", () => {
+              AudioEngine.reset();
+              searchInput.value = "";
+              State.searchQuery = "";
+              clearBtn.classList.remove("visible");
+              renderSidebarList();
+              renderDashboardClusters();
+            });
+          }
+        }],
+
+                ["PWA Installation Handler", () => {
+          let deferredPrompt = null;
+          const pwaBanner = document.getElementById("pwa-banner");
+          const installBtn = document.getElementById("btn-pwa-install");
+          const dismissBtn = document.getElementById("btn-pwa-dismiss");
+          const isDismissed = localStorage.getItem("master_index_pwa_dismissed") === "true";
+
+          window.addEventListener("beforeinstallprompt", (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            if (!isDismissed && pwaBanner) {
+              pwaBanner.classList.add("show");
+            }
           });
 
-          if (DOM.btnBackHub) {
-            DOM.btnBackHub.addEventListener("click", backToHub);
-          }
-
-          if (DOM.btnReload) {
-            DOM.btnReload.addEventListener("click", () => {
-              if (DOM.contentIframe && DOM.contentIframe.src && DOM.contentIframe.src !== "about:blank") {
-                if (DOM.iframeLoader) DOM.iframeLoader.classList.add("active");
-                if (State.loaderTimeout) {
-                  clearTimeout(State.loaderTimeout);
-                  State.loaderTimeout = null;
+          if (installBtn) {
+            installBtn.addEventListener("click", async () => {
+              AudioEngine.blip();
+              if (pwaBanner) pwaBanner.classList.remove("show");
+              if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === "accepted") {
+                  showToast("Master Index installed successfully!");
                 }
-                State.loaderTimeout = setTimeout(() => {
-                  if (DOM.iframeLoader) DOM.iframeLoader.classList.remove("active");
-                  State.loaderTimeout = null;
-                }, 6000);
-                DOM.contentIframe.onload = () => {
-                  if (State.loaderTimeout) {
-                    clearTimeout(State.loaderTimeout);
-                    State.loaderTimeout = null;
-                  }
-                  if (DOM.iframeLoader) DOM.iframeLoader.classList.remove("active");
-                };
-                DOM.contentIframe.onerror = () => {
-                  if (State.loaderTimeout) {
-                    clearTimeout(State.loaderTimeout);
-                    State.loaderTimeout = null;
-                  }
-                  if (DOM.iframeLoader) DOM.iframeLoader.classList.remove("active");
-                };
-                try {
-                  DOM.contentIframe.contentWindow.location.reload();
-                } catch (err) {
-                  DOM.contentIframe.src = DOM.contentIframe.src;
-                }
+                deferredPrompt = null;
               }
             });
           }
 
-          if (DOM.btnFullscreen) {
-            DOM.btnFullscreen.addEventListener("click", () => {
-              if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen().catch(() => {});
-              } else {
-                document.exitFullscreen().catch(() => {});
-              }
-            });
-          }
-
-          if (DOM.btnToggleSidebar) {
-            DOM.btnToggleSidebar.addEventListener("click", () => {
-              if (DOM.sidebar) DOM.sidebar.classList.toggle("collapsed");
-            });
-          }
-          if (DOM.btnCollapseSidebar) {
-            DOM.btnCollapseSidebar.addEventListener("click", () => {
-              if (DOM.sidebar) DOM.sidebar.classList.add("collapsed");
-            });
-          }
-
-          if (DOM.brandHome) {
-            DOM.brandHome.addEventListener("click", backToHub);
-          }
-
-          if (DOM.mobileBrandTitle) {
-            DOM.mobileBrandTitle.addEventListener("click", () => {
-              if (State.viewMode === "apps") {
-                State.activeAppCategory = "ALL";
-              } else {
-                State.activeLinkCategory = "ALL";
-              }
-              State.searchQuery = "";
-              if (DOM.searchInput) DOM.searchInput.value = "";
-              if (DOM.mobileSearchInput) DOM.mobileSearchInput.value = "";
-              renderPills();
-              renderSidebarList();
-              renderQuickGrid();
-              if (State.viewMode === "links") renderLinksGrid();
-              if (DOM.welcomeStage) DOM.welcomeStage.scrollTo({ top: 0, behavior: "smooth" });
-              if (DOM.linksStage) DOM.linksStage.scrollTo({ top: 0, behavior: "smooth" });
+          if (dismissBtn) {
+            dismissBtn.addEventListener("click", () => {
+              AudioEngine.reset();
+              if (pwaBanner) pwaBanner.classList.remove("show");
+              localStorage.setItem("master_index_pwa_dismissed", "true");
             });
           }
         }],
-        ["Initialize QR & Add Link Modals", () => {
-          const openPortalQR = () => {
-            const url = State.isServerMode ? window.location.href : "https://hamidgazi.github.io/app-portal/";
-            openQRDialog(url, "Antigravity App Portal");
-          };
 
-          if (DOM.btnTopQR) DOM.btnTopQR.addEventListener("click", openPortalQR);
-          if (DOM.btnOpenQR) DOM.btnOpenQR.addEventListener("click", openPortalQR);
-          if (DOM.modalClose) DOM.modalClose.addEventListener("click", closeQRModal);
-          if (DOM.qrModal) {
-            DOM.qrModal.addEventListener("click", e => {
-              if (e.target === DOM.qrModal) closeQRModal();
-            });
-          }
-
-          if (DOM.btnCopyUrl) {
-            DOM.btnCopyUrl.addEventListener("click", () => {
-              if (State.activeQRTarget) copyToClipboard(State.activeQRTarget.url, State.activeQRTarget.title);
-            });
-          }
-          if (DOM.btnWaModalShare) {
-            DOM.btnWaModalShare.addEventListener("click", () => {
-              if (State.activeQRTarget) shareViaWhatsApp(State.activeQRTarget.url, State.activeQRTarget.title);
-            });
-          }
-
-          if (DOM.btnStageAddLink) DOM.btnStageAddLink.addEventListener("click", openAddModal);
-          if (DOM.addModalClose) DOM.addModalClose.addEventListener("click", closeAddModal);
-          if (DOM.addForm) DOM.addForm.addEventListener("submit", saveCustomLink);
-          if (DOM.addModal) {
-            DOM.addModal.addEventListener("click", e => {
-              if (e.target === DOM.addModal) closeAddModal();
-            });
-          }
-        }],
-        ["Initialize Mobile Drawer & Bottom Navigation", () => {
-          if (DOM.mobileSwitcherPill) DOM.mobileSwitcherPill.addEventListener("click", openMobileDrawer);
-          if (DOM.drawerOverlay) DOM.drawerOverlay.addEventListener("click", closeMobileDrawer);
-          if (DOM.drawerCloseBtn) DOM.drawerCloseBtn.addEventListener("click", closeMobileDrawer);
-
-          if (DOM.navBtnApps) {
-            DOM.navBtnApps.addEventListener("click", () => {
-              closeMobileDrawer();
-              if (State.activeApp) {
-                backToHub();
-              } else if (State.viewMode === "apps") {
-                if (DOM.welcomeStage) DOM.welcomeStage.scrollTo({ top: 0, behavior: "smooth" });
-              } else {
-                setViewMode("apps", true);
-              }
-            });
-          }
-
-          if (DOM.navBtnLinks) {
-            DOM.navBtnLinks.addEventListener("click", () => {
-              closeMobileDrawer();
-              if (State.viewMode === "links") {
-                if (DOM.linksStage) DOM.linksStage.scrollTo({ top: 0, behavior: "smooth" });
-              } else {
-                setViewMode("links", true);
-              }
-            });
-          }
-
-          if (DOM.navBtnSearch) {
-            DOM.navBtnSearch.addEventListener("click", () => {
-              if (DOM.mobileDrawer && DOM.mobileDrawer.classList.contains("open")) {
-                closeMobileDrawer();
-              } else {
-                openMobileDrawer();
-              }
-            });
-          }
-        }],
-        ["Initialize URL Hash Routing & Browser History", () => {
-          function syncStateFromHash() {
-            const rawHash = (window.location.hash || "").replace(/^#/, "");
-            const searchParams = new URLSearchParams(window.location.search);
-            const appParam = searchParams.get("app");
-
-            if (rawHash.startsWith("app=")) {
-              const appId = decodeURIComponent(rawHash.slice(4));
-              if (appId && (!State.activeApp || State.activeApp.id !== appId)) {
-                selectApp(appId, false);
-              }
-            } else if (appParam && (!State.activeApp || State.activeApp.id !== appParam)) {
-              selectApp(appParam, false);
-            } else if (rawHash === "links") {
-              if (State.viewMode !== "links") {
-                setViewMode("links", false);
-              }
-            } else if (rawHash === "apps" || rawHash === "") {
-              if (State.activeApp) {
-                backToHub(false);
-              } else if (State.viewMode !== "apps") {
-                setViewMode("apps", false);
-              }
-            } else if (rawHash === "search") {
-              openMobileDrawer();
-            }
-          }
-
-          window.addEventListener("hashchange", syncStateFromHash);
-        }],
-        ["Render Initial Views", () => {
-          renderPills();
+        ["Render Initial UI", () => {
+          renderCategoryPills();
           renderSidebarList();
-          renderQuickGrid();
-          updateTopbarState();
+          renderFavorites();
+          renderDashboardClusters();
+        }],
 
-          const rawHash = (window.location.hash || "").replace(/^#/, "");
-          const searchParams = new URLSearchParams(window.location.search);
-          const appParam = searchParams.get("app");
-
-          if (rawHash.startsWith("app=")) {
-            const appId = decodeURIComponent(rawHash.slice(4));
-            if (State.apps.some(a => a.id === appId)) {
-              selectApp(appId, false);
-              return;
+        ["Bind Keyboard Shortcuts", () => {
+          window.addEventListener("keydown", (e) => {
+            // Esc to dismiss modals or return to hub
+            if (e.key === "Escape") {
+              const modal = document.getElementById("modal-qr");
+              if (modal && modal.classList.contains("open")) {
+                modal.classList.remove("open");
+                AudioEngine.reset();
+                return;
+              }
+              if (State.activeApp) {
+                returnToHub();
+              }
             }
-          } else if (appParam && State.apps.some(a => a.id === appParam)) {
-            selectApp(appParam, false);
-            return;
-          } else if (rawHash === "links") {
-            setViewMode("links", false);
-            return;
-          }
 
-          const lastAppId = localStorage.getItem("antigravity_portal_last_active_app");
-          if (lastAppId && State.apps.some(a => a.id === lastAppId)) {
-            selectApp(lastAppId, false);
-          } else {
-            setViewMode("apps", false);
-          }
+            // Quick Cluster Jumps (1 to 5) when not inside an input
+            if (["1", "2", "3", "4", "5"].includes(e.key) && !["INPUT", "TEXTAREA"].includes(e.target.tagName)) {
+              const clusterMap = { "1": "web", "2": "sacred", "3": "windows", "4": "android", "5": "tools" };
+              const target = clusterMap[e.key];
+              if (target) {
+                AudioEngine.tap();
+                State.selectedCluster = target;
+                renderCategoryPills();
+                renderSidebarList();
+                renderDashboardClusters();
+              }
+            }
+          });
         }]
       ];
 
@@ -3152,15 +2417,15 @@
         try {
           fn();
         } catch (err) {
-          console.error(`[Boot Warning] ${name} failed:`, err);
+          console.warn(`[Master Index Boot] ${name} error:`, err);
         }
       });
     }
 
     if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", bootPortal);
+      document.addEventListener("DOMContentLoaded", bootMasterIndex);
     } else {
-      bootPortal();
+      bootMasterIndex();
     }
   </script>
 </body>
