@@ -2,7 +2,7 @@
 window.PORTAL_CATALOG = {
   "version": "1.0.0",
   "lastUpdated": "Antigravity Files",
-  "totalApps": 27,
+  "totalApps": 29,
   "categories": [
     "Islamic & Faith",
     "Productivity & Utilities",
@@ -136,6 +136,30 @@ window.PORTAL_CATALOG = {
       "relPath": "15-Quran-Deep-Analyzer/manners.html",
       "portalHref": "./15-Quran-Deep-Analyzer/manners.html",
       "serverHref": "./15-Quran-Deep-Analyzer/manners.html"
+    },
+    {
+      "id": "17_ Roman Naat__index_html",
+      "title": "Roman Naat Studio (Bareilly Diwans)",
+      "category": "Islamic & Faith",
+      "icon": "✨",
+      "badge": "4 Books • 7,893 Shers",
+      "description": "Instant phonetic search across all 4 canonical Bareilly Naat books (Hadaiq, Saamaan, Safeena, Zauq) with English translations, WhatsApp sharing, and recitation deck.",
+      "tags": [
+        "naat",
+        "roman",
+        "urdu",
+        "bareilly",
+        "hadaiq",
+        "saaman",
+        "safeena",
+        "zauq",
+        "pwa",
+        "recitation"
+      ],
+      "primary": true,
+      "relPath": "17. Roman Naat/index.html",
+      "portalHref": "./17. Roman Naat/index.html",
+      "serverHref": "./17. Roman Naat/index.html"
     },
     {
       "id": "03-Hadith-Roman-Urdu__web__top_100_short_hadiths_html",
@@ -536,6 +560,22 @@ window.PORTAL_CATALOG = {
       "relPath": "08-Pincode-Search/phone_qr.html",
       "portalHref": "./08-Pincode-Search/phone_qr.html",
       "serverHref": "./08-Pincode-Search/phone_qr.html"
+    },
+    {
+      "id": "15-Quran-Deep-Analyzer__commands_html",
+      "title": "📜 احکامِ الٰہی و طرزِ زندگی • Divine Commands & Injunctions for Human Living",
+      "category": "Discovered Tools",
+      "icon": "📄",
+      "badge": "15-Quran-Deep-Analyzer",
+      "description": "قرآن حکیم کے 80 منتخب اوامر و نواہی (احکامِ الٰہی): خوراک، صحت، شائستہ گفتگو، غریب پروری، اخلاق، دیانت اور انسانی فلاح کا جامع قرآنی چارٹر مع کنز الایمان و حکمت۔",
+      "tags": [
+        "15-quran-deep-analyzer",
+        "commands.html"
+      ],
+      "primary": false,
+      "relPath": "15-Quran-Deep-Analyzer/commands.html",
+      "portalHref": "./15-Quran-Deep-Analyzer/commands.html",
+      "serverHref": "./15-Quran-Deep-Analyzer/commands.html"
     }
   ]
 };

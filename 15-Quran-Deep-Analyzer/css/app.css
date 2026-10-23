@@ -5482,3 +5482,243 @@ mark.search-highlight {
   padding: 1px 7px;
   border-radius: var(--radius-full);
 }
+
+
+/* ====================================================================
+   📱 UNIVERSAL MOBILE BOTTOM COMMAND DOCK & AUDIO MINI-DOCK (v2.1)
+   ==================================================================== */
+
+.mobile-bottom-dock {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 58px;
+  z-index: 9998;
+  background: rgba(6, 8, 14, 0.95);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 4px;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.6);
+  direction: rtl;
+}
+
+@media (min-width: 769px) {
+  .mobile-bottom-dock {
+    display: none !important;
+  }
+}
+
+.mobile-dock-btn {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  text-decoration: none;
+  color: #94a3b8;
+  font-size: 0.70rem;
+  font-weight: 600;
+  transition: all 0.18s ease;
+  touch-action: manipulation;
+  user-select: none;
+  position: relative;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.mobile-dock-btn:hover {
+  color: #f8fafc;
+}
+
+.mobile-dock-icon {
+  font-size: 1.22rem;
+  line-height: 1;
+  transition: transform 0.18s ease;
+}
+
+.mobile-dock-label {
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.mobile-dock-btn.active {
+  color: #fbbf24;
+  font-weight: 700;
+}
+
+.mobile-dock-btn.active .mobile-dock-icon {
+  transform: translateY(-2px) scale(1.1);
+  filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.5));
+}
+
+.mobile-dock-btn.active::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 20%;
+  right: 20%;
+  height: 2px;
+  background: #fbbf24;
+  border-radius: 9999px;
+  box-shadow: 0 0 8px #fbbf24;
+}
+
+/* Persistent Cyber-Glass Audio Mini-Dock */
+.audio-mini-dock {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(140px);
+  width: calc(100% - 32px);
+  max-width: 780px;
+  z-index: 9990;
+  background: rgba(10, 15, 30, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.8), 0 0 20px rgba(251, 191, 36, 0.18);
+  border-radius: 9999px;
+  padding: 8px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0;
+  pointer-events: none;
+  direction: rtl;
+}
+
+.audio-mini-dock.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (max-width: 768px) {
+  .audio-mini-dock {
+    bottom: 66px;
+    width: calc(100% - 16px);
+    padding: 6px 12px;
+    border-radius: 16px;
+  }
+}
+
+.mini-dock-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.mini-dock-pulse {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 10px #10b981;
+  animation: pulseEmerald 1.5s infinite;
+  flex-shrink: 0;
+}
+
+@keyframes pulseEmerald {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.6; }
+}
+
+.mini-dock-text-wrap {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  text-align: right;
+}
+
+.mini-dock-title {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #f8fafc;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mini-dock-sub {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  white-space: nowrap;
+}
+
+.mini-dock-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.mini-dock-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #f8fafc;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  touch-action: manipulation;
+}
+
+.mini-dock-btn:hover {
+  background: rgba(251, 191, 36, 0.25);
+  border-color: #fbbf24;
+  color: #fbbf24;
+  transform: scale(1.05);
+}
+
+.mini-dock-btn.play-toggle {
+  background: #10b981;
+  border-color: #10b981;
+  color: #022c22;
+  font-size: 1rem;
+}
+
+.mini-dock-btn.play-toggle:hover {
+  background: #34d399;
+  transform: scale(1.08);
+}
+
+.mini-dock-autoplay-wrap {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  color: #cbd5e1;
+  cursor: pointer;
+  user-select: none;
+}
+
+.mini-dock-close {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+}
+
+.mini-dock-close:hover {
+  color: #f8fafc;
+}
