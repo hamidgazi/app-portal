@@ -270,7 +270,7 @@
     <header>
       <div class="badge">⚡ Production Knowledge Hub & Launchpad</div>
       <h1>🧠 Master Engineering Navigator</h1>
-      <p class="subtitle">Unified interactive index of 28 battle-tested architectural principles and 1-click execution console for all 11 production projects across the Antigravity workspace.</p>
+      <p class="subtitle">Unified interactive index of 28 battle-tested architectural principles and 1-click execution console for all 18 production projects across the Antigravity workspace.</p>
     </header>
 
     <!-- Main Navigation Tabs -->
@@ -279,7 +279,7 @@
         🧠 Knowledge Navigator (<span id="tabKnowledgeCount">28</span>)
       </button>
       <button class="nav-tab" id="tab-launchpad" data-view="launchpad" role="tab" aria-selected="false" aria-controls="view-launchpad">
-        🚀 Project Launchpad (11 Projects)
+        🚀 Project Launchpad (18 Projects)
       </button>
       <a class="nav-tab" href="App-Portal/index.html" style="text-decoration: none; border-color: rgba(56, 189, 248, 0.4); background: rgba(56, 189, 248, 0.1); color: var(--accent);">
         ⚡ All-in-One App Portal
@@ -317,7 +317,7 @@
     <div id="view-launchpad" class="view-panel" role="tabpanel" aria-labelledby="tab-launchpad" style="display: none;">
       <div class="launchpad-intro">
         <h2>🚀 Antigravity Project Launchpad</h2>
-        <p>Interactive 1-click execution console indexing all 11 production projects organized across the 4 thematic pillars. All links operate 100% offline via relative file paths.</p>
+        <p>Interactive 1-click execution console indexing all 18 production projects organized across the 4 thematic pillars. All links operate 100% offline via relative file paths.</p>
       </div>
       <div id="launchpadContainer"></div>
     </div>
@@ -341,7 +341,7 @@
       {
         id: "pwa-0ms",
         domain: "Web",
-        chapter: "Ch 2.1",
+        chapter: "Ch 1.1",
         title: "Instant 0ms Mobile Cold Start via Service Worker",
         desc: "Standard Stale-While-Revalidate causes 1-2s network latency on mobile. Intercepting 'navigate' mode directly with cached index.html gives true 0ms startup.",
         finding: "Never wait for network ping on app cold-start. Always serve shell from cache and defer updates by 2s.",
@@ -399,7 +399,7 @@ chords.forEach(n => {
       {
         id: "swipe-gestures",
         domain: "Web",
-        chapter: "Ch 4",
+        chapter: "Ch 2.1",
         title: "Physics-Based Touch Swipe-to-Delete",
         desc: "Native-grade 1:1 finger tracking swipe gestures with 8px slop threshold, vertical scroll guard, and rightward rubber-band resistance.",
         finding: "If |dy| > |dx|, abort immediately to let native scroll take over. When dragging right, multiply dx by 0.12 for resistance.",
@@ -415,7 +415,7 @@ cardEl.style.transform = 'translateX(' + currentX + 'px)';`
       {
         id: "bootloader-isolation",
         domain: "Web",
-        chapter: "Ch 20.1",
+        chapter: "Ch 4.1",
         title: "Defensive Component Bootloader Isolation",
         desc: "Never initialize UI modules in an unprotected linear sequence. Sandboxing each module inside its own try/catch ensures optional feature failures never crash the whole app.",
         finding: "A failure in Web Audio, Service Worker, or Confetti should NEVER freeze core document reading, navigation, or security gates.",
@@ -434,7 +434,7 @@ cardEl.style.transform = 'translateX(' + currentX + 'px)';`
       {
         id: "kebab-case-dom",
         domain: "Web",
-        chapter: "Ch 20.2",
+        chapter: "Ch 4.2",
         title: "Strict DOM Variable Hygiene (Kebab-Case Trap)",
         desc: "Hyphenated IDs like <div id='desc-lh'> CANNOT be referenced as global variables in JS. Calling descLh throws a fatal ReferenceError.",
         finding: "Always explicitly declare and null-check DOM targets via document.getElementById() before modifying properties.",
@@ -449,7 +449,7 @@ if (descLh) {
       {
         id: "touch-ergonomics",
         domain: "Web",
-        chapter: "Ch 20.3",
+        chapter: "Ch 4.3",
         title: "Mobile Touch Ergonomics & Whole-Container Hitbox",
         desc: "Binding click listeners only to tiny 16px chevrons creates severe mobile tap friction. Bind to the whole card header with >= 48px hitbox.",
         finding: "WCAG 2.1 requires >= 48px touch targets. Use touch-action: manipulation to eliminate mobile tap latency.",
@@ -466,7 +466,7 @@ if (descLh) {
       {
         id: "node-check-syntax",
         domain: "Web",
-        chapter: "Ch 20.4",
+        chapter: "Ch 4.4",
         title: "Automated Pre-Deployment JS Syntax Tests",
         desc: "String presence tests like assertIn('<script>', html) don't catch syntax errors. Extract all <script> blocks and validate via node --check.",
         finding: "Zero-dependency CI test that guarantees 100% syntax validity across all single-file HTML applications before release.",
@@ -481,7 +481,7 @@ for idx, code in enumerate(scripts):
       {
         id: "whatsapp-gate",
         domain: "Security",
-        chapter: "Ch 5",
+        chapter: "Ch 38.1",
         title: "Serverless Deterministic WhatsApp Access Gate",
         desc: "Passwordless security for client prototypes without a database or backend server. Client sends request code over WhatsApp; owner generates PIN on phone.",
         finding: "Both client and owner compute identical 6-digit PIN using shared secret salt. Zero cloud costs, works on GitHub Pages.",
@@ -497,7 +497,7 @@ for idx, code in enumerate(scripts):
       {
         id: "solar-ephemeris",
         domain: "Security",
-        chapter: "Ch 7",
+        chapter: "Ch 39.1",
         title: "Jean Meeus Solar Ephemeris & Hanafi Asr Formula",
         desc: "High-precision mathematical prayer calculation engine running 100% offline. Computes Julian Day, Equation of Time, and Hanafi double-shadow Asr.",
         finding: "Islamic calendar day advances at Sunset (Maghrib), not Midnight. Invert shadow altitude via atan(1 / (2 + noonShadow)).",
@@ -510,7 +510,7 @@ const hAsr = computeHourAngle(asrAltitude, lat, solar.declination);`
       {
         id: "fast-64k-dedup",
         domain: "Windows",
-        chapter: "Ch 8.1",
+        chapter: "Ch 32.1",
         title: "Fast-64K Two-Tier Duplicate File Radar",
         desc: "Computing full SHA-256 hashes across gigabytes of videos causes severe I/O thrashing. Read head 64KB + tail 64KB for instant scanning.",
         finding: "Files with matching size AND matching 64K head/tail checksum are 99.99% duplicate; run full SHA-256 only on collision.",
@@ -528,7 +528,7 @@ const hAsr = computeHourAngle(asrAltitude, lat, solar.declination);`
       {
         id: "reversible-undo",
         domain: "Windows",
-        chapter: "Ch 8.3",
+        chapter: "Ch 32.3",
         title: "Persistent Transaction Journal for 1-Tap Undo",
         desc: "Record all file movement operations in .organizer_history.json with relative paths and created folders. Allows 100% reversible batch rollbacks.",
         finding: "Iterating operations in reverse restores original state and safely removes newly created empty directories.",
@@ -545,7 +545,7 @@ const hAsr = computeHourAngle(asrAltitude, lat, solar.declination);`
       {
         id: "polyglot-bat-wpf",
         domain: "Windows",
-        chapter: "Ch 9.1",
+        chapter: "Ch 32.4",
         title: "Polyglot Batch + PowerShell WPF Desktop GUI",
         desc: "Embed an entire modern GPU-accelerated XAML/WPF interface inside a single .bat file runnable on any Windows PC without installation.",
         finding: "Uses self-reading script token marker to launch hidden PowerShell STA session with zero console flashing.",
@@ -560,7 +560,7 @@ Add-Type -AssemblyName PresentationFramework
       {
         id: "wsearch-decommission",
         domain: "Windows",
-        chapter: "Ch 19.1",
+        chapter: "Ch 29.1",
         title: "Eliminating 5400 RPM HDD Stutter via USN Search",
         desc: "Windows Search (WSearch) and Superfetch (SysMain) cause severe random 4K read contention on mechanical drives. Decommissioning them eliminates stutter.",
         finding: "NTFS USN Journal tools (Everything / Listary) search millions of files in < 0.05s from RAM with 0 disk head movement.",
@@ -573,7 +573,7 @@ Set-Service -Name "SysMain" -StartupType Disabled`
       {
         id: "word-mode-15",
         domain: "Docs",
-        chapter: "Ch 18.12",
+        chapter: "Ch 24.12",
         title: "Modern Word Mode 15 & Sub-Pixel Typography",
         desc: "python-docx creates Word 2010 (Mode 14) files showing unsightly Compatibility Mode banners. Upgrade to Mode 15 for native sub-pixel kerning.",
         finding: "Combine OpenXML w:compatSetting w:val='15' with Word COM $doc.Convert() to permanently eliminate Compatibility Mode.",
@@ -587,7 +587,7 @@ if ($doc.CompatibilityMode -lt 15) { $doc.Convert() }`
       {
         id: "pymupdf-bookmarks",
         domain: "Docs",
-        chapter: "Ch 18.13",
+        chapter: "Ch 24.13",
         title: "Hierarchical Multi-Tier PDF Bookmarking via PyMuPDF",
         desc: "Exporting custom styles via Word COM often produces 0 PDF bookmarks. Post-process with PyMuPDF (fitz) to inject interactive multi-level TOCs.",
         finding: "A clean outline array [level, title, page] creates instant sidebar navigation across Adobe, Chrome, Edge, and mobile readers.",
@@ -605,7 +605,7 @@ doc.save("book_bookmarked.pdf", deflate=True, garbage=3)`
       {
         id: "android-widget-bridge",
         domain: "Android",
-        chapter: "Ch 6.1",
+        chapter: "Ch 34.1",
         title: "Bidirectional Web-to-Widget Synchronization",
         desc: "Bridge HTML localStorage directly to native Android RemoteViews home screen widgets using an exposed @JavascriptInterface.",
         finding: "When user edits data in web app, JS calls bridge -> writes to SharedPreferences -> triggers notifyAppWidgetViewDataChanged().",
@@ -623,7 +623,7 @@ doc.save("book_bookmarked.pdf", deflate=True, garbage=3)`
       {
         id: "script-relocation",
         domain: "Workspace",
-        chapter: "Ch 10.1",
+        chapter: "Ch 33.1",
         title: "Dynamic Script Relocation Pattern (%~dp0)",
         desc: "Never hardcode directory paths in batch deployers. Using cd /d '%~dp0' guarantees scripts run seamlessly even when folders are moved or renamed.",
         finding: "%~dp0 dynamically resolves to the drive and directory of the running batch file at execution time.",
@@ -638,7 +638,7 @@ pause`
       {
         id: "immutability-dual-release",
         domain: "Workspace",
-        chapter: "Ch 12",
+        chapter: "Ch 41.4",
         title: "Immutability & Dual-Release Client Architecture",
         desc: "Never edit an active client production file directly. Freeze the approved client deliverable, fork modifications into a vNext draft.",
         finding: "Guarantees zero regressions in client deliverables while allowing unconstrained innovation on experimental branches.",
@@ -649,7 +649,7 @@ pause`
       {
         id: "openxml-mixed-script",
         domain: "Docs",
-        chapter: "Ch 18.27",
+        chapter: "Ch 24.27",
         title: "Sub-Element Mixed-Script Parsing & Compact Honorifics",
         desc: "Prevent inline Arabic within Roman blockquotes from contaminating surrounding English/Roman text into giant green fonts, and render authentic Arabic honorifics without bidi flips.",
         finding: "Split tokens via regex and route Latin to Palatino and Arabic to Traditional Arabic 11.5pt Navy, strictly omitting w:rtl to avoid bracket flips.",
@@ -666,7 +666,7 @@ parts.forEach(part => {
       {
         id: "word-com-fast-paginator",
         domain: "Docs",
-        chapter: "Ch 18.29",
+        chapter: "Ch 24.29",
         title: "High-Speed Word COM Bookmark Pagination Engine (< 2s)",
         desc: "Calculate physical page numbers directly from bookmark ranges rather than running slow document repaginations, eliminating UI freezing and dialog locks.",
         finding: "Inspect Range.Information(3) (wdActiveEndPageNumber) directly on target heading bookmarks in memory.",
@@ -680,7 +680,7 @@ foreach ($bmName in $topicBookmarks) {
       {
         id: "winget-dual-loop",
         domain: "Windows",
-        chapter: "Ch 21.1",
+        chapter: "Ch 31.1",
         title: "Dual-Loop Winget & Registry Direct Vendor Evaluator",
         desc: "Evaluate package updates across both Winget CLI tables and secondary Registry scans with direct vendor feeds, bypassing delayed repository syncs.",
         finding: "Compare installed versions against vendor REST/INI endpoints and inject direct download URLs for 1-click silent installations.",
@@ -694,7 +694,7 @@ if ($installedVer -lt $vendorLatestVer) {
       {
         id: "defender-optimization",
         domain: "Windows",
-        chapter: "Ch 22.1",
+        chapter: "Ch 30.1",
         title: "Windows Defender Zero-Lag Antimalware Optimization",
         desc: "Eliminate MsMpEng.exe CPU spikes and disk contention by breaking the recursive self-scanning loop and capping background scans to 15% CPU.",
         finding: "Add self-exclusions to Windows Defender paths and enforce LowCpuPriority with ScanAvgCPULoadFactor 15.",
@@ -706,7 +706,7 @@ Set-MpPreference -ScanAvgCPULoadFactor 15 -EnableLowCpuPriority $true -ScanOnlyI
       {
         id: "intel-telemetry-reclaim",
         domain: "Windows",
-        chapter: "Ch 23.1",
+        chapter: "Ch 30.5",
         title: "Intel SUR & DSA Background Telemetry Elimination",
         desc: "Reclaim ~600MB of physical RAM by disabling heavy OEM Intel telemetry services while guaranteeing zero impact on graphics drivers or display resolution.",
         finding: "Telemetry services (esrv.exe, SurSvc.exe, DSAService.exe) are completely decoupled from core Intel HD Graphics display drivers (igfxCUIService).",
@@ -720,7 +720,7 @@ foreach ($s in $intelSvcs) {
       {
         id: "cloudclip-room-tts",
         domain: "Web",
-        chapter: "Ch 24.1",
+        chapter: "Ch 5.1",
         title: "Zero-Dependency Real-Time Room Sync & Web Speech TTS",
         desc: "Synchronize clipboard snippets across workstations and mobile devices via room identifiers with local-first offline caching and browser-native speech synthesis.",
         finding: "Combine URL hash room channels with Web Speech API SpeechSynthesisUtterance for zero-cost, hands-free text narration.",
@@ -736,7 +736,7 @@ function speakText(text, rate = 1.0) {
       {
         id: "omnichannel-publication",
         domain: "Docs",
-        chapter: "Ch 25.2",
+        chapter: "Ch 27.23",
         title: "7-Tier Omnichannel Publication & Format Parity Engine",
         desc: "Synchronize massive 20,000+ word manuscripts across 7 distinct tiers: Canonical Markdown, OpenXML Word, Bit-Perfect Word COM PDF, Universal EPUB 3.0, Interactive PWA Reader, Pocket Cards, and Cloudflare Pages.",
         finding: "Modular part generation combined with SHA-256 baseline locks and Promise.allSettled Service Worker caching guarantees 100% typographic parity across all formats with zero token cutoffs.",
@@ -754,7 +754,7 @@ PUBLICATION_TIERS = [
       {
         id: "logistics-binary-search",
         domain: "Web",
-        chapter: "Ch 26.1",
+        chapter: "Ch 6.1",
         title: "Zero-Latency Integer Range Binary Search (< 0.01ms)",
         desc: "Search 22,000+ logistics postal codes and multi-city hub records in microseconds on mobile phones. Dictionary interning reduces data size by 75%, and mathematical integer interval binary search over Uint32Array eliminates regex overhead.",
         finding: "6-digit postal prefixes form closed integer ranges: minVal = val * 10^(6 - len), maxVal = minVal + 10^(6 - len) - 1. Two binary searches evaluate prefix queries in under 0.01ms.",
@@ -771,7 +771,7 @@ function searchPincodePrefix(val, len, sortedArray) {
       {
         id: "contentprovider-sandbox-bypass",
         domain: "Web",
-        chapter: "Ch 26.5",
+        chapter: "Ch 6.5",
         title: "Standalone Inlined Bundling for Android ContentProvider Sandbox",
         desc: "When users open HTML files from WhatsApp or Telegram, Android's content:// sandbox blocks all relative stylesheets and scripts. Inlining all CSS, JS, and datasets into a single ~973KB file guarantees 100% offline hydration.",
         finding: "A Python bundler script embeds CSS, compressed datasets, and logic into a single HTML file with 0 external network requests and 0 relative dependencies.",
@@ -819,7 +819,7 @@ with open("dist/Pincode_Search_Offline.html", "w", encoding="utf-8") as out:
       }
     ];
 
-    const PROJECT_ITEMS = [
+        const PROJECT_ITEMS = [
       {
         num: "01",
         pillarId: "pillar-1",
@@ -850,30 +850,17 @@ with open("dist/Pincode_Search_Offline.html", "w", encoding="utf-8") as out:
       {
         num: "03",
         pillarId: "pillar-1",
-        pillarName: "Web & Mobile",
-        name: "Smart Organizer Android",
-        desc: "High-performance Android storage management application featuring Fast-64K two-tier duplicate file radar, Jetpack Compose UI, and 1-tap reversible rollback journals.",
-        badges: ["Kotlin", "Jetpack Compose", "Fast-64K SHA-256", "Undo Journal"],
+        pillarName: "Web Applications",
+        name: "Thela Stock Manager PWA",
+        desc: "Mobile-first inventory & stock management suite with Firestore real-time cloud sync, offline queue, Web Audio acoustic feedback, and 2-way OpenXML Excel reconciliation.",
+        badges: ["PWA", "Firestore Cloud", "Excel Sync", "Offline-First"],
         launchers: [
-          { label: "📱 Download APK", href: "../16-Smart-Organizer-Android/SmartOrganizer_Android.apk", type: "primary" },
-          { label: "📄 Architecture README", href: "../16-Smart-Organizer-Android/README.md", type: "secondary" }
+          { label: "📦 Launch Stock Manager", href: "../03-Thela-Stock-Manager/index.html", type: "primary" },
+          { label: "📄 README Docs", href: "../03-Thela-Stock-Manager/README.md", type: "subtle" }
         ]
       },
       {
         num: "04",
-        pillarId: "pillar-1",
-        pillarName: "Web & Mobile",
-        name: "CloudClip PRO",
-        desc: "Local-first cross-device clipboard synchronization suite with Web Speech API text-to-speech narration, encrypted room channels, and instant device pairing.",
-        badges: ["HTML5/CSS3", "Web Speech TTS", "Local-First", "AES-GCM"],
-        launchers: [
-          { label: "🌐 Open Web App", href: "../05-Cloud-Clipboard/index.html", type: "primary" },
-          { label: "⚡ Run OPEN_APP.bat", href: "../05-Cloud-Clipboard/OPEN_APP.bat", type: "secondary" },
-          { label: "📄 README Docs", href: "../05-Cloud-Clipboard/README.md", type: "subtle" }
-        ]
-      },
-      {
-        num: "08",
         pillarId: "pillar-1",
         pillarName: "Web & Mobile",
         name: "Pincode Logistics Search Engine",
@@ -887,47 +874,81 @@ with open("dist/Pincode_Search_Offline.html", "w", encoding="utf-8") as out:
         ]
       },
       {
-        num: "06",
-        pillarId: "pillar-2",
-        pillarName: "System Utilities",
-        name: "PC Software Updater",
-        desc: "Workstation maintenance suite with fluent WPF XAML GUI, dual-loop Winget CLI and direct vendor registry feed resolution, and Pro License Shield protection.",
-        badges: ["PowerShell 5.1", "WPF XAML", "Winget CLI", "Registry Feeds"],
+        num: "05",
+        pillarId: "pillar-1",
+        pillarName: "Web & Mobile",
+        name: "CloudClip PRO",
+        desc: "Local-first cross-device clipboard synchronization suite with Web Speech API text-to-speech narration, encrypted room channels, and instant device pairing.",
+        badges: ["HTML5/CSS3", "Web Speech TTS", "Local-First", "AES-GCM"],
         launchers: [
-          { label: "⚡ Run Updater (BAT)", href: "../13-Update-Software/Update_PC_Software.bat", type: "primary" },
-          { label: "🖥️ Silent VBS Launcher", href: "../13-Update-Software/Update_PC_Software.vbs", type: "secondary" },
-          { label: "📄 Documentation", href: "../13-Update-Software/README.md", type: "subtle" }
+          { label: "🌐 Open Web App", href: "../05-Cloud-Clipboard/index.html", type: "primary" },
+          { label: "⚡ Run OPEN_APP.bat", href: "../05-Cloud-Clipboard/OPEN_APP.bat", type: "secondary" },
+          { label: "📄 README Docs", href: "../05-Cloud-Clipboard/README.md", type: "subtle" }
+        ]
+      },
+      {
+        num: "06",
+        pillarId: "pillar-1",
+        pillarName: "Web Applications",
+        name: "Sustainable Weight Gain Suite",
+        desc: "Clinical physiological nutrition & calisthenics hypertrophy dashboard for ectomorphs featuring gastric decoupling protocols, macro calculators, and 3-1-1 tempo logs.",
+        badges: ["Physiology", "Biomechanics", "Interactive Dashboard", "PWA"],
+        launchers: [
+          { label: "🥗 Open Dashboard", href: "../06-Sustainable-Weight-Gain-Guide/Weight_Gain_Dashboard.html", type: "primary" },
+          { label: "📘 Master Guide (MD)", href: "../06-Sustainable-Weight-Gain-Guide/MASTER_WEIGHT_GAIN_GUIDE.md", type: "secondary" },
+          { label: "📄 README Docs", href: "../06-Sustainable-Weight-Gain-Guide/README.md", type: "subtle" }
         ]
       },
       {
         num: "07",
-        pillarId: "pillar-2",
-        pillarName: "System Utilities",
-        name: "System Acceleration & Latency Tuning",
-        desc: "Workstation performance tuning suite for Intel Core i5 systems, capping Windows Defender scans to 15% CPU and reclaiming ~600MB RAM via Intel SUR/DSA telemetry decommissioning.",
-        badges: ["PowerShell", "Defender Throttling", "Intel SUR Decommission", "Reversible Tweaks"],
+        pillarId: "pillar-3",
+        pillarName: "Digital Publishing",
+        name: "Quran Deep Analyzer Studio",
+        desc: "High-density quantitative corpus linguistics studio covering 114 Surahs, 30 Paras, authentic Mutashabihat concordance, triliteral root morphology, and zero-music UI acoustics.",
+        badges: ["Linguistics", "Morphology", "Mutashabihat", "Cyber-Glass PWA"],
         launchers: [
-          { label: "⚡ Optimize Defender (BAT)", href: "../12-System-Acceleration/Optimize_Windows_Defender.bat", type: "primary" },
-          { label: "⚡ Disable Intel Telemetry (BAT)", href: "../12-System-Acceleration/Disable_Intel_Usage_Report.bat", type: "secondary" },
-          { label: "🔄 Rollback Defender (BAT)", href: "../12-System-Acceleration/Rollback_Windows_Defender.bat", type: "subtle" },
-          { label: "📄 README Docs", href: "../12-System-Acceleration/README.md", type: "subtle" }
+          { label: "📖 Launch Quran Analyzer", href: "../07-Quran-Deep-Analyzer/index.html", type: "primary" },
+          { label: "📄 README Docs", href: "../07-Quran-Deep-Analyzer/README.md", type: "subtle" }
+        ]
+      },
+      {
+        num: "08",
+        pillarId: "pillar-3",
+        pillarName: "Digital Publishing",
+        name: "Hadith Roman Urdu Reader",
+        desc: "Grand Sahih Hadith reader indexing 7,882 narrations and Top 100 Short Hadiths with sub-15ms search, Roman Urdu phonetic normalization, and instant audio pacing.",
+        badges: ["Hadith Corpus", "Roman Urdu", "Sub-15ms Search", "Offline PWA"],
+        launchers: [
+          { label: "📖 Launch Hadith Reader", href: "../08-Hadith-Roman-Urdu/Hadith_Reader.html", type: "primary" },
+          { label: "📄 README Docs", href: "../08-Hadith-Roman-Urdu/README.md", type: "subtle" }
+        ]
+      },
+      {
+        num: "09",
+        pillarId: "pillar-3",
+        pillarName: "Digital Publishing",
+        name: "Fatawa Razviya Encyclopedia Reader",
+        desc: "Grand Islamic Jurisprudence Encyclopedia & Reader compiling 924+ short fatwas across 30 volumes with Roman Urdu transliteration, topic categorization, and sub-millisecond search.",
+        badges: ["Urdu Fiqh", "Roman Transliteration", "SQLite Extraction", "HTML Reader"],
+        launchers: [
+          { label: "📖 Launch Fatawa Reader", href: "../09-Fatawa-Project/output/fatawa_reader.html", type: "primary" },
+          { label: "📄 README Docs", href: "../09-Fatawa-Project/README.md", type: "subtle" }
         ]
       },
       {
         num: "10",
-        pillarId: "pillar-2",
-        pillarName: "System Utilities",
-        name: "Essential PC Software Suite",
-        desc: "Automated workstation software provisioning engine and 9-domain compendium of zero-bloat, high-performance native tools across system, media, and development.",
-        badges: ["Winget Automation", "PowerShell CLI", "9-Domain Matrix", "Zero-Bloat"],
+        pillarId: "pillar-3",
+        pillarName: "Digital Publishing",
+        name: "Roman Naat Diwan Reader",
+        desc: "Classical Islamic poetry and diwan reader featuring multi-diwan categorization, fuzzy phonetic token search, and 1-tap WhatsApp sharing buffers.",
+        badges: ["Classical Naat", "Roman Urdu", "Diwan Reader", "Offline PWA"],
         launchers: [
-          { label: "⚡ Quick Install Menu (BAT)", href: "../14-Essential-PC-Software-Suite/Quick_Install_Menu.bat", type: "primary" },
-          { label: "📘 PC Master Guide (MD)", href: "../14-Essential-PC-Software-Suite/Essential_PC_Software_Master_Guide.md", type: "secondary" },
-          { label: "📄 README Docs", href: "../14-Essential-PC-Software-Suite/README.md", type: "subtle" }
+          { label: "📖 Launch Naat Reader", href: "../10-Roman-Naat/index.html", type: "primary" },
+          { label: "📄 README Docs", href: "../10-Roman-Naat/README.md", type: "subtle" }
         ]
       },
       {
-        num: "05",
+        num: "11",
         pillarId: "pillar-3",
         pillarName: "Digital Publishing",
         name: "Roman Urdu Sacred Publishing",
@@ -942,7 +963,72 @@ with open("dist/Pincode_Search_Offline.html", "w", encoding="utf-8") as out:
         ]
       },
       {
-        num: "09",
+        num: "12",
+        pillarId: "pillar-2",
+        pillarName: "System Utilities",
+        name: "System Acceleration & Latency Tuning",
+        desc: "Workstation performance tuning suite for Intel Core i5 systems, capping Windows Defender scans to 15% CPU and reclaiming ~600MB RAM via Intel SUR/DSA telemetry decommissioning.",
+        badges: ["PowerShell", "Defender Throttling", "Intel SUR Decommission", "Reversible Tweaks"],
+        launchers: [
+          { label: "⚡ Optimize Defender (BAT)", href: "../12-System-Acceleration/Optimize_Windows_Defender.bat", type: "primary" },
+          { label: "⚡ Disable Intel Telemetry (BAT)", href: "../12-System-Acceleration/Disable_Intel_Usage_Report.bat", type: "secondary" },
+          { label: "🔄 Rollback Defender (BAT)", href: "../12-System-Acceleration/Rollback_Windows_Defender.bat", type: "subtle" },
+          { label: "📄 README Docs", href: "../12-System-Acceleration/README.md", type: "subtle" }
+        ]
+      },
+      {
+        num: "13",
+        pillarId: "pillar-2",
+        pillarName: "System Utilities",
+        name: "PC Software Updater",
+        desc: "Workstation maintenance suite with fluent WPF XAML GUI, dual-loop Winget CLI and direct vendor registry feed resolution, and Pro License Shield protection.",
+        badges: ["PowerShell 5.1", "WPF XAML", "Winget CLI", "Registry Feeds"],
+        launchers: [
+          { label: "⚡ Run Updater (BAT)", href: "../13-Update-Software/Update_PC_Software.bat", type: "primary" },
+          { label: "🖥️ Silent VBS Launcher", href: "../13-Update-Software/Update_PC_Software.vbs", type: "secondary" },
+          { label: "📄 Documentation", href: "../13-Update-Software/README.md", type: "subtle" }
+        ]
+      },
+      {
+        num: "14",
+        pillarId: "pillar-2",
+        pillarName: "System Utilities",
+        name: "Essential PC Software Suite",
+        desc: "Automated workstation software provisioning engine and 9-domain compendium of zero-bloat, high-performance native tools across system, media, and development.",
+        badges: ["Winget Automation", "PowerShell CLI", "9-Domain Matrix", "Zero-Bloat"],
+        launchers: [
+          { label: "⚡ Quick Install Menu (BAT)", href: "../14-Essential-PC-Software-Suite/Quick_Install_Menu.bat", type: "primary" },
+          { label: "📘 PC Master Guide (MD)", href: "../14-Essential-PC-Software-Suite/Essential_PC_Software_Master_Guide.md", type: "secondary" },
+          { label: "📄 README Docs", href: "../14-Essential-PC-Software-Suite/README.md", type: "subtle" }
+        ]
+      },
+      {
+        num: "15",
+        pillarId: "pillar-2",
+        pillarName: "System Utilities",
+        name: "Smartphone Hardware & Decision Studio",
+        desc: "Practical mobile telemetry evaluation studio evaluating sustained HBM nits, high-frequency PWM eye strain, 200g wrist fatigue limits, and real-world sensor architectures.",
+        badges: ["Display PWM", "Thermal Telemetry", "Hardware Benchmarks", "Interactive Matrix"],
+        launchers: [
+          { label: "📱 Open Decision Studio", href: "../15-Mobile-Phone-Analysis/index.html", type: "primary" },
+          { label: "📘 Practical Analysis Report", href: "../15-Mobile-Phone-Analysis/PRACTICAL_MOBILE_ANALYSIS_REPORT.md", type: "secondary" },
+          { label: "📄 README Docs", href: "../15-Mobile-Phone-Analysis/README.md", type: "subtle" }
+        ]
+      },
+      {
+        num: "16",
+        pillarId: "pillar-4",
+        pillarName: "Master Guides",
+        name: "Smart Organizer Android",
+        desc: "High-performance Android storage management application featuring Fast-64K two-tier duplicate file radar, Jetpack Compose UI, and 1-tap reversible rollback journals.",
+        badges: ["Kotlin", "Jetpack Compose", "Fast-64K SHA-256", "Undo Journal"],
+        launchers: [
+          { label: "📱 Download APK", href: "../16-Smart-Organizer-Android/SmartOrganizer_Android.apk", type: "primary" },
+          { label: "📄 Architecture README", href: "../16-Smart-Organizer-Android/README.md", type: "secondary" }
+        ]
+      },
+      {
+        num: "17",
         pillarId: "pillar-4",
         pillarName: "Master Guides",
         name: "Android Zero-Loss Backup Hub",
@@ -955,7 +1041,7 @@ with open("dist/Pincode_Search_Offline.html", "w", encoding="utf-8") as out:
         ]
       },
       {
-        num: "11",
+        num: "18",
         pillarId: "pillar-4",
         pillarName: "Master Guides",
         name: "Essential Android Apps Suite",
@@ -964,68 +1050,6 @@ with open("dist/Pincode_Search_Offline.html", "w", encoding="utf-8") as out:
         launchers: [
           { label: "📘 Android Apps Master Guide (MD)", href: "../18-Essential-Android-Apps-Suite/Essential_Android_Apps_Master_Guide.md", type: "primary" },
           { label: "📄 README Docs", href: "../18-Essential-Android-Apps-Suite/README.md", type: "secondary" }
-        ]
-      },
-      {
-        num: "12",
-        pillarId: "pillar-3",
-        pillarName: "Digital Publishing",
-        name: "Fatawa Razviya Encyclopedia Reader",
-        desc: "Grand Islamic Jurisprudence Encyclopedia & Reader compiling 924+ short fatwas across 30 volumes with Roman Urdu transliteration, topic categorization, and sub-millisecond search.",
-        badges: ["Urdu Fiqh", "Roman Transliteration", "SQLite Extraction", "HTML Reader"],
-        launchers: [
-          { label: "📖 Launch Fatawa Reader", href: "../09-Fatawa-Project/output/fatawa_reader.html", type: "primary" },
-          { label: "📄 README Docs", href: "../09-Fatawa-Project/README.md", type: "subtle" }
-        ]
-      },
-      {
-        num: "13",
-        pillarId: "pillar-1",
-        pillarName: "Web Applications",
-        name: "Sustainable Weight Gain Suite",
-        desc: "Clinical physiological nutrition & calisthenics hypertrophy dashboard for ectomorphs featuring gastric decoupling protocols, macro calculators, and 3-1-1 tempo logs.",
-        badges: ["Physiology", "Biomechanics", "Interactive Dashboard", "PWA"],
-        launchers: [
-          { label: "🥗 Open Dashboard", href: "../06-Sustainable-Weight-Gain-Guide/Weight_Gain_Dashboard.html", type: "primary" },
-          { label: "📘 Master Guide (MD)", href: "../06-Sustainable-Weight-Gain-Guide/MASTER_WEIGHT_GAIN_GUIDE.md", type: "secondary" },
-          { label: "📄 README Docs", href: "../06-Sustainable-Weight-Gain-Guide/README.md", type: "subtle" }
-        ]
-      },
-      {
-        num: "14",
-        pillarId: "pillar-1",
-        pillarName: "Web Applications",
-        name: "Thela Stock Manager PWA",
-        desc: "Mobile-first inventory & stock management suite with Firestore real-time cloud sync, offline queue, Web Audio acoustic feedback, and 2-way OpenXML Excel reconciliation.",
-        badges: ["PWA", "Firestore Cloud", "Excel Sync", "Offline-First"],
-        launchers: [
-          { label: "📦 Launch Stock Manager", href: "../03-Thela-Stock-Manager/index.html", type: "primary" },
-          { label: "📄 README Docs", href: "../03-Thela-Stock-Manager/README.md", type: "subtle" }
-        ]
-      },
-      {
-        num: "15",
-        pillarId: "pillar-1",
-        pillarName: "Web Applications",
-        name: "Quran Deep Analyzer Studio",
-        desc: "High-density quantitative corpus linguistics studio covering 114 Surahs, 30 Paras, authentic Mutashabihat concordance, triliteral root morphology, and zero-music UI acoustics.",
-        badges: ["Linguistics", "Morphology", "Mutashabihat", "Cyber-Glass PWA"],
-        launchers: [
-          { label: "📖 Launch Quran Analyzer", href: "../07-Quran-Deep-Analyzer/index.html", type: "primary" },
-          { label: "📄 README Docs", href: "../07-Quran-Deep-Analyzer/README.md", type: "subtle" }
-        ]
-      },
-      {
-        num: "16",
-        pillarId: "pillar-4",
-        pillarName: "Master Guides",
-        name: "Smartphone Hardware & Decision Studio",
-        desc: "Practical mobile telemetry evaluation studio evaluating sustained HBM nits, high-frequency PWM eye strain, 200g wrist fatigue limits, and real-world sensor architectures.",
-        badges: ["Display PWM", "Thermal Telemetry", "Hardware Benchmarks", "Interactive Matrix"],
-        launchers: [
-          { label: "📱 Open Decision Studio", href: "../15-Mobile-Phone-Analysis/index.html", type: "primary" },
-          { label: "📘 Practical Analysis Report", href: "../15-Mobile-Phone-Analysis/PRACTICAL_MOBILE_ANALYSIS_REPORT.md", type: "secondary" },
-          { label: "📄 README Docs", href: "../15-Mobile-Phone-Analysis/README.md", type: "subtle" }
         ]
       }
     ];

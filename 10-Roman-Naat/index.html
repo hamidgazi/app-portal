@@ -143,9 +143,6 @@
                     </button>
                 </div>
                 <div class="diwan-display-options">
-                    <button id="diwan-cols-btn" class="diwan-ctrl-btn" title="Toggle 2 Columns / 1 Column">
-                        🔲 2-Column
-                    </button>
                     <button id="diwan-trans-btn" class="diwan-ctrl-btn active" title="Toggle English Translation">
                         <span class="toolbar-icon">🔤</span> <span id="diwan-trans-label">Translation: ON</span>
                     </button>
@@ -163,11 +160,11 @@
             </div>
         </header>
 
-        <!-- Diwan Body & Multi-Column Verses -->
-        <main class="diwan-body-wrap">
+        <!-- Continuous Single-Column Diwan Page -->
+        <main class="diwan-book-page">
             <div id="diwan-intro-note" class="kalam-intro-note" style="display: none;"></div>
-            <div id="diwan-verses-container" class="diwan-verses-flow cols-2">
-                <!-- Continuous couplets populated dynamically -->
+            <div id="diwan-verses-container" class="diwan-book-flow">
+                <!-- Continuous left-aligned couplets populated dynamically -->
             </div>
             <div id="diwan-footnote" class="kalam-footnote" style="display: none;"></div>
 
