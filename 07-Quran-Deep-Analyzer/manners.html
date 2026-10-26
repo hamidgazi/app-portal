@@ -7,6 +7,7 @@
   <meta name="description" content="The 67 Quranic Injunctions for Social Ethics, Etiquette, Manners and Character (Adaab-e-Zindagi) with Kanzul Iman and Saheeh International.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
   <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/commands-manners.css">
   <style>
     :root {
       --bg-darkest: #070a12;
@@ -1061,20 +1062,73 @@
       <!-- Injected dynamically -->
     </div>
 
-    <!-- Master Search & Filter Toolbar -->
-    <div class="manners-toolbar">
-      <div class="toolbar-row-main">
-        <div class="search-input-wrap">
+    <!-- Smart 2-Zone Cyber Control Hub -->
+    <div class="cyber-hub-container">
+      <!-- Zone 1 (Top): Search + Count + Display Options Trigger -->
+      <div class="cyber-hub-top-row">
+        <div class="cyber-search-wrapper">
           <span class="search-icon" style="left: 14px; right: auto;">🔍</span>
-          <input type="text" id="manners-search" class="manners-search-field" placeholder="Search manners: speech, parents, forgiveness, humility, 17:23..." style="direction: ltr; text-align: left; padding: 8px 36px 8px 38px;">
+          <input type="text" id="manners-search" class="cyber-search-input" placeholder="Search manners: speech, parents, forgiveness, humility, 17:23..." style="direction: ltr; text-align: left; padding: 9px 36px 9px 38px;">
           <button id="manners-search-clear" class="search-clear-btn" style="right: 14px; left: auto; display: none;" title="Clear Search">✕</button>
         </div>
 
-        <div class="toolbar-controls-group">
-          <!-- Sort Selector -->
-          <div class="sort-selector-wrap">
+        <div class="cyber-hub-tools">
+          <div id="manners-count-badge" class="commands-counter-badge" style="font-size: 0.80rem; padding: 4px 10px;">
+            67 Manners
+          </div>
+          <button type="button" id="manners-display-btn" class="display-options-trigger-btn" title="View, Language & Sort Options">
+            <span>⚙️ Display</span>
+            <span id="manners-config-preview" class="display-config-preview">Cards • Bilingual</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Topic Exploration Pills (Hidden Scrollbar) -->
+      <div class="toolbar-row-ribbon" style="border-top: 1px solid rgba(255, 255, 255, 0.06); padding-top: 6px;">
+        <span class="quick-topic-label" style="font-size: 0.78rem; color: #94a3b8; font-weight: 700;">💡 Topics:</span>
+        <button type="button" class="quick-topic-pill" data-q="والدین">Parents (والدین)</button>
+        <button type="button" class="quick-topic-pill" data-q="سچ">Truth & Speech (سچ)</button>
+        <button type="button" class="quick-topic-pill" data-q="غیبت">Backbiting (غیبت)</button>
+        <button type="button" class="quick-topic-pill" data-q="صبر">Patience (صبر)</button>
+        <button type="button" class="quick-topic-pill" data-q="سلام">Greeting & Privacy (سلام)</button>
+        <button type="button" class="quick-topic-pill" data-q="انصاف">Justice & Fairness (انصاف)</button>
+      </div>
+    </div>
+
+    <!-- Zone 2: Cyber-Glass Display & Sort Modal Sheet (On-Demand) -->
+    <div id="manners-display-modal" class="cyber-modal-overlay" aria-modal="true" role="dialog">
+      <div class="cyber-modal-card">
+        <div class="cyber-modal-header">
+          <h3 class="cyber-modal-title"><span>⚙️</span> Manners Display Settings</h3>
+          <button type="button" class="cyber-modal-close-btn" id="manners-modal-close" aria-label="Close">✕</button>
+        </div>
+
+        <!-- View Mode -->
+        <div class="cyber-modal-section">
+          <div class="cyber-modal-section-label">Layout View Mode</div>
+          <div class="segmented-control" id="view-mode-toggle" title="Layout View Mode" style="width: 100%;">
+            <button class="segment-btn active" data-view="cards" title="Detailed Cards" style="flex: 1;">🃏 Detailed Cards</button>
+            <button class="segment-btn" data-view="compact" title="Compact Checklist" style="flex: 1;">📋 Checklist</button>
+          </div>
+        </div>
+
+        <!-- Language Display Mode -->
+        <div class="cyber-modal-section">
+          <div class="cyber-modal-section-label">Language Priority</div>
+          <div class="segmented-control" id="lang-mode-toggle" title="Language Display Mode" style="width: 100%;">
+            <button class="segment-btn active" data-lang="both_ur" style="flex: 1;">Both (Urdu 1st)</button>
+            <button class="segment-btn" data-lang="both_en" style="flex: 1;">Both (Eng 1st)</button>
+            <button class="segment-btn" data-lang="ur" style="flex: 1;">Urdu</button>
+            <button class="segment-btn" data-lang="en" style="flex: 1;">English</button>
+          </div>
+        </div>
+
+        <!-- Sort Order -->
+        <div class="cyber-modal-section">
+          <div class="cyber-modal-section-label">Sort Sequence</div>
+          <div class="sort-selector-wrap" style="width: 100%; box-sizing: border-box;">
             <label for="manners-sort-select" class="sort-label">Sort:</label>
-            <select id="manners-sort-select" class="manners-sort-select" aria-label="Sort Ayat" style="direction: ltr;">
+            <select id="manners-sort-select" class="manners-sort-select" aria-label="Sort Ayat" style="direction: ltr; width: 100%;">
               <option value="default">🔢 Default Order (#1..#67)</option>
               <option value="words_asc">📏 Shortest First (Words ⬆)</option>
               <option value="words_desc">📜 Longest First (Words ⬇)</option>
@@ -1082,39 +1136,16 @@
               <option value="surah">📖 Quranic Order (Surah 1..114)</option>
             </select>
           </div>
+        </div>
 
-          <!-- Dual View Switcher -->
-          <div class="segmented-control" id="view-mode-toggle" title="Layout View Mode">
-            <button class="segment-btn active" data-view="cards" title="Detailed Cards">🃏 Cards</button>
-            <button class="segment-btn" data-view="compact" title="Compact Checklist">📋 Checklist</button>
-          </div>
-
-          <!-- Adaptive BiDi Language Switcher -->
-          <div class="segmented-control" id="lang-mode-toggle" title="Language Display Mode">
-            <button class="segment-btn active" data-lang="both_ur">Both (Urdu 1st)</button>
-            <button class="segment-btn" data-lang="both_en">Both (Eng 1st)</button>
-            <button class="segment-btn" data-lang="ur">Urdu</button>
-            <button class="segment-btn" data-lang="en">English</button>
-          </div>
-
-          <div id="manners-count-badge" class="manners-count-badge">
-            67 Manners
-          </div>
+        <!-- Waqf Guide Quick Launch -->
+        <div class="cyber-modal-section" style="border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 12px;">
+          <button type="button" class="waqf-guide-toolbar-btn" onclick="window.WaqfEngine && window.WaqfEngine.openGuideModal(); document.getElementById('manners-display-modal').classList.remove('open');" style="width: 100%; justify-content: center; padding: 10px;">
+            <span>🛑 Open Universal Waqf & Ayah Stop Signs Guide</span>
+          </button>
         </div>
       </div>
-
-      <!-- Quick Topic Exploration Pills -->
-      <div class="toolbar-row-topics">
-        <span class="quick-topic-label">💡 Quick Topics:</span>
-        <button class="quick-topic-pill" data-q="والدین">Parents (والدین)</button>
-        <button class="quick-topic-pill" data-q="سچ">Truth & Speech (سچ)</button>
-        <button class="quick-topic-pill" data-q="غیبت">Backbiting (غیبت)</button>
-        <button class="quick-topic-pill" data-q="صبر">Patience (صبر)</button>
-        <button class="quick-topic-pill" data-q="سلام">Greeting & Privacy (سلام)</button>
-        <button class="quick-topic-pill" data-q="انصاف">Justice & Fairness (انصاف)</button>
-      </div>
     </div>
-
     <!-- Cards List Container -->
     <div class="manners-cards-list" id="manners-list">
       <!-- Rendered dynamically -->

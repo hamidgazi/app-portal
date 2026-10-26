@@ -249,22 +249,33 @@
 
     return `
       <article class="manner-card" id="manner-card-${serialNum}">
-        <div class="manner-card-header">
-          <div class="manner-headline">
+        <div class="streamlined-card-header">
+          <div class="streamlined-header-left">
             <span class="manner-serial-pill">#${serialNum}</span>
-            <span>${it.module_icon || '📖'}</span>
-            <span style="font-weight: 700; color: #fbbf24;">${enModTitle}</span>
-            <span class="manner-words-pill">📏 ${it.word_count} Words</span>
+            <span class="command-cat-badge">${it.module_icon || '📖'} ${enModTitle}</span>
+            <span class="command-surah-pill">Surah ${it.surah_name_roman} [${it.surah_id}:${it.ayah_num}]</span>
+            <span class="manner-words-pill">📏 ${it.word_count}w</span>
           </div>
-          <div class="manner-header-actions">
+          <div class="streamlined-header-right">
             <button class="manner-star-btn ${bookmarked ? 'bookmarked' : ''}" data-serial="${serialNum}" title="${bookmarked ? 'Remove bookmark' : 'Save bookmark'}">
               <span>${starChar} ${bookmarked ? 'Saved' : 'Save'}</span>
             </button>
-            <div class="manner-ref-badge">Surah ${it.surah_name_roman} [${it.surah_id}:${it.ayah_num}]</div>
+            <button class="manner-btn-pill copy-manner-btn" data-idx="${idx}" title="Copy Manner">
+              <span>📋</span>
+            </button>
+            <button class="manner-btn-pill tafsir-btn" data-surah="${it.surah_id}" data-ayah="${it.ayah_num}" data-serial="${serialNum}" title="Read Tafsir Sirat-ul-Jinan">
+              <span>📖 Tafsir</span>
+            </button>
+            <button class="manner-btn-pill analyzer-btn" data-surah="${it.surah_id}" data-ayah="${it.ayah_num}" title="Open in Deep Ayah Analyzer">
+              <span>🔍 ↗</span>
+            </button>
+            <button class="manner-btn-pill whatsapp-btn" data-idx="${idx}" title="Share on WhatsApp">
+              <span>📲</span>
+            </button>
           </div>
         </div>
 
-        <div class="manner-arabic-text" dir="rtl">«${formattedAr}»</div>
+        <div class="streamlined-arabic-box" dir="rtl">«${formattedAr}»</div>
 
         <div class="manner-content-grid ${!showEnglish ? 'urdu-only-grid' : (!showUrdu ? 'en-only-grid' : '')} ${isEngFirst ? 'mobile-order-en-first' : ''}">
           ${showUrdu ? `
@@ -280,24 +291,6 @@
               <div class="manner-en-translation" dir="ltr">${hEn}</div>
             </div>
           ` : ''}
-        </div>
-
-        <div class="manner-card-footer">
-          <div class="manner-actions-left" style="direction: ltr;">
-            <button class="manner-btn-pill tafsir-btn" data-surah="${it.surah_id}" data-ayah="${it.ayah_num}" data-serial="${serialNum}">
-              <span>📖 Tafsir</span>
-            </button>
-            <button class="manner-btn-pill analyzer-btn" data-surah="${it.surah_id}" data-ayah="${it.ayah_num}" title="Open in Deep Ayah Analyzer">
-              <span>🔍 Deep Analyzer ↗</span>
-            </button>
-            <button class="manner-btn-pill whatsapp-btn" data-idx="${idx}" title="Share on WhatsApp">
-              <span>📲 WhatsApp</span>
-            </button>
-            <button class="manner-btn-pill copy-manner-btn" data-idx="${idx}" title="Copy Manner">
-              <span>📋 Copy</span>
-            </button>
-          </div>
-          <span style="font-size: 0.76rem; color: #64748b; font-weight: 600;">Surah ${it.surah_name_roman} [${it.surah_id}:${it.ayah_num}]</span>
         </div>
 
         <div class="manner-tafsir-drawer" id="manner-tafsir-${serialNum}" style="display: none;">
@@ -574,6 +567,39 @@
       }
     }
 
+    // Display Modal Trigger and Close
+    const displayBtn = rootEl.querySelector("#manners-display-btn") || rootEl.querySelector("#native-manners-display-btn");
+    const displayModal = rootEl.querySelector("#manners-display-modal");
+    const modalClose = rootEl.querySelector("#manners-modal-close");
+
+    function updateConfigPreview() {
+      const preview = rootEl.querySelector("#native-manners-config-preview") || rootEl.querySelector("#manners-config-preview");
+      if (preview) {
+        const viewLabel = activeView === "compact" ? "Checklist" : "Cards";
+        const langLabel = activeLang === "ur" ? "Urdu" : (activeLang === "en" ? "English" : "Bilingual");
+        preview.textContent = `${viewLabel} • ${langLabel}`;
+      }
+    }
+
+    if (displayBtn && displayModal && !displayBtn._bound) {
+      displayBtn._bound = true;
+      displayBtn.addEventListener("click", () => {
+        if (window.AudioSFX) window.AudioSFX.playTab();
+        displayModal.classList.add("open");
+      });
+      if (modalClose) {
+        modalClose.addEventListener("click", () => {
+          if (window.AudioSFX) window.AudioSFX.playClick();
+          displayModal.classList.remove("open");
+        });
+      }
+      displayModal.addEventListener("click", (e) => {
+        if (e.target === displayModal) {
+          displayModal.classList.remove("open");
+        }
+      });
+    }
+
     // Sort Select
     const sortSelect = rootEl.querySelector("#manners-sort-select") || rootEl.querySelector("#native-manners-sort-select");
     if (sortSelect && !sortSelect._bound) {
@@ -581,6 +607,7 @@
       sortSelect.addEventListener("change", (e) => {
         if (window.AudioSFX) window.AudioSFX.playClick();
         activeSortMode = e.target.value;
+        updateConfigPreview();
         renderList();
       });
     }
@@ -594,6 +621,7 @@
         btn.parentElement.querySelectorAll(".segment-btn").forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
         activeView = btn.dataset.view;
+        updateConfigPreview();
         renderList();
       });
     });
@@ -608,6 +636,7 @@
         btn.classList.add("active");
         activeLang = btn.dataset.lang;
         try { localStorage.setItem("quran_bidi_lang_order", activeLang); } catch(e) {}
+        updateConfigPreview();
         renderList();
       });
     });

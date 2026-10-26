@@ -372,20 +372,38 @@
     if (activeView === "cards") {
       return `
         <article class="command-card ${isCommand ? 'command-type' : 'prohibition-type'}" id="card-${it.serial}">
-          <div class="command-card-header">
-            <div class="command-headline">
+          <div class="streamlined-card-header">
+            <div class="streamlined-header-left">
               <span class="command-serial-pill">#${it.serial}</span>
               ${polarityBadge}
-              <span class="command-sphere-tag">${categoryMap[it.category_id]?.icon || '📜'} ${it.category_name_en}</span>
-              <span class="command-words-tag">📏 ${it.word_count} Words</span>
+              <span class="command-surah-pill">Surah ${it.surah_name_roman} [${it.surah_id}:${it.ayah_num}]</span>
+              <span class="command-cat-badge">${categoryMap[it.category_id]?.icon || '📜'} ${it.category_name_en}</span>
+              <span class="command-words-pill">📏 ${it.word_count}w</span>
             </div>
-            <div class="command-header-actions">
+            <div class="streamlined-header-right">
+              <button class="card-action-btn play-btn" data-serial="${it.serial}" data-idx="${idx}" title="Listen to Tartil Recitation">
+                <span>▶ Recite</span>
+              </button>
+              <button class="card-action-btn wisdom-toggle-btn" data-serial="${it.serial}" title="View Living Wisdom & Health Rationale">
+                <span>💡 Wisdom</span>
+              </button>
               ${starBtnHtml}
-              <div class="command-ref-badge">Surah ${it.surah_name_roman} [${it.surah_id}:${it.ayah_num}]</div>
+              <button class="card-action-btn copy-btn" data-idx="${idx}" title="Copy Directive">
+                <span>📋</span>
+              </button>
+              <button class="card-action-btn tafsir-btn" data-surah="${it.surah_id}" data-ayah="${it.ayah_num}" data-serial="${it.serial}" title="Read Tafsir Sirat-ul-Jinan">
+                <span>📖 Tafsir</span>
+              </button>
+              <button class="card-action-btn analyzer-btn" data-surah="${it.surah_id}" data-ayah="${it.ayah_num}" title="Open in Deep Ayah Analyzer">
+                <span>🔍 ↗</span>
+              </button>
+              <button class="card-action-btn whatsapp-btn" data-idx="${idx}" title="Share on WhatsApp">
+                <span>📲</span>
+              </button>
             </div>
           </div>
 
-          <div class="command-arabic-text" dir="rtl">«${formattedAr}»</div>
+          <div class="streamlined-arabic-box" dir="rtl">«${formattedAr}»</div>
 
           <div class="command-content-grid ${!showEnglish ? 'urdu-only-grid' : (!showUrdu ? 'en-only-grid' : '')} ${isEngFirst ? 'mobile-order-en-first' : ''}">
             ${showUrdu ? `
@@ -403,34 +421,10 @@
             ` : ''}
           </div>
 
-          <div class="command-wisdom-drawer" id="wisdom-drawer-${it.serial}" style="display: none;">
-            <div class="wisdom-title">💡 Human Flourishing & Health Rationale:</div>
-            <div class="wisdom-en">${hWisdomEn}</div>
-            <div class="wisdom-ur" dir="rtl">${hWisdomUr}</div>
-          </div>
-
-          <div class="command-card-footer">
-            <div class="card-actions-left">
-              <button class="card-action-btn play-btn" data-serial="${it.serial}" data-idx="${idx}" title="Listen to Tartil Recitation">
-                <span>▶ Recite</span>
-              </button>
-              <button class="card-action-btn wisdom-toggle-btn" data-serial="${it.serial}" title="View Human Flourishing & Health Wisdom">
-                <span>💡 Wisdom</span>
-              </button>
-              <button class="card-action-btn tafsir-btn" data-surah="${it.surah_id}" data-ayah="${it.ayah_num}" data-serial="${it.serial}" title="Read Tafsir Sirat-ul-Jinan">
-                <span>📖 Tafsir</span>
-              </button>
-              <button class="card-action-btn analyzer-btn" data-surah="${it.surah_id}" data-ayah="${it.ayah_num}" title="Open in Deep Ayah Analyzer">
-                <span>🔍 Deep Analyzer ↗</span>
-              </button>
-              <button class="card-action-btn whatsapp-btn" data-idx="${idx}" title="Share on WhatsApp">
-                <span>📲 WhatsApp</span>
-              </button>
-              <button class="card-action-btn copy-btn" data-idx="${idx}" title="Copy Directive">
-                <span>📋 Copy</span>
-              </button>
-            </div>
-            <span class="card-footer-coord">Surah ${it.surah_name_roman} [${it.surah_id}:${it.ayah_num}]</span>
+          <div class="command-wisdom-drawer streamlined-living-wisdom-drawer" id="wisdom-drawer-${it.serial}" style="display: none;">
+            <div class="wisdom-title" style="color: #34d399; font-weight: 700; margin-bottom: 4px;">💡 Living Wisdom & Health Rationale:</div>
+            <div class="wisdom-en" style="color: #f8fafc; font-size: 0.88rem; line-height: 1.5; margin-bottom: 6px;">${hWisdomEn}</div>
+            <div class="wisdom-ur" dir="rtl" style="font-family: var(--font-urdu); color: #fbbf24; font-size: 1.05rem; line-height: 1.6;">${hWisdomUr}</div>
           </div>
 
           <div class="command-tafsir-drawer" id="tafsir-drawer-${it.serial}" style="display: none;">
@@ -748,6 +742,39 @@
       }
     }
 
+    // Display Modal Trigger and Close
+    const displayBtn = rootEl.querySelector("#commands-display-btn") || rootEl.querySelector("#native-commands-display-btn");
+    const displayModal = rootEl.querySelector("#commands-display-modal");
+    const modalClose = rootEl.querySelector("#commands-modal-close");
+
+    function updateConfigPreview() {
+      const preview = rootEl.querySelector("#native-commands-config-preview") || rootEl.querySelector("#commands-config-preview");
+      if (preview) {
+        const viewLabel = activeView === "checklist" ? "Checklist" : (activeView === "collapsible" ? "Summary" : "Cards");
+        const langLabel = activeLang === "ur" ? "Urdu" : (activeLang === "en" ? "English" : "Bilingual");
+        preview.textContent = `${viewLabel} • ${langLabel}`;
+      }
+    }
+
+    if (displayBtn && displayModal && !displayBtn._bound) {
+      displayBtn._bound = true;
+      displayBtn.addEventListener("click", () => {
+        if (window.AudioSFX) window.AudioSFX.playTab();
+        displayModal.classList.add("open");
+      });
+      if (modalClose) {
+        modalClose.addEventListener("click", () => {
+          if (window.AudioSFX) window.AudioSFX.playClick();
+          displayModal.classList.remove("open");
+        });
+      }
+      displayModal.addEventListener("click", (e) => {
+        if (e.target === displayModal) {
+          displayModal.classList.remove("open");
+        }
+      });
+    }
+
     // Sort Select
     const sortSelect = rootEl.querySelector("#commands-sort-select") || rootEl.querySelector("#native-commands-sort-select");
     if (sortSelect && !sortSelect._bound) {
@@ -755,6 +782,7 @@
       sortSelect.addEventListener("change", (e) => {
         if (window.AudioSFX) window.AudioSFX.playClick();
         activeSortMode = e.target.value;
+        updateConfigPreview();
         renderList();
       });
     }
@@ -768,6 +796,7 @@
         btn.parentElement.querySelectorAll(".segment-btn").forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
         activeView = btn.dataset.view;
+        updateConfigPreview();
         renderList();
       });
     });
@@ -782,6 +811,7 @@
         btn.classList.add("active");
         activeLang = btn.dataset.lang;
         try { localStorage.setItem("quran_bidi_lang_order", activeLang); } catch(e) {}
+        updateConfigPreview();
         renderList();
       });
     });

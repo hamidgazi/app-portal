@@ -7,6 +7,7 @@
   <meta name="description" content="The 80 Canonical Divine Directives (Commands & Prohibitions) of the Holy Quran for Human Living, Health, Ethics, Compassion & Social Harmony with Kanzul Iman & Saheeh International.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
   <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/commands-manners.css">
   <style>
     :root {
       --bg-darkest: #06080e;
@@ -1188,55 +1189,29 @@
   <!-- Main Body -->
   <main class="commands-main">
 
-    <!-- Sleek Two-Tier Exploration Toolbar (~90px Height) -->
-    <div class="commands-toolbar">
-      <!-- Tier 1: Search, Sort, View Switcher, Language Mode, Counter -->
-      <div class="toolbar-row-main">
-        <div class="search-box-wrap">
+    <!-- Smart 2-Zone Cyber Control Hub -->
+    <div class="cyber-hub-container">
+      <!-- Zone 1 (Top): Search + Count + Display Options Trigger -->
+      <div class="cyber-hub-top-row">
+        <div class="cyber-search-wrapper">
           <span class="search-icon">🔍</span>
-          <input type="text" id="commands-search-input" class="commands-search-input" placeholder="Search directives: food, speech, parents, justice, 2:168..." autocomplete="off">
+          <input type="text" id="commands-search-input" class="cyber-search-input" placeholder="Search directives: food, speech, parents, justice, 2:168..." autocomplete="off">
           <button id="search-clear-btn" class="search-clear-btn" style="display: none;" title="Clear Search">✕</button>
         </div>
 
-        <div class="toolbar-actions-group">
-          <!-- Sort Selector -->
-          <div class="sort-selector-wrap">
-            <label for="commands-sort-select" class="sort-label">Sort:</label>
-            <select id="commands-sort-select" class="commands-sort-select" aria-label="Sort Ayat">
-              <option value="default">🔢 Default Order (#1..#80)</option>
-              <option value="words_asc">📏 Shortest First (Words ⬆)</option>
-              <option value="words_desc">📜 Longest First (Words ⬇)</option>
-              <option value="alpha">🔤 Alphabetical (Alif - Yaa)</option>
-              <option value="surah">📖 Quranic Order (Surah 1..114)</option>
-            </select>
-          </div>
-
-          <!-- Tri-Mode View Mode -->
-          <button class="waqf-guide-toolbar-btn" onclick="window.WaqfEngine.openGuideModal()" title="Quranic Stop Signs & Waqf Rules Guide">
-            <span>🛑 Waqf Guide</span>
-          </button>
-          <div class="segmented-pill-group" id="view-mode-filters">
-            <button class="segment-btn active" data-view="cards" title="Detailed Cards">🃏 Cards</button>
-            <button class="segment-btn" data-view="collapsible" title="High-Density Summary">📑 Summary</button>
-            <button class="segment-btn" data-view="checklist" title="Compact Action Checklist">📋 Checklist</button>
-          </div>
-
-          <!-- Language & BiDi Reading Order Mode -->
-          <div class="segmented-pill-group" id="lang-filters">
-            <button class="segment-btn active" data-lang="both-ur" title="Both (Urdu first on mobile)">Both (Urdu 1st)</button>
-            <button class="segment-btn" data-lang="both-en" title="Both (English first on mobile)">Both (Eng 1st)</button>
-            <button class="segment-btn" data-lang="ur">Urdu</button>
-            <button class="segment-btn" data-lang="en">English</button>
-          </div>
-
-          <div id="commands-counter-badge" class="commands-counter-badge">
+        <div class="cyber-hub-tools">
+          <div id="commands-counter-badge" class="commands-counter-badge" style="font-size: 0.80rem; padding: 4px 10px;">
             80 Directives
           </div>
+          <button type="button" id="commands-display-btn" class="display-options-trigger-btn" title="View, Language & Sort Options">
+            <span>⚙️ Display</span>
+            <span id="commands-config-preview" class="display-config-preview">Cards • Bilingual</span>
+          </button>
         </div>
       </div>
 
-      <!-- Tier 2: Horizontal Scrollable Ribbon (Polarity + Categories) -->
-      <div class="toolbar-row-ribbon" id="ribbon-filters">
+      <!-- Zone 1 (Bottom): Smooth Touch-Snapping Capsule Ribbon (Zero Native Scrollbar) -->
+      <div class="toolbar-row-ribbon" id="ribbon-filters" style="border-top: 1px solid rgba(255, 255, 255, 0.06); padding-top: 6px;">
         <!-- Polarity Filters -->
         <div class="segmented-pill-group" id="polarity-filters">
           <button class="segment-btn active" data-polarity="all">All (80)</button>
@@ -1262,6 +1237,58 @@
       </div>
     </div>
 
+    <!-- Zone 2: Cyber-Glass Display & Sort Modal Sheet (On-Demand) -->
+    <div id="commands-display-modal" class="cyber-modal-overlay" aria-modal="true" role="dialog">
+      <div class="cyber-modal-card">
+        <div class="cyber-modal-header">
+          <h3 class="cyber-modal-title"><span>⚙️</span> Commands Display Settings</h3>
+          <button type="button" class="cyber-modal-close-btn" id="commands-modal-close" aria-label="Close">✕</button>
+        </div>
+
+        <!-- View Mode -->
+        <div class="cyber-modal-section">
+          <div class="cyber-modal-section-label">Layout View Mode</div>
+          <div class="segmented-pill-group" id="view-mode-filters" style="width: 100%;">
+            <button class="segment-btn active" data-view="cards" title="Detailed Cards" style="flex: 1;">🃏 Detailed Cards</button>
+            <button class="segment-btn" data-view="collapsible" title="High-Density Summary" style="flex: 1;">📑 Summary</button>
+            <button class="segment-btn" data-view="checklist" title="Compact Action Checklist" style="flex: 1;">📋 Checklist</button>
+          </div>
+        </div>
+
+        <!-- Language Display Mode -->
+        <div class="cyber-modal-section">
+          <div class="cyber-modal-section-label">Language Priority</div>
+          <div class="segmented-pill-group" id="lang-filters" style="width: 100%;">
+            <button class="segment-btn active" data-lang="both-ur" title="Both (Urdu first on mobile)" style="flex: 1;">Both (Urdu 1st)</button>
+            <button class="segment-btn" data-lang="both-en" title="Both (English first on mobile)" style="flex: 1;">Both (Eng 1st)</button>
+            <button class="segment-btn" data-lang="ur" style="flex: 1;">Urdu</button>
+            <button class="segment-btn" data-lang="en" style="flex: 1;">English</button>
+          </div>
+        </div>
+
+        <!-- Sort Order -->
+        <div class="cyber-modal-section">
+          <div class="cyber-modal-section-label">Sort Sequence</div>
+          <div class="sort-selector-wrap" style="width: 100%; box-sizing: border-box;">
+            <label for="commands-sort-select" class="sort-label">Sort:</label>
+            <select id="commands-sort-select" class="commands-sort-select" aria-label="Sort Ayat" style="width: 100%;">
+              <option value="default">🔢 Default Order (#1..#80)</option>
+              <option value="words_asc">📏 Shortest First (Words ⬆)</option>
+              <option value="words_desc">📜 Longest First (Words ⬇)</option>
+              <option value="alpha">🔤 Alphabetical (Alif - Yaa)</option>
+              <option value="surah">📖 Quranic Order (Surah 1..114)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Waqf Guide Quick Launch -->
+        <div class="cyber-modal-section" style="border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 12px;">
+          <button type="button" class="waqf-guide-toolbar-btn" onclick="window.WaqfEngine.openGuideModal(); document.getElementById('commands-display-modal').classList.remove('open');" style="width: 100%; justify-content: center; padding: 10px;">
+            <span>🛑 Open Universal Waqf & Ayah Stop Signs Guide</span>
+          </button>
+        </div>
+      </div>
+    </div>
     <!-- Directives List Mount -->
     <div id="commands-list-mount" class="commands-container">
       <!-- Dynamically populated via Progressive Chunking -->
