@@ -10,6 +10,12 @@
 }
 
 @font-face {
+  font-family: 'AlMushafWaqf';
+  src: url('../fonts/Al_Mushaf.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'JameelNoori';
   src: url('../fonts/Jameel Noori Nastaleeq New.ttf') format('truetype');
   font-display: swap;
@@ -6107,19 +6113,23 @@ mark.search-highlight {
 
 /* Inline Waqf Pause Marks */
 .quran-waqf-inline-mark {
-  display: inline-block;
-  padding: 0 3px;
-  margin: 0 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  margin: 0 0.35em;
+  min-width: 1.1em;
   cursor: pointer;
   color: #fbbf24;
-  font-family: var(--font-arabic), serif;
-  font-size: 1.15em;
+  font-family: 'AlMushafWaqf', 'Scheherazade New', 'Amiri', 'Traditional Arabic', serif !important;
+  font-size: 1.12em;
   line-height: 1;
+  vertical-align: middle;
   border-radius: 4px;
   transition: all 0.18s ease;
   user-select: none;
   touch-action: manipulation;
-  text-shadow: 0 0 6px rgba(251, 191, 36, 0.3);
+  text-shadow: 0 0 6px rgba(251, 191, 36, 0.35);
 }
 
 .quran-waqf-inline-mark:hover {
@@ -6168,7 +6178,7 @@ mark.search-highlight {
 }
 
 .waqf-popover-symbol-badge {
-  font-family: var(--font-arabic), serif;
+  font-family: 'AlMushafWaqf', var(--font-arabic), serif;
   font-size: 1.4rem;
   font-weight: 700;
   padding: 2px 8px;
@@ -6413,7 +6423,7 @@ mark.search-highlight {
 }
 
 .waqf-guide-symbol {
-  font-family: var(--font-arabic), serif;
+  font-family: 'AlMushafWaqf', var(--font-arabic), serif;
   font-size: 1.5rem;
   font-weight: 700;
   display: inline-flex;

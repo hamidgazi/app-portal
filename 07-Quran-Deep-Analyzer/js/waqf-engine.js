@@ -107,6 +107,16 @@
       name_en: "Embracing Paired Stop",
       rule_en: "These appear in pairs. You may stop at either the first or second mark, but never at both.",
       color: "#fbbf24"
+    },
+    kadhalik: {
+      key: "kadhalik",
+      symbol: "۫",
+      name_ur: "وقفِ کذٰلک (ک / ۫)",
+      name_roman: "Waqf Kadhalik",
+      action_roman: "Is ka hukm pichle waqf jaisa hai",
+      name_en: "Similar to Preceding Stop",
+      rule_en: "Takes the same pause ruling as the preceding waqf mark in the sentence.",
+      color: "#38bdf8"
     }
   };
 
@@ -137,7 +147,7 @@
       // 2. Append End-of-Ayah Sign (۝ [number]) if ayahNum provided and not already present
       if (num && !text.includes('quran-ayah-stop-mark') && !text.includes('۝')) {
         // Strip trailing dashes, waqf mutlaq at very end or spaces
-        text = text.replace(/[\s\-\u06D5]+$/, '');
+        text = text.replace(/[\s\-\u0615\u06D5-\u06DB\u06EB]+$/, '');
         const digitsClass = num.length >= 3 ? ' digits-3' : '';
         const endSignHtml = ` <span class="quran-ayah-stop-mark" data-waqf-key="ayah_end" data-ayah="${num}" data-digits="${num.length}" role="button" tabindex="0" title="End of Ayah ${num} • وقفِ تام" aria-label="End of Ayah ${num}"><span class="quran-ayah-stop-symbol">۝</span><span class="quran-ayah-stop-num${digitsClass}">${num}</span></span>`;
         text = text + endSignHtml;
@@ -152,11 +162,18 @@
     wrapInlineWaqfSymbols(text) {
       if (!text) return '';
 
-      // Pattern covering standard Unicode Quranic pause diacritics
-      // \u06D5 (ؕ - Tah / Mutlaq), \u06D8 (ۘ - Meem / Lazim), \u06DA (ۚ - Jeem / Jaiz),
-      // \u06D6 (ۖ - Sad-Lam / Mujawwaz), \u06D7 (ۗ - Qaf-Lam / Murakhkhas),
-      // \u06D9 (ۙ - Lam-Alif / La), \u06DB (ۛ - Three dots / Muanaqah)
-      return text.replace(/([\u06D5\u06D6\u06D7\u06D8\u06D9\u06DA\u06DB])/g, (match, char) => {
+      // Pattern covering standard Unicode Quranic pause diacritics:
+      // \u0615 (Small High Tah ؕ - Mutlaq)
+      // \u06D5 (Ae ە fallback)
+      // \u06D6 (Sad-Lam ۖ - Mujawwaz)
+      // \u06D7 (Qaf-Lam ۗ - Murakhkhas)
+      // \u06D8 (Small High Meem ۘ - Lazim)
+      // \u06D9 (Small High Lam-Alif ۙ - La Waqf)
+      // \u06DA (Small High Jeem ۚ - Jaiz)
+      // \u06DB (Three dots ۛ - Muanaqah)
+      // \u06EB (Empty Centre Stop ۫ - Kadhalik)
+      // Also match optional Indo-Pak hyphen delimiter (e.g., ؕ- or ۫-) and normalize surrounding spaces
+      return text.replace(/\s*([\u0615\u06D5\u06D6\u06D7\u06D8\u06D9\u06DA\u06DB\u06EB])(?:\s*[\-\u200C\u200D\u200E\u200F\u00A0]*\-)?\s*/g, (match, char) => {
         let key = "mutlaq";
         if (char === '\u06D8') key = "lazim";
         else if (char === '\u06DA') key = "jaiz";
@@ -164,10 +181,11 @@
         else if (char === '\u06D7') key = "murakhkhas";
         else if (char === '\u06D9') key = "la";
         else if (char === '\u06DB') key = "muanaqah";
-        else if (char === '\u06D5') key = "mutlaq";
+        else if (char === '\u0615' || char === '\u06D5') key = "mutlaq";
+        else if (char === '\u06EB') key = "kadhalik";
 
         const def = this.definitions[key] || this.definitions.mutlaq;
-        return `<span class="quran-waqf-inline-mark" data-waqf-key="${key}" role="button" tabindex="0" title="${def.name_ur} • ${def.name_en}" aria-label="${def.name_roman}">${char}</span>`;
+        return ` <span class="quran-waqf-inline-mark" data-waqf-key="${key}" role="button" tabindex="0" title="${def.name_ur} • ${def.name_en}" aria-label="${def.name_roman}">${char}</span> `;
       });
     }
 
@@ -180,7 +198,7 @@
       let clean = String(arabicText).replace(/<[^>]+>/g, '').replace(/[«»]/g, '').trim();
       const num = (ayahNum !== undefined && ayahNum !== null) ? String(ayahNum) : '';
       if (num && !clean.includes('۝')) {
-        clean = clean.replace(/[\s\-\u06D5]+$/, '') + ` ۝ ${num}`;
+        clean = clean.replace(/[\s\-\u0615\u06D5-\u06DB\u06EB]+$/, '') + ` ۝ ${num}`;
       }
       return clean;
     }
