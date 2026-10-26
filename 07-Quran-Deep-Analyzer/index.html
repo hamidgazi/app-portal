@@ -41,8 +41,19 @@
         if (modal) modal.style.display = 'none';
       }
     }
+    function openUserGuideModal() {
+      const modal = document.getElementById('user-guide-modal');
+      if (modal) modal.style.display = 'flex';
+      if (window.AudioSFX && typeof window.AudioSFX.playClick === 'function') window.AudioSFX.playClick();
+    }
+    function closeUserGuideModal() {
+      const modal = document.getElementById('user-guide-modal');
+      if (modal) modal.style.display = 'none';
+    }
     window.openOmnisearch = openOmnisearch;
     window.closeOmnisearch = closeOmnisearch;
+    window.openUserGuideModal = openUserGuideModal;
+    window.closeUserGuideModal = closeUserGuideModal;
   </script>
 </head>
 <body>
@@ -60,12 +71,20 @@
           </div>
         </div>
 
-        <!-- Global Omnisearch Trigger Button -->
-        <button id="open-omnisearch-btn" class="omnisearch-trigger-btn" onclick="openOmnisearch()" title="Open Global Omnisearch (Ctrl+K or /)">
-          <span class="omnisearch-icon">🔍</span>
-          <span class="omnisearch-btn-text">Quick Search...</span>
-          <kbd>Ctrl K</kbd>
-        </button>
+        <div class="header-tier-actions" style="display: flex; align-items: center; gap: 8px;">
+          <!-- Comprehensive User Manual & Feature Guide Trigger -->
+          <button id="open-user-guide-btn" class="guide-trigger-btn" onclick="openUserGuideModal()" title="Open Complete User Manual & Feature Guide">
+            <span class="guide-icon">📖</span>
+            <span class="guide-btn-text">User Guide</span>
+          </button>
+
+          <!-- Global Omnisearch Trigger Button -->
+          <button id="open-omnisearch-btn" class="omnisearch-trigger-btn" onclick="openOmnisearch()" title="Open Global Omnisearch (Ctrl+K or /)">
+            <span class="omnisearch-icon">🔍</span>
+            <span class="omnisearch-btn-text">Quick Search...</span>
+            <kbd>Ctrl K</kbd>
+          </button>
+        </div>
       </div>
 
       <!-- Tier 2: Dedicated Full-Width Segmented Tab Navigation Strip -->
@@ -1053,6 +1072,329 @@
     </div>
   </div>
 
+  <!-- Cyber-Glass Master User Manual & Feature Guide Modal -->
+  <div id="user-guide-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="user-guide-modal-title" style="display: none;">
+    <div class="modal-card user-guide-card">
+      <!-- Modal Header -->
+      <div class="user-guide-header">
+        <div class="user-guide-title-wrap">
+          <span class="user-guide-icon">📖</span>
+          <div class="user-guide-title-text">
+            <h2 id="user-guide-modal-title">Quran Deep Analyzer — User Manual & Feature Guide</h2>
+            <p>Authoritative Handbook for All 12 Studios, Features, Best Urdu Fonts & Keyboard Shortcuts</p>
+          </div>
+        </div>
+        <button id="user-guide-modal-close" class="modal-close-btn" onclick="closeUserGuideModal()" aria-label="Close User Guide" style="background: rgba(255, 255, 255, 0.08); border: none; color: #f8fafc; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 1.1rem;">✕</button>
+      </div>
+
+      <!-- Quick Search Toolbar -->
+      <div style="padding: 10px 22px; background: rgba(15, 23, 42, 0.7); border-bottom: 1px solid rgba(255,255,255,0.06);">
+        <input type="text" id="user-guide-search-input" placeholder="🔍 Search guide features, tools, fonts, or shortcuts..." style="width: 100%; padding: 8px 16px; background: rgba(0,0,0,0.45); border: 1px solid rgba(212,175,55,0.3); border-radius: 20px; color: #fff; font-size: 0.85rem; outline: none;" oninput="filterUserGuideSections(this.value)">
+      </div>
+
+      <!-- Quick Nav Pills -->
+      <nav class="user-guide-nav-bar" aria-label="Guide Sections">
+        <button class="user-guide-nav-pill active" onclick="jumpToGuideSection('guide-sec-1')">1. Quick Start</button>
+        <button class="user-guide-nav-pill" onclick="jumpToGuideSection('guide-sec-2')">2. Ayah Stop Medallions</button>
+        <button class="user-guide-nav-pill" onclick="jumpToGuideSection('guide-sec-3')">3. Urdu Fonts Guide</button>
+        <button class="user-guide-nav-pill" onclick="jumpToGuideSection('guide-sec-4')">4. Reading Studio</button>
+        <button class="user-guide-nav-pill" onclick="jumpToGuideSection('guide-sec-5')">5. AI Search Studio</button>
+        <button class="user-guide-nav-pill" onclick="jumpToGuideSection('guide-sec-6')">6. Analytics Studio</button>
+        <button class="user-guide-nav-pill" onclick="jumpToGuideSection('guide-sec-7')">7. Thematic Graph</button>
+        <button class="user-guide-nav-pill" onclick="jumpToGuideSection('guide-sec-8')">8. Sarf Morphology</button>
+        <button class="user-guide-nav-pill" onclick="jumpToGuideSection('guide-sec-9')">9. Word Frequency</button>
+        <button class="user-guide-nav-pill" onclick="jumpToGuideSection('guide-sec-10')">10. Mutashabihat</button>
+        <button class="user-guide-nav-pill" onclick="jumpToGuideSection('guide-sec-11')">11. Waqf Rules</button>
+        <button class="user-guide-nav-pill" onclick="jumpToGuideSection('guide-sec-12')">12. Commands & Manners</button>
+        <button class="user-guide-nav-pill" onclick="jumpToGuideSection('guide-sec-13')">13. Tadabbur Studio</button>
+        <button class="user-guide-nav-pill" onclick="jumpToGuideSection('guide-sec-14')">14. Shortcuts</button>
+        <button class="user-guide-nav-pill" onclick="jumpToGuideSection('guide-sec-15')">15. Offline Resilience</button>
+      </nav>
+
+      <!-- Guide Content Body -->
+      <div class="user-guide-body" id="user-guide-body-content">
+        <!-- Section 1 -->
+        <section id="guide-sec-1" class="user-guide-section">
+          <h3>🚀 1. Executive Overview & Quick Start</h3>
+          <p><strong>Quran Deep Analyzer (Version 2.0)</strong> is an executive computational laboratory combining classical Islamic sciences (<em>Ulum al-Qur'an, Tafsir, Tajweed, Ilm al-Sarf</em>) with modern corpus linguistics and AI semantic retrieval.</p>
+          <div class="user-guide-tip-card">
+            <strong>✨ Zero-CORS Offline Durability:</strong> All 114 Surahs, 6,236 Ayat, morphological trees, and topic graphs are bundled into standalone asynchronous JavaScript data files. The app runs directly under <code>file:///</code> with no server and no internet required.
+          </div>
+          <p><strong>Corpus Telemetry:</strong> 82,480 Word Tokens • 20,105 Unique Words • 1,642 Roots • 4,832 Lemmas • 6,236 Canonical Ayat • 114 Surahs • 30 Paras.</p>
+        </section>
+
+        <!-- Section 2 -->
+        <section id="guide-sec-2" class="user-guide-section">
+          <h3>🎨 2. Design Architecture & Ayah Stop Medallions</h3>
+          <p><strong>Why were there 2 big circles previously?</strong></p>
+          <p>In previous iterations, the Ayah stop marker suffered from a distracting double-circle visual defect:</p>
+          <ol style="margin-left: 20px; color: #cbd5e1;">
+            <li><strong>Circle 1:</strong> The outer CSS container <code>.quran-ayah-stop-mark</code> was styled as a circle with a border and heavy neon glow.</li>
+            <li><strong>Circle 2:</strong> Inside that container, the character <code>۝</code> (U+06DD End of Ayah) was rendered. In Arabic typography, <code>۝</code> is already an ornate circular rosette glyph!</li>
+            <li><strong>The Result:</strong> The browser drew the CSS border circle around the font's inner rosette circle, creating two visible concentric rings like an archery target, ballooning to an oversized <code>2.15em</code> (>60px tall) that overwhelmed the sacred verse text.</li>
+          </ol>
+          <div class="user-guide-tip-card">
+            <strong>✨ The Redesigned Ayah Stop Medallion:</strong>
+            <ul style="margin: 6px 0 0 16px;">
+              <li><strong>Single Delicate Ring:</strong> The duplicate font rosette glyph is cleanly suppressed, eliminating concentric rings.</li>
+              <li><strong>Proportional Scale (1.28em):</strong> Scaled down by over 40% to sit harmoniously on the baseline alongside text.</li>
+              <li><strong>Antique Gold Hairline:</strong> Styled with <code>1px solid rgba(212, 175, 55, 0.45)</code> and subtle translucent tint, restoring sacred text focus.</li>
+              <li><strong>Interactive Waqf Popover:</strong> Click any medallion to display the instant trilingual phonetic pause rule (Urdu, Roman Urdu, English).</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Section 3 -->
+        <section id="guide-sec-3" class="user-guide-section">
+          <h3>🖋️ 3. The Definitive Guide to Best Urdu Fonts</h3>
+          <p>Urdu typography requires specialized handling because the language is traditionally written in the flowing, cascading <strong>Nastaliq (نستعلیق)</strong> script, whereas digital screens often favor the linear horizontal baseline of <strong>Naskh (نسخ)</strong>.</p>
+          <div class="user-guide-table-wrap">
+            <table class="user-guide-table">
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Font Name</th>
+                  <th>Script Style</th>
+                  <th>Best Use Case</th>
+                  <th>Score</th>
+                  <th>Readability & Aesthetic Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>1</strong></td>
+                  <td><strong>Jameel Noori Nastaleeq</strong></td>
+                  <td>Classic Nastaliq</td>
+                  <td>Formal literature, Quranic translations, desktop reading</td>
+                  <td>⭐ 9.8/10</td>
+                  <td>The undisputed gold standard of Urdu publishing. Authentic cascading baselines and emotional resonance. Pre-bundled locally in the app.</td>
+                </tr>
+                <tr>
+                  <td><strong>2</strong></td>
+                  <td><strong>Noto Nastaliq Urdu</strong></td>
+                  <td>Modern Nastaliq</td>
+                  <td>Web apps, mobile devices, digital screens</td>
+                  <td>⭐ 9.7/10</td>
+                  <td>Engineered by Google Fonts. Solves clipping and line-height ballooning common in older Nastaliq. Crisp at smaller sizes across all mobile platforms.</td>
+                </tr>
+                <tr>
+                  <td><strong>3</strong></td>
+                  <td><strong>Mehr Nastaliq Web</strong></td>
+                  <td>Web Nastaliq</td>
+                  <td>Fast website loading, high-speed reading</td>
+                  <td>⭐ 9.5/10</td>
+                  <td>Developed by CLE. Ultra-lightweight (114KB) with exceptional kerning between words. Pre-bundled locally in the app.</td>
+                </tr>
+                <tr>
+                  <td><strong>4</strong></td>
+                  <td><strong>Gulzar</strong></td>
+                  <td>Modern Nasta'liq</td>
+                  <td>Editorial design, digital publishing</td>
+                  <td>⭐ 9.3/10</td>
+                  <td>DecoType & Google Fonts variable font engineered specifically for modern OpenType font engines. Extremely sharp on Retina screens.</td>
+                </tr>
+                <tr>
+                  <td><strong>5</strong></td>
+                  <td><strong>Faiz Lahori Nastaliq</strong></td>
+                  <td>Artistic Nastaliq</td>
+                  <td>Classical poetry, formal certificates</td>
+                  <td>⭐ 9.0/10</td>
+                  <td>Classical Lahori calligraphic tradition of Syed Nafees Shah. Highly ornamental with sweeping letter extensions (kashida).</td>
+                </tr>
+                <tr>
+                  <td><strong>6</strong></td>
+                  <td><strong>Noto Sans Arabic</strong></td>
+                  <td>Modern Naskh / Sans</td>
+                  <td>Mobile scanning, search results, dense lists</td>
+                  <td>⭐ 9.6/10</td>
+                  <td>Clean, geometric, linear horizontal baseline. Zero risk of vertical line overlap. Exceptional legibility on compact phone screens.</td>
+                </tr>
+                <tr>
+                  <td><strong>7</strong></td>
+                  <td><strong>Urdu Typesetting</strong></td>
+                  <td>Digital Naskh</td>
+                  <td>Windows desktop UI, clear reading</td>
+                  <td>⭐ 9.2/10</td>
+                  <td>Pre-installed on Microsoft Windows. Engineered specifically for ClearType sub-pixel font rendering with balanced counters.</td>
+                </tr>
+                <tr>
+                  <td><strong>8</strong></td>
+                  <td><strong>Amiri</strong></td>
+                  <td>Classical Scholarly Naskh</td>
+                  <td>Bilingual Arabic-Urdu scholarly notes</td>
+                  <td>⭐ 9.1/10</td>
+                  <td>Revival of the famous Bulaq Press typeface from Cairo. Elegant, dignified, with wide open counters for scripture study.</td>
+                </tr>
+                <tr>
+                  <td><strong>9</strong></td>
+                  <td><strong>Dubai</strong></td>
+                  <td>Humanist Sans Naskh</td>
+                  <td>Modern app interfaces, navigation</td>
+                  <td>⭐ 8.9/10</td>
+                  <td>Designed by Monotype. Crisp, modern sans-serif aesthetic with balanced proportions across Latin and Arabic-script characters.</td>
+                </tr>
+                <tr>
+                  <td><strong>10</strong></td>
+                  <td><strong>Alvi Nastaleeq</strong></td>
+                  <td>Compact Nastaliq</td>
+                  <td>Books, long-form PDF publishing</td>
+                  <td>⭐ 8.8/10</td>
+                  <td>Compact ligature set with tighter vertical baselines than Jameel Noori. Great for reducing page count in publications.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p><strong>How to Switch Fonts in the App:</strong> Toggle between <strong>🖋️ Nastaleeq</strong> and <strong>📖 Modern Naskh</strong> in the Display Settings cog or in the Manners/Commands headers; your preference is persisted in <code>localStorage</code>.</p>
+        </section>
+
+        <!-- Section 4 -->
+        <section id="guide-sec-4" class="user-guide-section">
+          <h3>📖 4. Deep Ayah Analyzer & Scripture Reading Studio</h3>
+          <p>The core scripture study environment offering 7 integrated tools:</p>
+          <ul style="margin-left: 20px; color: #cbd5e1;">
+            <li><strong>Surah & Para Pickers:</strong> Instant fuzzy search across Surahs, Paras, Makki/Madani classifications, and verse counts.</li>
+            <li><strong>Dynamic Phonological Tajweed:</strong> 1-tap colorization of Arabic calligraphy across 6 phonetic rules (Ghunnah, Qalqalah, Madd, Ikhfa, Idgham, Iqlab) with an interactive legend bar.</li>
+            <li><strong>Sacred Audio Tartil Companion:</strong> Multi-Qari audio streaming (Alafasy, Al-Husary, Abdul Basit) with repeat loops (1x, 3x, 5x, continuous) and live verse wave tracking.</li>
+            <li><strong>Comparative Multi-Translation Split Drawer:</strong> Side-by-side comparison of Kanzul Iman, Kanzul Irfan, Saheeh International, and Pickthall.</li>
+            <li><strong>Classical Sirat-ul-Jinan Tafsir:</strong> 100% sanitized exegetical commentary with verse revelation backgrounds and spiritual injunctions.</li>
+            <li><strong>Edge QuickScrubber:</strong> 120 FPS high-speed vertical slider with floating preview pills and direct numeric verse jumper.</li>
+            <li><strong>Return to Origin Pill (Alt+Left):</strong> Floating pill that remembers your previous tab and scroll position for instant return.</li>
+          </ul>
+        </section>
+
+        <!-- Section 5 -->
+        <section id="guide-sec-5" class="user-guide-section">
+          <h3>🔍 5. AI Search Studio & Gemini Flash RAG Synthesizer</h3>
+          <p>Powered by probabilistic <strong>Okapi BM25 ranking</strong> ($k_1=1.2, b=0.75$) with Levenshtein typo-tolerance, whole-word boundary matching, and Islamic semantic synonym graphs across Arabic, Urdu, English, and Roman Urdu.</p>
+          <div class="user-guide-tip-card">
+            <strong>✨ Gemini Flash RAG AI (Ctrl+Enter):</strong> Ask any conceptual question. The system retrieves relevant verses, prompts Google Gemini 1.5 Flash, and synthesizes a reverent answer with clickable scripture citation pills. Free API keys can be saved in local settings.
+          </div>
+        </section>
+
+        <!-- Section 6 -->
+        <section id="guide-sec-6" class="user-guide-section">
+          <h3>📊 6. Analytics Studio (PRO) & Scientific Discoveries</h3>
+          <p>Quantitative corpus breakdowns of structural and numerical phenomena:</p>
+          <ul style="margin-left: 20px; color: #cbd5e1;">
+            <li><strong>26 Prophetic Cards:</strong> Explicitly disambiguating Muhammad (4 mentions) from Ahmad (1 mention), with word tokens vs unique verse metrics for all 26 Prophets.</li>
+            <li><strong>Iron (Al-Hadid):</strong> Gematria of Hadid = 26 (atomic number of Iron $Fe$), Al-Hadid = 57 (stable isotope $Fe^{57}$ & Surah 57). Mentioned in Ayah 25 (26th verse including Bismillah).</li>
+            <li><strong>Water vs Land Ratio:</strong> Sea (32) vs Dry Land (13) = 71.11% Water vs 28.89% Land, mirroring satellite geodetic measurements.</li>
+            <li><strong>Cosmic Symmetries:</strong> Singular Day (*Yawm*) appears 365 times; Singular Month (*Shahr*) appears 12 times; Plural Days (*Ayyam*) appears 30 times.</li>
+            <li><strong>18 Sacred Geography Locations & 12 Historical Civilizations:</strong> Full scripture concordances.</li>
+            <li><strong>21 Celebrated Semantic Pairs & Rhetorical Tibaq:</strong> Verified 1:1 mathematical balances with clickable verse citations.</li>
+            <li><strong>23-Year Chronological Stylometrics Timeline:</strong> Revelational evolution across Early Makki, Middle Makki, Late Makki, and Madani epochs.</li>
+          </ul>
+        </section>
+
+        <!-- Section 7 -->
+        <section id="guide-sec-7" class="user-guide-section">
+          <h3>🕸️ 7. Thematic Knowledge Graph & Dual Concordance</h3>
+          <p>Explore the Quran conceptually through two complementary taxonomies:</p>
+          <ul style="margin-left: 20px; color: #cbd5e1;">
+            <li><strong>Mode 1: Matalib al-Quran (484 Themes):</strong> High-level theological taxonomy (Tawhid, Risalah, Akhirah, Ethics, Jurisprudence) with #1..#N sequential gold numbering.</li>
+            <li><strong>Mode 2: Sirat-ul-Jinan Exegetical Concordance (3,513 Topics):</strong> Granular topics with bilingual verse preview drawers.</li>
+          </ul>
+        </section>
+
+        <!-- Section 8 -->
+        <section id="guide-sec-8" class="user-guide-section">
+          <h3>🌿 8. Morphological Root & Lemma Explorer (علم الصرف)</h3>
+          <p>Index of all <strong>1,642 Quranic roots</strong> and <strong>4,832 dictionary lemmas</strong>. Features a 28-letter Arabic alphabet filter ribbon and complete Sarf conjugation matrices (Verb Forms I–X, past, present, imperative, active/passive participles, verbal nouns) with full verse concordances.</p>
+        </section>
+
+        <!-- Section 9 -->
+        <section id="guide-sec-9" class="user-guide-section">
+          <h3>📈 9. Word Frequency Studio & Bilingual Vocabulary</h3>
+          <p>Ranks the <strong>Top 1,000 Most Frequent Quranic Words</strong> in grand 2.8rem Arabic calligraphy, paired with bilingual English and Roman Urdu meanings and corpus frequency percentage bars.</p>
+        </section>
+
+        <!-- Section 10 -->
+        <section id="guide-sec-10" class="user-guide-section">
+          <h3>⚖️ 10. Mutashabihat Studio</h3>
+          <p>Analyzes <strong>95 Authentic Mutashabihat Clusters</strong> (parallel verses across Surahs) with filter chips for refrains ≥ 4 and parallels 2–3. Features an interactive citation matrix grid and a guaranteed zero singletons policy.</p>
+        </section>
+
+        <!-- Section 11 -->
+        <section id="guide-sec-11" class="user-guide-section">
+          <h3>⏸️ 11. Waqf & Phonetic Stopping Science</h3>
+          <p>Comprehensive guide to <strong>15 Quranic Stopping Symbols</strong> (۝ Waqf Tam, مـ Waqf Lazim, ط Waqf Mutlaq, ج Waqf Ja'iz, ز Waqf Mujawwaz, ص Waqf Murakhkhas, لا Waqf Mamnu', قف Qif, ∴ ... ∴ Waqf Mu'anaqah) with actionable recitation rules.</p>
+        </section>
+
+        <!-- Section 12 -->
+        <section id="guide-sec-12" class="user-guide-section">
+          <h3>📜 12. Executive Studios: Divine Commands & Quranic Manners</h3>
+          <ul style="margin-left: 20px; color: #cbd5e1;">
+            <li><strong>Divine Commands (80 Directives):</strong> Covers 8 life spheres (Health, Speech, Compassion, Social Peace, Financial Integrity, Serenity, Family, Justice) with polarity badges, psychosocial wisdom, Tartil audio, and Tri-Mode views (Cards, Collapsible, Checklist).</li>
+            <li><strong>Quranic Manners (67 Injunctions):</strong> Covers 9 spheres (Modesty, Greeting, Conversation, Home Privacy, Humility, Honoring Elders, Anger Control, Financial Moderation, Truthfulness) from Kanzul Iman with star bookmarking and inline Tafsir.</li>
+          </ul>
+        </section>
+
+        <!-- Section 13 -->
+        <section id="guide-sec-13" class="user-guide-section">
+          <h3>📝 13. Personal Research Notebook & Tadabbur Studio</h3>
+          <p>Organize Quranic reflections into customizable folders, write verse-linked study notes, tag topics with hashtags (<code>#tawakkul</code>, <code>#sabr</code>), and export complete research dossiers in Markdown (.md) or JSON with 1 click.</p>
+        </section>
+
+        <!-- Section 14 -->
+        <section id="guide-sec-14" class="user-guide-section">
+          <h3>⌨️ 14. Keyboard Shortcuts & Pro-Tips</h3>
+          <div class="user-guide-table-wrap">
+            <table class="user-guide-table">
+              <thead>
+                <tr><th>Shortcut</th><th>Action</th><th>Description</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><code>/</code> or <code>Ctrl + K</code></td><td>Spotlight Search</td><td>Focuses global search bar from anywhere</td></tr>
+                <tr><td><code>Ctrl + Enter</code></td><td>Ask Gemini AI</td><td>Synthesizes RAG answer for current query</td></tr>
+                <tr><td><code>Esc</code></td><td>Close Modals</td><td>Closes open pickers, drawers, or user guide</td></tr>
+                <tr><td><code>A-</code> / <code>A</code> / <code>A+</code></td><td>Font Scaling</td><td>Dynamically resizes Arabic & Urdu scripture</td></tr>
+                <tr><td><code>Click Ayah Mark</code></td><td>Waqf Popover</td><td>Displays trilingual phonetic pause rule</td></tr>
+                <tr><td><code>Drag Scrubber</code></td><td>Edge Navigation</td><td>120 FPS high-speed scrolling through Surah verses</td></tr>
+                <tr><td><code>Alt + Left</code></td><td>Return Pill</td><td>Jumps back to previous tab and scroll position</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Section 15 -->
+        <section id="guide-sec-15" class="user-guide-section">
+          <h3>🛡️ 15. Offline Architecture & Zero-CORS Durability</h3>
+          <p>Engineered with zero CDN dependencies for core data bundles, procedural Web Audio API acoustics (strictly zero musical instruments), defensive component bootloader isolation, and 100% automated syntax compilation guarantees via <code>node --check</code>.</p>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function filterUserGuideSections(query) {
+      const q = (query || '').toLowerCase().trim();
+      const sections = document.querySelectorAll('.user-guide-section');
+      sections.forEach(sec => {
+        if (!q) {
+          sec.style.display = 'block';
+        } else {
+          const text = sec.textContent.toLowerCase();
+          sec.style.display = text.includes(q) ? 'block' : 'none';
+        }
+      });
+    }
+    function jumpToGuideSection(secId) {
+      const target = document.getElementById(secId);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.querySelectorAll('.user-guide-nav-pill').forEach(p => p.classList.remove('active'));
+        if (event && event.target) event.target.classList.add('active');
+      }
+    }
+    window.filterUserGuideSections = filterUserGuideSections;
+    window.jumpToGuideSection = jumpToGuideSection;
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeUserGuideModal();
+      }
+    });
+  </script>
+
 <!-- Floating Always-Visible Return to Origin Pill -->
   <button id="floating-return-pill" class="floating-return-pill" style="display: none;" title="Return to where you left off (Alt+Left)">
     <span class="return-arrow" style="font-size: 1.15rem;">↩</span>
@@ -1062,7 +1404,7 @@
 
   <!-- App Footer -->
   <footer class="app-footer">
-    <p>Quran Deep Analyzer • Canonical Tanzil Uthmanic Text & QuranDB Corpus • 100% Offline Resilience</p>
+    <p>Quran Deep Analyzer • Canonical Tanzil Uthmanic Text & QuranDB Corpus • 100% Offline Resilience • <button type="button" class="footer-guide-link" onclick="openUserGuideModal()" style="background: none; border: none; color: #fbbf24; cursor: pointer; text-decoration: underline; font-size: inherit; font-family: inherit;">📖 User Manual & Feature Guide</button></p>
   </footer>
 
   <!-- Application Scripts (Zero-CORS Offline Data Bundle) -->

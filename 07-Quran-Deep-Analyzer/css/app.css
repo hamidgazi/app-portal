@@ -15,7 +15,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'MehrNastaliqWeb';
+  src: url('../fonts/Mehr_Nastaliq_Web_3.ttf') format('truetype');
+  font-display: swap;
+}
+
 body.font-mode-naskh {
+  --font-urdu: var(--font-urdu-naskh) !important;
   --font-urdu-current: var(--font-urdu-naskh) !important;
   --urdu-line-height: 1.62 !important;
 }
@@ -43,8 +50,8 @@ body.font-mode-naskh {
   --accent-purple: #c084fc;
 
   --font-arabic: 'AlQalamQuran', 'Amiri Quran', 'Amiri', 'Traditional Arabic', serif;
-  --font-urdu: 'JameelNoori', 'NafeesWeb', 'Urdu Typesetting', serif;
-  --font-urdu-nastaleeq: var(--font-urdu), 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
+  --font-urdu: 'JameelNoori', 'MehrNastaliqWeb', 'NafeesWeb', 'Urdu Typesetting', serif;
+  --font-urdu-nastaleeq: var(--font-urdu), 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', 'Mehr Nastaliq Web', serif;
   --font-urdu-naskh: 'Scheherazade New', 'Amiri', 'Traditional Arabic', 'Segoe UI', sans-serif;
   --font-urdu-current: var(--font-urdu-nastaleeq);
   --urdu-line-height: 1.82;
@@ -6677,4 +6684,206 @@ mark.search-highlight {
   font-size: 0.76rem;
   color: #94a3b8;
   text-align: center;
+}
+
+/* ==========================================================================
+   USER MANUAL & COMPREHENSIVE FEATURE GUIDE MODAL (CYBER-GLASS)
+   ========================================================================== */
+
+.guide-trigger-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  color: #fbbf24;
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+}
+
+.guide-trigger-btn:hover {
+  background: rgba(212, 175, 55, 0.22);
+  border-color: rgba(212, 175, 55, 0.7);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.25);
+}
+
+.user-guide-card {
+  max-width: 980px;
+  width: 95%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  background: rgba(11, 17, 32, 0.94);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(212, 175, 55, 0.12);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  overflow: hidden;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.user-guide-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 22px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(15, 23, 42, 0.85);
+  flex-shrink: 0;
+}
+
+.user-guide-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-guide-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.user-guide-title-text h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fbbf24;
+  letter-spacing: -0.01em;
+}
+
+.user-guide-title-text p {
+  margin: 2px 0 0;
+  font-size: 0.80rem;
+  color: #94a3b8;
+}
+
+.user-guide-nav-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  background: rgba(8, 12, 22, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  overflow-x: auto;
+  white-space: nowrap;
+  flex-shrink: 0;
+  scrollbar-width: thin;
+}
+
+.user-guide-nav-pill {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  user-select: none;
+}
+
+.user-guide-nav-pill:hover,
+.user-guide-nav-pill.active {
+  background: rgba(212, 175, 55, 0.2);
+  border-color: #d4af37;
+  color: #fbbf24;
+}
+
+.user-guide-body {
+  padding: 22px 26px;
+  overflow-y: auto;
+  flex: 1;
+  color: #e2e8f0;
+  font-size: 0.92rem;
+  line-height: 1.68;
+}
+
+.user-guide-section {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.user-guide-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.user-guide-section h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fbbf24;
+  font-size: 1.15rem;
+  margin: 0 0 12px;
+  font-weight: 700;
+}
+
+.user-guide-section p {
+  margin: 0 0 12px;
+  color: #cbd5e1;
+}
+
+.user-guide-table-wrap {
+  overflow-x: auto;
+  margin: 14px 0;
+  border-radius: 8px;
+  border: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.user-guide-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  text-align: left;
+}
+
+.user-guide-table th {
+  background: rgba(15, 23, 42, 0.95);
+  color: #fbbf24;
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+  font-weight: 700;
+}
+
+.user-guide-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: #e2e8f0;
+}
+
+.user-guide-table tr:nth-child(even) td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.user-guide-tip-card {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 12px 0;
+  color: #d1fae5;
+  font-size: 0.85rem;
+}
+
+.user-guide-warn-card {
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 12px 0;
+  color: #fef3c7;
+  font-size: 0.85rem;
 }
