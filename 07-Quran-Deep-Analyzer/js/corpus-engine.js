@@ -488,6 +488,7 @@ class CorpusEngine {
     }
     this.loadSurah(surahId).then(() => {
       setTimeout(() => {
+        this.ensureAyahRendered(ayahNumber);
         const target = document.getElementById(`ayah-node-${ayahNumber}`);
         if (target) {
           target.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -580,215 +581,320 @@ class CorpusEngine {
       legendMount.innerHTML = window.TajweedEngine.renderLegend();
     }
 
-    let html = "";
-    (s.ayat || []).forEach(a => {
-      const p = this.getParaForAyah(s.surah_id, a.number);
-      const tajweedParsed = window.TajweedEngine ? window.TajweedEngine.parse(a.arabic) : a.arabic;
-      const arabicFormatted = window.WaqfEngine ? window.WaqfEngine.formatArabicWithStopSigns(tajweedParsed, a.number) : tajweedParsed;
-      html += `
-        <div class="ayah-card ${this.ayahViewMode === 'compact' ? 'compact-card' : ''}" id="ayah-node-${a.number}" data-surah="${s.surah_id}" data-ayah="${a.number}">
-          <div class="ayah-card-meta">
-            <div class="ayah-meta-left">
-              <span class="ayah-badge">Ayah ${s.surah_id}:${a.number}</span>
-              <span class="para-badge jump-to-para-btn" data-para="${p.para}" title="Para ${p.para}: ${p.name_ar} (${p.name_roman}) • Click to jump to start of Para">Para ${p.para}</span>
-              <span class="ayah-stat-chip">${a.word_count} Words</span>
-            </div>
-            <div class="ayah-meta-actions">
-              <button class="ayah-tool-btn play-ayah-audio-btn" data-surah="${s.surah_id}" data-ayah="${a.number}" title="Listen to Tartil Recitation">
-                ▶ Tartil
-              </button>
-              <button class="ayah-tool-btn toggle-ayah-words-btn" data-target="words-box-${a.number}" title="Toggle Word-by-Word Breakdown">
-                🔤 Words (${a.word_count})
-              </button>
-              <button class="ayah-tool-btn toggle-ayah-compare-btn" data-target="compare-box-${a.number}" title="Compare Urdu & English Translations Side-by-Side">
-                ⚖️ موازنہ
-              </button>
-              ${a.tafseer_sirat_ul_jinan ? `
-                <button class="ayah-tool-btn toggle-ayah-tafsir-btn" data-target="tafsir-box-${a.number}" title="Read Tafsir Sirat-ul-Jinan">
-                  📖 Tafsir
-                </button>
-              ` : ''}
-              <button class="ayah-tool-btn open-notebook-btn" data-surah="${s.surah_id}" data-ayah="${a.number}" title="Reflect & Save Tadabbur Note">
-                ✍ نوٹ
-              </button>
-              <button class="ayah-tool-btn copy-ayah-btn" data-arabic="${encodeURIComponent(a.arabic)}" title="Copy Arabic Verse">
-                📋 Copy
-              </button>
-            </div>
+    // Progressive Chunk Virtualization: Render initial 30 ayat in <15ms
+    this.renderedAyatCount = 0;
+    const CHUNK_SIZE = 30;
+    this.renderAyahBatch(0, CHUNK_SIZE);
+
+    // Single Container Event Delegation: eliminates thousands of redundant event listeners
+    this.setupAyatContainerDelegation(ayatContainer);
+
+    // Initialize or update Universal Edge QuickScrubber
+    if (window.QuickScrubber) {
+      window.QuickScrubber.init({
+        containerId: "ayahs-list-container",
+        itemSelector: ".ayah-card",
+        totalItems: s.total_ayat || (s.ayat ? s.ayat.length : 1),
+        unitName: "ayat",
+        modalTitle: `Jump to Ayah • Surah ${s.name_roman}`,
+        getItemLabel: (idx) => ({
+          title: `Ayah ${s.surah_id}:${idx}`,
+          subtitle: `Surah ${s.name_roman} (${s.name_ar})`
+        }),
+        onJump: (targetAyahNum) => {
+          this.ensureAyahRendered(targetAyahNum);
+          const targetNode = document.getElementById(`ayah-node-${targetAyahNum}`);
+          if (targetNode) {
+            targetNode.scrollIntoView({ behavior: "smooth", block: "start" });
+            targetNode.classList.add("reciting-active");
+            setTimeout(() => targetNode.classList.remove("reciting-active"), 2000);
+          }
+        }
+      });
+    }
+  }
+
+  buildSingleAyahHtml(a, s) {
+    const p = this.getParaForAyah(s.surah_id, a.number);
+    const tajweedParsed = window.TajweedEngine ? window.TajweedEngine.parse(a.arabic) : a.arabic;
+    const arabicFormatted = window.WaqfEngine ? window.WaqfEngine.formatArabicWithStopSigns(tajweedParsed, a.number) : tajweedParsed;
+    return `
+      <div class="ayah-card ${this.ayahViewMode === 'compact' ? 'compact-card' : ''}" id="ayah-node-${a.number}" data-surah="${s.surah_id}" data-ayah="${a.number}">
+        <div class="ayah-card-meta">
+          <div class="ayah-meta-left">
+            <span class="ayah-badge">Ayah ${s.surah_id}:${a.number}</span>
+            <span class="para-badge jump-to-para-btn" data-para="${p.para}" title="Para ${p.para}: ${p.name_ar} (${p.name_roman}) • Click to jump to start of Para">Para ${p.para}</span>
+            <span class="ayah-stat-chip">${a.word_count} Words</span>
           </div>
-
-          <div class="ayah-arabic-text">${arabicFormatted}</div>
-
-          <div class="ayah-words-pills-container" id="words-box-${a.number}" style="${this.showWordPills ? 'display:flex;' : 'display:none;'}">
-            ${(a.words || []).map(w => `
-              <div class="word-pill" title="Word #${w.index}: ${w.clean}">
-                <span class="pill-ar">${w.token}</span>
-                <span class="pill-idx">#${w.index}</span>
-              </div>
-            `).join("")}
-          </div>
-
-          <!-- Comparative Multi-Translation Split Drawer -->
-          <div class="comparative-drawer-grid" id="compare-box-${a.number}" style="display:none;">
-            <div class="compare-col">
-              <div class="compare-header">
-                <span class="compare-author">امام احمد رضا خان</span>
-                <span class="compare-badge gold">کنز الایمان</span>
-              </div>
-              <div class="compare-text urdu" dir="rtl">
-                ${a.translation_urdu_kanzul_iman || '<span class="text-dim">ترجمہ دستیاب نہیں</span>'}
-              </div>
-            </div>
-            <div class="compare-col">
-              <div class="compare-header">
-                <span class="compare-author">مفتی محمد قاسم قادری</span>
-                <span class="compare-badge green">کنز العرفان</span>
-              </div>
-              <div class="compare-text urdu" dir="rtl">
-                ${a.translation_urdu_kanzul_irfan || '<span class="text-dim">ترجمہ دستیاب نہیں</span>'}
-              </div>
-            </div>
-            <div class="compare-col">
-              <div class="compare-header">
-                <span class="compare-author">Saheeh International</span>
-                <span class="compare-badge blue">English</span>
-              </div>
-              <div class="compare-text english" dir="ltr">
-                ${a.translation_english || '<span class="text-dim">Translation not available</span>'}
-              </div>
-            </div>
-          </div>
-
-          <div class="translations-block">
-            ${a.translation_english ? `
-              <div class="translation-item trans-layer-en" dir="ltr" style="${this.showEnglish ? 'display:flex;' : 'display:none;'}">
-                <span class="compact-trans-tag en">EN</span>
-                <div class="trans-text english">${a.translation_english}</div>
-              </div>
+          <div class="ayah-meta-actions">
+            <button class="ayah-tool-btn play-ayah-audio-btn" data-surah="${s.surah_id}" data-ayah="${a.number}" title="Listen to Tartil Recitation">
+              ▶ Tartil
+            </button>
+            <button class="ayah-tool-btn toggle-ayah-words-btn" data-target="words-box-${a.number}" title="Toggle Word-by-Word Breakdown">
+              🔤 Words (${a.word_count})
+            </button>
+            <button class="ayah-tool-btn toggle-ayah-compare-btn" data-target="compare-box-${a.number}" title="Compare Urdu & English Translations Side-by-Side">
+              ⚖️ موازنہ
+            </button>
+            ${a.tafseer_sirat_ul_jinan ? `
+              <button class="ayah-tool-btn toggle-ayah-tafsir-btn" data-target="tafsir-box-${a.number}" title="Read Tafsir Sirat-ul-Jinan">
+                📖 Tafsir
+              </button>
             ` : ''}
-
-            ${a.translation_urdu_kanzul_iman ? `
-              <div class="translation-item trans-layer-ki" dir="rtl" style="${this.showKanzulIman ? 'display:flex;' : 'display:none;'}">
-                <span class="compact-trans-tag ur-ki">کنز الایمان</span>
-                <div class="trans-text urdu" dir="rtl">${a.translation_urdu_kanzul_iman}</div>
-              </div>
-            ` : ''}
-
-            ${a.translation_urdu_kanzul_irfan ? `
-              <div class="translation-item trans-layer-kr" dir="rtl" style="${this.showKanzulIrfan ? 'display:flex;' : 'display:none;'}">
-                <span class="compact-trans-tag ur-kr">کنز العرفان</span>
-                <div class="trans-text urdu" dir="rtl">${a.translation_urdu_kanzul_irfan}</div>
-              </div>
-            ` : ''}
+            <button class="ayah-tool-btn open-notebook-btn" data-surah="${s.surah_id}" data-ayah="${a.number}" title="Reflect & Save Tadabbur Note">
+              ✍ نوٹ
+            </button>
+            <button class="ayah-tool-btn copy-ayah-btn" data-arabic="${encodeURIComponent(a.arabic)}" title="Copy Arabic Verse">
+              📋 Copy
+            </button>
           </div>
+        </div>
 
-          ${a.tafseer_sirat_ul_jinan ? `
-            <div class="tafsir-content-drawer" id="tafsir-box-${a.number}">
-              ${this.cleanTafsirHtml(a.tafseer_sirat_ul_jinan)}
+        <div class="ayah-arabic-text">${arabicFormatted}</div>
+
+        <div class="ayah-words-pills-container" id="words-box-${a.number}" style="${this.showWordPills ? 'display:flex;' : 'display:none;'}">
+          ${(a.words || []).map(w => `
+            <div class="word-pill" title="Word #${w.index}: ${w.clean}">
+              <span class="pill-ar">${w.token}</span>
+              <span class="pill-idx">#${w.index}</span>
+            </div>
+          `).join("")}
+        </div>
+
+        <!-- Comparative Multi-Translation Split Drawer -->
+        <div class="comparative-drawer-grid" id="compare-box-${a.number}" style="display:none;">
+          <div class="compare-col">
+            <div class="compare-header">
+              <span class="compare-author">امام احمد رضا خان</span>
+              <span class="compare-badge gold">کنز الایمان</span>
+            </div>
+            <div class="compare-text urdu" dir="rtl">
+              ${a.translation_urdu_kanzul_iman || '<span class="text-dim">ترجمہ دستیاب نہیں</span>'}
+            </div>
+          </div>
+          <div class="compare-col">
+            <div class="compare-header">
+              <span class="compare-author">مفتی محمد قاسم قادری</span>
+              <span class="compare-badge green">کنز العرفان</span>
+            </div>
+            <div class="compare-text urdu" dir="rtl">
+              ${a.translation_urdu_kanzul_irfan || '<span class="text-dim">ترجمہ دستیاب نہیں</span>'}
+            </div>
+          </div>
+          <div class="compare-col">
+            <div class="compare-header">
+              <span class="compare-author">Saheeh International</span>
+              <span class="compare-badge blue">English</span>
+            </div>
+            <div class="compare-text english" dir="ltr">
+              ${a.translation_english || '<span class="text-dim">Translation not available</span>'}
+            </div>
+          </div>
+        </div>
+
+        <div class="translations-block">
+          ${a.translation_english ? `
+            <div class="translation-item trans-layer-en" dir="ltr" style="${this.showEnglish ? 'display:flex;' : 'display:none;'}">
+              <span class="compact-trans-tag en">EN</span>
+              <div class="trans-text english">${a.translation_english}</div>
+            </div>
+          ` : ''}
+
+          ${a.translation_urdu_kanzul_iman ? `
+            <div class="translation-item trans-layer-ki" dir="rtl" style="${this.showKanzulIman ? 'display:flex;' : 'display:none;'}">
+              <span class="compact-trans-tag ur-ki">کنز الایمان</span>
+              <div class="trans-text urdu" dir="rtl">${a.translation_urdu_kanzul_iman}</div>
+            </div>
+          ` : ''}
+
+          ${a.translation_urdu_kanzul_irfan ? `
+            <div class="translation-item trans-layer-kr" dir="rtl" style="${this.showKanzulIrfan ? 'display:flex;' : 'display:none;'}">
+              <span class="compact-trans-tag ur-kr">کنز العرفان</span>
+              <div class="trans-text urdu" dir="rtl">${a.translation_urdu_kanzul_irfan}</div>
             </div>
           ` : ''}
         </div>
-      `;
-    });
 
-    ayatContainer.innerHTML = html;
+        ${a.tafseer_sirat_ul_jinan ? `
+          <div class="tafsir-content-drawer" id="tafsir-box-${a.number}">
+            ${this.cleanTafsirHtml(a.tafseer_sirat_ul_jinan)}
+          </div>
+        ` : ''}
+      </div>
+    `;
+  }
 
-    // Wire Tartil Audio Recitation Play
-    ayatContainer.querySelectorAll(".play-ayah-audio-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
+  renderAyahBatch(startIndex, count) {
+    const s = this.currentSurahData;
+    const ayatContainer = document.getElementById("ayahs-list-container");
+    if (!s || !s.ayat || !ayatContainer) return;
+
+    const slice = s.ayat.slice(startIndex, startIndex + count);
+    if (slice.length === 0) return;
+
+    let chunkHtml = slice.map(a => this.buildSingleAyahHtml(a, s)).join("");
+
+    if (startIndex === 0) {
+      chunkHtml += `<div id="ayah-scroll-sentinel" class="scroll-sentinel" style="height: 50px; width: 100%; display: flex; align-items: center; justify-content: center; color: #64748b; font-size: 0.85rem;"></div>`;
+      ayatContainer.innerHTML = chunkHtml;
+      this.setupAyahSentinelObserver();
+    } else {
+      const sentinel = document.getElementById("ayah-scroll-sentinel");
+      if (sentinel) {
+        sentinel.insertAdjacentHTML("beforebegin", chunkHtml);
+      } else {
+        ayatContainer.insertAdjacentHTML("beforeend", chunkHtml);
+      }
+    }
+
+    this.renderedAyatCount = startIndex + slice.length;
+
+    if (this.renderedAyatCount >= s.ayat.length) {
+      if (this.ayahObserver) this.ayahObserver.disconnect();
+      const sentinel = document.getElementById("ayah-scroll-sentinel");
+      if (sentinel) sentinel.style.display = "none";
+    }
+  }
+
+  setupAyahSentinelObserver() {
+    if (this.ayahObserver) this.ayahObserver.disconnect();
+    const sentinel = document.getElementById("ayah-scroll-sentinel");
+    if (!sentinel || typeof IntersectionObserver === "undefined") return;
+
+    this.ayahObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (this.currentSurahData && this.currentSurahData.ayat && (this.renderedAyatCount || 0) < this.currentSurahData.ayat.length) {
+            this.renderAyahBatch(this.renderedAyatCount || 0, 25);
+          }
+        }
+      });
+    }, { rootMargin: "350px 0px" });
+
+    this.ayahObserver.observe(sentinel);
+  }
+
+  ensureAyahRendered(ayahNumber) {
+    if (!this.currentSurahData || !this.currentSurahData.ayat) return;
+    const targetIdx = this.currentSurahData.ayat.findIndex(a => (a.number === ayahNumber || a.ayatNumber === ayahNumber));
+    if (targetIdx !== -1 && targetIdx >= (this.renderedAyatCount || 0)) {
+      const neededCount = (targetIdx + 25) - (this.renderedAyatCount || 0);
+      this.renderAyahBatch(this.renderedAyatCount || 0, Math.max(neededCount, 25));
+    }
+  }
+
+  setupAyatContainerDelegation(ayatContainer) {
+    if (!ayatContainer || ayatContainer._hasPerformanceDelegation) return;
+    ayatContainer._hasPerformanceDelegation = true;
+
+    ayatContainer.addEventListener("click", (e) => {
+      // 1. Tartil Audio Play
+      const audioBtn = e.target.closest(".play-ayah-audio-btn");
+      if (audioBtn) {
         if (window.AudioSFX) window.AudioSFX.playClick();
-        const surahId = parseInt(btn.dataset.surah, 10);
-        const ayahNum = parseInt(btn.dataset.ayah, 10);
+        const surahId = parseInt(audioBtn.dataset.surah, 10);
+        const ayahNum = parseInt(audioBtn.dataset.ayah, 10);
         if (window.AudioTartilCompanion) {
           window.AudioTartilCompanion.play(surahId, ayahNum);
         }
-      });
-    });
+        return;
+      }
 
-    // Wire Comparative Translation Drawer Toggle
-    ayatContainer.querySelectorAll(".toggle-ayah-compare-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
+      // 2. Word Breakdown Toggle
+      const wordsBtn = e.target.closest(".toggle-ayah-words-btn");
+      if (wordsBtn) {
         if (window.AudioSFX) window.AudioSFX.playClick();
-        const targetId = btn.dataset.target;
-        const box = document.getElementById(targetId);
-        if (box) {
-          const isHidden = box.style.display === "none";
-          box.style.display = isHidden ? "grid" : "none";
-          btn.classList.toggle("active", isHidden);
-        }
-      });
-    });
-
-    // Wire Tadabbur Notebook Note Opener
-    ayatContainer.querySelectorAll(".open-notebook-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        if (window.AudioSFX) window.AudioSFX.playClick();
-        const surahId = parseInt(btn.dataset.surah, 10);
-        const ayahNum = parseInt(btn.dataset.ayah, 10);
-        if (window.NotebookEngine) {
-          window.NotebookEngine.openAyahNoteCreator(surahId, ayahNum);
-        }
-      });
-    });
-
-    // Wire Per-Ayah Word Toggle
-    ayatContainer.querySelectorAll(".toggle-ayah-words-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        if (window.AudioSFX) window.AudioSFX.playClick();
-        const targetId = btn.dataset.target;
+        const targetId = wordsBtn.dataset.target;
         const box = document.getElementById(targetId);
         if (box) {
           const isHidden = box.style.display === "none";
           box.style.display = isHidden ? "flex" : "none";
-          btn.classList.toggle("active", isHidden);
+          wordsBtn.classList.toggle("active", isHidden);
         }
-      });
-    });
+        return;
+      }
 
-    // Wire Per-Ayah Tafsir Toggle
-    ayatContainer.querySelectorAll(".toggle-ayah-tafsir-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
+      // 3. Comparative Translation Drawer Toggle
+      const compareBtn = e.target.closest(".toggle-ayah-compare-btn");
+      if (compareBtn) {
         if (window.AudioSFX) window.AudioSFX.playClick();
-        const targetId = btn.dataset.target;
+        const targetId = compareBtn.dataset.target;
+        const box = document.getElementById(targetId);
+        if (box) {
+          const isHidden = box.style.display === "none";
+          box.style.display = isHidden ? "grid" : "none";
+          compareBtn.classList.toggle("active", isHidden);
+        }
+        return;
+      }
+
+      // 4. Tafsir Drawer Toggle
+      const tafsirBtn = e.target.closest(".toggle-ayah-tafsir-btn");
+      if (tafsirBtn) {
+        if (window.AudioSFX) window.AudioSFX.playClick();
+        const targetId = tafsirBtn.dataset.target;
         const drawer = document.getElementById(targetId);
         if (drawer) {
           drawer.classList.toggle("open");
-          btn.classList.toggle("active", drawer.classList.contains("open"));
+          tafsirBtn.classList.toggle("active", drawer.classList.contains("open"));
         }
-      });
-    });
+        return;
+      }
 
-    // Wire Per-Ayah Copy Button
-    ayatContainer.querySelectorAll(".copy-ayah-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
+      // 5. Tadabbur Notebook Note Opener
+      const noteBtn = e.target.closest(".open-notebook-btn");
+      if (noteBtn) {
         if (window.AudioSFX) window.AudioSFX.playClick();
-        const rawText = decodeURIComponent(btn.dataset.arabic);
-        const card = btn.closest('.ayah-card');
+        const surahId = parseInt(noteBtn.dataset.surah, 10);
+        const ayahNum = parseInt(noteBtn.dataset.ayah, 10);
+        if (window.NotebookEngine) {
+          window.NotebookEngine.openAyahNoteCreator(surahId, ayahNum);
+        }
+        return;
+      }
+
+      // 6. Copy Ayah
+      const copyBtn = e.target.closest(".copy-ayah-btn");
+      if (copyBtn) {
+        if (window.AudioSFX) window.AudioSFX.playClick();
+        const rawText = decodeURIComponent(copyBtn.dataset.arabic || "");
+        const card = copyBtn.closest('.ayah-card');
         const ayahNum = card ? card.dataset.ayah : '';
         const text = window.WaqfEngine ? window.WaqfEngine.appendPlainTextStopSign(rawText, ayahNum) : rawText;
         navigator.clipboard.writeText(text).then(() => {
-          const orig = btn.innerHTML;
-          btn.innerHTML = "✓ Copied";
-          btn.style.borderColor = "#34d399";
-          btn.style.color = "#34d399";
+          const orig = copyBtn.innerHTML;
+          copyBtn.innerHTML = "✓ Copied";
+          copyBtn.style.borderColor = "#34d399";
+          copyBtn.style.color = "#34d399";
           setTimeout(() => {
-            btn.innerHTML = orig;
-            btn.style.borderColor = "";
-            btn.style.color = "";
+            copyBtn.innerHTML = orig;
+            copyBtn.style.borderColor = "";
+            copyBtn.style.color = "";
           }, 1500);
         }).catch(err => {
           console.error("Failed to copy:", err);
         });
-      });
-    });
+        return;
+      }
 
-    // Wire Word Pills Animation
-    ayatContainer.querySelectorAll(".word-pill").forEach(pill => {
-      pill.addEventListener("click", () => {
+      // 7. Word Pill Animation
+      const pill = e.target.closest(".word-pill");
+      if (pill) {
         if (window.AudioSFX) window.AudioSFX.playClick();
         pill.style.transform = "scale(1.15)";
         setTimeout(() => pill.style.transform = "", 150);
-      });
+        return;
+      }
+
+      // 8. Para Badge Jump
+      const paraBtn = e.target.closest(".jump-to-para-btn");
+      if (paraBtn) {
+        const pNum = parseInt(paraBtn.dataset.para, 10);
+        if (pNum && typeof this.handleParaSelect === "function") {
+          this.handleParaSelect(pNum);
+        }
+        return;
+      }
     });
   }
 
@@ -1258,6 +1364,7 @@ class CorpusEngine {
       const val = parseInt(stickyInput.value, 10);
       if (!val || val < 1) return;
       if (window.AudioSFX) window.AudioSFX.playClick();
+      this.ensureAyahRendered(val);
       const target = document.getElementById(`ayah-node-${val}`);
       if (target) {
         target.scrollIntoView({ behavior: 'smooth', block: 'center' });

@@ -179,7 +179,7 @@
           clearTimeout(this.debounceTimer);
           this.debounceTimer = setTimeout(() => {
             this.executeSearch(val);
-          }, 15);
+          }, 140);
         });
 
         // Keyboard Shortcuts on Input
@@ -481,6 +481,7 @@
       if (!container) return;
 
       if (matches.length === 0) {
+        if (this.searchObserver) this.searchObserver.disconnect();
         container.innerHTML = `
           <div class="search-studio-welcome" style="text-align: center; padding: 48px 24px;">
             <div style="font-size: 2.5rem; margin-bottom: 12px;">🔍</div>
@@ -497,8 +498,28 @@
         return;
       }
 
-      let html = '';
-      matches.forEach((m, idx) => {
+      this.currentSearchMatches = matches;
+      this.currentSearchQuery = query;
+      this.searchRenderedCount = 0;
+
+      this.renderNextSearchChunk();
+      this.bindCardActions(container);
+    },
+
+    renderNextSearchChunk() {
+      const container = document.getElementById('search-studio-results');
+      if (!container || !this.currentSearchMatches) return;
+
+      const matches = this.currentSearchMatches;
+      const query = this.currentSearchQuery;
+      const startIndex = this.searchRenderedCount || 0;
+      const CHUNK_SIZE = 20;
+      const slice = matches.slice(startIndex, startIndex + CHUNK_SIZE);
+      if (slice.length === 0) return;
+
+      let chunkHtml = '';
+      slice.forEach((m, i) => {
+        const idx = startIndex + i;
         if (m.surahId && m.ayahNum) {
           const meta = this.getSurahMeta(m.surahId);
           const verseObj = {
@@ -511,14 +532,47 @@
             english: m.subtitle || m.english || '',
             urdu: m.urdu || ''
           };
-          html += this.buildAyahCardHtml(verseObj, query, idx + 1);
+          chunkHtml += this.buildAyahCardHtml(verseObj, query, idx + 1);
         } else {
-          html += this.buildGenericCardHtml(m, query, idx + 1);
+          chunkHtml += this.buildGenericCardHtml(m, query, idx + 1);
         }
       });
 
-      container.innerHTML = html;
-      this.bindCardActions(container);
+      if (startIndex === 0) {
+        chunkHtml += `<div id="search-scroll-sentinel" class="scroll-sentinel" style="height: 40px; width: 100%;"></div>`;
+        container.innerHTML = chunkHtml;
+        this.setupSearchSentinelObserver();
+      } else {
+        const sentinel = document.getElementById('search-scroll-sentinel');
+        if (sentinel) {
+          sentinel.insertAdjacentHTML('beforebegin', chunkHtml);
+        } else {
+          container.insertAdjacentHTML('beforeend', chunkHtml);
+        }
+      }
+
+      this.searchRenderedCount = startIndex + slice.length;
+      if (this.searchRenderedCount >= matches.length) {
+        if (this.searchObserver) this.searchObserver.disconnect();
+        const sentinel = document.getElementById('search-scroll-sentinel');
+        if (sentinel) sentinel.style.display = 'none';
+      }
+    },
+
+    setupSearchSentinelObserver() {
+      if (this.searchObserver) this.searchObserver.disconnect();
+      const sentinel = document.getElementById('search-scroll-sentinel');
+      if (!sentinel || typeof IntersectionObserver === 'undefined') return;
+
+      this.searchObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            this.renderNextSearchChunk();
+          }
+        });
+      }, { rootMargin: '300px' });
+
+      this.searchObserver.observe(sentinel);
     },
 
     buildAyahCardHtml(v, query, rankNum) {
@@ -562,7 +616,7 @@
           <div class="search-tafsir-drawer" id="search-tafsir-${v.surahId}-${v.ayahNum}" style="display: none;">
             <div class="search-tafsir-header">
               <div class="search-tafsir-title">
-                <span>📚 Tafsir Sirat-ul-Jinan</span>
+                <span>📖 Tafsir Sirat-ul-Jinan</span>
                 <span style="font-weight: 400; color: #94a3b8; font-size: 0.85rem;">• Surah ${v.surahRoman} [${v.surahId}:${v.ayahNum}]</span>
               </div>
               <span class="search-tafsir-author">Mufti Muhammad Qasim Qadri</span>
@@ -580,23 +634,14 @@
       const highlightedSub = this.highlightText(m.subtitle, query);
 
       return `
-        <article class="search-ayah-card">
-          <div class="search-ayah-card-header">
-            <div class="search-ayah-meta-left">
-              <span class="search-ayah-coord-badge" style="background: rgba(168, 85, 247, 0.2); border-color: rgba(168, 85, 247, 0.4); color: #e9d5ff;">
-                ${this.escapeHtml(m.category || 'General')}
-              </span>
-              <span class="search-surah-title-badge">${highlightedTitle}</span>
-              ${rankNum ? `<span class="search-ayah-rank-badge">#${rankNum}</span>` : ''}
-            </div>
-            <div class="search-ayah-meta-right">
-              <button class="search-micro-action analyzer-btn" onclick="(${m.action.toString()})()">
-                <span>Explore ↗</span>
-              </button>
-            </div>
+        <article class="search-generic-card" onclick="window.SearchStudioEngine.applyTopicQuery('${this.escapeAttr(m.title)}')">
+          <div class="search-generic-header">
+            <span class="search-generic-icon">${m.icon || '🏷️'}</span>
+            <div class="search-generic-title">${highlightedTitle}</div>
+            <span class="search-generic-category">${m.category}</span>
+            ${rankNum ? `<span class="search-ayah-rank-badge">#${rankNum}</span>` : ''}
           </div>
-
-          <div class="search-ayah-english" style="font-size: 0.94rem; margin-top: 6px;">
+          <div class="search-generic-body">
             ${highlightedSub}
           </div>
         </article>
@@ -604,47 +649,52 @@
     },
 
     bindCardActions(container) {
-      // 1. Tafsir Buttons
-      container.querySelectorAll('.tafsir-btn').forEach((btn) => {
-        btn.addEventListener('click', () => {
-          StudioSound.playClick();
-          const sId = parseInt(btn.dataset.surah, 10);
-          const aNum = parseInt(btn.dataset.ayah, 10);
-          this.toggleTafsir(sId, aNum, btn);
-        });
-      });
+      if (!container || container._hasSearchDelegation) return;
+      container._hasSearchDelegation = true;
 
-      // 2. Open in Analyzer Buttons
-      container.querySelectorAll('.analyzer-btn').forEach((btn) => {
-        btn.addEventListener('click', () => {
+      container.addEventListener('click', (e) => {
+        // 1. Tafsir Buttons
+        const tafsirBtn = e.target.closest('.tafsir-btn');
+        if (tafsirBtn) {
+          StudioSound.playClick();
+          const sId = parseInt(tafsirBtn.dataset.surah, 10);
+          const aNum = parseInt(tafsirBtn.dataset.ayah, 10);
+          this.toggleTafsir(sId, aNum, tafsirBtn);
+          return;
+        }
+
+        // 2. Open in Analyzer Buttons
+        const analyzerBtn = e.target.closest('.analyzer-btn');
+        if (analyzerBtn) {
           StudioSound.playTab();
-          const sId = parseInt(btn.dataset.surah, 10);
-          const aNum = parseInt(btn.dataset.ayah, 10);
+          const sId = parseInt(analyzerBtn.dataset.surah, 10);
+          const aNum = parseInt(analyzerBtn.dataset.ayah, 10);
           this.jumpToAnalyzer(sId, aNum);
-        });
-      });
+          return;
+        }
 
-      // 3. Copy Verse Buttons
-      container.querySelectorAll('.copy-btn').forEach((btn) => {
-        btn.addEventListener('click', () => {
+        // 3. Copy Verse Buttons
+        const copyBtn = e.target.closest('.copy-btn');
+        if (copyBtn) {
           StudioSound.playClick();
-          const sId = btn.dataset.surah;
-          const aNum = btn.dataset.ayah;
-          let ar = btn.dataset.arabic || '';
-      if (window.WaqfEngine) {
-        ar = window.WaqfEngine.appendPlainTextStopSign(ar, aNum);
-      }
-          const en = btn.dataset.english || '';
-          const ur = btn.dataset.urdu || '';
+          const sId = copyBtn.dataset.surah;
+          const aNum = copyBtn.dataset.ayah;
+          let ar = copyBtn.dataset.arabic || '';
+          if (window.WaqfEngine) {
+            ar = window.WaqfEngine.appendPlainTextStopSign(ar, aNum);
+          }
+          const en = copyBtn.dataset.english || '';
+          const ur = copyBtn.dataset.urdu || '';
           const copyText = `Surah ${sId}:${aNum}\n\n${ar}\n\nEnglish: ${en}\n\nUrdu (Kanzul Iman): ${ur}\n\n(Quran Deep Analyzer)`;
           navigator.clipboard.writeText(copyText).then(() => {
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<span>✓ Copied!</span>';
+            const originalText = copyBtn.innerHTML;
+            copyBtn.innerHTML = '<span>✓ Copied!</span>';
             setTimeout(() => {
-              btn.innerHTML = originalText;
+              copyBtn.innerHTML = originalText;
             }, 2000);
           });
-        });
+          return;
+        }
       });
     },
 

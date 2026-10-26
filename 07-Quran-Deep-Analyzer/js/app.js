@@ -54,6 +54,15 @@ function switchAppTab(tabName) {
     window.NotebookEngine.render();
   }
 
+  // Synchronize High-Velocity QuickScrubber Visibility
+  if (window.QuickScrubber) {
+    if (tabName === "ayahs") {
+      window.QuickScrubber.show();
+    } else {
+      window.QuickScrubber.hide();
+    }
+  }
+
   if (readingTabs.includes(tabName)) {
     if (banner && !banner.classList.contains("user-pinned-open")) {
       banner.classList.add("collapsed");

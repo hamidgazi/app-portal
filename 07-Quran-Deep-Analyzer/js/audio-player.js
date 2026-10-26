@@ -220,6 +220,11 @@
     highlightActiveAyah(ayahNum) {
       if (typeof document === 'undefined') return;
 
+      // Ensure offscreen virtual chunk is mounted if playing sequentially
+      if (window.CorpusEngine && typeof window.CorpusEngine.ensureAyahRendered === 'function') {
+        window.CorpusEngine.ensureAyahRendered(ayahNum);
+      }
+
       // Remove existing recitation highlights
       document.querySelectorAll('.ayah-card.reciting-active, .reciting-active').forEach(node => {
         node.classList.remove('reciting-active');

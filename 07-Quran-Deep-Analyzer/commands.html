@@ -465,6 +465,11 @@
 
     /* Mode 1: High-Density Compact Editorial Card (~195px Height) */
     .command-card {
+      content-visibility: auto;
+      contain-intrinsic-size: auto 195px;
+      contain: layout style;
+      will-change: scroll-position;
+      transform: translateZ(0);
       background: var(--bg-card-glass);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-md);
@@ -1327,6 +1332,7 @@
 
   <!-- Standalone Offline Zero-CORS Data Bundle -->
   <script src="js/waqf-engine.js?v=20261026"></script>
+  <script src="js/quick-scrubber.js?v=20261026"></script>
   <script src="data/quran_commands_data.js"></script>
 
   <!-- Interactive Studio Orchestration Script -->
@@ -1984,6 +1990,41 @@
 
         // Render initial chunk
         renderNextChunk();
+
+        // Initialize Universal Edge QuickScrubber
+        if (window.QuickScrubber) {
+          window.QuickScrubber.init({
+            containerId: "commands-list-mount",
+            itemSelector: ".command-card, .collapsible-row, .checklist-row",
+            totalItems: currentFilteredItems.length,
+            unitName: "directives",
+            modalTitle: "Jump to Divine Directive",
+            getItemLabel: (idx) => {
+              const it = currentFilteredItems[idx - 1];
+              return {
+                title: `Directive #${it ? it.serial : idx}`,
+                subtitle: it ? it.title_en : ""
+              };
+            },
+            onJump: (targetIdx) => {
+              ensureRenderedUpToIndex(targetIdx - 1);
+              const it = currentFilteredItems[targetIdx - 1];
+              if (!it) return;
+              const card = document.getElementById(`card-${it.serial}`) || document.getElementById(`check-${it.serial}`);
+              if (card) {
+                card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                card.classList.add('playing-now');
+                setTimeout(() => card.classList.remove('playing-now'), 2000);
+              }
+            }
+          });
+        }
+      }
+
+      function ensureRenderedUpToIndex(idx) {
+        while (renderedCount <= idx && renderedCount < currentFilteredItems.length) {
+          renderNextChunk();
+        }
       }
 
       // IntersectionObserver for 60fps Infinite Scroll Chunking
