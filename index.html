@@ -301,6 +301,127 @@
       color: var(--text-dim);
     }
 
+    
+    /* Interactive Quick Search Card */
+    .search-card-container {
+      width: 100%;
+    }
+
+    .search-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 6px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.2s var(--spring);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      min-height: 52px;
+      cursor: text;
+    }
+
+    .search-card:focus-within {
+      background: var(--bg-card-hover);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(56, 189, 248, 0.25);
+    }
+
+    .search-card-icon {
+      font-size: 18px;
+      color: var(--text-dim);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.15s, transform 0.15s;
+      flex-shrink: 0;
+      padding: 4px;
+    }
+
+    .search-card:focus-within .search-card-icon,
+    .search-card-icon:hover {
+      color: var(--accent-cyan);
+      transform: scale(1.1);
+    }
+
+    .search-card-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text-primary);
+      font-size: 14.5px;
+      font-weight: 500;
+      min-height: 40px;
+      width: 100%;
+    }
+
+    .search-card-input::placeholder {
+      color: var(--text-dim);
+    }
+
+    .search-card-clear {
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      font-size: 14px;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 4px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.15s;
+    }
+
+    .search-card-clear.visible {
+      display: flex;
+    }
+
+    .search-card-clear:hover {
+      color: var(--text-primary);
+    }
+
+    .search-card-spotlight-pill {
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      color: var(--accent-cyan);
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+      touch-action: manipulation;
+    }
+
+    .search-card-spotlight-pill:hover {
+      background: rgba(56, 189, 248, 0.18);
+      border-color: var(--accent-cyan);
+      color: #fff;
+    }
+
+    .search-card-spotlight-pill kbd {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-size: 10px;
+    }
+
+    @media (max-width: 640px) {
+      .search-card-spotlight-pill kbd {
+        display: none;
+      }
+      .search-card-input {
+        font-size: 13.5px;
+      }
+    }
+
     /* Section Headers */
     .section-header {
       display: flex;
@@ -1051,6 +1172,26 @@
         </div>
       </div>
 
+      <!-- Interactive Quick Search Card (Instant Filter & Spotlight Launchpad) -->
+      <section class="search-card-container" id="search-card-section" aria-label="Search Applications">
+        <div class="search-card" id="search-card">
+          <span class="search-card-icon" id="search-card-icon-btn" title="Open AI Spotlight (Ctrl+K)">🔍</span>
+          <input 
+            type="search" 
+            id="dashboard-search-input" 
+            class="search-card-input" 
+            placeholder="Search 29 apps, Hadith, Fatwas, Namaz, Pincodes, Tools... (or press Ctrl+K)" 
+            autocomplete="off"
+            aria-label="Search apps and tools"
+          >
+          <button class="search-card-clear" id="dashboard-search-clear" title="Clear Search" aria-label="Clear Search">✕</button>
+          <button class="search-card-spotlight-pill" id="btn-card-spotlight" title="Open Full AI Spotlight Palette">
+            <span>⚡ Spotlight</span>
+            <kbd>Ctrl+K</kbd>
+          </button>
+        </div>
+      </section>
+
       <!-- Pinned Favorites & Recents Strip -->
       <section class="favorites-section" id="favorites-section" aria-labelledby="fav-section-title">
         <div class="section-header">
@@ -1739,13 +1880,103 @@
           }
         }],
 
-        ["Bind Spotlight AI Search", () => {
+        ["Initialize & Bind Spotlight AI Search", () => {
+          // Initialize AI Search Kit with catalog data
+          if (window.AISearch && typeof window.AISearch.init === 'function') {
+            try {
+              window.AISearch.init({
+                autoCrawl: false,
+                enableHistory: true,
+                enableSound: !State.audioMuted,
+                enableVoice: true,
+                enableFloatingPill: false,
+                catalog: State.apps,
+                onSelect: (item) => {
+                  if (item && item.id) {
+                    launchApp(item.id);
+                  } else if (item && item.url) {
+                    window.location.href = item.url;
+                  }
+                }
+              });
+            } catch (err) {
+              console.warn('[AISearch Init Warning]', err);
+            }
+          }
+
+          function triggerSpotlight(query = '') {
+            AudioEngine.tap();
+            if (window.AISearch && typeof window.AISearch.open === 'function') {
+              window.AISearch.open(query);
+            }
+          }
+
+          // Topbar Search Button
           const spotlightBtn = document.getElementById("btn-open-spotlight");
           if (spotlightBtn) {
-            spotlightBtn.addEventListener("click", () => {
-              if (window.AISearch && window.AISearch.open) {
-                window.AISearch.open();
+            spotlightBtn.addEventListener("click", () => triggerSpotlight());
+          }
+
+          // Search Card Spotlight Button
+          const cardSpotlightBtn = document.getElementById("btn-card-spotlight");
+          if (cardSpotlightBtn) {
+            cardSpotlightBtn.addEventListener("click", () => {
+              const input = document.getElementById("dashboard-search-input");
+              triggerSpotlight(input ? input.value : '');
+            });
+          }
+
+          // Search Card Icon Button
+          const cardIconBtn = document.getElementById("search-card-icon-btn");
+          if (cardIconBtn) {
+            cardIconBtn.addEventListener("click", () => {
+              const input = document.getElementById("dashboard-search-input");
+              triggerSpotlight(input ? input.value : '');
+            });
+          }
+
+          // Search Card Container click focus
+          const searchCard = document.getElementById("search-card");
+          const searchInput = document.getElementById("dashboard-search-input");
+          if (searchCard && searchInput) {
+            searchCard.addEventListener("click", (e) => {
+              if (!e.target.closest("button")) {
+                searchInput.focus();
               }
+            });
+          }
+        }],
+
+        ["Bind Dashboard In-Page Search Input", () => {
+          const searchInput = document.getElementById("dashboard-search-input");
+          const clearBtn = document.getElementById("dashboard-search-clear");
+          if (!searchInput) return;
+
+          searchInput.addEventListener("input", () => {
+            State.searchQuery = searchInput.value;
+            if (clearBtn) clearBtn.classList.toggle("visible", searchInput.value.length > 0);
+            renderDashboardClusters();
+          });
+
+          // Pressing Enter in search bar triggers full Spotlight with that query
+          searchInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              if (window.AISearch && typeof window.AISearch.open === 'function') {
+                window.AISearch.open(searchInput.value);
+              }
+            }
+          });
+
+          if (clearBtn) {
+            clearBtn.addEventListener("click", (e) => {
+              e.stopPropagation();
+              AudioEngine.reset();
+              searchInput.value = "";
+              State.searchQuery = "";
+              clearBtn.classList.remove("visible");
+              renderDashboardClusters();
+              searchInput.focus();
             });
           }
         }],

@@ -2262,7 +2262,7 @@
       });
     }
 
-    open() {
+    open(initialQuery = '') {
       if (this.isOpen) return;
       if (this.options.enableSound) SoundFX.click();
       this.isOpen = true;
@@ -2273,6 +2273,10 @@
       document.body.classList.add('ai-search-scroll-lock');
       setTimeout(() => {
         if (this.inputEl) {
+          if (initialQuery) {
+            this.inputEl.value = initialQuery;
+            this.handleInput();
+          }
           this.inputEl.focus();
           this.inputEl.select();
         }
@@ -3343,8 +3347,8 @@
       }
     },
 
-    open() {
-      if (this.ui) this.ui.open();
+    open(initialQuery = '') {
+      if (this.ui) this.ui.open(initialQuery);
     },
 
     close() {
