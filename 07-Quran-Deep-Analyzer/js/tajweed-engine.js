@@ -24,128 +24,128 @@
   const TAJWEED_RULES = {
     ghunnah: {
       id: 'ghunnah',
-      name_ur: 'غنہ (Ghunnah)',
-      name_en: 'Nasalization (2 Counts)',
-      timing: '2 Harakat (2 Counts)',
+      name_ur: 'غنہ مشددہ (Ghunnah - 2 Harakat / 1 Alif)',
+      name_en: 'Compulsory Nasal Resonance (2 Harakat / 1 Alif)',
+      timing: '2 Harakat (1 Alif / 2 Counts)',
       color: '#10b981',
-      bg_color: 'rgba(16, 185, 129, 0.15)',
-      description: 'نّ یا مّ پر دو حرکات کی مقدار ناک سے آواز نکال کر غنہ کرنا واجب ہے۔'
+      bg_color: 'rgba(16, 185, 129, 0.20)',
+      description: 'نون مشدد (نّ) یا میم مشدد (مّ) پر دو حرکات (1 الف) کی مقدار ناک (خیشوم) سے آواز نکال کر غنہ کرنا واجب ہے۔'
     },
     qalqalah: {
       id: 'qalqalah',
-      name_ur: 'قلقلہ (Qalqalah)',
-      name_en: 'Echoing Bounce',
-      timing: 'Vocalic Bounce (Echo)',
+      name_ur: 'قلقلہ (Qalqalah - قطب جد)',
+      name_en: 'Echoing Vocalic Bounce',
+      timing: 'Kinetic Bounce (Echo / جھٹکا اور گونج)',
       color: '#38bdf8',
-      bg_color: 'rgba(56, 189, 248, 0.15)',
-      description: 'حروف قطب جد (ق، ط، ب، ج، د) جب ساکن ہوں تو ان میں مخرج کو ہلا کر گونج پیدا کی جاتی ہے۔'
+      bg_color: 'rgba(56, 189, 248, 0.20)',
+      description: 'حروف قطب جد (ق، ط، ب، ج، د) جب ساکن ہوں تو ان میں مخرج سے ٹکرا کر گونج دار جھٹکا پیدا کیا جاتا ہے۔ (صغریٰ درمیان میں، کبریٰ وقف پر)'
     },
     madd_lazim: {
       id: 'madd_lazim',
-      name_ur: 'مد لازم (Madd Lazim)',
-      name_en: 'Compulsory Prolongation (6 Counts)',
-      timing: '6 Harakat (3 Alifs)',
-      color: '#be123c',
-      bg_color: 'rgba(190, 18, 60, 0.15)',
-      description: 'حرفِ مد کے بعد سکونِ اصلی یا تشدید آئے تو آواز کو لازماً 6 حرکات (3 الف) لمبا کیا جاتا ہے۔'
+      name_ur: 'مد لازم (Madd Lazim - 6 Harakat / 3 Alifs)',
+      name_en: 'Compulsory Prolongation (6 Harakat / 3 Alifs)',
+      timing: '6 Harakat (3 Alifs / لازم کھینچنا)',
+      color: '#ef4444',
+      bg_color: 'rgba(239, 68, 68, 0.20)',
+      description: 'حرفِ مد کے بعد سکونِ اصلی یا تشدید آئے تو آواز کو لازماً 6 حرکات (3 الف) لمبا کیا جاتا ہے۔ (مثلاً: دَآبَّةٌ، الحَآقَّة)'
     },
     madd_muttasil: {
       id: 'madd_muttasil',
-      name_ur: 'مد متصل (Madd Muttasil)',
-      name_en: 'Obligatory Connected Madd (4-5 Counts)',
-      timing: '4-5 Harakat (2-2.5 Alifs)',
-      color: '#f43f5e',
-      bg_color: 'rgba(244, 63, 94, 0.15)',
-      description: 'ایک ہی کلمہ میں حرفِ مد کے فوراً بعد ہمزہ آئے تو 4 سے 5 حرکات لمبا کرنا واجب ہے۔'
+      name_ur: 'مد واجب متصل (Madd Muttasil - 4-5 Harakat)',
+      name_en: 'Obligatory Connected Madd (4-5 Harakat / 2-2.5 Alifs)',
+      timing: '4-5 Harakat (2-2.5 Alifs / متصل)',
+      color: '#f87171',
+      bg_color: 'rgba(248, 113, 113, 0.18)',
+      description: 'ایک ہی کلمہ میں حرفِ مد کے فوراً بعد ہمزہ آئے تو 4 سے 5 حرکات (2 سے 2.5 الف) لمبا کرنا واجب ہے۔ (مثلاً: جَآءَ، سُوٓءَ)'
     },
     madd_munfasil: {
       id: 'madd_munfasil',
-      name_ur: 'مد منفصل (Madd Munfasil)',
-      name_en: 'Permissible Detached Madd (4-5 Counts)',
-      timing: '4-5 Harakat (2-2.5 Alifs)',
-      color: '#fb7185',
-      bg_color: 'rgba(251, 113, 133, 0.15)',
-      description: 'کلمہ کے آخر میں حرفِ مد اور اگلے کلمہ کے شروع میں ہمزہ آئے تو 4 سے 5 حرکات تک کھینچتے ہیں۔'
+      name_ur: 'مد جائز منفصل (Madd Munfasil - 4-5 Harakat)',
+      name_en: 'Permissible Detached Madd (4-5 Harakat / 2-2.5 Alifs)',
+      timing: '4-5 Harakat (2-2.5 Alifs / منفصل)',
+      color: '#fb923c',
+      bg_color: 'rgba(251, 146, 60, 0.18)',
+      description: 'کلمہ کے آخر میں حرفِ مد اور اگلے کلمہ کے شروع میں ہمزہ آئے تو 4 سے 5 حرکات تک کھینچتے ہیں۔ (مثلاً: إِنَّآ أَنزَلْنَاهُ)'
     },
     madd_aaridh: {
       id: 'madd_aaridh',
-      name_ur: 'مد عارض للسکون (Madd Aaridh)',
-      name_en: 'Secondary Prolongation at Waqf (2, 4, 6 Counts)',
-      timing: '2, 4, or 6 Harakat (1-3 Alifs)',
-      color: '#eab308',
-      bg_color: 'rgba(234, 179, 8, 0.15)',
-      description: 'حرفِ مد کے بعد وقف کی وجہ سے سکون عارض ہو تو 2، 4 یا 6 حرکات تک لمبا کرنا جائز ہے۔'
+      name_ur: 'مد عارض للسکون (Madd Aaridh - 2, 4, 6 Harakat)',
+      name_en: 'Secondary Stopping Madd (2, 4, 6 Harakat / 1-3 Alifs)',
+      timing: '2, 4, or 6 Harakat (1-3 Alifs / وقف کا مد)',
+      color: '#facc15',
+      bg_color: 'rgba(250, 204, 21, 0.18)',
+      description: 'حرفِ مد کے بعد وقف کی وجہ سے سکون عارض ہو تو 2، 4 یا 6 حرکات (قصر، توسط، طول) تک لمبا کرنا جائز ہے۔ (مثلاً: الرَّحِيمْ، تَعْلَمُونَ)'
     },
     madd: {
       id: 'madd',
-      name_ur: 'مد (Madd)',
-      name_en: 'Prolongation (4-6 Counts)',
-      timing: '4-6 Harakat',
-      color: '#f43f5e',
-      bg_color: 'rgba(244, 63, 94, 0.15)',
-      description: 'حروف مدہ کے بعد ہمزہ یا سکون آنے پر آواز کو 4 سے 6 حرکات تک لمبا کیا جاتا ہے۔'
+      name_ur: 'مد (Madd - 4-6 Harakat)',
+      name_en: 'Prolongation (4-6 Harakat / 2-3 Alifs)',
+      timing: '4-6 Harakat (2-3 Alifs)',
+      color: '#f87171',
+      bg_color: 'rgba(248, 113, 113, 0.18)',
+      description: 'حروف مدہ کے بعد ہمزہ یا سکون آنے پر آواز کو 4 سے 6 حرکات (2 سے 3 الف) تک لمبا کیا جاتا ہے۔'
     },
     ikhfa: {
       id: 'ikhfa',
-      name_ur: 'اخفاء (Ikhfa)',
-      name_en: 'Light Concealment (2 Counts)',
-      timing: '2 Harakat',
-      color: '#14b8a6',
-      bg_color: 'rgba(20, 184, 166, 0.15)',
-      description: 'نون ساکن یا تنوین کے بعد 15 حروف اخفاء میں سے کوئی حرف آئے تو آواز کو ناک میں چھپا کر پڑھتے ہیں۔'
+      name_ur: 'اخفاء حقیقی و شفوی (Ikhfa - 2 Harakat / 1 Alif)',
+      name_en: 'Nasal Concealment (2 Harakat / 1 Alif)',
+      timing: '2 Harakat (1 Alif / اخفاء)',
+      color: '#2dd4bf',
+      bg_color: 'rgba(45, 212, 191, 0.18)',
+      description: 'نون ساکن یا تنوین کے بعد 15 حروف اخفاء یا میم ساکن کے بعد باء آئے تو آواز کو ناک میں چھپا کر پڑھتے ہیں۔'
     },
     idgham_ghunnah: {
       id: 'idgham_ghunnah',
-      name_ur: 'ادغام مع الغنہ (Idgham Bi-Ghunnah)',
-      name_en: 'Assimilation with Ghunnah (2 Counts)',
-      timing: '2 Harakat',
-      color: '#22c55e',
-      bg_color: 'rgba(34, 197, 94, 0.15)',
-      description: 'نون ساکن یا تنوین کے بعد حروف ینمو (ی، ن، م، و) آئیں تو آواز کو ملا کر غنہ کے ساتھ پڑھتے ہیں۔'
+      name_ur: 'ادغام مع الغنہ (Idgham Bi-Ghunnah - 2 Harakat)',
+      name_en: 'Assimilation with Ghunnah (2 Harakat / 1 Alif)',
+      timing: '2 Harakat (1 Alif / غنہ کے ساتھ ملاؤ)',
+      color: '#06b6d4',
+      bg_color: 'rgba(6, 182, 212, 0.18)',
+      description: 'نون ساکن یا تنوین کے بعد حروف ینمو (ی، ن، م، و) آئیں تو آواز کو ملا کر 2 حرکات غنہ کے ساتھ ادا کرتے ہیں۔'
     },
     idgham_no_ghunnah: {
       id: 'idgham_no_ghunnah',
       name_ur: 'ادغام بلا غنہ (Idgham Bila-Ghunnah)',
-      name_en: 'Assimilation without Ghunnah',
-      timing: 'Complete Merge',
-      color: '#f97316',
-      bg_color: 'rgba(249, 115, 22, 0.15)',
-      description: 'نون ساکن یا تنوین کے بعد لام (ل) یا راء (ر) آئے تو مکمل ادغام بغیر غنہ کے کیا جاتا ہے۔'
+      name_en: 'Assimilation without Ghunnah (0 Counts)',
+      timing: '0 Counts (بغیر غنہ کے مکمل ملاؤ)',
+      color: '#94a3b8',
+      bg_color: 'rgba(148, 163, 184, 0.14)',
+      description: 'نون ساکن یا تنوین کے بعد لام (ل) یا راء (ر) آئے تو مکمل ادغام بغیر غنہ کے کیا جاتا ہے۔ (مثلاً: مِن رَّبِّهِمْ)'
     },
     idgham: {
       id: 'idgham',
-      name_ur: 'ادغام (Idgham)',
-      name_en: 'Assimilation / Merging',
-      timing: 'Merging',
-      color: '#c084fc',
-      bg_color: 'rgba(192, 132, 252, 0.15)',
+      name_ur: 'ادغام (Idgham - یرملون)',
+      name_en: 'Phonetic Assimilation / Merging',
+      timing: 'Merging (ادغام)',
+      color: '#a855f7',
+      bg_color: 'rgba(168, 85, 247, 0.18)',
       description: 'نون ساکن یا تنوین کے بعد حروف یرملون (ی، ر، م، ل، و، ن) آئیں تو ادغام کیا جاتا ہے۔'
     },
     iqlab: {
       id: 'iqlab',
-      name_ur: 'اقلاب (Iqlab)',
-      name_en: 'Conversion to Meem (2 Counts)',
-      timing: '2 Harakat (Converted to Meem)',
-      color: '#f59e0b',
-      bg_color: 'rgba(245, 158, 11, 0.15)',
-      description: 'نون ساکن یا تنوین کے بعد باء (ب) آئے تو نون کو میم مخفف سے بدل کر غنہ کے ساتھ پڑھتے ہیں۔'
+      name_ur: 'اقلاب (Iqlab - ن → م)',
+      name_en: 'Conversion to Meem (2 Harakat / 1 Alif)',
+      timing: '2 Harakat (1 Alif / نون کو میم سے بدلنا)',
+      color: '#c084fc',
+      bg_color: 'rgba(192, 132, 252, 0.20)',
+      description: 'نون ساکن یا تنوین کے بعد باء (ب) آئے تو نون کو خالص میم مخفف سے بدل کر غنہ کے ساتھ 2 حرکات پڑھتے ہیں۔ (مثلاً: مِنۢ بَعْدِ)'
     },
     tafkheem: {
       id: 'tafkheem',
-      name_ur: 'تفخیم (Tafkheem)',
-      name_en: 'Heavy / Full Mouth Letter',
-      timing: 'Heavy Resonance',
-      color: '#3b82f6',
-      bg_color: 'rgba(59, 130, 246, 0.15)',
-      description: 'حروف مستعلیہ (خص ضغط قظ) کو ہر حال میں پر (موٹا اور پر آواز سے) پڑھا جاتا ہے۔'
+      name_ur: 'تفخیم (Tafkheem - پر حروف)',
+      name_en: 'Heavy / Full Mouth Resonance',
+      timing: 'Heavy Resonance (پر / موٹی آواز)',
+      color: '#60a5fa',
+      bg_color: 'rgba(96, 165, 250, 0.18)',
+      description: 'حروف مستعلیہ (خص ضغط قظ) اور پر پڑھی جانے والی راء کو منہ بھر کر موٹی آواز سے پڑھا جاتا ہے۔'
     },
     silent: {
       id: 'silent',
       name_ur: 'حرف صامت (Silent / Hamzatul Wasl)',
-      name_en: 'Silent Letter / Unpronounced',
-      timing: '0 Counts (Skipped in Flow)',
+      name_en: 'Silent Letter / Dropped in Flow',
+      timing: '0 Counts (ساقط / خاموش حروف)',
       color: '#94a3b8',
-      bg_color: 'rgba(148, 163, 184, 0.15)',
+      bg_color: 'rgba(148, 163, 184, 0.12)',
       description: 'وہ حروف جو رسم الخط میں موجود ہوتے ہیں لیکن وصل کی حالت میں پڑھے نہیں جاتے جیسے ہمزۃ الوصل۔'
     }
   };
@@ -345,21 +345,26 @@
       return `
         <div class="tajweed-legend-bar" id="tajweed-legend-bar" aria-label="Interactive Tajweed Rules Legend">
           <div class="tajweed-legend-title">
-            <span>🎨 تجوید کلید (Tajweed Legend):</span>
-            <span class="tajweed-legend-hint">Tap any rule to filter & focus</span>
+            <div class="tj-title-group">
+              <span class="tj-title-main">🎨 احکامِ تجوید کلید (Tajweed Legend):</span>
+              <span class="tajweed-legend-hint">Tap rule to filter • 2 Harakat = 1 Alif • 6 Harakat = 3 Alifs</span>
+            </div>
+            <button type="button" class="tajweed-rulebook-btn" onclick="openTajweedGuideModal()" title="Open Complete Tajweed Rule Book (مفصل قواعدِ تجوید کتاب)">
+              📖 Rule Book (احکامِ تجوید)
+            </button>
           </div>
           <div class="tajweed-legend-pills">
-            <span class="tj-pill tj-ghunnah" data-rule="ghunnah" title="${TAJWEED_RULES.ghunnah.description}">● غنہ (Ghunnah • 2 Counts)</span>
-            <span class="tj-pill tj-qalqalah" data-rule="qalqalah" title="${TAJWEED_RULES.qalqalah.description}">● قلقلہ (Qalqalah • Echo)</span>
-            <span class="tj-pill tj-madd-lazim" data-rule="madd_lazim" title="${TAJWEED_RULES.madd_lazim.description}">● مد لازم (Lazim • 6 Counts)</span>
-            <span class="tj-pill tj-madd-muttasil" data-rule="madd_muttasil" title="${TAJWEED_RULES.madd_muttasil.description}">● مد متصل (Muttasil • 4-5)</span>
-            <span class="tj-pill tj-madd-munfasil" data-rule="madd_munfasil" title="${TAJWEED_RULES.madd_munfasil.description}">● مد منفصل (Munfasil • 4-5)</span>
-            <span class="tj-pill tj-madd-aaridh" data-rule="madd_aaridh" title="${TAJWEED_RULES.madd_aaridh.description}">● مد عارض (Aaridh • 2,4,6)</span>
-            <span class="tj-pill tj-ikhfa" data-rule="ikhfa" title="${TAJWEED_RULES.ikhfa.description}">● اخفاء (Ikhfa • 2 Counts)</span>
-            <span class="tj-pill tj-idgham-ghunnah" data-rule="idgham_ghunnah" title="${TAJWEED_RULES.idgham_ghunnah.description}">● ادغام مع الغنہ (2 Counts)</span>
-            <span class="tj-pill tj-idgham-no-ghunnah" data-rule="idgham_no_ghunnah" title="${TAJWEED_RULES.idgham_no_ghunnah.description}">● ادغام بلا غنہ</span>
+            <span class="tj-pill tj-madd-lazim" data-rule="madd_lazim" title="${TAJWEED_RULES.madd_lazim.description}">● مد لازم (Lazim • 6H / 3A)</span>
+            <span class="tj-pill tj-madd-muttasil" data-rule="madd_muttasil" title="${TAJWEED_RULES.madd_muttasil.description}">● مد متصل (Muttasil • 4-5H)</span>
+            <span class="tj-pill tj-madd-munfasil" data-rule="madd_munfasil" title="${TAJWEED_RULES.madd_munfasil.description}">● مد منفصل (Munfasil • 4-5H)</span>
+            <span class="tj-pill tj-madd-aaridh" data-rule="madd_aaridh" title="${TAJWEED_RULES.madd_aaridh.description}">● مد عارض (Aaridh • 2,4,6H)</span>
+            <span class="tj-pill tj-ghunnah" data-rule="ghunnah" title="${TAJWEED_RULES.ghunnah.description}">● غنہ مشددہ (Ghunnah • 2H / 1A)</span>
+            <span class="tj-pill tj-ikhfa" data-rule="ikhfa" title="${TAJWEED_RULES.ikhfa.description}">● اخفاء (Ikhfa • 2H / 1A)</span>
+            <span class="tj-pill tj-idgham-ghunnah" data-rule="idgham_ghunnah" title="${TAJWEED_RULES.idgham_ghunnah.description}">● ادغام مع الغنہ (2H / 1A)</span>
+            <span class="tj-pill tj-idgham-no-ghunnah" data-rule="idgham_no_ghunnah" title="${TAJWEED_RULES.idgham_no_ghunnah.description}">● ادغام بلا غنہ (Merge)</span>
             <span class="tj-pill tj-iqlab" data-rule="iqlab" title="${TAJWEED_RULES.iqlab.description}">● اقلاب (Iqlab • Meem)</span>
-            <span class="tj-pill tj-tafkheem" data-rule="tafkheem" title="${TAJWEED_RULES.tafkheem.description}">● تفخیم (Tafkheem • Heavy)</span>
+            <span class="tj-pill tj-qalqalah" data-rule="qalqalah" title="${TAJWEED_RULES.qalqalah.description}">● قلقلہ (Qalqalah • Echo)</span>
+            <span class="tj-pill tj-tafkheem" data-rule="tafkheem" title="${TAJWEED_RULES.tafkheem.description}">● تفخیم (Tafkheem • Pur)</span>
             <span class="tj-pill tj-silent" data-rule="silent" title="${TAJWEED_RULES.silent.description}">● حرف صامت (Silent)</span>
           </div>
         </div>

@@ -5213,30 +5213,30 @@ mark.search-highlight {
   display: none !important;
 }
 
-/* Individual Phonetic Rules */
-.tj-ghunnah { color: #10b981 !important; font-weight: 700; text-shadow: 0 0 10px rgba(16, 185, 129, 0.45); }
-.tj-qalqalah { color: #38bdf8 !important; font-weight: 700; text-shadow: 0 0 10px rgba(56, 189, 248, 0.45); }
+/* Individual Phonetic Rules - Cognitive Color Psychology & Indian Standard */
+.tj-ghunnah { color: #10b981 !important; font-weight: 700; text-shadow: 0 0 10px rgba(16, 185, 129, 0.50); }
+.tj-qalqalah { color: #38bdf8 !important; font-weight: 700; text-shadow: 0 0 10px rgba(56, 189, 248, 0.50); }
 
-/* Madd Hierarchy (Lazim 6 counts, Muttasil 4-5 counts, Munfasil 4-5 counts) */
-.tj-madd { color: #f43f5e !important; font-weight: 700; text-shadow: 0 0 10px rgba(244, 63, 94, 0.45); }
-.tj-madd-lazim, .tj-madd[data-rule="madd_lazim"] { color: #be123c !important; font-weight: 800; text-shadow: 0 0 12px rgba(190, 18, 60, 0.55); }
-.tj-madd-muttasil, .tj-madd[data-rule="madd_muttasil"] { color: #f43f5e !important; font-weight: 700; text-shadow: 0 0 10px rgba(244, 63, 94, 0.45); }
-.tj-madd-munfasil, .tj-madd[data-rule="madd_munfasil"] { color: #fb7185 !important; font-weight: 700; text-shadow: 0 0 10px rgba(251, 113, 133, 0.45); }
-.tj-madd-aaridh, .tj-madd[data-rule="madd_aaridh"] { color: #eab308 !important; font-weight: 700; text-shadow: 0 0 10px rgba(234, 179, 8, 0.45); }
+/* Madd Hierarchy (Lazim 6 counts / 3 Alifs, Muttasil 4-5 counts, Munfasil 4-5 counts, Aaridh 2,4,6) */
+.tj-madd { color: #f87171 !important; font-weight: 700; text-shadow: 0 0 10px rgba(248, 113, 113, 0.50); }
+.tj-madd-lazim, .tj-madd[data-rule="madd_lazim"] { color: #ef4444 !important; font-weight: 800; text-shadow: 0 0 14px rgba(239, 68, 68, 0.65); }
+.tj-madd-muttasil, .tj-madd[data-rule="madd_muttasil"] { color: #f87171 !important; font-weight: 700; text-shadow: 0 0 10px rgba(248, 113, 113, 0.50); }
+.tj-madd-munfasil, .tj-madd[data-rule="madd_munfasil"] { color: #fb923c !important; font-weight: 700; text-shadow: 0 0 10px rgba(251, 146, 60, 0.50); }
+.tj-madd-aaridh, .tj-madd[data-rule="madd_aaridh"] { color: #facc15 !important; font-weight: 700; text-shadow: 0 0 10px rgba(250, 204, 21, 0.50); }
 
-/* Ikhfa (2 Counts Concealment) */
-.tj-ikhfa { color: #14b8a6 !important; font-weight: 700; text-shadow: 0 0 8px rgba(20, 184, 166, 0.4); }
+/* Ikhfa (2 Counts / 1 Alif Concealment) */
+.tj-ikhfa { color: #2dd4bf !important; font-weight: 700; text-shadow: 0 0 8px rgba(45, 212, 191, 0.45); }
 
-/* Idgham Variants (Bi-Ghunnah 2 counts vs Bila-Ghunnah Complete) */
-.tj-idgham { color: #c084fc !important; font-weight: 700; }
-.tj-idgham-ghunnah, .tj-idgham[data-rule="idgham_ghunnah"] { color: #22c55e !important; font-weight: 700; text-shadow: 0 0 10px rgba(34, 197, 94, 0.4); }
-.tj-idgham-no-ghunnah, .tj-idgham[data-rule="idgham_no_ghunnah"] { color: #f97316 !important; font-weight: 700; text-shadow: 0 0 10px rgba(249, 115, 22, 0.4); }
+/* Idgham Variants (Bi-Ghunnah 2 counts Cyan vs Bila-Ghunnah Complete Merge Muted) */
+.tj-idgham { color: #a855f7 !important; font-weight: 700; }
+.tj-idgham-ghunnah, .tj-idgham[data-rule="idgham_ghunnah"] { color: #06b6d4 !important; font-weight: 700; text-shadow: 0 0 10px rgba(6, 182, 212, 0.50); }
+.tj-idgham-no-ghunnah, .tj-idgham[data-rule="idgham_no_ghunnah"] { color: #94a3b8 !important; font-weight: 600; text-shadow: none; opacity: 0.85; }
 
-/* Iqlab (Conversion to Meem 2 counts) */
-.tj-iqlab { color: #f59e0b !important; font-weight: 700; text-shadow: 0 0 10px rgba(245, 158, 11, 0.4); }
+/* Iqlab (Conversion to Meem 2 counts / 1 Alif) */
+.tj-iqlab { color: #c084fc !important; font-weight: 700; text-shadow: 0 0 10px rgba(192, 132, 252, 0.50); }
 
 /* Tafkheem & Silent Letters */
-.tj-tafkheem { color: #3b82f6 !important; font-weight: 700; text-shadow: 0 0 8px rgba(59, 130, 246, 0.4); }
+.tj-tafkheem { color: #60a5fa !important; font-weight: 700; text-shadow: 0 0 8px rgba(96, 165, 250, 0.45); }
 .tj-silent, span[data-rule="silent"] { color: #94a3b8 !important; opacity: 0.65; font-weight: 400; text-shadow: none; }
 
 /* Interactive Focus & Dim Filtering States */
@@ -5258,14 +5258,12 @@ mark.search-highlight {
 /* Tajweed Legend Bar */
 .tajweed-legend-bar {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 10px;
-  background: rgba(15, 23, 42, 0.85);
+  background: rgba(15, 23, 42, 0.88);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(251, 191, 36, 0.2);
+  border: 1px solid rgba(212, 175, 55, 0.28);
   border-radius: var(--radius-md);
   padding: 10px 16px;
   margin: 10px 0 16px 0;
@@ -5275,7 +5273,20 @@ mark.search-highlight {
 .tajweed-legend-title {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  flex-wrap: wrap;
   gap: 8px;
+}
+
+.tj-title-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.tj-title-main {
   font-size: 0.88rem;
   font-weight: 700;
   color: #fbbf24;
@@ -5283,9 +5294,31 @@ mark.search-highlight {
 
 .tajweed-legend-hint {
   font-size: 0.72rem;
-  font-weight: 400;
-  color: var(--text-dim);
-  opacity: 0.85;
+  font-weight: 500;
+  color: #94a3b8;
+}
+
+.tajweed-rulebook-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  border-radius: var(--radius-full);
+  color: #fef08a;
+  font-size: 0.76rem;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tajweed-rulebook-btn:hover {
+  background: rgba(212, 175, 55, 0.25);
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
+  transform: translateY(-1px);
 }
 
 .tajweed-legend-pills {
@@ -5304,12 +5337,25 @@ mark.search-highlight {
   min-height: 28px;
   border-radius: var(--radius-full);
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   cursor: pointer;
   user-select: none;
   touch-action: manipulation;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+.tj-pill.tj-madd-lazim { border-color: rgba(239, 68, 68, 0.4); color: #ef4444; }
+.tj-pill.tj-madd-muttasil { border-color: rgba(248, 113, 113, 0.4); color: #f87171; }
+.tj-pill.tj-madd-munfasil { border-color: rgba(251, 146, 60, 0.4); color: #fb923c; }
+.tj-pill.tj-madd-aaridh { border-color: rgba(250, 204, 21, 0.4); color: #facc15; }
+.tj-pill.tj-ghunnah { border-color: rgba(16, 185, 129, 0.4); color: #10b981; }
+.tj-pill.tj-ikhfa { border-color: rgba(45, 212, 191, 0.4); color: #2dd4bf; }
+.tj-pill.tj-idgham-ghunnah { border-color: rgba(6, 182, 212, 0.4); color: #06b6d4; }
+.tj-pill.tj-idgham-no-ghunnah { border-color: rgba(148, 163, 184, 0.4); color: #94a3b8; }
+.tj-pill.tj-iqlab { border-color: rgba(192, 132, 252, 0.4); color: #c084fc; }
+.tj-pill.tj-qalqalah { border-color: rgba(56, 189, 248, 0.4); color: #38bdf8; }
+.tj-pill.tj-tafkheem { border-color: rgba(96, 165, 250, 0.4); color: #60a5fa; }
+.tj-pill.tj-silent { border-color: rgba(148, 163, 184, 0.3); color: #94a3b8; }
 
 .tj-pill:hover {
   transform: translateY(-2px);
@@ -7054,4 +7100,247 @@ mark.search-highlight {
   margin: 12px 0;
   color: #fef3c7;
   font-size: 0.85rem;
+}
+
+
+/* ====================================================================
+   TAJWEED RULE BOOK MODAL & CYBER-GLASS COMPONENT SYSTEM
+   ==================================================================== */
+.tajweed-guide-card {
+  max-width: 1040px;
+  width: 95vw;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  background: rgba(11, 17, 33, 0.96) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 175, 55, 0.35) !important;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85), 0 0 30px rgba(212, 175, 55, 0.12);
+  overflow: hidden;
+  animation: modalFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tajweed-guide-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 22px;
+  background: rgba(15, 23, 42, 0.95);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+}
+
+.tajweed-guide-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tajweed-guide-icon {
+  font-size: 1.8rem;
+  filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
+}
+
+.tajweed-guide-title-text h2 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #fbbf24;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.tajweed-guide-title-text p {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  margin: 2px 0 0 0;
+}
+
+.tajweed-guide-nav-bar {
+  display: flex;
+  gap: 8px;
+  padding: 10px 22px;
+  background: rgba(10, 15, 29, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: thin;
+}
+
+.tajweed-guide-nav-pill {
+  padding: 5px 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.tajweed-guide-nav-pill:hover,
+.tajweed-guide-nav-pill.active {
+  background: rgba(212, 175, 55, 0.18);
+  border-color: rgba(212, 175, 55, 0.5);
+  color: #fef08a;
+}
+
+.tajweed-guide-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px;
+  color: #e2e8f0;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  scroll-behavior: smooth;
+}
+
+.tajweed-guide-sec {
+  margin-bottom: 28px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.tajweed-sec-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.tajweed-sec-title {
+  font-size: 1.08rem;
+  font-weight: 800;
+  color: #fef08a;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tajweed-sec-urdu-title {
+  font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
+  font-size: 1.25rem;
+  color: #67e8f9;
+  direction: rtl;
+}
+
+.tajweed-rule-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 14px;
+  margin: 14px 0;
+}
+
+.tajweed-rule-card {
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.tajweed-rule-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(212, 175, 55, 0.35);
+}
+
+.tajweed-rule-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.tajweed-rule-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.tajweed-timing-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #94a3b8;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.tajweed-example-box {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.tajweed-example-arabic {
+  font-family: 'Amiri', 'Scheherazade New', serif;
+  font-size: 1.25rem;
+  direction: rtl;
+  color: #ffffff;
+}
+
+.tajweed-example-ref {
+  font-size: 0.72rem;
+  color: #64748b;
+  font-style: italic;
+}
+
+/* Strict Anti-1-Letter-Wrap Table Architecture for Tajweed Tables */
+.tajweed-guide-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 14px 0;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  font-size: 0.84rem;
+}
+
+.tajweed-guide-table th {
+  background: rgba(30, 41, 59, 0.85);
+  color: #fbbf24;
+  font-weight: 700;
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  white-space: nowrap !important;
+}
+
+.tajweed-guide-table td {
+  padding: 9px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: #cbd5e1;
+  vertical-align: middle;
+}
+
+.tajweed-guide-table tr:last-child td {
+  border-bottom: none;
+}
+
+.tajweed-guide-table tr:hover td {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.tajweed-guide-table td.nowrap,
+.tajweed-guide-table th.nowrap {
+  white-space: nowrap !important;
+  word-break: normal !important;
+  hyphens: none !important;
 }

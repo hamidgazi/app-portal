@@ -50,10 +50,44 @@
       const modal = document.getElementById('user-guide-modal');
       if (modal) modal.style.display = 'none';
     }
+    function openTajweedGuideModal() {
+      const modal = document.getElementById('tajweed-guide-modal');
+      if (modal) modal.style.display = 'flex';
+      if (window.AudioSFX && typeof window.AudioSFX.playClick === 'function') window.AudioSFX.playClick();
+    }
+    function closeTajweedGuideModal() {
+      const modal = document.getElementById('tajweed-guide-modal');
+      if (modal) modal.style.display = 'none';
+    }
+    function jumpToTajweedSection(secId) {
+      const el = document.getElementById(secId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.querySelectorAll('.tajweed-guide-nav-pill').forEach(p => p.classList.remove('active'));
+        const btn = document.querySelector(`.tajweed-guide-nav-pill[onclick*="${secId}"]`);
+        if (btn) btn.classList.add('active');
+      }
+    }
+    function filterTajweedGuideSections(query) {
+      const q = (query || '').toLowerCase().trim();
+      const secs = document.querySelectorAll('.tajweed-guide-sec');
+      secs.forEach(sec => {
+        if (!q) {
+          sec.style.display = 'block';
+        } else {
+          const text = sec.textContent.toLowerCase();
+          sec.style.display = text.includes(q) ? 'block' : 'none';
+        }
+      });
+    }
     window.openOmnisearch = openOmnisearch;
     window.closeOmnisearch = closeOmnisearch;
     window.openUserGuideModal = openUserGuideModal;
     window.closeUserGuideModal = closeUserGuideModal;
+    window.openTajweedGuideModal = openTajweedGuideModal;
+    window.closeTajweedGuideModal = closeTajweedGuideModal;
+    window.jumpToTajweedSection = jumpToTajweedSection;
+    window.filterTajweedGuideSections = filterTajweedGuideSections;
   </script>
 </head>
 <body>
@@ -76,6 +110,12 @@
           <button id="open-user-guide-btn" class="guide-trigger-btn" onclick="openUserGuideModal()" title="Open Complete User Manual & Feature Guide">
             <span class="guide-icon">📖</span>
             <span class="guide-btn-text">User Guide</span>
+          </button>
+
+          <!-- Indian Standard Tajweed Rule Book Trigger -->
+          <button id="open-tajweed-guide-btn" class="guide-trigger-btn tajweed-guide-trigger" onclick="openTajweedGuideModal()" title="Open Indian Standard Tajweed Rule Book (مفصل احکامِ تجوید کتاب)">
+            <span class="guide-icon">🎨</span>
+            <span class="guide-btn-text">Tajweed Rules</span>
           </button>
 
           <!-- Global Omnisearch Trigger Button -->
@@ -1401,6 +1441,563 @@
     <span class="floating-return-prefix" style="font-size: 0.8rem; text-transform: uppercase; opacity: 0.85;">Back:</span>
     <span id="floating-return-label">Previous Location</span>
   </button>
+
+
+  <!-- Cyber-Glass Indian Standard Tajweed Rule Book Modal -->
+  <div id="tajweed-guide-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="tajweed-guide-modal-title" style="display: none;">
+    <div class="modal-card tajweed-guide-card">
+      <!-- Modal Header -->
+      <div class="tajweed-guide-header">
+        <div class="tajweed-guide-title-wrap">
+          <span class="tajweed-guide-icon">🎨</span>
+          <div class="tajweed-guide-title-text">
+            <h2 id="tajweed-guide-modal-title">Indian Standard Tajweed Rule Book • احکام و قواعدِ تجوید</h2>
+            <p>16-Line Madrasa Curriculum • Cognitive Color Psychology • Timing in Harakat & Alifs</p>
+          </div>
+        </div>
+        <button id="tajweed-guide-modal-close" class="modal-close-btn" onclick="closeTajweedGuideModal()" aria-label="Close Tajweed Guide" style="background: rgba(255, 255, 255, 0.08); border: none; color: #f8fafc; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 1.1rem;">✕</button>
+      </div>
+
+      <!-- Search Bar -->
+      <div style="padding: 10px 22px; background: rgba(15, 23, 42, 0.7); border-bottom: 1px solid rgba(255,255,255,0.06);">
+        <input type="text" id="tajweed-guide-search-input" placeholder="🔍 Search Tajweed rules, letters, examples (e.g., Ikhfa, Qalqalah, Lazim, قطب جد)..." style="width: 100%; padding: 8px 16px; background: rgba(0,0,0,0.45); border: 1px solid rgba(212,175,55,0.3); border-radius: 20px; color: #fff; font-size: 0.85rem; outline: none;" oninput="filterTajweedGuideSections(this.value)">
+      </div>
+
+      <!-- Quick Nav Pills -->
+      <nav class="tajweed-guide-nav-bar" aria-label="Tajweed Chapters">
+        <button class="tajweed-guide-nav-pill active" onclick="jumpToTajweedSection('tj-sec-1')">1. تعارف و علم تجوید</button>
+        <button class="tajweed-guide-nav-pill" onclick="jumpToTajweedSection('tj-sec-2')">2. رنگوں کی نفسیات (Color Psychology)</button>
+        <button class="tajweed-guide-nav-pill" onclick="jumpToTajweedSection('tj-sec-3')">3. مخارج الحروف (17 Makharij)</button>
+        <button class="tajweed-guide-nav-pill" onclick="jumpToTajweedSection('tj-sec-4')">4. صفات الحروف (Sifat)</button>
+        <button class="tajweed-guide-nav-pill" onclick="jumpToTajweedSection('tj-sec-5')">5. نون ساکن و تنوین</button>
+        <button class="tajweed-guide-nav-pill" onclick="jumpToTajweedSection('tj-sec-6')">6. احکام میم ساکن</button>
+        <button class="tajweed-guide-nav-pill" onclick="jumpToTajweedSection('tj-sec-7')">7. احکام الغنہ (Ghunnah)</button>
+        <button class="tajweed-guide-nav-pill" onclick="jumpToTajweedSection('tj-sec-8')">8. احکام المدود (Madd 6H/4H/2H)</button>
+        <button class="tajweed-guide-nav-pill" onclick="jumpToTajweedSection('tj-sec-9')">9. تفخیم و ترقیق (پر اور باریک)</button>
+        <button class="tajweed-guide-nav-pill" onclick="jumpToTajweedSection('tj-sec-10')">10. علاماتِ وقف و رموز</button>
+        <button class="tajweed-guide-nav-pill" onclick="jumpToTajweedSection('tj-sec-11')">11. عام غلطیاں اور ان کا ازالہ</button>
+      </nav>
+
+      <!-- Guide Content Body -->
+      <div class="tajweed-guide-body" id="tajweed-guide-body-content">
+        <!-- Section 1: Intro -->
+        <section id="tj-sec-1" class="tajweed-guide-sec">
+          <div class="tajweed-sec-heading">
+            <span class="tajweed-sec-title">📖 Chapter 1: Introduction to Tajweed & Shar'i Mandate</span>
+            <span class="tajweed-sec-urdu-title">باب 1: علمِ تجوید کی تعریف، غرض و غایت اور شرعی حکم</span>
+          </div>
+          <p><strong>تجوید کا لغوی معنی:</strong> کسی چیز کو عمدہ، خوبصورت اور سنوار کر بنانا (التحسين والترتيب)۔</p>
+          <p><strong>اصطلاحی تعریف:</strong> قرآن مجید کے ہر حرف کو اس کے صحیح مخرج (Origin) سے اس کی تمام لازمی اور عارضی صفات (Characteristics) کے ساتھ ادا کرنا تاکہ معنی میں تحریف واقع نہ ہو۔</p>
+          <div class="user-guide-tip-card">
+            <strong>📜 شرعی حیثیت:</strong> قرآن مجید کو تجوید کے ساتھ پڑھنا ہر مسلمان پر <em>فرضِ عین</em> ہے۔ اللہ تعالیٰ کا ارشاد ہے: <code>وَرَتِّلِ الْقُرْآنَ تَرْتِيلًا</code> (اور قرآن کو خوب ٹھہر ٹھہر کر صاف پڑھو — سورہ المزمل: 4)۔ امام ابن الجزری فرماتے ہیں: <em>"وَالأَخْذُ بِالتَّجْوِيدِ حَتْمٌ لازِمُ • مَنْ لَمْ يُجَوِّدِ الْقُرْآنَ آثِمُ"</em> (تجوید کا سیکھنا لازمی امر ہے، جو تجوید سے قرآن نہ پڑھے وہ گنہگار ہے)۔
+          </div>
+          <p><strong>لحن جلی بمقابلہ لحن خفی (Fatal vs Minor Pitfalls):</strong></p>
+          <ul>
+            <li><strong>لحنِ جلی (کھلی غلطی - حرام):</strong> ایک حرف کو دوسرے حرف سے بدل دینا (مثلاً 'ع' کی جگہ 'الف' پڑھنا، یا 'ط' کو 'ت')، یا کسی حرکت کو بدل دینا (پیش کی جگہ زبر پڑھ دینا جس سے معنی بگڑ جائے جیسے 'أَنْعَمْتَ' کی جگہ 'أَنْعَمْتُ' پڑھنا)۔ نماز میں اس سے نماز فاسد ہو جاتی ہے۔</li>
+            <li><strong>لحنِ خفی (پوشیدہ غلطی - مکروہ):</strong> غنہ، اخفاء، یا مد کی مقدار میں کمی بیشی کرنا، ترقیق و تفخیم کی باریکیوں کو چھوڑ دینا۔ اس سے تلاوت کا حسن متاثر ہوتا ہے۔</li>
+          </ul>
+        </section>
+
+        <!-- Section 2: Color Psychology -->
+        <section id="tj-sec-2" class="tajweed-guide-sec">
+          <div class="tajweed-sec-heading">
+            <span class="tajweed-sec-title">🎨 Chapter 2: The Cognitive Color Psychology System</span>
+            <span class="tajweed-sec-urdu-title">باب 2: تجوید میں رنگوں کی نفسیات اور پہچان کا نظام</span>
+          </div>
+          <p>ہماری اس ایپ میں تجوید کے رنگوں کو <strong>انسانی نفسیات (Color Psychology)</strong> اور برصغیر ہند و پاک کے 16 سطر والے تجویدی قرآن مجید کے مصدقہ نصاب کے عین مطابق ترتیب دیا گیا ہے:</p>
+          
+          <table class="tajweed-guide-table">
+            <thead>
+              <tr>
+                <th class="nowrap">رنگ (Color)</th>
+                <th class="nowrap">نفسیاتی تاثر (Psychological Cue)</th>
+                <th class="nowrap">قاعدہ (Tajweed Rule)</th>
+                <th class="nowrap">مقدار و حرکت (Timing)</th>
+                <th class="nowrap">مثال (Example)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="nowrap"><span style="color: #ef4444; font-weight: 800;">🔴 گہرا سرخ (Crimson)</span></td>
+                <td>شدت، خطرہ، مکمل روک تھام (Stop & Stretch)</td>
+                <td><strong>مد لازم (Madd Lazim)</strong></td>
+                <td class="nowrap">6 حرکات (3 الف)</td>
+                <td class="tajweed-example-arabic" style="color: #ef4444;">دَآبَّةٍ • الحَآقَّةُ</td>
+              </tr>
+              <tr>
+                <td class="nowrap"><span style="color: #f87171; font-weight: 700;">🔴 سرخ (Carmine Red)</span></td>
+                <td>واجب کھینچنا، ایک ہی کلمہ میں اتصال</td>
+                <td><strong>مد واجب متصل (Madd Muttasil)</strong></td>
+                <td class="nowrap">4 تا 5 حرکات (2-2.5 الف)</td>
+                <td class="tajweed-example-arabic" style="color: #f87171;">جَآءَ • السَّمَآءِ</td>
+              </tr>
+              <tr>
+                <td class="nowrap"><span style="color: #fb923c; font-weight: 700;">🟠 نارنجی (Coral Orange)</span></td>
+                <td>درمیانہ فاصلہ، جائز کھینچنا</td>
+                <td><strong>مد جائز منفصل (Madd Munfasil)</strong></td>
+                <td class="nowrap">4 تا 5 حرکات (2-2.5 الف)</td>
+                <td class="tajweed-example-arabic" style="color: #fb923c;">إِنَّآ أَنزَلْنَاهُ</td>
+              </tr>
+              <tr>
+                <td class="nowrap"><span style="color: #facc15; font-weight: 700;">🟡 سنہری (Amber Gold)</span></td>
+                <td>وقف کا اختتام، لچکدار کھینچاؤ</td>
+                <td><strong>مد عارض للسکون و لین (Aaridh)</strong></td>
+                <td class="nowrap">2، 4 یا 6 حرکات (1 تا 3 الف)</td>
+                <td class="tajweed-example-arabic" style="color: #facc15;">الرَّحِيمْ • تَعْلَمُونَ</td>
+              </tr>
+              <tr>
+                <td class="nowrap"><span style="color: #10b981; font-weight: 700;">🟢 زمردی سبز (Emerald)</span></td>
+                <td>زندگی، سانس، ناک کی قدرتی گونج</td>
+                <td><strong>غنہ مشددہ (نّ / مّ - Ghunnah)</strong></td>
+                <td class="nowrap">2 حرکات (1 الف)</td>
+                <td class="tajweed-example-arabic" style="color: #10b981;">إِنَّ • عَمَّ</td>
+              </tr>
+              <tr>
+                <td class="nowrap"><span style="color: #2dd4bf; font-weight: 700;">🟢 ہلکا سمندری (Mint Teal)</span></td>
+                <td>پوشیدگی، 75% آواز ناک میں چھپانا</td>
+                <td><strong>اخفاء حقیقی و شفوی (Ikhfa)</strong></td>
+                <td class="nowrap">2 حرکات (1 الف)</td>
+                <td class="tajweed-example-arabic" style="color: #2dd4bf;">مِن قَبْلِ • كُنتُمْ</td>
+              </tr>
+              <tr>
+                <td class="nowrap"><span style="color: #06b6d4; font-weight: 700;">🟢 فیروزی (Cyan Turquoise)</span></td>
+                <td>ہموار بہاؤ، غنہ کے ساتھ ملاوٹ</td>
+                <td><strong>ادغام مع الغنہ (ینمو - Bi-Ghunnah)</strong></td>
+                <td class="nowrap">2 حرکات (1 الف)</td>
+                <td class="tajweed-example-arabic" style="color: #06b6d4;">مَن يَقُولُ • مِن مَّالٍ</td>
+              </tr>
+              <tr>
+                <td class="nowrap"><span style="color: #c084fc; font-weight: 700;">🟣 جامنی (Purple / Violet)</span></td>
+                <td>آواز کی تبدیلی، نون کا میم میں پلٹنا</td>
+                <td><strong>اقلاب (Iqlab - ن $	o$ م)</strong></td>
+                <td class="nowrap">2 حرکات (1 الف)</td>
+                <td class="tajweed-example-arabic" style="color: #c084fc;">مِنۢ بَعْدِ • أَنۢبِئْهُم</td>
+              </tr>
+              <tr>
+                <td class="nowrap"><span style="color: #38bdf8; font-weight: 700;">🔵 آسمانی نیلا (Sky Blue)</span></td>
+                <td>پانی کی لہر، مخرج کا ہلنا اور اچھلنا</td>
+                <td><strong>قلقلہ (قطب جد - Qalqalah)</strong></td>
+                <td class="nowrap">جھٹکا اور گونج دار اچھال</td>
+                <td class="tajweed-example-arabic" style="color: #38bdf8;">قُلْ هُوَ اللَّهُ أَحَدْ • الفَلَقْ</td>
+              </tr>
+              <tr>
+                <td class="nowrap"><span style="color: #60a5fa; font-weight: 700;">🔷 گہرا نیلا (Royal Cobalt)</span></td>
+                <td>منہ بھرنا، بھاری پن، وقار (پر آواز)</td>
+                <td><strong>تفخیم (خص ضغط قظ & ر - Tafkheem)</strong></td>
+                <td class="nowrap">موٹی آواز (Pur)</td>
+                <td class="tajweed-example-arabic" style="color: #60a5fa;">الصِّرَاطَ • خَالِدِينَ</td>
+              </tr>
+              <tr>
+                <td class="nowrap"><span style="color: #94a3b8; font-weight: 500;">⚪ سرمئی (Muted Slate)</span></td>
+                <td>خاموشی، روانی میں حذف شدہ</td>
+                <td><strong>حروف صامت و ادغام بلا غنہ</strong></td>
+                <td class="nowrap">0 حرکات (ساقط)</td>
+                <td class="tajweed-example-arabic" style="color: #94a3b8;">مِن رَّبِّهِمْ • وَالْقَمَرِ</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Section 3: Makharij -->
+        <section id="tj-sec-3" class="tajweed-guide-sec">
+          <div class="tajweed-sec-heading">
+            <span class="tajweed-sec-title">👄 Chapter 3: The 17 Makharij (Articulation Points)</span>
+            <span class="tajweed-sec-urdu-title">باب 3: مخارج الحروف — 17 مقاماتِ ادائے حروف</span>
+          </div>
+          <p>مخرج اس مقام کو کہتے ہیں جہاں سے حرف کی آواز پیدا ہوتی ہے۔ جمہور علمائے ہند و خلیل بن احمد کے نزدیک مخارج کی کل تعداد <strong>17</strong> ہے جو 5 بڑے اعضاء میں تقسیم ہیں:</p>
+          
+          <div class="tajweed-rule-grid">
+            <div class="tajweed-rule-card">
+              <div class="tajweed-rule-card-header">
+                <span class="tajweed-rule-badge" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8;">1. الجوف (منہ کا خالی حصہ)</span>
+                <span class="tajweed-timing-badge">1 مخرج • 3 حروف</span>
+              </div>
+              <p>حروفِ مدہ (با، بو، بی) منہ اور حلق کے خالی خلا سے بغیر کسی عضو کے ٹکرائے ادا ہوتے ہیں۔</p>
+            </div>
+
+            <div class="tajweed-rule-card">
+              <div class="tajweed-rule-card-header">
+                <span class="tajweed-rule-badge" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">2. الحلق (گلا)</span>
+                <span class="tajweed-timing-badge">3 مخارج • 6 حروف</span>
+              </div>
+              <p>• <strong>اقصیٰ حلق (نیچلا گلا):</strong> ہمزہ (ء)، ہاء (ہ)<br>
+                 • <strong>وسطِ حلق (درمیانی گلا):</strong> عین (ع)، حاء (ح)<br>
+                 • <strong>ادنٰی حلق (اوپری گلا، منہ کی طرف):</strong> غین (غ)، خاء (خ)</p>
+            </div>
+
+            <div class="tajweed-rule-card">
+              <div class="tajweed-rule-card-header">
+                <span class="tajweed-rule-badge" style="background: rgba(251, 146, 60, 0.15); color: #fb923c;">3. اللسان (زبان)</span>
+                <span class="tajweed-timing-badge">10 مخارج • 18 حروف</span>
+              </div>
+              <p>زبان کی جڑ تالو سے لگے تو <strong>ق</strong> اور تھوڑا آگے لگے تو <strong>ك</strong>۔ زبان کا درمیانہ حصہ تالو سے لگے تو <strong>ج، ش، ی</strong>۔ زبان کی کروٹ داڑھوں سے لگے تو <strong>ض</strong>۔ زبان کا سرا سامنے کے دانتوں اور مسوڑھوں سے لگے تو <strong>ل، ن، ر، ط، د، ت، ص، س، ز، ظ، ذ، ث</strong>۔</p>
+            </div>
+
+            <div class="tajweed-rule-card">
+              <div class="tajweed-rule-card-header">
+                <span class="tajweed-rule-badge" style="background: rgba(192, 132, 252, 0.15); color: #c084fc;">4. الشفتان (دونوں ہونٹ)</span>
+                <span class="tajweed-timing-badge">2 مخارج • 4 حروف</span>
+              </div>
+              <p>نیچلے ہونٹ کا پیٹ اوپری دانتوں سے لگے تو <strong>ف</strong>۔ دونوں ہونٹوں کو گول کرنے سے <strong>و</strong>، باہم سختی سے ملانے سے <strong>ب</strong> اور تری کے حصے ملانے سے <strong>م</strong>۔</p>
+            </div>
+
+            <div class="tajweed-rule-card">
+              <div class="tajweed-rule-card-header">
+                <span class="tajweed-rule-badge" style="background: rgba(45, 212, 191, 0.15); color: #2dd4bf;">5. الخيشوم (ناک کا بانسہ)</span>
+                <span class="tajweed-timing-badge">1 مخرج • غنہ</span>
+              </div>
+              <p>یہاں سے غنہ کی آواز نکلتی ہے جو نون اور میم کی فطری صفت ہے۔</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 4: Sifat -->
+        <section id="tj-sec-4" class="tajweed-guide-sec">
+          <div class="tajweed-sec-heading">
+            <span class="tajweed-sec-title">⚖️ Chapter 4: Sifat al-Huruf (Characteristics of Letters)</span>
+            <span class="tajweed-sec-urdu-title">باب 4: صفاتِ حروف — لازمہ و عارضہ کی مکمل تفصیل</span>
+          </div>
+          <p>مخرج حرف کی پیدائش کی جگہ ہے جبکہ <strong>صفت</strong> اس آواز کا طریقہ کار اور معیار ہے جس سے ایک ہی مخرج والے حروف میں تمیز ہوتی ہے (جیسے ت اور ط دونوں کا مخرج ایک ہے لیکن صفت سے فرق ہوتا ہے)۔</p>
+          <ul>
+            <li><strong>صفاتِ لازمہ متضادہ (5 جوڑے):</strong>
+              <br>1. <em>ہمس</em> (ہوا کا جاری رہنا: سکت فحثہ شخص) بمقابلہ <em>جہر</em> (ہوا کا رکنا)۔
+              <br>2. <em>شدت</em> (آواز کا رکنا: اجدت طبق) اور <em>توسط</em> (عمر لن) بمقابلہ <em>رخاوت</em> (آواز کا بہنا)۔
+              <br>3. <em>استعلاء</em> (زبان کی جڑ تالو کی طرف اٹھنا یعنی پر حروف: خص ضغط قظ) بمقابلہ <em>استفال</em> (باریک حروف)۔
+              <br>4. <em>اطباق</em> (زبان کا تالو سے چمٹ جانا: ص، ض، ط، ظ) بمقابلہ <em>انفتاح</em> (کھلنا)۔
+              <br>5. <em>اذلاق</em> (روانی و تیزی: فر من لب) بمقابلہ <em>اصمات</em>۔
+            </li>
+            <li><strong>صفاتِ لازمہ غیر متضادہ:</strong>
+              <br>1. <strong>صفیر (سیٹی کی آواز):</strong> ص، س، ز۔
+              <br>2. <strong>قلقلہ (گونج و جھٹکا):</strong> ق، ط، ب، ج، د (قطب جد)۔
+              <br>3. <strong>لین (نرمی):</strong> واؤ ساکن اور یاء ساکن جن سے پہلے زبر ہو (خَوْف، بَيْت)۔
+              <br>4. <strong>انحراف:</strong> ل، ر۔
+              <br>5. <strong>تکریر (زبان کی نوک کا کانپنا):</strong> ر (تلاوت میں اس سے بچنا ضروری ہے)۔
+              <br>6. <strong>تفشی (منہ میں ہوا کا پھیلنا):</strong> ش۔
+              <br>7. <strong>استطالت (آواز کا لمبا کھنچنا):</strong> ض۔
+            </li>
+          </ul>
+        </section>
+
+        <!-- Section 5: Noon Sakinah & Tanween -->
+        <section id="tj-sec-5" class="tajweed-guide-sec">
+          <div class="tajweed-sec-heading">
+            <span class="tajweed-sec-title">🌿 Chapter 5: Ahkam Noon Sakinah & Tanween</span>
+            <span class="tajweed-sec-urdu-title">باب 5: نون ساکن اور تنوین کے چار بنیادی احکام</span>
+          </div>
+          <p>نون ساکن (نْ) اور تنوین (ً ٍ ٌ) کے بعد آنے والے حروف کے اعتبار سے <strong>4 احکام</strong> بنتے ہیں:</p>
+          
+          <div class="tajweed-rule-grid">
+            <div class="tajweed-rule-card">
+              <div class="tajweed-rule-card-header">
+                <span class="tajweed-rule-badge" style="background: rgba(148, 163, 184, 0.15); color: #cbd5e1;">1. اظہارِ حلقی (Izhar Halqi)</span>
+                <span class="tajweed-timing-badge">0 غنہ • صاف ادائیگی</span>
+              </div>
+              <p>اگر نون ساکن یا تنوین کے بعد <strong>حروفِ حلق (ء ہ ع ح غ خ)</strong> میں سے کوئی حرف آئے تو نون کو بغیر غنہ کے بالکل صاف ظاہر کر کے پڑھیں گے۔</p>
+              <div class="tajweed-example-box">
+                <span class="tajweed-example-arabic">مَنْ آمَنَ • أَنْعَمْتَ • عَلِيمٌ حَكِيمٌ</span>
+                <span class="tajweed-example-ref">صاف پڑھیں</span>
+              </div>
+            </div>
+
+            <div class="tajweed-rule-card">
+              <div class="tajweed-rule-card-header">
+                <span class="tajweed-rule-badge" style="background: rgba(6, 182, 212, 0.15); color: #06b6d4;">2. ادغام (Idgham - یرملون)</span>
+                <span class="tajweed-timing-badge">2 اقسام • ملاوٹ</span>
+              </div>
+              <p>نون ساکن یا تنوین کے بعد حروف <strong>یرملون (ی، ر، م، ل، و، ن)</strong> آئیں تو ادغام ہوتا ہے:</p>
+              <p>• <strong>ادغام مع الغنہ (ینمو):</strong> ی، ن، م، و میں 2 حرکات غنہ کے ساتھ ملائیں گے۔<br>
+                 • <strong>ادغام بلا غنہ (ل، ر):</strong> لام اور راء میں بغیر غنہ کے مکمل داخل کر کے پڑھیں گے۔</p>
+              <div class="tajweed-example-box">
+                <span class="tajweed-example-arabic">مَن يَّقُولُ (مع الغنہ) • مِن رَّبِّهِمْ (بلا غنہ)</span>
+                <span class="tajweed-example-ref">ینمو بمقابلہ لر</span>
+              </div>
+            </div>
+
+            <div class="tajweed-rule-card">
+              <div class="tajweed-rule-card-header">
+                <span class="tajweed-rule-badge" style="background: rgba(192, 132, 252, 0.15); color: #c084fc;">3. اقلاب (Iqlab - ن $	o$ م)</span>
+                <span class="tajweed-timing-badge">2 حرکات (1 الف) غنہ</span>
+              </div>
+              <p>اگر نون ساکن یا تنوین کے بعد <strong>باء (ب)</strong> آئے تو نون کو خالص میم مخفف سے بدل کر دونوں ہونٹوں کو نرمی سے ملا کر 2 حرکات غنہ کے ساتھ ادا کیا جاتا ہے۔</p>
+              <div class="tajweed-example-box">
+                <span class="tajweed-example-arabic">مِنۢ بَعْدِ • أَنۢبِئْهُم • سَمِيعٌۢ بَصِيرٌ</span>
+                <span class="tajweed-example-ref">چھوٹی میم (ۢ)</span>
+              </div>
+            </div>
+
+            <div class="tajweed-rule-card">
+              <div class="tajweed-rule-card-header">
+                <span class="tajweed-rule-badge" style="background: rgba(45, 212, 191, 0.15); color: #2dd4bf;">4. اخفاءِ حقیقی (Ikhfa Haqiqi)</span>
+                <span class="tajweed-timing-badge">2 حرکات (1 الف) • 75% ناک</span>
+              </div>
+              <p>اگر نون ساکن یا تنوین کے بعد <strong>15 حروفِ اخفاء (ت ث ج د ذ ز س ش ص ض ط ظ ف ق ك)</strong> آئیں تو زبان کو مخرج سے ہٹا کر آواز کا 75% حصہ ناک کے بانسے میں چھپا کر 2 حرکات تک غنہ کیا جاتا ہے۔</p>
+              <div class="tajweed-example-box">
+                <span class="tajweed-example-arabic">مِن قَبْلِ • كُنتُمْ • رِجَالًا كَثِيرًا</span>
+                <span class="tajweed-example-ref">15 حروف</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 6: Meem Sakinah -->
+        <section id="tj-sec-6" class="tajweed-guide-sec">
+          <div class="tajweed-sec-heading">
+            <span class="tajweed-sec-title">👄 Chapter 6: Ahkam Meem Sakinah (Rules of Silent Meem)</span>
+            <span class="tajweed-sec-urdu-title">باب 6: احکامِ میم ساکن — اخفاء شفوی، ادغام شفوی اور اظہار شفوی</span>
+          </div>
+          <p>میم ساکن (مْ) کے بعد حروف کے لحاظ سے <strong>3 احکام</strong> ہوتے ہیں:</p>
+          <ul>
+            <li><strong>1. اخفاءِ شفوی (Ikhfa Shafawi):</strong> میم ساکن کے بعد <strong>باء (ب)</strong> آئے تو میم کو ہونٹوں میں چھپا کر 2 حرکات غنہ کے ساتھ پڑھیں گے (مثلاً: <code>تَرْمِيهِم بِحِجَارَةٍ</code>)۔</li>
+            <li><strong>2. ادغامِ شفوی / مثلین (Idgham Shafawi):</strong> میم ساکن کے بعد دوسری <strong>میم (م)</strong> آئے تو دونوں میموں کو باہم ملا کر تشدید کے ساتھ 2 حرکات غنہ کریں گے (مثلاً: <code>لَهُم مَّا يَشَآءُونَ</code>)۔</li>
+            <li><strong>3. اظہارِ شفوی (Izhar Shafawi):</strong> باء اور میم کے علاوہ باقی تمام 26 حروف کے سامنے میم ساکن کو بغیر کسی غنہ کے بالکل صاف اور واضح ادا کیا جائے گا، خاص طور پر <em>واؤ</em> اور <em>فاء</em> سے پہلے تاکہ غلطی سے اخفاء نہ ہو جائے (مثلاً: <code>عَلَيْهِمْ وَلَا</code>، <code>هُمْ فِيهَا</code>)۔</li>
+          </ul>
+        </section>
+
+        <!-- Section 7: Ghunnah Levels -->
+        <section id="tj-sec-7" class="tajweed-guide-sec">
+          <div class="tajweed-sec-heading">
+            <span class="tajweed-sec-title">👃 Chapter 7: Ahkam al-Ghunnah & 5 Phonetic Levels</span>
+            <span class="tajweed-sec-urdu-title">باب 7: احکامِ غنہ اور اس کے 5 صوتی مراتب</span>
+          </div>
+          <p><strong>غنہ کی تعریف:</strong> وہ ترنم دار گنگناہٹ جو ناک کے بانسے (خیشوم) سے نکلتی ہے، جس میں زبان کا کوئی دخل نہیں ہوتا۔ اس کی مقدار <strong>2 حرکات (ایک الف یعنی 1 سیکنڈ)</strong> ہوتی ہے۔</p>
+          <p><strong>غنہ کے 5 مراتب (قوی ترین سے کمزور ترین تک):</strong></p>
+          <ol>
+            <li><strong>اکمل ترین (Most Complete):</strong> نون مشدد اور میم مشدد (<code>إِنَّ، عَمَّ</code>) اور ادغام ناقص مع الغنہ (<code>مَن يَّقُولُ</code>)۔</li>
+            <li><strong>کامل (Complete):</strong> اخفاء حقیقی اور اخفاء شفوی (<code>مِن قَبْلِ، كُنتُمْ</code>) اور اقلاب (<code>مِنۢ بَعْدِ</code>)۔</li>
+            <li><strong>ناقص (Incomplete):</strong> نون ساکن اور میم ساکن جب ان میں اظہار ہو (<code>أَنْعَمْتَ</code>)۔</li>
+            <li><strong>انقص ترین (Least):</strong> نون اور میم متحرک یعنی زبر، زیر، پیش والے (<code>نَعْبُدُ، مَلِكِ</code>)۔</li>
+          </ol>
+        </section>
+
+        <!-- Section 8: Madd Varieties -->
+        <section id="tj-sec-8" class="tajweed-guide-sec">
+          <div class="tajweed-sec-heading">
+            <span class="tajweed-sec-title">📏 Chapter 8: Ahkam al-Madd (Prolongation Categories & Timings)</span>
+            <span class="tajweed-sec-urdu-title">باب 8: احکامِ مد — اقسام، حرکات اور الف کی پیمائش</span>
+          </div>
+          <p>مد کا لغوی معنی دراز کرنا اور لمبا کرنا ہے۔ حروفِ مدہ 3 ہیں: الف ساکن ماقبل مفتوح، واؤ ساکن ماقبل مضموم، اور یاء ساکن ماقبل مکسور۔ مد کی بنیادی طور پر دو اقسام ہیں: <strong>مد اصلی (طبیعی)</strong> اور <strong>مد فرعی</strong>۔</p>
+          
+          <table class="tajweed-guide-table">
+            <thead>
+              <tr>
+                <th class="nowrap">مد کی قسم (Category)</th>
+                <th class="nowrap">سبب (Trigger Cause)</th>
+                <th class="nowrap">حرکات و الف (Timing)</th>
+                <th class="nowrap">حکم (Shar'i Status)</th>
+                <th class="nowrap">قرآنی مثال (Quranic Benchmark)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="nowrap"><strong>مد اصلی / طبیعی (Asli)</strong></td>
+                <td>کوئی ہمزہ یا سکون نہیں</td>
+                <td class="nowrap">2 حرکات (1 الف)</td>
+                <td>واجب (قصر)</td>
+                <td class="tajweed-example-arabic">نُوحِيهَآ • قَالَ • قِيلَ</td>
+              </tr>
+              <tr>
+                <td class="nowrap"><strong style="color: #f87171;">مد واجب متصل (Muttasil)</strong></td>
+                <td>ایک ہی کلمہ میں ہمزہ آئے</td>
+                <td class="nowrap">4 تا 5 حرکات (2-2.5 الف)</td>
+                <td>واجب</td>
+                <td class="tajweed-example-arabic" style="color: #f87171;">جَآءَ • سُوٓءَ • السَّمَآءِ</td>
+              </tr>
+              <tr>
+                <td class="nowrap"><strong style="color: #fb923c;">مد جائز منفصل (Munfasil)</strong></td>
+                <td>دوسرے کلمہ کے شروع میں ہمزہ آئے</td>
+                <td class="nowrap">4 تا 5 حرکات (2-2.5 الف)</td>
+                <td>جائز</td>
+                <td class="tajweed-example-arabic" style="color: #fb923c;">إِنَّآ أَنزَلْنَاهُ • قُوٓا أَنفُسَكُمْ</td>
+              </tr>
+              <tr>
+                <td class="nowrap"><strong style="color: #ef4444;">مد لازم کلمی مثقل (Lazim)</strong></td>
+                <td>کلمہ میں حرف مد کے بعد تشدید (ّ)</td>
+                <td class="nowrap">6 حرکات (3 الف)</td>
+                <td>لازم (طول)</td>
+                <td class="tajweed-example-arabic" style="color: #ef4444;">دَآبَّةٍ • الصَّآخَّةُ • الحَآقَّةُ</td>
+              </tr>
+              <tr>
+                <td class="nowrap"><strong style="color: #ef4444;">مد لازم کلمی مخفف</strong></td>
+                <td>کلمہ میں حرف مد کے بعد سکونِ اصلی</td>
+                <td class="nowrap">6 حرکات (3 الف)</td>
+                <td>لازم (طول)</td>
+                <td class="tajweed-example-arabic" style="color: #ef4444;">آلْآنَ (سورہ یونس: 51، 91)</td>
+              </tr>
+              <tr>
+                <td class="nowrap"><strong style="color: #ef4444;">مد لازم حرفی مثقل و مخفف</strong></td>
+                <td>حروفِ مقطعات میں (نقص عسلکم)</td>
+                <td class="nowrap">6 حرکات (3 الف)</td>
+                <td>لازم (طول)</td>
+                <td class="tajweed-example-arabic" style="color: #ef4444;">الٓمّٓ • الٓمّٓصٓ • قٓ • نٓ</td>
+              </tr>
+              <tr>
+                <td class="nowrap"><strong style="color: #facc15;">مد عارض للسکون (Aaridh)</strong></td>
+                <td>وقف کی وجہ سے عارضی سکون</td>
+                <td class="nowrap">2، 4 یا 6 حرکات (1-3 الف)</td>
+                <td>جائز (قصر، توسط، طول)</td>
+                <td class="tajweed-example-arabic" style="color: #facc15;">الْعَالَمِينَ • الرَّحِيمِ • الدِّينِ</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Section 9: Tafkheem & Tarqeeq -->
+        <section id="tj-sec-9" class="tajweed-guide-sec">
+          <div class="tajweed-sec-heading">
+            <span class="tajweed-sec-title">🔊 Chapter 9: Tafkheem & Tarqeeq (Heavy vs Light Letters)</span>
+            <span class="tajweed-sec-urdu-title">باب 9: تفخیم و ترقیق — راء (ر) اور لامِ جلالہ (لله) کے احکام</span>
+          </div>
+          <p><strong>1. حروفِ مستعلیہ (خص ضغط قظ):</strong> یہ 7 حروف ہر حال میں پر (موٹے) پڑھے جاتے ہیں، خواہ ان پر زبر، پیش، زیر یا جزم ہو۔</p>
+          <p><strong>2. لامِ لفظِ جلالہ (اللہ):</strong></p>
+          <ul>
+            <li>اگر لفظ 'اللہ' یا 'اللہم' سے پہلے والے حرف پر <strong>زبر یا پیش</strong> ہو تو لام کو <strong>پر (موٹا)</strong> پڑھا جائے گا (مثلاً: <code>قَالَ اللَّهُ</code>، <code>نَصْرُ اللَّهِ</code>)۔</li>
+            <li>اگر لفظ 'اللہ' سے پہلے <strong>زیر</strong> ہو تو لام کو <strong>باریک</strong> پڑھا جائے گا (مثلاً: <code>بِسْمِ اللَّهِ</code>، <code>قُلِ اللَّهُمَّ</code>)۔</li>
+          </ul>
+          <p><strong>3. احکامِ راء (ر):</strong></p>
+          <ul>
+            <li><strong>پر (Tafkheem):</strong> جب راء پر زبر یا پیش ہو (<code>رَبَّنَا</code>، <code>رُزِقْنَا</code>)، یا راء ساکن سے پہلے زبر یا پیش ہو (<code>وَأَرْسَلَ</code>، <code>قُرْآن</code>)۔</li>
+            <li><strong>باریک (Tarqeeq):</strong> جب راء پر زیر ہو (<code>رِجَالٌ</code>)، یا راء ساکن سے پہلے اصلی زیر ہو اور بعد میں حرفِ مستعلیہ نہ ہو (<code>فِرْعَوْنَ</code>، <code>مِرْيَةٍ</code>)۔</li>
+          </ul>
+        </section>
+
+        <!-- Section 10: Waqf & Indo-Pak Signs -->
+        <section id="tj-sec-10" class="tajweed-guide-sec">
+          <div class="tajweed-sec-heading">
+            <span class="tajweed-sec-title">🛑 Chapter 10: Signs of Waqf & Indo-Pak Mushaf Punctuation</span>
+            <span class="tajweed-sec-urdu-title">باب 10: علاماتِ وقف، رموزِ اوقاف اور سکتہ کے احکام</span>
+          </div>
+          <p>برصغیر پاک و ہند کے 16 سطر اور 15 سطر والے مصاحف میں درج ذیل رموزِ اوقاف رائج ہیں جن کی پیروی تلاوت کے دوران لازمی ہے:</p>
+          
+          <table class="tajweed-guide-table">
+            <thead>
+              <tr>
+                <th class="nowrap">علامت (Sign)</th>
+                <th class="nowrap">اصطلاحی نام</th>
+                <th class="nowrap">حکم و ہدایت (Instruction)</th>
+                <th class="nowrap">تلاوتی عمل (Action)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="nowrap"><strong style="color: #ef4444; font-size: 1.2rem;">مـ</strong></td>
+                <td>وقفِ لازم</td>
+                <td>یہاں وقف کرنا نہایت ضروری ہے ورنہ معنی کے فاسد ہونے کا شدید اندیشہ ہوتا ہے۔</td>
+                <td>لازماً سانس توڑیں</td>
+              </tr>
+              <tr>
+                <td class="nowrap"><strong style="color: #f59e0b; font-size: 1.2rem;">ط</strong></td>
+                <td>وقفِ مطلق</td>
+                <td>کلام پورا ہو چکا ہے، یہاں رکنا افضل اور پسندیدہ ہے۔</td>
+                <td>رکنا بہتر ہے</td>
+              </tr>
+              <tr>
+                <td class="nowrap"><strong style="color: #10b981; font-size: 1.2rem;">ج</strong></td>
+                <td>وقفِ جائز</td>
+                <td>وقف کرنا اور ملا کر پڑھنا دونوں جائز ہیں، مگر وقف اولیٰ ہے۔</td>
+                <td>وقف و وصل دونوں درست</td>
+              </tr>
+              <tr>
+                <td class="nowrap"><strong style="color: #38bdf8; font-size: 1.2rem;">ز</strong></td>
+                <td>وقفِ مجوّز</td>
+                <td>وقف کی اجازت ہے لیکن نہ ٹھہرنا اور ملا کر پڑھنا زیادہ بہتر ہے۔</td>
+                <td>ملا کر پڑھنا افضل</td>
+              </tr>
+              <tr>
+                <td class="nowrap"><strong style="color: #a855f7; font-size: 1.2rem;">ص</strong></td>
+                <td>وقفِ مرخص</td>
+                <td>طویل آیت میں سانس ٹوٹنے کی مجبوری کی بنا پر ٹھہرنے کی اجازت ہے۔</td>
+                <td>سانس کی تنگی پر رخصت</td>
+              </tr>
+              <tr>
+                <td class="nowrap"><strong style="color: #ef4444; font-size: 1.2rem;">لا</strong></td>
+                <td>لا تقف (نہ رکو)</td>
+                <td>درمیانِ آیت میں نہ رکیں؛ اگر سانس ٹوٹ جائے تو ماقبل سے اعادہ کریں۔</td>
+                <td>قطعاً نہ ٹھہریں</td>
+              </tr>
+              <tr>
+                <td class="nowrap"><strong style="color: #facc15; font-size: 1.2rem;">قف</strong></td>
+                <td>الامر بالوقف</td>
+                <td>وقف کرنے کا امر دیا گیا ہے تاکہ سامع بات کو سمجھ سکے۔</td>
+                <td>ٹھہریں</td>
+              </tr>
+              <tr>
+                <td class="nowrap"><strong style="color: #38bdf8; font-size: 1.2rem;">سکتہ</strong></td>
+                <td>سکتہ لطیفہ</td>
+                <td>آواز کو روک لیں لیکن سانس نہ توڑیں، تقریباً ایک الف کے برابر خاموش رہیں۔</td>
+                <td>بے سانس ٹھہراؤ</td>
+              </tr>
+              <tr>
+                <td class="nowrap"><strong style="color: #fb923c; font-size: 1.2rem;">ۛ ۛ</strong></td>
+                <td>معانقہ / مراقبہ</td>
+                <td>تین تین نقطے دو جگہ آتے ہیں؛ کسی ایک پر ٹھہریں، دونوں پر اکٹھے نہ ٹھہریں۔</td>
+                <td>ایک جگہ وقف، ایک پر وصل</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Section 11: Common South Asian Mistakes -->
+        <section id="tj-sec-11" class="tajweed-guide-sec">
+          <div class="tajweed-sec-heading">
+            <span class="tajweed-sec-title">⚠️ Chapter 11: Common Pronunciation Pitfalls in South Asia</span>
+            <span class="tajweed-sec-urdu-title">باب 11: برصغیر پاک و ہند کے قارئین کی 10 عام غلطیاں اور ان کا حل</span>
+          </div>
+          <div class="user-guide-warn-card">
+            <strong>⚠️ تنبیہ:</strong> اردو، ہندی اور علاقائی زبانوں کے اثر کی وجہ سے بہت سے حفاظ اور قراء نادانستہ طور پر قریبی مخرج والے حروف کو باہم خلط ملط کر دیتے ہیں، جس سے معنی بدل جاتا ہے اور لحنِ جلی واقع ہوتا ہے۔
+          </div>
+          
+          <table class="tajweed-guide-table">
+            <thead>
+              <tr>
+                <th class="nowrap">ملتے جلتے حروف (Confused Letters)</th>
+                <th class="nowrap">عام غلطی (Common Error)</th>
+                <th class="nowrap">صحیح قرآنی ادائیگی (Correct Pronunciation)</th>
+                <th class="nowrap">خطرناک فرق کی مثال</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="nowrap"><strong>ح بمقابلہ ہ</strong></td>
+                <td>ح کو ہندی یا اردو کی 'ہ' پڑھ دینا</td>
+                <td><strong>ح</strong> حلق کے بالکل بیچ سے رگڑ کھا کر نکلتی ہے جبکہ <strong>ہ</strong> سینے کی طرف سے نکلتی ہے۔</td>
+                <td class="tajweed-example-arabic">الْحَمْدُ (سب تعریفیں) بمقابلہ الْهَمْدُ (راکھ ہونا)</td>
+              </tr>
+              <tr>
+                <td class="nowrap"><strong>ع بمقابلہ ء</strong></td>
+                <td>عین کی آواز کو الف یا ہمزہ بنا دینا</td>
+                <td><strong>ع</strong> گلے کے درمیان کو دبا کر واضح گونج سے ادا ہوتی ہے، جبکہ ہمزہ جھٹکے سے۔</td>
+                <td class="tajweed-example-arabic">عَلِيمٌ (جاننے والا) بمقابلہ أَلِيمٌ (دردناک)</td>
+              </tr>
+              <tr>
+                <td class="nowrap"><strong>ز، ذ، ظ، ض</strong></td>
+                <td>چاروں حروف کو صرف اردو کی 'ز' پڑھ دینا</td>
+                <td>• <strong>ز:</strong> سیٹی دار دانت ملا کر۔<br>• <strong>ذ:</strong> زبان کی نوک سامنے کے دانتوں کے اندر۔<br>• <strong>ظ:</strong> زبان کی نوک دانتوں پر لیکن موٹی پر آواز۔<br>• <strong>ض:</strong> زبان کی کروٹ اوپری داڑھوں سے۔</td>
+                <td class="tajweed-example-arabic">الضَّالِّينَ (گمراہ) بمقابلہ الظَّالِّينَ (سایہ پانے والے)</td>
+              </tr>
+              <tr>
+                <td class="nowrap"><strong>ت بمقابلہ ط</strong></td>
+                <td>ط کو باریک 'ت' کی طرح پڑھنا</td>
+                <td><strong>ط</strong> حروفِ مستعلیہ و اطباق میں سے ہے، منہ کو پورا بھر کر موٹا ادا کریں۔</td>
+                <td class="tajweed-example-arabic">تَابَ (توبہ کی) بمقابلہ طَابَ (پاکیزہ ہوا)</td>
+              </tr>
+              <tr>
+                <td class="nowrap"><strong>س بمقابلہ ص اور ث</strong></td>
+                <td>تینوں کو باریک 'س' بنا دینا</td>
+                <td><strong>ص</strong> کو پر اور سیٹی کے ساتھ، <strong>س</strong> کو باریک سیٹی کے ساتھ، اور <strong>ث</strong> کو بغیر سیٹی نرمی سے۔</td>
+                <td class="tajweed-example-arabic">عَسَى (قریب ہے) بمقابلہ عَصَى (نافرمانی کی)</td>
+              </tr>
+              <tr>
+                <td class="nowrap"><strong>ق بمقابلہ ك</strong></td>
+                <td>ق کو ہندی کا 'ک' یا حلق سے غائب کر دینا</td>
+                <td><strong>ق</strong> کو زبان کی جڑ کو کوے کے قریب نرم تالو سے ٹکرا کر قلقلہ کے ساتھ موٹا ادا کریں۔</td>
+                <td class="tajweed-example-arabic">قَلْبٌ (دل) بمقابلہ كَلْبٌ (کتا)</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+    </div>
+  </div>
 
   <!-- App Footer -->
   <footer class="app-footer">
