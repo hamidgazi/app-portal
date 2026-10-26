@@ -1302,46 +1302,41 @@
       position: relative;
     }
 
-    .btn-date-custom {
-      width: 100%;
-      min-height: var(--min-hitbox);
-      border-radius: 12px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      color: #ffffff;
-      font-size: 0.92rem;
-      font-weight: 700;
+    .custom-date-row {
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 6px;
-      cursor: pointer;
-      touch-action: manipulation;
-      transition: transform 0.12s var(--spring), border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
-      position: relative;
-      overflow: hidden;
+      gap: 10px;
+      margin-top: 8px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 12px;
+      padding: 8px 12px;
     }
 
-    .btn-date-custom:active {
-      transform: scale(0.96);
-    }
-
-    .btn-date-custom.selected {
-      border-color: #38bdf8;
-      background: rgba(56, 189, 248, 0.2);
+    .custom-date-label {
+      font-size: 0.85rem;
+      font-weight: 700;
       color: #38bdf8;
-      box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
+      white-space: nowrap;
     }
 
-    .hidden-date-input {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
+    .custom-date-input {
+      flex: 1;
+      min-height: 48px;
+      background: #0b1120;
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 0 12px;
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 700;
+      outline: none;
       cursor: pointer;
-      z-index: 2;
+      color-scheme: dark;
+    }
+
+    .custom-date-input:focus {
+      border-color: #38bdf8;
     }
 
     /* Modal Styling */
@@ -1607,12 +1602,17 @@
         <button type="button" id="btn-date-yesterday" class="date-chip" data-date="yesterday">
           <span>⏮️</span> Yesterday
         </button>
-        <div class="date-custom-wrapper">
-          <label for="input-custom-date" id="btn-custom-date-label" class="btn-date-custom" title="Choose specific date">
-            <span>📅</span> <span id="custom-date-btn-text">Custom</span>
-            <input type="date" id="input-custom-date" class="hidden-date-input">
-          </label>
-        </div>
+        <button type="button" id="btn-date-custom" class="date-chip" data-date="custom" title="Choose specific date">
+          <span>📅</span> <span id="custom-date-btn-text">Custom</span>
+        </button>
+      </div>
+
+      <!-- Custom Date Inline Row (revealed on Custom selection) -->
+      <div id="row-custom-date" class="custom-date-row" style="display: none;">
+        <label for="input-custom-date" class="custom-date-label">
+          <span>📅 Select Date:</span>
+        </label>
+        <input type="date" id="input-custom-date" class="custom-date-input">
       </div>
     </section>
 
@@ -2250,8 +2250,9 @@
     function setupDateSelection() {
       const btnToday = document.getElementById("btn-date-today");
       const btnYesterday = document.getElementById("btn-date-yesterday");
+      const btnCustom = document.getElementById("btn-date-custom");
+      const rowCustom = document.getElementById("row-custom-date");
       const inputCustom = document.getElementById("input-custom-date");
-      const btnCustomLabel = document.getElementById("btn-custom-date-label");
       const labelDate = document.getElementById("label-selected-date");
       const customText = document.getElementById("custom-date-btn-text");
 
@@ -2261,15 +2262,21 @@
       if (labelDate) {
         labelDate.textContent = `Today (${formatDateDisplay(today)})`;
       }
+      if (inputCustom) {
+        const yyyy = today.getFullYear();
+        const mm = ("0" + (today.getMonth() + 1)).slice(-2);
+        const dd = ("0" + today.getDate()).slice(-2);
+        inputCustom.value = `${yyyy}-${mm}-${dd}`;
+      }
 
       function updateActiveDateChip(active) {
         if (btnToday) btnToday.classList.remove("selected");
         if (btnYesterday) btnYesterday.classList.remove("selected");
-        if (btnCustomLabel) btnCustomLabel.classList.remove("selected");
+        if (btnCustom) btnCustom.classList.remove("selected");
 
         if (active === "today" && btnToday) btnToday.classList.add("selected");
         else if (active === "yesterday" && btnYesterday) btnYesterday.classList.add("selected");
-        else if (active === "custom" && btnCustomLabel) btnCustomLabel.classList.add("selected");
+        else if (active === "custom" && btnCustom) btnCustom.classList.add("selected");
       }
 
       if (btnToday) {
@@ -2279,6 +2286,7 @@
           selectedDate = formatDateObj(now);
           if (labelDate) labelDate.textContent = `Today (${formatDateDisplay(now)})`;
           if (customText) customText.textContent = "Custom";
+          if (rowCustom) rowCustom.style.display = "none";
           updateActiveDateChip("today");
         });
       }
@@ -2291,7 +2299,36 @@
           selectedDate = formatDateObj(y);
           if (labelDate) labelDate.textContent = `Yesterday (${formatDateDisplay(y)})`;
           if (customText) customText.textContent = "Custom";
+          if (rowCustom) rowCustom.style.display = "none";
           updateActiveDateChip("yesterday");
+        });
+      }
+
+      if (btnCustom) {
+        btnCustom.addEventListener("click", () => {
+          playSound("tap");
+          updateActiveDateChip("custom");
+          if (rowCustom) {
+            rowCustom.style.display = "flex";
+          }
+          if (inputCustom) {
+            if (!inputCustom.value) {
+              const now = new Date();
+              const yyyy = now.getFullYear();
+              const mm = ("0" + (now.getMonth() + 1)).slice(-2);
+              const dd = ("0" + now.getDate()).slice(-2);
+              inputCustom.value = `${yyyy}-${mm}-${dd}`;
+            }
+            if (typeof inputCustom.showPicker === "function") {
+              try {
+                inputCustom.showPicker();
+              } catch (err) {
+                console.warn("showPicker error:", err);
+              }
+            } else {
+              inputCustom.focus();
+            }
+          }
         });
       }
 
@@ -2307,6 +2344,14 @@
             if (labelDate) labelDate.textContent = `${disp} (${selectedDate})`;
             if (customText) customText.textContent = disp;
             updateActiveDateChip("custom");
+          }
+        });
+
+        inputCustom.addEventListener("click", () => {
+          if (typeof inputCustom.showPicker === "function") {
+            try {
+              inputCustom.showPicker();
+            } catch (e) {}
           }
         });
       }
