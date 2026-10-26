@@ -918,26 +918,85 @@
       transform: translateY(0);
     }
 
-    /* Mobile Breakpoints */
+    /* Desktop & Mobile Responsive Architecture */
+    @media (min-width: 901px) {
+      .mobile-floating-back {
+        display: none !important;
+      }
+    }
+
     @media (max-width: 900px) {
-      .topbar {
-        padding: 0 16px;
-      }
-      .brand-badge {
-        display: none;
-      }
-      .topbar-center {
-        max-width: 50vw;
-      }
-      .dashboard-view {
-        padding: 16px 14px 80px;
-        gap: 24px;
-      }
       .cluster-grid {
         grid-template-columns: 1fr;
       }
       .favorites-grid {
         grid-template-columns: 1fr;
+      }
+      .dashboard-view {
+        padding: 16px 14px 80px;
+        gap: 20px;
+      }
+      /* Pure Full-Stage on mobile: hide duplicate 48px topbar header and let app utilize full 100dvh */
+      .active-topbar {
+        display: none !important;
+      }
+      .stage-canvas {
+        height: 100vh !important;
+        height: 100dvh !important;
+      }
+      .mobile-floating-back {
+        top: max(14px, env(safe-area-inset-top));
+        left: max(14px, env(safe-area-inset-left));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .topbar {
+        height: auto;
+        min-height: 94px;
+        flex-wrap: wrap;
+        padding: max(8px, env(safe-area-inset-top)) 14px 8px;
+        gap: 8px 12px;
+      }
+      .topbar-left {
+        order: 1;
+      }
+      .brand-badge {
+        display: none;
+      }
+      .topbar-right {
+        order: 2;
+        gap: 6px;
+      }
+      /* Hide QR modal trigger on phone (phone cannot scan own screen) */
+      #btn-top-qr {
+        display: none !important;
+      }
+      /* Compact search button on mobile */
+      #btn-open-spotlight {
+        padding: 6px 10px;
+      }
+      #btn-open-spotlight kbd {
+        display: none;
+      }
+      .search-btn-text {
+        display: none;
+      }
+      /* Category Filter Pills span entire width below brand & actions */
+      .topbar-center {
+        order: 3;
+        width: 100%;
+        max-width: 100%;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        touch-action: pan-x;
+        -webkit-overflow-scrolling: touch;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .brand-full {
+        display: none;
       }
     }
   </style>
@@ -952,7 +1011,7 @@
         <a class="brand" id="brand-home" href="#" title="Antigravity Master Index">
           <span class="brand-logo" aria-hidden="true">🚀</span>
           <div>
-            <span class="brand-title">Antigravity Master Index</span>
+            <span class="brand-title"><span class="brand-full">Antigravity </span>Master Index</span>
           </div>
           <span class="brand-badge">2.0</span>
         </a>
@@ -966,7 +1025,7 @@
       <!-- Right: Search, Share, Audio -->
       <div class="topbar-right">
         <button class="action-btn btn-primary" id="btn-open-spotlight" title="Universal AI Search (Ctrl+K)">
-          <span>🔍</span> Search <kbd style="font-size:10px; background:rgba(255,255,255,0.1); padding:2px 5px; border-radius:4px;">Ctrl+K</kbd>
+          <span>🔍</span> <span class="search-btn-text">Search</span> <kbd style="font-size:10px; background:rgba(255,255,255,0.1); padding:2px 5px; border-radius:4px;">Ctrl+K</kbd>
         </button>
         <button class="action-btn" id="btn-top-qr" title="Connect Phone via Wi-Fi">📱 QR</button>
         <button class="btn-icon" id="btn-audio-toggle" title="Toggle Audio Feedback" aria-label="Toggle Audio">🔊</button>
@@ -1517,23 +1576,37 @@
       const rawHref = app.portalHref || app.relPath || "";
       const cleanHref = rawHref.replace(/^\.\.\/\.\.\//, "").replace(/^\.\//, "");
       const resolvedUrl = (window.location.protocol === "file:") 
-        ? (window.location.origin + window.location.pathname.replace("Common-Resources/App-Portal/index.html", "") + cleanHref)
+        ? new URL(app.portalHref || ('./' + cleanHref), window.location.href).href
         : (new URL(app.portalHref || cleanHref, window.location.href).href);
 
+      // Best share URL: for local file: testing, cloud URL is shared to external devices/WhatsApp
+      const cloudShareUrl = `https://hamidgazi.github.io/app-portal/${cleanHref}`;
+      const shareUrl = (window.location.protocol === "file:") ? cloudShareUrl : resolvedUrl;
+
       if (titleEl) titleEl.textContent = `🔗 Share: ${app.title}`;
-      if (qrBox) qrBox.innerHTML = generateQrSvg(resolvedUrl);
+      if (qrBox) {
+        const qrApi = `https://api.qrserver.com/v1/create-qr-code/?size=175x175&margin=2&data=${encodeURIComponent(shareUrl)}`;
+        qrBox.innerHTML = `
+          <img src="${qrApi}" 
+               alt="QR Code" 
+               width="175" 
+               height="175" 
+               style="display:block; border-radius:8px;" 
+               onerror="this.onerror=null; this.outerHTML = generateQrSvg('${escapeHtml(shareUrl)}');" />
+        `;
+      }
 
       if (btnCopy) {
         btnCopy.onclick = () => {
-          navigator.clipboard.writeText(resolvedUrl).then(() => {
-            showToast("Direct app link copied!");
+          navigator.clipboard.writeText(shareUrl).then(() => {
+            showToast("App link copied to clipboard!");
           });
         };
       }
 
       if (btnWa) {
         btnWa.onclick = () => {
-          const text = encodeURIComponent(`*${app.title}*\n${app.description || ''}\n\n🔗 ${resolvedUrl}`);
+          const text = encodeURIComponent(`*${app.title}*\n${app.description || ''}\n\n🔗 ${shareUrl}`);
           window.open(`https://api.whatsapp.com/send?text=${text}`, "_blank");
         };
       }
@@ -1592,6 +1665,10 @@
           if (window.PORTAL_CATALOG && Array.isArray(window.PORTAL_CATALOG.apps)) {
             State.apps = window.PORTAL_CATALOG.apps;
           }
+          const statusCountEl = document.getElementById("status-tools-count");
+          if (statusCountEl && State.apps.length) {
+            statusCountEl.textContent = `${State.apps.length} Production Tools Online`;
+          }
         }],
 
         ["Initialize Audio Toggle", () => {
@@ -1616,7 +1693,15 @@
           const btnShareStage = document.getElementById("btn-share-stage");
 
           if (btnBack) btnBack.addEventListener("click", returnToHub);
-          if (brandHome) brandHome.addEventListener("click", (e) => { e.preventDefault(); returnToHub(); });
+          if (brandHome) {
+            brandHome.addEventListener("click", (e) => {
+              e.preventDefault();
+              State.selectedCluster = "all";
+              renderCategoryPills();
+              renderDashboardClusters();
+              returnToHub();
+            });
+          }
           if (mobileBack) mobileBack.addEventListener("click", returnToHub);
 
           if (btnReload && iframe) {
@@ -1725,9 +1810,9 @@
               }
             }
 
-            // Quick Cluster Jumps (1 to 5) when not inside an input
-            if (["1", "2", "3", "4", "5"].includes(e.key) && !["INPUT", "TEXTAREA"].includes(e.target.tagName)) {
-              const clusterMap = { "1": "web", "2": "sacred", "3": "windows", "4": "android", "5": "tools" };
+            // Quick Cluster Jumps (0-5, ~) when not inside an input
+            if (["0", "1", "2", "3", "4", "5", "`"].includes(e.key) && !["INPUT", "TEXTAREA"].includes(e.target.tagName)) {
+              const clusterMap = { "0": "all", "`": "all", "1": "web", "2": "sacred", "3": "windows", "4": "android", "5": "tools" };
               const target = clusterMap[e.key];
               if (target) {
                 AudioEngine.tap();

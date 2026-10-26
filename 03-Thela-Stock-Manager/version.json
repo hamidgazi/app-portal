@@ -1,6 +1,6 @@
 {
-  "version": "3.0.0",
+  "version": "3.1.0",
   "name": "Thela Stock Manager",
-  "updated": "2026-10-23",
-  "changelog": "v3.0.0: Super-Easy, Ultra-Fast & Ergonomic Redesign based on cognitive psychology and thumb-zone optimization: (1) Fixed Bottom Action Bar (#sticky-bottom-bar) docking live stock equation preview and 60px RECORD TRANSACTION button for instant <=2s entry with zero scrolling, (2) Distinct color-coded bag identity (data-item) with glowing health indicator dots (Green/Amber/Pulsing Rose) and bold stock numbers, (3) Smart stepper controls (-10, -5, +5, +10) plus quick chips (25, 50, 100, 200, 500) eliminating keyboard popups, (4) Instant party/remark suggestion chips auto-populated from recent transactions, (5) Floating 5-second undo snackbar with 1-tap rollback, (6) 1-tap acoustic UI sound toggle with localStorage persistence adhering to Zero-Music jurisprudence."
+  "updated": "2026-10-26",
+  "changelog": "v3.1.0: Transaction Date Selection & In-Place Transaction Edit Suite: (1) 1-tap Date Selection chips ([Today], [Yesterday]) and [📅 Custom Date] picker ensuring accurate backdated logging, (2) Dedicated AMOLED Cyber/Glass Edit Modal (#modal-edit-tx) accessible via ✏️ Edit buttons across both Main Screen Recent List and 50-Record Drawer, (3) Full 5-field editing (Date, Bag Item, OUT/IN Action, Quantity, Note) with automated differential stock balance math, (4) Google Apps Script webhook in-place updater (action: 'edit') with full backwards-compatible fallback."
 }

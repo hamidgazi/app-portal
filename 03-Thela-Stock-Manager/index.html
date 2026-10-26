@@ -834,6 +834,29 @@
       transform: scale(0.96);
     }
 
+    .btn-edit {
+      min-height: 48px;
+      padding: 0 12px;
+      border-radius: 10px;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: #38bdf8;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      touch-action: manipulation;
+      transition: transform 0.12s var(--spring), background 0.15s ease;
+    }
+
+    .btn-edit:active {
+      transform: scale(0.96);
+      background: rgba(56, 189, 248, 0.28);
+    }
+
     #btn-refresh-data {
       min-height: 48px;
     }
@@ -1226,17 +1249,113 @@
       transform: scale(0.97);
     }
 
+    /* Date Selection Section */
+    .date-section {
+      margin-bottom: 12px;
+    }
+
+    .selected-date-badge {
+      font-size: 0.8rem;
+      color: #38bdf8;
+      font-weight: 700;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 2px 10px;
+      border-radius: 9999px;
+    }
+
+    .date-chips-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    .date-chip {
+      min-height: var(--min-hitbox);
+      border-radius: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: #ffffff;
+      font-size: 0.92rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: transform 0.12s var(--spring), border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .date-chip:active {
+      transform: scale(0.96);
+    }
+
+    .date-chip.selected {
+      border-color: #38bdf8;
+      background: rgba(56, 189, 248, 0.2);
+      color: #38bdf8;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
+    }
+
+    .date-custom-wrapper {
+      position: relative;
+    }
+
+    .btn-date-custom {
+      width: 100%;
+      min-height: var(--min-hitbox);
+      border-radius: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: #ffffff;
+      font-size: 0.92rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: transform 0.12s var(--spring), border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-date-custom:active {
+      transform: scale(0.96);
+    }
+
+    .btn-date-custom.selected {
+      border-color: #38bdf8;
+      background: rgba(56, 189, 248, 0.2);
+      color: #38bdf8;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
+    }
+
+    .hidden-date-input {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+      z-index: 2;
+    }
+
     /* Modal Styling */
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(6px);
+      background: rgba(0, 0, 0, 0.88);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       display: none;
       align-items: center;
       justify-content: center;
       padding: 16px;
-      z-index: 100;
+      z-index: 1100;
     }
 
     .modal-overlay.active {
@@ -1246,14 +1365,16 @@
     .modal-box {
       width: 100%;
       max-width: 480px;
+      max-height: 90vh;
+      overflow-y: auto;
       background: #0b1120;
-      border: 1px solid var(--border-subtle);
+      border: 1px solid rgba(56, 189, 248, 0.3);
       border-radius: 20px;
       padding: 20px;
       display: flex;
       flex-direction: column;
       gap: 14px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), 0 0 16px rgba(56, 189, 248, 0.15);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.9), 0 0 20px rgba(56, 189, 248, 0.2);
     }
 
     .modal-title {
@@ -1265,6 +1386,15 @@
       align-items: center;
     }
 
+    .modal-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: -6px;
+    }
+
     .modal-input {
       width: 100%;
       min-height: 48px;
@@ -1273,8 +1403,124 @@
       border-radius: 12px;
       padding: 0 12px;
       color: #ffffff;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       outline: none;
+      transition: border-color 0.15s ease;
+    }
+
+    .modal-input:focus {
+      border-color: #38bdf8;
+    }
+
+    .modal-select {
+      width: 100%;
+      min-height: 48px;
+      background: #1e293b;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 0 12px;
+      color: #ffffff;
+      font-size: 1rem;
+      font-weight: 700;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .modal-select:focus {
+      border-color: #38bdf8;
+    }
+
+    .modal-action-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .modal-action-btn {
+      min-height: 48px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: transform 0.12s var(--spring), background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .modal-action-btn:active {
+      transform: scale(0.96);
+    }
+
+    .modal-action-btn.btn-out.selected {
+      background: rgba(239, 68, 68, 0.25);
+      border-color: #ef4444;
+      color: #f87171;
+      box-shadow: 0 0 14px rgba(239, 68, 68, 0.35);
+    }
+
+    .modal-action-btn.btn-in.selected {
+      background: rgba(16, 185, 129, 0.25);
+      border-color: #10b981;
+      color: #34d399;
+      box-shadow: 0 0 14px rgba(16, 185, 129, 0.35);
+    }
+
+    .modal-steppers {
+      margin-top: -6px;
+      margin-bottom: 4px;
+    }
+
+    .modal-footer {
+      display: flex;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .btn-modal-cancel {
+      flex: 1;
+      min-height: 48px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: all 0.15s ease;
+    }
+
+    .btn-modal-cancel:active {
+      transform: scale(0.96);
+    }
+
+    .btn-modal-save {
+      flex: 2;
+      min-height: 48px;
+      background: linear-gradient(135deg, #0284c7, #38bdf8);
+      border: none;
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: 0.98rem;
+      font-weight: 800;
+      cursor: pointer;
+      touch-action: manipulation;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 4px 16px rgba(56, 189, 248, 0.35);
+      transition: all 0.15s ease;
+    }
+
+    .btn-modal-save:active {
+      transform: scale(0.96);
     }
 
     /* Toast Notification */
@@ -1345,6 +1591,28 @@
       <div style="text-align: right;">
         <span class="glance-title">Available Stock</span>
         <div id="glance-item-stock" class="glance-stock">500 pcs</div>
+      </div>
+    </section>
+
+    <!-- STEP 0: Transaction Date Selection -->
+    <section class="date-section" id="section-date-picker">
+      <div class="step-label">
+        <span>Transaction Date</span>
+        <span id="label-selected-date" class="selected-date-badge">Today</span>
+      </div>
+      <div class="date-chips-row">
+        <button type="button" id="btn-date-today" class="date-chip selected" data-date="today">
+          <span>⚡</span> Today
+        </button>
+        <button type="button" id="btn-date-yesterday" class="date-chip" data-date="yesterday">
+          <span>⏮️</span> Yesterday
+        </button>
+        <div class="date-custom-wrapper">
+          <label for="input-custom-date" id="btn-custom-date-label" class="btn-date-custom" title="Choose specific date">
+            <span>📅</span> <span id="custom-date-btn-text">Custom</span>
+            <input type="date" id="input-custom-date" class="hidden-date-input">
+          </label>
+        </div>
       </div>
     </section>
 
@@ -1596,6 +1864,52 @@
     </div>
   </div>
 
+  <!-- Edit Transaction Modal (v3.1) -->
+  <div id="modal-edit-tx" class="modal-overlay" aria-hidden="true">
+    <div class="modal-box">
+      <div class="modal-title">
+        <span>✏️ Edit Transaction #<span id="edit-tx-sr"></span></span>
+        <button id="btn-close-edit-modal" class="btn-icon" style="min-width: 48px; min-height: 48px;" aria-label="Close">✕</button>
+      </div>
+
+      <div class="modal-label">Transaction Date (DD/MM/YYYY)</div>
+      <input type="text" id="edit-tx-date" class="modal-input" placeholder="DD/MM/YYYY">
+
+      <div class="modal-label">Bag Item</div>
+      <select id="edit-tx-item" class="modal-select">
+        <option value="1 set">1 set</option>
+        <option value="Kohinoor">Kohinoor</option>
+        <option value="Lining 28">Lining 28</option>
+        <option value="Medium 29">Medium 29</option>
+        <option value="Pink 30">Pink 30</option>
+        <option value="White (6)">White (6)</option>
+      </select>
+
+      <div class="modal-label">Action</div>
+      <div class="modal-action-row">
+        <button type="button" id="edit-btn-action-out" class="modal-action-btn btn-out selected">📤 OUT</button>
+        <button type="button" id="edit-btn-action-in" class="modal-action-btn btn-in">📥 IN</button>
+      </div>
+
+      <div class="modal-label">Quantity (Pieces)</div>
+      <input type="number" id="edit-tx-qty" class="modal-input" min="1" step="1" placeholder="Quantity...">
+      <div class="qty-stepper-row modal-steppers" id="edit-modal-steppers">
+        <button type="button" class="btn-stepper edit-stepper" data-step="-10" aria-label="Minus 10 pieces">−10</button>
+        <button type="button" class="btn-stepper edit-stepper" data-step="-5" aria-label="Minus 5 pieces">−5</button>
+        <button type="button" class="btn-stepper edit-stepper" data-step="5" aria-label="Plus 5 pieces">+5</button>
+        <button type="button" class="btn-stepper edit-stepper" data-step="10" aria-label="Plus 10 pieces">+10</button>
+      </div>
+
+      <div class="modal-label">Party Name / Note (Optional)</div>
+      <input type="text" id="edit-tx-remark" class="modal-input" placeholder="Party Name / Note...">
+
+      <div class="modal-footer">
+        <button type="button" id="btn-cancel-edit" class="btn-modal-cancel">Cancel</button>
+        <button type="button" id="btn-save-edit" class="btn-modal-save">💾 Save Changes</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast Notification -->
   <div id="toast" class="toast">
     <span id="toast-icon">✅</span>
@@ -1650,6 +1964,25 @@
     const KEY_RECENT = "thela_stock_recent";
     const KEY_QUEUE = "thela_stock_offline_queue";
     const KEY_SOUND_MUTED = "thela_stock_sound_muted";
+
+    // Date & Edit Modal State (v3.1)
+    let selectedDate = ""; // Formatted as "DD/MM/YYYY"
+    let editCurrentTx = null;
+    let editSelectedAction = "OUT";
+
+    /* ========================================================================
+       DATE FORMATTING HELPERS (v3.1)
+       ======================================================================== */
+    function formatDateObj(d) {
+      const day = ("0" + d.getDate()).slice(-2);
+      const month = ("0" + (d.getMonth() + 1)).slice(-2);
+      const year = d.getFullYear();
+      return `${day}/${month}/${year}`;
+    }
+
+    function formatDateDisplay(d) {
+      return d.toLocaleDateString("en-GB", { day: "numeric", month: "short" });
+    }
 
     /* ========================================================================
        ACOUSTIC UI (ZERO-MUSIC PROCEDURAL WEB AUDIO SYNTHESIS)
@@ -1746,6 +2079,18 @@
         setupSoundToggle();
       } catch (err) {
         console.error("Bootloader setupSoundToggle error:", err);
+      }
+
+      try {
+        setupDateSelection();
+      } catch (err) {
+        console.error("Bootloader setupDateSelection error:", err);
+      }
+
+      try {
+        setupEditModal();
+      } catch (err) {
+        console.error("Bootloader setupEditModal error:", err);
       }
 
       try {
@@ -1897,6 +2242,74 @@
           showToast("Sound effects muted 🔇");
         }
       });
+    }
+
+    /* ========================================================================
+       TRANSACTION DATE SELECTION ENGINE (v3.1)
+       ======================================================================== */
+    function setupDateSelection() {
+      const btnToday = document.getElementById("btn-date-today");
+      const btnYesterday = document.getElementById("btn-date-yesterday");
+      const inputCustom = document.getElementById("input-custom-date");
+      const btnCustomLabel = document.getElementById("btn-custom-date-label");
+      const labelDate = document.getElementById("label-selected-date");
+      const customText = document.getElementById("custom-date-btn-text");
+
+      // Initialize selectedDate to today
+      const today = new Date();
+      selectedDate = formatDateObj(today);
+      if (labelDate) {
+        labelDate.textContent = `Today (${formatDateDisplay(today)})`;
+      }
+
+      function updateActiveDateChip(active) {
+        if (btnToday) btnToday.classList.remove("selected");
+        if (btnYesterday) btnYesterday.classList.remove("selected");
+        if (btnCustomLabel) btnCustomLabel.classList.remove("selected");
+
+        if (active === "today" && btnToday) btnToday.classList.add("selected");
+        else if (active === "yesterday" && btnYesterday) btnYesterday.classList.add("selected");
+        else if (active === "custom" && btnCustomLabel) btnCustomLabel.classList.add("selected");
+      }
+
+      if (btnToday) {
+        btnToday.addEventListener("click", () => {
+          playSound("tap");
+          const now = new Date();
+          selectedDate = formatDateObj(now);
+          if (labelDate) labelDate.textContent = `Today (${formatDateDisplay(now)})`;
+          if (customText) customText.textContent = "Custom";
+          updateActiveDateChip("today");
+        });
+      }
+
+      if (btnYesterday) {
+        btnYesterday.addEventListener("click", () => {
+          playSound("tap");
+          const y = new Date();
+          y.setDate(y.getDate() - 1);
+          selectedDate = formatDateObj(y);
+          if (labelDate) labelDate.textContent = `Yesterday (${formatDateDisplay(y)})`;
+          if (customText) customText.textContent = "Custom";
+          updateActiveDateChip("yesterday");
+        });
+      }
+
+      if (inputCustom) {
+        inputCustom.addEventListener("change", () => {
+          playSound("tap");
+          if (!inputCustom.value) return;
+          const parts = inputCustom.value.split("-");
+          if (parts.length === 3) {
+            const pickedDate = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+            selectedDate = formatDateObj(pickedDate);
+            const disp = formatDateDisplay(pickedDate);
+            if (labelDate) labelDate.textContent = `${disp} (${selectedDate})`;
+            if (customText) customText.textContent = disp;
+            updateActiveDateChip("custom");
+          }
+        });
+      }
     }
 
     function saveBalances() {
@@ -2231,11 +2644,19 @@
             <div class="recent-item-title">${escapeHtml(tx.itemName)}</div>
             <div class="recent-item-meta">${escapeHtml(tx.date || "")} ${tx.remark ? "• " + escapeHtml(tx.remark) : ""}</div>
           </div>
-          <div style="display: flex; align-items: center; gap: 8px;">
+          <div style="display: flex; align-items: center; gap: 6px;">
             <span class="recent-item-badge ${badgeType}">${tx.type} ${tx.quantity}</span>
+            <button class="btn-edit" data-sr="${tx.sr || ''}" title="Edit entry #${tx.sr || ''}">✏️ Edit</button>
             ${isLatest ? `<button class="btn-undo" data-sr="${tx.sr || ''}">↩ Undo</button>` : ""}
           </div>
         `;
+
+        const editBtn = item.querySelector(".btn-edit");
+        if (editBtn) {
+          editBtn.addEventListener("click", () => {
+            openEditModal(tx);
+          });
+        }
 
         if (isLatest) {
           const undoBtn = item.querySelector(".btn-undo");
@@ -2469,11 +2890,19 @@
               <span style="color: var(--text-muted); opacity: 0.7;">#${escapeHtml(String(tx.sr || ''))}</span>
             </div>
           </div>
-          <div style="display: flex; align-items: center; gap: 8px;">
+          <div style="display: flex; align-items: center; gap: 6px;">
             <span class="recent-item-badge ${badgeType}">${tx.type} ${tx.quantity}</span>
+            <button class="btn-edit" data-sr="${tx.sr || ''}" title="Edit entry #${tx.sr || ''}">✏️ Edit</button>
             <button class="btn-undo" data-sr="${tx.sr || ''}" title="Undo entry #${tx.sr || ''}">↩ Undo</button>
           </div>
         `;
+
+        const editBtn = item.querySelector(".btn-edit");
+        if (editBtn) {
+          editBtn.addEventListener("click", () => {
+            openEditModal(tx);
+          });
+        }
 
         const undoBtn = item.querySelector(".btn-undo");
         if (undoBtn) {
@@ -2663,8 +3092,7 @@
         }
 
         const remark = remarkInput ? remarkInput.value.trim() : "";
-        const now = new Date();
-        const dateStr = ("0" + now.getDate()).slice(-2) + "/" + ("0" + (now.getMonth() + 1)).slice(-2) + "/" + now.getFullYear();
+        const dateStr = selectedDate || formatDateObj(new Date());
 
         const newTx = {
           sr: Date.now(), // Temporary local SR
@@ -2822,6 +3250,217 @@
         } catch (e) {
           console.warn("Undo webhook call failed:", e);
         }
+      }
+    }
+
+    /* ========================================================================
+       EDIT TRANSACTION MODAL ENGINE (v3.1)
+       ======================================================================== */
+    function setupEditModal() {
+      const modal = document.getElementById("modal-edit-tx");
+      const btnClose = document.getElementById("btn-close-edit-modal");
+      const btnCancel = document.getElementById("btn-cancel-edit");
+      const btnSave = document.getElementById("btn-save-edit");
+      const btnActionOut = document.getElementById("edit-btn-action-out");
+      const btnActionIn = document.getElementById("edit-btn-action-in");
+      const qtyInput = document.getElementById("edit-tx-qty");
+      const stepperBtns = document.querySelectorAll(".edit-stepper");
+
+      if (btnClose) {
+        btnClose.addEventListener("click", closeEditModal);
+      }
+      if (btnCancel) {
+        btnCancel.addEventListener("click", closeEditModal);
+      }
+
+      if (modal) {
+        modal.addEventListener("click", (e) => {
+          if (e.target === modal) {
+            closeEditModal();
+          }
+        });
+      }
+
+      if (btnActionOut && btnActionIn) {
+        btnActionOut.addEventListener("click", () => {
+          playSound("tap");
+          editSelectedAction = "OUT";
+          btnActionOut.classList.add("selected");
+          btnActionIn.classList.remove("selected");
+        });
+        btnActionIn.addEventListener("click", () => {
+          playSound("tap");
+          editSelectedAction = "IN";
+          btnActionIn.classList.add("selected");
+          btnActionOut.classList.remove("selected");
+        });
+      }
+
+      stepperBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          playSound("tap");
+          const step = parseInt(btn.getAttribute("data-step"), 10) || 0;
+          let currentVal = parseInt(qtyInput ? qtyInput.value : "0", 10) || 0;
+          let newVal = Math.max(1, currentVal + step);
+          if (qtyInput) qtyInput.value = String(newVal);
+        });
+      });
+
+      if (btnSave) {
+        btnSave.addEventListener("click", saveTransactionEdit);
+      }
+    }
+
+    function openEditModal(tx) {
+      playSound("tap");
+      editCurrentTx = tx;
+      const modal = document.getElementById("modal-edit-tx");
+      const srLabel = document.getElementById("edit-tx-sr");
+      const dateInput = document.getElementById("edit-tx-date");
+      const itemSelect = document.getElementById("edit-tx-item");
+      const btnActionOut = document.getElementById("edit-btn-action-out");
+      const btnActionIn = document.getElementById("edit-btn-action-in");
+      const qtyInput = document.getElementById("edit-tx-qty");
+      const remarkInput = document.getElementById("edit-tx-remark");
+
+      if (srLabel) srLabel.textContent = String(tx.sr || "");
+      if (dateInput) dateInput.value = tx.date || "";
+      if (itemSelect) itemSelect.value = tx.itemName || CANONICAL_ITEMS[0];
+
+      editSelectedAction = tx.type || "OUT";
+      if (btnActionOut && btnActionIn) {
+        if (editSelectedAction === "OUT") {
+          btnActionOut.classList.add("selected");
+          btnActionIn.classList.remove("selected");
+        } else {
+          btnActionIn.classList.add("selected");
+          btnActionOut.classList.remove("selected");
+        }
+      }
+
+      if (qtyInput) qtyInput.value = String(tx.quantity || 25);
+      if (remarkInput) remarkInput.value = tx.remark || "";
+
+      if (modal) {
+        modal.classList.add("active");
+        modal.setAttribute("aria-hidden", "false");
+      }
+    }
+
+    function closeEditModal() {
+      playSound("tap");
+      const modal = document.getElementById("modal-edit-tx");
+      if (modal) {
+        modal.classList.remove("active");
+        modal.setAttribute("aria-hidden", "true");
+      }
+      editCurrentTx = null;
+    }
+
+    async function saveTransactionEdit() {
+      if (!editCurrentTx) return;
+
+      const dateInput = document.getElementById("edit-tx-date");
+      const itemSelect = document.getElementById("edit-tx-item");
+      const qtyInput = document.getElementById("edit-tx-qty");
+      const remarkInput = document.getElementById("edit-tx-remark");
+
+      const newDate = dateInput ? dateInput.value.trim() : editCurrentTx.date;
+      const newItem = itemSelect ? itemSelect.value : editCurrentTx.itemName;
+      const newAction = editSelectedAction;
+      const newQty = parseInt(qtyInput ? qtyInput.value : "0", 10) || 0;
+      const newRemark = remarkInput ? remarkInput.value.trim() : "";
+
+      if (newQty <= 0) {
+        showToast("Please enter a valid quantity!", true);
+        playSound("warn");
+        return;
+      }
+
+      if (!newDate) {
+        showToast("Please enter a valid date (DD/MM/YYYY)!", true);
+        playSound("warn");
+        return;
+      }
+
+      // Revert old transaction impact
+      const oldItem = editCurrentTx.itemName;
+      const oldQty = Number(editCurrentTx.quantity) || 0;
+      const oldType = editCurrentTx.type;
+
+      if (typeof liveBalances[oldItem] === "number") {
+        if (oldType === "OUT") {
+          liveBalances[oldItem] += oldQty;
+        } else {
+          liveBalances[oldItem] = Math.max(0, liveBalances[oldItem] - oldQty);
+        }
+      }
+
+      // Apply new transaction impact
+      if (typeof liveBalances[newItem] !== "number") {
+        liveBalances[newItem] = 0;
+      }
+      if (newAction === "OUT") {
+        liveBalances[newItem] = Math.max(0, liveBalances[newItem] - newQty);
+      } else {
+        liveBalances[newItem] += newQty;
+      }
+
+      // Update transaction object in-place
+      editCurrentTx.date = newDate;
+      editCurrentTx.itemName = newItem;
+      editCurrentTx.quantity = newQty;
+      editCurrentTx.type = newAction;
+      editCurrentTx.remark = newRemark;
+
+      saveBalances();
+      saveRecent();
+      renderBagCards();
+      updateGlanceBanner();
+      updateStockPreviewBanner();
+      renderRecentTransactions();
+      renderPartySuggestions();
+
+      const drawer = document.getElementById("drawer-history");
+      if (drawer && drawer.classList.contains("active")) {
+        renderDrawerTransactions();
+      }
+
+      closeEditModal();
+      playSound("success");
+      showToast(`Updated #${editCurrentTx.sr}: ${newQty} ${newItem}`);
+
+      // Push edit to Google Sheets webhook
+      await pushEditToGoogleSheet(editCurrentTx);
+    }
+
+    async function pushEditToGoogleSheet(tx) {
+      const webhookUrl = getWebhookUrl();
+      if (!webhookUrl) return;
+
+      try {
+        const params = new URLSearchParams({
+          action: "edit",
+          sr: String(tx.sr || ""),
+          date: tx.date || "",
+          itemName: tx.itemName || "",
+          quantity: String(tx.quantity || 0),
+          type: tx.type || "OUT",
+          remark: tx.remark || "",
+          limit: "50"
+        });
+
+        const targetUrl = webhookUrl + (webhookUrl.includes("?") ? "&" : "?") + params.toString();
+        const response = await fetch(targetUrl, { method: "GET", mode: "cors" });
+        if (response.ok) {
+          const res = await response.json();
+          if (res && res.data) {
+            applyUpdatedGoogleSheetData(res.data);
+          }
+          updateStatusPill(true, "Online (Sheet Synced)");
+        }
+      } catch (err) {
+        console.warn("Failed to push edit to Google Sheet:", err);
       }
     }
 
