@@ -1751,7 +1751,7 @@
         // Mode 1: High-Density Compact Editorial Cards (~195px Height)
         if (activeView === "cards") {
           return `
-            <article class="command-card ${cardTypeClass}" id="card-${it.serial}">
+            <article class="command-card ${cardTypeClass}" id="card-${it.serial}" data-idx="${idx}" data-serial="${it.serial}">
               <div class="command-card-header">
                 <div class="command-header-left">
                   <span class="command-serial-pill">#${it.serial}</span>
@@ -1853,7 +1853,7 @@
         } else if (activeView === "collapsible") {
           // Mode 2: Collapsible Accordion Card
           return `
-            <article class="command-card collapsible-card ${cardTypeClass}" id="card-${it.serial}" onclick="window.CommandsApp.toggleCardExpansion(${it.serial}, event)">
+            <article class="command-card collapsible-card ${cardTypeClass}" id="card-${it.serial}" data-idx="${idx}" data-serial="${it.serial}" onclick="window.CommandsApp.toggleCardExpansion(${it.serial}, event)">
               <div class="collapsible-summary-row">
                 <div class="collapsible-left-meta">
                   <span class="command-serial-pill">#${it.serial}</span>
@@ -1947,7 +1947,7 @@
         } else {
           // Mode 3: Compact Action Checklist
           return `
-            <div class="checklist-row" id="check-${it.serial}">
+            <div class="checklist-row" id="check-${it.serial}" data-idx="${idx}" data-serial="${it.serial}">
               <div class="checklist-left">
                 <span class="checklist-serial">#${it.serial}</span>
                 <span class="checklist-polarity-icon">${isCommand ? '✅' : '🚫'}</span>
@@ -2030,6 +2030,7 @@
         // Initialize Universal Edge QuickScrubber
         if (window.QuickScrubber) {
           window.QuickScrubber.init({
+            context: "commands",
             containerId: "commands-list-mount",
             itemSelector: ".command-card, .collapsible-row, .checklist-row",
             totalItems: currentFilteredItems.length,

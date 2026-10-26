@@ -273,10 +273,11 @@
       const rect = items[i].getBoundingClientRect ? items[i].getBoundingClientRect() : { top: 0 };
       const top = rect.top + currentScrollY;
       if (top <= viewTop) {
-        if (items[i].dataset && items[i].dataset.serial !== undefined) {
-          foundIndex = parseInt(items[i].dataset.serial, 10);
-        } else if (items[i].dataset && items[i].dataset.idx !== undefined) {
+        if (items[i].dataset && items[i].dataset.idx !== undefined) {
           foundIndex = parseInt(items[i].dataset.idx, 10) + 1;
+        } else if (items[i].dataset && items[i].dataset.serial !== undefined) {
+          const sVal = parseInt(items[i].dataset.serial, 10);
+          foundIndex = (sVal <= activeConfig.totalItems) ? sVal : (i + 1);
         } else {
           foundIndex = i + 1;
         }
@@ -377,7 +378,17 @@
       activeConfig.context = activeConfig.context || 'default';
       buildDOM();
 
-      if (activeConfig.totalItems <= 1) {
+      // Check if container belongs to an inactive .tab-panel
+      let isVisibleTab = true;
+      if (activeConfig.containerId && typeof document !== 'undefined') {
+        const container = document.getElementById(activeConfig.containerId);
+        const panel = container && container.closest ? container.closest('.tab-panel') : null;
+        if (panel && !panel.classList.contains('active')) {
+          isVisibleTab = false;
+        }
+      }
+
+      if (activeConfig.totalItems <= 1 || !isVisibleTab) {
         if (railEl) railEl.style.display = 'none';
         return;
       } else {

@@ -67,6 +67,15 @@
       bg_color: 'rgba(251, 113, 133, 0.15)',
       description: 'کلمہ کے آخر میں حرفِ مد اور اگلے کلمہ کے شروع میں ہمزہ آئے تو 4 سے 5 حرکات تک کھینچتے ہیں۔'
     },
+    madd_aaridh: {
+      id: 'madd_aaridh',
+      name_ur: 'مد عارض للسکون (Madd Aaridh)',
+      name_en: 'Secondary Prolongation at Waqf (2, 4, 6 Counts)',
+      timing: '2, 4, or 6 Harakat (1-3 Alifs)',
+      color: '#eab308',
+      bg_color: 'rgba(234, 179, 8, 0.15)',
+      description: 'حرفِ مد کے بعد وقف کی وجہ سے سکون عارض ہو تو 2، 4 یا 6 حرکات تک لمبا کرنا جائز ہے۔'
+    },
     madd: {
       id: 'madd',
       name_ur: 'مد (Madd)',
@@ -258,50 +267,76 @@
       if (!arabicText || typeof arabicText !== 'string') return '';
 
       let text = arabicText;
+      const spans = [];
+      const makeTag = (classes, rule, title, innerText) => {
+        const id = spans.length;
+        spans.push(`<span class="${classes}" data-rule="${rule}" title="${title}">${innerText}</span>`);
+        return `___TJTAG_${id}___`;
+      };
 
       // 1. Madd Lazim (مد لازم - 6 counts): Maddah followed by Shaddah
       text = text.replace(/(\u0622|[\u0621-\u064A\u06CC\u0671]\u0653)([\u0621-\u064A\u06CC][\u0651\u065F])/gu,
-        '<span class="tj-madd" data-rule="madd_lazim" title="Madd Lazim (مد لازم - 6 Counts / 3 Alifs)">$1</span>$2');
+        (m, p1, p2) => makeTag('tj-madd', 'madd_lazim', 'Madd Lazim (مد لازم - 6 Counts / 3 Alifs)', p1) + p2);
 
       // 2. Madd Muttasil (مد واجب متصل - 4-5 counts): Maddah followed by Hamzah in same word
       text = text.replace(/(\u0622|[\u0621-\u064A\u06CC\u0671]\u0653)([\u0621\u0623\u0625\u0626\u0624])/gu,
-        '<span class="tj-madd" data-rule="madd_muttasil" title="Madd Wajib Muttasil (مد واجب متصل - 4-5 Counts)">$1</span>$2');
+        (m, p1, p2) => makeTag('tj-madd', 'madd_muttasil', 'Madd Wajib Muttasil (مد واجب متصل - 4-5 Counts)', p1) + p2);
 
       // 3. Madd Munfasil (مد جائز منفصل - 4-5 counts): Maddah followed by Hamzah across space
       text = text.replace(/(\u0622|[\u0621-\u064A\u06CC\u0671]\u0653)(\s+[\u0621\u0623\u0625\u0671\u0622])/gu,
-        '<span class="tj-madd" data-rule="madd_munfasil" title="Madd Ja\'iz Munfasil (مد جائز منفصل - 4-5 Counts)">$1</span>$2');
+        (m, p1, p2) => makeTag('tj-madd', 'madd_munfasil', "Madd Ja'iz Munfasil (مد جائز منفصل - 4-5 Counts)", p1) + p2);
 
       // 4. General Madd (مد - 4-6 counts): Any remaining Maddah
       text = text.replace(/(\u0622|[\u0621-\u064A\u06CC\u0671]\u0653)/gu,
-        '<span class="tj-madd" data-rule="madd" title="Madd (مد - Prolongation 4-6 Counts)">$1</span>');
+        (m, p1) => makeTag('tj-madd', 'madd', 'Madd (مد - Prolongation 4-6 Counts)', p1));
 
-      // 5. Ghunnah (غنہ - 2 counts): Noon or Meem with Shaddah (نّ or مّ)
-      text = text.replace(/([نم][\u0651\u065F][\u064E\u064F\u0650\u0670]?)/gu,
-        '<span class="tj-ghunnah" data-rule="ghunnah" title="Ghunnah (غنہ - Nasalization 2 Counts)">$1</span>');
+      // 5. Madd Aaridh lil-Sukun (مد عارض للسکون - 2, 4, 6 counts): Vowel letter before final consonant at stop/waqf/verse-end
+      text = text.replace(/([\u064E\u064F\u0650]?[\u0648\u064A\u06CC\u0627\u0670])([\u0621-\u064A\u06CC][\u064B-\u0652\u0670]?\s*(?:[۝\u06DD]|[ۖ-ۛ]|[.,;!?\u061F]|\s*$))/gu,
+        (m, p1, p2) => makeTag('tj-madd', 'madd_aaridh', 'Madd Aaridh lil-Sukun (مد عارض للسکون - 2, 4, 6 Counts at Stop)', p1) + p2);
 
-      // 6. Qalqalah (قلقلہ - Echoing Bounce): قطب جد with Sukun
-      text = text.replace(/([قطبجد][\u0652\u06E1\u06DF])/gu,
-        '<span class="tj-qalqalah" data-rule="qalqalah" title="Qalqalah (قلقلہ - Echoing Bounce)">$1</span>');
-
-      // 7. Iqlab (اقلاب - Conversion to Meem): Tanween or Noon Sakinah followed by small Meem or Baa
+      // 6. Iqlab (اقلاب - Conversion to Meem 2 counts): Tanween or Noon Sakinah followed by small Meem or Baa
       text = text.replace(/((?:[\u064B\u064C\u064D][\u0627\u0671\u0649\u0670]?|ن[\u0652\u06E1]?))(\s*(?:[\u06E2\u06ED]|\u0628))/gu,
-        '<span class="tj-iqlab" data-rule="iqlab" title="Iqlab (اقلاب - Conversion to Meem 2 Counts)">$1</span>$2');
+        (m, p1, p2) => makeTag('tj-iqlab', 'iqlab', 'Iqlab (اقلاب - Conversion to Meem 2 Counts)', p1) + p2);
 
-      // 8. Idgham with Ghunnah (ادغام مع الغنہ - 2 counts): Tanween or Noon Sakinah before [ينمو]
+      // 7. Idgham Bi-Ghunnah (ادغام مع الغنہ - 2 counts): Tanween or Noon Sakinah before [ينمو], or Meem Sakinah before Meem with Shaddah
       text = text.replace(/((?:[\u064B\u064C\u064D][\u0627\u0671\u0649\u0670]?|ن[\u0652\u06E1]?))(\s+)([\u064A\u06CC\u0646\u0645\u0648][\u0651\u065F\u064E\u064F\u0650]?)/gu,
-        '<span class="tj-idgham" data-rule="idgham_ghunnah" title="Idgham Bi-Ghunnah (ادغام مع الغنہ - Assimilation with Ghunnah 2 Counts)">$1</span>$2$3');
+        (m, p1, p2, p3) => makeTag('tj-idgham', 'idgham_ghunnah', 'Idgham Bi-Ghunnah (ادغام مع الغنہ - Assimilation with Ghunnah 2 Counts)', p1) + p2 + p3);
+      text = text.replace(/((?:م[\u0652\u06E1]|م))(\s+)(م[\u0651\u065F][\u064E\u064F\u0650]?)/gu,
+        (m, p1, p2, p3) => makeTag('tj-idgham', 'idgham_ghunnah', 'Idgham Shafawi / Mithlayn (ادغام شفوی - 2 Counts)', p1) + p2 + p3);
 
-      // 9. Idgham without Ghunnah (ادغام بلا غنہ): Tanween or Noon Sakinah before [لر]
+      // 8. Idgham Bila-Ghunnah (ادغام بلا غنہ): Tanween or Noon Sakinah before [لر]
       text = text.replace(/((?:[\u064B\u064C\u064D][\u0627\u0671\u0649\u0670]?|ن[\u0652\u06E1]?))(\s+)([\u0644\u0631][\u0651\u065F\u064E\u064F\u0650]?)/gu,
-        '<span class="tj-idgham" data-rule="idgham_no_ghunnah" title="Idgham Bila-Ghunnah (ادغام بلا غنہ - Complete Assimilation)">$1</span>$2$3');
+        (m, p1, p2, p3) => makeTag('tj-idgham', 'idgham_no_ghunnah', 'Idgham Bila-Ghunnah (ادغام بلا غنہ - Complete Assimilation)', p1) + p2 + p3);
 
-      // 10. Ikhfa (اخفاء - 2 counts): Tanween or Noon Sakinah before 15 Ikhfa letters
+      // 9. Ikhfa (اخفاء - 2 counts): Tanween or Noon Sakinah before 15 Ikhfa letters
       text = text.replace(/((?:[\u064B\u064C\u064D][\u0627\u0671\u0649\u0670]?|ن[\u0652\u06E1]?))(\s*)([تثجدذزسشصضطظفقك])/gu,
-        '<span class="tj-ikhfa" data-rule="ikhfa" title="Ikhfa (اخفاء - Light Concealment 2 Counts)">$1</span>$2$3');
+        (m, p1, p2, p3) => makeTag('tj-ikhfa', 'ikhfa', 'Ikhfa (اخفاء - Light Concealment 2 Counts)', p1) + p2 + p3);
+      // Ikhfa Shafawi (اخفاء شفوی): Meem Sakinah before Baa
+      text = text.replace(/((?:م[\u0652\u06E1]|م))(\s+)(ب[\u064E\u064F\u0650]?)/gu,
+        (m, p1, p2, p3) => makeTag('tj-ikhfa', 'ikhfa', 'Ikhfa Shafawi (اخفاء شفوی - 2 Counts)', p1) + p2 + p3);
 
-      // 11. Silent Letters & Hamzatul Wasl (حرف صامت / همزة الوصل)
+      // 10. Ghunnah (غنہ - 2 counts): Noon or Meem with Shaddah (نّ or مّ)
+      text = text.replace(/([نم][\u0651\u065F][\u064E\u064F\u0650\u0670]?)/gu,
+        (m, p1) => makeTag('tj-ghunnah', 'ghunnah', 'Ghunnah (غنہ - Nasalization 2 Counts)', p1));
+
+
+      // 11. Qalqalah (قلقلہ - Echoing Bounce): قطب جد with Sukun OR at verse end/waqf
+      text = text.replace(/([قطبجد][\u0652\u06E1\u06DF])/gu,
+        (m, p1) => makeTag('tj-qalqalah', 'qalqalah', 'Qalqalah (قلقلہ - Echoing Bounce)', p1));
+      text = text.replace(/([قطبجد][\u0651\u065F]?[\u064B-\u0650\u0670]?)(\s*(?:[۝\u06DD]|[ۖ-ۛ]|[.,;!?\u061F]|\s*$))/gu,
+        (m, p1, p2) => makeTag('tj-qalqalah', 'qalqalah', 'Qalqalah at Waqf (قلقلہ کبریٰ - Echo at Stop)', p1) + p2);
+
+
+      // 12. Silent Letters & Hamzatul Wasl (حرف صامت / همزة الوصل)
       text = text.replace(/(\u0671|\u0627\u06DF)/gu,
-        '<span class="tj-silent" data-rule="silent" title="Silent Letter / Hamzatul Wasl (حرف صامت / همزة الوصل)">$1</span>');
+        (m, p1) => makeTag('tj-silent', 'silent', 'Silent Letter / Hamzatul Wasl (حرف صامت / همزة الوصل)', p1));
+
+      // 13. Tafkheem (تفخیم - Heavy Isti'la letters & Raa): [خصضغظ], [طق] (when not already qalqalah), and Raa with Fathah/Dammah
+      text = text.replace(/([خصضغظ][\u064E\u064F\u0650\u0651\u0652\u06E1\u064B\u064C\u064D]?|[طق][\u064E\u064F\u0650\u0651\u064B\u064C\u064D]|ر[\u0651]?[\u064E\u064F\u064B\u064C\u0670])/gu,
+        (m, p1) => makeTag('tj-tafkheem', 'tafkheem', "Tafkheem (تفخیم - Heavy Letter / Isti'la)", p1));
+
+      // 14. Unpack all placeholders into final markup
+      text = text.replace(/___TJTAG_(\d+)___/g, (match, id) => spans[parseInt(id, 10)] || match);
 
       return text;
     },
@@ -319,10 +354,12 @@
             <span class="tj-pill tj-madd-lazim" data-rule="madd_lazim" title="${TAJWEED_RULES.madd_lazim.description}">● مد لازم (Lazim • 6 Counts)</span>
             <span class="tj-pill tj-madd-muttasil" data-rule="madd_muttasil" title="${TAJWEED_RULES.madd_muttasil.description}">● مد متصل (Muttasil • 4-5)</span>
             <span class="tj-pill tj-madd-munfasil" data-rule="madd_munfasil" title="${TAJWEED_RULES.madd_munfasil.description}">● مد منفصل (Munfasil • 4-5)</span>
+            <span class="tj-pill tj-madd-aaridh" data-rule="madd_aaridh" title="${TAJWEED_RULES.madd_aaridh.description}">● مد عارض (Aaridh • 2,4,6)</span>
             <span class="tj-pill tj-ikhfa" data-rule="ikhfa" title="${TAJWEED_RULES.ikhfa.description}">● اخفاء (Ikhfa • 2 Counts)</span>
             <span class="tj-pill tj-idgham-ghunnah" data-rule="idgham_ghunnah" title="${TAJWEED_RULES.idgham_ghunnah.description}">● ادغام مع الغنہ (2 Counts)</span>
             <span class="tj-pill tj-idgham-no-ghunnah" data-rule="idgham_no_ghunnah" title="${TAJWEED_RULES.idgham_no_ghunnah.description}">● ادغام بلا غنہ</span>
             <span class="tj-pill tj-iqlab" data-rule="iqlab" title="${TAJWEED_RULES.iqlab.description}">● اقلاب (Iqlab • Meem)</span>
+            <span class="tj-pill tj-tafkheem" data-rule="tafkheem" title="${TAJWEED_RULES.tafkheem.description}">● تفخیم (Tafkheem • Heavy)</span>
             <span class="tj-pill tj-silent" data-rule="silent" title="${TAJWEED_RULES.silent.description}">● حرف صامت (Silent)</span>
           </div>
         </div>

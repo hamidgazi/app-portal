@@ -590,31 +590,37 @@ class CorpusEngine {
     this.setupAyatContainerDelegation(ayatContainer);
 
     // Initialize or update Universal Edge QuickScrubber ONLY if ayahs tab is active
-    const isOtherTabActive = (window.location && (window.location.hash === '#manners' || window.location.hash === '#commands')) ||
-      (typeof document !== 'undefined' && (
-        (document.getElementById('tab-manners') && document.getElementById('tab-manners').classList.contains('active')) ||
-        (document.getElementById('tab-commands') && document.getElementById('tab-commands').classList.contains('active'))
-      ));
-
-    if (!isOtherTabActive) {
+    const tabAyahs = typeof document !== 'undefined' ? document.getElementById('tab-ayahs') : null;
+    const isAyahsActive = tabAyahs && tabAyahs.classList.contains('active');
+    if (isAyahsActive) {
       this.syncQuickScrubber();
     }
   }
 
   syncQuickScrubber() {
     if (!window.QuickScrubber) return;
-    const s = this.currentSurah;
+    const s = this.currentSurahData || (this.surahsTelemetry && this.surahsTelemetry.find(item => item.id === (this.activeSurahId || 1))) || {
+      surah_id: this.activeSurahId || 1,
+      name_roman: "Al-Fatihah",
+      name_ar: "الفاتحة",
+      total_ayat: 7
+    };
     if (!s) return;
+    const sId = s.surah_id || s.id || this.activeSurahId || 1;
+    const sName = s.name_roman || `Surah ${sId}`;
+    const sAr = s.name_ar || "";
+    const totalAyat = s.total_ayat || (s.ayat ? s.ayat.length : (this.currentSurahData && this.currentSurahData.ayat ? this.currentSurahData.ayat.length : 7));
+
     window.QuickScrubber.init({
       context: "ayahs",
       containerId: "ayahs-list-container",
       itemSelector: ".ayah-card",
-      totalItems: s.total_ayat || (s.ayat ? s.ayat.length : 1),
+      totalItems: totalAyat,
       unitName: "ayat",
-      modalTitle: `Jump to Ayah • Surah ${s.name_roman}`,
+      modalTitle: `Jump to Ayah • Surah ${sName}`,
       getItemLabel: (idx) => ({
-        title: `Ayah ${s.surah_id}:${idx}`,
-        subtitle: `Surah ${s.name_roman} (${s.name_ar})`
+        title: `Ayah ${sId}:${idx}`,
+        subtitle: `Surah ${sName} (${sAr})`
       }),
       onJump: (targetAyahNum) => {
         this.ensureAyahRendered(targetAyahNum);

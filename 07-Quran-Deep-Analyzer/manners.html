@@ -1637,6 +1637,7 @@
         // Initialize Universal QuickScrubber
         if (window.QuickScrubber) {
           window.QuickScrubber.init({
+            context: "manners",
             containerId: "manners-list",
             itemSelector: ".manner-card, .compact-manner-row",
             totalItems: currentFilteredItems.length,
@@ -1692,7 +1693,7 @@
 
         const enModTitle = moduleEnTitles[it.module_id] || it.module_title || "Ethics";
         return `
-          <article class="manner-card" id="manner-card-${serialNum}">
+          <article class="manner-card" id="manner-card-${serialNum}" data-idx="${idx}" data-serial="${serialNum}">
             <div class="manner-card-header">
               <div class="manner-headline">
                 <span class="manner-serial-pill">#${serialNum}</span>
@@ -1767,7 +1768,7 @@
         const hTitle = highlightText(it.title_ur, searchQuery);
 
         return `
-          <div class="compact-manner-row" id="compact-row-${serialNum}">
+          <div class="compact-manner-row" id="compact-row-${serialNum}" data-idx="${idx}" data-serial="${serialNum}">
             <div class="compact-left-meta">
               <button class="manner-star-btn ${bookmarked ? 'bookmarked' : ''}" data-serial="${serialNum}" style="font-size: 1.05rem; padding: 0 4px;">${starChar}</button>
               <span class="compact-serial">#${serialNum}</span>
