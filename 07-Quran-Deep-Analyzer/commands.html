@@ -1207,6 +1207,9 @@
           </div>
 
           <!-- Tri-Mode View Mode -->
+          <button class="waqf-guide-toolbar-btn" onclick="window.WaqfEngine.openGuideModal()" title="Quranic Stop Signs & Waqf Rules Guide">
+            <span>🛑 Waqf Guide</span>
+          </button>
           <div class="segmented-pill-group" id="view-mode-filters">
             <button class="segment-btn active" data-view="cards" title="Detailed Cards">🃏 Cards</button>
             <button class="segment-btn" data-view="collapsible" title="High-Density Summary">📑 Summary</button>
@@ -1323,6 +1326,7 @@
   <audio id="quran-audio-player" preload="none"></audio>
 
   <!-- Standalone Offline Zero-CORS Data Bundle -->
+  <script src="js/waqf-engine.js?v=20261026"></script>
   <script src="data/quran_commands_data.js"></script>
 
   <!-- Interactive Studio Orchestration Script -->
@@ -1515,12 +1519,13 @@
 
       // Format WhatsApp Text
       function formatWhatsApp(it) {
+        const arText = window.WaqfEngine ? window.WaqfEngine.appendPlainTextStopSign(it.arabic, it.ayah_num) : it.arabic;
         const pBadge = it.polarity === "command" ? "✅ COMMAND (DO THIS)" : "🚫 PROHIBITION (AVOID THIS)";
         let msg = `📜 *Divine Commands & Injunctions (#${it.serial})* 📜\n` +
                   `🏷️ *${it.title_en}* [${pBadge}]\n` +
                   `📌 *${it.title_ur}*\n` +
                   `📍 *Surah ${it.surah_name_roman} (${it.surah_name_ar}) [${it.surah_id}:${it.ayah_num}]*\n\n` +
-                  `📖 *Sacred Arabic:*\n«${it.arabic}»\n\n` +
+                  `📖 *Sacred Arabic:*\n«${arText}»\n\n` +
                   `💎 *Kanzul Iman Urdu Translation (Imam Ahmad Raza Khan):*\n${it.translation_urdu_kanzul_iman}\n\n` +
                   `🌐 *English Translation (Saheeh International):*\n${it.translation_english}\n\n` +
                   `💡 *Human Flourishing & Health Wisdom:*\n${it.wisdom_benefit_en}\n\n` +
@@ -1719,7 +1724,7 @@
               </div>
 
               <!-- Compact Centered Sacred Arabic Scripture -->
-              <div class="command-arabic-box">${hAr}</div>
+              <div class="command-arabic-box">${window.WaqfEngine ? window.WaqfEngine.formatArabicWithStopSigns(hAr, it.ayah_num) : hAr}</div>
 
               <!-- BiDi Dual-Pane Grid (Side-by-side on desktop, fluid order on mobile) -->
               <div class="command-content-grid ${!showEnglish ? 'urdu-only-grid' : (!showUrdu ? 'en-only-grid' : '')} ${isEngFirst ? 'mobile-order-en-first' : ''}">
@@ -1825,7 +1830,7 @@
 
               <!-- Collapsible Deep Details -->
               <div class="collapsible-body-content" id="col-body-${it.serial}">
-                <div class="command-arabic-box">${hAr}</div>
+                <div class="command-arabic-box">${window.WaqfEngine ? window.WaqfEngine.formatArabicWithStopSigns(hAr, it.ayah_num) : hAr}</div>
 
                 <div class="command-content-grid ${!showEnglish ? 'urdu-only-grid' : (!showUrdu ? 'en-only-grid' : '')}">
                   ${showUrdu ? `

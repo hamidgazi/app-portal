@@ -493,7 +493,7 @@ class TelemetryEngine {
                 </button>
               </div>
               <div class="occ-verse-content">
-                <div class="occ-ayah-arabic" dir="rtl">${v.arabic}</div>
+                <div class="occ-ayah-arabic" dir="rtl">${window.WaqfEngine ? window.WaqfEngine.formatArabicWithStopSigns(v.arabic, v.ayah) : v.arabic}</div>
               </div>
             </div>
           `;
@@ -633,7 +633,8 @@ class TelemetryEngine {
               const paraBadge = p ? `<span class="para-badge-inline" title="Para ${p.para}: ${p.name_ar} (${p.name_roman})">Para ${p.para}</span> ` : '';
               badgeEl.innerHTML = `${paraBadge}Surah ${s.name_roman} (${sId}:${aNo})`;
             }
-            const ar = a.arabic || a.arabicText || a.text || '';
+            let ar = a.arabic || a.arabicText || a.text || '';
+            if (window.WaqfEngine) ar = window.WaqfEngine.formatArabicWithStopSigns(ar, aNo);
             contentEl.innerHTML = ar ? `<div class="occ-ayah-arabic" dir="rtl">${ar}</div>` : '';
             return;
           }

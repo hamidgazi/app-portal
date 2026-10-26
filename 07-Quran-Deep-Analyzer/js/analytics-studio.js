@@ -239,7 +239,8 @@ class AnalyticsStudio {
           const ayahObj = await window.CorpusEngine.getAyahData(s.surah, s.ayah);
           if (ayahObj && ayahObj.ayah) {
             const ar = ayahObj.ayah.arabic || ayahObj.ayah.arabicText || ayahObj.ayah.text || '';
-            el.innerHTML = ar ? `<div class="occ-ayah-arabic" dir="rtl" style="font-size: 1.35rem; line-height: 1.9; color: #f8fafc;">${ar}</div>` : '';
+            const formattedAr = window.WaqfEngine ? window.WaqfEngine.formatArabicWithStopSigns(ar, s.ayah) : ar;
+            el.innerHTML = formattedAr ? `<div class="occ-ayah-arabic" dir="rtl" style="font-size: 1.35rem; line-height: 1.9; color: #f8fafc;">${formattedAr}</div>` : '';
             return;
           }
         } catch (e) {}
@@ -373,7 +374,7 @@ class AnalyticsStudio {
         <div style="display: flex; flex-direction: column; gap: 10px;">
           ${op.tibaq_sample.map(t => `
             <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); padding: 12px 16px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;">
-              <div style="font-family: var(--font-arabic); font-size: 1.28rem; color: #fef08a; direction: rtl; text-align: right; flex: 1 1 280px; line-height: 2.0;">${t.arabic}</div>
+              <div style="font-family: var(--font-arabic); font-size: 1.28rem; color: #fef08a; direction: rtl; text-align: right; flex: 1 1 280px; line-height: 2.0;">${window.WaqfEngine ? window.WaqfEngine.formatArabicWithStopSigns(t.arabic, t.ayah) : t.arabic}</div>
               <button class="filter-btn studio-jump-btn" data-surah="${t.surah}" data-ayah="${t.ayah}" onclick="window.AnalyticsStudio.closeTibaqModal()" style="flex-shrink: 0; background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.35); color: #38bdf8; font-weight: 700; padding: 5px 12px; border-radius: var(--radius-full); cursor: pointer;">Surah ${t.surah}:${t.ayah} ↗</button>
             </div>
           `).join("")}
@@ -598,7 +599,8 @@ class AnalyticsStudio {
               const paraBadge = p ? `<span class="para-badge-inline" title="Para ${p.para}: ${p.name_ar} (${p.name_roman})">Para ${p.para}</span> ` : '';
               badgeEl.innerHTML = `${paraBadge}Surah ${s.name_roman} (${sId}:${aNo})`;
             }
-            const ar = a.arabic || a.arabicText || a.text || '';
+            let ar = a.arabic || a.arabicText || a.text || '';
+            if (window.WaqfEngine) ar = window.WaqfEngine.formatArabicWithStopSigns(ar, aNo);
             contentEl.innerHTML = ar ? `<div class="occ-ayah-arabic" dir="rtl">${ar}</div>` : '';
             return;
           }

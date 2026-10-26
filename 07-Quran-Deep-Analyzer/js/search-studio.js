@@ -522,7 +522,8 @@
     },
 
     buildAyahCardHtml(v, query, rankNum) {
-      const highlightedAr = this.highlightText(v.arabic, query);
+      const rawAr = this.highlightText(v.arabic, query);
+      const highlightedAr = window.WaqfEngine ? window.WaqfEngine.formatArabicWithStopSigns(rawAr, v.ayahNum) : rawAr;
       const highlightedEn = this.highlightText(v.english, query);
       const highlightedUr = this.highlightText(v.urdu, query);
       const revBadge =
@@ -629,7 +630,10 @@
           StudioSound.playClick();
           const sId = btn.dataset.surah;
           const aNum = btn.dataset.ayah;
-          const ar = btn.dataset.arabic || '';
+          let ar = btn.dataset.arabic || '';
+      if (window.WaqfEngine) {
+        ar = window.WaqfEngine.appendPlainTextStopSign(ar, aNum);
+      }
           const en = btn.dataset.english || '';
           const ur = btn.dataset.urdu || '';
           const copyText = `Surah ${sId}:${aNum}\n\n${ar}\n\nEnglish: ${en}\n\nUrdu (Kanzul Iman): ${ur}\n\n(Quran Deep Analyzer)`;

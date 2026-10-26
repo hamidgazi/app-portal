@@ -583,7 +583,8 @@ class CorpusEngine {
     let html = "";
     (s.ayat || []).forEach(a => {
       const p = this.getParaForAyah(s.surah_id, a.number);
-      const arabicFormatted = window.TajweedEngine ? window.TajweedEngine.parse(a.arabic) : a.arabic;
+      const tajweedParsed = window.TajweedEngine ? window.TajweedEngine.parse(a.arabic) : a.arabic;
+      const arabicFormatted = window.WaqfEngine ? window.WaqfEngine.formatArabicWithStopSigns(tajweedParsed, a.number) : tajweedParsed;
       html += `
         <div class="ayah-card ${this.ayahViewMode === 'compact' ? 'compact-card' : ''}" id="ayah-node-${a.number}" data-surah="${s.surah_id}" data-ayah="${a.number}">
           <div class="ayah-card-meta">
@@ -761,7 +762,10 @@ class CorpusEngine {
     ayatContainer.querySelectorAll(".copy-ayah-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         if (window.AudioSFX) window.AudioSFX.playClick();
-        const text = decodeURIComponent(btn.dataset.arabic);
+        const rawText = decodeURIComponent(btn.dataset.arabic);
+        const card = btn.closest('.ayah-card');
+        const ayahNum = card ? card.dataset.ayah : '';
+        const text = window.WaqfEngine ? window.WaqfEngine.appendPlainTextStopSign(rawText, ayahNum) : rawText;
         navigator.clipboard.writeText(text).then(() => {
           const orig = btn.innerHTML;
           btn.innerHTML = "✓ Copied";
@@ -977,7 +981,7 @@ class CorpusEngine {
                 📖 Read in Ayah Analyzer ↗
               </button>
             </div>
-            ${ar ? `<div class="thematic-preview-arabic" dir="rtl">${ar}</div>` : ''}
+            ${ar ? `<div class="thematic-preview-arabic" dir="rtl">${window.WaqfEngine ? window.WaqfEngine.formatArabicWithStopSigns(ar, a.number) : ar}</div>` : ''}
             ${ur ? `
               <div class="thematic-preview-trans ur" dir="rtl">
                 <span class="compact-trans-tag ur-ki">کنز الایمان</span>
@@ -1189,7 +1193,7 @@ class CorpusEngine {
                       Open in Ayah Analyzer ↗
                     </button>
                   </div>
-                  <div class="parallel-arabic" dir="rtl">${occ.arabic}</div>
+                  <div class="parallel-arabic" dir="rtl">${window.WaqfEngine ? window.WaqfEngine.formatArabicWithStopSigns(occ.arabic, occ.ayah) : occ.arabic}</div>
                   <div class="parallel-translations">
                     ${enTrans ? `<div class="parallel-trans-en"><strong>EN:</strong> ${enTrans}</div>` : ''}
                     ${urTrans ? `<div class="parallel-trans-ur" dir="rtl"><span class="compact-trans-tag ur-ki">کنز الایمان</span> ${urTrans}</div>` : ''}
