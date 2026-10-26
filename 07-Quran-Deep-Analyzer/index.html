@@ -7,6 +7,7 @@
   <meta name="description" content="Complete deep analysis of the Holy Quran: Quantitative telemetry, word counts, roots, lemmas, thematic ontology, and classical Tafsir.">
   <meta name="theme-color" content="#07090e">
   <link rel="stylesheet" href="css/app.css?v=20261021_rev7">
+  <link rel="stylesheet" href="css/commands-manners.css?v=20261026">
   <script>
     function openOmnisearch() {
       if (typeof window.switchAppTab === 'function') {
@@ -109,14 +110,14 @@
           <span>📝 Tadabbur Studio</span>
           <span class="tab-badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399;">v2.0</span>
         </button>
-        <a href="manners.html" class="nav-tab-btn nav-tab-link" id="tab-btn-manners" title="Quranic Manners & Social Ethics Compendium (Kanzul Iman)">
+        <button class="nav-tab-btn" data-tab="manners" id="tab-btn-manners" title="Quranic Manners & Social Ethics Compendium (Kanzul Iman)">
           <span>🌿 Quranic Manners</span>
           <span class="tab-badge" style="background: rgba(251, 191, 36, 0.2); color: #fbbf24;">67</span>
-        </a>
-        <a href="commands.html" class="nav-tab-btn nav-tab-link" id="tab-btn-commands" title="Divine Commands & Injunctions for Human Living (احکامِ الٰہی)">
+        </button>
+        <button class="nav-tab-btn" data-tab="commands" id="tab-btn-commands" title="Divine Commands & Injunctions for Human Living (احکامِ الٰہی)">
           <span>📜 Divine Commands</span>
           <span class="tab-badge" style="background: rgba(251, 191, 36, 0.2); color: #fbbf24;">80</span>
-        </a>
+        </button>
       </nav>
     </div>
   </header>
@@ -584,6 +585,210 @@
       <div id="notebook-studio-mount"></div>
     </section>
 
+    <!-- Tab 11: Quranic Manners & Social Ethics Compendium (67 Manners) -->
+    <section id="tab-manners" class="tab-panel">
+      <div class="manners-main-container">
+        <!-- Manners Toolbar -->
+        <div class="commands-toolbar">
+          <div class="toolbar-row-main">
+            <div class="search-box-wrap">
+              <span class="search-icon">🔍</span>
+              <input type="text" id="native-manners-search" class="commands-search-input" placeholder="Search manners: truth, parents, humility, walking, 49:12..." autocomplete="off">
+              <button id="native-manners-search-clear" class="search-clear-btn" style="display: none;" title="Clear Search">✕</button>
+            </div>
+
+            <div class="toolbar-actions-group">
+              <div class="sort-selector-wrap">
+                <label for="native-manners-sort-select" class="sort-label">Sort:</label>
+                <select id="native-manners-sort-select" class="commands-sort-select" aria-label="Sort Manners">
+                  <option value="default">🔢 Default Order (#1..#67)</option>
+                  <option value="words_asc">📏 Shortest First (Words ⬆)</option>
+                  <option value="words_desc">📜 Longest First (Words ⬇)</option>
+                  <option value="alpha">🔤 Alphabetical (Alif - Yaa)</option>
+                  <option value="surah">📖 Quranic Order (Surah 1..114)</option>
+                </select>
+              </div>
+
+              <button class="waqf-guide-toolbar-btn" onclick="window.WaqfEngine && window.WaqfEngine.openGuideModal()" title="Quranic Stop Signs & Waqf Rules Guide">
+                <span>🛑 Waqf Guide</span>
+              </button>
+
+              <div class="segmented-pill-group" id="native-manners-view-mode">
+                <button class="segment-btn active" data-view="cards" title="Detailed Cards">🃏 Cards</button>
+                <button class="segment-btn" data-view="compact" title="High-Density Checklist">📋 Checklist</button>
+              </div>
+
+              <div class="segmented-pill-group" id="native-manners-lang-filters">
+                <button class="segment-btn active" data-lang="both-ur" title="Both (Urdu first on mobile)">Both (Urdu 1st)</button>
+                <button class="segment-btn" data-lang="both-en" title="Both (English first on mobile)">Both (Eng 1st)</button>
+                <button class="segment-btn" data-lang="ur">Urdu</button>
+                <button class="segment-btn" data-lang="en">English</button>
+              </div>
+
+              <div id="native-manners-count-badge" class="commands-counter-badge">
+                67 Manners
+              </div>
+            </div>
+          </div>
+
+          <!-- 9 Life Spheres Ribbon -->
+          <div class="toolbar-row-ribbon">
+            <div class="modules-nav">
+              <button class="module-pill active" data-module="all">
+                <span>🌟</span>
+                <span>All Manners (67)</span>
+              </button>
+              <button class="module-pill" data-module="m1">
+                <span>🗣️</span>
+                <span>Speech & Truth (11)</span>
+              </button>
+              <button class="module-pill" data-module="m2">
+                <span>🚶</span>
+                <span>Walking & Humility (5)</span>
+              </button>
+              <button class="module-pill" data-module="m3">
+                <span>🚪</span>
+                <span>Privacy & Homes (6)</span>
+              </button>
+              <button class="module-pill" data-module="m4">
+                <span>🤝</span>
+                <span>Social Peace (8)</span>
+              </button>
+              <button class="module-pill" data-module="m5">
+                <span>⚖️</span>
+                <span>Financial Ethics (12)</span>
+              </button>
+              <button class="module-pill" data-module="m6">
+                <span>👨‍👩‍👧</span>
+                <span>Parents & Family (7)</span>
+              </button>
+              <button class="module-pill" data-module="m7">
+                <span>🌍</span>
+                <span>Equality & Dignity (6)</span>
+              </button>
+              <button class="module-pill" data-module="m8">
+                <span>🧠</span>
+                <span>Rumor Resistance (6)</span>
+              </button>
+              <button class="module-pill" data-module="m9">
+                <span>🕊️</span>
+                <span>Forgiveness & Sabr (6)</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mount for Manners List -->
+        <div id="native-manners-list" class="manners-container"></div>
+        <div id="native-manners-sentinel" class="scroll-sentinel" style="height: 40px; width: 100%;"></div>
+      </div>
+    </section>
+
+    <!-- Tab 12: Quranic Divine Commands & Injunctions (80 Directives) -->
+    <section id="tab-commands" class="tab-panel">
+      <div class="commands-main" style="padding: 0;">
+        <!-- Commands Toolbar -->
+        <div class="commands-toolbar">
+          <div class="toolbar-row-main">
+            <div class="search-box-wrap">
+              <span class="search-icon">🔍</span>
+              <input type="text" id="native-commands-search-input" class="commands-search-input" placeholder="Search directives: food, speech, parents, justice, 2:168..." autocomplete="off">
+              <button id="native-commands-search-clear" class="search-clear-btn" style="display: none;" title="Clear Search">✕</button>
+            </div>
+
+            <div class="toolbar-actions-group">
+              <div class="sort-selector-wrap">
+                <label for="native-commands-sort-select" class="sort-label">Sort:</label>
+                <select id="native-commands-sort-select" class="commands-sort-select" aria-label="Sort Ayat">
+                  <option value="default">🔢 Default Order (#1..#80)</option>
+                  <option value="words_asc">📏 Shortest First (Words ⬆)</option>
+                  <option value="words_desc">📜 Longest First (Words ⬇)</option>
+                  <option value="alpha">🔤 Alphabetical (Alif - Yaa)</option>
+                  <option value="surah">📖 Quranic Order (Surah 1..114)</option>
+                </select>
+              </div>
+
+              <button class="waqf-guide-toolbar-btn" onclick="window.WaqfEngine && window.WaqfEngine.openGuideModal()" title="Quranic Stop Signs & Waqf Rules Guide">
+                <span>🛑 Waqf Guide</span>
+              </button>
+
+              <div class="segmented-pill-group" id="native-commands-view-mode">
+                <button class="segment-btn active" data-view="cards" title="Detailed Cards">🃏 Cards</button>
+                <button class="segment-btn" data-view="collapsible" title="High-Density Summary">📑 Summary</button>
+                <button class="segment-btn" data-view="checklist" title="Compact Action Checklist">📋 Checklist</button>
+              </div>
+
+              <div class="segmented-pill-group" id="native-commands-lang-filters">
+                <button class="segment-btn active" data-lang="both-ur" title="Both (Urdu first on mobile)">Both (Urdu 1st)</button>
+                <button class="segment-btn" data-lang="both-en" title="Both (English first on mobile)">Both (Eng 1st)</button>
+                <button class="segment-btn" data-lang="ur">Urdu</button>
+                <button class="segment-btn" data-lang="en">English</button>
+              </div>
+
+              <div id="native-commands-counter-badge" class="commands-counter-badge">
+                80 Directives
+              </div>
+            </div>
+          </div>
+
+          <div class="toolbar-row-ribbon">
+            <div class="segmented-pill-group" id="native-commands-polarity-filters">
+              <button class="segment-btn active" data-polarity="all">All (80)</button>
+              <button class="segment-btn command" data-polarity="command">✅ Do This (46)</button>
+              <button class="segment-btn prohibition" data-polarity="prohibition">🚫 Avoid This (34)</button>
+              <button class="segment-btn" data-polarity="starred">⭐ Saved</button>
+            </div>
+
+            <div class="ribbon-divider"></div>
+
+            <div class="category-scroll-strip" id="native-commands-category-filters">
+              <button class="cat-filter-chip active" data-cat="all">All Spheres</button>
+              <button class="cat-filter-chip" data-cat="health">🥗 Health & Hygiene</button>
+              <button class="cat-filter-chip" data-cat="speech">🗣️ Speech & Truth</button>
+              <button class="cat-filter-chip" data-cat="compassion">🍲 Charity & Feeding</button>
+              <button class="cat-filter-chip" data-cat="social_peace">🤝 Social Harmony</button>
+              <button class="cat-filter-chip" data-cat="mental_peace">🧠 Mental Peace & Sabr</button>
+              <button class="cat-filter-chip" data-cat="finance">⚖️ Financial Ethics</button>
+              <button class="cat-filter-chip" data-cat="family">👨‍👩‍👧 Parents & Family</button>
+              <button class="cat-filter-chip" data-cat="justice">🏛️ Justice & Humility</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mount for Commands List -->
+        <div id="native-commands-list" class="commands-container"></div>
+        <div id="native-commands-sentinel" class="scroll-sentinel" style="height: 40px; width: 100%;"></div>
+
+        <!-- Persistent Cyber-Glass Audio Mini-Dock -->
+        <div id="native-commands-mini-dock" class="audio-mini-dock" aria-label="Persistent Audio Player">
+          <div class="mini-dock-info">
+            <div class="mini-dock-pulse"></div>
+            <div class="mini-dock-text-wrap">
+              <div id="native-mini-dock-title" class="mini-dock-title">Quran Tartil Audio</div>
+              <div id="native-mini-dock-sub" class="mini-dock-sub">Mishary Alafasy</div>
+            </div>
+          </div>
+          <div class="mini-dock-reciter-wrap">
+            <select id="native-audio-reciter-select" class="audio-reciter-select" title="Choose Reciter">
+              <option value="Alafasy_128kbps">Mishary Alafasy</option>
+              <option value="Husary_128kbps">Al-Husary (Teacher)</option>
+              <option value="Abdul_Basit_Murattal_192kbps">Abdul Basit Murattal</option>
+            </select>
+          </div>
+          <div class="mini-dock-controls">
+            <button id="native-mini-dock-prev-btn" class="mini-dock-btn" title="Previous Directive">⏮</button>
+            <button id="native-mini-dock-play-btn" class="mini-dock-btn play-toggle" title="Play/Pause">▶</button>
+            <button id="native-mini-dock-next-btn" class="mini-dock-btn" title="Next Directive">⏭</button>
+            <label class="mini-dock-autoplay-wrap" title="Auto-advance to next directive">
+              <input type="checkbox" id="native-mini-dock-autoplay" checked>
+              <span>Autoplay</span>
+            </label>
+            <button id="native-mini-dock-close-btn" class="mini-dock-close" title="Close">✕</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- Occurrence Modal Drawer -->
@@ -797,29 +1002,33 @@
   <script src="js/audio-player.js?v=20261022_v2"></script>
   <script src="js/tajweed-engine.js?v=20261022_v2"></script>
   <script src="js/notebook-engine.js?v=20261022_v2"></script>
+  <script src="data/quran_commands_data.js"></script>
+  <script src="data/quran_manners_data.js"></script>
+  <script src="js/commands-engine.js"></script>
+  <script src="js/manners-engine.js"></script>
   <script src="js/app.js?v=20261022_v2"></script>
   <!-- Universal Mobile Bottom Command Dock -->
   <nav class="mobile-bottom-dock" aria-label="Mobile Navigation Dock">
-    <a href="index.html#ayahs" class="mobile-dock-btn active" id="dock-btn-read" class="mobile-dock-btn active">
+    <button class="mobile-dock-btn active" data-tab="ayahs" id="dock-btn-read">
       <span class="mobile-dock-icon">📖</span>
       <span class="mobile-dock-label">تلاوت</span>
-    </a>
-    <a href="index.html#search" class="mobile-dock-btn" id="dock-btn-search">
+    </button>
+    <button class="mobile-dock-btn" data-tab="search" id="dock-btn-search">
       <span class="mobile-dock-icon">⚡</span>
       <span class="mobile-dock-label">تلاش</span>
-    </a>
-    <a href="commands.html" class="mobile-dock-btn" id="dock-btn-commands">
+    </button>
+    <button class="mobile-dock-btn" data-tab="commands" id="dock-btn-commands">
       <span class="mobile-dock-icon">📜</span>
       <span class="mobile-dock-label">اوامر</span>
-    </a>
-    <a href="manners.html" class="mobile-dock-btn" id="dock-btn-manners">
+    </button>
+    <button class="mobile-dock-btn" data-tab="manners" id="dock-btn-manners">
       <span class="mobile-dock-icon">🌿</span>
       <span class="mobile-dock-label">آداب</span>
-    </a>
-    <a href="index.html#studio" class="mobile-dock-btn" id="dock-btn-studio">
+    </button>
+    <button class="mobile-dock-btn" data-tab="studio" id="dock-btn-studio">
       <span class="mobile-dock-icon">🔬</span>
       <span class="mobile-dock-label">تحقیق</span>
-    </a>
+    </button>
   </nav>
 
 </body>

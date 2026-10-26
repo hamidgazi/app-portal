@@ -32,6 +32,8 @@ function switchAppTab(tabName) {
     btn.classList.remove("active");
     if (tabName === "ayahs" && btn.id === "dock-btn-read") btn.classList.add("active");
     else if (tabName === "search" && btn.id === "dock-btn-search") btn.classList.add("active");
+    else if (tabName === "commands" && btn.id === "dock-btn-commands") btn.classList.add("active");
+    else if (tabName === "manners" && btn.id === "dock-btn-manners") btn.classList.add("active");
     else if (tabName === "studio" && btn.id === "dock-btn-studio") btn.classList.add("active");
   });
 
@@ -40,7 +42,7 @@ function switchAppTab(tabName) {
   const banner = document.getElementById("global-metrics-banner");
   const btnIcon = document.getElementById("telemetry-btn-icon");
   const btnText = document.getElementById("telemetry-btn-text");
-  const readingTabs = ["search", "ayahs", "roots", "thematic", "mutashabihat", "waqf", "notebook"];
+  const readingTabs = ["search", "ayahs", "roots", "thematic", "mutashabihat", "waqf", "notebook", "manners", "commands"];
 
   if (tabName === "search" && window.SearchStudioEngine) {
     window.SearchStudioEngine.onActivated();
@@ -54,9 +56,17 @@ function switchAppTab(tabName) {
     window.NotebookEngine.render();
   }
 
+  if (tabName === "manners" && window.MannersEngine) {
+    window.MannersEngine.onTabActivated();
+  }
+
+  if (tabName === "commands" && window.CommandsEngine) {
+    window.CommandsEngine.onTabActivated();
+  }
+
   // Synchronize High-Velocity QuickScrubber Visibility
   if (window.QuickScrubber) {
-    if (tabName === "ayahs") {
+    if (tabName === "ayahs" || tabName === "commands" || tabName === "manners") {
       window.QuickScrubber.show();
     } else {
       window.QuickScrubber.hide();
@@ -119,6 +129,20 @@ function initTabs() {
     dockStudio.addEventListener("click", (e) => {
       e.preventDefault();
       switchAppTab("studio");
+    });
+  }
+  const dockCommands = document.getElementById("dock-btn-commands");
+  if (dockCommands) {
+    dockCommands.addEventListener("click", (e) => {
+      e.preventDefault();
+      switchAppTab("commands");
+    });
+  }
+  const dockManners = document.getElementById("dock-btn-manners");
+  if (dockManners) {
+    dockManners.addEventListener("click", (e) => {
+      e.preventDefault();
+      switchAppTab("manners");
     });
   }
 
