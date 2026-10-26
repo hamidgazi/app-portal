@@ -6127,7 +6127,7 @@ mark.search-highlight {
   align-items: center;
   justify-content: center;
   padding: 0 1px;
-  margin: 0 0.35em;
+  margin: 0 0.12em 0 0.04em;
   min-width: auto;
   cursor: pointer;
   color: #fbbf24;
@@ -6143,7 +6143,8 @@ mark.search-highlight {
 }
 
 .quran-waqf-inline-mark + .quran-waqf-inline-mark {
-  margin-right: -0.20em;
+  margin-right: -0.15em;
+  margin-left: 0.04em;
 }
 
 .quran-waqf-inline-mark:hover {

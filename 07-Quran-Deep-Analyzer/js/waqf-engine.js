@@ -182,23 +182,29 @@
     wrapInlineWaqfSymbols(text) {
       if (!text) return '';
 
-      // Pattern covering standard Unicode Quranic pause diacritics:
-      // \u0615 (Small High Tah ؕ - Mutlaq)
-      // \u06D6 (Sad-Lam ۖ - Mujawwaz)
-      // \u06D7 (Qaf-Lam ۗ - Murakhkhas)
-      // \u06D8 (Small High Meem ۘ - Lazim)
-      // \u06D9 (Small High Lam-Alif ۙ - La Waqf)
-      // \u06DA (Small High Jeem ۚ - Jaiz)
-      // \u06DB (Three dots ۛ - Muanaqah)
-      // \u06DC (Small Seen ۜ - Saktah)
-      // \u06EB (Empty Centre Stop ۫ - Kadhalik)
-      // \u06EA (Empty Centre Low Stop ۪ - Kadhalik)
-      // \u06EC (Rounded High Stop ۬ - Kadhalik)
-      // \u06ED (Small Low Meem ۭ - Lazim)
-      // \u06E2 (Small High Meem ۢ - Lazim)
-      // \u06E9 (Place of Sajdah ۩ - Sajdah)
-      // Also matches attached Indo-Pak hyphens (e.g., ؕ-, ۫-) and sanitizes them cleanly
-      let result = text.replace(/([\u0615\u06D5\u06D6-\u06DC\u06EB\u06EA\u06EC\u06ED\u06E2\u06E9])(?:\s*[\-\u200C\u200D\u200E\u200F\u00A0]*\-)?/g, (match, char) => {
+      // 0. Pre-heal any broken words, presentation-form glyphs, and isolated conjunction waws
+      let t = String(text);
+
+      // Map proprietary presentation-form waqf glyphs to standard Unicode marks
+      t = t.replace(/[\uFB64\uFB65\uFB66\uFB67\uFB68\uFCA2\uFCA8\uFC6D\uFB8A\uFB8E\uFB92\uFCD0\uFC2F\uFC30\uFC61\uFC62\uFCDA]/g, '\u0615')
+           .replace(/[\uFB6A\uFD30\uFCD4\uFBFC\uFC43\uFC44\uFC59]/g, '\u06D9')
+           .replace(/[\uFB55\uFCDB\uFCD3\uFCF3\uFCF4\uFCCD\uFCD1\uFC6A\uFC33\uFC08\uFC09\uFC9C\uFC4E\uFC4F\uFC50\uFCA3\uFCAA\uFCAC\uFCB0\uFCCC\uFCCE\uFC42\uFC2E\uFB7A]/g, '\u06DA')
+           .replace(/[\uFCDC\uFCF2\uFCD2\uFC95\uFC60]/g, '\u06D6')
+           .replace(/[\uFCD8\uFCD5\uFC5F\uFC5E\uFC58\uFCA6]/g, '\u06D7')
+           .replace(/[\uFD88\uFCDD]/g, '\u06DB');
+
+      // Heal broken kh-r-j words: e.g. یُخْرِ جْ -> یُخْرِجْ, اَخْرَ جَ -> اَخْرَجَ
+      t = t.replace(/([خح][\u064E\u064F\u0650\u0652]?ر[\u064E\u064F\u0650\u0652]?)\s+([ج][\u064E\u064F\u0650\u0652\u064C]?)/g, '$1$2');
+
+      // Heal broken j-w-ain: جُوْ عٍ -> جُوْعٍ
+      t = t.replace(/(جُ?وْ)\s+(عٍ)/g, '$1$2');
+
+      // Attach isolated conjunction waw: وَ / وَّ to subsequent word
+      t = t.replace(/(?:^|(?<=\s))([وۄ][\u064E\u0651\u0654]?|وَّ)\s+([^\s\-\u0615\u06D6-\u06DC\u06DF-\u06EB<])/g, '$1$2');
+      t = t.replace(/([\-\u0615\u06D6-\u06DC\u06DF-\u06EB])([وۄ][\u064E\u0651\u0654]?|وَّ)\s+([^\s\-\u0615\u06D6-\u06DC\u06DF-\u06EB<])/g, '$1$2$3');
+
+      // 1. Pattern covering standard Unicode Quranic pause diacritics
+      let result = t.replace(/([\u0615\u06D5\u06D6-\u06DC\u06EB\u06EA\u06EC\u06ED\u06E2\u06E9])(?:\s*[\-\u200C\u200D\u200E\u200F\u00A0]*\-)?/g, (match, char) => {
         let key = "mutlaq";
         if (char === '\u06D8' || char === '\u06E2' || char === '\u06ED') key = "lazim";
         else if (char === '\u06DA') key = "jaiz";
@@ -220,6 +226,9 @@
 
       // Guarantee single standard space after waqf mark when followed by another word
       result = result.replace(/(<\/span>)(?=[^\s<])/g, '$1 ');
+
+      // Also ensure waw directly following a waqf span attaches cleanly without isolated space
+      result = result.replace(/(<\/span>\s*)([وۄ][\u064E\u0651\u0654]?|وَّ)\s+([^\s\-\u0615\u06D6-\u06DC\u06DF-\u06EB<])/g, '$1$2$3');
 
       // Sanitize any orphaned trailing hyphens leftover from old data
       result = result.replace(/(\S)\-(?=\s|$)/g, '$1');

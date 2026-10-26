@@ -12,7 +12,7 @@
   "ayat": [
     {
       "number": 1,
-      "arabic": "اَلْقَارِعَةُ",
+      "arabic": "اَلْقَارِعَةُۙ",
       "arabic_clean": "القارعه",
       "translation_urdu_kanzul_iman": "دل دہلانے والی۔",
       "translation_urdu_kanzul_irfan": "وہ دل دہلادینے والی۔",
@@ -30,7 +30,7 @@
     },
     {
       "number": 2,
-      "arabic": "مَا الْقَارِعَةُ",
+      "arabic": "مَا الْقَارِعَةُۚ",
       "arabic_clean": "ما القارعه",
       "translation_urdu_kanzul_iman": "کیا وہ دہلانے والی ۔",
       "translation_urdu_kanzul_irfan": "وہ دل دہلادینے والی کیاہے؟",
@@ -53,7 +53,7 @@
     },
     {
       "number": 3,
-      "arabic": "وَ مَاۤ اَدْرٰىكَ مَا الْقَارِعَةُ",
+      "arabic": "وَمَاۤ اَدْرٰىكَ مَا الْقَارِعَةُؕ",
       "arabic_clean": "و ما ادريك ما القارعه",
       "translation_urdu_kanzul_iman": "اور تو نے کیا جانا کیا ہے دہلانے والی۔",
       "translation_urdu_kanzul_irfan": "اور تجھے کیا معلوم کہ وہ دل دہلادینے والی کیاہے؟",
@@ -91,7 +91,7 @@
     },
     {
       "number": 4,
-      "arabic": "یَوْمَ یَكُوْنُ النَّاسُ كَالْفَرَاشِ الْمَبْثُوْثِ",
+      "arabic": "یَوْمَ یَكُوْنُ النَّاسُ كَالْفَرَاشِ الْمَبْثُوْثِۙ",
       "arabic_clean": "یوم یكون الناس كالفراش المبثوث",
       "translation_urdu_kanzul_iman": "جس دن آدمی ہوں  گے جیسے پھیلے پتنگے ۔",
       "translation_urdu_kanzul_irfan": "جس دن آدمی پھیلے ہوئے پروانوں  کی طرح ہوں   گے ۔",
@@ -129,7 +129,7 @@
     },
     {
       "number": 5,
-      "arabic": "وَ تَكُوْنُ الْجِبَالُ كَالْعِهْنِ الْمَنْفُوْشِ",
+      "arabic": "وَتَكُوْنُ الْجِبَالُ كَالْعِهْنِ الْمَنْفُوْشِؕ",
       "arabic_clean": "و تكون الجبال كالعهن المنفوش",
       "translation_urdu_kanzul_iman": "اور پہاڑ ہوں  گے جیسے دُھنکی اون ۔",
       "translation_urdu_kanzul_irfan": "اور پہاڑ رنگ برنگی دھنکی ہوئی اون کی طرح ہوجائیں   گے۔",
@@ -167,7 +167,7 @@
     },
     {
       "number": 6,
-      "arabic": "فَاَمَّا مَنْ ثَقُلَتْ مَوَازِیْنُهٗ",
+      "arabic": "فَاَمَّا مَنْ ثَقُلَتْ مَوَازِیْنُهٗۙ",
       "arabic_clean": "فاما من ثقلت موازینه",
       "translation_urdu_kanzul_iman": "تو جس کی تولیں  بھاری ہوئیں  ۔",
       "translation_urdu_kanzul_irfan": "توبہرحال جس کے ترازو بھاری ہوں   گے۔",
@@ -200,7 +200,7 @@
     },
     {
       "number": 7,
-      "arabic": "فَهُوَ فِیْ عِیْشَةٍ رَّاضِیَةٍ",
+      "arabic": "فَهُوَ فِیْ عِیْشَةٍ رَّاضِیَةٍؕ",
       "arabic_clean": "فهو فی عیشه راضیه",
       "translation_urdu_kanzul_iman": "وہ تو من مانتے عیش میں  ہیں  ۔",
       "translation_urdu_kanzul_irfan": "وہ تو پسندیدہ زندگی میں  ہوگا۔",
@@ -233,7 +233,7 @@
     },
     {
       "number": 8,
-      "arabic": "وَ اَمَّا مَنْ خَفَّتْ مَوَازِیْنُهٗ",
+      "arabic": "وَاَمَّا مَنْ خَفَّتْ مَوَازِیْنُهٗۙ",
       "arabic_clean": "و اما من خفت موازینه",
       "translation_urdu_kanzul_iman": "اور جس کی تولیں  ہلکی پڑیں  ۔",
       "translation_urdu_kanzul_irfan": "اور بہرحال جس کے ترازو ہلکے پڑیں  گے۔",
@@ -271,7 +271,7 @@
     },
     {
       "number": 9,
-      "arabic": "فَاُمُّهٗ هَاوِیَةٌ",
+      "arabic": "فَاُمُّهٗ هَاوِیَةٌؕ",
       "arabic_clean": "فامه هاویه",
       "translation_urdu_kanzul_iman": "وہ نیچا دکھانے والی گود میں  ہے ۔",
       "translation_urdu_kanzul_irfan": "تو اس کا ٹھکانہ ہاویہ ہوگا۔",
@@ -294,7 +294,7 @@
     },
     {
       "number": 10,
-      "arabic": "وَ مَاۤ اَدْرٰىكَ مَاهِیَهْ",
+      "arabic": "وَمَاۤ اَدْرٰىكَ مَاهِیَهْؕ",
       "arabic_clean": "و ما ادريك ماهیه",
       "translation_urdu_kanzul_iman": "اور تو نے کیا جانا کیا نیچا دکھانے والی۔",
       "translation_urdu_kanzul_irfan": "اور تجھے کیا معلوم کہ وہ کیا ہے؟",
@@ -327,7 +327,7 @@
     },
     {
       "number": 11,
-      "arabic": "نَارٌ حَامِیَةٌ",
+      "arabic": "نَارٌ حَامِیَةٌ۠",
       "arabic_clean": "نار حامیه",
       "translation_urdu_kanzul_iman": "ایک آگ شعلے مارتی ۔",
       "translation_urdu_kanzul_irfan": "ایک شعلے مارتی آگ ہے۔",

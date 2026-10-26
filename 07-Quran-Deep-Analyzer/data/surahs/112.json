@@ -12,7 +12,7 @@
   "ayat": [
     {
       "number": 1,
-      "arabic": "قُلْ هُوَ اللّٰهُ اَحَدٌ",
+      "arabic": "قُلْ هُوَ اللّٰهُ اَحَدٌۚ",
       "arabic_clean": "قل هو الله احد",
       "translation_urdu_kanzul_iman": "تم فرماؤ وہ اللہ ہے وہ ایک ہے ۔",
       "translation_urdu_kanzul_irfan": "تم فرماؤ: وہ اللہ  ایک ہے۔",
@@ -45,7 +45,7 @@
     },
     {
       "number": 2,
-      "arabic": "اَللّٰهُ الصَّمَدُ",
+      "arabic": "اَللّٰهُ الصَّمَدُۚ",
       "arabic_clean": "الله الصمد",
       "translation_urdu_kanzul_iman": "اللہ بے نیاز ہے۔",
       "translation_urdu_kanzul_irfan": "اللہ بے نیاز ہے۔",
@@ -68,7 +68,7 @@
     },
     {
       "number": 3,
-      "arabic": "لَمْ یَلِدْ وَ لَمْ یُوْلَدْ",
+      "arabic": "لَمْ یَلِدْ ۙ وَلَمْ یُوْلَدْۙ",
       "arabic_clean": "لم یلد  و لم یولد",
       "translation_urdu_kanzul_iman": "نہ اس کی کوئی اولاد اور نہ وہ کسی سے پیدا ہوا۔",
       "translation_urdu_kanzul_irfan": "نہ اس نے کسی کو جنم دیا اور نہ وہ کسی سے پیدا ہوا۔",
@@ -106,7 +106,7 @@
     },
     {
       "number": 4,
-      "arabic": "وَ لَمْ یَكُنْ لَّهٗ كُفُوًا اَحَدٌ",
+      "arabic": "وَلَمْ یَكُنْ لَّهٗ كُفُوًا اَحَدٌ۠",
       "arabic_clean": "و لم یكن له كفوا احد",
       "translation_urdu_kanzul_iman": "اور نہ اس کے جوڑ کا کوئی۔",
       "translation_urdu_kanzul_irfan": "اور کوئی اس کے برابر نہیں   ۔",

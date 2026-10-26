@@ -12,7 +12,7 @@
   "ayat": [
     {
       "number": 1,
-      "arabic": "قُلْ اَعُوْذُ بِرَبِّ النَّاسِ",
+      "arabic": "قُلْ اَعُوْذُ بِرَبِّ النَّاسِۙ",
       "arabic_clean": "قل اعوذ برب الناس",
       "translation_urdu_kanzul_iman": "تم کہو میں  اس کی پناہ میں  آیا جو سب لوگوں  کا رب۔",
       "translation_urdu_kanzul_irfan": "تم کہو: میں   تمام لوگوں   کے رب کی پناہ لیتا ہوں   ۔",
@@ -45,7 +45,7 @@
     },
     {
       "number": 2,
-      "arabic": "مَلِكِ النَّاسِ",
+      "arabic": "مَلِكِ النَّاسِۙ",
       "arabic_clean": "ملك الناس",
       "translation_urdu_kanzul_iman": "سب لوگوں  کا بادشاہ۔",
       "translation_urdu_kanzul_irfan": "تمام لوگوں   کا بادشاہ ۔",
@@ -68,7 +68,7 @@
     },
     {
       "number": 3,
-      "arabic": "اِلٰهِ النَّاسِ",
+      "arabic": "اِلٰهِ النَّاسِۙ",
       "arabic_clean": "اله الناس",
       "translation_urdu_kanzul_iman": "سب لوگوں  کا خدا۔",
       "translation_urdu_kanzul_irfan": "تمام لوگوں   کا معبود ۔",
@@ -91,7 +91,7 @@
     },
     {
       "number": 4,
-      "arabic": "مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ",
+      "arabic": "مِنْ شَرِّ الْوَسْوَاسِ ۙ الْخَنَّاسِۙ",
       "arabic_clean": "من شر الوسواس  الخناس",
       "translation_urdu_kanzul_iman": "اس کے شر سے جو دل میں  برے خطرے ڈالے اور دبک رہے ۔",
       "translation_urdu_kanzul_irfan": "باربار وسوسے ڈالنے والے، چھپ جانے والے کے شر سے(پناہ لیتا ہوں)۔",
@@ -124,7 +124,7 @@
     },
     {
       "number": 5,
-      "arabic": "الَّذِیْ یُوَسْوِسُ فِیْ صُدُوْرِ النَّاسِ",
+      "arabic": "الَّذِیْ یُوَسْوِسُ فِیْ صُدُوْرِ النَّاسِۙ",
       "arabic_clean": "الذی یوسوس فی صدور الناس",
       "translation_urdu_kanzul_iman": "وہ جو لوگوں  کے دلوں  میں  وسوسے ڈالتے ہیں ۔",
       "translation_urdu_kanzul_irfan": "وہ جو لوگوں   کے دلوں   میں   وسوسے ڈالتا ہے۔",
@@ -162,7 +162,7 @@
     },
     {
       "number": 6,
-      "arabic": "مِنَ الْجِنَّةِ وَ النَّاسِ",
+      "arabic": "مِنَ الْجِنَّةِ وَالنَّاسِ۠",
       "arabic_clean": "من الجنه و الناس",
       "translation_urdu_kanzul_iman": "جن اور آدمی۔",
       "translation_urdu_kanzul_irfan": "جنوں   اورانسانوں   میں   سے۔",

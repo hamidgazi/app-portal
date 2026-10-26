@@ -12,7 +12,7 @@
   "ayat": [
     {
       "number": 1,
-      "arabic": "اَلَمْ نَشْرَحْ لَكَ صَدْرَكَ",
+      "arabic": "اَلَمْ نَشْرَحْ لَكَ صَدْرَكَۙ",
       "arabic_clean": "الم نشرح لك صدرك",
       "translation_urdu_kanzul_iman": "کیا ہم نے تمہارے لئے سینہ کشادہ نہ کیا ۔",
       "translation_urdu_kanzul_irfan": "کیا ہم نے تمہاری خاطر تمہارا سینہ کشادہ نہ کردیا ؟",
@@ -45,7 +45,7 @@
     },
     {
       "number": 2,
-      "arabic": "وَ وَضَعْنَا عَنْكَ وِزْرَكَ",
+      "arabic": "وَوَضَعْنَا عَنْكَ وِزْرَكَۙ",
       "arabic_clean": "و وضعنا عنك وزرك",
       "translation_urdu_kanzul_iman": "اور تم پر سے تمہارا وہ بوجھ اتار لیا۔",
       "translation_urdu_kanzul_irfan": "اور ہم نے تمہارے اوپر سے تمہارا بوجھ اتاردیا۔",
@@ -78,7 +78,7 @@
     },
     {
       "number": 3,
-      "arabic": "الَّذِیْۤ اَنْقَضَ ظَهْرَكَ",
+      "arabic": "الَّذِیْۤ اَنْقَضَ ظَهْرَكَۙ",
       "arabic_clean": "الذی انقض ظهرك",
       "translation_urdu_kanzul_iman": "جس نے تمہاری پیٹھ توڑی تھی ۔",
       "translation_urdu_kanzul_irfan": "جس نے تمہاری پیٹھ توڑی تھی۔",
@@ -106,7 +106,7 @@
     },
     {
       "number": 4,
-      "arabic": "وَ رَفَعْنَا لَكَ ذِكْرَكَ",
+      "arabic": "وَرَفَعْنَا لَكَ ذِكْرَكَؕ",
       "arabic_clean": "و رفعنا لك ذكرك",
       "translation_urdu_kanzul_iman": "اور ہم نے تمہارے لیے تمہارا ذکر بلند کردیا۔",
       "translation_urdu_kanzul_irfan": "اور ہم نے تمہاری خاطر تمہارا ذکر بلند کردیا۔",
@@ -139,7 +139,7 @@
     },
     {
       "number": 5,
-      "arabic": "فَاِنَّ مَعَ الْعُسْرِ یُسْرًا",
+      "arabic": "فَاِنَّ مَعَ الْعُسْرِ یُسْرًاۙ",
       "arabic_clean": "فان مع العسر یسرا",
       "translation_urdu_kanzul_iman": "تو بیشک دشواری کے ساتھ آسانی ہے ۔",
       "translation_urdu_kanzul_irfan": "تو بیشک دشواری کے ساتھ آسانی ہے۔",
@@ -172,7 +172,7 @@
     },
     {
       "number": 6,
-      "arabic": "اِنَّ مَعَ الْعُسْرِ یُسْرًا",
+      "arabic": "اِنَّ مَعَ الْعُسْرِ یُسْرًاؕ",
       "arabic_clean": "ان مع العسر یسرا",
       "translation_urdu_kanzul_iman": "بیشک دشواری کے ساتھ اور آسانی ہے ۔",
       "translation_urdu_kanzul_irfan": "بیشک دشواری کے ساتھ آسانی ہے۔",
@@ -205,7 +205,7 @@
     },
     {
       "number": 7,
-      "arabic": "فَاِذَا فَرَغْتَ فَانْصَبْ",
+      "arabic": "فَاِذَا فَرَغْتَ فَانْصَبْۙ",
       "arabic_clean": "فاذا فرغت فانصب",
       "translation_urdu_kanzul_iman": "تو جب تم نماز سے فارغ ہو تو دعا میں  محنت کرو ۔",
       "translation_urdu_kanzul_irfan": "تو جب تم فارغ ہو تو خوب کوشش کرو۔",
@@ -233,7 +233,7 @@
     },
     {
       "number": 8,
-      "arabic": "وَ اِلٰى رَبِّكَ فَارْغَبْ",
+      "arabic": "وَاِلٰى رَبِّكَ فَارْغَبْ۠",
       "arabic_clean": "و الي ربك فارغب",
       "translation_urdu_kanzul_iman": "اور اپنے رب ہی کی طرف رغبت کرو ۔",
       "translation_urdu_kanzul_irfan": "اور اپنے رب ہی کی طرف رغبت رکھو۔",

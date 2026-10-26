@@ -12,7 +12,7 @@
   "ayat": [
     {
       "number": 1,
-      "arabic": "عَبَسَ وَ تَوَلّٰۤى",
+      "arabic": "عَبَسَ وَتَوَلّٰۤىۙ",
       "arabic_clean": "عبس و تولي",
       "translation_urdu_kanzul_iman": "تیوری چڑھائی اور منہ پھیرا",
       "translation_urdu_kanzul_irfan": "تیوری چڑھائی اور منہ پھیرا۔",
@@ -40,7 +40,7 @@
     },
     {
       "number": 2,
-      "arabic": "اَنْ جَآءَهُ الْاَعْمٰى",
+      "arabic": "اَنْ جَآءَهُ الْاَعْمٰىؕ",
       "arabic_clean": "ان جاءه الاعمي",
       "translation_urdu_kanzul_iman": "اس پر کہ اس کے پاس وہ نابینا حاضر ہوا",
       "translation_urdu_kanzul_irfan": "اس بات پر کہ ان کے پاس نابینا حاضر ہوا۔",
@@ -68,7 +68,7 @@
     },
     {
       "number": 3,
-      "arabic": "وَ مَا یُدْرِیْكَ لَعَلَّهٗ یَزَّ كّٰۤى",
+      "arabic": "وَمَا یُدْرِیْكَ لَعَلَّهٗ یَزَّ كّٰۤىۙ",
       "arabic_clean": "و ما یدریك لعله یز  كي",
       "translation_urdu_kanzul_iman": "اور تمہیں  کیا معلوم شاید وہ ستھرا ہو",
       "translation_urdu_kanzul_irfan": "اور تمہیں   کیا معلوم شاید وہ پاکیزہ ہوجائے۔",
@@ -111,7 +111,7 @@
     },
     {
       "number": 4,
-      "arabic": "اَوْ یَذَّكَّرُ فَتَنْفَعَهُ الذِّكْرٰى",
+      "arabic": "اَوْ یَذَّكَّرُ فَتَنْفَعَهُ الذِّكْرٰىؕ",
       "arabic_clean": "او یذكر فتنفعه الذكري",
       "translation_urdu_kanzul_iman": "یا نصیحت لے تو اسے نصیحت فائدہ دے",
       "translation_urdu_kanzul_irfan": "یا نصیحت حاصل کرے تو نصیحت اسے فائدہ دے۔",
@@ -144,7 +144,7 @@
     },
     {
       "number": 5,
-      "arabic": "اَمَّا مَنِ اسْتَغْنٰى",
+      "arabic": "اَمَّا مَنِ اسْتَغْنٰىۙ",
       "arabic_clean": "اما من استغني",
       "translation_urdu_kanzul_iman": "وہ جو بے پرواہ بنتا ہے",
       "translation_urdu_kanzul_irfan": "بہرحال وہ شخص جو بے پروا بنا۔",
@@ -172,7 +172,7 @@
     },
     {
       "number": 6,
-      "arabic": "فَاَنْتَ لَهٗ تَصَدّٰى",
+      "arabic": "فَاَنْتَ لَهٗ تَصَدّٰىؕ",
       "arabic_clean": "فانت له تصدي",
       "translation_urdu_kanzul_iman": "تم اس کے تو پیچھے پڑتے ہو",
       "translation_urdu_kanzul_irfan": "توتم اس کے پیچھے پڑتے ہو۔",
@@ -200,7 +200,7 @@
     },
     {
       "number": 7,
-      "arabic": "وَ مَا عَلَیْكَ اَلَّا یَزَّ كّٰى",
+      "arabic": "وَمَا عَلَیْكَ اَلَّا یَزَّ كّٰىؕ",
       "arabic_clean": "و ما علیك الا یز  كي",
       "translation_urdu_kanzul_iman": "اور تمہارا کچھ زِیاں  نہیں  اس میں  کہ وہ ستھرا نہ ہو",
       "translation_urdu_kanzul_irfan": "اور تم پر اس بات کا کوئی الزام نہیں   کہ وہ (کافر) پاکیزہ نہ ہو۔",
@@ -243,7 +243,7 @@
     },
     {
       "number": 8,
-      "arabic": "وَ اَمَّا مَنْ جَآءَكَ یَسْعٰى",
+      "arabic": "وَاَمَّا مَنْ جَآءَكَ یَسْعٰىۙ",
       "arabic_clean": "و اما من جاءك یسعي",
       "translation_urdu_kanzul_iman": "اور وہ جو تمہارے حضور ملکتا آیا",
       "translation_urdu_kanzul_irfan": "اوررہا وہ جو تمہارے حضور دوڑتا ہوا آیا۔",
@@ -281,7 +281,7 @@
     },
     {
       "number": 9,
-      "arabic": "وَ هُوَ یَخْشٰى",
+      "arabic": "وَهُوَ یَخْشٰىۙ",
       "arabic_clean": "و هو یخشي",
       "translation_urdu_kanzul_iman": "اور وہ ڈر رہا ہے",
       "translation_urdu_kanzul_irfan": "اور وہ ڈررہا ہے ۔",
@@ -309,7 +309,7 @@
     },
     {
       "number": 10,
-      "arabic": "فَاَنْتَ عَنْهُ تَلَهّٰى",
+      "arabic": "فَاَنْتَ عَنْهُ تَلَهّٰىۚ",
       "arabic_clean": "فانت عنه تلهي",
       "translation_urdu_kanzul_iman": "تو اسے چھوڑ کر اور طرف مشغول ہوتے ہو۔",
       "translation_urdu_kanzul_irfan": "تو تم اسے چھوڑ کر (دوسری طرف) مشغول ہوتے ہو۔",
@@ -337,7 +337,7 @@
     },
     {
       "number": 11,
-      "arabic": "كَلَّاۤ اِنَّهَا تَذْكِرَةٌ",
+      "arabic": "كَلَّاۤ اِنَّهَا تَذْكِرَةٌۚ",
       "arabic_clean": "كلا انها تذكره",
       "translation_urdu_kanzul_iman": "یوں  نہیں  یہ تو سمجھانا ہے",
       "translation_urdu_kanzul_irfan": "ایسے نہیں   ، بیشک یہ باتیں   نصیحت ہیں   ۔",
@@ -365,7 +365,7 @@
     },
     {
       "number": 12,
-      "arabic": "فَمَنْ شَآءَ ذَكَرَهٗ",
+      "arabic": "فَمَنْ شَآءَ ذَكَرَهٗؕ",
       "arabic_clean": "فمن شاء ذكره",
       "translation_urdu_kanzul_iman": "تو جو چاہے اُسے یا د کرے",
       "translation_urdu_kanzul_irfan": "تو جو چاہے اسے یا د کرے۔",
@@ -393,7 +393,7 @@
     },
     {
       "number": 13,
-      "arabic": "فِیْ صُحُفٍ مُّكَرَّمَةٍ",
+      "arabic": "فِیْ صُحُفٍ مُّكَرَّمَةٍۙ",
       "arabic_clean": "فی صحف مكرمه",
       "translation_urdu_kanzul_iman": "ان صحیفوں  میں  کہ عزت والے ہیں",
       "translation_urdu_kanzul_irfan": "ان عزت والے صحیفوں   میں  ۔",
@@ -444,7 +444,7 @@
     },
     {
       "number": 15,
-      "arabic": "بِاَیْدِیْ سَفَرَةٍ",
+      "arabic": "بِاَیْدِیْ سَفَرَةٍۙ",
       "arabic_clean": "بایدی سفره",
       "translation_urdu_kanzul_iman": "ایسوں  کے ہاتھ لکھے ہوئے",
       "translation_urdu_kanzul_irfan": "ان لکھنے والوں   کے ہاتھوں   سے (لکھے ہوئے)۔",
@@ -467,7 +467,7 @@
     },
     {
       "number": 16,
-      "arabic": "كِرَامٍۭ بَرَرَةٍ",
+      "arabic": "كِرَامٍۭ بَرَرَةٍؕ",
       "arabic_clean": "كرامۭ برره",
       "translation_urdu_kanzul_iman": "جو کرم والے نکوئی والے ۔",
       "translation_urdu_kanzul_irfan": "جو معزز نیکی والے ہیں  ۔",
@@ -490,7 +490,7 @@
     },
     {
       "number": 17,
-      "arabic": "قُتِلَ الْاِنْسَانُ مَاۤ اَكْفَرَهٗ",
+      "arabic": "قُتِلَ الْاِنْسَانُ مَاۤ اَكْفَرَهٗؕ",
       "arabic_clean": "قتل الانسان ما اكفره",
       "translation_urdu_kanzul_iman": "آدمی مارا جائیو کیا ناشکر ہے",
       "translation_urdu_kanzul_irfan": "آدمی مارا جائے ، کتنا ناشکرا ہے وہ۔",
@@ -523,7 +523,7 @@
     },
     {
       "number": 18,
-      "arabic": "مِنْ اَیِّ شَیْءٍ خَلَقَهٗ",
+      "arabic": "مِنْ اَیِّ شَیْءٍ خَلَقَهٗؕ",
       "arabic_clean": "من ای شیء خلقه",
       "translation_urdu_kanzul_iman": "اُسے کاہے سے بنایا",
       "translation_urdu_kanzul_irfan": "اللہ نے اسے کس چیز سے پیدا کیا ہے؟",
@@ -556,7 +556,7 @@
     },
     {
       "number": 19,
-      "arabic": "مِنْ نُّطْفَةٍؕ-خَلَقَهٗ فَقَدَّرَهٗ",
+      "arabic": "مِنْ نُّطْفَةٍؕ-خَلَقَهٗ فَقَدَّرَهٗۙ",
       "arabic_clean": "من نطفهؕ-خلقه فقدره",
       "translation_urdu_kanzul_iman": "پانی کی بوند سے اسے پیدا فرمایا پھر اسے طرح طرح کے اندازوں  پر رکھا",
       "translation_urdu_kanzul_irfan": "ایک بوند سے اسے پیدا فرمایا، پھر اسے طرح طرح کی حالتوں   میں   رکھا۔",
@@ -584,7 +584,7 @@
     },
     {
       "number": 20,
-      "arabic": "ثُمَّ السَّبِیْلَ یَسَّرَهٗ",
+      "arabic": "ثُمَّ السَّبِیْلَ یَسَّرَهٗۙ",
       "arabic_clean": "ثم السبیل یسره",
       "translation_urdu_kanzul_iman": "پھر اسے راستہ آسان کیا",
       "translation_urdu_kanzul_irfan": "پھر راستہ آسان کردیا اسے۔",
@@ -612,7 +612,7 @@
     },
     {
       "number": 21,
-      "arabic": "ثُمَّ اَمَاتَهٗ فَاَقْبَرَهٗ",
+      "arabic": "ثُمَّ اَمَاتَهٗ فَاَقْبَرَهٗۙ",
       "arabic_clean": "ثم اماته فاقبره",
       "translation_urdu_kanzul_iman": "پھر اُسے موت دی پھر قبر میں  رکھوایا",
       "translation_urdu_kanzul_irfan": "پھر اسے موت دی پھر اسے قبر میں   رکھوایا۔",
@@ -640,7 +640,7 @@
     },
     {
       "number": 22,
-      "arabic": "ثُمَّ اِذَا شَآءَ اَنْشَرَهٗ",
+      "arabic": "ثُمَّ اِذَا شَآءَ اَنْشَرَهٗؕ",
       "arabic_clean": "ثم اذا شاء انشره",
       "translation_urdu_kanzul_iman": "پھر جب چاہا اسے باہر نکالا۔",
       "translation_urdu_kanzul_irfan": "پھر جب چاہے گا اسے باہر نکالے گا۔",
@@ -673,7 +673,7 @@
     },
     {
       "number": 23,
-      "arabic": "كَلَّا لَمَّا یَقْضِ مَاۤ اَمَرَهٗ",
+      "arabic": "كَلَّا لَمَّا یَقْضِ مَاۤ اَمَرَهٗؕ",
       "arabic_clean": "كلا لما یقض ما امره",
       "translation_urdu_kanzul_iman": "کوئی نہیں  اس نے اب تک پورا نہ کیا جو اُسے حکم ہوا تھا۔",
       "translation_urdu_kanzul_irfan": "یقینا اس نے اب تک پورا نہ کیا جو اللہ  نے اسے حکم دیا تھا۔",
@@ -711,7 +711,7 @@
     },
     {
       "number": 24,
-      "arabic": "فَلْیَنْظُرِ الْاِنْسَانُ اِلٰى طَعَامِهٖ",
+      "arabic": "فَلْیَنْظُرِ الْاِنْسَانُ اِلٰى طَعَامِهٖۙ",
       "arabic_clean": "فلینظر الانسان الي طعامه",
       "translation_urdu_kanzul_iman": "تو آدمی کو چاہئے اپنے کھانوں  کو دیکھے",
       "translation_urdu_kanzul_irfan": "تو آدمی کو چاہیے اپنے کھانوں   کو دیکھے۔",
@@ -744,7 +744,7 @@
     },
     {
       "number": 25,
-      "arabic": "اَنَّا صَبَبْنَا الْمَآءَ صَبًّا",
+      "arabic": "اَنَّا صَبَبْنَا الْمَآءَ صَبًّاۙ",
       "arabic_clean": "انا صببنا الماء صبا",
       "translation_urdu_kanzul_iman": "کہ ہم نے اچھی طرح پانی ڈالا",
       "translation_urdu_kanzul_irfan": "کہ ہم نے اچھی طرح پانی ڈالا۔",
@@ -777,7 +777,7 @@
     },
     {
       "number": 26,
-      "arabic": "ثُمَّ شَقَقْنَا الْاَرْضَ شَقًّا",
+      "arabic": "ثُمَّ شَقَقْنَا الْاَرْضَ شَقًّاۙ",
       "arabic_clean": "ثم شققنا الارض شقا",
       "translation_urdu_kanzul_iman": "پھر زمین کو خوب چیرا",
       "translation_urdu_kanzul_irfan": "پھر زمین کو خوب چیرا۔",
@@ -810,7 +810,7 @@
     },
     {
       "number": 27,
-      "arabic": "فَاَنْۢبَتْنَا فِیْهَا حَبًّا",
+      "arabic": "فَاَنْۢبَتْنَا فِیْهَا حَبًّاۙ",
       "arabic_clean": "فانبتنا فیها حبا",
       "translation_urdu_kanzul_iman": "تو اس میں  اُگایا اناج",
       "translation_urdu_kanzul_irfan": "تو اس میں   اناج اُگایا ۔",
@@ -838,7 +838,7 @@
     },
     {
       "number": 28,
-      "arabic": "وَّ عِنَبًا وَّ قَضْبًا",
+      "arabic": "وَّعِنَبًا وَّقَضْبًاۙ",
       "arabic_clean": "و عنبا و قضبا",
       "translation_urdu_kanzul_iman": "اور انگور اور چارہ",
       "translation_urdu_kanzul_irfan": "اور انگور اور چارہ۔",
@@ -871,7 +871,7 @@
     },
     {
       "number": 29,
-      "arabic": "وَّ زَیْتُوْنًا وَّ نَخْلًا",
+      "arabic": "وَّزَیْتُوْنًا وَّنَخْلًاۙ",
       "arabic_clean": "و زیتونا و نخلا",
       "translation_urdu_kanzul_iman": "اور زیتون اور کھجور",
       "translation_urdu_kanzul_irfan": "اور زیتون اور کھجور۔",
@@ -904,7 +904,7 @@
     },
     {
       "number": 30,
-      "arabic": "وَّ حَدَآىٕقَ غُلْبًا",
+      "arabic": "وَّحَدَآىٕقَ غُلْبًاۙ",
       "arabic_clean": "و حدايق غلبا",
       "translation_urdu_kanzul_iman": "اور گھنے باغیچے",
       "translation_urdu_kanzul_irfan": "اور گھنے باغیچے۔",
@@ -932,7 +932,7 @@
     },
     {
       "number": 31,
-      "arabic": "وَّ فَاكِهَةً وَّ اَبًّا",
+      "arabic": "وَّفَاكِهَةً وَّاَبًّاۙ",
       "arabic_clean": "و فاكهه و ابا",
       "translation_urdu_kanzul_iman": "اور میوے اور دُوب",
       "translation_urdu_kanzul_irfan": "اورپھل اور گھاس ۔",
@@ -965,7 +965,7 @@
     },
     {
       "number": 32,
-      "arabic": "مَّتَاعًا لَّكُمْ وَ لِاَنْعَامِكُمْ",
+      "arabic": "مَّتَاعًا لَّكُمْ وَلِاَنْعَامِكُمْؕ",
       "arabic_clean": "متاعا لكم و لانعامكم",
       "translation_urdu_kanzul_iman": "تمہارے فائدے کو اور تمہارے چوپایوں  کے۔",
       "translation_urdu_kanzul_irfan": "تمہارے فائدے کے لئے اور تمہارے چوپایوں   کے لئے۔",
@@ -1026,7 +1026,7 @@
     },
     {
       "number": 34,
-      "arabic": "یَوْمَ یَفِرُّ الْمَرْءُ مِنْ اَخِیْهِ",
+      "arabic": "یَوْمَ یَفِرُّ الْمَرْءُ مِنْ اَخِیْهِۙ",
       "arabic_clean": "یوم یفر المرء من اخیه",
       "translation_urdu_kanzul_iman": "اس دن آدمی بھاگے گا اپنے بھائی",
       "translation_urdu_kanzul_irfan": "اس دن آدمی اپنے بھائی سے بھاگے گا ۔",
@@ -1064,7 +1064,7 @@
     },
     {
       "number": 35,
-      "arabic": "وَ اُمِّهٖ وَ اَبِیْهِ",
+      "arabic": "وَاُمِّهٖ وَاَبِیْهِۙ",
       "arabic_clean": "و امه و ابیه",
       "translation_urdu_kanzul_iman": "اور ماں  اور باپ۔",
       "translation_urdu_kanzul_irfan": "اور اپنی ماں   اور اپنے باپ۔",
@@ -1097,7 +1097,7 @@
     },
     {
       "number": 36,
-      "arabic": "وَ صَاحِبَتِهٖ وَ بَنِیْهِ",
+      "arabic": "وَصَاحِبَتِهٖ وَبَنِیْهِؕ",
       "arabic_clean": "و صاحبته و بنیه",
       "translation_urdu_kanzul_iman": "اور جورو اور بیٹوں  سے۔",
       "translation_urdu_kanzul_irfan": "اوراپنی بیوی اور اپنے بیٹوں   سے۔",
@@ -1130,7 +1130,7 @@
     },
     {
       "number": 37,
-      "arabic": "لِكُلِّ امْرِئٍ مِّنْهُمْ یَوْمَىٕذٍ شَاْنٌ یُّغْنِیْهِ",
+      "arabic": "لِكُلِّ امْرِئٍ مِّنْهُمْ یَوْمَىٕذٍ شَاْنٌ یُّغْنِیْهِؕ",
       "arabic_clean": "لكل امرئ منهم یوميذ شان یغنیه",
       "translation_urdu_kanzul_iman": "ان میں  سے ہر ایک کو اس دن ایک فکر ہے کہ وہی اسے بس ہے ۔",
       "translation_urdu_kanzul_irfan": "ان میں   سے ہر شخص کو اس دن ایک ایسی فکر ہوگی جو اسے (دوسروں   سے) بے پروا کردے گی۔",
@@ -1173,7 +1173,7 @@
     },
     {
       "number": 38,
-      "arabic": "وُجُوْهٌ یَّوْمَىٕذٍ مُّسْفِرَةٌ",
+      "arabic": "وُجُوْهٌ یَّوْمَىٕذٍ مُّسْفِرَةٌۙ",
       "arabic_clean": "وجوه یوميذ مسفره",
       "translation_urdu_kanzul_iman": "کتنے منہ اس دن روشن ہوں  گے",
       "translation_urdu_kanzul_irfan": "بہت سے چہرے اس دن روشن ہوں   گے۔",
@@ -1201,7 +1201,7 @@
     },
     {
       "number": 39,
-      "arabic": "ضَاحِكَةٌ مُّسْتَبْشِرَةٌ",
+      "arabic": "ضَاحِكَةٌ مُّسْتَبْشِرَةٌۚ",
       "arabic_clean": "ضاحكه مستبشره",
       "translation_urdu_kanzul_iman": "ہنستے خوشیاں  مناتے",
       "translation_urdu_kanzul_irfan": "ہنستے ہوئے خوشیاں   مناتے ہوں   گے۔",
@@ -1224,7 +1224,7 @@
     },
     {
       "number": 40,
-      "arabic": "وَ وُجُوْهٌ یَّوْمَىٕذٍ عَلَیْهَا غَبَرَةٌ",
+      "arabic": "وَوُجُوْهٌ یَّوْمَىٕذٍ عَلَیْهَا غَبَرَةٌۙ",
       "arabic_clean": "و وجوه یوميذ علیها غبره",
       "translation_urdu_kanzul_iman": "اور کتنے مونھوں  پر اس دن گرد پڑی ہوگی",
       "translation_urdu_kanzul_irfan": "اور بہت سے چہروں   پر اس دن گرد پڑی ہوگی۔",
@@ -1262,7 +1262,7 @@
     },
     {
       "number": 41,
-      "arabic": "تَرْهَقُهَا قَتَرَةٌ",
+      "arabic": "تَرْهَقُهَا قَتَرَةٌؕ",
       "arabic_clean": "ترهقها قتره",
       "translation_urdu_kanzul_iman": "ان پر سیاہی چڑھ رہی ہے",
       "translation_urdu_kanzul_irfan": "ان پر سیاہی چڑھ رہی ہوگی ۔",
@@ -1285,7 +1285,7 @@
     },
     {
       "number": 42,
-      "arabic": "اُولٰٓىٕكَ هُمُ الْكَفَرَةُ الْفَجَرَةُ",
+      "arabic": "اُولٰٓىٕكَ هُمُ الْكَفَرَةُ الْفَجَرَةُ۠",
       "arabic_clean": "اوليك هم الكفره الفجره",
       "translation_urdu_kanzul_iman": "یہ وہی ہیں  کافر بدکار ۔",
       "translation_urdu_kanzul_irfan": "یہ لوگ وہی کافر بدکارہیں  ۔",
