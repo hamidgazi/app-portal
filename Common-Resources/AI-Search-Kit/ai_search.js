@@ -1824,7 +1824,7 @@
               title: item.title,
               content: (item.description || '') + ' ' + (Array.isArray(item.tags) ? item.tags.join(' ') : (item.tags || '')),
               category: item.category || 'Workspace App',
-              url: item.url || '#',
+              url: item.portalHref || item.url || item.serverHref || (item.relPath ? ('./' + item.relPath) : '#'),
               icon: item.icon || '🚀',
               isApp: true
             });
@@ -3309,7 +3309,7 @@
               title: item.title,
               content: (item.description || '') + ' ' + (Array.isArray(item.tags) ? item.tags.join(' ') : (item.tags || '')),
               category: item.category || 'Workspace App',
-              url: item.url || '#',
+              url: item.portalHref || item.url || item.serverHref || (item.relPath ? ('./' + item.relPath) : '#'),
               icon: item.icon || '🚀',
               isApp: true
             });

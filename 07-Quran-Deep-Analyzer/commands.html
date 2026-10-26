@@ -1,0 +1,2172 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>📜 Divine Commands & Injunctions • Quranic Blueprint for Human Living</title>
+  <meta name="description" content="The 80 Canonical Divine Directives (Commands & Prohibitions) of the Holy Quran for Human Living, Health, Ethics, Compassion & Social Harmony with Kanzul Iman & Saheeh International.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
+  <link rel="stylesheet" href="css/app.css">
+  <style>
+    :root {
+      --bg-darkest: #06080e;
+      --bg-card-glass: rgba(15, 23, 42, 0.78);
+      --gold-primary: #fbbf24;
+      --gold-border: rgba(212, 175, 55, 0.35);
+      --emerald-glow: #10b981;
+      --emerald-border: rgba(16, 185, 129, 0.35);
+      --rose-glow: #f43f5e;
+      --rose-border: rgba(244, 63, 94, 0.35);
+      --cyan-glow: #38bdf8;
+      --urdu-font-size: calc(1.40rem * var(--ayah-font-scale, 1.0));
+      --urdu-wisdom-size: calc(1.30rem * var(--ayah-font-scale, 1.0));
+      --arabic-font-size: calc(1.40rem * var(--ayah-font-scale, 1.0));
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #06080e 75%);
+      color: #f8fafc;
+      font-family: var(--font-ui), sans-serif;
+      min-height: 100vh;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      padding-bottom: 74px; /* Space for mobile bottom dock */
+      direction: rtl;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Executive App Header */
+    .commands-app-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(6, 8, 14, 0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 10px 16px;
+    }
+
+    .commands-header-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .commands-header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .commands-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .commands-logo-badge {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: #000;
+      box-shadow: 0 0 16px rgba(251, 191, 36, 0.45);
+      flex-shrink: 0;
+    }
+
+    .commands-brand-titles h1 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin: 0;
+      line-height: 1.2;
+      background: linear-gradient(to left, #fbbf24, #f8fafc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .commands-brand-titles p {
+      font-size: 0.76rem;
+      color: #94a3b8;
+      margin: 2px 0 0 0;
+      direction: ltr;
+      text-align: right;
+    }
+
+    .commands-nav-strip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .header-nav-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #cbd5e1;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      touch-action: manipulation;
+    }
+
+    .header-nav-btn:hover {
+      background: rgba(251, 191, 36, 0.2);
+      border-color: var(--gold-primary);
+      color: #fbbf24;
+      transform: translateY(-1px);
+    }
+
+    /* Main Container */
+    .commands-main {
+      flex: 1;
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Sleek Two-Tier Exploration Toolbar (~90px Height) */
+    .commands-toolbar {
+      background: rgba(15, 23, 42, 0.88);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .toolbar-row-main {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+
+    .search-box-wrap {
+      position: relative;
+      flex: 1 1 260px;
+      min-width: 200px;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #94a3b8;
+      pointer-events: none;
+    }
+
+    .search-clear-btn {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: #cbd5e1;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .commands-search-input {
+      width: 100%;
+      background: rgba(10, 15, 30, 0.9);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-full);
+      padding: 8px 36px 8px 38px;
+      color: #f8fafc;
+      font-size: 0.90rem;
+      outline: none;
+      transition: all 0.2s ease;
+      direction: ltr;
+      text-align: left;
+    }
+
+    .commands-search-input:focus {
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 15px rgba(251, 191, 36, 0.25);
+    }
+
+    .toolbar-actions-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .segmented-pill-group {
+      display: inline-flex;
+      background: rgba(10, 15, 30, 0.9);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-full);
+      padding: 3px;
+      gap: 2px;
+    }
+
+    .segment-btn {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      padding: 4px 11px;
+      border-radius: var(--radius-full);
+      font-size: 0.80rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      white-space: nowrap;
+      touch-action: manipulation;
+    }
+
+    .segment-btn:hover {
+      color: #f8fafc;
+    }
+
+    .segment-btn.active {
+      background: rgba(251, 191, 36, 0.25);
+      color: #fbbf24;
+      font-weight: 700;
+      box-shadow: 0 0 10px rgba(251, 191, 36, 0.2);
+    }
+
+    .segment-btn.active.command {
+      background: rgba(16, 185, 129, 0.25);
+      color: #34d399;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+    }
+
+    .segment-btn.active.prohibition {
+      background: rgba(244, 63, 94, 0.25);
+      color: #fb7185;
+      box-shadow: 0 0 10px rgba(244, 63, 94, 0.3);
+    }
+
+    .sort-selector-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(10, 15, 30, 0.9);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-full);
+      padding: 3px 10px;
+    }
+
+    .sort-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #fbbf24;
+      white-space: nowrap;
+    }
+
+    .commands-sort-select {
+      background: transparent;
+      border: none;
+      color: #f8fafc;
+      font-size: 0.80rem;
+      font-weight: 600;
+      outline: none;
+      cursor: pointer;
+      padding: 2px 4px;
+      direction: ltr;
+    }
+
+    .commands-sort-select option {
+      background: #0f172a;
+      color: #f8fafc;
+    }
+
+    .command-words-pill {
+      background: rgba(148, 163, 184, 0.12);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      color: #cbd5e1;
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .commands-counter-badge {
+      color: #fbbf24;
+      font-weight: 700;
+      font-size: 0.82rem;
+      white-space: nowrap;
+      padding: 4px 10px;
+      background: rgba(251, 191, 36, 0.12);
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      border-radius: var(--radius-full);
+    }
+
+    /* Tier 2: Horizontal Scrollable Ribbon */
+    .toolbar-row-ribbon {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 8px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(251, 191, 36, 0.3) transparent;
+      -webkit-overflow-scrolling: touch;
+      width: 100%;
+    }
+
+    .ribbon-divider {
+      width: 1px;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      flex-shrink: 0;
+      margin: 0 4px;
+    }
+
+    .category-scroll-strip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .cat-filter-chip {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #cbd5e1;
+      padding: 4px 11px;
+      border-radius: var(--radius-full);
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      touch-action: manipulation;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      flex-shrink: 0;
+    }
+
+    .cat-filter-chip:hover, .cat-filter-chip.active {
+      background: rgba(251, 191, 36, 0.22);
+      border-color: var(--gold-primary);
+      color: #fbbf24;
+      transform: translateY(-1px);
+    }
+
+    /* Persistent Audio Dock Reciter Selector */
+    .mini-dock-reciter-wrap {
+      display: flex;
+      align-items: center;
+      margin: 0 6px;
+      flex-shrink: 0;
+    }
+
+    .mini-dock-reciter-wrap .audio-reciter-select {
+      background: rgba(10, 15, 30, 0.9);
+      border: 1px solid rgba(251, 191, 36, 0.35);
+      color: #fbbf24;
+      padding: 3px 8px;
+      border-radius: var(--radius-full);
+      font-size: 0.76rem;
+      outline: none;
+      cursor: pointer;
+    }
+
+    /* Category Section Header */
+    .category-section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 18px;
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.12) 0%, rgba(15, 23, 42, 0.85) 100%);
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      border-radius: var(--radius-lg);
+      margin-top: 14px;
+      margin-bottom: 6px;
+      scroll-margin-top: 130px;
+    }
+
+    .cat-sec-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cat-sec-icon {
+      font-size: 1.5rem;
+    }
+
+    .cat-sec-title {
+      font-family: var(--font-urdu), serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fbbf24;
+      margin: 0;
+    }
+
+    .cat-sec-badge {
+      font-size: 0.76rem;
+      font-weight: 700;
+      background: rgba(251, 191, 36, 0.2);
+      color: #fbbf24;
+      padding: 2px 10px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(251, 191, 36, 0.35);
+    }
+
+    /* High-Density Compact Injunctions Container */
+    .commands-container {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* Mode 1: High-Density Compact Editorial Card (~195px Height) */
+    .command-card {
+      background: var(--bg-card-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: relative;
+      transition: all 0.22s ease;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+    }
+
+    .command-card:hover {
+      border-color: var(--gold-border);
+      box-shadow: 0 6px 22px rgba(0, 0, 0, 0.55);
+      transform: translateY(-1px);
+    }
+
+    .command-card.command-type {
+      border-left: 4px solid #10b981;
+      border-right: none;
+    }
+
+    .command-card.prohibition-type {
+      border-left: 4px solid #f43f5e;
+      border-right: none;
+    }
+
+    .command-card.playing-now {
+      border-color: #10b981 !important;
+      box-shadow: 0 0 24px rgba(16, 185, 129, 0.4) !important;
+    }
+
+    .command-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding-bottom: 5px;
+      direction: ltr;
+    }
+
+    .command-header-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .command-serial-pill {
+      background: rgba(251, 191, 36, 0.15);
+      border: 1px solid rgba(251, 191, 36, 0.35);
+      color: #fbbf24;
+      font-size: 0.74rem;
+      font-weight: 800;
+      padding: 1px 7px;
+      border-radius: var(--radius-full);
+    }
+
+    .command-polarity-pill {
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 1px 8px;
+      border-radius: var(--radius-full);
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .command-polarity-pill.command {
+      background: rgba(16, 185, 129, 0.18);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+    }
+
+    .command-polarity-pill.prohibition {
+      background: rgba(244, 63, 94, 0.18);
+      border: 1px solid rgba(244, 63, 94, 0.4);
+      color: #fb7185;
+    }
+
+    .command-cat-badge {
+      font-size: 0.73rem;
+      font-weight: 600;
+      padding: 1px 8px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #cbd5e1;
+    }
+
+    .command-surah-pill {
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: #38bdf8;
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 1px 8px;
+      border-radius: var(--radius-full);
+    }
+
+    /* Compact Centered Sacred Arabic Scripture (~42px Height) */
+    .command-arabic-box {
+      font-family: var(--font-arabic), 'Scheherazade New', 'Amiri', serif;
+      font-size: var(--arabic-font-size);
+      line-height: 1.68;
+      color: #fef08a;
+      text-align: center;
+      direction: rtl;
+      padding: 6px 12px;
+      background: rgba(251, 191, 36, 0.03);
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(251, 191, 36, 0.12);
+      letter-spacing: 0.01em;
+      text-shadow: 0 0 10px rgba(251, 191, 36, 0.15);
+      margin: 0;
+    }
+
+    /* Synchronized BiDi Dual-Pane (~75px Height) */
+    .command-content-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 14px;
+      align-items: start;
+      margin-top: 1px;
+    }
+
+    .command-content-grid.urdu-only-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .command-content-grid.en-only-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .command-pane-ur {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      direction: rtl;
+      text-align: right;
+      padding: 0;
+      background: transparent;
+      border: none;
+    }
+
+    .command-pane-en {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      direction: ltr;
+      text-align: left;
+      padding: 0 14px 0 0;
+      background: transparent;
+      border: none;
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .command-title-ur {
+      font-family: var(--font-urdu), 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
+      font-size: 1.16rem;
+      font-weight: 700;
+      color: #fbbf24;
+      line-height: 1.35;
+      margin-bottom: 2px;
+    }
+
+    .command-title-en {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: #e2e8f0;
+      direction: ltr;
+      text-align: left;
+      line-height: 1.3;
+      margin-bottom: 2px;
+    }
+
+    .trans-stack-ur, .trans-stack-en {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .trans-item-ur, .trans-item-en {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .trans-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .trans-source-tag {
+      font-size: 0.70rem;
+      font-weight: 700;
+      padding: 0 6px;
+      border-radius: var(--radius-full);
+      line-height: 1.5;
+    }
+
+    .trans-source-tag.ki {
+      background: rgba(251, 191, 36, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(251, 191, 36, 0.28);
+    }
+
+    .trans-source-tag.kr {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.28);
+    }
+
+    .trans-source-tag.en {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.28);
+    }
+
+    .trans-body-ur {
+      font-family: var(--font-urdu), 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
+      font-size: var(--urdu-font-size);
+      line-height: 1.72;
+      color: #f8fafc;
+      text-align: right;
+      direction: rtl;
+    }
+
+    .trans-body-en {
+      font-size: 0.88rem;
+      line-height: 1.40;
+      color: #cbd5e1;
+      direction: ltr;
+      text-align: left;
+    }
+
+    /* 1-Tap Collapsible Wisdom Drawer (Hidden by default, saves ~120px) */
+    .command-wisdom-drawer {
+      display: none;
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.08) 0%, rgba(15, 23, 42, 0.9) 100%);
+      border: 1px solid rgba(251, 191, 36, 0.28);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      animation: fadeIn 0.2s ease-out;
+      margin-top: 4px;
+    }
+
+    .wisdom-drawer-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.80rem;
+      font-weight: 700;
+      color: #fbbf24;
+      border-bottom: 1px solid rgba(251, 191, 36, 0.15);
+      padding-bottom: 4px;
+      margin-bottom: 6px;
+      direction: ltr;
+    }
+
+    .wisdom-drawer-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .wisdom-drawer-grid.single-col {
+      grid-template-columns: 1fr;
+    }
+
+    /* Slim Merged Action Footer (~32px Height) */
+    .command-actions-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      flex-wrap: wrap;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 6px;
+      margin-top: 2px;
+      direction: ltr;
+    }
+
+    .card-action-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #cbd5e1;
+      padding: 3px 9px;
+      border-radius: var(--radius-full);
+      font-size: 0.76rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.18s ease;
+      touch-action: manipulation;
+    }
+
+    .card-action-btn:hover {
+      background: rgba(251, 191, 36, 0.2);
+      border-color: var(--gold-primary);
+      color: #fbbf24;
+      transform: translateY(-1px);
+    }
+
+    .card-action-btn.wisdom-toggle-btn {
+      background: rgba(251, 191, 36, 0.12);
+      border-color: rgba(251, 191, 36, 0.35);
+      color: #fbbf24;
+    }
+
+    .card-action-btn.wisdom-toggle-btn.active {
+      background: var(--gold-primary);
+      color: #000;
+      font-weight: 700;
+    }
+
+    /* 💡 Wisdom Boxes in Dual-Pane */
+    .command-wisdom-pane-ur {
+      margin-top: auto;
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(15, 23, 42, 0.75) 100%);
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .command-wisdom-pane-en {
+      margin-top: auto;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.08) 0%, rgba(15, 23, 42, 0.75) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .wisdom-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #fbbf24;
+    }
+
+    .wisdom-header.en {
+      color: #38bdf8;
+    }
+
+    .wisdom-body-ur {
+      font-family: var(--font-urdu), 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
+      font-size: var(--urdu-wisdom-size);
+      line-height: 1.95;
+      color: #fef08a;
+      direction: rtl;
+      text-align: right;
+    }
+
+    .wisdom-body-en {
+      font-size: 0.88rem;
+      line-height: 1.55;
+      color: #94a3b8;
+      direction: ltr;
+      text-align: left;
+    }
+
+    /* Action Buttons Bar */
+    .command-actions-bar {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 8px;
+      flex-wrap: wrap;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 10px;
+    }
+
+    .card-action-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #cbd5e1;
+      padding: 5px 12px;
+      border-radius: var(--radius-full);
+      font-size: 0.80rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s ease;
+      touch-action: manipulation;
+    }
+
+    .card-action-btn:hover {
+      background: rgba(251, 191, 36, 0.2);
+      border-color: var(--gold-primary);
+      color: #fbbf24;
+      transform: translateY(-1px);
+    }
+
+    .card-action-btn.play-btn {
+      background: rgba(16, 185, 129, 0.18);
+      border-color: rgba(16, 185, 129, 0.4);
+      color: #34d399;
+    }
+
+    .card-action-btn.play-btn:hover {
+      background: #10b981;
+      color: #022c22;
+    }
+
+    .card-action-btn.whatsapp-btn {
+      background: rgba(37, 211, 102, 0.15);
+      border-color: rgba(37, 211, 102, 0.35);
+      color: #4ade80;
+    }
+
+    .card-action-btn.whatsapp-btn:hover {
+      background: #25d366;
+      color: #000;
+    }
+
+    .card-action-btn.bookmarked {
+      color: #fbbf24;
+      border-color: var(--gold-primary);
+      background: rgba(251, 191, 36, 0.2);
+    }
+
+    /* Tafsir Drawer */
+    .command-tafsir-drawer {
+      display: none;
+      background: rgba(10, 15, 30, 0.95);
+      border: 1px solid var(--gold-border);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      margin-top: 8px;
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    .tafsir-header-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #fbbf24;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tafsir-content-body {
+      font-family: var(--font-urdu), serif;
+      font-size: 1.15rem;
+      line-height: 2.0;
+      color: #f1f5f9;
+      direction: rtl;
+      text-align: right;
+    }
+
+    /* Mode 2: Collapsible Accordion Card */
+    .command-card.collapsible-card {
+      padding: 12px 18px;
+      cursor: pointer;
+    }
+
+    .collapsible-summary-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      user-select: none;
+    }
+
+    .collapsible-left-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .collapsible-title-wrap {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .collapsible-title-main {
+      font-family: var(--font-urdu), serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #f8fafc;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .collapsible-wisdom-preview {
+      font-size: 0.78rem;
+      color: #94a3b8;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .collapsible-right-tools {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .chevron-indicator {
+      font-size: 0.82rem;
+      color: #94a3b8;
+      transition: transform 0.25s ease;
+      display: inline-block;
+    }
+
+    .command-card.collapsible-card.is-expanded .chevron-indicator {
+      transform: rotate(180deg);
+      color: #fbbf24;
+    }
+
+    .collapsible-body-content {
+      display: none;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      animation: fadeIn 0.25s ease-out;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .command-card.collapsible-card.is-expanded .collapsible-body-content {
+      display: flex;
+    }
+
+    /* Mode 3: Compact Action Checklist */
+    .checklist-row {
+      background: var(--bg-card-glass);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      transition: all 0.18s ease;
+    }
+
+    .checklist-row:hover {
+      border-color: var(--gold-border);
+      background: rgba(30, 41, 59, 0.7);
+    }
+
+    .checklist-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .checklist-serial {
+      font-size: 0.80rem;
+      font-weight: 800;
+      color: #fbbf24;
+      min-width: 34px;
+    }
+
+    .checklist-polarity-icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .checklist-title {
+      font-family: var(--font-urdu), serif;
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: #f8fafc;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .checklist-ref {
+      font-size: 0.76rem;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      padding: 1px 7px;
+      border-radius: var(--radius-full);
+      white-space: nowrap;
+    }
+
+    .checklist-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    /* Sentinel for Infinite Scroll */
+    .scroll-sentinel {
+      height: 20px;
+      width: 100%;
+      margin: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Toast Notification */
+    .toast-popup {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(16, 185, 129, 0.95);
+      color: #022c22;
+      padding: 10px 22px;
+      border-radius: var(--radius-full);
+      font-weight: 700;
+      font-size: 0.9rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      z-index: 9999;
+      opacity: 0;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+
+    .toast-popup.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* Search Highlights */
+    mark.highlight {
+      background: rgba(245, 158, 11, 0.35);
+      color: #fef08a;
+      font-weight: 700;
+      border-radius: 2px;
+      padding: 0 2px;
+    }
+
+    @media (max-width: 820px) {
+      .commands-app-header {
+        padding: 8px 12px;
+      }
+      .commands-main {
+        padding: 10px;
+        gap: 12px;
+      }
+      .command-card {
+        padding: 12px 14px;
+      }
+      .command-content-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .command-pane-ur, .command-pane-en {
+        padding: 10px 12px;
+      }
+      .command-title-ur {
+        font-size: 1.30rem;
+      }
+      .command-arabic-box {
+        font-size: 1.4rem;
+        line-height: 1.9;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Executive Header -->
+  <header class="commands-app-header">
+    <div class="commands-header-inner">
+      <div class="commands-header-top">
+        <a href="index.html" class="commands-brand" title="Back to Quran Deep Analyzer">
+          <div class="commands-logo-badge">📜</div>
+          <div class="commands-brand-titles">
+            <h1 style="direction: ltr; text-align: left;">Divine Commands & Injunctions</h1>
+            <p style="direction: ltr; text-align: left;">The Quranic Blueprint for Human Living (Hukm-e-Ilahi)</p>
+          </div>
+        </a>
+
+        <nav class="commands-nav-strip">
+          <a href="index.html#ayahs" class="header-nav-btn">
+            <span>📖 Deep Analyzer</span>
+          </a>
+          <a href="index.html#search" class="header-nav-btn">
+            <span>🔍 Search Studio</span>
+          </a>
+          <a href="manners.html" class="header-nav-btn">
+            <span>🌿 Quranic Manners (67)</span>
+          </a>
+          <a href="index.html#notebook" class="header-nav-btn">
+            <span>📝 Tadabbur Studio</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Body -->
+  <main class="commands-main">
+
+    <!-- Sleek Two-Tier Exploration Toolbar (~90px Height) -->
+    <div class="commands-toolbar">
+      <!-- Tier 1: Search, Sort, View Switcher, Language Mode, Counter -->
+      <div class="toolbar-row-main">
+        <div class="search-box-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="commands-search-input" class="commands-search-input" placeholder="Search directives: food, speech, parents, justice, 2:168..." autocomplete="off">
+          <button id="search-clear-btn" class="search-clear-btn" style="display: none;" title="Clear Search">✕</button>
+        </div>
+
+        <div class="toolbar-actions-group">
+          <!-- Sort Selector -->
+          <div class="sort-selector-wrap">
+            <label for="commands-sort-select" class="sort-label">Sort:</label>
+            <select id="commands-sort-select" class="commands-sort-select" aria-label="Sort Ayat">
+              <option value="default">🔢 Default Order (#1..#80)</option>
+              <option value="words_asc">📏 Shortest First (Words ⬆)</option>
+              <option value="words_desc">📜 Longest First (Words ⬇)</option>
+              <option value="alpha">🔤 Alphabetical (Alif - Yaa)</option>
+              <option value="surah">📖 Quranic Order (Surah 1..114)</option>
+            </select>
+          </div>
+
+          <!-- Tri-Mode View Mode -->
+          <div class="segmented-pill-group" id="view-mode-filters">
+            <button class="segment-btn active" data-view="cards" title="Detailed Cards">🃏 Cards</button>
+            <button class="segment-btn" data-view="collapsible" title="High-Density Summary">📑 Summary</button>
+            <button class="segment-btn" data-view="checklist" title="Compact Action Checklist">📋 Checklist</button>
+          </div>
+
+          <!-- Language & BiDi Reading Order Mode -->
+          <div class="segmented-pill-group" id="lang-filters">
+            <button class="segment-btn active" data-lang="both-ur" title="Both (Urdu first on mobile)">Both (Urdu 1st)</button>
+            <button class="segment-btn" data-lang="both-en" title="Both (English first on mobile)">Both (Eng 1st)</button>
+            <button class="segment-btn" data-lang="ur">Urdu</button>
+            <button class="segment-btn" data-lang="en">English</button>
+          </div>
+
+          <div id="commands-counter-badge" class="commands-counter-badge">
+            80 Directives
+          </div>
+        </div>
+      </div>
+
+      <!-- Tier 2: Horizontal Scrollable Ribbon (Polarity + Categories) -->
+      <div class="toolbar-row-ribbon" id="ribbon-filters">
+        <!-- Polarity Filters -->
+        <div class="segmented-pill-group" id="polarity-filters">
+          <button class="segment-btn active" data-polarity="all">All (80)</button>
+          <button class="segment-btn command" data-polarity="command">✅ Do This</button>
+          <button class="segment-btn prohibition" data-polarity="prohibition">🚫 Avoid This</button>
+          <button class="segment-btn" data-polarity="starred">⭐ Saved</button>
+        </div>
+
+        <div class="ribbon-divider"></div>
+
+        <!-- Life Spheres Category Filter Chips -->
+        <div class="category-scroll-strip" id="category-filters">
+          <button class="cat-filter-chip active" data-cat="all">All Spheres</button>
+          <button class="cat-filter-chip" data-cat="health">🥗 Health & Hygiene</button>
+          <button class="cat-filter-chip" data-cat="speech">🗣️ Speech & Truth</button>
+          <button class="cat-filter-chip" data-cat="compassion">🍲 Charity & Feeding</button>
+          <button class="cat-filter-chip" data-cat="social_peace">🤝 Social Harmony</button>
+          <button class="cat-filter-chip" data-cat="mental_peace">🧠 Mental Peace & Sabr</button>
+          <button class="cat-filter-chip" data-cat="finance">⚖️ Financial Ethics</button>
+          <button class="cat-filter-chip" data-cat="family">👨‍👩‍👧 Parents & Family</button>
+          <button class="cat-filter-chip" data-cat="justice">🏛️ Justice & Humility</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Directives List Mount -->
+    <div id="commands-list-mount" class="commands-container">
+      <!-- Dynamically populated via Progressive Chunking -->
+    </div>
+
+    <!-- Sentinel for Progressive Infinite Chunk Loading -->
+    <div id="scroll-sentinel" class="scroll-sentinel"></div>
+
+  </main>
+
+  <!-- Persistent Cyber-Glass Audio Mini-Dock -->
+  <div id="audio-mini-dock" class="audio-mini-dock" aria-label="Persistent Audio Player">
+    <div class="mini-dock-info">
+      <div class="mini-dock-pulse"></div>
+      <div class="mini-dock-text-wrap">
+        <div id="mini-dock-title" class="mini-dock-title">Quran Tartil Audio</div>
+        <div id="mini-dock-sub" class="mini-dock-sub">Mishary Alafasy</div>
+      </div>
+    </div>
+    <div class="mini-dock-reciter-wrap">
+      <select id="audio-reciter-select" class="audio-reciter-select" title="Choose Reciter">
+        <option value="Alafasy_128kbps">Mishary Alafasy</option>
+        <option value="Husary_128kbps">Al-Husary (Teacher)</option>
+        <option value="Abdul_Basit_Murattal_192kbps">Abdul Basit Murattal</option>
+      </select>
+    </div>
+    <div class="mini-dock-controls">
+      <button id="mini-dock-prev-btn" class="mini-dock-btn" title="Previous Directive">⏮</button>
+      <button id="mini-dock-play-btn" class="mini-dock-btn play-toggle" title="Play/Pause">▶</button>
+      <button id="mini-dock-next-btn" class="mini-dock-btn" title="Next Directive">⏭</button>
+      <label class="mini-dock-autoplay-wrap" title="Auto-advance to next directive">
+        <input type="checkbox" id="mini-dock-autoplay" checked>
+        <span>Autoplay</span>
+      </label>
+      <button id="mini-dock-close-btn" class="mini-dock-close" title="Close">✕</button>
+    </div>
+  </div>
+
+  <!-- Universal Mobile Bottom Command Dock -->
+  <nav class="mobile-bottom-dock" aria-label="Mobile Navigation Dock">
+    <a href="index.html#ayahs" class="mobile-dock-btn" id="dock-btn-read">
+      <span class="mobile-dock-icon">📖</span>
+      <span class="mobile-dock-label">Recite</span>
+    </a>
+    <a href="index.html#search" class="mobile-dock-btn" id="dock-btn-search">
+      <span class="mobile-dock-icon">⚡</span>
+      <span class="mobile-dock-label">Search</span>
+    </a>
+    <a href="commands.html" class="mobile-dock-btn active" id="dock-btn-commands">
+      <span class="mobile-dock-icon">📜</span>
+      <span class="mobile-dock-label">Commands</span>
+    </a>
+    <a href="manners.html" class="mobile-dock-btn" id="dock-btn-manners">
+      <span class="mobile-dock-icon">🌿</span>
+      <span class="mobile-dock-label">Manners</span>
+    </a>
+    <a href="index.html#studio" class="mobile-dock-btn" id="dock-btn-studio">
+      <span class="mobile-dock-icon">🔬</span>
+      <span class="mobile-dock-label">Studio</span>
+    </a>
+  </nav>
+
+  <!-- Toast Notification -->
+  <div id="toast-popup" class="toast-popup">Copied to clipboard!</div>
+
+  <!-- Hidden Audio Element for EveryAyah CDN -->
+  <audio id="quran-audio-player" preload="none"></audio>
+
+  <!-- Standalone Offline Zero-CORS Data Bundle -->
+  <script src="data/quran_commands_data.js"></script>
+
+  <!-- Interactive Studio Orchestration Script -->
+  <script>
+    (function () {
+      'use strict';
+
+      const data = window.QURAN_COMMANDS_DATA;
+      if (data && data.items) {
+        data.items.forEach(it => {
+          const words = (it.arabic || "").trim().split(/\s+/).filter(Boolean);
+          it.word_count = words.length;
+          const rawFirstWord = words[0] || "";
+          it.clean_first_word = rawFirstWord.replace(/[\u064B-\u065F\u0670\u06D6-\u06ED]/g, "");
+        });
+      }
+      if (!data || !data.items) {
+        console.error("Quran Commands Data bundle missing!");
+        return;
+      }
+
+      const categoryMap = {
+        health: { name_en: "Health & Hygiene", icon: "🥗" },
+        speech: { name_en: "Speech & Truth", icon: "🗣️" },
+        compassion: { name_en: "Charity & Feeding", icon: "🍲" },
+        social_peace: { name_en: "Social Harmony", icon: "🤝" },
+        mental_peace: { name_en: "Mental Peace & Sabr", icon: "🧠" },
+        finance: { name_en: "Financial Ethics", icon: "⚖️" },
+        family: { name_en: "Parents & Family", icon: "👨‍👩‍👧" },
+        justice: { name_en: "Justice & Humility", icon: "🏛️" }
+      };
+
+      // App State
+      let activePolarity = "all";  // "all", "command", "prohibition", "starred"
+      let activeCategory = "all";  // "all", or category IDs
+      let activeLang = "both-ur";  // "both-ur", "both-en", "ur", "en"
+      try {
+        const savedLang = localStorage.getItem("quran_bidi_lang_order");
+        if (savedLang) activeLang = savedLang;
+      } catch(e) {}
+      let activeView = "cards";     // "cards", "collapsible", "checklist"
+      let activeSortMode = "default";
+      let searchQuery = "";
+      const tafsirCache = new Map();
+
+      // Progressive Rendering State
+      const CHUNK_SIZE = 12;
+      let renderedCount = 0;
+      let currentFilteredItems = [];
+
+      // Audio state
+      const audioPlayer = document.getElementById("quran-audio-player");
+      const reciterSelect = document.getElementById("audio-reciter-select");
+      const miniDock = document.getElementById("audio-mini-dock");
+      const miniDockTitle = document.getElementById("mini-dock-title");
+      const miniDockSub = document.getElementById("mini-dock-sub");
+      const miniDockPlayBtn = document.getElementById("mini-dock-play-btn");
+      const miniDockPrevBtn = document.getElementById("mini-dock-prev-btn");
+      const miniDockNextBtn = document.getElementById("mini-dock-next-btn");
+      const miniDockAutoplay = document.getElementById("mini-dock-autoplay");
+      const miniDockCloseBtn = document.getElementById("mini-dock-close-btn");
+
+      let currentlyPlayingIndex = -1;
+
+      // Bookmarks Management
+      function getBookmarks() {
+        try {
+          const raw = localStorage.getItem("quran_commands_bookmarks");
+          return raw ? JSON.parse(raw) : [];
+        } catch(e) { return []; }
+      }
+
+      function toggleBookmark(serial) {
+        if (window.AudioSFX) window.AudioSFX.playClick();
+        let list = getBookmarks();
+        if (list.includes(serial)) {
+          list = list.filter(x => x !== serial);
+          showToast("Removed from bookmarks");
+        } else {
+          list.push(serial);
+          showToast("Saved to bookmarks! (★)");
+        }
+        try {
+          localStorage.setItem("quran_commands_bookmarks", JSON.stringify(list));
+        } catch(e) {}
+        renderList();
+      }
+
+      function showToast(msg) {
+        const toast = document.getElementById("toast-popup");
+        if (!toast) return;
+        toast.textContent = msg;
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 2000);
+      }
+
+      // Highlight Helper
+      function highlightText(text, query) {
+        if (!text || !query) return text || "";
+        const cleanQ = query.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        if (!cleanQ) return text;
+        const re = new RegExp(`(${cleanQ})`, "gi");
+        return text.replace(re, '<mark class="highlight">$1</mark>');
+      }
+
+      // Play Audio via EveryAyah CDN & Synchronize Mini-Dock
+      function playAyahByIndex(idx) {
+        if (idx < 0 || idx >= currentFilteredItems.length) return;
+        const it = currentFilteredItems[idx];
+        currentlyPlayingIndex = idx;
+
+        const reciter = reciterSelect ? reciterSelect.value : "Alafasy_128kbps";
+        const sPad = String(it.surah_id).padStart(3, '0');
+        const aPad = String(it.ayah_num).padStart(3, '0');
+        const url = `https://everyayah.com/data/${reciter}/${sPad}${aPad}.mp3`;
+
+        // Update Mini-Dock UI
+        if (miniDockTitle) miniDockTitle.textContent = `#${it.serial}: ${it.title_en || it.title_ur}`;
+        const reciterLabel = reciterSelect ? reciterSelect.options[reciterSelect.selectedIndex].text.split('(')[0].trim() : "Mishary Alafasy";
+        if (miniDockSub) miniDockSub.textContent = `Surah ${it.surah_name_roman} [${it.surah_id}:${it.ayah_num}] • ${reciterLabel}`;
+        if (miniDock) miniDock.classList.add("show");
+        if (miniDockPlayBtn) miniDockPlayBtn.innerHTML = "⏸";
+
+        // Highlight playing card
+        document.querySelectorAll(".command-card").forEach(c => c.classList.remove("playing-now"));
+        const cardElem = document.getElementById(`card-${it.serial}`);
+        if (cardElem) cardElem.classList.add("playing-now");
+
+        audioPlayer.src = url;
+        audioPlayer.play().then(() => {
+          updatePlayButtons(true, it.serial);
+        }).catch(err => {
+          console.warn("Audio play error:", err);
+          showToast("Audio unavailable for this verse");
+          if (miniDockPlayBtn) miniDockPlayBtn.innerHTML = "▶";
+          updatePlayButtons(false, it.serial);
+        });
+
+        audioPlayer.onended = () => {
+          updatePlayButtons(false, it.serial);
+          if (miniDockPlayBtn) miniDockPlayBtn.innerHTML = "▶";
+          if (cardElem) cardElem.classList.remove("playing-now");
+
+          if (miniDockAutoplay && miniDockAutoplay.checked) {
+            const nextIdx = currentlyPlayingIndex + 1;
+            if (nextIdx < currentFilteredItems.length) {
+              playAyahByIndex(nextIdx);
+            }
+          }
+        };
+      }
+
+      function updatePlayButtons(isPlaying, activeSerial) {
+        document.querySelectorAll(".card-action-btn.play-btn").forEach(btn => {
+          const serial = parseInt(btn.dataset.serial, 10);
+          if (serial === activeSerial && isPlaying) {
+            btn.innerHTML = '<span>⏸ Pause</span>';
+            btn.style.background = '#10b981';
+            btn.style.color = '#022c22';
+          } else {
+            btn.innerHTML = activeView === 'checklist' ? '▶' : '<span>▶ Recite</span>';
+            btn.style.background = '';
+            btn.style.color = '';
+          }
+        });
+      }
+
+      function toggleAudioPlayback() {
+        if (!audioPlayer.src) {
+          if (currentFilteredItems.length > 0) playAyahByIndex(0);
+          return;
+        }
+        if (audioPlayer.paused) {
+          audioPlayer.play().then(() => {
+            if (miniDockPlayBtn) miniDockPlayBtn.innerHTML = "⏸";
+            if (currentlyPlayingIndex >= 0) {
+              const it = currentFilteredItems[currentlyPlayingIndex];
+              updatePlayButtons(true, it.serial);
+            }
+          });
+        } else {
+          audioPlayer.pause();
+          if (miniDockPlayBtn) miniDockPlayBtn.innerHTML = "▶";
+          if (currentlyPlayingIndex >= 0) {
+            const it = currentFilteredItems[currentlyPlayingIndex];
+            updatePlayButtons(false, it.serial);
+          }
+        }
+      }
+
+      // Format WhatsApp Text
+      function formatWhatsApp(it) {
+        const pBadge = it.polarity === "command" ? "✅ COMMAND (DO THIS)" : "🚫 PROHIBITION (AVOID THIS)";
+        let msg = `📜 *Divine Commands & Injunctions (#${it.serial})* 📜\n` +
+                  `🏷️ *${it.title_en}* [${pBadge}]\n` +
+                  `📌 *${it.title_ur}*\n` +
+                  `📍 *Surah ${it.surah_name_roman} (${it.surah_name_ar}) [${it.surah_id}:${it.ayah_num}]*\n\n` +
+                  `📖 *Sacred Arabic:*\n«${it.arabic}»\n\n` +
+                  `💎 *Kanzul Iman Urdu Translation (Imam Ahmad Raza Khan):*\n${it.translation_urdu_kanzul_iman}\n\n` +
+                  `🌐 *English Translation (Saheeh International):*\n${it.translation_english}\n\n` +
+                  `💡 *Human Flourishing & Health Wisdom:*\n${it.wisdom_benefit_en}\n\n` +
+                  `✨ *Quran Deep Analyzer*\nhttps://hamidgazi.github.io/app-portal/`;
+        return msg;
+      }
+
+      // Copy Text
+      function copyCardText(it) {
+        const text = formatWhatsApp(it);
+        navigator.clipboard.writeText(text).then(() => {
+          showToast("Directive copied to clipboard!");
+        }).catch(() => {
+          showToast("Failed to copy");
+        });
+      }
+
+      // Zero-CORS Tafsir Loader
+      async function loadTafsir(surahId, ayahNum, serial, btn) {
+        const drawer = document.getElementById(`tafsir-drawer-${serial}`);
+        const body = document.getElementById(`tafsir-body-${serial}`);
+        if (!drawer || !body) return;
+
+        if (drawer.style.display === "block") {
+          drawer.style.display = "none";
+          btn.classList.remove("active");
+          btn.innerHTML = "<span>📖 Tafsir</span>";
+          return;
+        }
+
+        drawer.style.display = "block";
+        btn.classList.add("active");
+        btn.innerHTML = "<span>✕ Close</span>";
+
+        const key = `${surahId}:${ayahNum}`;
+        if (tafsirCache.has(key)) {
+          body.innerHTML = tafsirCache.get(key);
+          return;
+        }
+
+        body.innerHTML = "<div style='color: #94a3b8; font-style: italic;'>Loading Tafsir Sirat-ul-Jinan...</div>";
+        const sPad = String(surahId).padStart(3, '0');
+
+        try {
+          if (window.location.protocol.startsWith('http')) {
+            const res = await fetch(`data/surahs/${sPad}.json`);
+            if (res.ok) {
+              const sData = await res.json();
+              const a = sData.ayat && sData.ayat.find(x => x.number === ayahNum);
+              if (a && a.tafseer_sirat_ul_jinan) {
+                const cleaned = cleanTafsir(a.tafseer_sirat_ul_jinan);
+                tafsirCache.set(key, cleaned);
+                body.innerHTML = cleaned;
+                return;
+              }
+            }
+          }
+        } catch(e) {}
+
+        // Fallback to script injection
+        const script = document.createElement('script');
+        script.src = `data/surahs_js/${sPad}.js`;
+        script.onload = () => {
+          const loaded = (window.QURAN_SURAHS && window.QURAN_SURAHS[surahId]) ||
+                         window[`SURAH_${sPad}_DATA`];
+          if (loaded && loaded.ayat) {
+            const a = loaded.ayat.find(x => x.number === ayahNum);
+            const rawT = a ? a.tafseer_sirat_ul_jinan : "Tafsir unavailable.";
+            const cleaned = cleanTafsir(rawT);
+            tafsirCache.set(key, cleaned);
+            body.innerHTML = cleaned;
+          } else {
+            body.innerHTML = "Tafsir Sirat-ul-Jinan unavailable.";
+          }
+        };
+        script.onerror = () => {
+          body.innerHTML = "Error loading Tafsir commentary.";
+        };
+        document.head.appendChild(script);
+      }
+
+      function cleanTafsir(text) {
+        if (!text) return "Tafsir commentary unavailable.";
+        return text
+          .replace(/\/\*\s*Style Definitions\s*\*\/[\s\S]*?\{[\s\S]*?\}/g, "")
+          .replace(/(?:table|p|span|div|a|li)\.Mso\w*\s*\{[^}]*\}/g, "")
+          .replace(/@page\s*\{[^}]*\}/g, "")
+          .replace(/style="[^"]*"/gi, "")
+          .replace(/class="[^"]*"/gi, "")
+          .trim();
+      }
+
+      // Jump to Main App Ayah Analyzer
+      function jumpToAnalyzer(surahId, ayahNum) {
+        try {
+          localStorage.setItem("quran_return_origin", JSON.stringify({
+            originTab: "commands",
+            originScrollY: window.scrollY,
+            label: "Divine Commands"
+          }));
+        } catch(e) {}
+        window.location.href = `index.html?surah=${surahId}&ayah=${ayahNum}&from=commands#ayahs`;
+      }
+
+      // Filter Current Items
+      function computeFilteredItems() {
+        const bookmarks = getBookmarks();
+        let items = [...data.items];
+
+        // 1. Polarity Filter
+        if (activePolarity === "command") {
+          items = items.filter(it => it.polarity === "command");
+        } else if (activePolarity === "prohibition") {
+          items = items.filter(it => it.polarity === "prohibition");
+        } else if (activePolarity === "starred") {
+          items = items.filter(it => bookmarks.includes(it.serial));
+        }
+
+        // 2. Category Filter
+        if (activeCategory !== "all") {
+          items = items.filter(it => it.category_id === activeCategory);
+        }
+
+        // 3. Search Filter
+        if (searchQuery) {
+          const q = searchQuery.toLowerCase();
+          items = items.filter(it =>
+            it.title_ur.toLowerCase().includes(q) ||
+            it.title_en.toLowerCase().includes(q) ||
+            it.arabic.includes(q) ||
+            it.translation_urdu_kanzul_iman.includes(q) ||
+            it.translation_english.toLowerCase().includes(q) ||
+            it.wisdom_benefit_ur.includes(q) ||
+            it.wisdom_benefit_en.toLowerCase().includes(q) ||
+            it.surah_name_roman.toLowerCase().includes(q) ||
+            `${it.surah_id}:${it.ayah_num}`.includes(q)
+          );
+        }
+
+        // 4. Sorting
+        if (activeSortMode === "words_asc") {
+          items.sort((a, b) => a.word_count - b.word_count || a.serial - b.serial);
+        } else if (activeSortMode === "words_desc") {
+          items.sort((a, b) => b.word_count - a.word_count || a.serial - b.serial);
+        } else if (activeSortMode === "alpha") {
+          items.sort((a, b) => a.clean_first_word.localeCompare(b.clean_first_word, "ar") || a.serial - b.serial);
+        } else if (activeSortMode === "surah") {
+          items.sort((a, b) => (a.surah_id - b.surah_id) || (a.ayah_num - b.ayah_num) || a.serial - b.serial);
+        } else {
+          items.sort((a, b) => a.serial - b.serial);
+        }
+
+        return items;
+      }
+
+      // Generate HTML for a single item based on active view mode
+      function renderItemHTML(it, idx) {
+        const bookmarks = getBookmarks();
+        const isStarred = bookmarks.includes(it.serial);
+        const isCommand = it.polarity === "command";
+        const polarityBadge = isCommand ? "✅ DO THIS" : "🚫 AVOID THIS";
+        const polarityClass = isCommand ? "command" : "prohibition";
+        const cardTypeClass = isCommand ? "command-type" : "prohibition-type";
+
+        const catInfo = categoryMap[it.category_id] || { name_en: it.category_name_en || it.category_name_ur, icon: it.category_icon || "📜" };
+
+        const hTitleUr = highlightText(it.title_ur, searchQuery);
+        const hTitleEn = highlightText(it.title_en, searchQuery);
+        const hAr = highlightText(it.arabic, searchQuery);
+        const hKi = highlightText(it.translation_urdu_kanzul_iman, searchQuery);
+        const hKr = it.translation_urdu_kanzul_irfan ? highlightText(it.translation_urdu_kanzul_irfan, searchQuery) : "";
+        const hEn = highlightText(it.translation_english, searchQuery);
+        const hWisdomUr = highlightText(it.wisdom_benefit_ur, searchQuery);
+        const hWisdomEn = highlightText(it.wisdom_benefit_en, searchQuery);
+
+        const isBoth = activeLang.startsWith("both");
+        const showUrdu = isBoth || activeLang === "ur";
+        const showEnglish = isBoth || activeLang === "en";
+        const isEngFirst = activeLang === "both-en";
+
+        // Mode 1: High-Density Compact Editorial Cards (~195px Height)
+        if (activeView === "cards") {
+          return `
+            <article class="command-card ${cardTypeClass}" id="card-${it.serial}">
+              <div class="command-card-header">
+                <div class="command-header-left">
+                  <span class="command-serial-pill">#${it.serial}</span>
+                  <span class="command-polarity-pill ${polarityClass}">${polarityBadge}</span>
+                  <span class="command-cat-badge">${catInfo.icon} ${catInfo.name_en}</span>
+                  <span class="command-surah-pill">Surah ${it.surah_name_roman} [${it.surah_id}:${it.ayah_num}]</span>
+                  <span class="command-words-pill">📏 ${it.word_count} Words</span>
+                </div>
+                <button class="card-action-btn ${isStarred ? 'bookmarked' : ''}" onclick="window.CommandsApp.toggleBookmark(${it.serial})" title="Bookmark">
+                  <span>${isStarred ? '★ Saved' : '☆ Bookmark'}</span>
+                </button>
+              </div>
+
+              <!-- Compact Centered Sacred Arabic Scripture -->
+              <div class="command-arabic-box">${hAr}</div>
+
+              <!-- BiDi Dual-Pane Grid (Side-by-side on desktop, fluid order on mobile) -->
+              <div class="command-content-grid ${!showEnglish ? 'urdu-only-grid' : (!showUrdu ? 'en-only-grid' : '')} ${isEngFirst ? 'mobile-order-en-first' : ''}">
+                ${showUrdu ? `
+                  <div class="command-pane-ur">
+                    <div class="command-title-ur">${hTitleUr}</div>
+                    <div class="trans-stack-ur">
+                      <div class="trans-item-ur">
+                        <div class="trans-header">
+                          <span class="trans-source-tag ki">کنز الایمان</span>
+                        </div>
+                        <div class="trans-body-ur">${hKi}</div>
+                      </div>
+                      ${hKr ? `
+                        <div class="trans-item-ur" style="margin-top: 2px;">
+                          <div class="trans-header">
+                            <span class="trans-source-tag kr">کنز العرفان</span>
+                          </div>
+                          <div class="trans-body-ur">${hKr}</div>
+                        </div>
+                      ` : ''}
+                    </div>
+                  </div>
+                ` : ''}
+
+                ${showEnglish ? `
+                  <div class="command-pane-en">
+                    <div class="command-title-en">${hTitleEn}</div>
+                    <div class="trans-stack-en">
+                      <div class="trans-item-en">
+                        <div class="trans-header">
+                          <span class="trans-source-tag en">Saheeh International</span>
+                        </div>
+                        <div class="trans-body-en">${hEn}</div>
+                      </div>
+                    </div>
+                  </div>
+                ` : ''}
+              </div>
+
+              <!-- Slim Merged Footer Actions (~32px) -->
+              <div class="command-actions-bar">
+                <div style="display: flex; align-items: center; gap: 4px; flex-wrap: wrap;">
+                  <button class="card-action-btn play-btn" data-serial="${it.serial}" onclick="window.CommandsApp.playAyah(${idx})">
+                    <span>▶ Recite</span>
+                  </button>
+                  <button class="card-action-btn wisdom-toggle-btn" id="wisdom-btn-${it.serial}" onclick="window.CommandsApp.toggleWisdom(${it.serial}, this)">
+                    <span>💡 Wisdom ▼</span>
+                  </button>
+                  <button class="card-action-btn" onclick="window.CommandsApp.loadTafsir(${it.surah_id}, ${it.ayah_num}, ${it.serial}, this)">
+                    <span>📖 Tafsir</span>
+                  </button>
+                  <button class="card-action-btn" onclick="window.CommandsApp.copyCardText(${it.serial})" title="Copy">
+                    <span>📋</span>
+                  </button>
+                  <button class="card-action-btn whatsapp-btn" onclick="window.CommandsApp.shareWhatsApp(${it.serial})" title="WhatsApp">
+                    <span>📲</span>
+                  </button>
+                  <button class="card-action-btn" onclick="window.CommandsApp.jumpToAnalyzer(${it.surah_id}, ${it.ayah_num})" title="Deep Analyzer">
+                    <span>↗</span>
+                  </button>
+                </div>
+                <span style="font-size: 0.74rem; color: #64748b; font-weight: 600;">Surah ${it.surah_name_roman} [${it.surah_id}:${it.ayah_num}]</span>
+              </div>
+
+              <!-- 1-Tap Collapsible Wisdom Drawer (Hidden by default, saves ~120px) -->
+              <div class="command-wisdom-drawer" id="wisdom-drawer-${it.serial}">
+                <div class="wisdom-drawer-header">
+                  <span>💡 Human Flourishing & Health Wisdom (حکمت و انسانی فائدہ)</span>
+                </div>
+                <div class="wisdom-drawer-grid ${!showEnglish || !showUrdu ? 'single-col' : ''}">
+                  ${showUrdu ? `<div class="wisdom-body-ur">${hWisdomUr}</div>` : ''}
+                  ${showEnglish ? `<div class="wisdom-body-en">${hWisdomEn}</div>` : ''}
+                </div>
+              </div>
+
+              <!-- Expandable Tafsir Drawer -->
+              <div class="command-tafsir-drawer" id="tafsir-drawer-${it.serial}">
+                <div class="tafsir-header-title">📖 Tafsir Sirat-ul-Jinan — Surah ${it.surah_name_roman} Ayah ${it.ayah_num}</div>
+                <div class="tafsir-content-body" id="tafsir-body-${it.serial}"></div>
+              </div>
+            </article>
+          `;
+        } else if (activeView === "collapsible") {
+          // Mode 2: Collapsible Accordion Card
+          return `
+            <article class="command-card collapsible-card ${cardTypeClass}" id="card-${it.serial}" onclick="window.CommandsApp.toggleCardExpansion(${it.serial}, event)">
+              <div class="collapsible-summary-row">
+                <div class="collapsible-left-meta">
+                  <span class="command-serial-pill">#${it.serial}</span>
+                  <span class="command-polarity-pill ${polarityClass}">${isCommand ? '✅' : '🚫'}</span>
+                  <div class="collapsible-title-wrap">
+                    <div class="collapsible-title-main" style="direction: ltr; text-align: left;">${hTitleEn} <span style="direction: rtl; font-family: var(--font-urdu), serif; color: #fbbf24; margin-left: 8px;">(${hTitleUr})</span></div>
+                    <div class="collapsible-wisdom-preview" style="direction: ltr; text-align: left;">${catInfo.icon} ${catInfo.name_en} • Surah ${it.surah_name_roman} [${it.surah_id}:${it.ayah_num}] • 📏 ${it.word_count} Words</div>
+                  </div>
+                </div>
+                <div class="collapsible-right-tools">
+                  <button class="card-action-btn play-btn" data-serial="${it.serial}" onclick="event.stopPropagation(); window.CommandsApp.playAyah(${idx});" title="Recite">▶</button>
+                  <button class="card-action-btn ${isStarred ? 'bookmarked' : ''}" onclick="event.stopPropagation(); window.CommandsApp.toggleBookmark(${it.serial});" title="Bookmark">${isStarred ? '★' : '☆'}</button>
+                  <span class="chevron-indicator">▼</span>
+                </div>
+              </div>
+
+              <!-- Collapsible Deep Details -->
+              <div class="collapsible-body-content" id="col-body-${it.serial}">
+                <div class="command-arabic-box">${hAr}</div>
+
+                <div class="command-content-grid ${!showEnglish ? 'urdu-only-grid' : (!showUrdu ? 'en-only-grid' : '')}">
+                  ${showUrdu ? `
+                    <div class="command-pane-ur">
+                      <div class="command-title-ur">${hTitleUr}</div>
+                      <div class="trans-stack-ur">
+                        <div class="trans-item-ur">
+                          <div class="trans-header">
+                            <span class="trans-source-tag ki">کنز الایمان</span>
+                          </div>
+                          <div class="trans-body-ur">${hKi}</div>
+                        </div>
+                        ${hKr ? `
+                          <div class="trans-item-ur" style="margin-top: 4px;">
+                            <div class="trans-header">
+                              <span class="trans-source-tag kr">کنز العرفان</span>
+                            </div>
+                            <div class="trans-body-ur">${hKr}</div>
+                          </div>
+                        ` : ''}
+                      </div>
+                    </div>
+                  ` : ''}
+
+                  ${showEnglish ? `
+                    <div class="command-pane-en">
+                      <div class="command-title-en">${hTitleEn}</div>
+                      <div class="trans-stack-en">
+                        <div class="trans-item-en">
+                          <div class="trans-header">
+                            <span class="trans-source-tag en">Saheeh International</span>
+                          </div>
+                          <div class="trans-body-en">${hEn}</div>
+                        </div>
+                      </div>
+                    </div>
+                  ` : ''}
+                </div>
+
+                <div class="command-wisdom-banner">
+                  <div class="wisdom-banner-header">
+                    <span>💡 Human Flourishing & Health Wisdom:</span>
+                  </div>
+                  <div class="wisdom-banner-body ${!showEnglish || !showUrdu ? 'single-col' : ''}">
+                    ${showUrdu ? `<div class="wisdom-body-ur">${hWisdomUr}</div>` : ''}
+                    ${showEnglish ? `<div class="wisdom-body-en">${hWisdomEn}</div>` : ''}
+                  </div>
+                </div>
+
+                <div class="command-actions-bar">
+                  <button class="card-action-btn" onclick="event.stopPropagation(); window.CommandsApp.loadTafsir(${it.surah_id}, ${it.ayah_num}, ${it.serial}, this)">
+                    <span>📖 Tafsir</span>
+                  </button>
+                  <button class="card-action-btn" onclick="event.stopPropagation(); window.CommandsApp.copyCardText(${it.serial})">
+                    <span>📋 Copy</span>
+                  </button>
+                  <button class="card-action-btn whatsapp-btn" onclick="event.stopPropagation(); window.CommandsApp.shareWhatsApp(${it.serial})">
+                    <span>📲 WhatsApp</span>
+                  </button>
+                  <button class="card-action-btn" onclick="event.stopPropagation(); window.CommandsApp.jumpToAnalyzer(${it.surah_id}, ${it.ayah_num})">
+                    <span>🔍 Deep Analyzer ↗</span>
+                  </button>
+                </div>
+
+                <div class="command-tafsir-drawer" id="tafsir-drawer-${it.serial}">
+                  <div class="tafsir-header-title">📖 Tafsir Sirat-ul-Jinan — Surah ${it.surah_name_roman} Ayah ${it.ayah_num}</div>
+                  <div class="tafsir-content-body" id="tafsir-body-${it.serial}"></div>
+                </div>
+              </div>
+            </article>
+          `;
+        } else {
+          // Mode 3: Compact Action Checklist
+          return `
+            <div class="checklist-row" id="check-${it.serial}">
+              <div class="checklist-left">
+                <span class="checklist-serial">#${it.serial}</span>
+                <span class="checklist-polarity-icon">${isCommand ? '✅' : '🚫'}</span>
+                <span class="checklist-title" style="direction: ltr; text-align: left;">${hTitleEn}</span>
+                <span class="checklist-ref">Surah ${it.surah_name_roman} [${it.surah_id}:${it.ayah_num}]</span>
+              </div>
+              <div class="checklist-actions">
+                <button class="card-action-btn play-btn" data-serial="${it.serial}" onclick="window.CommandsApp.playAyah(${idx})" title="Listen to Tartil">▶</button>
+                <button class="card-action-btn ${isStarred ? 'bookmarked' : ''}" onclick="window.CommandsApp.toggleBookmark(${it.serial})" title="Bookmark">${isStarred ? '★' : '☆'}</button>
+                <button class="card-action-btn whatsapp-btn" onclick="window.CommandsApp.shareWhatsApp(${it.serial})" title="Share on WhatsApp">📲</button>
+                <button class="card-action-btn" onclick="window.CommandsApp.jumpToAnalyzer(${it.surah_id}, ${it.ayah_num})" title="Open in Ayah Analyzer">↗</button>
+              </div>
+            </div>
+          `;
+        }
+      }
+
+      // Main Container & Sentinel
+      const container = document.getElementById("commands-list-mount");
+      const counterBadge = document.getElementById("commands-counter-badge");
+      const sentinel = document.getElementById("scroll-sentinel");
+
+      // Progressive Chunked Render
+      function renderNextChunk() {
+        if (renderedCount >= currentFilteredItems.length) return;
+        const nextBatch = currentFilteredItems.slice(renderedCount, renderedCount + CHUNK_SIZE);
+        let fragment = document.createDocumentFragment();
+        const tempDiv = document.createElement("div");
+
+        let chunkHTML = "";
+        let prevCat = renderedCount > 0 ? currentFilteredItems[renderedCount - 1].category_id : null;
+
+        nextBatch.forEach((it, i) => {
+          const globalIdx = renderedCount + i;
+          // Render Category Section Header if grouping and category changes
+          if (activeCategory === "all" && !searchQuery && activeSortMode === "default" && it.category_id !== prevCat) {
+            const catInfo = categoryMap[it.category_id] || { name_en: it.category_name_en, icon: it.category_icon };
+            chunkHTML += `
+              <div class="category-section-header" id="category-section-${it.category_id}">
+                <div class="cat-sec-title-wrap">
+                  <span class="cat-sec-icon">${catInfo.icon}</span>
+                  <h3 class="cat-sec-title" style="direction: ltr; font-family: var(--font-ui), sans-serif; font-size: 1.15rem;">${catInfo.name_en}</h3>
+                </div>
+                <span class="cat-sec-badge" style="font-family: var(--font-urdu), serif; font-size: 0.95rem;">${it.category_name_ur}</span>
+              </div>
+            `;
+            prevCat = it.category_id;
+          }
+          chunkHTML += renderItemHTML(it, globalIdx);
+        });
+
+        tempDiv.innerHTML = chunkHTML;
+        while (tempDiv.firstChild) {
+          fragment.appendChild(tempDiv.firstChild);
+        }
+        container.appendChild(fragment);
+        renderedCount += nextBatch.length;
+      }
+
+      function renderList() {
+        currentFilteredItems = computeFilteredItems();
+        if (counterBadge) counterBadge.textContent = `${currentFilteredItems.length} Directives`;
+        container.innerHTML = "";
+        renderedCount = 0;
+
+        if (currentFilteredItems.length === 0) {
+          container.innerHTML = `
+            <div style="text-align: center; padding: 60px 20px; color: var(--text-dim); background: var(--bg-card-glass); border-radius: var(--radius-lg);">
+              <div style="font-size: 2.8rem; margin-bottom: 10px;">🔍</div>
+              <div style="font-size: 1.25rem; font-weight: 700; color: #fbbf24;">No directives found</div>
+              <p style="margin-top: 6px; font-size: 0.92rem;">Please try a different search query or change filters.</p>
+            </div>
+          `;
+          return;
+        }
+
+        // Render initial chunk
+        renderNextChunk();
+      }
+
+      // IntersectionObserver for 60fps Infinite Scroll Chunking
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            renderNextChunk();
+          }
+        });
+      }, { rootMargin: "300px" });
+
+      if (sentinel) {
+        observer.observe(sentinel);
+      }
+
+      // Event Wiring: Polarity Filter
+      document.querySelectorAll("#polarity-filters .segment-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          if (window.AudioSFX) window.AudioSFX.playTab();
+          document.querySelectorAll("#polarity-filters .segment-btn").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          activePolarity = btn.dataset.polarity;
+          renderList();
+        });
+      });
+
+      // Event Wiring: Language & BiDi Reading Order Filter
+      document.querySelectorAll("#lang-filters .segment-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          if (window.AudioSFX) window.AudioSFX.playTab();
+          document.querySelectorAll("#lang-filters .segment-btn").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          activeLang = btn.dataset.lang;
+          try {
+            localStorage.setItem("quran_bidi_lang_order", activeLang);
+          } catch(e) {}
+          renderList();
+        });
+      });
+
+      // Synchronize active state from persisted preference
+      const activeBtn = document.querySelector(`#lang-filters .segment-btn[data-lang="${activeLang}"]`);
+      if (activeBtn) {
+        document.querySelectorAll("#lang-filters .segment-btn").forEach(b => b.classList.remove("active"));
+        activeBtn.classList.add("active");
+      }
+
+      function toggleWisdom(serial, btn) {
+        if (window.AudioSFX) window.AudioSFX.playClick();
+        const drawer = document.getElementById(`wisdom-drawer-${serial}`);
+        if (!drawer) return;
+        const isOpen = drawer.style.display === "block";
+        if (isOpen) {
+          drawer.style.display = "none";
+          if (btn) {
+            btn.classList.remove("active");
+            btn.innerHTML = "<span>💡 Wisdom ▼</span>";
+          }
+        } else {
+          drawer.style.display = "block";
+          if (btn) {
+            btn.classList.add("active");
+            btn.innerHTML = "<span>💡 Wisdom ▲</span>";
+          }
+        }
+      }
+
+      // Event Wiring: Tri-Mode View Filter
+      document.querySelectorAll("#view-mode-filters .segment-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          if (window.AudioSFX) window.AudioSFX.playTab();
+          document.querySelectorAll("#view-mode-filters .segment-btn").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          activeView = btn.dataset.view;
+          renderList();
+        });
+      });
+
+      // Event Wiring: Category Filter Chips
+      document.querySelectorAll("#category-filters .cat-filter-chip").forEach(btn => {
+        btn.addEventListener("click", () => {
+          if (window.AudioSFX) window.AudioSFX.playClick();
+          document.querySelectorAll("#category-filters .cat-filter-chip").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          activeCategory = btn.dataset.cat;
+
+          if (activeCategory === "all") {
+            renderList();
+          } else {
+            const headerTarget = document.getElementById(`category-section-${activeCategory}`);
+            if (headerTarget) {
+              headerTarget.scrollIntoView({ behavior: 'smooth' });
+            } else {
+              renderList();
+            }
+          }
+        });
+      });
+
+      // Sort Select
+      const sortSelect = document.getElementById("commands-sort-select");
+      if (sortSelect) {
+        sortSelect.addEventListener("change", (e) => {
+          if (window.AudioSFX) window.AudioSFX.playClick();
+          activeSortMode = e.target.value;
+          renderList();
+        });
+      }
+
+      // Debounced Search (100ms)
+      const searchInput = document.getElementById("commands-search-input");
+      const searchClear = document.getElementById("search-clear-btn");
+      let searchTimeout = null;
+
+      if (searchInput) {
+        searchInput.addEventListener("input", (e) => {
+          clearTimeout(searchTimeout);
+          searchTimeout = setTimeout(() => {
+            searchQuery = e.target.value.trim();
+            if (searchClear) searchClear.style.display = searchQuery ? "block" : "none";
+            renderList();
+          }, 100);
+        });
+      }
+
+      if (searchClear) {
+        searchClear.addEventListener("click", () => {
+          if (window.AudioSFX) window.AudioSFX.playClick();
+          if (searchInput) {
+            searchInput.value = "";
+            searchQuery = "";
+            searchClear.style.display = "none";
+            renderList();
+            searchInput.focus();
+          }
+        });
+      }
+
+      // Audio Mini-Dock Controls
+      if (miniDockPlayBtn) miniDockPlayBtn.addEventListener("click", toggleAudioPlayback);
+      if (miniDockPrevBtn) miniDockPrevBtn.addEventListener("click", () => {
+        if (currentlyPlayingIndex > 0) {
+          playAyahByIndex(currentlyPlayingIndex - 1);
+        }
+      });
+      if (miniDockNextBtn) miniDockNextBtn.addEventListener("click", () => {
+        if (currentlyPlayingIndex < currentFilteredItems.length - 1) {
+          playAyahByIndex(currentlyPlayingIndex + 1);
+        }
+      });
+      if (miniDockCloseBtn) miniDockCloseBtn.addEventListener("click", () => {
+        audioPlayer.pause();
+        if (miniDock) miniDock.classList.remove("show");
+        document.querySelectorAll(".command-card").forEach(c => c.classList.remove("playing-now"));
+        updatePlayButtons(false, -1);
+      });
+
+      // Export globally for onclick handlers
+      window.CommandsApp = {
+        playAyah: (idx) => playAyahByIndex(idx),
+        toggleWisdom,
+
+        loadTafsir,
+        copyCardText: (serial) => {
+          const it = data.items.find(x => x.serial === serial);
+          if (it) copyCardText(it);
+        },
+        shareWhatsApp: (serial) => {
+          const it = data.items.find(x => x.serial === serial);
+          if (it) {
+            const msg = formatWhatsApp(it);
+            const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank');
+          }
+        },
+        toggleBookmark,
+        jumpToAnalyzer,
+        toggleCardExpansion: (serial, event) => {
+          const card = document.getElementById(`card-${serial}`);
+          if (card) card.classList.toggle("is-expanded");
+        }
+      };
+
+      // Initial Render
+      renderList();
+      console.log("[CommandsApp] ✓ Initialized successfully with " + data.items.length + " divine directives.");
+
+    })();
+  </script>
+</body>
+</html>

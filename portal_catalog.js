@@ -2,7 +2,7 @@
 window.PORTAL_CATALOG = {
   "version": "1.0.0",
   "lastUpdated": "Antigravity Files",
-  "totalApps": 30,
+  "totalApps": 29,
   "categories": [
     "Islamic & Faith",
     "Productivity & Utilities",
@@ -531,22 +531,6 @@ window.PORTAL_CATALOG = {
       "relPath": "Common-Resources/WhatsApp-Gate-Kit/WHATSAPP_GATE_TEMPLATE.html",
       "portalHref": "./Common-Resources/WhatsApp-Gate-Kit/WHATSAPP_GATE_TEMPLATE.html",
       "serverHref": "./Common-Resources/WhatsApp-Gate-Kit/WHATSAPP_GATE_TEMPLATE.html"
-    },
-    {
-      "id": "01-Events-Countdown__android__app__src__main__assets__index_html",
-      "title": "Events Countdown",
-      "category": "Discovered Tools",
-      "icon": "📄",
-      "badge": "01-Events-Countdown",
-      "description": "HTML application located in 01-Events-Countdown.",
-      "tags": [
-        "01-events-countdown",
-        "index.html"
-      ],
-      "primary": false,
-      "relPath": "01-Events-Countdown/android/app/src/main/assets/index.html",
-      "portalHref": "./01-Events-Countdown/android/app/src/main/assets/index.html",
-      "serverHref": "./01-Events-Countdown/android/app/src/main/assets/index.html"
     },
     {
       "id": "05-Cloud-Clipboard__Clipboard Sync_html",

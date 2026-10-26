@@ -1074,6 +1074,45 @@
       overflow: hidden;
     }
 
+    
+    /* Iframe Loading Overlay */
+    .iframe-loader {
+      position: absolute;
+      inset: 0;
+      background: #06080d;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      z-index: 5;
+      transition: opacity 0.25s ease;
+    }
+
+    .iframe-loader.active {
+      display: flex;
+    }
+
+    .iframe-spinner {
+      width: 44px;
+      height: 44px;
+      border: 3px solid rgba(56, 189, 248, 0.15);
+      border-top-color: var(--accent-cyan);
+      border-radius: 50%;
+      animation: spin 0.75s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .iframe-loader-text {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      letter-spacing: 0.3px;
+    }
+
     .device-frame {
       width: 100%;
       height: 100%;
@@ -1106,7 +1145,7 @@
       width: 100%;
       height: 100%;
       border: none;
-      background: #fff;
+      background: #06080d;
     }
 
     /* ==========================================================================
@@ -1499,6 +1538,10 @@
         <!-- View 2: Embedded Iframe Stage (Desktop App Runner) -->
         <div class="iframe-stage" id="iframe-stage">
           <div class="device-frame" id="device-frame">
+                        <div class="iframe-loader" id="iframe-loader">
+              <div class="iframe-spinner"></div>
+              <div class="iframe-loader-text" id="loader-app-title">Loading Application...</div>
+            </div>
             <iframe class="app-iframe" id="content-iframe" title="Application Viewer" src="about:blank"></iframe>
           </div>
         </div>
@@ -1718,10 +1761,16 @@
 
     /* Helper: Resolve Launch URL */
     function getLaunchUrl(app) {
-      if (window.location.protocol === "file:") {
-        return app.localPath || app.relativePath || "";
+      if (!app) return "";
+      // 1. If portalHref is present (generated for local vs web distribution)
+      if (app.portalHref) return app.portalHref;
+      // 2. If serverHref is present (for localhost server)
+      if (app.serverHref) return app.serverHref;
+      // 3. Fallback based on relPath
+      if (app.relPath) {
+        return (window.location.protocol === "file:") ? ("../../" + app.relPath) : ("./" + app.relPath);
       }
-      return app.webPath || app.relativePath || "";
+      return "";
     }
 
     /* Render Category Filter Pills */
@@ -1801,6 +1850,10 @@
           if (e.target.closest(".app-item-fav-btn")) return;
           const appId = item.getAttribute("data-id");
           launchApp(appId);
+          if (window.innerWidth <= 900) {
+            const sidebar = document.getElementById("sidebar");
+            if (sidebar) sidebar.classList.remove("open");
+          }
         });
       });
 
@@ -1998,6 +2051,18 @@
       `;
     }
 
+    function showIframeLoader(title) {
+      const loader = document.getElementById("iframe-loader");
+      const titleEl = document.getElementById("loader-app-title");
+      if (titleEl) titleEl.textContent = title ? `Loading ${title}...` : "Loading Application...";
+      if (loader) loader.classList.add("active");
+    }
+
+    function hideIframeLoader() {
+      const loader = document.getElementById("iframe-loader");
+      if (loader) loader.classList.remove("active");
+    }
+
     /* Launch Application (Adaptive Desktop vs Mobile) */
     function launchApp(appId) {
       const app = State.apps.find(a => a.id === appId);
@@ -2015,13 +2080,9 @@
 
       const url = getLaunchUrl(app);
 
-      // On mobile viewport (<= 900px): launch directly full-screen
-      if (window.innerWidth <= 900) {
-        window.location.href = url;
-        return;
-      }
+      // On mobile viewport (<= 900px): launch directly full-screen with mobile back floating button
+      const isMobile = window.innerWidth <= 900;
 
-      // On desktop: use the split-stage iframe
       const dashboard = document.getElementById("dashboard-view");
       const iframeStage = document.getElementById("iframe-stage");
       const iframe = document.getElementById("content-iframe");
@@ -2030,16 +2091,20 @@
       const topControls = document.getElementById("topbar-device-controls");
       const btnReload = document.getElementById("btn-reload-stage");
       const btnPopout = document.getElementById("btn-popout-stage");
+      const mobileBack = document.getElementById("mobile-floating-back");
 
       if (dashboard) dashboard.style.display = "none";
       if (iframeStage) iframeStage.style.display = "flex";
       if (btnBack) btnBack.style.display = "flex";
       if (activeMeta) activeMeta.style.display = "flex";
-      if (topControls) topControls.style.display = "flex";
+      if (topControls) topControls.style.display = isMobile ? "none" : "flex";
       if (btnReload) btnReload.style.display = "inline-flex";
       if (btnPopout) {
         btnPopout.style.display = "inline-flex";
         btnPopout.href = url;
+      }
+      if (mobileBack) {
+        mobileBack.style.display = isMobile ? "flex" : "none";
       }
 
       const iconEl = document.getElementById("top-app-icon");
@@ -2049,7 +2114,21 @@
       if (titleEl) titleEl.textContent = app.title;
       if (tagEl) tagEl.textContent = app.badge || app.category || "Active App";
 
-      if (iframe && iframe.src !== url) {
+      if (iframe) {
+        showIframeLoader(app.title);
+        let loaded = false;
+        iframe.onload = () => {
+          loaded = true;
+          hideIframeLoader();
+        };
+        iframe.onerror = () => {
+          loaded = true;
+          hideIframeLoader();
+        };
+        // Auto-dismiss loader after 4 seconds as fallback
+        setTimeout(() => {
+          if (!loaded) hideIframeLoader();
+        }, 4000);
         iframe.src = url;
       }
 
@@ -2069,6 +2148,7 @@
       const topControls = document.getElementById("topbar-device-controls");
       const btnReload = document.getElementById("btn-reload-stage");
       const btnPopout = document.getElementById("btn-popout-stage");
+      const mobileBack = document.getElementById("mobile-floating-back");
 
       if (dashboard) dashboard.style.display = "flex";
       if (iframeStage) iframeStage.style.display = "none";
@@ -2077,7 +2157,9 @@
       if (topControls) topControls.style.display = "none";
       if (btnReload) btnReload.style.display = "none";
       if (btnPopout) btnPopout.style.display = "none";
+      if (mobileBack) mobileBack.style.display = "none";
       if (iframe) iframe.src = "about:blank";
+      hideIframeLoader();
 
       renderSidebarList();
     }
@@ -2094,9 +2176,11 @@
       const btnCopy = document.getElementById("btn-copy-qr-url");
       const btnWa = document.getElementById("btn-share-wa");
 
+      const rawHref = app.portalHref || app.relPath || "";
+      const cleanHref = rawHref.replace(/^\.\.\/\.\.\//, "").replace(/^\.\//, "");
       const resolvedUrl = (window.location.protocol === "file:") 
-        ? (window.location.origin + window.location.pathname.replace("App-Portal/index.html", "") + (app.relativePath || ""))
-        : (new URL(app.webPath || app.relativePath || "", window.location.href).href);
+        ? (window.location.origin + window.location.pathname.replace("Common-Resources/App-Portal/index.html", "") + cleanHref)
+        : (new URL(app.portalHref || cleanHref, window.location.href).href);
 
       if (titleEl) titleEl.textContent = `🔗 Share: ${app.title}`;
       
@@ -2242,6 +2326,16 @@
               }
             });
           });
+
+          // Spotlight Trigger
+          const spotlightBtn = document.getElementById("btn-open-spotlight");
+          if (spotlightBtn) {
+            spotlightBtn.addEventListener("click", () => {
+              if (window.AISearch && window.AISearch.open) {
+                window.AISearch.open();
+              }
+            });
+          }
 
           // Reload Stage
           const btnReload = document.getElementById("btn-reload-stage");

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scan with Phone — Courier Pincode Search</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0a0c10;
+      color: #e6edf3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px;
+      text-align: center;
+    }
+    .card {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 16px;
+      padding: 32px 24px;
+      max-width: 440px;
+      width: 100%;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.6);
+    }
+    h1 {
+      font-size: 22px;
+      margin-bottom: 8px;
+      color: #58a6ff;
+    }
+    p {
+      font-size: 14px;
+      color: #8b949e;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    .qr-container {
+      background: #ffffff;
+      padding: 16px;
+      border-radius: 12px;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+    .qr-container img {
+      display: block;
+      width: 240px;
+      height: 240px;
+    }
+    .url-badge {
+      display: block;
+      background: #0d1117;
+      border: 1px solid #30363d;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-family: Consolas, monospace;
+      font-size: 15px;
+      color: #3fb950;
+      text-decoration: none;
+      word-break: break-all;
+      margin-bottom: 16px;
+    }
+    .instructions {
+      font-size: 13px;
+      color: #8b949e;
+      text-align: left;
+      line-height: 1.6;
+      background: rgba(56, 139, 253, 0.08);
+      border-left: 3px solid #58a6ff;
+      padding: 12px 14px;
+      border-radius: 4px;
+    }
+    .instructions ol {
+      margin-left: 20px;
+      margin-top: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>📱 Scan to Open on Phone</h1>
+    <p>Point your smartphone camera at this QR code while connected to the same Wi-Fi.</p>
+    
+    <div class="qr-container">
+      <img src="icons/mobile_qr.png" alt="Pincode App QR Code">
+    </div>
+
+    <a href="http://192.168.1.14:8080/index.html" target="_blank" class="url-badge">http://192.168.1.14:8080/index.html</a>
+
+    <div class="instructions">
+      <strong>How to install on phone:</strong>
+      <ol>
+        <li>Open the link above in Chrome (Android) or Safari (iOS).</li>
+        <li>Tap <strong>"Add to Home screen"</strong> or <strong>"Install app"</strong>.</li>
+        <li>The app will work <strong>100% offline</strong> forever!</li>
+      </ol>
+    </div>
+  </div>
+</body>
+</html>

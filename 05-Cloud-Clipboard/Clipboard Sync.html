@@ -1,0 +1,2925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cloud Clipboard Pro</title>
+    <script>
+        try {
+            if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        } catch (e) {}
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: {} }
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest" onload="if (typeof safeCreateIcons !== 'undefined') safeCreateIcons()"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        textarea { scrollbar-width: none; }
+        textarea::-webkit-scrollbar { width: 0px; background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb { background: #475569; }
+        body { overscroll-behavior-y: contain; transition: background-color 0.3s ease; }
+        .smart-tag { color: #3b82f6; background-color: #eff6ff; padding: 2px 6px; border-radius: 6px; font-weight: 600; font-size: 0.85em; }
+        .dark .smart-tag { color: #60a5fa; background-color: rgba(59, 130, 246, 0.2); }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in { animation: fadeIn 0.25s ease forwards; }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-black text-gray-800 dark:text-gray-200 h-[100dvh] flex justify-center sm:p-4 overflow-hidden font-sans antialiased">
+
+    <div class="bg-white dark:bg-slate-900 w-full md:max-w-4xl lg:max-w-5xl flex flex-col h-full sm:h-[90vh] sm:rounded-3xl shadow-2xl relative overflow-hidden transition-colors duration-300">
+        
+        <!-- App Header -->
+        <header class="bg-slate-900 dark:bg-black text-white px-3 py-2 flex justify-between items-center shrink-0 z-20 shadow-md border-b dark:border-slate-800">
+            <div class="flex items-center gap-1.5">
+                <div id="cloudIconContainer" class="bg-blue-500 dark:bg-blue-600 p-1.5 rounded-lg transition-colors duration-300">
+                    <i data-lucide="cloud-lightning" class="w-4 h-4 text-white"></i>
+                </div>
+                <h1 class="text-sm font-bold tracking-wide hidden sm:block">CloudClip <span class="text-[10px] text-blue-400 font-normal">PRO</span></h1>
+            </div>
+            
+            <div class="flex items-center gap-2">
+                <!-- Room Name Input with Share link -->
+                <div class="flex items-center bg-white/10 dark:bg-slate-900/60 border border-white/10 dark:border-slate-800 rounded-lg px-2 py-1 text-xs gap-1">
+                    <span class="text-[10px] text-slate-400 uppercase tracking-wider font-bold">Room:</span>
+                    <input 
+                        type="text" 
+                        id="roomNameInput" 
+                        class="bg-transparent border-none outline-none text-white font-semibold w-16 sm:w-20 text-[11px]" 
+                        placeholder="default"
+                        onchange="saveRoomName()"
+                        onkeydown="if(event.key==='Enter') { this.blur(); saveRoomName(); }"
+                    />
+                    <button onclick="copyRoomLink(event)" class="text-slate-400 hover:text-white ml-0.5 active:scale-90 transition-transform shrink-0" title="Copy Shareable Room Link">
+                        <i data-lucide="share-2" class="w-3.5 h-3.5"></i>
+                    </button>
+                </div>
+
+                <!-- Pair Mobile Trigger -->
+                <button 
+                    id="pairMobileBtn"
+                    onclick="openPairModal()" 
+                    class="p-1.5 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 border border-blue-500/30 rounded-lg text-xs font-semibold flex items-center gap-1 active:scale-95 transition-all shrink-0"
+                    title="Pair Mobile Device"
+                >
+                    <i data-lucide="qr-code" class="w-3.5 h-3.5 text-blue-400"></i>
+                    <span class="hidden md:inline">Pair Mobile</span>
+                </button>
+
+                <!-- Backup Trigger -->
+                <button 
+                    id="createBackupBtn"
+                    onclick="createCloudBackup()" 
+                    class="p-1.5 bg-emerald-600 hover:bg-emerald-700 rounded-lg text-white text-[11px] font-semibold flex items-center gap-1 active:scale-95 transition-all shadow-sm shrink-0"
+                    title="Backup to Cloud"
+                >
+                    <i data-lucide="cloud-lightning" class="w-3.5 h-3.5"></i>
+                    <span class="hidden md:inline">Backup</span>
+                </button>
+
+                <!-- Restore Backup Dropdown Trigger -->
+                <div class="relative" id="backupDropdownContainer">
+                    <button 
+                        onclick="toggleBackupDropdown(event)" 
+                        class="p-1.5 bg-white/10 hover:bg-white/20 rounded-lg text-slate-300 flex items-center gap-1 active:scale-95 transition-all animate-none"
+                        title="Cloud Backups History"
+                    >
+                        <i data-lucide="history" class="w-3.5 h-3.5"></i>
+                        <span class="hidden md:inline text-xs">Backups</span>
+                        <i data-lucide="chevron-down" class="w-3 h-3 text-slate-400"></i>
+                    </button>
+                    
+                    <!-- Dropdown Panel (hidden by default) -->
+                    <div id="cloudBackupsDropdown" onclick="event.stopPropagation()" class="hidden absolute right-0 mt-2 w-60 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border border-gray-200 dark:border-slate-800 rounded-xl shadow-xl p-3 z-50 space-y-2 text-gray-800 dark:text-gray-200 animate-fade-in">
+                        <div class="flex justify-between items-center pb-1 border-b border-gray-100 dark:border-slate-800">
+                            <span class="text-[10px] font-bold text-gray-400 dark:text-slate-500 uppercase tracking-wider">Cloud Backups</span>
+                            <span id="backupCountBadge" class="text-[9px] font-bold bg-gray-100 dark:bg-slate-800 px-1.5 py-0.5 rounded-full">0/5</span>
+                        </div>
+                        <div id="cloudBackupsList" class="max-h-40 overflow-y-auto custom-scrollbar space-y-1.5 pr-1 text-xs">
+                            <p class="text-[10px] text-gray-400 dark:text-slate-500 italic">No online backups found.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Speech Speed Selector in Header -->
+                <div class="flex items-center bg-white/10 dark:bg-slate-900/60 border border-white/10 dark:border-slate-800 rounded-lg px-2 py-1 text-xs gap-1">
+                    <span class="text-[10px] text-slate-400 uppercase tracking-wider font-bold">Speed:</span>
+                    <select id="ttsSpeedSelect" onchange="handleSpeedChange()" class="bg-transparent border-none outline-none text-white font-semibold text-[11px] cursor-pointer focus:ring-0 focus:outline-none">
+                        <option value="0.9" class="bg-slate-900 text-white">0.9x</option>
+                        <option value="1.0" class="bg-slate-900 text-white">1.0x</option>
+                        <option value="1.25" class="bg-slate-900 text-white">1.25x</option>
+                        <option value="1.5" class="bg-slate-900 text-white">1.5x</option>
+                        <option value="2.0" class="bg-slate-900 text-white">2.0x</option>
+                    </select>
+                </div>
+
+                <!-- Settings Dropdown Trigger -->
+                <div class="relative" id="settingsDropdownContainer">
+                    <button 
+                        onclick="toggleSettingsDropdown(event)" 
+                        class="p-1.5 bg-white/10 hover:bg-white/20 rounded-lg text-slate-300 flex items-center gap-1 active:scale-95 transition-all"
+                        title="App Settings"
+                    >
+                        <i data-lucide="settings" class="w-3.5 h-3.5"></i>
+                    </button>
+                    
+                    <!-- Settings Dropdown Panel (hidden by default) -->
+                    <div id="appSettingsDropdown" onclick="event.stopPropagation()" class="hidden absolute right-0 mt-2 w-64 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border border-gray-200 dark:border-slate-800 rounded-xl shadow-xl p-3.5 z-50 space-y-3.5 text-gray-800 dark:text-gray-200 animate-fade-in">
+                        <div class="flex justify-between items-center pb-1 border-b border-gray-100 dark:border-slate-800">
+                            <span class="text-[10px] font-bold text-gray-400 dark:text-slate-500 uppercase tracking-wider">App Settings</span>
+                        </div>
+                        
+                        <!-- Password settings group -->
+                        <div id="passwordSettingsGroup" class="flex flex-col gap-2 text-left pb-1 border-b border-gray-100 dark:border-slate-800/60">
+                            <!-- Collapsible Trigger Button -->
+                            <button onclick="togglePasswordSection(event)" class="w-full flex items-center justify-between text-xs font-bold text-gray-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors" type="button">
+                                <span class="text-[9px] uppercase tracking-wider">Password Settings</span>
+                                <i data-lucide="chevron-right" id="passwordSectionChevron" class="w-3 h-3 transition-transform duration-200"></i>
+                            </button>
+                            
+                            <!-- Collapsible Content Panel (hidden by default) -->
+                            <div id="passwordCollapseSection" class="hidden flex flex-col gap-2 pt-1">
+                                <!-- Current Password Row -->
+                                <div id="currentPasswordRow" class="hidden flex flex-col gap-0.5">
+                                    <span class="text-[9px] text-gray-400 dark:text-slate-500 font-medium">Current Password</span>
+                                    <div class="relative">
+                                        <input 
+                                            type="password" 
+                                            id="currentPasswordInput" 
+                                            class="w-full bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-lg pl-2 pr-8 py-1 text-[11px] font-semibold focus:outline-none focus:ring-1 focus:ring-blue-500 dark:text-white"
+                                            placeholder="Verify current password"
+                                        />
+                                        <button onclick="togglePasswordVisibility('currentPasswordInput', this, event)" class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-white shrink-0 shadow-none outline-none" type="button">
+                                            <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- New Password Row -->
+                                <div class="flex flex-col gap-0.5">
+                                    <span id="newPasswordLabel" class="text-[9px] text-gray-400 dark:text-slate-500 font-medium">New Password</span>
+                                    <div class="relative">
+                                        <input 
+                                            type="password" 
+                                            id="newPasswordInput" 
+                                            class="w-full bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-lg pl-2 pr-8 py-1 text-[11px] font-semibold focus:outline-none focus:ring-1 focus:ring-blue-500 dark:text-white"
+                                            placeholder="Set password (optional)"
+                                        />
+                                        <button onclick="togglePasswordVisibility('newPasswordInput', this, event)" class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-white shrink-0 shadow-none outline-none" type="button">
+                                            <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <button 
+                                    onclick="updateClearPassword()" 
+                                    class="w-full mt-1.5 py-1 px-3 bg-blue-600 hover:bg-blue-700 text-white text-[10px] font-bold rounded-lg active:scale-[0.98] transition-all"
+                                    type="button"
+                                >
+                                    Update Password
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Help Guide Modal Trigger -->
+                <button 
+                    id="helpGuideBtn" 
+                    onclick="openHelpGuideModal(event)" 
+                    class="p-1.5 bg-white/10 hover:bg-white/20 rounded-lg text-slate-300 flex items-center gap-1 active:scale-95 transition-all shrink-0" 
+                    title="User Guide & Help"
+                >
+                    <i data-lucide="help-circle" class="w-3.5 h-3.5"></i>
+                </button>
+
+                <!-- Theme Toggle -->
+                <button onclick="toggleDarkMode()" class="p-1.5 bg-white/10 hover:bg-white/20 rounded-lg active:scale-95 transition-all shrink-0" title="Toggle Dark Mode">
+                    <i data-lucide="moon" id="themeIcon" class="w-3.5 h-3.5 text-blue-300"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main split-screen body container -->
+        <div class="flex-1 flex flex-col md:flex-row overflow-hidden relative">
+
+            <!-- Left Column: Editor & Settings -->
+            <div class="w-full md:w-[35%] lg:w-[38%] flex flex-col shrink-0 md:border-r border-gray-100 dark:border-slate-800 bg-white dark:bg-slate-900 relative transition-colors duration-300 min-h-0">
+
+                <!-- Input & Editor Area -->
+                <div class="flex-1 flex flex-col min-h-0 relative">
+                    
+                    <!-- Editing Banner -->
+                    <div id="editBanner" class="hidden bg-amber-100 dark:bg-amber-900/40 px-4 py-2 flex justify-between items-center border-b border-amber-200 dark:border-amber-700/50 shrink-0">
+                        <div class="flex items-center gap-2 text-xs font-bold text-amber-700 dark:text-amber-400">
+                            <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+                            <span>Editing Saved Clip</span>
+                        </div>
+                        <button onclick="cancelEditMode()" class="text-[10px] font-bold bg-amber-200/50 dark:bg-amber-800/50 text-amber-700 dark:text-amber-300 px-2 py-1 rounded hover:bg-amber-300/50 transition-colors">
+                            CANCEL
+                        </button>
+                    </div>
+
+                    <!-- Textarea container (stretches vertically on desktop/tablet) -->
+                    <div class="relative flex-1 min-h-[200px] md:min-h-0">
+                        <textarea 
+                            id="clipboardInput" 
+                            class="w-full h-full p-4 pb-12 bg-transparent outline-none resize-none text-gray-700 dark:text-gray-200 text-[15px] leading-relaxed placeholder-gray-300 dark:placeholder-gray-600"
+                            placeholder="Paste text, #tags, or YouTube links..."
+                        ></textarea>
+                        
+                        <div class="absolute bottom-3 right-3 flex gap-1.5 sm:gap-2">
+                            <span id="textStats" class="text-[10px] text-gray-400 dark:text-slate-500 font-medium bg-gray-50 dark:bg-slate-800 px-2 py-1.5 rounded-md border border-gray-100 dark:border-slate-700 flex items-center">
+                                0W | 0C
+                            </span>
+                            <button onclick="undoText()" class="p-2 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl text-gray-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 active:scale-95 transition-all shadow-sm" title="Undo">
+                                <i data-lucide="undo" class="w-4 h-4"></i>
+                            </button>
+                            <button onclick="redoText()" class="p-2 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl text-gray-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 active:scale-95 transition-all shadow-sm" title="Redo">
+                                <i data-lucide="redo" class="w-4 h-4"></i>
+                            </button>
+                            <button id="pasteBtn" onclick="pasteFromClipboard()" class="p-2 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl text-gray-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 active:scale-95 transition-all shadow-sm" title="Paste from Clipboard">
+                                <i data-lucide="clipboard-paste" class="w-4 h-4"></i>
+                            </button>
+                            <button onclick="copyToClipboard()" class="p-2 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl text-gray-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 active:scale-95 transition-all shadow-sm" title="Copy Text">
+                                <i data-lucide="copy" class="w-4 h-4"></i>
+                            </button>
+                            <button onclick="clearText()" class="p-2 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl text-gray-500 dark:text-slate-400 hover:text-red-500 dark:hover:text-red-400 active:scale-95 transition-all shadow-sm" title="Clear Text">
+                                <i data-lucide="trash-2" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Action Bar -->
+                    <div class="px-4 py-3 bg-gray-50/80 dark:bg-slate-900 flex gap-3 items-center border-t border-gray-100 dark:border-slate-800 shrink-0">
+                        <!-- Desktop Keyboard hint -->
+                        <span class="text-[9px] text-gray-400 dark:text-slate-500 hidden md:inline mr-auto">Ctrl+Enter to save | Enter for new line</span>
+                        <button 
+                            id="saveBtn"
+                            class="flex-1 md:flex-none md:px-6 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-semibold py-3 px-4 rounded-xl shadow-md active:scale-[0.98] transition-all flex items-center justify-center gap-2 text-sm"
+                        >
+                            <i data-lucide="bookmark-plus" id="saveIcon" class="w-4 h-4"></i>
+                            <span id="saveBtnText">Save to History</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right Column: History -->
+            <div class="flex-1 flex flex-col bg-gray-100/50 dark:bg-black overflow-hidden relative transition-colors duration-300">
+                
+                <!-- Vault Control Header -->
+                <div class="px-4 py-2.5 flex flex-col gap-2.5 shrink-0 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm border-b border-gray-200/60 dark:border-slate-800 sticky top-0 z-10">
+                    
+                    <!-- Row 1: Search and Item Count -->
+                    <div class="flex gap-2 items-center w-full">
+                        <div class="relative flex-1">
+                            <span class="absolute inset-y-0 left-3 flex items-center pointer-events-none text-gray-400">
+                                <i data-lucide="search" class="w-3.5 h-3.5"></i>
+                            </span>
+                            <input 
+                                type="text" 
+                                id="historySearchInput" 
+                                oninput="handleSearchInput()"
+                                class="w-full bg-gray-50 dark:bg-slate-900/40 border border-gray-200 dark:border-slate-700/80 rounded-xl pl-9 pr-8 py-2 text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none dark:text-white placeholder-gray-400 dark:placeholder-slate-500"
+                                placeholder="Search Vault or #tags..."
+                            />
+                            <button 
+                                id="clearSearchBtn" 
+                                onclick="clearSearch()" 
+                                class="hidden absolute inset-y-0 right-2 flex items-center pr-1 text-gray-400 hover:text-gray-600 dark:hover:text-white"
+                            >
+                                <i data-lucide="x" class="w-3.5 h-3.5"></i>
+                            </button>
+                        </div>
+                        <span class="text-[10px] font-bold text-gray-400 dark:text-slate-500 bg-gray-200/50 dark:bg-slate-800 px-2.5 py-1 rounded-full shrink-0" id="historyCount">0</span>
+                    </div>
+                    
+                    <!-- Row 2: Sort, Speech, Backup tools -->
+                    <div class="flex items-center justify-between gap-2 flex-wrap">
+                        <div class="flex items-center gap-1.5 flex-wrap">
+                            <select id="sortSelect" onchange="handleSortChange()" class="text-[10px] sm:text-[11px] font-semibold bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-300 border border-gray-200 dark:border-slate-700 rounded-lg px-2 py-1 outline-none focus:ring-1 focus:ring-blue-500">
+                                <optgroup label="Date Created">
+                                    <option value="created_desc">Created: Newest First</option>
+                                    <option value="created_asc">Created: Oldest First</option>
+                                </optgroup>
+                                <optgroup label="Date Modified">
+                                    <option value="modified_desc">Edited: Newest First</option>
+                                    <option value="modified_asc">Edited: Oldest First</option>
+                                </optgroup>
+                                <optgroup label="Length / Size">
+                                    <option value="length_desc">Size: Largest First</option>
+                                    <option value="length_asc">Size: Smallest First</option>
+                                </optgroup>
+                                <optgroup label="Last Accessed">
+                                    <option value="accessed_desc">Accessed: Recent First</option>
+                                    <option value="accessed_asc">Accessed: Older First</option>
+                                </optgroup>
+                            </select>
+
+
+                            <!-- Active filter indicator (hashtag/search indicator) -->
+                            <span id="activeFilterBadge" class="hidden text-[9px] font-bold bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-2 py-0.5 rounded-md border border-blue-100 dark:border-blue-800/40 flex items-center gap-1">
+                                <span id="activeFilterText">#tag</span>
+                                <button onclick="clearActiveFilter()"><i data-lucide="x" class="w-2.5 h-2.5"></i></button>
+                            </span>
+                        </div>
+
+                        <div class="flex items-center gap-3">
+                            <!-- Import Backup Button & Hidden Input -->
+                            <input type="file" id="importFileInput" onchange="handleImportFile(event)" accept=".json" class="hidden" />
+                            <button onclick="triggerImport()" class="text-[10px] font-bold text-gray-500 dark:text-slate-400 hover:text-blue-500 dark:hover:text-blue-400 uppercase tracking-wide active:scale-95 transition-transform flex items-center gap-1" title="Import Backup">
+                                <i data-lucide="upload" class="w-3 h-3"></i> <span>Import</span>
+                            </button>
+                            
+                            <button onclick="exportData()" class="text-[10px] font-bold text-gray-500 dark:text-slate-400 hover:text-blue-500 dark:hover:text-blue-400 uppercase tracking-wide active:scale-95 transition-transform flex items-center gap-1" title="Download Backup">
+                                <i data-lucide="download" class="w-3 h-3"></i> <span>Export</span>
+                            </button>
+
+                            <!-- Clear All Button -->
+                            <button onclick="clearAllHistory()" class="text-[10px] font-bold text-red-500 dark:text-red-400 hover:text-red-600 dark:hover:text-red-300 uppercase tracking-wide active:scale-95 transition-transform flex items-center gap-1" title="Clear All History">
+                                <i data-lucide="trash-2" class="w-3 h-3"></i> <span>Clear All</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="historyList" class="flex-1 overflow-y-auto custom-scrollbar p-3 space-y-2.5 pb-20">
+                    <div class="flex flex-col items-center justify-center h-full text-gray-400 dark:text-slate-600 space-y-3 opacity-60 pt-10">
+                        <i data-lucide="loader-2" class="w-8 h-8 animate-spin"></i>
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- End split-screen body container -->
+    </div>
+
+    <!-- Glassmorphic Mobile QR Pairing Modal -->
+    <div 
+        id="qrPairModal" 
+        onclick="handleModalBackdropClick(event)"
+        class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md transition-opacity duration-300"
+        role="dialog" 
+        aria-modal="true" 
+        aria-labelledby="pairModalTitle"
+    >
+        <div 
+            onclick="event.stopPropagation()" 
+            class="relative bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-gray-200 dark:border-slate-800 rounded-3xl shadow-2xl p-6 max-w-sm w-full flex flex-col items-center gap-4 text-center animate-fade-in"
+        >
+            <!-- Close Button -->
+            <button 
+                id="closePairModalBtn"
+                onclick="closePairModal()" 
+                class="absolute top-4 right-4 p-1.5 text-gray-400 hover:text-gray-700 dark:hover:text-white rounded-lg active:scale-90 transition-transform" 
+                title="Close (Esc)"
+            >
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <!-- Header -->
+            <div class="flex flex-col items-center gap-1 mt-1">
+                <div class="p-2.5 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-2xl">
+                    <i data-lucide="qr-code" class="w-6 h-6"></i>
+                </div>
+                <h3 id="pairModalTitle" class="text-base font-bold text-gray-800 dark:text-white">Pair Mobile Device</h3>
+                <p class="text-xs text-gray-500 dark:text-slate-400">
+                    Room: <span id="pairModalRoomBadge" class="font-bold text-blue-600 dark:text-blue-400 font-mono">default</span>
+                    <span id="qrModalRoomBadge" class="hidden">default</span>
+                </p>
+            </div>
+
+            <!-- Scannable High-Contrast QR Code Container -->
+            <div class="p-3 bg-white rounded-2xl shadow-inner border border-gray-200/60 flex items-center justify-center">
+                <div id="qrCodeContainer" class="w-48 h-48 flex items-center justify-center">
+                    <!-- QR Code rendered here -->
+                </div>
+                <div id="pairQrContainer" class="hidden"></div>
+            </div>
+
+            <!-- Link Display & Copy Shortcut -->
+            <div class="w-full flex flex-col gap-2">
+                <div class="flex items-center w-full bg-gray-50 dark:bg-slate-800/80 border border-gray-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs gap-2">
+                    <input 
+                        id="pairUrlInput" 
+                        type="text" 
+                        readonly 
+                        class="bg-transparent border-none outline-none text-gray-700 dark:text-gray-300 font-mono text-[11px] flex-1 truncate select-all" 
+                    />
+                    <button 
+                        id="copyPairUrlBtn"
+                        onclick="copyPairUrl()" 
+                        class="text-blue-600 dark:text-blue-400 hover:text-blue-700 font-bold text-xs flex items-center gap-1 shrink-0 active:scale-95 transition-transform" 
+                        title="Copy URL"
+                    >
+                        <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                        <span>Copy</span>
+                    </button>
+                </div>
+                <p class="text-[11px] text-gray-400 dark:text-slate-500">Scan with phone camera to instantly connect and sync clips.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive In-App Help & User Guide Modal -->
+    <div 
+        id="helpGuideModal" 
+        onclick="handleHelpModalBackdropClick(event)"
+        class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md transition-opacity duration-300"
+        role="dialog" 
+        aria-modal="true" 
+        aria-labelledby="helpModalTitle"
+    >
+        <div 
+            onclick="event.stopPropagation()" 
+            class="relative bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-gray-200 dark:border-slate-800 rounded-3xl shadow-2xl p-6 max-w-2xl w-full flex flex-col max-h-[85vh] animate-fade-in"
+        >
+            <!-- Close Button -->
+            <button 
+                id="closeHelpGuideBtn"
+                onclick="closeHelpGuideModal()" 
+                class="absolute top-4 right-4 p-1.5 text-gray-400 hover:text-gray-700 dark:hover:text-white rounded-lg active:scale-90 transition-transform" 
+                title="Close (Esc)"
+            >
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <!-- Modal Header -->
+            <div class="flex items-center gap-3 pb-4 border-b border-gray-100 dark:border-slate-800 shrink-0">
+                <div class="p-2.5 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-2xl shrink-0">
+                    <i data-lucide="book-open" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h3 id="helpModalTitle" class="text-base font-bold text-gray-800 dark:text-white flex items-center gap-2">
+                        <span>CloudClip PRO Guide</span>
+                        <span class="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300">v2.5 PRO</span>
+                    </h3>
+                    <p class="text-xs text-gray-500 dark:text-slate-400">Features, settings, shortcuts, and troubleshooting reference.</p>
+                </div>
+            </div>
+
+            <!-- Tab Buttons Bar -->
+            <div class="flex items-center gap-1.5 py-3 border-b border-gray-100 dark:border-slate-800 overflow-x-auto custom-scrollbar shrink-0 text-xs">
+                <button onclick="switchHelpTab('shortcuts')" id="helpTabBtn-shortcuts" class="help-tab-btn px-3 py-1.5 rounded-xl font-bold transition-all bg-blue-600 text-white shadow-sm flex items-center gap-1.5 shrink-0">
+                    <i data-lucide="zap" class="w-3.5 h-3.5"></i>
+                    <span>Quick Start & Shortcuts</span>
+                </button>
+                <button onclick="switchHelpTab('sync')" id="helpTabBtn-sync" class="help-tab-btn px-3 py-1.5 rounded-xl font-semibold transition-all bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-slate-700 flex items-center gap-1.5 shrink-0">
+                    <i data-lucide="qr-code" class="w-3.5 h-3.5"></i>
+                    <span>Sync & Mobile QR</span>
+                </button>
+                <button onclick="switchHelpTab('inspectors')" id="helpTabBtn-inspectors" class="help-tab-btn px-3 py-1.5 rounded-xl font-semibold transition-all bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-slate-700 flex items-center gap-1.5 shrink-0">
+                    <i data-lucide="palette" class="w-3.5 h-3.5"></i>
+                    <span>Smart Inspectors</span>
+                </button>
+                <button onclick="switchHelpTab('history')" id="helpTabBtn-history" class="help-tab-btn px-3 py-1.5 rounded-xl font-semibold transition-all bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-slate-700 flex items-center gap-1.5 shrink-0">
+                    <i data-lucide="git-branch" class="w-3.5 h-3.5"></i>
+                    <span>Versions & Diff</span>
+                </button>
+                <button onclick="switchHelpTab('security')" id="helpTabBtn-security" class="help-tab-btn px-3 py-1.5 rounded-xl font-semibold transition-all bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-slate-700 flex items-center gap-1.5 shrink-0">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+                    <span>Security & Backups</span>
+                </button>
+                <button onclick="switchHelpTab('faq')" id="helpTabBtn-faq" class="help-tab-btn px-3 py-1.5 rounded-xl font-semibold transition-all bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-slate-700 flex items-center gap-1.5 shrink-0">
+                    <i data-lucide="help-circle" class="w-3.5 h-3.5"></i>
+                    <span>FAQ & Help</span>
+                </button>
+            </div>
+
+            <!-- Tab Content Area -->
+            <div class="flex-1 overflow-y-auto custom-scrollbar py-4 pr-1 text-xs text-gray-700 dark:text-slate-300 space-y-4">
+                <!-- Pane 1: Quick Start & Shortcuts -->
+                <div id="helpPane-shortcuts" class="space-y-3">
+                    <div class="p-3 bg-blue-50/60 dark:bg-blue-900/20 rounded-2xl border border-blue-100 dark:border-blue-800/40 space-y-1.5">
+                        <h4 class="font-bold text-blue-900 dark:text-blue-300 flex items-center gap-1.5">
+                            <i data-lucide="sparkles" class="w-4 h-4"></i>
+                            <span>Real-Time Cloud Clipboard</span>
+                        </h4>
+                        <p class="text-gray-600 dark:text-slate-400 leading-relaxed">
+                            Type or paste any text into the left editor. Your drafts synchronize instantaneously across all devices joined to the same Room.
+                        </p>
+                    </div>
+
+                    <div class="space-y-2">
+                        <h5 class="font-bold uppercase tracking-wider text-[11px] text-gray-400 dark:text-slate-500">Keyboard Shortcuts</h5>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 font-mono text-[11px]">
+                            <div class="flex items-center justify-between p-2.5 bg-gray-50 dark:bg-slate-800/60 rounded-xl border border-gray-100 dark:border-slate-800">
+                                <span class="font-semibold text-gray-800 dark:text-slate-200">Ctrl + Enter</span>
+                                <span class="text-blue-600 dark:text-blue-400 font-sans font-bold">Save Clip</span>
+                            </div>
+                            <div class="flex items-center justify-between p-2.5 bg-gray-50 dark:bg-slate-800/60 rounded-xl border border-gray-100 dark:border-slate-800">
+                                <span class="font-semibold text-gray-800 dark:text-slate-200">Enter</span>
+                                <span class="text-gray-500 dark:text-slate-400 font-sans font-bold">New Line</span>
+                            </div>
+                            <div class="flex items-center justify-between p-2.5 bg-gray-50 dark:bg-slate-800/60 rounded-xl border border-gray-100 dark:border-slate-800">
+                                <span class="font-semibold text-gray-800 dark:text-slate-200">Ctrl + Z / Y</span>
+                                <span class="text-gray-500 dark:text-slate-400 font-sans font-bold">Undo / Redo</span>
+                            </div>
+                            <div class="flex items-center justify-between p-2.5 bg-gray-50 dark:bg-slate-800/60 rounded-xl border border-gray-100 dark:border-slate-800">
+                                <span class="font-semibold text-gray-800 dark:text-slate-200">Escape</span>
+                                <span class="text-gray-500 dark:text-slate-400 font-sans font-bold">Close Modals</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <h5 class="font-bold uppercase tracking-wider text-[11px] text-gray-400 dark:text-slate-500">Floating Toolbar Actions</h5>
+                        <ul class="space-y-1 text-gray-600 dark:text-slate-400">
+                            <li>• <strong>Paste (<i data-lucide="clipboard-paste" class="w-3 h-3 inline"></i>)</strong>: Reads native OS clipboard directly without pressing Ctrl+V.</li>
+                            <li>• <strong>Copy (<i data-lucide="copy" class="w-3 h-3 inline"></i>)</strong>: Copies current textarea text to clipboard.</li>
+                            <li>• <strong>Undo / Redo</strong>: Step backward or forward through text modifications.</li>
+                            <li>• <strong>Clear (<i data-lucide="trash-2" class="w-3 h-3 inline"></i>)</strong>: Clears editor and resets live cloud broadcast.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Pane 2: Sync & Mobile QR -->
+                <div id="helpPane-sync" class="hidden space-y-3">
+                    <div class="p-3 bg-indigo-50/60 dark:bg-indigo-900/20 rounded-2xl border border-indigo-100 dark:border-indigo-800/40 space-y-1.5">
+                        <h4 class="font-bold text-indigo-900 dark:text-indigo-300 flex items-center gap-1.5">
+                            <i data-lucide="smartphone" class="w-4 h-4"></i>
+                            <span>Mobile Device QR Pairing</span>
+                        </h4>
+                        <p class="text-gray-600 dark:text-slate-400 leading-relaxed">
+                            Connect your phone or tablet in seconds without typing URLs or room codes.
+                        </p>
+                    </div>
+
+                    <ol class="space-y-2 list-decimal list-inside text-gray-600 dark:text-slate-400 leading-relaxed">
+                        <li>Click <strong>Pair Mobile</strong> (<i data-lucide="qr-code" class="w-3.5 h-3.5 inline"></i>) in the header bar.</li>
+                        <li>Scan the QR code with your smartphone camera.</li>
+                        <li>Tap the notification to open CloudClip PRO on your mobile device in the same room.</li>
+                        <li>Any text copied or typed on either device syncs immediately in real time.</li>
+                    </ol>
+
+                    <div class="p-2.5 bg-gray-50 dark:bg-slate-800/60 rounded-xl border border-gray-100 dark:border-slate-800 text-[11px] space-y-1">
+                        <p class="font-semibold text-gray-700 dark:text-slate-300">Room Isolation & Offline Cache</p>
+                        <p class="text-gray-500 dark:text-slate-400">Each room name has an independent vault history. If internet is lost, clips are saved to local storage and sync automatically upon reconnection.</p>
+                    </div>
+                </div>
+
+                <!-- Pane 3: Smart Inspectors -->
+                <div id="helpPane-inspectors" class="hidden space-y-3">
+                    <div class="p-3 bg-purple-50/60 dark:bg-purple-900/20 rounded-2xl border border-purple-100 dark:border-purple-800/40 space-y-1.5">
+                        <h4 class="font-bold text-purple-900 dark:text-purple-300 flex items-center gap-1.5">
+                            <i data-lucide="palette" class="w-4 h-4"></i>
+                            <span>Smart Content Intelligence</span>
+                        </h4>
+                        <p class="text-gray-600 dark:text-slate-400 leading-relaxed">
+                            CloudClip PRO detects specialized data formats automatically in your saved clips:
+                        </p>
+                    </div>
+
+                    <div class="space-y-2.5">
+                        <div class="p-2.5 bg-gray-50 dark:bg-slate-800/60 rounded-xl border border-gray-100 dark:border-slate-800 space-y-1">
+                            <span class="font-bold text-gray-800 dark:text-white flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-blue-500 inline-block"></span>
+                                <span>Live Color Swatches</span>
+                            </span>
+                            <p class="text-gray-500 dark:text-slate-400">Detects Hex (<code class="font-mono">#fff</code>, <code class="font-mono">#3b82f6</code>) and <code class="font-mono">rgb(...)</code>/<code class="font-mono">rgba(...)</code> codes. Renders circular preview dots with 1-click copy. Disambiguates 4-digit years (<code class="font-mono">#2026</code>) as tags.</p>
+                        </div>
+
+                        <div class="p-2.5 bg-gray-50 dark:bg-slate-800/60 rounded-xl border border-gray-100 dark:border-slate-800 space-y-1">
+                            <span class="font-bold text-gray-800 dark:text-white flex items-center gap-1.5">
+                                <span class="px-1.5 py-0.5 rounded text-[9px] bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 font-mono font-bold">JSON</span>
+                                <span>Code & JSON Detection</span>
+                            </span>
+                            <p class="text-gray-500 dark:text-slate-400">Automatically formats valid JSON and 12 programming languages in monospace with syntax badges and a dedicated <strong>Copy Raw Code</strong> button.</p>
+                        </div>
+
+                        <div class="p-2.5 bg-gray-50 dark:bg-slate-800/60 rounded-xl border border-gray-100 dark:border-slate-800 space-y-1">
+                            <span class="font-bold text-gray-800 dark:text-white flex items-center gap-1.5">
+                                <span class="px-1.5 py-0.5 rounded text-[9px] bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 font-bold">MD Preview</span>
+                                <span>Markdown Preview Toggle</span>
+                            </span>
+                            <p class="text-gray-500 dark:text-slate-400">Cards with Markdown display an inline toggle button. Renders headings, checklists (<code class="font-mono">- [ ]</code> / <code class="font-mono">- [x]</code>), lists, and bold with strict XSS sanitization.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pane 4: Versions & Diff -->
+                <div id="helpPane-history" class="hidden space-y-3">
+                    <div class="p-3 bg-emerald-50/60 dark:bg-emerald-900/20 rounded-2xl border border-emerald-100 dark:border-emerald-800/40 space-y-1.5">
+                        <h4 class="font-bold text-emerald-900 dark:text-emerald-300 flex items-center gap-1.5">
+                            <i data-lucide="git-branch" class="w-4 h-4"></i>
+                            <span>Edit History & Visual Diffs</span>
+                        </h4>
+                        <p class="text-gray-600 dark:text-slate-400 leading-relaxed">
+                            Every time you edit and save a clip, earlier revisions are preserved in the clip's version history drawer.
+                        </p>
+                    </div>
+
+                    <ul class="space-y-2 text-gray-600 dark:text-slate-400 leading-relaxed">
+                        <li>• <strong>Versions Badge</strong>: Click <code class="font-mono bg-gray-100 dark:bg-slate-800 px-1 py-0.5 rounded">Edits (N)</code> on any modified clip to view previous revisions.</li>
+                        <li>• <strong>Visual Diff Comparison</strong>: Click any historical version to open the delta view. Added text is highlighted in <span class="text-green-600 font-bold">green</span> and removed text in <span class="text-red-600 line-through font-bold">red</span>.</li>
+                        <li>• <strong>One-Click Restore</strong>: Click <strong>Restore This Version</strong> to revert the clip to that exact state.</li>
+                        <li>• <strong>Duplicate Bump</strong>: Saving identical text brings the existing clip to the top instead of creating duplicates.</li>
+                    </ul>
+                </div>
+
+                <!-- Pane 5: Security & Backups -->
+                <div id="helpPane-security" class="hidden space-y-3">
+                    <div class="p-3 bg-amber-50/60 dark:bg-amber-900/20 rounded-2xl border border-amber-100 dark:border-amber-800/40 space-y-1.5">
+                        <h4 class="font-bold text-amber-900 dark:text-amber-300 flex items-center gap-1.5">
+                            <i data-lucide="shield-check" class="w-4 h-4"></i>
+                            <span>Security, PIN & Backups</span>
+                        </h4>
+                        <p class="text-gray-600 dark:text-slate-400 leading-relaxed">
+                            Protect sensitive clipboards and keep snapshots of your vault.
+                        </p>
+                    </div>
+
+                    <div class="space-y-2 text-gray-600 dark:text-slate-400">
+                        <div class="p-2.5 bg-gray-50 dark:bg-slate-800/60 rounded-xl border border-gray-100 dark:border-slate-800 space-y-1">
+                            <p class="font-bold text-gray-800 dark:text-white">Room Password Protection</p>
+                            <p class="text-[11px] text-gray-500 dark:text-slate-400">Click Settings (<i data-lucide="settings" class="w-3 h-3 inline"></i>) → Password Settings to lock the room with client-side SHA-256 PIN hashing.</p>
+                        </div>
+
+                        <div class="p-2.5 bg-gray-50 dark:bg-slate-800/60 rounded-xl border border-gray-100 dark:border-slate-800 space-y-1">
+                            <p class="font-bold text-gray-800 dark:text-white">5-Slot Cloud Backups</p>
+                            <p class="text-[11px] text-gray-500 dark:text-slate-400">Take instant cloud snapshots via <strong>Backups</strong> dropdown. Restore to any previous snapshot with a single click.</p>
+                        </div>
+
+                        <div class="p-2.5 bg-gray-50 dark:bg-slate-800/60 rounded-xl border border-gray-100 dark:border-slate-800 space-y-1">
+                            <p class="font-bold text-gray-800 dark:text-white">Global Speech Speed Setting</p>
+                            <p class="text-[11px] text-gray-500 dark:text-slate-400">Set Reading Speed in the header (0.9x to 2.0x). Applies to all clips and automatically persists as your default.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pane 6: FAQ & Help -->
+                <div id="helpPane-faq" class="hidden space-y-3">
+                    <div class="space-y-2">
+                        <div class="p-2.5 bg-gray-50 dark:bg-slate-800/60 rounded-xl border border-gray-100 dark:border-slate-800 space-y-1">
+                            <p class="font-bold text-gray-800 dark:text-white">Q: Paste button says "PASTE PERMISSION DENIED"?</p>
+                            <p class="text-[11px] text-gray-500 dark:text-slate-400">Click the browser address bar icon and allow Clipboard permissions for this site. Standard Ctrl+V always works as a fallback.</p>
+                        </div>
+
+                        <div class="p-2.5 bg-gray-50 dark:bg-slate-800/60 rounded-xl border border-gray-100 dark:border-slate-800 space-y-1">
+                            <p class="font-bold text-gray-800 dark:text-white">Q: How to export or transfer my clips?</p>
+                            <p class="text-[11px] text-gray-500 dark:text-slate-400">Use <strong>Export JSON</strong> in the History pane header to download all clips and edit histories. Use <strong>Import Backup</strong> to merge on any device.</p>
+                        </div>
+
+                        <div class="p-2.5 bg-gray-50 dark:bg-slate-800/60 rounded-xl border border-gray-100 dark:border-slate-800 space-y-1">
+                            <p class="font-bold text-gray-800 dark:text-white">Q: Is my data private?</p>
+                            <p class="text-[11px] text-gray-500 dark:text-slate-400">Yes. Clips are isolated per Room identifier. For maximum privacy, use a unique room name and enable room PIN encryption.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="pt-3 border-t border-gray-100 dark:border-slate-800 flex justify-between items-center text-[11px] text-gray-400 dark:text-slate-500 shrink-0">
+                <span>See <code class="font-mono bg-gray-100 dark:bg-slate-800 px-1 py-0.5 rounded">USER_MANUAL.md</code> for full details.</span>
+                <button onclick="closeHelpGuideModal()" class="px-3 py-1 bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 text-gray-700 dark:text-slate-200 rounded-lg font-semibold transition-colors">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Toast Notification overlay -->
+    <div id="toastNotification" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-slate-900/90 dark:bg-slate-950/90 backdrop-blur-md border border-slate-700/50 text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-xl z-50 flex items-center gap-2 transition-all duration-300 opacity-0 translate-y-4 pointer-events-none">
+        <span class="w-2 h-2 rounded-full bg-green-400 shadow-[0_0_8px_#22c55e]" id="toastDot"></span>
+        <span id="toastText">SUCCESS</span>
+    </div>
+
+    <!-- Firebase SDK (v8 Stable) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+    <script>
+        // Safe Lucide wrapper
+        function safeCreateIcons() {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        }
+
+        // --- Core Firebase & Room Initialization ---
+        let db;
+        let docRef, historyRef, backupsRef;
+        let docUnsubscribe = null;
+        let historyUnsubscribe = null;
+        let backupsUnsubscribe = null;
+        let cloudBackupsArray = [];
+        var markdownPreviewItemIds = new Set();
+        window.markdownPreviewItemIds = markdownPreviewItemIds;
+
+        // Initialize Room Name from URL parameters or LocalStorage
+        const urlParams = new URLSearchParams(window.location.search);
+        const roomParam = urlParams.get('room');
+        let roomName = "default";
+        if (roomParam) {
+            roomName = roomParam.trim().replace(/[^a-zA-Z0-9_-]/g, "");
+            if (!roomName) roomName = "default";
+            localStorage.setItem('cloudclip_roomName', roomName);
+        } else {
+            roomName = localStorage.getItem('cloudclip_roomName') || "default";
+        }
+
+        if (typeof firebase !== 'undefined') {
+            try {
+                const firebaseConfig = {
+                    apiKey: "AIzaSyDHZwg7GRqSUgGxRFhgr17-tK-DJRqxL_A",
+                    authDomain: "clip-18233.firebaseapp.com",
+                    projectId: "clip-18233",
+                    storageBucket: "clip-18233.firebasestorage.app",
+                    messagingSenderId: "953672309081",
+                    appId: "1:953672309081:web:563bdf3fead45697bc9448"
+                };
+                firebase.initializeApp(firebaseConfig);
+                db = firebase.firestore();
+            } catch (err) {
+                console.error("Firebase init failed:", err);
+            }
+        }
+
+        function initializeFirestoreRefs() {
+            if (docUnsubscribe) { docUnsubscribe(); docUnsubscribe = null; }
+            if (historyUnsubscribe) { historyUnsubscribe(); historyUnsubscribe = null; }
+            if (backupsUnsubscribe) { backupsUnsubscribe(); backupsUnsubscribe = null; }
+
+            if (typeof firebase !== 'undefined' && db) {
+                // If room is "default", map to the original un-prefixed documents to restore previous history
+                if (roomName === "default") {
+                    docRef = db.collection("clipboard").doc("mySharedText");
+                    historyRef = db.collection("clipboard").doc("myHistory");
+                    backupsRef = db.collection("clipboard").doc("myBackups");
+                } else {
+                    docRef = db.collection("clipboard").doc("sharedText_" + roomName);
+                    historyRef = db.collection("clipboard").doc("history_" + roomName);
+                    backupsRef = db.collection("clipboard").doc("backups_" + roomName);
+                }
+                setupFirestoreListeners();
+            } else {
+                updateCloudStatus('offline');
+            }
+        }
+        
+        function getHistoryStorageKey() {
+            return 'cloudclip_history_' + roomName;
+        }
+
+        function saveLocalHistory() {
+            try {
+                localStorage.setItem(getHistoryStorageKey(), JSON.stringify(historyArray));
+            } catch (e) {
+                showStatus("STORAGE QUOTA FULL", true);
+            }
+        }
+
+        function loadLocalHistory() {
+            try {
+                const key = getHistoryStorageKey();
+                let stored = localStorage.getItem(key);
+                if (stored === null) {
+                    const legacyStored = localStorage.getItem('cloudclip_history');
+                    if (legacyStored !== null) {
+                        try {
+                            localStorage.setItem(key, legacyStored);
+                        } catch (e) {}
+                        stored = legacyStored;
+                    }
+                }
+                return stored ? JSON.parse(stored) : [];
+            } catch (e) {
+                console.error("Failed to load local history:", e);
+                return [];
+            }
+        }
+
+        function updateCloudStatus(status) {
+            const container = document.getElementById('cloudIconContainer');
+            if (!container) return;
+            
+            const createBtn = document.getElementById('createBackupBtn');
+            
+            if (status === 'online') {
+                container.className = "bg-green-500 dark:bg-green-600 p-1.5 rounded-lg transition-colors duration-300";
+                container.innerHTML = '<i data-lucide="cloud-lightning" class="w-4 h-4 text-white"></i>';
+                container.title = "Cloud Sync Online";
+                if (createBtn) {
+                    createBtn.disabled = false;
+                    createBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                }
+            } else if (status === 'offline') {
+                container.className = "bg-amber-500 dark:bg-amber-600 p-1.5 rounded-lg transition-colors duration-300";
+                container.innerHTML = '<i data-lucide="cloud-off" class="w-4 h-4 text-white"></i>';
+                container.title = "Cloud Sync Error - Running in Local Offline Mode";
+                if (createBtn) {
+                    createBtn.disabled = true;
+                    createBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                }
+            }
+            safeCreateIcons();
+            
+            if (typeof renderCloudBackupsList !== 'undefined') {
+                renderCloudBackupsList();
+            }
+        }
+
+        // App State
+        let historyArray = loadLocalHistory();
+        let editingItemId = null;
+        let currentSort = 'created_desc'; // 2-Way default sort
+        let expandedItemIds = new Set();
+        let activeFilter = "";
+        let clearPassword = localStorage.getItem('cloudclip_clearPassword') || "";
+        let preEditDraftText = ""; // Holds draft editor text before editing a clip
+        
+        let debounceTimer;
+        let statusTimer;
+        let currentUtterance = null;
+        let isPlayingId = null;
+        let speechHeartbeat = null;
+
+        function clearSpeechHeartbeat() {
+            if (speechHeartbeat) {
+                clearInterval(speechHeartbeat);
+                speechHeartbeat = null;
+            }
+        }
+
+        function stopAllSpeech() {
+            clearSpeechHeartbeat();
+            if (typeof window !== 'undefined' && window.speechSynthesis && typeof window.speechSynthesis.cancel === 'function') {
+                try { window.speechSynthesis.cancel(); } catch (e) {}
+            }
+            isPlayingId = null;
+            currentUtterance = null;
+        }
+        
+        // Safe Parse Speech Speed
+        let currentSpeechRate = parseFloat(localStorage.getItem('ttsSpeed'));
+        if (isNaN(currentSpeechRate)) {
+            currentSpeechRate = 1.0;
+        }
+
+        // --- Undo / Redo Engine State ---
+        let undoStack = [""];
+        let redoStack = [];
+        let undoDebounce;
+
+        function pushToUndo(val) {
+            if (undoStack[undoStack.length - 1] !== val) {
+                undoStack.push(val);
+                if (undoStack.length > 50) undoStack.shift();
+                redoStack = []; 
+            }
+        }
+        
+        const textArea = document.getElementById('clipboardInput');
+        const saveBtn = document.getElementById('saveBtn');
+
+        // --- THEME & UTILS ---
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark'); localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark'); localStorage.setItem('theme', 'dark');
+            }
+            renderIcons();
+        }
+
+        function renderIcons() {
+            setTimeout(() => {
+                const icon = document.getElementById('themeIcon');
+                if(icon) icon.setAttribute('data-lucide', document.documentElement.classList.contains('dark') ? 'sun' : 'moon');
+                safeCreateIcons();
+            }, 10);
+        }
+        renderIcons();
+
+        function showStatus(message, isError = false) {
+            const toast = document.getElementById('toastNotification');
+            const text = document.getElementById('toastText');
+            const dot = document.getElementById('toastDot');
+            if (!toast || !text || !dot) return;
+
+            text.innerText = message;
+            dot.className = isError 
+                ? "w-2 h-2 rounded-full bg-red-500 shadow-[0_0_8px_#ef4444]" 
+                : "w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_#22c55e]";
+            
+            // Show toast visually
+            toast.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+            toast.classList.add('opacity-100', 'translate-y-0');
+
+            clearTimeout(statusTimer);
+            statusTimer = setTimeout(() => {
+                // Hide toast
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+            }, 2000);
+        }
+
+        function updateStats() {
+            const text = textArea.value;
+            const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+            const stats = document.getElementById('textStats');
+            stats.innerText = `${words}W | ${text.length}C`;
+            stats.classList.remove('hidden');
+        }
+
+        // HTML escape helper
+        function escapeHtml(str) {
+            return String(str || '').replace(/[&<>'"]/g, tag => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                "'": '&#39;',
+                '"': '&quot;'
+            }[tag]));
+        }
+        window.escapeHtml = escapeHtml;
+
+        function formatExpertText(str) {
+            let escaped = escapeHtml(str);
+            const placeholders = [];
+
+            // 1. Detect Hex colors (#3b82f6, #fff, #3B82F6, #22c55e80)
+            // Disambiguation: 4-digit numbers like #2026 are hashtags, NOT colors
+            escaped = escaped.replace(/(^|[^\w])#([0-9a-fA-F]{8}|[0-9a-fA-F]{6}|[0-9a-fA-F]{4}|[0-9a-fA-F]{3})(?![a-zA-Z0-9_-])/g, (fullMatch, prefix, hex) => {
+                if (hex.length === 4 && /^\d{4}$/.test(hex)) return fullMatch;
+                const color = '#' + hex;
+                const idx = placeholders.length;
+                placeholders.push(`<span class="inline-flex items-center gap-1.5 px-2 py-0.5 my-0.5 rounded-md font-mono text-[11px] font-semibold bg-gray-100 dark:bg-slate-800 text-gray-800 dark:text-gray-200 border border-gray-200/80 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-400 cursor-pointer select-none transition-all active:scale-95 align-middle" onclick="event.stopPropagation(); copyColorCode('${color}')" title="Click to copy ${color}"><span class="w-3 h-3 rounded-full inline-block shrink-0 shadow-sm border border-black/20 dark:border-white/20 align-middle" style="background-color: ${color};"></span><span>${color}</span></span>`);
+                return `${prefix}___SWATCH_TOKEN_${idx}___`;
+            });
+
+            // 2. Detect RGB / RGBA colors: rgb(...) or rgba(...)
+            escaped = escaped.replace(/\brgba?\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}(?:\s*,\s*(?:0|1|0?\.\d+|\d{1,3}%))?\s*\)/gi, (match) => {
+                const idx = placeholders.length;
+                placeholders.push(`<span class="inline-flex items-center gap-1.5 px-2 py-0.5 my-0.5 rounded-md font-mono text-[11px] font-semibold bg-gray-100 dark:bg-slate-800 text-gray-800 dark:text-gray-200 border border-gray-200/80 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-400 cursor-pointer select-none transition-all active:scale-95 align-middle" onclick="event.stopPropagation(); copyColorCode('${match}')" title="Click to copy ${match}"><span class="w-3 h-3 rounded-full inline-block shrink-0 shadow-sm border border-black/20 dark:border-white/20 align-middle" style="background-color: ${match};"></span><span>${match}</span></span>`);
+                return `___SWATCH_TOKEN_${idx}___`;
+            });
+
+            // 3. Hashtags: #todo, #meeting, etc. (vault filter tags)
+            escaped = escaped.replace(/(#[a-zA-Z0-9_-]+)/g, '<span class="smart-tag cursor-pointer hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors" onclick="event.stopPropagation(); filterByHashtag(\'$1\')">$1</span>');
+
+            // 4. Restore swatches cleanly without hashtag interference
+            placeholders.forEach((html, i) => {
+                escaped = escaped.replace(`___SWATCH_TOKEN_${i}___`, () => html);
+            });
+
+            return escaped;
+        }
+        window.formatExpertText = formatExpertText;
+
+        function formatDateTime(ms) {
+            const d = new Date(ms);
+            return d.toLocaleDateString([], {month: 'short', day: 'numeric'}) + ', ' + d.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        }
+
+        const generateId = () => Math.random().toString(36).substr(2, 9) + Date.now().toString(36);
+
+        function handleSortChange() {
+            currentSort = document.getElementById('sortSelect').value;
+            renderHistory();
+        }
+
+        // --- NEW: Handle Speed Change ---
+        window.handleSpeedChange = function() {
+            currentSpeechRate = parseFloat(document.getElementById('ttsSpeedSelect').value);
+            localStorage.setItem('ttsSpeed', currentSpeechRate);
+            showStatus("SPEED SAVED");
+            
+            // Restart audio immediately with new speed if it's currently playing
+            if(isPlayingId) {
+                const id = isPlayingId;
+                stopAllSpeech();
+                setTimeout(() => window.toggleSpeech(id), 50);
+            }
+        }
+        
+        // Initialize Room Name, Password & Speed Dropdown UI on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const speedDropdown = document.getElementById('ttsSpeedSelect');
+            if(speedDropdown) speedDropdown.value = currentSpeechRate;
+            
+            const roomInput = document.getElementById('roomNameInput');
+            if(roomInput) roomInput.value = roomName;
+
+            initPasswordUI();
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', (event) => {
+            // Close Backups Dropdown
+            const backupsDropdown = document.getElementById('cloudBackupsDropdown');
+            const backupsContainer = document.getElementById('backupDropdownContainer');
+            if (backupsDropdown && backupsContainer && !backupsDropdown.classList.contains('hidden')) {
+                if (!backupsContainer.contains(event.target)) {
+                    backupsDropdown.classList.add('hidden');
+                }
+            }
+
+            // Close Settings Dropdown
+            const settingsDropdown = document.getElementById('appSettingsDropdown');
+            const settingsContainer = document.getElementById('settingsDropdownContainer');
+            if (settingsDropdown && settingsContainer && !settingsDropdown.classList.contains('hidden')) {
+                if (!settingsContainer.contains(event.target)) {
+                    settingsDropdown.classList.add('hidden');
+                }
+            }
+        });
+
+        // Initialize state from LocalStorage immediately
+        const localCurrentText = localStorage.getItem('cloudclip_currentText');
+        if (localCurrentText && !textArea.value) {
+            textArea.value = localCurrentText;
+            updateStats();
+        }
+        renderHistory();
+
+        // --- LIVE SYNC & DATA MIGRATION ---
+        function setupFirestoreListeners() {
+            if (typeof firebase === 'undefined' || !docRef || !historyRef) return;
+
+            docUnsubscribe = docRef.onSnapshot((docSnap) => {
+                updateCloudStatus('online');
+                const content = docSnap.exists ? (docSnap.data().content || "") : "";
+                if (textArea.value !== content) {
+                    textArea.value = content;
+                    updateStats();
+                    showStatus("SYNCED");
+                    localStorage.setItem('cloudclip_currentText', content);
+                }
+            }, (error) => {
+                console.warn("Shared Text sync error:", error);
+                updateCloudStatus('offline');
+            });
+
+            historyUnsubscribe = historyRef.onSnapshot((docSnap) => {
+                updateCloudStatus('online');
+                const rawData = (docSnap.exists && Array.isArray(docSnap.data().items)) ? docSnap.data().items : [];
+                
+                historyArray = rawData.map(item => ({
+                    id: item.id || generateId(),
+                    content: item.content || "",
+                    pinned: !!item.pinned,
+                    created: item.created || item.timestamp || Date.now(),
+                    modified: item.modified || item.timestamp || Date.now(),
+                    accessed: item.accessed || item.timestamp || Date.now(),
+                    versions: item.versions || []
+                }));
+                
+                saveLocalHistory();
+                renderHistory();
+            }, (error) => {
+                console.warn("History sync error:", error);
+                updateCloudStatus('offline');
+                // render from local cache if sync fails
+                renderHistory();
+            });
+
+            if (backupsRef) {
+                backupsUnsubscribe = backupsRef.onSnapshot((docSnap) => {
+                    updateCloudStatus('online');
+                    const rawBackups = (docSnap.exists && Array.isArray(docSnap.data().backups)) ? docSnap.data().backups : [];
+                    cloudBackupsArray = rawBackups.map(b => ({
+                        id: b.id || generateId(),
+                        timestamp: b.timestamp || Date.now(),
+                        itemCount: b.itemCount || 0,
+                        items: b.items || []
+                    }));
+                    renderCloudBackupsList();
+                }, (error) => {
+                    console.warn("Backups sync error:", error);
+                });
+            }
+        }
+
+        // Initialize Refs and setup listeners
+        initializeFirestoreRefs();
+
+        // --- EDIT MODE LOGIC ---
+        function enterEditMode(id) {
+            const item = historyArray.find(i => i.id === id);
+            if (!item) return;
+
+            // Preserve current draft text before entering edit mode (only if not already editing)
+            if (!editingItemId) {
+                preEditDraftText = textArea.value;
+            }
+
+            editingItemId = id;
+            textArea.value = item.content;
+            pushToUndo(item.content);
+            updateStats(); 
+            
+            document.getElementById('editBanner').classList.remove('hidden');
+            
+            const saveBtnText = document.getElementById('saveBtnText');
+            if (saveBtnText) saveBtnText.innerText = 'Update Clip';
+            
+            const saveIcon = document.getElementById('saveIcon');
+            if (saveIcon) saveIcon.setAttribute('data-lucide', 'save');
+            
+            item.accessed = Date.now();
+            saveLocalHistory();
+            
+            if (typeof firebase !== 'undefined' && historyRef) {
+                historyRef.set({ items: historyArray })
+                    .then(() => updateCloudStatus('online'))
+                    .catch((error) => {
+                        console.warn("Cloud update accessed time failed:", error);
+                        updateCloudStatus('offline');
+                    });
+            }
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            renderIcons();
+            showStatus("LOADED FOR EDIT");
+        }
+
+        function cancelEditMode() {
+            editingItemId = null;
+            
+            // Restore previous unsaved draft text
+            textArea.value = preEditDraftText;
+            preEditDraftText = "";
+            
+            updateStats();
+            textArea.dispatchEvent(new Event('input'));
+
+            const editBanner = document.getElementById('editBanner');
+            if(editBanner) editBanner.classList.add('hidden');
+            
+            const saveBtnText = document.getElementById('saveBtnText');
+            if (saveBtnText) saveBtnText.innerText = 'Save to History';
+            
+            const saveIcon = document.getElementById('saveIcon');
+            if (saveIcon) saveIcon.setAttribute('data-lucide', 'bookmark-plus');
+            
+            renderIcons();
+        }
+        window.cancelEditMode = cancelEditMode;
+
+        // --- ACTIONS ---
+        textArea.addEventListener('input', () => {
+            updateStats(); showStatus("TYPING...");
+            
+            localStorage.setItem('cloudclip_currentText', textArea.value);
+
+            clearTimeout(undoDebounce);
+            undoDebounce = setTimeout(() => pushToUndo(textArea.value), 400);
+
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(async () => {
+                try {
+                    if (typeof firebase !== 'undefined' && docRef) {
+                        await docRef.set({ content: textArea.value });
+                        updateCloudStatus('online');
+                    }
+                } catch (error) {
+                    console.warn("Cloud sync typing failed:", error);
+                    updateCloudStatus('offline');
+                }
+            }, 800);
+        });
+
+        // Save on Ctrl+Enter / Cmd+Enter, regular Enter inserts a new line
+        textArea.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                e.preventDefault();
+                saveBtn.click();
+            }
+        });
+
+        // Improved Undo/Redo Engine
+        window.undoText = function() {
+            clearTimeout(undoDebounce);
+            if (undoStack.length > 1) {
+                if (textArea.value !== undoStack[undoStack.length - 1]) {
+                    undoStack.push(textArea.value);
+                }
+                const currentState = undoStack.pop();
+                redoStack.push(currentState);
+                
+                textArea.value = undoStack[undoStack.length - 1];
+                updateStats();
+                localStorage.setItem('cloudclip_currentText', textArea.value);
+                
+                if (typeof firebase !== 'undefined' && docRef) {
+                    docRef.set({ content: textArea.value })
+                        .then(() => updateCloudStatus('online'))
+                        .catch((error) => {
+                            console.warn("Cloud undo sync failed:", error);
+                            updateCloudStatus('offline');
+                        });
+                }
+                showStatus("UNDO");
+            } else {
+                showStatus("Nothing to undo", true);
+            }
+        }
+
+        window.redoText = function() {
+            if (redoStack.length > 0) {
+                const nextState = redoStack.pop();
+                undoStack.push(nextState);
+                
+                textArea.value = nextState;
+                updateStats();
+                localStorage.setItem('cloudclip_currentText', textArea.value);
+                
+                if (typeof firebase !== 'undefined' && docRef) {
+                    docRef.set({ content: nextState })
+                        .then(() => updateCloudStatus('online'))
+                        .catch((error) => {
+                            console.warn("Cloud redo sync failed:", error);
+                            updateCloudStatus('offline');
+                        });
+                }
+                showStatus("REDO");
+            } else {
+                showStatus("Nothing to redo", true);
+            }
+        }
+
+        saveBtn.addEventListener('click', async () => {
+            const currentText = textArea.value.trim();
+            if (!currentText) return; 
+
+            preEditDraftText = ""; // Reset draft since save succeeded
+
+            // Save old HTML just in case, but rely on finally block for cleanup
+            saveBtn.innerHTML = '<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> Saving...';
+            safeCreateIcons();
+
+            let updatedHistory = [...historyArray];
+            let isEdit = !!editingItemId;
+            let targetItemId = editingItemId;
+            let isDuplicateBump = false;
+
+            if (isEdit) {
+                const index = updatedHistory.findIndex(i => i.id === editingItemId);
+                if (index > -1 && updatedHistory[index].content !== currentText) {
+                    const oldItem = updatedHistory[index];
+                    const newVersions = [{ content: oldItem.content, modified: oldItem.modified }, ...(oldItem.versions || [])].slice(0, 5);
+                    
+                    updatedHistory[index] = {
+                        ...oldItem,
+                        content: currentText,
+                        modified: Date.now(),
+                        accessed: Date.now(),
+                        versions: newVersions
+                    };
+                }
+            } else {
+                const existingIndex = updatedHistory.findIndex(item => String(item.content).trim() === currentText);
+                if (existingIndex > -1) {
+                    isDuplicateBump = true;
+                    const existingItem = updatedHistory.splice(existingIndex, 1)[0];
+                    const now = Date.now();
+                    existingItem.modified = now;
+                    existingItem.accessed = now;
+                    updatedHistory.unshift(existingItem);
+                } else {
+                    const now = Date.now();
+                    const newItem = { 
+                        id: generateId(), content: currentText, pinned: false, 
+                        created: now, modified: now, accessed: now, versions: [] 
+                    };
+                    updatedHistory.unshift(newItem);
+                }
+            }
+
+            // Save locally first
+            historyArray = updatedHistory;
+            saveLocalHistory();
+            renderHistory();
+
+            // Clear text inputs locally
+            textArea.value = "";
+            localStorage.setItem('cloudclip_currentText', "");
+            updateStats();
+
+            if (isEdit) {
+                editingItemId = null;
+                const editBanner = document.getElementById('editBanner');
+                if (editBanner) editBanner.classList.add('hidden');
+            }
+
+            try {
+                if (typeof firebase !== 'undefined' && docRef && historyRef) {
+                    await historyRef.set({ items: updatedHistory });
+                    await docRef.set({ content: "" }); 
+                    
+                    showStatus(isDuplicateBump ? "CLIP MOVED TO TOP" : (isEdit ? "UPDATED (CLOUD)" : "SAVED (CLOUD)"));
+                    updateCloudStatus('online');
+                } else {
+                    showStatus(isDuplicateBump ? "CLIP MOVED TO TOP" : (isEdit ? "UPDATED LOCALLY" : "SAVED LOCALLY"));
+                }
+            } catch (error) {
+                console.warn("Cloud save failed:", error);
+                updateCloudStatus('offline');
+                showStatus(isDuplicateBump ? "CLIP MOVED TO TOP" : (isEdit ? "UPDATED LOCALLY" : "SAVED LOCALLY"), true);
+            } finally {
+                const btnText = editingItemId ? 'Update Clip' : 'Save to History';
+                const btnIcon = editingItemId ? 'save' : 'bookmark-plus';
+                saveBtn.innerHTML = `<i data-lucide="${btnIcon}" id="saveIcon" class="w-4 h-4"></i><span id="saveBtnText">${btnText}</span>`;
+                safeCreateIcons();
+            }
+        });
+
+        // --- ROOM CONFIGURATION FUNCTIONS ---
+        window.saveRoomName = function() {
+            const input = document.getElementById('roomNameInput');
+            if (input) {
+                const newRoom = input.value.trim().replace(/[^a-zA-Z0-9_-]/g, ""); // Sanitize input
+                if (!newRoom) {
+                    input.value = roomName;
+                    return alert("Please enter a valid room name (letters, numbers, underscores, and dashes only).");
+                }
+                
+                if (newRoom === roomName) {
+                    input.value = roomName;
+                    return; // No change
+                }
+                
+                roomName = newRoom;
+                input.value = roomName; // Instantly show sanitized value in UI
+                localStorage.setItem('cloudclip_roomName', roomName);
+
+                // Update URL parameter without reloading
+                try {
+                    const newUrl = window.location.origin + window.location.pathname + (roomName === 'default' ? '' : '?room=' + encodeURIComponent(roomName));
+                    window.history.replaceState({ path: newUrl }, '', newUrl);
+                } catch (e) {
+                    console.warn("History replaceState failed:", e);
+                }
+                
+                stopAllSpeech();
+                historyArray = loadLocalHistory();
+                renderHistory();
+                initializeFirestoreRefs();
+                showStatus("ROOM CHANGED");
+                
+                // Hide backups dropdown in case room changes
+                const dropdown = document.getElementById('cloudBackupsDropdown');
+                if (dropdown) dropdown.classList.add('hidden');
+            }
+        }
+
+        // Copy Shareable Room URL
+        window.copyRoomLink = function(event) {
+            if (event) event.stopPropagation();
+            const cleanUrl = window.location.origin + window.location.pathname + (roomName === 'default' ? '' : '?room=' + encodeURIComponent(roomName));
+            
+            navigator.clipboard.writeText(cleanUrl).then(() => {
+                showStatus("ROOM LINK COPIED");
+            }).catch(() => {
+                const temp = document.createElement("textarea");
+                temp.value = cleanUrl;
+                document.body.appendChild(temp);
+                temp.select();
+                document.execCommand("copy");
+                document.body.removeChild(temp);
+                showStatus("ROOM LINK COPIED");
+            });
+        }
+
+        // --- BACKUPS DROPDOWN ---
+        window.toggleBackupDropdown = function(event) {
+            if (event) event.stopPropagation();
+            const dropdown = document.getElementById('cloudBackupsDropdown');
+            if (dropdown) {
+                dropdown.classList.toggle('hidden');
+            }
+        }
+
+        // --- SETTINGS DROPDOWN ---
+        window.toggleSettingsDropdown = function(event) {
+            if (event) event.stopPropagation();
+            const dropdown = document.getElementById('appSettingsDropdown');
+            if (dropdown) {
+                const wasHidden = dropdown.classList.contains('hidden');
+                dropdown.classList.toggle('hidden');
+                if (wasHidden) {
+                    initPasswordUI();
+                }
+            }
+        }
+
+        // Toggle collapsible Password settings section
+        window.togglePasswordSection = function(event) {
+            if (event) event.stopPropagation();
+            const section = document.getElementById('passwordCollapseSection');
+            const chevron = document.getElementById('passwordSectionChevron');
+            if (section && chevron) {
+                const isHidden = section.classList.contains('hidden');
+                if (isHidden) {
+                    section.classList.remove('hidden');
+                    chevron.style.transform = 'rotate(90deg)';
+                } else {
+                    section.classList.add('hidden');
+                    chevron.style.transform = 'rotate(0deg)';
+                }
+            }
+        }
+
+        // Initialize Deletion Password Settings elements in UI
+        window.initPasswordUI = function() {
+            const currentPaddedRow = document.getElementById('currentPasswordRow');
+            const newPasswordLabel = document.getElementById('newPasswordLabel');
+            const currentInput = document.getElementById('currentPasswordInput');
+            const newInput = document.getElementById('newPasswordInput');
+            
+            if (currentInput) currentInput.value = "";
+            if (newInput) newInput.value = "";
+            
+            // Revert type to password on load/reopen
+            if (currentInput) currentInput.type = "password";
+            if (newInput) newInput.type = "password";
+            
+            // Re-render fresh Eye icons so Lucide compiles them correctly
+            const currentEyeBtn = document.querySelector(`button[onclick="togglePasswordVisibility('currentPasswordInput', this, event)"]`);
+            if (currentEyeBtn) currentEyeBtn.innerHTML = `<i data-lucide="eye" class="w-3.5 h-3.5"></i>`;
+            
+            const newEyeBtn = document.querySelector(`button[onclick="togglePasswordVisibility('newPasswordInput', this, event)"]`);
+            if (newEyeBtn) newEyeBtn.innerHTML = `<i data-lucide="eye" class="w-3.5 h-3.5"></i>`;
+            
+            safeCreateIcons();
+            
+            // Hide password section by default on reopen
+            const section = document.getElementById('passwordCollapseSection');
+            const chevron = document.getElementById('passwordSectionChevron');
+            if (section) section.classList.add('hidden');
+            if (chevron) chevron.style.transform = 'rotate(0deg)';
+            
+            if (clearPassword) {
+                if (currentPaddedRow) currentPaddedRow.classList.remove('hidden');
+                if (newPasswordLabel) newPasswordLabel.innerText = "New Password";
+            } else {
+                if (currentPaddedRow) currentPaddedRow.classList.add('hidden');
+                if (newPasswordLabel) newPasswordLabel.innerText = "Set Password (optional)";
+            }
+        }
+
+        // Toggle Password visibility dot/text (Robust innerHTML Lucide compilation)
+        window.togglePasswordVisibility = function(inputId, buttonEl, event) {
+            if (event) event.stopPropagation();
+            const input = document.getElementById(inputId);
+            if (!input) return;
+            
+            const isPassword = input.type === "password";
+            input.type = isPassword ? "text" : "password";
+            
+            const newIconName = isPassword ? "eye-off" : "eye";
+            buttonEl.innerHTML = `<i data-lucide="${newIconName}" class="w-3.5 h-3.5"></i>`;
+            safeCreateIcons();
+        }
+
+        // Verify old password and save new password
+        window.updateClearPassword = function() {
+            const currentInput = document.getElementById('currentPasswordInput');
+            const newInput = document.getElementById('newPasswordInput');
+            
+            const currentVal = currentInput ? currentInput.value.trim() : "";
+            const newVal = newInput ? newInput.value.trim() : "";
+            
+            if (clearPassword) {
+                if (!currentVal) {
+                    showStatus("ENTER CURRENT PASSWORD", true);
+                    return;
+                }
+                if (currentVal !== clearPassword) {
+                    showStatus("WRONG CURRENT PASSWORD", true);
+                    return;
+                }
+            }
+            
+            clearPassword = newVal;
+            localStorage.setItem('cloudclip_clearPassword', clearPassword);
+            
+            if (clearPassword) {
+                showStatus("PASSWORD SAVED");
+            } else {
+                showStatus("PASSWORD REMOVED");
+            }
+            
+            initPasswordUI();
+        }
+
+        // --- CLOUD BACKUP & RESTORE FUNCTIONS ---
+        window.createCloudBackup = async function(silent = false) {
+            if (typeof firebase === 'undefined' || !backupsRef) {
+                if (!silent) alert("Online backups are not available in Offline Mode.");
+                return false;
+            }
+            if (historyArray.length === 0) {
+                if (!silent) alert("Your Clipboard History is empty. Nothing to backup!");
+                return false;
+            }
+
+            const backupBtn = document.getElementById('createBackupBtn');
+            const originalHtml = backupBtn ? backupBtn.innerHTML : '';
+            if (backupBtn) {
+                backupBtn.disabled = true;
+                backupBtn.innerHTML = '<i data-lucide="loader-2" class="w-3 h-3 animate-spin"></i> Saving...';
+                safeCreateIcons();
+            }
+
+            try {
+                const newBackup = {
+                    id: generateId(),
+                    timestamp: Date.now(),
+                    itemCount: historyArray.length,
+                    items: JSON.parse(JSON.stringify(historyArray))
+                };
+
+                // Keep up to 5 backups (newest first)
+                let updatedBackups = [newBackup, ...cloudBackupsArray].slice(0, 5);
+                await backupsRef.set({ backups: updatedBackups });
+                
+                if (!silent) showStatus("BACKED UP ONLINE");
+                return true;
+            } catch (err) {
+                console.error("Cloud backup failed:", err);
+                if (!silent) showStatus("BACKUP FAILED", true);
+                return false;
+            } finally {
+                if (backupBtn) {
+                    backupBtn.disabled = false;
+                    backupBtn.innerHTML = originalHtml;
+                    safeCreateIcons();
+                }
+            }
+        }
+
+        window.restoreCloudBackup = async function(backupId) {
+            const backup = cloudBackupsArray.find(b => b.id === backupId);
+            if (!backup) return;
+
+            if (!confirm(`Restore this backup created on ${new Date(backup.timestamp).toLocaleString()} with ${backup.itemCount} items?\nThis will OVERWRITE your current history.`)) {
+                return;
+            }
+
+            // Hide backups dropdown
+            const dropdown = document.getElementById('cloudBackupsDropdown');
+            if (dropdown) dropdown.classList.add('hidden');
+
+            historyArray = JSON.parse(JSON.stringify(backup.items));
+            saveLocalHistory();
+            renderHistory();
+
+            try {
+                if (typeof firebase !== 'undefined' && historyRef) {
+                    await historyRef.set({ items: historyArray });
+                    showStatus("RESTORED FROM CLOUD");
+                } else {
+                    showStatus("RESTORED LOCALLY");
+                }
+            } catch (err) {
+                console.error("Sync restored history failed:", err);
+                showStatus("RESTORED LOCALLY", true);
+            }
+        }
+
+        window.deleteCloudBackup = async function(backupId) {
+            if (!confirm("Are you sure you want to delete this cloud backup snapshot? This cannot be undone.")) {
+                return;
+            }
+
+            try {
+                let updatedBackups = cloudBackupsArray.filter(b => b.id !== backupId);
+                await backupsRef.set({ backups: updatedBackups });
+                showStatus("BACKUP DELETED");
+            } catch (err) {
+                console.error("Delete backup failed:", err);
+                showStatus("DELETE FAILED", true);
+            }
+        }
+
+        function renderCloudBackupsList() {
+            const container = document.getElementById('cloudBackupsList');
+            if (!container) return;
+
+            const badge = document.getElementById('backupCountBadge');
+            if (badge) {
+                badge.innerText = `${cloudBackupsArray.length}/5`;
+            }
+
+            if (cloudBackupsArray.length === 0) {
+                container.innerHTML = `<p class="text-[10px] text-gray-400 dark:text-slate-500 italic">No online backups found.</p>`;
+                return;
+            }
+
+            container.innerHTML = cloudBackupsArray.map(b => {
+                const dateStr = new Date(b.timestamp).toLocaleString([], {
+                    month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit'
+                });
+                const isOffline = (typeof firebase === 'undefined' || !db);
+                const disabledAttr = isOffline ? 'disabled class="opacity-50 cursor-not-allowed text-gray-400 dark:text-slate-600"' : '';
+                
+                return `
+                <div class="flex justify-between items-center bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 rounded-xl p-2 shadow-sm gap-2">
+                    <div class="flex flex-col min-w-0 flex-1">
+                        <span class="text-[10px] font-semibold text-gray-600 dark:text-slate-300 leading-tight">${dateStr}</span>
+                        <span class="text-[9px] text-gray-400 dark:text-slate-500 font-medium">${b.itemCount} clips</span>
+                    </div>
+                    <div class="flex items-center gap-1 shrink-0">
+                        <button onclick="restoreCloudBackup('${b.id}')" ${disabledAttr} class="p-1.5 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/50 active:scale-95 transition-all" title="Restore this backup">
+                            <i data-lucide="rotate-ccw" class="w-3 h-3"></i>
+                        </button>
+                        <button onclick="deleteCloudBackup('${b.id}')" ${disabledAttr} class="p-1.5 bg-red-50 dark:bg-red-900/30 text-red-500 dark:text-red-400 rounded-lg hover:bg-red-100 dark:hover:bg-red-900/50 active:scale-95 transition-all" title="Delete backup from cloud">
+                            <i data-lucide="trash-2" class="w-3 h-3"></i>
+                        </button>
+                    </div>
+                </div>
+                `;
+            }).join('');
+
+            safeCreateIcons();
+        }
+
+        // --- RENDER HISTORY UI (Advanced 2-Way Sorting, Searching & Multi-Dates) ---
+
+        window.toggleExpandItem = function(event, id, expand) {
+            event.stopPropagation();
+            if (expand) {
+                expandedItemIds.add(id);
+            } else {
+                expandedItemIds.delete(id);
+            }
+            renderHistory();
+        }
+
+        window.handleSearchInput = function() {
+            const val = document.getElementById('historySearchInput').value.trim();
+            const clearBtn = document.getElementById('clearSearchBtn');
+            if (val) {
+                clearBtn.classList.remove('hidden');
+                activeFilter = val;
+                showActiveFilterBadge(val);
+            } else {
+                clearBtn.classList.add('hidden');
+                activeFilter = "";
+                hideActiveFilterBadge();
+            }
+            renderHistory();
+        }
+
+        window.clearSearch = function() {
+            document.getElementById('historySearchInput').value = "";
+            document.getElementById('clearSearchBtn').classList.add('hidden');
+            activeFilter = "";
+            hideActiveFilterBadge();
+            renderHistory();
+        }
+
+        window.filterByHashtag = function(tag) {
+            document.getElementById('historySearchInput').value = tag;
+            document.getElementById('clearSearchBtn').classList.remove('hidden');
+            activeFilter = tag;
+            showActiveFilterBadge(tag);
+            renderHistory();
+        }
+
+        window.clearActiveFilter = function() {
+            clearSearch();
+        }
+
+        function showActiveFilterBadge(text) {
+            const badge = document.getElementById('activeFilterBadge');
+            const txt = document.getElementById('activeFilterText');
+            if (badge && txt) {
+                txt.innerText = text;
+                badge.classList.remove('hidden');
+            }
+        }
+
+        function hideActiveFilterBadge() {
+            const badge = document.getElementById('activeFilterBadge');
+            if (badge) {
+                badge.classList.add('hidden');
+            }
+        }
+
+        // ==========================================
+        // R1: One-Click Native System Paste
+        // ==========================================
+        async function pasteFromClipboard() {
+            if (!navigator.clipboard || typeof navigator.clipboard.readText !== 'function') {
+                showStatus("CLIPBOARD API NOT SUPPORTED", true);
+                return;
+            }
+
+            try {
+                const text = await navigator.clipboard.readText();
+                if (!text || text.trim() === '') {
+                    showStatus("CLIPBOARD EMPTY", true);
+                    return;
+                }
+
+                // Push current value to undo stack before paste
+                pushToUndo(textArea.value);
+
+                // Insert at cursor or replace selection
+                if (typeof textArea.selectionStart === 'number' && typeof textArea.selectionEnd === 'number') {
+                    const start = textArea.selectionStart;
+                    const end = textArea.selectionEnd;
+                    const currentVal = textArea.value;
+                    textArea.value = currentVal.substring(0, start) + text + currentVal.substring(end);
+                    textArea.selectionStart = textArea.selectionEnd = start + text.length;
+                } else {
+                    textArea.value = text;
+                }
+
+                // Push new value to undo stack
+                pushToUndo(textArea.value);
+
+                // Update word/char statistics synchronously
+                updateStats();
+
+                // Save to localStorage and dispatch input event to trigger auto-sync
+                localStorage.setItem('cloudclip_currentText', textArea.value);
+                textArea.dispatchEvent(new Event('input'));
+
+                // Toast feedback
+                showStatus("PASTED FROM CLIPBOARD");
+
+                // Button visual feedback
+                const btn = document.getElementById('pasteBtn') || document.querySelector(`button[onclick="pasteFromClipboard()"]`);
+                if (btn) {
+                    const originalHtml = btn.innerHTML;
+                    btn.innerHTML = '<i data-lucide="check" class="w-4 h-4 text-green-500"></i>';
+                    btn.classList.add('bg-green-50', 'dark:bg-green-950/20', 'border-green-200');
+                    safeCreateIcons();
+                    setTimeout(() => {
+                        btn.innerHTML = originalHtml;
+                        btn.classList.remove('bg-green-50', 'dark:bg-green-950/20', 'border-green-200');
+                        safeCreateIcons();
+                    }, 1200);
+                }
+            } catch (err) {
+                console.warn("Clipboard paste failed:", err);
+                showStatus("PASTE PERMISSION DENIED", true);
+            }
+        }
+        window.pasteFromClipboard = pasteFromClipboard;
+
+        // ==========================================
+        // R2: Mobile QR Code Room Pairing Modal
+        // ==========================================
+        function getResolvedRoomUrl() {
+            const rawRoom = (typeof roomName !== 'undefined' && roomName) ? String(roomName).trim() : 'default';
+            const loc = window.location;
+            const origin = String(loc.origin || '');
+            const protocol = String(loc.protocol || '');
+            const hostname = String(loc.hostname || '');
+            const isLocal = origin === '' || 
+                            origin === 'null' || 
+                            origin.startsWith('file:') || 
+                            protocol === 'file:' || 
+                            origin.includes('localhost') || 
+                            origin.includes('127.0.0.1') ||
+                            hostname === 'localhost' ||
+                            hostname === '127.0.0.1';
+            const encodedRoom = encodeURIComponent(rawRoom || 'default');
+            if (isLocal) {
+                return `https://clip-18233.web.app/?room=${encodedRoom}`;
+            }
+            const path = loc.pathname || '/';
+            return `${origin}${path}?room=${encodedRoom}`;
+        }
+        window.getResolvedRoomUrl = getResolvedRoomUrl;
+        window.getPairingUrl = getResolvedRoomUrl;
+
+        function renderQrCode(url) {
+            const container = document.getElementById('qrCodeContainer') || document.getElementById('pairQrContainer');
+            if (!container) return;
+            container.innerHTML = '';
+
+            // Check if QRCode library is available
+            if (typeof QRCode !== 'undefined') {
+                try {
+                    new QRCode(container, {
+                        text: url,
+                        width: 180,
+                        height: 180,
+                        colorDark: "#0f172a",
+                        colorLight: "#ffffff",
+                        correctLevel: (typeof QRCode.CorrectLevel !== 'undefined' ? QRCode.CorrectLevel.M : 0)
+                    });
+                    const qrEl = container.querySelector('canvas') || container.querySelector('img');
+                    if (qrEl) {
+                        qrEl.className = "w-44 h-44 rounded-lg";
+                        return;
+                    }
+                } catch (e) {
+                    console.warn("QRCode constructor error:", e);
+                }
+            }
+
+            // High-resolution image fallback for cameras
+            const img = document.createElement('img');
+            img.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=1&data=${encodeURIComponent(url)}`;
+            img.alt = "QR Code for " + url;
+            img.className = "w-44 h-44 object-contain rounded-lg";
+            img.loading = "lazy";
+            img.onerror = () => {
+                container.innerHTML = `<div class="p-3 text-center text-[11px] font-mono break-all text-slate-700 bg-slate-100 rounded-lg">${escapeHtml(url)}</div>`;
+            };
+            container.appendChild(img);
+        }
+        window.renderQrCode = renderQrCode;
+
+        function openPairModal(event) {
+            if (event && event.stopPropagation) event.stopPropagation();
+            const modal = document.getElementById('qrPairModal') || document.getElementById('qrModalBackdrop');
+            if (!modal) return;
+
+            const url = getResolvedRoomUrl();
+            const urlInput = document.getElementById('pairUrlInput') || document.getElementById('qrModalUrlInput');
+            if (urlInput) urlInput.value = url;
+
+            const badge = document.getElementById('pairModalRoomBadge') || document.getElementById('qrModalRoomBadge');
+            if (badge) badge.innerText = (roomName || 'default');
+
+            renderQrCode(url);
+
+            modal.classList.remove('hidden');
+            safeCreateIcons();
+        }
+        window.openPairModal = openPairModal;
+        window.openQrModal = openPairModal;
+
+        function closePairModal() {
+            const modal = document.getElementById('qrPairModal') || document.getElementById('qrModalBackdrop');
+            if (modal) modal.classList.add('hidden');
+        }
+        window.closePairModal = closePairModal;
+        window.closeQrModal = closePairModal;
+
+        function handleModalBackdropClick(event) {
+            const modal = document.getElementById('qrPairModal') || document.getElementById('qrModalBackdrop');
+            if (!event || event.target === modal || !event.target) {
+                closePairModal();
+            }
+        }
+        window.handleModalBackdropClick = handleModalBackdropClick;
+
+        function copyPairUrl() {
+            const input = document.getElementById('pairUrlInput') || document.getElementById('qrModalUrlInput');
+            const url = (input && input.value) ? input.value : getResolvedRoomUrl();
+            const finalize = () => showStatus("ROOM LINK COPIED");
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(finalize).catch(() => {
+                    fallbackCopy(url);
+                });
+            } else {
+                fallbackCopy(url);
+            }
+            function fallbackCopy(text) {
+                if (input) {
+                    input.select();
+                    document.execCommand('copy');
+                }
+                finalize();
+            }
+        }
+        window.copyPairUrl = copyPairUrl;
+        window.copyQrModalLink = copyPairUrl;
+
+        // Help Guide Modal Functions
+        function openHelpGuideModal(event) {
+            if (event && event.stopPropagation) event.stopPropagation();
+            const modal = document.getElementById('helpGuideModal');
+            if (!modal) return;
+            modal.classList.remove('hidden');
+            safeCreateIcons();
+        }
+        window.openHelpGuideModal = openHelpGuideModal;
+
+        function closeHelpGuideModal() {
+            const modal = document.getElementById('helpGuideModal');
+            if (modal) modal.classList.add('hidden');
+        }
+        window.closeHelpGuideModal = closeHelpGuideModal;
+
+        function handleHelpModalBackdropClick(event) {
+            const modal = document.getElementById('helpGuideModal');
+            if (!event || event.target === modal || !event.target) {
+                closeHelpGuideModal();
+            }
+        }
+        window.handleHelpModalBackdropClick = handleHelpModalBackdropClick;
+
+        function switchHelpTab(tabId) {
+            const tabs = ['shortcuts', 'sync', 'inspectors', 'history', 'security', 'faq'];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`helpTabBtn-${t}`);
+                const pane = document.getElementById(`helpPane-${t}`);
+                if (btn) {
+                    if (t === tabId) {
+                        btn.className = 'help-tab-btn px-3 py-1.5 rounded-xl font-bold transition-all bg-blue-600 text-white shadow-sm flex items-center gap-1.5 shrink-0';
+                    } else {
+                        btn.className = 'help-tab-btn px-3 py-1.5 rounded-xl font-semibold transition-all bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-slate-700 flex items-center gap-1.5 shrink-0';
+                    }
+                }
+                if (pane) {
+                    if (t === tabId) {
+                        pane.classList.remove('hidden');
+                    } else {
+                        pane.classList.add('hidden');
+                    }
+                }
+            });
+            safeCreateIcons();
+        }
+        window.switchHelpTab = switchHelpTab;
+
+        // Attach listeners for modal interactions
+        const pairModalElement = document.getElementById('qrPairModal');
+        if (pairModalElement) {
+            pairModalElement.addEventListener('click', handleModalBackdropClick);
+        }
+        const closePairBtnElement = document.getElementById('closePairModalBtn');
+        if (closePairBtnElement) {
+            closePairBtnElement.addEventListener('click', closePairModal);
+        }
+        const copyPairBtnElement = document.getElementById('copyPairUrlBtn');
+        if (copyPairBtnElement) {
+            copyPairBtnElement.addEventListener('click', copyPairUrl);
+        }
+
+        const helpModalElement = document.getElementById('helpGuideModal');
+        if (helpModalElement) {
+            helpModalElement.addEventListener('click', handleHelpModalBackdropClick);
+        }
+        const closeHelpBtnElement = document.getElementById('closeHelpGuideBtn');
+        if (closeHelpBtnElement) {
+            closeHelpBtnElement.addEventListener('click', closeHelpGuideModal);
+        }
+
+        // Global Escape keydown listeners (document and window)
+        const handleEscapeKey = (e) => {
+            if (e && (e.key === 'Escape' || e.key === 'Esc')) {
+                const modal = document.getElementById('qrPairModal') || document.getElementById('qrModalBackdrop');
+                if (modal && !modal.classList.contains('hidden')) {
+                    closePairModal();
+                }
+                const helpModal = document.getElementById('helpGuideModal');
+                if (helpModal && !helpModal.classList.contains('hidden')) {
+                    closeHelpGuideModal();
+                }
+            }
+        };
+        if (typeof document !== 'undefined' && document.addEventListener) {
+            document.addEventListener('keydown', handleEscapeKey);
+        }
+        if (typeof window !== 'undefined' && window.addEventListener) {
+            window.addEventListener('keydown', handleEscapeKey);
+        }
+
+        // ==========================================
+        // R3: Smart Content: Color Swatches
+        // ==========================================
+        function extractColors(text) {
+            if (!text) return [];
+            const results = [];
+            const hexRegex = /(?:^|[^\w])#([0-9a-fA-F]{8}|[0-9a-fA-F]{6}|[0-9a-fA-F]{4}|[0-9a-fA-F]{3})(?![a-zA-Z0-9_-])/g;
+            const rgbRegex = /\brgba?\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}(?:\s*,\s*(?:0|1|0?\.\d+|\d{1,3}%))?\s*\)/gi;
+            let m;
+            while ((m = hexRegex.exec(text)) !== null) {
+                const hexVal = m[1];
+                if (hexVal.length === 4 && /^\d{4}$/.test(hexVal)) {
+                    continue;
+                }
+                const color = '#' + hexVal;
+                if (!results.some(r => r.color.toLowerCase() === color.toLowerCase())) {
+                    const item = {
+                        color: color,
+                        type: 'hex',
+                        toString() { return this.color; },
+                        valueOf() { return this.color; }
+                    };
+                    results.push(item);
+                }
+            }
+            while ((m = rgbRegex.exec(text)) !== null) {
+                const color = m[0];
+                if (!results.some(r => r.color.toLowerCase() === color.toLowerCase())) {
+                    const item = {
+                        color: color,
+                        type: 'rgb',
+                        toString() { return this.color; },
+                        valueOf() { return this.color; }
+                    };
+                    results.push(item);
+                }
+            }
+            return results;
+        }
+        window.extractColors = extractColors;
+
+        function copyColorCode(colorOrEvent, maybeColor) {
+            const color = typeof colorOrEvent === 'string' ? colorOrEvent : maybeColor;
+            if (colorOrEvent && colorOrEvent.stopPropagation) colorOrEvent.stopPropagation();
+            if (!color) return;
+
+            showStatus("COPIED COLOR: " + color);
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(color).catch(() => fallbackCopy(color));
+            } else {
+                fallbackCopy(color);
+            }
+            function fallbackCopy(text) {
+                if (typeof document === 'undefined' || !document.createElement) return;
+                const temp = document.createElement("textarea");
+                temp.value = text;
+                if (document.body) {
+                    document.body.appendChild(temp);
+                    temp.select();
+                    document.execCommand("copy");
+                    document.body.removeChild(temp);
+                }
+            }
+        }
+        window.copyColorCode = copyColorCode;
+
+        // ==========================================
+        // R4: Smart Content: Code & JSON Detection
+        // ==========================================
+        function isJsonContent(str) {
+            const trimmed = String(str || '').trim();
+            if (!((trimmed.startsWith('{') && trimmed.endsWith('}')) || (trimmed.startsWith('[') && trimmed.endsWith(']')))) {
+                return false;
+            }
+            try {
+                const parsed = JSON.parse(trimmed);
+                return typeof parsed === 'object' && parsed !== null;
+            } catch (e) {
+                return false;
+            }
+        }
+        window.isJsonContent = isJsonContent;
+
+        function isCodeContent(str) {
+            const text = String(str || '').trim();
+            if (text.startsWith('```') || text.includes('```')) return true;
+
+            const codePatterns = [
+                /\b(const|let|var)\s+[a-zA-Z0-9_$]+\s*=/,
+                /\bfunction\s*[a-zA-Z0-9_$]*\s*\(/,
+                /\bclass\s+[a-zA-Z0-9_$]+(\s+extends\s+[a-zA-Z0-9_$]+)?\s*\{/,
+                /\bimport\s+.*\s+from\s+['"]/,
+                /\bexport\s+(default\s+)?(function|class|const|let|var)/,
+                /\b(public|private|protected)\s+(static\s+)?\w+\s+\w+\s*\(/,
+                /\bdef\s+[a-zA-Z0-9_]+\s*\([^)]*\)\s*:/,
+                /\b(console\.log|System\.out\.println|print)\s*\(/,
+                /;\s*$/m,
+                /=>\s*\{?/,
+                /<\/?[a-zA-Z][\w-]*(\s+[^>]*)?>.*<\/?[a-zA-Z][\w-]*>/s,
+                /\bSELECT\s+[\s\S]+\s+FROM\s+/i
+            ];
+
+            let matches = 0;
+            for (const pat of codePatterns) {
+                if (pat.test(text)) matches++;
+            }
+            return matches >= 1 && (text.includes('\n') || text.includes('{') || text.includes(';') || text.includes('=>'));
+        }
+        window.isCodeContent = isCodeContent;
+
+        function detectCode(str) {
+            if (isJsonContent(str)) return { isCode: true, type: 'JSON' };
+            if (isCodeContent(str)) {
+                const text = String(str || '').trim();
+                let type = 'CODE';
+                if (/\b(const|let|var)\s+[a-zA-Z0-9_$]+\s*=|console\.log|=>/.test(text)) type = 'JS';
+                else if (/\bdef\s+[a-zA-Z0-9_]+\s*\(|print\s*\(/.test(text)) type = 'PYTHON';
+                else if (/<\/?[a-zA-Z][\w-]*(\s+[^>]*)?>/.test(text)) type = 'HTML';
+                else if (/\bSELECT\s+[\s\S]+\s+FROM\s+/i.test(text)) type = 'SQL';
+                return { isCode: true, type: type };
+            }
+            return null;
+        }
+        window.detectCode = detectCode;
+
+        function copyRawCode(event, id) {
+            if (event && event.stopPropagation) event.stopPropagation();
+            const item = historyArray.find(i => i.id === id);
+            if (!item || !item.content) return;
+
+            showStatus("COPIED RAW CODE");
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(item.content).catch(() => fallbackCopy(item.content));
+            } else {
+                fallbackCopy(item.content);
+            }
+            function fallbackCopy(text) {
+                if (typeof document === 'undefined' || !document.createElement) return;
+                const temp = document.createElement("textarea");
+                temp.value = text;
+                if (document.body) {
+                    document.body.appendChild(temp);
+                    temp.select();
+                    document.execCommand("copy");
+                    document.body.removeChild(temp);
+                }
+            }
+        }
+        window.copyRawCode = copyRawCode;
+
+        // ==========================================
+        // R5: Smart Content: Markdown Preview Toggle
+        // ==========================================
+        function isMarkdownContent(str) {
+            if (!str) return false;
+            const text = String(str);
+            const lines = text.split('\n');
+            const hasLinePattern = lines.some(line => {
+                const trimmed = line.trim();
+                return /^#{1,6}\s+\S+/.test(trimmed) ||
+                       /^[-*+]\s+\[[ xX]\]\s+\S+/.test(trimmed) ||
+                       /^[-*+]\s+\S+/.test(trimmed) ||
+                       /^\d+\.\s+\S+/.test(trimmed) ||
+                       /^>\s+\S+/.test(trimmed) ||
+                       /^---+$/.test(trimmed);
+            });
+            return hasLinePattern || /\*\*[^*]+\*\*/.test(text) || /`[^`]+`/.test(text);
+        }
+        window.isMarkdownContent = isMarkdownContent;
+        window.detectMarkdown = isMarkdownContent;
+
+        function toggleMarkdownPreview(event, id) {
+            if (event && event.stopPropagation) event.stopPropagation();
+            if (markdownPreviewItemIds.has(id)) {
+                markdownPreviewItemIds.delete(id);
+            } else {
+                markdownPreviewItemIds.add(id);
+            }
+            renderHistory();
+        }
+        window.toggleMarkdownPreview = toggleMarkdownPreview;
+
+        function renderMarkdown(str) {
+            if (!str) return '';
+            // 1. Strict HTML escape to prevent XSS
+            let escaped = escapeHtml(str);
+
+            // Block XSS handler payloads and javascript: schemes
+            escaped = escaped.replace(/onerror\s*=/gi, 'data-blocked=');
+            escaped = escaped.replace(/onload\s*=/gi, 'data-blocked=');
+            escaped = escaped.replace(/onclick\s*=/gi, 'data-blocked=');
+
+            // Protect code blocks, inline code, and links with placeholders before swatch processing
+            const placeholders = [];
+            const protect = (html) => {
+                const id = placeholders.length;
+                placeholders.push(html);
+                return `___MD_TOKEN_${id}___`;
+            };
+
+            // 1. Code blocks
+            escaped = escaped.replace(/```([\s\S]*?)```/g, (m, code) => protect(`<pre class="bg-gray-900 text-gray-100 p-2.5 rounded-lg text-xs font-mono my-2 overflow-x-auto">${code}</pre>`));
+
+            // 2. Inline Code
+            escaped = escaped.replace(/`([^`]+)`/g, (m, code) => protect(`<code class="bg-gray-100 dark:bg-slate-800 px-1 py-0.5 rounded font-mono text-xs text-blue-600 dark:text-blue-400">${code}</code>`));
+
+            // 3. Support markdown links [text](url) safely: block dangerous schemes (javascript:, data:, vbscript:)
+            escaped = escaped.replace(/\[(.*?)\]\((.*?)\)/g, (match, text, url) => {
+                const cleanUrl = url.trim().replace(/^(javascript|data|vbscript):/i, '#blocked-');
+                if (cleanUrl.startsWith('#blocked-')) {
+                    return protect(`<span>${text}</span>`);
+                }
+                return protect(`<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" class="text-blue-500 underline">${text}</a>`);
+            });
+
+            // 4. Headings (# h1, ## h2, ### h3)
+            escaped = escaped.replace(/^### (.*$)/gim, '<h3 class="text-xs font-bold text-gray-800 dark:text-gray-100 mt-2 mb-1">$1</h3>');
+            escaped = escaped.replace(/^## (.*$)/gim, '<h2 class="text-sm font-bold text-gray-800 dark:text-white mt-2.5 mb-1">$1</h2>');
+            escaped = escaped.replace(/^# (.*$)/gim, '<h1 class="text-base font-bold text-gray-900 dark:text-white mt-3 mb-1.5 pb-1 border-b border-gray-200 dark:border-slate-700">$1</h1>');
+
+            // 5. Checklists (- [ ] item, - [x] item)
+            escaped = escaped.replace(/^[\s]*[-*+]\s+\[ \]\s+(.*$)/gim, '<div class="flex items-center gap-2 py-0.5"><input type="checkbox" disabled class="w-3.5 h-3.5 rounded text-blue-600 accent-blue-600 pointer-events-none" /><span class="text-xs text-gray-700 dark:text-gray-300">$1</span></div>');
+            escaped = escaped.replace(/^[\s]*[-*+]\s+\[[xX]\]\s+(.*$)/gim, '<div class="flex items-center gap-2 py-0.5"><input type="checkbox" checked disabled class="w-3.5 h-3.5 rounded text-blue-600 accent-blue-600 pointer-events-none" /><span class="text-xs line-through text-gray-400 dark:text-slate-500">$1</span></div>');
+
+            // 6. Unordered & Ordered Lists
+            escaped = escaped.replace(/^[\s]*[-*+]\s+(.*$)/gim, '<li class="ml-4 list-disc text-xs text-gray-700 dark:text-gray-300">$1</li>');
+            escaped = escaped.replace(/^[\s]*\d+\.\s+(.*$)/gim, '<li class="ml-4 list-decimal text-xs text-gray-700 dark:text-gray-300">$1</li>');
+
+            // 7. Bold & Italic
+            escaped = escaped.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-gray-900 dark:text-white">$1</strong>');
+            escaped = escaped.replace(/\*(.*?)\*/g, '<em class="italic">$1</em>');
+
+            // 8. Blockquotes
+            escaped = escaped.replace(/^>\s+(.*$)/gim, '<blockquote class="border-l-2 border-blue-500 pl-2.5 py-0.5 italic text-gray-600 dark:text-gray-400 my-1 text-xs">$1</blockquote>');
+
+            // 9. Horizontal rules
+            escaped = escaped.replace(/^---+$/gim, '<hr class="border-gray-200 dark:border-slate-700 my-2" />');
+
+            // 10. Format color swatches in markdown safely on body text
+            // 10a. Hex colors
+            escaped = escaped.replace(/(^|[^\w])#([0-9a-fA-F]{8}|[0-9a-fA-F]{6}|[0-9a-fA-F]{4}|[0-9a-fA-F]{3})(?![a-zA-Z0-9_-])/g, (fullMatch, prefix, hex) => {
+                if (hex.length === 4 && /^\d{4}$/.test(hex)) return fullMatch;
+                const color = '#' + hex;
+                return `${prefix}<span class="inline-flex items-center gap-1.5 px-2 py-0.5 my-0.5 rounded-md font-mono text-[11px] font-semibold bg-gray-100 dark:bg-slate-800 text-gray-800 dark:text-gray-200 border border-gray-200/80 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-400 cursor-pointer select-none transition-all active:scale-95 align-middle" onclick="event.stopPropagation(); copyColorCode('${color}')" title="Click to copy ${color}"><span class="w-3 h-3 rounded-full inline-block shrink-0 shadow-sm border border-black/20 dark:border-white/20 align-middle" style="background-color: ${color};"></span><span>${color}</span></span>`;
+            });
+            // 10b. RGB / RGBA colors
+            escaped = escaped.replace(/\brgba?\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}(?:\s*,\s*(?:0|1|0?\.\d+|\d{1,3}%))?\s*\)/gi, (match) => {
+                return `<span class="inline-flex items-center gap-1.5 px-2 py-0.5 my-0.5 rounded-md font-mono text-[11px] font-semibold bg-gray-100 dark:bg-slate-800 text-gray-800 dark:text-gray-200 border border-gray-200/80 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-400 cursor-pointer select-none transition-all active:scale-95 align-middle" onclick="event.stopPropagation(); copyColorCode('${match}')" title="Click to copy ${match}"><span class="w-3 h-3 rounded-full inline-block shrink-0 shadow-sm border border-black/20 dark:border-white/20 align-middle" style="background-color: ${match};"></span><span>${match}</span></span>`;
+            });
+
+            // 11. Restore protected placeholders
+            placeholders.forEach((html, i) => {
+                escaped = escaped.replace(`___MD_TOKEN_${i}___`, () => html);
+            });
+
+            // 12. Line breaks
+            escaped = escaped.replace(/\n/g, '<br />');
+
+            return escaped;
+        }
+        window.renderMarkdown = renderMarkdown;
+        window.renderMarkdownContent = renderMarkdown;
+
+        function renderHistory() {
+            const list = document.getElementById('historyList');
+            if (!list) return;
+
+            // Apply active filters
+            let filteredArray = [...historyArray];
+            if (activeFilter) {
+                const query = activeFilter.toLowerCase();
+                if (query === '#') {
+                    filteredArray = filteredArray.filter(item => {
+                        const content = String(item && item.content || '');
+                        return /(#[a-zA-Z0-9_-]+)/.test(content);
+                    });
+                } else if (query.startsWith('#')) {
+                    filteredArray = filteredArray.filter(item => {
+                        const content = String(item && item.content || '');
+                        const tags = (content.match(/(#[a-zA-Z0-9_-]+)/g) || []).map(t => t.toLowerCase());
+                        return tags.some(t => t.startsWith(query));
+                    });
+                } else {
+                    filteredArray = filteredArray.filter(item => 
+                        String(item && item.content || '').toLowerCase().includes(query)
+                    );
+                }
+            }
+
+            // Update item count UI
+            const countLabel = activeFilter ? `${filteredArray.length} found` : `${historyArray.length} items`;
+            document.getElementById('historyCount').innerText = countLabel;
+
+            if (filteredArray.length === 0) {
+                list.innerHTML = `
+                    <div class="flex flex-col items-center justify-center h-full text-gray-400 dark:text-slate-600 space-y-3 opacity-60 pt-10">
+                        <i data-lucide="${activeFilter ? 'search' : 'leaf'}" class="w-10 h-10"></i>
+                        <p class="text-sm">${activeFilter ? 'No matches found.' : 'Vault is empty.'}</p>
+                    </div>`;
+                renderIcons(); return;
+            }
+
+            // Apply 2-Way Sorting Logic
+            let sortedArray = [...filteredArray].sort((a, b) => {
+                if (a.pinned !== b.pinned) return a.pinned ? -1 : 1; // Pinned always top
+                
+                const [key, order] = currentSort.split('_');
+                const multiplier = order === 'asc' ? 1 : -1;
+
+                if (key === 'created') {
+                    if (order === 'desc') return 0; // Preserve natural vault array order (newest clips and bumped duplicates at top)
+                    return (a.created - b.created) * multiplier;
+                }
+                if (key === 'modified') return (a.modified - b.modified) * multiplier;
+                if (key === 'accessed') return (a.accessed - b.accessed) * multiplier;
+                if (key === 'length') return ((a.content || '').length - (b.content || '').length) * multiplier;
+                return 0;
+            });
+
+            list.innerHTML = sortedArray.map((item) => {
+                const safeContent = String(item.content || '');
+                const linkMatch = safeContent.match(/(https?:\/\/[^\s]+)/);
+                const hasLink = !!linkMatch;
+                let firstLink = hasLink ? linkMatch[0] : '#';
+                const cleanLink = encodeURI(firstLink).replace(/"/g, '&quot;');
+                const isYoutube = hasLink && (firstLink.includes('youtube.com') || firstLink.includes('youtu.be'));
+                
+                // Smart Date Formatting
+                const createdStr = formatDateTime(item.created);
+                const isEdited = (item.modified - item.created) > 2000; 
+                const modifiedStr = formatDateTime(item.modified);
+                
+                const bgClass = item.pinned ? 'bg-amber-50 dark:bg-amber-900/20 border-amber-200/60 dark:border-amber-500/30' : 'bg-white dark:bg-slate-800 border-gray-100 dark:border-slate-700';
+                const pinClass = item.pinned ? 'text-amber-500 fill-amber-500' : 'text-gray-300 dark:text-slate-600 hover:text-amber-500';
+                
+                const isThisPlaying = isPlayingId === item.id;
+                const audioIcon = isThisPlaying ? 'square' : 'play';
+                const audioColor = isThisPlaying ? 'text-red-500' : 'text-emerald-500';
+
+                // Version History HTML
+                let versionsHtml = '';
+                if (item.versions && item.versions.length > 0) {
+                    versionsHtml = `
+                    <div id="versions-${item.id}" class="hidden mt-3 pt-3 border-t border-gray-100 dark:border-slate-700 space-y-2">
+                        <p class="text-[10px] font-bold text-gray-400 dark:text-slate-500 uppercase">Version History</p>
+                        ${item.versions.map((v, vIdx) => {
+                            const vDate = new Date(v.modified).toLocaleString([], {month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'});
+                            return `
+                            <div class="flex flex-col bg-gray-50 dark:bg-slate-900/50 rounded-xl p-2 border border-gray-100 dark:border-slate-700 gap-1.5 animate-fade-in">
+                                <div class="flex justify-between items-center w-full gap-2 text-[11px]">
+                                    <span class="text-gray-500 dark:text-slate-400 font-semibold">Backup: ${vDate}</span>
+                                    <div class="flex items-center gap-1.5 shrink-0">
+                                        <button onclick="toggleCompareVersion(event, '${item.id}', ${vIdx})" class="text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 font-bold bg-emerald-50 dark:bg-emerald-950/20 px-2 py-0.5 rounded transition-all flex items-center gap-0.5" title="Compare to Current version">
+                                            <i data-lucide="git-compare" class="w-3 h-3"></i> Compare
+                                        </button>
+                                        <button onclick="restoreVersion('${item.id}', ${vIdx})" class="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-bold bg-blue-50 dark:bg-blue-950/20 px-2 py-0.5 rounded transition-all flex items-center gap-0.5" title="Restore this version">
+                                            <i data-lucide="rotate-ccw" class="w-3 h-3"></i> Restore
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- Collapsible Comparison Diff Area -->
+                                <div id="diff-${item.id}-${vIdx}" class="hidden p-2.5 bg-white dark:bg-slate-950 border border-gray-150 dark:border-slate-800/80 rounded-lg text-[11px] leading-relaxed max-h-48 overflow-y-auto custom-scrollbar select-text">
+                                </div>
+                            </div>`
+                        }).join('')}
+                    </div>`;
+                }
+
+                // R4 Code/JSON Detection
+                const codeInfo = detectCode(safeContent);
+                const isCode = !!codeInfo;
+
+                // R5 Markdown Detection
+                const isMd = isMarkdownContent(safeContent);
+                const isMdActive = markdownPreviewItemIds.has(item.id);
+
+                // Expand/Collapse Check
+                const isExpanded = expandedItemIds.has(item.id);
+                const isLongContent = safeContent.length > 280 || safeContent.split('\n').length > 3;
+
+                let contentBodyHtml = "";
+                if (isMd && isMdActive) {
+                    contentBodyHtml = `
+                        <div class="text-[13px] text-gray-700 dark:text-gray-300 leading-relaxed cursor-pointer select-text flex-1" onclick="enterEditMode('${item.id}')" title="Tap to Edit">
+                            ${renderMarkdown(safeContent)}
+                        </div>
+                    `;
+                } else if (isCode) {
+                    contentBodyHtml = `
+                        <div class="relative group my-0.5 cursor-pointer select-text flex-1" onclick="enterEditMode('${item.id}')" title="Tap to Edit">
+                            <pre class="font-mono text-xs p-3 bg-slate-900 text-slate-100 dark:bg-slate-950 rounded-xl border border-slate-800 overflow-x-auto whitespace-pre leading-relaxed custom-scrollbar"><code>${escapeHtml(safeContent)}</code></pre>
+                        </div>
+                    `;
+                } else if (isLongContent && !isExpanded) {
+                    const truncatedText = safeContent.slice(0, 240) + "...";
+                    contentBodyHtml = `
+                        <div class="text-[13px] text-gray-700 dark:text-gray-300 leading-relaxed cursor-pointer select-text flex-1" onclick="enterEditMode('${item.id}')" title="Tap to Edit">
+                            ${formatExpertText(truncatedText)}
+                        </div>
+                        <button onclick="toggleExpandItem(event, '${item.id}', true)" class="text-blue-500 hover:text-blue-600 font-bold text-[10px] uppercase mt-1 w-max block active:scale-95 transition-all">
+                            Show More
+                        </button>
+                    `;
+                } else {
+                    contentBodyHtml = `
+                        <div class="text-[13px] text-gray-700 dark:text-gray-300 leading-relaxed cursor-pointer select-text flex-1" onclick="enterEditMode('${item.id}')" title="Tap to Edit">
+                            ${formatExpertText(safeContent)}
+                        </div>
+                    `;
+                    if (isLongContent && isExpanded) {
+                        contentBodyHtml += `
+                            <button onclick="toggleExpandItem(event, '${item.id}', false)" class="text-blue-500 hover:text-blue-600 font-bold text-[10px] uppercase mt-1 w-max block active:scale-95 transition-all">
+                                Show Less
+                            </button>
+                        `;
+                    }
+                }
+
+                // Badges row
+                let badgesHtml = '';
+                if (isCode) {
+                    badgesHtml = `
+                        <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-mono font-bold uppercase tracking-wider bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800/40 w-max mb-1">
+                            <i data-lucide="code" class="w-2.5 h-2.5"></i> ${codeInfo.type}
+                        </span>
+                    `;
+                }
+
+                return `
+                <div class="${bgClass} rounded-2xl border p-3 flex flex-col gap-2 relative shadow-sm animate-fade-in transition-all duration-300">
+                    <div class="flex gap-3 items-start justify-between">
+                        <div class="flex-1 flex flex-col">
+                            ${badgesHtml}
+                            ${contentBodyHtml}
+                        </div>
+                        <button onclick="togglePinHistory('${item.id}')" class="p-1 -mt-1 -mr-1 ${pinClass} active:scale-90 transition-transform shrink-0">
+                            <i data-lucide="pin" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+
+                    <div class="flex flex-wrap justify-between items-end mt-1 gap-2 border-t border-gray-100 dark:border-slate-700/50 pt-2">
+                        
+                        <!-- Dual Date Display Column -->
+                        <div class="flex flex-col gap-0.5">
+                            <span class="text-[9px] font-bold text-gray-400 dark:text-slate-500 uppercase tracking-wider flex items-center gap-1" title="Created on">
+                                <i data-lucide="calendar-plus" class="w-3 h-3"></i> ${createdStr}
+                            </span>
+                            ${isEdited ? `
+                            <span class="text-[9px] font-bold text-blue-500 dark:text-blue-400 uppercase tracking-wider flex items-center gap-1" title="Last modified">
+                                <i data-lucide="edit-3" class="w-3 h-3"></i> ${modifiedStr}
+                            </span>` : ''}
+                            
+                            ${item.versions && item.versions.length > 0 ? `
+                            <button onclick="toggleVersions('${item.id}')" class="text-[9px] font-bold text-amber-500 hover:text-amber-600 uppercase flex items-center gap-1 mt-1 text-left w-max bg-amber-50 dark:bg-amber-500/10 px-1.5 py-0.5 rounded">
+                                <i data-lucide="history" class="w-3 h-3"></i> ${item.versions.length} Older Edits
+                            </button>` : ''}
+                        </div>
+                        
+                        <!-- Actions Row -->
+                        <div class="flex items-center gap-1.5 ml-auto flex-wrap justify-end">
+                            ${isCode ? `
+                            <button onclick="copyRawCode(event, '${item.id}')" class="h-7 px-2 flex items-center justify-center gap-1 bg-purple-50 dark:bg-purple-900/20 hover:bg-purple-100 text-purple-600 dark:text-purple-400 rounded-lg border border-purple-200 dark:border-purple-800/40 active:scale-95 transition-all text-[10px] font-bold" title="Copy Raw Code">
+                                <i data-lucide="copy" class="w-3 h-3"></i>
+                                <span>Copy Raw</span>
+                            </button>` : ''}
+                            ${isMd ? `
+                            <button onclick="toggleMarkdownPreview(event, '${item.id}')" class="h-7 px-2 flex items-center justify-center gap-1 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 text-blue-600 dark:text-blue-400 rounded-lg border border-blue-200 dark:border-blue-800/40 active:scale-95 transition-all text-[10px] font-bold" title="Toggle Markdown Preview">
+                                <i data-lucide="${isMdActive ? 'file-text' : 'eye'}" class="w-3 h-3"></i>
+                                <span>${isMdActive ? 'Raw Text' : 'MD Preview'}</span>
+                            </button>` : ''}
+                            <button onclick="toggleSpeech('${item.id}')" class="w-7 h-7 flex items-center justify-center bg-emerald-50 dark:bg-emerald-500/10 hover:bg-emerald-100 ${audioColor} rounded-lg border border-emerald-100 dark:border-emerald-500/20 active:scale-95 transition-all" title="Read Aloud">
+                                <i data-lucide="${audioIcon}" class="w-3.5 h-3.5 ${isThisPlaying ? 'fill-red-500' : 'fill-emerald-500'}"></i>
+                            </button>
+                            ${hasLink ? `
+                            <a href="${cleanLink}" target="_blank" class="w-7 h-7 flex items-center justify-center bg-gray-50 dark:bg-slate-700 hover:bg-red-50 dark:hover:bg-red-500/20 text-gray-400 dark:text-slate-400 hover:text-red-500 dark:hover:text-red-400 rounded-lg border border-gray-100 dark:border-slate-600 active:scale-95 transition-all">
+                                <i data-lucide="${isYoutube ? 'youtube' : 'external-link'}" class="w-3.5 h-3.5 ${isYoutube ? 'text-red-500' : ''}"></i>
+                            </a>` : ''}
+                            <button onclick="copyHistoryItem('${item.id}')" class="w-7 h-7 flex items-center justify-center bg-gray-50 dark:bg-slate-700 hover:bg-gray-100 text-gray-400 dark:text-slate-400 hover:text-gray-600 dark:hover:text-gray-200 rounded-lg border border-gray-100 dark:border-slate-600 active:scale-95 transition-all" title="Copy Text">
+                                <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                            </button>
+                            <button onclick="deleteSingleHistory('${item.id}')" class="w-7 h-7 flex items-center justify-center bg-gray-50 dark:bg-slate-700 hover:bg-red-50 text-gray-400 dark:text-slate-400 hover:text-red-500 dark:hover:text-red-400 rounded-lg border border-gray-100 dark:border-slate-600 active:scale-95 transition-all" title="Delete Clip">
+                                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                            </button>
+                        </div>
+                    </div>
+                    ${versionsHtml}
+                </div>
+            `}).join('');
+
+            renderIcons(); 
+        }
+        window.renderHistory = renderHistory;
+
+        // --- ID-BASED ACTIONS ---
+        window.toggleVersions = function(id) {
+            const div = document.getElementById(`versions-${id}`);
+            if(div) div.classList.toggle('hidden');
+        }
+
+        window.restoreVersion = async function(id, versionIndex) {
+            if(!confirm("Restore this older version? Current text will be pushed to history.")) return;
+            
+            const index = historyArray.findIndex(i => i.id === id);
+            if(index > -1) {
+                const item = historyArray[index];
+                const versionToRestore = item.versions[versionIndex];
+                
+                const newVersions = [{ content: item.content, modified: item.modified }, ...item.versions];
+                newVersions.splice(versionIndex + 1, 1);
+                
+                const updatedHistory = [...historyArray];
+                updatedHistory[index] = {
+                    ...item,
+                    content: versionToRestore.content,
+                    modified: Date.now(),
+                    versions: newVersions.slice(0, 5)
+                };
+                
+                historyArray = updatedHistory;
+                saveLocalHistory();
+                renderHistory();
+
+                try {
+                    if (typeof firebase !== 'undefined' && historyRef) {
+                        await historyRef.set({ items: updatedHistory });
+                        showStatus("RESTORED");
+                        updateCloudStatus('online');
+                    } else {
+                        showStatus("RESTORED LOCALLY");
+                    }
+                } catch (error) {
+                    console.warn("Cloud restore failed:", error);
+                    updateCloudStatus('offline');
+                    showStatus("RESTORED LOCALLY", true);
+                }
+            }
+        }
+
+        window.deleteSingleHistory = async function(id) {
+            if(!confirm("Delete this clip completely?")) return;
+            if (isPlayingId === id) {
+                stopAllSpeech();
+            }
+            const updatedHistory = historyArray.filter(i => i.id !== id);
+            
+            historyArray = updatedHistory;
+            saveLocalHistory();
+            renderHistory();
+            if(editingItemId === id) cancelEditMode();
+
+            try {
+                if (typeof firebase !== 'undefined' && historyRef) {
+                    await historyRef.set({ items: updatedHistory });
+                    updateCloudStatus('online');
+                } else {
+                    showStatus("DELETED LOCALLY");
+                }
+            } catch (error) {
+                console.warn("Cloud delete failed:", error);
+                updateCloudStatus('offline');
+                showStatus("DELETED LOCALLY", true);
+            }
+        }
+
+        window.clearAllHistory = async function() {
+            if (historyArray.length === 0) return;
+
+            // Automatically and silently back up history before deletion as a safety net
+            await createCloudBackup(true);
+
+            // Password confirmation gate
+            if (clearPassword) {
+                const pw = prompt("Enter your delete password to confirm clearing all clips:");
+                if (pw === null) return; // User cancelled
+                if (pw !== clearPassword) {
+                    alert("Incorrect delete password. Deletion aborted.");
+                    showStatus("WRONG PASSWORD", true);
+                    return;
+                }
+            } else {
+                if (!confirm("No delete password is set. Are you sure you want to clear ALL saved clips?\n(An automatic backup snapshot has been saved to the cloud).")) {
+                    return;
+                }
+            }
+
+            stopAllSpeech();
+            historyArray = [];
+            saveLocalHistory();
+            renderHistory();
+
+            try {
+                if (typeof firebase !== 'undefined' && historyRef) {
+                    await historyRef.set({ items: [] });
+                    showStatus("CLEARED");
+                    updateCloudStatus('online');
+                } else {
+                    showStatus("CLEARED LOCALLY");
+                }
+            } catch (error) {
+                console.warn("Cloud clear failed:", error);
+                updateCloudStatus('offline');
+                showStatus("CLEARED LOCALLY", true);
+            }
+        }
+
+        window.togglePinHistory = async function(id) {
+            const updatedHistory = historyArray.map(item => item.id === id ? { ...item, pinned: !item.pinned } : item);
+            
+            historyArray = updatedHistory;
+            saveLocalHistory();
+            renderHistory();
+
+            try {
+                if (typeof firebase !== 'undefined' && historyRef) {
+                    await historyRef.set({ items: updatedHistory });
+                    updateCloudStatus('online');
+                }
+            } catch (error) {
+                console.warn("Cloud pin failed:", error);
+                updateCloudStatus('offline');
+            }
+        }
+
+        window.copyHistoryItem = function(id) {
+            const item = historyArray.find(i => i.id === id);
+            if(!item) return;
+            navigator.clipboard.writeText(item.content).then(() => {
+                showCopyFeedback(id);
+            }).catch(() => {
+                const temp = document.createElement("textarea"); temp.value = item.content; document.body.appendChild(temp);
+                temp.select(); document.execCommand("copy"); document.body.removeChild(temp); 
+                showCopyFeedback(id);
+            });
+        }
+
+        function showCopyFeedback(id) {
+            showStatus("COPIED");
+            const btn = document.querySelector(`button[onclick="copyHistoryItem('${id}')"]`);
+            if (btn) {
+                const originalHtml = btn.innerHTML;
+                btn.innerHTML = '<i data-lucide="check" class="w-3.5 h-3.5 text-green-500"></i>';
+                btn.classList.add('bg-green-50', 'dark:bg-green-950/20', 'border-green-200');
+                safeCreateIcons();
+                setTimeout(() => {
+                    btn.innerHTML = originalHtml;
+                    btn.classList.remove('bg-green-50', 'dark:bg-green-950/20', 'border-green-200');
+                    safeCreateIcons();
+                }, 1500);
+            }
+        }
+        
+        window.clearText = function() { 
+            pushToUndo(textArea.value); 
+            textArea.value = ''; 
+            pushToUndo(''); 
+            updateStats(); 
+            textArea.dispatchEvent(new Event('input')); 
+        }
+
+        function toggleSpeech(id) {
+            const item = historyArray.find(i => i.id === id);
+            if(!item) return;
+
+            if (typeof window === 'undefined' || !window.speechSynthesis || typeof SpeechSynthesisUtterance === 'undefined') {
+                showStatus("TTS NOT SUPPORTED", true);
+                return;
+            }
+
+            const textToSpeak = String(item.content || '').trim();
+            if (!textToSpeak) {
+                showStatus("CLIP IS EMPTY", true);
+                return;
+            }
+            
+            if (isPlayingId === id) { 
+                stopAllSpeech();
+                renderHistory(); 
+                return; 
+            }
+            stopAllSpeech();
+            
+            const thisUtterance = new SpeechSynthesisUtterance(textToSpeak);
+            currentUtterance = thisUtterance;
+            thisUtterance.rate = currentSpeechRate;
+
+            const cleanupSpeech = () => {
+                if (currentUtterance === thisUtterance) {
+                    clearSpeechHeartbeat();
+                    isPlayingId = null;
+                    currentUtterance = null;
+                    renderHistory();
+                }
+            };
+
+            thisUtterance.onend = cleanupSpeech;
+            thisUtterance.onerror = (e) => {
+                console.warn("Speech synthesis error:", e);
+                cleanupSpeech();
+            };
+            
+            isPlayingId = id; 
+            window.speechSynthesis.speak(thisUtterance);
+
+            speechHeartbeat = setInterval(() => {
+                if (window.speechSynthesis && window.speechSynthesis.speaking) {
+                    if (typeof window.speechSynthesis.pause === 'function') window.speechSynthesis.pause();
+                    if (typeof window.speechSynthesis.resume === 'function') window.speechSynthesis.resume();
+                } else {
+                    clearSpeechHeartbeat();
+                }
+            }, 10000);
+
+            renderHistory();
+        }
+        window.toggleSpeech = toggleSpeech;
+
+        window.triggerImport = function() {
+            document.getElementById('importFileInput').click();
+        }
+
+        window.handleImportFile = function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = async function(e) {
+                try {
+                    const imported = JSON.parse(e.target.result);
+                    if (!Array.isArray(imported)) throw new Error("Invalid format");
+                    
+                    const validated = imported.map(item => ({
+                        id: item.id || generateId(),
+                        content: item.content || "",
+                        pinned: !!item.pinned,
+                        created: item.created || Date.now(),
+                        modified: item.modified || Date.now(),
+                        accessed: item.accessed || Date.now(),
+                        versions: item.versions || []
+                    }));
+                    
+                    if (confirm(`Import ${validated.length} items? This will merge with your current history.`)) {
+                        let merged = [...historyArray];
+                        let count = 0;
+                        validated.forEach(item => {
+                            if (!merged.some(m => m.content.trim() === item.content.trim())) {
+                                merged.push(item);
+                                count++;
+                            }
+                        });
+                        
+                        historyArray = merged;
+                        saveLocalHistory();
+                        renderHistory();
+                        
+                        try {
+                            if (typeof firebase !== 'undefined' && historyRef) {
+                                await historyRef.set({ items: historyArray });
+                                updateCloudStatus('online');
+                            }
+                        } catch (err) {
+                            console.warn("Cloud merge sync failed:", err);
+                        }
+                        showStatus(`IMPORTED ${count} ITEMS`);
+                    }
+                } catch (err) {
+                    alert("Failed to parse backup file. Make sure it is a valid JSON backup file generated by this app.");
+                }
+                event.target.value = "";
+            };
+            reader.readAsText(file);
+        }
+
+        window.exportData = function() {
+            if(historyArray.length === 0) return alert("No data to export!");
+            const dataStr = JSON.stringify(historyArray, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+            a.download = `CloudClip_Backup_${new Date().toISOString().split('T')[0]}.json`; a.click();
+        }
+
+        // Copy Main Input Area Content
+        window.copyToClipboard = function() {
+            const val = textArea.value;
+            if (!val) return showStatus("NO TEXT TO COPY", true);
+
+            const btn = document.querySelector(`button[onclick="copyToClipboard()"]`);
+            const originalHtml = btn ? btn.innerHTML : '';
+
+            const finalizeCopy = () => {
+                showStatus("COPIED TO CLIPBOARD");
+                if (btn) {
+                    btn.innerHTML = '<i data-lucide="check" class="w-4 h-4 text-green-500"></i>';
+                    btn.classList.add('bg-green-50', 'dark:bg-green-950/20', 'border-green-200');
+                    safeCreateIcons();
+                    setTimeout(() => {
+                        btn.innerHTML = originalHtml;
+                        btn.classList.remove('bg-green-50', 'dark:bg-green-950/20', 'border-green-200');
+                        safeCreateIcons();
+                    }, 1500);
+                }
+            };
+
+            navigator.clipboard.writeText(val).then(finalizeCopy).catch(() => {
+                const temp = document.createElement("textarea");
+                temp.value = val;
+                document.body.appendChild(temp);
+                temp.select();
+                document.execCommand("copy");
+                document.body.removeChild(temp);
+                finalizeCopy();
+            });
+        }
+
+        // Escape HTML tags to prevent execution in diff
+        function escapeHtml(str) {
+            return String(str || '').replace(/[&<>'"]/g, tag => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                "'": '&#39;',
+                '"': '&quot;'
+            }[tag]));
+        }
+
+        // Word-by-word LCS diff algorithm
+        function computeDiff(oldStr, newStr) {
+            const oldWords = oldStr.split(/(\s+)/);
+            const newWords = newStr.split(/(\s+)/);
+            
+            // Optimization for very large texts to prevent browser hang
+            if (oldWords.length * newWords.length > 90000) {
+                return [
+                    { type: 'removed', value: oldStr },
+                    { type: 'added', value: newStr }
+                ];
+            }
+            
+            const dp = Array(oldWords.length + 1).fill(0).map(() => Array(newWords.length + 1).fill(0));
+            for (let i = 1; i <= oldWords.length; i++) {
+                for (let j = 1; j <= newWords.length; j++) {
+                    if (oldWords[i-1] === newWords[j-1]) {
+                        dp[i][j] = dp[i-1][j-1] + 1;
+                    } else {
+                        dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]);
+                    }
+                }
+            }
+            
+            let i = oldWords.length, j = newWords.length;
+            const diff = [];
+            while (i > 0 || j > 0) {
+                if (i > 0 && j > 0 && oldWords[i-1] === newWords[j-1]) {
+                    diff.unshift({ type: 'common', value: oldWords[i-1] });
+                    i--; j--;
+                } else if (j > 0 && (i === 0 || dp[i][j-1] >= dp[i-1][j])) {
+                    diff.unshift({ type: 'added', value: newWords[j-1] });
+                    j--;
+                } else {
+                    diff.unshift({ type: 'removed', value: oldWords[i-1] });
+                    i--;
+                }
+            }
+            return diff;
+        }
+
+        // Generates green/red styled HTML differences
+        function getDiffHtml(oldStr, newStr) {
+            try {
+                const diff = computeDiff(oldStr, newStr);
+                return diff.map(part => {
+                    if (part.type === 'added') {
+                        return `<ins class="bg-green-100 dark:bg-green-950/60 text-green-800 dark:text-green-300 no-underline px-0.5 rounded font-semibold">${escapeHtml(part.value)}</ins>`;
+                    }
+                    if (part.type === 'removed') {
+                        return `<del class="bg-red-100 dark:bg-red-950/60 text-red-800 dark:text-red-300 line-through px-0.5 rounded">${escapeHtml(part.value)}</del>`;
+                    }
+                    return escapeHtml(part.value);
+                }).join('');
+            } catch (e) {
+                return `<strong>Old version:</strong><br>${escapeHtml(oldStr)}<br><br><strong>Current version:</strong><br>${escapeHtml(newStr)}`;
+            }
+        }
+
+        // Toggles display of the inline diff comparison panel
+        window.toggleCompareVersion = function(event, itemId, versionIndex) {
+            if (event) event.stopPropagation();
+            
+            const diffDiv = document.getElementById(`diff-${itemId}-${versionIndex}`);
+            if (!diffDiv) return;
+            
+            const isHidden = diffDiv.classList.contains('hidden');
+            
+            // Close any other open diff panels inside this card to keep it clean
+            const parentCard = diffDiv.closest('#versions-' + itemId);
+            if (parentCard) {
+                const openDiffs = parentCard.querySelectorAll('[id^="diff-"]');
+                openDiffs.forEach(d => {
+                    if (d !== diffDiv) d.classList.add('hidden');
+                });
+            }
+            
+            if (isHidden) {
+                const item = historyArray.find(i => i.id === itemId);
+                if (!item) return;
+                
+                const version = item.versions[versionIndex];
+                if (!version) return;
+                
+                // Compare version.content (older) with current item.content (new)
+                const diffHtml = getDiffHtml(version.content, item.content);
+                
+                diffDiv.innerHTML = `
+                    <div class="flex justify-between items-center mb-1.5 pb-1 border-b border-gray-100 dark:border-slate-800 text-[9px] font-bold text-gray-400 dark:text-slate-500 uppercase tracking-wider">
+                        <span>Comparison (Red = Deleted | Green = Added)</span>
+                    </div>
+                    <div class="text-gray-700 dark:text-slate-300 font-sans whitespace-pre-wrap">${diffHtml}</div>
+                `;
+                diffDiv.classList.remove('hidden');
+                safeCreateIcons();
+            } else {
+                diffDiv.classList.add('hidden');
+            }
+        }
+
+        // Cancel TTS on unload/reloading
+        window.addEventListener('beforeunload', () => {
+            stopAllSpeech();
+        });
+    </script>
+</body>
+</html>
