@@ -117,6 +117,26 @@
       name_en: "Similar to Preceding Stop",
       rule_en: "Takes the same pause ruling as the preceding waqf mark in the sentence.",
       color: "#38bdf8"
+    },
+    saktah: {
+      key: "saktah",
+      symbol: "ۜ",
+      name_ur: "سکتہ (س / ۜ)",
+      name_roman: "Saktah (Silence Without Breath)",
+      action_roman: "Saans tode baghair thodi der aawaz rokein",
+      name_en: "Brief Breathless Pause",
+      rule_en: "Pause sound briefly without breaking breath before resuming.",
+      color: "#a855f7"
+    },
+    sajdah: {
+      key: "sajdah",
+      symbol: "۩",
+      name_ur: "آیتِ سجدہ (۩)",
+      name_roman: "Ayah Sajdah",
+      action_roman: "Yahan Sajdah-e-Tilawat wajib/sunnat hai",
+      name_en: "Prostration Indicator",
+      rule_en: "Indicates a verse of prostration (Sajdah Tilawat).",
+      color: "#10b981"
     }
   };
 
@@ -147,7 +167,7 @@
       // 2. Append End-of-Ayah Sign (۝ [number]) if ayahNum provided and not already present
       if (num && !text.includes('quran-ayah-stop-mark') && !text.includes('۝')) {
         // Strip trailing dashes, waqf mutlaq at very end or spaces
-        text = text.replace(/[\s\-\u0615\u06D5-\u06DB\u06EB]+$/, '');
+        text = text.replace(/[\s\-\u0615\u06D5-\u06DC\u06EB\u06EA\u06EC\u06ED\u06E2\u06E9]+$/, '');
         const digitsClass = num.length >= 3 ? ' digits-3' : '';
         const endSignHtml = ` <span class="quran-ayah-stop-mark" data-waqf-key="ayah_end" data-ayah="${num}" data-digits="${num.length}" role="button" tabindex="0" title="End of Ayah ${num} • وقفِ تام" aria-label="End of Ayah ${num}"><span class="quran-ayah-stop-symbol">۝</span><span class="quran-ayah-stop-num${digitsClass}">${num}</span></span>`;
         text = text + endSignHtml;
@@ -164,29 +184,50 @@
 
       // Pattern covering standard Unicode Quranic pause diacritics:
       // \u0615 (Small High Tah ؕ - Mutlaq)
-      // \u06D5 (Ae ە fallback)
       // \u06D6 (Sad-Lam ۖ - Mujawwaz)
       // \u06D7 (Qaf-Lam ۗ - Murakhkhas)
       // \u06D8 (Small High Meem ۘ - Lazim)
       // \u06D9 (Small High Lam-Alif ۙ - La Waqf)
       // \u06DA (Small High Jeem ۚ - Jaiz)
       // \u06DB (Three dots ۛ - Muanaqah)
+      // \u06DC (Small Seen ۜ - Saktah)
       // \u06EB (Empty Centre Stop ۫ - Kadhalik)
-      // Also match optional Indo-Pak hyphen delimiter (e.g., ؕ- or ۫-) and normalize surrounding spaces
-      return text.replace(/\s*([\u0615\u06D5\u06D6\u06D7\u06D8\u06D9\u06DA\u06DB\u06EB])(?:\s*[\-\u200C\u200D\u200E\u200F\u00A0]*\-)?\s*/g, (match, char) => {
+      // \u06EA (Empty Centre Low Stop ۪ - Kadhalik)
+      // \u06EC (Rounded High Stop ۬ - Kadhalik)
+      // \u06ED (Small Low Meem ۭ - Lazim)
+      // \u06E2 (Small High Meem ۢ - Lazim)
+      // \u06E9 (Place of Sajdah ۩ - Sajdah)
+      // Also matches attached Indo-Pak hyphens (e.g., ؕ-, ۫-) and sanitizes them cleanly
+      let result = text.replace(/([\u0615\u06D5\u06D6-\u06DC\u06EB\u06EA\u06EC\u06ED\u06E2\u06E9])(?:\s*[\-\u200C\u200D\u200E\u200F\u00A0]*\-)?/g, (match, char) => {
         let key = "mutlaq";
-        if (char === '\u06D8') key = "lazim";
+        if (char === '\u06D8' || char === '\u06E2' || char === '\u06ED') key = "lazim";
         else if (char === '\u06DA') key = "jaiz";
         else if (char === '\u06D6') key = "mujawwaz";
         else if (char === '\u06D7') key = "murakhkhas";
         else if (char === '\u06D9') key = "la";
         else if (char === '\u06DB') key = "muanaqah";
         else if (char === '\u0615' || char === '\u06D5') key = "mutlaq";
-        else if (char === '\u06EB') key = "kadhalik";
+        else if (char === '\u06EB' || char === '\u06EA' || char === '\u06EC') key = "kadhalik";
+        else if (char === '\u06DC') key = "saktah";
+        else if (char === '\u06E9') key = "sajdah";
 
         const def = this.definitions[key] || this.definitions.mutlaq;
-        return ` <span class="quran-waqf-inline-mark" data-waqf-key="${key}" role="button" tabindex="0" title="${def.name_ur} • ${def.name_en}" aria-label="${def.name_roman}">${char}</span> `;
+        return `<span class="quran-waqf-inline-mark" data-waqf-key="${key}" role="button" tabindex="0" title="${def.name_ur} • ${def.name_en}" aria-label="${def.name_roman}">${char}</span>`;
       });
+
+      // Remove unwanted whitespace before inline waqf spans so they attach smoothly to preceding words
+      result = result.replace(/([^\s>])\s+(<span class="quran-waqf-inline-mark")/g, '$1$2');
+
+      // Guarantee single standard space after waqf mark when followed by another word
+      result = result.replace(/(<\/span>)(?=[^\s<])/g, '$1 ');
+
+      // Sanitize any orphaned trailing hyphens leftover from old data
+      result = result.replace(/(\S)\-(?=\s|$)/g, '$1');
+
+      // Collapse multiple consecutive spaces
+      result = result.replace(/[ \t\u00A0]{2,}/g, ' ');
+
+      return result.trim();
     }
 
     /**
