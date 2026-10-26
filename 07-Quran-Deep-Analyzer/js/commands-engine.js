@@ -263,7 +263,7 @@
            `🏷️ *${it.title_en}* [${pBadge}]\n` +
            `📌 *${it.title_ur}*\n` +
            `📍 *Surah ${it.surah_name_roman} (${it.surah_name_ar}) [${it.surah_id}:${it.ayah_num}]*\n\n` +
-           `📖 *Sacred Arabic:*\n«${arText}»\n\n` +
+           `📖 *Sacred Arabic:*\n${arText}\n\n` +
            `💎 *Kanzul Iman Urdu Translation (Imam Ahmad Raza Khan):*\n${it.translation_urdu_kanzul_iman}\n\n` +
            `🌐 *English Translation (Saheeh International):*\n${it.translation_english}\n\n` +
            `💡 *Human Flourishing & Health Wisdom:*\n${it.wisdom_benefit_en}\n\n` +
@@ -403,7 +403,7 @@
             </div>
           </div>
 
-          <div class="streamlined-arabic-box" dir="rtl">«${formattedAr}»</div>
+          <div class="streamlined-arabic-box" dir="rtl">${formattedAr}</div>
 
           <div class="command-content-grid ${!showEnglish ? 'urdu-only-grid' : (!showUrdu ? 'en-only-grid' : '')} ${isEngFirst ? 'mobile-order-en-first' : ''}">
             ${showUrdu ? `
@@ -455,7 +455,7 @@
           </div>
 
           <div class="command-collapsible-body" id="col-body-${it.serial}">
-            <div class="command-arabic-text" dir="rtl">«${formattedAr}»</div>
+            <div class="command-arabic-text" dir="rtl">${formattedAr}</div>
             <div class="command-content-grid ${!showEnglish ? 'urdu-only-grid' : (!showUrdu ? 'en-only-grid' : '')} ${isEngFirst ? 'mobile-order-en-first' : ''}">
               ${showUrdu ? `<div class="command-pane-ur"><div class="command-translation-ur" dir="rtl">${hUr}</div></div>` : ''}
               ${showEnglish ? `<div class="command-pane-en"><div class="command-translation-en" dir="ltr">${hEn}</div></div>` : ''}
@@ -747,12 +747,30 @@
     const displayModal = rootEl.querySelector("#commands-display-modal");
     const modalClose = rootEl.querySelector("#commands-modal-close");
 
+    let activeUrduFont = "nastaleeq";
+    try {
+      activeUrduFont = localStorage.getItem("quran_urdu_font_preference") || "nastaleeq";
+    } catch(e) {}
+
+    function applyUrduFont(font) {
+      activeUrduFont = font;
+      try { localStorage.setItem("quran_urdu_font_preference", font); } catch(e) {}
+      if (typeof document !== 'undefined') {
+        document.body.classList.toggle("font-mode-naskh", font === "naskh");
+      }
+      rootEl.querySelectorAll(".segmented-pill-group[id*='urdu-font'] .segment-btn").forEach(b => {
+        b.classList.toggle("active", b.dataset.urduFont === font);
+      });
+      updateConfigPreview();
+    }
+
     function updateConfigPreview() {
       const preview = rootEl.querySelector("#native-commands-config-preview") || rootEl.querySelector("#commands-config-preview");
       if (preview) {
         const viewLabel = activeView === "checklist" ? "Checklist" : (activeView === "collapsible" ? "Summary" : "Cards");
         const langLabel = activeLang === "ur" ? "Urdu" : (activeLang === "en" ? "English" : "Bilingual");
-        preview.textContent = `${viewLabel} • ${langLabel}`;
+        const fontLabel = activeUrduFont === "naskh" ? "Naskh" : "Nastaleeq";
+        preview.textContent = `${viewLabel} • ${langLabel} • ${fontLabel}`;
       }
     }
 
@@ -786,6 +804,19 @@
         renderList();
       });
     }
+
+    // Apply saved Urdu Font preference
+    applyUrduFont(activeUrduFont);
+
+    // Urdu Typography Font Filters
+    rootEl.querySelectorAll(".segmented-pill-group[id*='urdu-font'] .segment-btn").forEach(btn => {
+      if (btn._bound) return;
+      btn._bound = true;
+      btn.addEventListener("click", () => {
+        if (window.AudioSFX) window.AudioSFX.playTab();
+        applyUrduFont(btn.dataset.urduFont);
+      });
+    });
 
     // View Mode Filters
     rootEl.querySelectorAll(".segmented-pill-group[id*='view-mode'] .segment-btn").forEach(btn => {

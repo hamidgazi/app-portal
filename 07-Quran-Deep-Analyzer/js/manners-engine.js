@@ -152,7 +152,7 @@
     return `🌿 *Quranic Manners & Social Ethics (#${it.global_serial})* 🌿\n` +
            `🏷️ *${it.title_ur}*\n` +
            `📍 *Surah ${it.surah_name_roman} (${it.surah_name_ar}) [${it.surah_id}:${it.ayah_num}]*\n\n` +
-           `📖 *Sacred Arabic:*\n«${arText}»\n\n` +
+           `📖 *Sacred Arabic:*\n${arText}\n\n` +
            `💎 *Kanzul Iman Urdu Translation:*\n${it.urdu_kanzul_iman}\n\n` +
            `🌐 *English Translation:*\n${it.english}\n\n` +
            `✨ *Quran Deep Analyzer*\nhttps://hamidgazi.github.io/app-portal/`;
@@ -275,7 +275,7 @@
           </div>
         </div>
 
-        <div class="streamlined-arabic-box" dir="rtl">«${formattedAr}»</div>
+        <div class="streamlined-arabic-box" dir="rtl">${formattedAr}</div>
 
         <div class="manner-content-grid ${!showEnglish ? 'urdu-only-grid' : (!showUrdu ? 'en-only-grid' : '')} ${isEngFirst ? 'mobile-order-en-first' : ''}">
           ${showUrdu ? `
@@ -572,12 +572,30 @@
     const displayModal = rootEl.querySelector("#manners-display-modal");
     const modalClose = rootEl.querySelector("#manners-modal-close");
 
+    let activeUrduFont = "nastaleeq";
+    try {
+      activeUrduFont = localStorage.getItem("quran_urdu_font_preference") || "nastaleeq";
+    } catch(e) {}
+
+    function applyUrduFont(font) {
+      activeUrduFont = font;
+      try { localStorage.setItem("quran_urdu_font_preference", font); } catch(e) {}
+      if (typeof document !== 'undefined') {
+        document.body.classList.toggle("font-mode-naskh", font === "naskh");
+      }
+      rootEl.querySelectorAll(".segmented-pill-group[id*='urdu-font'] .segment-btn").forEach(b => {
+        b.classList.toggle("active", b.dataset.urduFont === font);
+      });
+      updateConfigPreview();
+    }
+
     function updateConfigPreview() {
       const preview = rootEl.querySelector("#native-manners-config-preview") || rootEl.querySelector("#manners-config-preview");
       if (preview) {
         const viewLabel = activeView === "compact" ? "Checklist" : "Cards";
         const langLabel = activeLang === "ur" ? "Urdu" : (activeLang === "en" ? "English" : "Bilingual");
-        preview.textContent = `${viewLabel} • ${langLabel}`;
+        const fontLabel = activeUrduFont === "naskh" ? "Naskh" : "Nastaleeq";
+        preview.textContent = `${viewLabel} • ${langLabel} • ${fontLabel}`;
       }
     }
 
@@ -611,6 +629,19 @@
         renderList();
       });
     }
+
+    // Apply saved Urdu Font preference
+    applyUrduFont(activeUrduFont);
+
+    // Urdu Typography Font Filters
+    rootEl.querySelectorAll(".segmented-pill-group[id*='urdu-font'] .segment-btn").forEach(btn => {
+      if (btn._bound) return;
+      btn._bound = true;
+      btn.addEventListener("click", () => {
+        if (window.AudioSFX) window.AudioSFX.playTab();
+        applyUrduFont(btn.dataset.urduFont);
+      });
+    });
 
     // View Mode Filters
     rootEl.querySelectorAll(".segmented-pill-group[id*='view-mode'] .segment-btn").forEach(btn => {

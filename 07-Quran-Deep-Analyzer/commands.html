@@ -1266,6 +1266,15 @@
           </div>
         </div>
 
+                <!-- Urdu Calligraphy Font Mode -->
+        <div class="cyber-modal-section">
+          <div class="cyber-modal-section-label">Urdu Calligraphy Font</div>
+          <div class="segmented-pill-group" id="commands-urdu-font-filters" style="width: 100%;">
+            <button type="button" class="segment-btn active" data-urdu-font="nastaleeq" style="flex: 1;">🖋️ Nastaleeq (Default)</button>
+            <button type="button" class="segment-btn" data-urdu-font="naskh" style="flex: 1;">📖 Modern Naskh</button>
+          </div>
+        </div>
+
         <!-- Sort Order -->
         <div class="cyber-modal-section">
           <div class="cyber-modal-section-label">Sort Sequence</div>
@@ -1558,7 +1567,7 @@
                   `🏷️ *${it.title_en}* [${pBadge}]\n` +
                   `📌 *${it.title_ur}*\n` +
                   `📍 *Surah ${it.surah_name_roman} (${it.surah_name_ar}) [${it.surah_id}:${it.ayah_num}]*\n\n` +
-                  `📖 *Sacred Arabic:*\n«${arText}»\n\n` +
+                  `📖 *Sacred Arabic:*\n${arText}\n\n` +
                   `💎 *Kanzul Iman Urdu Translation (Imam Ahmad Raza Khan):*\n${it.translation_urdu_kanzul_iman}\n\n` +
                   `🌐 *English Translation (Saheeh International):*\n${it.translation_english}\n\n` +
                   `💡 *Human Flourishing & Health Wisdom:*\n${it.wisdom_benefit_en}\n\n` +

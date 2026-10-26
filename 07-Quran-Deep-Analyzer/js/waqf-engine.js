@@ -138,7 +138,8 @@
       if (num && !text.includes('quran-ayah-stop-mark') && !text.includes('۝')) {
         // Strip trailing dashes, waqf mutlaq at very end or spaces
         text = text.replace(/[\s\-\u06D5]+$/, '');
-        const endSignHtml = ` <span class="quran-ayah-stop-mark" data-waqf-key="ayah_end" data-ayah="${num}" role="button" tabindex="0" title="End of Ayah ${num} • وقفِ تام" aria-label="End of Ayah ${num}"><span class="quran-ayah-stop-symbol">۝</span><span class="quran-ayah-stop-num">${num}</span></span>`;
+        const digitsClass = num.length >= 3 ? ' digits-3' : '';
+        const endSignHtml = ` <span class="quran-ayah-stop-mark" data-waqf-key="ayah_end" data-ayah="${num}" data-digits="${num.length}" role="button" tabindex="0" title="End of Ayah ${num} • وقفِ تام" aria-label="End of Ayah ${num}"><span class="quran-ayah-stop-symbol">۝</span><span class="quran-ayah-stop-num${digitsClass}">${num}</span></span>`;
         text = text + endSignHtml;
       }
 
@@ -176,7 +177,7 @@
      */
     appendPlainTextStopSign(arabicText, ayahNum) {
       if (!arabicText) return '';
-      let clean = String(arabicText).replace(/<[^>]+>/g, '').trim();
+      let clean = String(arabicText).replace(/<[^>]+>/g, '').replace(/[«»]/g, '').trim();
       const num = (ayahNum !== undefined && ayahNum !== null) ? String(ayahNum) : '';
       if (num && !clean.includes('۝')) {
         clean = clean.replace(/[\s\-\u06D5]+$/, '') + ` ۝ ${num}`;

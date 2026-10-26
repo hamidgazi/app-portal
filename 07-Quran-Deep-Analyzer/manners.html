@@ -1123,6 +1123,15 @@
           </div>
         </div>
 
+                <!-- Urdu Calligraphy Font Mode -->
+        <div class="cyber-modal-section">
+          <div class="cyber-modal-section-label">Urdu Calligraphy Font</div>
+          <div class="segmented-pill-group" id="manners-urdu-font-filters" style="width: 100%;">
+            <button type="button" class="segment-btn active" data-urdu-font="nastaleeq" style="flex: 1;">🖋️ Nastaleeq (Default)</button>
+            <button type="button" class="segment-btn" data-urdu-font="naskh" style="flex: 1;">📖 Modern Naskh</button>
+          </div>
+        </div>
+
         <!-- Sort Order -->
         <div class="cyber-modal-section">
           <div class="cyber-modal-section-label">Sort Sequence</div>
@@ -1546,7 +1555,7 @@
         let msg = `🌸 *قرآنی آداب و اخلاق (#${it.global_serial})* 🌸\n\n` +
                   `📖 *${it.title_ur}*\n` +
                   `📍 *${it.surah_name_roman} [${it.surah_id}:${it.ayah_num}]*\n\n` +
-                  `📜 *عربی:*\n«${arText}»\n\n` +
+                  `📜 *عربی:*\n${arText}\n\n` +
                   `💎 *اردو ترجمہ (کنز الایمان شریف):*\n${it.urdu_kanzul_iman}\n\n`;
         if (it.english) {
           msg += `🌐 *English Translation:*\n${it.english}\n\n`;
@@ -1699,7 +1708,7 @@
             </div>
 
             <!-- Centered Compact Sacred Arabic Scripture -->
-            <div class="manner-arabic-text">«${window.WaqfEngine ? window.WaqfEngine.formatArabicWithStopSigns(hAr, it.ayah_num) : hAr}»</div>
+            <div class="manner-arabic-text">${window.WaqfEngine ? window.WaqfEngine.formatArabicWithStopSigns(hAr, it.ayah_num) : hAr}</div>
 
             <!-- Synchronized BiDi Dual-Pane Grid (Side-by-side on desktop, fluid order on mobile) -->
             <div class="manner-content-grid ${!showEnglish ? 'urdu-only-grid' : (!showUrdu ? 'en-only-grid' : '')} ${isEngFirst ? 'mobile-order-en-first' : ''}">
@@ -1730,7 +1739,7 @@
                 <button class="manner-btn-pill whatsapp-btn" data-idx="${idx}" title="Share on WhatsApp">
                   <span>📲 WhatsApp</span>
                 </button>
-                <button class="manner-btn-pill copy-manner-btn" data-text="#${serialNum} • ${it.title_ur}&#10;«${it.arabic}»&#10;&#10;Kanzul Iman:&#10;${it.urdu_kanzul_iman}&#10;&#10;English:&#10;${it.english}&#10;&#10;${it.reference_badge} (${it.reference_code})">
+                <button class="manner-btn-pill copy-manner-btn" data-text="#${serialNum} • ${it.title_ur}&#10;${it.arabic}&#10;&#10;Kanzul Iman:&#10;${it.urdu_kanzul_iman}&#10;&#10;English:&#10;${it.english}&#10;&#10;${it.reference_badge} (${it.reference_code})">
                   <span>📋 Copy</span>
                 </button>
               </div>
@@ -1772,7 +1781,7 @@
               <button class="compact-micro-btn whatsapp-btn" data-idx="${idx}" title="Share on WhatsApp">
                 <span>📲</span>
               </button>
-              <button class="compact-micro-btn copy-manner-btn" data-text="#${serialNum} • ${it.title_ur}&#10;«${it.arabic}»&#10;&#10;اردو ترجمہ (کنز الایمان شریف):&#10;${it.urdu_kanzul_iman}&#10;&#10;${it.reference_badge}" title="Copy Verse">
+              <button class="compact-micro-btn copy-manner-btn" data-text="#${serialNum} • ${it.title_ur}&#10;${it.arabic}&#10;&#10;اردو ترجمہ (کنز الایمان شریف):&#10;${it.urdu_kanzul_iman}&#10;&#10;${it.reference_badge}" title="Copy Verse">
                 <span>📋</span>
               </button>
             </div>

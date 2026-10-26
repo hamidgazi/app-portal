@@ -16,9 +16,18 @@
       --rose-glow: #f43f5e;
       --rose-border: rgba(244, 63, 94, 0.35);
       --cyan-glow: #38bdf8;
+      --font-urdu-nastaleeq: var(--font-urdu, 'JameelNoori'), 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
+      --font-urdu-naskh: 'Scheherazade New', 'Amiri', 'Traditional Arabic', 'Segoe UI', sans-serif;
+      --font-urdu-current: var(--font-urdu-nastaleeq);
+      --urdu-line-height: 1.82;
       --urdu-font-size: calc(1.40rem * var(--ayah-font-scale, 1.0));
       --urdu-wisdom-size: calc(1.30rem * var(--ayah-font-scale, 1.0));
       --arabic-font-size: calc(1.40rem * var(--ayah-font-scale, 1.0));
+    }
+
+    body.font-mode-naskh {
+      --font-urdu-current: var(--font-urdu-naskh) !important;
+      --urdu-line-height: 1.62 !important;
     }
 
     *, *::before, *::after {
@@ -678,21 +687,37 @@
       border: 1px solid rgba(16, 185, 129, 0.28);
     }
 
+    .command-translation-ur,
     .trans-body-ur {
-      font-family: var(--font-urdu), 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
-      font-size: var(--urdu-font-size);
-      line-height: 1.72;
-      color: #f8fafc;
-      text-align: right;
-      direction: rtl;
+      font-family: var(--font-urdu-current, var(--font-urdu), 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif) !important;
+      font-size: var(--urdu-font-size, 1.30rem) !important;
+      line-height: var(--urdu-line-height, 1.82) !important;
+      color: #f8fafc !important;
+      text-align: right !important;
+      direction: rtl !important;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      margin-top: 4px;
     }
 
+    .command-translation-en,
     .trans-body-en {
       font-size: 0.88rem;
-      line-height: 1.40;
+      line-height: 1.45;
       color: #cbd5e1;
       direction: ltr;
       text-align: left;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      margin-top: 4px;
+    }
+
+    .ki-gold {
+      color: #fbbf24;
+      font-size: 0.78em;
+      font-weight: 700;
+      margin-left: 6px;
+      display: inline-block;
     }
 
     /* 1-Tap Collapsible Wisdom Drawer (Hidden by default, saves ~120px) */
@@ -1815,14 +1840,15 @@
     }
 
     .manner-urdu-kanzuliman {
-      font-family: var(--font-urdu), 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
-      font-size: var(--urdu-font-size);
-      line-height: 1.72;
-      color: #f8fafc;
-      text-align: right;
-      direction: rtl;
+      font-family: var(--font-urdu-current, var(--font-urdu), 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif) !important;
+      font-size: var(--urdu-font-size, 1.30rem) !important;
+      line-height: var(--urdu-line-height, 1.82) !important;
+      color: #f8fafc !important;
+      text-align: right !important;
+      direction: rtl !important;
       word-break: break-word;
       overflow-wrap: break-word;
+      margin-top: 4px;
     }
 
     .manner-en-translation {
@@ -2474,3 +2500,73 @@
   margin-top: 4px;
   animation: fadeIn 0.2s ease-out;
 }
+
+    /* Universal Centered Circular Ayah Stop Rosette Medallion */
+    .quran-ayah-stop-mark {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.15em;
+      height: 2.15em;
+      margin: 0 0.35em;
+      vertical-align: middle;
+      cursor: pointer;
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 50%, rgba(251, 191, 36, 0.22) 0%, rgba(212, 175, 55, 0.06) 100%);
+      border: 1.5px solid rgba(251, 191, 36, 0.75);
+      box-shadow: 0 0 0 1.5px rgba(15, 23, 42, 0.9), 0 0 12px rgba(251, 191, 36, 0.35), inset 0 0 6px rgba(251, 191, 36, 0.2);
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      direction: ltr;
+      user-select: none;
+      touch-action: manipulation;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .quran-ayah-stop-mark:hover {
+      background: radial-gradient(circle at 50% 50%, rgba(251, 191, 36, 0.38) 0%, rgba(212, 175, 55, 0.16) 100%);
+      border-color: #fbbf24;
+      box-shadow: 0 0 0 1.5px rgba(15, 23, 42, 0.95), 0 0 20px rgba(251, 191, 36, 0.65), inset 0 0 10px rgba(251, 191, 36, 0.3);
+      transform: translateY(-1px) scale(1.10);
+    }
+
+    .quran-ayah-stop-mark:active {
+      transform: scale(0.95);
+    }
+
+    .quran-ayah-stop-symbol {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-arabic), 'Scheherazade New', 'Amiri', serif;
+      font-size: 1.85em;
+      color: #fbbf24;
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      opacity: 0.75;
+    }
+
+    .quran-ayah-stop-num {
+      position: relative;
+      z-index: 2;
+      font-family: var(--font-ui), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 0.66em;
+      font-weight: 800;
+      color: #fef08a;
+      letter-spacing: -0.02em;
+      direction: ltr;
+      display: inline-block;
+      line-height: 1;
+      text-align: center;
+      pointer-events: none;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.95);
+    }
+
+    .quran-ayah-stop-mark[data-digits="3"] .quran-ayah-stop-num,
+    .quran-ayah-stop-num.digits-3 {
+      font-size: 0.54em;
+      letter-spacing: -0.04em;
+    }
