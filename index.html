@@ -383,9 +383,9 @@
       color: var(--text-primary);
     }
 
-    .search-card-spotlight-pill {
+    .search-card-pill {
       background: rgba(56, 189, 248, 0.08);
-      border: 1px solid rgba(56, 189, 248, 0.25);
+      border: 1px solid rgba(56, 189, 248, 0.22);
       color: var(--accent-cyan);
       padding: 6px 12px;
       border-radius: var(--radius-sm);
@@ -398,15 +398,27 @@
       transition: all 0.15s ease;
       flex-shrink: 0;
       touch-action: manipulation;
+      user-select: none;
     }
 
-    .search-card-spotlight-pill:hover {
-      background: rgba(56, 189, 248, 0.18);
+    .search-card-pill:hover {
+      background: rgba(56, 189, 248, 0.16);
       border-color: var(--accent-cyan);
       color: #fff;
     }
 
-    .search-card-spotlight-pill kbd {
+    .search-card-badge {
+      background: var(--accent-cyan);
+      color: #09090b;
+      padding: 2px 7px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+      display: none;
+    }
+
+    .search-card-pill kbd {
       background: rgba(255, 255, 255, 0.1);
       padding: 2px 5px;
       border-radius: 4px;
@@ -414,12 +426,83 @@
     }
 
     @media (max-width: 640px) {
-      .search-card-spotlight-pill kbd {
+      .search-card-pill kbd {
         display: none;
       }
       .search-card-input {
         font-size: 13.5px;
       }
+    }
+
+    /* Keyword Match Highlighting (Subtle Cyan Glow) */
+    mark.search-highlight {
+      background: rgba(56, 189, 248, 0.22);
+      color: #38bdf8;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.55);
+      padding: 1px 3px;
+      border-radius: 3px;
+      font-weight: 600;
+    }
+
+    /* Clean Obsidian-Style Empty Search State */
+    .search-empty-state {
+      background: var(--bg-card);
+      border: 1px dashed var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 48px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 12px;
+      margin: 20px 0;
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    .search-empty-icon {
+      font-size: 36px;
+      margin-bottom: 4px;
+      opacity: 0.85;
+    }
+
+    .search-empty-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.3px;
+    }
+
+    .search-empty-desc {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      max-width: 440px;
+      line-height: 1.5;
+    }
+
+    .btn-clear-search {
+      margin-top: 8px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: var(--accent-cyan);
+      padding: 8px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+      touch-action: manipulation;
+      min-height: 44px;
+    }
+
+    .btn-clear-search:hover {
+      background: rgba(56, 189, 248, 0.22);
+      border-color: var(--accent-cyan);
+      color: #fff;
+      transform: translateY(-1px);
     }
 
     /* Section Headers */
@@ -1145,7 +1228,7 @@
 
       <!-- Right: Search, Share, Audio -->
       <div class="topbar-right">
-        <button class="action-btn btn-primary" id="btn-open-spotlight" title="Universal AI Search (Ctrl+K)">
+        <button class="action-btn btn-primary" id="btn-open-spotlight" title="Search Apps & Tools (Ctrl+K)">
           <span>🔍</span> <span class="search-btn-text">Search</span> <kbd style="font-size:10px; background:rgba(255,255,255,0.1); padding:2px 5px; border-radius:4px;">Ctrl+K</kbd>
         </button>
         <button class="action-btn" id="btn-top-qr" title="Connect Phone via Wi-Fi">📱 QR</button>
@@ -1172,10 +1255,10 @@
         </div>
       </div>
 
-      <!-- Interactive Quick Search Card (Instant Filter & Spotlight Launchpad) -->
+      <!-- Interactive Quick Search Card (Instant In-Place AI Filter) -->
       <section class="search-card-container" id="search-card-section" aria-label="Search Applications">
         <div class="search-card" id="search-card">
-          <span class="search-card-icon" id="search-card-icon-btn" title="Open AI Spotlight (Ctrl+K)">🔍</span>
+          <span class="search-card-icon" id="search-card-icon-btn" title="Click to search">🔍</span>
           <input 
             type="search" 
             id="dashboard-search-input" 
@@ -1185,10 +1268,10 @@
             aria-label="Search apps and tools"
           >
           <button class="search-card-clear" id="dashboard-search-clear" title="Clear Search" aria-label="Clear Search">✕</button>
-          <button class="search-card-spotlight-pill" id="btn-card-spotlight" title="Open Full AI Spotlight Palette">
-            <span>⚡ Spotlight</span>
+          <div class="search-card-pill" id="search-card-indicator" title="Keyboard shortcut: Ctrl+K">
+            <span class="search-card-badge" id="search-match-badge"></span>
             <kbd>Ctrl+K</kbd>
-          </button>
+          </div>
         </div>
       </section>
 
@@ -1514,28 +1597,282 @@
       });
     }
 
-    /* Render Thematic Clusters in Dashboard Grid */
+    /* ==========================================================================
+       DOMAIN TRANSLITERATION & AI SEARCH NLP ENGINE (Client-Side In-Place)
+       ========================================================================== */
+    const TRANSLITERATION_MAP = {
+      // Namaz / Prayer
+      "namaz": ["namaz", "prayer", "salaah", "salah", "salat", "azan", "fajr", "zuhr", "asr", "maghrib", "isha", "ephemeris", "solar"],
+      "prayer": ["namaz", "prayer", "salaah", "salah", "salat", "azan"],
+      "salah": ["namaz", "prayer", "salaah", "salat"],
+      "salat": ["namaz", "prayer", "salat", "salaah"],
+      "azan": ["namaz", "prayer", "azan", "athan"],
+
+      // Hadith
+      "hadis": ["hadis", "hadith", "hadees", "ahadees", "short hadiths", "bukhari", "muslim"],
+      "hadith": ["hadis", "hadith", "hadees", "ahadees"],
+      "hadees": ["hadis", "hadith", "hadees", "ahadees"],
+      "ahadees": ["hadis", "hadith", "hadees", "ahadees"],
+
+      // Fatawa / Islamic Jurisprudence
+      "fatwa": ["fatwa", "fatawa", "razvia", "razviya", "ahkam", "masail", "shariat", "bahar"],
+      "fatawa": ["fatwa", "fatawa", "razvia", "razviya", "ahkam", "masail", "shariat", "bahar"],
+      "razvia": ["fatwa", "fatawa", "razvia", "ahmad raza"],
+      "shariat": ["shariat", "shariah", "bahar", "fatwa", "fatawa", "masail"],
+      "masail": ["masail", "masla", "fatwa", "fatawa", "shariat"],
+
+      // Quran
+      "quran": ["quran", "quranic", "koran", "ayat", "surah", "tajweed", "analyzer", "mutashabihat", "roots", "morphology"],
+      "koran": ["quran", "quranic", "koran", "ayat"],
+      "tajweed": ["tajweed", "quran", "audio", "recitation", "waqf"],
+      "surah": ["surah", "ayat", "quran"],
+      "ayat": ["ayat", "verse", "quran", "surah"],
+
+      // Naat
+      "naat": ["naat", "kalam", "kalaam", "diwan", "shairi", "hassan", "bareilvi", "poetry"],
+      "kalam": ["naat", "kalam", "kalaam", "poetry"],
+      "kalaam": ["naat", "kalam", "kalaam"],
+
+      // POS / Thela
+      "thela": ["thela", "stock", "inventory", "pos", "billing", "store", "layman"],
+      "stock": ["thela", "stock", "inventory", "pos", "items"],
+      "inventory": ["thela", "stock", "inventory", "pos"],
+      "pos": ["thela", "stock", "inventory", "pos", "billing"],
+
+      // Pincode / Logistics
+      "pincode": ["pincode", "pin", "postal", "post", "dak", "oda", "courier", "delivery", "bluedart"],
+      "postal": ["pincode", "pin", "postal", "post", "dak", "oda"],
+      "post": ["pincode", "pin", "postal", "post", "dak"],
+      "courier": ["pincode", "courier", "bluedart", "delivery", "oda"],
+
+      // Clipboard / Cloud
+      "clipboard": ["clipboard", "clip", "copy", "paste", "cloud", "sync", "tts", "speech"],
+      "clip": ["clipboard", "clip", "copy", "paste"],
+      "copy": ["clipboard", "copy", "paste"],
+      "tts": ["clipboard", "tts", "speech", "read aloud"],
+
+      // Weight Gain / Health
+      "weight": ["weight", "vazan", "gain", "nutrition", "diet", "hypertrophy", "calisthenics", "calories"],
+      "vazan": ["weight", "vazan", "gain", "nutrition"],
+      "diet": ["weight", "diet", "nutrition", "food", "calories"],
+      "nutrition": ["weight", "nutrition", "diet", "hypertrophy"],
+
+      // Mobile / Phone Analysis
+      "mobile": ["mobile", "phone", "pwm", "display", "telemetry", "antutu", "geekbench", "battery"],
+      "phone": ["mobile", "phone", "pwm", "display", "antutu", "specs"],
+      "pwm": ["pwm", "display", "flicker", "eyesight", "mobile", "phone"],
+
+      // Android Tools / Backup
+      "android": ["android", "apk", "compose", "shizuku", "samsung", "backup", "organizer", "fast64k"],
+      "backup": ["backup", "samsung", "smart switch", "mtp", "android", "restore"],
+      "samsung": ["backup", "samsung", "smart switch", "android"],
+      "organizer": ["organizer", "cleanup", "duplicates", "dedup", "fast64k", "android"],
+      "clean": ["organizer", "clean", "cleanup", "duplicates", "dedup"],
+
+      // Windows Workstation Tools
+      "windows": ["windows", "system", "pc", "software", "freeware", "updater", "winget", "sysmain", "acceleration"],
+      "speed": ["acceleration", "system", "speed", "latency", "sysmain", "everything"],
+      "acceleration": ["acceleration", "speed", "system", "sysmain", "usn"],
+      "updater": ["updater", "update", "winget", "software", "suite"],
+      "update": ["updater", "update", "winget", "software"],
+      "software": ["software", "freeware", "suite", "apps", "tools", "winget"]
+    };
+
+    function getExpandedTokens(rawQuery) {
+      if (!rawQuery) return [];
+      const rawTokens = rawQuery.toLowerCase().trim().split(/\s+/).filter(Boolean);
+      const tokenGroups = [];
+
+      for (const token of rawTokens) {
+        const variants = new Set([token]);
+        if (TRANSLITERATION_MAP[token]) {
+          TRANSLITERATION_MAP[token].forEach(v => variants.add(v));
+        }
+        for (const [key, list] of Object.entries(TRANSLITERATION_MAP)) {
+          if (token.startsWith(key) || key.startsWith(token)) {
+            list.forEach(v => variants.add(v));
+          }
+        }
+        tokenGroups.push({
+          primary: token,
+          variants: Array.from(variants)
+        });
+      }
+      return tokenGroups;
+    }
+
+    function isFuzzyMatch(needle, haystack) {
+      if (haystack.includes(needle)) return true;
+      if (needle.length < 4) return false;
+      for (let i = 0; i <= haystack.length - needle.length; i++) {
+        let diff = 0;
+        for (let j = 0; j < needle.length; j++) {
+          if (needle[j] !== haystack[i + j]) diff++;
+          if (diff > 1) break;
+        }
+        if (diff <= 1) return true;
+      }
+      return false;
+    }
+
+    function matchAppWithAI(app, tokenGroups) {
+      if (!tokenGroups || tokenGroups.length === 0) {
+        return { matches: true, score: 0, matchedTokens: [] };
+      }
+
+      const title = (app.title || "").toLowerCase();
+      const desc = (app.description || "").toLowerCase();
+      const badge = (app.badge || app.category || "").toLowerCase();
+      const tags = (app.tags || []).map(t => t.toLowerCase());
+
+      let totalScore = 0;
+      const matchedTokens = [];
+
+      for (const group of tokenGroups) {
+        let bestTokenScore = 0;
+        let matchedWord = "";
+
+        for (const variant of group.variants) {
+          if (title.includes(variant)) {
+            const score = 15 + (variant === group.primary ? 5 : 0);
+            if (score > bestTokenScore) {
+              bestTokenScore = score;
+              matchedWord = variant;
+            }
+          }
+          if (tags.some(t => t.includes(variant))) {
+            const score = 10 + (variant === group.primary ? 3 : 0);
+            if (score > bestTokenScore) {
+              bestTokenScore = score;
+              matchedWord = variant;
+            }
+          }
+          if (desc.includes(variant)) {
+            const score = 6 + (variant === group.primary ? 2 : 0);
+            if (score > bestTokenScore) {
+              bestTokenScore = score;
+              matchedWord = variant;
+            }
+          }
+          if (badge.includes(variant)) {
+            const score = 4;
+            if (score > bestTokenScore) {
+              bestTokenScore = score;
+              matchedWord = variant;
+            }
+          }
+          if (!matchedWord && (isFuzzyMatch(variant, title) || isFuzzyMatch(variant, desc))) {
+            const score = 3;
+            if (score > bestTokenScore) {
+              bestTokenScore = score;
+              matchedWord = variant;
+            }
+          }
+        }
+
+        if (bestTokenScore > 0) {
+          totalScore += bestTokenScore;
+          matchedTokens.push(matchedWord || group.primary);
+        } else {
+          return { matches: false, score: 0, matchedTokens: [] };
+        }
+      }
+
+      return {
+        matches: true,
+        score: totalScore,
+        matchedTokens: matchedTokens
+      };
+    }
+
+    function highlightMatch(text, matchedTokens) {
+      if (!text) return "";
+      const safe = escapeHtml(text);
+      if (!matchedTokens || matchedTokens.length === 0) return safe;
+
+      const valid = [...new Set(matchedTokens.filter(t => t && t.length >= 2))]
+        .sort((a, b) => b.length - a.length);
+
+      if (valid.length === 0) return safe;
+
+      const pattern = valid.map(t => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|");
+      if (!pattern) return safe;
+
+      try {
+        const regex = new RegExp(`(${pattern})`, "gi");
+        return safe.replace(regex, '<mark class="search-highlight">$1</mark>');
+      } catch (e) {
+        return safe;
+      }
+    }
+
+    function clearSearchFilter() {
+      AudioEngine.reset();
+      const input = document.getElementById("dashboard-search-input");
+      const clearBtn = document.getElementById("dashboard-search-clear");
+      if (input) {
+        input.value = "";
+        input.focus();
+      }
+      State.searchQuery = "";
+      if (clearBtn) clearBtn.classList.remove("visible");
+      renderDashboardClusters();
+    }
+
+    function focusSearchInput() {
+      AudioEngine.tap();
+      const input = document.getElementById("dashboard-search-input");
+      const card = document.getElementById("search-card");
+      if (!input) return;
+      if (card) {
+        card.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+      input.focus();
+      input.select();
+    }
+
+    /* Render Thematic Clusters in Dashboard Grid (With Pure In-Place AI Filter) */
     function renderDashboardClusters() {
       const container = document.getElementById("clusters-container");
+      const favoritesSection = document.getElementById("favorites-section");
+      const matchBadge = document.getElementById("search-match-badge");
       if (!container) return;
+
+      const hasQuery = State.searchQuery && State.searchQuery.trim().length > 0;
+      const tokenGroups = hasQuery ? getExpandedTokens(State.searchQuery) : [];
+
+      // Hide favorites during active search to keep focus on matching tools
+      if (favoritesSection) {
+        favoritesSection.style.display = hasQuery ? "none" : "block";
+      }
 
       let activeClusters = CLUSTERS;
       if (State.selectedCluster !== "all") {
         activeClusters = CLUSTERS.filter(c => c.id === State.selectedCluster);
       }
 
-      container.innerHTML = activeClusters.map(cluster => {
-        let apps = State.apps.filter(a => getAppCluster(a) === cluster.id);
-        if (State.searchQuery.trim()) {
-          const q = State.searchQuery.toLowerCase();
-          apps = apps.filter(a => 
-            a.title.toLowerCase().includes(q) || 
-            (a.description && a.description.toLowerCase().includes(q)) ||
-            (a.tags && a.tags.some(t => t.toLowerCase().includes(q)))
-          );
+      let totalMatches = 0;
+      const clusterHtmls = activeClusters.map(cluster => {
+        let clusterApps = State.apps.filter(a => getAppCluster(a) === cluster.id);
+        let scoredList = [];
+
+        if (hasQuery) {
+          for (const app of clusterApps) {
+            const res = matchAppWithAI(app, tokenGroups);
+            if (res.matches) {
+              scoredList.push({ app, score: res.score, tokens: res.matchedTokens });
+            }
+          }
+          scoredList.sort((a, b) => b.score - a.score);
+        } else {
+          scoredList = clusterApps.map(app => ({ app, score: 0, tokens: [] }));
         }
 
-        if (apps.length === 0) return "";
+        if (scoredList.length === 0) return ""; // Auto-hide empty clusters!
+
+        totalMatches += scoredList.length;
+
+        const cardsMarkup = scoredList.map(item => renderAppCard(item.app, item.tokens)).join("");
 
         return `
           <div class="cluster-block" id="cluster-block-${cluster.id}">
@@ -1544,14 +1881,49 @@
                 <span class="cluster-tag ${cluster.tagClass}">${cluster.tag}</span>
                 <span class="cluster-title">${cluster.icon} ${cluster.name}</span>
               </div>
-              <span class="section-count">${apps.length} Tools</span>
+              <span class="section-count">${scoredList.length} ${scoredList.length === 1 ? 'Tool' : 'Tools'}</span>
             </div>
             <div class="cluster-grid">
-              ${apps.map(app => renderAppCard(app)).join("")}
+              ${cardsMarkup}
             </div>
           </div>
         `;
-      }).join("");
+      }).filter(Boolean);
+
+      // Update in-page search indicator badge
+      if (matchBadge) {
+        if (hasQuery) {
+          matchBadge.textContent = `${totalMatches} ${totalMatches === 1 ? 'match' : 'matches'}`;
+          matchBadge.style.display = "inline-flex";
+        } else {
+          matchBadge.textContent = "";
+          matchBadge.style.display = "none";
+        }
+      }
+
+      // Check if total matches is 0 when searching
+      if (hasQuery && totalMatches === 0) {
+        container.innerHTML = `
+          <div class="search-empty-state" id="search-empty-state">
+            <div class="search-empty-icon">🔍</div>
+            <div class="search-empty-title">No tools match "${escapeHtml(State.searchQuery)}"</div>
+            <div class="search-empty-desc">
+              We couldn't find any tools matching your query. Check your spelling or search by general topic (e.g. <em>namaz, hadis, fatwa, stock, phone, pincode</em>).
+            </div>
+            <button class="btn-clear-search" id="btn-empty-clear-search">
+              <span>✕</span> Clear Search Filter
+            </button>
+          </div>
+        `;
+
+        const btnEmptyClear = document.getElementById("btn-empty-clear-search");
+        if (btnEmptyClear) {
+          btnEmptyClear.addEventListener("click", clearSearchFilter);
+        }
+        return;
+      }
+
+      container.innerHTML = clusterHtmls.join("");
 
       // Bind Whole-Card Clicks
       container.querySelectorAll(".app-card").forEach(card => {
@@ -1579,16 +1951,19 @@
       });
     }
 
-    function renderAppCard(app) {
+    function renderAppCard(app, tokens = []) {
       const isStarred = State.favorites.includes(app.id);
       const url = getLaunchUrl(app);
+      const displayTitle = highlightMatch(app.title, tokens);
+      const displayDesc = highlightMatch(app.description || '', tokens);
+
       return `
         <div class="app-card" data-id="${escapeHtml(app.id)}" title="Launch ${escapeHtml(app.title)}">
           <div class="app-card-top">
             <div class="app-card-header-left">
               <div class="app-icon-squircle">${app.icon || '📦'}</div>
               <div class="app-meta">
-                <div class="app-title">${escapeHtml(app.title)}</div>
+                <div class="app-title">${displayTitle}</div>
                 <span class="app-badge-pill">${escapeHtml(app.badge || app.category || '')}</span>
               </div>
             </div>
@@ -1600,7 +1975,7 @@
               </button>
             </div>
           </div>
-          <div class="app-card-desc">${escapeHtml(app.description || '')}</div>
+          <div class="app-card-desc">${displayDesc}</div>
           <div class="app-card-footer">
             <div class="app-tag-list">
               ${(app.tags || []).slice(0, 2).map(t => `<span class="card-tag">${escapeHtml(t)}</span>`).join("")}
@@ -1880,67 +2255,55 @@
           }
         }],
 
-        ["Initialize & Bind Spotlight AI Search", () => {
-          // Initialize AI Search Kit with catalog data
+        ["Initialize In-Place AI Search Engine", () => {
+          // Initialize AI Search catalog without popup modals or shortcut hijacking
           if (window.AISearch && typeof window.AISearch.init === 'function') {
             try {
               window.AISearch.init({
                 autoCrawl: false,
-                enableHistory: true,
+                enableHistory: false,
                 enableSound: !State.audioMuted,
-                enableVoice: true,
+                enableVoice: false,
                 enableFloatingPill: false,
+                enableShortcuts: false, // In-place search handles Ctrl+K directly
                 catalog: State.apps,
                 onSelect: (item) => {
-                  if (item && item.id) {
-                    launchApp(item.id);
-                  } else if (item && item.url) {
-                    window.location.href = item.url;
-                  }
+                  if (item && item.id) launchApp(item.id);
                 }
               });
+              // Guarantee no modal popup can ever open
+              window.AISearch.open = (q) => focusSearchInput();
             } catch (err) {
               console.warn('[AISearch Init Warning]', err);
             }
           }
 
-          function triggerSpotlight(query = '') {
-            AudioEngine.tap();
-            if (window.AISearch && typeof window.AISearch.open === 'function') {
-              window.AISearch.open(query);
-            }
-          }
-
-          // Topbar Search Button
-          const spotlightBtn = document.getElementById("btn-open-spotlight");
-          if (spotlightBtn) {
-            spotlightBtn.addEventListener("click", () => triggerSpotlight());
-          }
-
-          // Search Card Spotlight Button
-          const cardSpotlightBtn = document.getElementById("btn-card-spotlight");
-          if (cardSpotlightBtn) {
-            cardSpotlightBtn.addEventListener("click", () => {
-              const input = document.getElementById("dashboard-search-input");
-              triggerSpotlight(input ? input.value : '');
+          // Topbar Search Button -> Focus In-Page Search Bar
+          const topbarSearchBtn = document.getElementById("btn-open-spotlight");
+          if (topbarSearchBtn) {
+            topbarSearchBtn.addEventListener("click", (e) => {
+              e.preventDefault();
+              focusSearchInput();
             });
           }
 
-          // Search Card Icon Button
+          // Search Card Indicator & Icon -> Focus In-Page Search Bar
+          const searchIndicator = document.getElementById("search-card-indicator");
+          if (searchIndicator) {
+            searchIndicator.addEventListener("click", () => focusSearchInput());
+          }
+
           const cardIconBtn = document.getElementById("search-card-icon-btn");
           if (cardIconBtn) {
-            cardIconBtn.addEventListener("click", () => {
-              const input = document.getElementById("dashboard-search-input");
-              triggerSpotlight(input ? input.value : '');
-            });
+            cardIconBtn.addEventListener("click", () => focusSearchInput());
           }
 
-          // Search Card Container click focus
+          // Search Card click focuses input
           const searchCard = document.getElementById("search-card");
           const searchInput = document.getElementById("dashboard-search-input");
           if (searchCard && searchInput) {
             searchCard.addEventListener("click", (e) => {
-              if (!e.target.closest("button")) {
+              if (!e.target.closest("button") && !e.target.closest(".search-card-pill")) {
                 searchInput.focus();
               }
             });
@@ -1958,25 +2321,21 @@
             renderDashboardClusters();
           });
 
-          // Pressing Enter in search bar triggers full Spotlight with that query
+          // Escape clears search, Enter blurs input
           searchInput.addEventListener("keydown", (e) => {
-            if (e.key === "Enter") {
+            if (e.key === "Escape") {
               e.preventDefault();
-              if (window.AISearch && typeof window.AISearch.open === 'function') {
-                window.AISearch.open(searchInput.value);
-              }
+              clearSearchFilter();
+            } else if (e.key === "Enter") {
+              e.preventDefault();
+              searchInput.blur();
             }
           });
 
           if (clearBtn) {
             clearBtn.addEventListener("click", (e) => {
               e.stopPropagation();
-              AudioEngine.reset();
-              searchInput.value = "";
-              State.searchQuery = "";
-              clearBtn.classList.remove("visible");
-              renderDashboardClusters();
-              searchInput.focus();
+              clearSearchFilter();
             });
           }
         }],
@@ -2039,6 +2398,18 @@
               if (State.activeApp) {
                 returnToHub();
               }
+            }
+
+            // Ctrl+K, Cmd+K, or / to immediately focus the in-page search bar
+            if ((e.ctrlKey || e.metaKey) && (e.key === "k" || e.key === "K")) {
+              e.preventDefault();
+              focusSearchInput();
+              return;
+            }
+            if (e.key === "/" && !["INPUT", "TEXTAREA"].includes(e.target.tagName)) {
+              e.preventDefault();
+              focusSearchInput();
+              return;
             }
 
             // Quick Cluster Jumps (0-5, ~) when not inside an input
