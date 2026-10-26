@@ -248,7 +248,7 @@
     const formattedAr = window.WaqfEngine ? window.WaqfEngine.formatArabicWithStopSigns(hAr, it.ayah_num) : hAr;
 
     return `
-      <article class="manner-card" id="manner-card-${serialNum}">
+      <article class="manner-card" id="manner-card-${serialNum}" data-idx="${idx}" data-serial="${serialNum}">
         <div class="streamlined-card-header">
           <div class="streamlined-header-left">
             <span class="manner-serial-pill">#${serialNum}</span>
@@ -313,7 +313,7 @@
     const hTitle = highlightText(it.title_ur, searchQuery);
 
     return `
-      <div class="compact-manner-row" id="compact-row-${serialNum}">
+      <div class="compact-manner-row" id="compact-row-${serialNum}" data-idx="${idx}" data-serial="${serialNum}">
         <div class="compact-left-meta">
           <button class="manner-star-btn ${bookmarked ? 'bookmarked' : ''}" data-serial="${serialNum}" style="font-size: 1.05rem; padding: 0 4px;">${starChar}</button>
           <span class="compact-serial">#${serialNum}</span>
@@ -505,38 +505,46 @@
     setupObserver();
     setupDelegation(container);
 
-    // Initialize or Update Universal Edge QuickScrubber
-    if (window.QuickScrubber) {
-      window.QuickScrubber.init({
-        containerId: container.id,
-        itemSelector: ".manner-card, .compact-manner-row",
-        totalItems: currentFilteredItems.length,
-        unitName: "manners",
-        modalTitle: "Jump to Quranic Manner",
-        getItemLabel: (idx) => {
-          const it = currentFilteredItems[idx - 1];
-          return {
-            title: `Manner #${it ? it.global_serial : idx}`,
-            subtitle: it ? it.title_ur : ""
-          };
-        },
-        onJump: (targetIdx) => {
-          ensureRenderedUpToIndex(targetIdx - 1);
-          const it = currentFilteredItems[targetIdx - 1];
-          if (!it) return;
-          const card = document.getElementById(`manner-card-${it.global_serial}`) || document.getElementById(`compact-row-${it.global_serial}`);
-          if (card) {
-            card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            card.style.borderColor = "#fbbf24";
-            card.style.boxShadow = "0 0 20px rgba(251, 191, 36, 0.4)";
-            setTimeout(() => {
-              card.style.borderColor = "";
-              card.style.boxShadow = "";
-            }, 2000);
-          }
+    syncQuickScrubber();
+  }
+
+  function syncQuickScrubber() {
+    if (!window.QuickScrubber) return;
+    const container = getContainer();
+    if (!container) return;
+    const items = currentFilteredItems || [];
+    window.QuickScrubber.init({
+      context: "manners",
+      containerId: container.id,
+      itemSelector: ".manner-card, .compact-manner-row",
+      totalItems: items.length,
+      unitName: "manners",
+      modalTitle: "Jump to Quranic Manner",
+      getItemLabel: (idx) => {
+        const it = items[idx - 1];
+        const num = it ? it.global_serial : idx;
+        const titleUr = it ? it.title_ur : `Manner #${num}`;
+        return {
+          title: `Manner #${num}: ${titleUr}`,
+          subtitle: it ? `Surah ${it.surah_name_roman} [${it.surah_id}:${it.ayah_num}] • ${it.module_title || ''}` : ""
+        };
+      },
+      onJump: (targetIdx) => {
+        ensureRenderedUpToIndex(targetIdx - 1);
+        const it = items[targetIdx - 1];
+        if (!it) return;
+        const card = document.getElementById(`manner-card-${it.global_serial}`) || document.getElementById(`compact-row-${it.global_serial}`);
+        if (card) {
+          card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          card.style.borderColor = "#fbbf24";
+          card.style.boxShadow = "0 0 20px rgba(251, 191, 36, 0.4)";
+          setTimeout(() => {
+            card.style.borderColor = "";
+            card.style.boxShadow = "";
+          }, 2000);
         }
-      });
-    }
+      }
+    });
   }
 
   function bindToolbarEvents(scope) {
@@ -701,11 +709,13 @@
       } else {
         renderList();
       }
+      syncQuickScrubber();
       if (window.QuickScrubber) {
         window.QuickScrubber.show();
       }
     },
 
+    syncQuickScrubber: syncQuickScrubber,
     toggleBookmark: toggleBookmark,
     jumpToAnalyzer: jumpToAnalyzer,
     formatWhatsApp: formatWhatsApp

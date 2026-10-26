@@ -2037,9 +2037,10 @@
             modalTitle: "Jump to Divine Directive",
             getItemLabel: (idx) => {
               const it = currentFilteredItems[idx - 1];
+              const num = it ? it.serial : idx;
               return {
-                title: `Directive #${it ? it.serial : idx}`,
-                subtitle: it ? it.title_en : ""
+                title: `Command #${num}: ${it ? (it.title_en || it.title_ur || '') : ''}`,
+                subtitle: it ? `${it.title_ur || ''} • Surah ${it.surah_name_roman} [${it.surah_id}:${it.ayah_num}]` : ""
               };
             },
             onJump: (targetIdx) => {

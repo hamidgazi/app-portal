@@ -255,16 +255,31 @@
 
   function syncThumbWithScroll() {
     if (isDragging || !activeConfig || !activeConfig.itemSelector) return;
-    const items = document.querySelectorAll(activeConfig.itemSelector);
+    const container = activeConfig.containerId ? document.getElementById(activeConfig.containerId) : document;
+    if (!container) return;
+
+    // Check if parent tab panel is inactive
+    const panel = container.closest ? container.closest('.tab-panel') : null;
+    if (panel && !panel.classList.contains('active')) return;
+
+    const items = container.querySelectorAll(activeConfig.itemSelector);
     if (!items || items.length === 0) return;
 
     // Find the topmost visible item in viewport
-    const viewTop = window.scrollY + 140;
+    const currentScrollY = typeof window !== 'undefined' ? (window.scrollY || window.pageYOffset || 0) : 0;
+    const viewTop = currentScrollY + 140;
     let foundIndex = 1;
     for (let i = 0; i < items.length; i++) {
-      const top = items[i].getBoundingClientRect().top + window.scrollY;
+      const rect = items[i].getBoundingClientRect ? items[i].getBoundingClientRect() : { top: 0 };
+      const top = rect.top + currentScrollY;
       if (top <= viewTop) {
-        foundIndex = i + 1;
+        if (items[i].dataset && items[i].dataset.serial !== undefined) {
+          foundIndex = parseInt(items[i].dataset.serial, 10);
+        } else if (items[i].dataset && items[i].dataset.idx !== undefined) {
+          foundIndex = parseInt(items[i].dataset.idx, 10) + 1;
+        } else {
+          foundIndex = i + 1;
+        }
       } else {
         break;
       }
@@ -359,6 +374,7 @@
     init: function (config) {
       activeConfig = config || {};
       activeConfig.totalItems = activeConfig.totalItems || 1;
+      activeConfig.context = activeConfig.context || 'default';
       buildDOM();
 
       if (activeConfig.totalItems <= 1) {
@@ -373,6 +389,16 @@
       wakeScrubber();
       syncThumbWithScroll();
     },
+
+    getContext: function () {
+      return activeConfig ? activeConfig.context : null;
+    },
+
+    getConfig: function () {
+      return activeConfig;
+    },
+
+    syncThumb: syncThumbWithScroll,
 
     updateTotal: function (total) {
       if (!activeConfig) return;

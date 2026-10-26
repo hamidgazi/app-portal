@@ -371,7 +371,7 @@
 
     if (activeView === "cards") {
       return `
-        <article class="command-card ${isCommand ? 'command-type' : 'prohibition-type'}" id="card-${it.serial}">
+        <article class="command-card ${isCommand ? 'command-type' : 'prohibition-type'}" id="card-${it.serial}" data-idx="${idx}" data-serial="${it.serial}">
           <div class="streamlined-card-header">
             <div class="streamlined-header-left">
               <span class="command-serial-pill">#${it.serial}</span>
@@ -435,7 +435,7 @@
       `;
     } else if (activeView === "collapsible") {
       return `
-        <article class="command-card collapsible-mode" id="card-${it.serial}">
+        <article class="command-card collapsible-mode" id="card-${it.serial}" data-idx="${idx}" data-serial="${it.serial}">
           <div class="command-card-header">
             <div class="command-headline">
               <span class="command-serial-pill">#${it.serial}</span>
@@ -477,7 +477,7 @@
       `;
     } else {
       return `
-        <div class="checklist-row" id="check-${it.serial}">
+        <div class="checklist-row" id="check-${it.serial}" data-idx="${idx}" data-serial="${it.serial}">
           <div class="checklist-left">
             <span class="checklist-serial">#${it.serial}</span>
             <span class="checklist-polarity-icon">${isCommand ? '✅' : '🚫'}</span>
@@ -684,34 +684,42 @@
     setupObserver();
     setupDelegation(container);
 
-    // Initialize or Update Universal Edge QuickScrubber
-    if (window.QuickScrubber) {
-      window.QuickScrubber.init({
-        containerId: container.id,
-        itemSelector: ".command-card, .collapsible-mode, .checklist-row",
-        totalItems: currentFilteredItems.length,
-        unitName: "directives",
-        modalTitle: "Jump to Divine Directive",
-        getItemLabel: (idx) => {
-          const it = currentFilteredItems[idx - 1];
-          return {
-            title: `Directive #${it ? it.serial : idx}`,
-            subtitle: it ? it.title_en : ""
-          };
-        },
-        onJump: (targetIdx) => {
-          ensureRenderedUpToIndex(targetIdx - 1);
-          const it = currentFilteredItems[targetIdx - 1];
-          if (!it) return;
-          const card = document.getElementById(`card-${it.serial}`) || document.getElementById(`check-${it.serial}`);
-          if (card) {
-            card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            card.classList.add('playing-now');
-            setTimeout(() => card.classList.remove('playing-now'), 2000);
-          }
+    syncQuickScrubber();
+  }
+
+  function syncQuickScrubber() {
+    if (!window.QuickScrubber) return;
+    const container = getContainer();
+    if (!container) return;
+    const items = currentFilteredItems || [];
+    window.QuickScrubber.init({
+      context: "commands",
+      containerId: container.id,
+      itemSelector: ".command-card, .collapsible-mode, .checklist-row",
+      totalItems: items.length,
+      unitName: "commands",
+      modalTitle: "Jump to Divine Command",
+      getItemLabel: (idx) => {
+        const it = items[idx - 1];
+        const num = it ? it.serial : idx;
+        const titleEn = it ? (it.title_en || it.title_ur || '') : `Command #${num}`;
+        return {
+          title: `Command #${num}: ${titleEn}`,
+          subtitle: it ? `${it.title_ur || ''} • Surah ${it.surah_name_roman} [${it.surah_id}:${it.ayah_num}]` : ""
+        };
+      },
+      onJump: (targetIdx) => {
+        ensureRenderedUpToIndex(targetIdx - 1);
+        const it = items[targetIdx - 1];
+        if (!it) return;
+        const card = document.getElementById(`card-${it.serial}`) || document.getElementById(`check-${it.serial}`);
+        if (card) {
+          card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          card.classList.add('playing-now');
+          setTimeout(() => card.classList.remove('playing-now'), 2000);
         }
-      });
-    }
+      }
+    });
   }
 
   function bindToolbarEvents(scope) {
@@ -921,11 +929,13 @@
       } else {
         renderList();
       }
+      syncQuickScrubber();
       if (window.QuickScrubber) {
         window.QuickScrubber.show();
       }
     },
 
+    syncQuickScrubber: syncQuickScrubber,
     playAyah: playAyahByIndex,
     toggleBookmark: toggleBookmark,
     jumpToAnalyzer: jumpToAnalyzer,

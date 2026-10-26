@@ -58,10 +58,22 @@ function switchAppTab(tabName) {
 
   if (tabName === "manners" && window.MannersEngine) {
     window.MannersEngine.onTabActivated();
+    if (typeof window.MannersEngine.syncQuickScrubber === 'function') {
+      window.MannersEngine.syncQuickScrubber();
+    }
   }
 
   if (tabName === "commands" && window.CommandsEngine) {
     window.CommandsEngine.onTabActivated();
+    if (typeof window.CommandsEngine.syncQuickScrubber === 'function') {
+      window.CommandsEngine.syncQuickScrubber();
+    }
+  }
+
+  if (tabName === "ayahs" && window.CorpusEngine) {
+    if (typeof window.CorpusEngine.syncQuickScrubber === 'function') {
+      window.CorpusEngine.syncQuickScrubber();
+    }
   }
 
   // Synchronize High-Velocity QuickScrubber Visibility
@@ -1156,7 +1168,9 @@ function bootApp() {
     { name: "MorphologyEngine", init: () => window.MorphologyEngine && window.MorphologyEngine.init() },
     { name: "AudioTartilCompanion", init: () => window.AudioTartilCompanion && window.AudioTartilCompanion.init() },
     { name: "TajweedEngine", init: () => window.TajweedEngine && window.TajweedEngine.init() },
-    { name: "NotebookEngine", init: () => window.NotebookEngine && window.NotebookEngine.init() }
+    { name: "NotebookEngine", init: () => window.NotebookEngine && window.NotebookEngine.init() },
+    { name: "CommandsEngine", init: () => window.CommandsEngine && window.CommandsEngine.init() },
+    { name: "MannersEngine", init: () => window.MannersEngine && window.MannersEngine.init() }
   ];
 
   modules.forEach(mod => {
@@ -1169,6 +1183,14 @@ function bootApp() {
   });
 
   console.log("[BOOT] Application successfully mounted.");
+
+  // Ensure correct tab & QuickScrubber context if hash was specified
+  try {
+    const hash = window.location.hash.replace('#', '');
+    if (hash && document.getElementById(`tab-${hash}`)) {
+      switchAppTab(hash);
+    }
+  } catch(e) {}
 
   // Handle URL parameters for deep-linking (e.g. from manners.html?surah=2&ayah=83#ayahs)
   try {

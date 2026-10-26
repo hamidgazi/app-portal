@@ -5203,7 +5203,7 @@ mark.search-highlight {
    QURAN DEEP ANALYZER VERSION 2.0 DESIGN SUITE
    ==================================================================== */
 
-/* 1. Dynamic Phonological Tajweed Rules */
+/* 1. Dynamic Phonological Tajweed Rules (Dar Al-Ma'rifah & Quran.com Canonical Standard) */
 #tab-ayahs:not(.tajweed-active) .ayah-arabic-text span[class^="tj-"] {
   color: inherit !important;
   font-weight: inherit !important;
@@ -5212,30 +5212,79 @@ mark.search-highlight {
 #tab-ayahs:not(.tajweed-active) .tajweed-legend-bar {
   display: none !important;
 }
-.tj-ghunnah { color: #10b981 !important; font-weight: 700; text-shadow: 0 0 10px rgba(16, 185, 129, 0.4); }
-.tj-qalqalah { color: #38bdf8 !important; font-weight: 700; text-shadow: 0 0 10px rgba(56, 189, 248, 0.4); }
-.tj-madd { color: #f43f5e !important; font-weight: 700; text-shadow: 0 0 10px rgba(244, 63, 94, 0.4); }
-.tj-ikhfa { color: #2dd4bf !important; font-weight: 700; }
-.tj-idgham { color: #c084fc !important; font-weight: 700; }
-.tj-iqlab { color: #f59e0b !important; font-weight: 700; }
 
+/* Individual Phonetic Rules */
+.tj-ghunnah { color: #10b981 !important; font-weight: 700; text-shadow: 0 0 10px rgba(16, 185, 129, 0.45); }
+.tj-qalqalah { color: #38bdf8 !important; font-weight: 700; text-shadow: 0 0 10px rgba(56, 189, 248, 0.45); }
+
+/* Madd Hierarchy (Lazim 6 counts, Muttasil 4-5 counts, Munfasil 4-5 counts) */
+.tj-madd { color: #f43f5e !important; font-weight: 700; text-shadow: 0 0 10px rgba(244, 63, 94, 0.45); }
+.tj-madd-lazim, .tj-madd[data-rule="madd_lazim"] { color: #be123c !important; font-weight: 800; text-shadow: 0 0 12px rgba(190, 18, 60, 0.55); }
+.tj-madd-muttasil, .tj-madd[data-rule="madd_muttasil"] { color: #f43f5e !important; font-weight: 700; text-shadow: 0 0 10px rgba(244, 63, 94, 0.45); }
+.tj-madd-munfasil, .tj-madd[data-rule="madd_munfasil"] { color: #fb7185 !important; font-weight: 700; text-shadow: 0 0 10px rgba(251, 113, 133, 0.45); }
+
+/* Ikhfa (2 Counts Concealment) */
+.tj-ikhfa { color: #14b8a6 !important; font-weight: 700; text-shadow: 0 0 8px rgba(20, 184, 166, 0.4); }
+
+/* Idgham Variants (Bi-Ghunnah 2 counts vs Bila-Ghunnah Complete) */
+.tj-idgham { color: #c084fc !important; font-weight: 700; }
+.tj-idgham-ghunnah, .tj-idgham[data-rule="idgham_ghunnah"] { color: #22c55e !important; font-weight: 700; text-shadow: 0 0 10px rgba(34, 197, 94, 0.4); }
+.tj-idgham-no-ghunnah, .tj-idgham[data-rule="idgham_no_ghunnah"] { color: #f97316 !important; font-weight: 700; text-shadow: 0 0 10px rgba(249, 115, 22, 0.4); }
+
+/* Iqlab (Conversion to Meem 2 counts) */
+.tj-iqlab { color: #f59e0b !important; font-weight: 700; text-shadow: 0 0 10px rgba(245, 158, 11, 0.4); }
+
+/* Tafkheem & Silent Letters */
+.tj-tafkheem { color: #3b82f6 !important; font-weight: 700; text-shadow: 0 0 8px rgba(59, 130, 246, 0.4); }
+.tj-silent, span[data-rule="silent"] { color: #94a3b8 !important; opacity: 0.65; font-weight: 400; text-shadow: none; }
+
+/* Interactive Focus & Dim Filtering States */
+#tab-ayahs.tajweed-active.tj-filter-active .ayah-arabic-text span[data-rule].tj-dimmed {
+  opacity: 0.22 !important;
+  text-shadow: none !important;
+  filter: grayscale(85%);
+  transition: opacity 0.25s ease, filter 0.25s ease;
+}
+#tab-ayahs.tajweed-active.tj-filter-active .ayah-arabic-text span[data-rule].tj-focused {
+  opacity: 1 !important;
+  display: inline-block;
+  transform: scale(1.08);
+  text-shadow: 0 0 14px currentColor, 0 0 28px currentColor !important;
+  font-weight: 800 !important;
+  transition: all 0.25s ease;
+}
+
+/* Tajweed Legend Bar */
 .tajweed-legend-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 10px;
-  background: rgba(15, 23, 42, 0.7);
-  border: 1px solid var(--border-subtle);
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(251, 191, 36, 0.2);
   border-radius: var(--radius-md);
-  padding: 8px 14px;
+  padding: 10px 16px;
   margin: 10px 0 16px 0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
 .tajweed-legend-title {
-  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
   font-weight: 700;
   color: #fbbf24;
+}
+
+.tajweed-legend-hint {
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--text-dim);
+  opacity: 0.85;
 }
 
 .tajweed-legend-pills {
@@ -5246,19 +5295,33 @@ mark.search-highlight {
 }
 
 .tj-pill {
+  display: inline-flex;
+  align-items: center;
   font-size: 0.78rem;
   font-weight: 600;
-  padding: 2px 8px;
+  padding: 4px 10px;
+  min-height: 28px;
   border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   cursor: pointer;
-  transition: all 0.2s ease;
+  user-select: none;
+  touch-action: manipulation;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .tj-pill:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 0 10px currentColor;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px currentColor;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.tj-pill.active-filter {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: currentColor !important;
+  box-shadow: 0 0 16px currentColor !important;
+  font-weight: 800 !important;
+  transform: scale(1.04);
 }
 
 /* 2. Floating Cyber-Glass Audio Companion Bar */
@@ -6836,36 +6899,110 @@ mark.search-highlight {
   color: #cbd5e1;
 }
 
-.user-guide-table-wrap {
+/* Universal Resilient Table Typography & Anti-Orphan Layout Architecture */
+.user-guide-table-wrap,
+.table-scroll-wrapper,
+.waqf-guide-modal-body,
+.markdown-table-wrap {
   overflow-x: auto;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
   margin: 14px 0;
   border-radius: 8px;
   border: 1px solid rgba(212, 175, 55, 0.15);
 }
 
-.user-guide-table {
+.user-guide-table,
+.analytics-table,
+.waqf-guide-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.82rem;
   text-align: left;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  hyphens: none !important;
+  text-rendering: optimizeLegibility;
 }
 
-.user-guide-table th {
+.user-guide-table th,
+.analytics-table th,
+.waqf-guide-table th {
   background: rgba(15, 23, 42, 0.95);
   color: #fbbf24;
   padding: 10px 14px;
   border-bottom: 1px solid rgba(212, 175, 55, 0.3);
   font-weight: 700;
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  overflow-wrap: normal !important;
+  hyphens: none !important;
+  vertical-align: middle;
 }
 
-.user-guide-table td {
+.user-guide-table td,
+.analytics-table td,
+.waqf-guide-table td {
   padding: 10px 14px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   color: #e2e8f0;
+  vertical-align: middle;
+  word-break: normal;
+  hyphens: none;
 }
 
 .user-guide-table tr:nth-child(even) td {
   background: rgba(255, 255, 255, 0.02);
+}
+
+/* User Guide Font Ranking Specific Proportional Column Architecture */
+.user-guide-table th:nth-child(1),
+.user-guide-table td:nth-child(1) {
+  width: 55px;
+  min-width: 50px;
+  text-align: center;
+  white-space: nowrap !important;
+}
+
+.user-guide-table th:nth-child(2),
+.user-guide-table td:nth-child(2) {
+  width: 185px;
+  min-width: 170px;
+  white-space: nowrap !important;
+  font-weight: 600;
+}
+
+.user-guide-table th:nth-child(3),
+.user-guide-table td:nth-child(3) {
+  width: 140px;
+  min-width: 130px;
+  white-space: nowrap !important;
+}
+
+.user-guide-table th:nth-child(4),
+.user-guide-table td:nth-child(4) {
+  min-width: 190px;
+  max-width: 250px;
+  word-break: normal;
+  overflow-wrap: break-word;
+  hyphens: none;
+}
+
+.user-guide-table th:nth-child(5),
+.user-guide-table td:nth-child(5) {
+  width: 135px;
+  min-width: 125px;
+  text-align: center;
+  white-space: nowrap !important;
+}
+
+.user-guide-table th:nth-child(6),
+.user-guide-table td:nth-child(6) {
+  min-width: 290px;
+  word-break: normal;
+  overflow-wrap: break-word;
+  hyphens: none;
+  line-height: 1.55;
 }
 
 .user-guide-tip-card {

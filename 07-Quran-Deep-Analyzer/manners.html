@@ -1644,9 +1644,10 @@
             modalTitle: "Jump to Quranic Manner",
             getItemLabel: (idx) => {
               const it = currentFilteredItems[idx - 1];
+              const num = it ? it.global_serial : idx;
               return {
-                title: `Manner #${it ? it.global_serial : idx}`,
-                subtitle: it ? it.title_ur : ""
+                title: `Manner #${num}: ${it ? it.title_ur : ''}`,
+                subtitle: it ? `Surah ${it.surah_name_roman} [${it.surah_id}:${it.ayah_num}]` : ""
               };
             },
             onJump: (targetIdx) => {

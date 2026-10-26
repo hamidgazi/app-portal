@@ -589,29 +589,43 @@ class CorpusEngine {
     // Single Container Event Delegation: eliminates thousands of redundant event listeners
     this.setupAyatContainerDelegation(ayatContainer);
 
-    // Initialize or update Universal Edge QuickScrubber
-    if (window.QuickScrubber) {
-      window.QuickScrubber.init({
-        containerId: "ayahs-list-container",
-        itemSelector: ".ayah-card",
-        totalItems: s.total_ayat || (s.ayat ? s.ayat.length : 1),
-        unitName: "ayat",
-        modalTitle: `Jump to Ayah • Surah ${s.name_roman}`,
-        getItemLabel: (idx) => ({
-          title: `Ayah ${s.surah_id}:${idx}`,
-          subtitle: `Surah ${s.name_roman} (${s.name_ar})`
-        }),
-        onJump: (targetAyahNum) => {
-          this.ensureAyahRendered(targetAyahNum);
-          const targetNode = document.getElementById(`ayah-node-${targetAyahNum}`);
-          if (targetNode) {
-            targetNode.scrollIntoView({ behavior: "smooth", block: "start" });
-            targetNode.classList.add("reciting-active");
-            setTimeout(() => targetNode.classList.remove("reciting-active"), 2000);
-          }
-        }
-      });
+    // Initialize or update Universal Edge QuickScrubber ONLY if ayahs tab is active
+    const isOtherTabActive = (window.location && (window.location.hash === '#manners' || window.location.hash === '#commands')) ||
+      (typeof document !== 'undefined' && (
+        (document.getElementById('tab-manners') && document.getElementById('tab-manners').classList.contains('active')) ||
+        (document.getElementById('tab-commands') && document.getElementById('tab-commands').classList.contains('active'))
+      ));
+
+    if (!isOtherTabActive) {
+      this.syncQuickScrubber();
     }
+  }
+
+  syncQuickScrubber() {
+    if (!window.QuickScrubber) return;
+    const s = this.currentSurah;
+    if (!s) return;
+    window.QuickScrubber.init({
+      context: "ayahs",
+      containerId: "ayahs-list-container",
+      itemSelector: ".ayah-card",
+      totalItems: s.total_ayat || (s.ayat ? s.ayat.length : 1),
+      unitName: "ayat",
+      modalTitle: `Jump to Ayah • Surah ${s.name_roman}`,
+      getItemLabel: (idx) => ({
+        title: `Ayah ${s.surah_id}:${idx}`,
+        subtitle: `Surah ${s.name_roman} (${s.name_ar})`
+      }),
+      onJump: (targetAyahNum) => {
+        this.ensureAyahRendered(targetAyahNum);
+        const targetNode = document.getElementById(`ayah-node-${targetAyahNum}`);
+        if (targetNode) {
+          targetNode.scrollIntoView({ behavior: "smooth", block: "start" });
+          targetNode.classList.add("reciting-active");
+          setTimeout(() => targetNode.classList.remove("reciting-active"), 2000);
+        }
+      }
+    });
   }
 
   buildSingleAyahHtml(a, s) {
@@ -619,7 +633,7 @@ class CorpusEngine {
     const tajweedParsed = window.TajweedEngine ? window.TajweedEngine.parse(a.arabic) : a.arabic;
     const arabicFormatted = window.WaqfEngine ? window.WaqfEngine.formatArabicWithStopSigns(tajweedParsed, a.number) : tajweedParsed;
     return `
-      <div class="ayah-card ${this.ayahViewMode === 'compact' ? 'compact-card' : ''}" id="ayah-node-${a.number}" data-surah="${s.surah_id}" data-ayah="${a.number}">
+      <div class="ayah-card ${this.ayahViewMode === 'compact' ? 'compact-card' : ''}" id="ayah-node-${a.number}" data-surah="${s.surah_id}" data-ayah="${a.number}" data-serial="${a.number}">
         <div class="ayah-card-meta">
           <div class="ayah-meta-left">
             <span class="ayah-badge">Ayah ${s.surah_id}:${a.number}</span>
