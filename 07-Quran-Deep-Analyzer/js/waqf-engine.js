@@ -182,9 +182,13 @@
     wrapInlineWaqfSymbols(text) {
       if (!text) return '';
 
-      // 0. Pre-heal any broken words, presentation-form glyphs, and isolated conjunction waws
+      // If text already has waqf marks wrapped, return immediately
       let t = String(text);
+      if (t.includes('quran-waqf-inline-mark')) {
+        return t;
+      }
 
+      // 0. Pre-heal any broken words, presentation-form glyphs, and isolated conjunction waws
       // Map proprietary presentation-form waqf glyphs to standard Unicode marks
       t = t.replace(/[\uFB64\uFB65\uFB66\uFB67\uFB68\uFCA2\uFCA8\uFC6D\uFB8A\uFB8E\uFB92\uFCD0\uFC2F\uFC30\uFC61\uFC62\uFCDA]/g, '\u0615')
            .replace(/[\uFB6A\uFD30\uFCD4\uFBFC\uFC43\uFC44\uFC59]/g, '\u06D9')
@@ -203,29 +207,41 @@
       t = t.replace(/(?:^|(?<=\s))([وۄ][\u064E\u0651\u0654]?|وَّ)\s+([^\s\-\u0615\u06D6-\u06DC\u06DF-\u06EB<])/g, '$1$2');
       t = t.replace(/([\-\u0615\u06D6-\u06DC\u06DF-\u06EB])([وۄ][\u064E\u0651\u0654]?|وَّ)\s+([^\s\-\u0615\u06D6-\u06DC\u06DF-\u06EB<])/g, '$1$2$3');
 
-      // 1. Pattern covering standard Unicode Quranic pause diacritics
-      let result = t.replace(/([\u0615\u06D5\u06D6-\u06DC\u06EB\u06EA\u06EC\u06ED\u06E2\u06E9])(?:\s*[\-\u200C\u200D\u200E\u200F\u00A0]*\-)?/g, (match, char) => {
-        let key = "mutlaq";
-        if (char === '\u06D8' || char === '\u06E2' || char === '\u06ED') key = "lazim";
-        else if (char === '\u06DA') key = "jaiz";
-        else if (char === '\u06D6') key = "mujawwaz";
-        else if (char === '\u06D7') key = "murakhkhas";
-        else if (char === '\u06D9') key = "la";
-        else if (char === '\u06DB') key = "muanaqah";
-        else if (char === '\u0615' || char === '\u06D5') key = "mutlaq";
-        else if (char === '\u06EB' || char === '\u06EA' || char === '\u06EC') key = "kadhalik";
-        else if (char === '\u06DC') key = "saktah";
-        else if (char === '\u06E9') key = "sajdah";
+      // 1. Symmetrically wrap waqf marks and clusters (e.g. ۚۖ, ۙ, ؕ) with balanced inter-word spacing
+      // Guarantees equal breathing room on both sides (not sticking to preceding word, no desert gap)
+      // Preserves Arabic cursive connections inside words without touching Tajweed spans
+      const WAQF_CHAR_CLASS = '[\\u0615\\u06D5\\u06D6-\\u06DC\\u06EB\\u06EA\\u06EC\\u06ED\\u06E2\\u06E9]';
+      const WAQF_CLUSTER_REGEX = new RegExp(
+        '(?:\\s*[\\-\\u200C\\u200D\\u200E\\u200F\\u00A0]*)*(' +
+        WAQF_CHAR_CLASS +
+        '(?:[\\s\\-\\u200C\\u200D\\u200E\\u200F\\u00A0]*' +
+        WAQF_CHAR_CLASS + ')*[\\-\\u200C\\u200D\\u200E\\u200F\\u00A0]*)',
+        'g'
+      );
 
-        const def = this.definitions[key] || this.definitions.mutlaq;
-        return `<span class="quran-waqf-inline-mark" data-waqf-key="${key}" role="button" tabindex="0" title="${def.name_ur} • ${def.name_en}" aria-label="${def.name_roman}">${char}</span>`;
+      let result = t.replace(WAQF_CLUSTER_REGEX, (match, cluster) => {
+        const chars = cluster.match(new RegExp(WAQF_CHAR_CLASS, 'g'));
+        if (!chars || chars.length === 0) return match;
+
+        const spans = chars.map(char => {
+          let key = "mutlaq";
+          if (char === '\u06D8' || char === '\u06E2' || char === '\u06ED') key = "lazim";
+          else if (char === '\u06DA') key = "jaiz";
+          else if (char === '\u06D6') key = "mujawwaz";
+          else if (char === '\u06D7') key = "murakhkhas";
+          else if (char === '\u06D9') key = "la";
+          else if (char === '\u06DB') key = "muanaqah";
+          else if (char === '\u0615' || char === '\u06D5') key = "mutlaq";
+          else if (char === '\u06EB' || char === '\u06EA' || char === '\u06EC') key = "kadhalik";
+          else if (char === '\u06DC') key = "saktah";
+          else if (char === '\u06E9') key = "sajdah";
+
+          const def = this.definitions[key] || this.definitions.mutlaq;
+          return `<span class="quran-waqf-inline-mark" data-waqf-key="${key}" role="button" tabindex="0" title="${def.name_ur} • ${def.name_en}" aria-label="${def.name_roman}">${char}</span>`;
+        }).join('');
+
+        return ` ${spans} `;
       });
-
-      // Remove unwanted whitespace before inline waqf spans so they attach smoothly to preceding words
-      result = result.replace(/([^\s>])\s+(<span class="quran-waqf-inline-mark")/g, '$1$2');
-
-      // Guarantee single standard space after waqf mark when followed by another word
-      result = result.replace(/(<\/span>)(?=[^\s<])/g, '$1 ');
 
       // Also ensure waw directly following a waqf span attaches cleanly without isolated space
       result = result.replace(/(<\/span>\s*)([وۄ][\u064E\u0651\u0654]?|وَّ)\s+([^\s\-\u0615\u06D6-\u06DC\u06DF-\u06EB<])/g, '$1$2$3');

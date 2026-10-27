@@ -5210,7 +5210,9 @@ mark.search-highlight {
    ==================================================================== */
 
 /* 1. Dynamic Phonological Tajweed Rules (Dar Al-Ma'rifah & Quran.com Canonical Standard) */
-.ayah-arabic-text span[class^="tj-"] {
+.ayah-arabic-text span[class^="tj-"],
+span.tj-tag,
+span[class*="tj-"] {
   display: inline !important;
   margin: 0 !important;
   padding: 0 !important;
@@ -5219,6 +5221,9 @@ mark.search-highlight {
   font-family: inherit !important;
   letter-spacing: normal !important;
   word-spacing: normal !important;
+  text-decoration: none !important;
+  border: none !important;
+  line-height: inherit !important;
 }
 
 #tab-ayahs:not(.tajweed-active) .ayah-arabic-text span[class^="tj-"] {
@@ -6127,14 +6132,14 @@ mark.search-highlight {
   align-items: center;
   justify-content: center;
   padding: 0 1px;
-  margin: 0 0.12em 0 0.04em;
+  margin: 0 0.08em;
   min-width: auto;
   cursor: pointer;
   color: #fbbf24;
   font-family: 'AlMushafWaqf', 'Scheherazade New', 'Amiri', 'Traditional Arabic', serif !important;
   font-size: 0.95em;
   line-height: 1;
-  vertical-align: 0.15em;
+  vertical-align: -0.12em;
   border-radius: 3px;
   transition: all 0.18s ease;
   user-select: none;
@@ -6143,8 +6148,8 @@ mark.search-highlight {
 }
 
 .quran-waqf-inline-mark + .quran-waqf-inline-mark {
-  margin-right: -0.15em;
-  margin-left: 0.04em;
+  margin-right: -0.04em;
+  margin-left: 0.08em;
 }
 
 .quran-waqf-inline-mark:hover {
