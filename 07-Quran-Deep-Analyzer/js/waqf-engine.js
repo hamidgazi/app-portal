@@ -244,7 +244,7 @@
       });
 
       // Also ensure waw directly following a waqf span attaches cleanly without isolated space
-      result = result.replace(/(<\/span>\s*)([وۄ][\u064E\u0651\u0654]?|وَّ)\s+([^\s\-\u0615\u06D6-\u06DC\u06DF-\u06EB<])/g, '$1$2$3');
+      result = result.replace(/(<span[^>]*class="[^"]*quran-waqf-inline-mark[^"]*"[^>]*>.*?<\/span>\s*)([وۄ][\u064E\u0651\u0654]?|وَّ)\s+([^\s\-\u0615\u06D6-\u06DC\u06DF-\u06EB<])/g, '$1$2$3');
 
       // Sanitize any orphaned trailing hyphens leftover from old data
       result = result.replace(/(\S)\-(?=\s|$)/g, '$1');
