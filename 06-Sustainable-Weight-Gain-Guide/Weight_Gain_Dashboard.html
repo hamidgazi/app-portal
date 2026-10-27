@@ -504,6 +504,135 @@
         color: #000 !important;
       }
     }
+  
+    /* Workout Phase Pills & Master Movement Cards */
+    .phase-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .phase-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      touch-action: manipulation;
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+
+    .phase-pill:hover {
+      background: var(--bg-card-hover);
+      color: var(--text-main);
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+
+    .phase-pill.active {
+      background: rgba(56, 189, 248, 0.18);
+      color: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+    }
+
+    details.movement-card {
+      background: #0d1424;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      margin-bottom: 0.85rem;
+      overflow: hidden;
+      transition: border-color 0.2s ease;
+    }
+
+    details.movement-card summary {
+      padding: 1rem 1.25rem;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      touch-action: manipulation;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      list-style: none;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    details.movement-card summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details.movement-card[open] {
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+
+    details.movement-card[open] summary {
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(56, 189, 248, 0.08);
+      color: var(--accent-cyan);
+    }
+
+    .movement-content {
+      padding: 1.25rem;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .badge-reg {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      color: #fbbf24;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: inline-block;
+      margin-top: 0.35rem;
+    }
+
+    .badge-cue {
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid rgba(34, 197, 94, 0.35);
+      color: #4ade80;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    .root-cause-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1rem;
+    }
+
+    .root-cause-card {
+      background: #0d1424;
+      border: 1px solid var(--border-subtle);
+      border-left: 3px solid var(--accent-cyan);
+      border-radius: 12px;
+      padding: 1.25rem;
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    .root-cause-card h4 {
+      color: var(--accent-cyan);
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+
   </style>
 </head>
 <body>
@@ -717,15 +846,16 @@
     </section>
 
     <!-- TAB: DIGESTIVE CLINIC & PHARMACOLOGY -->
+    <!-- TAB 4: DIGESTIVE CLINIC & TRIAGE -->
     <section id="tab-clinic" class="tab-pane" role="tabpanel">
+      <!-- Clinical Diagnostic Triage -->
       <div class="card">
-        <h2 class="card-title">🏥 Gastrointestinal Clinical Triage & Symptom Navigator</h2>
+        <h2 class="card-title">🩺 Immediate GI Symptom Triage Matrix</h2>
         <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
-          Select any digestive problem below for instant 5-minute emergency relief, root-cause protocols, and clinical pharmacology insights.
+          Select your current digestive symptom for instant, 5-minute emergency relief protocols and long-term root-cause eradication.
         </p>
 
-        <!-- Symptom Selector Pills -->
-        <div class="symptom-pills" id="symptom-pills">
+        <div class="symptom-pills" role="tablist">
           <button class="symptom-pill active" data-sym="acidity">🔥 Acidity & Reflux</button>
           <button class="symptom-pill" data-sym="fullness">🪨 Early Fullness</button>
           <button class="symptom-pill" data-sym="burning">🌋 Burning Stomach</button>
@@ -736,12 +866,11 @@
           <button class="symptom-pill" data-sym="diarrhea">🌊 Loose Stools</button>
         </div>
 
-        <!-- Dynamic Triage Cards Container -->
         <div class="triage-display">
           <div class="triage-card" style="border-left: 3px solid var(--accent-amber);">
             <h4 style="color: var(--accent-amber);">⏱️ 5-to-15 Min Emergency Quick Fix</h4>
             <div id="triage-quick">
-              <p>• Sip 100 ml cold whole milk or chew 1 tsp raw fennel seeds (*Saunf*).<br>• Stand upright; strictly avoid reclining.<br>• OTC: 10 ml Sodium Alginate (Gaviscon) to form a mechanical raft barrier over acid.</p>
+              <p>• Sip 100 ml chilled whole milk OR chew 1 tsp raw fennel seeds (<em>Saunf</em>).<br>• Stand upright; do not recline for 60 mins.<br>• OTC: 10 ml Sodium Alginate (Gaviscon) to form a mechanical raft barrier over stomach acid.</p>
             </div>
           </div>
           <div class="triage-card" style="border-left: 3px solid var(--accent-emerald);">
@@ -763,102 +892,162 @@
       <div class="card">
         <h2 class="card-title">💊 Master Clinical Pharmacology Compendium (Educational Reference)</h2>
         <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem;">
-          Search through OTC & prescription gastrointestinal medications by brand, symptom, or drug class for pharmacological transparency.
+          Search through OTC & prescription gastrointestinal medications by brand, symptom, root cause, or drug class for pharmacological transparency.
         </p>
 
-        <input type="text" id="med-search" class="med-search-input" placeholder="🔍 Search medicines by name, symptom, or class (e.g. Pan 40, Drotin, gas, nausea, Gaviscon, curd)...">
+        <input type="text" id="med-search" class="med-search-input" placeholder="🔍 Search medicines by brand, root cause, or symptom (e.g. Pan 40, Drotin, gas, nausea, Gaviscon, curd)...">
 
         <div class="table-container">
           <table id="med-table">
             <colgroup>
-              <col style="width: 20%;">
+              <col style="width: 17%;">
+              <col style="width: 21%;">
+              <col style="width: 17%;">
               <col style="width: 15%;">
-              <col style="width: 22%;">
-              <col style="width: 20%;">
-              <col style="width: 23%;">
+              <col style="width: 15%;">
+              <col style="width: 15%;">
             </colgroup>
             <thead>
               <tr>
                 <th>Drug Class & Brands</th>
-                <th>Target Symptoms</th>
+                <th>Target Root Cause & Exact GI Symptoms Solved</th>
                 <th>Biochemical Mechanism</th>
                 <th>Clinical Positives</th>
-                <th>Negatives & Safety Warnings</th>
+                <th>Negatives & Side Effects</th>
+                <th>Critical Warnings & Interactions</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>OTC Antacids</strong><br><small style="color: var(--text-muted);">Gelusil, Digene, Megalac<br>(Aluminium + Magnesium Hydroxide + Simethicone)</small></td>
-                <td>Acidity, Heartburn, Gas</td>
-                <td>Chemical neutralization of gastric HCl by basic salts; Simethicone reduces gas surface tension.</td>
-                <td>Instant relief (< 3 mins); acts locally without hormonal interference; low cost.</td>
-                <td>Short duration (30–60 mins); Aluminium causes constipation, Magnesium causes loose stools. Chelates antibiotics.</td>
+                <td><strong>OTC Antacids</strong><br><small style="color: var(--text-muted);">Gelusil, Digene, Megalac<br>(Al + Mg Hydroxide + Simethicone)</small></td>
+                <td><strong style="color: var(--accent-amber);">Root Cause</strong>: Unbuffered free hydrochloric acid (HCl) irritating sensitive esophageal/gastric mucosa.<br><strong style="color: var(--accent-cyan);">Symptoms</strong>: Retrosternal heartburn, sour waterbrash, acute acid burn, gas bubbles.</td>
+                <td>Chemical neutralization of gastric HCl by basic salts; Simethicone reduces gas surface tension to coalesce bubbles.</td>
+                <td>Instant relief (&lt; 3 mins); acts locally without hormonal interference; low cost.</td>
+                <td>Short duration (30–60 mins); Aluminium causes constipation, Magnesium causes loose stools. Chalky taste.</td>
+                <td>Chelates oral antibiotics (Tetracyclines, Ciprofloxacin); separate by 2h. Avoid chronic overuse.</td>
               </tr>
               <tr>
-                <td><strong>Alginate Raft Formers</strong><br><small style="color: var(--text-muted);">Gaviscon Liquid<br>(Sodium Alginate + Potassium Bicarbonate)</small></td>
-                <td>Acid Reflux, GERD, Night Burning</td>
+                <td><strong>Alginate Raft Formers</strong><br><small style="color: var(--text-muted);">Gaviscon Liquid<br>(Sodium Alginate + K Bicarbonate)</small></td>
+                <td><strong style="color: var(--accent-amber);">Root Cause</strong>: Transient LES relaxation & recumbent acid pocket rising into esophagus.<br><strong style="color: var(--accent-cyan);">Symptoms</strong>: Nocturnal acid reflux, bedtime regurgitation, burning throat on waking.</td>
                 <td>Reacts with acid to form a thick, floating mechanical gel "raft" that physically blocks acid from refluxing into esophagus.</td>
-                <td>Superior for nocturnal reflux; mechanical barrier rather than systemic acid shutdown; high safety.</td>
-                <td>Must be taken immediately after meals and before bed. High sodium content in some formulations.</td>
+                <td>Superior for nocturnal reflux; pure mechanical physical barrier rather than systemic acid shutdown; high safety.</td>
+                <td>High sodium content in some formulations (monitor if hypertensive); viscous gel mouthfeel.</td>
+                <td>Must be taken <strong>immediately after meals</strong> and before bed (empty stomach prevents raft formation).</td>
               </tr>
               <tr>
                 <td><strong>Mucosal Protectants</strong><br><small style="color: var(--text-muted);">Sucrafil, Sucrate<br>(Sucralfate 1g / 10ml)</small></td>
-                <td>Gastric Erosions, Ulcers, Burning Pit</td>
-                <td>Polymerizes in acidic environment (pH < 4) to bind electrostatically to ulcer proteins, forming a protective shield.</td>
-                <td>Accelerates ulcer healing; shields against bile salt injury; minimal systemic absorption (< 3%).</td>
-                <td>Must be taken on an empty stomach (1h before meals). Can cause mild constipation; binds to other drugs.</td>
+                <td><strong style="color: var(--accent-amber);">Root Cause</strong>: Disrupted gastric mucus-bicarbonate barrier, exposing denuded enterocytes to pepsin digestion.<br><strong style="color: var(--accent-cyan);">Symptoms</strong>: Intense epigastric gnawing raw pain, gastric micro-erosions, tender stomach pit.</td>
+                <td>Polymerizes in acidic environment (pH &lt; 4) to bind electrostatically to ulcer proteins, forming a protective shield.</td>
+                <td>Accelerates ulcer healing; shields against bile salt injury; minimal systemic absorption (&lt; 3%).</td>
+                <td>Can cause mild constipation (2–3%); chalky taste; requires frequent dosing (3–4x daily).</td>
+                <td><strong>Must be taken on an empty stomach</strong> (1h before meals). Decreases absorption of Digoxin, Warfarin, Phenytoin.</td>
               </tr>
               <tr>
                 <td><strong>H2 Receptor Blockers</strong><br><small style="color: var(--text-muted);">Topcid 20/40, Famocid<br>(Famotidine)</small></td>
-                <td>Nocturnal Acidity, Moderate GERD</td>
+                <td><strong style="color: var(--accent-amber);">Root Cause</strong>: Histamine-driven stimulation of parietal cell H2 receptors during nighttime sleep.<br><strong style="color: var(--accent-cyan);">Symptoms</strong>: Nocturnal acid breakthrough, night awakenings from chest burning, moderate GERD.</td>
                 <td>Competitively inhibits histamine H2 receptors on parietal cells, lowering acid output by ~70%.</td>
                 <td>Fast onset (45–60 mins); lasts 10–12 hours; ideal for intermittent acid breakthrough without heavy PPI shutdown.</td>
                 <td>Tolerance (tachyphylaxis) develops if taken continuously past 14 days. Mild headache or fatigue.</td>
+                <td>Safe alternative to PPIs for intermittent as-needed acid suppression. Dose adjustment in renal impairment.</td>
               </tr>
               <tr>
                 <td><strong>Proton Pump Inhibitors (PPIs)</strong><br><small style="color: var(--text-muted);">Pan 40, Razo 20, Nexpro, Omez<br>(Pantoprazole, Rabeprazole, Esomeprazole)</small></td>
-                <td>Severe Gastritis, Esophagitis, Ulcers</td>
-                <td>Irreversibly inhibits H+/K+ ATPase enzyme in parietal cells, shutting down terminal acid secretion by >90%.</td>
-                <td>Gold standard for healing erosions and peptic ulcers; potent 24h acid suppression.</td>
-                <td><strong style="color: var(--accent-rose);">Rebound Hypersecretion</strong>: Abrupt stopping causes severe rebound burning. Long-term use impairs B12, Iron, and Calcium.</td>
+                <td><strong style="color: var(--accent-amber);">Root Cause</strong>: Severe parietal cell H+/K+ ATPase hyper-reactivity driving erosive mucosal injury.<br><strong style="color: var(--accent-cyan);">Symptoms</strong>: Severe erosive esophagitis, active peptic ulcers, debilitating constant acid burn.</td>
+                <td>Irreversibly inhibits H+/K+ ATPase enzyme in parietal cells, shutting down terminal acid secretion by &gt;90%.</td>
+                <td>Gold standard for healing erosions and peptic ulcers; potent 24h acid suppression; high healing rate.</td>
+                <td>Mild headache, diarrhea. Long-term use impairs B12, Iron, Magnesium, and Calcium absorption.</td>
+                <td><strong style="color: var(--accent-rose);">Rebound Hypersecretion</strong>: Abrupt stopping after &gt;4 weeks causes severe rebound burning. Take 30m before breakfast; taper slowly.</td>
               </tr>
               <tr>
                 <td><strong>Prokinetics & Motility Enhancers</strong><br><small style="color: var(--text-muted);">Motilium, Vomistop, Lesuride, Ganaton<br>(Domperidone, Levosulpiride, Itopride)</small></td>
-                <td>Early Fullness, Nausea, Gastroparesis</td>
+                <td><strong style="color: var(--accent-amber);">Root Cause</strong>: Antral hypomotility and delayed gastric accommodation (functional gastroparesis); stagnant food bolus.<br><strong style="color: var(--accent-cyan);">Symptoms</strong>: Early satiety ("stuffed after 3 bites"), heavy stone-in-stomach feeling, nausea.</td>
                 <td>Dopamine D2 antagonism & 5-HT4 agonism; accelerates stomach emptying and strengthens LES tone.</td>
                 <td>Rapidly empties stagnant food into intestines; relieves early satiety and nausea. Itopride has no cardiac risk.</td>
-                <td><strong style="color: var(--accent-rose);">Cardiac Warning</strong>: Domperidone can prolong QT interval. Can elevate prolactin (breast tenderness/gynecomastia).</td>
+                <td>Domperidone/Levosulpiride can elevate prolactin (breast tenderness). Levosulpiride can cause drowsiness.</td>
+                <td><strong style="color: var(--accent-rose);">Cardiac Warning</strong>: Domperidone can prolong QT interval. Take 15–30m before meals; limit to short cycles (&lt; 4 wks).</td>
               </tr>
               <tr>
-                <td><strong>Antiemetics</strong><br><small style="color: var(--text-muted);">Emeset 4mg, Ondem<br>(Ondansetron)</small></td>
-                <td>Acute Nausea, Vomiting Reflex</td>
+                <td><strong>Antiemetics</strong><br><small style="color: var(--text-muted);">Emeset 4mg, Ondem<br>(Ondansetron MD)</small></td>
+                <td><strong style="color: var(--accent-amber);">Root Cause</strong>: Duodenal mechanoreceptor over-distension triggering mucosal serotonin release into vagus and Area Postrema CTZ.<br><strong style="color: var(--accent-cyan);">Symptoms</strong>: Acute retching, sudden vomiting reflex, post-meal gag reflex during dense feedings.</td>
                 <td>Selective 5-HT3 serotonin receptor antagonist blocking triggers in vagus nerve and central CTZ.</td>
                 <td>Rapid suppression of vomiting reflex; mouth-dissolving tablet melts on tongue without water; non-drowsy.</td>
-                <td>Constipation is common (slows colonic transit). Transient mild headache. Strictly for acute episodes.</td>
+                <td>Constipation is common (slows colonic transit). Transient mild headache or flushing.</td>
+                <td>Use strictly for acute nausea/vomiting distress, not daily chronic appetite stimulation.</td>
               </tr>
               <tr>
-                <td><strong>Antispasmodics</strong><br><small style="color: var(--text-muted);">Drotin 40/80mg, Meftal-Spas, Cyclopam<br>(Drotaverine, Dicyclomine)</small></td>
-                <td>Colicky Abdominal Pain, Intestinal Cramps</td>
+                <td><strong>Antispasmodics & Relaxants</strong><br><small style="color: var(--text-muted);">Drotin 40/80mg, Meftal-Spas, Cyclopam<br>(Drotaverine, Dicyclomine)</small></td>
+                <td><strong style="color: var(--accent-amber);">Root Cause</strong>: Visceral smooth muscle hyper-irritability and tetanic uncoordinated circular spasms in bowel wall.<br><strong style="color: var(--accent-cyan);">Symptoms</strong>: Sharp gripping abdominal colic, painful twisting gut cramps, trapped gas spasms.</td>
                 <td>Drotaverine: Selective PDE-4 inhibitor relaxing visceral smooth muscle. Dicyclomine: Muscarinic receptor blocker.</td>
                 <td>Rapidly relieves sharp intestinal colic and cramping without anticholinergic side effects (Drotaverine).</td>
-                <td>Never use for undiagnosed acute abdomen with high fever (can mask appendicitis). Dicyclomine can cause dry mouth.</td>
+                <td>Dicyclomine can cause dry mouth, drowsiness, blurred vision. Drotaverine: rare dizziness.</td>
+                <td>Never use for undiagnosed acute abdomen with high fever (can mask appendicitis). Take with/after food.</td>
               </tr>
               <tr>
                 <td><strong>Osmotic & Bulk Laxatives</strong><br><small style="color: var(--text-muted);">Duphalac, Cremaffin, Isabgol<br>(Lactulose, Liquid Paraffin, Psyllium)</small></td>
-                <td>Sluggish Bowel, Constipation, Hard Stools</td>
+                <td><strong style="color: var(--accent-amber);">Root Cause</strong>: Inadequate luminal stool water retention and slow colonic transit resulting in dry fecal compaction.<br><strong style="color: var(--accent-cyan);">Symptoms</strong>: Severe straining, hard pebble stools (Bristol 1–2), incomplete evacuation, blunted morning appetite.</td>
                 <td>Lactulose/PEG pulls water into stool via osmosis. Psyllium absorbs water into soft gelatinous bulking mass.</td>
-                <td>Non-habit-forming; Lactulose acts as a prebiotic supporting beneficial gut bacteria.</td>
-                <td>Initial gas and rumbling (first 3 days). Avoid harsh stimulant laxatives (Senna) that cause lazy bowel syndrome.</td>
+                <td>Non-habit-forming; Lactulose acts as a prebiotic fostering beneficial *Bifidobacteria*.</td>
+                <td>Initial gas and rumbling (first 3 days). Psyllium requires copious water or risks esophageal choking.</td>
+                <td>Avoid harsh stimulant laxatives (Senna, Bisacodyl) as they deplete electrolytes and cause lazy bowel syndrome.</td>
               </tr>
               <tr>
-                <td><strong>Flora Restorers & Anti-Diarrheals</strong><br><small style="color: var(--text-muted);">Enterogermina, Econorm, Redotil<br>(B. clausii spores, S. boulardii, Racecadotril)</small></td>
-                <td>Loose Stools, Dysbiosis, Osmotic Diarrhea</td>
-                <td>Probiotic spores colonize gut; Racecadotril inhibits intestinal hypersecretion without paralyzing bowel motility.</td>
+                <td><strong>Gut Flora Restorers & Anti-Diarrheals</strong><br><small style="color: var(--text-muted);">Enterogermina, Econorm, Redotil<br>(B. clausii spores, S. boulardii, Racecadotril)</small></td>
+                <td><strong style="color: var(--accent-amber);">Root Cause</strong>: Dietary dysbiosis from sudden caloric surplus or enterocyte hypersecretion dumping water into lumen.<br><strong style="color: var(--accent-cyan);">Symptoms</strong>: Watery loose stools (Bristol 7), post-shake diarrhea, microbial gas fermentation.</td>
+                <td>Probiotic spores colonize gut; Racecadotril inhibits intestinal enkephalinase without paralyzing bowel motility.</td>
                 <td>Controls diarrhea without causing secondary constipation (unlike Loperamide); restores natural flora.</td>
+                <td>Rare skin rash. Minimal systemic side effects.</td>
                 <td><strong style="color: var(--accent-rose);">Imodium Warning</strong>: Never use Loperamide if fever or blood/mucus is present (traps bacterial toxins). Always hydrate with ORS.</td>
+              </tr>
+              <tr>
+                <td><strong>Bile Primers & Enzymes</strong><br><small style="color: var(--text-muted);">Himalaya Liv.52 DS, Aristozyme, Unienzyme<br>(Herbal Hepatoprotective / Diastase + Pepsin)</small></td>
+                <td><strong style="color: var(--accent-amber);">Root Cause</strong>: Endogenous biliary insufficiency and enzyme ceiling for hydrolyzing elevated protein/lipid surplus.<br><strong style="color: var(--accent-cyan);">Symptoms</strong>: Greasy floating stools, protracted 5-hour meal heaviness, undigested food particles, blunted bile flow.</td>
+                <td>Liv.52 DS stimulates liver hepatocytes to secrete bile. Diastase/Pepsin pre-cleaves starches and peptide bonds.</td>
+                <td>Dramatically accelerates stomach clearance of heavy solid meals; eliminates food sluggishness within 45 mins.</td>
+                <td>Mild warm stomach sensation if taken without food; darker stool color from bile excretion.</td>
+                <td>Take Liv.52 DS twice daily with meals; take digestive enzymes strictly with/after the heaviest meal of the day.</td>
               </tr>
             </tbody>
           </table>
+        </div>
+      </div>
+
+      <!-- Pathophysiological Root Causes Educational Cards -->
+      <div class="card">
+        <h2 class="card-title">🔬 Clinical Pathophysiology: Why These GI Root Causes Occur in Hardgainers</h2>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+          Deep clinical analysis of the exact biological causes of gastrointestinal discomfort in tall, slender ectomorphs during caloric surplus:
+        </p>
+        <div class="root-cause-grid">
+          <div class="root-cause-card">
+            <h4>1. Parietal Cell Hyper-Reactivity</h4>
+            <p><strong>Pathophysiology</strong>: High-protein boluses trigger G-cells to release gastrin, which drives parietal cells via H2 receptors to dump massive hydrochloric acid ($HCl$). In a slender frame with low visceral fat, the stomach is compressed against the abdominal wall, causing acid to back-splash past the LES into the esophagus.</p>
+            <span class="badge-cue">Solved By: Antacids, Alginates, Famotidine, PPIs</span>
+          </div>
+          <div class="root-cause-card">
+            <h4>2. Delayed Gastric Accommodation</h4>
+            <p><strong>Pathophysiology</strong>: Hardgainers possess a stiff, unconditioned gastric fundus that fails to perform receptive relaxation. High fats trigger duodenal CCK, which clamps the pyloric sphincter shut, leaving food "sitting like a heavy stone" for 5–6 hours.</p>
+            <span class="badge-cue">Solved By: Prokinetics (Itopride/Domperidone), 100-step stroll</span>
+          </div>
+          <div class="root-cause-card">
+            <h4>3. Smooth Muscle Hyper-Spasms</h4>
+            <p><strong>Pathophysiology</strong>: Rapidly eating unsoaked lentils or poorly chewed solids triggers acute irritation in the Enteric Nervous System. Circular smooth muscle enters tetanic contraction, producing sharp, twisting abdominal cramps.</p>
+            <span class="badge-cue">Solved By: Drotaverine (PDE-4 inhibitor), heating pad</span>
+          </div>
+          <div class="root-cause-card">
+            <h4>4. Mucosal Epithelial Erosion</h4>
+            <p><strong>Pathophysiology</strong>: Fasting for 6–8 hours leaves residual acid and pepsin to pool in the antrum, degrading the mucus layer and digesting bare cell walls, creating micro-ulcers that burn raw when food arrives.</p>
+            <span class="badge-cue">Solved By: Sucralfate (shields ulcer proteins), Ghee butyrate</span>
+          </div>
+          <div class="root-cause-card">
+            <h4>5. Colonic Bacterial Fermentation</h4>
+            <p><strong>Pathophysiology</strong>: Exceeding salivary amylase capacity dumps unhydrolyzed starches into the colon, where anaerobic bacteria ferment them into huge volumes of $CO_2$, $H_2$, and methane, distending the belly wall with trapped gas.</p>
+            <span class="badge-cue">Solved By: Simethicone, 20–25 chews/bite, Bacillus clausii</span>
+          </div>
+          <div class="root-cause-card">
+            <h4>6. Central CTZ Serotonergic Nausea</h4>
+            <p><strong>Pathophysiology</strong>: Sudden duodenal over-distension forces enterochromaffin cells to flood vagal afferents with serotonin ($5	ext{-}HT$), activating the brainstem Chemoreceptor Trigger Zone (CTZ) to trigger acute retching and gag reflex.</p>
+            <span class="badge-cue">Solved By: Ondansetron (5-HT3 blocker), gingerols, liquid shakes</span>
+          </div>
         </div>
       </div>
 
@@ -1398,58 +1587,366 @@
     </section>
 
     <!-- TAB 6: CALISTHENICS & WORKOUT TIMER -->
+    <!-- TAB 6: CALISTHENICS & WORKOUT TIMER -->
     <section id="tab-calisthenics" class="tab-pane" role="tabpanel">
+      <!-- 12-Week Interactive Periodization Overview -->
       <div class="card">
-        <h2 class="card-title">🤸 100% Home Calisthenics Hypertrophy System</h2>
-        <div class="table-container">
-          <table>
-            <colgroup>
-              <col style="width: 28%;">
-              <col style="width: 18%;">
-              <col style="width: 24%;">
-              <col style="width: 30%;">
-            </colgroup>
-            <thead>
-              <tr>
-                <th>Movement</th>
-                <th>Sets × Reps</th>
-                <th>Target Muscle Group</th>
-                <th>Strict Form Cue (3-1-1 Tempo)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>1. Push-Up Variation</strong></td>
-                <td>4 Sets × 8–12 Reps</td>
-                <td>Chest, Shoulders, Triceps</td>
-                <td>Knee/Incline (Phase 1) &rarr; Floor Standard (Phase 2) &rarr; Decline/Backpack (Phase 3).</td>
-              </tr>
-              <tr>
-                <td><strong>2. Doorframe / Table Rows</strong></td>
-                <td>4 Sets × 8–12 Reps</td>
-                <td>Upper Back, Lats, Biceps</td>
-                <td>Hang under sturdy table or grip doorframe. 2s peak scapular squeeze.</td>
-              </tr>
-              <tr>
-                <td><strong>3. Bulgarian Split Squat</strong></td>
-                <td>4 Sets × 8–10 Reps/leg</td>
-                <td>Quadriceps, Glutes</td>
-                <td>Rear foot elevated on bed/chair. The #1 bodyweight mass builder.</td>
-              </tr>
-              <tr>
-                <td><strong>4. Pike Push-Ups</strong></td>
-                <td>3 Sets × 6–10 Reps</td>
-                <td>Anterior & Lateral Delts</td>
-                <td>Hips raised in high V-shape; lower head diagonally forward.</td>
-              </tr>
-              <tr>
-                <td><strong>5. Backpack Loaded Squats</strong></td>
-                <td>4 Sets × 12–15 Reps</td>
-                <td>Full Quadriceps, Hips</td>
-                <td>Load backpack with 3–6 kg books; squat below parallel with proud chest.</td>
-              </tr>
-            </tbody>
-          </table>
+        <h2 class="card-title">🤸 Absolute-Beginner 12-Week Calisthenics Blueprint</h2>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+          Designed specifically for tall, slender hardgainers starting from absolute zero ("0 in that"). 100% home items only (chair, bed edge, doorframe, rug, and backpack). Zero intimidating advanced moves.
+        </p>
+
+        <!-- Phase Switcher Pills -->
+        <div class="phase-pills" role="tablist">
+          <button class="phase-pill active" data-phase="phase1">🌱 Weeks 1–4: Foundation & Joints (3 Days/Wk)</button>
+          <button class="phase-pill" data-phase="phase2">🔥 Weeks 5–8: Volume & Progression (3–4 Days/Wk)</button>
+          <button class="phase-pill" data-phase="phase3">⚡ Weeks 9–12: Backpack Hypertrophy (4-Day Split)</button>
+        </div>
+
+        <!-- Phase 1 View -->
+        <div id="workout-phase1" class="workout-phase-view">
+          <div style="background: rgba(56, 189, 248, 0.08); border-left: 3px solid var(--accent-cyan); padding: 0.85rem 1.25rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.88rem;">
+            <strong>Phase 1 Goal</strong>: Build wrist, elbow, and shoulder stability; awaken dormant neural pathways. 3 Days/Week (Mon/Wed/Fri alternating Routine A and B). 90s rest between sets.
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Routine & Focus</th>
+                  <th>Exercise & Level 0 Progression</th>
+                  <th>Sets × Reps</th>
+                  <th>Strict Form & Tempo (3-1-1)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Routine A (Mon/Fri)</strong><br><small style="color: var(--text-muted);">Push / Squat / Core</small></td>
+                  <td><strong>Wall or Bed Incline Push-Ups</strong><br><span class="badge-reg">Lvl 0: Wall | Lvl 1: Bed Incline</span></td>
+                  <td>3 Sets × 8–12 Reps</td>
+                  <td>Elbows tucked 45°; 3-second descent; pause 1s at bottom; push in 1s.</td>
+                </tr>
+                <tr>
+                  <td><strong>Routine A (Mon/Fri)</strong><br><small style="color: var(--text-muted);">Push / Squat / Core</small></td>
+                  <td><strong>Chair Box Squats</strong><br><span class="badge-reg">Lvl 0: Hand-Supported | Lvl 1: Box Tap</span></td>
+                  <td>3 Sets × 10–12 Reps</td>
+                  <td>Sit back into hips; tap chair edge gently; drive up through whole foot.</td>
+                </tr>
+                <tr>
+                  <td><strong>Routine A (Mon/Fri)</strong><br><small style="color: var(--text-muted);">Push / Squat / Core</small></td>
+                  <td><strong>Bent-Knee Chair Dips</strong><br><span class="badge-reg">Lvl 0: Knees 90° Leg-Assisted</span></td>
+                  <td>3 Sets × 8–10 Reps</td>
+                  <td>Hands beside hips on chair edge; lower to 90° elbow bend; press up.</td>
+                </tr>
+                <tr>
+                  <td><strong>Routine A (Mon/Fri)</strong><br><small style="color: var(--text-muted);">Push / Squat / Core</small></td>
+                  <td><strong>The Deadbug & Kneeling Plank</strong><br><span class="badge-reg">Lvl 0: Arm/Leg only | Lvl 1: Full Deadbug</span></td>
+                  <td>3 Sets × 8/side | 25s Plank</td>
+                  <td>Lower back pinned flat to floor. Squeeze glutes and brace abdominal wall.</td>
+                </tr>
+                <tr>
+                  <td><strong>Routine B (Wed)</strong><br><small style="color: var(--text-muted);">Pull / Hinge / Shoulders</small></td>
+                  <td><strong>Standing Doorframe Rows</strong><br><span class="badge-reg">Lvl 0: Upright | Lvl 1: Walk feet forward</span></td>
+                  <td>3 Sets × 10–12 Reps</td>
+                  <td>Grip doorframe; pull chest to frame; squeeze shoulder blades hard for 2 full seconds.</td>
+                </tr>
+                <tr>
+                  <td><strong>Routine B (Wed)</strong><br><small style="color: var(--text-muted);">Pull / Hinge / Shoulders</small></td>
+                  <td><strong>Floor Glute Bridges</strong><br><span class="badge-reg">Lvl 0: Two feet flat | Lvl 1: 3s hold</span></td>
+                  <td>3 Sets × 12–15 Reps</td>
+                  <td>Drive through heels; lift hips into straight ramp; squeeze glutes at top.</td>
+                </tr>
+                <tr>
+                  <td><strong>Routine B (Wed)</strong><br><small style="color: var(--text-muted);">Pull / Hinge / Shoulders</small></td>
+                  <td><strong>Incline Pike Isometric Hold</strong><br><span class="badge-reg">Lvl 0: Hands on Bed/Chair Hold</span></td>
+                  <td>3 Sets × 20–30s Hold</td>
+                  <td>Hands on bed edge, hips high in V-shape; push shoulders active and proud.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Phase 2 View -->
+        <div id="workout-phase2" class="workout-phase-view" style="display: none;">
+          <div style="background: rgba(34, 197, 94, 0.08); border-left: 3px solid var(--accent-emerald); padding: 0.85rem 1.25rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.88rem;">
+            <strong>Phase 2 Goal</strong>: Increase volume to 4 sets on main compounds; transition to lower inclines (couch/knee pushups), towel door rows, free squats, and free split squats.
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Movement Focus</th>
+                  <th>Exercise & Progression Target</th>
+                  <th>Sets × Reps</th>
+                  <th>Progression Trigger & Technique</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Horizontal Push</strong></td>
+                  <td><strong>Low Incline (Couch) &rarr; Knee Push-Ups</strong></td>
+                  <td>4 Sets × 8–12 Reps</td>
+                  <td>When hitting 12 reps on couch incline, drop to knees on floor with soft towel.</td>
+                </tr>
+                <tr>
+                  <td><strong>Horizontal Pull</strong></td>
+                  <td><strong>Towel Door Anchor / Incline Door Rows</strong></td>
+                  <td>4 Sets × 8–12 Reps</td>
+                  <td>Walk feet further forward into doorway to achieve steep 45° pulling angle.</td>
+                </tr>
+                <tr>
+                  <td><strong>Bilateral Squat</strong></td>
+                  <td><strong>Free Air Squats (Chair Removed)</strong></td>
+                  <td>4 Sets × 12–15 Reps</td>
+                  <td>Descend until hip crease dips level with kneecaps; proud chest; 3s tempo.</td>
+                </tr>
+                <tr>
+                  <td><strong>Unilateral Leg</strong></td>
+                  <td><strong>Free Split Squats (No Hand Support)</strong></td>
+                  <td>3 Sets × 8–10 Reps/leg</td>
+                  <td>Lower like an elevator until rear knee hovers 1 inch; drive through front heel.</td>
+                </tr>
+                <tr>
+                  <td><strong>Vertical Push</strong></td>
+                  <td><strong>Incline Pike Push-Ups (Hands on Bed)</strong></td>
+                  <td>3 Sets × 6–8 Reps</td>
+                  <td>Lower forehead diagonally forward forming tripod apex; press back up into V-shape.</td>
+                </tr>
+                <tr>
+                  <td><strong>Posterior Chain</strong></td>
+                  <td><strong>Elevated-Feet Glute Bridges</strong></td>
+                  <td>3 Sets × 12 Reps</td>
+                  <td>Heels placed on couch edge; elevates range of motion for deep hamstring stretch.</td>
+                </tr>
+                <tr>
+                  <td><strong>Core Stability</strong></td>
+                  <td><strong>Full Standard Elbow Plank</strong></td>
+                  <td>3 Sets × 30–45s Hold</td>
+                  <td>Straight rigid plank from toes to shoulders; posterior pelvic tilt locked.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Phase 3 View -->
+        <div id="workout-phase3" class="workout-phase-view" style="display: none;">
+          <div style="background: rgba(245, 158, 11, 0.08); border-left: 3px solid var(--accent-amber); padding: 0.85rem 1.25rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.88rem;">
+            <strong>Phase 3 Goal</strong>: Upper / Lower 4-Day Hypertrophy Split (Mon/Tue, Thu/Fri). Introduction of backpack loaded with +2 to +5 kg water bottles/books for progressive overload.
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Split Day</th>
+                  <th>Exercise & Progression Target</th>
+                  <th>Sets × Reps</th>
+                  <th>Loading & Execution Protocol</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Upper Body (Mon & Thu)</strong></td>
+                  <td><strong>Standard Floor Push-Ups / Negatives</strong></td>
+                  <td>4 Sets × 6–10 Reps</td>
+                  <td>Full floor pushups. If hitting failure, perform 5s eccentric negatives.</td>
+                </tr>
+                <tr>
+                  <td><strong>Upper Body (Mon & Thu)</strong></td>
+                  <td><strong>Inverted Dining Table Rows</strong></td>
+                  <td>4 Sets × 8–10 Reps</td>
+                  <td>Under sturdy table; pull chest to underside; 2s peak scapular squeeze.</td>
+                </tr>
+                <tr>
+                  <td><strong>Upper Body (Mon & Thu)</strong></td>
+                  <td><strong>Floor Pike Push-Ups</strong></td>
+                  <td>3 Sets × 6–8 Reps</td>
+                  <td>Inverted V on floor; head traces forward tripod apex; vertical deltoid drive.</td>
+                </tr>
+                <tr>
+                  <td><strong>Upper Body (Mon & Thu)</strong></td>
+                  <td><strong>Straight-Leg Chair Dips & Backpack Curls</strong></td>
+                  <td>3 Sets × 10–12 Reps</td>
+                  <td>Dips with straight legs; curls with 3–5 kg loaded backpack; elbows pinned.</td>
+                </tr>
+                <tr>
+                  <td><strong>Lower Body (Tue & Fri)</strong></td>
+                  <td><strong>Bulgarian Split Squats (The King)</strong></td>
+                  <td>4 Sets × 6–8 Reps/leg</td>
+                  <td>Rear foot on bed/chair; 3s descent; front heel drive. Premier calisthenics leg builder.</td>
+                </tr>
+                <tr>
+                  <td><strong>Lower Body (Tue & Fri)</strong></td>
+                  <td><strong>Backpack Goblet Squats (+3 to +5 kg)</strong></td>
+                  <td>4 Sets × 10–12 Reps</td>
+                  <td>Hug loaded backpack against chest; squat deep below parallel; chest tall.</td>
+                </tr>
+                <tr>
+                  <td><strong>Lower Body (Tue & Fri)</strong></td>
+                  <td><strong>Single-Leg Glute Bridges & Calf Raises</strong></td>
+                  <td>3 Sets × 10 / 15 Reps</td>
+                  <td>Single leg bridge driving heel hard; standing calf raises on step edge with 2s hold.</td>
+                </tr>
+                <tr>
+                  <td><strong>Lower Body (Tue & Fri)</strong></td>
+                  <td><strong>Lying Floor Leg Raises</strong></td>
+                  <td>3 Sets × 10–12 Reps</td>
+                  <td>Hands under glutes; raise straight legs to 90°; lower under 3s control; no back arch.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Granular Exercise Master Cards (Accordion) -->
+      <div class="card">
+        <h2 class="card-title">📖 Exercise Master Execution Cards & Level 0 Regressions</h2>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+          Click any movement below to inspect exact hand/foot setups, 3-1-1 tempo execution, mind-muscle cues, common beginner mistakes, and Level 0 zero-rep regressions.
+        </p>
+
+        <!-- Push Pattern -->
+        <details class="movement-card">
+          <summary>
+            <span>🛡️ 1. The Push Pattern (Chest, Front Delts, Triceps)</span>
+            <span style="font-size: 0.8rem; color: var(--accent-cyan);">Tap to Expand ▾</span>
+          </summary>
+          <div class="movement-content">
+            <p><strong>Setup & Grip</strong>: Hands slightly wider than shoulder-width, fingers splayed wide. Screw palms into surface clockwise (right) and counter-clockwise (left) to stabilize shoulders. Body in a rigid plank.</p>
+            <p><strong>Execution</strong>: Inhale deeply on 3-second descent. Keep elbows tucked at a <strong>45° arrow angle</strong> (never flare at 90°). Pause 1 second 1 inch above floor. Exhale forcefully and press up in 1 explosive second.</p>
+            <p><strong>Mind-Muscle Cues</strong>: <em>"Push the floor/wall away from you"</em> • <em>"Crush an orange inside each armpit"</em>.</p>
+            <p><strong>Mistakes to Avoid</strong>: Flaring elbows out like a 'T' (damages rotator cuff); sagging hips (strains lower back); craning neck to reach floor.</p>
+            <div class="badge-reg">Level 0 Regression: Wall Push-Ups (Stand 2 ft from flat wall, push at chest height) &rarr; Bed/Counter Incline &rarr; Knee Push-Ups.</div>
+          </div>
+        </details>
+
+        <!-- Pull Pattern -->
+        <details class="movement-card">
+          <summary>
+            <span>🛡️ 2. The Pull Pattern (Lats, Upper Back, Rhomboids, Biceps)</span>
+            <span style="font-size: 0.8rem; color: var(--accent-cyan);">Tap to Expand ▾</span>
+          </summary>
+          <div class="movement-content">
+            <p><strong>Setup & Grip</strong>: Grip doorframe molding at mid-chest height, or use a bath towel knotted and shut firmly over a door. Lean back so body weight hangs from hands with arms straight.</p>
+            <p><strong>Execution</strong>: Exhale and drive elbows straight back, pulling chest smoothly to frame/towel. Squeeze shoulder blades together as hard as possible for <strong>2 full seconds</strong>. Inhale and lower under 3s control.</p>
+            <p><strong>Mind-Muscle Cues</strong>: <em>"Pull elbows into back pockets"</em> • <em>"Pinch a pencil between shoulder blades at peak"</em>.</p>
+            <p><strong>Mistakes to Avoid</strong>: Shrugging shoulders up to ears; curling wrists inward; bending at hips instead of leading with chest.</p>
+            <div class="badge-reg">Level 0 Regression: Standing Doorframe Rows (Feet right next to frame, 20% bodyweight) &rarr; 45° Door Rows &rarr; Inverted Table Rows.</div>
+          </div>
+        </details>
+
+        <!-- Squat Pattern -->
+        <details class="movement-card">
+          <summary>
+            <span>🛡️ 3. The Squat Pattern (Quadriceps, Glutes, Adductors)</span>
+            <span style="font-size: 0.8rem; color: var(--accent-cyan);">Tap to Expand ▾</span>
+          </summary>
+          <div class="movement-content">
+            <p><strong>Setup & Stance</strong>: Feet shoulder-width apart, toes turned outward 15–25° (accommodates tall 6'0" femurs). Arms forward for counter-balance.</p>
+            <p><strong>Execution</strong>: Push hips backward first (like sitting into a chair), bend knees tracking in line with toes. Lower over 3s until glutes lightly tap chair (or below parallel). Pause 1s. Drive through heels to stand tall.</p>
+            <p><strong>Mind-Muscle Cues</strong>: <em>"Spread the floor apart with feet"</em> • <em>"Show shirt logo to wall in front (proud chest)"</em>.</p>
+            <p><strong>Mistakes to Avoid</strong>: Knees collapsing inward (valgus); heels peeling off floor (weight too far forward); rounding lower back.</p>
+            <div class="badge-reg">Level 0 Regression: Assisted Chair Squat (Hold doorframe/table with hands while sitting and standing) &rarr; Chair Box Squat &rarr; Free Squat.</div>
+          </div>
+        </details>
+
+        <!-- Hinge Pattern -->
+        <details class="movement-card">
+          <summary>
+            <span>🛡️ 4. The Hinge & Posterior Chain Pattern (Glutes, Hamstrings)</span>
+            <span style="font-size: 0.8rem; color: var(--accent-cyan);">Tap to Expand ▾</span>
+          </summary>
+          <div class="movement-content">
+            <p><strong>Setup & Position</strong>: Lie flat on back on rug, knees bent 90°, feet flat hip-width, heels 8–10 inches from glutes. Arms flat at sides.</p>
+            <p><strong>Execution</strong>: Flatten lower back to floor (pelvic tuck). Drive down through heels and thrust hips skyward until body forms a straight ramp. Squeeze glutes tight for <strong>2 full seconds</strong>. Lower over 3s.</p>
+            <p><strong>Mind-Muscle Cues</strong>: <em>"Drive heels through the floor"</em> • <em>"Squeeze a ₹500 note between butt cheeks at top"</em>.</p>
+            <p><strong>Mistakes to Avoid</strong>: Over-arching lumbar spine; pushing through toes instead of heels (loads knees instead of glutes).</p>
+            <div class="badge-reg">Level 0 Regression: Floor Glute Bridge (Both feet flat, 2s top hold) &rarr; Paused 4s Bridge &rarr; Elevated Feet Bridge &rarr; Single-Leg Bridge.</div>
+          </div>
+        </details>
+
+        <!-- Unilateral Pattern -->
+        <details class="movement-card">
+          <summary>
+            <span>🛡️ 5. The Unilateral Leg & Balance Pattern (Quads, Glutes, Hip Stabilizers)</span>
+            <span style="font-size: 0.8rem; color: var(--accent-cyan);">Tap to Expand ▾</span>
+          </summary>
+          <div class="movement-content">
+            <p><strong>Setup & Stance</strong>: Large staggered step forward (2.5–3 ft). Front foot flat, rear foot on ball of foot. Torso tall with slight 10° forward lean.</p>
+            <p><strong>Execution</strong>: Lower straight down like an elevator until rear knee hovers 1 inch off floor (or touches towel). Pause 1s. Drive forcefully through <strong>front heel</strong> (80% of effort) to stand tall.</p>
+            <p><strong>Mind-Muscle Cues</strong>: <em>"Lower like an elevator, not an escalator"</em> • <em>"80% of bodyweight is concentrated in front heel"</em>.</p>
+            <p><strong>Mistakes to Avoid</strong>: Front heel lifting; pushing off rear toe; knee wobbling inward.</p>
+            <div class="badge-reg">Level 0 Regression: Supported Split Squat (Hold chair back with both hands) &rarr; Free Split Squat &rarr; Bulgarian Split Squat (rear foot on bed).</div>
+          </div>
+        </details>
+
+        <!-- Pike Shoulder Pattern -->
+        <details class="movement-card">
+          <summary>
+            <span>🛡️ 6. The Pike Shoulder Pattern (Deltoids, Upper Chest)</span>
+            <span style="font-size: 0.8rem; color: var(--accent-cyan);">Tap to Expand ▾</span>
+          </summary>
+          <div class="movement-content">
+            <p><strong>Setup & Position</strong>: Hands shoulder-width on floor or bed edge. Push hips high into the air in an inverted 'V' shape (downward dog).</p>
+            <p><strong>Execution</strong>: Lower forehead <strong>diagonally forward</strong> so head forms the top apex of a triangle with your hands. Forehead gently kisses floor/cushion. Pause 1s. Push back and up into high hips.</p>
+            <p><strong>Mind-Muscle Cues</strong>: <em>"Head traces a triangle forward, not between hands"</em> • <em>"Push floor away and hide ears between biceps"</em>.</p>
+            <p><strong>Mistakes to Avoid</strong>: Lowering head straight between hands (pinches rotator cuff); letting hips sag down into flat pushup.</p>
+            <div class="badge-reg">Level 0 Regression: Incline Pike Isometric Hold (Hands on bed, hips high, hold 25s) &rarr; Incline Pike Pushup &rarr; Floor Pike Pushup.</div>
+          </div>
+        </details>
+
+        <!-- Arm Isolation Pattern -->
+        <details class="movement-card">
+          <summary>
+            <span>🛡️ 7. The Arm Isolation Pattern (Triceps Dips & Backpack Curls)</span>
+            <span style="font-size: 0.8rem; color: var(--accent-cyan);">Tap to Expand ▾</span>
+          </summary>
+          <div class="movement-content">
+            <p><strong>Chair Dips</strong>: Sit on chair edge, hands beside hips gripping edge, slide butt off. Knees bent 90° (Level 0 leg assist). Lower hips until elbows reach 90°. Press through palm heels to lock out triceps.</p>
+            <p><strong>Backpack Curls</strong>: Stand tall, grip backpack top grab handle, pin elbows tight against ribs. Curl up to chest, squeeze biceps 1s at top, lower under strict 3-second control.</p>
+            <p><strong>Mind-Muscle Cues</strong>: <em>"Pin elbows to ribs like they are stapled"</em> • <em>"Press palm heels through chair seat"</em>.</p>
+            <p><strong>Mistakes to Avoid</strong>: Dipping too deep past 90° (strains shoulders); swinging backpack with momentum.</p>
+            <div class="badge-reg">Level 0 Regression: Bent-Knee Chair Dips (Legs take 40% weight) &rarr; Straight-Leg Dips &rarr; 2–5 kg Backpack Curls.</div>
+          </div>
+        </details>
+
+        <!-- Core Pattern -->
+        <details class="movement-card">
+          <summary>
+            <span>🛡️ 8. The Core & Stabilization Pattern (Deadbug & Planks)</span>
+            <span style="font-size: 0.8rem; color: var(--accent-cyan);">Tap to Expand ▾</span>
+          </summary>
+          <div class="movement-content">
+            <p><strong>Deadbug Setup</strong>: Lie on back, arms pointing up, knees bent 90° over hips. <strong>Lock lower back flat into floor</strong> so no paper could slide underneath.</p>
+            <p><strong>Deadbug Execution</strong>: Slowly extend right arm back and left leg forward until hovering 2 inches above floor without lower back peeling off. Return and switch sides.</p>
+            <p><strong>Plank Execution</strong>: Forearms on floor, elbows under shoulders, squeeze glutes, tuck pelvis, brace abs as if expecting a punch. Calm nasal breathing.</p>
+            <p><strong>Mistakes to Avoid</strong>: Lower back arching during deadbug; hips sagging toward floor during plank; holding breath.</p>
+            <div class="badge-reg">Level 0 Regression: Deadbug Arm-only or Leg-only tap &rarr; Kneeling Forearm Plank &rarr; Full Standard Plank &rarr; Lying Leg Raises.</div>
+          </div>
+        </details>
+      </div>
+
+      <!-- Prehab & Cool-Down Routines -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 1.5rem;">
+        <div class="card" style="border-left: 3px solid var(--accent-cyan);">
+          <h3 style="color: var(--accent-cyan); margin-bottom: 0.5rem; font-size: 1.05rem;">🧘 5-Minute Prehab Joint Warm-Up</h3>
+          <ul style="font-size: 0.85rem; color: var(--text-muted); padding-left: 1.2rem; line-height: 1.7;">
+            <li><strong>Wrist Circles & Prayer Pulses (60s)</strong>: Figure-8 wrist rotations to lubricate carpals.</li>
+            <li><strong>Arm Circles & Sweeps (60s)</strong>: 20 forward, 20 backward to warm rotator cuffs.</li>
+            <li><strong>Cat-Cow Spinal Waves (60s)</strong>: Mobilizes thoracic spine and transverse abs.</li>
+            <li><strong>Deep Squat Pry (60s)</strong>: Holding doorframe, open ankle and hip capsules.</li>
+            <li><strong>Glute Activation Bridges (60s)</strong>: 15 reps waking up dormant glutes.</li>
+          </ul>
+        </div>
+        <div class="card" style="border-left: 3px solid var(--accent-emerald);">
+          <h3 style="color: var(--accent-emerald); margin-bottom: 0.5rem; font-size: 1.05rem;">🌿 5-Minute Post-Workout Cool-Down</h3>
+          <ul style="font-size: 0.85rem; color: var(--text-muted); padding-left: 1.2rem; line-height: 1.7;">
+            <li><strong>Doorframe Chest Opener (60s)</strong>: Forearm on doorframe, rotate torso away.</li>
+            <li><strong>Child's Pose with Lat Reach (60s)</strong>: Hips on heels, reach arms far forward.</li>
+            <li><strong>Couch / Bed Quad Stretch (60s/leg)</strong>: Rear foot on bed edge, tall upright chest.</li>
+            <li><strong>Seated Hamstring Reach (60s)</strong>: Gentle forward reach without spinal rounding.</li>
+          </ul>
         </div>
       </div>
 
@@ -1832,6 +2329,35 @@
         }
       } catch (err) {
         console.error("Timer bootloader error:", err);
+      }
+
+      
+      // Workout Phase Switcher Bootloader
+      try {
+        const phasePills = document.querySelectorAll(".phase-pill");
+        const phaseViews = {
+          phase1: document.getElementById("workout-phase1"),
+          phase2: document.getElementById("workout-phase2"),
+          phase3: document.getElementById("workout-phase3")
+        };
+
+        phasePills.forEach(pill => {
+          pill.addEventListener("click", () => {
+            const phase = pill.getAttribute("data-phase");
+            if (!phase || !phaseViews[phase]) return;
+
+            phasePills.forEach(p => p.classList.remove("active"));
+            pill.classList.add("active");
+
+            Object.keys(phaseViews).forEach(k => {
+              if (phaseViews[k]) {
+                phaseViews[k].style.display = (k === phase) ? "block" : "none";
+              }
+            });
+          });
+        });
+      } catch (err) {
+        console.error("Workout phase switcher error:", err);
       }
 
       // 4. Interactive Habit Tracker & LocalStorage Bootloader
