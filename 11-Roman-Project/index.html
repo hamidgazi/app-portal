@@ -9,7 +9,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#000000">
-  <meta name="description" content="Read, search, bookmark, and copy rulings & Hadiths from Bahar-e-Shariat, Qareena-e-Zindagi, and Ghalat Fehmiyan Aur Unki Islaah in Roman Urdu.">
+  <meta name="description" content="Seamless mobile reader and copy/share studio for Bahar-e-Shariat (Pt 16), Qareena-e-Zindagi, and Ghalat Fehmiyan in Roman Urdu.">
   
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/reader.css">
@@ -35,7 +35,7 @@
           📑
         </button>
         <!-- Saved Bookmarks Toggle -->
-        <button class="icon-btn" id="btn-toggle-bookmarks" title="Saved Masail & Bookmarks" aria-label="Open Saved Masail" style="position: relative;">
+        <button class="icon-btn" id="btn-toggle-bookmarks" title="Saved Articles & Masail" aria-label="Open Saved Bookmarks" style="position: relative;">
           ⭐
           <span class="badge-count" id="bookmark-count-badge" style="display: none;">0</span>
         </button>
@@ -74,26 +74,53 @@
         <input type="text" id="search-input" class="search-input" placeholder="Search Hadith, Mas'ala, keyword (e.g. Libas, Nikah, Angoothi)..." autocomplete="off" spellcheck="false">
         <button type="button" id="search-clear-btn" class="search-clear-btn" title="Clear Search">✕</button>
       </div>
-      <div class="search-options-row">
-        <div class="search-scope-pills">
-          <span class="scope-pill active" data-scope="current">This Book</span>
-          <span class="scope-pill" data-scope="all">All 3 Books</span>
-        </div>
-        <span id="search-stats" class="search-stats-pill"></span>
-      </div>
     </div>
   </header>
 
   <!-- ========================================================
-       MAIN SCROLLABLE CONTENT STREAM
+       SEAMLESS EDITORIAL ARTICLE VIEWPORT (CONTINUOUS READING)
        ======================================================== -->
-  <main class="app-main" id="content-stream">
-    <!-- Dynamically populated by app.js -->
+  <main class="article-viewport" id="article-viewport">
     <div class="loading-wrap">
       <div class="spinner"></div>
       <p>Loading Roman Islamic Library...</p>
     </div>
   </main>
+
+  <!-- ========================================================
+       STICKY BOTTOM COMMAND DOCK (PREV / NEXT / TOC JUMP)
+       ======================================================== -->
+  <nav class="bottom-nav-dock" id="bottom-nav-dock" aria-label="Chapter Navigation">
+    <div class="dock-content">
+      <button class="dock-nav-btn" id="btn-dock-prev" title="Previous Chapter">
+        ← Prev
+      </button>
+      
+      <div class="dock-chapter-indicator" id="dock-chapter-indicator" title="Tap to open Table of Contents">
+        <span class="dock-indicator-title" id="dock-indicator-title">Loading...</span>
+        <span class="dock-indicator-sub" id="dock-indicator-sub">Tap for Index</span>
+      </div>
+
+      <button class="dock-nav-btn" id="btn-dock-next" title="Next Chapter">
+        Next →
+      </button>
+    </div>
+  </nav>
+
+  <!-- ========================================================
+       INSTANT SEARCH RESULTS DECK OVERLAY
+       ======================================================== -->
+  <div class="search-deck-overlay" id="search-deck-overlay">
+    <div class="search-deck-panel">
+      <div class="search-deck-header">
+        <h3 class="search-deck-title" id="search-deck-title">Search Results</h3>
+        <button class="icon-btn" id="btn-close-search-deck" title="Close Search">✕</button>
+      </div>
+      <div class="search-deck-body" id="search-deck-body">
+        <!-- Results dynamically inserted here -->
+      </div>
+    </div>
+  </div>
 
   <!-- ========================================================
        OFF-CANVAS DRAWER: TABLE OF CONTENTS (TOC)
@@ -109,7 +136,7 @@
       <button class="icon-btn drawer-close-btn" title="Close" aria-label="Close Drawer">✕</button>
     </div>
     <div class="drawer-filter-wrap">
-      <input type="text" id="toc-filter-input" class="drawer-filter-input" placeholder="Filter chapters / abwaab...">
+      <input type="text" id="toc-filter-input" class="drawer-filter-input" placeholder="Filter chapters / topics...">
     </div>
     <div class="drawer-body">
       <ul class="drawer-list" id="toc-list">
@@ -119,13 +146,13 @@
   </aside>
 
   <!-- ========================================================
-       OFF-CANVAS DRAWER: SAVED MASAIL & BOOKMARKS
+       OFF-CANVAS DRAWER: SAVED ARTICLES & BOOKMARKS
        ======================================================== -->
-  <aside class="drawer-panel right" id="bookmarks-drawer" aria-label="Saved Masail">
+  <aside class="drawer-panel right" id="bookmarks-drawer" aria-label="Saved Bookmarks">
     <div class="drawer-header">
       <div class="drawer-title">
         <span>⭐</span>
-        <span>Saved Masail</span>
+        <span>Saved Bookmarks</span>
       </div>
       <button class="icon-btn drawer-close-btn" title="Close" aria-label="Close Drawer">✕</button>
     </div>
@@ -193,9 +220,9 @@
 
         <!-- Library Information -->
         <div class="setting-group" style="padding-top: 10px; border-top: 1px solid var(--border-color); font-size: 0.8rem; color: var(--text-tertiary);">
-          <p><strong>Roman Urdu Islamic Library (Studio Edition)</strong></p>
+          <p><strong>Roman Urdu Islamic Library (Seamless Editorial Edition)</strong></p>
           <p>Curated & Compiled by Hamid Gazi (Surat)</p>
-          <p style="margin-top: 4px;">• Bahar-e-Shariat Part 16 (47 Chapters, 857 Hadiths, 577 Masail)</p>
+          <p style="margin-top: 4px;">• Bahar-e-Shariat Part 16 (47 Chapters, 850 Hadiths, 568 Masail)</p>
           <p>• Qareena-e-Zindagi (132 Izdiwaji Chapters)</p>
           <p>• Ghalat Fehmiyan Aur Unki Islaah (185 Topics)</p>
         </div>

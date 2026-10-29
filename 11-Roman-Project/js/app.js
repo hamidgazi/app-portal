@@ -1,15 +1,15 @@
 /**
  * ============================================================================
- * ROMAN URDU ISLAMIC LIBRARY — MOBILE PWA APPLICATION LOGIC
+ * ROMAN URDU ISLAMIC LIBRARY — REDESIGNED EDITORIAL APPLICATION LOGIC
  * ============================================================================
  * Features:
- *   - Unified Multi-Book Studio (Ghalat Fehmiyan, Qareena-e-Zindagi, Bahar-e-Shariat 16)
- *   - Defensive Component Bootloader Isolation (Directive 5)
- *   - Strict DOM Identifier & Variable Hygiene (Directive 5)
- *   - Procedural Web Audio SFX (Clicks & Chimes, Zero Music - Directive 7)
- *   - WhatsApp-Ready Clipboard Exporter (Single Item & Complete Chapter)
- *   - Real-time Cross-Book & Scoped Search Engine with Keyword Highlighting
- *   - Off-canvas TOC & Bookmarks Drawers with LocalStorage Persistence
+ *   - Seamless Editorial Article Reader (Unbroken Prose Flow, Zero Chopped Cards)
+ *   - In-Text Hadith & Mas'ala Badges with 1-Tap Quick-Copy Buttons
+ *   - Single-Article View with Sticky Bottom Navigation Dock (Prev / Next / TOC)
+ *   - Instant Search Results Deck with Direct Article Anchor Jumping
+ *   - WhatsApp-Formatted Exporter (Individual Ruling & Complete Article)
+ *   - LocalStorage Bookmarks Drawer for Saved Articles & Masail
+ *   - Procedural Web Audio API Sound SFX (Tactile Clicks & Chimes - Zero Music)
  *   - Tri-Theme AMOLED / Sepia / Light & Dynamic Typography Scaler
  * ============================================================================
  */
@@ -21,17 +21,16 @@
   // APPLICATION STATE
   // ==========================================
   const AppState = {
-    currentBookId: "bahar_e_shariat_16", // Default to Bahar-e-Shariat 16
+    currentBookId: "bahar_e_shariat_16", // Default to Bahar-e-Shariat Part 16
+    currentChapterIndex: 0,             // Active reading chapter index
     searchQuery: "",
-    searchScope: "current", // "current" | "all"
-    theme: "amoled",        // "amoled" | "sepia" | "light"
-    fontSize: 16,           // 14 to 22 px
+    theme: "amoled",                    // "amoled" | "sepia" | "light"
+    fontSize: 16,                       // 14 to 22 px
     soundEnabled: true,
-    bookmarks: [],          // [{ id, bookId, bookTitle, chapterTitle, label, previewText }]
-    renderedChapterCount: 4 // Virtual lazy pagination
+    bookmarks: []                       // Saved items
   };
 
-  // Cached DOM elements container
+  // Cached DOM elements
   const DOM = {};
 
   // ==========================================
@@ -47,7 +46,7 @@
           this.ctx = new AudioContextClass();
         }
       } catch (e) {
-        console.warn("Web Audio not available on this browser:", e);
+        console.warn("Web Audio not available:", e);
       }
     },
 
@@ -57,7 +56,7 @@
       }
     },
 
-    // Subtle tactile mechanical click (30ms blip)
+    // Subtle mechanical tactile tap (30ms blip)
     playClick() {
       if (!AppState.soundEnabled || !this.ctx) return;
       try {
@@ -66,7 +65,7 @@
         const gain = this.ctx.createGain();
         osc.type = "sine";
         osc.frequency.setValueAtTime(800, this.ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(300, this.ctx.currentTime + 0.03);
+        osc.frequency.exponentialRampToValueAtTime(320, this.ctx.currentTime + 0.03);
         gain.gain.setValueAtTime(0.08, this.ctx.currentTime);
         gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.03);
         osc.connect(gain);
@@ -74,11 +73,11 @@
         osc.start();
         osc.stop(this.ctx.currentTime + 0.03);
       } catch (err) {
-        // Silent fail on audio restriction
+        // Silent fail
       }
     },
 
-    // Soft alert chime for copy success (two ascending harmonized tones)
+    // Soft alert chime for copy success (two harmonized ascending tones)
     playChime() {
       if (!AppState.soundEnabled || !this.ctx) return;
       try {
@@ -130,7 +129,7 @@
   }
 
   // ==========================================
-  // CLIPBOARD ENGINE (WITH FALLBACK)
+  // CLIPBOARD ENGINE (WITH SECURE FALLBACK)
   // ==========================================
   async function copyToClipboard(text, successMsg = "Copied to clipboard!") {
     let success = false;
@@ -143,7 +142,6 @@
       }
     }
 
-    // Fallback using temporary textarea
     if (!success) {
       try {
         const textArea = document.createElement("textarea");
@@ -173,10 +171,10 @@
   // ==========================================
   // WHATSAPP FORMATTING BUILDERS
   // ==========================================
-  function formatItemForWhatsApp(book, chapter, item) {
+  function formatRulingForWhatsApp(book, chapter, block) {
     const bookTitle = book ? book.title : "Roman Islamic Library";
     const chTitle = chapter ? (chapter.title || `Chapter ${chapter.number}`) : "";
-    const typeLabel = item.label || (item.type === "hadith" ? "Hadees Shareef" : (item.type === "masala" ? "Shar'i Mas'ala" : "Nasihat / Hukm"));
+    const typeLabel = block.label || (block.type === "hadith" ? "Hadees Shareef" : "Shar'i Mas'ala");
 
     let out = `*📗 ${bookTitle}*\n`;
     if (chTitle) {
@@ -185,16 +183,16 @@
     out += `------------------------------\n`;
     out += `*${typeLabel}:*\n`;
 
-    if (item.scripture || (item.is_arabic && item.text)) {
-      out += `\n_${item.scripture || item.text}_\n\n`;
+    if (block.scripture) {
+      out += `\n_${block.scripture}_\n\n`;
     }
 
-    if (item.type !== "scripture" && (!item.is_arabic || item.scripture)) {
-      out += `${item.text || ""}\n`;
+    if (block.text) {
+      out += `${block.text}\n`;
     }
 
-    if (item.citation || chapter.hawala) {
-      out += `\n📚 *Hawala / Reference:* ${item.citation || chapter.hawala}\n`;
+    if (chapter.hawala) {
+      out += `\n📚 *Hawala / Reference:* ${chapter.hawala}\n`;
     }
 
     out += `------------------------------\n`;
@@ -203,27 +201,30 @@
     return out;
   }
 
-  function formatChapterForWhatsApp(book, chapter) {
+  function formatFullArticleForWhatsApp(book, chapter) {
     const bookTitle = book ? book.title : "Roman Islamic Library";
     const chTitle = chapter ? (chapter.title || `Chapter ${chapter.number}`) : "";
 
     let out = `*📗 ${bookTitle}*\n`;
-    out += `*📖 ${chTitle} (Complete Chapter)*\n`;
+    out += `*📖 ${chTitle}*\n`;
     if (chapter.subtitle) {
       out += `_${chapter.subtitle}_\n`;
     }
     out += `==============================\n\n`;
 
-    if (chapter.items && Array.isArray(chapter.items)) {
-      chapter.items.forEach((item, idx) => {
-        const itemHeading = item.label || (item.type === "hadith" ? `[Hadees ${idx + 1}]` : (item.type === "masala" ? `[Mas'ala ${idx + 1}]` : ""));
-        if (itemHeading) {
-          out += `*${itemHeading}*\n`;
+    if (chapter.blocks && Array.isArray(chapter.blocks)) {
+      chapter.blocks.forEach(block => {
+        if (block.type === "p") {
+          out += `${block.text}\n\n`;
+        } else if (block.type === "scripture") {
+          out += `_${block.text}_\n\n`;
+        } else if (block.type === "hadith" || block.type === "masala") {
+          out += `*${block.label}:*\n${block.text}\n\n`;
+        } else if (block.type === "quote") {
+          out += `> _${block.text}_\n\n`;
+        } else if (block.type === "heading") {
+          out += `*${block.text}*\n\n`;
         }
-        if (item.scripture) {
-          out += `_${item.scripture}_\n`;
-        }
-        out += `${item.text || ""}\n\n`;
       });
     }
 
@@ -261,9 +262,6 @@
     return lib.books.find(b => b.id === id) || null;
   }
 
-  // ==========================================
-  // ESCAPE HTML & SEARCH HIGHLIGHTING
-  // ==========================================
   function escapeHTML(str) {
     if (!str) return "";
     return str
@@ -282,12 +280,6 @@
     const qClean = query.trim().replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     const regex = new RegExp(`(${qClean})`, "gi");
     return escapedText.replace(regex, `<mark class="search-match">$1</mark>`);
-  }
-
-  // Check if string contains Arabic characters
-  function containsArabic(str) {
-    if (!str) return false;
-    return /[\u0600-\u06FF\u0750-\u077F]/.test(str);
   }
 
   // ==========================================
@@ -396,23 +388,31 @@
     }
   }
 
-  function isItemBookmarked(itemId) {
-    return AppState.bookmarks.some(b => b.id === itemId);
+  function isItemBookmarked(id) {
+    return AppState.bookmarks.some(b => b.id === id);
   }
 
-  function toggleBookmark(itemData) {
+  function toggleArticleBookmark(book, chapter) {
     SoundFX.playClick();
-    const idx = AppState.bookmarks.findIndex(b => b.id === itemData.id);
+    const chId = chapter.id;
+    const idx = AppState.bookmarks.findIndex(b => b.id === chId);
     if (idx >= 0) {
       AppState.bookmarks.splice(idx, 1);
-      showToast("Removed from Saved Masail", "🗑️");
+      showToast("Removed from Saved Articles", "🗑️");
     } else {
-      AppState.bookmarks.push(itemData);
-      showToast("Saved to Bookmarks!", "⭐");
+      AppState.bookmarks.push({
+        id: chId,
+        bookId: book.id,
+        bookTitle: book.title,
+        chapterIndex: AppState.currentChapterIndex,
+        title: chapter.title,
+        subtitle: chapter.subtitle || chapter.title_urdu || ""
+      });
+      showToast("Article Bookmarked!", "⭐");
     }
     saveBookmarks();
     renderBookmarksDrawerList();
-    renderCurrentBookStream(); // Re-render to refresh star icons
+    renderCurrentArticle(); // Refresh bookmark button state
   }
 
   function updateBookmarksBadge() {
@@ -428,9 +428,9 @@
     if (AppState.bookmarks.length === 0) {
       DOM.bookmarksList.innerHTML = `
         <div class="empty-state">
-          <div style="font-size: 2rem; margin-bottom: 8px;">⭐</div>
-          <p>No saved Masail yet.</p>
-          <small>Tap the star icon on any Hadith or Mas'ala to save for quick reading.</small>
+          <div style="font-size: 2.2rem; margin-bottom: 8px;">⭐</div>
+          <div style="font-weight: 700; margin-bottom: 4px;">No saved bookmarks yet</div>
+          <small>Tap the Bookmark button in any article header to save for quick reading.</small>
         </div>
       `;
       return;
@@ -439,10 +439,10 @@
     let html = "";
     AppState.bookmarks.forEach(bm => {
       html += `
-        <li class="drawer-list-item" data-bm-book="${escapeHTML(bm.bookId)}" data-bm-item="${escapeHTML(bm.id)}">
+        <li class="drawer-list-item" data-bm-book="${escapeHTML(bm.bookId)}" data-bm-ch-idx="${bm.chapterIndex}">
           <div style="flex: 1; padding-right: 8px;">
-            <div class="item-title" style="font-weight: 600;">${escapeHTML(bm.label || bm.chapterTitle)}</div>
-            <div class="item-meta">📖 ${escapeHTML(bm.bookTitle)} • ${escapeHTML(bm.previewText ? bm.previewText.substring(0, 60) + '...' : '')}</div>
+            <div class="item-title" style="font-weight: 700;">${escapeHTML(bm.title)}</div>
+            <div class="item-meta">📖 ${escapeHTML(bm.bookTitle)} ${bm.subtitle ? `• ${escapeHTML(bm.subtitle)}` : ''}</div>
           </div>
           <button class="icon-btn delete-btn" title="Remove" data-remove-bm="${escapeHTML(bm.id)}" style="width:36px; height:36px; min-width:36px; min-height:36px;">
             ✕
@@ -457,11 +457,9 @@
       item.addEventListener("click", function (e) {
         if (e.target.closest(".delete-btn")) return;
         const bId = this.getAttribute("data-bm-book");
-        const itemId = this.getAttribute("data-bm-item");
+        const chIdx = parseInt(this.getAttribute("data-bm-ch-idx"), 10) || 0;
         closeDrawers();
-        switchToBook(bId, () => {
-          jumpToElement(itemId);
-        });
+        switchToBook(bId, chIdx);
       });
     });
 
@@ -474,9 +472,64 @@
           AppState.bookmarks.splice(idx, 1);
           saveBookmarks();
           renderBookmarksDrawerList();
-          renderCurrentBookStream();
+          renderCurrentArticle();
         }
       });
+    });
+  }
+
+  // ==========================================
+  // MODULE: TOC DRAWER RENDERING
+  // ==========================================
+  function renderTOCDrawerList() {
+    if (!DOM.tocList) return;
+    const book = getCurrentBook();
+    if (!book || !book.chapters) {
+      DOM.tocList.innerHTML = `<div class="empty-state">No chapters found</div>`;
+      return;
+    }
+
+    if (DOM.tocBookTitle) {
+      DOM.tocBookTitle.textContent = book.title;
+    }
+
+    let html = "";
+    book.chapters.forEach((ch, idx) => {
+      const isCurrent = (idx === AppState.currentChapterIndex);
+      const metaInfo = (ch.hadith_count || ch.masala_count) 
+        ? `${ch.hadith_count || 0} Ahadith • ${ch.masala_count || 0} Masail`
+        : `Topic ${ch.number}`;
+
+      html += `
+        <li class="drawer-list-item toc-item ${isCurrent ? 'active' : ''}" data-ch-idx="${idx}">
+          <div style="flex: 1;">
+            <div class="item-title">${escapeHTML(ch.title)}</div>
+            ${ch.title_urdu ? `<div class="item-meta" style="direction: rtl; font-family: var(--font-arabic); font-size: 0.95rem;">${escapeHTML(ch.title_urdu)}</div>` : ''}
+            <div class="item-meta">${metaInfo}</div>
+          </div>
+          <span style="color: var(--accent-light); font-size: 1.15rem;">›</span>
+        </li>
+      `;
+    });
+
+    DOM.tocList.innerHTML = html;
+
+    DOM.tocList.querySelectorAll(".toc-item").forEach(item => {
+      item.addEventListener("click", function () {
+        SoundFX.playClick();
+        const chIdx = parseInt(this.getAttribute("data-ch-idx"), 10) || 0;
+        closeDrawers();
+        goToChapter(chIdx);
+      });
+    });
+  }
+
+  function filterTOC(filterText) {
+    if (!DOM.tocList) return;
+    const items = DOM.tocList.querySelectorAll(".toc-item");
+    items.forEach(el => {
+      const text = el.textContent.toLowerCase();
+      el.style.display = text.includes(filterText) ? "flex" : "none";
     });
   }
 
@@ -491,7 +544,7 @@
           tab.addEventListener("click", function () {
             SoundFX.playClick();
             const bId = this.getAttribute("data-book-id");
-            switchToBook(bId);
+            switchToBook(bId, 0);
           });
         });
       }
@@ -504,7 +557,7 @@
         });
       }
 
-      // Bookmark button
+      // Bookmarks button
       if (DOM.bookmarkToggleBtn) {
         DOM.bookmarkToggleBtn.addEventListener("click", () => {
           SoundFX.playClick();
@@ -541,13 +594,44 @@
         });
       }
 
+      // Search deck close button
+      if (DOM.searchDeckCloseBtn) {
+        DOM.searchDeckCloseBtn.addEventListener("click", () => {
+          SoundFX.playClick();
+          closeSearchDeck();
+        });
+      }
+
       // Overlay clicks
       if (DOM.drawerOverlay) {
         DOM.drawerOverlay.addEventListener("click", closeDrawers);
       }
+      if (DOM.searchDeckOverlay) {
+        DOM.searchDeckOverlay.addEventListener("click", function (e) {
+          if (e.target === this) closeSearchDeck();
+        });
+      }
       if (DOM.settingsModal) {
         DOM.settingsModal.addEventListener("click", function (e) {
           if (e.target === this) closeModals();
+        });
+      }
+
+      // Bottom Command Dock Buttons
+      if (DOM.dockPrevBtn) {
+        DOM.dockPrevBtn.addEventListener("click", () => {
+          goToPrevChapter();
+        });
+      }
+      if (DOM.dockNextBtn) {
+        DOM.dockNextBtn.addEventListener("click", () => {
+          goToNextChapter();
+        });
+      }
+      if (DOM.dockIndicator) {
+        DOM.dockIndicator.addEventListener("click", () => {
+          SoundFX.playClick();
+          openDrawer("toc");
         });
       }
 
@@ -559,7 +643,7 @@
         });
 
         window.addEventListener("scroll", () => {
-          if (window.scrollY > 350) {
+          if (window.scrollY > 300) {
             DOM.fabTop.classList.add("visible");
           } else {
             DOM.fabTop.classList.remove("visible");
@@ -578,13 +662,12 @@
     }
   }
 
-  function switchToBook(bookId, callback) {
+  function switchToBook(bookId, chapterIndex = 0) {
     AppState.currentBookId = bookId;
-    AppState.renderedChapterCount = 4; // Reset virtual paging
+    AppState.currentChapterIndex = chapterIndex;
     AppState.searchQuery = "";
     if (DOM.searchInput) DOM.searchInput.value = "";
     if (DOM.searchClearBtn) DOM.searchClearBtn.classList.remove("visible");
-    if (DOM.searchStats) DOM.searchStats.textContent = "";
 
     document.body.setAttribute("data-current-book", bookId);
 
@@ -596,11 +679,32 @@
     }
 
     renderTOCDrawerList();
-    renderCurrentBookStream();
+    renderCurrentArticle();
     window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 
-    if (typeof callback === "function") {
-      setTimeout(callback, 100);
+  function goToChapter(index) {
+    const book = getCurrentBook();
+    if (!book || !book.chapters) return;
+    const clampedIndex = Math.max(0, Math.min(index, book.chapters.length - 1));
+    AppState.currentChapterIndex = clampedIndex;
+    renderTOCDrawerList();
+    renderCurrentArticle();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function goToPrevChapter() {
+    SoundFX.playClick();
+    if (AppState.currentChapterIndex > 0) {
+      goToChapter(AppState.currentChapterIndex - 1);
+    }
+  }
+
+  function goToNextChapter() {
+    SoundFX.playClick();
+    const book = getCurrentBook();
+    if (book && AppState.currentChapterIndex < book.chapters.length - 1) {
+      goToChapter(AppState.currentChapterIndex + 1);
     }
   }
 
@@ -630,78 +734,164 @@
     if (DOM.settingsModal) DOM.settingsModal.classList.remove("open");
   }
 
-  function jumpToElement(elemId) {
-    // If element is not rendered yet, expand rendered chapters to include it
-    let target = document.getElementById(elemId);
-    if (!target) {
-      const book = getCurrentBook();
-      if (book) {
-        AppState.renderedChapterCount = book.chapters.length;
-        renderCurrentBookStream();
-        target = document.getElementById(elemId);
-      }
-    }
+  function openSearchDeck() {
+    if (DOM.searchDeckOverlay) DOM.searchDeckOverlay.classList.add("open");
+  }
 
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-      target.classList.add("highlighted");
-      setTimeout(() => target.classList.remove("highlighted"), 2500);
-    }
+  function closeSearchDeck() {
+    if (DOM.searchDeckOverlay) DOM.searchDeckOverlay.classList.remove("open");
   }
 
   // ==========================================
-  // MODULE: TOC DRAWER RENDERING
+  // MODULE: SEAMLESS ARTICLE RENDERING PIPELINE
   // ==========================================
-  function renderTOCDrawerList() {
-    if (!DOM.tocList) return;
+  function renderCurrentArticle() {
+    if (!DOM.articleContainer) return;
     const book = getCurrentBook();
-    if (!book || !book.chapters) {
-      DOM.tocList.innerHTML = `<div class="empty-state">No chapters found</div>`;
+    if (!book || !book.chapters || book.chapters.length === 0) {
+      DOM.articleContainer.innerHTML = `<div class="empty-state">No book data available</div>`;
       return;
     }
 
-    if (DOM.tocBookTitle) {
-      DOM.tocBookTitle.textContent = book.title;
+    const chapter = book.chapters[AppState.currentChapterIndex] || book.chapters[0];
+    const isBookmarked = isItemBookmarked(chapter.id);
+    const totalChapters = book.chapters.length;
+    const currentNum = AppState.currentChapterIndex + 1;
+
+    // Build Header HTML
+    let headerHTML = `
+      <header class="article-header">
+        <div class="article-top-meta">
+          <span class="book-category-badge">${escapeHTML(book.badge || 'Islamic Classical')}</span>
+          <span class="article-seq-indicator">${currentNum} / ${totalChapters}</span>
+        </div>
+        <h1 class="article-title">${escapeHTML(chapter.title)}</h1>
+        ${chapter.title_urdu ? `<div class="article-urdu-title">${escapeHTML(chapter.title_urdu)}</div>` : ''}
+        ${chapter.subtitle ? `<div class="article-subtitle">${escapeHTML(chapter.subtitle)}</div>` : ''}
+        ${chapter.hawala ? `<div class="article-hawala">📚 ${escapeHTML(chapter.hawala)}</div>` : ''}
+        
+        <div class="article-actions-bar">
+          <button class="article-action-btn btn-primary-action" id="btn-copy-full-article" title="Copy complete article formatted for WhatsApp">
+            📋 Copy Full Article
+          </button>
+          <button class="article-action-btn" id="btn-share-full-article" title="Share complete article to WhatsApp">
+            💬 Share WhatsApp
+          </button>
+          <button class="article-action-btn ${isBookmarked ? 'bookmarked' : ''}" id="btn-bookmark-article" title="${isBookmarked ? 'Remove Bookmark' : 'Save Article'}">
+            ${isBookmarked ? '★ Bookmarked' : '⭐ Bookmark'}
+          </button>
+        </div>
+      </header>
+    `;
+
+    // Build Continuous Prose Body HTML
+    let proseHTML = `<div class="article-prose">`;
+
+    if (chapter.blocks && Array.isArray(chapter.blocks)) {
+      chapter.blocks.forEach(block => {
+        if (block.type === "p") {
+          proseHTML += `<p class="article-p">${escapeHTML(block.text)}</p>`;
+        } else if (block.type === "scripture") {
+          proseHTML += `<div class="scripture-box">${escapeHTML(block.text)}</div>`;
+        } else if (block.type === "hadith") {
+          proseHTML += `
+            <div class="ruling-block hadith-block" id="${escapeHTML(block.id)}" data-ruling-id="${escapeHTML(block.id)}">
+              <div class="ruling-header">
+                <span class="ruling-badge hadith-badge">📜 ${escapeHTML(block.label)}</span>
+                <button class="inline-copy-btn btn-copy-ruling" data-ruling-id="${escapeHTML(block.id)}" title="Copy ${escapeHTML(block.label)} for WhatsApp">
+                  📋 Copy
+                </button>
+              </div>
+              ${block.scripture ? `<div class="scripture-box">${escapeHTML(block.scripture)}</div>` : ''}
+              <div class="ruling-body">${escapeHTML(block.text)}</div>
+            </div>
+          `;
+        } else if (block.type === "masala") {
+          proseHTML += `
+            <div class="ruling-block masala-block" id="${escapeHTML(block.id)}" data-ruling-id="${escapeHTML(block.id)}">
+              <div class="ruling-header">
+                <span class="ruling-badge masala-badge">⚖️ ${escapeHTML(block.label)}</span>
+                <button class="inline-copy-btn btn-copy-ruling" data-ruling-id="${escapeHTML(block.id)}" title="Copy ${escapeHTML(block.label)} for WhatsApp">
+                  📋 Copy
+                </button>
+              </div>
+              ${block.scripture ? `<div class="scripture-box">${escapeHTML(block.scripture)}</div>` : ''}
+              <div class="ruling-body">${escapeHTML(block.text)}</div>
+            </div>
+          `;
+        } else if (block.type === "quote") {
+          proseHTML += `<blockquote class="article-quote">${escapeHTML(block.text)}</blockquote>`;
+        } else if (block.type === "heading") {
+          proseHTML += `<h3 class="article-heading">${escapeHTML(block.text)}</h3>`;
+        } else if (block.type === "footnote") {
+          proseHTML += `<div class="article-footnote">${escapeHTML(block.text)}</div>`;
+        }
+      });
     }
 
-    let html = "";
-    book.chapters.forEach(ch => {
-      const itemCount = ch.items ? ch.items.length : 0;
-      html += `
-        <li class="drawer-list-item toc-item" data-ch-id="${escapeHTML(ch.id)}">
-          <div style="flex: 1;">
-            <div class="item-title">${escapeHTML(ch.title)}</div>
-            ${ch.title_urdu ? `<div class="item-meta" style="direction: rtl; font-family: var(--font-arabic); font-size: 0.95rem;">${escapeHTML(ch.title_urdu)}</div>` : ''}
-            <div class="item-meta">${itemCount} ahkaam / masail</div>
-          </div>
-          <span style="color: var(--accent-light); font-size: 1.1rem;">›</span>
-        </li>
-      `;
-    });
+    proseHTML += `</div>`;
 
-    DOM.tocList.innerHTML = html;
+    // Inject into viewport
+    DOM.articleContainer.innerHTML = headerHTML + proseHTML;
 
-    DOM.tocList.querySelectorAll(".toc-item").forEach(item => {
-      item.addEventListener("click", function () {
-        SoundFX.playClick();
-        const chId = this.getAttribute("data-ch-id");
-        closeDrawers();
-        jumpToElement(chId);
+    // Update Bottom Command Dock
+    if (DOM.dockPrevBtn) {
+      DOM.dockPrevBtn.disabled = (AppState.currentChapterIndex === 0);
+    }
+    if (DOM.dockNextBtn) {
+      DOM.dockNextBtn.disabled = (AppState.currentChapterIndex === totalChapters - 1);
+    }
+    if (DOM.dockIndicatorTitle && DOM.dockIndicatorSub) {
+      DOM.dockIndicatorTitle.textContent = chapter.title;
+      DOM.dockIndicatorSub.textContent = `${currentNum} of ${totalChapters} • Tap for Index`;
+    }
+
+    attachArticleEventListeners(book, chapter);
+  }
+
+  function attachArticleEventListeners(book, chapter) {
+    // Copy Full Article
+    const copyFullBtn = document.getElementById("btn-copy-full-article");
+    if (copyFullBtn) {
+      copyFullBtn.addEventListener("click", () => {
+        const text = formatFullArticleForWhatsApp(book, chapter);
+        copyToClipboard(text, "Full article copied! Ready for WhatsApp");
+      });
+    }
+
+    // Share Full Article
+    const shareFullBtn = document.getElementById("btn-share-full-article");
+    if (shareFullBtn) {
+      shareFullBtn.addEventListener("click", () => {
+        const text = formatFullArticleForWhatsApp(book, chapter);
+        shareDirectWhatsApp(text);
+      });
+    }
+
+    // Bookmark Article
+    const bookmarkBtn = document.getElementById("btn-bookmark-article");
+    if (bookmarkBtn) {
+      bookmarkBtn.addEventListener("click", () => {
+        toggleArticleBookmark(book, chapter);
+      });
+    }
+
+    // Inline Ruling Copy Buttons
+    DOM.articleContainer.querySelectorAll(".btn-copy-ruling").forEach(btn => {
+      btn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        const rId = this.getAttribute("data-ruling-id");
+        const block = chapter.blocks && chapter.blocks.find(b => b.id === rId);
+        if (block) {
+          const text = formatRulingForWhatsApp(book, chapter, block);
+          copyToClipboard(text, `${block.label} copied! Ready for WhatsApp`);
+        }
       });
     });
   }
 
-  function filterTOC(filterText) {
-    if (!DOM.tocList) return;
-    const items = DOM.tocList.querySelectorAll(".toc-item");
-    items.forEach(el => {
-      const text = el.textContent.toLowerCase();
-      el.style.display = text.includes(filterText) ? "flex" : "none";
-    });
-  }
-
   // ==========================================
-  // MODULE: SEARCH ENGINE (SCOPED & ALL BOOKS)
+  // MODULE: SEARCH ENGINE & RESULTS DECK
   // ==========================================
   let searchDebounceTimer = null;
 
@@ -725,22 +915,8 @@
           SoundFX.playClick();
           DOM.searchInput.value = "";
           DOM.searchClearBtn.classList.remove("visible");
-          executeSearch("");
+          closeSearchDeck();
           DOM.searchInput.focus();
-        });
-      }
-
-      if (DOM.searchScopePills) {
-        DOM.searchScopePills.forEach(pill => {
-          pill.addEventListener("click", function () {
-            SoundFX.playClick();
-            const scope = this.getAttribute("data-scope");
-            AppState.searchScope = scope;
-            DOM.searchScopePills.forEach(p => p.classList.toggle("active", p === this));
-            if (AppState.searchQuery) {
-              executeSearch(AppState.searchQuery);
-            }
-          });
         });
       }
     } catch (err) {
@@ -751,359 +927,102 @@
   function executeSearch(query) {
     AppState.searchQuery = query;
 
-    if (!query) {
-      if (DOM.searchStats) DOM.searchStats.textContent = "";
-      renderCurrentBookStream();
+    if (!query || query.length < 2) {
+      closeSearchDeck();
       return;
     }
 
     const lib = getLibrary();
     const queryLower = query.toLowerCase();
-    const booksToSearch = AppState.searchScope === "all" ? lib.books : [getCurrentBook()];
-
-    let totalMatches = 0;
     const results = [];
 
-    booksToSearch.forEach(book => {
+    // Search across all books
+    lib.books.forEach(book => {
       if (!book || !book.chapters) return;
-      book.chapters.forEach(ch => {
-        let chapterMatched = false;
-        const matchingItems = [];
-
-        // Check chapter title
+      book.chapters.forEach((ch, chIdx) => {
         const chTitleMatch = ch.title && ch.title.toLowerCase().includes(queryLower);
         const chUrduMatch = ch.title_urdu && ch.title_urdu.includes(query);
 
-        if (ch.items && Array.isArray(ch.items)) {
-          ch.items.forEach(item => {
-            const textMatch = item.text && item.text.toLowerCase().includes(queryLower);
-            const scriptMatch = item.scripture && item.scripture.includes(query);
-            const labelMatch = item.label && item.label.toLowerCase().includes(queryLower);
+        if (ch.blocks && Array.isArray(ch.blocks)) {
+          ch.blocks.forEach(block => {
+            const textMatch = block.text && block.text.toLowerCase().includes(queryLower);
+            const scriptMatch = block.scripture && block.scripture.includes(query);
+            const labelMatch = block.label && block.label.toLowerCase().includes(queryLower);
 
             if (textMatch || scriptMatch || labelMatch || chTitleMatch || chUrduMatch) {
-              matchingItems.push(item);
-              totalMatches++;
+              results.push({
+                book: book,
+                chapter: ch,
+                chapterIndex: chIdx,
+                block: block,
+                preview: block.text ? block.text.substring(0, 140) + "..." : (block.scripture || "")
+              });
             }
-          });
-        }
-
-        if (matchingItems.length > 0) {
-          results.push({
-            book: book,
-            chapter: ch,
-            items: matchingItems
           });
         }
       });
     });
 
-    if (DOM.searchStats) {
-      const scopeLabel = AppState.searchScope === "all" ? "across all 3 books" : "in current book";
-      DOM.searchStats.textContent = `Found ${totalMatches} matches ${scopeLabel}`;
-    }
-
-    renderSearchResultsStream(results, query);
+    renderSearchDeckResults(results, query);
   }
 
-  function renderSearchResultsStream(results, query) {
-    if (!DOM.contentStream) return;
+  function renderSearchDeckResults(results, query) {
+    if (!DOM.searchDeckBody || !DOM.searchDeckTitle) return;
+
+    DOM.searchDeckTitle.textContent = `Found ${results.length} results for "${query}"`;
+
     if (results.length === 0) {
-      DOM.contentStream.innerHTML = `
-        <div class="empty-state" style="padding: 60px 20px;">
-          <div style="font-size: 2.5rem; margin-bottom: 12px;">🔍</div>
-          <div style="font-size: 1.15rem; font-weight: 700; margin-bottom: 6px;">No matches found</div>
-          <p style="color: var(--text-tertiary);">No rulings or Hadiths matched "<strong>${escapeHTML(query)}</strong>".</p>
-          <div style="margin-top: 16px;">
-            <button class="icon-btn" id="btn-search-all-scope" style="width: auto; padding: 8px 18px; border-radius: 999px;">
-              Try searching across all 3 books
-            </button>
-          </div>
+      DOM.searchDeckBody.innerHTML = `
+        <div class="empty-state">
+          <div style="font-size: 2.2rem; margin-bottom: 8px;">🔍</div>
+          <p>No rulings or topics matched "<strong>${escapeHTML(query)}</strong>".</p>
         </div>
       `;
-      const searchAllBtn = document.getElementById("btn-search-all-scope");
-      if (searchAllBtn) {
-        searchAllBtn.addEventListener("click", () => {
-          AppState.searchScope = "all";
-          if (DOM.searchScopePills) {
-            DOM.searchScopePills.forEach(p => p.classList.toggle("active", p.getAttribute("data-scope") === "all"));
-          }
-          executeSearch(query);
-        });
-      }
+      openSearchDeck();
       return;
     }
 
     let html = "";
-    results.forEach(group => {
-      const { book, chapter, items } = group;
-      html += `
-        <div class="chapter-container">
-          <div class="chapter-header-card">
-            <div class="chapter-header-top">
-              <div class="chapter-title-group">
-                <span class="chapter-number-tag">📖 ${escapeHTML(book.title)}</span>
-                <h3 class="chapter-main-title">${highlightMatches(chapter.title, query)}</h3>
-                ${chapter.title_urdu ? `<div class="chapter-urdu-title">${escapeHTML(chapter.title_urdu)}</div>` : ''}
-              </div>
-            </div>
-          </div>
-          <div class="chapter-items-wrap">
-      `;
-
-      items.forEach(item => {
-        html += renderItemCardHTML(book, chapter, item, query);
-      });
+    // Show up to 50 best results
+    results.slice(0, 50).forEach(res => {
+      const { book, chapter, chapterIndex, block, preview } = res;
+      const blockLabel = block.label || (block.type === "scripture" ? "Aayah / Hadees" : "Ruling");
 
       html += `
+        <div class="search-result-card" data-book-id="${escapeHTML(book.id)}" data-ch-idx="${chapterIndex}" data-block-id="${escapeHTML(block.id || '')}">
+          <div class="search-result-badge-row">
+            <span class="search-result-book">${escapeHTML(book.badge || book.title)}</span>
+            <span style="font-size: 0.72rem; color: var(--accent-light); font-weight: 700;">${escapeHTML(blockLabel)}</span>
           </div>
+          <div class="search-result-chapter">${highlightMatches(chapter.title, query)}</div>
+          <div class="search-result-snippet">${highlightMatches(preview, query)}</div>
         </div>
       `;
     });
 
-    DOM.contentStream.innerHTML = html;
-    attachItemEventListeners();
-  }
+    DOM.searchDeckBody.innerHTML = html;
+    openSearchDeck();
 
-  // ==========================================
-  // MODULE: BOOK STREAM & ITEM RENDERING
-  // ==========================================
-  function renderCurrentBookStream() {
-    if (!DOM.contentStream) return;
-    const book = getCurrentBook();
-    if (!book) {
-      DOM.contentStream.innerHTML = `<div class="empty-state">No book data available</div>`;
-      return;
-    }
-
-    let html = `
-      <div class="book-hero-banner">
-        <div class="book-badge-row">
-          <span class="book-badge">${escapeHTML(book.badge || 'Islamic Classical')}</span>
-          <span class="chapter-count-pill">${book.chapters.length} Chapters / Topics</span>
-        </div>
-        <h1 class="book-hero-title">${escapeHTML(book.title)}</h1>
-        ${book.title_urdu ? `<div class="book-hero-urdu">${escapeHTML(book.title_urdu)}</div>` : ''}
-        ${book.subtitle ? `<div class="book-hero-subtitle">${escapeHTML(book.subtitle)}</div>` : ''}
-        <div class="book-hero-meta">
-          <div class="meta-item">✍️ <strong>Musannif:</strong> ${escapeHTML(book.author)}</div>
-          <div class="meta-item">💻 <strong>Compiler:</strong> ${escapeHTML(book.compiler)}</div>
-        </div>
-      </div>
-    `;
-
-    // Virtual pagination: Render only first N chapters initially for ultra-responsive mobile performance
-    const chaptersToRender = book.chapters.slice(0, AppState.renderedChapterCount);
-
-    chaptersToRender.forEach(chapter => {
-      html += `
-        <section class="chapter-container" id="${escapeHTML(chapter.id)}">
-          <div class="chapter-header-card">
-            <div class="chapter-header-top">
-              <div class="chapter-title-group">
-                <span class="chapter-number-tag">Section / Chapter ${chapter.number}</span>
-                <h2 class="chapter-main-title">${escapeHTML(chapter.title)}</h2>
-                ${chapter.title_urdu ? `<div class="chapter-urdu-title">${escapeHTML(chapter.title_urdu)}</div>` : ''}
-                ${chapter.subtitle ? `<div style="font-size:0.85rem; color:var(--text-secondary); margin-top:4px;">${escapeHTML(chapter.subtitle)}</div>` : ''}
-                ${chapter.hawala ? `<div style="font-size:0.75rem; color:var(--text-tertiary); margin-top:4px; font-style:italic;">${escapeHTML(chapter.hawala)}</div>` : ''}
-              </div>
-              <div class="chapter-actions">
-                <button class="chapter-copy-btn btn-copy-chapter" data-ch-id="${escapeHTML(chapter.id)}" title="Copy Complete Chapter">
-                  <span>📋 Copy Chapter</span>
-                </button>
-                <button class="chapter-copy-btn btn-share-chapter" data-ch-id="${escapeHTML(chapter.id)}" title="Share Chapter to WhatsApp">
-                  <span>💬 Share</span>
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="chapter-items-wrap">
-      `;
-
-      if (chapter.items && Array.isArray(chapter.items)) {
-        chapter.items.forEach(item => {
-          html += renderItemCardHTML(book, chapter, item, "");
-        });
-      }
-
-      html += `
-          </div>
-        </section>
-      `;
-    });
-
-    // Load More Button if remaining chapters exist
-    if (book.chapters.length > AppState.renderedChapterCount) {
-      const remaining = book.chapters.length - AppState.renderedChapterCount;
-      html += `
-        <div class="loading-wrap">
-          <button class="load-more-btn" id="btn-load-more-chapters">
-            📖 Load Next 6 Chapters (${remaining} remaining)
-          </button>
-        </div>
-      `;
-    }
-
-    DOM.contentStream.innerHTML = html;
-    attachItemEventListeners();
-
-    const loadMoreBtn = document.getElementById("btn-load-more-chapters");
-    if (loadMoreBtn) {
-      loadMoreBtn.addEventListener("click", () => {
+    // Attach click to jump
+    DOM.searchDeckBody.querySelectorAll(".search-result-card").forEach(card => {
+      card.addEventListener("click", function () {
         SoundFX.playClick();
-        AppState.renderedChapterCount += 6;
-        renderCurrentBookStream();
-      });
-    }
-  }
+        const bId = this.getAttribute("data-book-id");
+        const chIdx = parseInt(this.getAttribute("data-ch-idx"), 10) || 0;
+        const blockId = this.getAttribute("data-block-id");
 
-  function renderItemCardHTML(book, chapter, item, searchQuery = "") {
-    const isBookmarked = isItemBookmarked(item.id);
-    const tagClass = item.type === "hadith" ? "type-hadith" : (item.type === "masala" ? "type-masala" : "");
-    const tagLabel = item.label || (item.type === "hadith" ? "Hadees" : (item.type === "masala" ? "Mas'ala" : "Ahkaam"));
+        closeSearchDeck();
+        switchToBook(bId, chIdx);
 
-    // Check if item text has Arabic script
-    const hasArabicText = item.is_arabic || containsArabic(item.text) || item.scripture;
-
-    return `
-      <article class="item-card" id="${escapeHTML(item.id)}" data-item-id="${escapeHTML(item.id)}" data-ch-id="${escapeHTML(chapter.id)}" data-book-id="${escapeHTML(book.id)}">
-        <div class="item-card-header">
-          <span class="item-tag ${tagClass}">
-            ${escapeHTML(tagLabel)}
-          </span>
-          <div class="item-actions">
-            <button class="mini-action-btn btn-copy-item" title="Copy to Clipboard" data-item-id="${escapeHTML(item.id)}">
-              📋
-            </button>
-            <button class="mini-action-btn btn-share-item" title="Share via WhatsApp" data-item-id="${escapeHTML(item.id)}">
-              💬
-            </button>
-            <button class="mini-action-btn btn-bookmark-item ${isBookmarked ? 'bookmarked' : ''}" title="${isBookmarked ? 'Remove Bookmark' : 'Save Mas\'ala'}" data-item-id="${escapeHTML(item.id)}">
-              ${isBookmarked ? '★' : '☆'}
-            </button>
-          </div>
-        </div>
-
-        ${item.scripture ? `
-          <div class="scripture-box">
-            ${highlightMatches(item.scripture, searchQuery)}
-          </div>
-        ` : ''}
-
-        ${item.is_arabic && !item.scripture ? `
-          <div class="scripture-box">
-            ${highlightMatches(item.text, searchQuery)}
-          </div>
-        ` : ''}
-
-        ${(!item.is_arabic || item.scripture) && item.text ? `
-          <div class="item-body">
-            <p>${highlightMatches(item.text, searchQuery)}</p>
-          </div>
-        ` : ''}
-
-        ${item.citation ? `
-          <div class="item-citation">
-            📚 ${highlightMatches(item.citation, searchQuery)}
-          </div>
-        ` : ''}
-      </article>
-    `;
-  }
-
-  function attachItemEventListeners() {
-    if (!DOM.contentStream) return;
-
-    // Single item Copy buttons
-    DOM.contentStream.querySelectorAll(".btn-copy-item").forEach(btn => {
-      btn.addEventListener("click", function (e) {
-        e.stopPropagation();
-        const card = this.closest(".item-card");
-        if (!card) return;
-        const bId = card.getAttribute("data-book-id");
-        const chId = card.getAttribute("data-ch-id");
-        const itemId = card.getAttribute("data-item-id");
-
-        const book = getBookById(bId);
-        const chapter = book && book.chapters.find(c => c.id === chId);
-        const item = chapter && chapter.items.find(i => i.id === itemId);
-
-        if (book && chapter && item) {
-          const text = formatItemForWhatsApp(book, chapter, item);
-          copyToClipboard(text, "Mas'ala copied! Ready for WhatsApp");
-        }
-      });
-    });
-
-    // Single item WhatsApp Share buttons
-    DOM.contentStream.querySelectorAll(".btn-share-item").forEach(btn => {
-      btn.addEventListener("click", function (e) {
-        e.stopPropagation();
-        const card = this.closest(".item-card");
-        if (!card) return;
-        const bId = card.getAttribute("data-book-id");
-        const chId = card.getAttribute("data-ch-id");
-        const itemId = card.getAttribute("data-item-id");
-
-        const book = getBookById(bId);
-        const chapter = book && book.chapters.find(c => c.id === chId);
-        const item = chapter && chapter.items.find(i => i.id === itemId);
-
-        if (book && chapter && item) {
-          const text = formatItemForWhatsApp(book, chapter, item);
-          shareDirectWhatsApp(text);
-        }
-      });
-    });
-
-    // Single item Bookmark buttons
-    DOM.contentStream.querySelectorAll(".btn-bookmark-item").forEach(btn => {
-      btn.addEventListener("click", function (e) {
-        e.stopPropagation();
-        const card = this.closest(".item-card");
-        if (!card) return;
-        const bId = card.getAttribute("data-book-id");
-        const chId = card.getAttribute("data-ch-id");
-        const itemId = card.getAttribute("data-item-id");
-
-        const book = getBookById(bId);
-        const chapter = book && book.chapters.find(c => c.id === chId);
-        const item = chapter && chapter.items.find(i => i.id === itemId);
-
-        if (book && chapter && item) {
-          toggleBookmark({
-            id: item.id,
-            bookId: book.id,
-            bookTitle: book.title,
-            chapterTitle: chapter.title,
-            label: item.label || `Item ${item.id}`,
-            previewText: item.text ? item.text.substring(0, 100) : (item.scripture || "")
-          });
-        }
-      });
-    });
-
-    // Complete Chapter Copy buttons
-    DOM.contentStream.querySelectorAll(".btn-copy-chapter").forEach(btn => {
-      btn.addEventListener("click", function () {
-        const chId = this.getAttribute("data-ch-id");
-        const book = getCurrentBook();
-        const chapter = book && book.chapters.find(c => c.id === chId);
-        if (book && chapter) {
-          const text = formatChapterForWhatsApp(book, chapter);
-          copyToClipboard(text, "Full chapter copied! Ready for WhatsApp");
-        }
-      });
-    });
-
-    // Complete Chapter WhatsApp Share buttons
-    DOM.contentStream.querySelectorAll(".btn-share-chapter").forEach(btn => {
-      btn.addEventListener("click", function () {
-        const chId = this.getAttribute("data-ch-id");
-        const book = getCurrentBook();
-        const chapter = book && book.chapters.find(c => c.id === chId);
-        if (book && chapter) {
-          const text = formatChapterForWhatsApp(book, chapter);
-          shareDirectWhatsApp(text);
+        if (blockId) {
+          setTimeout(() => {
+            const anchor = document.getElementById(blockId);
+            if (anchor) {
+              anchor.scrollIntoView({ behavior: "smooth", block: "center" });
+              anchor.classList.add("target-anchor-highlight");
+              setTimeout(() => anchor.classList.remove("target-anchor-highlight"), 2500);
+            }
+          }, 150);
         }
       });
     });
@@ -1114,11 +1033,9 @@
   // ==========================================
   function cacheDOMElements() {
     DOM.bookTabsContainer = document.getElementById("book-tabs-container");
-    DOM.contentStream = document.getElementById("content-stream");
+    DOM.articleContainer = document.getElementById("article-viewport");
     DOM.searchInput = document.getElementById("search-input");
     DOM.searchClearBtn = document.getElementById("search-clear-btn");
-    DOM.searchStats = document.getElementById("search-stats");
-    DOM.searchScopePills = document.querySelectorAll(".scope-pill");
     DOM.tocToggleBtn = document.getElementById("btn-toggle-toc");
     DOM.bookmarkToggleBtn = document.getElementById("btn-toggle-bookmarks");
     DOM.settingsToggleBtn = document.getElementById("btn-toggle-settings");
@@ -1142,10 +1059,21 @@
     DOM.fontIncBtn = document.getElementById("btn-font-inc");
     DOM.fontIndicator = document.getElementById("font-size-val");
     DOM.soundToggle = document.getElementById("sound-fx-toggle");
+
+    // Redesigned Bottom Dock & Search Deck Elements
+    DOM.dockPrevBtn = document.getElementById("btn-dock-prev");
+    DOM.dockNextBtn = document.getElementById("btn-dock-next");
+    DOM.dockIndicator = document.getElementById("dock-chapter-indicator");
+    DOM.dockIndicatorTitle = document.getElementById("dock-indicator-title");
+    DOM.dockIndicatorSub = document.getElementById("dock-indicator-sub");
+    DOM.searchDeckOverlay = document.getElementById("search-deck-overlay");
+    DOM.searchDeckBody = document.getElementById("search-deck-body");
+    DOM.searchDeckTitle = document.getElementById("search-deck-title");
+    DOM.searchDeckCloseBtn = document.getElementById("btn-close-search-deck");
   }
 
   function appBootloader() {
-    console.log("🕌 Bootloading Roman Urdu Islamic Library PWA...");
+    console.log("🕌 Bootloading Roman Urdu Islamic Library (Seamless Editorial Edition)...");
 
     // 1. Audio System
     try {
@@ -1189,19 +1117,19 @@
       console.error("Search engine error:", e);
     }
 
-    // 7. Initial Data Render
+    // 7. Initial Article Render
     try {
       const lib = getLibrary();
       if (lib && lib.books && lib.books.length > 0) {
-        switchToBook(AppState.currentBookId);
+        switchToBook(AppState.currentBookId, 0);
       } else {
         console.error("No library data found. Ensure library_catalog.js is loaded.");
       }
     } catch (e) {
-      console.error("Initial data render error:", e);
+      console.error("Initial article render error:", e);
     }
 
-    console.log("✨ Roman Islamic Library Initialized Successfully!");
+    console.log("✨ Roman Islamic Library Seamless Reader Initialized Successfully!");
   }
 
   // Run bootloader on DOM ready

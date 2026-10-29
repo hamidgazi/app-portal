@@ -1,16 +1,15 @@
 /* ==========================================================================
-   ROMAN URDU ISLAMIC LIBRARY — UNIFIED MOBILE READER STYLESHEET
+   ROMAN URDU ISLAMIC LIBRARY — SEAMLESS EDITORIAL READER STYLESHEET
    Supports: AMOLED Black, Eye-Care Sepia, Clean Light Themes
-   Ergonomics: Minimum 48px Touch Hitboxes, Glassmorphism, Amiri Scripture
+   Architecture: Unbroken Article Prose, In-Text Ruling Badges, Bottom Dock
    ========================================================================== */
 
-/* Google Fonts Import: Amiri & Inter / Outfit fallback */
 @import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 :root {
-  /* Dynamic Font Scale (Defaults to 16px, adjustable 14px to 22px) */
+  /* Dynamic Typography Scale (Default 16px, adjustable 14px to 22px) */
   --base-font-size: 16px;
-  --line-height-normal: 1.75;
+  --line-height-prose: 1.85;
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-arabic: 'Amiri', 'Traditional Arabic', 'Scheherazade New', serif;
 
@@ -24,9 +23,11 @@
   --text-primary: #f4f4f5;
   --text-secondary: #a1a1aa;
   --text-tertiary: #71717a;
-  --header-bg: rgba(0, 0, 0, 0.85);
+  --header-bg: rgba(0, 0, 0, 0.88);
   --header-border: #27272a;
-  --arabic-bg: #181d19;
+  --dock-bg: rgba(10, 10, 10, 0.92);
+  --dock-border: #27272a;
+  --arabic-bg: #131b15;
   --arabic-border: #064e3b;
   --arabic-text: #6ee7b7;
   --search-highlight: #ca8a04;
@@ -36,15 +37,15 @@
   --btn-bg: #27272a;
   --btn-text: #f4f4f5;
   --btn-hover: #3f3f46;
-  --toast-bg: rgba(24, 24, 27, 0.95);
+  --toast-bg: rgba(24, 24, 27, 0.96);
   --toast-text: #ffffff;
   --toast-border: #3f3f46;
-  --overlay-bg: rgba(0, 0, 0, 0.75);
+  --overlay-bg: rgba(0, 0, 0, 0.8);
 
-  /* Book Accents */
-  --accent-color: #3b82f6;
+  /* Book Theme Accents */
+  --accent-color: #2563eb;
   --accent-light: #60a5fa;
-  --accent-glow: rgba(59, 130, 246, 0.25);
+  --accent-glow: rgba(37, 99, 235, 0.25);
 }
 
 /* Sepia (Eye-Care Day/Night) */
@@ -60,6 +61,8 @@
   --text-tertiary: #9c856e;
   --header-bg: rgba(251, 240, 217, 0.92);
   --header-border: #e2ceaa;
+  --dock-bg: rgba(244, 227, 195, 0.95);
+  --dock-border: #e2ceaa;
   --arabic-bg: #f5ece1;
   --arabic-border: #c29d59;
   --arabic-text: #3d2a14;
@@ -73,7 +76,7 @@
   --toast-bg: rgba(67, 52, 34, 0.96);
   --toast-text: #fbf0d9;
   --toast-border: #7a6652;
-  --overlay-bg: rgba(67, 52, 34, 0.6);
+  --overlay-bg: rgba(67, 52, 34, 0.65);
 }
 
 /* Clean Modern Light */
@@ -89,6 +92,8 @@
   --text-tertiary: #64748b;
   --header-bg: rgba(255, 255, 255, 0.92);
   --header-border: #e2e8f0;
+  --dock-bg: rgba(255, 255, 255, 0.95);
+  --dock-border: #e2e8f0;
   --arabic-bg: #f0fdf4;
   --arabic-border: #bbf7d0;
   --arabic-text: #065f46;
@@ -141,21 +146,21 @@ body {
   font-family: var(--font-sans);
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  line-height: var(--line-height-normal);
+  line-height: var(--line-height-prose);
   transition: background-color 0.25s ease, color 0.25s ease;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-/* Header & Navigation Bar */
+/* Sticky Header */
 .sticky-header {
   position: sticky;
   top: 0;
   z-index: 100;
   background-color: var(--header-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--header-border);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
 }
@@ -165,7 +170,7 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 8px 16px;
-  max-width: 900px;
+  max-width: 820px;
   margin: 0 auto;
 }
 
@@ -178,15 +183,14 @@ body {
 }
 
 .brand-icon {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: 10px;
   background: linear-gradient(135deg, var(--accent-color), var(--accent-light));
   display: flex;
   align-items: center;
   justify-content: center;
   color: #ffffff;
-  font-weight: 800;
   font-size: 1.15rem;
   box-shadow: 0 2px 8px var(--accent-glow);
 }
@@ -199,7 +203,6 @@ body {
 .brand-title {
   font-size: 1.05rem;
   font-weight: 700;
-  letter-spacing: -0.01em;
   color: var(--text-primary);
   line-height: 1.2;
 }
@@ -216,7 +219,7 @@ body {
   gap: 8px;
 }
 
-/* Minimum 48px hitboxes for mobile ergonomics */
+/* Minimum 44-48px Touch Hitboxes */
 .icon-btn {
   width: 44px;
   height: 44px;
@@ -242,12 +245,6 @@ body {
   transform: translateY(-1px);
 }
 
-.icon-btn.active {
-  background-color: var(--accent-color);
-  color: #ffffff;
-  border-color: var(--accent-color);
-}
-
 .icon-btn .badge-count {
   position: absolute;
   top: -4px;
@@ -265,15 +262,15 @@ body {
 /* Book Switcher Pill Tabs */
 .book-tabs-container {
   overflow-x: auto;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
-  padding: 6px 16px 10px;
-  max-width: 900px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 4px 16px 8px;
+  max-width: 820px;
   margin: 0 auto;
 }
 
 .book-tabs-container::-webkit-scrollbar {
-  display: none; /* Chrome/Safari */
+  display: none;
 }
 
 .book-tabs {
@@ -313,10 +310,6 @@ body {
   box-shadow: 0 2px 8px var(--accent-glow);
 }
 
-.book-tab .tab-icon {
-  font-size: 1rem;
-}
-
 .book-tab .tab-count {
   font-size: 0.72rem;
   padding: 2px 6px;
@@ -326,9 +319,9 @@ body {
 
 /* Search Bar Container */
 .search-container {
-  max-width: 900px;
+  max-width: 820px;
   margin: 0 auto;
-  padding: 8px 16px 12px;
+  padding: 4px 16px 10px;
 }
 
 .search-bar-wrap {
@@ -355,7 +348,7 @@ body {
 
 .search-input {
   width: 100%;
-  padding: 12px 10px 12px 10px;
+  padding: 11px 10px;
   background: transparent;
   border: none;
   outline: none;
@@ -388,206 +381,209 @@ body {
   display: flex;
 }
 
-.search-options-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 8px;
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-}
-
-.search-scope-pills {
-  display: flex;
-  gap: 6px;
-}
-
-.scope-pill {
-  padding: 4px 10px;
-  border-radius: 6px;
-  border: 1px solid var(--border-color);
-  background-color: var(--btn-bg);
-  color: var(--text-secondary);
-  font-size: 0.75rem;
-  font-weight: 500;
-  cursor: pointer;
-  user-select: none;
-}
-
-.scope-pill.active {
-  background-color: var(--accent-color);
-  color: #ffffff;
-  border-color: var(--accent-color);
-}
-
-.search-stats-pill {
-  font-weight: 600;
-  color: var(--accent-light);
-  font-size: 0.78rem;
-}
-
-/* Main Content Area */
-.app-main {
+/* ==========================================================================
+   SEAMLESS EDITORIAL ARTICLE VIEWPORT (THE CORE REDESIGN)
+   ========================================================================== */
+.article-viewport {
   flex: 1;
-  max-width: 900px;
+  max-width: 760px;
   width: 100%;
   margin: 0 auto;
-  padding: 12px 16px 80px;
+  padding: 16px 16px 100px; /* Generous bottom padding for bottom nav dock */
 }
 
-/* Book Banner Card */
-.book-hero-banner {
-  background: linear-gradient(135deg, var(--card-bg), var(--bg-secondary));
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
-  padding: 18px 20px;
-  margin-bottom: 20px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+/* Article Hero Header */
+.article-header {
+  margin-bottom: 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border-color);
 }
 
-.book-hero-banner::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 5px;
-  height: 100%;
-  background-color: var(--accent-color);
-}
-
-.book-badge-row {
+.article-top-meta {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
-.book-badge {
+.book-category-badge {
   display: inline-block;
-  padding: 3px 10px;
+  padding: 4px 10px;
   border-radius: 6px;
   background-color: var(--accent-glow);
   color: var(--accent-light);
   font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.04em;
   text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-.chapter-count-pill {
-  font-size: 0.75rem;
+.article-seq-indicator {
+  font-size: 0.78rem;
   color: var(--text-tertiary);
-  font-weight: 500;
+  font-weight: 600;
 }
 
-.book-hero-title {
-  font-size: 1.35rem;
+.article-title {
+  font-size: 1.55rem;
   font-weight: 800;
   color: var(--text-primary);
-  line-height: 1.3;
-  margin-bottom: 4px;
-}
-
-.book-hero-urdu {
-  font-family: var(--font-arabic);
-  font-size: 1.4rem;
-  direction: rtl;
-  color: var(--accent-light);
-  line-height: 1.6;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
   margin-bottom: 6px;
 }
 
-.book-hero-subtitle {
-  font-size: 0.88rem;
-  color: var(--text-secondary);
-  line-height: 1.5;
-  margin-bottom: 12px;
+.article-urdu-title {
+  font-family: var(--font-arabic);
+  font-size: 1.65rem;
+  direction: rtl;
+  color: var(--accent-light);
+  line-height: 1.6;
+  margin-bottom: 8px;
 }
 
-.book-hero-meta {
+.article-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.article-hawala {
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+  font-style: italic;
+  margin-bottom: 14px;
+}
+
+/* Article Actions Row (Copy Full, Share, Bookmark) */
+.article-actions-bar {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   padding-top: 10px;
-  border-top: 1px solid var(--border-color);
-  font-size: 0.78rem;
-  color: var(--text-tertiary);
 }
 
-.meta-item {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-/* Chapter Container & Card */
-.chapter-container {
-  margin-bottom: 30px;
-}
-
-.chapter-header-card {
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 14px;
-  padding: 16px;
-  margin-bottom: 14px;
-  position: relative;
-}
-
-.chapter-header-top {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.chapter-title-group {
-  flex: 1;
-}
-
-.chapter-number-tag {
-  display: inline-block;
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--accent-light);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 4px;
-}
-
-.chapter-main-title {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  line-height: 1.35;
-}
-
-.chapter-urdu-title {
-  font-family: var(--font-arabic);
-  font-size: 1.25rem;
-  direction: rtl;
-  color: var(--text-secondary);
-  margin-top: 4px;
-}
-
-.chapter-actions {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.chapter-copy-btn {
+.article-action-btn {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 12px;
-  min-height: 40px;
-  border-radius: 8px;
+  padding: 8px 14px;
+  min-height: 44px;
+  border-radius: 10px;
   background-color: var(--btn-bg);
   border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.article-action-btn:hover, .article-action-btn:active {
+  background-color: var(--card-hover);
+  border-color: var(--accent-color);
+}
+
+.article-action-btn.btn-primary-action {
+  background-color: var(--accent-color);
+  color: #ffffff;
+  border-color: var(--accent-color);
+  box-shadow: 0 2px 8px var(--accent-glow);
+}
+
+.article-action-btn.bookmarked {
+  color: #eab308;
+  border-color: #eab308;
+  background-color: rgba(234, 179, 8, 0.15);
+}
+
+/* Continuous Article Prose */
+.article-prose {
+  font-size: var(--base-font-size);
+  line-height: var(--line-height-prose);
+  color: var(--text-primary);
+}
+
+.article-p {
+  margin-bottom: 1.35rem;
+  word-break: break-word;
+  text-align: left;
+}
+
+/* Scripture Callout Blocks */
+.scripture-box {
+  background-color: var(--arabic-bg);
+  border: 1px solid var(--arabic-border);
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin: 1.35rem 0;
+  font-family: var(--font-arabic);
+  font-size: 1.35rem;
+  line-height: 2.15;
+  direction: rtl;
+  text-align: right;
+  color: var(--arabic-text);
+  word-spacing: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* In-Text Ruling Demarcation (Hadiths & Masail) */
+.ruling-block {
+  margin: 1.8rem 0;
+  padding-top: 1.2rem;
+  border-top: 1px dashed var(--border-color);
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.ruling-block.target-anchor-highlight {
+  background-color: var(--accent-glow);
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.ruling-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.ruling-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+
+.ruling-badge.hadith-badge {
+  background-color: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.ruling-badge.masala-badge {
+  background-color: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.inline-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  min-height: 40px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background-color: var(--btn-bg);
   color: var(--text-secondary);
   font-size: 0.78rem;
   font-weight: 600;
@@ -597,139 +593,249 @@ body {
   touch-action: manipulation;
 }
 
-.chapter-copy-btn:hover, .chapter-copy-btn:active {
+.inline-copy-btn:hover, .inline-copy-btn:active {
   background-color: var(--accent-color);
   color: #ffffff;
   border-color: var(--accent-color);
 }
 
-/* Individual Content Items (Masail, Hadiths, Paragraphs) */
-.item-card {
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 12px;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  position: relative;
+.ruling-body {
+  font-size: var(--base-font-size);
+  line-height: var(--line-height-prose);
+  color: var(--text-primary);
 }
 
-.item-card:hover {
-  border-color: var(--border-light);
-}
-
-.item-card.highlighted {
-  border-color: var(--accent-color);
-  box-shadow: 0 0 0 2px var(--accent-glow);
-}
-
-.item-card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  padding-bottom: 8px;
-  border-bottom: 1px dashed var(--border-color);
-}
-
-.item-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--accent-light);
-  background-color: var(--badge-bg);
-  padding: 2px 8px;
-  border-radius: 6px;
-}
-
-.item-tag.type-hadith {
-  background-color: rgba(16, 185, 129, 0.15);
-  color: #10b981;
-}
-
-.item-tag.type-masala {
-  background-color: rgba(59, 130, 246, 0.15);
-  color: #3b82f6;
-}
-
-.item-actions {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.mini-action-btn {
-  width: 36px;
-  height: 36px;
-  min-width: 36px;
-  min-height: 36px;
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
-  background-color: var(--btn-bg);
+.article-quote {
+  border-left: 3px solid var(--accent-color);
+  padding: 8px 14px;
+  margin: 1.2rem 0;
+  background-color: var(--bg-secondary);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
   color: var(--text-secondary);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 0.88rem;
-  transition: all 0.2s ease;
-  touch-action: manipulation;
-  user-select: none;
 }
 
-.mini-action-btn:hover, .mini-action-btn:active {
-  background-color: var(--card-hover);
+.article-heading {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 1.5rem 0 0.8rem;
   color: var(--text-primary);
-  border-color: var(--accent-color);
 }
 
-.mini-action-btn.bookmarked {
-  color: #eab308;
-  border-color: #eab308;
-  background-color: rgba(234, 179, 8, 0.15);
-}
-
-/* Arabic Scripture Block */
-.scripture-box {
-  background-color: var(--arabic-bg);
-  border: 1px solid var(--arabic-border);
-  border-radius: 10px;
-  padding: 14px 16px;
-  margin: 10px 0 14px;
-  font-family: var(--font-arabic);
-  font-size: 1.35rem;
-  line-height: 2.1;
-  direction: rtl;
-  text-align: right;
-  color: var(--arabic-text);
-  word-spacing: 2px;
-}
-
-/* Item Body Text */
-.item-body {
-  font-size: 1rem;
-  line-height: var(--line-height-normal);
-  color: var(--text-primary);
-  word-break: break-word;
-}
-
-.item-body p {
-  margin-bottom: 10px;
-}
-
-.item-body p:last-child {
-  margin-bottom: 0;
-}
-
-.item-citation {
-  margin-top: 10px;
-  padding-top: 8px;
+.article-footnote {
+  margin-top: 1.5rem;
+  padding: 10px 14px;
   border-top: 1px solid var(--border-color);
   font-size: 0.78rem;
   color: var(--text-tertiary);
-  font-style: italic;
+}
+
+/* ==========================================================================
+   STICKY BOTTOM COMMAND DOCK (NAVIGATION & JUMP CONTROLS)
+   ========================================================================== */
+.bottom-nav-dock {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 95;
+  background-color: var(--dock-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-top: 1px solid var(--dock-border);
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.dock-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 8px 16px;
+  gap: 10px;
+}
+
+.dock-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 16px;
+  min-height: 48px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background-color: var(--btn-bg);
+  color: var(--text-primary);
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  touch-action: manipulation;
+  flex: 1;
+  max-width: 140px;
+}
+
+.dock-nav-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.dock-nav-btn:not(:disabled):hover, .dock-nav-btn:not(:disabled):active {
+  background-color: var(--accent-color);
+  color: #ffffff;
+  border-color: var(--accent-color);
+}
+
+.dock-chapter-indicator {
+  flex: 2;
+  text-align: center;
+  padding: 8px 10px;
+  min-height: 48px;
+  border-radius: 12px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  transition: all 0.2s ease;
+}
+
+.dock-chapter-indicator:hover, .dock-chapter-indicator:active {
+  border-color: var(--accent-color);
+}
+
+.dock-indicator-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 220px;
+}
+
+.dock-indicator-sub {
+  font-size: 0.68rem;
+  color: var(--accent-light);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   INSTANT SEARCH RESULTS DECK
+   ========================================================================== */
+.search-deck-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: var(--overlay-bg);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 250;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.search-deck-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.search-deck-panel {
+  background-color: var(--card-bg);
+  border-top: 1px solid var(--border-color);
+  border-radius: 20px 20px 0 0;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  max-height: 82vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.search-deck-overlay.open .search-deck-panel {
+  transform: translateY(0);
+}
+
+.search-deck-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.search-deck-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.search-deck-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px 16px;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.search-result-card {
+  padding: 14px;
+  min-height: 48px;
+  border-radius: 12px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.search-result-card:hover, .search-result-card:active {
+  border-color: var(--accent-color);
+  background-color: var(--card-hover);
+  transform: translateY(-1px);
+}
+
+.search-result-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.search-result-book {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent-light);
+  text-transform: uppercase;
+}
+
+.search-result-chapter {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.search-result-snippet {
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--text-secondary);
 }
 
 /* Search Highlights */
@@ -877,13 +983,6 @@ mark.search-match {
   font-size: 0.72rem;
   color: var(--text-tertiary);
   margin-top: 2px;
-}
-
-.drawer-list-item .delete-btn {
-  color: #ef4444;
-  padding: 6px;
-  font-size: 1rem;
-  border-radius: 6px;
 }
 
 .empty-state {
@@ -1080,7 +1179,7 @@ input:checked + .slider:before {
 /* Floating Action Button (Back to Top) */
 .fab-top {
   position: fixed;
-  bottom: 24px;
+  bottom: 74px; /* Sits comfortably above bottom dock */
   right: 20px;
   width: 48px;
   height: 48px;
@@ -1108,14 +1207,10 @@ input:checked + .slider:before {
   transform: translateY(0);
 }
 
-.fab-top:active {
-  transform: scale(0.92);
-}
-
 /* Toast Notification Banner */
 .toast-banner {
   position: fixed;
-  bottom: 24px;
+  bottom: 74px;
   left: 50%;
   transform: translateX(-50%) translateY(40px);
   background-color: var(--toast-bg);
@@ -1148,17 +1243,16 @@ input:checked + .slider:before {
   font-size: 1.1rem;
 }
 
-/* Loading Spinner & Pagination */
+/* Loading Wrap */
 .loading-wrap {
   text-align: center;
-  padding: 40px;
+  padding: 60px 20px;
   color: var(--text-tertiary);
-  font-size: 0.95rem;
 }
 
 .spinner {
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border: 3px solid var(--border-color);
   border-top-color: var(--accent-color);
   border-radius: 50%;
@@ -1170,31 +1264,6 @@ input:checked + .slider:before {
   to { transform: rotate(360deg); }
 }
 
-.load-more-btn {
-  display: block;
-  width: 100%;
-  max-width: 300px;
-  margin: 20px auto;
-  padding: 14px;
-  min-height: 48px;
-  border-radius: 12px;
-  background-color: var(--btn-bg);
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
-  font-size: 0.92rem;
-  font-weight: 700;
-  cursor: pointer;
-  text-align: center;
-  transition: all 0.2s ease;
-}
-
-.load-more-btn:hover, .load-more-btn:active {
-  background-color: var(--accent-color);
-  color: #ffffff;
-  border-color: var(--accent-color);
-}
-
-/* Responsiveness */
 @media (max-width: 600px) {
   .brand-title {
     font-size: 0.95rem;
@@ -1202,22 +1271,17 @@ input:checked + .slider:before {
   .brand-subtitle {
     display: none;
   }
-  .chapter-header-top {
-    flex-direction: column;
-    gap: 10px;
+  .article-title {
+    font-size: 1.35rem;
   }
-  .chapter-actions {
-    width: 100%;
-    justify-content: flex-end;
-  }
-  .book-hero-banner {
-    padding: 14px;
-  }
-  .book-hero-title {
-    font-size: 1.2rem;
+  .article-urdu-title {
+    font-size: 1.45rem;
   }
   .scripture-box {
     font-size: 1.2rem;
-    padding: 12px;
+    padding: 12px 14px;
+  }
+  .dock-chapter-indicator {
+    max-width: 170px;
   }
 }
