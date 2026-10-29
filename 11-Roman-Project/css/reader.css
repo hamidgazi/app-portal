@@ -1,7 +1,7 @@
 /* ==========================================================================
-   ROMAN URDU ISLAMIC LIBRARY — SEAMLESS EDITORIAL READER STYLESHEET
+   ROMAN URDU ISLAMIC LIBRARY — ZERO-BOX CONTINUOUS READING STYLESHEET
    Supports: AMOLED Black, Eye-Care Sepia, Clean Light Themes
-   Architecture: Unbroken Article Prose, In-Text Ruling Badges, Bottom Dock
+   Architecture: Pure Book Typography, Zero Enclosing Boxes, Strict LTR Flow
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
@@ -25,11 +25,9 @@
   --text-tertiary: #71717a;
   --header-bg: rgba(0, 0, 0, 0.88);
   --header-border: #27272a;
-  --dock-bg: rgba(10, 10, 10, 0.92);
+  --dock-bg: rgba(10, 10, 10, 0.94);
   --dock-border: #27272a;
-  --arabic-bg: #131b15;
-  --arabic-border: #064e3b;
-  --arabic-text: #6ee7b7;
+  --arabic-color: #10b981; /* Sacred Emerald Green */
   --search-highlight: #ca8a04;
   --search-highlight-text: #000000;
   --badge-bg: #27272a;
@@ -42,7 +40,7 @@
   --toast-border: #3f3f46;
   --overlay-bg: rgba(0, 0, 0, 0.8);
 
-  /* Book Theme Accents */
+  /* Book Accents */
   --accent-color: #2563eb;
   --accent-light: #60a5fa;
   --accent-glow: rgba(37, 99, 235, 0.25);
@@ -63,9 +61,7 @@
   --header-border: #e2ceaa;
   --dock-bg: rgba(244, 227, 195, 0.95);
   --dock-border: #e2ceaa;
-  --arabic-bg: #f5ece1;
-  --arabic-border: #c29d59;
-  --arabic-text: #3d2a14;
+  --arabic-color: #92400e; /* Deep Antique Gold/Brown */
   --search-highlight: #d97706;
   --search-highlight-text: #ffffff;
   --badge-bg: #ede0c7;
@@ -94,9 +90,7 @@
   --header-border: #e2e8f0;
   --dock-bg: rgba(255, 255, 255, 0.95);
   --dock-border: #e2e8f0;
-  --arabic-bg: #f0fdf4;
-  --arabic-border: #bbf7d0;
-  --arabic-text: #065f46;
+  --arabic-color: #047857; /* Deep Forest Emerald */
   --search-highlight: #fef08a;
   --search-highlight-text: #854d0e;
   --badge-bg: #f1f5f9;
@@ -110,7 +104,7 @@
   --overlay-bg: rgba(15, 23, 42, 0.6);
 }
 
-/* Book Dynamic Theme Accents */
+/* Dynamic Book Accents */
 body[data-current-book="ghalat_fehmiyan"] {
   --accent-color: #d97706; /* Amber */
   --accent-light: #f59e0b;
@@ -317,7 +311,7 @@ body {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Search Bar Container */
+/* Search Bar */
 .search-container {
   max-width: 820px;
   margin: 0 auto;
@@ -382,14 +376,16 @@ body {
 }
 
 /* ==========================================================================
-   SEAMLESS EDITORIAL ARTICLE VIEWPORT (THE CORE REDESIGN)
+   PURE ZERO-BOX CONTINUOUS ARTICLE READING CANVAS
    ========================================================================== */
 .article-viewport {
   flex: 1;
   max-width: 760px;
   width: 100%;
   margin: 0 auto;
-  padding: 16px 16px 100px; /* Generous bottom padding for bottom nav dock */
+  padding: 18px 20px 100px; /* Space for bottom navigation dock */
+  user-select: text;
+  -webkit-user-select: text;
 }
 
 /* Article Hero Header */
@@ -425,7 +421,7 @@ body {
 }
 
 .article-title {
-  font-size: 1.55rem;
+  font-size: 1.6rem;
   font-weight: 800;
   color: var(--text-primary);
   line-height: 1.35;
@@ -435,7 +431,7 @@ body {
 
 .article-urdu-title {
   font-family: var(--font-arabic);
-  font-size: 1.65rem;
+  font-size: 1.7rem;
   direction: rtl;
   color: var(--accent-light);
   line-height: 1.6;
@@ -446,7 +442,7 @@ body {
   font-size: 0.95rem;
   color: var(--text-secondary);
   line-height: 1.5;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .article-hawala {
@@ -456,7 +452,7 @@ body {
   margin-bottom: 14px;
 }
 
-/* Article Actions Row (Copy Full, Share, Bookmark) */
+/* Top Action Toolbar */
 .article-actions-bar {
   display: flex;
   flex-wrap: wrap;
@@ -501,7 +497,7 @@ body {
   background-color: rgba(234, 179, 8, 0.15);
 }
 
-/* Continuous Article Prose */
+/* Continuous Reading Prose — STRICT LTR & ZERO BOXES */
 .article-prose {
   font-size: var(--base-font-size);
   line-height: var(--line-height-prose);
@@ -509,129 +505,78 @@ body {
 }
 
 .article-p {
-  margin-bottom: 1.35rem;
-  word-break: break-word;
-  text-align: left;
-}
-
-/* Scripture Callout Blocks */
-.scripture-box {
-  background-color: var(--arabic-bg);
-  border: 1px solid var(--arabic-border);
-  border-radius: 12px;
-  padding: 14px 18px;
-  margin: 1.35rem 0;
-  font-family: var(--font-arabic);
-  font-size: 1.35rem;
-  line-height: 2.15;
-  direction: rtl;
-  text-align: right;
-  color: var(--arabic-text);
-  word-spacing: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-
-/* In-Text Ruling Demarcation (Hadiths & Masail) */
-.ruling-block {
-  margin: 1.8rem 0;
-  padding-top: 1.2rem;
-  border-top: 1px dashed var(--border-color);
-  position: relative;
-  transition: background-color 0.3s ease;
-}
-
-.ruling-block.target-anchor-highlight {
-  background-color: var(--accent-glow);
-  border-radius: 10px;
-  padding: 12px;
-}
-
-.ruling-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.ruling-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.82rem;
-  font-weight: 700;
-  padding: 4px 10px;
-  border-radius: 8px;
-}
-
-.ruling-badge.hadith-badge {
-  background-color: rgba(16, 185, 129, 0.15);
-  color: #10b981;
-  border: 1px solid rgba(16, 185, 129, 0.3);
-}
-
-.ruling-badge.masala-badge {
-  background-color: rgba(59, 130, 246, 0.15);
-  color: #60a5fa;
-  border: 1px solid rgba(59, 130, 246, 0.3);
-}
-
-.inline-copy-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 5px 12px;
-  min-height: 40px;
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
-  background-color: var(--btn-bg);
-  color: var(--text-secondary);
-  font-size: 0.78rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  user-select: none;
-  touch-action: manipulation;
-}
-
-.inline-copy-btn:hover, .inline-copy-btn:active {
-  background-color: var(--accent-color);
-  color: #ffffff;
-  border-color: var(--accent-color);
-}
-
-.ruling-body {
+  direction: ltr !important;
+  text-align: left !important;
   font-size: var(--base-font-size);
   line-height: var(--line-height-prose);
+  margin-bottom: 1.35rem;
   color: var(--text-primary);
+  word-break: break-word;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+.article-p strong {
+  color: var(--accent-light);
+  font-weight: 700;
+}
+
+.article-p em {
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+/* PURE ARABIC MATN CALLIGRAPHY — ZERO BOXES & ZERO BORDERS */
+.arabic-matn {
+  font-family: var(--font-arabic);
+  font-size: 1.55rem;
+  line-height: 2.3;
+  direction: rtl;
+  text-align: center;
+  color: var(--arabic-color);
+  margin: 1.6rem 0;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  word-spacing: 3px;
+  display: block;
 }
 
 .article-quote {
   border-left: 3px solid var(--accent-color);
-  padding: 8px 14px;
-  margin: 1.2rem 0;
-  background-color: var(--bg-secondary);
-  border-radius: 0 8px 8px 0;
-  font-style: italic;
+  padding: 6px 14px;
+  margin: 1.25rem 0;
+  background: transparent;
   color: var(--text-secondary);
+  font-style: italic;
+  direction: ltr;
+  text-align: left;
 }
 
 .article-heading {
   font-size: 1.2rem;
   font-weight: 700;
-  margin: 1.5rem 0 0.8rem;
   color: var(--text-primary);
+  margin: 1.6rem 0 0.8rem;
+  direction: ltr;
+  text-align: left;
 }
 
 .article-footnote {
   margin-top: 1.5rem;
-  padding: 10px 14px;
+  padding: 10px 0;
   border-top: 1px solid var(--border-color);
   font-size: 0.78rem;
   color: var(--text-tertiary);
+  direction: ltr;
+  text-align: left;
 }
 
 /* ==========================================================================
-   STICKY BOTTOM COMMAND DOCK (NAVIGATION & JUMP CONTROLS)
+   STICKY BOTTOM COMMAND DOCK (PREV / NEXT / TOC JUMP)
    ========================================================================== */
 .bottom-nav-dock {
   position: fixed;
@@ -847,7 +792,7 @@ mark.search-match {
   font-weight: 600;
 }
 
-/* Off-Canvas Drawers (TOC & Bookmarks) */
+/* Off-Canvas Drawers */
 .drawer-overlay {
   position: fixed;
   inset: 0;
@@ -1179,7 +1124,7 @@ input:checked + .slider:before {
 /* Floating Action Button (Back to Top) */
 .fab-top {
   position: fixed;
-  bottom: 74px; /* Sits comfortably above bottom dock */
+  bottom: 74px;
   right: 20px;
   width: 48px;
   height: 48px;
@@ -1277,9 +1222,9 @@ input:checked + .slider:before {
   .article-urdu-title {
     font-size: 1.45rem;
   }
-  .scripture-box {
-    font-size: 1.2rem;
-    padding: 12px 14px;
+  .arabic-matn {
+    font-size: 1.35rem;
+    line-height: 2.1;
   }
   .dock-chapter-indicator {
     max-width: 170px;

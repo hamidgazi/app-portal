@@ -1,15 +1,15 @@
 /**
  * ============================================================================
- * ROMAN URDU ISLAMIC LIBRARY — REDESIGNED EDITORIAL APPLICATION LOGIC
+ * ROMAN URDU ISLAMIC LIBRARY — ZERO-BOX CONTINUOUS READING LOGIC
  * ============================================================================
  * Features:
- *   - Seamless Editorial Article Reader (Unbroken Prose Flow, Zero Chopped Cards)
- *   - In-Text Hadith & Mas'ala Badges with 1-Tap Quick-Copy Buttons
- *   - Single-Article View with Sticky Bottom Navigation Dock (Prev / Next / TOC)
- *   - Instant Search Results Deck with Direct Article Anchor Jumping
- *   - WhatsApp-Formatted Exporter (Individual Ruling & Complete Article)
- *   - LocalStorage Bookmarks Drawer for Saved Articles & Masail
- *   - Procedural Web Audio API Sound SFX (Tactile Clicks & Chimes - Zero Music)
+ *   - Pure Book Typography (Zero Boxes, Zero Card Envelopes, Zero Borders)
+ *   - Continuous Reading Flow with Strict LTR Paragraphs & Centered Amiri Calligraphy
+ *   - Single-Article Viewport with Sticky Bottom Navigation Dock (Prev / Next / TOC)
+ *   - WhatsApp-Formatted Exporter (Full Article & Chapters)
+ *   - Instant Search Results Deck with Direct Chapter Jump
+ *   - LocalStorage Bookmarks Drawer for Saved Articles
+ *   - Procedural Web Audio API Feedback (Clicks & Chimes - Strictly Zero Music)
  *   - Tri-Theme AMOLED / Sepia / Light & Dynamic Typography Scaler
  * ============================================================================
  */
@@ -171,36 +171,6 @@
   // ==========================================
   // WHATSAPP FORMATTING BUILDERS
   // ==========================================
-  function formatRulingForWhatsApp(book, chapter, block) {
-    const bookTitle = book ? book.title : "Roman Islamic Library";
-    const chTitle = chapter ? (chapter.title || `Chapter ${chapter.number}`) : "";
-    const typeLabel = block.label || (block.type === "hadith" ? "Hadees Shareef" : "Shar'i Mas'ala");
-
-    let out = `*📗 ${bookTitle}*\n`;
-    if (chTitle) {
-      out += `*📌 ${chTitle}*\n`;
-    }
-    out += `------------------------------\n`;
-    out += `*${typeLabel}:*\n`;
-
-    if (block.scripture) {
-      out += `\n_${block.scripture}_\n\n`;
-    }
-
-    if (block.text) {
-      out += `${block.text}\n`;
-    }
-
-    if (chapter.hawala) {
-      out += `\n📚 *Hawala / Reference:* ${chapter.hawala}\n`;
-    }
-
-    out += `------------------------------\n`;
-    out += `📲 _Roman Islamic Library — Curated by Hamid Gazi_\n`;
-    out += `🔗 https://hamidgazi.github.io/app-portal/`;
-    return out;
-  }
-
   function formatFullArticleForWhatsApp(book, chapter) {
     const bookTitle = book ? book.title : "Roman Islamic Library";
     const chTitle = chapter ? (chapter.title || `Chapter ${chapter.number}`) : "";
@@ -214,16 +184,14 @@
 
     if (chapter.blocks && Array.isArray(chapter.blocks)) {
       chapter.blocks.forEach(block => {
-        if (block.type === "p") {
-          out += `${block.text}\n\n`;
-        } else if (block.type === "scripture") {
+        if (block.type === "arabic") {
           out += `_${block.text}_\n\n`;
-        } else if (block.type === "hadith" || block.type === "masala") {
-          out += `*${block.label}:*\n${block.text}\n\n`;
         } else if (block.type === "quote") {
           out += `> _${block.text}_\n\n`;
         } else if (block.type === "heading") {
           out += `*${block.text}*\n\n`;
+        } else {
+          out += `${block.text || ""}\n\n`;
         }
       });
     }
@@ -255,11 +223,6 @@
   function getCurrentBook() {
     const lib = getLibrary();
     return lib.books.find(b => b.id === AppState.currentBookId) || lib.books[0] || null;
-  }
-
-  function getBookById(id) {
-    const lib = getLibrary();
-    return lib.books.find(b => b.id === id) || null;
   }
 
   function escapeHTML(str) {
@@ -412,7 +375,7 @@
     }
     saveBookmarks();
     renderBookmarksDrawerList();
-    renderCurrentArticle(); // Refresh bookmark button state
+    renderCurrentArticle();
   }
 
   function updateBookmarksBadge() {
@@ -496,16 +459,13 @@
     let html = "";
     book.chapters.forEach((ch, idx) => {
       const isCurrent = (idx === AppState.currentChapterIndex);
-      const metaInfo = (ch.hadith_count || ch.masala_count) 
-        ? `${ch.hadith_count || 0} Ahadith • ${ch.masala_count || 0} Masail`
-        : `Topic ${ch.number}`;
 
       html += `
         <li class="drawer-list-item toc-item ${isCurrent ? 'active' : ''}" data-ch-idx="${idx}">
           <div style="flex: 1;">
             <div class="item-title">${escapeHTML(ch.title)}</div>
             ${ch.title_urdu ? `<div class="item-meta" style="direction: rtl; font-family: var(--font-arabic); font-size: 0.95rem;">${escapeHTML(ch.title_urdu)}</div>` : ''}
-            <div class="item-meta">${metaInfo}</div>
+            <div class="item-meta">Topic ${ch.number}</div>
           </div>
           <span style="color: var(--accent-light); font-size: 1.15rem;">›</span>
         </li>
@@ -743,7 +703,7 @@
   }
 
   // ==========================================
-  // MODULE: SEAMLESS ARTICLE RENDERING PIPELINE
+  // MODULE: ZERO-BOX CONTINUOUS ARTICLE RENDERING
   // ==========================================
   function renderCurrentArticle() {
     if (!DOM.articleContainer) return;
@@ -784,47 +744,21 @@
       </header>
     `;
 
-    // Build Continuous Prose Body HTML
+    // Build Pure Continuous Reading Prose (Zero Boxes, Centered Calligraphy)
     let proseHTML = `<div class="article-prose">`;
 
     if (chapter.blocks && Array.isArray(chapter.blocks)) {
       chapter.blocks.forEach(block => {
-        if (block.type === "p") {
-          proseHTML += `<p class="article-p">${escapeHTML(block.text)}</p>`;
-        } else if (block.type === "scripture") {
-          proseHTML += `<div class="scripture-box">${escapeHTML(block.text)}</div>`;
-        } else if (block.type === "hadith") {
-          proseHTML += `
-            <div class="ruling-block hadith-block" id="${escapeHTML(block.id)}" data-ruling-id="${escapeHTML(block.id)}">
-              <div class="ruling-header">
-                <span class="ruling-badge hadith-badge">📜 ${escapeHTML(block.label)}</span>
-                <button class="inline-copy-btn btn-copy-ruling" data-ruling-id="${escapeHTML(block.id)}" title="Copy ${escapeHTML(block.label)} for WhatsApp">
-                  📋 Copy
-                </button>
-              </div>
-              ${block.scripture ? `<div class="scripture-box">${escapeHTML(block.scripture)}</div>` : ''}
-              <div class="ruling-body">${escapeHTML(block.text)}</div>
-            </div>
-          `;
-        } else if (block.type === "masala") {
-          proseHTML += `
-            <div class="ruling-block masala-block" id="${escapeHTML(block.id)}" data-ruling-id="${escapeHTML(block.id)}">
-              <div class="ruling-header">
-                <span class="ruling-badge masala-badge">⚖️ ${escapeHTML(block.label)}</span>
-                <button class="inline-copy-btn btn-copy-ruling" data-ruling-id="${escapeHTML(block.id)}" title="Copy ${escapeHTML(block.label)} for WhatsApp">
-                  📋 Copy
-                </button>
-              </div>
-              ${block.scripture ? `<div class="scripture-box">${escapeHTML(block.scripture)}</div>` : ''}
-              <div class="ruling-body">${escapeHTML(block.text)}</div>
-            </div>
-          `;
+        if (block.type === "arabic") {
+          proseHTML += `<div class="arabic-matn">${escapeHTML(block.text)}</div>`;
         } else if (block.type === "quote") {
-          proseHTML += `<blockquote class="article-quote">${escapeHTML(block.text)}</blockquote>`;
+          proseHTML += `<blockquote class="article-quote">${block.html || escapeHTML(block.text)}</blockquote>`;
         } else if (block.type === "heading") {
-          proseHTML += `<h3 class="article-heading">${escapeHTML(block.text)}</h3>`;
+          proseHTML += `<h3 class="article-heading">${block.html || escapeHTML(block.text)}</h3>`;
         } else if (block.type === "footnote") {
-          proseHTML += `<div class="article-footnote">${escapeHTML(block.text)}</div>`;
+          proseHTML += `<div class="article-footnote">${block.html || escapeHTML(block.text)}</div>`;
+        } else {
+          proseHTML += `<p class="article-p">${block.html || escapeHTML(block.text)}</p>`;
         }
       });
     }
@@ -875,19 +809,6 @@
         toggleArticleBookmark(book, chapter);
       });
     }
-
-    // Inline Ruling Copy Buttons
-    DOM.articleContainer.querySelectorAll(".btn-copy-ruling").forEach(btn => {
-      btn.addEventListener("click", function (e) {
-        e.stopPropagation();
-        const rId = this.getAttribute("data-ruling-id");
-        const block = chapter.blocks && chapter.blocks.find(b => b.id === rId);
-        if (block) {
-          const text = formatRulingForWhatsApp(book, chapter, block);
-          copyToClipboard(text, `${block.label} copied! Ready for WhatsApp`);
-        }
-      });
-    });
   }
 
   // ==========================================
@@ -946,16 +867,12 @@
         if (ch.blocks && Array.isArray(ch.blocks)) {
           ch.blocks.forEach(block => {
             const textMatch = block.text && block.text.toLowerCase().includes(queryLower);
-            const scriptMatch = block.scripture && block.scripture.includes(query);
-            const labelMatch = block.label && block.label.toLowerCase().includes(queryLower);
-
-            if (textMatch || scriptMatch || labelMatch || chTitleMatch || chUrduMatch) {
+            if (textMatch || chTitleMatch || chUrduMatch) {
               results.push({
                 book: book,
                 chapter: ch,
                 chapterIndex: chIdx,
-                block: block,
-                preview: block.text ? block.text.substring(0, 140) + "..." : (block.scripture || "")
+                preview: block.text ? block.text.substring(0, 140) + "..." : ""
               });
             }
           });
@@ -983,16 +900,13 @@
     }
 
     let html = "";
-    // Show up to 50 best results
-    results.slice(0, 50).forEach(res => {
-      const { book, chapter, chapterIndex, block, preview } = res;
-      const blockLabel = block.label || (block.type === "scripture" ? "Aayah / Hadees" : "Ruling");
+    results.slice(0, 45).forEach(res => {
+      const { book, chapter, chapterIndex, preview } = res;
 
       html += `
-        <div class="search-result-card" data-book-id="${escapeHTML(book.id)}" data-ch-idx="${chapterIndex}" data-block-id="${escapeHTML(block.id || '')}">
+        <div class="search-result-card" data-book-id="${escapeHTML(book.id)}" data-ch-idx="${chapterIndex}">
           <div class="search-result-badge-row">
             <span class="search-result-book">${escapeHTML(book.badge || book.title)}</span>
-            <span style="font-size: 0.72rem; color: var(--accent-light); font-weight: 700;">${escapeHTML(blockLabel)}</span>
           </div>
           <div class="search-result-chapter">${highlightMatches(chapter.title, query)}</div>
           <div class="search-result-snippet">${highlightMatches(preview, query)}</div>
@@ -1003,27 +917,14 @@
     DOM.searchDeckBody.innerHTML = html;
     openSearchDeck();
 
-    // Attach click to jump
     DOM.searchDeckBody.querySelectorAll(".search-result-card").forEach(card => {
       card.addEventListener("click", function () {
         SoundFX.playClick();
         const bId = this.getAttribute("data-book-id");
         const chIdx = parseInt(this.getAttribute("data-ch-idx"), 10) || 0;
-        const blockId = this.getAttribute("data-block-id");
 
         closeSearchDeck();
         switchToBook(bId, chIdx);
-
-        if (blockId) {
-          setTimeout(() => {
-            const anchor = document.getElementById(blockId);
-            if (anchor) {
-              anchor.scrollIntoView({ behavior: "smooth", block: "center" });
-              anchor.classList.add("target-anchor-highlight");
-              setTimeout(() => anchor.classList.remove("target-anchor-highlight"), 2500);
-            }
-          }, 150);
-        }
       });
     });
   }
@@ -1060,7 +961,7 @@
     DOM.fontIndicator = document.getElementById("font-size-val");
     DOM.soundToggle = document.getElementById("sound-fx-toggle");
 
-    // Redesigned Bottom Dock & Search Deck Elements
+    // Bottom Dock & Search Deck Elements
     DOM.dockPrevBtn = document.getElementById("btn-dock-prev");
     DOM.dockNextBtn = document.getElementById("btn-dock-next");
     DOM.dockIndicator = document.getElementById("dock-chapter-indicator");
@@ -1073,51 +974,15 @@
   }
 
   function appBootloader() {
-    console.log("🕌 Bootloading Roman Urdu Islamic Library (Seamless Editorial Edition)...");
+    console.log("🕌 Bootloading Roman Urdu Islamic Library (Zero-Box Continuous Edition)...");
 
-    // 1. Audio System
-    try {
-      SoundFX.init();
-    } catch (e) {
-      console.warn("Audio module skipped:", e);
-    }
+    try { SoundFX.init(); } catch (e) { console.warn("Audio init skipped:", e); }
+    try { cacheDOMElements(); } catch (e) { console.error("DOM caching error:", e); }
+    try { initThemeManager(); } catch (e) { console.error("Theme manager error:", e); }
+    try { initBookmarksManager(); } catch (e) { console.error("Bookmarks manager error:", e); }
+    try { initNavigation(); } catch (e) { console.error("Navigation error:", e); }
+    try { initSearchEngine(); } catch (e) { console.error("Search engine error:", e); }
 
-    // 2. Cache DOM targets
-    try {
-      cacheDOMElements();
-    } catch (e) {
-      console.error("DOM caching error:", e);
-    }
-
-    // 3. Theme & Font Size
-    try {
-      initThemeManager();
-    } catch (e) {
-      console.error("Theme manager error:", e);
-    }
-
-    // 4. Bookmarks System
-    try {
-      initBookmarksManager();
-    } catch (e) {
-      console.error("Bookmarks manager error:", e);
-    }
-
-    // 5. Navigation & Tabs
-    try {
-      initNavigation();
-    } catch (e) {
-      console.error("Navigation error:", e);
-    }
-
-    // 6. Search Engine
-    try {
-      initSearchEngine();
-    } catch (e) {
-      console.error("Search engine error:", e);
-    }
-
-    // 7. Initial Article Render
     try {
       const lib = getLibrary();
       if (lib && lib.books && lib.books.length > 0) {
@@ -1129,10 +994,9 @@
       console.error("Initial article render error:", e);
     }
 
-    console.log("✨ Roman Islamic Library Seamless Reader Initialized Successfully!");
+    console.log("✨ Roman Islamic Library Zero-Box Reader Initialized Successfully!");
   }
 
-  // Run bootloader on DOM ready
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", appBootloader);
   } else {
