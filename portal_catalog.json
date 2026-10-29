@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "lastUpdated": "Antigravity Files",
-  "totalApps": 29,
+  "totalApps": 30,
   "categories": [
     "Islamic & Faith",
     "Productivity & Utilities",
@@ -160,6 +160,29 @@
       "relPath": "10-Roman-Naat/index.html",
       "portalHref": "./10-Roman-Naat/index.html",
       "serverHref": "./10-Roman-Naat/index.html"
+    },
+    {
+      "id": "11-Roman-Project__index_html",
+      "title": "Roman Urdu Islamic Library (3 Books)",
+      "category": "Islamic & Faith",
+      "icon": "📚",
+      "badge": "3 Books • 364 Chapters • Copy/Share",
+      "description": "Unified mobile reader and copy/share studio for Bahar-e-Shariat (Pt 16), Qareena-e-Zindagi, and Ghalat Fehmiyan. Instant search, Amiri Arabic, WhatsApp export.",
+      "tags": [
+        "roman",
+        "urdu",
+        "bahar-e-shariat",
+        "qareena",
+        "ghalat-fehmiyan",
+        "fiqh",
+        "masail",
+        "hadith",
+        "pwa"
+      ],
+      "primary": true,
+      "relPath": "11-Roman-Project/index.html",
+      "portalHref": "./11-Roman-Project/index.html",
+      "serverHref": "./11-Roman-Project/index.html"
     },
     {
       "id": "08-Hadith-Roman-Urdu__web__top_100_short_hadiths_html",
