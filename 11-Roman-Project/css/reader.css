@@ -147,49 +147,51 @@ body {
   flex-direction: column;
 }
 
-/* Sticky Header */
+/* Sticky Header — Stable Constant Height (Zero Hysteresis, Zero Blink) */
 .sticky-header {
   position: sticky;
   top: 0;
   z-index: 100;
   background-color: var(--header-bg);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--header-border);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-  transition: all 0.25s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  height: 54px; /* CONSTANT STABLE HEIGHT — NEVER COLLAPSES OR EXPANDS ON SCROLL */
+  display: flex;
+  align-items: center;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
-/* Discovery Header (Resting at top of page) */
-.discovery-header {
-  display: block;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+.sticky-header.scrolled {
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+  border-bottom-color: var(--accent-glow);
 }
 
-.sticky-header.scrolled .discovery-header {
-  display: none;
-}
-
-/* Smart Compact Reading Header (Active when scrolled into article) */
+/* Smart Compact Reading Header (Permanent Top Bar) */
 .reading-header-bar {
-  display: none;
-  height: 52px;
+  display: flex; /* ALWAYS DISPLAY FLEX — NEVER DISPLAY NONE */
+  height: 54px;
+  width: 100%;
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
   max-width: 820px;
   margin: 0 auto;
-  gap: 10px;
-  animation: fadeInHeader 0.2s ease;
+  gap: 8px;
 }
 
-@keyframes fadeInHeader {
-  from { opacity: 0; transform: translateY(-6px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Discovery Hero (In normal page flow — scrolls smoothly above article) */
+.discovery-hero {
+  padding: 10px 0 6px;
+  border-bottom: 1px solid var(--border-color);
+  background: transparent;
+  transition: opacity 0.2s ease;
 }
 
-.sticky-header.scrolled .reading-header-bar {
-  display: flex;
+.discovery-hero-inner {
+  max-width: 820px;
+  margin: 0 auto;
 }
 
 .reading-title-wrap {
@@ -356,7 +358,8 @@ body {
   transform: translateY(-1px);
 }
 
-.icon-btn .badge-count {
+.icon-btn .badge-count,
+.icon-btn-compact .badge-count {
   position: absolute;
   top: -4px;
   right: -4px;
@@ -1352,6 +1355,31 @@ input:checked + .slider:before {
 }
 
 @media (max-width: 600px) {
+  .reading-header-bar {
+    padding: 0 10px;
+    gap: 6px;
+  }
+  .icon-btn-compact {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+  }
+  .reading-title-wrap {
+    gap: 6px;
+  }
+  .reading-book-badge {
+    padding: 2px 5px;
+    font-size: 0.62rem;
+  }
+  .reading-header-title {
+    font-size: 0.84rem;
+  }
+  .reading-header-sub {
+    font-size: 0.62rem;
+  }
   .brand-title {
     font-size: 0.95rem;
   }

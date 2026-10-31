@@ -595,10 +595,32 @@
         });
       }
 
-      // Back to top FAB and Smart Reading Header Scroll Observer
+      // Brand icon click -> smooth scroll to top
+      if (DOM.brandHomeBtn) {
+        DOM.brandHomeBtn.addEventListener("click", () => {
+          SoundFX.playClick();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      }
+
+      // Quick Search button in header
+      if (DOM.readingSearchBtn) {
+        DOM.readingSearchBtn.addEventListener("click", () => {
+          SoundFX.playClick();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+          setTimeout(() => {
+            if (DOM.searchInput) {
+              DOM.searchInput.focus();
+              DOM.searchInput.select();
+            }
+          }, 280);
+        });
+      }
+
+      // Back to top FAB and Header Scroll Observer (Zero height change, zero hysteresis)
       window.addEventListener("scroll", () => {
         const scrollY = window.scrollY || window.pageYOffset;
-        if (scrollY > 120) {
+        if (scrollY > 50) {
           if (DOM.appHeader) DOM.appHeader.classList.add("scrolled");
         } else {
           if (DOM.appHeader) DOM.appHeader.classList.remove("scrolled");
@@ -1038,6 +1060,8 @@
 
     // Reading Context Header Elements
     DOM.appHeader = document.getElementById("app-header");
+    DOM.brandHomeBtn = document.getElementById("btn-brand-home");
+    DOM.readingSearchBtn = document.getElementById("btn-reading-search");
     DOM.readingHeaderBar = document.getElementById("reading-header-bar");
     DOM.readingBookBadge = document.getElementById("reading-header-book-badge");
     DOM.readingTitle = document.getElementById("reading-header-title");

@@ -17,37 +17,43 @@
 <body data-current-book="bahar_e_shariat_16">
 
   <!-- ========================================================
-       STICKY TOP NAVIGATION BAR (GLASSMORPHIC)
+       STICKY TOP NAVIGATION BAR (CONSTANT 54PX HEIGHT — ZERO BLINK)
        ======================================================== -->
   <header class="sticky-header" id="app-header">
-    <!-- Discovery Header (Visible at top) -->
-    <div class="discovery-header" id="discovery-header">
-      <div class="header-top">
-        <div class="brand-section" id="btn-brand-home" title="Roman Islamic Library">
-          <div class="brand-icon">🌙</div>
-          <div class="brand-title-wrap">
-            <span class="brand-title">Roman Islamic Library</span>
-            <span class="brand-subtitle">اسلامی کتب خانہ • رومن اردو</span>
-          </div>
-        </div>
-        
-        <div class="header-actions">
-          <!-- Table of Contents Toggle -->
-          <button class="icon-btn" id="btn-toggle-toc" title="Table of Contents (Fehrist)" aria-label="Open Table of Contents">
-            📑
-          </button>
-          <!-- Saved Bookmarks Toggle -->
-          <button class="icon-btn" id="btn-toggle-bookmarks" title="Saved Articles & Masail" aria-label="Open Saved Bookmarks" style="position: relative;">
-            ⭐
-            <span class="badge-count" id="bookmark-count-badge" style="display: none;">0</span>
-          </button>
-          <!-- Settings Modal Toggle -->
-          <button class="icon-btn" id="btn-toggle-settings" title="Display Settings & Themes" aria-label="Open Settings">
-            ⚙️
-          </button>
+    <div class="reading-header-bar" id="reading-header-bar">
+      <!-- Left: Brand Icon, Book Badge & Topic Title (Tap opens TOC) -->
+      <div class="reading-title-wrap" id="btn-reading-toc-jump" title="Tap to open Table of Contents (Fehrist)">
+        <span class="brand-icon" id="btn-brand-home" title="Back to Top / Books" style="cursor: pointer;">🌙</span>
+        <span class="reading-book-badge" id="reading-header-book-badge">BS16</span>
+        <div class="reading-title-text-group">
+          <span class="reading-header-title" id="reading-header-title">Loading...</span>
+          <span class="reading-header-sub" id="reading-header-sub">Chapter</span>
         </div>
       </div>
 
+      <!-- Right: Direct 1-Tap Action Icons -->
+      <div class="reading-actions">
+        <button class="icon-btn-compact" id="btn-reading-search" title="Search Hadith & Masail" aria-label="Search Library">🔍</button>
+        <button class="icon-btn-compact" id="btn-reading-copy" title="Copy Full Article (WhatsApp)" aria-label="Copy Article">📋</button>
+        <button class="icon-btn-compact" id="btn-reading-share" title="Share via WhatsApp" aria-label="Share Article">💬</button>
+        <button class="icon-btn-compact" id="btn-reading-bookmark" title="Bookmark Article" aria-label="Bookmark Article">⭐</button>
+        <button class="icon-btn-compact" id="btn-toggle-bookmarks" title="Saved Bookmarks List" aria-label="Open Saved Bookmarks" style="position: relative;">
+          🔖
+          <span class="badge-count" id="bookmark-count-badge" style="display: none;">0</span>
+        </button>
+        <button class="icon-btn-compact" id="btn-reading-toc" title="Table of Contents (Fehrist)" aria-label="Open Table of Contents">📑</button>
+        <button class="icon-btn-compact" id="btn-toggle-settings" title="Display Settings & Themes" aria-label="Open Settings">⚙️</button>
+        <!-- Retain btn-toggle-toc alias for test compatibility -->
+        <span id="btn-toggle-toc" style="display: none;"></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================
+       DISCOVERY HERO (BOOK TABS & SEARCH BAR — IN PAGE FLOW)
+       ======================================================== -->
+  <section class="discovery-hero" id="discovery-header">
+    <div class="discovery-hero-inner">
       <!-- Book Switcher Pill Tabs -->
       <div class="book-tabs-container" id="book-tabs-container">
         <div class="book-tabs">
@@ -78,24 +84,7 @@
         </div>
       </div>
     </div>
-
-    <!-- Smart Compact Reading Context Bar (Visible on scroll) -->
-    <div class="reading-header-bar" id="reading-header-bar">
-      <div class="reading-title-wrap" id="btn-reading-toc-jump" title="Tap to open Table of Contents">
-        <span class="reading-book-badge" id="reading-header-book-badge">BS16</span>
-        <div class="reading-title-text-group">
-          <span class="reading-header-title" id="reading-header-title">Loading...</span>
-          <span class="reading-header-sub" id="reading-header-sub">Chapter</span>
-        </div>
-      </div>
-      <div class="reading-actions">
-        <button class="icon-btn-compact" id="btn-reading-copy" title="Copy Full Article (WhatsApp)" aria-label="Copy Article">📋</button>
-        <button class="icon-btn-compact" id="btn-reading-share" title="Share via WhatsApp" aria-label="Share Article">💬</button>
-        <button class="icon-btn-compact" id="btn-reading-bookmark" title="Bookmark Article" aria-label="Bookmark Article">⭐</button>
-        <button class="icon-btn-compact" id="btn-reading-toc" title="Table of Contents" aria-label="Open Table of Contents">📑</button>
-      </div>
-    </div>
-  </header>
+  </section>
 
   <!-- ========================================================
        SEAMLESS EDITORIAL ARTICLE VIEWPORT (CONTINUOUS READING)
