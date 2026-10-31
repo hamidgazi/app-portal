@@ -3085,6 +3085,263 @@
       } catch (err) {
         console.error("Chronobiology inspector bootloader error:", err);
       }
+
+      // 10. Bio-Synergies & Culinary Chemistry Inspector Bootloader
+      try {
+        const synergyData = {
+          syn1: {
+            categoryLabel: "SYNERGY 1: HEPATIC GLUCURONIDATION BLOCKADE & LYMPHATIC MICELLES",
+            title: "🌶️ CURCUMIN + PIPERINE + GHEE TRIAD",
+            badgeText: "+2,000% (20-FOLD BOOST)",
+            badgeBg: "rgba(239, 68, 68, 0.2)",
+            badgeColor: "#ef4444",
+            boxBg: "rgba(239, 68, 68, 0.12)",
+            boxBorder: "#ef4444",
+            formulationStat: "Turmeric + Pepper + Ghee",
+            formulationDesc: "Curcuminoids + 20mg Piperine + Butyrate Lipids",
+            mechanismStat: "UGT & P-gp Inhibition",
+            mechanismDesc: "Blocks intestinal/hepatic clearance enzymes",
+            multiplierStat: "+2,000% Bioavailability",
+            multiplierDesc: "20-fold rise in human plasma AUC curve",
+            benefitStat: "Nocturnal Anabolism",
+            benefitDesc: "Lymphatic delivery shields muscle tissue",
+            clinicalHtml: "<p><strong>Glucuronidation Blockade</strong>: Native oral curcumin has near-zero bioavailability (&lt;1%) because enterocytic and hepatic UDP-glucuronosyltransferase (UGT) enzymes rapidly convert free curcumin into water-soluble curcumin glucuronides for biliary excretion. Piperine is a potent, reversible inhibitor of UGT enzymes and downregulates P-glycoprotein.</p><p style=\"margin-top:0.5rem;\"><strong>Lymphatic Chylomicron Transport</strong>: Curcumin is highly lipophilic. Dissolving it in warm Desi Ghee stimulates bile salt release and incorporates curcumin into mixed micelles, entering mesenteric lymph vessels via chylomicrons and completely bypassing first-pass liver destruction.</p>",
+            kitchenHtml: "<p><strong>Nightly Recipe</strong>: In 200 ml warm whole milk, whisk 1 pinch organic turmeric + 1 pinch freshly cracked black pepper (~20 mg piperine) + 1 tsp Desi Ghee + 300 mg Ashwagandha. Simmer gently for 2 minutes; drink warm 30m before bed.</p><p style=\"margin-top:0.5rem;\"><strong>Antagonist Trap</strong>: Never use stale pre-ground pepper (oxidized piperine has 0% potency) and never use skim milk with zero fat (curcumin requires lipid micelle assembly).</p>"
+          },
+          syn2: {
+            categoryLabel: "SYNERGY 2: NON-HEME IRON REDUCTION & DMT-1 CHELATION",
+            title: "🍋 NON-HEME IRON + ASCORBIC ACID / LEMON",
+            badgeText: "+300% TO +400% IRON UPTAKE",
+            badgeBg: "rgba(34, 197, 94, 0.2)",
+            badgeColor: "#22c55e",
+            boxBg: "rgba(34, 197, 94, 0.12)",
+            boxBorder: "#22c55e",
+            formulationStat: "Dal / Eggs / Chana + Fresh Lemon",
+            formulationDesc: "Non-heme plant iron + 15–25mg L-Ascorbic Acid",
+            mechanismStat: "Fe³⁺ to Fe²⁺ Reduction",
+            mechanismDesc: "Converts insoluble ferric to soluble ferrous state",
+            multiplierStat: "+300% to +400%",
+            multiplierDesc: "Overcomes baseline plant phytate inhibition",
+            benefitStat: "Erythropoiesis & Oxygenation",
+            benefitDesc: "Maximizes tissue delivery for workout energy",
+            clinicalHtml: "<p><strong>Chemical Reduction of Ferric Iron</strong>: Non-heme iron in grains and pulses exists in the oxidized insoluble ferric state (Fe³⁺). Ascorbic acid donates an electron at acidic gastric pH, reducing it to the soluble ferrous state (Fe²⁺) which binds Divalent Metal Transporter 1 (DMT-1) on duodenal enterocytes.</p><p style=\"margin-top:0.5rem;\"><strong>Soluble Chelate Formation</strong>: Ascorbic acid forms a stable chelate that resists alkaline intestinal precipitation and prevents phytates from sequestering iron.</p>",
+            kitchenHtml: "<p><strong>Kitchen Dosing Rule</strong>: Squeeze the juice of 1/2 fresh lemon (15–20 mg Vitamin C) directly over cooked dal, chana, or eggs <em>immediately after</em> taking them off the stove flame. Heat above 70°C degrades Vitamin C.</p><p style=\"margin-top:0.5rem;\"><strong>Antagonist Trap</strong>: Zero tea, coffee, or milk within 60 minutes of iron-rich meals; tannins and calcium block DMT-1 transporter uptake by 60–80%.</p>"
+          },
+          syn3: {
+            categoryLabel: "SYNERGY 3: CALCIUM SHUTTLING & HYDROXYAPATITE DEPOSITION",
+            title: "🦴 FAT-SOLUBLE VITAMIN TETRAD (D3 + K2 + LIPIDS + MG)",
+            badgeText: "+50% UPTAKE & 100% BONE TARGET",
+            badgeBg: "rgba(56, 189, 248, 0.2)",
+            badgeColor: "var(--accent-cyan)",
+            boxBg: "rgba(56, 189, 248, 0.12)",
+            boxBorder: "var(--accent-cyan)",
+            formulationStat: "D3 + K2-MK7 + Lipids + Mg",
+            formulationDesc: "60k IU/mo D3 + 55mcg K2 + Ghee + 300mg Mg",
+            mechanismStat: "Osteocalcin & MGP Activation",
+            mechanismDesc: "Carboxylates proteins to drive calcium into bones",
+            multiplierStat: "+50% Mucosal Absorption",
+            multiplierDesc: "Complete prevention of arterial calcification",
+            benefitStat: "Dense Skeletal Frame",
+            benefitDesc: "Directs calcium to bone matrix; spares arteries",
+            clinicalHtml: "<p><strong>Targeted Mineral Shuttling</strong>: Vitamin D3 upregulates epithelial calcium channels (TRPV6) to pull calcium into the blood. Vitamin K2-MK7 activates Osteocalcin via gamma-carboxylation to lock calcium into skeletal bone mineral matrix, while carboxylating Matrix Gla Protein (MGP) to prevent arterial and vascular calcification.</p><p style=\"margin-top:0.5rem;\"><strong>Enzymatic Cofactor Role</strong>: Magnesium serves as the obligate cofactor for hepatic and renal hydroxylase enzymes converting D3 into its active hormonal form.</p>",
+            kitchenHtml: "<p><strong>Clinical Protocol</strong>: Take fat-soluble D3/K2 immediately following a fat-dense meal (3 eggs in ghee). Take 300mg Magnesium Glycinate with dinner or bedtime milk.</p><p style=\"margin-top:0.5rem;\"><strong>Antagonist Trap</strong>: Taking Vitamin D3 on an empty stomach with plain water (results in near-zero absorption) or taking high calcium doses without K2.</p>"
+          },
+          syn4: {
+            categoryLabel: "SYNERGY 4: DEPHYTINIZATION & OLIGOSACCHARIDE ELIMINATION",
+            title: "🌰 PHYTATE & LECTIN OSMOTIC SOAKING",
+            badgeText: "2× MINERAL UPTAKE (-70% GAS)",
+            badgeBg: "rgba(245, 158, 11, 0.2)",
+            badgeColor: "#f59e0b",
+            boxBg: "rgba(245, 158, 11, 0.12)",
+            boxBorder: "#f59e0b",
+            formulationStat: "Almonds, Munakka, Lentils + Soak",
+            formulationDesc: "12-hour warm osmotic soak in room water",
+            mechanismStat: "Endogenous Phytase Activation",
+            mechanismDesc: "Hydrolyzes inositol-phosphate bonds",
+            multiplierStat: "Doubles Zinc & Iron",
+            multiplierDesc: "Cuts gas-causing oligosaccharides by 70%",
+            benefitStat: "Zero-Bloat Mineral Surge",
+            benefitDesc: "Eliminates digestive friction and enzyme inhibition",
+            clinicalHtml: "<p><strong>Phytic Acid Hydrolysis</strong>: Phytic acid in raw nuts, lentils, and grains has 6 negative phosphate groups that bind divalent cations (Zn²⁺, Fe²⁺, Mg²⁺) into insoluble chelates. A 12-hour warm water soak activates dormant seed phytase enzymes that cleave inositol-phosphate bonds, freeing bound minerals.</p><p style=\"margin-top:0.5rem;\"><strong>Tannin & Oligosaccharide Removal</strong>: Peeling almond skins removes condensed tannins that inhibit pepsin; discarding soaking water leaches out raffinose and stachyose.</p>",
+            kitchenHtml: "<p><strong>Daily Routine</strong>: Soak 6–8 almonds and 8–10 Munakka for 10–12 hours; peel skins and eat upon waking. Soak dals for 6–8h and discard the water completely before cooking.</p><p style=\"margin-top:0.5rem;\"><strong>Antagonist Trap</strong>: Reusing pulse soaking water in the pressure cooker or eating raw unpeeled almonds (tannins blunt gastric proteolysis).</p>"
+          },
+          syn5: {
+            categoryLabel: "SYNERGY 5: DIFFERENTIAL HEAT GRADIENT & CHOLINE PRESERVATION",
+            title: "🍳 THE THERMAL GRADIENT EGG COOKING LAW",
+            badgeText: "91% PROTEIN (100% CHOLINE)",
+            badgeBg: "rgba(34, 197, 94, 0.2)",
+            badgeColor: "#22c55e",
+            boxBg: "rgba(34, 197, 94, 0.12)",
+            boxBorder: "#22c55e",
+            formulationStat: "Firm White + Velvety Runny Yolk",
+            formulationDesc: "6.5-min soft boil, sunny-side, or gentle scramble",
+            mechanismStat: "Avidin Denaturation & Lipid Shield",
+            mechanismDesc: "Denatures avidin/ovalbumin; preserves phosphatidylcholine",
+            multiplierStat: "91% vs 51% Digestibility",
+            multiplierDesc: "40% greater amino acid assimilation; zero choline loss",
+            benefitStat: "Testosterone & Neural Fuel",
+            benefitDesc: "Unoxidized yolk cholesterol drives steroidogenesis",
+            clinicalHtml: "<p><strong>Albumen Denaturation & Biotin Protection</strong>: Raw egg white contains avidin, which binds dietary biotin with near-irreversible affinity, and tightly folded ovalbumin that resists pepsin. Heat coagulates the albumen, destroying avidin and unfolding protein chains for 91% ileal digestibility.</p><p style=\"margin-top:0.5rem;\"><strong>Lipid & Choline Shield</strong>: Prolonged intense heat oxidizes delicate yolk polyunsaturated fatty acids and damages phosphatidylcholine (147mg/yolk). Keeping the yolk soft preserves 100% active nutrients.</p>",
+            kitchenHtml: "<p><strong>Cooking Method</strong>: 6.5-minute soft boil with ice bath plunge, or gentle scramble in 1 tsp ghee until white is firm but yolk is glossy and creamy.</p><p style=\"margin-top:0.5rem;\"><strong>Antagonist Trap</strong>: Drinking raw eggs in shakes (wastes 49% of protein and destroys biotin) or boiling eggs until an ugly gray sulfur ring forms.</p>"
+          },
+          syn6: {
+            categoryLabel: "SYNERGY 6: AMYLOSE RETROGRADATION & BUTYRATE SYNTHESIS",
+            title: "🍚 RETROGRADED AMYLOSE RESISTANT STARCH (RS3)",
+            badgeText: "-20% GI CRASH (+2.5× BUTYRATE)",
+            badgeBg: "rgba(56, 189, 248, 0.2)",
+            badgeColor: "var(--accent-cyan)",
+            boxBg: "rgba(56, 189, 248, 0.12)",
+            boxBorder: "var(--accent-cyan)",
+            formulationStat: "Cooked White Rice Chilled at 4°C",
+            formulationDesc: "12–24h refrigeration followed by mild reheating with ghee",
+            mechanismStat: "Crystalline Amylose Retrogradation",
+            mechanismDesc: "Forms double-helices that resist upper digestive amylase",
+            multiplierStat: "-20% Glycemic Spike",
+            multiplierDesc: "2.5-fold elevation in colon short-chain fatty acids",
+            benefitStat: "Epithelial Barrier Integrity",
+            benefitDesc: "Feeds F. prausnitzii; tightens claudin/occludin junctions",
+            clinicalHtml: "<p><strong>Type 3 Resistant Starch Formation</strong>: Freshly boiled white rice has gelatinized amylose that triggers sharp insulin spikes. Chilling cooked rice at 4°C for 12–24h forces linear amylose chains to realign into crystalline double-helices (RS3) held by hydrogen bonds.</p><p style=\"margin-top:0.5rem;\"><strong>Microbiome Fermentation</strong>: RS3 passes intact into the colon where commensal bacteria ferment it into Butyrate, fueling colonocytes and eliminating postprandial reactive hypoglycemia.</p>",
+            kitchenHtml: "<p><strong>Kitchen Rule</strong>: Cook a batch of Basmati rice, refrigerate at 4°C for 24h, then gently reheat with 1 tsp Desi Ghee for lunch or dinner. RS3 structure remains stable!</p><p style=\"margin-top:0.5rem;\"><strong>Antagonist Trap</strong>: Leaving cooked rice at room temperature for hours (Bacillus cereus risk). Always refrigerate within 60 minutes of cooking.</p>"
+          },
+          syn7: {
+            categoryLabel: "SYNERGY 7: SARCOLEMMAL SYMPORT & INSULIN-STIMULATED CreaT",
+            title: "⚡ CREATINE MONOHYDRATE GLYCEMIC TRANSPORT",
+            badgeText: "+20% TO +30% MUSCLE SATURATION",
+            badgeBg: "rgba(245, 158, 11, 0.2)",
+            badgeColor: "#f59e0b",
+            boxBg: "rgba(245, 158, 11, 0.12)",
+            boxBorder: "#f59e0b",
+            formulationStat: "3–5g Creatine + Bananas & Dates",
+            formulationDesc: "Blended in Desi Power Bulk Shake with whole milk",
+            mechanismStat: "PI3K/Akt CreaT Translocation",
+            mechanismDesc: "Insulin stimulates sarcolemmal sodium-dependent pumps",
+            multiplierStat: "+20% to +30% Uptake",
+            multiplierDesc: "Accelerates intramuscular saturation by 7–10 days",
+            benefitStat: "Cellular ATP & Hydration",
+            benefitDesc: "Draws intracellular water into muscle fibers",
+            clinicalHtml: "<p><strong>200-Fold Gradient Overcome</strong>: Intramuscular creatine is 120–140 mmol/kg dry muscle vs 50–100 μmol/L in serum. Translocation requires the sodium/chloride-dependent transporter (CreaT / SLC6A8).</p><p style=\"margin-top:0.5rem;\"><strong>Insulin Vector Activation</strong>: Simple carbohydrates from bananas and dates trigger an insulin surge that activates PI3K/Akt signaling, upregulating sarcolemmal Na⁺/K⁺-ATPase pumps and driving rapid creatine symport.</p>",
+            kitchenHtml: "<p><strong>Preparation</strong>: Add 3–5g micronized creatine directly into your Desi Power Bulk Shake (milk, 2 bananas, 4 dates, peanut butter) and blend for 60 seconds.</p><p style=\"margin-top:0.5rem;\"><strong>Antagonist Trap</strong>: Dry-scooping or drinking creatine in cold water on an empty stomach (causes osmotic stomach cramps and diarrhea).</p>"
+          },
+          syn8: {
+            categoryLabel: "SYNERGY 8: CHOLINERGIC ANTRAL MOTILITY & PARIETAL SECRETION",
+            title: "🌿 CARMINATIVE THYMOL-GINGEROL ANTRAL PRIMING",
+            badgeText: "-50% FULLNESS (PHASE III MMC)",
+            badgeBg: "rgba(34, 197, 94, 0.2)",
+            badgeColor: "#22c55e",
+            boxBg: "rgba(34, 197, 94, 0.12)",
+            boxBorder: "#22c55e",
+            formulationStat: "Ginger + Roasted Ajwain + Kala Namak",
+            formulationDesc: "Fresh root sliver + thymol seeds + mineral salt in 50ml water",
+            mechanismStat: "M3 Cholinergic & Parietal Activation",
+            mechanismDesc: "Triggers antral contractions and stomach acid release",
+            multiplierStat: "Cuts Fullness by 50%",
+            multiplierDesc: "Accelerates gastric clearance into duodenum",
+            benefitStat: "Rapid Meal Transit",
+            benefitDesc: "Completely prevents upper abdominal distension and burps",
+            clinicalHtml: "<p><strong>Antral Motility Stimulation</strong>: Gingerols bind cholinergic muscarinic (M3) receptors on antral smooth muscle, initiating peristaltic contractions and relaxing the pyloric valve. Thymol stimulates biliary and pancreatic lipase output.</p><p style=\"margin-top:0.5rem;\"><strong>HCl Acid Secretion</strong>: Kala Namak chloride ions activate parietal cells to produce Hydrochloric Acid (HCl), eliminating delayed digestion and hypochlorhydria.</p>",
+            kitchenHtml: "<p><strong>Protocol</strong>: 15 minutes before breakfast and lunch, chew 1 thin ginger sliver sprinkled with roasted ajwain and black salt, or drink in 50ml lukewarm water.</p><p style=\"margin-top:0.5rem;\"><strong>Antagonist Trap</strong>: Downing a large glass of water with the elixir (dilutes acid and stretches stomach mechanoreceptors).</p>"
+          },
+          syn9: {
+            categoryLabel: "SYNERGY 9: SELECTIVE PREBIOTIC FERMENTATION & BRUSH BORDER EXPANSION",
+            title: "🌱 SYNBIOTIC MICROBIOME PAIRING (SATTU + CURD)",
+            badgeText: "MAX VILLI SURFACE AREA",
+            badgeBg: "rgba(13, 148, 136, 0.2)",
+            badgeColor: "var(--accent-teal)",
+            boxBg: "rgba(13, 148, 136, 0.15)",
+            boxBorder: "var(--accent-teal)",
+            formulationStat: "Fresh Dahi + Roasted Chana Sattu",
+            formulationDesc: "150g live curd + 35g sattu / firm green-tipped banana",
+            mechanismStat: "Probiotic Colonization & SCFA Milieu",
+            mechanismDesc: "Lowers luminal pH below 5.5; deepens absorptive crypts",
+            multiplierStat: "+15% Caloric Assimilation",
+            multiplierDesc: "Directly lengthens brush-border microvillus height",
+            benefitStat: "Mucosal Integrity & Digestion",
+            benefitDesc: "Inhibits enterobacteria; prevents food-induced gut leak",
+            clinicalHtml: "<p><strong>Synbiotic Colonization</strong>: Live Lactobacillus and Bifidobacteria require specific oligosaccharide substrates to survive gut transit. Prebiotic fibers in roasted sattu and firm bananas provide this substrate in the distal ileum and cecum.</p><p style=\"margin-top:0.5rem;\"><strong>Villus Architecture Expansion</strong>: Fermentation produces lactic acid and acetate, stimulating enterocyte mitosis to deepen crypts and expand microvillus surface area for higher calorie assimilation.</p>",
+            kitchenHtml: "<p><strong>Recipe</strong>: Whisk 35g Sattu into 150g fresh curd, 150ml room-temperature water, roasted jeera, and black salt. Or eat 1 firm banana with curd at 11:30 AM.</p><p style=\"margin-top:0.5rem;\"><strong>Antagonist Trap</strong>: Mixing sattu and curd with hot boiling water (heat instantly kills 100% of live probiotic bacteria).</p>"
+          },
+          syn10: {
+            categoryLabel: "SYNERGY 10: TRANS-TO-CIS ISOMERIZATION & LIPID MICELLE PARTITIONING",
+            title: "🍅 THERMAL CAROTENOID LIPID EXTRACTION",
+            badgeText: "+400% LYCOPENE (+300% CAROTENE)",
+            badgeBg: "rgba(239, 68, 68, 0.2)",
+            badgeColor: "#ef4444",
+            boxBg: "rgba(239, 68, 68, 0.12)",
+            boxBorder: "#ef4444",
+            formulationStat: "Cooked Tomatoes/Carrots + Desi Ghee",
+            formulationDesc: "10–12 minute sauté in pure Desi Ghee base",
+            mechanismStat: "Trans-to-Cis Isomerization & SR-BI",
+            mechanismDesc: "Heat unlocks cell walls; ghee lipids assemble micelles",
+            multiplierStat: "+400% Lycopene Bioavailability",
+            multiplierDesc: "4-fold rise in antioxidant plasma concentrations",
+            benefitStat: "Cellular Recovery & Muscle Repair",
+            benefitDesc: "Suppresses post-workout myofibrillar oxidative stress",
+            clinicalHtml: "<p><strong>Chromoplast Disruption</strong>: Raw carotenoids are entrapped inside rigid plant pectin/cellulose walls. Cooking denatures binding proteins, disrupts walls, and induces trans-to-cis isomerization into soluble polar cis-isomers.</p><p style=\"margin-top:0.5rem;\"><strong>SR-BI Enterocyte Uptake</strong>: Ghee lipids form oil-in-water micro-droplets that dissolve liberated carotenoids into bile micelles for active uptake via Scavenger Receptor Class B Type 1 (SR-BI).</p>",
+            kitchenHtml: "<p><strong>Kitchen Dosing Rule</strong>: Sauté tomatoes and carrots in 1 tbsp Desi Ghee for 10–12 minutes until softened into a deep red curry or tadka base.</p><p style=\"margin-top:0.5rem;\"><strong>Antagonist Trap</strong>: Drinking raw tomato/carrot juice with zero fat (over 85% is excreted in feces) or discarding cooked tomato skins.</p>"
+          }
+        };
+
+        const synergyPills = document.querySelectorAll(".synergy-pill");
+        const synergyCategoryLabel = document.getElementById("synergy-category-label");
+        const synergyTitle = document.getElementById("synergy-title");
+        const synergyBadge = document.getElementById("synergy-badge");
+        const synergyVerdictBox = document.getElementById("synergy-verdict-box");
+        const synergyFormulationStat = document.getElementById("synergy-formulation-stat");
+        const synergyFormulationDesc = document.getElementById("synergy-formulation-desc");
+        const synergyMechanismStat = document.getElementById("synergy-mechanism-stat");
+        const synergyMechanismDesc = document.getElementById("synergy-mechanism-desc");
+        const synergyMultiplierStat = document.getElementById("synergy-multiplier-stat");
+        const synergyMultiplierDesc = document.getElementById("synergy-multiplier-desc");
+        const synergyBenefitStat = document.getElementById("synergy-benefit-stat");
+        const synergyBenefitDesc = document.getElementById("synergy-benefit-desc");
+        const synergyClinicalText = document.getElementById("synergy-clinical-text");
+        const synergyKitchenText = document.getElementById("synergy-kitchen-text");
+
+        synergyPills.forEach(pill => {
+          pill.addEventListener("click", () => {
+            const synKey = pill.getAttribute("data-synergy");
+            if (!synKey || !synergyData[synKey]) return;
+
+            synergyPills.forEach(p => {
+              p.classList.remove("active");
+              p.setAttribute("aria-selected", "false");
+            });
+            pill.classList.add("active");
+            pill.setAttribute("aria-selected", "true");
+
+            const synergyDisplay = document.getElementById("synergy-display");
+            if (synergyDisplay && pill.id) {
+              synergyDisplay.setAttribute("aria-labelledby", pill.id);
+            }
+
+            const data = synergyData[synKey];
+            if (synergyCategoryLabel) synergyCategoryLabel.textContent = data.categoryLabel;
+            if (synergyTitle) synergyTitle.textContent = data.title;
+            if (synergyBadge) {
+              synergyBadge.textContent = data.badgeText;
+              synergyBadge.style.background = data.badgeBg;
+              synergyBadge.style.color = data.badgeColor;
+              synergyBadge.style.borderColor = data.badgeColor;
+            }
+            if (synergyVerdictBox) {
+              synergyVerdictBox.style.background = data.boxBg;
+              synergyVerdictBox.style.borderLeftColor = data.boxBorder;
+            }
+            if (synergyFormulationStat) synergyFormulationStat.textContent = data.formulationStat;
+            if (synergyFormulationDesc) synergyFormulationDesc.textContent = data.formulationDesc;
+            if (synergyMechanismStat) synergyMechanismStat.textContent = data.mechanismStat;
+            if (synergyMechanismDesc) synergyMechanismDesc.textContent = data.mechanismDesc;
+            if (synergyMultiplierStat) synergyMultiplierStat.textContent = data.multiplierStat;
+            if (synergyMultiplierDesc) synergyMultiplierDesc.textContent = data.multiplierDesc;
+            if (synergyBenefitStat) synergyBenefitStat.textContent = data.benefitStat;
+            if (synergyBenefitDesc) synergyBenefitDesc.textContent = data.benefitDesc;
+            if (synergyClinicalText) synergyClinicalText.innerHTML = data.clinicalHtml;
+            if (synergyKitchenText) synergyKitchenText.innerHTML = data.kitchenHtml;
+          });
+        });
+      } catch (err) {
+        console.error("Bio-Synergies inspector bootloader error:", err);
+      }
     });
   </script>
 </body>
