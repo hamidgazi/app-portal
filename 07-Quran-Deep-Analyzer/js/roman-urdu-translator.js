@@ -26,6 +26,38 @@
 
   // --- 1. CURATED LEXICON (2718 Curated Entries) ---
   const LEXICON = {
+  "hamne": {
+    "ro": "hamne",
+    "ur": "ہم نے",
+    "en": "We",
+    "ar": "ہم نے",
+    "alt": ["humne", "hum ne", "ham ne"],
+    "cat": "pronoun"
+  },
+  "humne": {
+    "ro": "humne",
+    "ur": "ہم نے",
+    "en": "We",
+    "ar": "ہم نے",
+    "alt": ["hamne", "hum ne", "ham ne"],
+    "cat": "pronoun"
+  },
+  "bheja": {
+    "ro": "bheja",
+    "ur": "بھیجا",
+    "en": "Sent / dispatched",
+    "ar": "بھیجا",
+    "alt": ["bheji", "bheje"],
+    "cat": "conversational"
+  },
+  "tumhe": {
+    "ro": "tumhe",
+    "ur": "تمہیں",
+    "en": "To you",
+    "ar": "تمہیں",
+    "alt": ["tumhein", "tum ko", "tumko"],
+    "cat": "pronoun"
+  },
   "aurat": {
     "ro": "aurat",
     "ur": "عورت",
@@ -22726,10 +22758,10 @@
   },
   "na": {
     "ro": "na",
-    "ur": "لا",
-    "en": "So no / not",
-    "ar": "لا",
-    "alt": [],
+    "ur": "نہ",
+    "en": "No / not",
+    "ar": "نہ",
+    "alt": ["nah", "naa"],
     "cat": "word"
   },
   "mein se": {
@@ -23594,6 +23626,8 @@
       .replace(/\u06A9/g, '\u0643') // Urdu Keheh -> Arabic Kaf
       .replace(/[\u06C1\u06C2\u0629]/g, '\u0647') // Urdu Goal Heh / Teh Marbuta -> ه
       .replace(/\u0624/g, '\u0648') // Waw with Hamza -> و
+      .replace(/[۔،؛؟!.?,()[\]"':\-–—]/g, ' ') // Punctuation & Stops -> whitespace
+      .replace(/[\s\u200c\u00a0]+/g, ' ')
       .trim()
       .toLowerCase();
   }
@@ -23769,6 +23803,22 @@
   // Extracted across all 6,236 Ayat. Every phrase exists verbatim with real counts.
   // ============================================================================
   const QURANIC_TARJUMA_PHRASES = [
+    {
+      urdu: "ہم نے تمہیں نہ بھیجا",
+      count: 5,
+      surahs: ["21:107", "25:56", "17:105", "34:28", "4:80"],
+      roman: ["hamne tumhe na bheja", "humne tumhe na bheja", "ham ne tumhe na bheja", "hum ne tumhe na bheja", "hamne tumhein na bheja", "humne tumhein na bheja"],
+      en: ["we did not send you", "we have not sent you"],
+      priority: 100
+    },
+    {
+      urdu: "ہم نے تم کو نہ بھیجا",
+      count: 4,
+      surahs: ["21:107", "34:28", "17:54", "42:48"],
+      roman: ["hamne tum ko na bheja", "humne tum ko na bheja", "ham ne tum ko na bheja", "hum ne tum ko na bheja"],
+      en: ["we did not send you", "we have not sent you"],
+      priority: 95
+    },
     // Kanzul Irfan Core Distinct Phrasings
     {
       urdu: "سب تعریفیں اللہ کے لئے ہیں",
@@ -24611,6 +24661,15 @@
         }
       }
 
+      if (cleanNorm.includes('bheja') || cleanNorm.includes('bhejna') || cleanNorm.includes('send')) {
+        addToken('ہم نے تمہیں نہ بھیجا', 1.0);
+        addToken('ہم نے تم کو نہ بھیجا', 0.98);
+        addToken('نہ بھیجا', 0.95);
+        addToken('بھیجا', 0.95);
+      }
+      if (cleanNorm.includes('hamne') || cleanNorm.includes('humne')) {
+        addToken('ہم نے', 1.0);
+      }
       if (cleanNorm.includes('aurat') || cleanNorm.includes('aurte') || cleanNorm.includes('women') || cleanNorm.includes('wives')) {
         addToken('عورتیں', 1.0);
         addToken('عورتوں', 0.98);
