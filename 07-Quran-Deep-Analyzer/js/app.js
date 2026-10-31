@@ -433,7 +433,9 @@ const OmnisearchEngine = {
     });
 
     input.addEventListener("input", (e) => {
-      this.executeSearch(e.target.value.trim());
+      const val = e.target.value;
+      this.renderTransliterationBar(val);
+      this.executeSearch(val.trim());
     });
 
     const askAiBtn = document.getElementById("omnisearch-ask-ai-btn");
@@ -530,11 +532,62 @@ const OmnisearchEngine = {
     }
   },
 
+  renderTransliterationBar(val) {
+    const bar = document.getElementById("omnisearch-transliteration-bar");
+    if (!bar) return;
+    const q = (val || "").trim();
+    if (!q || !window.RomanUrduTranslator) {
+      bar.style.display = "none";
+      bar.innerHTML = "";
+      return;
+    }
+    const data = window.RomanUrduTranslator.getSmartPills(q);
+    if (!data || !data.pills || !data.pills.length) {
+      bar.style.display = "none";
+      bar.innerHTML = "";
+      return;
+    }
+    bar.style.display = "flex";
+    let html = "";
+    for (const pill of data.pills) {
+      if (pill.type === "lang") {
+        html += `<span class="trans-lang-tag">${pill.label}</span>`;
+      } else if (pill.type === "urdu") {
+        html += `<button type="button" class="trans-chip-urdu" data-val="${pill.value}" title="1-Tap Search">${pill.label}</button>`;
+      } else if (pill.type === "english") {
+        html += `<button type="button" class="trans-chip-en" data-val="${pill.value}" title="1-Tap Search">${pill.label}</button>`;
+      } else if (pill.type === "arabic") {
+        html += `<button type="button" class="trans-chip-ar" data-val="${pill.value}" title="1-Tap Search">${pill.label}</button>`;
+      } else if (pill.type === "roman") {
+        html += `<button type="button" class="trans-chip-en" data-val="${pill.value}" title="1-Tap Search">${pill.label}</button>`;
+      }
+    }
+    bar.innerHTML = html;
+    bar.querySelectorAll("button").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const targetVal = btn.getAttribute("data-val");
+        const input = document.getElementById("omnisearch-input");
+        if (targetVal && input) {
+          input.value = targetVal;
+          input.focus();
+          this.executeSearch(targetVal);
+          this.renderTransliterationBar(targetVal);
+        }
+      });
+    });
+  },
+
   close() {
     const modal = document.getElementById("omnisearch-modal");
     if (!modal) return;
     this.isOpen = false;
     modal.style.display = "none";
+    const bar = document.getElementById("omnisearch-transliteration-bar");
+    if (bar) {
+      bar.style.display = "none";
+      bar.innerHTML = "";
+    }
   },
 
   navigateResults(delta) {

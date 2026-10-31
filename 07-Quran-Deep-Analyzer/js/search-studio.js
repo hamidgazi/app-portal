@@ -176,6 +176,7 @@
           if (clearBtn) {
             clearBtn.style.display = val.trim() ? 'flex' : 'none';
           }
+          this.updateTransliterationBar(val);
           clearTimeout(this.debounceTimer);
           this.debounceTimer = setTimeout(() => {
             this.executeSearch(val);
@@ -323,6 +324,86 @@
       StudioSound.playClick();
     },
 
+    updateTransliterationBar(rawVal) {
+      const bar = document.getElementById('search-studio-transliteration-bar');
+      if (!bar) return;
+
+      const q = (rawVal || '').trim();
+      if (!q) {
+        bar.style.display = 'none';
+        bar.innerHTML = '';
+        return;
+      }
+
+      const translator = window.RomanUrduTranslator;
+      if (!translator || typeof translator.getSmartPills !== 'function') {
+        bar.style.display = 'none';
+        return;
+      }
+
+      const data = translator.getSmartPills(q);
+      if (!data || !data.pills || data.pills.length === 0) {
+        bar.style.display = 'none';
+        bar.innerHTML = '';
+        return;
+      }
+
+      bar.style.display = 'flex';
+      let html = '';
+
+      for (const pill of data.pills) {
+        if (pill.type === 'lang') {
+          html += `<span class="trans-lang-tag">${this.escapeHtml(pill.label)}</span>`;
+        } else if (pill.type === 'urdu') {
+          html += `<button type="button" class="trans-chip-urdu" data-val="${this.escapeHtml(pill.value)}" title="1-Tap Search Urdu">${this.escapeHtml(pill.label)}</button>`;
+        } else if (pill.type === 'english') {
+          html += `<button type="button" class="trans-chip-en" data-val="${this.escapeHtml(pill.value)}" title="1-Tap Search English">${this.escapeHtml(pill.label)}</button>`;
+        } else if (pill.type === 'arabic') {
+          html += `<button type="button" class="trans-chip-ar" data-val="${this.escapeHtml(pill.value)}" title="1-Tap Search Arabic">${this.escapeHtml(pill.label)}</button>`;
+        } else if (pill.type === 'roman') {
+          html += `<button type="button" class="trans-chip-en" data-val="${this.escapeHtml(pill.value)}" title="1-Tap Search Roman">${this.escapeHtml(pill.label)}</button>`;
+        }
+      }
+
+      // Add extra variant pills if available
+      if (Array.isArray(data.variants)) {
+        for (const v of data.variants.slice(0, 3)) {
+          if (v && v !== data.urduScript && v !== data.arabicTerm) {
+            html += `<button type="button" class="trans-chip-variant" data-val="${this.escapeHtml(v)}" title="Filter variant">${this.escapeHtml(v)}</button>`;
+          }
+        }
+      }
+
+      bar.innerHTML = html;
+
+      // Delegate click events on chips
+      const buttons = bar.querySelectorAll('button');
+      buttons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetVal = btn.getAttribute('data-val');
+          if (targetVal) {
+            StudioSound.playClick();
+            const input = document.getElementById('search-studio-input');
+            if (input) {
+              input.value = targetVal;
+              input.focus();
+            }
+            this.executeSearch(targetVal);
+            this.updateTransliterationBar(targetVal);
+          }
+        });
+      });
+    },
+
+    hideTransliterationBar() {
+      const bar = document.getElementById('search-studio-transliteration-bar');
+      if (bar) {
+        bar.style.display = 'none';
+        bar.innerHTML = '';
+      }
+    },
+
     clearSearch() {
       const input = document.getElementById('search-studio-input');
       const clearBtn = document.getElementById('search-studio-clear');
@@ -333,6 +414,7 @@
       if (clearBtn) {
         clearBtn.style.display = 'none';
       }
+      this.hideTransliterationBar();
       this.lastQuery = '';
       this.renderCelebratedLanding();
     },
@@ -472,6 +554,7 @@
         if (clearBtn) clearBtn.style.display = 'flex';
         input.focus();
       }
+      this.updateTransliterationBar(query);
       this.executeSearch(query);
       window.scrollTo({ top: 120, behavior: 'smooth' });
     },

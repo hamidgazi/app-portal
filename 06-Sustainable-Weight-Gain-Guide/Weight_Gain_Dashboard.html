@@ -2011,21 +2011,21 @@
         </div>
 
         <!-- Chrono Timing Pills (10 Windows) -->
-        <div class="chrono-pills" role="tablist">
-          <button class="chrono-pill" data-window="win1">🌅 06:00 AM Fasted</button>
-          <button class="chrono-pill" data-window="win2">🥛 07:30 AM Fueled</button>
-          <button class="chrono-pill" data-window="win3">⚡ 10:00 AM Mid-Morning</button>
-          <button class="chrono-pill" data-window="win4">🍛 01:00 PM Post-Lunch</button>
-          <button class="chrono-pill" data-window="win5">🥱 03:00 PM Slump</button>
-          <button class="chrono-pill active" data-window="win6">⭐ 05:30 PM Golden Window</button>
-          <button class="chrono-pill" data-window="win7">🌙 08:00 PM Early Night</button>
-          <button class="chrono-pill" data-window="win8">⚠️ 10:00 PM Late Night</button>
-          <button class="chrono-pill" data-window="ramadan">🌙 Ramadan / Fasting</button>
-          <button class="chrono-pill" data-window="jummah">🕌 Friday Jummah</button>
+        <div class="chrono-pills" role="tablist" aria-label="Exercise Chronobiology Windows">
+          <button class="chrono-pill" role="tab" id="chrono-tab-win1" aria-selected="false" aria-controls="chrono-display" data-window="win1">🌅 06:00 AM Fasted</button>
+          <button class="chrono-pill" role="tab" id="chrono-tab-win2" aria-selected="false" aria-controls="chrono-display" data-window="win2">🥛 07:30 AM Fueled</button>
+          <button class="chrono-pill" role="tab" id="chrono-tab-win3" aria-selected="false" aria-controls="chrono-display" data-window="win3">⚡ 10:00 AM Mid-Morning</button>
+          <button class="chrono-pill" role="tab" id="chrono-tab-win4" aria-selected="false" aria-controls="chrono-display" data-window="win4">🍛 01:00 PM Post-Lunch</button>
+          <button class="chrono-pill" role="tab" id="chrono-tab-win5" aria-selected="false" aria-controls="chrono-display" data-window="win5">🥱 03:00 PM Slump</button>
+          <button class="chrono-pill active" role="tab" id="chrono-tab-win6" aria-selected="true" aria-controls="chrono-display" data-window="win6">⭐ 05:30 PM Golden Window</button>
+          <button class="chrono-pill" role="tab" id="chrono-tab-win7" aria-selected="false" aria-controls="chrono-display" data-window="win7">🌙 08:00 PM Early Night</button>
+          <button class="chrono-pill" role="tab" id="chrono-tab-win8" aria-selected="false" aria-controls="chrono-display" data-window="win8">⚠️ 10:00 PM Late Night</button>
+          <button class="chrono-pill" role="tab" id="chrono-tab-ramadan" aria-selected="false" aria-controls="chrono-display" data-window="ramadan">🌙 Ramadan / Fasting</button>
+          <button class="chrono-pill" role="tab" id="chrono-tab-jummah" aria-selected="false" aria-controls="chrono-display" data-window="jummah">🕌 Friday Jummah</button>
         </div>
 
         <!-- Dynamic Inspector Display Area -->
-        <div class="chrono-display">
+        <div class="chrono-display" id="chrono-display" role="tabpanel" aria-live="polite" aria-labelledby="chrono-tab-win6">
           <!-- Top Verdict Banner -->
           <div id="chrono-verdict-box" style="background: rgba(2, 132, 199, 0.15); border-left: 4px solid var(--accent-cyan); padding: 1rem 1.25rem; border-radius: 10px; margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
             <div>
@@ -2860,8 +2860,17 @@
             const winKey = pill.getAttribute("data-window");
             if (!winKey || !chronoData[winKey]) return;
 
-            chronoPills.forEach(p => p.classList.remove("active"));
+            chronoPills.forEach(p => {
+              p.classList.remove("active");
+              p.setAttribute("aria-selected", "false");
+            });
             pill.classList.add("active");
+            pill.setAttribute("aria-selected", "true");
+
+            const chronoDisplay = document.getElementById("chrono-display");
+            if (chronoDisplay && pill.id) {
+              chronoDisplay.setAttribute("aria-labelledby", pill.id);
+            }
 
             const data = chronoData[winKey];
             if (chronoTimeLabel) chronoTimeLabel.textContent = data.timeLabel;

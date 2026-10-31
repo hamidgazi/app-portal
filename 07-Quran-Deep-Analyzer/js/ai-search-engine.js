@@ -305,6 +305,21 @@
         }
       }
 
+      // Cross-Lingual Roman Urdu & English AI Translator expansion
+      const translator = (typeof window !== 'undefined' && window.RomanUrduTranslator) ||
+                         (typeof global !== 'undefined' && global.RomanUrduTranslator);
+      if (translator && typeof translator.expandSearchQuery === 'function') {
+        const transExpansions = translator.expandSearchQuery(rawQ);
+        for (const exp of transExpansions) {
+          for (const st of this.tokenize(exp.term)) {
+            const currentW = expandedTerms.get(st) || 0;
+            if (exp.weight > currentW) {
+              expandedTerms.set(st, exp.weight);
+            }
+          }
+        }
+      }
+
       // Check full query phrase in synonyms
       for (const [concept, synList] of Object.entries(ISLAMIC_SYNONYMS)) {
         if (rawQ.includes(concept) || (normQ && normalizeArabicUrdu(concept).includes(normQ))) {
@@ -353,7 +368,10 @@
       }
 
       // Exact phrase scanner guarantee: Any document containing the exact multi-word phrase gets instant top score
-      if (rawQ.length >= 3) {
+      const urduQ = (translator && typeof translator.transliteratePhrase === 'function') ? translator.transliteratePhrase(rawQ) : '';
+      const normUrduQ = urduQ ? normalizeArabicUrdu(urduQ) : '';
+
+      if (rawQ.length >= 3 || (normUrduQ && normUrduQ.length >= 2)) {
         const rawQAlt = rawQ.includes('our') ? rawQ.replace(/our/g, 'or') : (rawQ.includes('or') ? rawQ.replace(/or/g, 'our') : null);
         for (let i = 0; i < this.docs.length; i++) {
           const doc = this.docs[i];
@@ -374,6 +392,14 @@
             scores.set(i, (scores.get(i) || 0) + 30.0);
           } else if (normQ && normQ.length >= 2 && normalizeArabicUrdu(cont).includes(normQ)) {
             scores.set(i, (scores.get(i) || 0) + 40.0);
+          } else if (normUrduQ && normUrduQ.length >= 2) {
+            const docUrduNorm = normalizeArabicUrdu(doc.urdu || '');
+            const docArNorm = normalizeArabicUrdu(doc.arabic || '');
+            if (docUrduNorm.includes(normUrduQ)) {
+              scores.set(i, (scores.get(i) || 0) + 45.0);
+            } else if (docArNorm.includes(normUrduQ)) {
+              scores.set(i, (scores.get(i) || 0) + 40.0);
+            }
           }
         }
       }
@@ -396,6 +422,10 @@
         if (normQ && normQ.length >= 2) {
           if (normalizeArabicUrdu(doc.arabic || '').includes(normQ)) finalScore += 35.0;
           if (normalizeArabicUrdu(doc.urdu || '').includes(normQ)) finalScore += 35.0;
+        }
+        if (normUrduQ && normUrduQ.length >= 2) {
+          if (normalizeArabicUrdu(doc.urdu || '').includes(normUrduQ)) finalScore += 35.0;
+          if (normalizeArabicUrdu(doc.arabic || '').includes(normUrduQ)) finalScore += 30.0;
         }
 
         results.push({

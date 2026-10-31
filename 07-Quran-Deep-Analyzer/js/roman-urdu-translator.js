@@ -24,7 +24,7 @@
     global.window = global;
   }
 
-  // --- 1. CURATED LEXICON (2660 Curated Entries) ---
+  // --- 1. CURATED LEXICON (2663 Curated Entries) ---
   const LEXICON = {
   "sabr": {
     "ro": "sabr",
@@ -2008,7 +2008,8 @@
     "en": "I seek forgiveness from Allah",
     "ar": "أستغفر الله",
     "alt": [
-      "tauba"
+      "istighfar",
+      "astagfirullah"
     ],
     "cat": "islamic"
   },
@@ -5617,6 +5618,46 @@
     ],
     "cat": "conversational"
   },
+  "mango": {
+    "ro": "mango",
+    "ur": "مانگو",
+    "en": "Ask! / Seek! / Supplicate!",
+    "ar": "مانگو",
+    "alt": [
+      "talab karo"
+    ],
+    "cat": "conversational"
+  },
+  "madad": {
+    "ro": "madad",
+    "ur": "مدد",
+    "en": "Help / Assistance / Aid",
+    "ar": "نصر",
+    "alt": [
+      "nusrat",
+      "isti'anat"
+    ],
+    "cat": "conversational"
+  },
+  "rakhna": {
+    "ro": "rakhna",
+    "ur": "رکھنا",
+    "en": "To make / appoint / place",
+    "ar": "رکھنا",
+    "alt": [
+      "rakho",
+      "rakha"
+    ],
+    "cat": "conversational"
+  },
+  "rakho": {
+    "ro": "rakho",
+    "ur": "رکھو",
+    "en": "Keep! (imperative)",
+    "ar": "رکھو",
+    "alt": [],
+    "cat": "conversational"
+  },
   "bhejna": {
     "ro": "bhejna",
     "ur": "بھیجنا",
@@ -8947,14 +8988,6 @@
   },
   "muqarrar karna": {
     "ro": "muqarrar karna",
-    "ur": "جعل",
-    "en": "To make / appoint / place",
-    "ar": "جعل",
-    "alt": [],
-    "cat": "root"
-  },
-  "rakhna": {
-    "ro": "rakhna",
     "ur": "جعل",
     "en": "To make / appoint / place",
     "ar": "جعل",
@@ -22801,23 +22834,11 @@
   const URDU_INDEX = new Map();
   const ARABIC_INDEX = new Map();
 
+  // Pass 1: Index all primary keys and script entries
   for (const [key, entry] of Object.entries(LEXICON)) {
-    // Index primary Roman Urdu key
     ROMAN_INDEX.set(key, entry);
     ROMAN_INDEX.set(key.replace(/[-_]/g, ''), entry);
     ROMAN_INDEX.set(key.replace(/[-_]/g, ' '), entry);
-
-    // Index alternate Roman Urdu spellings
-    if (Array.isArray(entry.alt)) {
-      for (const alt of entry.alt) {
-        const aClean = alt.toLowerCase().trim();
-        if (aClean) {
-          ROMAN_INDEX.set(aClean, entry);
-          ROMAN_INDEX.set(aClean.replace(/[-_]/g, ''), entry);
-          ROMAN_INDEX.set(aClean.replace(/[-_]/g, ' '), entry);
-        }
-      }
-    }
 
     // Index English keywords
     if (entry.en) {
@@ -22840,6 +22861,22 @@
     if (entry.ar) {
       const arClean = entry.ar.trim();
       ARABIC_INDEX.set(arClean, entry);
+    }
+  }
+
+  // Pass 2: Index alternate Roman Urdu spellings ONLY if slot not occupied by a primary key
+  for (const [key, entry] of Object.entries(LEXICON)) {
+    if (Array.isArray(entry.alt)) {
+      for (const alt of entry.alt) {
+        const aClean = alt.toLowerCase().trim();
+        if (aClean) {
+          if (!ROMAN_INDEX.has(aClean)) ROMAN_INDEX.set(aClean, entry);
+          const noDash = aClean.replace(/[-_]/g, '');
+          if (!ROMAN_INDEX.has(noDash)) ROMAN_INDEX.set(noDash, entry);
+          const withSpace = aClean.replace(/[-_]/g, ' ');
+          if (!ROMAN_INDEX.has(withSpace)) ROMAN_INDEX.set(withSpace, entry);
+        }
+      }
     }
   }
 
@@ -23026,7 +23063,7 @@
 
   // --- 4. MASTER ROMAN URDU TRANSLATOR API ---
   const RomanUrduTranslator = {
-    lexiconCount: 2660,
+    lexiconCount: 2663,
 
     /**
      * Detects input script/language: 'roman_urdu' | 'english' | 'urdu' | 'arabic'
@@ -23042,14 +23079,17 @@
           return 'urdu';
         }
         // Common Urdu function words in native script
-        const urduWords = ['کا', 'کی', 'کے', 'کو', 'سے', 'میں', 'پر', 'ہے', 'ہیں', 'تھا', 'تھی', 'تھے', 'اور', 'نہ', 'ہو', 'کیا', 'کون'];
+        const urduWords = ['کا', 'کی', 'کے', 'کو', 'سے', 'میں', 'پر', 'ہے', 'ہیں', 'تھا', 'تھی', 'تھے', 'اور', 'نہ', 'ہو', 'کیا', 'کون', 'والا', 'والے', 'والی', 'تجھ', 'مجھ', 'ہم', 'تم', 'آپ', 'کرو', 'کرو۔', 'ہے۔'];
         const tokens = clean.split(/\s+/);
         if (tokens.some(t => urduWords.includes(t))) {
           return 'urdu';
         }
-        // Quranic vowel marks or Arabic specific features
-        if (/[\u064B-\u065F\u0670]/.test(clean) || /^(ال|في|من|على|إلى|هذا|الذي)/.test(clean)) {
+        // Arabic markers: Teh Marbuta ة, Quranic diacritics, prefixed definite article ال, Arabic particles, or exact Arabic index match
+        if (/[\u064B-\u065F\u0670\u0629]/.test(clean) || /(^|\s)ال[\u0600-\u06FF]{2,}/.test(clean) || /(^|\s)(في|من|على|إلى|هذا|الذي|الذين|قال|يا|ما)(\s|$)/.test(clean) || ARABIC_INDEX.has(clean)) {
           return 'arabic';
+        }
+        if (URDU_INDEX.has(clean) && !ARABIC_INDEX.has(clean)) {
+          return 'urdu';
         }
         return 'urdu';
       }

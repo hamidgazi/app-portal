@@ -260,6 +260,9 @@
             <button id="search-studio-settings-btn" class="search-studio-settings-btn" onclick="window.QuranAISearchEngine && window.QuranAISearchEngine.openKeyModal()" title="Gemini AI Key Settings" aria-label="Settings">⚙️</button>
           </div>
 
+          <!-- Live Transliteration & Language Pill Bar -->
+          <div id="search-studio-transliteration-bar" class="transliteration-pill-bar" style="display: none;"></div>
+
           <!-- Row 2: Unified Micro-Filter Strip + Inline Count Metrics -->
           <div class="search-hero-row-sub">
             <div class="search-micro-pills" id="search-category-filters">
@@ -956,6 +959,8 @@
         <kbd class="omnisearch-esc-hint" onclick="closeOmnisearch()" style="cursor: pointer;" title="Close search (ESC)">ESC</kbd>
         <button id="omnisearch-close-btn" class="omnisearch-close-btn" onclick="closeOmnisearch()" aria-label="Close search">✕</button>
       </div>
+      <!-- Live Transliteration & Language Pill Bar -->
+      <div id="omnisearch-transliteration-bar" class="transliteration-pill-bar" style="display: none;"></div>
       <div class="omnisearch-quick-filters">
         <button class="omni-filter-chip active" data-cat="all">All</button>
         <button class="omni-filter-chip" data-cat="surahs">Surahs (114)</button>
@@ -2016,6 +2021,7 @@
   <script src="js/corpus-engine.js?v=20261021_rev7"></script>
   <script src="js/analytics-studio.js?v=20261021_rev7"></script>
   <script src="js/morphology-engine.js?v=20261021_rev7"></script>
+  <script src="js/roman-urdu-translator.js"></script>
   <script src="js/ai-search-engine.js?v=20261021_rev7"></script>
   <script src="js/search-studio.js?v=20261021_rev7"></script>
   <script src="js/audio-player.js?v=20261022_v2"></script>

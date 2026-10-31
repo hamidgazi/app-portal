@@ -4718,6 +4718,153 @@ mark.search-highlight {
   color: #fbbf24;
 }
 
+/* ==========================================================================
+   LIVE TRANSLITERATION PILL BAR & CHIPS (Roman Urdu & English AI Translator)
+   ========================================================================== */
+.transliteration-pill-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+  margin-bottom: 4px;
+  padding: 6px 10px;
+  background: rgba(15, 23, 42, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  animation: transBarSlideDown 0.18s ease-out;
+  width: 100%;
+}
+
+@keyframes transBarSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.trans-lang-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  user-select: none;
+}
+
+.trans-chip-urdu {
+  font-family: var(--font-urdu), 'JameelNoori', serif;
+  font-size: 1.05rem;
+  color: #fbbf24;
+  direction: rtl;
+  background: rgba(251, 191, 36, 0.12);
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  padding: 3px 12px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  touch-action: manipulation;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 30px;
+}
+
+.trans-chip-urdu:hover,
+.trans-chip-urdu:focus {
+  background: rgba(251, 191, 36, 0.22);
+  border-color: #fbbf24;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(251, 191, 36, 0.25);
+}
+
+.trans-chip-en {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #e2e8f0;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  touch-action: manipulation;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 30px;
+}
+
+.trans-chip-en:hover,
+.trans-chip-en:focus {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.trans-chip-ar {
+  font-family: var(--font-arabic), 'AlMushaf', serif;
+  font-size: 1rem;
+  color: #34d399;
+  background: rgba(52, 211, 153, 0.12);
+  border: 1px solid rgba(52, 211, 153, 0.3);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  direction: rtl;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  touch-action: manipulation;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 30px;
+}
+
+.trans-chip-ar:hover,
+.trans-chip-ar:focus {
+  background: rgba(52, 211, 153, 0.22);
+  border-color: #34d399;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(52, 211, 153, 0.25);
+}
+
+.trans-chip-variant {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  background: rgba(148, 163, 184, 0.08);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  touch-action: manipulation;
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+}
+
+.trans-chip-variant:hover {
+  background: rgba(148, 163, 184, 0.18);
+  border-color: #cbd5e1;
+  color: #ffffff;
+}
+
 /* Row 2: Unified Micro-Filter Strip + Inline Count Metrics */
 .search-hero-row-sub {
   display: flex;
