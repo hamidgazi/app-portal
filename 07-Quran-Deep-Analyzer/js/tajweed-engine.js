@@ -150,6 +150,99 @@
     }
   };
 
+  // Dual-joining Arabic letters (can connect forward to the next letter)
+  const DUAL_JOINING = new Set([
+    'ب', 'ت', 'ث', 'ج', 'ح', 'خ', 'س', 'ش', 'ص', 'ض', 'ط', 'ظ',
+    'ع', 'غ', 'ف', 'ق', 'ك', 'ل', 'م', 'ن', 'ه', 'ي', 'ى', 'ئ',
+    'پ', 'چ', 'ژ', 'ک', 'گ', 'ں', 'ی', 'ے'
+  ]);
+
+  // Right-joining only letters (never connect forward)
+  const RIGHT_JOINING_ONLY = new Set([
+    'ا', 'آ', 'أ', 'إ', 'ٱ', 'د', 'ذ', 'ر', 'ز', 'و', 'ۄ', 'ة'
+  ]);
+
+  // Non-spacing Tashkeel / diacritical combining marks to skip when checking base consonants
+  const TASHKEEL_REGEX = /[\u0610-\u061A\u064B-\u065F\u0670\u06D6-\u06ED\u0653\u0654\u0655\u06DF\u06E0\u06E1\u200C\u200D]/;
+
+  function canJoinForward(char) {
+    if (!char) return false;
+    return DUAL_JOINING.has(char);
+  }
+
+  function canJoinBackward(char) {
+    if (!char) return false;
+    if (char === 'ء' || char === '\u0621') return false;
+    return DUAL_JOINING.has(char) || RIGHT_JOINING_ONLY.has(char);
+  }
+
+  function getFirstBaseChar(str) {
+    if (!str) return null;
+    for (let i = 0; i < str.length; i++) {
+      const c = str[i];
+      if (!TASHKEEL_REGEX.test(c)) return c;
+    }
+    return null;
+  }
+
+  function getLastBaseChar(str) {
+    if (!str) return null;
+    for (let i = str.length - 1; i >= 0; i--) {
+      const c = str[i];
+      if (!TASHKEEL_REGEX.test(c)) return c;
+    }
+    return null;
+  }
+
+  function getBaseCharBefore(str, offset, spans) {
+    let i = offset - 1;
+    while (i >= 0) {
+      if (str[i] === '_') {
+        const sub = str.slice(0, i + 1);
+        const match = sub.match(/___TJTAG_(\d+)___$/);
+        if (match) {
+          const id = parseInt(match[1], 10);
+          if (spans && spans[id]) {
+            const c = getLastBaseChar(spans[id].innerText);
+            if (c) return c;
+          }
+          i -= match[0].length;
+          continue;
+        }
+      }
+      const c = str[i];
+      if (!TASHKEEL_REGEX.test(c)) {
+        return c;
+      }
+      i--;
+    }
+    return null;
+  }
+
+  function getBaseCharAfter(str, offset, spans) {
+    let i = offset;
+    while (i < str.length) {
+      if (str.startsWith('___TJTAG_', i)) {
+        const match = str.slice(i).match(/^___TJTAG_(\d+)___/);
+        if (match) {
+          const id = parseInt(match[1], 10);
+          if (spans && spans[id]) {
+            const c = getFirstBaseChar(spans[id].innerText);
+            if (c) return c;
+          }
+          i += match[0].length;
+          continue;
+        }
+      }
+      const c = str[i];
+      if (!TASHKEEL_REGEX.test(c)) {
+        return c;
+      }
+      i++;
+    }
+    return null;
+  }
+
   const TajweedEngine = {
     isEnabled: false,
     activeHighlightRule: null,
@@ -270,7 +363,7 @@
       const spans = [];
       const makeTag = (classes, rule, title, innerText) => {
         const id = spans.length;
-        spans.push(`<span class="${classes}" data-rule="${rule}" title="${title}">${innerText}</span>`);
+        spans.push({ classes, rule, title, innerText });
         return `___TJTAG_${id}___`;
       };
 
@@ -335,8 +428,29 @@
       text = text.replace(/([خصضغظ][\u064E\u064F\u0650\u0651\u0652\u06E1\u064B\u064C\u064D]?|[طق][\u064E\u064F\u0650\u0651\u064B\u064C\u064D]|ر[\u0651]?[\u064E\u064F\u064B\u064C\u0670])/gu,
         (m, p1) => makeTag('tj-tafkheem', 'tafkheem', "Tafkheem (تفخیم - Heavy Letter / Isti'la)", p1));
 
-      // 14. Unpack all placeholders into final markup
-      text = text.replace(/___TJTAG_(\d+)___/g, (match, id) => spans[parseInt(id, 10)] || match);
+      // 14. Unpack all placeholders with intelligent context-aware Zero-Width Joiner (ZWJ) ligature healing
+      text = text.replace(/___TJTAG_(\d+)___/g, (match, idStr, offset, fullStr) => {
+        const id = parseInt(idStr, 10);
+        const tag = spans[id];
+        if (!tag) return match;
+
+        const inner = tag.innerText;
+        const firstBaseChar = getFirstBaseChar(inner);
+        const lastBaseChar = getLastBaseChar(inner);
+
+        const prevChar = getBaseCharBefore(fullStr, offset, spans);
+        const nextChar = getBaseCharAfter(fullStr, offset + match.length, spans);
+
+        const joinBefore = canJoinForward(prevChar) && canJoinBackward(firstBaseChar);
+        const joinAfter = canJoinForward(lastBaseChar) && canJoinBackward(nextChar);
+
+        const leadOutside = joinBefore ? '\u200D' : '';
+        const leadInside = joinBefore ? '\u200D' : '';
+        const trailInside = joinAfter ? '\u200D' : '';
+        const trailOutside = joinAfter ? '\u200D' : '';
+
+        return `${leadOutside}<span class="${tag.classes}" data-rule="${tag.rule}" title="${tag.title}">${leadInside}${inner}${trailInside}</span>${trailOutside}`;
+      });
 
       return text;
     },
@@ -374,5 +488,9 @@
 
   global.TajweedEngine = TajweedEngine;
   global.TAJWEED_RULES = TAJWEED_RULES;
+
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = TajweedEngine;
+  }
 
 })(typeof window !== 'undefined' ? window : this);

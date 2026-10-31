@@ -5465,29 +5465,29 @@ span[class*="tj-"]:not(.tj-pill) {
 }
 
 /* Individual Phonetic Rules - Cognitive Color Psychology & Indian Standard (Cursive Invariant) */
-.tj-ghunnah { color: #10b981 !important; font-weight: inherit !important; display: inline !important; text-shadow: 0 0 2px rgba(16, 185, 129, 0.40); }
-.tj-qalqalah { color: #38bdf8 !important; font-weight: inherit !important; display: inline !important; text-shadow: 0 0 2px rgba(56, 189, 248, 0.40); }
+.tj-ghunnah { color: #10b981 !important; font-weight: inherit !important; display: inline !important; }
+.tj-qalqalah { color: #38bdf8 !important; font-weight: inherit !important; display: inline !important; }
 
 /* Madd Hierarchy (Lazim 6 counts / 3 Alifs, Muttasil 4-5 counts, Munfasil 4-5 counts, Aaridh 2,4,6) */
-.tj-madd { color: #f87171 !important; font-weight: inherit !important; display: inline !important; text-shadow: 0 0 2px rgba(248, 113, 113, 0.40); }
-.tj-madd-lazim, .tj-madd[data-rule="madd_lazim"] { color: #ef4444 !important; font-weight: inherit !important; display: inline !important; text-shadow: 0 0 3px rgba(239, 68, 68, 0.50); }
-.tj-madd-muttasil, .tj-madd[data-rule="madd_muttasil"] { color: #f87171 !important; font-weight: inherit !important; display: inline !important; text-shadow: 0 0 2px rgba(248, 113, 113, 0.40); }
-.tj-madd-munfasil, .tj-madd[data-rule="madd_munfasil"] { color: #fb923c !important; font-weight: inherit !important; display: inline !important; text-shadow: 0 0 2px rgba(251, 146, 60, 0.40); }
-.tj-madd-aaridh, .tj-madd[data-rule="madd_aaridh"] { color: #facc15 !important; font-weight: inherit !important; display: inline !important; text-shadow: 0 0 2px rgba(250, 204, 21, 0.40); }
+.tj-madd { color: #f87171 !important; font-weight: inherit !important; display: inline !important; }
+.tj-madd-lazim, .tj-madd[data-rule="madd_lazim"] { color: #ef4444 !important; font-weight: inherit !important; display: inline !important; }
+.tj-madd-muttasil, .tj-madd[data-rule="madd_muttasil"] { color: #f87171 !important; font-weight: inherit !important; display: inline !important; }
+.tj-madd-munfasil, .tj-madd[data-rule="madd_munfasil"] { color: #fb923c !important; font-weight: inherit !important; display: inline !important; }
+.tj-madd-aaridh, .tj-madd[data-rule="madd_aaridh"] { color: #facc15 !important; font-weight: inherit !important; display: inline !important; }
 
 /* Ikhfa (2 Counts / 1 Alif Concealment) */
-.tj-ikhfa { color: #2dd4bf !important; font-weight: inherit !important; display: inline !important; text-shadow: 0 0 2px rgba(45, 212, 191, 0.40); }
+.tj-ikhfa { color: #2dd4bf !important; font-weight: inherit !important; display: inline !important; }
 
 /* Idgham Variants (Bi-Ghunnah 2 counts Cyan vs Bila-Ghunnah Complete Merge Muted) */
 .tj-idgham { color: #a855f7 !important; font-weight: inherit !important; display: inline !important; }
-.tj-idgham-ghunnah, .tj-idgham[data-rule="idgham_ghunnah"] { color: #06b6d4 !important; font-weight: inherit !important; display: inline !important; text-shadow: 0 0 2px rgba(6, 182, 212, 0.40); }
+.tj-idgham-ghunnah, .tj-idgham[data-rule="idgham_ghunnah"] { color: #06b6d4 !important; font-weight: inherit !important; display: inline !important; }
 .tj-idgham-no-ghunnah, .tj-idgham[data-rule="idgham_no_ghunnah"] { color: #94a3b8 !important; font-weight: inherit !important; display: inline !important; text-shadow: none; opacity: 0.85; }
 
 /* Iqlab (Conversion to Meem 2 counts / 1 Alif) */
-.tj-iqlab { color: #c084fc !important; font-weight: inherit !important; display: inline !important; text-shadow: 0 0 2px rgba(192, 132, 252, 0.40); }
+.tj-iqlab { color: #c084fc !important; font-weight: inherit !important; display: inline !important; }
 
 /* Tafkheem & Silent Letters */
-.tj-tafkheem { color: #60a5fa !important; font-weight: inherit !important; display: inline !important; text-shadow: 0 0 2px rgba(96, 165, 250, 0.40); }
+.tj-tafkheem { color: #60a5fa !important; font-weight: inherit !important; display: inline !important; }
 .tj-silent, span[data-rule="silent"] { color: #94a3b8 !important; opacity: 0.65; font-weight: inherit !important; display: inline !important; text-shadow: none; }
 
 /* Interactive Focus & Dim Filtering States */
@@ -6361,14 +6361,14 @@ span[class*="tj-"]:not(.tj-pill) {
   align-items: center;
   justify-content: center;
   padding: 0 1px;
-  margin: 0 0.18em 0 0.35em;
+  margin: 0 0.60em 0 0.40em;
   min-width: auto;
   cursor: pointer;
   color: #fbbf24;
   font-family: 'AlMushafWaqf', 'Scheherazade New', 'Amiri', 'Traditional Arabic', serif !important;
-  font-size: 0.95em;
+  font-size: 0.92em;
   line-height: 1;
-  vertical-align: -0.30em;
+  vertical-align: -0.52em;
   border-radius: 3px;
   transition: all 0.18s ease;
   user-select: none;
@@ -6378,7 +6378,7 @@ span[class*="tj-"]:not(.tj-pill) {
 
 .quran-waqf-inline-mark + .quran-waqf-inline-mark {
   margin-right: -0.06em;
-  margin-left: 0.18em;
+  margin-left: 0.40em;
 }
 
 .quran-waqf-inline-mark:hover {
