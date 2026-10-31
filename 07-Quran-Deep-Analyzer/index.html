@@ -6,6 +6,11 @@
   <title>Quran Deep Analyzer | Master Linguistic & Quantitative Suite</title>
   <meta name="description" content="Complete deep analysis of the Holy Quran: Quantitative telemetry, word counts, roots, lemmas, thematic ontology, and classical Tafsir.">
   <meta name="theme-color" content="#07090e">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="stylesheet" href="css/app.css?v=20261021_rev7">
   <link rel="stylesheet" href="css/commands-manners.css?v=20261026">
   <script>
@@ -2071,5 +2076,19 @@
     </button>
   </nav>
 
+  <!-- Service Worker Registration for Offline PWA -->
+  <script>
+    if ('serviceWorker' in navigator && typeof location !== 'undefined' && location.protocol !== 'file:') {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('./sw.js')
+          .then(function(reg) {
+            console.log('[PWA] Service Worker active with scope:', reg.scope);
+          })
+          .catch(function(err) {
+            console.warn('[PWA] Service Worker registration note:', err);
+          });
+      });
+    }
+  </script>
 </body>
 </html>

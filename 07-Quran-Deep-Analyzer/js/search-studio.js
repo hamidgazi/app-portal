@@ -157,6 +157,11 @@
     activeCategory: 'all',
     activeRevelation: 'all',
     activeTarjuma: 'both',
+    worker: null,
+    workerReady: false,
+    currentRequestId: 0,
+    transliterationDebounceTimer: null,
+    transliterationCache: new Map(),
     debounceTimer: null,
     lastQuery: '',
     tafsirCache: new Map(),
@@ -209,6 +214,9 @@
             this.triggerAISynthesis();
           });
         }
+
+        // Initialize Background Search Worker (Hybrid Architecture)
+        this.initSearchWorker();
 
         // Density Switcher Setup
         const densityBtn = document.getElementById('search-density-toggle');
@@ -302,6 +310,42 @@
       }
     },
 
+    initSearchWorker() {
+      if (typeof Worker !== 'undefined' && typeof location !== 'undefined' && location.protocol !== 'file:') {
+        try {
+          this.worker = new Worker('js/search-worker.js');
+          this.worker.onmessage = (e) => {
+            const data = e.data || {};
+            if (data.type === 'READY') {
+              this.workerReady = true;
+            } else if (data.type === 'SEARCH_RESULTS') {
+              if (data.requestId === this.currentRequestId) {
+                this.handleSearchResults(data.matches, data.query, data.elapsed);
+              }
+            }
+          };
+          this.worker.onerror = (err) => {
+            console.warn('[SearchStudio] Background worker error, falling back to in-memory engine:', err);
+            this.worker = null;
+            this.workerReady = false;
+          };
+          this.worker.postMessage({ type: 'INIT' });
+        } catch (err) {
+          console.warn('[SearchStudio] Worker creation failed, using in-memory engine:', err);
+          this.worker = null;
+          this.workerReady = false;
+        }
+      }
+    },
+
+    setSearchingVisual(isSearching) {
+      const wrap = document.querySelector('.search-studio-input-wrap');
+      if (wrap) {
+        if (isSearching) wrap.classList.add('is-searching');
+        else wrap.classList.remove('is-searching');
+      }
+    },
+
     onActivated() {
       const input = document.getElementById('search-studio-input');
       if (input) {
@@ -339,23 +383,39 @@
     },
 
     updateTransliterationBar(rawVal) {
+      const q = (rawVal || '').trim();
+      clearTimeout(this.transliterationDebounceTimer);
+
+      if (!q) {
+        const bar = document.getElementById('search-studio-transliteration-bar');
+        if (bar) {
+          bar.style.display = 'none';
+          bar.innerHTML = '';
+        }
+        return;
+      }
+
+      // Check cache first for 0ms instantaneous keystroke rendering
+      if (this.transliterationCache.has(q)) {
+        this.renderTransliterationPills(this.transliterationCache.get(q));
+        return;
+      }
+
+      // 50ms micro-debounce prevents repetitive skeleton calculations during fast typing
+      this.transliterationDebounceTimer = setTimeout(() => {
+        const translator = window.RomanUrduTranslator;
+        if (!translator || typeof translator.getSmartPills !== 'function') return;
+        const data = translator.getSmartPills(q);
+        if (this.transliterationCache.size > 200) this.transliterationCache.clear();
+        this.transliterationCache.set(q, data);
+        this.renderTransliterationPills(data);
+      }, 50);
+    },
+
+    renderTransliterationPills(data) {
       const bar = document.getElementById('search-studio-transliteration-bar');
       if (!bar) return;
 
-      const q = (rawVal || '').trim();
-      if (!q) {
-        bar.style.display = 'none';
-        bar.innerHTML = '';
-        return;
-      }
-
-      const translator = window.RomanUrduTranslator;
-      if (!translator || typeof translator.getSmartPills !== 'function') {
-        bar.style.display = 'none';
-        return;
-      }
-
-      const data = translator.getSmartPills(q);
       if (!data || !data.pills || data.pills.length === 0) {
         bar.style.display = 'none';
         bar.innerHTML = '';
@@ -379,7 +439,6 @@
         }
       }
 
-      // Add extra variant pills if available
       if (Array.isArray(data.variants)) {
         for (const v of data.variants.slice(0, 3)) {
           if (v && v !== data.urduScript && v !== data.arabicTerm) {
@@ -390,7 +449,6 @@
 
       bar.innerHTML = html;
 
-      // Delegate click events on chips
       const buttons = bar.querySelectorAll('button');
       buttons.forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -399,38 +457,17 @@
           if (targetVal) {
             StudioSound.playClick();
             const input = document.getElementById('search-studio-input');
+            const clearBtn = document.getElementById('search-studio-clear');
             if (input) {
               input.value = targetVal;
+              if (clearBtn) clearBtn.style.display = 'flex';
               input.focus();
             }
-            this.executeSearch(targetVal);
             this.updateTransliterationBar(targetVal);
+            this.executeSearch(targetVal);
           }
         });
       });
-    },
-
-    hideTransliterationBar() {
-      const bar = document.getElementById('search-studio-transliteration-bar');
-      if (bar) {
-        bar.style.display = 'none';
-        bar.innerHTML = '';
-      }
-    },
-
-    clearSearch() {
-      const input = document.getElementById('search-studio-input');
-      const clearBtn = document.getElementById('search-studio-clear');
-      if (input) {
-        input.value = '';
-        input.focus();
-      }
-      if (clearBtn) {
-        clearBtn.style.display = 'none';
-      }
-      this.hideTransliterationBar();
-      this.lastQuery = '';
-      this.renderCelebratedLanding();
     },
 
     getSurahMeta(surahId) {
@@ -447,7 +484,6 @@
 
     executeSearch(rawQuery) {
       const resultsContainer = document.getElementById('search-studio-results');
-      const counterBadge = document.getElementById('search-studio-counter');
       const aiContainer = document.getElementById('search-studio-ai-container');
       if (!resultsContainer) return;
 
@@ -456,54 +492,74 @@
 
       // When query is empty, restore celebrated welcome view
       if (!q) {
+        this.setSearchingVisual(false);
         if (aiContainer) aiContainer.style.display = 'none';
         this.renderCelebratedLanding();
         return;
       }
 
-      const t0 = performance.now();
+      this.setSearchingVisual(true);
+      const reqId = ++this.currentRequestId;
 
-      // Retrieve matches from AI Search Engine
-      let matches = [];
-      if (window.QuranAISearchEngine && typeof window.QuranAISearchEngine.search === 'function') {
-        matches = window.QuranAISearchEngine.search(q, this.activeCategory, 80);
-      } else if ((window.QURAN_AYAT_SEARCH_DATA || window.QURAN_AYAT_SEARCH_BUNDLE) && Array.isArray(window.QURAN_AYAT_SEARCH_DATA || window.QURAN_AYAT_SEARCH_BUNDLE)) {
-        const searchBundle = window.QURAN_AYAT_SEARCH_DATA || window.QURAN_AYAT_SEARCH_BUNDLE;
-        // Fallback search directly over the 6,236 Ayat bundle
-        const qLower = q.toLowerCase();
-        for (const v of searchBundle) {
-          const sId = v[0];
-          const aNum = v[1];
-          const sNameRoman = v[2];
-          const sNameAr = v[3];
-          const arVocalized = v[4] || '';
-          const enTrans = v[5] || '';
-          const urTrans = v[6] || '';
-          const arClean = v[7] || arVocalized;
-          if (
-            (enTrans && enTrans.toLowerCase().includes(qLower)) ||
-            (urTrans && urTrans.includes(q)) ||
-            (arClean && arClean.includes(q))
-          ) {
-            matches.push({
-              category: 'verse',
-              surahId: sId,
-              ayahNum: aNum,
-              title: `${sNameRoman} ${sId}:${aNum}`,
-              subtitle: enTrans,
-              arabic: arVocalized,
-              arabicClean: arClean,
-              urdu: urTrans,
-              urKanzulIman: urTrans,
-              urKanzulIrfan: v[8] || '',
-              action: () => {
-                if (window.CorpusEngine) window.CorpusEngine.jumpToAyah(sId, aNum);
-              }
-            });
-            if (matches.length >= 80) break;
+      if (this.worker && this.workerReady) {
+        // Offload to background worker thread (Zero Main-Thread Freezing)
+        this.worker.postMessage({
+          type: 'SEARCH',
+          query: q,
+          category: this.activeCategory,
+          limit: 80,
+          requestId: reqId
+        });
+      } else {
+        // Ultra-Fast In-Memory Engine Fallback (< 15ms with pre-normalized documents)
+        const t0 = performance.now();
+        let matches = [];
+        if (window.QuranAISearchEngine && typeof window.QuranAISearchEngine.search === 'function') {
+          matches = window.QuranAISearchEngine.search(q, this.activeCategory, 80);
+        } else if ((window.QURAN_AYAT_SEARCH_DATA || window.QURAN_AYAT_SEARCH_BUNDLE) && Array.isArray(window.QURAN_AYAT_SEARCH_DATA || window.QURAN_AYAT_SEARCH_BUNDLE)) {
+          const searchBundle = window.QURAN_AYAT_SEARCH_DATA || window.QURAN_AYAT_SEARCH_BUNDLE;
+          const qLower = q.toLowerCase();
+          for (const v of searchBundle) {
+            const sId = v[0];
+            const aNum = v[1];
+            const sNameRoman = v[2];
+            const sNameAr = v[3];
+            const arVocalized = v[4] || '';
+            const enTrans = v[5] || '';
+            const urTrans = v[6] || '';
+            const arClean = v[7] || arVocalized;
+            if (
+              (enTrans && enTrans.toLowerCase().includes(qLower)) ||
+              (urTrans && urTrans.includes(q)) ||
+              (arClean && arClean.includes(q))
+            ) {
+              matches.push({
+                category: 'verse',
+                surahId: sId,
+                ayahNum: aNum,
+                title: `${sNameRoman} ${sId}:${aNum}`,
+                subtitle: enTrans,
+                arabic: arVocalized,
+                arabicClean: arClean,
+                urdu: urTrans,
+                urKanzulIman: urTrans,
+                urKanzulIrfan: v[8] || '',
+                action: () => {
+                  if (window.CorpusEngine) window.CorpusEngine.jumpToAyah(sId, aNum);
+                }
+              });
+              if (matches.length >= 80) break;
+            }
           }
         }
+        const elapsed = Math.round(performance.now() - t0);
+        this.handleSearchResults(matches, q, elapsed);
       }
+    },
+
+    handleSearchResults(rawMatches, q, elapsed) {
+      this.setSearchingVisual(false);
+      let matches = rawMatches || [];
 
       // Filter by Revelation Type (Makki / Madani)
       if (this.activeRevelation !== 'all') {
@@ -514,9 +570,8 @@
         });
       }
 
-      const elapsed = Math.round(performance.now() - t0);
-
       // Update metrics badge
+      const counterBadge = document.getElementById('search-studio-counter');
       if (counterBadge) {
         const countStr = matches.length.toLocaleString();
         counterBadge.innerHTML = `Found <strong>${countStr}</strong> matching ${
@@ -524,7 +579,7 @@
         } for "<strong>${this.escapeHtml(q)}</strong>" in <strong>${elapsed}ms</strong>`;
       }
 
-      // Render Results
+      // Render Results with cross-fade
       this.renderResults(matches, q);
     },
 

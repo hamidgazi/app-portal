@@ -238,6 +238,17 @@
 
     addDocument(doc) {
       const docId = this.docs.length;
+      // Precompute normalized search caches for sub-15ms BM25 execution
+      doc.subLower = (doc.subtitle || '').toLowerCase();
+      doc.titLower = (doc.title || '').toLowerCase();
+      doc.contLower = (doc.content || '').toLowerCase();
+      const imanRaw = doc.urKanzulIman || doc.urdu || '';
+      const irfanRaw = doc.urKanzulIrfan || '';
+      const arRaw = doc.arabicClean || doc.arabic || '';
+      doc.imanNorm = normalizeArabicUrdu(imanRaw);
+      doc.irfanNorm = normalizeArabicUrdu(irfanRaw);
+      doc.arNorm = normalizeArabicUrdu(arRaw);
+      doc.contNorm = normalizeArabicUrdu(doc.content || '');
       this.docs.push(doc);
 
       // Boost title terms 3.0x
@@ -387,9 +398,9 @@
         for (let i = 0; i < this.docs.length; i++) {
           const doc = this.docs[i];
           if (category !== 'all' && doc.categoryType !== category) continue;
-          const sub = (doc.subtitle || '').toLowerCase();
-          const tit = (doc.title || '').toLowerCase();
-          const cont = (doc.content || '').toLowerCase();
+          const sub = doc.subLower !== undefined ? doc.subLower : (doc.subtitle || '').toLowerCase();
+          const tit = doc.titLower !== undefined ? doc.titLower : (doc.title || '').toLowerCase();
+          const cont = doc.contLower !== undefined ? doc.contLower : (doc.content || '').toLowerCase();
 
           const hasSub = sub.includes(rawQ) || (rawQAlt && sub.includes(rawQAlt));
           const hasTit = tit.includes(rawQ) || (rawQAlt && tit.includes(rawQAlt));
@@ -401,12 +412,12 @@
             scores.set(i, (scores.get(i) || 0) + 50.0);
           } else if (hasCont) {
             scores.set(i, (scores.get(i) || 0) + 30.0);
-          } else if (normQ && normQ.length >= 2 && normalizeArabicUrdu(cont).includes(normQ)) {
+          } else if (normQ && normQ.length >= 2 && (doc.contNorm ? doc.contNorm.includes(normQ) : normalizeArabicUrdu(cont).includes(normQ))) {
             scores.set(i, (scores.get(i) || 0) + 40.0);
           } else if (urduExpansions.size > 0) {
-            const docImanNorm = normalizeArabicUrdu(doc.urKanzulIman || doc.urdu || '');
-            const docIrfanNorm = normalizeArabicUrdu(doc.urKanzulIrfan || '');
-            const docArNorm = normalizeArabicUrdu(doc.arabic || '');
+            const docImanNorm = doc.imanNorm !== undefined ? doc.imanNorm : normalizeArabicUrdu(doc.urKanzulIman || doc.urdu || '');
+            const docIrfanNorm = doc.irfanNorm !== undefined ? doc.irfanNorm : normalizeArabicUrdu(doc.urKanzulIrfan || '');
+            const docArNorm = doc.arNorm !== undefined ? doc.arNorm : normalizeArabicUrdu(doc.arabic || '');
             for (const uq of urduExpansions) {
               if (docImanNorm.includes(uq) || docIrfanNorm.includes(uq)) {
                 scores.set(i, (scores.get(i) || 0) + 45.0);
@@ -442,14 +453,12 @@
         let isProximityMatch = false;
         let matchedSnippet = '';
 
-        const subLower = (doc.subtitle || '').toLowerCase();
-        const titLower = (doc.title || '').toLowerCase();
-        const contLower = (doc.content || '').toLowerCase();
-        const docIman = doc.urKanzulIman || doc.urdu || '';
-        const docIrfan = doc.urKanzulIrfan || '';
-        const docImanNorm = normalizeArabicUrdu(docIman);
-        const docIrfanNorm = normalizeArabicUrdu(docIrfan);
-        const docArNorm = normalizeArabicUrdu(doc.arabicClean || doc.arabic || '');
+        const subLower = doc.subLower !== undefined ? doc.subLower : (doc.subtitle || '').toLowerCase();
+        const titLower = doc.titLower !== undefined ? doc.titLower : (doc.title || '').toLowerCase();
+        const contLower = doc.contLower !== undefined ? doc.contLower : (doc.content || '').toLowerCase();
+        const docImanNorm = doc.imanNorm !== undefined ? doc.imanNorm : normalizeArabicUrdu(doc.urKanzulIman || doc.urdu || '');
+        const docIrfanNorm = doc.irfanNorm !== undefined ? doc.irfanNorm : normalizeArabicUrdu(doc.urKanzulIrfan || '');
+        const docArNorm = doc.arNorm !== undefined ? doc.arNorm : normalizeArabicUrdu(doc.arabicClean || doc.arabic || '');
 
         // 1. EXACT MULTI-WORD TARJUMA PHRASE BOOST (+300.0):
         // Evaluates against BOTH Kanzul Iman and Kanzul Irfan!
