@@ -24,7 +24,7 @@
     global.window = global;
   }
 
-  // --- 1. CURATED LEXICON (2663 Curated Entries) ---
+  // --- 1. CURATED LEXICON (2718 Curated Entries) ---
   const LEXICON = {
   "sabr": {
     "ro": "sabr",
@@ -90,7 +90,7 @@
   "jannat": {
     "ro": "jannat",
     "ur": "جنت",
-    "en": "Concealment / Paradise / Garden",
+    "en": "Paradise / Heavenly Garden",
     "ar": "جنة",
     "alt": [
       "jannah",
@@ -141,7 +141,7 @@
   "namaz": {
     "ro": "namaz",
     "ur": "نماز",
-    "en": "Prayer / Blessings / Supplication",
+    "en": "Ritual Prayer / Worship",
     "ar": "صلاة",
     "alt": [
       "salah",
@@ -162,6 +162,7 @@
       "roze",
       "rozedar",
       "rozey",
+      "rozon",
       "siyam"
     ],
     "cat": "islamic"
@@ -242,8 +243,33 @@
     "en": "Islam / Submission to Divine Will",
     "ar": "إسلام",
     "alt": [
-      "islami",
-      "musalman"
+      "islami"
+    ],
+    "cat": "islamic"
+  },
+  "muslim": {
+    "ro": "muslim",
+    "ur": "مسلمان",
+    "en": "Muslim / Believer / Submissive to Allah",
+    "ar": "مسلم",
+    "alt": [
+      "musalman",
+      "musalmaan",
+      "muslimeen",
+      "muslimoon",
+      "muslima"
+    ],
+    "cat": "islamic"
+  },
+  "musalman": {
+    "ro": "musalman",
+    "ur": "مسلمان",
+    "en": "Muslim / Follower of Islam",
+    "ar": "مسلم",
+    "alt": [
+      "musalmaan",
+      "muslim",
+      "musalmano"
     ],
     "cat": "islamic"
   },
@@ -317,6 +343,19 @@
     ],
     "cat": "islamic"
   },
+  "mohammad": {
+    "ro": "mohammad",
+    "ur": "محمد",
+    "en": "Prophet Muhammad (SAW)",
+    "ar": "محمد",
+    "alt": [
+      "muhammad",
+      "mohammed",
+      "ahmad",
+      "rasoolullah"
+    ],
+    "cat": "islamic"
+  },
   "sahaba": {
     "ro": "sahaba",
     "ur": "صحابہ",
@@ -367,8 +406,32 @@
     "en": "Ritual Ablution",
     "ar": "وضوء",
     "alt": [
+      "wazu",
+      "wudhu",
       "wazoo",
-      "wudhu"
+      "vazu"
+    ],
+    "cat": "islamic"
+  },
+  "wazu": {
+    "ro": "wazu",
+    "ur": "وضو",
+    "en": "Ritual Ablution / Purity",
+    "ar": "وضوء",
+    "alt": [
+      "wudu",
+      "wudhu",
+      "vazu"
+    ],
+    "cat": "islamic"
+  },
+  "tayammum": {
+    "ro": "tayammum",
+    "ur": "تیمم",
+    "en": "Dry Ablution with Clean Dust",
+    "ar": "تيمم",
+    "alt": [
+      "tayamum"
     ],
     "cat": "islamic"
   },
@@ -385,7 +448,7 @@
   "azaan": {
     "ro": "azaan",
     "ur": "اذان",
-    "en": "Ear / Permission / Announcement",
+    "en": "Call to Daily Prayer",
     "ar": "أذان",
     "alt": [
       "azan",
@@ -396,7 +459,7 @@
   "dua": {
     "ro": "dua",
     "ur": "دعا",
-    "en": "Prayer / Blessings / Supplication",
+    "en": "Supplication / Personal Prayer",
     "ar": "دعاء",
     "alt": [
       "duayein",
@@ -448,6 +511,17 @@
     ],
     "cat": "islamic"
   },
+  "shifa": {
+    "ro": "shifa",
+    "ur": "شفا",
+    "en": "Cure / Healing / Health",
+    "ar": "شفاء",
+    "alt": [
+      "shefa",
+      "shifaa"
+    ],
+    "cat": "islamic"
+  },
   "gunah": {
     "ro": "gunah",
     "ur": "گناہ",
@@ -457,6 +531,31 @@
       "gunaah",
       "sayyiat",
       "khata"
+    ],
+    "cat": "islamic"
+  },
+  "neki": {
+    "ro": "neki",
+    "ur": "نیکی",
+    "en": "Good Deed / Virtue / Righteousness",
+    "ar": "حسنة",
+    "alt": [
+      "nekiyan",
+      "nekiyon",
+      "nekiya",
+      "nek"
+    ],
+    "cat": "islamic"
+  },
+  "amal": {
+    "ro": "amal",
+    "ur": "عمل",
+    "en": "Deed / Action / Practice",
+    "ar": "عمل",
+    "alt": [
+      "aamal",
+      "amaal",
+      "aamaal"
     ],
     "cat": "islamic"
   },
@@ -477,9 +576,31 @@
     "en": "Disbelief / Ingratitude",
     "ar": "كفر",
     "alt": [
-      "kafir",
+      "kufran"
+    ],
+    "cat": "islamic"
+  },
+  "kafir": {
+    "ro": "kafir",
+    "ur": "کافر",
+    "en": "Disbeliever / Denier of Divine Truth",
+    "ar": "كافر",
+    "alt": [
       "kaafir",
+      "kafiroon",
+      "kafireen",
       "kuffar"
+    ],
+    "cat": "islamic"
+  },
+  "kuffar": {
+    "ro": "kuffar",
+    "ur": "کفار",
+    "en": "Disbelievers / Ingrates",
+    "ar": "كفار",
+    "alt": [
+      "kuffaar",
+      "kafiron"
     ],
     "cat": "islamic"
   },
@@ -523,6 +644,527 @@
     "ar": "تقوى",
     "alt": [
       "parhezgari"
+    ],
+    "cat": "islamic"
+  },
+  "kitab": {
+    "ro": "kitab",
+    "ur": "کتاب",
+    "en": "The Book / Scripture / Divine Decree",
+    "ar": "كتاب",
+    "alt": [
+      "kitaab",
+      "kutub"
+    ],
+    "cat": "islamic"
+  },
+  "azab": {
+    "ro": "azab",
+    "ur": "عذاب",
+    "en": "Divine Punishment / Torment / Penalty",
+    "ar": "عذاب",
+    "alt": [
+      "azaab",
+      "azabaan"
+    ],
+    "cat": "islamic"
+  },
+  "insaf": {
+    "ro": "insaf",
+    "ur": "انصاف",
+    "en": "Justice / Equity / Fairness",
+    "ar": "قسط",
+    "alt": [
+      "insaaf",
+      "adl"
+    ],
+    "cat": "islamic"
+  },
+  "yateem": {
+    "ro": "yateem",
+    "ur": "یتیم",
+    "en": "Orphan",
+    "ar": "يتيم",
+    "alt": [
+      "yatama",
+      "yatim",
+      "yateemon"
+    ],
+    "cat": "islamic"
+  },
+  "miskeen": {
+    "ro": "miskeen",
+    "ur": "مسکین",
+    "en": "Poor / Needy / Destitute",
+    "ar": "مسكين",
+    "alt": [
+      "masakeen",
+      "miskin"
+    ],
+    "cat": "islamic"
+  },
+  "nikah": {
+    "ro": "nikah",
+    "ur": "نکاح",
+    "en": "Marriage / Nuptial Contract",
+    "ar": "نكاح",
+    "alt": [
+      "nikaah",
+      "shadi"
+    ],
+    "cat": "islamic"
+  },
+  "talaq": {
+    "ro": "talaq",
+    "ur": "طلاق",
+    "en": "Divorce / Repudiation",
+    "ar": "طلاق",
+    "alt": [
+      "talaaq"
+    ],
+    "cat": "islamic"
+  },
+  "meeras": {
+    "ro": "meeras",
+    "ur": "میراث",
+    "en": "Inheritance / Heritage",
+    "ar": "ميراث",
+    "alt": [
+      "wirasat",
+      "wirasah"
+    ],
+    "cat": "islamic"
+  },
+  "riba": {
+    "ro": "riba",
+    "ur": "ربا",
+    "en": "Usury / Interest",
+    "ar": "ربا",
+    "alt": [
+      "sood",
+      "sud"
+    ],
+    "cat": "islamic"
+  },
+  "sud": {
+    "ro": "sud",
+    "ur": "سود",
+    "en": "Usury / Interest / Riba",
+    "ar": "ربا",
+    "alt": [
+      "sood",
+      "riba"
+    ],
+    "cat": "islamic"
+  },
+  "sharab": {
+    "ro": "sharab",
+    "ur": "شراب",
+    "en": "Wine / Intoxicants",
+    "ar": "خمر",
+    "alt": [
+      "khamr",
+      "nasha"
+    ],
+    "cat": "islamic"
+  },
+  "jua": {
+    "ro": "jua",
+    "ur": "جوا",
+    "en": "Gambling / Games of Chance",
+    "ar": "ميسر",
+    "alt": [
+      "maysir",
+      "juwa"
+    ],
+    "cat": "islamic"
+  },
+  "parosi": {
+    "ro": "parosi",
+    "ur": "پڑوسی",
+    "en": "Neighbor / Kinsman",
+    "ar": "جار",
+    "alt": [
+      "humsaya",
+      "padosi"
+    ],
+    "cat": "islamic"
+  },
+  "straight path": {
+    "ro": "straight path",
+    "ur": "سیدھا راستہ",
+    "en": "The Straight Path",
+    "ar": "الصراط المستقيم",
+    "alt": [
+      "sirat-e-mustaqeem",
+      "sirat e mustaqeem",
+      "seedha rasta"
+    ],
+    "cat": "islamic"
+  },
+  "day of judgment": {
+    "ro": "day of judgment",
+    "ur": "قیامت کا دن",
+    "en": "Day of Judgment / Resurrection",
+    "ar": "يوم القيامة",
+    "alt": [
+      "qayamat",
+      "hashr",
+      "aakhirat",
+      "yom-e-jaza"
+    ],
+    "cat": "islamic"
+  },
+  "throne verse": {
+    "ro": "throne verse",
+    "ur": "آیت الکرسی",
+    "en": "The Throne Verse (Ayat al-Kursi)",
+    "ar": "آية الكرسي",
+    "alt": [
+      "ayatul kursi",
+      "ayat al kursi"
+    ],
+    "cat": "islamic"
+  },
+  "righteous": {
+    "ro": "righteous",
+    "ur": "نیک",
+    "en": "Righteous / Virtuous / Pious",
+    "ar": "صالح",
+    "alt": [
+      "neek",
+      "saleh",
+      "muttaqi",
+      "saliheen"
+    ],
+    "cat": "islamic"
+  },
+  "believers": {
+    "ro": "believers",
+    "ur": "مومن",
+    "en": "Believers / Faithful",
+    "ar": "مؤمنون",
+    "alt": [
+      "momineen",
+      "momin",
+      "muslimeen"
+    ],
+    "cat": "islamic"
+  },
+  "disbelievers": {
+    "ro": "disbelievers",
+    "ur": "کافر",
+    "en": "Disbelievers / Unbelievers",
+    "ar": "كافرون",
+    "alt": [
+      "kafir",
+      "kuffar",
+      "kafiroon"
+    ],
+    "cat": "islamic"
+  },
+  "hypocrites": {
+    "ro": "hypocrites",
+    "ur": "منافق",
+    "en": "Hypocrites in Religion",
+    "ar": "منافقون",
+    "alt": [
+      "munafiq",
+      "munafiqeen",
+      "nifaq"
+    ],
+    "cat": "islamic"
+  },
+  "parents": {
+    "ro": "parents",
+    "ur": "والدین",
+    "en": "Parents / Mother and Father",
+    "ar": "والدين",
+    "alt": [
+      "walidain",
+      "maa baap"
+    ],
+    "cat": "islamic"
+  },
+  "patience": {
+    "ro": "patience",
+    "ur": "صبر",
+    "en": "Patience / Perseverance",
+    "ar": "صبر",
+    "alt": [
+      "sabr",
+      "saber"
+    ],
+    "cat": "islamic"
+  },
+  "prayer": {
+    "ro": "prayer",
+    "ur": "نماز",
+    "en": "Ritual Prayer / Worship",
+    "ar": "صلاة",
+    "alt": [
+      "namaz",
+      "salah",
+      "salat"
+    ],
+    "cat": "islamic"
+  },
+  "fasting": {
+    "ro": "fasting",
+    "ur": "روزہ",
+    "en": "Fasting / Abstinence",
+    "ar": "صوم",
+    "alt": [
+      "roza",
+      "sawm",
+      "roze",
+      "siyam"
+    ],
+    "cat": "islamic"
+  },
+  "charity": {
+    "ro": "charity",
+    "ur": "زکوۃ",
+    "en": "Obligatory Charity / Alms",
+    "ar": "زكاة",
+    "alt": [
+      "zakat",
+      "sadaqah"
+    ],
+    "cat": "islamic"
+  },
+  "mercy": {
+    "ro": "mercy",
+    "ur": "رحمت",
+    "en": "Divine Mercy / Grace",
+    "ar": "رحمة",
+    "alt": [
+      "rehmat",
+      "rahmat"
+    ],
+    "cat": "islamic"
+  },
+  "forgiveness": {
+    "ro": "forgiveness",
+    "ur": "مغفرت",
+    "en": "Forgiveness / Absolution",
+    "ar": "مغفرة",
+    "alt": [
+      "istighfar",
+      "maghfirat"
+    ],
+    "cat": "islamic"
+  },
+  "hellfire": {
+    "ro": "hellfire",
+    "ur": "جہنم",
+    "en": "Hellfire / Gehenna",
+    "ar": "جهنم",
+    "alt": [
+      "jahannam",
+      "dozakh"
+    ],
+    "cat": "islamic"
+  },
+  "god": {
+    "ro": "god",
+    "ur": "اللہ",
+    "en": "God / The Supreme Creator",
+    "ar": "الله",
+    "alt": [
+      "allah",
+      "khuda"
+    ],
+    "cat": "islamic"
+  },
+  "lord": {
+    "ro": "lord",
+    "ur": "رب",
+    "en": "Lord / Cherisher / Sustainer",
+    "ar": "رب",
+    "alt": [
+      "rab",
+      "parwardigar"
+    ],
+    "cat": "islamic"
+  },
+  "hell": {
+    "ro": "hell",
+    "ur": "جہنم",
+    "en": "Hell / Hellfire",
+    "ar": "جهنم",
+    "alt": [
+      "jahannam",
+      "dozakh"
+    ],
+    "cat": "islamic"
+  },
+  "heaven": {
+    "ro": "heaven",
+    "ur": "جنت",
+    "en": "Heaven / Paradise",
+    "ar": "جنة",
+    "alt": [
+      "jannat",
+      "firdous"
+    ],
+    "cat": "islamic"
+  },
+  "angel": {
+    "ro": "angel",
+    "ur": "فرشتہ",
+    "en": "Angel / Heavenly Messenger",
+    "ar": "ملاك",
+    "alt": [
+      "farishta"
+    ],
+    "cat": "islamic"
+  },
+  "angels": {
+    "ro": "angels",
+    "ur": "فرشتہ",
+    "en": "Angels / Heavenly Messengers",
+    "ar": "ملائكة",
+    "alt": [
+      "farishtay",
+      "malaika"
+    ],
+    "cat": "islamic"
+  },
+  "truth": {
+    "ro": "truth",
+    "ur": "حق",
+    "en": "Truth / Sovereign Reality",
+    "ar": "حق",
+    "alt": [
+      "haq",
+      "sach",
+      "sachai"
+    ],
+    "cat": "islamic"
+  },
+  "orphans": {
+    "ro": "orphans",
+    "ur": "یتیم",
+    "en": "Orphans",
+    "ar": "يتامى",
+    "alt": [
+      "yateem",
+      "yatama"
+    ],
+    "cat": "islamic"
+  },
+  "orphan": {
+    "ro": "orphan",
+    "ur": "یتیم",
+    "en": "Orphan",
+    "ar": "يتيم",
+    "alt": [
+      "yateem"
+    ],
+    "cat": "islamic"
+  },
+  "peace": {
+    "ro": "peace",
+    "ur": "سلامتی",
+    "en": "Peace / Tranquility",
+    "ar": "سلام",
+    "alt": [
+      "salam",
+      "sukoon"
+    ],
+    "cat": "islamic"
+  },
+  "justice": {
+    "ro": "justice",
+    "ur": "عدل",
+    "en": "Justice / Divine Balance / Equity",
+    "ar": "عدل",
+    "alt": [
+      "adl",
+      "insaf"
+    ],
+    "cat": "islamic"
+  },
+  "gratitude": {
+    "ro": "gratitude",
+    "ur": "شکر",
+    "en": "Gratitude / Thankfulness",
+    "ar": "شكر",
+    "alt": [
+      "shukr"
+    ],
+    "cat": "islamic"
+  },
+  "guidance": {
+    "ro": "guidance",
+    "ur": "ہدایت",
+    "en": "Divine Guidance / Right Path",
+    "ar": "هدى",
+    "alt": [
+      "hidayat"
+    ],
+    "cat": "islamic"
+  },
+  "worship": {
+    "ro": "worship",
+    "ur": "عبادت",
+    "en": "Worship / Servitude to Allah",
+    "ar": "عبادة",
+    "alt": [
+      "ibadat"
+    ],
+    "cat": "islamic"
+  },
+  "resurrection": {
+    "ro": "resurrection",
+    "ur": "قیامت",
+    "en": "Resurrection / The Day of Gathering",
+    "ar": "قيامة",
+    "alt": [
+      "qayamat",
+      "hashr"
+    ],
+    "cat": "islamic"
+  },
+  "wisdom": {
+    "ro": "wisdom",
+    "ur": "حکمت",
+    "en": "Wisdom / Insight",
+    "ar": "حكمة",
+    "alt": [
+      "hikmat"
+    ],
+    "cat": "islamic"
+  },
+  "knowledge": {
+    "ro": "knowledge",
+    "ur": "علم",
+    "en": "Knowledge / Sacred Learning",
+    "ar": "علم",
+    "alt": [
+      "ilm"
+    ],
+    "cat": "islamic"
+  },
+  "sin": {
+    "ro": "sin",
+    "ur": "گناہ",
+    "en": "Sin / Moral Transgression",
+    "ar": "ذنب",
+    "alt": [
+      "gunah"
+    ],
+    "cat": "islamic"
+  },
+  "sins": {
+    "ro": "sins",
+    "ur": "گناہ",
+    "en": "Sins / Moral Transgressions",
+    "ar": "ذنوب",
+    "alt": [
+      "gunah",
+      "gunahon"
     ],
     "cat": "islamic"
   },
@@ -671,7 +1313,7 @@
   "sach": {
     "ro": "sach",
     "ur": "سچ",
-    "en": "Truth / Right / Reality",
+    "en": "Truth / Honesty",
     "ar": "صدق",
     "alt": [
       "sacha",
@@ -881,7 +1523,7 @@
   "dil": {
     "ro": "dil",
     "ur": "دل",
-    "en": "Heart / Turning / Conversion",
+    "en": "Heart / Spiritual Seat",
     "ar": "قلب",
     "alt": [
       "qalb",
@@ -914,7 +1556,7 @@
   "hikmat": {
     "ro": "hikmat",
     "ur": "حکمت",
-    "en": "Wisdom / Judgment / Governance",
+    "en": "Wisdom / Insight",
     "ar": "حكمة",
     "alt": [
       "danishmandi",
@@ -937,7 +1579,7 @@
   "qawm": {
     "ro": "qawm",
     "ur": "قوم",
-    "en": "To stand / People / Community",
+    "en": "Nation / People / Community",
     "ar": "قوم",
     "alt": [
       "ummat",
@@ -1852,7 +2494,7 @@
   "wali": {
     "ro": "wali",
     "ur": "ولی",
-    "en": "Protecting friend / Guardian",
+    "en": "Friend of Allah / Saint",
     "ar": "ولي",
     "alt": [
       "auliya",
@@ -4303,7 +4945,7 @@
   "kya": {
     "ro": "kya",
     "ur": "کیا",
-    "en": "In/With what / that which / not",
+    "en": "What",
     "ar": "کیا",
     "alt": [],
     "cat": "conversational"
@@ -4603,7 +5245,7 @@
   "taraf": {
     "ro": "taraf",
     "ur": "طرف",
-    "en": "Face / Countenance / Direction",
+    "en": "Towards / Direction",
     "ar": "طرف",
     "alt": [
       "janib"
@@ -4641,7 +5283,7 @@
   "ya": {
     "ro": "ya",
     "ur": "یا",
-    "en": "Or (in questions)",
+    "en": "Or",
     "ar": "یا",
     "alt": [],
     "cat": "conversational"
@@ -4667,7 +5309,7 @@
   "agar": {
     "ro": "agar",
     "ur": "اگر",
-    "en": "If / Would that",
+    "en": "If / In case",
     "ar": "اگر",
     "alt": [
       "kash"
@@ -4877,7 +5519,7 @@
   "yaqeenan": {
     "ro": "yaqeenan",
     "ur": "یقیناً",
-    "en": "In/With indeed / truly",
+    "en": "Certainly / Surely",
     "ar": "یقیناً",
     "alt": [
       "beshak"
@@ -4913,7 +5555,7 @@
   "tha": {
     "ro": "tha",
     "ur": "تھا",
-    "en": "To be / exist / happen",
+    "en": "Was (masculine)",
     "ar": "تھا",
     "alt": [],
     "cat": "conversational"
@@ -4961,7 +5603,7 @@
   "hona": {
     "ro": "hona",
     "ur": "ہونا",
-    "en": "To be / exist / happen",
+    "en": "To be / To happen",
     "ar": "ہونا",
     "alt": [],
     "cat": "conversational"
@@ -5112,7 +5754,7 @@
   "kehna": {
     "ro": "kehna",
     "ur": "کہنا",
-    "en": "To say / speak / utter",
+    "en": "To say / To state",
     "ar": "کہنا",
     "alt": [
       "kaho",
@@ -5135,7 +5777,7 @@
   "kaha": {
     "ro": "kaha",
     "ur": "کہا",
-    "en": "So he said",
+    "en": "Said",
     "ar": "کہا",
     "alt": [],
     "cat": "conversational"
@@ -5262,7 +5904,7 @@
   "likhna": {
     "ro": "likhna",
     "ur": "لکھنا",
-    "en": "Writing / Book / To decree",
+    "en": "To write",
     "ar": "لکھنا",
     "alt": [
       "likho",
@@ -5363,7 +6005,7 @@
   "aana": {
     "ro": "aana",
     "ur": "آنا",
-    "en": "To come / bring / grant",
+    "en": "To come / To arrive",
     "ar": "آنا",
     "alt": [
       "aao",
@@ -5642,7 +6284,7 @@
   "rakhna": {
     "ro": "rakhna",
     "ur": "رکھنا",
-    "en": "To make / appoint / place",
+    "en": "To keep / To place",
     "ar": "رکھنا",
     "alt": [
       "rakho",
@@ -5661,7 +6303,7 @@
   "bhejna": {
     "ro": "bhejna",
     "ur": "بھیجنا",
-    "en": "To send / Messenger / Message",
+    "en": "To send / To dispatch",
     "ar": "بھیجنا",
     "alt": [
       "bhejo",
@@ -6217,7 +6859,7 @@
   "aasman": {
     "ro": "aasman",
     "ur": "آسمان",
-    "en": "Sky / Heaven / Elevation",
+    "en": "Sky / Heaven",
     "ar": "سماء",
     "alt": [
       "sky",
@@ -6228,7 +6870,7 @@
   "zameen": {
     "ro": "zameen",
     "ur": "زمین",
-    "en": "Earth / Land / Ground",
+    "en": "Earth / Ground",
     "ar": "أرض",
     "alt": [
       "dharti",
@@ -6294,7 +6936,7 @@
   "aag": {
     "ro": "aag",
     "ur": "آگ",
-    "en": "The Fire / Hell",
+    "en": "Fire",
     "ar": "نار",
     "alt": [
       "aatish",
@@ -6391,7 +7033,7 @@
   "din": {
     "ro": "din",
     "ur": "دن",
-    "en": "Day / Era / Time",
+    "en": "Day / Daylight",
     "ar": "نهار",
     "alt": [
       "nahar",
@@ -6524,7 +7166,7 @@
   "aankh": {
     "ro": "aankh",
     "ur": "آنکھ",
-    "en": "Eye / Spring of water",
+    "en": "Eye",
     "ar": "عين",
     "alt": [
       "ayn",
@@ -6545,7 +7187,7 @@
   "kaan": {
     "ro": "kaan",
     "ur": "کان",
-    "en": "Ear / Permission / Announcement",
+    "en": "Ear",
     "ar": "أذن",
     "alt": [
       "uzun"
@@ -6635,7 +7277,7 @@
   "seena": {
     "ro": "seena",
     "ur": "سینہ",
-    "en": "Chest / Breast / Source",
+    "en": "Chest / Breast",
     "ar": "صدر",
     "alt": [
       "sadr"
@@ -6676,7 +7318,7 @@
   "chehra": {
     "ro": "chehra",
     "ur": "چہرہ",
-    "en": "Face / Countenance / Direction",
+    "en": "Face / Countenance",
     "ar": "وجه",
     "alt": [
       "wajh",
@@ -6729,7 +7371,7 @@
   "bura": {
     "ro": "bura",
     "ur": "برا",
-    "en": "Evil / Badness / Harm",
+    "en": "Bad / Wicked / Evil",
     "ar": "برا",
     "alt": [
       "kharab"
@@ -7000,7 +7642,7 @@
   "khushi": {
     "ro": "khushi",
     "ur": "خوشی",
-    "en": "Joy / Delight / Exultation",
+    "en": "Happiness / Joy",
     "ar": "خوشی",
     "alt": [
       "musarrat",
@@ -7011,7 +7653,7 @@
   "gham": {
     "ro": "gham",
     "ur": "غم",
-    "en": "Grief / Sorrow / Sadness",
+    "en": "Sorrow / Grief",
     "ar": "غم",
     "alt": [
       "ranj",
@@ -7033,7 +7675,7 @@
   "takleef": {
     "ro": "takleef",
     "ur": "تکلیف",
-    "en": "Punishment / Torment / Pain",
+    "en": "Hardship / Distress",
     "ar": "تکلیف",
     "alt": [
       "musibat"
@@ -7075,7 +7717,7 @@
   "khauf": {
     "ro": "khauf",
     "ur": "خوف",
-    "en": "Fear / Dread / Awe",
+    "en": "Fear / Awe of God",
     "ar": "خوف",
     "alt": [
       "dar",
@@ -9050,14 +9692,6 @@
     "alt": [],
     "cat": "root"
   },
-  "kitab": {
-    "ro": "kitab",
-    "ur": "كتب",
-    "en": "Writing / Book / To decree",
-    "ar": "كتب",
-    "alt": [],
-    "cat": "root"
-  },
   "farz karna": {
     "ro": "farz karna",
     "ur": "كتب",
@@ -9500,14 +10134,6 @@
   },
   "husn": {
     "ro": "husn",
-    "ur": "حسن",
-    "en": "Beauty / Goodness / Excellence",
-    "ar": "حسن",
-    "alt": [],
-    "cat": "root"
-  },
-  "neki": {
-    "ro": "neki",
     "ur": "حسن",
     "en": "Beauty / Goodness / Excellence",
     "ar": "حسن",
@@ -22831,8 +23457,22 @@
   // Build fast O(1) multi-way lookup indexes
   const ROMAN_INDEX = new Map();
   const ENGLISH_INDEX = new Map();
+  const ENGLISH_PHRASE_INDEX = new Map();
   const URDU_INDEX = new Map();
   const ARABIC_INDEX = new Map();
+
+  const ENGLISH_STOP_WORDS = new Set([
+    'the', 'and', 'for', 'with', 'from', 'that', 'this', 'into', 'through',
+    'who', 'whom', 'whose', 'which', 'what', 'where', 'when', 'why', 'how',
+    'all', 'are', 'was', 'were', 'have', 'has', 'had', 'do', 'does', 'did',
+    'not', 'but', 'out', 'one', 'any', 'its', 'our', 'him', 'her', 'his',
+    'two', 'may', 'can', 'will', 'shall', 'upon', 'over', 'under', 'them',
+    'their', 'about', 'each', 'every', 'such', 'more', 'most', 'other', 'some',
+    'been', 'being', 'make', 'made', 'call', 'called', 'name', 'named',
+    'verse', 'verses', 'chapter', 'quran', 'islam', 'root', 'word', 'term',
+    'they', 'you', 'your', 'yours', 'me', 'my', 'mine', 'we', 'us',
+    'there', 'then', 'than', 'so', 'as', 'at', 'by', 'in', 'on', 'of', 'to', 'is', 'it'
+  ]);
 
   // Pass 1: Index all primary keys and script entries
   for (const [key, entry] of Object.entries(LEXICON)) {
@@ -22840,14 +23480,37 @@
     ROMAN_INDEX.set(key.replace(/[-_]/g, ''), entry);
     ROMAN_INDEX.set(key.replace(/[-_]/g, ' '), entry);
 
-    // Index English keywords
+    // Index English keywords and multi-word concepts
     if (entry.en) {
-      const enTokens = entry.en.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').split(/\s+/).filter(t => t.length > 2);
+      const enRaw = entry.en.toLowerCase();
+      // Multi-word phrase index (e.g. "straight path", "day of judgment", "the throne verse")
+      const phrases = enRaw.split('/').map(p => p.trim().replace(/[^a-z0-9\s-]/g, ''));
+      for (const phrase of phrases) {
+        if (phrase && !ENGLISH_STOP_WORDS.has(phrase)) {
+          if (!ENGLISH_PHRASE_INDEX.has(phrase) || entry.cat === 'islamic') {
+            ENGLISH_PHRASE_INDEX.set(phrase, entry);
+          }
+          const noThe = phrase.replace(/^the\s+/, '');
+          if (noThe && noThe !== phrase && !ENGLISH_STOP_WORDS.has(noThe)) {
+            if (!ENGLISH_PHRASE_INDEX.has(noThe) || entry.cat === 'islamic') {
+              ENGLISH_PHRASE_INDEX.set(noThe, entry);
+            }
+          }
+        }
+      }
+
+      // Content word index: STRICTLY exclude grammatical stop words, prioritize canonical Islamic entries
+      const enTokens = enRaw.replace(/[^a-z0-9\s]/g, ' ').split(/\s+/).filter(t => t.length > 2);
       for (const t of enTokens) {
+        if (ENGLISH_STOP_WORDS.has(t)) continue;
         if (!ENGLISH_INDEX.has(t)) {
           ENGLISH_INDEX.set(t, []);
         }
-        ENGLISH_INDEX.get(t).push(entry);
+        if (entry.cat === 'islamic' || entry.cat === 'conversational') {
+          ENGLISH_INDEX.get(t).unshift(entry);
+        } else {
+          ENGLISH_INDEX.get(t).push(entry);
+        }
       }
     }
 
@@ -22898,7 +23561,7 @@
   // Distinct language markers
   const ROMAN_URDU_MARKERS = new Set([
     'ka', 'ki', 'ke', 'ko', 'se', 'mein', 'me', 'par', 'pe', 'ne', 'tak',
-    'hai', 'hain', 'tha', 'thi', 'the', 'hoga', 'hogi', 'honge', 'raha', 'rahi', 'rahe',
+    'hai', 'hain', 'tha', 'thi', 'hoga', 'hogi', 'honge', 'raha', 'rahi', 'rahe',
     'kya', 'kyun', 'kyu', 'kaise', 'kese', 'kahan', 'kaha', 'kab', 'kon', 'kaun', 'kitna', 'kitni', 'kitne',
     'aur', 'bhi', 'toh', 'to', 'ya', 'magar', 'lekin', 'agar', 'jab', 'tab', 'phir', 'ab',
     'hum', 'tum', 'aap', 'woh', 'wo', 'yeh', 'ye', 'mera', 'meri', 'mere', 'tera', 'teri', 'tere', 'apna', 'apni', 'apne',
@@ -23063,7 +23726,7 @@
 
   // --- 4. MASTER ROMAN URDU TRANSLATOR API ---
   const RomanUrduTranslator = {
-    lexiconCount: 2663,
+    lexiconCount: 2718,
 
     /**
      * Detects input script/language: 'roman_urdu' | 'english' | 'urdu' | 'arabic'
@@ -23095,17 +23758,27 @@
       }
 
       // Latin / English keyboard text
-      const words = clean.toLowerCase().replace(/[^a-z0-9\s-]/g, ' ').split(/\s+/).filter(w => w.length > 0);
+      const cleanNorm = clean.toLowerCase().replace(/[^a-z0-9\s-]/g, ' ').trim();
+      const words = cleanNorm.split(/\s+/).filter(w => w.length > 0);
       if (words.length === 0) return 'roman_urdu';
+
+      // Check if full phrase is a known English phrase
+      if (ENGLISH_PHRASE_INDEX.has(cleanNorm) || ENGLISH_PHRASE_INDEX.has(cleanNorm.replace(/^the\s+/, ''))) {
+        return 'english';
+      }
 
       let romanScore = 0;
       let englishScore = 0;
 
       for (const w of words) {
-        if (ROMAN_URDU_MARKERS.has(w)) romanScore += 2.0;
-        if (ENGLISH_MARKERS.has(w)) englishScore += 2.0;
+        if (ROMAN_URDU_MARKERS.has(w)) romanScore += 2.5;
+        if (ENGLISH_MARKERS.has(w) || ENGLISH_STOP_WORDS.has(w)) englishScore += 2.0;
         if (ROMAN_INDEX.has(w)) romanScore += 1.0;
-        if (ENGLISH_INDEX.has(w)) englishScore += 0.8;
+        if (ENGLISH_INDEX.has(w)) englishScore += 1.2;
+        // Morphological English suffixes: -ness, -ment, -tion, -sion, -ing, -ed, -ous, -ful, -less, -able, -ible
+        if (/(ness|ments?|tions?|sions?|ings?|ed|ous|ful|less|ables?|ibles?)$/i.test(w)) {
+          englishScore += 2.0;
+        }
       }
 
       if (romanScore > englishScore) return 'roman_urdu';
@@ -23115,9 +23788,10 @@
       if (words.length === 1) {
         const single = words[0];
         if (ROMAN_URDU_MARKERS.has(single)) return 'roman_urdu';
-        if (ENGLISH_MARKERS.has(single)) return 'english';
-        if (ROMAN_INDEX.has(single) && !ENGLISH_INDEX.has(single)) return 'roman_urdu';
+        if (ENGLISH_MARKERS.has(single) || ENGLISH_STOP_WORDS.has(single)) return 'english';
+        if (/(ness|ments?|tions?|sions?|ings?|ed|ous|ful|less|ables?|ibles?)$/i.test(single)) return 'english';
         if (ENGLISH_INDEX.has(single) && !ROMAN_INDEX.has(single)) return 'english';
+        if (ROMAN_INDEX.has(single) && !ENGLISH_INDEX.has(single)) return 'roman_urdu';
         // Check characteristic Roman Urdu digraphs
         if (/(kh|gh|sh|ch|dh|jh|bh|aa|ee|oo)/.test(single)) return 'roman_urdu';
       }
@@ -23221,13 +23895,20 @@
         detectedLangLabel = 'English';
         pills.push({ type: 'lang', label: '🔤 English', text: 'english' });
 
-        // Search reverse index for English concept
-        const cleanTokens = raw.toLowerCase().split(/\s+/);
-        let matchedEntry = null;
-        for (const t of cleanTokens) {
-          if (ENGLISH_INDEX.has(t)) {
-            matchedEntry = ENGLISH_INDEX.get(t)[0];
-            break;
+        // 1. Try matching full phrase or phrase without leading "the"
+        const cleanNorm = raw.toLowerCase().trim().replace(/[^a-z0-9\s-]/g, ' ');
+        const noThe = cleanNorm.replace(/^the\s+/, '').trim();
+        let matchedEntry = ENGLISH_PHRASE_INDEX.get(cleanNorm) || ENGLISH_PHRASE_INDEX.get(noThe);
+
+        // 2. If no full phrase match, iterate through content words skipping stop words
+        if (!matchedEntry) {
+          const cleanTokens = cleanNorm.split(/\s+/);
+          for (const t of cleanTokens) {
+            if (ENGLISH_STOP_WORDS.has(t)) continue; // Never match "the", "and", "for", etc.
+            if (ENGLISH_INDEX.has(t)) {
+              matchedEntry = ENGLISH_INDEX.get(t)[0];
+              break;
+            }
           }
         }
 
@@ -23236,18 +23917,32 @@
           arabicTerm = matchedEntry.ar;
           pills.push({ type: 'urdu', label: `✍️ اردو: ${matchedEntry.ur}`, text: matchedEntry.ur, value: matchedEntry.ur });
           pills.push({ type: 'roman', label: `🌐 Roman: ${matchedEntry.ro}`, text: matchedEntry.ro, value: matchedEntry.ro });
-          if (matchedEntry.ar) {
+          if (matchedEntry.ar && matchedEntry.ar !== matchedEntry.ur) {
             pills.push({ type: 'arabic', label: `📖 ${matchedEntry.ar}`, text: matchedEntry.ar, value: matchedEntry.ar });
           }
           variants.add(matchedEntry.ur);
           variants.add(matchedEntry.ro);
+          if (Array.isArray(matchedEntry.alt)) {
+            matchedEntry.alt.forEach(a => variants.add(a));
+          }
         }
       } else if (lang === 'urdu' || lang === 'arabic') {
         const isUr = (lang === 'urdu');
         detectedLangLabel = isUr ? 'Urdu Nastaleeq' : 'Sacred Arabic';
         pills.push({ type: 'lang', label: isUr ? '✍️ اردو' : '📖 العربية', text: lang });
 
-        const entry = isUr ? URDU_INDEX.get(raw) : ARABIC_INDEX.get(raw);
+        let entry = isUr ? URDU_INDEX.get(raw) : ARABIC_INDEX.get(raw);
+        if (!entry) {
+          // Tokenize and look up words if multi-word
+          const rawTokens = raw.split(/\s+/);
+          for (const t of rawTokens) {
+            const match = isUr ? URDU_INDEX.get(t) : ARABIC_INDEX.get(t);
+            if (match) {
+              entry = match;
+              break;
+            }
+          }
+        }
         if (entry) {
           pills.push({ type: 'roman', label: `🌐 Roman: ${entry.ro}`, text: entry.ro, value: entry.ro });
           pills.push({ type: 'english', label: `🇬🇧 English: ${entry.en.split('/')[0].trim()}`, text: entry.en.split('/')[0].trim(), value: entry.en.split('/')[0].trim() });
@@ -23309,9 +24004,39 @@
           if (entry) {
             addToken(entry.ur, 1.0, 'urdu');
             if (entry.ar) addToken(entry.ar, 0.85, 'arabic');
-            // English semantic keywords
+
+            // Canonical morphological plurals & Quranic inflections
+            if (entry.ro === 'roza' || w === 'roza') {
+              addToken('روزے', 1.0, 'urdu');
+              addToken('روزوں', 0.9, 'urdu');
+            } else if (entry.ro === 'namaz' || w === 'namaz') {
+              addToken('نمازیں', 0.9, 'urdu');
+              addToken('نمازوں', 0.9, 'urdu');
+            } else if (entry.ro === 'jannat' || w === 'jannat') {
+              addToken('جنتیں', 0.9, 'urdu');
+              addToken('جنتوں', 0.9, 'urdu');
+            } else if (entry.ro === 'gunah' || w === 'gunah') {
+              addToken('گناہوں', 0.9, 'urdu');
+            } else if (entry.ro === 'neki' || w === 'neki') {
+              addToken('نیکیاں', 0.9, 'urdu');
+              addToken('نیکیوں', 0.9, 'urdu');
+            } else if (entry.ro === 'kafir' || w === 'kafir') {
+              addToken('کفار', 1.0, 'urdu');
+              addToken('کافروں', 0.9, 'urdu');
+            } else if (entry.ro === 'muslim' || w === 'muslim') {
+              addToken('مسلمانوں', 0.9, 'urdu');
+              addToken('مسلمین', 0.9, 'urdu');
+            } else if (entry.ro === 'momin' || w === 'momin') {
+              addToken('مومنین', 1.0, 'urdu');
+              addToken('مومنوں', 0.9, 'urdu');
+            } else if (entry.ro === 'munafiq' || w === 'munafiq') {
+              addToken('منافقین', 1.0, 'urdu');
+              addToken('منافقوں', 0.9, 'urdu');
+            }
+
+            // English semantic keywords (excluding stop words)
             if (entry.en) {
-              const enTokens = entry.en.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').split(/\s+/).filter(t => t.length > 2);
+              const enTokens = entry.en.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').split(/\s+/).filter(t => t.length > 2 && !ENGLISH_STOP_WORDS.has(t));
               for (const et of enTokens) {
                 addToken(et, 0.85, 'english');
               }
@@ -23319,7 +24044,18 @@
           }
         }
       } else if (lang === 'english') {
+        // First check full phrase
+        const cleanNorm = raw.toLowerCase().trim().replace(/[^a-z0-9\s-]/g, ' ');
+        const noThe = cleanNorm.replace(/^the\s+/, '').trim();
+        const phraseEntry = ENGLISH_PHRASE_INDEX.get(cleanNorm) || ENGLISH_PHRASE_INDEX.get(noThe);
+        if (phraseEntry) {
+          addToken(phraseEntry.ur, 1.0, 'urdu');
+          addToken(phraseEntry.ro, 0.9, 'roman_urdu');
+          if (phraseEntry.ar) addToken(phraseEntry.ar, 0.85, 'arabic');
+        }
+
         for (const w of rawTokens) {
+          if (ENGLISH_STOP_WORDS.has(w)) continue; // STRICT STOP-WORD FILTER
           const entries = ENGLISH_INDEX.get(w);
           if (entries && entries.length) {
             for (const entry of entries.slice(0, 3)) {

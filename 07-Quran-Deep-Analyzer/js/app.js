@@ -547,25 +547,46 @@ const OmnisearchEngine = {
       bar.innerHTML = "";
       return;
     }
+    const escapeHtml = (str) => String(str || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+
     bar.style.display = "flex";
     let html = "";
     for (const pill of data.pills) {
+      const safeLabel = escapeHtml(pill.label);
+      const safeVal = escapeHtml(pill.value || pill.text || "");
       if (pill.type === "lang") {
-        html += `<span class="trans-lang-tag">${pill.label}</span>`;
+        html += `<span class="trans-lang-tag">${safeLabel}</span>`;
       } else if (pill.type === "urdu") {
-        html += `<button type="button" class="trans-chip-urdu" data-val="${pill.value}" title="1-Tap Search">${pill.label}</button>`;
+        html += `<button type="button" class="trans-chip-urdu" data-val="${safeVal}" title="1-Tap Search">${safeLabel}</button>`;
       } else if (pill.type === "english") {
-        html += `<button type="button" class="trans-chip-en" data-val="${pill.value}" title="1-Tap Search">${pill.label}</button>`;
+        html += `<button type="button" class="trans-chip-en" data-val="${safeVal}" title="1-Tap Search">${safeLabel}</button>`;
       } else if (pill.type === "arabic") {
-        html += `<button type="button" class="trans-chip-ar" data-val="${pill.value}" title="1-Tap Search">${pill.label}</button>`;
+        html += `<button type="button" class="trans-chip-ar" data-val="${safeVal}" title="1-Tap Search">${safeLabel}</button>`;
       } else if (pill.type === "roman") {
-        html += `<button type="button" class="trans-chip-en" data-val="${pill.value}" title="1-Tap Search">${pill.label}</button>`;
+        html += `<button type="button" class="trans-chip-en" data-val="${safeVal}" title="1-Tap Search">${safeLabel}</button>`;
       }
     }
+
+    // Add extra variant pills if available
+    if (Array.isArray(data.variants)) {
+      for (const v of data.variants.slice(0, 3)) {
+        if (v && v !== data.urduScript && v !== data.arabicTerm) {
+          const safeV = escapeHtml(v);
+          html += `<button type="button" class="trans-chip-variant" data-val="${safeV}" title="Filter variant">${safeV}</button>`;
+        }
+      }
+    }
+
     bar.innerHTML = html;
     bar.querySelectorAll("button").forEach(btn => {
       btn.addEventListener("click", (e) => {
         e.preventDefault();
+        if (window.AudioSFX) window.AudioSFX.playClick();
         const targetVal = btn.getAttribute("data-val");
         const input = document.getElementById("omnisearch-input");
         if (targetVal && input) {

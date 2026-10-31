@@ -4772,15 +4772,16 @@ mark.search-highlight {
   direction: rtl;
   background: rgba(251, 191, 36, 0.12);
   border: 1px solid rgba(251, 191, 36, 0.35);
-  padding: 3px 12px;
+  padding: 6px 14px;
   border-radius: var(--radius-full);
   cursor: pointer;
   transition: all 0.15s ease;
   touch-action: manipulation;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  min-height: 30px;
+  gap: 6px;
+  min-height: 38px;
+  user-select: none;
 }
 
 .trans-chip-urdu:hover,
@@ -4793,20 +4794,21 @@ mark.search-highlight {
 }
 
 .trans-chip-en {
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   font-weight: 500;
   color: #e2e8f0;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 4px 10px;
+  padding: 6px 14px;
   border-radius: var(--radius-full);
   cursor: pointer;
   transition: all 0.15s ease;
   touch-action: manipulation;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  min-height: 30px;
+  gap: 6px;
+  min-height: 38px;
+  user-select: none;
 }
 
 .trans-chip-en:hover,
@@ -4819,11 +4821,11 @@ mark.search-highlight {
 
 .trans-chip-ar {
   font-family: var(--font-arabic), 'AlMushaf', serif;
-  font-size: 1rem;
+  font-size: 1.05rem;
   color: #34d399;
   background: rgba(52, 211, 153, 0.12);
   border: 1px solid rgba(52, 211, 153, 0.3);
-  padding: 3px 10px;
+  padding: 6px 14px;
   border-radius: var(--radius-full);
   direction: rtl;
   cursor: pointer;
@@ -4831,8 +4833,9 @@ mark.search-highlight {
   touch-action: manipulation;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  min-height: 30px;
+  gap: 6px;
+  min-height: 38px;
+  user-select: none;
 }
 
 .trans-chip-ar:hover,
@@ -4845,24 +4848,36 @@ mark.search-highlight {
 }
 
 .trans-chip-variant {
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   color: #94a3b8;
   background: rgba(148, 163, 184, 0.08);
   border: 1px solid rgba(148, 163, 184, 0.2);
-  padding: 3px 8px;
+  padding: 5px 12px;
   border-radius: var(--radius-full);
   cursor: pointer;
   transition: all 0.15s ease;
   touch-action: manipulation;
   display: inline-flex;
   align-items: center;
-  min-height: 28px;
+  min-height: 36px;
+  user-select: none;
 }
 
 .trans-chip-variant:hover {
   background: rgba(148, 163, 184, 0.18);
   border-color: #cbd5e1;
   color: #ffffff;
+}
+
+@media (max-width: 640px) {
+  .trans-chip-urdu,
+  .trans-chip-en,
+  .trans-chip-ar,
+  .trans-chip-variant {
+    min-height: 44px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
 }
 
 /* Row 2: Unified Micro-Filter Strip + Inline Count Metrics */

@@ -370,8 +370,19 @@
       // Exact phrase scanner guarantee: Any document containing the exact multi-word phrase gets instant top score
       const urduQ = (translator && typeof translator.transliteratePhrase === 'function') ? translator.transliteratePhrase(rawQ) : '';
       const normUrduQ = urduQ ? normalizeArabicUrdu(urduQ) : '';
+      const urduExpansions = new Set();
+      if (normUrduQ && normUrduQ.length >= 2) urduExpansions.add(normUrduQ);
+      if (translator && typeof translator.expandSearchQuery === 'function') {
+        const expansions = translator.expandSearchQuery(rawQ);
+        for (const exp of expansions) {
+          if (exp.weight >= 0.95 && /[\u0600-\u06FF]/.test(exp.term)) {
+            const n = normalizeArabicUrdu(exp.term);
+            if (n && n.length >= 2) urduExpansions.add(n);
+          }
+        }
+      }
 
-      if (rawQ.length >= 3 || (normUrduQ && normUrduQ.length >= 2)) {
+      if (rawQ.length >= 3 || urduExpansions.size > 0) {
         const rawQAlt = rawQ.includes('our') ? rawQ.replace(/our/g, 'or') : (rawQ.includes('or') ? rawQ.replace(/or/g, 'our') : null);
         for (let i = 0; i < this.docs.length; i++) {
           const doc = this.docs[i];
@@ -392,13 +403,17 @@
             scores.set(i, (scores.get(i) || 0) + 30.0);
           } else if (normQ && normQ.length >= 2 && normalizeArabicUrdu(cont).includes(normQ)) {
             scores.set(i, (scores.get(i) || 0) + 40.0);
-          } else if (normUrduQ && normUrduQ.length >= 2) {
+          } else if (urduExpansions.size > 0) {
             const docUrduNorm = normalizeArabicUrdu(doc.urdu || '');
             const docArNorm = normalizeArabicUrdu(doc.arabic || '');
-            if (docUrduNorm.includes(normUrduQ)) {
-              scores.set(i, (scores.get(i) || 0) + 45.0);
-            } else if (docArNorm.includes(normUrduQ)) {
-              scores.set(i, (scores.get(i) || 0) + 40.0);
+            for (const uq of urduExpansions) {
+              if (docUrduNorm.includes(uq)) {
+                scores.set(i, (scores.get(i) || 0) + 45.0);
+                break;
+              } else if (docArNorm.includes(uq)) {
+                scores.set(i, (scores.get(i) || 0) + 40.0);
+                break;
+              }
             }
           }
         }
@@ -423,9 +438,18 @@
           if (normalizeArabicUrdu(doc.arabic || '').includes(normQ)) finalScore += 35.0;
           if (normalizeArabicUrdu(doc.urdu || '').includes(normQ)) finalScore += 35.0;
         }
-        if (normUrduQ && normUrduQ.length >= 2) {
-          if (normalizeArabicUrdu(doc.urdu || '').includes(normUrduQ)) finalScore += 35.0;
-          if (normalizeArabicUrdu(doc.arabic || '').includes(normUrduQ)) finalScore += 30.0;
+        if (urduExpansions.size > 0) {
+          const docUrduNorm = normalizeArabicUrdu(doc.urdu || '');
+          const docArNorm = normalizeArabicUrdu(doc.arabic || '');
+          for (const uq of urduExpansions) {
+            if (docUrduNorm.includes(uq)) {
+              finalScore += 35.0;
+              break;
+            } else if (docArNorm.includes(uq)) {
+              finalScore += 30.0;
+              break;
+            }
+          }
         }
 
         results.push({
