@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "lastUpdated": "Antigravity Files",
-  "totalApps": 30,
+  "totalApps": 32,
   "categories": [
     "Islamic & Faith",
     "Productivity & Utilities",
@@ -553,6 +553,38 @@
       "relPath": "Common-Resources/WhatsApp-Gate-Kit/WHATSAPP_GATE_TEMPLATE.html",
       "portalHref": "./Common-Resources/WhatsApp-Gate-Kit/WHATSAPP_GATE_TEMPLATE.html",
       "serverHref": "./Common-Resources/WhatsApp-Gate-Kit/WHATSAPP_GATE_TEMPLATE.html"
+    },
+    {
+      "id": "19-Dermatology-Health-Guide__index_html",
+      "title": "Clinical Dermatology & Skin Recovery Protocol",
+      "category": "Discovered Tools",
+      "icon": "📄",
+      "badge": "19-Dermatology-Health-Guide",
+      "description": "HTML application located in 19-Dermatology-Health-Guide.",
+      "tags": [
+        "19-dermatology-health-guide",
+        "index.html"
+      ],
+      "primary": false,
+      "relPath": "19-Dermatology-Health-Guide/index.html",
+      "portalHref": "./19-Dermatology-Health-Guide/index.html",
+      "serverHref": "./19-Dermatology-Health-Guide/index.html"
+    },
+    {
+      "id": "07-Quran-Deep-Analyzer__archive__inspect_dock_html",
+      "title": "Inspect Dock",
+      "category": "Discovered Tools",
+      "icon": "📄",
+      "badge": "07-Quran-Deep-Analyzer",
+      "description": "HTML application located in 07-Quran-Deep-Analyzer.",
+      "tags": [
+        "07-quran-deep-analyzer",
+        "inspect_dock.html"
+      ],
+      "primary": false,
+      "relPath": "07-Quran-Deep-Analyzer/archive/inspect_dock.html",
+      "portalHref": "./07-Quran-Deep-Analyzer/archive/inspect_dock.html",
+      "serverHref": "./07-Quran-Deep-Analyzer/archive/inspect_dock.html"
     },
     {
       "id": "05-Cloud-Clipboard__Clipboard Sync_html",
