@@ -1,7 +1,7 @@
 /**
  * ============================================================================
  * Quran Deep Analyzer - Cache-First Progressive Web App Service Worker
- * (sw.js) - Version 2.1.0
+ * (sw.js) - Version 2.1.1
  * ============================================================================
  * Guarantees instant 0ms offline launch, zero network dependency for core
  * scriptural study, and offline full-corpus search across 6,236 Ayat.
@@ -9,7 +9,7 @@
  * ============================================================================
  */
 
-const CACHE_NAME = 'quran-deep-analyzer-v2.1.0';
+const CACHE_NAME = 'quran-deep-analyzer-v2.1.1';
 
 const PRECACHE_ASSETS = [
   './',
