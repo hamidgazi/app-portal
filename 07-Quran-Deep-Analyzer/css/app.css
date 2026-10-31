@@ -7904,13 +7904,21 @@ span[class*="tj-"]:not(.tj-pill) {
   margin-top: 6px;
 }
 
-/* Mode 1: Desktop Side-by-Side 2-Column Comparative Grid */
+/* Mode 1: Desktop Side-by-Side 2-Column Comparative Grid (Kanzul Iman on Right, Kanzul Irfan on Left) */
 @media (min-width: 768px) {
   .search-dual-tarjuma-wrap.layout-grid {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
+    grid-template-areas: "irfan iman" !important;
     gap: 10px !important;
     align-items: stretch !important;
+    direction: ltr !important;
+  }
+  .search-dual-tarjuma-wrap.layout-grid .kanzul-iman {
+    grid-area: iman !important;
+  }
+  .search-dual-tarjuma-wrap.layout-grid .kanzul-irfan {
+    grid-area: irfan !important;
   }
 }
 
