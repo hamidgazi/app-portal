@@ -475,11 +475,15 @@
             const input = document.getElementById('search-studio-input');
             const clearBtn = document.getElementById('search-studio-clear');
             if (input) {
-              input.value = targetVal;
+              input.value = targetVal.trim() + ' ';
               if (clearBtn) clearBtn.style.display = 'flex';
               input.focus();
+              if (typeof input.setSelectionRange === 'function') {
+                const len = input.value.length;
+                input.setSelectionRange(len, len);
+              }
             }
-            this.updateTransliterationBar(targetVal);
+            this.updateTransliterationBar(input ? input.value : targetVal);
             this.executeSearch(targetVal);
           }
         });

@@ -561,11 +561,11 @@
     /* Print Styles */
     @media print {
       body {
-        background: #ffffff;
-        color: #000000;
+        background: #ffffff !important;
+        color: #000000 !important;
         padding: 0;
       }
-      .nav-tabs, .timer-card, .btn, .calc-grid {
+      .nav-tabs, .timer-card, .btn, .calc-grid, .synergy-pills, .chrono-pills, .phase-pills, .schedule-pills {
         display: none !important;
       }
       .tab-pane {
@@ -573,9 +573,19 @@
         margin-bottom: 2rem;
       }
       .card {
-        border: 1px solid #ccc;
-        background: #ffffff;
-        color: #000000;
+        border: 1px solid #cbd5e1 !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+        box-shadow: none !important;
+      }
+      .chrono-stat-card {
+        background: #f8fafc !important;
+        border: 1px solid #e2e8f0 !important;
+        color: #000000 !important;
+      }
+      .schedule-view {
+        display: block !important;
+        margin-bottom: 1.5rem;
       }
       th {
         background: #eee !important;
@@ -583,15 +593,15 @@
       }
     }
   
-    /* Workout Phase Pills & Master Movement Cards */
-    .phase-pills {
+    /* Workout Phase & Schedule Pills */
+    .phase-pills, .schedule-pills {
       display: flex;
       flex-wrap: wrap;
       gap: 0.6rem;
       margin-bottom: 1.25rem;
     }
 
-    .phase-pill {
+    .phase-pill, .schedule-pill {
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
       color: var(--text-muted);
@@ -605,17 +615,17 @@
       min-height: 48px;
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.5rem;
       transition: all 0.2s ease;
     }
 
-    .phase-pill:hover {
+    .phase-pill:hover, .schedule-pill:hover {
       background: var(--bg-card-hover);
       color: var(--text-main);
       border-color: rgba(56, 189, 248, 0.4);
     }
 
-    .phase-pill.active {
+    .phase-pill.active, .schedule-pill.active {
       background: rgba(56, 189, 248, 0.18);
       color: var(--accent-cyan);
       border-color: var(--accent-cyan);
@@ -1722,90 +1732,246 @@
     <!-- TAB 5: TRIPLE SCHEDULES -->
     <section id="tab-schedules" class="tab-pane" role="tabpanel">
       <div class="card">
-        <h2 class="card-title">🕒 Schedule A: The Gold Standard (3 Meals + 2 Nutrient Shakes)</h2>
-        <div class="table-container">
-          <table>
-            <colgroup>
-              <col style="width: 15%;">
-              <col style="width: 20%;">
-              <col style="width: 45%;">
-              <col style="width: 20%;">
-            </colgroup>
-            <thead>
-              <tr>
-                <th>Time</th>
-                <th>Activity / Meal</th>
-                <th>Exact Menu & Instructions</th>
-                <th>Calories & Protein</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>07:30 AM</strong></td>
-                <td>Morning Awakening</td>
-                <td>1 glass warm water + 8 soaked Munakka + 6 peeled almonds</td>
-                <td>~ 100 kcal | 2g P</td>
-              </tr>
-              <tr>
-                <td><strong>08:15 AM</strong></td>
-                <td>Appetite Primer</td>
-                <td>50 ml warm water with fresh ginger slice, lemon drop, kala namak</td>
-                <td>—</td>
-              </tr>
-              <tr>
-                <td><strong>08:30 AM</strong></td>
-                <td><strong>Breakfast</strong></td>
-                <td>3 whole eggs (omelet/bhurji in 1 tsp ghee) + 2 parathas / bread</td>
-                <td>~ 450 kcal | 22g P</td>
-              </tr>
-              <tr>
-                <td><strong>11:30 AM</strong></td>
-                <td>Mid-Morning Snack</td>
-                <td>1 bowl fresh curd (dahi) with 1 banana or 4 dates + roasted chana</td>
-                <td>~ 220 kcal | 7g P</td>
-              </tr>
-              <tr>
-                <td><strong>01:30 PM</strong></td>
-                <td><strong>Lunch</strong></td>
-                <td>1.5 katori rice + thick dal with 1 tsp ghee + 120g chicken/mutton curry</td>
-                <td>~ 620 kcal | 32g P</td>
-              </tr>
-              <tr>
-                <td><strong>01:50 PM</strong></td>
-                <td>Post-Meal Stroll</td>
-                <td>100–200 slow steps inside house + 1 tab Liv.52 DS / Aristozyme</td>
-                <td>—</td>
-              </tr>
-              <tr>
-                <td><strong>05:30 PM</strong></td>
-                <td><strong>Power Shake</strong></td>
-                <td><strong>Desi Power Bulk Shake</strong> (Milk, 2 bananas, 2 tbsp peanut butter, dates)</td>
-                <td>~ 680 kcal | 24g P</td>
-              </tr>
-              <tr>
-                <td><strong>06:30 PM</strong></td>
-                <td><strong>Home Workout</strong></td>
-                <td>35–45 minutes calisthenics (3-sec lowering tempo)</td>
-                <td>—</td>
-              </tr>
-              <tr>
-                <td><strong>08:30 PM</strong></td>
-                <td><strong>Dinner</strong></td>
-                <td>2 rotis (light ghee) + chicken/mutton or egg curry + cooked sabzi</td>
-                <td>~ 520 kcal | 28g P</td>
-              </tr>
-              <tr>
-                <td><strong>10:30 PM</strong></td>
-                <td>Bedtime Tonic</td>
-                <td>1 cup warm milk + pinch of turmeric & cardamom + 300mg Ashwagandha</td>
-                <td>~ 140 kcal | 5g P</td>
-              </tr>
-              <tr style="background: rgba(34, 197, 94, 0.12);">
-                <td colspan="3"><strong>DAILY ACCUMULATION</strong></td>
-                <td><strong style="color: #22c55e;">~ 2730 kcal | 120g P</strong></td>
-              </tr>
-            </tbody>
-          </table>
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
+          <div>
+            <h2 class="card-title" style="margin-bottom: 0.25rem;">🕒 The Triple-Schedule Blueprint</h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">
+              Calibrated daily pacing templates engineered to respect the Splanchnic Blood-Shunting Law, mechanoreceptor digestion gaps, and culinary chemistry synergies.
+            </p>
+          </div>
+          <span class="badge" style="background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan); border: 1px solid var(--accent-cyan);">Module 4 Suite</span>
+        </div>
+
+        <!-- Schedule Switcher Pills -->
+        <div class="schedule-pills" role="tablist" aria-label="Daily Schedule Templates">
+          <button class="schedule-pill active" role="tab" id="sched-tab-a" aria-selected="true" aria-controls="schedule-view-a" data-schedule="schedA">🌟 Schedule A: The Gold Standard (3+2 Engine)</button>
+          <button class="schedule-pill" role="tab" id="sched-tab-b" aria-selected="false" aria-controls="schedule-view-b" data-schedule="schedB">🏢 Schedule B: 3 Dense Meals (Zero Snacking)</button>
+          <button class="schedule-pill" role="tab" id="sched-tab-c" aria-selected="false" aria-controls="schedule-view-c" data-schedule="schedC">🌙 Schedule C: Flexible / Late-Waking (10:30 AM Wake)</button>
+        </div>
+
+        <!-- Schedule A View -->
+        <div id="schedule-view-a" class="schedule-view">
+          <div style="background: rgba(56, 189, 248, 0.08); border-left: 3px solid var(--accent-cyan); padding: 0.85rem 1.25rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.88rem;">
+            <strong>Schedule A Focus</strong>: The Gold Standard baseline for high-leverage hardgainers. Divides calories across 3 moderate whole-food meals and 2 fast-clearing liquid calorie shakes, eliminating early satiety.
+          </div>
+          <div class="table-container">
+            <table>
+              <colgroup>
+                <col style="width: 14%;">
+                <col style="width: 18%;">
+                <col style="width: 48%;">
+                <col style="width: 20%;">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>Activity / Meal</th>
+                  <th>Exact Menu & Instructions</th>
+                  <th>Calories & Protein</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>07:30 AM</strong></td>
+                  <td>Morning Awakening</td>
+                  <td>1 glass warm water + 8 soaked Munakka + 6 peeled almonds<br><small style="color: var(--accent-cyan);">🌰 Phytase Activation &bull; Mineral Unbinding</small></td>
+                  <td>~ 100 kcal | 2g P</td>
+                </tr>
+                <tr>
+                  <td><strong>08:15 AM</strong></td>
+                  <td>Appetite Primer</td>
+                  <td>50 ml warm water + ginger sliver + lemon drop + Kala Namak<br><small style="color: var(--accent-emerald);">🌿 Carminative Antral Priming &bull; Phase III MMC</small></td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td><strong>08:30 AM</strong></td>
+                  <td><strong>Breakfast</strong></td>
+                  <td>3 whole eggs (firm white, velvety runny yolk in 1 tsp ghee) + 2 parathas / bread<br><small style="color: var(--accent-emerald);">🍳 91% Protein (Thermal Gradient) &bull; 🦴 D3/K2 Fat Shuttling</small></td>
+                  <td>~ 450 kcal | 22g P</td>
+                </tr>
+                <tr>
+                  <td><strong>11:30 AM</strong></td>
+                  <td>Mid-Morning Snack</td>
+                  <td>1 bowl fresh curd (dahi) with 1 firm banana or 4 dates + roasted chana<br><small style="color: var(--accent-teal);">🌱 Synbiotic Microflora Pairing &bull; Villi Expansion</small></td>
+                  <td>~ 220 kcal | 7g P</td>
+                </tr>
+                <tr>
+                  <td><strong>01:30 PM</strong></td>
+                  <td><strong>Lunch</strong></td>
+                  <td>1.5 katori white rice + thick dal in ghee + 120g chicken/mutton curry + squeeze 1/2 lemon<br><small style="color: #22c55e;">🍋 +Vit C Iron Multiplier (+300-400%) &bull; 🍚 Retrograded RS3</small></td>
+                  <td>~ 620 kcal | 32g P</td>
+                </tr>
+                <tr>
+                  <td><strong>01:50 PM</strong></td>
+                  <td>Post-Meal Stroll</td>
+                  <td>100–200 slow steps inside house + 1 tab Liv.52 DS / Aristozyme</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td><strong>05:30 PM</strong></td>
+                  <td><strong>Power Shake</strong></td>
+                  <td><strong>Desi Power Bulk Shake</strong> (Milk, 2 bananas, 2 tbsp PB, 4 dates + 3–5g Creatine)<br><small style="color: var(--accent-cyan);">⚡ Insulin-CreaT Vector (+20-30% Intramuscular Saturation)</small></td>
+                  <td>~ 680 kcal | 24g P</td>
+                </tr>
+                <tr>
+                  <td><strong>06:30 PM</strong></td>
+                  <td><strong>Home Workout</strong></td>
+                  <td>35–45 minutes beginner calisthenics (Window 6: Peak Circadian Core Temp & Grip Torque)</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td><strong>08:30 PM</strong></td>
+                  <td><strong>Dinner</strong></td>
+                  <td>2 soft rotis (light ghee) + chicken/mutton or egg curry + cooked tomato-ghee sabzi<br><small style="color: #ef4444;">🍅 +Ghee Carotenoid Extraction (+400% Lycopene)</small></td>
+                  <td>~ 520 kcal | 28g P</td>
+                </tr>
+                <tr>
+                  <td><strong>10:30 PM</strong></td>
+                  <td><strong>Bedtime Golden Milk Triad</strong></td>
+                  <td>1 cup (200ml) warm whole milk + 1 pinch organic turmeric + <strong>1 pinch freshly cracked black pepper</strong> + 1 tsp pure Desi Ghee + 300mg KSM-66 Ashwagandha<br><small style="color: #ef4444;">🌶️ Piperine Glucuronidation Blockade (+2,000% Curcumin Boost) &bull; 🧈 Ghee Micelle Carrier</small></td>
+                  <td>~ 180 kcal | 6g P</td>
+                </tr>
+                <tr style="background: rgba(34, 197, 94, 0.12);">
+                  <td colspan="3"><strong>DAILY ACCUMULATION</strong></td>
+                  <td><strong style="color: #22c55e;">~ 2770 kcal | 121g P</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Schedule B View -->
+        <div id="schedule-view-b" class="schedule-view" style="display: none;">
+          <div style="background: rgba(245, 158, 11, 0.08); border-left: 3px solid #f59e0b; padding: 0.85rem 1.25rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.88rem;">
+            <strong>Schedule B Focus</strong>: The 3 Dense Meals Adaptation for busy workdays, meetings, or travel where daytime liquid shake blending is impossible. Enforces a 4-hour Splanchnic Digestion Window before training.
+          </div>
+          <div class="table-container">
+            <table>
+              <colgroup>
+                <col style="width: 14%;">
+                <col style="width: 18%;">
+                <col style="width: 48%;">
+                <col style="width: 20%;">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>Activity / Meal</th>
+                  <th>Exact Menu & Instructions</th>
+                  <th>Calories & Protein</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>08:30 AM</strong></td>
+                  <td><strong>Breakfast</strong></td>
+                  <td>3 whole eggs in 1 tbsp ghee with onions/tomatoes + 2 thick parathas + 1 glass whole milk blended with 1 banana & 2 tbsp peanut butter</td>
+                  <td>~ 750 kcal | 34g P</td>
+                </tr>
+                <tr>
+                  <td><strong>01:30 PM</strong></td>
+                  <td><strong>Lunch</strong></td>
+                  <td>2 katori cooked white rice + 1 katori thick dal in 1 tbsp ghee + 150g chicken/mutton curry + 1 cup full-fat curd + squeeze 1/2 fresh lemon + 10m stroll</td>
+                  <td>~ 850 kcal | 42g P</td>
+                </tr>
+                <tr>
+                  <td><strong>05:30 PM</strong></td>
+                  <td><strong>Home Workout</strong></td>
+                  <td>Scheduled 4 hours post-lunch, respecting Splanchnic Blood Shunting & Window 6 Golden Anabolic Window</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td><strong>08:30 PM</strong></td>
+                  <td><strong>Dinner</strong></td>
+                  <td>3 soft rotis brushed with ghee + 150g chicken/mutton or 120g paneer curry + 1 bowl cooked sabzi + 4 dates for dessert</td>
+                  <td>~ 750 kcal | 38g P</td>
+                </tr>
+                <tr>
+                  <td><strong>10:30 PM</strong></td>
+                  <td><strong>Bedtime Golden Milk Triad</strong></td>
+                  <td>1 cup warm whole milk + 1 pinch turmeric + 1 pinch freshly cracked black pepper (piperine hack for +2,000% curcumin absorption) + 1 tsp pure Desi Ghee + 300mg KSM-66 Ashwagandha</td>
+                  <td>~ 180 kcal | 6g P</td>
+                </tr>
+                <tr style="background: rgba(34, 197, 94, 0.12);">
+                  <td colspan="3"><strong>DAILY ACCUMULATION</strong></td>
+                  <td><strong style="color: #22c55e;">~ 2530 kcal | 120g P</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Schedule C View -->
+        <div id="schedule-view-c" class="schedule-view" style="display: none;">
+          <div style="background: rgba(168, 85, 247, 0.08); border-left: 3px solid #a855f7; padding: 0.85rem 1.25rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.88rem;">
+            <strong>Schedule C Focus</strong>: The Flexible / Late-Waking Routine for weekends or shift workers sleeping late (01:00 AM) and waking at 10:00–10:30 AM. Preserves caloric surplus without digestive distress.
+          </div>
+          <div class="table-container">
+            <table>
+              <colgroup>
+                <col style="width: 14%;">
+                <col style="width: 18%;">
+                <col style="width: 48%;">
+                <col style="width: 20%;">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>Activity / Meal</th>
+                  <th>Exact Menu & Instructions</th>
+                  <th>Calories & Protein</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>10:30 AM</strong></td>
+                  <td>Wake Up</td>
+                  <td>Warm water + 8 soaked Munakka & 6 peeled almonds</td>
+                  <td>~ 100 kcal | 2g P</td>
+                </tr>
+                <tr>
+                  <td><strong>11:00 AM</strong></td>
+                  <td><strong>Brunch (Meal 1)</strong></td>
+                  <td>3 whole eggs (soft yolks, firm whites) + 2 parathas + 1 glass whole milk</td>
+                  <td>~ 600 kcal | 28g P</td>
+                </tr>
+                <tr>
+                  <td><strong>02:30 PM</strong></td>
+                  <td><strong>Midday Shake (Meal 2)</strong></td>
+                  <td>Desi Power Bulk Shake (Milk, 2 bananas, 2 tbsp PB, dates + 3–5g Creatine)</td>
+                  <td>~ 680 kcal | 24g P</td>
+                </tr>
+                <tr>
+                  <td><strong>05:30 PM</strong></td>
+                  <td><strong>Pre-Workout (Meal 3)</strong></td>
+                  <td>2 boiled potatoes mashed with curd and roasted cumin, or 2 rotis with dal/chicken</td>
+                  <td>~ 400 kcal | 14g P</td>
+                </tr>
+                <tr>
+                  <td><strong>06:30 PM</strong></td>
+                  <td><strong>Home Workout</strong></td>
+                  <td>Home Calisthenics Session (Window 6 Shifted Golden Window — fully fueled by Meal 3)</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td><strong>08:30 PM</strong></td>
+                  <td><strong>Dinner (Meal 4)</strong></td>
+                  <td>2–3 soft rotis + rice + chicken/mutton curry + salad with olive oil/lemon</td>
+                  <td>~ 650 kcal | 32g P</td>
+                </tr>
+                <tr>
+                  <td><strong>11:30 PM</strong></td>
+                  <td><strong>Late-Night Golden Milk Triad</strong></td>
+                  <td>1 glass warm whole milk + 1 pinch turmeric + 1 pinch freshly cracked black pepper (+2,000% curcumin boost) + 1 tsp Desi Ghee + 300mg Ashwagandha + 4 dates</td>
+                  <td>~ 350 kcal | 8g P</td>
+                </tr>
+                <tr style="background: rgba(34, 197, 94, 0.12);">
+                  <td colspan="3"><strong>DAILY ACCUMULATION</strong></td>
+                  <td><strong style="color: #22c55e;">~ 2780 kcal | 120g P</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </section>
@@ -2676,6 +2842,38 @@
         });
       } catch (err) {
         console.error("Workout phase switcher error:", err);
+      }
+
+      // Triple Schedules Switcher Bootloader
+      try {
+        const schedulePills = document.querySelectorAll(".schedule-pill");
+        const scheduleViews = {
+          schedA: document.getElementById("schedule-view-a"),
+          schedB: document.getElementById("schedule-view-b"),
+          schedC: document.getElementById("schedule-view-c")
+        };
+
+        schedulePills.forEach(pill => {
+          pill.addEventListener("click", () => {
+            const sched = pill.getAttribute("data-schedule");
+            if (!sched || !scheduleViews[sched]) return;
+
+            schedulePills.forEach(p => {
+              p.classList.remove("active");
+              p.setAttribute("aria-selected", "false");
+            });
+            pill.classList.add("active");
+            pill.setAttribute("aria-selected", "true");
+
+            Object.keys(scheduleViews).forEach(k => {
+              if (scheduleViews[k]) {
+                scheduleViews[k].style.display = (k === sched) ? "block" : "none";
+              }
+            });
+          });
+        });
+      } catch (err) {
+        console.error("Schedule switcher bootloader error:", err);
       }
 
       // 4. Interactive Habit Tracker & LocalStorage Bootloader

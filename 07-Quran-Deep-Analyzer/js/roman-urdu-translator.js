@@ -24357,6 +24357,10 @@
 
       // Check for Arabic/Urdu unicode characters
       if (/[\u0600-\u06FF]/.test(clean)) {
+        // Check if query is mixed script (contains both Arabic/Urdu script and Latin letters)
+        if (/[a-zA-Z]/.test(clean)) {
+          return 'mixed_urdu';
+        }
         // Distinct Urdu characters: ٹ ڈ ڑ ں ے ھ چ پ گ ژ
         if (/[ٹڈڑںےھچپگژ]/.test(clean)) {
           return 'urdu';
@@ -24458,26 +24462,38 @@
      */
     transliteratePhrase(phrase) {
       if (!phrase) return '';
-      const cleanNorm = phrase.toLowerCase().trim().replace(/[^a-z0-9\s-]/g, ' ').replace(/\s+/g, ' ');
+      const rawTrim = phrase.trim();
 
-      // 1. Direct Quranic phrase match
-      if (QURANIC_EXACT_MAP.has(cleanNorm)) {
-        return QURANIC_EXACT_MAP.get(cleanNorm).urdu;
+      // If purely Latin/English keyboard characters, check exact & skeleton dictionaries
+      if (!/[\u0600-\u06FF]/.test(rawTrim)) {
+        const cleanNorm = rawTrim.toLowerCase().replace(/[^a-z0-9\s-]/g, ' ').replace(/\s+/g, ' ');
+        // 1. Direct Quranic phrase match
+        if (QURANIC_EXACT_MAP.has(cleanNorm)) {
+          return QURANIC_EXACT_MAP.get(cleanNorm).urdu;
+        }
+        // 2. Consonant skeleton match for multi-word phrases (typo tolerance)
+        const skel = getConsonantSkeleton(cleanNorm);
+        if (skel && QURANIC_PHRASE_SKELETON_MAP.has(skel)) {
+          return QURANIC_PHRASE_SKELETON_MAP.get(skel)[0].urdu;
+        }
       }
 
-      // 2. Consonant skeleton match for multi-word phrases (typo tolerance)
-      const skel = getConsonantSkeleton(cleanNorm);
-      if (skel && QURANIC_PHRASE_SKELETON_MAP.has(skel)) {
-        return QURANIC_PHRASE_SKELETON_MAP.get(skel)[0].urdu;
-      }
-
-      // 3. Fallback: transliterate token by token
-      const tokens = phrase.trim().split(/(\s+|[^a-zA-Z0-9_-]+)/);
+      // 3. Token-by-token transliteration (supporting pure Roman Urdu, pure Urdu, and mixed-script)
+      const tokens = rawTrim.split(/(\s+)/);
       return tokens.map(tok => {
-        if (!tok || /^\s+$/.test(tok) || /^[^a-zA-Z0-9_-]+$/.test(tok)) {
+        if (!tok || /^\s+$/.test(tok)) {
           return tok;
         }
-        return this.transliterateWord(tok).urdu;
+        // If token is already in Arabic/Urdu script, preserve it as-is!
+        if (/[\u0600-\u06FF]/.test(tok)) {
+          return tok;
+        }
+        // If token has Latin letters, transliterate using lexicon / phonetic rules
+        if (/[a-zA-Z]/.test(tok)) {
+          const res = this.transliterateWord(tok);
+          return res && res.urdu ? res.urdu : tok;
+        }
+        return tok;
       }).join('');
     },
 
@@ -24493,7 +24509,9 @@
       const cleanNorm = raw.toLowerCase().replace(/[^a-z0-9\s-]/g, ' ').trim().replace(/\s+/g, ' ');
 
       // Language identification badge
-      if (lang === 'roman_urdu') {
+      if (lang === 'mixed_urdu') {
+        pills.push({ type: 'lang', label: '🌐 Mixed Roman / Urdu', text: 'mixed_urdu' });
+      } else if (lang === 'roman_urdu') {
         pills.push({ type: 'lang', label: '🌐 Roman Urdu', text: 'roman_urdu' });
       } else if (lang === 'english') {
         pills.push({ type: 'lang', label: '🔤 English', text: 'english' });
@@ -24533,6 +24551,8 @@
       let candidateUrdu = '';
       if (lang === 'urdu') {
         candidateUrdu = raw;
+      } else if (lang === 'mixed_urdu') {
+        candidateUrdu = this.transliteratePhrase(raw);
       } else if (lang === 'english' && lexicalEntry && lexicalEntry.ur) {
         candidateUrdu = lexicalEntry.ur;
       } else if (lexicalEntry && lexicalEntry.ur && !raw.includes(' ')) {
@@ -24684,7 +24704,7 @@
       const finalPills = langBadge ? [langBadge, ...urduPills] : urduPills;
 
       return {
-        detectedLang: (lang === 'roman_urdu') ? 'Roman Urdu' : (lang === 'english' ? 'English' : 'Urdu'),
+        detectedLang: (lang === 'mixed_urdu') ? 'Mixed Roman / Urdu' : ((lang === 'roman_urdu') ? 'Roman Urdu' : (lang === 'english' ? 'English' : 'Urdu')),
         langCode: lang,
         urduScript: primaryUrduScript,
         pills: finalPills,
