@@ -169,40 +169,52 @@ header.app-header {
   white-space: nowrap;
 }
 
-/* Tier 2: Dedicated Navigation Strip */
+/* Tier 2: Dedicated Navigation Strip — Single-Row Smooth Horizontal Scroll Ribbon */
 nav.app-nav,
 nav.app-nav-tier {
-  display: flex;
+  display: flex !important;
   align-items: center;
   justify-content: flex-start;
-  flex-wrap: wrap;
-  gap: 6px 8px;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  gap: 6px;
   width: 100%;
-  padding: 6px 8px;
-  background: rgba(15, 20, 32, 0.75);
+  height: 40px !important;
+  min-height: 40px !important;
+  padding: 3px 8px;
+  background: rgba(15, 20, 32, 0.85);
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-subtle);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+}
+nav.app-nav::-webkit-scrollbar,
+nav.app-nav-tier::-webkit-scrollbar {
+  display: none !important;
 }
 
 .nav-tab-btn {
   background: transparent;
   color: var(--text-muted);
-  border: none;
+  border: 1px solid transparent;
   border-radius: var(--radius-full);
-  padding: 6px 14px;
-  font-size: 0.82rem;
+  padding: 4px 12px;
+  font-size: 0.80rem;
   font-weight: 600;
   cursor: pointer;
   white-space: nowrap;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 6px;
-  min-height: 38px;
+  gap: 5px;
+  min-height: 32px;
+  height: 32px;
   touch-action: manipulation;
   user-select: none;
   text-decoration: none;
-  flex-shrink: 0;
+  flex: 0 0 auto !important;
 }
 
 a.nav-tab-btn,
@@ -1012,7 +1024,7 @@ table.analytics-table tbody tr:hover {
 
 .ayah-card {
   content-visibility: auto;
-  contain-intrinsic-size: auto 180px;
+  contain-intrinsic-size: auto 130px;
   contain: layout style;
   will-change: scroll-position;
   transform: translateZ(0);
@@ -1977,7 +1989,7 @@ footer.app-footer {
    ========================================================================== */
 .mutashabihat-cluster-card {
   content-visibility: auto;
-  contain-intrinsic-size: auto 240px;
+  contain-intrinsic-size: auto 130px;
   contain: layout style;
   will-change: scroll-position;
   transform: translateZ(0);
@@ -4973,14 +4985,14 @@ mark.search-highlight {
 /* Luxury High-Density Scripture Ayah Card */
 .search-ayah-card {
   content-visibility: auto;
-  contain-intrinsic-size: auto 180px;
+  contain-intrinsic-size: auto 130px;
   contain: layout style;
   will-change: scroll-position;
   transform: translateZ(0);
   background: rgba(15, 23, 42, 0.75);
   border: 1px solid rgba(212, 175, 55, 0.2);
   border-radius: var(--radius-md);
-  padding: 12px 18px;
+  padding: 10px 14px;
   margin-bottom: 0;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
   transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
@@ -5185,21 +5197,21 @@ mark.search-highlight {
 /* Golden-Ratio Typography Scale */
 .search-ayah-arabic {
   font-family: var(--font-arabic), "Scheherazade New", serif;
-  font-size: 1.7rem;
-  line-height: 1.65;
+  font-size: 1.55rem;
+  line-height: 1.45;
   color: #f8fafc;
   direction: rtl;
   text-align: right;
-  margin: 4px 0 6px 0;
+  margin: 2px 0 4px 0;
   padding: 0;
   word-spacing: 2px;
 }
 
 .search-ayah-english {
-  font-size: 0.94rem;
-  line-height: 1.55;
+  font-size: 0.90rem;
+  line-height: 1.45;
   color: #e2e8f0;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
   font-weight: 400;
 }
 
@@ -5227,17 +5239,17 @@ mark.search-highlight {
 
 /* Ultra-Dense Density Mode (.search-dense-mode) — 4-5 verses visible on screen */
 .search-dense-mode .search-ayah-card {
-  padding: 9px 14px;
+  padding: 10px 14px;
 }
 
 .search-dense-mode .search-ayah-arabic {
-  font-size: 1.52rem;
-  line-height: 1.55;
+  font-size: 1.55rem;
+  line-height: 1.45;
   margin: 2px 0 4px 0;
 }
 
 .search-dense-mode .search-ayah-english {
-  font-size: 0.88rem;
+  font-size: 0.90rem;
   line-height: 1.45;
   margin-bottom: 4px;
 }
@@ -5403,12 +5415,12 @@ mark.search-highlight {
   }
 
   .search-ayah-card {
-    padding: 10px 12px;
+    padding: 10px 14px;
   }
 
   .search-ayah-arabic {
-    font-size: 1.45rem;
-    line-height: 1.6;
+    font-size: 1.55rem;
+    line-height: 1.45;
   }
 
   .search-ayah-urdu {
@@ -5417,8 +5429,8 @@ mark.search-highlight {
   }
 
   .search-ayah-english {
-    font-size: 0.88rem;
-    line-height: 1.5;
+    font-size: 0.90rem;
+    line-height: 1.45;
   }
 
   .search-ayah-card-header {
@@ -7885,74 +7897,179 @@ span[class*="tj-"]:not(.tj-pill) {
   box-shadow: 0 0 10px rgba(251, 191, 36, 0.2);
 }
 
-/* Stacked Dual-Tarjuma Result Card Typography */
+
+/* High-Density 3-Mode Dual-Tarjuma Architecture */
+.search-dual-tarjuma-wrap {
+  width: 100%;
+  margin-top: 6px;
+}
+
+/* Mode 1: Desktop Side-by-Side 2-Column Comparative Grid */
+@media (min-width: 768px) {
+  .search-dual-tarjuma-wrap.layout-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+    align-items: stretch !important;
+  }
+}
+
+/* Mode 2: Compact Stacked View */
+.search-dual-tarjuma-wrap.layout-stack {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+}
+
+/* Mode 3: Tabbed In-Card Switcher */
+.search-dual-tarjuma-wrap.layout-tabbed {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+}
+.search-tarjuma-tabs {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+.tarjuma-tab-pill {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  opacity: 0.55;
+  transition: all 0.15s ease;
+}
+.tarjuma-tab-pill:hover {
+  opacity: 0.85;
+}
+.tarjuma-tab-pill.active {
+  opacity: 1;
+}
+.tarjuma-tab-pill.active .tarjuma-source-badge {
+  box-shadow: 0 0 8px currentColor;
+}
+
+/* Tarjuma Box Styling */
 .search-ayah-urdu {
   position: relative;
-  margin-top: 10px;
-  padding: 10px 14px;
-  border-radius: 8px;
-  background: rgba(15, 23, 42, 0.45);
+  margin-top: 0;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: rgba(15, 23, 42, 0.4);
   font-family: var(--font-urdu, "Jameel Noori Nastaleeq", "Noto Nastaliq Urdu", serif);
-  font-size: 1.25rem;
-  line-height: 2.2;
+  font-size: 1.18rem;
+  line-height: 1.65;
   text-align: right;
   direction: rtl;
+  min-width: 0;
+  box-sizing: border-box;
 }
 .search-ayah-urdu.kanzul-iman {
   border-right: 3px solid #fbbf24;
+  border-left: 1px solid rgba(251, 191, 36, 0.15);
+  border-top: 1px solid rgba(251, 191, 36, 0.12);
+  border-bottom: 1px solid rgba(251, 191, 36, 0.12);
 }
 .search-ayah-urdu.kanzul-irfan {
   border-right: 3px solid #38bdf8;
-  background: rgba(15, 23, 42, 0.35);
+  border-left: 1px solid rgba(56, 189, 248, 0.15);
+  border-top: 1px solid rgba(56, 189, 248, 0.12);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.12);
+  background: rgba(15, 23, 42, 0.45);
 }
 .tarjuma-source-badge {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", sans-serif;
-  font-size: 0.68rem;
+  font-size: 0.66rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  padding: 2px 8px;
+  letter-spacing: 0.4px;
+  padding: 1px 7px;
   border-radius: 4px;
-  margin-left: 0;
   vertical-align: middle;
   direction: ltr;
+  line-height: 1.4;
 }
 .tarjuma-source-badge.iman {
-  background: rgba(251, 191, 36, 0.18);
+  background: rgba(251, 191, 36, 0.15);
   color: #fbbf24;
-  border: 1px solid rgba(251, 191, 36, 0.3);
+  border: 1px solid rgba(251, 191, 36, 0.35);
+}
+.tarjuma-source-badge.irfan {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.35);
 }
 
 .tarjuma-meta-bar {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-bottom: 6px;
+  margin-bottom: 3px;
   direction: ltr;
-  padding-bottom: 4px;
-  border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+  padding: 0;
+  border: none;
 }
 .tarjuma-translator-sub {
-  font-family: var(--font-urdu, "Jameel Noori Nastaleeq", "Noto Nastaliq Urdu", serif);
-  font-size: 0.95rem;
-  color: #94a3b8;
-  direction: rtl;
+  display: none;
 }
 .tarjuma-text {
   display: block;
   font-family: var(--font-urdu, "Jameel Noori Nastaleeq", "Noto Nastaliq Urdu", serif);
-  font-size: 1.25rem;
-  line-height: 2.2;
+  font-size: 1.18rem;
+  line-height: 1.65;
   text-align: right;
   direction: rtl;
+  color: #e2e8f0;
+  margin: 0;
+  padding: 0;
 }
 
-.tarjuma-source-badge.irfan {
-  background: rgba(56, 189, 248, 0.18);
-  color: #38bdf8;
-  border: 1px solid rgba(56, 189, 248, 0.3);
+/* Toolbar Layout Selector Controls */
+.search-layout-strip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(15, 23, 42, 0.6);
+  padding: 2px 4px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
+.search-layout-chip {
+  background: transparent;
+  border: 1px solid transparent;
+  color: #94a3b8;
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.search-layout-chip:hover {
+  color: #f8fafc;
+  background: rgba(255, 255, 255, 0.05);
+}
+.search-layout-chip.active {
+  background: rgba(245, 158, 11, 0.18);
+  border-color: rgba(245, 158, 11, 0.45);
+  color: #fbbf24;
+  font-weight: 700;
+  box-shadow: 0 0 6px rgba(245, 158, 11, 0.2);
+}
+
+/* BiDi Isolation for Transliteration Chips */
+.trans-chip-urdu,
+.trans-chip-variant {
+  direction: rtl;
+  unicode-bidi: plaintext;
+  text-align: right;
+}
+
 .audio-bar-close-btn {
   background: rgba(255, 255, 255, 0.08);
   border: none;
@@ -8053,4 +8170,486 @@ span[class*="tj-"]:not(.tj-pill) {
 
 #search-studio-results {
   transition: opacity 0.15s ease-out;
+}
+
+
+/* ====================================================================
+   🎨 CURATED MULTI-THEME ENGINE (Cyber / OLED Black / Warm Parchment)
+   ==================================================================== */
+
+/* OLED Pure Black Theme (AMOLED Mobile Battery Saver) */
+body[data-theme="oled"] {
+  --bg-base: #000000 !important;
+  --bg-card: #08080a !important;
+  --bg-card-hover: #121216 !important;
+  --bg-glass: rgba(8, 8, 12, 0.95) !important;
+  --border-subtle: rgba(255, 255, 255, 0.14) !important;
+  --border-accent: rgba(212, 175, 55, 0.45) !important;
+  --border-focus: #fbbf24 !important;
+  --text-main: #ffffff !important;
+  --text-muted: #a1a1aa !important;
+  --text-dim: #71717a !important;
+}
+
+body[data-theme="oled"] .mobile-bottom-dock,
+body[data-theme="oled"] .app-header {
+  background: rgba(0, 0, 0, 0.98) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Warm Parchment / Sepia Theme (Gentle Book-Style Reading) */
+body[data-theme="parchment"] {
+  --bg-base: #f7f3e8 !important;
+  --bg-card: #ffffff !important;
+  --bg-card-hover: #fcf9f2 !important;
+  --bg-glass: rgba(255, 255, 255, 0.90) !important;
+  --border-subtle: #e5dec9 !important;
+  --border-accent: #d97706 !important;
+  --border-focus: #b45309 !important;
+  --text-main: #1c1917 !important;
+  --text-muted: #57534e !important;
+  --text-dim: #78716c !important;
+  --accent-gold: #b45309 !important;
+  --accent-gold-glow: rgba(180, 83, 9, 0.15) !important;
+  --accent-cyan: #0284c7 !important;
+  --accent-emerald: #059669 !important;
+  --accent-amber: #d97706 !important;
+}
+
+body[data-theme="parchment"] .app-header,
+body[data-theme="parchment"] .mobile-bottom-dock {
+  background: rgba(247, 243, 232, 0.96) !important;
+  border-color: #e5dec9 !important;
+}
+
+body[data-theme="parchment"] .mobile-dock-btn {
+  color: #78716c !important;
+}
+
+body[data-theme="parchment"] .mobile-dock-btn.active,
+body[data-theme="parchment"] .mobile-dock-btn:hover {
+  color: #b45309 !important;
+}
+
+body[data-theme="parchment"] .ayah-arabic-text,
+body[data-theme="parchment"] .search-ayah-arabic {
+  color: #0c0a09 !important;
+}
+
+body[data-theme="parchment"] .trans-text.urdu,
+body[data-theme="parchment"] .search-ayah-urdu {
+  color: #1c1917 !important;
+  background: #fbf8f0 !important;
+}
+
+body[data-theme="parchment"] .ayah-card,
+body[data-theme="parchment"] .search-ayah-card {
+  background: #ffffff !important;
+  border-color: #e5dec9 !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04) !important;
+}
+
+body[data-theme="parchment"] .search-studio-input-wrap {
+  background: #ffffff !important;
+  border-color: #d6ceb9 !important;
+}
+
+body[data-theme="parchment"] .search-studio-input {
+  color: #1c1917 !important;
+}
+
+/* Header Theme Toggle Button */
+.theme-toggle-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #fbbf24;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.theme-toggle-btn:hover {
+  background: rgba(251, 191, 36, 0.15);
+  border-color: #fbbf24;
+}
+
+body[data-theme="parchment"] .theme-toggle-btn {
+  background: #ffffff;
+  border-color: #d6ceb9;
+  color: #b45309;
+}
+
+/* ====================================================================
+   📱 MOBILE NAVIGATION CONSOLIDATION (Reclaiming 42px Vertical Space)
+   ==================================================================== */
+@media (max-width: 768px) {
+  /* Hide the bulky 12-tab horizontal scrolling ribbon on mobile */
+  .app-nav.app-nav-tier {
+    display: none !important;
+  }
+}
+
+/* Mobile More Tools Bottom Sheet Modal */
+.mobile-more-sheet-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 10000;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.mobile-more-sheet-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-more-sheet-content {
+  width: 100%;
+  max-width: 540px;
+  max-height: 85vh;
+  background: rgba(15, 23, 42, 0.96);
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 20px 20px 0 0;
+  padding: 12px 16px 28px 16px;
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.8);
+  overflow-y: auto;
+  transform: translateY(100%);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-more-sheet-overlay.open .mobile-more-sheet-content {
+  transform: translateY(0);
+}
+
+body[data-theme="oled"] .mobile-more-sheet-content {
+  background: #08080a !important;
+  border-top-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+body[data-theme="parchment"] .mobile-more-sheet-content {
+  background: #ffffff !important;
+  border-top-color: #d6ceb9 !important;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+.mobile-more-sheet-handle {
+  width: 44px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 3px;
+  margin: 0 auto 12px auto;
+}
+
+body[data-theme="parchment"] .mobile-more-sheet-handle {
+  background: #d6ceb9 !important;
+}
+
+.mobile-more-sheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+body[data-theme="parchment"] .mobile-more-sheet-header {
+  border-bottom-color: #e5dec9 !important;
+}
+
+.more-sheet-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+body[data-theme="parchment"] .more-sheet-title-wrap {
+  color: #1c1917 !important;
+}
+
+.more-sheet-close-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: #94a3b8;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.more-sheet-close-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+}
+
+.mobile-more-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.more-tool-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.18s ease;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.more-tool-card:active,
+.more-tool-card:hover {
+  background: rgba(251, 191, 36, 0.12);
+  border-color: rgba(251, 191, 36, 0.35);
+  transform: translateY(-1px);
+}
+
+body[data-theme="parchment"] .more-tool-card {
+  background: #fbf8f0 !important;
+  border-color: #e5dec9 !important;
+}
+
+body[data-theme="parchment"] .more-tool-card:hover {
+  background: #f5eedb !important;
+  border-color: #b45309 !important;
+}
+
+.more-tool-card .tool-icon {
+  font-size: 1.35rem;
+  margin-bottom: 2px;
+}
+
+.more-tool-card .tool-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+body[data-theme="parchment"] .more-tool-card .tool-name {
+  color: #1c1917 !important;
+}
+
+.more-tool-card .tool-desc {
+  font-size: 0.70rem;
+  color: #94a3b8;
+  line-height: 1.25;
+}
+
+body[data-theme="parchment"] .more-tool-card .tool-desc {
+  color: #78716c !important;
+}
+
+/* ====================================================================
+   📖 FLOATING READING CONTROLLER (A- / A+ Scaler & Ayah Jumper)
+   ==================================================================== */
+
+.reading-floating-controller {
+  position: fixed;
+  bottom: 74px;
+  right: 16px;
+  z-index: 9990;
+  display: flex;
+  align-items: center;
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  border-radius: var(--radius-full);
+  padding: 4px 6px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  transition: all 0.25s ease;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+body[data-theme="oled"] .reading-floating-controller {
+  background: rgba(0, 0, 0, 0.92) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+body[data-theme="parchment"] .reading-floating-controller {
+  background: rgba(255, 255, 255, 0.94) !important;
+  border-color: #d6ceb9 !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12) !important;
+}
+
+.floating-ctrl-btn {
+  background: transparent;
+  border: none;
+  color: #fbbf24;
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 6px 10px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.floating-ctrl-btn:hover,
+.floating-ctrl-btn:active {
+  background: rgba(251, 191, 36, 0.2);
+}
+
+body[data-theme="parchment"] .floating-ctrl-btn {
+  color: #b45309 !important;
+}
+
+body[data-theme="parchment"] .floating-ctrl-btn:hover {
+  background: rgba(180, 83, 9, 0.12) !important;
+}
+
+.floating-ctrl-divider {
+  width: 1px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.15);
+  margin: 0 2px;
+}
+
+body[data-theme="parchment"] .floating-ctrl-divider {
+  background: #e5dec9 !important;
+}
+
+/* Quick Ayah Jumper Modal Box */
+.jumper-modal-box {
+  max-width: 420px !important;
+  width: 90% !important;
+}
+
+.jumper-surah-info {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fbbf24;
+  margin-bottom: 12px;
+}
+
+body[data-theme="parchment"] .jumper-surah-info {
+  color: #b45309 !important;
+}
+
+.jumper-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.jumper-input-row label {
+  font-size: 0.82rem;
+  color: #94a3b8;
+  white-space: nowrap;
+}
+
+body[data-theme="parchment"] .jumper-input-row label {
+  color: #57534e !important;
+}
+
+.jumper-number-input {
+  width: 80px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.35);
+  color: #f8fafc;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+body[data-theme="parchment"] .jumper-number-input {
+  background: #ffffff !important;
+  border-color: #d6ceb9 !important;
+  color: #1c1917 !important;
+}
+
+.jumper-submit-btn {
+  padding: 8px 18px;
+  border-radius: 6px;
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  background: rgba(251, 191, 36, 0.18);
+  color: #fbbf24;
+  font-weight: 700;
+  font-size: 0.90rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.jumper-submit-btn:hover {
+  background: #fbbf24;
+  color: #0f172a;
+}
+
+body[data-theme="parchment"] .jumper-submit-btn {
+  background: #b45309 !important;
+  color: #ffffff !important;
+  border-color: #b45309 !important;
+}
+
+.jumper-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.jumper-preset-chip {
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  color: #cbd5e1;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.jumper-preset-chip:hover {
+  background: rgba(251, 191, 36, 0.15);
+  border-color: #fbbf24;
+  color: #fbbf24;
+}
+
+body[data-theme="parchment"] .jumper-preset-chip {
+  background: #fbf8f0 !important;
+  border-color: #e5dec9 !important;
+  color: #57534e !important;
+}
+
+body[data-theme="parchment"] .jumper-preset-chip:hover {
+  background: #f5eedb !important;
+  border-color: #b45309 !important;
+  color: #b45309 !important;
 }

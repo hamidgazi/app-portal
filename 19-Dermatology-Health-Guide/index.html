@@ -369,6 +369,7 @@
       <button class="tab-btn active" data-tab="tab-lips" id="btn-tab-lips">👄 Lips (Cheilitis)</button>
       <button class="tab-btn" data-tab="tab-bacne" id="btn-tab-bacne">🚿 Bacne & Sweat</button>
       <button class="tab-btn" data-tab="tab-joints" id="btn-tab-joints">🌟 Dark Joints & AN</button>
+      <button class="tab-btn" data-tab="tab-hair" id="btn-tab-hair">💇 Hair Protocol</button>
       <button class="tab-btn" data-tab="tab-daily" id="btn-tab-daily">📅 Daily Tracker</button>
       <button class="tab-btn" data-tab="tab-doctor" id="btn-tab-doctor">🩺 Doctor Visit</button>
     </div>
@@ -605,6 +606,69 @@
       </div>
     </section>
 
+    <!-- TAB: HAIR -->
+    <section class="section-view" id="tab-hair">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">💇 Coarse, Hard, Sticky & Frizzy Hair Protocol</div>
+        </div>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;">
+          Thick, coarse hair has a large cortical diameter requiring deep cationic hydration. Because you do not apply hair oil, the 18-MEA protective lipid barrier is stripped, leaving cuticles flared (frizz & roughness), while oxidized scalp sebum creates a sticky, waxy coating.
+        </p>
+
+        <div class="alert-box alert-info">
+          <strong>💡 The Non-Greasy Secret:</strong> You don't need heavy, greasy hair oils. Modern silicone/micro-lipid serums and cationic conditioners give you the softness and slip of oil with <strong>zero greasiness, zero stickiness, and instant 10-second absorption</strong>.
+        </div>
+
+        <h3 style="font-size: 0.95rem; margin: 16px 0 8px; color: var(--accent);">Ranked Solutions & Products:</h3>
+
+        <div class="product-item">
+          <div class="product-header">
+            <span class="product-name">Tresemmé Keratin Smooth / L'Oréal Total Repair 5 Conditioner</span>
+            <span class="product-rank">Rank #1 (Mandatory Core)</span>
+          </div>
+          <div class="product-detail">Cationic surfactants bind to coarse hair keratin, neutralizing static, flattening flared cuticles, and making thick hair soft and pliable.</div>
+          <div class="product-usage">📌 Apply after shampooing from mid-lengths to ends. Leave for 2–3 minutes, rinse with cool water. Never skip!</div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-header">
+            <span class="product-name">Streax Pro / L'Oréal Extraordinary Oil Serum</span>
+            <span class="product-rank">Rank #2 (Oil-Free Slip)</span>
+          </div>
+          <div class="product-detail">Replaces the missing 18-MEA lipid mantle. High-refractive-index micro-silicones coat strands in a weightless silk shield that stops frizz and hardness.</div>
+          <div class="product-usage">📌 Rub 2 to 3 drops between palms and glide through towel-damp hair. Dries non-sticky in 10 seconds.</div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-header">
+            <span class="product-name">Diluted Apple Cider Vinegar (ACV) Acidic Rinse</span>
+            <span class="product-rank">Rank #3 (De-Sticking Reset)</span>
+          </div>
+          <div class="product-detail">Acidity (pH 3.5–4.0) instantly snaps cuticle scales flat, dissolves sticky oxidized sebum films, and creates glass-like slip.</div>
+          <div class="product-usage">📌 Mix 1–2 tbsp ACV in 500ml water. Pour over hair once weekly after washing; rinse with cool water after 1 min.</div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-header">
+            <span class="product-name">Neutrogena Anti-Residue / Paul Mitchell Clarifying Shampoo</span>
+            <span class="product-rank">Rank #4 (Residue Stripper)</span>
+          </div>
+          <div class="product-detail">Cleans away stubborn oxidized sebum and insoluble precipitates that make hair feel waxy and heavy.</div>
+          <div class="product-usage">📌 Use once every 7 to 10 days as a deep clarifying reset wash.</div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-header">
+            <span class="product-name">Ketoconazole 2% Shampoo (Nizoral)</span>
+            <span class="rx-badge">[Prescription / Scalp Care]</span>
+          </div>
+          <div class="product-detail">Eradicates scalp Malassezia yeast (the same fungus behind back acne), eliminating itchy roots and greasy dandruff.</div>
+          <div class="product-usage">📌 Massage into scalp 2x weekly. Leave for 3 to 5 minutes before rinsing.</div>
+        </div>
+      </div>
+    </section>
+
     <!-- TAB 4: DAILY TRACKER -->
     <section class="section-view" id="tab-daily">
       <div class="card">
@@ -652,7 +716,21 @@
               <span class="check-desc">Apply Zinc Oxide 10-20% (Sudocrem/Desitin) or Vaseline between buttock cheeks.</span>
             </div>
           </label>
-<label class="check-item">
+          <label class="check-item">
+            <input type="checkbox" id="chk-hair-cond">
+            <div class="check-content">
+              <span class="check-title">Hair Conditioner (2–3 Minutes)</span>
+              <span class="check-desc">Tresemmé / L'Oréal Conditioner on mid-lengths to ends (rinse with cool water).</span>
+            </div>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" id="chk-hair-serum">
+            <div class="check-content">
+              <span class="check-title">Post-Shower Hair Serum (Non-Greasy)</span>
+              <span class="check-desc">2–3 drops Streax Pro / L'Oréal Serum glided through damp hair. Zero stickiness!</span>
+            </div>
+          </label>
+          <label class="check-item">
             <input type="checkbox" id="chk-am-lips">
             <div class="check-content">
               <span class="check-title">Lip Shield & Hydration</span>
@@ -794,7 +872,7 @@
           const tabBtns = document.querySelectorAll(".tab-btn");
           const views = document.querySelectorAll(".section-view");
           const nextBtn = document.getElementById("btn-next-tab");
-          const tabOrder = ["tab-lips", "tab-bacne", "tab-joints", "tab-daily", "tab-doctor"];
+          const tabOrder = ["tab-lips", "tab-bacne", "tab-joints", "tab-hair", "tab-daily", "tab-doctor"];
 
           function switchTab(targetId) {
             tabBtns.forEach(btn => {
@@ -841,6 +919,8 @@
             "chk-am-urea",
             "chk-am-groin",
             "chk-am-perianal",
+            "chk-hair-cond",
+            "chk-hair-serum",
             "chk-am-lips",
             "chk-pm-sweat",
             "chk-pm-retinoid",

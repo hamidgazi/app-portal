@@ -1,4 +1,69 @@
 /**
+ * ThemeEngine - Curated Multi-Theme Orchestrator
+ * (Cyber / OLED Black / Warm Parchment)
+ */
+const ThemeEngine = {
+  themes: ['cyber', 'oled', 'parchment'],
+  themeIcons: {
+    cyber: '🌙',
+    oled: '🖤',
+    parchment: '📜'
+  },
+  themeLabels: {
+    cyber: 'Cyber',
+    oled: 'OLED',
+    parchment: 'Book'
+  },
+  init() {
+    let saved = 'cyber';
+    try {
+      saved = localStorage.getItem('quran_theme') || 'cyber';
+    } catch(e) {}
+    this.applyTheme(saved);
+  },
+  getTheme() {
+    return document.body.getAttribute('data-theme') || 'cyber';
+  },
+  applyTheme(theme) {
+    if (!this.themes.includes(theme)) theme = 'cyber';
+    document.body.setAttribute('data-theme', theme);
+    try {
+      localStorage.setItem('quran_theme', theme);
+    } catch(e) {}
+    const iconEl = document.getElementById('theme-toggle-icon');
+    const labelEl = document.getElementById('theme-toggle-label');
+    if (iconEl) iconEl.textContent = this.themeIcons[theme] || '🌙';
+    if (labelEl) labelEl.textContent = this.themeLabels[theme] || 'Theme';
+  },
+  toggleNextTheme() {
+    const curr = this.getTheme();
+    const idx = this.themes.indexOf(curr);
+    const next = this.themes[(idx + 1) % this.themes.length];
+    if (window.AudioSFX) window.AudioSFX.playClick();
+    this.applyTheme(next);
+  }
+};
+window.ThemeEngine = ThemeEngine;
+
+// Mobile More Tools Bottom Sheet Controllers
+window.openMobileMoreSheet = function() {
+  const sheet = document.getElementById("mobile-more-sheet");
+  if (sheet) {
+    sheet.style.display = "flex";
+    setTimeout(() => sheet.classList.add("open"), 10);
+    if (window.AudioSFX) window.AudioSFX.playClick();
+  }
+};
+
+window.closeMobileMoreSheet = function() {
+  const sheet = document.getElementById("mobile-more-sheet");
+  if (sheet) {
+    sheet.classList.remove("open");
+    setTimeout(() => { sheet.style.display = "none"; }, 250);
+  }
+};
+
+/**
  * Quran Deep Analyzer - Master Bootloader & State Orchestrator
  * Defensive Component Bootloader Isolation (Workspace Directive 5)
  */
@@ -34,8 +99,17 @@ function switchAppTab(tabName) {
     else if (tabName === "search" && btn.id === "dock-btn-search") btn.classList.add("active");
     else if (tabName === "commands" && btn.id === "dock-btn-commands") btn.classList.add("active");
     else if (tabName === "manners" && btn.id === "dock-btn-manners") btn.classList.add("active");
-    else if (tabName === "studio" && btn.id === "dock-btn-studio") btn.classList.add("active");
+    else if (!["ayahs", "search", "commands", "manners"].includes(tabName) && btn.id === "dock-btn-more") btn.classList.add("active");
   });
+
+  // Automatically close mobile bottom sheet on navigation
+  if (window.closeMobileMoreSheet) window.closeMobileMoreSheet();
+
+  // Floating Reading Controller visibility (Reader view only)
+  const floatCtrl = document.getElementById("reading-floating-controller");
+  if (floatCtrl) {
+    floatCtrl.style.display = (tabName === "ayahs") ? "flex" : "none";
+  }
 
 
   // Auto-collapse telemetry banner on reading tabs to maximize vertical reading area
@@ -136,11 +210,28 @@ function initTabs() {
       switchAppTab("search");
     });
   }
-  const dockStudio = document.getElementById("dock-btn-studio");
-  if (dockStudio) {
-    dockStudio.addEventListener("click", (e) => {
+  const dockMore = document.getElementById("dock-btn-more");
+  if (dockMore) {
+    dockMore.addEventListener("click", (e) => {
       e.preventDefault();
-      switchAppTab("studio");
+      window.openMobileMoreSheet();
+    });
+  }
+
+  const moreCloseBtn = document.getElementById("more-sheet-close");
+  if (moreCloseBtn) {
+    moreCloseBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.closeMobileMoreSheet();
+    });
+  }
+
+  const moreSheetOverlay = document.getElementById("mobile-more-sheet");
+  if (moreSheetOverlay) {
+    moreSheetOverlay.addEventListener("click", (e) => {
+      if (e.target === moreSheetOverlay) {
+        window.closeMobileMoreSheet();
+      }
     });
   }
   const dockCommands = document.getElementById("dock-btn-commands");
@@ -1226,9 +1317,23 @@ function initTelemetryToolbar() {
 }
 
 function bootApp() {
+  // Horizontal mouse-wheel delegation for sleek single-row tab ribbon
+  try {
+    const navTier = document.querySelector('nav.app-nav-tier');
+    if (navTier) {
+      navTier.addEventListener('wheel', (evt) => {
+        if (evt.deltaY !== 0 && navTier.scrollWidth > navTier.clientWidth) {
+          evt.preventDefault();
+          navTier.scrollLeft += evt.deltaY;
+        }
+      }, { passive: false });
+    }
+  } catch(e) {}
+
   console.log("[BOOT] Starting Quran Deep Analyzer bootloader...");
 
   const modules = [
+    { name: "ThemeEngine", init: () => window.ThemeEngine && window.ThemeEngine.init() },
     { name: "AudioSFX", init: () => window.AudioSFX && window.AudioSFX.init() },
     { name: "Tabs", init: () => initTabs() },
     { name: "TelemetryToolbar", init: () => initTelemetryToolbar() },

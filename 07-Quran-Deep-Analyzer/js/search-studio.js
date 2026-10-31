@@ -169,6 +169,8 @@
     activeCategory: 'all',
     activeRevelation: 'all',
     activeTarjuma: 'both',
+    translationLayout: 'grid',
+    cardTabState: new Map(),
     worker: null,
     workerReady: false,
     currentRequestId: 0,
@@ -318,6 +320,34 @@
           });
         });
 
+        // 3-Mode Layout View Selector (Split Grid, Compact Stack, Tabbed)
+        const layoutChips = document.querySelectorAll('.search-layout-chip');
+        layoutChips.forEach((chip) => {
+          chip.addEventListener('click', () => {
+            StudioSound.playClick();
+            layoutChips.forEach((c) => c.classList.remove('active'));
+            chip.classList.add('active');
+            this.translationLayout = chip.dataset.layout || 'grid';
+            try { localStorage.setItem('quran_search_layout', this.translationLayout); } catch(e) {}
+            const curVal = input ? input.value : '';
+            if (curVal && curVal.trim()) {
+              this.executeSearch(curVal);
+            } else {
+              this.renderCelebratedLanding();
+            }
+          });
+        });
+        try {
+          const savedLayout = localStorage.getItem('quran_search_layout');
+          if (savedLayout && ['grid', 'stack', 'tabbed'].includes(savedLayout)) {
+            this.translationLayout = savedLayout;
+            layoutChips.forEach((c) => {
+              if (c.dataset.layout === savedLayout) c.classList.add('active');
+              else c.classList.remove('active');
+            });
+          }
+        } catch(e) {}
+
         // Initial landing display: Celebrated Ayat & Thematic Topics
         this.renderCelebratedLanding();
         this.isInitialized = true;
@@ -445,20 +475,20 @@
         if (pill.type === 'lang') {
           html += `<span class="trans-lang-tag">${this.escapeHtml(pill.label)}</span>`;
         } else if (pill.type === 'urdu') {
-          html += `<button type="button" class="trans-chip-urdu" data-val="${this.escapeHtml(pill.value)}" title="1-Tap Search Urdu">${this.escapeHtml(pill.label)}</button>`;
+          html += `<button type="button" class="trans-chip-urdu" dir="auto" data-val="${this.escapeHtml(pill.value)}" title="1-Tap Search Urdu"><bdi dir="auto">${this.escapeHtml(pill.label)}</bdi></button>`;
         } else if (pill.type === 'english') {
-          html += `<button type="button" class="trans-chip-en" data-val="${this.escapeHtml(pill.value)}" title="1-Tap Search English">${this.escapeHtml(pill.label)}</button>`;
+          html += `<button type="button" class="trans-chip-en" dir="auto" data-val="${this.escapeHtml(pill.value)}" title="1-Tap Search English"><bdi dir="auto">${this.escapeHtml(pill.label)}</bdi></button>`;
         } else if (pill.type === 'arabic') {
-          html += `<button type="button" class="trans-chip-ar" data-val="${this.escapeHtml(pill.value)}" title="1-Tap Search Arabic">${this.escapeHtml(pill.label)}</button>`;
+          html += `<button type="button" class="trans-chip-ar" dir="auto" data-val="${this.escapeHtml(pill.value)}" title="1-Tap Search Arabic"><bdi dir="auto">${this.escapeHtml(pill.label)}</bdi></button>`;
         } else if (pill.type === 'roman') {
-          html += `<button type="button" class="trans-chip-en" data-val="${this.escapeHtml(pill.value)}" title="1-Tap Search Roman">${this.escapeHtml(pill.label)}</button>`;
+          html += `<button type="button" class="trans-chip-en" dir="auto" data-val="${this.escapeHtml(pill.value)}" title="1-Tap Search Roman"><bdi dir="auto">${this.escapeHtml(pill.label)}</bdi></button>`;
         }
       }
 
       if (Array.isArray(data.variants)) {
         for (const v of data.variants.slice(0, 3)) {
           if (v && v !== data.urduScript && v !== data.arabicTerm) {
-            html += `<button type="button" class="trans-chip-variant" data-val="${this.escapeHtml(v)}" title="Filter variant">${this.escapeHtml(v)}</button>`;
+            html += `<button type="button" class="trans-chip-variant" dir="auto" data-val="${this.escapeHtml(v)}" title="Filter variant"><bdi dir="auto">${this.escapeHtml(v)}</bdi></button>`;
           }
         }
       }
@@ -882,6 +912,31 @@
       `;
     },
 
+    switchCardTarjuma(surahId, ayahNum, targetTarjuma) {
+      if (!this.cardTabState) this.cardTabState = new Map();
+      this.cardTabState.set(`${surahId}:${ayahNum}`, targetTarjuma);
+      const wrap = document.getElementById(`tarjuma-wrap-${surahId}-${ayahNum}`);
+      if (!wrap) return;
+      const imanPane = document.getElementById(`tarjuma-pane-iman-${surahId}-${ayahNum}`);
+      const irfanPane = document.getElementById(`tarjuma-pane-irfan-${surahId}-${ayahNum}`);
+      const btnIman = wrap.querySelector('.tarjuma-tab-pill.pill-iman');
+      const btnIrfan = wrap.querySelector('.tarjuma-tab-pill.pill-irfan');
+      if (targetTarjuma === 'iman') {
+        if (imanPane) imanPane.style.display = '';
+        if (irfanPane) irfanPane.style.display = 'none';
+        if (btnIman) btnIman.classList.add('active');
+        if (btnIrfan) btnIrfan.classList.remove('active');
+      } else {
+        if (imanPane) imanPane.style.display = 'none';
+        if (irfanPane) irfanPane.style.display = '';
+        if (btnIman) btnIman.classList.remove('active');
+        if (btnIrfan) btnIrfan.classList.add('active');
+      }
+      if (typeof StudioSound !== 'undefined' && StudioSound.playClick) {
+        StudioSound.playClick();
+      }
+    },
+
     buildDualTarjumaHtml(v, query, isUrduQuery) {
       const urIman = v.urKanzulIman || v.urdu || '';
       const urIrfan = v.urKanzulIrfan || '';
@@ -892,29 +947,69 @@
       const active = this.activeTarjuma || 'both';
       const showIman = active === 'both' || active === 'iman';
       const showIrfan = (active === 'both' || active === 'irfan') && !!urIrfan;
+      const layout = this.translationLayout || 'grid';
 
-      let html = '';
-      if (showIman && urIman) {
+      let layoutClass = 'layout-grid';
+      if (layout === 'stack' || !showIrfan || !showIman) {
+        layoutClass = 'layout-stack';
+      } else if (layout === 'tabbed') {
+        layoutClass = 'layout-tabbed';
+      }
+
+      const cardTabKey = `${v.surahId}:${v.ayahNum}`;
+      const activeCardTab = (this.cardTabState && this.cardTabState.get(cardTabKey)) || 'iman';
+
+      let html = `<div class="search-dual-tarjuma-wrap ${layoutClass}" id="tarjuma-wrap-${v.surahId}-${v.ayahNum}">`;
+
+      if (layout === 'tabbed' && showIman && showIrfan) {
+        // Mode 3: Interactive In-Card Tabbed Switcher
         html += `
-          <div class="search-ayah-urdu kanzul-iman">
-            <div class="tarjuma-meta-bar">
+          <div class="search-tarjuma-tabs" role="tablist">
+            <button type="button" class="tarjuma-tab-pill pill-iman ${activeCardTab === 'iman' ? 'active' : ''}" onclick="window.SearchStudioEngine.switchCardTarjuma(${v.surahId}, ${v.ayahNum}, 'iman')" title="Switch to Kanzul Iman">
+              <span class="tarjuma-source-badge iman" title="Kanzul Iman — Imam Ahmad Raza Khan">Kanzul Iman</span>
+            </button>
+            <button type="button" class="tarjuma-tab-pill pill-irfan ${activeCardTab === 'irfan' ? 'active' : ''}" onclick="window.SearchStudioEngine.switchCardTarjuma(${v.surahId}, ${v.ayahNum}, 'irfan')" title="Switch to Kanzul Irfan">
+              <span class="tarjuma-source-badge irfan" title="Kanzul Irfan — Mufti Muhammad Qasim Qadri">Kanzul Irfan</span>
+            </button>
+          </div>
+          <div class="search-ayah-urdu kanzul-iman" id="tarjuma-pane-iman-${v.surahId}-${v.ayahNum}" style="${activeCardTab === 'iman' ? '' : 'display:none;'}">
+            <div class="tarjuma-meta-bar" style="display:none;">
               <span class="tarjuma-source-badge iman" title="Kanzul Iman — Imam Ahmad Raza Khan">Kanzul Iman</span>
             </div>
             <div class="tarjuma-text">${highlightedIman}</div>
-          </div>`;
-      }
-      if (showIrfan && urIrfan) {
-        html += `
-          <div class="search-ayah-urdu kanzul-irfan">
-            <div class="tarjuma-meta-bar">
+          </div>
+          <div class="search-ayah-urdu kanzul-irfan" id="tarjuma-pane-irfan-${v.surahId}-${v.ayahNum}" style="${activeCardTab === 'irfan' ? '' : 'display:none;'}">
+            <div class="tarjuma-meta-bar" style="display:none;">
               <span class="tarjuma-source-badge irfan" title="Kanzul Irfan — Mufti Muhammad Qasim Qadri">Kanzul Irfan</span>
             </div>
             <div class="tarjuma-text">${highlightedIrfan}</div>
-          </div>`;
+          </div>
+        `;
+      } else {
+        // Mode 1 (Split Grid) & Mode 2 (Compact Stack)
+        if (showIman && urIman) {
+          html += `
+            <div class="search-ayah-urdu kanzul-iman" id="tarjuma-pane-iman-${v.surahId}-${v.ayahNum}">
+              <div class="tarjuma-meta-bar">
+                <span class="tarjuma-source-badge iman" title="Kanzul Iman — Imam Ahmad Raza Khan">Kanzul Iman</span>
+              </div>
+              <div class="tarjuma-text">${highlightedIman}</div>
+            </div>`;
+        }
+        if (showIrfan && urIrfan) {
+          html += `
+            <div class="search-ayah-urdu kanzul-irfan" id="tarjuma-pane-irfan-${v.surahId}-${v.ayahNum}">
+              <div class="tarjuma-meta-bar">
+                <span class="tarjuma-source-badge irfan" title="Kanzul Irfan — Mufti Muhammad Qasim Qadri">Kanzul Irfan</span>
+              </div>
+              <div class="tarjuma-text">${highlightedIrfan}</div>
+            </div>`;
+        }
       }
+
       // Resilient fallback: If nothing rendered but we have Iman translation, show Iman
-      if (!html && urIman) {
-        html = `
+      if (!html.includes('search-ayah-urdu') && urIman) {
+        html += `
           <div class="search-ayah-urdu kanzul-iman">
             <div class="tarjuma-meta-bar">
               <span class="tarjuma-source-badge iman" title="Kanzul Iman — Imam Ahmad Raza Khan">Kanzul Iman</span>
@@ -922,6 +1017,8 @@
             <div class="tarjuma-text">${highlightedIman}</div>
           </div>`;
       }
+
+      html += `</div>`;
       return html;
     },
 

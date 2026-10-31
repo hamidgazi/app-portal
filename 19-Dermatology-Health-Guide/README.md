@@ -4,6 +4,7 @@ A medical-grade, evidence-based dermatological action guide and daily therapeuti
 1. **Exfoliative Cheilitis** (*Chronic peeling, hardening, and crusting lips*).
 2. **Malassezia Folliculitis, Truncal Hyperhidrosis & Retention Hyperkeratosis** (*Back sweating, chest/back acne, and rolled dead-keratin sheets misperceived as dirt*).
 3. **Acanthosis Nigricans & Frictional Melanosis** (*Darkened velvety skin on back, joints, hips, and groin linked to systemic hyperinsulinemia*).
+4. **Clinical Trichology Protocol** (*Coarse, hard, thick, sticky, and frizzy hair restored via cationic conditioning and weightless lipid shields without hair oils*).
 
 ---
 

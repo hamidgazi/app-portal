@@ -160,3 +160,30 @@ PATIENT DISCUSSION SUMMARY FOR ATTENDING PHYSICIAN:
    [ ] Trifarotene (Aklief) 0.005% Cream [Prescription Based] (for truncal cellular remodeling)
    [ ] Tacrolimus 0.03% Ointment [Prescription Based] (for refractory exfoliative cheilitis)
 ```
+
+
+---
+
+## 6. Hair Restoration Checklist & Action Protocol
+
+```
++-------------------------------------------------------------------------------+
+| [ ] HAIR WASH DAY PROTOCOL (Every 2–3 Days)                                   |
++-------------------------------------------------------------------------------+
+  [ ] Step 1: Scalp Cleansing
+      * Mon & Sun: Ketoconazole 2% Shampoo (massage scalp, leave 3-5 min, rinse).
+      * Fri: Clarifying Shampoo (Neutrogena Anti-Residue) to strip sticky oxidized sebum.
+  [ ] Step 2: Cationic Conditioning (MANDATORY FOR THICK/COARSE HAIR)
+      * Squeeze excess water out from hair.
+      * Apply a palm-sized amount of Tresemmé Keratin Smooth / L'Oréal Conditioner
+        from mid-lengths to ends (keep off scalp).
+      * Leave for 2 to 3 minutes, then rinse with lukewarm/cool water.
+  [ ] Step 3: Weekly Acidic Cuticle Closing (Wednesday)
+      * Mix 1 tbsp Apple Cider Vinegar into 500ml water.
+      * Pour over hair after washing, leave for 1 min, rinse with cool water.
+      * Snaps cuticles shut, dissolves stickiness, and provides instant glass slip.
+  [ ] Step 4: Post-Shower Smoothing Shield (EVERY WASH DAY - ZERO OILINESS)
+      * On damp, towel-dried hair, rub 2 to 3 drops of Streax Pro / L'Oréal Serum
+        between your palms and glide through hair.
+      * Dries non-sticky in 10 seconds; keeps thick hair soft, pliable, and frizz-free.
+```
