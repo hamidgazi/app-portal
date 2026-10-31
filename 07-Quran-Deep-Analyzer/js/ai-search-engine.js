@@ -404,10 +404,11 @@
           } else if (normQ && normQ.length >= 2 && normalizeArabicUrdu(cont).includes(normQ)) {
             scores.set(i, (scores.get(i) || 0) + 40.0);
           } else if (urduExpansions.size > 0) {
-            const docUrduNorm = normalizeArabicUrdu(doc.urdu || '');
+            const docImanNorm = normalizeArabicUrdu(doc.urKanzulIman || doc.urdu || '');
+            const docIrfanNorm = normalizeArabicUrdu(doc.urKanzulIrfan || '');
             const docArNorm = normalizeArabicUrdu(doc.arabic || '');
             for (const uq of urduExpansions) {
-              if (docUrduNorm.includes(uq)) {
+              if (docImanNorm.includes(uq) || docIrfanNorm.includes(uq)) {
                 scores.set(i, (scores.get(i) || 0) + 45.0);
                 break;
               } else if (docArNorm.includes(uq)) {
@@ -444,29 +445,33 @@
         const subLower = (doc.subtitle || '').toLowerCase();
         const titLower = (doc.title || '').toLowerCase();
         const contLower = (doc.content || '').toLowerCase();
-        const docUrdu = doc.urdu || '';
-        const docUrduNorm = normalizeArabicUrdu(docUrdu);
+        const docIman = doc.urKanzulIman || doc.urdu || '';
+        const docIrfan = doc.urKanzulIrfan || '';
+        const docImanNorm = normalizeArabicUrdu(docIman);
+        const docIrfanNorm = normalizeArabicUrdu(docIrfan);
         const docArNorm = normalizeArabicUrdu(doc.arabicClean || doc.arabic || '');
 
-        // 1. EXACT MULTI-WORD TARJUMA PHRASE BOOST (+250.0):
-        // When a user searches for a multi-word phrase (e.g. "tumhari auratein" -> "تمہاری عورتیں"),
-        // verses containing the exact sequence in Kanzul Iman shoot straight to Rank #1!
+        // 1. EXACT MULTI-WORD TARJUMA PHRASE BOOST (+300.0):
+        // Evaluates against BOTH Kanzul Iman and Kanzul Irfan!
         if (targetUrduPhrases.length > 0) {
-          // Check exact primary transliterated phrase first
           const primaryUrdu = targetUrduPhrases[0];
-          if (docUrduNorm.includes(primaryUrdu)) {
+          const inIman = docImanNorm.includes(primaryUrdu);
+          const inIrfan = docIrfanNorm.includes(primaryUrdu);
+
+          if (inIman || inIrfan) {
             finalScore += 300.0;
             isExactTarjumaMatch = true;
             matchedSnippet = primaryUrdu;
-            // Boost if phrase appears at the start of the verse
-            if (docUrduNorm.startsWith(primaryUrdu) || docUrduNorm.indexOf(primaryUrdu) < 15) {
+            // Boost if phrase appears at the start of either translation
+            if ((inIman && (docImanNorm.startsWith(primaryUrdu) || docImanNorm.indexOf(primaryUrdu) < 15)) ||
+                (inIrfan && (docIrfanNorm.startsWith(primaryUrdu) || docIrfanNorm.indexOf(primaryUrdu) < 15))) {
               finalScore += 50.0;
             }
           } else {
             // Secondary Quranic phrase variants
             for (let pi = 1; pi < targetUrduPhrases.length; pi++) {
               const uq = targetUrduPhrases[pi];
-              if (docUrduNorm.includes(uq)) {
+              if (docImanNorm.includes(uq) || docIrfanNorm.includes(uq)) {
                 finalScore += 220.0;
                 isExactTarjumaMatch = true;
                 matchedSnippet = uq;
@@ -476,10 +481,13 @@
           }
         }
 
-        // 2. PROXIMITY BOOST (+150.0): All words appear within 3 tokens of each other
+        // 2. PROXIMITY BOOST (+150.0): All words appear in either translation
         if (!isExactTarjumaMatch && targetUrduPhrases.length > 0) {
           const phraseTokens = targetUrduPhrases[0].split(/\s+/);
-          if (phraseTokens.length >= 2 && phraseTokens.every(t => docUrduNorm.includes(t))) {
+          if (phraseTokens.length >= 2 && (
+              phraseTokens.every(t => docImanNorm.includes(t)) ||
+              phraseTokens.every(t => docIrfanNorm.includes(t))
+          )) {
             finalScore += 150.0;
             isProximityMatch = true;
           }
@@ -492,12 +500,12 @@
         // Individual word expansions
         if (normQ && normQ.length >= 2) {
           if (docArNorm.includes(normQ)) finalScore += 35.0;
-          if (docUrduNorm.includes(normQ)) finalScore += 35.0;
+          if (docImanNorm.includes(normQ) || docIrfanNorm.includes(normQ)) finalScore += 35.0;
         }
 
         if (urduExpansions.size > 0 && !isExactTarjumaMatch) {
           for (const uq of urduExpansions) {
-            if (docUrduNorm.includes(uq)) {
+            if (docImanNorm.includes(uq) || docIrfanNorm.includes(uq)) {
               finalScore += 40.0;
               break;
             } else if (docArNorm.includes(uq)) {
@@ -517,7 +525,9 @@
           subtitle: doc.subtitle,
           arabic: doc.arabic || '',               // Authentic vocalized Arabic
           arabicClean: doc.arabicClean || '',     // Unvocalized Arabic
-          urdu: doc.urdu || '',                   // Kanzul Iman Urdu
+          urdu: doc.urdu || '',                   // Primary Urdu
+          urKanzulIman: doc.urKanzulIman || doc.urdu || '', // Kanzul Iman
+          urKanzulIrfan: doc.urKanzulIrfan || '',           // Kanzul Irfan
           surahId: doc.surahId,
           ayahNum: doc.ayahNum,
           surahNameRoman: doc.surahNameRoman || '',
@@ -766,8 +776,9 @@
         const sNameAr = item[3];
         const arVocalized = (item[4] || '').trim();
         const enTrans = (item[5] || '').trim();
-        const urTrans = (item[6] || '').trim();
+        const urIman = (item[6] || '').trim();
         const arClean = (item[7] || arVocalized).trim();
+        const urIrfan = (item[8] || '').trim();
 
         this.index.addDocument({
           categoryType: 'ayahs',
@@ -777,12 +788,14 @@
           subtitle: enTrans,
           arabic: arVocalized,   // Authentic vocalized Arabic text (Zabar, Zer, Pesh, Waqf)
           arabicClean: arClean,  // Clean unvocalized Arabic for internal token indexing
-          urdu: urTrans,         // Authentic Kanzul Iman Urdu translation
+          urdu: urIman,          // Primary Urdu translation
+          urKanzulIman: urIman,  // Authentic Kanzul Iman
+          urKanzulIrfan: urIrfan,// Authentic Kanzul Irfan
           surahId: sId,
           ayahNum: aNum,
           surahNameRoman: sNameRoman,
           surahNameAr: sNameAr,
-          content: `${sNameRoman} ${sNameAr} ${sId}:${aNum} ${arClean} ${enTrans} ${urTrans}`,
+          content: `${sNameRoman} ${sNameAr} ${sId}:${aNum} ${arClean} ${enTrans} ${urIman} ${urIrfan}`,
           action: () => {
             if (window.CorpusEngine) window.CorpusEngine.jumpToAyah(sId, aNum);
           }

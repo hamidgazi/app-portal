@@ -620,7 +620,7 @@
               <span>🎯 Best Match / Exact Tarjuma</span>
               <span class="search-tier-count">(${this.currentExactCount} ${this.currentExactCount === 1 ? 'Verse' : 'Verses'})</span>
             </div>
-            <div class="search-tier-title-ur">بہترین مطابقت • کنز الایمان</div>
+            <div class="search-tier-title-ur">Exact Tarjuma Match</div>
           </div>
         `;
       }
@@ -655,6 +655,8 @@
             arabic: m.arabic || '',
             english: m.subtitle || m.english || '',
             urdu: m.urdu || '',
+            urKanzulIman: m.urKanzulIman || m.urdu || '',
+            urKanzulIrfan: m.urKanzulIrfan || '',
             isExactMatch: isExact
           };
           chunkHtml += this.buildAyahCardHtml(verseObj, query, idx + 1, isExact);
@@ -703,6 +705,7 @@
     buildAyahCardHtml(v, query, rankNum, isExactMatch) {
       // Preserve authentic vocalized Arabic text without regex disruption if searching in Urdu/English
       const isArabicQuery = /[؀-ۿ]/.test(query) && !/[ٹڈڑںےھچپگژ]/.test(query);
+      const isUrduQuery = /[؀-ۿ]/.test(query);
       const rawAr = isArabicQuery ? this.highlightText(v.arabic, query) : (v.arabic || '');
       const highlightedAr = window.WaqfEngine ? window.WaqfEngine.formatArabicWithStopSigns(rawAr, v.ayahNum) : rawAr;
       const highlightedEn = this.highlightText(v.english, query);
@@ -732,7 +735,7 @@
               <button class="search-micro-action analyzer-btn" data-surah="${v.surahId}" data-ayah="${v.ayahNum}" title="Open in Deep Ayah Analyzer">
                 <span>🔍 Analyzer ↗</span>
               </button>
-              <button class="search-micro-action copy-btn" data-surah="${v.surahId}" data-ayah="${v.ayahNum}" data-arabic="${this.escapeAttr(v.arabic)}" data-english="${this.escapeAttr(v.english)}" data-urdu="${this.escapeAttr(v.urdu)}" title="Copy Verse">
+              <button class="search-micro-action copy-btn" data-surah="${v.surahId}" data-ayah="${v.ayahNum}" data-arabic="${this.escapeAttr(v.arabic)}" data-english="${this.escapeAttr(v.english)}" data-urdu="${this.escapeAttr(v.urKanzulIman || v.urdu)}" data-urdu-irfan="${this.escapeAttr(v.urKanzulIrfan || "")}" title="Copy Verse">
                 <span>📋 Copy</span>
               </button>
             </div>
@@ -740,7 +743,7 @@
 
           <div class="search-ayah-arabic">${highlightedAr}</div>
           <div class="search-ayah-english">${highlightedEn}</div>
-          <div class="search-ayah-urdu">${highlightedUr}</div>
+          ${this.buildDualTarjumaHtml(v, query, isUrduQuery)}
 
           <div class="search-tafsir-drawer" id="search-tafsir-${v.surahId}-${v.ayahNum}" style="display: none;">
             <div class="search-tafsir-header">
@@ -756,6 +759,34 @@
           </div>
         </article>
       `;
+    },
+
+    buildDualTarjumaHtml(v, query, isUrduQuery) {
+      const urIman = v.urKanzulIman || v.urdu || '';
+      const urIrfan = v.urKanzulIrfan || '';
+
+      const highlightedIman = isUrduQuery ? this.highlightText(urIman, query) : urIman;
+      const highlightedIrfan = isUrduQuery && urIrfan ? this.highlightText(urIrfan, query) : urIrfan;
+
+      const showIman = this.activeTarjuma === 'both' || this.activeTarjuma === 'iman';
+      const showIrfan = (this.activeTarjuma === 'both' || this.activeTarjuma === 'irfan') && urIrfan;
+
+      let html = '';
+      if (showIman && urIman) {
+        html += `
+          <div class="search-ayah-urdu kanzul-iman">
+            <span class="tarjuma-source-badge iman">Kanzul Iman</span>
+            <span class="tarjuma-text">${highlightedIman}</span>
+          </div>`;
+      }
+      if (showIrfan && urIrfan) {
+        html += `
+          <div class="search-ayah-urdu kanzul-irfan">
+            <span class="tarjuma-source-badge irfan">Kanzul Irfan</span>
+            <span class="tarjuma-text">${highlightedIrfan}</span>
+          </div>`;
+      }
+      return html;
     },
 
     buildGenericCardHtml(m, query, rankNum) {
@@ -814,7 +845,8 @@
           }
           const en = copyBtn.dataset.english || '';
           const ur = copyBtn.dataset.urdu || '';
-          const copyText = `Surah ${sId}:${aNum}\n\n${ar}\n\nEnglish: ${en}\n\nUrdu (Kanzul Iman): ${ur}\n\n(Quran Deep Analyzer)`;
+          const urIrfan = copyBtn.dataset.urduIrfan || '';
+          const copyText = `Surah ${sId}:${aNum}\n\n${ar}\n\nEnglish: ${en}\n\nUrdu (Kanzul Iman): ${ur}\nUrdu (Kanzul Irfan): ${urIrfan}\n\n(Quran Deep Analyzer)`;
           navigator.clipboard.writeText(copyText).then(() => {
             const originalText = copyBtn.innerHTML;
             copyBtn.innerHTML = '<span>✓ Copied!</span>';

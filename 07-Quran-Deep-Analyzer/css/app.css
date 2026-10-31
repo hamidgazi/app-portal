@@ -6063,7 +6063,7 @@ span[class*="tj-"]:not(.tj-pill) {
   justify-content: space-around;
   padding: 0 4px;
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.6);
-  direction: rtl;
+  direction: ltr !important;
 }
 
 @media (min-width: 769px) {
@@ -7602,4 +7602,404 @@ span[class*="tj-"]:not(.tj-pill) {
   white-space: nowrap !important;
   word-break: normal !important;
   hyphens: none !important;
+}
+
+
+/* ==========================================================================
+   MOBILE OVERHAUL & DUAL-TARJUMA STYLES (Directive 5 & Expert Mobile UI)
+   ========================================================================== */
+
+/* 1. Mobile Topbar & Header Protection from Floating Hub Pill */
+@media (max-width: 768px) {
+  .app-header {
+    padding: 8px 10px;
+    max-width: 100vw !important;
+    width: 100% !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+  }
+  .header-inner {
+    max-width: 100% !important;
+    width: 100% !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+  }
+  .header-tier-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-height: 44px;
+  }
+  /* Provide 88px left clearance for the App-Portal floating '← Hub' button */
+  .app-branding {
+    padding-left: 88px !important;
+    gap: 6px;
+    min-width: 0;
+    flex: 1;
+  }
+  .app-branding h1 {
+    font-size: 1.05rem !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.2;
+  }
+  .app-branding p {
+    display: none !important; /* Hide subtitle to preserve clean single line */
+  }
+  .logo-badge {
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 1rem !important;
+    flex-shrink: 0;
+  }
+  .header-tier-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .guide-trigger-btn {
+    padding: 6px 10px !important;
+    font-size: 0.75rem !important;
+    border-radius: var(--radius-full) !important;
+    min-height: 38px;
+  }
+  .guide-trigger-btn .guide-btn-text {
+    display: none; /* Icon-only on narrow screens to prevent horizontal overflow */
+  }
+  .omnisearch-trigger-btn {
+    display: none !important; /* Omnisearch accessible via bottom Search tab */
+  }
+
+  /* 2. Single-Row Smooth Horizontal Scroll Navigation Ribbon (Replaces 280px Grid) */
+  .app-nav.app-nav-tier {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    height: 42px !important;
+    padding: 4px 6px !important;
+    gap: 6px !important;
+    background: rgba(10, 15, 28, 0.95);
+    border-bottom: 1px solid var(--border-subtle);
+    margin-top: 4px;
+  }
+  .app-nav.app-nav-tier::-webkit-scrollbar {
+    display: none;
+  }
+  .app-nav.app-nav-tier .nav-tab-btn {
+    flex: 0 0 auto !important;
+    padding: 6px 12px !important;
+    font-size: 0.80rem !important;
+    border-radius: var(--radius-full) !important;
+    height: 32px !important;
+    min-width: auto !important;
+    white-space: nowrap !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  }
+  .app-nav.app-nav-tier .nav-tab-btn.active {
+    background: rgba(251, 191, 36, 0.15) !important;
+    border-color: rgba(251, 191, 36, 0.45) !important;
+    color: #fbbf24 !important;
+  }
+  .app-nav.app-nav-tier .tab-badge {
+    font-size: 0.65rem !important;
+    padding: 1px 5px !important;
+    margin-left: 4px;
+  }
+
+  /* 3. Non-Intrusive Docked Audio Companion Bar */
+  .audio-companion-bar {
+    position: fixed !important;
+    bottom: calc(56px + env(safe-area-inset-bottom, 0px)) !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    transform: none !important;
+    border-radius: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--border-subtle) !important;
+    background: rgba(7, 10, 18, 0.97) !important;
+    padding: 4px 12px !important;
+    height: 44px !important;
+    z-index: 998 !important;
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.5) !important;
+  }
+  .audio-companion-inner {
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    width: 100%;
+    align-items: center;
+  }
+  .audio-meta-wrap {
+    gap: 6px !important;
+    min-width: 0;
+    flex: 1;
+  }
+  .audio-info-texts {
+    min-width: 0;
+  }
+  .audio-verse-label {
+    font-size: 0.78rem !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .audio-reciter-select {
+    font-size: 0.70rem !important;
+    padding: 1px 4px !important;
+    max-width: 110px;
+  }
+  .audio-controls-wrap {
+    gap: 6px !important;
+    flex-shrink: 0;
+  }
+  .audio-btn {
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 0.85rem !important;
+  }
+  .audio-btn.play-main {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 1rem !important;
+  }
+  .audio-pill-toggles {
+    display: none !important; /* Speed & repeat accessible via long-press or settings on mobile */
+  }
+  .audio-bar-close-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: none;
+    color: #94a3b8;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* 4. Universal Mobile Bottom Dock Ergonomics (Perfect 5-Column Grid) */
+  .mobile-bottom-dock {
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr) !important;
+    height: calc(56px + env(safe-area-inset-bottom, 0px)) !important;
+    padding-bottom: max(6px, env(safe-area-inset-bottom, 0px)) !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+    background: rgba(7, 10, 18, 0.98) !important;
+    border-top: 1px solid rgba(251, 191, 36, 0.25) !important;
+    direction: ltr !important;
+    align-items: center !important;
+  }
+  .mobile-dock-btn {
+    min-height: 48px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 4px 1px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    touch-action: manipulation;
+    box-sizing: border-box !important;
+  }
+  .mobile-dock-icon {
+    font-size: 1.15rem !important;
+    line-height: 1 !important;
+  }
+  .mobile-dock-label {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", sans-serif !important;
+    font-size: 0.62rem !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.2px !important;
+    text-transform: capitalize !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 100% !important;
+    text-align: center !important;
+  }
+
+  /* Search Studio Mobile Viewport Clearance */
+  .search-studio-container {
+    padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  .search-hero-row-sub {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+  }
+}
+
+/* 5. Dual-Tarjuma Selector Strip & Badges */
+.search-tarjuma-strip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding: 2px 0;
+}
+.search-tarjuma-strip::-webkit-scrollbar {
+  display: none;
+}
+.search-tarjuma-chip {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #94a3b8;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  touch-action: manipulation;
+}
+.search-tarjuma-chip:hover {
+  border-color: rgba(251, 191, 36, 0.4);
+  color: #f8fafc;
+}
+.search-tarjuma-chip.active {
+  background: rgba(251, 191, 36, 0.18);
+  border-color: #fbbf24;
+  color: #fbbf24;
+  box-shadow: 0 0 10px rgba(251, 191, 36, 0.2);
+}
+
+/* Stacked Dual-Tarjuma Result Card Typography */
+.search-ayah-urdu {
+  position: relative;
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.45);
+  font-family: var(--font-urdu, "Jameel Noori Nastaleeq", "Noto Nastaliq Urdu", serif);
+  font-size: 1.25rem;
+  line-height: 2.2;
+  text-align: right;
+  direction: rtl;
+}
+.search-ayah-urdu.kanzul-iman {
+  border-right: 3px solid #fbbf24;
+}
+.search-ayah-urdu.kanzul-irfan {
+  border-right: 3px solid #38bdf8;
+  background: rgba(15, 23, 42, 0.35);
+}
+.tarjuma-source-badge {
+  display: inline-block;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-left: 8px;
+  vertical-align: middle;
+  direction: ltr;
+}
+.tarjuma-source-badge.iman {
+  background: rgba(251, 191, 36, 0.18);
+  color: #fbbf24;
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+.tarjuma-source-badge.irfan {
+  background: rgba(56, 189, 248, 0.18);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+.audio-bar-close-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: #94a3b8;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+.audio-bar-close-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+/* Mobile Viewport Overflow Protection & Search Studio Ergonomics */
+@media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+    width: 100% !important;
+  }
+  .app-container, .search-studio-container, .tab-panel {
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+  }
+  .search-hero-row-main {
+    display: grid !important;
+    grid-template-columns: 1fr auto !important;
+    gap: 8px !important;
+  }
+  .search-studio-input-wrap {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  .search-studio-ask-btn {
+    grid-column: 1 / 2 !important;
+    padding: 6px 12px !important;
+    font-size: 0.80rem !important;
+  }
+  .search-density-btn {
+    display: none !important; /* Auto high-density on mobile */
+  }
+  .search-studio-settings-btn {
+    grid-column: 2 / 3 !important;
+    padding: 6px 10px !important;
+  }
+  .search-tier-title-ur {
+    display: none !important; /* Left title is sufficient and prevents horizontal overflow */
+  }
+  .search-results-tier-header {
+    padding: 8px 12px !important;
+    font-size: 0.82rem !important;
+  }
+  .search-ayah-card-header {
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+  }
+  .search-ayah-meta-left {
+    flex-wrap: wrap !important;
+    gap: 4px !important;
+  }
+  .search-ayah-meta-right {
+    margin-top: 4px;
+    width: 100%;
+    justify-content: flex-end;
+  }
 }

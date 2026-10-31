@@ -44,7 +44,19 @@
     isPlaying: false,
     isInitialized: false,
 
+        dismissBar() {
+      const bar = document.getElementById('floating-audio-companion');
+      if (bar) bar.style.display = 'none';
+      if (window.AudioSFX && typeof window.AudioSFX.playClick === 'function') window.AudioSFX.playClick();
+    },
+
+    showBar() {
+      const bar = document.getElementById('floating-audio-companion');
+      if (bar) bar.style.display = 'flex';
+    },
+
     play(surahId, ayahNum) {
+      this.showBar();
       return this.playAyah(surahId, ayahNum);
     },
 
@@ -246,6 +258,7 @@
         bar.className = 'audio-companion-bar';
         document.body.appendChild(bar);
       }
+      bar.style.display = this.isPlaying ? 'flex' : 'none';
 
       bar.innerHTML = `
         <div class="audio-companion-inner">
@@ -277,6 +290,8 @@
               <span id="audio-speed-label">${this.playbackSpeed}x</span>
             </button>
           </div>
+
+          <button class="audio-bar-close-btn" id="audio-bar-close" onclick="window.AudioTartilCompanion.dismissBar()" title="Dismiss audio player" aria-label="Dismiss audio player">✕</button>
         </div>
       `;
 

@@ -23769,6 +23769,23 @@
   // Extracted across all 6,236 Ayat. Every phrase exists verbatim with real counts.
   // ============================================================================
   const QURANIC_TARJUMA_PHRASES = [
+    // Kanzul Irfan Core Distinct Phrasings
+    {
+      urdu: "سب تعریفیں اللہ کے لئے ہیں",
+      count: 5,
+      surahs: ["1:1", "6:1", "18:1", "34:1", "35:1"],
+      roman: ["sab tareefen allah ke liye hain", "sab tareefen allah ke liye", "sub tareefen", "sab tareefein"],
+      en: ["all praise is for allah", "all praises belong to allah"],
+      priority: 95
+    },
+    {
+      urdu: "تمام جہان والوں کا پالنے والا",
+      count: 42,
+      surahs: ["1:1", "2:131", "5:28", "6:71"],
+      roman: ["tamam jahan walon ka palne wala", "palne wala", "jahan walon ka rab"],
+      en: ["lord of all the worlds", "sustainer of all realms"],
+      priority: 95
+    },
     // Women / Wives / Marriage / Family
     {
       urdu: "تمہاری عورتیں",
@@ -24383,7 +24400,7 @@
       } else if (lang === 'english') {
         pills.push({ type: 'lang', label: '🔤 English', text: 'english' });
       } else if (lang === 'urdu') {
-        pills.push({ type: 'lang', label: '📖 اردو ترجمہ', text: 'urdu' });
+        pills.push({ type: 'lang', label: '📖 Urdu Translation', text: 'urdu' });
       } else {
         pills.push({ type: 'lang', label: '📖 Arabic', text: 'arabic' });
       }

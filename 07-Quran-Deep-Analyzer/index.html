@@ -265,6 +265,21 @@
 
           <!-- Row 2: Unified Micro-Filter Strip + Inline Count Metrics -->
           <div class="search-hero-row-sub">
+            <!-- Dual-Tarjuma Selector Strip -->
+            <div class="search-tarjuma-strip" id="search-tarjuma-selector" role="group" aria-label="Urdu Translation Filter">
+              <button type="button" class="search-tarjuma-chip active" data-tarjuma="both" title="Search both Kanzul Iman &amp; Kanzul Irfan">
+                <span>Both Translations</span>
+              </button>
+              <button type="button" class="search-tarjuma-chip" data-tarjuma="iman" title="Filter to Kanzul Iman (Ala Hazrat)">
+                <span>Kanzul Iman</span>
+              </button>
+              <button type="button" class="search-tarjuma-chip" data-tarjuma="irfan" title="Filter to Kanzul Irfan (Mufti Qasim Qadri)">
+                <span>Kanzul Irfan</span>
+              </button>
+            </div>
+
+            <span class="search-strip-sep"></span>
+
             <div class="search-micro-pills" id="search-category-filters">
               <button class="search-micro-chip active" data-cat="all">All (6,236)</button>
               <button class="search-micro-chip" data-cat="ayahs">Ayat</button>
@@ -2036,23 +2051,23 @@
   <nav class="mobile-bottom-dock" aria-label="Mobile Navigation Dock">
     <button class="mobile-dock-btn active" data-tab="ayahs" id="dock-btn-read">
       <span class="mobile-dock-icon">📖</span>
-      <span class="mobile-dock-label">تلاوت</span>
+      <span class="mobile-dock-label">Read</span>
     </button>
     <button class="mobile-dock-btn" data-tab="search" id="dock-btn-search">
       <span class="mobile-dock-icon">⚡</span>
-      <span class="mobile-dock-label">تلاش</span>
+      <span class="mobile-dock-label">Search</span>
     </button>
     <button class="mobile-dock-btn" data-tab="commands" id="dock-btn-commands">
       <span class="mobile-dock-icon">📜</span>
-      <span class="mobile-dock-label">اوامر</span>
+      <span class="mobile-dock-label">Commands</span>
     </button>
     <button class="mobile-dock-btn" data-tab="manners" id="dock-btn-manners">
       <span class="mobile-dock-icon">🌿</span>
-      <span class="mobile-dock-label">آداب</span>
+      <span class="mobile-dock-label">Manners</span>
     </button>
     <button class="mobile-dock-btn" data-tab="studio" id="dock-btn-studio">
       <span class="mobile-dock-icon">🔬</span>
-      <span class="mobile-dock-label">تحقیق</span>
+      <span class="mobile-dock-label">Analytics</span>
     </button>
   </nav>
 
