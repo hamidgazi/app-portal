@@ -457,7 +457,14 @@
         // Fallback search directly over the 6,236 Ayat bundle
         const qLower = q.toLowerCase();
         for (const v of window.QURAN_AYAT_SEARCH_BUNDLE) {
-          const [sId, aNum, sNameRoman, sNameAr, arClean, enTrans, urTrans] = v;
+          const sId = v[0];
+          const aNum = v[1];
+          const sNameRoman = v[2];
+          const sNameAr = v[3];
+          const arVocalized = v[4] || '';
+          const enTrans = v[5] || '';
+          const urTrans = v[6] || '';
+          const arClean = v[7] || arVocalized;
           if (
             (enTrans && enTrans.toLowerCase().includes(qLower)) ||
             (urTrans && urTrans.includes(q)) ||
@@ -469,7 +476,8 @@
               ayahNum: aNum,
               title: `${sNameRoman} ${sId}:${aNum}`,
               subtitle: enTrans,
-              arabic: arClean,
+              arabic: arVocalized,
+              arabicClean: arClean,
               urdu: urTrans,
               action: () => {
                 if (window.CorpusEngine) window.CorpusEngine.jumpToAyah(sId, aNum);
@@ -584,6 +592,8 @@
       this.currentSearchMatches = matches;
       this.currentSearchQuery = query;
       this.searchRenderedCount = 0;
+      this.currentExactCount = matches.filter(m => m.isExactTarjumaMatch || m.score >= 350).length;
+      this.hasEmittedSimilarHeader = false;
 
       this.renderNextSearchChunk();
       this.bindCardActions(container);
@@ -601,8 +611,39 @@
       if (slice.length === 0) return;
 
       let chunkHtml = '';
+
+      // Emit Tier 1 Header at very beginning if exact Tarjuma matches exist
+      if (startIndex === 0 && this.currentExactCount > 0) {
+        chunkHtml += `
+          <div class="search-results-tier-header best-match">
+            <div class="search-tier-title-left">
+              <span>🎯 Best Match / Exact Tarjuma</span>
+              <span class="search-tier-count">(${this.currentExactCount} ${this.currentExactCount === 1 ? 'Verse' : 'Verses'})</span>
+            </div>
+            <div class="search-tier-title-ur">بہترین مطابقت • کنز الایمان</div>
+          </div>
+        `;
+      }
+
       slice.forEach((m, i) => {
         const idx = startIndex + i;
+        const isExact = !!(m.isExactTarjumaMatch || m.score >= 350);
+
+        // Emit Tier 2 Header right before the first non-exact match
+        if (!isExact && this.currentExactCount > 0 && !this.hasEmittedSimilarHeader) {
+          const similarCount = matches.length - this.currentExactCount;
+          chunkHtml += `
+            <div class="search-results-tier-header similar-verses">
+              <div class="search-tier-title-left">
+                <span>💡 Related & Similar Verses</span>
+                <span class="search-tier-count">(${similarCount} ${similarCount === 1 ? 'Verse' : 'Verses'})</span>
+              </div>
+              <div class="search-tier-title-ur">متعلقہ و مشابہ آیات</div>
+            </div>
+          `;
+          this.hasEmittedSimilarHeader = true;
+        }
+
         if (m.surahId && m.ayahNum) {
           const meta = this.getSurahMeta(m.surahId);
           const verseObj = {
@@ -613,9 +654,10 @@
             rev: meta.type || 'makki',
             arabic: m.arabic || '',
             english: m.subtitle || m.english || '',
-            urdu: m.urdu || ''
+            urdu: m.urdu || '',
+            isExactMatch: isExact
           };
-          chunkHtml += this.buildAyahCardHtml(verseObj, query, idx + 1);
+          chunkHtml += this.buildAyahCardHtml(verseObj, query, idx + 1, isExact);
         } else {
           chunkHtml += this.buildGenericCardHtml(m, query, idx + 1);
         }
@@ -658,8 +700,10 @@
       this.searchObserver.observe(sentinel);
     },
 
-    buildAyahCardHtml(v, query, rankNum) {
-      const rawAr = this.highlightText(v.arabic, query);
+    buildAyahCardHtml(v, query, rankNum, isExactMatch) {
+      // Preserve authentic vocalized Arabic text without regex disruption if searching in Urdu/English
+      const isArabicQuery = /[؀-ۿ]/.test(query) && !/[ٹڈڑںےھچپگژ]/.test(query);
+      const rawAr = isArabicQuery ? this.highlightText(v.arabic, query) : (v.arabic || '');
       const highlightedAr = window.WaqfEngine ? window.WaqfEngine.formatArabicWithStopSigns(rawAr, v.ayahNum) : rawAr;
       const highlightedEn = this.highlightText(v.english, query);
       const highlightedUr = this.highlightText(v.urdu, query);
@@ -667,14 +711,16 @@
         v.rev.toLowerCase() === 'madani'
           ? `<span class="search-rev-badge madani">Madani 🕌</span>`
           : `<span class="search-rev-badge makki">Makki 🕋</span>`;
+      const bestMatchBadge = isExactMatch ? `<span class="search-best-match-badge">🎯 Best Match</span>` : '';
 
       return `
-        <article class="search-ayah-card" id="search-card-${v.surahId}-${v.ayahNum}">
+        <article class="search-ayah-card ${isExactMatch ? 'exact-match' : ''}" id="search-card-${v.surahId}-${v.ayahNum}">
           <div class="search-ayah-card-header">
             <div class="search-ayah-meta-left">
               <span class="search-ayah-coord-badge">[Surah ${v.surahId}:${v.ayahNum}]</span>
               <span class="search-surah-title-badge">${v.surahRoman} (${v.surahAr})</span>
               ${revBadge}
+              ${bestMatchBadge}
               ${rankNum ? `<span class="search-ayah-rank-badge">#${rankNum}</span>` : ''}
             </div>
 

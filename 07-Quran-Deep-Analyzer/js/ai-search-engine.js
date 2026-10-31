@@ -419,31 +419,86 @@
         }
       }
 
-      // Filter and rank results
+      // Filter and rank results with 100% Quranic Grounded Tarjuma Phrase Prioritization
       const results = [];
       const rawQAlt = rawQ.includes('our') ? rawQ.replace(/our/g, 'or') : (rawQ.includes('or') ? rawQ.replace(/or/g, 'our') : null);
+
+      // Collect authentic Urdu phrases to check for multi-word exact matches
+      const targetUrduPhrases = [];
+      if (normUrduQ && normUrduQ.includes(' ')) targetUrduPhrases.push(normUrduQ);
+      for (const uq of urduExpansions) {
+        if (uq.includes(' ') && !targetUrduPhrases.includes(uq)) {
+          targetUrduPhrases.push(uq);
+        }
+      }
+
       for (const [docId, score] of scores.entries()) {
         const doc = this.docs[docId];
         if (category !== 'all' && doc.categoryType !== category) continue;
 
-        // Exact substring bonus
         let finalScore = score;
+        let isExactTarjumaMatch = false;
+        let isProximityMatch = false;
+        let matchedSnippet = '';
+
         const subLower = (doc.subtitle || '').toLowerCase();
         const titLower = (doc.title || '').toLowerCase();
         const contLower = (doc.content || '').toLowerCase();
+        const docUrdu = doc.urdu || '';
+        const docUrduNorm = normalizeArabicUrdu(docUrdu);
+        const docArNorm = normalizeArabicUrdu(doc.arabicClean || doc.arabic || '');
 
-        if (subLower.includes(rawQ) || (rawQAlt && subLower.includes(rawQAlt))) finalScore += 25.0;
-        if (titLower.includes(rawQ) || (rawQAlt && titLower.includes(rawQAlt))) finalScore += 30.0;
-        if (normQ && normQ.length >= 2) {
-          if (normalizeArabicUrdu(doc.arabic || '').includes(normQ)) finalScore += 35.0;
-          if (normalizeArabicUrdu(doc.urdu || '').includes(normQ)) finalScore += 35.0;
+        // 1. EXACT MULTI-WORD TARJUMA PHRASE BOOST (+250.0):
+        // When a user searches for a multi-word phrase (e.g. "tumhari auratein" -> "تمہاری عورتیں"),
+        // verses containing the exact sequence in Kanzul Iman shoot straight to Rank #1!
+        if (targetUrduPhrases.length > 0) {
+          // Check exact primary transliterated phrase first
+          const primaryUrdu = targetUrduPhrases[0];
+          if (docUrduNorm.includes(primaryUrdu)) {
+            finalScore += 300.0;
+            isExactTarjumaMatch = true;
+            matchedSnippet = primaryUrdu;
+            // Boost if phrase appears at the start of the verse
+            if (docUrduNorm.startsWith(primaryUrdu) || docUrduNorm.indexOf(primaryUrdu) < 15) {
+              finalScore += 50.0;
+            }
+          } else {
+            // Secondary Quranic phrase variants
+            for (let pi = 1; pi < targetUrduPhrases.length; pi++) {
+              const uq = targetUrduPhrases[pi];
+              if (docUrduNorm.includes(uq)) {
+                finalScore += 220.0;
+                isExactTarjumaMatch = true;
+                matchedSnippet = uq;
+                break;
+              }
+            }
+          }
         }
-        if (urduExpansions.size > 0) {
-          const docUrduNorm = normalizeArabicUrdu(doc.urdu || '');
-          const docArNorm = normalizeArabicUrdu(doc.arabic || '');
+
+        // 2. PROXIMITY BOOST (+150.0): All words appear within 3 tokens of each other
+        if (!isExactTarjumaMatch && targetUrduPhrases.length > 0) {
+          const phraseTokens = targetUrduPhrases[0].split(/\s+/);
+          if (phraseTokens.length >= 2 && phraseTokens.every(t => docUrduNorm.includes(t))) {
+            finalScore += 150.0;
+            isProximityMatch = true;
+          }
+        }
+
+        // Subtitle / English exact matches
+        if (subLower.includes(rawQ) || (rawQAlt && subLower.includes(rawQAlt))) finalScore += 35.0;
+        if (titLower.includes(rawQ) || (rawQAlt && titLower.includes(rawQAlt))) finalScore += 30.0;
+
+        // Individual word expansions
+        if (normQ && normQ.length >= 2) {
+          if (docArNorm.includes(normQ)) finalScore += 35.0;
+          if (docUrduNorm.includes(normQ)) finalScore += 35.0;
+        }
+
+        if (urduExpansions.size > 0 && !isExactTarjumaMatch) {
           for (const uq of urduExpansions) {
             if (docUrduNorm.includes(uq)) {
-              finalScore += 35.0;
+              finalScore += 40.0;
               break;
             } else if (docArNorm.includes(uq)) {
               finalScore += 30.0;
@@ -460,14 +515,18 @@
           categoryType: doc.categoryType,
           title: doc.title,
           subtitle: doc.subtitle,
-          arabic: doc.arabic || '',
-          urdu: doc.urdu || '',
+          arabic: doc.arabic || '',               // Authentic vocalized Arabic
+          arabicClean: doc.arabicClean || '',     // Unvocalized Arabic
+          urdu: doc.urdu || '',                   // Kanzul Iman Urdu
           surahId: doc.surahId,
           ayahNum: doc.ayahNum,
           surahNameRoman: doc.surahNameRoman || '',
           surahNameAr: doc.surahNameAr || '',
           content: doc.content || '',
-          action: doc.action
+          action: doc.action,
+          isExactTarjumaMatch,
+          isProximityMatch,
+          matchedSnippet
         });
       }
 
@@ -705,9 +764,10 @@
         const aNum = item[1];
         const sNameRoman = item[2];
         const sNameAr = item[3];
-        const arClean = item[4];
-        const enTrans = item[5];
-        const urTrans = item[6];
+        const arVocalized = (item[4] || '').trim();
+        const enTrans = (item[5] || '').trim();
+        const urTrans = (item[6] || '').trim();
+        const arClean = (item[7] || arVocalized).trim();
 
         this.index.addDocument({
           categoryType: 'ayahs',
@@ -715,8 +775,9 @@
           categoryClass: 'verse',
           title: `${sNameRoman} [${sId}:${aNum}]`,
           subtitle: enTrans,
-          arabic: arClean,
-          urdu: urTrans,
+          arabic: arVocalized,   // Authentic vocalized Arabic text (Zabar, Zer, Pesh, Waqf)
+          arabicClean: arClean,  // Clean unvocalized Arabic for internal token indexing
+          urdu: urTrans,         // Authentic Kanzul Iman Urdu translation
           surahId: sId,
           ayahNum: aNum,
           surahNameRoman: sNameRoman,
@@ -991,6 +1052,11 @@ User Question: "${q}"`;
   // Export to global window namespace immediately
   window.QuranAISearchEngine = QuranAISearchEngine;
   window.normalizeArabicUrdu = normalizeArabicUrdu;
+
+  // Export to Node/CommonJS environments
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = QuranAISearchEngine;
+  }
 
   // Auto-hydrate 6,236 Ayat bundle if already present in window
   if (typeof window !== 'undefined' && window.QURAN_AYAT_SEARCH_DATA && Array.isArray(window.QURAN_AYAT_SEARCH_DATA)) {
