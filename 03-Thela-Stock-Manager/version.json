@@ -1,6 +1,6 @@
 {
-  "version": "3.1.0",
+  "version": "4.0.0",
   "name": "Thela Stock Manager",
-  "updated": "2026-10-26",
-  "changelog": "v3.1.0: Transaction Date Selection & In-Place Transaction Edit Suite: (1) 1-tap Date Selection chips ([Today], [Yesterday]) and [📅 Custom Date] picker ensuring accurate backdated logging, (2) Dedicated AMOLED Cyber/Glass Edit Modal (#modal-edit-tx) accessible via ✏️ Edit buttons across both Main Screen Recent List and 50-Record Drawer, (3) Full 5-field editing (Date, Bag Item, OUT/IN Action, Quantity, Note) with automated differential stock balance math, (4) Google Apps Script webhook in-place updater (action: 'edit') with full backwards-compatible fallback."
+  "updated": "2026-10-31",
+  "changelog": "v4.0.0: POS Cockpit, On-Screen Keypad & Deluxe Haptics Suite: (1) Dual-Cockpit Glance Header with Active Bag Stock and live Today's Activity Pulse (OUT, IN, entries), (2) Integrated On-Screen Numeric Keypad (0-9, clear, backspace, +25, +50, +100, done) eliminating mobile OS keyboard popups, (3) Prominent Selected Quantity Cockpit Badge with custom keypad toggle, (4) Deluxe Haptic Feedback Suite (12ms subtle clicks, chord success pulses, warning buzzes), (5) Smart Party Note with 1-tap clear button (✕) and active chip highlighting, (6) Pulsating neon halos and spring dynamics for immediate physical tactile feedback."
 }

@@ -434,6 +434,45 @@
       box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
     }
 
+    /* Chronobiology Inspector Styles */
+    .chrono-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .chrono-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      touch-action: manipulation;
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+
+    .chrono-pill:hover {
+      background: var(--bg-card-hover);
+      color: var(--text-main);
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+
+    .chrono-pill.active {
+      background: rgba(56, 189, 248, 0.18);
+      color: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+    }
+
     .triage-display {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1959,6 +1998,91 @@
         </div>
       </div>
 
+      <!-- ⏰ Exercise Chronobiology & Timing Inspector -->
+      <div class="card" id="chrono-inspector-card">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
+          <div>
+            <h2 class="card-title" style="margin-bottom: 0.25rem;">⏰ Exercise Chronobiology & Timing Inspector</h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">
+              24-hour circadian training window matrix calibrated for hardgainers (6'0", 57 kg). Tap any time slot below to inspect neuromuscular readiness, splanchnic digestive safety, and pre/post-workout meal protocols.
+            </p>
+          </div>
+          <span class="badge" style="background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan); border: 1px solid rgba(56, 189, 248, 0.3);">Module 5.6 Suite</span>
+        </div>
+
+        <!-- Chrono Timing Pills (10 Windows) -->
+        <div class="chrono-pills" role="tablist">
+          <button class="chrono-pill" data-window="win1">🌅 06:00 AM Fasted</button>
+          <button class="chrono-pill" data-window="win2">🥛 07:30 AM Fueled</button>
+          <button class="chrono-pill" data-window="win3">⚡ 10:00 AM Mid-Morning</button>
+          <button class="chrono-pill" data-window="win4">🍛 01:00 PM Post-Lunch</button>
+          <button class="chrono-pill" data-window="win5">🥱 03:00 PM Slump</button>
+          <button class="chrono-pill active" data-window="win6">⭐ 05:30 PM Golden Window</button>
+          <button class="chrono-pill" data-window="win7">🌙 08:00 PM Early Night</button>
+          <button class="chrono-pill" data-window="win8">⚠️ 10:00 PM Late Night</button>
+          <button class="chrono-pill" data-window="ramadan">🌙 Ramadan / Fasting</button>
+          <button class="chrono-pill" data-window="jummah">🕌 Friday Jummah</button>
+        </div>
+
+        <!-- Dynamic Inspector Display Area -->
+        <div class="chrono-display">
+          <!-- Top Verdict Banner -->
+          <div id="chrono-verdict-box" style="background: rgba(2, 132, 199, 0.15); border-left: 4px solid var(--accent-cyan); padding: 1rem 1.25rem; border-radius: 10px; margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+            <div>
+              <div style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted);" id="chrono-time-label">WINDOW 6: LATE AFTERNOON / EARLY EVENING (04:30 PM – 06:30 PM)</div>
+              <div style="font-size: 1.15rem; font-weight: 700; color: var(--text-main);" id="chrono-verdict-title">⭐ THE GOLDEN WINDOW — MAXIMUM ANABOLIC RECEPTIVITY</div>
+            </div>
+            <div id="chrono-verdict-badge" style="padding: 6px 14px; border-radius: 999px; font-weight: 700; font-size: 0.82rem; background: rgba(56, 189, 248, 0.2); color: var(--accent-cyan); border: 1px solid var(--accent-cyan);">
+              BEST OVERALL (5/5)
+            </div>
+          </div>
+
+          <!-- 4-Card Physiological Telemetry Grid -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 1.25rem;">
+            <div class="chrono-stat-card" style="background: #0d1424; border: 1px solid var(--border-subtle); border-radius: 10px; padding: 1rem;">
+              <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">🌡️ Core Body Temperature</div>
+              <div style="font-size: 1.05rem; font-weight: 700; color: var(--text-main);" id="chrono-temp-stat">Peak (~37.2°C – 37.4°C)</div>
+              <div style="font-size: 0.78rem; color: var(--accent-emerald); margin-top: 4px;" id="chrono-temp-desc">Max tendon elasticity & low injury risk</div>
+            </div>
+            <div class="chrono-stat-card" style="background: #0d1424; border: 1px solid var(--border-subtle); border-radius: 10px; padding: 1rem;">
+              <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">🧬 Cortisol : Testosterone</div>
+              <div style="font-size: 1.05rem; font-weight: 700; color: var(--text-main);" id="chrono-hormone-stat">Highly Anabolic</div>
+              <div style="font-size: 0.78rem; color: var(--accent-emerald); margin-top: 4px;" id="chrono-hormone-desc">Cortisol at daytime low; high androgen sensitivity</div>
+            </div>
+            <div class="chrono-stat-card" style="background: #0d1424; border: 1px solid var(--border-subtle); border-radius: 10px; padding: 1rem;">
+              <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">⚡ Glycogen & Cellular ATP</div>
+              <div style="font-size: 1.05rem; font-weight: 700; color: var(--text-main);" id="chrono-glycogen-stat">100% Saturated</div>
+              <div style="font-size: 0.78rem; color: var(--accent-cyan); margin-top: 4px;" id="chrono-glycogen-desc">Fueled by Breakfast & Lunch carbs</div>
+            </div>
+            <div class="chrono-stat-card" style="background: #0d1424; border: 1px solid var(--border-subtle); border-radius: 10px; padding: 1rem;">
+              <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">🩺 Splanchnic Blood Shunting</div>
+              <div style="font-size: 1.05rem; font-weight: 700; color: var(--text-main);" id="chrono-gut-stat">Optimal Clearance</div>
+              <div style="font-size: 0.78rem; color: var(--accent-emerald); margin-top: 4px;" id="chrono-gut-desc">Zero stomach heaviness, no nausea risk</div>
+            </div>
+          </div>
+
+          <!-- Deep Strategy 2-Column Split: Clinical Mechanism + Pre/Post Nutrition -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.25rem;">
+            <div class="card" style="border-left: 3px solid var(--accent-cyan); margin-bottom: 0;">
+              <h3 style="color: var(--accent-cyan); font-size: 0.95rem; margin-bottom: 0.5rem;">🔬 Physiological Analysis & Hardgainer Dynamics</h3>
+              <div id="chrono-clinical-text" style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+                <p><strong>Peak Neuromuscular Performance</strong>: Core body temperature reaches its diurnal zenith (~37.2°C – 37.4°C), optimizing metabolic enzyme kinetics and nerve conduction velocity. Grip strength and peak isometric torque are at their 24-hour peak.</p>
+                <p style="margin-top: 0.5rem;"><strong>Anabolic Hormonal Ratio</strong>: Cortisol is near baseline, and the Cortisol:Testosterone ratio is at its most anabolic balance. Androgen receptors on skeletal muscle tissue exhibit peak sensitivity.</p>
+                <p style="margin-top: 0.5rem;"><strong>Post-Workout Hyper-Partitioning</strong>: Post-exercise GLUT-4 glucose transporters translocate to muscle cell membranes, shuttling virtually 100% of evening meal carbs and amino acids directly into muscle tissue repair rather than fat.</p>
+              </div>
+            </div>
+            <div class="card" style="border-left: 3px solid var(--accent-emerald); margin-bottom: 0;">
+              <h3 style="color: var(--accent-emerald); font-size: 0.95rem; margin-bottom: 0.5rem;">🥗 Pre/Post Fueling & Digestion Timeline</h3>
+              <div id="chrono-nutrition-text" style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+                <p><strong>Mandatory Digestion Gap</strong>: Allow 3.0 to 3.5 hours after 01:30 PM lunch so gastric motility has completely cleared the stomach before training.</p>
+                <p style="margin-top: 0.5rem;"><strong>Pre-Workout Fuel (05:00 PM — 60m Prior)</strong>: 1 serving <em>Desi Power Bulk Shake</em> (or 2 boiled potatoes mashed with curd or 2 ripe bananas with 1 tbsp peanut butter).</p>
+                <p style="margin-top: 0.5rem;"><strong>Post-Workout Anabolism (08:00 PM – 08:30 PM)</strong>: Complete high-density dinner: 2–3 soft rotis brushed with ghee + chicken/mutton or egg curry + 1 katori thick dal (520+ kcal, 28g protein).</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Zero-Audio Web Audio API Workout Timer -->
       <div class="card">
         <h2 class="card-title">⏱️ Web Audio Rest & Tempo Pacer</h2>
@@ -2518,6 +2642,254 @@
         }
       } catch (err) {
         console.error("Digestive clinic bootloader error:", err);
+      }
+
+      // 6. Exercise Chronobiology & Optimal Timing Inspector Bootloader
+      try {
+        const chronoData = {
+          win1: {
+            timeLabel: "WINDOW 1: EARLY MORNING FASTED (06:00 AM – 07:30 AM)",
+            verdictTitle: "🔴 CATABOLIC HAZARD — CANNIBALIZES MUSCLE TISSUE",
+            badgeText: "WORST (1/5)",
+            badgeBg: "rgba(244, 63, 94, 0.2)",
+            badgeColor: "var(--accent-rose)",
+            boxBg: "rgba(244, 63, 94, 0.12)",
+            boxBorder: "var(--accent-rose)",
+            tempStat: "Nadir (~36.3°C – 36.5°C)",
+            tempDesc: "Synovial fluid viscous, high tendon stiffness",
+            hormoneStat: "Heavily Catabolic",
+            hormoneDesc: "Cortisol awakening peak; high muscle breakdown",
+            glycogenStat: "Depleted (0% Liver)",
+            glycogenDesc: "Forces gluconeogenesis from muscle amino acids",
+            gutStat: "Empty (No Food)",
+            gutDesc: "No digestive load, but zero glycogen fuel",
+            clinicalHtml: "<p><strong>Catabolic Breakdown Danger</strong>: For a 57 kg ectomorph, fasted exercise does NOT burn excess fat; it triggers <em>gluconeogenesis</em>, mobilizing skeletal muscle amino acids (BCAAs) to maintain blood glucose.</p><p style=\"margin-top:0.5rem;\"><strong>Cold Joint Mechanics</strong>: Synovial fluid is at its most viscous nadir. Push-ups and squats place excessive shear force on cold tendons and ligaments.</p>",
+            nutritionHtml: "<p><strong>Hardgainer Rule</strong>: Avoid if possible. If mandatory due to dawn work schedule, consume <strong>1 glass warm water + 1 tbsp honey + 4 soft dates (30g fast carbs)</strong> 20 minutes before training.</p><p style=\"margin-top:0.5rem;\"><strong>Immediate Post-Workout</strong>: Consume your full 30g protein breakfast (3 whole eggs + toast + milk) within 35 minutes to arrest cortisol-driven muscle breakdown.</p>"
+          },
+          win2: {
+            timeLabel: "WINDOW 2: EARLY MORNING FUELED (07:30 AM – 09:00 AM)",
+            verdictTitle: "🟡 MODERATE / VIABLE — FAST LIQUID PROTOCOL REQUIRED",
+            badgeText: "MODERATE (3/5)",
+            badgeBg: "rgba(245, 158, 11, 0.2)",
+            badgeColor: "var(--accent-amber)",
+            boxBg: "rgba(245, 158, 11, 0.12)",
+            boxBorder: "var(--accent-amber)",
+            tempStat: "Rising (~36.7°C)",
+            tempDesc: "Neural drive warming up; moderate mobility",
+            hormoneStat: "Stabilizing",
+            hormoneDesc: "Cortisol declining from morning peak",
+            glycogenStat: "Partially Restored (60%)",
+            glycogenDesc: "Absorbing quick morning liquid carbohydrates",
+            gutStat: "Sensitive Clearance",
+            gutDesc: "Solid fats/meats cause severe acid reflux",
+            clinicalHtml: "<p><strong>Gastric Clearance Sensitivity</strong>: Stomach motility is easily overwhelmed early in the morning. Attempting to lift or do push-ups after solid rotis or omelets causes heavy nausea and throat burn.</p><p style=\"margin-top:0.5rem;\"><strong>Liquid Nutrient Partitioning</strong>: Liquid carbohydrates bypass gastric churning rapidly, fueling muscle glycogen within 30–45 minutes without provoking splanchnic ischemia.</p>",
+            nutritionHtml: "<p><strong>Pre-Workout Fuel (45m Prior)</strong>: 200 ml milk or water blended with 1 ripe banana and 1 tsp raw honey (~200 kcal, fast liquid carbs). Strictly NO heavy solid eggs or fried parathas before training.</p><p style=\"margin-top:0.5rem;\"><strong>Post-Workout Anabolism</strong>: Eat your full solid breakfast (3 eggs scrambled in ghee + 2 rotis/parathas + curd) 30–40 minutes after completing your cool-down.</p>"
+          },
+          win3: {
+            timeLabel: "WINDOW 3: MID-MORNING (10:00 AM – 11:30 AM)",
+            verdictTitle: "🟢 VERY GOOD — 2ND BEST WINDOW OF THE DAY",
+            badgeText: "VERY GOOD (4.5/5)",
+            badgeBg: "rgba(34, 197, 94, 0.2)",
+            badgeColor: "var(--accent-emerald)",
+            boxBg: "rgba(34, 197, 94, 0.12)",
+            boxBorder: "var(--accent-emerald)",
+            tempStat: "Optimal Baseline (~36.9°C)",
+            tempDesc: "Joint capsules fully lubricated and elastic",
+            hormoneStat: "Anabolically Primed",
+            hormoneDesc: "Cortisol normalized; high sympathetic alertness",
+            glycogenStat: "Fully Loaded (90%)",
+            glycogenDesc: "08:30 AM Breakfast completely digested and stored",
+            gutStat: "Cleared & Settled",
+            gutDesc: "Breakfast left stomach; zero nausea or reflux",
+            clinicalHtml: "<p><strong>High Neural Drive & Joint Elasticity</strong>: Core temperature is comfortably warm. Tendon compliance is high, allowing clean push-ups and squats with zero stiffness.</p><p style=\"margin-top:0.5rem;\"><strong>Zero Splanchnic Conflict</strong>: Because 90–120 minutes have passed since breakfast, mesenteric blood flow has returned to baseline, eliminating nausea risk completely.</p>",
+            nutritionHtml: "<p><strong>Pre-Workout Fuel</strong>: Zero extra food needed! Your 08:30 AM high-protein breakfast provides sustained glycogen and circulating amino acids.</p><p style=\"margin-top:0.5rem;\"><strong>Post-Workout Snack (11:45 AM)</strong>: 1 bowl fresh full-fat curd (dahi) with 1 diced banana or 4 dates + handful roasted chana (220 kcal, 7g protein).</p>"
+          },
+          win4: {
+            timeLabel: "WINDOW 4: IMMEDIATELY POST-LUNCH (12:30 PM – 02:00 PM)",
+            verdictTitle: "⛔ ABSOLUTE WORST — DANGEROUS FOR DIGESTION",
+            badgeText: "CRITICAL DANGER (0/5)",
+            badgeBg: "rgba(220, 38, 38, 0.25)",
+            badgeColor: "#ef4444",
+            boxBg: "rgba(220, 38, 38, 0.15)",
+            boxBorder: "#ef4444",
+            tempStat: "Sluggish Circulation",
+            tempDesc: "Blood diverted to viscera; brain/muscle flow low",
+            hormoneStat: "Parasympathetic State",
+            hormoneDesc: "Rest-and-digest dominance; neural drive suppressed",
+            glycogenStat: "Processing Digestion",
+            glycogenDesc: "Nutrients trapped in stomach; not yet in cells",
+            gutStat: "SEVERE SHUNT CONFLICT",
+            gutDesc: "Up to 35% cardiac output locked in mesentery",
+            clinicalHtml: "<p><strong>The Splanchnic Crash Law</strong>: Post-lunch digestion demands up to 35% of cardiac output to churn heavy rice, chicken, and dal. Exercise triggers sympathetic vasoconstriction, starving the stomach of blood.</p><p style=\"margin-top:0.5rem;\"><strong>Vomiting & Reflux Reflex</strong>: Stomach churning halts abruptly (*functional gastroparesis*). Acid surges into the esophagus, provoking acute nausea, dizziness, and violent vomiting.</p>",
+            nutritionHtml: "<p><strong>STRICT COMMANDMENT</strong>: <strong>NEVER WORK OUT IN THIS WINDOW</strong>.</p><p style=\"margin-top:0.5rem;\"><strong>Prescribed Action</strong>: Take your relaxed 10-minute post-meal motility stroll (*Shatapawali* — 100 to 200 slow steps), drink zero water for 35 minutes, and sit or study. Wait at least 2.5–3 hours before training.</p>"
+          },
+          win5: {
+            timeLabel: "WINDOW 5: MID-AFTERNOON CIRCADIAN SLUMP (02:30 PM – 04:00 PM)",
+            verdictTitle: "🟡 POOR / LETHARGIC — SUB-OPTIMAL NEURAL DRIVE",
+            badgeText: "SUB-OPTIMAL (2/5)",
+            badgeBg: "rgba(245, 158, 11, 0.2)",
+            badgeColor: "var(--accent-amber)",
+            boxBg: "rgba(245, 158, 11, 0.12)",
+            boxBorder: "var(--accent-amber)",
+            tempStat: "Transient Dip (~36.8°C)",
+            tempDesc: "Biological mid-afternoon drop in alertness",
+            hormoneStat: "Somnolent State",
+            hormoneDesc: "Circadian sleepiness peak; low sympathetic drive",
+            glycogenStat: "Adequate (75%)",
+            glycogenDesc: "Lunch nutrients reaching cellular stores",
+            gutStat: "Partially Cleared",
+            gutDesc: "Stomach mostly empty, but sluggish bowel motility",
+            clinicalHtml: "<p><strong>Circadian Sleepiness Signal</strong>: Driven by internal clock gene oscillations, the body experiences a natural dip in sympathetic tone and blood pressure between 02:30 and 04:00 PM.</p><p style=\"margin-top:0.5rem;\"><strong>Blunted Motor Unit Recruitment</strong>: Calisthenics movements feel noticeably heavier. Focus on isometric holds and core stabilization is impaired.</p>",
+            nutritionHtml: "<p><strong>If Forced to Train</strong>: Splash cold water on face, perform 3 minutes of dynamic joint circles, and drink 1 cup warm water with 1 tsp jaggery or black tea 20 minutes prior.</p><p style=\"margin-top:0.5rem;\"><strong>Post-Workout</strong>: Follow immediately with your afternoon Desi Power Bulk Shake.</p>"
+          },
+          win6: {
+            timeLabel: "WINDOW 6: LATE AFTERNOON / EARLY EVENING (04:30 PM – 06:30 PM)",
+            verdictTitle: "⭐ THE GOLDEN WINDOW — MAXIMUM ANABOLIC RECEPTIVITY",
+            badgeText: "BEST OVERALL (5/5)",
+            badgeBg: "rgba(56, 189, 248, 0.2)",
+            badgeColor: "var(--accent-cyan)",
+            boxBg: "rgba(2, 132, 199, 0.15)",
+            boxBorder: "var(--accent-cyan)",
+            tempStat: "Peak Zenith (~37.2°C – 37.4°C)",
+            tempDesc: "Max tendon elasticity, enzymatics & lowest injury risk",
+            hormoneStat: "Optimal Anabolic Ratio",
+            hormoneDesc: "Cortisol at diurnal low; peak androgen sensitivity",
+            glycogenStat: "100% Saturated",
+            glycogenDesc: "Fully charged by Breakfast and Lunch meals",
+            gutStat: "Completely Cleared",
+            gutDesc: "3+ hours post-lunch; zero splanchnic conflict",
+            clinicalHtml: "<p><strong>Peak Neuromuscular Performance</strong>: Core body temperature reaches its diurnal zenith (~37.2°C – 37.4°C), optimizing metabolic enzyme kinetics and nerve conduction velocity. Grip strength and peak isometric torque are at their 24-hour peak.</p><p style=\"margin-top:0.5rem;\"><strong>Anabolic Hormonal Ratio</strong>: Cortisol is near baseline, and the Cortisol:Testosterone ratio is at its most anabolic balance. Androgen receptors on skeletal muscle tissue exhibit peak sensitivity.</p><p style=\"margin-top:0.5rem;\"><strong>Post-Workout Hyper-Partitioning</strong>: Post-exercise GLUT-4 glucose transporters translocate to muscle cell membranes, shuttling virtually 100% of evening meal carbs and amino acids directly into muscle tissue repair rather than fat.</p>",
+            nutritionHtml: "<p><strong>Mandatory Digestion Gap</strong>: Allow 3.0 to 3.5 hours after 01:30 PM lunch so gastric motility has completely cleared the stomach before training.</p><p style=\"margin-top:0.5rem;\"><strong>Pre-Workout Fuel (05:00 PM — 60m Prior)</strong>: 1 serving <em>Desi Power Bulk Shake</em> (or 2 boiled potatoes mashed with curd or 2 ripe bananas with 1 tbsp peanut butter).</p><p style=\"margin-top:0.5rem;\"><strong>Post-Workout Anabolism (08:00 PM – 08:30 PM)</strong>: Complete high-density dinner: 2–3 soft rotis brushed with ghee + chicken/mutton or egg curry + 1 katori thick dal (520+ kcal, 28g protein).</p>"
+          },
+          win7: {
+            timeLabel: "WINDOW 7: EARLY NIGHT POST-WORK (07:30 PM – 08:30 PM)",
+            verdictTitle: "🟢 GOOD / PRACTICAL — HIGH STRESS DISCHARGE",
+            badgeText: "VIABLE & GOOD (4/5)",
+            badgeBg: "rgba(34, 197, 94, 0.2)",
+            badgeColor: "var(--accent-emerald)",
+            boxBg: "rgba(34, 197, 94, 0.12)",
+            boxBorder: "var(--accent-emerald)",
+            tempStat: "Warm Baseline (~37.0°C)",
+            tempDesc: "Good joint compliance from daytime movement",
+            hormoneStat: "De-Stressing Rebound",
+            hormoneDesc: "Reduces work-related adrenaline; elevates endorphins",
+            glycogenStat: "Solid (80%)",
+            glycogenDesc: "Fueled by late afternoon shake/snack",
+            gutStat: "Completely Cleared",
+            gutDesc: "Stomach empty before dinner; zero reflux",
+            clinicalHtml: "<p><strong>Workday Decompression</strong>: Ideal for students and office workers. Discharges mental stress, clears cortisol, and primes a strong parasympathetic rebound for deep sleep.</p><p style=\"margin-top:0.5rem;\"><strong>Appetite Awakening</strong>: Intense evening calisthenics reliably stimulates ghrelin (hunger hormone), making large dinners easy to consume without early satiety.</p>",
+            nutritionHtml: "<p><strong>Pre-Workout Snack (06:30 PM — 60m Prior)</strong>: 2 bananas or 1 slice peanut butter toast. Strictly DO NOT eat dinner before this workout.</p><p style=\"margin-top:0.5rem;\"><strong>Post-Workout Dinner (09:00 PM)</strong>: Immediate dinner (rotis, chicken/egg curry, rice). Allow at least 90 minutes after eating before lying flat for sleep.</p>"
+          },
+          win8: {
+            timeLabel: "WINDOW 8: LATE NIGHT (< 2H BEFORE BED, 09:30 PM – 11:30 PM)",
+            verdictTitle: "🔴 WORST FOR SLEEP & RECOVERY — CRUSHES HGH",
+            badgeText: "RECOVERY HAZARD (1.5/5)",
+            badgeBg: "rgba(244, 63, 94, 0.2)",
+            badgeColor: "var(--accent-rose)",
+            boxBg: "rgba(244, 63, 94, 0.12)",
+            boxBorder: "var(--accent-rose)",
+            tempStat: "Elevated (+0.8°C Spike)",
+            tempDesc: "Blocks mandatory 1°C nocturnal cooling drop",
+            hormoneStat: "Sympathetic Hyper-Arousal",
+            hormoneDesc: "Adrenaline blocks pineal melatonin by up to 70%",
+            glycogenStat: "Abundant (100%)",
+            glycogenDesc: "Fueled by dinner, but metabolic cost is high",
+            gutStat: "Full Stomach Distress",
+            gutDesc: "Recent dinner causes reflux during floor core moves",
+            clinicalHtml: "<p><strong>Severe Melatonin Suppression</strong>: High sympathetic catecholamines flood the system, blunting melatonin secretion. Core body temperature stays elevated, delaying slow-wave sleep onset by 90+ minutes.</p><p style=\"margin-top:0.5rem;\"><strong>Crushed Growth Hormone (HGH)</strong>: Over 70% of daily HGH is pulsed between 11:00 PM and 02:00 AM. Missing this window severely curtails nighttime muscle fiber repair and tissue accretion.</p>",
+            nutritionHtml: "<p><strong>Emergency Modification (If Unavoidable)</strong>: Cap intensity to RPE 7 (zero failure); finish session with 5 minutes slow diaphragmatic box breathing.</p><p style=\"margin-top:0.5rem;\"><strong>Sleep Rescue Protocol</strong>: Take a lukewarm-to-cool shower immediately to lower skin temperature. Consume warm milk with 1 tsp ghee + 300mg Ashwagandha; dim all lights immediately.</p>"
+          },
+          ramadan: {
+            timeLabel: "🌙 RAMADAN & ISLAMIC FASTING ADAPTATION PROTOCOL",
+            verdictTitle: "🌙 RAMADAN ANABOLIC PROTOCOL — ZERO MUSCLE LOSS",
+            badgeText: "ISLAMIC PROTOCOL",
+            badgeBg: "rgba(13, 148, 136, 0.2)",
+            badgeColor: "var(--accent-teal)",
+            boxBg: "rgba(13, 148, 136, 0.15)",
+            boxBorder: "var(--accent-teal)",
+            tempStat: "Carefully Managed",
+            tempDesc: "Strictly avoid high heat and dehydration",
+            hormoneStat: "Fasting Preservation",
+            hormoneDesc: "Ketone sparing; protect lean tissue",
+            glycogenStat: "Window-Dependent",
+            glycogenDesc: "Low pre-Iftar; 100% restored post-Taraweeh",
+            gutStat: "Fasted vs Hydrated",
+            gutDesc: "Pre-Iftar: Empty | Post-Taraweeh: Fully hydrated",
+            clinicalHtml: "<p><strong>Midday Fasting Prohibition</strong>: Training between 12:00 PM and 04:00 PM while fasting is STRICTLY FORBIDDEN for a 57 kg hardgainer due to severe dehydration, rhabdomyolysis, and acute muscle wasting.</p><p style=\"margin-top:0.5rem;\"><strong>Two Valid Pathways</strong>:<br>• <em>Option A (Pre-Iftar Preservation)</em>: 30 mins before Maghrib, 2 sets per move, followed by immediate Iftar dates and shake.<br>• <em>Option B (Post-Taraweeh Hypertrophy)</em>: 09:30 PM – 10:30 PM, 100% full intensity fueled by Iftar water and carbs.</p>",
+            nutritionHtml: "<p><strong>Pre-Iftar Protocol</strong>: Train 06:15 PM – 06:45 PM. Break fast at 06:50 PM with 3 soft dates + 250 ml water with pink salt + Desi Power Bulk Shake + dinner.</p><p style=\"margin-top:0.5rem;\"><strong>Post-Taraweeh Protocol</strong>: Light Iftar at 06:50 PM (fruits + 2 eggs). Drink 750 ml water. Train 09:30 PM. Massive high-protein dinner at 11:00 PM; heavy shake at 04:00 AM Suhoor.</p>"
+          },
+          jummah: {
+            timeLabel: "🕌 FRIDAY (JUMMAH) DIGESTION PACING PROTOCOL",
+            verdictTitle: "🕌 JUMMAH ROUTINE — HEAVY LUNCH DIGESTION PACING",
+            badgeText: "PACING PROTOCOL",
+            badgeBg: "rgba(34, 197, 94, 0.2)",
+            badgeColor: "var(--accent-emerald)",
+            boxBg: "rgba(34, 197, 94, 0.12)",
+            boxBorder: "var(--accent-emerald)",
+            tempStat: "Elevated Mid-Morning & Evening",
+            tempDesc: "Avoid 01:30 PM – 04:30 PM splanchnic peak",
+            hormoneStat: "Post-Congregational Calm",
+            hormoneDesc: "Spiritual focus; reduced sympathetic stress",
+            glycogenStat: "Maximal Storage",
+            glycogenDesc: "Surplus from Friday afternoon family meal",
+            gutStat: "Heavy Visceral Load",
+            gutDesc: "Biryani/Mutton requires 3.5 hours clearance",
+            clinicalHtml: "<p><strong>The Friday Lunch Pitfall</strong>: Friday congregational Jummah prayer is traditionally followed by an exceptionally rich lunch (Biryani, mutton curry, ghee rice). The digestive tract requires a full 3.5 hours to process this caloric volume.</p><p style=\"margin-top:0.5rem;\"><strong>The Timing Law</strong>: Never attempt to train at 03:00 PM or 04:00 PM. The severe mesenteric blood diversion will trigger acute nausea, lethargy, and reflux.</p>",
+            nutritionHtml: "<p><strong>Option 1 (Pre-Jummah Slot — Recommended)</strong>: Work out from <strong>10:15 AM to 11:00 AM</strong> (Window 3). Shower, perform ghusl, attend Jummah, and let the heavy Friday lunch serve as your anabolic post-workout meal!</p><p style=\"margin-top:0.5rem;\"><strong>Option 2 (Delayed Golden Window)</strong>: Push evening session to <strong>05:45 PM – 06:30 PM</strong>, ensuring a clean 3.5-hour gap after heavy Friday lunch.</p>"
+          }
+        };
+
+        const chronoPills = document.querySelectorAll(".chrono-pill");
+        const chronoTimeLabel = document.getElementById("chrono-time-label");
+        const chronoVerdictTitle = document.getElementById("chrono-verdict-title");
+        const chronoVerdictBadge = document.getElementById("chrono-verdict-badge");
+        const chronoVerdictBox = document.getElementById("chrono-verdict-box");
+        const chronoTempStat = document.getElementById("chrono-temp-stat");
+        const chronoTempDesc = document.getElementById("chrono-temp-desc");
+        const chronoHormoneStat = document.getElementById("chrono-hormone-stat");
+        const chronoHormoneDesc = document.getElementById("chrono-hormone-desc");
+        const chronoGlycogenStat = document.getElementById("chrono-glycogen-stat");
+        const chronoGlycogenDesc = document.getElementById("chrono-glycogen-desc");
+        const chronoGutStat = document.getElementById("chrono-gut-stat");
+        const chronoGutDesc = document.getElementById("chrono-gut-desc");
+        const chronoClinicalText = document.getElementById("chrono-clinical-text");
+        const chronoNutritionText = document.getElementById("chrono-nutrition-text");
+
+        chronoPills.forEach(pill => {
+          pill.addEventListener("click", () => {
+            const winKey = pill.getAttribute("data-window");
+            if (!winKey || !chronoData[winKey]) return;
+
+            chronoPills.forEach(p => p.classList.remove("active"));
+            pill.classList.add("active");
+
+            const data = chronoData[winKey];
+            if (chronoTimeLabel) chronoTimeLabel.textContent = data.timeLabel;
+            if (chronoVerdictTitle) chronoVerdictTitle.textContent = data.verdictTitle;
+            if (chronoVerdictBadge) {
+              chronoVerdictBadge.textContent = data.badgeText;
+              chronoVerdictBadge.style.background = data.badgeBg;
+              chronoVerdictBadge.style.color = data.badgeColor;
+              chronoVerdictBadge.style.borderColor = data.badgeColor;
+            }
+            if (chronoVerdictBox) {
+              chronoVerdictBox.style.background = data.boxBg;
+              chronoVerdictBox.style.borderLeftColor = data.boxBorder;
+            }
+            if (chronoTempStat) chronoTempStat.textContent = data.tempStat;
+            if (chronoTempDesc) chronoTempDesc.textContent = data.tempDesc;
+            if (chronoHormoneStat) chronoHormoneStat.textContent = data.hormoneStat;
+            if (chronoHormoneDesc) chronoHormoneDesc.textContent = data.hormoneDesc;
+            if (chronoGlycogenStat) chronoGlycogenStat.textContent = data.glycogenStat;
+            if (chronoGlycogenDesc) chronoGlycogenDesc.textContent = data.glycogenDesc;
+            if (chronoGutStat) chronoGutStat.textContent = data.gutStat;
+            if (chronoGutDesc) chronoGutDesc.textContent = data.gutDesc;
+            if (chronoClinicalText) chronoClinicalText.innerHTML = data.clinicalHtml;
+            if (chronoNutritionText) chronoNutritionText.innerHTML = data.nutritionHtml;
+          });
+        });
+      } catch (err) {
+        console.error("Chronobiology inspector bootloader error:", err);
       }
     });
   </script>
