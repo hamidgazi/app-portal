@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#0d1117">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Clinical Dermatology & Skin Recovery Protocol</title>
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: #131b2e;
+      --card-border: #1e2942;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.15);
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --rx-badge: #8b5cf6;
+      --radius: 12px;
+      --touch-min: 48px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 90px;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(180deg, #162038 0%, #0d1424 100%);
+      padding: 20px 16px 14px;
+      border-bottom: 1px solid var(--card-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    .header-content {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    h1 {
+      font-size: clamp(1.2rem, 4vw, 1.6rem);
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-badge {
+      font-size: 0.75rem;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Main Container */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    /* Tab Navigation */
+    .tab-nav {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 4px 2px 14px;
+      scrollbar-width: none;
+    }
+
+    .tab-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+      min-height: var(--touch-min);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      touch-action: manipulation;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .tab-btn.active {
+      background: var(--accent);
+      color: #090d16;
+      border-color: var(--accent);
+      box-shadow: 0 0 12px var(--accent-glow);
+    }
+
+    /* Content Cards */
+    .section-view {
+      display: none;
+      animation: fadeIn 0.2s ease-in-out;
+    }
+
+    .section-view.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      cursor: pointer;
+      user-select: none;
+      touch-action: manipulation;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .alert-box {
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin: 12px 0;
+      font-size: 0.88rem;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .alert-danger {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #fca5a5;
+    }
+
+    .alert-warning {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: #fde68a;
+    }
+
+    .alert-info {
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: #bae6fd;
+    }
+
+    /* Product Item Table / Cards */
+    .product-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .product-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .product-rank {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--accent-glow);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .product-name {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .rx-badge {
+      background: rgba(139, 92, 246, 0.2);
+      border: 1px solid rgba(139, 92, 246, 0.5);
+      color: #c4b5fd;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .product-detail {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .product-usage {
+      font-size: 0.82rem;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.08);
+      padding: 6px 10px;
+      border-radius: 6px;
+      margin-top: 4px;
+    }
+
+    /* Interactive Checkbox Tracker */
+    .checklist {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .check-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      cursor: pointer;
+      user-select: none;
+      touch-action: manipulation;
+      min-height: var(--touch-min);
+    }
+
+    .check-item input[type="checkbox"] {
+      width: 22px;
+      height: 22px;
+      cursor: pointer;
+      accent-color: var(--accent);
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .check-content {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .check-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .check-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* Fixed Bottom Quick Action */
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #0d1424;
+      border-top: 1px solid var(--card-border);
+      padding: 10px 16px;
+      display: flex;
+      justify-content: center;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    .bottom-btn {
+      background: var(--accent);
+      color: #090d16;
+      border: none;
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 12px 24px;
+      border-radius: 999px;
+      cursor: pointer;
+      min-height: var(--touch-min);
+      width: 100%;
+      max-width: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      user-select: none;
+      touch-action: manipulation;
+      box-shadow: 0 4px 14px var(--accent-glow);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-content">
+      <div class="title-row">
+        <h1>🩺 Dermatology Master Protocol</h1>
+        <span class="status-badge">Triage Verified</span>
+      </div>
+      <p class="subtitle">Evidence-based clinical guidelines & daily execution tracker</p>
+    </div>
+  </header>
+
+  <main>
+    <!-- Tab Controls -->
+    <div class="tab-nav" role="tablist">
+      <button class="tab-btn active" data-tab="tab-lips" id="btn-tab-lips">👄 Lips (Cheilitis)</button>
+      <button class="tab-btn" data-tab="tab-bacne" id="btn-tab-bacne">🚿 Bacne & Sweat</button>
+      <button class="tab-btn" data-tab="tab-joints" id="btn-tab-joints">🌟 Dark Joints & AN</button>
+      <button class="tab-btn" data-tab="tab-daily" id="btn-tab-daily">📅 Daily Tracker</button>
+      <button class="tab-btn" data-tab="tab-doctor" id="btn-tab-doctor">🩺 Doctor Visit</button>
+    </div>
+
+    <!-- TAB 1: LIPS -->
+    <section class="section-view active" id="tab-lips">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">👄 Exfoliative Cheilitis Management</div>
+        </div>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;">
+          Your lips are in an active peeling-desquamation cycle. Manually peeling immature skin forces underlying cells into disordered "emergency hyperkeratosis," creating rigid, hardening crusts.
+        </p>
+
+        <div class="alert-box alert-danger">
+          <strong>⚠️ Inviolable Rule:</strong> Absolutely NEVER pick, bite, or peel lip flakes with fingers or teeth. Saliva contains digestive enzymes that destroy the mucosal barrier. If a flake lifts, snip it flush with sterile cuticle scissors.
+        </div>
+
+        <h3 style="font-size: 0.95rem; margin: 16px 0 8px; color: var(--accent);">Ranked Solutions & Products:</h3>
+
+        <div class="product-item">
+          <div class="product-header">
+            <span class="product-name">100% Pure White Petrolatum (Vaseline)</span>
+            <span class="product-rank">Rank #1 (Gold Standard)</span>
+          </div>
+          <div class="product-detail">Reduces transepidermal water loss (TEWL) by >98%, sealing in hydration so basal cells can mature without crusting.</div>
+          <div class="product-usage">📌 Apply every 2–3 hours daytime and a thick "slugging" layer overnight.</div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-header">
+            <span class="product-name">La Roche-Posay Cicaplast Lèvres / Avene Cicalfate</span>
+            <span class="product-rank">Rank #2 (Barrier Repair)</span>
+          </div>
+          <div class="product-detail">Panthenol (B5) + Madecassoside repair lipid bilayers and calm irritation.</div>
+          <div class="product-usage">📌 Apply onto damp lips first, then lock in with Vaseline.</div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-header">
+            <span class="product-name">Hydrocortisone 1% Ointment</span>
+            <span class="rx-badge">[Prescription / Mild OTC]</span>
+          </div>
+          <div class="product-detail">Short-pulse anti-inflammatory ointment to halt acute crusting and erythema.</div>
+          <div class="product-usage">📌 Apply thin layer 2x daily for 5 to 7 days maximum to break the cycle.</div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-header">
+            <span class="product-name">Tacrolimus 0.03% Ointment</span>
+            <span class="rx-badge">[Prescription Based]</span>
+          </div>
+          <div class="product-detail">Non-steroidal immunomodulator for chronic refractory cases without skin thinning risk.</div>
+          <div class="product-usage">📌 Apply 2x daily under dermatologist supervision.</div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-header">
+            <span class="product-name">SLS-Free Toothpaste (Sensodyne Pronamel / Biotene)</span>
+            <span class="product-rank">Decontamination</span>
+          </div>
+          <div class="product-detail">Eliminates Sodium Lauryl Sulfate detergents and harsh mint flavorings that cause contact cheilitis.</div>
+          <div class="product-usage">📌 Switch oral care immediately and permanently.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: BACNE & SWEAT -->
+    <section class="section-view" id="tab-bacne">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">🚿 Bacne, Hyperhidrosis & Dead Skin Rolls</div>
+        </div>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;">
+          The rolls of "dirt" that come off when rubbing after soap are <strong>Retention Hyperkeratosis</strong>—compacted dead skin cells bonded with soap scum and sebum. The itchy uniform chest/back acne is <strong>Malassezia (Fungal) Folliculitis</strong>.
+        </p>
+
+        <div class="alert-box alert-warning">
+          <strong>⚠️ Caution on Antibiotics:</strong> Never take typical bacterial acne antibiotics (e.g. Doxycycline) for fungal acne—they destroy beneficial bacteria and make yeast eruptions far more severe.
+        </div>
+
+        <h3 style="font-size: 0.95rem; margin: 16px 0 8px; color: var(--accent);">Ranked Solutions & Products:</h3>
+
+        <div class="product-item">
+          <div class="product-header">
+            <span class="product-name">Ketoconazole 2% Wash (Nizoral) + Benzoyl Peroxide 10%</span>
+            <span class="product-rank">Rank #1 (Contact Cleanser)</span>
+          </div>
+          <div class="product-detail">Ketoconazole eradicates Malassezia yeast; Benzoyl Peroxide clears follicular sebum.</div>
+          <div class="product-usage">📌 <strong>CRUCIAL:</strong> Leave suds on chest and back for a full 3 to 5 minutes before rinsing! Alternate days.</div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-header">
+            <span class="product-name">AmLactin 12% Lactic Acid Lotion / CeraVe SA Body Wash</span>
+            <span class="product-rank">Rank #2 (Keratolytic)</span>
+          </div>
+          <div class="product-detail">Dissolves the microscopic protein glue (desmosomes) between dead skin cells. Ends the "dirt rolls" completely without any physical scrubbing.</div>
+          <div class="product-usage">📌 Stop all finger rubbing or loofahs. Apply AmLactin post-shower.</div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-header">
+            <span class="product-name">Aluminum Chloride Hexahydrate (Certain Dri / Driclor)</span>
+            <span class="product-rank">Rank #3 (Sweat Control)</span>
+          </div>
+          <div class="product-detail">Plugs eccrine sweat ducts, stopping excessive truncal sweat and starving yeast of moisture.</div>
+          <div class="product-usage">📌 Apply to bone-dry back at bedtime 2 nights per week.</div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-header">
+            <span class="product-name">Trifarotene (Aklief) 0.005% Cream</span>
+            <span class="rx-badge">[Prescription Based]</span>
+          </div>
+          <div class="product-detail">4th-generation retinoid specifically approved for clearing large-surface truncal chest/back acne.</div>
+          <div class="product-usage">📌 Apply thin layer 2–3 nights weekly as directed by dermatologist.</div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-header">
+            <span class="product-name">Oral Fluconazole (150–200mg weekly)</span>
+            <span class="rx-badge">[Prescription Based]</span>
+          </div>
+          <div class="product-detail">Systemic antifungal pulse therapy for rapid eradication of deep follicular yeast.</div>
+          <div class="product-usage">📌 1 tablet weekly for 2 to 4 weeks under medical supervision.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: JOINTS & ACANTHOSIS NIGRICANS -->
+    <section class="section-view" id="tab-joints">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">🌟 Dark Joints, Groin, Hips & Back</div>
+        </div>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;">
+          Velvety dark skin in folds (groin, hips, neck) is <strong>Acanthosis Nigricans (AN)</strong> caused by high insulin stimulating keratinocyte growth receptors. Dark elbows and knees are compounded by <strong>Frictional Melanosis</strong>.
+        </p>
+
+        <div class="alert-box alert-info">
+          <strong>💡 Root Cause Key:</strong> Bleaching creams alone will not work permanently. Lowering circulating insulin through low-glycemic nutrition and medical guidance is the definitive cure.
+        </div>
+
+        <h3 style="font-size: 0.95rem; margin: 16px 0 8px; color: var(--accent);">Ranked Solutions & Products:</h3>
+
+        <div class="product-item">
+          <div class="product-header">
+            <span class="product-name">Oral Metformin (500mg–1000mg)</span>
+            <span class="rx-badge">[Prescription Based]</span>
+          </div>
+          <div class="product-detail">Clinical standard of care to resolve insulin resistance and normalize keratinocyte proliferation.</div>
+          <div class="product-usage">📌 Prescribed after reviewing fasting insulin, glucose, and HbA1c tests.</div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-header">
+            <span class="product-name">Urea 10% to 20% Lotion (Eucerin Roughness Relief)</span>
+            <span class="product-rank">Rank #2 (Keratolytic)</span>
+          </div>
+          <div class="product-detail">Breaks hydrogen bonds in thickened hyperkeratotic plaques on elbows, knees, hips, and back.</div>
+          <div class="product-usage">📌 Massage into dark rough areas 1–2 times daily after showering.</div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-header">
+            <span class="product-name">Azelaic Acid 10% to 15% Gel (Finacea)</span>
+            <span class="rx-badge">[Rx 15% / OTC 10%]</span>
+          </div>
+          <div class="product-detail">Inhibits tyrosinase without irritating sensitive groin and inner thigh folds. Safe for thin skin.</div>
+          <div class="product-usage">📌 Apply once daily to groin, private area creases, and post-acne back spots.</div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-header">
+            <span class="product-name">Adapalene 0.1% Gel / Tretinoin 0.025% Cream</span>
+            <span class="rx-badge">[Prescription Based]</span>
+          </div>
+          <div class="product-detail">Stimulates cell turnover and disperses clumped melanin over 12–16 weeks.</div>
+          <div class="product-usage">📌 Apply 2–3 nights weekly over moisturizer on elbows, knees, and back. (Avoid mucosal areas).</div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-header">
+            <span class="product-name">Tri-Luma (Fluocinolone + Hydroquinone 4% + Tretinoin)</span>
+            <span class="rx-badge">[Prescription Based]</span>
+          </div>
+          <div class="product-detail">Triple combination therapy for stubborn, localized hyperpigmentation.</div>
+          <div class="product-usage">📌 Strictly under dermatologist supervision for max 8–12 weeks. Never apply to groin mucosa.</div>
+        </div>
+      </div>
+
+      <!-- SPECIAL PERIANAL / INTERGLUTEAL CARD -->
+      <div class="card" style="border-left: 4px solid var(--accent);">
+        <div class="card-header">
+          <div class="card-title">🍑 Perianal & Intergluteal Cleft ("Poop Area") Protocol</div>
+        </div>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;">
+          The area between the buttock cheeks and surrounding the anus naturally has higher melanocyte density and suffers continuous friction, sweat, and residual digestive enzymes from stool.
+        </p>
+
+        <div class="alert-box alert-danger">
+          <strong>🚫 CRITICAL DANGER:</strong> NEVER apply Glycolic Acid peels, Salicylic Acid, or Hydroquinone directly to the anal verge. The mucosal lining has no stratum corneum and will suffer painful chemical burns, fissures, and severe rebound darkening!
+        </div>
+
+        <h3 style="font-size: 0.95rem; margin: 16px 0 8px; color: var(--accent);">Safe & Effective Perianal Protocol:</h3>
+
+        <div class="product-item">
+          <div class="product-header">
+            <span class="product-name">Water Wash + Pat Dry + Zinc Oxide 10–20% Barrier</span>
+            <span class="product-rank">Rank #1 (Barrier Shield)</span>
+          </div>
+          <div class="product-detail">Always use water/bidet after defecation. NEVER dry-wipe roughly. Zinc Oxide (Sudocrem/Desitin) or Vaseline neutralizes residual fecal digestive enzymes and stops cheek-to-cheek friction.</div>
+          <div class="product-usage">📌 Apply a thin layer between the buttock cheeks daily and after bowel movements.</div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-header">
+            <span class="product-name">Azelaic Acid 10% to 15% Gel</span>
+            <span class="rx-badge">[Rx 15% / OTC 10%]</span>
+          </div>
+          <div class="product-detail">The safest tyrosinase inhibitor for delicate intertriginous folds. Halts melanin overproduction without chemical burn risk.</div>
+          <div class="product-usage">📌 Apply a pea-sized amount to the clean, dry cleft at bedtime (avoid internal canal).</div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-header">
+            <span class="product-name">Ketoconazole 2% or Clotrimazole 1% Cream</span>
+            <span class="rx-badge">[Rx / Mild OTC]</span>
+          </div>
+          <div class="product-detail">Clears occult Candida/yeast intertrigo caused by heat and moisture, which is often the silent trigger for intense darkness.</div>
+          <div class="product-usage">📌 Apply 2x daily for 7–10 days if the cleft ever itches or burns.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: DAILY TRACKER -->
+    <section class="section-view" id="tab-daily">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">📅 Interactive Daily Regimen Tracker</div>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">
+          Check off your completed daily actions. Progress automatically saves in your device's browser memory.
+        </p>
+
+        <h4 style="font-size: 0.95rem; color: #38bdf8; margin: 12px 0 8px;">🌅 Morning (AM) Protocol</h4>
+        <div class="checklist">
+          <label class="check-item">
+            <input type="checkbox" id="chk-am-wash">
+            <div class="check-content">
+              <span class="check-title">Shower Contact Wash (3–5 Minutes)</span>
+              <span class="check-desc">Ketoconazole 2% (Mon/Wed/Fri) or Benzoyl Peroxide 10% (Tue/Thu/Sat) on chest & back.</span>
+            </div>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" id="chk-am-noscrub">
+            <div class="check-content">
+              <span class="check-title">Zero Friction Cleansing</span>
+              <span class="check-desc">No loofahs or finger scrubbing on arms/back. Gentle syndet wash only.</span>
+            </div>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" id="chk-am-urea">
+            <div class="check-content">
+              <span class="check-title">Body Keratolytic Application</span>
+              <span class="check-desc">Urea 10% or AmLactin 12% on elbows, knees, hips, and back.</span>
+            </div>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" id="chk-am-groin">
+            <div class="check-content">
+              <span class="check-title">Groin Depigmentation</span>
+              <span class="check-desc">Azelaic Acid 10–15% applied to inner thigh & groin creases.</span>
+            </div>
+          </label>
+                    <label class="check-item">
+            <input type="checkbox" id="chk-am-perianal">
+            <div class="check-content">
+              <span class="check-title">Perianal Friction Barrier ("Poop Area")</span>
+              <span class="check-desc">Apply Zinc Oxide 10-20% (Sudocrem/Desitin) or Vaseline between buttock cheeks.</span>
+            </div>
+          </label>
+<label class="check-item">
+            <input type="checkbox" id="chk-am-lips">
+            <div class="check-content">
+              <span class="check-title">Lip Shield & Hydration</span>
+              <span class="check-desc">Water drop on lips + Cicaplast Lèvres or Aquaphor seal.</span>
+            </div>
+          </label>
+        </div>
+
+        <h4 style="font-size: 0.95rem; color: #818cf8; margin: 20px 0 8px;">🌙 Evening (PM) Protocol</h4>
+        <div class="checklist">
+          <label class="check-item">
+            <input type="checkbox" id="chk-pm-sweat">
+            <div class="check-content">
+              <span class="check-title">Sweat Control (Sun & Wed Nights)</span>
+              <span class="check-desc">Aluminum Chloride (Certain Dri) applied to 100% dry back.</span>
+            </div>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" id="chk-pm-retinoid">
+            <div class="check-content">
+              <span class="check-title">Cellular Renewal (Mon, Thu & Sat)</span>
+              <span class="check-desc">Adapalene 0.1% or Tretinoin [Rx] over moisturizer on back & joints.</span>
+            </div>
+          </label>
+                    <label class="check-item">
+            <input type="checkbox" id="chk-pm-perianal">
+            <div class="check-content">
+              <span class="check-title">Cleft Depigmentation (Nightly)</span>
+              <span class="check-desc">Apply thin layer of Azelaic Acid 10-15% over clean, dry intergluteal fold.</span>
+            </div>
+          </label>
+<label class="check-item">
+            <input type="checkbox" id="chk-pm-perianal",
+            "chk-pm-slug">
+            <div class="check-content">
+              <span class="check-title">Lip Slugging Barrier (Nightly)</span>
+              <span class="check-desc">Thick coating of 100% Pure Petrolatum (Vaseline) over lips. Zero peeling!</span>
+            </div>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: DOCTOR VISIT -->
+    <section class="section-view" id="tab-doctor">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">🩺 Doctor Consultation Checklist</div>
+        </div>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 14px;">
+          Bring or screenshot this exact panel for your consultation with a board-certified dermatologist and physician.
+        </p>
+
+        <h4 style="font-size: 0.95rem; color: var(--accent); margin-bottom: 8px;">🩸 Mandatory Diagnostic Blood Panel:</h4>
+        <ul style="padding-left: 20px; font-size: 0.88rem; color: var(--text); display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px;">
+          <li><strong>Fasting Plasma Glucose (FPG)</strong> & <strong>Fasting Serum Insulin</strong> (to calculate HOMA-IR score for insulin resistance).</li>
+          <li><strong>Hemoglobin A1c (HbA1c)</strong> (evaluates 3-month average glycemic index).</li>
+          <li><strong>Serum Ferritin, Vitamin B12, Folate & Zinc</strong> (deficiencies cause non-healing lip cheilitis).</li>
+          <li><strong>Complete Lipid Profile</strong> (Triglycerides, HDL, LDL).</li>
+        </ul>
+
+        <h4 style="font-size: 0.95rem; color: var(--rx-badge); margin-bottom: 8px;">💊 Prescription Items to Inquire About:</h4>
+        <div class="product-item">
+          <div class="product-header">
+            <span class="product-name">Metformin 500mg–1000mg</span>
+            <span class="rx-badge">[Prescription Based]</span>
+          </div>
+          <div class="product-detail">If HOMA-IR shows insulin resistance, Metformin treats the root cause of Acanthosis Nigricans.</div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-header">
+            <span class="product-name">Ketoconazole 2% Wash / Oral Fluconazole</span>
+            <span class="rx-badge">[Prescription Based]</span>
+          </div>
+          <div class="product-detail">For deep follicular clearance if truncal yeast fails to clear with OTC strength.</div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-header">
+            <span class="product-name">Trifarotene (Aklief) 0.005% Cream</span>
+            <span class="rx-badge">[Prescription Based]</span>
+          </div>
+          <div class="product-detail">Specialized truncal retinoid for back acne and post-inflammatory marks.</div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-header">
+            <span class="product-name">Tacrolimus 0.03% Ointment</span>
+            <span class="rx-badge">[Prescription Based]</span>
+          </div>
+          <div class="product-detail">Non-steroidal barrier repair ointment for chronic recalcitrant exfoliative cheilitis.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="bottom-bar">
+    <button class="bottom-btn" id="btn-next-tab">Next Section ➔</button>
+  </div>
+
+  <script>
+    // Defensive Component Bootloader Isolation Pattern
+    (function () {
+      "use strict";
+
+      // 1. Procedural AudioContext Tap (Non-musical tactile UI feedback)
+      let audioCtx = null;
+      function playTactileTap() {
+        try {
+          if (!audioCtx) {
+            const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+            if (AudioContextClass) audioCtx = new AudioContextClass();
+          }
+          if (audioCtx && audioCtx.state === 'suspended') {
+            audioCtx.resume();
+          }
+          if (audioCtx) {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = "sine";
+            osc.frequency.setValueAtTime(140, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(40, audioCtx.currentTime + 0.04);
+            gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.04);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.04);
+          }
+        } catch (e) {
+          // Silent fallback if audio context blocked
+        }
+      }
+
+      // 2. Navigation Module Bootloader
+      function initNavigation() {
+        try {
+          const tabBtns = document.querySelectorAll(".tab-btn");
+          const views = document.querySelectorAll(".section-view");
+          const nextBtn = document.getElementById("btn-next-tab");
+          const tabOrder = ["tab-lips", "tab-bacne", "tab-joints", "tab-daily", "tab-doctor"];
+
+          function switchTab(targetId) {
+            tabBtns.forEach(btn => {
+              const isActive = btn.getAttribute("data-tab") === targetId;
+              btn.classList.toggle("active", isActive);
+              if (isActive) {
+                btn.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+              }
+            });
+            views.forEach(view => {
+              view.classList.toggle("active", view.id === targetId);
+            });
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            playTactileTap();
+          }
+
+          tabBtns.forEach(btn => {
+            btn.addEventListener("click", () => {
+              const target = btn.getAttribute("data-tab");
+              if (target) switchTab(target);
+            });
+          });
+
+          if (nextBtn) {
+            nextBtn.addEventListener("click", () => {
+              const currentActive = document.querySelector(".tab-btn.active");
+              const currentId = currentActive ? currentActive.getAttribute("data-tab") : "tab-lips";
+              const currentIndex = tabOrder.indexOf(currentId);
+              const nextIndex = (currentIndex + 1) % tabOrder.length;
+              switchTab(tabOrder[nextIndex]);
+            });
+          }
+        } catch (err) {
+          console.error("Navigation boot error:", err);
+        }
+      }
+
+      // 3. Checklist Persistence Module Bootloader
+      function initChecklistPersistence() {
+        try {
+          const checkboxes = [
+            "chk-am-wash",
+            "chk-am-noscrub",
+            "chk-am-urea",
+            "chk-am-groin",
+            "chk-am-perianal",
+            "chk-am-lips",
+            "chk-pm-sweat",
+            "chk-pm-retinoid",
+            "chk-pm-perianal",
+            "chk-pm-slug"
+          ];
+
+          checkboxes.forEach(id => {
+            const el = document.getElementById(id);
+            if (!el) return;
+
+            // Load saved state
+            const saved = localStorage.getItem("derm_tracker_" + id);
+            if (saved === "true") {
+              el.checked = true;
+            }
+
+            // Save on change
+            el.addEventListener("change", () => {
+              localStorage.setItem("derm_tracker_" + id, el.checked ? "true" : "false");
+              playTactileTap();
+            });
+          });
+        } catch (err) {
+          console.error("Checklist persistence error:", err);
+        }
+      }
+
+      // Master Safe Bootloader
+      document.addEventListener("DOMContentLoaded", () => {
+        initNavigation();
+        initChecklistPersistence();
+      });
+    })();
+  </script>
+</body>
+</html>
