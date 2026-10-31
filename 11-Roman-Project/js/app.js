@@ -595,20 +595,69 @@
         });
       }
 
-      // Back to top FAB
-      if (DOM.fabTop) {
-        DOM.fabTop.addEventListener("click", () => {
-          SoundFX.playClick();
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        });
+      // Back to top FAB and Smart Reading Header Scroll Observer
+      window.addEventListener("scroll", () => {
+        const scrollY = window.scrollY || window.pageYOffset;
+        if (scrollY > 120) {
+          if (DOM.appHeader) DOM.appHeader.classList.add("scrolled");
+        } else {
+          if (DOM.appHeader) DOM.appHeader.classList.remove("scrolled");
+        }
 
-        window.addEventListener("scroll", () => {
-          if (window.scrollY > 300) {
+        if (DOM.fabTop) {
+          if (scrollY > 300) {
             DOM.fabTop.classList.add("visible");
           } else {
             DOM.fabTop.classList.remove("visible");
           }
-        }, { passive: true });
+        }
+      }, { passive: true });
+
+      // Reading Header Quick Action Buttons
+      if (DOM.readingCopyBtn) {
+        DOM.readingCopyBtn.addEventListener("click", () => {
+          const book = getCurrentBook();
+          const chapter = book && book.chapters && book.chapters[AppState.currentChapterIndex];
+          if (book && chapter) {
+            const text = formatFullArticleForWhatsApp(book, chapter);
+            copyToClipboard(text, "Full article copied! Ready for WhatsApp");
+          }
+        });
+      }
+
+      if (DOM.readingShareBtn) {
+        DOM.readingShareBtn.addEventListener("click", () => {
+          const book = getCurrentBook();
+          const chapter = book && book.chapters && book.chapters[AppState.currentChapterIndex];
+          if (book && chapter) {
+            const text = formatFullArticleForWhatsApp(book, chapter);
+            shareDirectWhatsApp(text);
+          }
+        });
+      }
+
+      if (DOM.readingBookmarkBtn) {
+        DOM.readingBookmarkBtn.addEventListener("click", () => {
+          const book = getCurrentBook();
+          const chapter = book && book.chapters && book.chapters[AppState.currentChapterIndex];
+          if (book && chapter) {
+            toggleArticleBookmark(book, chapter);
+          }
+        });
+      }
+
+      if (DOM.readingTocBtn) {
+        DOM.readingTocBtn.addEventListener("click", () => {
+          SoundFX.playClick();
+          openDrawer("toc");
+        });
+      }
+
+      if (DOM.readingTocJump) {
+        DOM.readingTocJump.addEventListener("click", () => {
+          SoundFX.playClick();
+          openDrawer("toc");
+        });
       }
 
       // TOC Search filter input
@@ -718,29 +767,33 @@
     const totalChapters = book.chapters.length;
     const currentNum = AppState.currentChapterIndex + 1;
 
-    // Build Header HTML
+    // Update Smart Compact Reading Header (Sticky Context Bar)
+    if (DOM.readingBookBadge) {
+      const badgeCode = (book.id === 'bahar_e_shariat_16' ? 'BS16' : (book.id === 'qareena_e_zindagi' ? 'QZ' : 'GF'));
+      DOM.readingBookBadge.textContent = badgeCode;
+    }
+    if (DOM.readingTitle) {
+      DOM.readingTitle.textContent = chapter.title;
+    }
+    if (DOM.readingSub) {
+      DOM.readingSub.textContent = `Chapter ${currentNum} of ${totalChapters}`;
+    }
+    if (DOM.readingBookmarkBtn) {
+      DOM.readingBookmarkBtn.classList.toggle("bookmarked", isBookmarked);
+      DOM.readingBookmarkBtn.textContent = isBookmarked ? "★" : "☆";
+    }
+
+    // Build In-Page Headline HTML (Flows seamlessly into text, zero barrier)
     let headerHTML = `
       <header class="article-header">
         <div class="article-top-meta">
           <span class="book-category-badge">${escapeHTML(book.badge || 'Islamic Classical')}</span>
-          <span class="article-seq-indicator">${currentNum} / ${totalChapters}</span>
+          <span class="article-seq-indicator">${escapeHTML(book.title)} • Chapter ${currentNum} of ${totalChapters}</span>
         </div>
         <h1 class="article-title">${escapeHTML(chapter.title)}</h1>
         ${chapter.title_urdu ? `<div class="article-urdu-title">${escapeHTML(chapter.title_urdu)}</div>` : ''}
         ${chapter.subtitle ? `<div class="article-subtitle">${escapeHTML(chapter.subtitle)}</div>` : ''}
         ${chapter.hawala ? `<div class="article-hawala">📚 ${escapeHTML(chapter.hawala)}</div>` : ''}
-        
-        <div class="article-actions-bar">
-          <button class="article-action-btn btn-primary-action" id="btn-copy-full-article" title="Copy complete article formatted for WhatsApp">
-            📋 Copy Full Article
-          </button>
-          <button class="article-action-btn" id="btn-share-full-article" title="Share complete article to WhatsApp">
-            💬 Share WhatsApp
-          </button>
-          <button class="article-action-btn ${isBookmarked ? 'bookmarked' : ''}" id="btn-bookmark-article" title="${isBookmarked ? 'Remove Bookmark' : 'Save Article'}">
-            ${isBookmarked ? '★ Bookmarked' : '⭐ Bookmark'}
-          </button>
-        </div>
       </header>
     `;
 
@@ -763,7 +816,21 @@
       });
     }
 
-    proseHTML += `</div>`;
+    // Append Article Completion Footer & Colophon
+    proseHTML += `
+      <footer class="article-footer-colophon">
+        <div class="footer-divider-ornament">✦ ✦ ✦</div>
+        <div class="footer-actions-wrap">
+          <button class="article-action-btn btn-primary-action" id="btn-footer-copy" title="Copy Complete Article">📋 Copy Article</button>
+          <button class="article-action-btn" id="btn-footer-share" title="Share Complete Article to WhatsApp">💬 Share WhatsApp</button>
+          <button class="article-action-btn ${isBookmarked ? 'bookmarked' : ''}" id="btn-footer-bookmark">⭐ ${isBookmarked ? 'Bookmarked' : 'Bookmark'}</button>
+        </div>
+        <div class="footer-colophon-text">
+          <strong>${escapeHTML(book.title)}</strong> • Chapter ${currentNum}<br>
+          <small>Roman Urdu Islamic Library • Curated by Hamid Gazi (Surat)</small>
+        </div>
+      </footer>
+    </div>`;
 
     // Inject into viewport
     DOM.articleContainer.innerHTML = headerHTML + proseHTML;
@@ -784,28 +851,25 @@
   }
 
   function attachArticleEventListeners(book, chapter) {
-    // Copy Full Article
-    const copyFullBtn = document.getElementById("btn-copy-full-article");
-    if (copyFullBtn) {
-      copyFullBtn.addEventListener("click", () => {
+    const footerCopyBtn = document.getElementById("btn-footer-copy");
+    if (footerCopyBtn) {
+      footerCopyBtn.addEventListener("click", () => {
         const text = formatFullArticleForWhatsApp(book, chapter);
         copyToClipboard(text, "Full article copied! Ready for WhatsApp");
       });
     }
 
-    // Share Full Article
-    const shareFullBtn = document.getElementById("btn-share-full-article");
-    if (shareFullBtn) {
-      shareFullBtn.addEventListener("click", () => {
+    const footerShareBtn = document.getElementById("btn-footer-share");
+    if (footerShareBtn) {
+      footerShareBtn.addEventListener("click", () => {
         const text = formatFullArticleForWhatsApp(book, chapter);
         shareDirectWhatsApp(text);
       });
     }
 
-    // Bookmark Article
-    const bookmarkBtn = document.getElementById("btn-bookmark-article");
-    if (bookmarkBtn) {
-      bookmarkBtn.addEventListener("click", () => {
+    const footerBookmarkBtn = document.getElementById("btn-footer-bookmark");
+    if (footerBookmarkBtn) {
+      footerBookmarkBtn.addEventListener("click", () => {
         toggleArticleBookmark(book, chapter);
       });
     }
@@ -971,6 +1035,18 @@
     DOM.searchDeckBody = document.getElementById("search-deck-body");
     DOM.searchDeckTitle = document.getElementById("search-deck-title");
     DOM.searchDeckCloseBtn = document.getElementById("btn-close-search-deck");
+
+    // Reading Context Header Elements
+    DOM.appHeader = document.getElementById("app-header");
+    DOM.readingHeaderBar = document.getElementById("reading-header-bar");
+    DOM.readingBookBadge = document.getElementById("reading-header-book-badge");
+    DOM.readingTitle = document.getElementById("reading-header-title");
+    DOM.readingSub = document.getElementById("reading-header-sub");
+    DOM.readingCopyBtn = document.getElementById("btn-reading-copy");
+    DOM.readingShareBtn = document.getElementById("btn-reading-share");
+    DOM.readingBookmarkBtn = document.getElementById("btn-reading-bookmark");
+    DOM.readingTocBtn = document.getElementById("btn-reading-toc");
+    DOM.readingTocJump = document.getElementById("btn-reading-toc-jump");
   }
 
   function appBootloader() {
