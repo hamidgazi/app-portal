@@ -96,7 +96,9 @@
       rev: "makki",
       arabic: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
       english: "In the name of Allah, the Entirely Merciful, the Especially Merciful.",
-      urdu: "اللہ کے نام سے شروع جو نہایت مہربان رحمت والا۔"
+      urdu: "اللہ کے نام سے شروع جو نہایت مہربان رحمت والا۔",
+      urKanzulIman: "اللہ کے نام سے شروع جو نہایت مہربان رحمت والا۔",
+      urKanzulIrfan: "اللہ کے نام سے شروع جو نہایت مہربان، ہمیشہ رحم فرمانے والا ہے۔"
     },
     {
       surahId: 1,
@@ -106,7 +108,9 @@
       rev: "makki",
       arabic: "اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ",
       english: "Guide us on the Straight Path.",
-      urdu: "ہم کو سیدھا راستہ چلا۔"
+      urdu: "ہم کو سیدھا راستہ چلا۔",
+      urKanzulIman: "ہم کو سیدھا راستہ چلا۔",
+      urKanzulIrfan: "ہمیں  سیدھے راستے پر چلا۔"
     },
     {
       surahId: 2,
@@ -116,7 +120,9 @@
       rev: "madani",
       arabic: "اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ",
       english: "Allah - there is no deity except Him, the Ever-Living, the Sustainer of all existence. Neither drowsiness overtakes Him nor sleep. To Him belongs whatever is in the heavens and whatever is on the earth.",
-      urdu: "اللہ ہے جس کے سوا کسی کی بندگی نہیں وہ آپ زندہ اوروں کا قائم رکھنے والا اسے نہ اونگھ آئے نہ نیند اسی کا ہے جو کچھ آسمانوں میں ہے اور جو کچھ زمین میں۔"
+      urdu: "اللہ ہے جس کے سوا کسی کی بندگی نہیں وہ آپ زندہ اوروں کا قائم رکھنے والا اسے نہ اونگھ آئے نہ نیند اسی کا ہے جو کچھ آسمانوں میں ہے اور جو کچھ زمین میں۔",
+      urKanzulIman: "اللہ ہے جس کے سوا کسی کی بندگی نہیں وہ آپ زندہ اوروں کا قائم رکھنے والا اسے نہ اونگھ آئے نہ نیند اسی کا ہے جو کچھ آسمانوں میں ہے اور جو کچھ زمین میں۔",
+      urKanzulIrfan: "اللہ  وہ ہے جس کے سوا کوئی معبود نہیں، وہ خود زندہ ہے ، دوسروں  کو قائم رکھنے والاہے، اسے نہ اونگھ آتی ہے اور نہ نیند ، جو کچھ آسمانوں  میں  ہے اور جو کچھ زمین میں  سب اسی کا ہے ۔"
     },
     {
       surahId: 2,
@@ -126,7 +132,9 @@
       rev: "madani",
       arabic: "آمَنَ الرَّسُولُ بِمَا أُنْزِلَ إِلَيْهِ مِنْ رَبِّهِ وَالْمُؤْمِنُونَ ۚ كُلٌّ آمَنَ بِاللَّهِ وَمَلَائِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ",
       english: "The Messenger has believed in what was revealed to him from his Lord, and [so have] the believers. All of them have believed in Allah and His angels and His books and His messengers.",
-      urdu: "رسول ایمان لایا اس پر جو اس کے رب کے پاس سے اس پر اترا اور مسلمان سب نے مانا اللہ اور اس کے فرشتوں اور اس کی کتابوں اور اس کے رسولوں کو۔"
+      urdu: "رسول ایمان لایا اس پر جو اس کے رب کے پاس سے اس پر اترا اور مسلمان سب نے مانا اللہ اور اس کے فرشتوں اور اس کی کتابوں اور اس کے رسولوں کو۔",
+      urKanzulIman: "رسول ایمان لایا اس پر جو اس کے رب کے پاس سے اس پر اترا اور مسلمان سب نے مانا اللہ اور اس کے فرشتوں اور اس کی کتابوں اور اس کے رسولوں کو۔",
+      urKanzulIrfan: "رسول اس پر ایمان لایا جو اس کے رب کی طرف سے اس کی طرف نازل کیا گیا اور مسلمان بھی۔ سب اللہ  پراور اس کے فرشتوں  اور اس کی کتابوں  اور اس کے رسولوں  پر ایمان لائے۔"
     },
     {
       surahId: 24,
@@ -136,7 +144,9 @@
       rev: "madani",
       arabic: "اللَّهُ نُورُ السَّمَاوَاتِ وَالْأَرْضِ ۚ مَثَلُ نُورِهِ كَمِشْكَاةٍ فِيهَا مِصْبَاحٌ ۖ الْمِصْبَاحُ فِي زُجَاجَةٍ ۖ الزُّجَاجَةُ كَأَنَّهَا كَوْكَبٌ دُرِّيٌّ",
       english: "Allah is the Light of the heavens and the earth. The example of His light is like a niche within which is a lamp, the lamp is within glass, the glass as if it were a pearly white star.",
-      urdu: "اللہ نور ہے آسمانوں اور زمین کا اس کے نور کی مثال ایسی جیسے ایک طاق کہ اس میں چراغ ہے وہ چراغ ایک فانوس میں ہے فانوس گویا ایک موتی کا سا چمکتا ستارہ۔"
+      urdu: "اللہ نور ہے آسمانوں اور زمین کا اس کے نور کی مثال ایسی جیسے ایک طاق کہ اس میں چراغ ہے وہ چراغ ایک فانوس میں ہے فانوس گویا ایک موتی کا سا چمکتا ستارہ۔",
+      urKanzulIman: "اللہ نور ہے آسمانوں اور زمین کا اس کے نور کی مثال ایسی جیسے ایک طاق کہ اس میں چراغ ہے وہ چراغ ایک فانوس میں ہے فانوس گویا ایک موتی کا سا چمکتا ستارہ۔",
+      urKanzulIrfan: "اللہ  آسمانوں   اور زمینوں   کو روشن کرنے والا ہے۔ اس کے نور کی مثال ایسی ہے جیسے ایک طاق ہو جس میں   چراغ ہے، وہ چراغ ایک فانوس میں   ہے، وہ فانوس گویا ایک موتی کی طرح چمکتا ہوا ستارہ ہے۔"
     },
     {
       surahId: 52,
@@ -146,7 +156,9 @@
       rev: "makki",
       arabic: "اصْلَوْهَا فَاصْبِرُوا أَوْ لَا تَصْبِرُوا سَوَاءٌ عَلَيْكُمْ ۖ إِنَّمَا تُجْزَوْنَ مَا كُنْتُمْ تَعْمَلُونَ",
       english: "[Enter to] burn therein; then be patient or impatient - it is all the same for you. You are only being recompensed for what you used to do.",
-      urdu: "اس میں جاؤ اب چاہے صبر کرو یا نہ کرو سب تم پر ایک سا ہے تمہیں اسی کا بدلہ ملے گا جو تم کرتے تھے۔"
+      urdu: "اس میں جاؤ اب چاہے صبر کرو یا نہ کرو سب تم پر ایک سا ہے تمہیں اسی کا بدلہ ملے گا جو تم کرتے تھے۔",
+      urKanzulIman: "اس میں جاؤ اب چاہے صبر کرو یا نہ کرو سب تم پر ایک سا ہے تمہیں اسی کا بدلہ ملے گا جو تم کرتے تھے۔",
+      urKanzulIrfan: "اس میں   داخل ہوجاؤ،تو اب چاہے صبر کرو یا نہ کرو، سب تم پربرابر ہے، تمہیں   اسی کا بدلہ دیا جارہا ہے جو تم کرتے تھے۔"
     }
   ];
 
@@ -297,8 +309,12 @@
             tarjumaChips.forEach((c) => c.classList.remove('active'));
             chip.classList.add('active');
             this.activeTarjuma = chip.dataset.tarjuma || 'both';
-            const curVal = input.value;
-            this.executeSearch(curVal);
+            const curVal = input ? input.value : '';
+            if (curVal && curVal.trim()) {
+              this.executeSearch(curVal);
+            } else {
+              this.renderCelebratedLanding();
+            }
           });
         });
 
@@ -774,7 +790,36 @@
       this.searchObserver.observe(sentinel);
     },
 
+    getAyahTranslations(surahId, ayahNum) {
+      if (!this._ayahLookupMap) {
+        this._ayahLookupMap = new Map();
+        const bundle = window.QURAN_AYAT_SEARCH_DATA || window.QURAN_AYAT_SEARCH_BUNDLE;
+        if (Array.isArray(bundle)) {
+          for (let i = 0; i < bundle.length; i++) {
+            const row = bundle[i];
+            this._ayahLookupMap.set(`${row[0]}:${row[1]}`, {
+              iman: row[6] || '',
+              irfan: row[8] || '',
+              english: row[5] || '',
+              arabic: row[4] || ''
+            });
+          }
+        }
+      }
+      return this._ayahLookupMap.get(`${surahId}:${ayahNum}`) || null;
+    },
+
     buildAyahCardHtml(v, query, rankNum, isExactMatch) {
+      // Auto-resolve dual translations from 6,236 Ayat bundle if missing
+      if (v.surahId && v.ayahNum) {
+        const trans = this.getAyahTranslations(v.surahId, v.ayahNum);
+        if (trans) {
+          if (!v.urKanzulIman && trans.iman) v.urKanzulIman = trans.iman;
+          if (!v.urKanzulIrfan && trans.irfan) v.urKanzulIrfan = trans.irfan;
+          if (!v.urdu) v.urdu = v.urKanzulIman || trans.iman;
+        }
+      }
+
       // Preserve authentic vocalized Arabic text without regex disruption if searching in Urdu/English
       const isArabicQuery = /[؀-ۿ]/.test(query) && !/[ٹڈڑںےھچپگژ]/.test(query);
       const isUrduQuery = /[؀-ۿ]/.test(query);
@@ -849,8 +894,7 @@
         html += `
           <div class="search-ayah-urdu kanzul-iman">
             <div class="tarjuma-meta-bar">
-              <span class="tarjuma-source-badge iman">Kanzul Iman</span>
-              <span class="tarjuma-translator-sub">امام احمد رضا خان علیہ الرحمہ</span>
+              <span class="tarjuma-source-badge iman" title="Kanzul Iman — Imam Ahmad Raza Khan">Kanzul Iman</span>
             </div>
             <div class="tarjuma-text">${highlightedIman}</div>
           </div>`;
@@ -859,8 +903,7 @@
         html += `
           <div class="search-ayah-urdu kanzul-irfan">
             <div class="tarjuma-meta-bar">
-              <span class="tarjuma-source-badge irfan">Kanzul Irfan</span>
-              <span class="tarjuma-translator-sub">مفتی محمد قاسم قادری دامت برکاتہم</span>
+              <span class="tarjuma-source-badge irfan" title="Kanzul Irfan — Mufti Muhammad Qasim Qadri">Kanzul Irfan</span>
             </div>
             <div class="tarjuma-text">${highlightedIrfan}</div>
           </div>`;
@@ -870,8 +913,7 @@
         html = `
           <div class="search-ayah-urdu kanzul-iman">
             <div class="tarjuma-meta-bar">
-              <span class="tarjuma-source-badge iman">Kanzul Iman</span>
-              <span class="tarjuma-translator-sub">امام احمد رضا خان علیہ الرحمہ</span>
+              <span class="tarjuma-source-badge iman" title="Kanzul Iman — Imam Ahmad Raza Khan">Kanzul Iman</span>
             </div>
             <div class="tarjuma-text">${highlightedIman}</div>
           </div>`;

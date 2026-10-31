@@ -7914,7 +7914,7 @@ span[class*="tj-"]:not(.tj-pill) {
   letter-spacing: 0.5px;
   padding: 2px 8px;
   border-radius: 4px;
-  margin-left: 8px;
+  margin-left: 0;
   vertical-align: middle;
   direction: ltr;
 }
@@ -7927,7 +7927,7 @@ span[class*="tj-"]:not(.tj-pill) {
 .tarjuma-meta-bar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-bottom: 6px;
   direction: ltr;
   padding-bottom: 4px;
