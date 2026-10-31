@@ -156,6 +156,7 @@
     isDenseMode: true,
     activeCategory: 'all',
     activeRevelation: 'all',
+    activeTarjuma: 'both',
     debounceTimer: null,
     lastQuery: '',
     tafsirCache: new Map(),
@@ -275,6 +276,19 @@
             revChips.forEach((c) => c.classList.remove('active'));
             chip.classList.add('active');
             this.activeRevelation = chip.dataset.rev || 'all';
+            const curVal = input.value;
+            this.executeSearch(curVal);
+          });
+        });
+
+        // Dual-Tarjuma Filter Chips (Both, Kanzul Iman, Kanzul Irfan)
+        const tarjumaChips = document.querySelectorAll('.search-tarjuma-chip');
+        tarjumaChips.forEach((chip) => {
+          chip.addEventListener('click', () => {
+            StudioSound.playClick();
+            tarjumaChips.forEach((c) => c.classList.remove('active'));
+            chip.classList.add('active');
+            this.activeTarjuma = chip.dataset.tarjuma || 'both';
             const curVal = input.value;
             this.executeSearch(curVal);
           });
@@ -453,10 +467,11 @@
       let matches = [];
       if (window.QuranAISearchEngine && typeof window.QuranAISearchEngine.search === 'function') {
         matches = window.QuranAISearchEngine.search(q, this.activeCategory, 80);
-      } else if (window.QURAN_AYAT_SEARCH_BUNDLE && Array.isArray(window.QURAN_AYAT_SEARCH_BUNDLE)) {
+      } else if ((window.QURAN_AYAT_SEARCH_DATA || window.QURAN_AYAT_SEARCH_BUNDLE) && Array.isArray(window.QURAN_AYAT_SEARCH_DATA || window.QURAN_AYAT_SEARCH_BUNDLE)) {
+        const searchBundle = window.QURAN_AYAT_SEARCH_DATA || window.QURAN_AYAT_SEARCH_BUNDLE;
         // Fallback search directly over the 6,236 Ayat bundle
         const qLower = q.toLowerCase();
-        for (const v of window.QURAN_AYAT_SEARCH_BUNDLE) {
+        for (const v of searchBundle) {
           const sId = v[0];
           const aNum = v[1];
           const sNameRoman = v[2];
@@ -479,6 +494,8 @@
               arabic: arVocalized,
               arabicClean: arClean,
               urdu: urTrans,
+              urKanzulIman: urTrans,
+              urKanzulIrfan: v[8] || '',
               action: () => {
                 if (window.CorpusEngine) window.CorpusEngine.jumpToAyah(sId, aNum);
               }
@@ -768,22 +785,40 @@
       const highlightedIman = isUrduQuery ? this.highlightText(urIman, query) : urIman;
       const highlightedIrfan = isUrduQuery && urIrfan ? this.highlightText(urIrfan, query) : urIrfan;
 
-      const showIman = this.activeTarjuma === 'both' || this.activeTarjuma === 'iman';
-      const showIrfan = (this.activeTarjuma === 'both' || this.activeTarjuma === 'irfan') && urIrfan;
+      const active = this.activeTarjuma || 'both';
+      const showIman = active === 'both' || active === 'iman';
+      const showIrfan = (active === 'both' || active === 'irfan') && !!urIrfan;
 
       let html = '';
       if (showIman && urIman) {
         html += `
           <div class="search-ayah-urdu kanzul-iman">
-            <span class="tarjuma-source-badge iman">Kanzul Iman</span>
-            <span class="tarjuma-text">${highlightedIman}</span>
+            <div class="tarjuma-meta-bar">
+              <span class="tarjuma-source-badge iman">Kanzul Iman</span>
+              <span class="tarjuma-translator-sub">امام احمد رضا خان علیہ الرحمہ</span>
+            </div>
+            <div class="tarjuma-text">${highlightedIman}</div>
           </div>`;
       }
       if (showIrfan && urIrfan) {
         html += `
           <div class="search-ayah-urdu kanzul-irfan">
-            <span class="tarjuma-source-badge irfan">Kanzul Irfan</span>
-            <span class="tarjuma-text">${highlightedIrfan}</span>
+            <div class="tarjuma-meta-bar">
+              <span class="tarjuma-source-badge irfan">Kanzul Irfan</span>
+              <span class="tarjuma-translator-sub">مفتی محمد قاسم قادری دامت برکاتہم</span>
+            </div>
+            <div class="tarjuma-text">${highlightedIrfan}</div>
+          </div>`;
+      }
+      // Resilient fallback: If nothing rendered but we have Iman translation, show Iman
+      if (!html && urIman) {
+        html = `
+          <div class="search-ayah-urdu kanzul-iman">
+            <div class="tarjuma-meta-bar">
+              <span class="tarjuma-source-badge iman">Kanzul Iman</span>
+              <span class="tarjuma-translator-sub">امام احمد رضا خان علیہ الرحمہ</span>
+            </div>
+            <div class="tarjuma-text">${highlightedIman}</div>
           </div>`;
       }
       return html;

@@ -7923,6 +7923,31 @@ span[class*="tj-"]:not(.tj-pill) {
   color: #fbbf24;
   border: 1px solid rgba(251, 191, 36, 0.3);
 }
+
+.tarjuma-meta-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  direction: ltr;
+  padding-bottom: 4px;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+}
+.tarjuma-translator-sub {
+  font-family: var(--font-urdu, "Jameel Noori Nastaleeq", "Noto Nastaliq Urdu", serif);
+  font-size: 0.95rem;
+  color: #94a3b8;
+  direction: rtl;
+}
+.tarjuma-text {
+  display: block;
+  font-family: var(--font-urdu, "Jameel Noori Nastaleeq", "Noto Nastaliq Urdu", serif);
+  font-size: 1.25rem;
+  line-height: 2.2;
+  text-align: right;
+  direction: rtl;
+}
+
 .tarjuma-source-badge.irfan {
   background: rgba(56, 189, 248, 0.18);
   color: #38bdf8;
