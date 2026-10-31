@@ -23632,6 +23632,58 @@
       .toLowerCase();
   }
 
+  // --- 2.1 UNIVERSAL CORPUS VERSE INDEX (6,236 Ayat Grounded Phrase Engine) ---
+  const CorpusVerseIndex = {
+    corpus: null,
+    cache: new Map(),
+
+    init() {
+      if (this.corpus) return;
+      let bundle = null;
+      if (typeof window !== 'undefined') {
+        bundle = window.QURAN_AYAT_SEARCH_DATA || window.QURAN_AYAT_SEARCH_BUNDLE;
+      } else if (typeof global !== 'undefined') {
+        bundle = global.QURAN_AYAT_SEARCH_DATA || global.QURAN_AYAT_SEARCH_BUNDLE;
+      }
+      if (!bundle && typeof require !== 'undefined') {
+        try {
+          bundle = require('../data/quran_ayat_search_bundle.json');
+        } catch (e) {}
+      }
+      if (Array.isArray(bundle)) {
+        this.corpus = bundle.map(r => ({
+          sId: r[0],
+          aNum: r[1],
+          imanNorm: normalizeArabicUrdu(r[6] || ''),
+          irfanNorm: normalizeArabicUrdu(r[8] || ''),
+          arNorm: normalizeArabicUrdu(r[7] || r[4] || '')
+        }));
+      }
+    },
+
+    queryPhrase(urduPhrase) {
+      this.init();
+      if (!this.corpus || !urduPhrase) return null;
+      const n = normalizeArabicUrdu(urduPhrase);
+      if (!n || n.length < 2) return null;
+      if (this.cache.has(n)) return this.cache.get(n);
+
+      let count = 0;
+      const surahs = [];
+      for (let i = 0; i < this.corpus.length; i++) {
+        const d = this.corpus[i];
+        if (d.imanNorm.includes(n) || d.irfanNorm.includes(n)) {
+          count++;
+          if (surahs.length < 6) surahs.push(`${d.sId}:${d.aNum}`);
+        }
+      }
+      const res = { count, surahs, phrase: urduPhrase };
+      if (this.cache.size > 500) this.cache.clear();
+      this.cache.set(n, res);
+      return res;
+    }
+  };
+
   // Distinct language markers
   const ROMAN_URDU_MARKERS = new Set([
     'ka', 'ki', 'ke', 'ko', 'se', 'mein', 'me', 'par', 'pe', 'ne', 'tak',
@@ -24439,12 +24491,8 @@
 
       const pills = [];
       const cleanNorm = raw.toLowerCase().replace(/[^a-z0-9\s-]/g, ' ').trim().replace(/\s+/g, ' ');
-      const querySkel = getConsonantSkeleton(cleanNorm);
-      const matchedQuranicPhrases = [];
-      const seenUrdu = new Set();
-      let primaryUrduScript = '';
 
-      // Add language badge
+      // Language identification badge
       if (lang === 'roman_urdu') {
         pills.push({ type: 'lang', label: '🌐 Roman Urdu', text: 'roman_urdu' });
       } else if (lang === 'english') {
@@ -24454,6 +24502,10 @@
       } else {
         pills.push({ type: 'lang', label: '📖 Arabic', text: 'arabic' });
       }
+
+      let primaryUrduScript = '';
+      const matchedVariants = [];
+      const seenUrdu = new Set();
 
       // Check lexical entry for single words or English phrases
       let lexicalEntry = null;
@@ -24477,146 +24529,166 @@
         }
       }
 
-      if (lexicalEntry && lexicalEntry.ur) {
-        primaryUrduScript = lexicalEntry.ur;
+      // Compute primary Urdu transliteration
+      let candidateUrdu = '';
+      if (lang === 'urdu') {
+        candidateUrdu = raw;
+      } else if (lang === 'english' && lexicalEntry && lexicalEntry.ur) {
+        candidateUrdu = lexicalEntry.ur;
+      } else if (lexicalEntry && lexicalEntry.ur && !raw.includes(' ')) {
+        candidateUrdu = lexicalEntry.ur;
+      } else {
+        candidateUrdu = this.transliteratePhrase(raw);
+      }
+      primaryUrduScript = candidateUrdu;
+
+      // 1. Verify candidateUrdu directly against all 6,236 Ayat
+      const exactMatch = CorpusVerseIndex.queryPhrase(candidateUrdu);
+      if (exactMatch && exactMatch.count > 0) {
+        seenUrdu.add(candidateUrdu);
+        matchedVariants.push(candidateUrdu);
+        pills.push({
+          type: 'urdu',
+          label: `✍️ ${candidateUrdu} (${exactMatch.count} ${exactMatch.count === 1 ? 'Ayat' : 'Ayat'})`,
+          text: candidateUrdu,
+          value: candidateUrdu,
+          count: exactMatch.count,
+          surahs: exactMatch.surahs
+        });
+      } else if (candidateUrdu && candidateUrdu.trim()) {
+        seenUrdu.add(candidateUrdu);
+        pills.push({
+          type: 'urdu',
+          label: `✍️ ${candidateUrdu}`,
+          text: candidateUrdu,
+          value: candidateUrdu
+        });
       }
 
-      // 1. EXACT PHRASE MATCH IN QURANIC GRAPH
-      if (QURANIC_EXACT_MAP.has(cleanNorm)) {
-        const item = QURANIC_EXACT_MAP.get(cleanNorm);
-        if (!seenUrdu.has(item.urdu)) {
-          seenUrdu.add(item.urdu);
-          matchedQuranicPhrases.push({ ...item, matchType: 'exact_phrase', score: 1000 });
-          if (!primaryUrduScript) primaryUrduScript = item.urdu;
-        }
-      }
-
-      // 2. CONSONANT SKELETON TYPO MATCH (Preserving root initial consonant)
-      if (querySkel) {
-        if (QURANIC_PHRASE_SKELETON_MAP.has(querySkel)) {
-          for (const item of QURANIC_PHRASE_SKELETON_MAP.get(querySkel)) {
-            if (!seenUrdu.has(item.urdu)) {
-              seenUrdu.add(item.urdu);
-              matchedQuranicPhrases.push({ ...item, matchType: 'skeleton_exact', score: 900 });
-              if (!primaryUrduScript) primaryUrduScript = item.urdu;
+      // 2. Discover authentic Quranic sub-phrases or parallel variants sharing words
+      const words = candidateUrdu.split(/\s+/).filter(w => w.length > 0);
+      if (words.length >= 3) {
+        for (let len = words.length - 1; len >= 2; len--) {
+          for (let i = 0; i <= words.length - len; i++) {
+            if (pills.length >= 5) break;
+            const sub = words.slice(i, i + len).join(' ');
+            if (seenUrdu.has(sub)) continue;
+            const subRes = CorpusVerseIndex.queryPhrase(sub);
+            if (subRes && subRes.count > 0 && subRes.count <= 250) {
+              seenUrdu.add(sub);
+              matchedVariants.push(sub);
+              pills.push({
+                type: 'urdu',
+                label: `✍️ ${sub} (${subRes.count} ${subRes.count === 1 ? 'Ayat' : 'Ayat'})`,
+                text: sub,
+                value: sub,
+                count: subRes.count,
+                surahs: subRes.surahs
+              });
             }
           }
-        } else {
-          for (const [sk, items] of QURANIC_PHRASE_SKELETON_MAP.entries()) {
-            if (Math.abs(sk.length - querySkel.length) <= 1 && querySkel.length >= 4 && sk[0] === querySkel[0]) {
-              let diff = 0;
-              let i = 0, j = 0;
-              while (i < querySkel.length && j < sk.length) {
-                if (querySkel[i] === sk[j]) {
-                  i++; j++;
-                } else {
-                  diff++;
-                  if (diff > 1) break;
-                  if (querySkel.length > sk.length) i++;
-                  else if (sk.length > querySkel.length) j++;
-                  else { i++; j++; }
-                }
-              }
-              diff += (querySkel.length - i) + (sk.length - j);
-              if (diff <= 1) {
-                for (const item of items) {
-                  if (!seenUrdu.has(item.urdu)) {
-                    seenUrdu.add(item.urdu);
-                    matchedQuranicPhrases.push({ ...item, matchType: 'skeleton_fuzzy', score: 850 });
-                    if (!primaryUrduScript) primaryUrduScript = item.urdu;
-                  }
-                }
-              }
+          if (pills.length >= 4) break;
+        }
+      }
+
+      // Check Quranic parallel phrasings for established patterns (e.g. 'تمہیں' <-> 'تم کو')
+      if (candidateUrdu.includes('تمہیں')) {
+        const altVariant = candidateUrdu.replace(/تمہیں/g, 'تم کو');
+        if (!seenUrdu.has(altVariant)) {
+          const altRes = CorpusVerseIndex.queryPhrase(altVariant);
+          if (altRes && altRes.count > 0) {
+            seenUrdu.add(altVariant);
+            matchedVariants.push(altVariant);
+            pills.push({
+              type: 'urdu',
+              label: `✍️ ${altVariant} (${altRes.count} ${altRes.count === 1 ? 'Ayat' : 'Ayat'})`,
+              text: altVariant,
+              value: altVariant,
+              count: altRes.count,
+              surahs: altRes.surahs
+            });
+          }
+        }
+      } else if (candidateUrdu.includes('تم کو')) {
+        const altVariant = candidateUrdu.replace(/تم کو/g, 'تمہیں');
+        if (!seenUrdu.has(altVariant)) {
+          const altRes = CorpusVerseIndex.queryPhrase(altVariant);
+          if (altRes && altRes.count > 0) {
+            seenUrdu.add(altVariant);
+            matchedVariants.push(altVariant);
+            pills.push({
+              type: 'urdu',
+              label: `✍️ ${altVariant} (${altRes.count} ${altRes.count === 1 ? 'Ayat' : 'Ayat'})`,
+              text: altVariant,
+              value: altVariant,
+              count: altRes.count,
+              surahs: altRes.surahs
+            });
+          }
+        }
+      }
+
+      // 3. For English queries or lexical entries with alts, query corpus for alts too
+      if (lexicalEntry) {
+        if (lexicalEntry.ur && !seenUrdu.has(lexicalEntry.ur)) {
+          const enRes = CorpusVerseIndex.queryPhrase(lexicalEntry.ur);
+          if (enRes && enRes.count > 0) {
+            seenUrdu.add(lexicalEntry.ur);
+            matchedVariants.push(lexicalEntry.ur);
+            pills.push({
+              type: 'urdu',
+              label: `✍️ ${lexicalEntry.ur} (${enRes.count} ${enRes.count === 1 ? 'Ayat' : 'Ayat'})`,
+              text: lexicalEntry.ur,
+              value: lexicalEntry.ur,
+              count: enRes.count,
+              surahs: enRes.surahs
+            });
+          }
+        }
+        const alts = Array.isArray(lexicalEntry.alt) ? lexicalEntry.alt : [];
+        for (const alt of alts) {
+          const altUr = this.transliteratePhrase(alt);
+          if (altUr && !seenUrdu.has(altUr)) {
+            const altRes = CorpusVerseIndex.queryPhrase(altUr);
+            if (altRes && altRes.count > 0) {
+              seenUrdu.add(altUr);
+              matchedVariants.push(altUr);
+              pills.push({
+                type: 'urdu',
+                label: `✍️ ${altUr} (${altRes.count} ${altRes.count === 1 ? 'Ayat' : 'Ayat'})`,
+                text: altUr,
+                value: altUr,
+                count: altRes.count,
+                surahs: altRes.surahs
+              });
             }
           }
         }
       }
 
-      // 3. KEYWORD-BASED REAL QURANIC PHRASE EXPANSION (WORD-LEVEL ISOLATION)
-      const tokens = cleanNorm.split(/\s+/).filter(t => t.length > 2 && !ENGLISH_STOP_WORDS.has(t));
-      for (const item of QURANIC_TARJUMA_PHRASES) {
-        if (seenUrdu.has(item.urdu)) continue;
-
-        let tokenMatches = 0;
-        for (const t of tokens) {
-          const tSkel = getConsonantSkeleton(t);
-          const hasInRoman = item.roman && item.roman.some(r => {
-            if (r === t) return true;
-            return r.split(/\s+/).some(w => w === t || (tSkel.length >= 3 && getConsonantSkeleton(w) === tSkel));
-          });
-          const hasInEn = item.en && item.en.some(e => {
-            if (e === t) return true;
-            return e.split(/\s+/).some(w => w === t || (tSkel.length >= 3 && getConsonantSkeleton(w) === tSkel));
-          });
-          const hasInUrdu = item.urdu.includes(t);
-          if (hasInRoman || hasInEn || hasInUrdu) {
-            tokenMatches++;
-          }
-        }
-
-        if (tokenMatches > 0) {
-          seenUrdu.add(item.urdu);
-          matchedQuranicPhrases.push({
-            ...item,
-            matchType: 'keyword',
-            score: (tokenMatches * 100) + (item.count || 0)
-          });
-        }
-      }
-
-      // 4. SORT ONLY REAL QURANIC PHRASES BY MATCH SCORE & AYAH COUNT
-      matchedQuranicPhrases.sort((a, b) => {
-        if (b.score !== a.score) return b.score - a.score;
+      // Sort urdu pills:
+      // 1. Exact full-query transliteration phrase match ALWAYS first
+      // 2. Then by token length descending (more specific to user's intent first)
+      // 3. Then by Ayat frequency count descending
+      const langBadge = pills[0];
+      const urduPills = pills.slice(1).sort((a, b) => {
+        const aIsExact = (a.value === candidateUrdu || a.text === candidateUrdu);
+        const bIsExact = (b.value === candidateUrdu || b.text === candidateUrdu);
+        if (aIsExact && !bIsExact) return -1;
+        if (!aIsExact && bIsExact) return 1;
+        const aWords = (a.value || a.text || '').split(/\s+/).length;
+        const bWords = (b.value || b.text || '').split(/\s+/).length;
+        if (aWords !== bWords) return bWords - aWords;
         return (b.count || 0) - (a.count || 0);
       });
-
-      // 5. IF A SINGLE WORD OR EXACT LEXICAL ROOT ENTRY MATCHES, INCLUDE IT
-      if (lexicalEntry && lexicalEntry.ur) {
-        pills.push({
-          type: 'urdu',
-          label: `✍️ ${lexicalEntry.ur}`,
-          text: lexicalEntry.ur,
-          value: lexicalEntry.ur
-        });
-      }
-
-      // 6. GENERATE CLEAN 1-TAP PILLS WITH VERIFIED AYAH COUNTS (ZERO GENERIC SYNONYMS)
-      for (const p of matchedQuranicPhrases.slice(0, 5)) {
-        if (lexicalEntry && lexicalEntry.ur === p.urdu) continue;
-        pills.push({
-          type: 'urdu',
-          label: `✍️ ${p.urdu} (${p.count} ${p.count === 1 ? 'Ayat' : 'Ayat'})`,
-          text: p.urdu,
-          value: p.urdu,
-          count: p.count,
-          surahs: p.surahs
-        });
-      }
-
-      // If no pre-indexed phrase or lexical entry matched, generate direct transliteration pill
-      if (pills.length <= 1) {
-        const fallbackUrdu = this.transliteratePhrase(raw);
-        if (fallbackUrdu && fallbackUrdu.trim()) {
-          pills.push({
-            type: 'urdu',
-            label: `✍️ ${fallbackUrdu}`,
-            text: fallbackUrdu,
-            value: fallbackUrdu
-          });
-          if (!primaryUrduScript) primaryUrduScript = fallbackUrdu;
-        }
-      }
-
-      if (!primaryUrduScript) {
-        primaryUrduScript = matchedQuranicPhrases.length > 0 ? matchedQuranicPhrases[0].urdu : this.transliteratePhrase(raw);
-      }
+      const finalPills = langBadge ? [langBadge, ...urduPills] : urduPills;
 
       return {
         detectedLang: (lang === 'roman_urdu') ? 'Roman Urdu' : (lang === 'english' ? 'English' : 'Urdu'),
         langCode: lang,
         urduScript: primaryUrduScript,
-        pills,
-        variants: matchedQuranicPhrases.map(p => p.urdu)
+        pills: finalPills,
+        variants: matchedVariants
       };
     },
 
@@ -24625,6 +24697,7 @@
       const raw = query.trim();
       const lang = this.detectLanguage(raw);
       const expanded = new Map();
+      const cleanNorm = raw.toLowerCase().replace(/[^a-z0-9\s-]/g, ' ').trim().replace(/\s+/g, ' ');
 
       const addToken = (tok, weight) => {
         if (!tok) return;
@@ -24642,7 +24715,6 @@
         addToken(t.toLowerCase(), 1.0);
       }
 
-      const cleanNorm = raw.toLowerCase().replace(/[^a-z0-9\s-]/g, ' ').trim().replace(/\s+/g, ' ');
       const transliterated = this.transliteratePhrase(raw);
       if (transliterated) {
         addToken(transliterated, 1.0);
@@ -24651,49 +24723,42 @@
         }
       }
 
-      const smartData = this.getSmartPills(raw);
-      if (smartData && Array.isArray(smartData.variants)) {
-        for (const v of smartData.variants.slice(0, 4)) {
-          addToken(v, 1.0);
-          for (const ut of v.split(/\s+/)) {
-            addToken(ut, 0.95);
+      // Expand canonical Islamic terms and morphological alternates (e.g. roza -> روزے)
+      const entry = this.lookup(raw) || this.lookup(cleanNorm);
+      if (entry) {
+        if (entry.ur) {
+          addToken(entry.ur, 1.0);
+          for (const ut of entry.ur.split(/\s+/)) addToken(ut, 1.0);
+        }
+        if (Array.isArray(entry.alt)) {
+          for (const a of entry.alt) {
+            const transliteratedAlt = this.transliteratePhrase(a);
+            if (transliteratedAlt) {
+              addToken(transliteratedAlt, 0.95);
+              for (const ut of transliteratedAlt.split(/\s+/)) addToken(ut, 0.95);
+            }
+            const aEntry = this.lookup(a);
+            if (aEntry && aEntry.ur) {
+              addToken(aEntry.ur, 0.95);
+              for (const ut of aEntry.ur.split(/\s+/)) addToken(ut, 0.95);
+            }
           }
         }
       }
 
-      if (cleanNorm.includes('bheja') || cleanNorm.includes('bhejna') || cleanNorm.includes('send')) {
-        addToken('ہم نے تمہیں نہ بھیجا', 1.0);
-        addToken('ہم نے تم کو نہ بھیجا', 0.98);
-        addToken('نہ بھیجا', 0.95);
-        addToken('بھیجا', 0.95);
-      }
-      if (cleanNorm.includes('hamne') || cleanNorm.includes('humne')) {
-        addToken('ہم نے', 1.0);
-      }
-      if (cleanNorm.includes('aurat') || cleanNorm.includes('aurte') || cleanNorm.includes('women') || cleanNorm.includes('wives')) {
-        addToken('عورتیں', 1.0);
-        addToken('عورتوں', 0.98);
-        addToken('عورت', 0.95);
-      }
-      if (cleanNorm.includes('tumhari') || cleanNorm.includes('tumari') || cleanNorm.includes('tmhari')) {
-        addToken('تمہاری', 1.0);
-      }
-      if (cleanNorm.includes('apni') || cleanNorm.includes('apne')) {
-        addToken('اپنی', 1.0);
-        addToken('اپنے', 0.95);
-      }
-      if (cleanNorm.includes('walidain') || cleanNorm.includes('parents') || cleanNorm.includes('maa baap')) {
-        addToken('ماں باپ', 1.0);
-        addToken('ماں', 0.95);
-        addToken('باپ', 0.95);
-      }
-      if (cleanNorm.includes('namaz') || cleanNorm.includes('prayer')) {
-        addToken('نماز قائم رکھو', 1.0);
-        addToken('نماز', 1.0);
-      }
-      if (cleanNorm.includes('roza') || cleanNorm.includes('fasting')) {
-        addToken('روزے', 1.0);
-        addToken('روزہ', 0.95);
+      const smartData = this.getSmartPills(raw);
+      if (smartData && Array.isArray(smartData.variants)) {
+        const transWords = transliterated ? transliterated.split(/\s+/) : [];
+        for (const v of smartData.variants.slice(0, 4)) {
+          const vWords = v.split(/\s+/);
+          const overlap = vWords.filter(w => transWords.includes(w)).length;
+          if (transWords.length === 0 || (overlap / Math.max(vWords.length, transWords.length)) >= 0.5) {
+            addToken(v, 1.0);
+            for (const ut of vWords) {
+              addToken(ut, 0.95);
+            }
+          }
+        }
       }
 
       return Array.from(expanded.entries()).map(([term, weight]) => ({ term, weight }));

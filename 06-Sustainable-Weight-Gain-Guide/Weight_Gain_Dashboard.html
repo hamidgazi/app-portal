@@ -473,6 +473,45 @@
       box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
     }
 
+    /* Bio-Synergies & Culinary Chemistry Inspector Styles */
+    .synergy-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .synergy-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      touch-action: manipulation;
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+
+    .synergy-pill:hover {
+      background: var(--bg-card-hover);
+      color: var(--text-main);
+      border-color: rgba(34, 197, 94, 0.4);
+    }
+
+    .synergy-pill.active {
+      background: rgba(34, 197, 94, 0.18);
+      color: #22c55e;
+      border-color: #22c55e;
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.25);
+    }
+
     .triage-display {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1461,16 +1500,16 @@
           <table>
             <colgroup>
               <col style="width: 25%;">
-              <col style="width: 25%;">
-              <col style="width: 25%;">
-              <col style="width: 25%;">
+              <col style="width: 22%;">
+              <col style="width: 23%;">
+              <col style="width: 30%;">
             </colgroup>
             <thead>
               <tr>
                 <th>Food Item</th>
                 <th>Serving Size</th>
                 <th>Calories & Protein</th>
-                <th>Why It Works for Hardgainers</th>
+                <th>Why It Works & Bio-Synergy Hack</th>
               </tr>
             </thead>
             <tbody>
@@ -1478,58 +1517,204 @@
                 <td><strong>Chicken Thighs / Legs</strong></td>
                 <td>150g cooked curry</td>
                 <td>~ 310 kcal | 33g P</td>
-                <td>Dark meat has juicy intramuscular fats, easier to digest than dry breast.</td>
+                <td>Dark meat has juicy intramuscular fats, easier to digest. <span class="badge" style="background: rgba(34, 197, 94, 0.15); color: #22c55e;">🍋 +Lemon Squeeze: Fe²⁺</span></td>
               </tr>
               <tr>
                 <td><strong>Whole Eggs (3 Boiled/Bhurji)</strong></td>
                 <td>3 whole eggs</td>
                 <td>~ 225 kcal | 18g P</td>
-                <td>Yolks provide cholesterol for testosterone, choline, and fat-soluble vitamins.</td>
+                <td>Yolks provide testosterone cholesterol, choline, and D3. <span class="badge" style="background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan);">🍳 +Thermal Gradient: 91% P</span></td>
               </tr>
               <tr>
                 <td><strong>Mutton Chops / Curry</strong></td>
                 <td>120g portion</td>
                 <td>~ 340 kcal | 26g P</td>
-                <td>High in bioavailable heme iron, zinc, and natural dietary creatine.</td>
+                <td>High in bioavailable heme iron, zinc, and natural creatine. <span class="badge" style="background: rgba(239, 68, 68, 0.15); color: #ef4444;">🥩 Heme-Iron + Zinc</span></td>
               </tr>
               <tr>
                 <td><strong>Desi Ghee (Clarified Butter)</strong></td>
                 <td>1 level tablespoon</td>
                 <td>~ 115 kcal | 0g P</td>
-                <td>Pure calorie booster with zero bulk; delivers gut-healing butyrate.</td>
+                <td>Pure calorie booster; delivers gut-healing butyrate. <span class="badge" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b;">🧈 +Micelle Carrier (+2000%)</span></td>
               </tr>
               <tr>
                 <td><strong>Paneer (Full-Fat)</strong></td>
                 <td>100g raw/pan-fried</td>
                 <td>~ 270 kcal | 18g P</td>
-                <td>Slow-digesting casein protein; excellent before sleep or in curries.</td>
+                <td>Slow-digesting casein; sustained anti-catabolic nocturnal amino release.</td>
               </tr>
               <tr>
                 <td><strong>Soft Dates (Khajoor)</strong></td>
                 <td>4 medium dates</td>
                 <td>~ 240 kcal | 2g P</td>
-                <td>Instant natural glycogen fuel; rich in potassium and digestive enzymes.</td>
+                <td>Instant natural glycogen fuel; rich in potassium. <span class="badge" style="background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan);">⚡ +CreaT Glycemic Vector</span></td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      <div class="card" style="border: 1px solid rgba(34, 197, 94, 0.3);">
-        <h2 class="card-title" style="color: #22c55e;">🥤 The "Desi Power Bulk" Homemade Shake (~ 680 kcal)</h2>
-        <div style="background: rgba(34, 197, 94, 0.05); padding: 1.25rem; border-radius: 10px;">
-          <p style="font-weight: 700; margin-bottom: 0.5rem; color: var(--text-main);">Ingredients (Blend for 60 seconds with immersion stick blender):</p>
-          <ul style="padding-left: 1.25rem; font-size: 0.9rem; color: var(--text-muted); line-height: 1.7;">
-            <li><strong>250 ml</strong> Full-cream milk (room temperature or warm)</li>
-            <li><strong>2 medium</strong> Ripe bananas</li>
-            <li><strong>2 tablespoons (32g)</strong> Natural peanut butter (no palm oil)</li>
-            <li><strong>4 soft dates (Khajoor)</strong>, seeds removed</li>
-            <li><strong>5–6 soaked almonds/walnuts</strong></li>
-            <li><strong>1 pinch</strong> Cardamom (*elaichi*) or cinnamon powder (eliminates bloating)</li>
-          </ul>
-          <p style="margin-top: 0.75rem; font-size: 0.85rem; color: var(--accent-cyan);">
-            ⚡ <strong>Pro Tip</strong>: Drink daily at 05:00–05:30 PM. Takes 3 minutes to drink, exits stomach in 80 minutes!
-          </p>
+      <!-- Master Shakes & Tonics Grid -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.25rem; margin-bottom: 1.5rem;">
+        <!-- Card 1: Desi Power Bulk Shake -->
+        <div class="card" style="border: 1px solid rgba(34, 197, 94, 0.3); margin-bottom: 0;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem;">
+            <h2 class="card-title" style="color: #22c55e; margin-bottom: 0;">🥤 The "Desi Power Bulk" Shake</h2>
+            <span class="badge" style="background: rgba(34, 197, 94, 0.2); color: #22c55e;">~ 680 kcal | 24g P</span>
+          </div>
+          <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.75rem;">
+            <span class="badge" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid #f59e0b;">⚡ +Creatine Glycemic Transport (+20-30%)</span>
+            <span class="badge" style="background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan); border: 1px solid var(--accent-cyan);">🧈 +Lipid Emulsion</span>
+          </div>
+          <div style="background: rgba(34, 197, 94, 0.05); padding: 1rem; border-radius: 10px;">
+            <p style="font-weight: 700; margin-bottom: 0.4rem; color: var(--text-main); font-size: 0.85rem;">Ingredients (Blend for 60s with stick blender):</p>
+            <ul style="padding-left: 1.2rem; font-size: 0.82rem; color: var(--text-muted); line-height: 1.6;">
+              <li><strong>250 ml</strong> Full-cream milk (room temperature or warm)</li>
+              <li><strong>2 medium</strong> Ripe bananas (natural glucose/maltose insulin spark)</li>
+              <li><strong>2 tablespoons (32g)</strong> Natural peanut butter (no palm oil)</li>
+              <li><strong>4 soft dates (Khajoor)</strong>, seeds removed</li>
+              <li><strong>5–6 soaked almonds/walnuts</strong></li>
+              <li><strong>1 pinch</strong> Cardamom (*elaichi*) or cinnamon powder</li>
+              <li><strong>Clinical Bio-Hack</strong>: 3–5g Creatine Monohydrate</li>
+            </ul>
+            <p style="margin-top: 0.6rem; font-size: 0.8rem; color: var(--accent-cyan);">
+              ⚡ <strong>Bio-Hack</strong>: Natural date/banana sugars pulse insulin, upregulating CreaT transporters for +20-30% faster muscle saturation.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 2: Evening Sattu & Curd Refresh Shake -->
+        <div class="card" style="border: 1px solid rgba(56, 189, 248, 0.3); margin-bottom: 0;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem;">
+            <h2 class="card-title" style="color: var(--accent-cyan); margin-bottom: 0;">🥣 The "Sattu & Curd" Shake</h2>
+            <span class="badge" style="background: rgba(56, 189, 248, 0.2); color: var(--accent-cyan);">~ 320 kcal | 16g P</span>
+          </div>
+          <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.75rem;">
+            <span class="badge" style="background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 1px solid #22c55e;">🌱 +Synbiotic Microflora Pairing</span>
+            <span class="badge" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid #f59e0b;">🍋 +Ascorbic Acid Fe²⁺ Release</span>
+          </div>
+          <div style="background: rgba(56, 189, 248, 0.05); padding: 1rem; border-radius: 10px;">
+            <p style="font-weight: 700; margin-bottom: 0.4rem; color: var(--text-main); font-size: 0.85rem;">Ingredients (Whisk smooth; never heat):</p>
+            <ul style="padding-left: 1.2rem; font-size: 0.82rem; color: var(--text-muted); line-height: 1.6;">
+              <li><strong>150 g</strong> Fresh set whole-milk Curd / Dahi (live probiotics)</li>
+              <li><strong>3 tablespoons (35g)</strong> Chana Sattu (prebiotic resistant starch)</li>
+              <li><strong>150 ml</strong> Room-temperature water</li>
+              <li><strong>1 pinch</strong> Roasted cumin (*jeera*) powder + pinch Kala Namak</li>
+              <li><strong>1 squeeze</strong> Fresh lemon juice (Vitamin C iron activator)</li>
+            </ul>
+            <p style="margin-top: 0.6rem; font-size: 0.8rem; color: var(--accent-emerald);">
+              🌱 <strong>Bio-Hack</strong>: Live Lactobacillus ferment sattu oligosaccharides, deepening crypts and expanding villus absorption area.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 3: Bedtime Golden Milk Triad -->
+        <div class="card" style="border: 1px solid rgba(239, 68, 68, 0.3); margin-bottom: 0;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem;">
+            <h2 class="card-title" style="color: #ef4444; margin-bottom: 0;">🌙 Bedtime Golden Milk Triad</h2>
+            <span class="badge" style="background: rgba(239, 68, 68, 0.2); color: #ef4444;">~ 180 kcal | 6g P</span>
+          </div>
+          <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.75rem;">
+            <span class="badge" style="background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid #ef4444;">🌶️ +Piperine 2000% Boost</span>
+            <span class="badge" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid #f59e0b;">🧈 +Ghee Micelle Carrier</span>
+          </div>
+          <div style="background: rgba(239, 68, 68, 0.05); padding: 1rem; border-radius: 10px;">
+            <p style="font-weight: 700; margin-bottom: 0.4rem; color: var(--text-main); font-size: 0.85rem;">Ingredients (Simmer 2m; drink warm 30m pre-bed):</p>
+            <ul style="padding-left: 1.2rem; font-size: 0.82rem; color: var(--text-muted); line-height: 1.6;">
+              <li><strong>200 ml</strong> Warm whole-fat milk (sustained casein amino drip)</li>
+              <li><strong>1 level pinch</strong> Organic turmeric powder (curcuminoids)</li>
+              <li><strong>1 pinch</strong> Freshly cracked black pepper (~20mg piperine)</li>
+              <li><strong>1 level teaspoon</strong> Pure Desi Ghee (lipophilic micelle vehicle)</li>
+              <li><strong>300 mg</strong> KSM-66 Ashwagandha (cortisol downregulator)</li>
+            </ul>
+            <p style="margin-top: 0.6rem; font-size: 0.8rem; color: #ef4444;">
+              🌶️ <strong>Bio-Hack</strong>: Piperine blocks hepatic glucuronidation (+2,000% curcumin boost) while ghee delivers it via lymphatic micelles.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 🧬 Bio-Synergies & Culinary Chemistry Inspector -->
+      <div class="card" id="synergy-inspector-card">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
+          <div>
+            <h2 class="card-title" style="margin-bottom: 0.25rem;">🧬 Bio-Synergies & Culinary Chemistry Inspector</h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">
+              Pharmacological food pairings, enzymatic multi-vectors, and culinary bio-hacks that amplify nutrient absorption by +50% to +2,000%. Tap any synergy below to inspect cellular mechanisms, clinical multipliers, and kitchen rules.
+            </p>
+          </div>
+          <span class="badge" style="background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.3);">Module 13.8 Suite</span>
+        </div>
+
+        <!-- Synergy Timing/Category Pills (10 Synergies) -->
+        <div class="synergy-pills" role="tablist" aria-label="Bioavailability Synergies">
+          <button class="synergy-pill active" role="tab" id="synergy-tab-syn1" aria-selected="true" aria-controls="synergy-display" data-synergy="syn1">🌶️ 1. Curcumin + Piperine + Ghee</button>
+          <button class="synergy-pill" role="tab" id="synergy-tab-syn2" aria-selected="false" aria-controls="synergy-display" data-synergy="syn2">🍋 2. Non-Heme Iron + Lemon</button>
+          <button class="synergy-pill" role="tab" id="synergy-tab-syn3" aria-selected="false" aria-controls="synergy-display" data-synergy="syn3">🦴 3. D3 + K2 + Lipids + Mg</button>
+          <button class="synergy-pill" role="tab" id="synergy-tab-syn4" aria-selected="false" aria-controls="synergy-display" data-synergy="syn4">🌰 4. Phytate Osmotic Soak</button>
+          <button class="synergy-pill" role="tab" id="synergy-tab-syn5" aria-selected="false" aria-controls="synergy-display" data-synergy="syn5">🍳 5. Thermal Egg Gradient</button>
+          <button class="synergy-pill" role="tab" id="synergy-tab-syn6" aria-selected="false" aria-controls="synergy-display" data-synergy="syn6">🍚 6. Retrograded Rice RS3</button>
+          <button class="synergy-pill" role="tab" id="synergy-tab-syn7" aria-selected="false" aria-controls="synergy-display" data-synergy="syn7">⚡ 7. Creatine Glycemic Vector</button>
+          <button class="synergy-pill" role="tab" id="synergy-tab-syn8" aria-selected="false" aria-controls="synergy-display" data-synergy="syn8">🌿 8. Carminative Antral Primer</button>
+          <button class="synergy-pill" role="tab" id="synergy-tab-syn9" aria-selected="false" aria-controls="synergy-display" data-synergy="syn9">🌱 9. Sattu-Curd Synbiotic</button>
+          <button class="synergy-pill" role="tab" id="synergy-tab-syn10" aria-selected="false" aria-controls="synergy-display" data-synergy="syn10">🍅 10. Thermal Carotenoid Ghee</button>
+        </div>
+
+        <!-- Dynamic Inspector Display Area -->
+        <div class="synergy-display" id="synergy-display" role="tabpanel" aria-live="polite" aria-labelledby="synergy-tab-syn1">
+          <!-- Top Verdict Banner -->
+          <div id="synergy-verdict-box" style="background: rgba(239, 68, 68, 0.12); border-left: 4px solid #ef4444; padding: 1rem 1.25rem; border-radius: 10px; margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+            <div>
+              <div style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted);" id="synergy-category-label">SYNERGY 1: HEPATIC GLUCURONIDATION BLOCKADE & LYMPHATIC MICELLES</div>
+              <div style="font-size: 1.15rem; font-weight: 700; color: var(--text-main);" id="synergy-title">🌶️ CURCUMIN + PIPERINE + GHEE TRIAD</div>
+            </div>
+            <div id="synergy-badge" style="padding: 6px 14px; border-radius: 999px; font-weight: 700; font-size: 0.82rem; background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid #ef4444;">
+              +2,000% (20-FOLD BOOST)
+            </div>
+          </div>
+
+          <!-- 4-Card Physiological Telemetry Grid -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 1.25rem;">
+            <div class="chrono-stat-card" style="background: #0d1424; border: 1px solid var(--border-subtle); border-radius: 10px; padding: 1rem;">
+              <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">🧬 Primary Formulation</div>
+              <div style="font-size: 1.05rem; font-weight: 700; color: var(--text-main);" id="synergy-formulation-stat">Turmeric + Pepper + Ghee</div>
+              <div style="font-size: 0.78rem; color: var(--accent-emerald); margin-top: 4px;" id="synergy-formulation-desc">Curcuminoids + 20mg Piperine + Butyrate Lipids</div>
+            </div>
+            <div class="chrono-stat-card" style="background: #0d1424; border: 1px solid var(--border-subtle); border-radius: 10px; padding: 1rem;">
+              <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">🔬 Molecular Target</div>
+              <div style="font-size: 1.05rem; font-weight: 700; color: var(--text-main);" id="synergy-mechanism-stat">UGT & P-gp Inhibition</div>
+              <div style="font-size: 0.78rem; color: var(--accent-emerald); margin-top: 4px;" id="synergy-mechanism-desc">Blocks intestinal/hepatic clearance enzymes</div>
+            </div>
+            <div class="chrono-stat-card" style="background: #0d1424; border: 1px solid var(--border-subtle); border-radius: 10px; padding: 1rem;">
+              <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">⚡ Absorption Multiplier</div>
+              <div style="font-size: 1.05rem; font-weight: 700; color: var(--text-main);" id="synergy-multiplier-stat">+2,000% Bioavailability</div>
+              <div style="font-size: 0.78rem; color: var(--accent-cyan); margin-top: 4px;" id="synergy-multiplier-desc">20-fold rise in human plasma AUC curve</div>
+            </div>
+            <div class="chrono-stat-card" style="background: #0d1424; border: 1px solid var(--border-subtle); border-radius: 10px; padding: 1rem;">
+              <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">🎯 Primary Benefit</div>
+              <div style="font-size: 1.05rem; font-weight: 700; color: var(--text-main);" id="synergy-benefit-stat">Nocturnal Anabolism</div>
+              <div style="font-size: 0.78rem; color: var(--accent-emerald); margin-top: 4px;" id="synergy-benefit-desc">Lymphatic delivery shields muscle tissue</div>
+            </div>
+          </div>
+
+          <!-- Deep Strategy 2-Column Split: Clinical Mechanism + Kitchen Prep -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.25rem;">
+            <div class="card" style="border-left: 3px solid var(--accent-cyan); margin-bottom: 0;">
+              <h3 style="color: var(--accent-cyan); font-size: 0.95rem; margin-bottom: 0.5rem;">🔬 Molecular Mechanism of Action</h3>
+              <div id="synergy-clinical-text" style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+                <p><strong>Glucuronidation Blockade</strong>: Native oral curcumin has near-zero bioavailability (&lt;1%) because enterocytic and hepatic UDP-glucuronosyltransferase (UGT) enzymes and sulfotransferases rapidly convert free curcumin into water-soluble curcumin glucuronides for biliary excretion. Piperine is a potent, reversible inhibitor of UGT enzymes and P-glycoprotein.</p>
+                <p style="margin-top: 0.5rem;"><strong>Lymphatic Chylomicron Transport</strong>: Curcumin is highly lipophilic. Dissolving it in warm Desi Ghee stimulates bile salt release and incorporates curcumin into mixed micelles, entering mesenteric lymph vessels via chylomicrons and completely bypassing first-pass liver destruction.</p>
+              </div>
+            </div>
+
+            <div class="card" style="border-left: 3px solid #22c55e; margin-bottom: 0;">
+              <h3 style="color: #22c55e; font-size: 0.95rem; margin-bottom: 0.5rem;">🍳 Kitchen Dosing & Antagonist Traps</h3>
+              <div id="synergy-kitchen-text" style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+                <p><strong>Nightly Recipe</strong>: 200 ml warm whole milk + 1 pinch organic turmeric + 1 pinch freshly cracked black pepper (~20 mg piperine) + 1 tsp Desi Ghee + 300 mg Ashwagandha. Simmer gently for 2 minutes; drink warm 30m before bed.</p>
+                <p style="margin-top: 0.5rem;"><strong>Antagonist Trap</strong>: Never use stale pre-ground pepper (oxidized piperine has 0% potency) and never use skim milk with zero fat (curcumin requires lipid micelle assembly).</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -440,11 +440,18 @@
       // Collect authentic Urdu phrases to check for multi-word exact matches
       const targetUrduPhrases = [];
       if (normUrduQ && normUrduQ.includes(' ')) targetUrduPhrases.push(normUrduQ);
+      const primaryWords = normUrduQ ? normUrduQ.split(/\s+/).filter(w => w.length > 0) : [];
       const qWordsCount = (normQ || '').split(/\s+/).filter(w => w.length > 0).length;
       const minPhraseWords = Math.min(3, Math.max(2, qWordsCount));
       for (const uq of urduExpansions) {
         const uqWords = uq.split(/\s+/).filter(w => w.length > 0);
         if (uqWords.length >= minPhraseWords && !targetUrduPhrases.includes(uq)) {
+          if (primaryWords.length >= 2) {
+            const overlap = uqWords.filter(w => primaryWords.includes(w)).length;
+            if (overlap / Math.max(primaryWords.length, uqWords.length) < 0.5) {
+              continue; // Reject disparate phrases
+            }
+          }
           targetUrduPhrases.push(uq);
         }
       }
@@ -473,7 +480,7 @@
           const inIrfan = docIrfanNorm.includes(primaryUrdu);
 
           if (inIman || inIrfan) {
-            finalScore += 300.0;
+            finalScore += 350.0;
             isExactTarjumaMatch = true;
             matchedSnippet = primaryUrdu;
             // Boost if phrase appears at the start of either translation
@@ -481,21 +488,24 @@
                 (inIrfan && (docIrfanNorm.startsWith(primaryUrdu) || docIrfanNorm.indexOf(primaryUrdu) < 15))) {
               finalScore += 50.0;
             }
-            // Canonical Priority for Universal Thematic Verses (e.g. Surah 21:107 for "hamne tumhe na bheja" / Rahmatan lil-Alameen)
+            // Canonical Priority for Universal Thematic Verses
             if (doc.surahId === 21 && doc.ayahNum === 107) {
-              finalScore += 40.0;
+              finalScore += 40.0; // Rahmatan lil-Alameen
+            }
+            if (doc.surahId === 109 && doc.ayahNum === 6) {
+              finalScore += 40.0; // Lakum deenukum waliya deen
             }
           } else {
-            // Secondary Quranic phrase variants
+            // Secondary Quranic phrase variants (sub-phrases or parallel forms)
             for (let pi = 1; pi < targetUrduPhrases.length; pi++) {
               const uq = targetUrduPhrases[pi];
               if (docImanNorm.includes(uq) || docIrfanNorm.includes(uq)) {
-                finalScore += 260.0;
+                finalScore += 220.0;
                 isExactTarjumaMatch = true;
                 matchedSnippet = uq;
                 if ((docImanNorm.startsWith(uq) || docImanNorm.indexOf(uq) < 15) ||
                     (docIrfanNorm.startsWith(uq) || docIrfanNorm.indexOf(uq) < 15)) {
-                  finalScore += 40.0;
+                  finalScore += 30.0;
                 }
                 break;
               }
