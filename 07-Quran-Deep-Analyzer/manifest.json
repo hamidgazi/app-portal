@@ -1,0 +1,33 @@
+{
+  "id": "/quran-deep-analyzer/",
+  "name": "Quran Deep Analyzer - Full Corpus Studio",
+  "short_name": "QuranAnalyzer",
+  "description": "Authoritative 6,236 Ayat analytical studio with dual Urdu translations (Kanzul Iman & Kanzul Irfan), English, root morphology, and audio.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0a0e17",
+  "theme_color": "#0a0e17",
+  "categories": ["education", "books", "reference"],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
