@@ -1,0 +1,715 @@
+/* ==========================================================================
+   Quran Deep Analyzer - Quranic Duas Encyclopedia Unified Styling System
+   Single-Page Application (SPA) Embedded & Standalone Compatible
+   High-Density Cyber-Glass, BiDi Dual-Pane Translation & 4-Tier Structure
+   ========================================================================== */
+
+:root {
+  --dua-gold: #fbbf24;
+  --dua-gold-glow: rgba(251, 191, 36, 0.25);
+  --dua-gold-border: rgba(251, 191, 36, 0.4);
+  --dua-cyan: #38bdf8;
+  --dua-cyan-glow: rgba(56, 189, 248, 0.25);
+  --dua-cyan-border: rgba(56, 189, 248, 0.4);
+  --dua-emerald: #10b981;
+  --dua-purple: #a855f7;
+  --dua-rose: #f43f5e;
+  --dua-card-bg: rgba(15, 23, 42, 0.82);
+  --dua-card-border: rgba(255, 255, 255, 0.08);
+}
+
+/* === DUAS CONTAINER & LAYOUT === */
+.duas-main-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 14px 16px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Duas Search & Controls Toolbar */
+.duas-toolbar-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--dua-card-border);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.duas-search-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  width: 100%;
+}
+
+.duas-search-input-wrap {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.duas-search-input {
+  width: 100%;
+  height: 44px;
+  background: rgba(6, 8, 14, 0.85);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  border-radius: 10px;
+  padding: 0 42px 0 16px;
+  color: #f8fafc;
+  font-size: 0.95rem;
+  font-family: inherit;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.duas-search-input:focus {
+  border-color: var(--dua-gold);
+  box-shadow: 0 0 0 3px var(--dua-gold-glow);
+}
+
+.duas-search-icon {
+  position: absolute;
+  right: 14px;
+  color: var(--dua-gold);
+  pointer-events: none;
+  font-size: 1.1rem;
+}
+
+.duas-search-clear {
+  position: absolute;
+  left: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #94a3b8;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  transition: all 0.15s ease;
+}
+
+.duas-search-clear:hover {
+  background: rgba(244, 63, 94, 0.25);
+  color: #f43f5e;
+}
+
+.duas-badge-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(251, 191, 36, 0.12);
+  border: 1px solid var(--dua-gold-border);
+  color: var(--dua-gold);
+  font-weight: 700;
+  font-size: 0.85rem;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+/* Quick Filter Strips */
+.duas-filter-strip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+.duas-filter-strip::-webkit-scrollbar {
+  height: 4px;
+}
+
+.duas-filter-strip::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.duas-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #cbd5e1;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.duas-pill-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #f8fafc;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.duas-pill-btn.active {
+  background: var(--dua-gold);
+  color: #06080e;
+  border-color: var(--dua-gold);
+  font-weight: 700;
+  box-shadow: 0 0 10px var(--dua-gold-glow);
+}
+
+.duas-pill-btn.active .pill-count {
+  background: rgba(0, 0, 0, 0.25);
+  color: #000;
+}
+
+.duas-pill-btn .pill-count {
+  display: inline-block;
+  font-size: 0.72rem;
+  padding: 1px 6px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  color: #94a3b8;
+}
+
+/* Category Filter Strips */
+.duas-category-strip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 2px 0 6px 0;
+  scrollbar-width: thin;
+}
+
+.duas-cat-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #94a3b8;
+  font-size: 0.82rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.duas-cat-chip:hover {
+  border-color: rgba(56, 189, 248, 0.4);
+  color: #f8fafc;
+}
+
+.duas-cat-chip.active {
+  background: rgba(56, 189, 248, 0.15);
+  border-color: var(--dua-cyan);
+  color: var(--dua-cyan);
+  font-weight: 700;
+}
+
+/* Prophet Filter Bar */
+.duas-prophet-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 2px 0;
+  font-size: 0.80rem;
+}
+
+.duas-prophet-chip {
+  padding: 4px 10px;
+  background: rgba(168, 85, 247, 0.08);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: 6px;
+  color: #c084fc;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.duas-prophet-chip:hover {
+  background: rgba(168, 85, 247, 0.2);
+  color: #f3e8ff;
+}
+
+.duas-prophet-chip.active {
+  background: #a855f7;
+  color: #ffffff;
+  border-color: #a855f7;
+  font-weight: 700;
+}
+
+/* === HIGH-DENSITY DUA CARD === */
+.duas-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.dua-card {
+  background: var(--dua-card-bg);
+  border: 1px solid var(--dua-card-border);
+  border-radius: 12px;
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+  contain: content;
+}
+
+.dua-card:hover {
+  border-color: rgba(251, 191, 36, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+.dua-card.playing-now {
+  border-color: var(--dua-gold);
+  box-shadow: 0 0 16px var(--dua-gold-glow);
+}
+
+/* Card Header */
+.dua-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.dua-meta-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.dua-serial-pill {
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 2px 7px;
+  background: rgba(251, 191, 36, 0.15);
+  border: 1px solid var(--dua-gold-border);
+  color: var(--dua-gold);
+  border-radius: 6px;
+}
+
+.dua-coord-pill {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid var(--dua-cyan-border);
+  color: var(--dua-cyan);
+  border-radius: 6px;
+}
+
+.dua-surah-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.dua-type-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: var(--dua-emerald);
+  border-radius: 6px;
+}
+
+.dua-speaker-tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  background: rgba(168, 85, 247, 0.12);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  color: #c084fc;
+  border-radius: 6px;
+}
+
+/* Micro Action Buttons in Card Header */
+.dua-micro-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dua-micro-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 9px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  color: #cbd5e1;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.dua-micro-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.dua-micro-btn.play-btn {
+  color: var(--dua-gold);
+  border-color: rgba(251, 191, 36, 0.3);
+}
+
+.dua-micro-btn.play-btn:hover {
+  background: rgba(251, 191, 36, 0.15);
+}
+
+.dua-micro-btn.analyzer-btn {
+  color: var(--dua-cyan);
+  border-color: rgba(56, 189, 248, 0.3);
+}
+
+.dua-micro-btn.analyzer-btn:hover {
+  background: rgba(56, 189, 248, 0.15);
+}
+
+.dua-micro-btn.star-btn.starred {
+  color: var(--dua-gold);
+  border-color: var(--dua-gold);
+  background: rgba(251, 191, 36, 0.15);
+}
+
+/* Tier 1: Scriptural Core */
+.dua-arabic {
+  font-family: var(--font-arabic, 'Amiri', 'Traditional Arabic', serif);
+  font-size: 1.45rem;
+  line-height: 2.1;
+  color: #ffffff;
+  text-align: right;
+  direction: rtl;
+  padding: 4px 0 6px 0;
+  word-spacing: 2px;
+}
+
+.dua-ayah-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(251, 191, 36, 0.15);
+  color: var(--dua-gold);
+  border: 1px solid var(--dua-gold-border);
+  font-size: 0.75rem;
+  font-family: sans-serif;
+  margin: 0 4px;
+  vertical-align: middle;
+}
+
+/* Dual Urdu Translations Split Grid */
+/* Note: In RTL direction, column 1 is on the RIGHT (Kanzul Iman), column 2 is on the LEFT (Kanzul Irfan) */
+.dua-tarjuma-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  direction: rtl;
+  margin: 6px 0;
+}
+
+.dua-tarjuma-pane {
+  background: rgba(6, 8, 14, 0.45);
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dua-tarjuma-pane.iman {
+  border-right: 3px solid var(--dua-gold);
+}
+
+.dua-tarjuma-pane.irfan {
+  border-right: 3px solid var(--dua-cyan);
+}
+
+.dua-tarjuma-label {
+  font-size: 0.70rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dua-tarjuma-pane.iman .dua-tarjuma-label {
+  color: var(--dua-gold);
+}
+
+.dua-tarjuma-pane.irfan .dua-tarjuma-label {
+  color: var(--dua-cyan);
+}
+
+.dua-tarjuma-text {
+  font-family: var(--font-urdu-current, var(--font-urdu, 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif));
+  font-size: 1.15rem;
+  line-height: 1.85;
+  color: #e2e8f0;
+  text-align: right;
+  direction: rtl;
+}
+
+/* English Translation */
+.dua-english {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #94a3b8;
+  direction: ltr;
+  text-align: left;
+  padding: 4px 8px;
+  background: rgba(255, 255, 255, 0.02);
+  border-left: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+
+/* === 3-TIER EXEGESIS & APPLICATION BOX === */
+.dua-context-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.08);
+}
+
+.dua-tier-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+
+.dua-tier-item.occasion {
+  background: rgba(251, 191, 36, 0.06);
+  border: 1px solid rgba(251, 191, 36, 0.18);
+}
+
+.dua-tier-item.purpose {
+  background: rgba(16, 185, 129, 0.06);
+  border: 1px solid rgba(16, 185, 129, 0.18);
+}
+
+.dua-tier-item.revelation {
+  background: rgba(168, 85, 247, 0.06);
+  border: 1px solid rgba(168, 85, 247, 0.18);
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dua-tier-icon {
+  font-size: 1.05rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.dua-tier-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dua-tier-title-ur {
+  font-weight: 700;
+  color: #f1f5f9;
+  font-size: 0.90rem;
+  direction: rtl;
+  text-align: right;
+  font-family: var(--font-urdu-current, inherit);
+}
+
+.dua-tier-title-en {
+  font-size: 0.76rem;
+  color: #94a3b8;
+  direction: ltr;
+  text-align: left;
+}
+
+/* Tafsir Exegesis Snippet */
+.dua-tafsir-snippet {
+  font-family: var(--font-urdu-current, inherit);
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: #cbd5e1;
+  direction: rtl;
+  text-align: right;
+  background: rgba(6, 8, 14, 0.5);
+  border-radius: 6px;
+  padding: 8px 10px;
+  border-right: 2px solid #a855f7;
+  max-height: 95px;
+  overflow: hidden;
+  position: relative;
+  transition: max-height 0.3s ease;
+}
+
+.dua-tafsir-snippet.expanded {
+  max-height: 800px;
+}
+
+.dua-tafsir-toggle-btn {
+  background: none;
+  border: none;
+  color: #c084fc;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  align-self: flex-start;
+  padding: 2px 4px;
+}
+
+.dua-tafsir-toggle-btn:hover {
+  text-decoration: underline;
+}
+
+/* Audio Mini Dock */
+.dua-audio-dock {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(6, 8, 14, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid var(--dua-gold-border);
+  padding: 10px 20px;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  z-index: 999;
+  box-shadow: 0 -4px 25px rgba(0, 0, 0, 0.6);
+}
+
+.dua-audio-dock.show {
+  display: flex;
+}
+
+.dua-dock-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dua-dock-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dua-dock-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.dua-dock-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.dua-dock-btn.main-play {
+  background: var(--dua-gold);
+  color: #06080e;
+  border-color: var(--dua-gold);
+  width: 42px;
+  height: 42px;
+}
+
+/* Responsive Overrides */
+@media (max-width: 768px) {
+  .dua-tarjuma-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .dua-tarjuma-pane.iman {
+    border-right: 3px solid var(--dua-gold);
+    border-left: none;
+  }
+
+  .dua-tarjuma-pane.irfan {
+    border-right: 3px solid var(--dua-cyan);
+    border-left: none;
+  }
+
+  .dua-micro-actions {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 4px;
+  }
+
+  .dua-arabic {
+    font-size: 1.30rem;
+    line-height: 1.95;
+  }
+}
+
+/* Search Studio Dua Badge Integration */
+.search-dua-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  background: rgba(251, 191, 36, 0.15);
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  color: #fbbf24;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.search-dua-badge:hover {
+  background: rgba(251, 191, 36, 0.28);
+  box-shadow: 0 0 10px rgba(251, 191, 36, 0.35);
+  color: #ffffff;
+}

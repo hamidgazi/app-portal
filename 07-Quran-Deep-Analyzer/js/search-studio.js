@@ -542,6 +542,27 @@
 
       // When query is empty, restore celebrated welcome view
       if (!q) {
+        if (this.activeCategory === 'duas' && window.QURAN_DUAS_DATA && window.QURAN_DUAS_DATA.duas) {
+          const matches = window.QURAN_DUAS_DATA.duas.map(d => ({
+            category: 'verse',
+            surahId: d.surah_id,
+            ayahNum: d.ayah_start,
+            title: `${d.surah_name_roman} ${d.surah_id}:${d.ayah_coordinate}`,
+            subtitle: d.english,
+            arabic: d.arabic,
+            arabicClean: d.arabic,
+            urdu: d.urdu_kanzul_iman,
+            urKanzulIman: d.urdu_kanzul_iman,
+            urKanzulIrfan: d.urdu_kanzul_irfan,
+            isDua: true,
+            duaObj: d,
+            isExactTarjumaMatch: true
+          }));
+          this.setSearchingVisual(false);
+          if (aiContainer) aiContainer.style.display = 'none';
+          this.handleSearchResults(matches, 'Quranic Duas', 1);
+          return;
+        }
         this.setSearchingVisual(false);
         if (aiContainer) aiContainer.style.display = 'none';
         this.renderCelebratedLanding();
@@ -610,6 +631,16 @@
     handleSearchResults(rawMatches, q, elapsed) {
       this.setSearchingVisual(false);
       let matches = rawMatches || [];
+
+      // Filter by Duas Category if active
+      if (this.activeCategory === 'duas') {
+        const duaCoords = new Set(
+          (window.QURAN_DUAS_DATA && window.QURAN_DUAS_DATA.duas)
+            ? window.QURAN_DUAS_DATA.duas.map(d => `${d.surah_id}:${d.ayah_start}`)
+            : []
+        );
+        matches = matches.filter(m => duaCoords.has(`${m.surahId}:${m.ayahNum}`) || m.isDua);
+      }
 
       // Filter by Revelation Type (Makki / Madani)
       if (this.activeRevelation !== 'all') {
@@ -866,6 +897,13 @@
           ? `<span class="search-rev-badge madani">Madani 🕌</span>`
           : `<span class="search-rev-badge makki">Makki 🕋</span>`;
       const bestMatchBadge = isExactMatch ? `<span class="search-best-match-badge">🎯 Best Match</span>` : '';
+      let duaBadge = '';
+      if (window.QURAN_DUAS_DATA && window.QURAN_DUAS_DATA.duas) {
+        const matchingDua = window.QURAN_DUAS_DATA.duas.find(d => d.surah_id === v.surahId && (d.ayah_start === v.ayahNum || (d.ayah_start <= v.ayahNum && d.ayah_end >= v.ayahNum)));
+        if (matchingDua) {
+          duaBadge = `<span class="search-dua-badge" title="${this.escapeAttr(matchingDua.title_ur)} • ${this.escapeAttr(matchingDua.when_to_use_ur)}" onclick="if(window.DuasEngine){const b=document.querySelector('[data-tab=\'duas\']');if(b)b.click();window.DuasEngine.setSearchQuery('${v.surahId}:${v.ayahNum}');}else{window.open('duas.html?dua=${matchingDua.serial}');}">🤲 قرآنی دعا: ${this.escapeHtml(matchingDua.title_ur)}</span>`;
+        }
+      }
 
       return `
         <article class="search-ayah-card ${isExactMatch ? 'exact-match' : ''}" id="search-card-${v.surahId}-${v.ayahNum}">
@@ -875,6 +913,7 @@
               <span class="search-surah-title-badge">${v.surahRoman} (${v.surahAr})</span>
               ${revBadge}
               ${bestMatchBadge}
+              ${duaBadge}
               ${rankNum ? `<span class="search-ayah-rank-badge">#${rankNum}</span>` : ''}
             </div>
 

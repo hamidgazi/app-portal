@@ -144,6 +144,10 @@ function switchAppTab(tabName) {
     }
   }
 
+  if (tabName === "duas" && window.DuasEngine) {
+    window.DuasEngine.onTabActivated();
+  }
+
   if (tabName === "ayahs" && window.CorpusEngine) {
     if (typeof window.CorpusEngine.syncQuickScrubber === 'function') {
       window.CorpusEngine.syncQuickScrubber();
@@ -1349,7 +1353,8 @@ function bootApp() {
     { name: "TajweedEngine", init: () => window.TajweedEngine && window.TajweedEngine.init() },
     { name: "NotebookEngine", init: () => window.NotebookEngine && window.NotebookEngine.init() },
     { name: "CommandsEngine", init: () => window.CommandsEngine && window.CommandsEngine.init() },
-    { name: "MannersEngine", init: () => window.MannersEngine && window.MannersEngine.init() }
+    { name: "MannersEngine", init: () => window.MannersEngine && window.MannersEngine.init() },
+    { name: "DuasEngine", init: () => window.DuasEngine && window.DuasEngine.init() }
   ];
 
   modules.forEach(mod => {
@@ -1389,6 +1394,9 @@ function bootApp() {
         } else if (fromParam === "commands") {
           originTab = "commands";
           label = "Divine Commands (80)";
+        } else if (fromParam === "duas") {
+          originTab = "duas";
+          label = "Quranic Duas (78)";
         }
         window.NavigationHistory.pushReturnContext({
           originTab,

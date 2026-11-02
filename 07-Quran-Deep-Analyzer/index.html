@@ -13,6 +13,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="stylesheet" href="css/app.css?v=20261021_rev7">
   <link rel="stylesheet" href="css/commands-manners.css?v=20261026">
+  <link rel="stylesheet" href="css/duas.css?v=20261102">
   <script>
     function openOmnisearch() {
       if (typeof window.switchAppTab === 'function') {
@@ -182,6 +183,10 @@
           <span>📜 Divine Commands</span>
           <span class="tab-badge" style="background: rgba(251, 191, 36, 0.2); color: #fbbf24;">80</span>
         </button>
+        <button class="nav-tab-btn" data-tab="duas" id="tab-btn-duas" title="Quranic Duas & Supplications Encyclopedia (دعاؤں کا قرآنی انسائیکلوپیڈیا)">
+          <span>🤲 Quranic Duas</span>
+          <span class="tab-badge" style="background: rgba(251, 191, 36, 0.2); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.4);">78</span>
+        </button>
       </nav>
     </div>
   </header>
@@ -305,6 +310,7 @@
               <button class="search-micro-chip" data-cat="paras">Paras</button>
               <button class="search-micro-chip" data-cat="topics">Topics</button>
               <button class="search-micro-chip" data-cat="prophets">Prophets</button>
+              <button class="search-micro-chip" data-cat="duas" title="Quranic Duas (دعاؤں کا قرآنی انسائیکلوپیڈیا)">Duas (78) 🤲</button>
             </div>
 
             <span class="search-strip-sep"></span>
@@ -963,6 +969,83 @@
       </div>
     </section>
 
+      <!-- Tab 13: Quranic Duas & Supplications Encyclopedia (78 Duas) -->
+      <section id="tab-duas" class="tab-panel">
+        <div class="duas-main-container" style="padding: 0;">
+          <div class="duas-toolbar-wrap">
+            <div class="duas-search-row">
+              <div class="duas-search-input-wrap">
+                <span class="duas-search-icon">🔍</span>
+                <input type="text" id="native-duas-search" class="duas-search-input" placeholder="Search Duas: shifa, rizq, aulad, parents, rabbana, forgiveness, 2:201..." autocomplete="off">
+                <button type="button" id="native-duas-search-clear" class="duas-search-clear" title="Clear Search">✕</button>
+              </div>
+              <div id="native-duas-count-badge" class="duas-badge-counter">78 Duas</div>
+              <a href="duas.html" target="_blank" class="dua-micro-btn" style="text-decoration: none; padding: 10px 14px; background: rgba(251,191,36,0.15); color: #fbbf24; border: 1px solid rgba(251,191,36,0.4);" title="Open Dedicated Standalone App">
+                <span>⚡ Standalone App ↗</span>
+              </a>
+            </div>
+
+            <!-- Quick Type Filter Strip -->
+            <div class="duas-filter-strip">
+              <button type="button" class="duas-pill-btn active" data-filter="all">
+                <span>سب دعائیں (All 78)</span>
+              </button>
+              <button type="button" class="duas-pill-btn" data-filter="40_rabbana">
+                <span>۴۰ ربنا دعائیں (40 Rabbana)</span>
+                <span class="pill-count">40</span>
+              </button>
+              <button type="button" class="duas-pill-btn" data-filter="rabbi">
+                <span>ربِّ ندائیں (Rabbi)</span>
+                <span class="pill-count">24</span>
+              </button>
+              <button type="button" class="duas-pill-btn" data-filter="prophet">
+                <span>انبیاء علیہم السلام کی دعائیں</span>
+              </button>
+              <button type="button" class="duas-pill-btn" data-filter="believer">
+                <span>مؤمنین و صالحین کی دعائیں</span>
+              </button>
+              <button type="button" class="duas-pill-btn" data-filter="starred">
+                <span>⭐ پسندیدہ (Starred)</span>
+              </button>
+            </div>
+
+            <!-- 9 Life Spheres / Categories -->
+            <div class="duas-category-strip">
+              <button type="button" class="duas-cat-chip active" data-cat="all">سب شعبہ جات (All Needs)</button>
+              <button type="button" class="duas-cat-chip" data-cat="forgiveness">🕊️ مغفرت و توبہ</button>
+              <button type="button" class="duas-cat-chip" data-cat="guidance">🧭 ہدایت و استقامت</button>
+              <button type="button" class="duas-cat-chip" data-cat="family">👨‍👩‍👧‍👦 اہل و عیال و والدین</button>
+              <button type="button" class="duas-cat-chip" data-cat="healing">🩺 شفاء و کشائشِ مصائب</button>
+              <button type="button" class="duas-cat-chip" data-cat="sustenance">🌾 رزقِ حلال و برکت</button>
+              <button type="button" class="duas-cat-chip" data-cat="protection">🛡️ حفاظت و نصرت</button>
+              <button type="button" class="duas-cat-chip" data-cat="knowledge">📖 علم، حکمت و فصاحت</button>
+              <button type="button" class="duas-cat-chip" data-cat="good_ending">🌅 حسنِ خاتمہ و نجات</button>
+              <button type="button" class="duas-cat-chip" data-cat="praise">✨ حمد و شکرِ الٰہی</button>
+            </div>
+
+            <!-- Prophet Filter Bar -->
+            <div class="duas-prophet-bar">
+              <span style="color: #94a3b8; font-weight: 700;">انبیاء کرام:</span>
+              <button type="button" class="duas-prophet-chip active" data-prophet="all">سب انبیاء</button>
+              <button type="button" class="duas-prophet-chip" data-prophet="adam">آدم علیہ السلام</button>
+              <button type="button" class="duas-prophet-chip" data-prophet="nuh">نوح علیہ السلام</button>
+              <button type="button" class="duas-prophet-chip" data-prophet="ibrahim">ابراہیم علیہ السلام</button>
+              <button type="button" class="duas-prophet-chip" data-prophet="yusuf">یوسف علیہ السلام</button>
+              <button type="button" class="duas-prophet-chip" data-prophet="musa">موسیٰ علیہ السلام</button>
+              <button type="button" class="duas-prophet-chip" data-prophet="yunus">یونس علیہ السلام</button>
+              <button type="button" class="duas-prophet-chip" data-prophet="ayyub">ایوب علیہ السلام</button>
+              <button type="button" class="duas-prophet-chip" data-prophet="zakariya">زکریا علیہ السلام</button>
+              <button type="button" class="duas-prophet-chip" data-prophet="suleiman">سلیمان علیہ السلام</button>
+              <button type="button" class="duas-prophet-chip" data-prophet="isa">عیسیٰ علیہ السلام</button>
+              <button type="button" class="duas-prophet-chip" data-prophet="muhammad">نبی کریم ﷺ</button>
+            </div>
+          </div>
+
+          <!-- Mount for Duas List -->
+          <div id="native-duas-list" class="duas-list-container"></div>
+          <div id="native-duas-sentinel" class="scroll-sentinel" style="height: 40px; width: 100%;"></div>
+        </div>
+      </section>
 
   </main>
 
@@ -2064,6 +2147,8 @@
   <script src="data/quran_manners_data.js"></script>
   <script src="js/commands-engine.js"></script>
   <script src="js/manners-engine.js"></script>
+  <script src="data/quran_duas_data.js"></script>
+  <script src="js/duas-engine.js"></script>
   <script src="js/app.js?v=20261022_v2"></script>
   <!-- Universal Mobile Bottom Command Dock -->
   <nav class="mobile-bottom-dock" aria-label="Mobile Navigation Dock">
@@ -2082,6 +2167,10 @@
     <button class="mobile-dock-btn" data-tab="manners" id="dock-btn-manners">
       <span class="mobile-dock-icon">🌿</span>
       <span class="mobile-dock-label">Manners</span>
+    </button>
+    <button class="mobile-dock-btn" data-tab="duas" id="dock-btn-duas">
+      <span class="mobile-dock-icon">🤲</span>
+      <span class="mobile-dock-label">Duas</span>
     </button>
     <button class="mobile-dock-btn" data-tab="studio" id="dock-btn-studio">
       <span class="mobile-dock-icon">🔬</span>
