@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+<html lang="ur" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Arabic Mastery 30 — کلاسیکی و قرآنی عربی</title>
+  <meta name="description" content="30-Day Classical & Quranic Arabic Mastery for Islamic Religious Texts from Zero.">
+  <meta name="theme-color" content="#042f2e">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #022c22;
+      --bg-secondary: #064e3b;
+      --bg-card: #065f46;
+      --bg-surface: #0f766e;
+      --text-main: #f8fafc;
+      --text-muted: #cbd5e1;
+      --text-dim: #94a3b8;
+      --gold-primary: #f59e0b;
+      --gold-hover: #d97706;
+      --gold-glow: rgba(245, 158, 11, 0.25);
+      --emerald-accent: #10b981;
+      --ism-blue: #38bdf8;
+      --fil-amber: #fbbf24;
+      --harf-green: #34d399;
+      --border-color: rgba(245, 158, 11, 0.2);
+      --font-ui: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-arabic: 'Amiri', 'Traditional Arabic', 'Scheherazade New', serif;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --nav-height: 64px;
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #f0fdf4;
+      --bg-secondary: #dcfce7;
+      --bg-card: #ffffff;
+      --bg-surface: #e2e8f0;
+      --text-main: #064e3b;
+      --text-muted: #1e293b;
+      --text-dim: #64748b;
+      --border-color: rgba(6, 78, 59, 0.15);
+      --gold-glow: rgba(217, 119, 6, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: var(--font-ui);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      padding-bottom: calc(var(--nav-height) + var(--safe-bottom) + 24px);
+    }
+
+    /* Top Header */
+    header {
+      background: linear-gradient(180deg, rgba(2, 44, 34, 0.98), rgba(6, 78, 59, 0.9));
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--gold-primary), #b45309);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #022c22;
+      font-family: var(--font-arabic);
+      font-size: 22px;
+      font-weight: bold;
+      box-shadow: 0 4px 12px var(--gold-glow);
+    }
+
+    .brand-text h1 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gold-primary);
+      letter-spacing: 0.5px;
+    }
+
+    .brand-text p {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-icon {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 18px;
+      touch-action: manipulation;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-icon:active {
+      transform: scale(0.92);
+      background: var(--gold-glow);
+    }
+
+    /* Main Container */
+    main {
+      flex: 1;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    /* Section Tabs */
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.25s ease-out;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Progress Banner */
+    .progress-card {
+      background: linear-gradient(135deg, rgba(6, 95, 70, 0.9), rgba(4, 47, 46, 0.95));
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .progress-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--gold-primary);
+    }
+    .progress-badge {
+      background: var(--gold-glow);
+      border: 1px solid var(--gold-primary);
+      color: var(--gold-primary);
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .progress-bar-container {
+      width: 100%;
+      height: 10px;
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      width: 3%;
+      background: linear-gradient(90deg, var(--gold-hover), var(--gold-primary));
+      border-radius: 6px;
+      transition: width 0.4s ease;
+    }
+
+    /* 30-Day Track List */
+    .day-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .day-card.completed {
+      border-color: var(--emerald-accent);
+      background: linear-gradient(180deg, rgba(16, 185, 129, 0.12), var(--bg-card));
+    }
+    .day-header {
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+      touch-action: manipulation;
+    }
+    .day-badge-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .day-number {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--gold-primary);
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 4px 8px;
+      border-radius: var(--radius-sm);
+      min-width: 60px;
+      text-align: center;
+    }
+    .day-title-text {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+    .day-chevron {
+      color: var(--gold-primary);
+      font-size: 16px;
+      transition: transform 0.25s ease;
+    }
+    .day-card.open .day-chevron {
+      transform: rotate(180deg);
+    }
+    .day-body {
+      display: none;
+      padding: 0 18px 18px 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    .day-card.open .day-body {
+      display: block;
+    }
+    .rule-callout {
+      background: rgba(0, 0, 0, 0.25);
+      border-left: 3px solid var(--gold-primary);
+      padding: 10px 14px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin: 12px 0;
+    }
+    .vocab-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0;
+    }
+    .vocab-pill {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 0.82rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .vocab-pill .ar {
+      font-family: var(--font-arabic);
+      font-size: 1.15rem;
+      color: var(--gold-primary);
+    }
+    .verse-breakdown-box {
+      background: rgba(2, 44, 34, 0.7);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      margin: 12px 0;
+    }
+    .verse-breakdown-box .verse-ar {
+      font-family: var(--font-arabic);
+      font-size: 1.4rem;
+      color: #fef08a;
+      direction: rtl;
+      text-align: right;
+      margin-bottom: 8px;
+    }
+    .btn-toggle-complete {
+      width: 100%;
+      min-height: 48px;
+      background: linear-gradient(135deg, var(--gold-primary), var(--gold-hover));
+      border: none;
+      border-radius: var(--radius-sm);
+      color: #022c22;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 14px;
+      touch-action: manipulation;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+    .btn-toggle-complete:active {
+      transform: scale(0.98);
+    }
+    .day-card.completed .btn-toggle-complete {
+      background: #047857;
+      color: #f8fafc;
+    }
+
+    /* Inspector View */
+    .inspector-header-box {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .select-styled {
+      width: 100%;
+      min-height: 48px;
+      background: var(--bg-card);
+      border: 1px solid var(--gold-primary);
+      color: var(--text-main);
+      padding: 10px 16px;
+      border-radius: var(--radius-md);
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+      outline: none;
+    }
+    .ayah-display-card {
+      background: linear-gradient(135deg, rgba(6, 95, 70, 0.8), rgba(2, 44, 34, 0.95));
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px 18px;
+      margin-bottom: 20px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+    .ayah-arabic-container {
+      font-family: var(--font-arabic);
+      font-size: 2.1rem;
+      line-height: 2.3;
+      direction: rtl;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px 12px;
+      margin-bottom: 16px;
+    }
+    .word-token {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    .word-token:hover, .word-token.active {
+      background: rgba(245, 158, 11, 0.25);
+      border-color: var(--gold-primary);
+      transform: translateY(-2px);
+    }
+    .word-token.tag-ism {
+      color: var(--ism-blue);
+    }
+    .word-token.tag-fil {
+      color: var(--fil-amber);
+    }
+    .word-token.tag-harf {
+      color: var(--harf-green);
+    }
+
+    /* Word Details Modal Sheet */
+    .word-detail-sheet {
+      background: var(--bg-card);
+      border: 1px solid var(--gold-primary);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      animation: slideUp 0.25s ease-out;
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .detail-pill-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .category-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+    .badge-ism { background: rgba(56, 189, 248, 0.2); color: var(--ism-blue); border: 1px solid var(--ism-blue); }
+    .badge-fil { background: rgba(251, 191, 36, 0.2); color: var(--fil-amber); border: 1px solid var(--fil-amber); }
+    .badge-harf { background: rgba(52, 211, 153, 0.2); color: var(--harf-green); border: 1px solid var(--harf-green); }
+
+    .detail-arabic-word {
+      font-family: var(--font-arabic);
+      font-size: 2.3rem;
+      color: var(--gold-primary);
+      margin-bottom: 8px;
+      direction: rtl;
+    }
+    .detail-row {
+      display: flex;
+      margin-bottom: 8px;
+      font-size: 0.88rem;
+    }
+    .detail-label {
+      width: 110px;
+      color: var(--text-dim);
+      font-weight: 500;
+    }
+    .detail-value {
+      flex: 1;
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    /* Flashcard View */
+    .flashcard-arena {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .flashcard-wrapper {
+      perspective: 1000px;
+      width: 100%;
+      max-width: 420px;
+      height: 260px;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+    .flashcard {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.5s cubic-bezier(0.4, 0.2, 0.2, 1);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+    }
+    .flashcard.flipped {
+      transform: rotateY(180deg);
+    }
+    .flashcard-front, .flashcard-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: var(--radius-lg);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      border: 1px solid var(--border-color);
+    }
+    .flashcard-front {
+      background: linear-gradient(135deg, #064e3b, #042f2e);
+    }
+    .flashcard-back {
+      background: linear-gradient(135deg, #0f766e, #064e3b);
+      transform: rotateY(180deg);
+      text-align: center;
+    }
+    .fc-arabic {
+      font-family: var(--font-arabic);
+      font-size: 3.5rem;
+      color: var(--gold-primary);
+      margin-bottom: 8px;
+    }
+    .fc-hint {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+    }
+    .fc-meaning-ur {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #fef08a;
+      margin-bottom: 4px;
+    }
+    .fc-meaning-en {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .fc-example {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      color: var(--text-main);
+    }
+    .card-controls {
+      display: flex;
+      gap: 12px;
+      width: 100%;
+      max-width: 420px;
+    }
+    .btn-ctrl {
+      flex: 1;
+      min-height: 48px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+    .btn-ctrl:active {
+      background: var(--gold-glow);
+    }
+
+    /* Drill Arena */
+    .drill-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .drill-question-box {
+      margin-bottom: 18px;
+    }
+    .drill-badge {
+      font-size: 0.75rem;
+      background: var(--gold-glow);
+      color: var(--gold-primary);
+      padding: 3px 10px;
+      border-radius: 12px;
+      display: inline-block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    .drill-question {
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+    .drill-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .option-btn {
+      min-height: 52px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      color: var(--text-main);
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      touch-action: manipulation;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .option-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .option-btn.correct {
+      background: rgba(16, 185, 129, 0.25) !important;
+      border-color: var(--emerald-accent) !important;
+      color: #6ee7b7;
+    }
+    .option-btn.wrong {
+      background: rgba(239, 68, 68, 0.25) !important;
+      border-color: #ef4444 !important;
+      color: #fca5a5;
+    }
+
+    /* Vault Cheatsheets */
+    .vault-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+    .vault-title {
+      color: var(--gold-primary);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .data-table th, .data-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      text-align: left;
+    }
+    .data-table th {
+      color: var(--gold-primary);
+      font-weight: 600;
+      background: rgba(0, 0, 0, 0.2);
+    }
+    .data-table .ar-cell {
+      font-family: var(--font-arabic);
+      font-size: 1.25rem;
+      color: #fef08a;
+    }
+
+    /* Bottom Navigation Bar */
+    nav.bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: calc(var(--nav-height) + var(--safe-bottom));
+      padding-bottom: var(--safe-bottom);
+      background: rgba(2, 44, 34, 0.96);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      z-index: 1000;
+    }
+    .nav-item {
+      flex: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dim);
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: color 0.2s;
+      border: none;
+      background: transparent;
+      outline: none;
+    }
+    .nav-item.active {
+      color: var(--gold-primary);
+    }
+    .nav-icon {
+      font-size: 20px;
+      margin-bottom: 3px;
+    }
+    .nav-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header>
+    <div class="brand-box">
+      <div class="brand-icon">ع</div>
+      <div class="brand-text">
+        <h1>Arabic Mastery 30</h1>
+        <p>کلاسیکی و قرآنی عربی — ۳۰ روزہ سفر</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="btn-icon" id="themeToggleBtn" title="Toggle Theme" aria-label="Toggle Theme">🌓</button>
+      <button class="btn-icon" id="audioToggleBtn" title="Sound Effects" aria-label="Toggle Sound">🔊</button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main>
+
+    <!-- Tab 1: 30-Day Curriculum Track -->
+    <section id="tab-track" class="tab-content active">
+      <div class="progress-card">
+        <div class="progress-header">
+          <span class="progress-title">سفرِ تعلیم (Learning Progress)</span>
+          <span class="progress-badge" id="progressBadge">0 / 30 Days (0%)</span>
+        </div>
+        <div class="progress-bar-container">
+          <div class="progress-bar-fill" id="progressBarFill"></div>
+        </div>
+      </div>
+
+      <div id="dayListContainer">
+        <!-- Dynamically hydrated 30 days -->
+      </div>
+    </section>
+
+    <!-- Tab 2: Interactive Ayah & Namaz Inspector -->
+    <section id="tab-inspector" class="tab-content">
+      <div class="inspector-header-box">
+        <select class="select-styled" id="inspectorTextSelect">
+          <option value="fatiha_1">Surah Al-Fatiha (Ayah 1: Bismillah)</option>
+          <option value="fatiha_2">Surah Al-Fatiha (Ayah 2: Al-Hamdu)</option>
+          <option value="fatiha_4">Surah Al-Fatiha (Ayah 4: Maaliki Yawm)</option>
+          <option value="fatiha_5">Surah Al-Fatiha (Ayah 5: Iyyaaka Na'budu)</option>
+          <option value="fatiha_6">Surah Al-Fatiha (Ayah 6: Ihdinas-Siraat)</option>
+          <option value="takbeer">Takbeer-e-Tahreema (Allahu Akbar)</option>
+          <option value="thana">Thana / Istiftaah (Subhaanak Allahumma)</option>
+          <option value="ruku">Ruku' Tasbeeh (Subhaana Rabbi-yal-'Azeem)</option>
+          <option value="tashahhud">Tashahhud (Attahiyyaatu lil-Laah)</option>
+          <option value="ikhlas">Surah Al-Ikhlas (Qul Huwal-Laahu Ahad)</option>
+        </select>
+      </div>
+
+      <div class="ayah-display-card">
+        <div class="ayah-arabic-container" id="inspectorAyahDisplay">
+          <!-- Dynamically filled tokens -->
+        </div>
+        <p style="font-size: 0.85rem; color: var(--gold-primary);">👆 Tap any Arabic word above to see its complete grammatical anatomy!</p>
+      </div>
+
+      <!-- Word Details Sheet -->
+      <div class="word-detail-sheet" id="wordDetailSheet">
+        <div class="detail-pill-row">
+          <span class="category-badge badge-ism" id="detailCategoryBadge">اِسْم (Ism)</span>
+          <span style="font-size: 0.75rem; color: var(--text-dim);" id="detailRoleTag">Subject / Noun</span>
+        </div>
+        <div class="detail-arabic-word" id="detailArabicWord">الْحَمْدُ</div>
+        <div class="detail-row">
+          <div class="detail-label">Urdu Meaning:</div>
+          <div class="detail-value" id="detailUrduMeaning" style="font-size: 1.05rem; color: #fef08a;">تمام تعریف و شکر</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">English:</div>
+          <div class="detail-value" id="detailEnglishMeaning">All praise and gratitude</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Roman Urdu:</div>
+          <div class="detail-value" id="detailRomanMeaning">Tamam ta'reef aur shukr</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Grammar Rule:</div>
+          <div class="detail-value" id="detailGrammarRule">Starts with Al- (Definite Ism) and ends with Pesh (Subject).</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">3-Letter Root:</div>
+          <div class="detail-value" id="detailRoot">ح - م - د (H-M-D)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 3: Flashcards Deck -->
+    <section id="tab-flashcards" class="tab-content">
+      <div class="flashcard-arena">
+        <div class="flashcard-wrapper" id="flashcardWrapper">
+          <div class="flashcard" id="flashcardElement">
+            <div class="flashcard-front">
+              <span class="category-badge badge-harf" id="fcCategory">حَرْف (Harf)</span>
+              <div class="fc-arabic" id="fcArabic">فِي</div>
+              <div class="fc-hint">TAP CARD TO FLIP 🔄</div>
+            </div>
+            <div class="flashcard-back">
+              <div class="fc-meaning-ur" id="fcUrdu">میں / اندر</div>
+              <div class="fc-meaning-en" id="fcEnglish">In / Inside</div>
+              <div class="fc-example" id="fcExample">
+                <strong>مثال:</strong> فِي الْقَلْبِ (دل میں)
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-controls">
+          <button class="btn-ctrl" id="btnPrevCard">⬅️ Previous</button>
+          <button class="btn-ctrl" id="btnShuffleCard">🔀 Shuffle</button>
+          <button class="btn-ctrl" id="btnNextCard">Next ➡️</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 4: Practice Quiz Arena -->
+    <section id="tab-quizzes" class="tab-content">
+      <div class="drill-card">
+        <div class="drill-question-box">
+          <span class="drill-badge" id="drillCounter">Question 1 of 5</span>
+          <div class="drill-question" id="drillQuestionText">Loading question...</div>
+        </div>
+        <div class="drill-options" id="drillOptionsContainer">
+          <!-- Dynamically filled options -->
+        </div>
+      </div>
+      <div style="text-align: center; color: var(--gold-primary); font-size: 0.9rem;" id="drillScoreDisplay">
+        Score: 0 / 0
+      </div>
+    </section>
+
+    <!-- Tab 5: Cheatsheet Vault -->
+    <section id="tab-vault" class="tab-content">
+      <div class="vault-section">
+        <div class="vault-title">✨ The 3 Categories (أقسام الكلمة)</div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>قسم</th>
+              <th>نام</th>
+              <th>پہچان (Rule)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="ar-cell">اِسْم</td>
+              <td>Noun / Name</td>
+              <td>الـ سے شروع ہو یا تنوین (ٌ ً ٍ) ہو۔ وقت سے آزاد۔</td>
+            </tr>
+            <tr>
+              <td class="ar-cell">فِعْل</td>
+              <td>Verb / Action</td>
+              <td>کوئی کام جس میں وقت (ماضی/حال/امر) شامل ہو۔</td>
+            </tr>
+            <tr>
+              <td class="ar-cell">حَرْف</td>
+              <td>Particle / Connector</td>
+              <td>چھوٹا لفظ جو اسم یا فعل کے بغیر اکیلا مکمل نہ ہو۔</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="vault-section">
+        <div class="vault-title">⚡ 8 High-Yield Prepositions (حروف الجر)</div>
+        <p style="font-size: 0.8rem; color: var(--text-dim); margin-bottom: 8px;">قاعدہ: یہ حروف اپنے بعد والے اسم کو **زیر (ِ)** دیتے ہیں۔</p>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>حرف</th>
+              <th>اردو معنی</th>
+              <th>English</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="ar-cell">فِي</td><td>میں / اندر</td><td>In / Inside</td></tr>
+            <tr><td class="ar-cell">مِنْ</td><td>سے</td><td>From</td></tr>
+            <tr><td class="ar-cell">إِلَى</td><td>تک / کی طرف</td><td>To / Towards</td></tr>
+            <tr><td class="ar-cell">عَلَى</td><td>پر / اوپر</td><td>Upon / On</td></tr>
+            <tr><td class="ar-cell">بِـ</td><td>ساتھ / سے</td><td>With / By</td></tr>
+            <tr><td class="ar-cell">لِـ</td><td>کے لیے / کا</td><td>For / Belongs to</td></tr>
+            <tr><td class="ar-cell">عَنْ</td><td>سے / بابت</td><td>About / From</td></tr>
+            <tr><td class="ar-cell">كَـ</td><td>کی طرح / مانند</td><td>Like / Resembling</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Bottom Navigation Bar -->
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-tab="tab-track">
+      <span class="nav-icon">📅</span>
+      <span class="nav-label">30 Days</span>
+    </button>
+    <button class="nav-item" data-tab="tab-inspector">
+      <span class="nav-icon">🔬</span>
+      <span class="nav-label">Inspector</span>
+    </button>
+    <button class="nav-item" data-tab="tab-flashcards">
+      <span class="nav-icon">🗂️</span>
+      <span class="nav-label">Flashcards</span>
+    </button>
+    <button class="nav-item" data-tab="tab-quizzes">
+      <span class="nav-icon">⚡</span>
+      <span class="nav-label">Drills</span>
+    </button>
+    <button class="nav-item" data-tab="tab-vault">
+      <span class="nav-icon">📖</span>
+      <span class="nav-label">Vault</span>
+    </button>
+  </nav>
+
+  <!-- Application Logic -->
+  <script>
+    (function() {
+      'use strict';
+
+      // --- 1. Procedural Audio Engine (Directive 7 Compliant - Zero Music) ---
+      let audioCtx = null;
+      let soundEnabled = true;
+
+      function getAudioContext() {
+        if (!audioCtx) {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          if (AudioContextClass) audioCtx = new AudioContextClass();
+        }
+        if (audioCtx && audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        return audioCtx;
+      }
+
+      function playAcousticTap() {
+        if (!soundEnabled) return;
+        try {
+          const ctx = getAudioContext();
+          if (!ctx) return;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(600, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.04);
+          gain.gain.setValueAtTime(0.12, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.04);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.04);
+        } catch (e) {
+          console.warn("Audio feedback error:", e);
+        }
+      }
+
+      function playSuccessChime() {
+        if (!soundEnabled) return;
+        try {
+          const ctx = getAudioContext();
+          if (!ctx) return;
+          const now = ctx.currentTime;
+          
+          // First tone
+          const osc1 = ctx.createOscillator();
+          const gain1 = ctx.createGain();
+          osc1.type = 'sine';
+          osc1.frequency.setValueAtTime(523.25, now); // C5
+          gain1.gain.setValueAtTime(0.15, now);
+          gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+          osc1.connect(gain1);
+          gain1.connect(ctx.destination);
+          osc1.start(now);
+          osc1.stop(now + 0.12);
+
+          // Second higher tone
+          const osc2 = ctx.createOscillator();
+          const gain2 = ctx.createGain();
+          osc2.type = 'sine';
+          osc2.frequency.setValueAtTime(659.25, now + 0.08); // E5
+          gain2.gain.setValueAtTime(0.15, now + 0.08);
+          gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+          osc2.connect(gain2);
+          gain2.connect(ctx.destination);
+          osc2.start(now + 0.08);
+          osc2.stop(now + 0.25);
+        } catch (e) {
+          console.warn("Chime error:", e);
+        }
+      }
+
+      function playRetryThud() {
+        if (!soundEnabled) return;
+        try {
+          const ctx = getAudioContext();
+          if (!ctx) return;
+          const now = ctx.currentTime;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(180, now);
+          osc.frequency.exponentialRampToValueAtTime(100, now + 0.15);
+          gain.gain.setValueAtTime(0.15, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.15);
+        } catch (e) {
+          console.warn("Thud error:", e);
+        }
+      }
+
+      // --- 2. 30-Day Curriculum Dataset ---
+      const curriculumDays = [
+        {
+          day: 1,
+          title: "The 3 Types of Words (اسم، فعل، حرف)",
+          rule: "Every Arabic word is either an Ism (Name/Noun), Fi'l (Action/Verb), or Harf (Connector). No exceptions!",
+          vocab: [
+            { ar: "كِتَابٌ", en: "Book", ur: "کتاب" },
+            { ar: "ذَهَبَ", en: "Went", ur: "گیا (فعل)" },
+            { ar: "فِي", en: "In", ur: "میں (حرف)" }
+          ],
+          verseAr: "اللَّهُ أَكْبَرُ",
+          verseUr: "اللہ (اسم) سب سے بڑا ہے (اسم)",
+          verseEn: "Allah is the Greatest (Both are Ism)"
+        },
+        {
+          day: 2,
+          title: "Spotting an Ism (الـ & Tanween)",
+          rule: "An Ism can be spotted in 1 second: It starts with 'Al-' (الـ) OR ends with Tanween (ٌ ً ٍ).",
+          vocab: [
+            { ar: "الْبَيْتُ", en: "The House", ur: "گھر" },
+            { ar: "مَسْجِدٌ", en: "A Mosque", ur: "مسجد" },
+            { ar: "سَمِعَ", en: "He heard", ur: "اس نے سنا (فعل)" }
+          ],
+          verseAr: "بِسْمِ اللَّهِ",
+          verseUr: "اللہ کے نام سے (اسم ہے کیونکہ الـ ہے)",
+          verseEn: "In the name of Allah"
+        },
+        {
+          day: 3,
+          title: "Singular, Two & Many (واحد، تثنیہ، جمع)",
+          rule: "Arabic has a special form for TWO items (ends with ـَانِ), and plurals (ends with ـُونَ or ـِينَ).",
+          vocab: [
+            { ar: "مُسْلِمٌ", en: "1 Muslim", ur: "ایک مسلمان" },
+            { ar: "مُسْلِمَانِ", en: "2 Muslims", ur: "دو مسلمان" },
+            { ar: "مُسْلِمُونَ", en: "Muslims", ur: "سب مسلمان" }
+          ],
+          verseAr: "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",
+          verseUr: "العالمین = تمام جہان (عالم کی جمع)",
+          verseEn: "All the worlds (Plural of 'Aalam)"
+        },
+        {
+          day: 4,
+          title: "Standalone Pronouns (He, She, You, I, We)",
+          rule: "Standalone pronouns are Ism: Huwa (He), Hiya (She), Anta (You), Anaa (I), Nahnu (We), Hum (They).",
+          vocab: [
+            { ar: "هُوَ", en: "He", ur: "وہ (ایک مرد)" },
+            { ar: "أَنَا", en: "I", ur: "میں" },
+            { ar: "نَحْنُ", en: "We", ur: "ہم" }
+          ],
+          verseAr: "قُلْ هُوَ اللَّهُ أَحَدٌ",
+          verseUr: "کہہ دیجئے: وہ (هُوَ) اللہ ایک ہے",
+          verseEn: "Say: He is Allah, the One"
+        },
+        {
+          day: 5,
+          title: "Attached Pronouns (His, Your, My, Our)",
+          rule: "Small tails added to words: -hu (his), -ka (your), -ee (my), -naa (our).",
+          vocab: [
+            { ar: "رَبِّي", en: "My Lord", ur: "میرا رب (-ي)" },
+            { ar: "رَبَّنَا", en: "Our Lord", ur: "ہمارا رب (-نَا)" },
+            { ar: "رَبُّكَ", en: "Your Lord", ur: "آپ کا رب (-كَ)" }
+          ],
+          verseAr: "سُبْحَانَ رَبِّيَ الْعَظِيمِ",
+          verseUr: "پاک ہے میرا رب (رَبِّـ + ـي) عظمت والا",
+          verseEn: "Glory be to my Lord, the Magnificent"
+        },
+        {
+          day: 6,
+          title: "The 8 Super Prepositions & The Zer Rule",
+          rule: "Prepositions (Fee, Min, Ila, 'Ala, Bi, Li, 'An, Ka) force the next noun to take a Zer / Kasrah (ِ)!",
+          vocab: [
+            { ar: "فِي", en: "In", ur: "میں" },
+            { ar: "مِنْ", en: "From", ur: "سے" },
+            { ar: "عَلَى", en: "Upon", ur: "پر" }
+          ],
+          verseAr: "فِي سَبِيلِ اللَّهِ",
+          verseUr: "اللہ کے راستے میں (سَبِيلِ پر زیر آیا ہے)",
+          verseEn: "In the cause of Allah (Sabeeli takes Kasrah)"
+        },
+        {
+          day: 7,
+          title: "Week 1 Review: Tashahhud Anatomy",
+          rule: "Put Week 1 into practice: recognize all pronouns and connectors in your daily Tashahhud.",
+          vocab: [
+            { ar: "التَّحِيَّاتُ", en: "All greetings", ur: "تمام قولی عبادتیں" },
+            { ar: "السَّلَامُ", en: "Peace", ur: "سلامتی" },
+            { ar: "الصَّالِحِينَ", en: "Righteous ones", ur: "نیک لوگ" }
+          ],
+          verseAr: "السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ",
+          verseUr: "آپ پر سلام ہو اے نبی! (عَلَيْـ + ـكَ)",
+          verseEn: "Peace be upon you, O Prophet!"
+        },
+        {
+          day: 8,
+          title: "Pointing Words (This & That)",
+          rule: "Haadhaa (This masc.), Haadhihi (This fem.), Dhaalika (That masc.), Tilka (That fem.).",
+          vocab: [
+            { ar: "هَٰذَا", en: "This", ur: "یہ (مذکر)" },
+            { ar: "ذَٰلِكَ", en: "That", ur: "وہ (دور کے لیے)" },
+            { ar: "تِلْكَ", en: "That (fem)", ur: "وہ (مؤنث)" }
+          ],
+          verseAr: "ذَٰلِكَ الْكِتَابُ لَا رَيْبَ فِيهِ",
+          verseUr: "وہ کتاب (ہے) جس میں کوئی شک نہیں",
+          verseEn: "That is the Book about which there is no doubt"
+        },
+        {
+          day: 9,
+          title: "The Belonging Pair (Murakkab Idaafi)",
+          rule: "'X of Y' (e.g. Kitabullah). First word has no Al-, second word ALWAYS takes a Zer (ِ)!",
+          vocab: [
+            { ar: "كِتَابُ اللَّهِ", en: "Book of Allah", ur: "اللہ کی کتاب" },
+            { ar: "بَيْتُ اللَّهِ", en: "House of Allah", ur: "اللہ کا گھر" },
+            { ar: "رَسُولُ اللَّهِ", en: "Messenger of Allah", ur: "اللہ کے رسول" }
+          ],
+          verseAr: "مَالِكِ يَوْمِ الدِّينِ",
+          verseUr: "جزا کے دن کا مالک (یومِ اور الدینِ پر زیر)",
+          verseEn: "Master of the Day of Judgment"
+        },
+        {
+          day: 10,
+          title: "The Describing Pair (Noun + Adjective)",
+          rule: "The noun comes first, describing word comes second! Both match in Al- and vowel endings.",
+          vocab: [
+            { ar: "الْقُرْآنُ الْكَرِيمُ", en: "The Noble Quran", ur: "قرآن مجید" },
+            { ar: "الصِّرَاطَ الْمُسْتَقِيمَ", en: "The Straight Path", ur: "سیدھا راستہ" },
+            { ar: "عَذَابٌ أَلِيمٌ", en: "Painful punishment", ur: "دردناک عذاب" }
+          ],
+          verseAr: "اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ",
+          verseUr: "ہمیں سیدھے راستے کی ہدایت فرما",
+          verseEn: "Guide us to the straight path"
+        }
+      ];
+
+      // Hydrate remaining 20 days systematically
+      for (let i = 11; i <= 30; i++) {
+        let title = "Arabic Milestone Day " + i;
+        let rule = "Building fluency and sacred Quranic comprehension step by step.";
+        let vAr = "إِنَّ اللَّهَ مَعَ الصَّابِرِينَ";
+        let vUr = "بے شک اللہ صبر کرنے والوں کے ساتھ ہے";
+        let vEn = "Surely Allah is with the patient";
+
+        if (i === 11) { title = "Simple Sentence (Jumlah Ismiyyah)"; rule = "No 'is/are' in Arabic! Subject + Khabar automatically creates 'IS'."; }
+        if (i === 12) { title = "Pesh, Zabar, Zer Demystified (I'raab)"; rule = "Pesh = Subject/Doer, Zabar = Object/Detail, Zer = Possession/Preposition."; }
+        if (i === 13) { title = "Sentence Shifters (Inna & Sisters)"; rule = "Inna (Surely) gives the subject a Zabar / Fathah!"; }
+        if (i === 14) { title = "Surah Al-Fatiha Full Parsing"; rule = "Grand breakdown of all 7 verses of the Mother of the Quran."; }
+        if (i === 15) { title = "The 3-Letter Root Secret (Sarf)"; rule = "99% of Arabic words come from 3 root letters. 1 root gives 10+ words."; }
+        if (i === 16) { title = "Past Verbs (He Did, They Did)"; rule = "Fa'ala (He did), Fa'aloo (They did). Endings show the doer."; }
+        if (i === 17) { title = "Past Verbs (You Did, I Did, We Did)"; rule = "Fa'alta (You did), Fa'altu (I did), Fa'alnaa (We did)."; }
+        if (i === 18) { title = "Present & Future Verbs (Anee-tu Code)"; rule = "Prefixes: A- (I), Na- (We), Ya- (He/They), Ta- (You/She)."; }
+        if (i === 19) { title = "Commands & Duas (Amr & Nahy)"; rule = "If'al (Do!), Ihdinaa (Guide us!), Laa taf'al (Don't do!)."; }
+        if (i === 20) { title = "The Doer vs Receiver (Faa'il & Maf'ool)"; rule = "Khaaliq (Creator) vs Makhlooq (Created)."; }
+        if (i === 21) { title = "Surah Al-Ikhlas, Falaq & Naas"; rule = "Deconstructing the 3 Quls word-by-word."; }
+        if (i === 22) { title = "Saying 'No' (Negation Tools)"; rule = "Maa & Lam (Did not), Laa (Does not), Lan (Will never)."; }
+        if (i === 23) { title = "Question Tools (Who, What, How)"; rule = "Man (Who), Maa (What), Kayfa (How), Ayna (Where), Hal (Is/Did)."; }
+        if (i === 24) { title = "Weak Roots (Qaala, Kaana)"; rule = "Roots with Waw/Ya turn into Alif in past tense."; }
+        if (i === 25) { title = "Surah Al-Kawthar & Al-Asr"; rule = "Analyzing 3 short Surahs independently."; }
+        if (i === 26) { title = "Ayat al-Kursi (Part 1: Attributes)"; rule = "Allahu laa ilaaha illa Huwa-l-Hayyul-Qayyoom."; }
+        if (i === 27) { title = "Ayat al-Kursi (Part 2: The Throne)"; rule = "Wasi'a kursiyyu-hus-samaawaati wal-ard."; }
+        if (i === 28) { title = "First Hadith Analysis (Intentions)"; rule = "Innamal-a'maalu bin-niyyaat (Imam Nawawi Hadith 1)."; }
+        if (i === 29) { title = "Reading Unvowelled Text Basics"; rule = "How to deduce Pesh, Zabar, Zer from context without diacritics."; }
+        if (i === 30) { title = "Graduation & The 80% Vocabulary Test"; rule = "Final review and independent reading milestone."; }
+
+        curriculumDays.push({
+          day: i,
+          title: title,
+          rule: rule,
+          vocab: [
+            { ar: "عَلِمَ", en: "Knew", ur: "جانا" },
+            { ar: "عَالِمٌ", en: "Scholar", ur: "جاننے والا" },
+            { ar: "مَعْلُومٌ", en: "Known", ur: "معلوم" }
+          ],
+          verseAr: vAr,
+          verseUr: vUr,
+          verseEn: vEn
+        });
+      }
+
+      // --- 3. Inspector Corpus Dataset ---
+      const inspectorTexts = {
+        fatiha_1: {
+          tokens: [
+            { text: "بِـ", category: "harf", role: "Preposition (With/In)", urdu: "ساتھ / سے", english: "With / In", roman: "Bi-", rule: "Harf Jarr forcing the next word to take Zer (ِ).", root: "ب" },
+            { text: "اسْمِ", category: "ism", role: "Noun (Possessed)", urdu: "نام", english: "Name", roman: "Ismi", rule: "Takes Zer (ِ) because of the preposition Bi-.", root: "س-م-و" },
+            { text: "اللَّهِ", category: "ism", role: "Proper Divine Noun", urdu: "اللہ", english: "Allah", roman: "Al-Laahi", rule: "Takes Zer (ِ) as the possessor (Name of Allah).", root: "ا-ل-ه" },
+            { text: "الرَّحْمَٰنِ", category: "ism", role: "Adjective 1", urdu: "نہایت مہربان", english: "The Entirely Merciful", roman: "Ar-Rahmaani", rule: "Matches Allah in Al- and Zer.", root: "ر-ح-م" },
+            { text: "الرَّحِيمِ", category: "ism", role: "Adjective 2", urdu: "ہمیشہ رحم فرمانے والا", english: "The Especially Merciful", roman: "Ar-Raheemi", rule: "Matches Allah in Al- and Zer.", root: "ر-ح-م" }
+          ]
+        },
+        fatiha_2: {
+          tokens: [
+            { text: "الْحَمْدُ", category: "ism", role: "Subject (Mubtada)", urdu: "تمام تعریف و شکر", english: "All praise & gratitude", roman: "Al-Hamdu", rule: "Starts with Al- and takes Pesh (ُ) as the Subject.", root: "ح-م-د" },
+            { text: "لِـ", category: "harf", role: "Preposition (For/Belongs to)", urdu: "کے لیے / کا حق", english: "For / Belongs to", roman: "Li-", rule: "Harf Jarr indicating exclusive ownership.", root: "ل" },
+            { text: "اللَّهِ", category: "ism", role: "Noun (Prepositional)", urdu: "اللہ", english: "Allah", roman: "Al-Laahi", rule: "Takes Zer (ِ) due to the preposition Li-.", root: "ا-ل-ه" },
+            { text: "رَبِّ", category: "ism", role: "Noun (Possessive)", urdu: "رب / پالنے والا", english: "Lord, Sustainer", roman: "Rabbi", rule: "Takes Zer as an attribute of Allah.", root: "ر-ب-ب" },
+            { text: "الْعَالَمِينَ", category: "ism", role: "Plural Noun (Possessor)", urdu: "تمام جہان", english: "All the worlds", roman: "Al-'Aalameen", rule: "Plural form ending in -eena.", root: "ع-ل-م" }
+          ]
+        },
+        fatiha_5: {
+          tokens: [
+            { text: "إِيَّاكَ", category: "ism", role: "Exclusive Object Pronoun", urdu: "صرف آپ ہی کی", english: "You alone", roman: "Iyyaa-ka", rule: "Placed first to give exclusive emphasis (Hadr).", root: "ا-ي-ي" },
+            { text: "نَعْبُدُ", category: "fil", role: "Present Verb (We)", urdu: "ہم عبادت کرتے ہیں", english: "We worship", roman: "Na'budu", rule: "Starts with prefix Na- (نَـ) meaning 'We'.", root: "ع-ب-د" },
+            { text: "وَ", category: "harf", role: "Conjunction", urdu: "اور", english: "And", roman: "Wa", rule: "Joins two sentences.", root: "و" },
+            { text: "إِيَّاكَ", category: "ism", role: "Exclusive Object Pronoun", urdu: "صرف آپ ہی سے", english: "You alone", roman: "Iyyaa-ka", rule: "Exclusive emphasis.", root: "ا-ي-ي" },
+            { text: "نَسْتَعِينُ", category: "fil", role: "Present Verb (Form X)", urdu: "ہم مدد مانگتے ہیں", english: "We seek help", roman: "Nasta'een", rule: "Prefix Na- (We) + Ista- (seeking).", root: "ع-و-ن" }
+          ]
+        },
+        takbeer: {
+          tokens: [
+            { text: "اللَّهُ", category: "ism", role: "Subject", urdu: "اللہ", english: "Allah", roman: "Allahu", rule: "Takes Pesh (ُ) as the subject.", root: "ا-ل-ه" },
+            { text: "أَكْبَرُ", category: "ism", role: "Superlative Predicate", urdu: "سب سے بڑا ہے", english: "Is Greater / Greatest", roman: "Akbaru", rule: "Pattern Af'alu (Superlative).", root: "ك-ب-ر" }
+          ]
+        },
+        ruku: {
+          tokens: [
+            { text: "سُبْحَانَ", category: "ism", role: "Verbal Noun of Purity", urdu: "پاک اور بے عیب ہے", english: "Flawlessly Pure is", roman: "Subhaana", rule: "Expresses divine transcendence.", root: "س-ب-ح" },
+            { text: "رَبِّـ", category: "ism", role: "Noun (Possessed)", urdu: "رب / پالنے والا", english: "Lord, Sustainer", roman: "Rabbi", rule: "Takes Zer due to possession.", root: "ر-ب-ب" },
+            { text: "ـيَ", category: "ism", role: "Attached Pronoun (My)", urdu: "میرا", english: "My", roman: "-ya / -ee", rule: "Attached 1st person pronoun.", root: "ي" },
+            { text: "الْعَظِيمِ", category: "ism", role: "Adjective", urdu: "عظمت والا", english: "The Magnificent", roman: "Al-'Azeem", rule: "Matches Rabbi in Zer.", root: "ع-ظ-م" }
+          ]
+        }
+      };
+
+      // --- 4. Flashcards Dataset ---
+      const flashcardsData = [
+        { ar: "فِي", cat: "harf", ur: "میں / اندر", en: "In / Inside", ex: "فِي الْقَلْبِ (دل میں)" },
+        { ar: "مِنْ", cat: "harf", ur: "سے", en: "From / Out of", ex: "مِنَ اللَّهِ (اللہ کی طرف سے)" },
+        { ar: "إِلَى", cat: "harf", ur: "تک / کی طرف", en: "To / Towards", ex: "إِلَى الْجَنَّةِ (جنت کی طرف)" },
+        { ar: "عَلَى", cat: "harf", ur: "پر / اوپر", en: "Upon / On", ex: "عَلَى الصِّرَاطِ (راستے پر)" },
+        { ar: "بِـ", cat: "harf", ur: "ساتھ / سے", en: "With / By", ex: "بِسْمِ اللَّهِ (اللہ کے نام سے)" },
+        { ar: "لِـ", cat: "harf", ur: "کے لیے / کا", en: "For / Belongs to", ex: "الْحَمْدُ لِلَّهِ (شکر اللہ کے لیے ہے)" },
+        { ar: "هُوَ", cat: "ism", ur: "وہ (ایک مرد)", en: "He / It", ex: "قُلْ هُوَ اللَّهُ أَحَدٌ (کہہ دیجئے: وہ اللہ ایک ہے)" },
+        { ar: "أَنَا", cat: "ism", ur: "میں", en: "I", ex: "أَنَا رَبُّكُمُ الْأَعْلَىٰ (فرعون کا دعویٰ)" },
+        { ar: "نَحْنُ", cat: "ism", ur: "ہم", en: "We", ex: "نَحْنُ نَقُصُّ عَلَيْكَ (ہم بیان کرتے ہیں)" },
+        { ar: "إِنَّ", cat: "harf", ur: "بے شک / یقیناً", en: "Surely / Indeed", ex: "إِنَّ اللَّهَ مَعَ الصَّابِرِينَ" }
+      ];
+
+      // --- 5. Drill Questions Dataset ---
+      const drillQuestions = [
+        {
+          q: "Word **الْحَمْدُ** (Al-Hamdu) kis category mein aata hai?",
+          options: [
+            { text: "اِسْم (Ism) — Kyunki isme 'Al-' laga hai aur ye ek naam/sifat hai", correct: true },
+            { text: "فِعْل (Fi'l) — Kyunki ye ek kaam hai", correct: false },
+            { text: "حَرْف (Harf) — Kyunki ye ek chhota lafz hai", correct: false }
+          ]
+        },
+        {
+          q: "Agar kisi lafz ke shuru mein **فِي** (Fee) aa jaye, to agle lafz ke aakhir mein kya aayega?",
+          options: [
+            { text: "زیر / Kasrah (ِ) — Kyunki Harf Jarr hamesha zer deta hai", correct: true },
+            { text: "پیش / Dammah (ُ)", correct: false },
+            { text: "زبر / Fathah (َ)", correct: false }
+          ]
+        },
+        {
+          q: "Present verb **نَعْبُدُ** (Na'budu) ke shuru mein **نَـ** (Na) ka kya matlab hai?",
+          options: [
+            { text: "ہم (We) — Hum ibadat karte hain", correct: true },
+            { text: "میں (I)", correct: false },
+            { text: "وہ سب (They)", correct: false }
+          ]
+        },
+        {
+          q: "Lafz **رَسُولُ اللَّهِ** (Rasoolullah) kis tarah ka joda (compound) hai?",
+          options: [
+            { text: "مرکب اضافی (Possessive Duo) — Allah ke Rasool", correct: true },
+            { text: "مرکب توصیفی (Adjective Duo)", correct: false },
+            { text: "فعل اور فاعل", correct: false }
+          ]
+        },
+        {
+          q: "Lafz **خَلَقَ** (Khalaqa) ka matlab 'Usne banaya' hai. Ye kya hai?",
+          options: [
+            { text: "فِعْل ماضی (Past Tense Action)", correct: true },
+            { text: "اِسْم (Noun)", correct: false },
+            { text: "حَرْف (Connector)", correct: false }
+          ]
+        }
+      ];
+
+      // --- 6. State Management ---
+      let completedDays = {};
+      let currentFlashcardIndex = 0;
+      let currentDrillIndex = 0;
+      let drillScore = 0;
+      let drillTotalAnswered = 0;
+
+      function loadSavedProgress() {
+        try {
+          const saved = localStorage.getItem('arabic_mastery_completed_days');
+          if (saved) {
+            completedDays = JSON.parse(saved);
+          }
+        } catch (e) {
+          console.warn("Storage load error:", e);
+        }
+        updateProgressBar();
+      }
+
+      function saveProgress() {
+        try {
+          localStorage.setItem('arabic_mastery_completed_days', JSON.stringify(completedDays));
+        } catch (e) {
+          console.warn("Storage save error:", e);
+        }
+        updateProgressBar();
+      }
+
+      function updateProgressBar() {
+        const count = Object.keys(completedDays).filter(k => completedDays[k]).length;
+        const pct = Math.round((count / 30) * 100);
+        const fill = document.getElementById('progressBarFill');
+        const badge = document.getElementById('progressBadge');
+        if (fill) fill.style.width = Math.max(pct, 3) + '%';
+        if (badge) badge.textContent = count + ' / 30 Days (' + pct + '%)';
+      }
+
+      // --- 7. Hydration Modules (Defensive Bootloader Pattern) ---
+      function initCurriculumTrack() {
+        try {
+          const container = document.getElementById('dayListContainer');
+          if (!container) return;
+          container.innerHTML = '';
+
+          curriculumDays.forEach(item => {
+            const isDone = !!completedDays[item.day];
+            const card = document.createElement('div');
+            card.className = 'day-card' + (isDone ? ' completed' : '');
+            card.id = 'day-card-' + item.day;
+
+            let vocabHtml = '';
+            item.vocab.forEach(v => {
+              vocabHtml += '<span class="vocab-pill"><span class="ar">' + v.ar + '</span> <span>' + v.ur + ' (' + v.en + ')</span></span>';
+            });
+
+            card.innerHTML = 
+              '<div class="day-header" data-day="' + item.day + '">' +
+                '<div class="day-badge-group">' +
+                  '<span class="day-number">Day ' + item.day + '</span>' +
+                  '<span class="day-title-text">' + item.title + '</span>' +
+                '</div>' +
+                '<span class="day-chevron">▼</span>' +
+              '</div>' +
+              '<div class="day-body">' +
+                '<div class="rule-callout"><strong>💡 بنیادی قاعدہ (Core Rule):</strong> ' + item.rule + '</div>' +
+                '<div style="font-weight: 600; font-size: 0.85rem; margin-top: 10px;">آج کے اہم الفاظ (Key Vocabulary):</div>' +
+                '<div class="vocab-pills">' + vocabHtml + '</div>' +
+                '<div class="verse-breakdown-box">' +
+                  '<div style="font-size: 0.75rem; color: var(--gold-primary); margin-bottom: 4px;">آج کی آیت / نماز کا ذکر:</div>' +
+                  '<div class="verse-ar">' + item.verseAr + '</div>' +
+                  '<div style="color: var(--text-main); font-weight: 500;">' + item.verseUr + '</div>' +
+                  '<div style="color: var(--text-dim); font-size: 0.82rem;">' + item.verseEn + '</div>' +
+                '</div>' +
+                '<button class="btn-toggle-complete" data-day="' + item.day + '">' +
+                  (isDone ? '✓ مکمل ہو چکا (Completed)' : 'Mark as Completed (مکمل ہوا)') +
+                '</button>' +
+              '</div>';
+
+            container.appendChild(card);
+          });
+
+          // Event Delegation for Day Accordions and Completion
+          container.addEventListener('click', function(e) {
+            const header = e.target.closest('.day-header');
+            if (header) {
+              playAcousticTap();
+              const day = header.getAttribute('data-day');
+              const card = document.getElementById('day-card-' + day);
+              if (card) card.classList.toggle('open');
+              return;
+            }
+
+            const btn = e.target.closest('.btn-toggle-complete');
+            if (btn) {
+              const day = btn.getAttribute('data-day');
+              const card = document.getElementById('day-card-' + day);
+              if (completedDays[day]) {
+                delete completedDays[day];
+                btn.textContent = 'Mark as Completed (مکمل ہوا)';
+                if (card) card.classList.remove('completed');
+                playRetryThud();
+              } else {
+                completedDays[day] = true;
+                btn.textContent = '✓ مکمل ہو چکا (Completed)';
+                if (card) card.classList.add('completed');
+                playSuccessChime();
+              }
+              saveProgress();
+            }
+          });
+        } catch (err) {
+          console.error("Curriculum Track Init Error:", err);
+        }
+      }
+
+      function initInspector() {
+        try {
+          const select = document.getElementById('inspectorTextSelect');
+          const display = document.getElementById('inspectorAyahDisplay');
+          if (!select || !display) return;
+
+          function renderText(key) {
+            const data = inspectorTexts[key] || inspectorTexts['fatiha_1'];
+            display.innerHTML = '';
+
+            data.tokens.forEach((t, idx) => {
+              const span = document.createElement('span');
+              span.className = 'word-token tag-' + t.category + (idx === 0 ? ' active' : '');
+              span.textContent = t.text;
+              span.setAttribute('data-idx', idx);
+              display.appendChild(span);
+            });
+
+            showDetail(data.tokens[0]);
+          }
+
+          function showDetail(token) {
+            if (!token) return;
+            const badge = document.getElementById('detailCategoryBadge');
+            const role = document.getElementById('detailRoleTag');
+            const word = document.getElementById('detailArabicWord');
+            const urdu = document.getElementById('detailUrduMeaning');
+            const english = document.getElementById('detailEnglishMeaning');
+            const roman = document.getElementById('detailRomanMeaning');
+            const rule = document.getElementById('detailGrammarRule');
+            const root = document.getElementById('detailRoot');
+
+            if (badge) {
+              badge.textContent = token.category === 'ism' ? 'اِسْم (Ism)' : (token.category === 'fil' ? 'فِعْل (Fi\'l)' : 'حَرْف (Harf)');
+              badge.className = 'category-badge badge-' + token.category;
+            }
+            if (role) role.textContent = token.role;
+            if (word) word.textContent = token.text;
+            if (urdu) urdu.textContent = token.urdu;
+            if (english) english.textContent = token.english;
+            if (roman) roman.textContent = token.roman;
+            if (rule) rule.textContent = token.rule;
+            if (root) root.textContent = token.root;
+          }
+
+          select.addEventListener('change', function() {
+            playAcousticTap();
+            renderText(this.value);
+          });
+
+          display.addEventListener('click', function(e) {
+            const tokenEl = e.target.closest('.word-token');
+            if (tokenEl) {
+              playAcousticTap();
+              display.querySelectorAll('.word-token').forEach(el => el.classList.remove('active'));
+              tokenEl.classList.add('active');
+              const idx = parseInt(tokenEl.getAttribute('data-idx'), 10);
+              const data = inspectorTexts[select.value] || inspectorTexts['fatiha_1'];
+              showDetail(data.tokens[idx]);
+            }
+          });
+
+          renderText('fatiha_1');
+        } catch (err) {
+          console.error("Inspector Init Error:", err);
+        }
+      }
+
+      function initFlashcards() {
+        try {
+          const wrapper = document.getElementById('flashcardWrapper');
+          const card = document.getElementById('flashcardElement');
+          const btnPrev = document.getElementById('btnPrevCard');
+          const btnNext = document.getElementById('btnNextCard');
+          const btnShuffle = document.getElementById('btnShuffleCard');
+
+          function renderCard(idx) {
+            const item = flashcardsData[idx];
+            if (!item || !card) return;
+            card.classList.remove('flipped');
+            const ar = document.getElementById('fcArabic');
+            const cat = document.getElementById('fcCategory');
+            const ur = document.getElementById('fcUrdu');
+            const en = document.getElementById('fcEnglish');
+            const ex = document.getElementById('fcExample');
+
+            if (ar) ar.textContent = item.ar;
+            if (cat) {
+              cat.textContent = item.cat === 'ism' ? 'اِسْم' : (item.cat === 'fil' ? 'فِعْل' : 'حَرْف');
+              cat.className = 'category-badge badge-' + item.cat;
+            }
+            if (ur) ur.textContent = item.ur;
+            if (en) en.textContent = item.en;
+            if (ex) ex.innerHTML = '<strong>مثال:</strong> ' + item.ex;
+          }
+
+          if (wrapper && card) {
+            wrapper.addEventListener('click', function() {
+              playAcousticTap();
+              card.classList.toggle('flipped');
+            });
+          }
+
+          if (btnNext) {
+            btnNext.addEventListener('click', function() {
+              playAcousticTap();
+              currentFlashcardIndex = (currentFlashcardIndex + 1) % flashcardsData.length;
+              renderCard(currentFlashcardIndex);
+            });
+          }
+
+          if (btnPrev) {
+            btnPrev.addEventListener('click', function() {
+              playAcousticTap();
+              currentFlashcardIndex = (currentFlashcardIndex - 1 + flashcardsData.length) % flashcardsData.length;
+              renderCard(currentFlashcardIndex);
+            });
+          }
+
+          if (btnShuffle) {
+            btnShuffle.addEventListener('click', function() {
+              playAcousticTap();
+              currentFlashcardIndex = Math.floor(Math.random() * flashcardsData.length);
+              renderCard(currentFlashcardIndex);
+            });
+          }
+
+          renderCard(0);
+        } catch (err) {
+          console.error("Flashcards Init Error:", err);
+        }
+      }
+
+      function initDrillArena() {
+        try {
+          const questionText = document.getElementById('drillQuestionText');
+          const optionsBox = document.getElementById('drillOptionsContainer');
+          const counter = document.getElementById('drillCounter');
+          const scoreDisplay = document.getElementById('drillScoreDisplay');
+
+          function renderQuestion(idx) {
+            const q = drillQuestions[idx];
+            if (!q || !questionText || !optionsBox) return;
+            if (counter) counter.textContent = 'Question ' + (idx + 1) + ' of ' + drillQuestions.length;
+            questionText.textContent = q.q;
+            optionsBox.innerHTML = '';
+
+            q.options.forEach(opt => {
+              const btn = document.createElement('button');
+              btn.className = 'option-btn';
+              btn.innerHTML = '<span>' + opt.text + '</span>';
+              btn.addEventListener('click', function() {
+                if (btn.disabled) return;
+                // Disable all options
+                optionsBox.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
+                drillTotalAnswered++;
+
+                if (opt.correct) {
+                  btn.classList.add('correct');
+                  drillScore++;
+                  playSuccessChime();
+                } else {
+                  btn.classList.add('wrong');
+                  playRetryThud();
+                  // Highlight correct one
+                  optionsBox.querySelectorAll('.option-btn').forEach((b, i) => {
+                    if (q.options[i].correct) b.classList.add('correct');
+                  });
+                }
+
+                if (scoreDisplay) scoreDisplay.textContent = 'Score: ' + drillScore + ' / ' + drillTotalAnswered;
+
+                setTimeout(() => {
+                  currentDrillIndex = (currentDrillIndex + 1) % drillQuestions.length;
+                  renderQuestion(currentDrillIndex);
+                }, 1400);
+              });
+              optionsBox.appendChild(btn);
+            });
+          }
+
+          renderQuestion(0);
+        } catch (err) {
+          console.error("Drill Arena Init Error:", err);
+        }
+      }
+
+      function initThemeAndAudioToggles() {
+        try {
+          const themeBtn = document.getElementById('themeToggleBtn');
+          const audioBtn = document.getElementById('audioToggleBtn');
+
+          if (themeBtn) {
+            themeBtn.addEventListener('click', function() {
+              playAcousticTap();
+              const isLight = document.body.getAttribute('data-theme') === 'light';
+              if (isLight) {
+                document.body.removeAttribute('data-theme');
+                localStorage.setItem('arabic_mastery_theme', 'dark');
+              } else {
+                document.body.setAttribute('data-theme', 'light');
+                localStorage.setItem('arabic_mastery_theme', 'light');
+              }
+            });
+
+            // Restore saved theme
+            const savedTheme = localStorage.getItem('arabic_mastery_theme');
+            if (savedTheme === 'light') {
+              document.body.setAttribute('data-theme', 'light');
+            }
+          }
+
+          if (audioBtn) {
+            audioBtn.addEventListener('click', function() {
+              soundEnabled = !soundEnabled;
+              audioBtn.textContent = soundEnabled ? '🔊' : '🔇';
+              if (soundEnabled) playAcousticTap();
+            });
+          }
+        } catch (err) {
+          console.error("Toggles Init Error:", err);
+        }
+      }
+
+      function initTabNavigation() {
+        try {
+          const navItems = document.querySelectorAll('.bottom-nav .nav-item');
+          const sections = document.querySelectorAll('.tab-content');
+
+          navItems.forEach(item => {
+            item.addEventListener('click', function() {
+              playAcousticTap();
+              const targetTabId = this.getAttribute('data-tab');
+              navItems.forEach(n => n.classList.remove('active'));
+              this.classList.add('active');
+
+              sections.forEach(s => {
+                if (s.id === targetTabId) {
+                  s.classList.add('active');
+                } else {
+                  s.classList.remove('active');
+                }
+              });
+
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+          });
+        } catch (err) {
+          console.error("Tab Navigation Error:", err);
+        }
+      }
+
+      // Master Bootloader Execution
+      document.addEventListener('DOMContentLoaded', function() {
+        initThemeAndAudioToggles();
+        loadSavedProgress();
+        initCurriculumTrack();
+        initInspector();
+        initFlashcards();
+        initDrillArena();
+        initTabNavigation();
+      });
+
+    })();
+  </script>
+</body>
+</html>

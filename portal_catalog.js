@@ -2,7 +2,7 @@
 window.PORTAL_CATALOG = {
   "version": "1.0.0",
   "lastUpdated": "Antigravity Files",
-  "totalApps": 32,
+  "totalApps": 33,
   "categories": [
     "Islamic & Faith",
     "Productivity & Utilities",
@@ -11,6 +11,28 @@ window.PORTAL_CATALOG = {
     "Discovered Tools"
   ],
   "apps": [
+    {
+      "id": "20-Arabic-Mastery__index_html",
+      "title": "Arabic Mastery 30",
+      "category": "Islamic & Faith",
+      "icon": "📖",
+      "badge": "30-Day PWA • Audio",
+      "description": "30-day Classical & Quranic Arabic mastery course from zero. Features interactive Ayah & Namaz word inspector, 40 particle flashcards, and procedural audio quizzes.",
+      "tags": [
+        "arabic",
+        "quran",
+        "namaz",
+        "grammar",
+        "islamic",
+        "pwa",
+        "education",
+        "flashcards"
+      ],
+      "primary": true,
+      "relPath": "20-Arabic-Mastery/index.html",
+      "portalHref": "./20-Arabic-Mastery/index.html",
+      "serverHref": "./20-Arabic-Mastery/index.html"
+    },
     {
       "id": "01-Events-Countdown__index_html",
       "title": "Events Countdown & Tracker",
