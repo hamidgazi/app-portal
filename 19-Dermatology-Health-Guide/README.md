@@ -23,6 +23,8 @@ Key diagnostic formulations established during clinical triage:
 
 | Production Deliverable | Format | Direct Clickable File Link | Description |
 | :--- | :--- | :--- | :--- |
+| **Allopathy vs. Ayurveda vs. Homeopathy Master Dossier** | Microsoft Word (.docx) | [Allopathy_vs_Ayurveda_vs_Homeopathy_Comparative_Guide.docx](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/19-Dermatology-Health-Guide/Allopathy_vs_Ayurveda_vs_Homeopathy_Comparative_Guide.docx) | Publication-grade Word reference comparing therapeutic mechanisms, RCT trial evidence, safety/toxicology audits, and 12 hidden gems for Acne, Scars, PIH, and PIE. |
+| **Comparative Dermatology Markdown Guide** | Markdown Document | [ALLOPATHY_VS_AYURVEDA_VS_HOMEOPATHY_COMPARATIVE_GUIDE.md](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/19-Dermatology-Health-Guide/ALLOPATHY_VS_AYURVEDA_VS_HOMEOPATHY_COMPARATIVE_GUIDE.md) | Canonical Markdown compendium with Mermaid flowcharts, multi-column condition scorecards, and scenario decision algorithms. |
 | **Executive Clinical Protocol** | Markdown Document | [MASTER_DERMATOLOGY_PROTOCOL.md](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/19-Dermatology-Health-Guide/MASTER_DERMATOLOGY_PROTOCOL.md) | Exhaustive clinical reference with pathophysiological blueprints, efficacy rankings, active mechanisms, and prescription tags. |
 | **Action & Regimen Tracker** | Markdown Document | [DAILY_REGIMEN_AND_ACTION_TRACKER.md](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/19-Dermatology-Health-Guide/DAILY_REGIMEN_AND_ACTION_TRACKER.md) | Day-by-day AM/PM checklist, 12-week recovery milestones, dietary guidelines, and doctor visit cheat sheet. |
 | **Interactive Mobile Reader App** | Responsive Web App | [index.html](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/19-Dermatology-Health-Guide/index.html) | Standalone, offline-capable mobile web app with tab navigation, procedural haptic feedback, and localStorage checkbox persistence. |
@@ -33,10 +35,13 @@ Key diagnostic formulations established during clinical triage:
 
 ```
 c:/Users/Shop PC 2/OneDrive/Desktop/Antigravity Files/19-Dermatology-Health-Guide/
-├── README.md                           # Master Project Navigation Hub & Executive Index
-├── MASTER_DERMATOLOGY_PROTOCOL.md      # In-depth Clinical Compendium & Product Directory
-├── DAILY_REGIMEN_AND_ACTION_TRACKER.md # Daily AM/PM Checklist & 12-Week Milestones
-└── index.html                          # Offline Responsive PWA Dashboard & Interactive Tracker
+├── README.md                                                       # Master Project Navigation Hub & Executive Index
+├── Allopathy_vs_Ayurveda_vs_Homeopathy_Comparative_Guide.docx      # Master Comparative Medical Word Deliverable
+├── ALLOPATHY_VS_AYURVEDA_VS_HOMEOPATHY_COMPARATIVE_GUIDE.md        # Canonical Markdown Comparative Compendium
+├── build_comparative_guide.py                                      # Automated OpenXML Word Generation Engine
+├── MASTER_DERMATOLOGY_PROTOCOL.md                                  # In-depth Clinical Compendium & Product Directory
+├── DAILY_REGIMEN_AND_ACTION_TRACKER.md                             # Daily AM/PM Checklist & 12-Week Milestones
+└── index.html                                                      # Offline Responsive PWA Dashboard & Interactive Tracker
 ```
 
 ---
