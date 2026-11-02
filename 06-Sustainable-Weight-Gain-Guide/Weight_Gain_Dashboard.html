@@ -565,7 +565,7 @@
         color: #000000 !important;
         padding: 0;
       }
-      .nav-tabs, .timer-card, .btn, .calc-grid, .synergy-pills, .chrono-pills, .phase-pills, .schedule-pills {
+      .nav-tabs, .timer-card, .btn, .calc-grid, .synergy-pills, .chrono-pills, .phase-pills, .schedule-pills, .superfood-category-pills, .superfood-selector-pills {
         display: none !important;
       }
       .tab-pane {
@@ -721,6 +721,103 @@
       font-size: 1rem;
     }
 
+
+    /* Superfoods Explorer & Snack Lab Styles */
+    .superfood-category-pills, .superfood-selector-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .sf-cat-pill, .sf-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      touch-action: manipulation;
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+
+    .sf-cat-pill:hover, .sf-pill:hover {
+      background: var(--bg-card-hover);
+      color: var(--text-main);
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+
+    .sf-cat-pill.active {
+      background: rgba(56, 189, 248, 0.18);
+      color: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+    }
+
+    .sf-pill.active {
+      background: rgba(34, 197, 94, 0.18);
+      color: #22c55e;
+      border-color: #22c55e;
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.25);
+    }
+
+    .macro-badge-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .macro-chip {
+      background: #0d1424;
+      border: 1px solid var(--border-subtle);
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .macro-chip.cal { color: #f59e0b; border-color: rgba(245, 158, 11, 0.3); }
+    .macro-chip.pro { color: #38bdf8; border-color: rgba(56, 189, 248, 0.3); }
+    .macro-chip.fat { color: #ec4899; border-color: rgba(236, 72, 153, 0.3); }
+    .macro-chip.carb { color: #22c55e; border-color: rgba(34, 197, 94, 0.3); }
+
+    .snack-recipe-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1rem;
+    }
+
+    .snack-card {
+      background: #0d1424;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.2s ease;
+    }
+
+    .snack-card:hover {
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+
+    .snack-card.completed {
+      border-color: rgba(34, 197, 94, 0.6);
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.08), rgba(9, 14, 26, 0.95));
+    }
   </style>
 </head>
 <body>
@@ -740,6 +837,7 @@
       <button class="tab-btn" data-tab="tab-lifestyle" role="tab">🧬 Dual-Tissue & Lifestyle</button>
       <button class="tab-btn" data-tab="tab-food-science" role="tab">🧪 Clinical Nutrition & Food Science</button>
       <button class="tab-btn" data-tab="tab-nutrition" role="tab">🍗 Food Catalog & Shakes</button>
+      <button class="tab-btn" id="tab-btn-superfoods" data-tab="tab-superfoods" role="tab">🌿 Superfoods & Snacks</button>
       <button class="tab-btn" data-tab="tab-schedules" role="tab">🕒 Triple Schedules</button>
       <button class="tab-btn" data-tab="tab-calisthenics" role="tab">🤸 Calisthenics & Timer</button>
       <button class="tab-btn" data-tab="tab-supplements" role="tab">💊 Safe Supplements</button>
@@ -1724,6 +1822,252 @@
                 <p style="margin-top: 0.5rem;"><strong>Antagonist Trap</strong>: Never use stale pre-ground pepper (oxidized piperine has 0% potency) and never use skim milk with zero fat (curcumin requires lipid micelle assembly).</p>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB: SUPERFOODS & SNACK LAB -->
+    <section id="tab-superfoods" class="tab-pane" role="tabpanel">
+      <!-- Section 1: Superfoods Encyclopedia & Explorer -->
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
+          <div>
+            <h2 class="card-title" style="margin-bottom: 0.25rem;">🌿 The Master Hardgainer Superfoods Encyclopedia</h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">
+              16 Champion traditional and modern superfoods categorized by functional strength. Engineered for high caloric density, rapid gastric clearance, and zero digestive friction.
+            </p>
+          </div>
+          <span style="font-size: 0.75rem; padding: 0.3rem 0.6rem; border-radius: 999px; background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan); font-weight: 700;">
+            16 Champion Foods • 4 Categories
+          </span>
+        </div>
+
+        <!-- Category Filter Pills -->
+        <div class="superfood-category-pills" role="tablist" aria-label="Superfood Categories">
+          <button class="sf-cat-pill active" data-cat="all" role="tab" id="sf-cat-all">🌟 All 16 Superfoods</button>
+          <button class="sf-cat-pill" data-cat="cat1" role="tab" id="sf-cat-cat1">🌾 Ancient Puffs & Carbs (4)</button>
+          <button class="sf-cat-pill" data-cat="cat2" role="tab" id="sf-cat-cat2">🥜 Hyper-Caloric Lipids & Seeds (4)</button>
+          <button class="sf-cat-pill" data-cat="cat3" role="tab" id="sf-cat-cat3">🍇 Glycogen Restorers & Dry Fruits (4)</button>
+          <button class="sf-cat-pill" data-cat="cat4" role="tab" id="sf-cat-cat4">🌿 Ayurvedic Deep Adaptogens (4)</button>
+        </div>
+
+        <!-- 16 Superfood Selector Pills -->
+        <div class="superfood-selector-pills" role="tablist" aria-label="16 Champion Superfoods" id="sf-selector-container">
+          <button class="sf-pill active" data-superfood="rajgira" data-category="cat1" id="sf-pill-rajgira" role="tab">🌾 Rajgira (Amaranth)</button>
+          <button class="sf-pill" data-superfood="chana" data-category="cat1" id="sf-pill-chana" role="tab">🥣 Roasted Chana (Sattu)</button>
+          <button class="sf-pill" data-superfood="makhana" data-category="cat1" id="sf-pill-makhana" role="tab">⚪ Makhana (Foxnuts)</button>
+          <button class="sf-pill" data-superfood="chia" data-category="cat1" id="sf-pill-chia" role="tab">🌱 Chia Seeds</button>
+          <button class="sf-pill" data-superfood="peanuts" data-category="cat2" id="sf-pill-peanuts" role="tab">🥜 Peanuts / Peanut Butter</button>
+          <button class="sf-pill" data-superfood="til" data-category="cat2" id="sf-pill-til" role="tab">⚪ Sesame Seeds (Til)</button>
+          <button class="sf-pill" data-superfood="khopra" data-category="cat2" id="sf-pill-khopra" role="tab">🥥 Dried Coconut (Khopra)</button>
+          <button class="sf-pill" data-superfood="pumpkin" data-category="cat2" id="sf-pill-pumpkin" role="tab">🎃 Pumpkin Seeds</button>
+          <button class="sf-pill" data-superfood="dates" data-category="cat3" id="sf-pill-dates" role="tab">🌴 Soft Dates (Khajoor)</button>
+          <button class="sf-pill" data-superfood="munakka" data-category="cat3" id="sf-pill-munakka" role="tab">🍇 Soaked Munakka</button>
+          <button class="sf-pill" data-superfood="anjeer" data-category="cat3" id="sf-pill-anjeer" role="tab">🍯 Dried Figs (Anjeer)</button>
+          <button class="sf-pill" data-superfood="walnuts" data-category="cat3" id="sf-pill-walnuts" role="tab">🧠 Soaked Walnuts</button>
+          <button class="sf-pill" data-superfood="gond" data-category="cat4" id="sf-pill-gond" role="tab">💎 Acacia Gum (Babool Gond)</button>
+          <button class="sf-pill" data-superfood="ashwagandha" data-category="cat4" id="sf-pill-ashwagandha" role="tab">🌿 Ashwagandha Root</button>
+          <button class="sf-pill" data-superfood="kesar" data-category="cat4" id="sf-pill-kesar" role="tab">🌸 Kashmiri Saffron (Kesar)</button>
+          <button class="sf-pill" data-superfood="gondkatira" data-category="cat4" id="sf-pill-gondkatira" role="tab">🧊 Tragacanth Gum (Gond Katira)</button>
+        </div>
+
+        <!-- Dynamic Superfood Inspector Card -->
+        <div class="card" id="sf-inspector-box" style="background: rgba(2, 132, 199, 0.08); border-left: 4px solid var(--accent-cyan); margin-bottom: 1.5rem;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
+            <div>
+              <div id="sf-cat-label" style="font-size: 0.75rem; color: var(--accent-cyan); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">
+                CATEGORY 1: PUFFED ANCIENT PSEUDOCEREALS & COMPLEX CARBS
+              </div>
+              <h3 id="sf-food-title" style="color: #ffffff; font-size: 1.3rem; margin: 0;">
+                🌾 RAJGIRA (PUFFED AMARANTH / AMARANTHUS CRUENTUS)
+              </h3>
+            </div>
+            <span id="sf-badge" style="font-size: 0.8rem; padding: 0.35rem 0.75rem; border-radius: 999px; background: rgba(56, 189, 248, 0.2); color: var(--accent-cyan); font-weight: 700; border: 1px solid var(--accent-cyan);">
+              COMPLETE PROTEIN + SQUALENE
+            </span>
+          </div>
+
+          <!-- Live Macro Badges (per 100g) -->
+          <div class="macro-badge-bar">
+            <span class="macro-chip cal">🔥 Calories: <strong id="sf-stat-cal">371 kcal</strong></span>
+            <span class="macro-chip pro">🥩 Protein: <strong id="sf-stat-pro">14.5g</strong></span>
+            <span class="macro-chip fat">🥑 Healthy Fat: <strong id="sf-stat-fat">7.0g</strong></span>
+            <span class="macro-chip carb">⚡ Carbs: <strong id="sf-stat-carb">65.0g</strong></span>
+          </div>
+
+          <!-- 4 Key Diagnostic Stat Boxes -->
+          <div class="chrono-stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem; margin-bottom: 1.25rem;">
+            <div class="chrono-stat-card" style="background: #090e1a; border: 1px solid var(--border-subtle); border-radius: 10px; padding: 0.9rem;">
+              <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">⏱️ Gastric Clearance</div>
+              <div id="sf-stat-clearance" style="font-size: 1.1rem; font-weight: 700; color: #22c55e; margin: 0.2rem 0;">45–60 mins</div>
+              <div id="sf-desc-clearance" style="font-size: 0.75rem; color: var(--text-muted);">Puffed structure prevents gastric pooling</div>
+            </div>
+
+            <div class="chrono-stat-card" style="background: #090e1a; border: 1px solid var(--border-subtle); border-radius: 10px; padding: 0.9rem;">
+              <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">🧬 Bioactive Superpower</div>
+              <div id="sf-stat-bioactive" style="font-size: 1.1rem; font-weight: 700; color: var(--accent-cyan); margin: 0.2rem 0;">Squalene + Lysine</div>
+              <div id="sf-desc-bioactive" style="font-size: 0.75rem; color: var(--text-muted);">Steroidogenesis precursor & complete amino acid balance</div>
+            </div>
+
+            <div class="chrono-stat-card" style="background: #090e1a; border: 1px solid var(--border-subtle); border-radius: 10px; padding: 0.9rem;">
+              <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">🎯 Anabolic Target</div>
+              <div id="sf-stat-target" style="font-size: 1.1rem; font-weight: 700; color: #f59e0b; margin: 0.2rem 0;">IGF-1 & Myogenesis</div>
+              <div id="sf-desc-target" style="font-size: 0.75rem; color: var(--text-muted);">Drives muscle protein synthesis without bloating</div>
+            </div>
+
+            <div class="chrono-stat-card" style="background: #090e1a; border: 1px solid var(--border-subtle); border-radius: 10px; padding: 0.9rem;">
+              <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">🥄 Prescribed Daily Serving</div>
+              <div id="sf-stat-serving" style="font-size: 1.1rem; font-weight: 700; color: #ec4899; margin: 0.2rem 0;">40g – 50g</div>
+              <div id="sf-desc-serving" style="font-size: 0.75rem; color: var(--text-muted);">In milk, pinni bites, or porridge</div>
+            </div>
+          </div>
+
+          <!-- Clinical & Kitchen Insights -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1rem;">
+            <div class="card" style="border-left: 3px solid var(--accent-cyan); margin-bottom: 0;">
+              <h4 style="color: var(--accent-cyan); font-size: 0.95rem; margin-bottom: 0.5rem;">🔬 Biochemical Mechanism & Physiological Impact</h4>
+              <div id="sf-clinical-text" style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+                <p>Unlike conventional grains (wheat, rice) which are severely deficient in the essential amino acid L-lysine, Amaranth delivers a complete protein PDCAAS score comparable to animal protein. Contains up to 8% squalene, a natural triterpene precursor to steroidogenesis. Puffing gelatinizes starches, allowing instant enzymatic breakdown without splanchnic blood-shunting conflict.</p>
+              </div>
+            </div>
+
+            <div class="card" style="border-left: 3px solid #22c55e; margin-bottom: 0;">
+              <h4 style="color: #22c55e; font-size: 0.95rem; margin-bottom: 0.5rem;">🍳 Optimal Culinary Synergy & Hardgainer Timing Rule</h4>
+              <div id="sf-kitchen-text" style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+                <p><strong>Synergy Pairing</strong>: Hand-knead puffed rajgira with crushed roasted peanuts and soft dates into dense Pinni bites (Combo 1). The lipid and natural invert sugar carriers convert airy volume into dense calories.</p>
+                <p style="margin-top: 0.5rem;"><strong>Timing Rule</strong>: Consume at 11:30 AM (Mid-Morning) or 05:00 PM (Pre-Workout). Never consume raw or un-puffed grains.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2: 4 High-Density Quick-Prep Snack Lab -->
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
+          <div>
+            <h2 class="card-title" style="margin-bottom: 0.25rem;">🥣 4 High-Density Quick-Prep Snack Lab</h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">
+              Zero-cooking, under-5-minute kitchen formulations. Engineered to bypass gastric volume sensors and deliver 190 to 450 clean surplus calories.
+            </p>
+          </div>
+          <span id="snack-counter-badge" style="font-size: 0.75rem; padding: 0.3rem 0.6rem; border-radius: 999px; background: rgba(34, 197, 94, 0.15); color: #22c55e; font-weight: 700;">
+            0 / 4 Snacks Prepared Today
+          </span>
+        </div>
+
+        <div class="snack-recipe-grid">
+          <!-- Combo 1 -->
+          <div class="snack-card" id="snack-card-pinni">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                <h3 style="color: var(--accent-cyan); font-size: 1.05rem; margin: 0;">1. Zero-Cook Rajgira-Peanut Pinni</h3>
+                <span style="font-size: 0.75rem; color: #f59e0b; font-weight: 700; background: rgba(245, 158, 11, 0.15); padding: 0.2rem 0.5rem; border-radius: 6px;">
+                  ~450 kcal | 14g Pro
+                </span>
+              </div>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+                Hand-mashed into 2 dense golf-ball size pinni bites. Completely dry, portable, and zero-cook.
+              </p>
+              <div style="font-size: 0.8rem; color: var(--text-main); margin-bottom: 0.75rem; background: #090e1a; padding: 0.75rem; border-radius: 8px;">
+                <strong>Ingredients</strong>:<br>
+                • 35g Puffed Rajgira (Amaranth)<br>
+                • 25g Crushed Roasted Peanuts<br>
+                • 4 Soft Khajoor (Dates, pitted & mashed)<br>
+                • 1 tsp Raw Honey + pinch cardamom
+              </div>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem;">
+                <strong>Assembly</strong>: Mash dates in a bowl with honey. Add peanuts and rajgira. Roll firmly into 2 dense balls with palms. Eat immediately or store in foil.
+              </div>
+            </div>
+            <button class="btn btn-snack-check" data-snack="pinni" style="width: 100%; min-height: 44px; background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan); border: 1px solid var(--accent-cyan); border-radius: 8px; font-weight: 700; cursor: pointer;">
+              Mark Prepared / Eaten ✓
+            </button>
+          </div>
+
+          <!-- Combo 2 -->
+          <div class="snack-card" id="snack-card-trailcrunch">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                <h3 style="color: #22c55e; font-size: 1.05rem; margin: 0;">2. Ghee Makhana, Chana & Til Crunch</h3>
+                <span style="font-size: 0.75rem; color: #f59e0b; font-weight: 700; background: rgba(245, 158, 11, 0.15); padding: 0.2rem 0.5rem; border-radius: 6px;">
+                  ~330 kcal | 11g Pro
+                </span>
+              </div>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+                Light crunch bowl absorbing 10g of A2 Ghee lipids without causing gastric heaviness.
+              </p>
+              <div style="font-size: 0.8rem; color: var(--text-main); margin-bottom: 0.75rem; background: #090e1a; padding: 0.75rem; border-radius: 8px;">
+                <strong>Ingredients</strong>:<br>
+                • 25g Makhana (Foxnuts)<br>
+                • 30g Roasted Bengal Gram (Bhuna Chana)<br>
+                • 1 tbsp White Sesame Seeds (Til)<br>
+                • 1 tsp Pure Desi Cow Ghee + pinch hing & black salt
+              </div>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem;">
+                <strong>Assembly</strong>: Warm ghee in a pan for 30s with hing. Toss makhana, chana, and til for 2 minutes until crisp. Sprinkle Kala Namak.
+              </div>
+            </div>
+            <button class="btn btn-snack-check" data-snack="trailcrunch" style="width: 100%; min-height: 44px; background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 1px solid #22c55e; border-radius: 8px; font-weight: 700; cursor: pointer;">
+              Mark Prepared / Eaten ✓
+            </button>
+          </div>
+
+          <!-- Combo 3 -->
+          <div class="snack-card" id="snack-card-elixir">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                <h3 style="color: #f59e0b; font-size: 1.05rem; margin: 0;">3. Bedtime Kesar-Gond-Ashwagandha</h3>
+                <span style="font-size: 0.75rem; color: #f59e0b; font-weight: 700; background: rgba(245, 158, 11, 0.15); padding: 0.2rem 0.5rem; border-radius: 6px;">
+                  ~380 kcal | 12g Pro
+                </span>
+              </div>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+                Deep restorative nightcap blunting cortisol, cushioning joint cartilage, and delivering 8h slow amino acids.
+              </p>
+              <div style="font-size: 0.8rem; color: var(--text-main); margin-bottom: 0.75rem; background: #090e1a; padding: 0.75rem; border-radius: 8px;">
+                <strong>Ingredients</strong>:<br>
+                • 250ml Warm Full-Cream Milk<br>
+                • 10g Babool Gond (fried in 1 tsp ghee until puffed)<br>
+                • 5–6 Threads Kashmiri Saffron (steeped)<br>
+                • 500mg Ashwagandha root powder + 2 soaked walnuts
+              </div>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem;">
+                <strong>Assembly</strong>: Whisk warm milk with steeped saffron, fried gond, ashwagandha, and crushed soaked walnuts. Drink warm 35 mins before bed.
+              </div>
+            </div>
+            <button class="btn btn-snack-check" data-snack="elixir" style="width: 100%; min-height: 44px; background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid #f59e0b; border-radius: 8px; font-weight: 700; cursor: pointer;">
+              Mark Prepared / Eaten ✓
+            </button>
+          </div>
+
+          <!-- Combo 4 -->
+          <div class="snack-card" id="snack-card-summercooler">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                <h3 style="color: var(--accent-teal); font-size: 1.05rem; margin: 0;">4. Hydrating Chia & Gond Katira</h3>
+                <span style="font-size: 0.75rem; color: #f59e0b; font-weight: 700; background: rgba(245, 158, 11, 0.15); padding: 0.2rem 0.5rem; border-radius: 6px;">
+                  ~190 kcal | 6g Pro
+                </span>
+              </div>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+                Pitta-pacifying summer thermal buffer soothing gut mucosa and eliminating acid burning.
+              </p>
+              <div style="font-size: 0.8rem; color: var(--text-main); margin-bottom: 0.75rem; background: #090e1a; padding: 0.75rem; border-radius: 8px;">
+                <strong>Ingredients</strong>:<br>
+                • 1 cup Tender Coconut Water (or 200ml chilled water)<br>
+                • 2 tbsp Puffed Soaked Gond Katira jelly<br>
+                • 1 tbsp Pre-soaked Chia Seeds<br>
+                • 1 tsp Raw Mishri (unrefined rock sugar) + 3 drops lemon
+              </div>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem;">
+                <strong>Assembly</strong>: Stir soaked Gond Katira jelly and chia seeds into coconut water with raw mishri and lemon. Drink chilled at 11:30 AM or 04:00 PM.
+              </div>
+            </div>
+            <button class="btn btn-snack-check" data-snack="summercooler" style="width: 100%; min-height: 44px; background: rgba(13, 148, 136, 0.15); color: var(--accent-teal); border: 1px solid var(--accent-teal); border-radius: 8px; font-weight: 700; cursor: pointer;">
+              Mark Prepared / Eaten ✓
+            </button>
           </div>
         </div>
       </div>
@@ -3539,6 +3883,473 @@
         });
       } catch (err) {
         console.error("Bio-Synergies inspector bootloader error:", err);
+      }
+
+      // 11. Superfoods Encyclopedia & Snack Lab Bootloader (Directive 5 & Directive 7)
+      try {
+        const superfoodData = {
+          rajgira: {
+            catLabel: "CATEGORY 1: PUFFED ANCIENT PSEUDOCEREALS & COMPLEX CARBS",
+            title: "🌾 RAJGIRA (PUFFED AMARANTH / AMARANTHUS CRUENTUS)",
+            badgeText: "COMPLETE PROTEIN + SQUALENE",
+            calStat: "371 kcal",
+            proStat: "14.5g",
+            fatStat: "7.0g",
+            carbStat: "65.0g",
+            clearanceStat: "45–60 mins",
+            clearanceDesc: "Puffed structure prevents gastric pooling",
+            bioactiveStat: "Squalene + Lysine",
+            bioactiveDesc: "Steroidogenesis precursor & complete amino acid balance",
+            targetStat: "IGF-1 & Myogenesis",
+            targetDesc: "Drives muscle protein synthesis without bloating",
+            servingStat: "40g – 50g",
+            servingDesc: "In milk, pinni bites, or porridge",
+            clinicalHtml: "<p>Unlike conventional grains (wheat, rice) which are severely deficient in the essential amino acid L-lysine, Amaranth delivers a complete protein PDCAAS score comparable to animal protein. Contains up to 8% squalene, a natural triterpene precursor to steroidogenesis. Puffing gelatinizes starches, allowing instant enzymatic breakdown without splanchnic blood-shunting conflict.</p>",
+            kitchenHtml: "<p><strong>Synergy Pairing</strong>: Hand-knead puffed rajgira with crushed roasted peanuts and soft dates into dense Pinni bites (Combo 1). The lipid and natural invert sugar carriers convert airy volume into dense calories.</p><p style='margin-top:0.5rem;'><strong>Timing Rule</strong>: Consume at 11:30 AM (Mid-Morning) or 05:00 PM (Pre-Workout). Never consume raw or un-puffed grains.</p>"
+          },
+          chana: {
+            catLabel: "CATEGORY 1: PUFFED ANCIENT PSEUDOCEREALS & COMPLEX CARBS",
+            title: "🥣 ROASTED BENGAL GRAM (BHUNA CHANA / SATTU)",
+            badgeText: "22% PROTEIN + HIGH LEUCINE",
+            calStat: "380 kcal",
+            proStat: "22.0g",
+            fatStat: "5.5g",
+            carbStat: "58.0g",
+            clearanceStat: "60–75 mins",
+            clearanceDesc: "Dry sand roast hydrolyzes hard starches",
+            bioactiveStat: "Resistant Oligosaccharides",
+            bioactiveDesc: "Prebiotic nourishment for colon Bifidobacteria",
+            targetStat: "mTOR & Sustained Satiety",
+            targetDesc: "Steady amino acid drip without insulin rebound",
+            servingStat: "35g – 50g",
+            servingDesc: "Handful roasted crunch or dissolved Sattu",
+            clinicalHtml: "<p>Sand-roasting (traditional dry heat) deactivates heat-labile trypsin inhibitors and lectins completely. With 22g protein per 100g and high branched-chain amino acids (leucine), it triggers muscle protein synthesis while prebiotic galacto-oligosaccharides promote short-chain fatty acid synthesis in the distal bowel.</p>",
+            kitchenHtml: "<p><strong>Synergy Pairing</strong>: Whisk Sattu into fresh room-temperature curd (Synbiotic Synergy 9) or roast with 1 tsp Desi Ghee and Kala Namak to prime antral gastric motility.</p><p style='margin-top:0.5rem;'><strong>Timing Rule</strong>: Ideal at 11:30 AM as a refresh beverage or 04:30 PM pre-workout.</p>"
+          },
+          makhana: {
+            catLabel: "CATEGORY 1: PUFFED ANCIENT PSEUDOCEREALS & COMPLEX CARBS",
+            title: "⚪ MAKHANA (FOXNUTS / EURYALE FEROX)",
+            badgeText: "CALORIC LIPID SPONGE",
+            calStat: "350 kcal",
+            proStat: "9.7g",
+            fatStat: "0.5g",
+            carbStat: "77.0g",
+            clearanceStat: "40–50 mins",
+            clearanceDesc: "Alveolar structure empties rapidly from stomach",
+            bioactiveStat: "Kaempferol Flavonoids",
+            bioactiveDesc: "Suppresses NF-κB inflammatory cytokines",
+            targetStat: "Lipid Absorption Carrier",
+            targetDesc: "Converts A2 Ghee into non-greasy calories",
+            servingStat: "25g – 40g",
+            servingDesc: "Sautéed in 1–2 tsp Desi Cow Ghee",
+            clinicalHtml: "<p>Puffed foxnuts have an extremely porous cellular structure that acts as a natural lipophilic matrix. When roasted in pure Desi Ghee, makhana absorbs 15–20g of healthy short/medium-chain fats without tasting heavy, converting an airy snack into an effortless 330+ kcal delivery vehicle that clears the stomach in under 50 minutes.</p>",
+            kitchenHtml: "<p><strong>Synergy Pairing</strong>: Sauté with roasted chana, sesame seeds, and Himalayan pink salt (Combo 2). The crunch stimulates salivary enzymes, pre-digesting starches.</p><p style='margin-top:0.5rem;'><strong>Timing Rule</strong>: Perfect 04:30 PM afternoon crunch with light green or CCF tea.</p>"
+          },
+          chia: {
+            catLabel: "CATEGORY 1: PUFFED ANCIENT PSEUDOCEREALS & COMPLEX CARBS",
+            title: "🌱 CHIA SEEDS (SALVIA HISPANICA)",
+            badgeText: "SOLUBLE MUCILAGE SHIELD",
+            calStat: "486 kcal",
+            proStat: "16.5g",
+            fatStat: "30.7g",
+            carbStat: "42.0g",
+            clearanceStat: "75–90 mins",
+            clearanceDesc: "Hydrophilic gel slows sugar spikes",
+            bioactiveStat: "Soluble Polysaccharide Gel",
+            bioactiveDesc: "Absorbs 12x its weight in water to coat mucosa",
+            targetStat: "Mucosal Barrier & Hydration",
+            targetDesc: "Protects esophagus and bowel from acid friction",
+            servingStat: "15g – 20g",
+            servingDesc: "Pre-soaked for at least 20 minutes",
+            clinicalHtml: "<p>When hydrated, chia seeds exude an anionic polysaccharide mucilage that forms a slippery protective hydrogel barrier along the gastric and duodenal lining. This mucilage prevents free hydrochloric acid from irritating sensitive mucosal tissue while slowing carbohydrate absorption for even glycemic release.</p>",
+            kitchenHtml: "<p><strong>Synergy Pairing</strong>: Blend into morning shakes or combine with soaked Gond Katira and tender coconut water (Combo 4) for intense heat relief.</p><p style='margin-top:0.5rem;'><strong>Timing Rule</strong>: Always soak before consumption. Never consume dry seeds with plain water.</p>"
+          },
+          peanuts: {
+            catLabel: "CATEGORY 2: HYPER-CALORIC HEALTHY LIPIDS & SEEDS",
+            title: "🥜 PEANUTS (MUNGFALI / NATURAL PEANUT BUTTER)",
+            badgeText: "567 KCAL / 100G CALORIE KING",
+            calStat: "567 kcal",
+            proStat: "25.8g",
+            fatStat: "49.2g",
+            carbStat: "16.0g",
+            clearanceStat: "90–120 mins",
+            clearanceDesc: "High lipid density requires pacing",
+            bioactiveStat: "L-Arginine & Resveratrol",
+            bioactiveDesc: "Upregulates endothelial nitric oxide synthase (eNOS)",
+            targetStat: "Caloric Surplus Shuttling",
+            targetDesc: "Delivers maximum calories in minimal bulk volume",
+            servingStat: "30g – 40g",
+            servingDesc: "2 tbsp natural 100% peanut butter",
+            clinicalHtml: "<p>Peanuts provide 5.67 kcal per single gram, making them the most cost-effective hyper-caloric food for hardgainers. Packed with L-arginine (precursor to nitric oxide) and resveratrol, they support endothelial vasodilation and muscular nutrient delivery while delivering 26% bioavailable plant protein.</p>",
+            kitchenHtml: "<p><strong>Synergy Pairing</strong>: Blend natural smooth peanut butter into the Desi Power Bulk Shake with milk and dates. Pureeing eliminates solid chewing fatigue and accelerates gastric transit.</p><p style='margin-top:0.5rem;'><strong>Timing Rule</strong>: Include in 11:30 AM or 05:30 PM liquid shakes; avoid eating whole roasted nuts right before bed.</p>"
+          },
+          til: {
+            catLabel: "CATEGORY 2: HYPER-CALORIC HEALTHY LIPIDS & SEEDS",
+            title: "⚪ SESAME SEEDS (WHITE & BLACK TIL / SESAMUM INDICUM)",
+            badgeText: "975MG ELEMENTAL CALCIUM",
+            calStat: "573 kcal",
+            proStat: "17.7g",
+            fatStat: "49.7g",
+            carbStat: "23.0g",
+            clearanceStat: "90–110 mins",
+            clearanceDesc: "High mineral density lipid matrix",
+            bioactiveStat: "Sesamin & Sesamolin Lignans",
+            bioactiveDesc: "Hepatic fatty acid oxidation & tocopherol sparing",
+            targetStat: "Bone Mineral Hypertrophy",
+            targetDesc: "Fortifies skeleton under progressive calisthenic load",
+            servingStat: "15g – 25g",
+            servingDesc: "Lightly toasted or rolled in pinni bites",
+            clinicalHtml: "<p>Sesame seeds contain 975mg calcium per 100g—the richest plant calcium source known. Sesamin lignans upregulate hepatic gene expression of peroxisomal beta-oxidation while shielding circulating Vitamin E from degradation, ensuring profound bone density and joint cushioning as training volume increases.</p>",
+            kitchenHtml: "<p><strong>Synergy Pairing</strong>: Toast lightly and add to roasted chana bowls or hand-knead into pinni bites with honey and dates.</p><p style='margin-top:0.5rem;'><strong>Timing Rule</strong>: Excellent in winter and transitional seasons; take with breakfast or mid-afternoon snacks.</p>"
+          },
+          khopra: {
+            catLabel: "CATEGORY 2: HYPER-CALORIC HEALTHY LIPIDS & SEEDS",
+            title: "🥥 DRIED GRATED COCONUT (KHOPRA / GARI)",
+            badgeText: "650 KCAL • DIRECT PORTAL MCTs",
+            calStat: "650 kcal",
+            proStat: "7.0g",
+            fatStat: "65.0g",
+            carbStat: "24.0g",
+            clearanceStat: "60–80 mins",
+            clearanceDesc: "MCTs bypass standard lymphatic emulsification",
+            bioactiveStat: "Lauric Acid (C12) & MCTs",
+            bioactiveDesc: "Direct portal-vein uptake straight to liver mitochondria",
+            targetStat: "Instant Non-Pancreatic ATP",
+            targetDesc: "Fuels cellular energy without digestive gallbladder strain",
+            servingStat: "25g – 35g",
+            servingDesc: "Grated dried copra in shakes or laddus",
+            clinicalHtml: "<p>Dry coconut contains 65% fat dominated by medium-chain triglycerides (lauric, caprylic, capric acids). MCTs do not require pancreatic lipase or bile salt micelle packaging; they are absorbed directly across enterocyte membranes into the portal vein straight to the liver, providing rapid non-carbohydrate cellular energy.</p>",
+            kitchenHtml: "<p><strong>Synergy Pairing</strong>: Blend grated dry coconut into morning or evening shakes or combine with soft dates and almonds for high-density chews.</p><p style='margin-top:0.5rem;'><strong>Timing Rule</strong>: Take 60 minutes before training or with afternoon shakes for clean sustained stamina.</p>"
+          },
+          pumpkin: {
+            catLabel: "CATEGORY 2: HYPER-CALORIC HEALTHY LIPIDS & SEEDS",
+            title: "🎃 PUMPKIN SEEDS (KADDOO BEEJ / PEPITAS)",
+            badgeText: "ELEMENTAL ZINC + TRYPTOPHAN",
+            calStat: "559 kcal",
+            proStat: "30.2g",
+            fatStat: "49.1g",
+            carbStat: "10.7g",
+            clearanceStat: "80–100 mins",
+            clearanceDesc: "High protein and healthy lipid matrix",
+            bioactiveStat: "Zinc (7.8mg) & L-Tryptophan",
+            bioactiveDesc: "Leydig steroidogenesis & pineal melatonin synthesis",
+            targetStat: "Testosterone & Deep Sleep",
+            targetDesc: "Promotes nocturnal growth hormone release",
+            servingStat: "20g – 30g",
+            servingDesc: "Pan-toasted or ground in bedtime milk",
+            clinicalHtml: "<p>Pumpkin seeds are an unmatched source of elemental zinc (7.8mg/100g) and L-tryptophan (570mg/100g). Zinc is an obligate structural cofactor for androgen receptor binding and testosterone synthesis, while tryptophan provides the direct substrate for nocturnal serotonin and melatonin secretion.</p>",
+            kitchenHtml: "<p><strong>Synergy Pairing</strong>: Grind into powder and whisk into warm bedtime milk with saffron and ashwagandha for deep slow-wave restorative sleep.</p><p style='margin-top:0.5rem;'><strong>Timing Rule</strong>: Consume with dinner or 45 minutes before sleep.</p>"
+          },
+          dates: {
+            catLabel: "CATEGORY 3: RAPID GLYCOGEN RESTORERS & DRY FRUITS",
+            title: "🌴 SOFT DATES (KHAJOOR / MEDJOOL / KIMIA)",
+            badgeText: "DUAL-TRANSPORTER GLYCOGEN",
+            calStat: "277 kcal",
+            proStat: "1.8g",
+            fatStat: "0.2g",
+            carbStat: "75.0g",
+            clearanceStat: "30–45 mins",
+            clearanceDesc: "Invert sugars clear stomach rapidly",
+            bioactiveStat: "Equimolar Glucose + Fructose",
+            bioactiveDesc: "Simultaneous SGLT-1 and GLUT-5 transporter uptake",
+            targetStat: "Insulin-Driven Creatine Shuttle",
+            targetDesc: "Restores liver/muscle glycogen without fermentation",
+            servingStat: "4 – 6 Soft Dates",
+            servingDesc: "40g to 60g pitted soft dates",
+            clinicalHtml: "<p>Soft dates provide natural invert sugars in an optimal 1:1 glucose-to-fructose ratio. Because glucose uses SGLT-1 and fructose uses GLUT-5 transporters in the jejunum, intestinal carbohydrate uptake capacity is doubled without gastrointestinal distress. Triggers the physiological insulin spike that drives creatine into muscle cells.</p>",
+            kitchenHtml: "<p><strong>Synergy Pairing</strong>: Blend 4 dates into the Desi Power Bulk Shake with creatine monohydrate (Synergy 7) or stuff each date with 1 tsp peanut butter and a walnut half.</p><p style='margin-top:0.5rem;'><strong>Timing Rule</strong>: 45 minutes pre-workout or immediately post-workout with protein.</p>"
+          },
+          munakka: {
+            catLabel: "CATEGORY 3: RAPID GLYCOGEN RESTORERS & DRY FRUITS",
+            title: "🍇 SOAKED BLACK RAISINS (MUNAKKA / VITIS VINIFERA)",
+            badgeText: "NATURAL SORBITOL MOTILITY",
+            calStat: "299 kcal",
+            proStat: "3.1g",
+            fatStat: "0.5g",
+            carbStat: "79.0g",
+            clearanceStat: "30–40 mins",
+            clearanceDesc: "Pre-soaked fiber speeds transit",
+            bioactiveStat: "Sorbitol & Bioavailable Iron",
+            bioactiveDesc: "Gentle osmotic laxative & erythropoietic support",
+            targetStat: "Morning Appetite & Peristalsis",
+            targetDesc: "Clears sluggish hard stools without cramping",
+            servingStat: "8 – 10 Soaked Munakka",
+            servingDesc: "Soaked 10–12 hours in room water",
+            clinicalHtml: "<p>Soaking black raisins for 10–12 hours activates the sugar alcohol sorbitol and hydrates soluble fruit pectin. Upon waking, chewing soaked munakka draws water into the descending colon, triggering physiological Phase III peristalsis to ensure a complete morning bowel evacuation and waking strong digestive fire.</p>",
+            kitchenHtml: "<p><strong>Synergy Pairing</strong>: Eat alongside 6 peeled soaked almonds upon waking (Daily Tracker habit); drink the sweet soaking water.</p><p style='margin-top:0.5rem;'><strong>Timing Rule</strong>: Strictly 07:00 AM on an empty morning stomach.</p>"
+          },
+          anjeer: {
+            catLabel: "CATEGORY 3: RAPID GLYCOGEN RESTORERS & DRY FRUITS",
+            title: "🍯 DRIED FIGS (ANJEER / FICUS CARICA)",
+            badgeText: "FICIN ENZYMATIC DIGESTION",
+            calStat: "249 kcal",
+            proStat: "3.3g",
+            fatStat: "0.9g",
+            carbStat: "64.0g",
+            clearanceStat: "45–60 mins",
+            clearanceDesc: "Enzymatic properties accelerate transit",
+            bioactiveStat: "Ficin Proteolytic Enzyme",
+            bioactiveDesc: "Natural endopeptidase that pre-digests proteins",
+            targetStat: "Mucosal Scrubbing & Proteolysis",
+            targetDesc: "Micro-seeds gently stimulate intestinal walls",
+            servingStat: "2 – 3 Soaked Figs",
+            servingDesc: "30g to 45g soaked in warm water",
+            clinicalHtml: "<p>Dried figs contain ficin, a powerful plant-derived cysteine endopeptidase that breaks peptide bonds in heavy dietary meats and eggs. The thousands of insoluble micro-achenes (seeds) physically stimulate intestinal mechanoreceptors, preventing sluggish transit while providing rich plant potassium and magnesium.</p>",
+            kitchenHtml: "<p><strong>Synergy Pairing</strong>: Soak overnight in warm water; eat before heavy chicken/mutton meals or blend into afternoon smoothies.</p><p style='margin-top:0.5rem;'><strong>Timing Rule</strong>: Morning breakfast or 30 minutes before heavy lunch.</p>"
+          },
+          walnuts: {
+            catLabel: "CATEGORY 3: RAPID GLYCOGEN RESTORERS & DRY FRUITS",
+            title: "🧠 SOAKED WALNUTS (AKHROT / JUGLANS REGIA)",
+            badgeText: "9.1G PLANT OMEGA-3 (ALA)",
+            calStat: "654 kcal",
+            proStat: "15.2g",
+            fatStat: "65.2g",
+            carbStat: "13.7g",
+            clearanceStat: "90–120 mins",
+            clearanceDesc: "Soaking removes astringent juglone tannins",
+            bioactiveStat: "Alpha-Linolenic Acid & Ellagitannins",
+            bioactiveDesc: "Maintains enteric neuro-synaptic membrane fluidity",
+            targetStat: "Enteric Nervous System & BDNF",
+            targetDesc: "Optimizes brain-gut vagal communication",
+            servingStat: "3 – 4 Halves (15g–20g)",
+            servingDesc: "Always pre-soaked for 8–10 hours",
+            clinicalHtml: "<p>Walnuts deliver 9.1g of Alpha-Linolenic Acid (ALA) per 100g, the highest of any tree nut. ALA is incorporated into phospholipid cell membranes throughout the enteric nervous system, enhancing vagus nerve sensitivity and acetylcholine transmission. Soaking neutralizes bitter juglone tannins that otherwise provoke gastric nausea.</p>",
+            kitchenHtml: "<p><strong>Synergy Pairing</strong>: Soak overnight; peel outer dark skin if bitter, and crush into warm bedtime milk with saffron and ashwagandha (Combo 3).</p><p style='margin-top:0.5rem;'><strong>Timing Rule</strong>: Afternoon snack or bedtime restorative drink.</p>"
+          },
+          gond: {
+            catLabel: "CATEGORY 4: TRADITIONAL AYURVEDIC DEEP-TISSUE ADAPTOGENS",
+            title: "💎 ACACIA GUM (BABOOL GOND / GONDH / ACACIA ARABICA)",
+            badgeText: "DEEP TISSUE ANABOLIC FORTIFIER",
+            calStat: "380 kcal",
+            proStat: "2.0g",
+            fatStat: "0.1g",
+            carbStat: "85.0g",
+            clearanceStat: "75–90 mins",
+            clearanceDesc: "Ghee-fried crystals digest smoothly",
+            bioactiveStat: "Branched Arabinogalactans",
+            bioactiveDesc: "Fortifies bone matrix (Asthi) and synovial joints",
+            targetStat: "Joint Lubrication & Core Density",
+            targetDesc: "Cushions knees and lumbar spine during squats",
+            servingStat: "10g – 15g",
+            servingDesc: "Fried in Desi Ghee until puffed white",
+            clinicalHtml: "<p>Babool Gond is revered in Ayurvedic pharmacology as a premier <em>Brihana</em> (deep tissue anabolic) agent. Composed of highly branched arabinogalactan polysaccharides, it stimulates gut microbiome butyrate synthesis and enhances skeletal calcium retention. Frying in pure Desi Ghee turns hard resin into light, digestible golden crystals.</p>",
+            kitchenHtml: "<p><strong>Synergy Pairing</strong>: Fry in 1 tsp pure Desi Ghee until fully puffed white; crush into bedtime saffron milk or roll into winter energy pinni.</p><p style='margin-top:0.5rem;'><strong>Timing Rule</strong>: Ideal during autumn and winter months, or during intensive training phases at bedtime.</p>"
+          },
+          ashwagandha: {
+            catLabel: "CATEGORY 4: TRADITIONAL AYURVEDIC DEEP-TISSUE ADAPTOGENS",
+            title: "🌿 ASHWAGANDHA ROOT (WITHANIA SOMNIFERA)",
+            badgeText: "-28% CORTISOL • +17% TESTOSTERONE",
+            calStat: "277 kcal",
+            proStat: "3.7g",
+            fatStat: "0.3g",
+            carbStat: "50.0g",
+            clearanceStat: "Under 45 mins",
+            clearanceDesc: "Rapid intestinal and systemic distribution",
+            bioactiveStat: "Withanolides (Withaferin A & D)",
+            bioactiveDesc: "Modulates GABA receptors to blunt HPA stress axis",
+            targetStat: "Anti-Catabolic Muscle Protection",
+            targetDesc: "Halts stress-induced skeletal muscle proteolysis",
+            servingStat: "300mg – 500mg extract",
+            servingDesc: "Or 1/2 tsp pure organic root powder",
+            clinicalHtml: "<p>Ashwagandha withanolides cross the blood-brain barrier to modulate GABAergic receptors, blunting hypothalamic-pituitary-adrenal (HPA) axis activation. Clinical double-blind trials confirm a 28% reduction in serum cortisol and a 17% increase in serum testosterone, protecting hardgainers from stress-induced muscle catabolism.</p>",
+            kitchenHtml: "<p><strong>Synergy Pairing</strong>: Whisk with warm whole milk, turmeric, black pepper, and 1 tsp ghee (Synergy 1 Triad). Piperine and milk fats maximize withanolide absorption.</p><p style='margin-top:0.5rem;'><strong>Timing Rule</strong>: 30–45 minutes before sleep to align with nocturnal growth hormone pulse.</p>"
+          },
+          kesar: {
+            catLabel: "CATEGORY 4: TRADITIONAL AYURVEDIC DEEP-TISSUE ADAPTOGENS",
+            title: "🌸 KASHMIRI SAFFRON (SHAHI KESAR / CROCUS SATIVUS)",
+            badgeText: "GASTRIC MICRO-CIRCULATION",
+            calStat: "310 kcal",
+            proStat: "11.4g",
+            fatStat: "5.8g",
+            carbStat: "65.4g",
+            clearanceStat: "Under 20 mins",
+            clearanceDesc: "Rapid sublingual and gastric absorption",
+            bioactiveStat: "Crocin, Crocetin & Safranal",
+            bioactiveDesc: "Stimulates endothelial nitric oxide in gastric mucosa",
+            targetStat: "Splanchnic Blood Flow & Appetite",
+            targetDesc: "Eliminates emotional food repulsion and enhances mood",
+            servingStat: "4 – 6 Strands",
+            servingDesc: "Steeped in 2 tbsp warm milk for 15 minutes",
+            clinicalHtml: "<p>Saffron carotenoids (crocin and safranal) stimulate micro-arteriolar vasodilation across gastric mucosal capillaries via endothelial nitric oxide release. By increasing mucosal blood perfusion and elevating cerebral serotonin, saffron relieves visceral tension and eliminates mental nausea or food aversion.</p>",
+            kitchenHtml: "<p><strong>Synergy Pairing</strong>: Steep 5 crimson strands in 2 tablespoons warm milk until vibrant gold; pour into morning shakes or bedtime golden milk (Combo 3).</p><p style='margin-top:0.5rem;'><strong>Timing Rule</strong>: Breakfast appetite awakening or evening relaxation.</p>"
+          },
+          gondkatira: {
+            catLabel: "CATEGORY 4: TRADITIONAL AYURVEDIC DEEP-TISSUE ADAPTOGENS",
+            title: "🧊 TRAGACANTH GUM (GOND KATIRA / ASTRAGALUS GUMMIFER)",
+            badgeText: "PITTA-PACIFYING SUMMER COOLANT",
+            calStat: "340 kcal",
+            proStat: "1.5g",
+            fatStat: "0.2g",
+            carbStat: "82.0g",
+            clearanceStat: "60–90 mins",
+            clearanceDesc: "Hydrophilic matrix empties without heaviness",
+            bioactiveStat: "Bassorin & Tragacanthin Gel",
+            bioactiveDesc: "Expands 20-fold into an odorless cooling gel",
+            targetStat: "Visceral Gastritis Relief",
+            targetDesc: "Protects hardgainers from summer heat exhaustion",
+            servingStat: "5g – 10g dry crystals",
+            servingDesc: "Yields 1 cup puffed jelly after water soak",
+            clinicalHtml: "<p>Unlike warming Babool Gond, Gond Katira is naturally cooling (<em>Sheeta Virya</em>). Composed of bassorin, it swells 20-fold in water into a soothing gelatinous hydrogel that coats the esophagus and stomach, neutralizing excess hydrochloric acid and protecting ectomorphs from summer heat exhaustion and dehydration.</p>",
+            kitchenHtml: "<p><strong>Synergy Pairing</strong>: Soak overnight in water; stir 2 tbsp of the puffed jelly into tender coconut water with soaked chia seeds and raw rock sugar (Combo 4).</p><p style='margin-top:0.5rem;'><strong>Timing Rule</strong>: Strictly during hot summer months at 11:30 AM or 04:00 PM; avoid in cold winter.</p>"
+          }
+        };
+
+        // UI Audio Feedback (Procedural Web Audio - Directive 7 Zero-Music Compliance)
+        let sfxAudioCtx = null;
+        function getSfxContext() {
+          if (!sfxAudioCtx) {
+            const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+            if (AudioContextClass) sfxAudioCtx = new AudioContextClass();
+          }
+          if (sfxAudioCtx && sfxAudioCtx.state === "suspended") {
+            sfxAudioCtx.resume();
+          }
+          return sfxAudioCtx;
+        }
+
+        function playTactileClick() {
+          try {
+            const ctx = getSfxContext();
+            if (!ctx) return;
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = "sine";
+            osc.frequency.setValueAtTime(440, ctx.currentTime);
+            gain.gain.setValueAtTime(0.08, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start();
+            osc.stop(ctx.currentTime + 0.05);
+          } catch (e) {}
+        }
+
+        function playSnackSuccessChime() {
+          try {
+            const ctx = getSfxContext();
+            if (!ctx) return;
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = "sine";
+            osc.frequency.setValueAtTime(880, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(1760, ctx.currentTime + 0.15);
+            gain.gain.setValueAtTime(0.18, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.18);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start();
+            osc.stop(ctx.currentTime + 0.18);
+          } catch (e) {}
+        }
+
+        // Category Filter Pills
+        const sfCatPills = document.querySelectorAll(".sf-cat-pill");
+        const sfSelectorPills = document.querySelectorAll(".sf-pill");
+
+        sfCatPills.forEach(catPill => {
+          catPill.addEventListener("click", () => {
+            playTactileClick();
+            const cat = catPill.getAttribute("data-cat");
+            if (!cat) return;
+
+            sfCatPills.forEach(p => p.classList.remove("active"));
+            catPill.classList.add("active");
+
+            sfSelectorPills.forEach(pill => {
+              const pillCat = pill.getAttribute("data-category");
+              if (cat === "all" || pillCat === cat) {
+                pill.style.display = "inline-flex";
+              } else {
+                pill.style.display = "none";
+              }
+            });
+          });
+        });
+
+        // Superfood Inspector Elements
+        const sfInspectorBox = document.getElementById("sf-inspector-box");
+        const sfCatLabel = document.getElementById("sf-cat-label");
+        const sfFoodTitle = document.getElementById("sf-food-title");
+        const sfBadge = document.getElementById("sf-badge");
+        const sfStatCal = document.getElementById("sf-stat-cal");
+        const sfStatPro = document.getElementById("sf-stat-pro");
+        const sfStatFat = document.getElementById("sf-stat-fat");
+        const sfStatCarb = document.getElementById("sf-stat-carb");
+        const sfStatClearance = document.getElementById("sf-stat-clearance");
+        const sfDescClearance = document.getElementById("sf-desc-clearance");
+        const sfStatBioactive = document.getElementById("sf-stat-bioactive");
+        const sfDescBioactive = document.getElementById("sf-desc-bioactive");
+        const sfStatTarget = document.getElementById("sf-stat-target");
+        const sfDescTarget = document.getElementById("sf-desc-target");
+        const sfStatServing = document.getElementById("sf-stat-serving");
+        const sfDescServing = document.getElementById("sf-desc-serving");
+        const sfClinicalText = document.getElementById("sf-clinical-text");
+        const sfKitchenText = document.getElementById("sf-kitchen-text");
+
+        sfSelectorPills.forEach(pill => {
+          pill.addEventListener("click", () => {
+            playTactileClick();
+            const key = pill.getAttribute("data-superfood");
+            if (!key || !superfoodData[key]) return;
+
+            sfSelectorPills.forEach(p => p.classList.remove("active"));
+            pill.classList.add("active");
+
+            const d = superfoodData[key];
+            if (sfCatLabel) sfCatLabel.textContent = d.catLabel;
+            if (sfFoodTitle) sfFoodTitle.textContent = d.title;
+            if (sfBadge) sfBadge.textContent = d.badgeText;
+            if (sfStatCal) sfStatCal.textContent = d.calStat;
+            if (sfStatPro) sfStatPro.textContent = d.proStat;
+            if (sfStatFat) sfStatFat.textContent = d.fatStat;
+            if (sfStatCarb) sfStatCarb.textContent = d.carbStat;
+            if (sfStatClearance) sfStatClearance.textContent = d.clearanceStat;
+            if (sfDescClearance) sfDescClearance.textContent = d.clearanceDesc;
+            if (sfStatBioactive) sfStatBioactive.textContent = d.bioactiveStat;
+            if (sfDescBioactive) sfDescBioactive.textContent = d.bioactiveDesc;
+            if (sfStatTarget) sfStatTarget.textContent = d.targetStat;
+            if (sfDescTarget) sfDescTarget.textContent = d.targetDesc;
+            if (sfStatServing) sfStatServing.textContent = d.servingStat;
+            if (sfDescServing) sfDescServing.textContent = d.servingDesc;
+            if (sfClinicalText) sfClinicalText.innerHTML = d.clinicalHtml;
+            if (sfKitchenText) sfKitchenText.innerHTML = d.kitchenHtml;
+          });
+        });
+
+        // 4 Snack Cards Buttons
+        const snackButtons = document.querySelectorAll(".btn-snack-check");
+        const snackCounterBadge = document.getElementById("snack-counter-badge");
+        let completedSnacksCount = 0;
+
+        snackButtons.forEach(btn => {
+          btn.addEventListener("click", () => {
+            const snackKey = btn.getAttribute("data-snack");
+            const card = document.getElementById("snack-card-" + snackKey);
+            if (!card) return;
+
+            const isDone = card.classList.toggle("completed");
+            if (isDone) {
+              btn.textContent = "Prepared & Eaten ✓";
+              btn.style.background = "#22c55e";
+              btn.style.color = "#090e1a";
+              playSnackSuccessChime();
+              completedSnacksCount++;
+            } else {
+              btn.textContent = "Mark Prepared / Eaten ✓";
+              btn.style.background = "";
+              btn.style.color = "";
+              playTactileClick();
+              completedSnacksCount = Math.max(0, completedSnacksCount - 1);
+            }
+
+            if (snackCounterBadge) {
+              snackCounterBadge.textContent = completedSnacksCount + " / 4 Snacks Prepared Today";
+            }
+          });
+        });
+
+      } catch (err) {
+        console.error("Superfoods bootloader error:", err);
       }
     });
   </script>
