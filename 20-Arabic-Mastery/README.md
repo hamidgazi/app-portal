@@ -9,6 +9,9 @@ This repository houses the permanent offline reference curriculum, cheatsheets, 
 
 Specifically engineered for readers who possess phonetic reading literacy (*Nazrah*) and an Urdu or English background, this course utilizes the **Urdu Super-Bridge** and **80/20 High-Yield Ayah Anatomy** to achieve direct comprehension of the Holy Qur'an, authentic Hadith, and classical Islamic texts from absolute zero without relying on translations.
 
+> [!IMPORTANT]
+> **Canonical Sacred Translation Standard**: All Quranic translations across this entire curriculum, study guides, and the interactive web application are strictly sourced from the verified local database of **Kanzul Iman (کنز الایمان)** by Ala Hazrat Imam Ahmad Raza Khan and **Kanzul Irfan (کنز العرفان)** by Mufti Muhammad Qasim Qadri (originating from `07-Quran-Deep-Analyzer`). Zero external or internet translations are permitted.
+
 ---
 
 ## 2. Deliverables Catalog

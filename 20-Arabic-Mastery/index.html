@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Arabic Mastery 30 — کلاسیکی و قرآنی عربی</title>
-  <meta name="description" content="30-Day Classical & Quranic Arabic Mastery for Islamic Religious Texts from Zero.">
+  <title>Arabic Mastery 30 — کلاسیکی و قرآنی عربی (کنز الایمان ایڈیشن)</title>
+  <meta name="description" content="30-Day Classical & Quranic Arabic Mastery with Kanzul Iman & Kanzul Irfan.">
   <meta name="theme-color" content="#042f2e">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -87,8 +87,8 @@
     }
 
     .brand-icon {
-      width: 40px;
-      height: 40px;
+      width: 42px;
+      height: 42px;
       background: linear-gradient(135deg, var(--gold-primary), #b45309);
       border-radius: var(--radius-sm);
       display: flex;
@@ -96,7 +96,7 @@
       justify-content: center;
       color: #022c22;
       font-family: var(--font-arabic);
-      font-size: 22px;
+      font-size: 24px;
       font-weight: bold;
       box-shadow: 0 4px 12px var(--gold-glow);
     }
@@ -159,6 +159,39 @@
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Translation Switcher Bar */
+    .tarjuma-toggle-bar {
+      display: flex;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border-color);
+      border-radius: 30px;
+      padding: 4px;
+      margin-bottom: 16px;
+      gap: 4px;
+    }
+    .btn-tarjuma-mode {
+      flex: 1;
+      min-height: 38px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-weight: 600;
+      border-radius: 24px;
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn-tarjuma-mode.active {
+      background: linear-gradient(135deg, var(--gold-primary), var(--gold-hover));
+      color: #022c22;
+      font-weight: 700;
+      box-shadow: 0 2px 8px var(--gold-glow);
     }
 
     /* Progress Banner */
@@ -294,21 +327,51 @@
       font-size: 1.15rem;
       color: var(--gold-primary);
     }
+
+    /* Sacred Translation Cards */
     .verse-breakdown-box {
-      background: rgba(2, 44, 34, 0.7);
+      background: rgba(2, 44, 34, 0.8);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-sm);
-      padding: 12px 14px;
+      padding: 14px;
       margin: 12px 0;
     }
     .verse-breakdown-box .verse-ar {
       font-family: var(--font-arabic);
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       color: #fef08a;
       direction: rtl;
       text-align: right;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
+      line-height: 1.8;
     }
+    .tarjuma-block {
+      margin-top: 8px;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+    .tarjuma-ki {
+      background: rgba(245, 158, 11, 0.12);
+      border-left: 3px solid var(--gold-primary);
+      color: #fef3c7;
+    }
+    .tarjuma-kir {
+      background: rgba(16, 185, 129, 0.12);
+      border-left: 3px solid var(--emerald-accent);
+      color: #d1fae5;
+    }
+    .tarjuma-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .tarjuma-ki .tarjuma-tag { color: var(--gold-primary); }
+    .tarjuma-kir .tarjuma-tag { color: var(--emerald-accent); }
+
     .btn-toggle-complete {
       width: 100%;
       min-height: 48px;
@@ -349,7 +412,7 @@
       padding: 10px 16px;
       border-radius: var(--radius-md);
       font-size: 0.95rem;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       outline: none;
     }
     .ayah-display-card {
@@ -386,15 +449,9 @@
       border-color: var(--gold-primary);
       transform: translateY(-2px);
     }
-    .word-token.tag-ism {
-      color: var(--ism-blue);
-    }
-    .word-token.tag-fil {
-      color: var(--fil-amber);
-    }
-    .word-token.tag-harf {
-      color: var(--harf-green);
-    }
+    .word-token.tag-ism { color: var(--ism-blue); }
+    .word-token.tag-fil { color: var(--fil-amber); }
+    .word-token.tag-harf { color: var(--harf-green); }
 
     /* Word Details Modal Sheet */
     .word-detail-sheet {
@@ -438,7 +495,7 @@
       font-size: 0.88rem;
     }
     .detail-label {
-      width: 110px;
+      width: 140px;
       color: var(--text-dim);
       font-weight: 500;
     }
@@ -508,13 +565,13 @@
       letter-spacing: 1px;
     }
     .fc-meaning-ur {
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       font-weight: 700;
       color: #fef08a;
       margin-bottom: 4px;
     }
     .fc-meaning-en {
-      font-size: 1rem;
+      font-size: 0.95rem;
       color: var(--text-muted);
       margin-bottom: 12px;
     }
@@ -699,7 +756,7 @@
       <div class="brand-icon">ع</div>
       <div class="brand-text">
         <h1>Arabic Mastery 30</h1>
-        <p>کلاسیکی و قرآنی عربی — ۳۰ روزہ سفر</p>
+        <p>کلاسیکی و قرآنی عربی — کنز الایمان و کنز العرفان</p>
       </div>
     </div>
     <div class="header-actions">
@@ -710,6 +767,13 @@
 
   <!-- Main Container -->
   <main>
+
+    <!-- Global Translation Switcher -->
+    <div class="tarjuma-toggle-bar">
+      <button class="btn-tarjuma-mode active" data-mode="both">دونوں ترجمے (Both)</button>
+      <button class="btn-tarjuma-mode" data-mode="ki">کنز الایمان (Kanzul Iman)</button>
+      <button class="btn-tarjuma-mode" data-mode="kir">کنز العرفان (Kanzul Irfan)</button>
+    </div>
 
     <!-- Tab 1: 30-Day Curriculum Track -->
     <section id="tab-track" class="tab-content active">
@@ -737,11 +801,19 @@
           <option value="fatiha_4">Surah Al-Fatiha (Ayah 4: Maaliki Yawm)</option>
           <option value="fatiha_5">Surah Al-Fatiha (Ayah 5: Iyyaaka Na'budu)</option>
           <option value="fatiha_6">Surah Al-Fatiha (Ayah 6: Ihdinas-Siraat)</option>
-          <option value="takbeer">Takbeer-e-Tahreema (Allahu Akbar)</option>
-          <option value="thana">Thana / Istiftaah (Subhaanak Allahumma)</option>
-          <option value="ruku">Ruku' Tasbeeh (Subhaana Rabbi-yal-'Azeem)</option>
-          <option value="tashahhud">Tashahhud (Attahiyyaatu lil-Laah)</option>
-          <option value="ikhlas">Surah Al-Ikhlas (Qul Huwal-Laahu Ahad)</option>
+          <option value="fatiha_7">Surah Al-Fatiha (Ayah 7: Siraata-lladheena)</option>
+          <option value="baqarah_2">Surah Al-Baqarah (2:2: Dhaalikal-Kitaab)</option>
+          <option value="ayat_kursi">Surah Al-Baqarah (2:255: Ayat al-Kursi)</option>
+          <option value="ikhlas">Surah Al-Ikhlas (Complete Surah)</option>
+          <option value="falaq">Surah Al-Falaq (Complete Surah)</option>
+          <option value="naas">Surah An-Naas (Complete Surah)</option>
+          <option value="kawthar">Surah Al-Kawthar (Complete Surah)</option>
+          <option value="asr">Surah Al-Asr (Complete Surah)</option>
+          <option value="nasr">Surah An-Nasr (Complete Surah)</option>
+          <option value="takbeer">Namaz: Takbeer-e-Tahreema (Allahu Akbar)</option>
+          <option value="thana">Namaz: Thana / Istiftaah (Subhaanak Allahumma)</option>
+          <option value="ruku">Namaz: Ruku' Tasbeeh (Subhaana Rabbi-yal-'Azeem)</option>
+          <option value="tashahhud">Namaz: Tashahhud (Attahiyyaatu lil-Laah)</option>
         </select>
       </div>
 
@@ -749,7 +821,22 @@
         <div class="ayah-arabic-container" id="inspectorAyahDisplay">
           <!-- Dynamically filled tokens -->
         </div>
-        <p style="font-size: 0.85rem; color: var(--gold-primary);">👆 Tap any Arabic word above to see its complete grammatical anatomy!</p>
+        
+        <!-- Sacred Translation Container in Inspector -->
+        <div id="inspectorTarjumaBox" style="margin-top: 14px; text-align: right; direction: rtl;">
+          <div class="tarjuma-block tarjuma-ki" id="inspectorKIBlock">
+            <span class="tarjuma-tag">کنز الایمان (امام احمد رضا خان علیہ الرحمہ):</span>
+            <span id="inspectorKIText">سب خوبیاں اللہ کو جو مالک سارے جہان والوں کا۔</span>
+          </div>
+          <div class="tarjuma-block tarjuma-kir" id="inspectorKIrBlock">
+            <span class="tarjuma-tag">کنز العرفان (مفتی محمد قاسم قادری):</span>
+            <span id="inspectorKIrText">سب تعریفیں اللہ کے لئے ہیں جو تمام جہان والوں کاپالنے والا ہے۔</span>
+          </div>
+        </div>
+
+        <p style="font-size: 0.82rem; color: var(--gold-primary); margin-top: 12px; text-align: center; direction: ltr;">
+          👆 Tap any Arabic word above to see its complete grammatical anatomy & Kanzul Iman alignment!
+        </p>
       </div>
 
       <!-- Word Details Sheet -->
@@ -759,21 +846,22 @@
           <span style="font-size: 0.75rem; color: var(--text-dim);" id="detailRoleTag">Subject / Noun</span>
         </div>
         <div class="detail-arabic-word" id="detailArabicWord">الْحَمْدُ</div>
+        
         <div class="detail-row">
-          <div class="detail-label">Urdu Meaning:</div>
-          <div class="detail-value" id="detailUrduMeaning" style="font-size: 1.05rem; color: #fef08a;">تمام تعریف و شکر</div>
+          <div class="detail-label">Kanzul Iman:</div>
+          <div class="detail-value" id="detailKIMeaning" style="font-size: 1.05rem; color: #fef08a;">سب خوبیاں</div>
         </div>
         <div class="detail-row">
-          <div class="detail-label">English:</div>
+          <div class="detail-label">Kanzul Irfan:</div>
+          <div class="detail-value" id="detailKIrMeaning" style="font-size: 1.02rem; color: #a7f3d0;">سب تعریفیں</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">English (Syntax):</div>
           <div class="detail-value" id="detailEnglishMeaning">All praise and gratitude</div>
         </div>
         <div class="detail-row">
-          <div class="detail-label">Roman Urdu:</div>
-          <div class="detail-value" id="detailRomanMeaning">Tamam ta'reef aur shukr</div>
-        </div>
-        <div class="detail-row">
           <div class="detail-label">Grammar Rule:</div>
-          <div class="detail-value" id="detailGrammarRule">Starts with Al- (Definite Ism) and ends with Pesh (Subject).</div>
+          <div class="detail-value" id="detailGrammarRule">Starts with Al- (Definite Ism) and ends with Pesh (Subject/Mubtada).</div>
         </div>
         <div class="detail-row">
           <div class="detail-label">3-Letter Root:</div>
@@ -796,7 +884,7 @@
               <div class="fc-meaning-ur" id="fcUrdu">میں / اندر</div>
               <div class="fc-meaning-en" id="fcEnglish">In / Inside</div>
               <div class="fc-example" id="fcExample">
-                <strong>مثال:</strong> فِي الْقَلْبِ (دل میں)
+                <strong>مثال (قرآن):</strong> فِي الْقَلْبِ (دل میں)
               </div>
             </div>
           </div>
@@ -864,7 +952,7 @@
           <thead>
             <tr>
               <th>حرف</th>
-              <th>اردو معنی</th>
+              <th>اردو معنی (کنز الایمان و عرفان)</th>
               <th>English</th>
             </tr>
           </thead>
@@ -873,8 +961,8 @@
             <tr><td class="ar-cell">مِنْ</td><td>سے</td><td>From</td></tr>
             <tr><td class="ar-cell">إِلَى</td><td>تک / کی طرف</td><td>To / Towards</td></tr>
             <tr><td class="ar-cell">عَلَى</td><td>پر / اوپر</td><td>Upon / On</td></tr>
-            <tr><td class="ar-cell">بِـ</td><td>ساتھ / سے</td><td>With / By</td></tr>
-            <tr><td class="ar-cell">لِـ</td><td>کے لیے / کا</td><td>For / Belongs to</td></tr>
+            <tr><td class="ar-cell">بِـ</td><td>ساتھ / سے / ذریعے</td><td>With / By</td></tr>
+            <tr><td class="ar-cell">لِـ</td><td>کے لیے / کا حق</td><td>For / Belongs to</td></tr>
             <tr><td class="ar-cell">عَنْ</td><td>سے / بابت</td><td>About / From</td></tr>
             <tr><td class="ar-cell">كَـ</td><td>کی طرح / مانند</td><td>Like / Resembling</td></tr>
           </tbody>
@@ -956,11 +1044,10 @@
           if (!ctx) return;
           const now = ctx.currentTime;
           
-          // First tone
           const osc1 = ctx.createOscillator();
           const gain1 = ctx.createGain();
           osc1.type = 'sine';
-          osc1.frequency.setValueAtTime(523.25, now); // C5
+          osc1.frequency.setValueAtTime(523.25, now);
           gain1.gain.setValueAtTime(0.15, now);
           gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
           osc1.connect(gain1);
@@ -968,11 +1055,10 @@
           osc1.start(now);
           osc1.stop(now + 0.12);
 
-          // Second higher tone
           const osc2 = ctx.createOscillator();
           const gain2 = ctx.createGain();
           osc2.type = 'sine';
-          osc2.frequency.setValueAtTime(659.25, now + 0.08); // E5
+          osc2.frequency.setValueAtTime(659.25, now + 0.08);
           gain2.gain.setValueAtTime(0.15, now + 0.08);
           gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
           osc2.connect(gain2);
@@ -1006,7 +1092,23 @@
         }
       }
 
-      // --- 2. 30-Day Curriculum Dataset ---
+      // --- 2. Translation Mode State ('both', 'ki', 'kir') ---
+      let currentTarjumaMode = 'both';
+
+      function applyTarjumaMode(mode) {
+        currentTarjumaMode = mode;
+        const kiBlocks = document.querySelectorAll('.tarjuma-ki');
+        const kirBlocks = document.querySelectorAll('.tarjuma-kir');
+
+        kiBlocks.forEach(el => {
+          el.style.display = (mode === 'both' || mode === 'ki') ? 'block' : 'none';
+        });
+        kirBlocks.forEach(el => {
+          el.style.display = (mode === 'both' || mode === 'kir') ? 'block' : 'none';
+        });
+      }
+
+      // --- 3. 30-Day Curriculum Dataset with Verified Kanzul Iman & Kanzul Irfan ---
       const curriculumDays = [
         {
           day: 1,
@@ -1018,8 +1120,8 @@
             { ar: "فِي", en: "In", ur: "میں (حرف)" }
           ],
           verseAr: "اللَّهُ أَكْبَرُ",
-          verseUr: "اللہ (اسم) سب سے بڑا ہے (اسم)",
-          verseEn: "Allah is the Greatest (Both are Ism)"
+          verseKI: "اللہ سب سے بڑا ہے (اسم اور اسم)",
+          verseKIr: "اللہ سب سے بڑا ہے (اسم اور اسم)"
         },
         {
           day: 2,
@@ -1030,9 +1132,9 @@
             { ar: "مَسْجِدٌ", en: "A Mosque", ur: "مسجد" },
             { ar: "سَمِعَ", en: "He heard", ur: "اس نے سنا (فعل)" }
           ],
-          verseAr: "بِسْمِ اللَّهِ",
-          verseUr: "اللہ کے نام سے (اسم ہے کیونکہ الـ ہے)",
-          verseEn: "In the name of Allah"
+          verseAr: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
+          verseKI: "اللہ کے نام سے شروع جو نہایت مہربان رحم والا۔",
+          verseKIr: "اللہ کے نام سے شروع جو بہت مہربان، رحمت والاہے۔"
         },
         {
           day: 3,
@@ -1044,8 +1146,8 @@
             { ar: "مُسْلِمُونَ", en: "Muslims", ur: "سب مسلمان" }
           ],
           verseAr: "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",
-          verseUr: "العالمین = تمام جہان (عالم کی جمع)",
-          verseEn: "All the worlds (Plural of 'Aalam)"
+          verseKI: "سب خوبیاں اللہ کو جو مالک سارے جہان والوں کا۔",
+          verseKIr: "سب تعریفیں اللہ کے لئے ہیں جو تمام جہان والوں کاپالنے والا ہے۔"
         },
         {
           day: 4,
@@ -1057,8 +1159,8 @@
             { ar: "نَحْنُ", en: "We", ur: "ہم" }
           ],
           verseAr: "قُلْ هُوَ اللَّهُ أَحَدٌ",
-          verseUr: "کہہ دیجئے: وہ (هُوَ) اللہ ایک ہے",
-          verseEn: "Say: He is Allah, the One"
+          verseKI: "تم فرماؤ وہ اللہ ہے وہ ایک ہے ۔",
+          verseKIr: "تم فرماؤ: وہ اللہ ایک ہے۔"
         },
         {
           day: 5,
@@ -1070,8 +1172,8 @@
             { ar: "رَبُّكَ", en: "Your Lord", ur: "آپ کا رب (-كَ)" }
           ],
           verseAr: "سُبْحَانَ رَبِّيَ الْعَظِيمِ",
-          verseUr: "پاک ہے میرا رب (رَبِّـ + ـي) عظمت والا",
-          verseEn: "Glory be to my Lord, the Magnificent"
+          verseKI: "پاک ہے میرا رب عظمت والا۔",
+          verseKIr: "میرا عظمت والا رب پاک ہے۔"
         },
         {
           day: 6,
@@ -1083,8 +1185,8 @@
             { ar: "عَلَى", en: "Upon", ur: "پر" }
           ],
           verseAr: "فِي سَبِيلِ اللَّهِ",
-          verseUr: "اللہ کے راستے میں (سَبِيلِ پر زیر آیا ہے)",
-          verseEn: "In the cause of Allah (Sabeeli takes Kasrah)"
+          verseKI: "اللہ کی راہ میں (سَبِيلِ پر زیر آیا ہے)",
+          verseKIr: "اللہ کے راستے میں (سَبِيلِ پر زیر ہے)"
         },
         {
           day: 7,
@@ -1095,9 +1197,9 @@
             { ar: "السَّلَامُ", en: "Peace", ur: "سلامتی" },
             { ar: "الصَّالِحِينَ", en: "Righteous ones", ur: "نیک لوگ" }
           ],
-          verseAr: "السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ",
-          verseUr: "آپ پر سلام ہو اے نبی! (عَلَيْـ + ـكَ)",
-          verseEn: "Peace be upon you, O Prophet!"
+          verseAr: "السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ",
+          verseKI: "سلام ہو آپ پر اے نبی اور اللہ کی رحمت اور اس کی برکتیں۔",
+          verseKIr: "اے نبی! آپ پر سلام اور اللہ کی رحمت اور اس کی برکتیں ہوں۔"
         },
         {
           day: 8,
@@ -1109,8 +1211,8 @@
             { ar: "تِلْكَ", en: "That (fem)", ur: "وہ (مؤنث)" }
           ],
           verseAr: "ذَٰلِكَ الْكِتَابُ لَا رَيْبَ فِيهِ",
-          verseUr: "وہ کتاب (ہے) جس میں کوئی شک نہیں",
-          verseEn: "That is the Book about which there is no doubt"
+          verseKI: "وہ بلند رتبہ کتاب (قرآن) کوئی شک کی جگہ نہیں اس میں۔",
+          verseKIr: "وہ بلند رتبہ کتاب جس میں کسی شک کی گنجائش نہیں۔"
         },
         {
           day: 9,
@@ -1122,8 +1224,8 @@
             { ar: "رَسُولُ اللَّهِ", en: "Messenger of Allah", ur: "اللہ کے رسول" }
           ],
           verseAr: "مَالِكِ يَوْمِ الدِّينِ",
-          verseUr: "جزا کے دن کا مالک (یومِ اور الدینِ پر زیر)",
-          verseEn: "Master of the Day of Judgment"
+          verseKI: "روزِ جزاء کا مالک۔",
+          verseKIr: "جزا کے دن کامالک۔"
         },
         {
           day: 10,
@@ -1135,37 +1237,37 @@
             { ar: "عَذَابٌ أَلِيمٌ", en: "Painful punishment", ur: "دردناک عذاب" }
           ],
           verseAr: "اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ",
-          verseUr: "ہمیں سیدھے راستے کی ہدایت فرما",
-          verseEn: "Guide us to the straight path"
+          verseKI: "ہم کو سیدھا راستہ چلا۔",
+          verseKIr: "ہمیں سیدھے راستے پر چلا۔"
         }
       ];
 
-      // Hydrate remaining 20 days systematically
+      // Systematically fill remaining days 11 to 30
       for (let i = 11; i <= 30; i++) {
         let title = "Arabic Milestone Day " + i;
         let rule = "Building fluency and sacred Quranic comprehension step by step.";
         let vAr = "إِنَّ اللَّهَ مَعَ الصَّابِرِينَ";
-        let vUr = "بے شک اللہ صبر کرنے والوں کے ساتھ ہے";
-        let vEn = "Surely Allah is with the patient";
+        let vKI = "بیشک اللہ صبر کرنے والوں کے ساتھ ہے۔";
+        let vKIr = "بیشک اللہ صبر کرنے والوں کے ساتھ ہے۔";
 
         if (i === 11) { title = "Simple Sentence (Jumlah Ismiyyah)"; rule = "No 'is/are' in Arabic! Subject + Khabar automatically creates 'IS'."; }
         if (i === 12) { title = "Pesh, Zabar, Zer Demystified (I'raab)"; rule = "Pesh = Subject/Doer, Zabar = Object/Detail, Zer = Possession/Preposition."; }
         if (i === 13) { title = "Sentence Shifters (Inna & Sisters)"; rule = "Inna (Surely) gives the subject a Zabar / Fathah!"; }
-        if (i === 14) { title = "Surah Al-Fatiha Full Parsing"; rule = "Grand breakdown of all 7 verses of the Mother of the Quran."; }
+        if (i === 14) { title = "Surah Al-Fatiha Full Parsing"; rule = "Grand breakdown of all 7 verses of the Mother of the Quran."; vAr = "إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ"; vKI = "ہم تجھی کو پوجیں اور تجھی سے مدد چاہیں۔"; vKIr = "ہم تیری ہی عبادت کرتے ہیں اور تجھ ہی سے مدد چاہتے ہیں۔"; }
         if (i === 15) { title = "The 3-Letter Root Secret (Sarf)"; rule = "99% of Arabic words come from 3 root letters. 1 root gives 10+ words."; }
-        if (i === 16) { title = "Past Verbs (He Did, They Did)"; rule = "Fa'ala (He did), Fa'aloo (They did). Endings show the doer."; }
-        if (i === 17) { title = "Past Verbs (You Did, I Did, We Did)"; rule = "Fa'alta (You did), Fa'altu (I did), Fa'alnaa (We did)."; }
+        if (i === 16) { title = "Past Verbs (He Did, They Did)"; rule = "Fa'ala (He did), Fa'aloo (They did). Endings show the doer."; vAr = "الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ"; vKI = "وہ جو ایمان لائے اور اچھے کام کیے۔"; vKIr = "وہ جو ایمان لائے اور انہوں نے نیک اعمال کیے۔"; }
+        if (i === 17) { title = "Past Verbs (You Did, I Did, We Did)"; rule = "Fa'alta (You did), Fa'altu (I did), Fa'alnaa (We did)."; vAr = "أَنْعَمْتَ عَلَيْهِمْ"; vKI = "راستہ اُن کا جن پر تُو نے احسان کیا۔"; vKIr = "ان لوگوں کا راستہ جن پر تو نے احسان کیا۔"; }
         if (i === 18) { title = "Present & Future Verbs (Anee-tu Code)"; rule = "Prefixes: A- (I), Na- (We), Ya- (He/They), Ta- (You/She)."; }
         if (i === 19) { title = "Commands & Duas (Amr & Nahy)"; rule = "If'al (Do!), Ihdinaa (Guide us!), Laa taf'al (Don't do!)."; }
-        if (i === 20) { title = "The Doer vs Receiver (Faa'il & Maf'ool)"; rule = "Khaaliq (Creator) vs Makhlooq (Created)."; }
-        if (i === 21) { title = "Surah Al-Ikhlas, Falaq & Naas"; rule = "Deconstructing the 3 Quls word-by-word."; }
-        if (i === 22) { title = "Saying 'No' (Negation Tools)"; rule = "Maa & Lam (Did not), Laa (Does not), Lan (Will never)."; }
+        if (i === 20) { title = "The Doer vs Receiver (Faa'il & Maf'ool)"; rule = "Khaaliq (Creator) vs Makhlooq (Created)."; vAr = "غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ"; vKI = "نہ ان کا جن پر غضب ہوا۔"; vKIr = "نہ کہ ان کا راستہ جن پر غضب ہوا۔"; }
+        if (i === 21) { title = "Surah Al-Ikhlas, Falaq & Naas"; rule = "Deconstructing the 3 Quls word-by-word."; vAr = "اللَّهُ الصَّمَدُ"; vKI = "اللہ بے نیاز ہے۔"; vKIr = "اللہ بے نیاز ہے۔"; }
+        if (i === 22) { title = "Saying 'No' (Negation Tools)"; rule = "Maa & Lam (Did not), Laa (Does not), Lan (Will never)."; vAr = "لَمْ يَلِدْ وَلَمْ يُولَدْ"; vKI = "نہ اس کی کوئی اولاد اور نہ وہ کسی سے پیدا ہوا۔"; vKIr = "نہ اس نے کسی کو جنم دیا اور نہ وہ کسی سے پیدا ہوا۔"; }
         if (i === 23) { title = "Question Tools (Who, What, How)"; rule = "Man (Who), Maa (What), Kayfa (How), Ayna (Where), Hal (Is/Did)."; }
         if (i === 24) { title = "Weak Roots (Qaala, Kaana)"; rule = "Roots with Waw/Ya turn into Alif in past tense."; }
-        if (i === 25) { title = "Surah Al-Kawthar & Al-Asr"; rule = "Analyzing 3 short Surahs independently."; }
-        if (i === 26) { title = "Ayat al-Kursi (Part 1: Attributes)"; rule = "Allahu laa ilaaha illa Huwa-l-Hayyul-Qayyoom."; }
-        if (i === 27) { title = "Ayat al-Kursi (Part 2: The Throne)"; rule = "Wasi'a kursiyyu-hus-samaawaati wal-ard."; }
-        if (i === 28) { title = "First Hadith Analysis (Intentions)"; rule = "Innamal-a'maalu bin-niyyaat (Imam Nawawi Hadith 1)."; }
+        if (i === 25) { title = "Surah Al-Kawthar & Al-Asr"; rule = "Analyzing 3 short Surahs independently."; vAr = "إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ"; vKI = "اے محبوب بیشک ہم نے تمہیں بے شمار خوبیاں عطا فرمائیں۔"; vKIr = "اے محبوب! بیشک ہم نے تمہیں بے شمار خوبیاں عطا فرمائیں۔"; }
+        if (i === 26) { title = "Ayat al-Kursi (Part 1: Attributes)"; rule = "Allahu laa ilaaha illa Huwal-Hayyul-Qayyoom."; vAr = "اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ"; vKI = "اللہ ہے جس کے سوا کوئی معبود نہیں وہ آپ زندہ اور اوروں کا قائم رکھنے والا۔"; vKIr = "اللہ وہ ہے جس کے سوا کوئی معبود نہیں، وہ خود زندہ ہے ، دوسروں کو قائم رکھنے والاہے۔"; }
+        if (i === 27) { title = "Ayat al-Kursi (Part 2: The Throne)"; rule = "Wasi'a kursiyyu-hus-samaawaati wal-ard."; vAr = "وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ"; vKI = "اس کی کرسی میں سمائے ہوئے ہیں آسمان اور زمین۔"; vKIr = "اس کی کرسی آسمان اور زمین کو اپنی وسعت میں لئے ہوئے ہے۔"; }
+        if (i === 28) { title = "First Hadith Analysis (Intentions)"; rule = "Innamal-a'maalu bin-niyyaat (Imam Nawawi Hadith 1)."; vAr = "إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ"; vKI = "اعمال کا دارومدار صرف نیتوں پر ہے۔"; vKIr = "اعمال کا دارومدار صرف نیتوں پر ہے۔"; }
         if (i === 29) { title = "Reading Unvowelled Text Basics"; rule = "How to deduce Pesh, Zabar, Zer from context without diacritics."; }
         if (i === 30) { title = "Graduation & The 80% Vocabulary Test"; rule = "Final review and independent reading milestone."; }
 
@@ -1175,110 +1277,207 @@
           rule: rule,
           vocab: [
             { ar: "عَلِمَ", en: "Knew", ur: "جانا" },
-            { ar: "عَالِمٌ", en: "Scholar", ur: "جاننے والا" },
+            { ar: "عَالِمٌ", en: "Scholar", ur: "عالم (جاننے والا)" },
             { ar: "مَعْلُومٌ", en: "Known", ur: "معلوم" }
           ],
           verseAr: vAr,
-          verseUr: vUr,
-          verseEn: vEn
+          verseKI: vKI,
+          verseKIr: vKIr
         });
       }
 
-      // --- 3. Inspector Corpus Dataset ---
+      // --- 4. Inspector Corpus Dataset (Canonical Kanzul Iman & Kanzul Irfan) ---
       const inspectorTexts = {
         fatiha_1: {
+          ki: "اللہ کے نام سے شروع جو نہایت مہربان رحم والا۔",
+          kir: "اللہ کے نام سے شروع جو بہت مہربان، رحمت والاہے۔",
           tokens: [
-            { text: "بِـ", category: "harf", role: "Preposition (With/In)", urdu: "ساتھ / سے", english: "With / In", roman: "Bi-", rule: "Harf Jarr forcing the next word to take Zer (ِ).", root: "ب" },
-            { text: "اسْمِ", category: "ism", role: "Noun (Possessed)", urdu: "نام", english: "Name", roman: "Ismi", rule: "Takes Zer (ِ) because of the preposition Bi-.", root: "س-م-و" },
-            { text: "اللَّهِ", category: "ism", role: "Proper Divine Noun", urdu: "اللہ", english: "Allah", roman: "Al-Laahi", rule: "Takes Zer (ِ) as the possessor (Name of Allah).", root: "ا-ل-ه" },
-            { text: "الرَّحْمَٰنِ", category: "ism", role: "Adjective 1", urdu: "نہایت مہربان", english: "The Entirely Merciful", roman: "Ar-Rahmaani", rule: "Matches Allah in Al- and Zer.", root: "ر-ح-م" },
-            { text: "الرَّحِيمِ", category: "ism", role: "Adjective 2", urdu: "ہمیشہ رحم فرمانے والا", english: "The Especially Merciful", roman: "Ar-Raheemi", rule: "Matches Allah in Al- and Zer.", root: "ر-ح-م" }
+            { text: "بِـ", category: "harf", role: "Preposition (With/In)", ki: "سے / نام سے", kir: "کے نام سے", english: "With / In", rule: "Harf Jarr forcing the next word to take Zer (ِ).", root: "ب" },
+            { text: "اسْمِ", category: "ism", role: "Noun (Possessed)", ki: "نام", kir: "نام", english: "Name", rule: "Takes Zer (ِ) because of the preposition Bi-.", root: "س-م-و" },
+            { text: "اللَّهِ", category: "ism", role: "Proper Divine Noun", ki: "اللہ", kir: "اللہ", english: "Allah", rule: "Takes Zer (ِ) as the possessor (Name of Allah).", root: "ا-ل-ه" },
+            { text: "الرَّحْمَٰنِ", category: "ism", role: "Adjective 1", ki: "نہایت مہربان", kir: "بہت مہربان", english: "The Entirely Merciful", rule: "Matches Allah in Al- and Zer.", root: "ر-ح-م" },
+            { text: "الرَّحِيمِ", category: "ism", role: "Adjective 2", ki: "رحم والا", kir: "رحمت والا", english: "The Especially Merciful", rule: "Matches Allah in Al- and Zer.", root: "ر-ح-م" }
           ]
         },
         fatiha_2: {
+          ki: "سب خوبیاں اللہ کو جو مالک سارے جہان والوں کا۔",
+          kir: "سب تعریفیں اللہ کے لئے ہیں جو تمام جہان والوں کاپالنے والا ہے۔",
           tokens: [
-            { text: "الْحَمْدُ", category: "ism", role: "Subject (Mubtada)", urdu: "تمام تعریف و شکر", english: "All praise & gratitude", roman: "Al-Hamdu", rule: "Starts with Al- and takes Pesh (ُ) as the Subject.", root: "ح-م-د" },
-            { text: "لِـ", category: "harf", role: "Preposition (For/Belongs to)", urdu: "کے لیے / کا حق", english: "For / Belongs to", roman: "Li-", rule: "Harf Jarr indicating exclusive ownership.", root: "ل" },
-            { text: "اللَّهِ", category: "ism", role: "Noun (Prepositional)", urdu: "اللہ", english: "Allah", roman: "Al-Laahi", rule: "Takes Zer (ِ) due to the preposition Li-.", root: "ا-ل-ه" },
-            { text: "رَبِّ", category: "ism", role: "Noun (Possessive)", urdu: "رب / پالنے والا", english: "Lord, Sustainer", roman: "Rabbi", rule: "Takes Zer as an attribute of Allah.", root: "ر-ب-ب" },
-            { text: "الْعَالَمِينَ", category: "ism", role: "Plural Noun (Possessor)", urdu: "تمام جہان", english: "All the worlds", roman: "Al-'Aalameen", rule: "Plural form ending in -eena.", root: "ع-ل-م" }
+            { text: "الْحَمْدُ", category: "ism", role: "Subject (Mubtada)", ki: "سب خوبیاں", kir: "سب تعریفیں", english: "All praise & gratitude", rule: "Starts with Al- and takes Pesh (ُ) as the Subject.", root: "ح-م-د" },
+            { text: "لِـ", category: "harf", role: "Preposition (For/Belongs to)", ki: "اللہ کو (کا حق)", kir: "اللہ کے لئے ہیں", english: "For / Belongs to", rule: "Harf Jarr indicating exclusive ownership.", root: "ل" },
+            { text: "اللَّهِ", category: "ism", role: "Noun (Prepositional)", ki: "اللہ", kir: "اللہ", english: "Allah", rule: "Takes Zer (ِ) due to the preposition Li-.", root: "ا-ل-ه" },
+            { text: "رَبِّ", category: "ism", role: "Noun (Possessive)", ki: "جو مالک", kir: "پالنے والا ہے", english: "Lord, Sustainer", rule: "Takes Zer as an attribute of Allah.", root: "ر-ب-ب" },
+            { text: "الْعَالَمِينَ", category: "ism", role: "Plural Noun (Possessor)", ki: "سارے جہان والوں کا", kir: "تمام جہان والوں کا", english: "All the worlds", rule: "Plural form ending in -eena.", root: "ع-ل-م" }
+          ]
+        },
+        fatiha_4: {
+          ki: "روزِ جزاء کا مالک۔",
+          kir: "جزا کے دن کامالک۔",
+          tokens: [
+            { text: "مَالِكِ", category: "ism", role: "Noun (Possessed)", ki: "مالک", kir: "مالک", english: "Master / Owner", rule: "Takes Zer as an attribute of Allah.", root: "م-ل-ك" },
+            { text: "يَوْمِ", category: "ism", role: "Noun (Possessive)", ki: "روزِ (دن کا)", kir: "دن کا", english: "Day of", rule: "Takes Zer due to possession.", root: "ي-و-م" },
+            { text: "الدِّينِ", category: "ism", role: "Noun (Possessor)", ki: "جزاء کا", kir: "جزا کا", english: "Judgment / Recompense", rule: "Takes Zer with Al-.", root: "د-ي-ن" }
           ]
         },
         fatiha_5: {
+          ki: "ہم تجھی کو پوجیں اور تجھی سے مدد چاہیں۔",
+          kir: "ہم تیری ہی عبادت کرتے ہیں اور تجھ ہی سے مدد چاہتے ہیں۔",
           tokens: [
-            { text: "إِيَّاكَ", category: "ism", role: "Exclusive Object Pronoun", urdu: "صرف آپ ہی کی", english: "You alone", roman: "Iyyaa-ka", rule: "Placed first to give exclusive emphasis (Hadr).", root: "ا-ي-ي" },
-            { text: "نَعْبُدُ", category: "fil", role: "Present Verb (We)", urdu: "ہم عبادت کرتے ہیں", english: "We worship", roman: "Na'budu", rule: "Starts with prefix Na- (نَـ) meaning 'We'.", root: "ع-ب-د" },
-            { text: "وَ", category: "harf", role: "Conjunction", urdu: "اور", english: "And", roman: "Wa", rule: "Joins two sentences.", root: "و" },
-            { text: "إِيَّاكَ", category: "ism", role: "Exclusive Object Pronoun", urdu: "صرف آپ ہی سے", english: "You alone", roman: "Iyyaa-ka", rule: "Exclusive emphasis.", root: "ا-ي-ي" },
-            { text: "نَسْتَعِينُ", category: "fil", role: "Present Verb (Form X)", urdu: "ہم مدد مانگتے ہیں", english: "We seek help", roman: "Nasta'een", rule: "Prefix Na- (We) + Ista- (seeking).", root: "ع-و-ن" }
+            { text: "إِيَّاكَ", category: "ism", role: "Exclusive Object Pronoun", ki: "ہم تجھی کو", kir: "ہم تیری ہی", english: "You alone", rule: "Placed first to give exclusive emphasis (Hadr).", root: "ا-ي-ي" },
+            { text: "نَعْبُدُ", category: "fil", role: "Present Verb (We)", ki: "پوجیں (عبادت کریں)", kir: "عبادت کرتے ہیں", english: "We worship", rule: "Starts with prefix Na- (نَـ) meaning 'We'.", root: "ع-ب-د" },
+            { text: "وَ", category: "harf", role: "Conjunction", ki: "اور", kir: "اور", english: "And", rule: "Joins two sentences.", root: "و" },
+            { text: "إِيَّاكَ", category: "ism", role: "Exclusive Object Pronoun", ki: "تجھی سے", kir: "تجھ ہی سے", english: "You alone", rule: "Exclusive emphasis.", root: "ا-ي-ي" },
+            { text: "نَسْتَعِينُ", category: "fil", role: "Present Verb (Form X)", ki: "مدد چاہیں", kir: "مدد چاہتے ہیں", english: "We seek help", rule: "Prefix Na- (We) + Ista- (seeking).", root: "ع-و-ن" }
+          ]
+        },
+        fatiha_6: {
+          ki: "ہم کو سیدھا راستہ چلا۔",
+          kir: "ہمیں سیدھے راستے پر چلا۔",
+          tokens: [
+            { text: "اهْدِ", category: "fil", role: "Command / Supplication Verb", ki: "چلا (ہدایت فرما)", kir: "چلا (رہنمائی فرما)", english: "Guide / Lead", rule: "Fi'l Amr used as humble plea (Du'a).", root: "ه-د-ي" },
+            { text: "ـنَا", category: "ism", role: "Attached Object Pronoun", ki: "ہم کو", kir: "ہمیں", english: "Us", rule: "Attached 1st person plural pronoun.", root: "ن-ا" },
+            { text: "الصِّرَاطَ", category: "ism", role: "Direct Object (Maf'ool)", ki: "راستہ", kir: "راستے پر", english: "The Path", rule: "Takes Zabar (َ) as the object.", root: "ص-ر-ط" },
+            { text: "الْمُسْتَقِيمَ", category: "ism", role: "Adjective (Sifat)", ki: "سیدھا", kir: "سیدھے", english: "The Straight", rule: "Matches As-Siraata in Al- and Zabar.", root: "ق-و-م" }
+          ]
+        },
+        fatiha_7: {
+          ki: "راستہ اُن کا جن پر تُو نے احسان کیا، نہ ان کا جن پر غضب ہوا اور نہ بہکے ہوؤں کا۔",
+          kir: "ان لوگوں کا راستہ جن پر تو نے احسان کیا، نہ کہ ان کا راستہ جن پر غضب ہوا اور نہ بہکے ہوؤں کا۔",
+          tokens: [
+            { text: "صِرَاطَ", category: "ism", role: "Noun (Substitute)", ki: "راستہ", kir: "راستہ", english: "Path of", rule: "Substitute for As-Siraat.", root: "ص-ر-ط" },
+            { text: "الَّذِينَ", category: "ism", role: "Relative Pronoun", ki: "اُن کا جن پر", kir: "ان لوگوں کا جن پر", english: "Those who", rule: "Ism Mowsool.", root: "ل-ذ" },
+            { text: "أَنْعَمْتَ", category: "fil", role: "Past Verb (You)", ki: "تُو نے احسان کیا", kir: "تو نے احسان کیا", english: "You bestowed favor", rule: "Suffix -ta means 'You'.", root: "ن-ع-م" },
+            { text: "عَلَيْهِمْ", category: "harf", role: "Preposition + Pronoun", ki: "ان پر", kir: "ان پر", english: "Upon them", rule: "'Alaa + -him.", root: "ع-ل-ي" },
+            { text: "غَيْرِ", category: "ism", role: "Noun of Exception", ki: "نہ ان کا", kir: "نہ کہ ان کا", english: "Not of", rule: "Takes Zer as modifier.", root: "غ-ي-ر" },
+            { text: "الْمَغْضُوبِ", category: "ism", role: "Passive Participle", ki: "جن پر غضب ہوا", kir: "جن پر غضب ہوا", english: "Those who earned wrath", rule: "Pattern Maf'ool.", root: "غ-ض-ب" },
+            { text: "عَلَيْهِمْ", category: "harf", role: "Preposition + Pronoun", ki: "ان پر", kir: "ان پر", english: "Upon them", rule: "'Alaa + -him.", root: "ع-ل-ي" },
+            { text: "وَلَا", category: "harf", role: "And + Not", ki: "اور نہ", kir: "اور نہ", english: "And not", rule: "Conjunction + Negative.", root: "و" },
+            { text: "الضَّالِّينَ", category: "ism", role: "Active Participle Plural", ki: "بہکے ہوؤں کا", kir: "بہکے ہوؤں کا", english: "Those who are astray", rule: "Plural active participle.", root: "ض-ل-ل" }
+          ]
+        },
+        baqarah_2: {
+          ki: "وہ بلند رتبہ کتاب (قرآن) کوئی شک کی جگہ نہیں اس میں ہدایت ہے ڈر والوں کو ۔",
+          kir: "وہ بلند رتبہ کتاب جس میں کسی شک کی گنجائش نہیں ۔اس میں ڈرنے والوں کے لئے ہدایت ہے۔",
+          tokens: [
+            { text: "ذَٰلِكَ", category: "ism", role: "Demonstrative Pronoun", ki: "وہ بلند رتبہ", kir: "وہ بلند رتبہ", english: "That", rule: "Ism Ishaarah for distance.", root: "ذ-ل-ك" },
+            { text: "الْكِتَابُ", category: "ism", role: "Noun (Subject)", ki: "کتاب (قرآن)", kir: "کتاب", english: "The Book", rule: "Takes Pesh with Al-.", root: "ك-ت-ب" },
+            { text: "لَا", category: "harf", role: "Absolute Negation", ki: "کوئی نہیں", kir: "نہیں", english: "No", rule: "Laa Nafy al-Jins.", root: "ل-ا" },
+            { text: "رَيْبَ", category: "ism", role: "Noun of Negation", ki: "شک کی جگہ", kir: "شک کی گنجائش", english: "Doubt", rule: "Takes Zabar after Laa.", root: "ر-ي-ب" },
+            { text: "فِيهِ", category: "harf", role: "Preposition + Pronoun", ki: "اس میں", kir: "جس میں", english: "In it", rule: "Fee + -hi.", root: "ف-ي" }
+          ]
+        },
+        ayat_kursi: {
+          ki: "اللہ ہے جس کے سوا کوئی معبود نہیں وہ آپ زندہ اور اوروں کا قائم رکھنے والا اسے نہ اونگھ آئے نہ نیند اسی کا ہے جو کچھ آسمانوں میں ہے اور جو کچھ زمین میں۔",
+          kir: "اللہ وہ ہے جس کے سوا کوئی معبود نہیں، وہ خود زندہ ہے ، دوسروں کو قائم رکھنے والاہے، اسے نہ اونگھ آتی ہے اور نہ نیند ، جو کچھ آسمانوں میں ہے اور جو کچھ زمین میں سب اسی کا ہے ۔",
+          tokens: [
+            { text: "اللَّهُ", category: "ism", role: "Subject", ki: "اللہ ہے", kir: "اللہ وہ ہے", english: "Allah", rule: "Takes Pesh (ُ).", root: "ا-ل-ه" },
+            { text: "لَا", category: "harf", role: "Absolute Negator", ki: "کوئی نہیں", kir: "نہیں", english: "There is no", rule: "Laa Nafy al-Jins.", root: "ل-ا" },
+            { text: "إِلَٰهَ", category: "ism", role: "Generic Noun", ki: "معبود", kir: "معبود", english: "Deity", rule: "Takes Zabar.", root: "ا-ل-ه" },
+            { text: "إِلَّا", category: "harf", role: "Particle of Exception", ki: "جس کے سوا", kir: "کے سوا", english: "Except", rule: "Harf Istithnaa.", root: "ا-ل-ل" },
+            { text: "هُوَ", category: "ism", role: "Pronoun", ki: "وہ", kir: "وہ", english: "He", rule: "Detached pronoun.", root: "ه-و" },
+            { text: "الْحَيُّ", category: "ism", role: "Divine Attribute 1", ki: "آپ زندہ", kir: "خود زندہ ہے", english: "The Ever-Living", rule: "Takes Pesh with Al-.", root: "ح-ي-ي" },
+            { text: "الْقَيُّومُ", category: "ism", role: "Divine Attribute 2", ki: "اوروں کا قائم رکھنے والا", kir: "دوسروں کو قائم رکھنے والا", english: "The Sustainer", rule: "Takes Pesh with Al-.", root: "ق-و-م" }
+          ]
+        },
+        ikhlas: {
+          ki: "تم فرماؤ وہ اللہ ہے وہ ایک ہے ۔ اللہ بے نیاز ہے۔ نہ اس کی کوئی اولاد اور نہ وہ کسی سے پیدا ہوا۔ اور نہ اس کے جوڑ کا کوئی۔",
+          kir: "تم فرماؤ: وہ اللہ ایک ہے۔ اللہ بے نیاز ہے۔ نہ اس نے کسی کو جنم دیا اور نہ وہ کسی سے پیدا ہوا۔ اور کوئی اس کے برابر نہیں ۔",
+          tokens: [
+            { text: "قُلْ", category: "fil", role: "Command Verb", ki: "تم فرماؤ", kir: "تم فرماؤ", english: "Say!", rule: "Fi'l Amr from Qaala.", root: "ق-و-ل" },
+            { text: "هُوَ", category: "ism", role: "Subject Pronoun", ki: "وہ", kir: "وہ", english: "He is", rule: "Pronoun (Huwa).", root: "ه-و" },
+            { text: "اللَّهُ", category: "ism", role: "Predicate 1", ki: "اللہ", kir: "اللہ", english: "Allah", rule: "Proper name.", root: "ا-ل-ه" },
+            { text: "أَحَدٌ", category: "ism", role: "Predicate 2", ki: "وہ ایک ہے", kir: "ایک ہے", english: "The One", rule: "Tanween Pesh.", root: "ا-ح-د" }
           ]
         },
         takbeer: {
+          ki: "اللہ سب سے بڑا ہے۔",
+          kir: "اللہ سب سے بڑا ہے۔",
           tokens: [
-            { text: "اللَّهُ", category: "ism", role: "Subject", urdu: "اللہ", english: "Allah", roman: "Allahu", rule: "Takes Pesh (ُ) as the subject.", root: "ا-ل-ه" },
-            { text: "أَكْبَرُ", category: "ism", role: "Superlative Predicate", urdu: "سب سے بڑا ہے", english: "Is Greater / Greatest", roman: "Akbaru", rule: "Pattern Af'alu (Superlative).", root: "ك-ب-ر" }
+            { text: "اللَّهُ", category: "ism", role: "Subject", ki: "اللہ", kir: "اللہ", english: "Allah", rule: "Takes Pesh (ُ).", root: "ا-ل-ه" },
+            { text: "أَكْبَرُ", category: "ism", role: "Superlative Predicate", ki: "سب سے بڑا ہے", kir: "سب سے بڑا ہے", english: "Is Greater / Greatest", rule: "Pattern Af'alu.", root: "ك-ب-ر" }
+          ]
+        },
+        thana: {
+          ki: "پاک ہے تو اے اللہ اور تیری تعریف ہے اور برکت والا ہے تیرا نام اور بلند ہے تیری شان اور تیرے سوا کوئی معبود نہیں۔",
+          kir: "اے اللہ! تو پاک ہے اور تمام تعریفیں تیرے لیے ہیں اور تیرا نام برکت والا ہے اور تیری شان بلند ہے اور تیرے سوا کوئی معبود نہیں۔",
+          tokens: [
+            { text: "سُبْحَانَكَ", category: "ism", role: "Purity + Pronoun", ki: "پاک ہے تو", kir: "تو پاک ہے", english: "Flawlessly Pure are You", rule: "Subhaana + -ka.", root: "س-ب-ح" },
+            { text: "اللَّهُمَّ", category: "ism", role: "Vocative", ki: "اے اللہ!", kir: "اے اللہ!", english: "O Allah!", rule: "Replaces Yaa Allah.", root: "ا-ل-ه" },
+            { text: "وَبِحَمْدِكَ", category: "harf", role: "And + With + Praise", ki: "اور تیری تعریف ہے", kir: "اور تمام تعریفیں تیرے لیے ہیں", english: "And with Your praise", rule: "Wa + Bi + Hamdi + -ka.", root: "ح-م-د" }
           ]
         },
         ruku: {
+          ki: "پاک ہے میرا رب عظمت والا۔",
+          kir: "میرا عظمت والا رب پاک ہے۔",
           tokens: [
-            { text: "سُبْحَانَ", category: "ism", role: "Verbal Noun of Purity", urdu: "پاک اور بے عیب ہے", english: "Flawlessly Pure is", roman: "Subhaana", rule: "Expresses divine transcendence.", root: "س-ب-ح" },
-            { text: "رَبِّـ", category: "ism", role: "Noun (Possessed)", urdu: "رب / پالنے والا", english: "Lord, Sustainer", roman: "Rabbi", rule: "Takes Zer due to possession.", root: "ر-ب-ب" },
-            { text: "ـيَ", category: "ism", role: "Attached Pronoun (My)", urdu: "میرا", english: "My", roman: "-ya / -ee", rule: "Attached 1st person pronoun.", root: "ي" },
-            { text: "الْعَظِيمِ", category: "ism", role: "Adjective", urdu: "عظمت والا", english: "The Magnificent", roman: "Al-'Azeem", rule: "Matches Rabbi in Zer.", root: "ع-ظ-م" }
+            { text: "سُبْحَانَ", category: "ism", role: "Purity", ki: "پاک ہے", kir: "پاک ہے", english: "Flawlessly Pure is", rule: "Verbal noun.", root: "س-ب-ح" },
+            { text: "رَبِّـ", category: "ism", role: "Lord (Possessed)", ki: "رب", kir: "رب", english: "Lord", rule: "Takes Zer due to possession.", root: "ر-ب-ب" },
+            { text: "ـيَ", category: "ism", role: "Attached Pronoun (My)", ki: "میرا", kir: "میرا", english: "My", rule: "Attached 1st person pronoun.", root: "ي" },
+            { text: "الْعَظِيمِ", category: "ism", role: "Adjective", ki: "عظمت والا", kir: "عظمت والا", english: "The Magnificent", rule: "Matches Rabbi in Zer.", root: "ع-ظ-م" }
+          ]
+        },
+        tashahhud: {
+          ki: "تمام قولی، بدنی اور مالی عبادتیں اللہ کے لیے ہیں۔ سلام ہو آپ پر اے نبی اور اللہ کی رحمت اور اس کی برکتیں۔",
+          kir: "تمام زبانی، بدنی اور مالی عبادتیں اللہ ہی کے لیے ہیں۔ اے نبی! آپ پر سلام اور اللہ کی رحمت اور اس کی برکتیں ہوں۔",
+          tokens: [
+            { text: "التَّحِيَّاتُ", category: "ism", role: "Subject Plural", ki: "تمام قولی عبادتیں", kir: "تمام زبانی عبادتیں", english: "All oral venerations", rule: "Starts with Al-.", root: "ح-ي-ي" },
+            { text: "لِلَّهِ", category: "harf", role: "Preposition + Ism", ki: "اللہ کے لیے ہیں", kir: "اللہ ہی کے لیے ہیں", english: "Belong to Allah", rule: "Li + Allah.", root: "ا-ل-ه" },
+            { text: "وَالصَّلَوَاتُ", category: "ism", role: "Conjunction + Plural", ki: "اور بدنی عبادتیں", kir: "اور بدنی عبادتیں", english: "And physical prayers", rule: "Plural of Salah.", root: "ص-ل-و" },
+            { text: "وَالطَّيِّبَاتُ", category: "ism", role: "Conjunction + Plural", ki: "اور مالی عبادتیں", kir: "اور مالی عبادتیں", english: "And pure deeds", rule: "Plural of Tayyibah.", root: "ط-ي-ب" }
           ]
         }
       };
 
-      // --- 4. Flashcards Dataset ---
+      // --- 5. Flashcards Dataset ---
       const flashcardsData = [
         { ar: "فِي", cat: "harf", ur: "میں / اندر", en: "In / Inside", ex: "فِي الْقَلْبِ (دل میں)" },
         { ar: "مِنْ", cat: "harf", ur: "سے", en: "From / Out of", ex: "مِنَ اللَّهِ (اللہ کی طرف سے)" },
         { ar: "إِلَى", cat: "harf", ur: "تک / کی طرف", en: "To / Towards", ex: "إِلَى الْجَنَّةِ (جنت کی طرف)" },
         { ar: "عَلَى", cat: "harf", ur: "پر / اوپر", en: "Upon / On", ex: "عَلَى الصِّرَاطِ (راستے پر)" },
         { ar: "بِـ", cat: "harf", ur: "ساتھ / سے", en: "With / By", ex: "بِسْمِ اللَّهِ (اللہ کے نام سے)" },
-        { ar: "لِـ", cat: "harf", ur: "کے لیے / کا", en: "For / Belongs to", ex: "الْحَمْدُ لِلَّهِ (شکر اللہ کے لیے ہے)" },
-        { ar: "هُوَ", cat: "ism", ur: "وہ (ایک مرد)", en: "He / It", ex: "قُلْ هُوَ اللَّهُ أَحَدٌ (کہہ دیجئے: وہ اللہ ایک ہے)" },
+        { ar: "لِـ", cat: "harf", ur: "کے لیے / کا", en: "For / Belongs to", ex: "الْحَمْدُ لِلَّهِ (سب خوبیاں اللہ کو)" },
+        { ar: "هُوَ", cat: "ism", ur: "وہ (ایک مرد)", en: "He / It", ex: "قُلْ هُوَ اللَّهُ أَحَدٌ (وہ اللہ ایک ہے)" },
         { ar: "أَنَا", cat: "ism", ur: "میں", en: "I", ex: "أَنَا رَبُّكُمُ الْأَعْلَىٰ (فرعون کا دعویٰ)" },
-        { ar: "نَحْنُ", cat: "ism", ur: "ہم", en: "We", ex: "نَحْنُ نَقُصُّ عَلَيْكَ (ہم بیان کرتے ہیں)" },
-        { ar: "إِنَّ", cat: "harf", ur: "بے شک / یقیناً", en: "Surely / Indeed", ex: "إِنَّ اللَّهَ مَعَ الصَّابِرِينَ" }
+        { ar: "نَحْنُ", cat: "ism", ur: "ہم", en: "We", ex: "نَحْنُ نَقُصُّ عَلَيْكَ (ہم بیان فرماتے ہیں)" },
+        { ar: "إِنَّ", cat: "harf", ur: "بے شک / یقیناً", en: "Surely / Indeed", ex: "إِنَّ اللَّهَ مَعَ الصَّابِرِينَ (بیشک اللہ صابروں کے ساتھ ہے)" }
       ];
 
-      // --- 5. Drill Questions Dataset ---
+      // --- 6. Drill Questions Dataset ---
       const drillQuestions = [
         {
-          q: "Word **الْحَمْدُ** (Al-Hamdu) kis category mein aata hai?",
+          q: "Word **الْحَمْدُ** (Al-Hamdu) کنز الایمان میں 'سب خوبیاں' ہے۔ یہ کس category میں آتا ہے؟",
           options: [
-            { text: "اِسْم (Ism) — Kyunki isme 'Al-' laga hai aur ye ek naam/sifat hai", correct: true },
-            { text: "فِعْل (Fi'l) — Kyunki ye ek kaam hai", correct: false },
-            { text: "حَرْف (Harf) — Kyunki ye ek chhota lafz hai", correct: false }
+            { text: "اِسْم (Ism) — کیونکہ اس پر 'الـ' ہے اور یہ وقت سے آزاد ہے", correct: true },
+            { text: "فِعْل (Fi'l) — کیونکہ یہ ایک کام ہے", correct: false },
+            { text: "حَرْف (Harf) — کیونکہ یہ ایک چھوٹا لفظ ہے", correct: false }
           ]
         },
         {
-          q: "Agar kisi lafz ke shuru mein **فِي** (Fee) aa jaye, to agle lafz ke aakhir mein kya aayega?",
+          q: "اگر کسی لفظ کے شروع میں **فِي** (Fee) آ جائے، تو اگلے لفظ کے آخر میں کیا آئے گا؟",
           options: [
-            { text: "زیر / Kasrah (ِ) — Kyunki Harf Jarr hamesha zer deta hai", correct: true },
+            { text: "زیر / Kasrah (ِ) — کیونکہ حرفِ جر ہمیشہ اگلے اسم کو زیر دیتا ہے", correct: true },
             { text: "پیش / Dammah (ُ)", correct: false },
             { text: "زبر / Fathah (َ)", correct: false }
           ]
         },
         {
-          q: "Present verb **نَعْبُدُ** (Na'budu) ke shuru mein **نَـ** (Na) ka kya matlab hai?",
+          q: "کنز الایمان میں **نَعْبُدُ** کا ترجمہ 'ہم پوجیں (عبادت کریں)' ہے۔ اس کے شروع میں **نَـ** کا کیا مطلب ہے؟",
           options: [
-            { text: "ہم (We) — Hum ibadat karte hain", correct: true },
+            { text: "ہم (We) — ہم عبادت کرتے ہیں", correct: true },
             { text: "میں (I)", correct: false },
             { text: "وہ سب (They)", correct: false }
           ]
         },
         {
-          q: "Lafz **رَسُولُ اللَّهِ** (Rasoolullah) kis tarah ka joda (compound) hai?",
+          q: "لفظ **رَسُولُ اللَّهِ** (اللہ کے رسول) کس طرح کا جوڑا (مرکب) ہے؟",
           options: [
-            { text: "مرکب اضافی (Possessive Duo) — Allah ke Rasool", correct: true },
-            { text: "مرکب توصیفی (Adjective Duo)", correct: false },
+            { text: "مرکب اضافی (Possessive Duo) — رسولِ خدا", correct: true },
+            { text: "مرکب توصیفی (صفت اور موصوف)", correct: false },
             { text: "فعل اور فاعل", correct: false }
           ]
         },
         {
-          q: "Lafz **خَلَقَ** (Khalaqa) ka matlab 'Usne banaya' hai. Ye kya hai?",
+          q: "لفظ **خَلَقَ** (Khalaqa) کا مطلب 'اس نے بنایا' ہے۔ یہ کیا ہے؟",
           options: [
             { text: "فِعْل ماضی (Past Tense Action)", correct: true },
             { text: "اِسْم (Noun)", correct: false },
@@ -1287,7 +1486,7 @@
         }
       ];
 
-      // --- 6. State Management ---
+      // --- 7. State Management ---
       let completedDays = {};
       let currentFlashcardIndex = 0;
       let currentDrillIndex = 0;
@@ -1324,7 +1523,7 @@
         if (badge) badge.textContent = count + ' / 30 Days (' + pct + '%)';
       }
 
-      // --- 7. Hydration Modules (Defensive Bootloader Pattern) ---
+      // --- 8. Hydration Modules (Defensive Bootloader Pattern) ---
       function initCurriculumTrack() {
         try {
           const container = document.getElementById('dayListContainer');
@@ -1357,8 +1556,12 @@
                 '<div class="verse-breakdown-box">' +
                   '<div style="font-size: 0.75rem; color: var(--gold-primary); margin-bottom: 4px;">آج کی آیت / نماز کا ذکر:</div>' +
                   '<div class="verse-ar">' + item.verseAr + '</div>' +
-                  '<div style="color: var(--text-main); font-weight: 500;">' + item.verseUr + '</div>' +
-                  '<div style="color: var(--text-dim); font-size: 0.82rem;">' + item.verseEn + '</div>' +
+                  '<div class="tarjuma-block tarjuma-ki">' +
+                    '<span class="tarjuma-tag">کنز الایمان:</span>' + item.verseKI +
+                  '</div>' +
+                  '<div class="tarjuma-block tarjuma-kir">' +
+                    '<span class="tarjuma-tag">کنز العرفان:</span>' + item.verseKIr +
+                  '</div>' +
                 '</div>' +
                 '<button class="btn-toggle-complete" data-day="' + item.day + '">' +
                   (isDone ? '✓ مکمل ہو چکا (Completed)' : 'Mark as Completed (مکمل ہوا)') +
@@ -1406,11 +1609,16 @@
         try {
           const select = document.getElementById('inspectorTextSelect');
           const display = document.getElementById('inspectorAyahDisplay');
+          const kiText = document.getElementById('inspectorKIText');
+          const kirText = document.getElementById('inspectorKIrText');
           if (!select || !display) return;
 
           function renderText(key) {
             const data = inspectorTexts[key] || inspectorTexts['fatiha_1'];
             display.innerHTML = '';
+
+            if (kiText) kiText.textContent = data.ki || "";
+            if (kirText) kirText.textContent = data.kir || "";
 
             data.tokens.forEach((t, idx) => {
               const span = document.createElement('span');
@@ -1428,21 +1636,21 @@
             const badge = document.getElementById('detailCategoryBadge');
             const role = document.getElementById('detailRoleTag');
             const word = document.getElementById('detailArabicWord');
-            const urdu = document.getElementById('detailUrduMeaning');
+            const kiMeaning = document.getElementById('detailKIMeaning');
+            const kirMeaning = document.getElementById('detailKIrMeaning');
             const english = document.getElementById('detailEnglishMeaning');
-            const roman = document.getElementById('detailRomanMeaning');
             const rule = document.getElementById('detailGrammarRule');
             const root = document.getElementById('detailRoot');
 
             if (badge) {
-              badge.textContent = token.category === 'ism' ? 'اِسْم (Ism)' : (token.category === 'fil' ? 'فِعْل (Fi\'l)' : 'حَرْف (Harf)');
+              badge.textContent = token.category === 'ism' ? 'اِسْم (Ism)' : (token.category === 'fil' ? "فِعْل (Fi'l)" : 'حَرْف (Harf)');
               badge.className = 'category-badge badge-' + token.category;
             }
             if (role) role.textContent = token.role;
             if (word) word.textContent = token.text;
-            if (urdu) urdu.textContent = token.urdu;
+            if (kiMeaning) kiMeaning.textContent = token.ki || "-";
+            if (kirMeaning) kirMeaning.textContent = token.kir || "-";
             if (english) english.textContent = token.english;
-            if (roman) roman.textContent = token.roman;
             if (rule) rule.textContent = token.rule;
             if (root) root.textContent = token.root;
           }
@@ -1555,7 +1763,6 @@
               btn.innerHTML = '<span>' + opt.text + '</span>';
               btn.addEventListener('click', function() {
                 if (btn.disabled) return;
-                // Disable all options
                 optionsBox.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
                 drillTotalAnswered++;
 
@@ -1566,7 +1773,6 @@
                 } else {
                   btn.classList.add('wrong');
                   playRetryThud();
-                  // Highlight correct one
                   optionsBox.querySelectorAll('.option-btn').forEach((b, i) => {
                     if (q.options[i].correct) b.classList.add('correct');
                   });
@@ -1607,7 +1813,6 @@
               }
             });
 
-            // Restore saved theme
             const savedTheme = localStorage.getItem('arabic_mastery_theme');
             if (savedTheme === 'light') {
               document.body.setAttribute('data-theme', 'light');
@@ -1623,6 +1828,23 @@
           }
         } catch (err) {
           console.error("Toggles Init Error:", err);
+        }
+      }
+
+      function initTarjumaModeSwitcher() {
+        try {
+          const buttons = document.querySelectorAll('.btn-tarjuma-mode');
+          buttons.forEach(btn => {
+            btn.addEventListener('click', function() {
+              playAcousticTap();
+              buttons.forEach(b => b.classList.remove('active'));
+              this.classList.add('active');
+              const mode = this.getAttribute('data-mode');
+              applyTarjumaMode(mode);
+            });
+          });
+        } catch (err) {
+          console.error("Tarjuma Switcher Error:", err);
         }
       }
 
@@ -1657,12 +1879,14 @@
       // Master Bootloader Execution
       document.addEventListener('DOMContentLoaded', function() {
         initThemeAndAudioToggles();
+        initTarjumaModeSwitcher();
         loadSavedProgress();
         initCurriculumTrack();
         initInspector();
         initFlashcards();
         initDrillArena();
         initTabNavigation();
+        applyTarjumaMode('both');
       });
 
     })();

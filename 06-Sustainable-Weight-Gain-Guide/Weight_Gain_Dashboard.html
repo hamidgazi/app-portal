@@ -565,7 +565,7 @@
         color: #000000 !important;
         padding: 0;
       }
-      .nav-tabs, .timer-card, .btn, .calc-grid, .synergy-pills, .chrono-pills, .phase-pills, .schedule-pills, .superfood-category-pills, .superfood-selector-pills {
+      .nav-tabs, .timer-card, .btn, .calc-grid, .synergy-pills, .chrono-pills, .phase-pills, .schedule-pills, .superfood-category-pills, .superfood-selector-pills, .carm-selector-pills {
         display: none !important;
       }
       .tab-pane {
@@ -818,6 +818,72 @@
       border-color: rgba(34, 197, 94, 0.6);
       background: linear-gradient(135deg, rgba(34, 197, 94, 0.08), rgba(9, 14, 26, 0.95));
     }
+
+    /* Carminatives & Digestive Elixirs Lab Styles */
+    .carm-selector-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .carm-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      touch-action: manipulation;
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+
+    .carm-pill:hover {
+      background: var(--bg-card-hover);
+      color: var(--text-main);
+      border-color: rgba(34, 197, 94, 0.4);
+    }
+
+    .carm-pill.active {
+      background: rgba(34, 197, 94, 0.18);
+      color: #22c55e;
+      border-color: #22c55e;
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.25);
+    }
+
+    .carm-recipe-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1rem;
+    }
+
+    .carm-card {
+      background: #0d1424;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.2s ease;
+    }
+
+    .carm-card:hover {
+      border-color: rgba(34, 197, 94, 0.4);
+    }
+
+    .carm-card.completed {
+      border-color: rgba(34, 197, 94, 0.6);
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.08), rgba(9, 14, 26, 0.95));
+    }
   </style>
 </head>
 <body>
@@ -1027,6 +1093,208 @@
           <p style="font-size: 0.9rem; color: var(--text-muted);">
             Mix <strong>2 teaspoons pure Desi Ghee + 1 teaspoon pure Raw Honey</strong> (always unequal amounts) with a pinch of cinnamon. Acts as a cellular carrier (*Yogavahi*) that fuels the intestinal mucosal barrier with butyric acid.
           </p>
+        </div>
+      </div>
+
+      <!-- SECTION: THE CARMINATIVE SEEDS & DIGESTIVE ELIXIRS LAB -->
+      <div class="card" style="margin-top: 1.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
+          <div>
+            <h2 class="card-title" style="margin-bottom: 0.25rem;">🥣 The Carminative Seeds & Digestive Elixirs Lab</h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">
+              Phytochemical volatile oils and prokinetic seeds engineered to accelerate gastric emptying, stimulate parietal HCl acid, and eliminate postprandial gas.
+            </p>
+          </div>
+          <span style="font-size: 0.75rem; padding: 0.3rem 0.6rem; border-radius: 999px; background: rgba(34, 197, 94, 0.15); color: #22c55e; font-weight: 700;">
+            6 Champion Spices • 4 Formulations
+          </span>
+        </div>
+
+        <!-- 6 Spice Selector Pills -->
+        <div class="carm-selector-pills" role="tablist" aria-label="Carminative Spices">
+          <button class="carm-pill active" data-spice="cumin" id="carm-pill-cumin" role="tab">🌾 Cumin (Jeera)</button>
+          <button class="carm-pill" data-spice="ajwain" id="carm-pill-ajwain" role="tab">🥣 Ajwain (Carom)</button>
+          <button class="carm-pill" data-spice="variyari" id="carm-pill-variyari" role="tab">🌿 Variyari (Saunf)</button>
+          <button class="carm-pill" data-spice="coriander" id="carm-pill-coriander" role="tab">🌱 Coriander (Dhaniya)</button>
+          <button class="carm-pill" data-spice="hing" id="carm-pill-hing" role="tab">💎 Ghee Hing (Asafoetida)</button>
+          <button class="carm-pill" data-spice="ginger" id="carm-pill-ginger" role="tab">🫚 Fresh Ginger (Adrak)</button>
+        </div>
+
+        <!-- Dynamic Spice Inspector Card -->
+        <div class="card" id="carm-inspector-box" style="background: rgba(34, 197, 94, 0.08); border-left: 4px solid #22c55e; margin-bottom: 1.5rem;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
+            <div>
+              <div id="carm-spice-subtitle" style="font-size: 0.75rem; color: #22c55e; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">
+                CHAMPION DIGESTIVE SPICE 1 OF 6
+              </div>
+              <h3 id="carm-spice-title" style="color: #ffffff; font-size: 1.3rem; margin: 0;">
+                🌾 CUMIN (JEERA / CUMINUM CYMINUM)
+              </h3>
+            </div>
+            <span id="carm-badge" style="font-size: 0.8rem; padding: 0.35rem 0.75rem; border-radius: 999px; background: rgba(34, 197, 94, 0.2); color: #22c55e; font-weight: 700; border: 1px solid #22c55e;">
+              CUMINALDEHYDE • +25% BILE FLOW
+            </span>
+          </div>
+
+          <!-- 4 Key Diagnostic Stat Boxes -->
+          <div class="chrono-stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem; margin-bottom: 1.25rem;">
+            <div class="chrono-stat-card" style="background: #090e1a; border: 1px solid var(--border-subtle); border-radius: 10px; padding: 0.9rem;">
+              <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">⏱️ Primary Motility Action</div>
+              <div id="carm-stat-motility" style="font-size: 1.1rem; font-weight: 700; color: #22c55e; margin: 0.2rem 0;">Cephalic & Antral Stimulant</div>
+              <div id="carm-desc-motility" style="font-size: 0.75rem; color: var(--text-muted);">Accelerates solid food breakdown</div>
+            </div>
+
+            <div class="chrono-stat-card" style="background: #090e1a; border: 1px solid var(--border-subtle); border-radius: 10px; padding: 0.9rem;">
+              <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">🚀 Gastric Transit Impact</div>
+              <div id="carm-stat-transit" style="font-size: 1.1rem; font-weight: 700; color: var(--accent-cyan); margin: 0.2rem 0;">-25% Transit Time</div>
+              <div id="carm-desc-transit" style="font-size: 0.75rem; color: var(--text-muted);">Shortens heavy meal gastric retention</div>
+            </div>
+
+            <div class="chrono-stat-card" style="background: #090e1a; border: 1px solid var(--border-subtle); border-radius: 10px; padding: 0.9rem;">
+              <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">🥄 Best Preparation Format</div>
+              <div id="carm-stat-format" style="font-size: 1.1rem; font-weight: 700; color: #f59e0b; margin: 0.2rem 0;">Lightly Dry-Roasted</div>
+              <div id="carm-desc-format" style="font-size: 0.75rem; color: var(--text-muted);">Fractures seed coat to release oils</div>
+            </div>
+
+            <div class="chrono-stat-card" style="background: #090e1a; border: 1px solid var(--border-subtle); border-radius: 10px; padding: 0.9rem;">
+              <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">🌡️ Thermal Energetics</div>
+              <div id="carm-stat-thermal" style="font-size: 1.1rem; font-weight: 700; color: #ec4899; margin: 0.2rem 0;">Mildly Warming</div>
+              <div id="carm-desc-thermal" style="font-size: 0.75rem; color: var(--text-muted);">Pitta-Vata balancing digestive fire</div>
+            </div>
+          </div>
+
+          <!-- Clinical & Kitchen Insights -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1rem;">
+            <div class="card" style="border-left: 3px solid #22c55e; margin-bottom: 0;">
+              <h4 style="color: #22c55e; font-size: 0.95rem; margin-bottom: 0.5rem;">🔬 Biochemical Mechanism & Physiological Impact</h4>
+              <div id="carm-clinical-text" style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+                <p>Cuminaldehyde and p-cymene bind gustatory chemoreceptors, increasing salivary amylase output by up to 300%. In the duodenum, cumin stimulates pancreatic exocrine secretion (amylase, lipase, trypsin) and elevates hepatobiliary bile acid synthesis by <strong>+25%</strong>, ensuring rapid emulsification of dietary fats and accelerating overall gastric emptying.</p>
+              </div>
+            </div>
+
+            <div class="card" style="border-left: 3px solid var(--accent-cyan); margin-bottom: 0;">
+              <h4 style="color: var(--accent-cyan); font-size: 0.95rem; margin-bottom: 0.5rem;">🍳 Kitchen Dosing & Antagonist Traps</h4>
+              <div id="carm-kitchen-text" style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+                <p><strong>Kitchen Protocol</strong>: Dry-roast seeds for 90 seconds until fragrant; simmer in CCF tea or whisk roasted powder into fresh room-temperature curd with black salt.</p>
+                <p style='margin-top: 0.5rem;'><strong>Antagonist Trap</strong>: Never burn cumin seeds to black char (destroys active terpenes) and avoid boiling ground powder for over 15 minutes.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Actionable Daily Brew Cards -->
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; margin-bottom: 0.5rem;">
+          <div>
+            <h3 style="color: var(--accent-cyan); font-size: 1.1rem; margin-bottom: 0.2rem;">🍵 4 Targeted Daily Preparation Protocols</h3>
+            <p style="font-size: 0.8rem; color: var(--text-muted);">
+              Under-5-minute formulations engineered for smooth motility, zero bloating, and rapid stomach comfort.
+            </p>
+          </div>
+          <span id="carm-counter-badge" style="font-size: 0.75rem; padding: 0.3rem 0.6rem; border-radius: 999px; background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan); font-weight: 700;">
+            0 / 4 Brews Taken Today
+          </span>
+        </div>
+
+        <div class="carm-recipe-grid">
+          <!-- Protocol 1 -->
+          <div class="carm-card" id="carm-card-ccf">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                <h4 style="color: #22c55e; font-size: 1.05rem; margin: 0;">1. 3-Seed CCF Motility Decoction</h4>
+                <span style="font-size: 0.75rem; color: #22c55e; font-weight: 700; background: rgba(34, 197, 94, 0.15); padding: 0.2rem 0.5rem; border-radius: 6px;">
+                  35m Post-Meal
+                </span>
+              </div>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+                The classic triad (Jeera + Dhaniya + Variyari). Clears heavy chyme and stimulates bile flow without acid rebound.
+              </p>
+              <div style="font-size: 0.8rem; color: var(--text-main); margin-bottom: 0.75rem; background: #090e1a; padding: 0.75rem; border-radius: 8px;">
+                <strong>Ingredients</strong>:<br>
+                • 1/2 tsp Cumin seeds (Jeera)<br>
+                • 1/2 tsp Coriander seeds (Dhaniya, cracked)<br>
+                • 1/2 tsp Fennel seeds (Variyari / Saunf)<br>
+                • 350 ml water (simmer covered 4–5 mins)
+              </div>
+            </div>
+            <button class="btn btn-carm-check" data-carm="ccf" style="width: 100%; min-height: 44px; background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 1px solid #22c55e; border-radius: 8px; font-weight: 700; cursor: pointer;">
+              Mark Brewed / Taken ✓
+            </button>
+          </div>
+
+          <!-- Protocol 2 -->
+          <div class="carm-card" id="carm-card-mukhwas">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                <h4 style="color: var(--accent-cyan); font-size: 1.05rem; margin: 0;">2. Post-Meal Ghee-Mukhwas Crunch</h4>
+                <span style="font-size: 0.75rem; color: var(--accent-cyan); font-weight: 700; background: rgba(56, 189, 248, 0.15); padding: 0.2rem 0.5rem; border-radius: 6px;">
+                  Immediate Post-Meal
+                </span>
+              </div>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+                Chewed for 60 seconds after lunch and dinner. Activates parotid saliva, coats throat against acid, and calms spasms.
+              </p>
+              <div style="font-size: 0.8rem; color: var(--text-main); margin-bottom: 0.75rem; background: #090e1a; padding: 0.75rem; border-radius: 8px;">
+                <strong>Ingredients (15-Day Jar)</strong>:<br>
+                • 4 tbsp Variyari (Saunf)<br>
+                • 2 tbsp Ajwain + 2 tbsp White Til (Calcium)<br>
+                • 1/2 tsp Desi Ghee + pinch Kala Namak<br>
+                • 1 tbsp crushed raw Mishri (unrefined)
+              </div>
+            </div>
+            <button class="btn btn-carm-check" data-carm="mukhwas" style="width: 100%; min-height: 44px; background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan); border: 1px solid var(--accent-cyan); border-radius: 8px; font-weight: 700; cursor: pointer;">
+              Mark Chewed / Taken ✓
+            </button>
+          </div>
+
+          <!-- Protocol 3 -->
+          <div class="carm-card" id="carm-card-antral">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                <h4 style="color: #f59e0b; font-size: 1.05rem; margin: 0;">3. Pre-Meal Antral Priming Elixir</h4>
+                <span style="font-size: 0.75rem; color: #f59e0b; font-weight: 700; background: rgba(245, 158, 11, 0.15); padding: 0.2rem 0.5rem; border-radius: 6px;">
+                  15m Pre-Meal
+                </span>
+              </div>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+                Chewed 15m before largest meal. Triggers Phase III MMC motility waves and activates parietal HCl acid.
+              </p>
+              <div style="font-size: 0.8rem; color: var(--text-main); margin-bottom: 0.75rem; background: #090e1a; padding: 0.75rem; border-radius: 8px;">
+                <strong>Ingredients</strong>:<br>
+                • 1 thin fresh ginger root sliver (2–3g)<br>
+                • 1 pinch roasted Ajwain powder<br>
+                • 1 pinch Himalayan Black Salt (Kala Namak)<br>
+                • 3 drops fresh lemon juice
+              </div>
+            </div>
+            <button class="btn btn-carm-check" data-carm="antral" style="width: 100%; min-height: 44px; background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid #f59e0b; border-radius: 8px; font-weight: 700; cursor: pointer;">
+              Mark Taken / Primed ✓
+            </button>
+          </div>
+
+          <!-- Protocol 4 -->
+          <div class="carm-card" id="carm-card-hing">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                <h4 style="color: var(--accent-rose); font-size: 1.05rem; margin: 0;">4. Emergency Ghee-Hing Flatulence Shot</h4>
+                <span style="font-size: 0.75rem; color: var(--accent-rose); font-weight: 700; background: rgba(244, 63, 94, 0.15); padding: 0.2rem 0.5rem; border-radius: 6px;">
+                  Acute Bloat Relief
+                </span>
+              </div>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+                Acute antispasmodic rescue. Unlocks sulfur disulfides to double bile flow and sweep gas out in 7–12 minutes.
+              </p>
+              <div style="font-size: 0.8rem; color: var(--text-main); margin-bottom: 0.75rem; background: #090e1a; padding: 0.75rem; border-radius: 8px;">
+                <strong>Ingredients</strong>:<br>
+                • 1/4 tsp pure Asafoetida (Hing)<br>
+                • 1/2 tsp Desi Cow Ghee (fried 15 seconds)<br>
+                • 1/2 tsp roasted Cumin powder (Jeera)<br>
+                • 60 ml lukewarm water + pinch black salt
+              </div>
+            </div>
+            <button class="btn btn-carm-check" data-carm="hing" style="width: 100%; min-height: 44px; background: rgba(244, 63, 94, 0.15); color: var(--accent-rose); border: 1px solid var(--accent-rose); border-radius: 8px; font-weight: 700; cursor: pointer;">
+              Mark Taken / Relieved ✓
+            </button>
+          </div>
         </div>
       </div>
     </section>
@@ -4350,6 +4618,167 @@
 
       } catch (err) {
         console.error("Superfoods bootloader error:", err);
+      }
+
+      // 12. Carminative Spices & Digestive Elixirs Bootloader (Directive 5 & Directive 7)
+      try {
+        const carminativeData = {
+          cumin: {
+            title: "🌾 CUMIN (JEERA / CUMINUM CYMINUM)",
+            badgeText: "CUMINALDEHYDE • +25% BILE FLOW",
+            motilityStat: "Cephalic & Antral Stimulant",
+            motilityDesc: "Accelerates solid food breakdown",
+            transitStat: "-25% Transit Time",
+            transitDesc: "Shortens heavy meal gastric retention",
+            formatStat: "Lightly Dry-Roasted",
+            formatDesc: "Fractures seed coat to release oils",
+            thermalStat: "Mildly Warming",
+            thermalDesc: "Pitta-Vata balancing digestive fire",
+            clinicalHtml: "<p>Cuminaldehyde and p-cymene bind gustatory chemoreceptors, increasing salivary amylase output by up to 300%. In the duodenum, cumin stimulates pancreatic exocrine secretion (amylase, lipase, trypsin) and elevates hepatobiliary bile acid synthesis by <strong>+25%</strong>, ensuring rapid emulsification of dietary fats and accelerating overall gastric emptying.</p>",
+            kitchenHtml: "<p><strong>Kitchen Protocol</strong>: Dry-roast seeds for 90 seconds until fragrant; simmer in CCF tea or whisk roasted powder into fresh room-temperature curd with black salt.</p><p style='margin-top: 0.5rem;'><strong>Antagonist Trap</strong>: Never burn cumin seeds to black char (destroys active terpenes) and avoid boiling ground powder for over 15 minutes.</p>"
+          },
+          ajwain: {
+            title: "🥣 AJWAIN (CAROM SEEDS / TRACHYSPERMUM AMMI)",
+            badgeText: "THYMOL (50%) • M3 CHOLINERGIC",
+            motilityStat: "Antral Churning & Gas Release",
+            motilityDesc: "Relaxes intestinal smooth-muscle spasms",
+            transitStat: "-30% Sluggish Delay",
+            transitDesc: "Cuts food retention in small intestine",
+            formatStat: "Lightly Toasted / Powder",
+            formatDesc: "Always chew thoroughly with black salt",
+            thermalStat: "Intensely Heating",
+            thermalDesc: "Deeply clears Kapha and trapped Vata gas",
+            clinicalHtml: "<p>Thymol binds cholinergic muscarinic (M3) receptors on gastric smooth muscle, stimulating rhythmic antral grinding waves. Concurrently, it acts as a physiological calcium-channel modulator in hyper-tonic bowel loops, relieving abdominal cramps and expelling trapped fermentation gas bubbles within 10 minutes.</p>",
+            kitchenHtml: "<p><strong>Kitchen Protocol</strong>: Chew 1 pinch (approx. 1g) with Himalayan black salt 15 minutes before your largest meal, or add to the Post-Meal Mukhwas Crunch.</p><p style='margin-top: 0.5rem;'><strong>Antagonist Trap</strong>: Swallowing whole raw seeds without chewing (smooth seed coat resists digestion); avoid excessive doses on active bleeding stomach ulcers.</p>"
+          },
+          variyari: {
+            title: "🌿 VARIYARI / SAUNF (FENNEL / FOENICULUM VULGARE)",
+            badgeText: "TRANS-ANETHOLE • PITTA COOLANT",
+            motilityStat: "LES Relaxation & Mucosal Shield",
+            motilityDesc: "Suppresses acid regurgitation spasms",
+            transitStat: "Smooth Gastric Transit",
+            transitDesc: "Relieves upper abdominal fullness and reflux",
+            formatStat: "Mukhwas Chew / Decoction",
+            formatDesc: "Dry-roasted with mishri or brewed in tea",
+            thermalStat: "Deeply Cooling (Sheeta)",
+            thermalDesc: "Pacifies visceral pitta and soothes gut burn",
+            clinicalHtml: "<p>Trans-anethole and fenchone exert a soothing, antispasmodic effect on the enteric nervous system without triggering acid rebound. Variyari stimulates mucosal blood perfusion and bicarbonate secretion, neutralizing free acid while relaxing lower esophageal sphincter tension, making it ideal for anxious hardgainers prone to throat burn.</p>",
+            kitchenHtml: "<p><strong>Kitchen Protocol</strong>: Chew 1 teaspoon of the Post-Meal Roasted Ghee-Mukhwas for 60 seconds after eating, or brew in the 3-Seed CCF Tea.</p><p style='margin-top: 0.5rem;'><strong>Antagonist Trap</strong>: Using artificial sugar-coated candy mukhwas with green food dyes; consuming stale pre-ground powder whose anethole has oxidized.</p>"
+          },
+          coriander: {
+            title: "🌱 CORIANDER SEEDS (DHANIYA / CORIANDRUM SATIVUM)",
+            badgeText: "LINALOOL (65%) • TRIDOSHA BUFFER",
+            motilityStat: "Thermal Balancing & Anti-Inflammatory",
+            motilityDesc: "Soothes duodenal enterocyte inflammation",
+            transitStat: "+22% Bile Synthesis",
+            transitDesc: "Accelerates hepatic lipid clearance",
+            formatStat: "Coarsely Cracked Husks",
+            formatDesc: "Lightly crush to expose inner oil glands",
+            thermalStat: "Tridoshic Neutral",
+            thermalDesc: "Balances the heating potency of ajwain/cumin",
+            clinicalHtml: "<p>Linalool is an anxiolytic and spasmolytic volatile terpene that modulates visceral hypersensitivity. In classic decoctions, coriander acts as the physiological buffer: it cools mucosal inflammation caused by heavy meat or fat digestion, supports renal electrolyte drainage, and prevents gastric hyper-reactivity.</p>",
+            kitchenHtml: "<p><strong>Kitchen Protocol</strong>: Crack whole seeds coarsely with a rolling pin and simmer with cumin and variyari for 5 minutes in CCF Tea.</p><p style='margin-top: 0.5rem;'><strong>Antagonist Trap</strong>: Discarding the husk before boiling, or using old powdered coriander that has lost its citrus-herbal volatile aroma.</p>"
+          },
+          hing: {
+            title: "💎 HING (ASAFOETIDA / FERULA FOETIDA)",
+            badgeText: "ORGANIC DISULFIDES • 2X BILE FLOW",
+            motilityStat: "Instant Anti-Flatulent Sweep",
+            motilityDesc: "Suppresses gas-producing gut anaerobes",
+            transitStat: "+100% Bile Surge",
+            transitDesc: "Doubles bile secretion within 15 minutes",
+            formatStat: "Strictly Desi Ghee Fried",
+            formatDesc: "20-second low heat fry in pure A2 Ghee",
+            thermalStat: "Intensely Warming",
+            thermalDesc: "The strongest natural Vata gas dispeller",
+            clinicalHtml: "<p>Volatile organic disulfides inhibit gas-fermenting colonic bacteria while stimulating intestinal smooth-muscle motility via mild acetylcholinesterase inhibition. When cooked in Desi Ghee, lipid-soluble ferulic acid is unlocked, doubling hepatobiliary bile flow and rapidly dispersing painful intestinal gas pockets.</p>",
+            kitchenHtml: "<p><strong>Kitchen Protocol</strong>: ALWAYS fry in 1/2 tsp warm Desi Ghee for 15-20 seconds before adding to warm water or dal. Never ingest raw hing.</p><p style='margin-top: 0.5rem;'><strong>Antagonist Trap</strong>: Adding raw powder into cold drinks (causes severe nausea and bitter burps); using cheap hing cut with refined maida flour.</p>"
+          },
+          ginger: {
+            title: "🫚 FRESH GINGER (ADRAK / ZINGIBER OFFICINALE)",
+            badgeText: "[6]-GINGEROL • PHASE III MMC",
+            motilityStat: "Pyloric Relaxation & MMC Sweeper",
+            motilityDesc: "Triggers deep housekeeper contractions",
+            transitStat: "+50% Faster Emptying",
+            transitDesc: "Cuts gastric half-emptying time in half",
+            formatStat: "Paper-Thin Fresh Slice",
+            formatDesc: "Dipped in Himalayan black salt & lemon juice",
+            thermalStat: "Gently Warming",
+            thermalDesc: "Stimulates gastric Agni without scorching",
+            clinicalHtml: "<p>Gingerols and [6]-shogaol act as selective cholinergic M3 and 5-HT3 receptor agonists. They stimulate antral motor contractions, relax the pyloric valve, and trigger Phase III of the Migrating Motor Complex (MMC), clearing stagnant solid food from the stomach and banishing morning nausea or early fullness.</p>",
+            kitchenHtml: "<p><strong>Kitchen Protocol</strong>: Dip 1 thin sliver in rock salt and fresh lemon juice; chew slowly 15 minutes before breakfast or lunch.</p><p style='margin-top: 0.5rem;'><strong>Antagonist Trap</strong>: Swallowing large woody chunks without chewing; taking heavy dry ginger powder (Sonth) during peak summer heat waves.</p>"
+          }
+        };
+
+        const carmPills = document.querySelectorAll(".carm-pill");
+        const carmSpiceTitle = document.getElementById("carm-spice-title");
+        const carmBadge = document.getElementById("carm-badge");
+        const carmStatMotility = document.getElementById("carm-stat-motility");
+        const carmDescMotility = document.getElementById("carm-desc-motility");
+        const carmStatTransit = document.getElementById("carm-stat-transit");
+        const carmDescTransit = document.getElementById("carm-desc-transit");
+        const carmStatFormat = document.getElementById("carm-stat-format");
+        const carmDescFormat = document.getElementById("carm-desc-format");
+        const carmStatThermal = document.getElementById("carm-stat-thermal");
+        const carmDescThermal = document.getElementById("carm-desc-thermal");
+        const carmClinicalText = document.getElementById("carm-clinical-text");
+        const carmKitchenText = document.getElementById("carm-kitchen-text");
+
+        carmPills.forEach(pill => {
+          pill.addEventListener("click", () => {
+            const key = pill.getAttribute("data-spice");
+            if (!key || !carminativeData[key]) return;
+
+            carmPills.forEach(p => p.classList.remove("active"));
+            pill.classList.add("active");
+
+            const d = carminativeData[key];
+            if (carmSpiceTitle) carmSpiceTitle.textContent = d.title;
+            if (carmBadge) carmBadge.textContent = d.badgeText;
+            if (carmStatMotility) carmStatMotility.textContent = d.motilityStat;
+            if (carmDescMotility) carmDescMotility.textContent = d.motilityDesc;
+            if (carmStatTransit) carmStatTransit.textContent = d.transitStat;
+            if (carmDescTransit) carmDescTransit.textContent = d.transitDesc;
+            if (carmStatFormat) carmStatFormat.textContent = d.formatStat;
+            if (carmDescFormat) carmDescFormat.textContent = d.formatDesc;
+            if (carmStatThermal) carmStatThermal.textContent = d.thermalStat;
+            if (carmDescThermal) carmDescThermal.textContent = d.thermalDesc;
+            if (carmClinicalText) carmClinicalText.innerHTML = d.clinicalHtml;
+            if (carmKitchenText) carmKitchenText.innerHTML = d.kitchenHtml;
+          });
+        });
+
+        // 4 Carminative Brew Buttons
+        const carmButtons = document.querySelectorAll(".btn-carm-check");
+        const carmCounterBadge = document.getElementById("carm-counter-badge");
+        let completedBrewsCount = 0;
+
+        carmButtons.forEach(btn => {
+          btn.addEventListener("click", () => {
+            const key = btn.getAttribute("data-carm");
+            const card = document.getElementById("carm-card-" + key);
+            if (!card) return;
+
+            const isDone = card.classList.toggle("completed");
+            if (isDone) {
+              btn.textContent = "Brewed & Taken ✓";
+              btn.style.background = "#22c55e";
+              btn.style.color = "#090e1a";
+              completedBrewsCount++;
+            } else {
+              btn.textContent = "Mark Brewed / Taken ✓";
+              btn.style.background = "";
+              btn.style.color = "";
+              completedBrewsCount = Math.max(0, completedBrewsCount - 1);
+            }
+
+            if (carmCounterBadge) {
+              carmCounterBadge.textContent = completedBrewsCount + " / 4 Brews Taken Today";
+            }
+          });
+        });
+
+      } catch (err) {
+        console.error("Carminatives bootloader error:", err);
       }
     });
   </script>

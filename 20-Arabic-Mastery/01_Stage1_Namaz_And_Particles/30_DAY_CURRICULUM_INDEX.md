@@ -1,14 +1,16 @@
 # 🗓️ 30-Day Arabic Scriptural Mastery: Day-by-Day Sequenced Curriculum
 *Designed for Absolute True Beginners with Zero Prior Grammar Knowledge*
+*Sacred Canonical Translation Standard: Strictly **Kanzul Iman (کنز الایمان)** & **Kanzul Irfan (کنز العرفان)** from the verified Quran Analysis Project (`07-Quran-Deep-Analyzer`)*
 
 ---
 
 ## 🌟 How to Use This 30-Day Guide
 - **Daily Commitment**: 20 to 25 minutes per day.
+- **The Sacred Translation Rule**: All Quranic verses in this curriculum are accompanied strictly by **Kanzul Iman** (امام احمد رضا خان علیہ الرحمہ) and **Kanzul Irfan** (مفتی محمد قاسم قادری). No external or internet translations are used.
 - **The 3-Step Daily Routine**:
   1. **Concept (7 mins)**: Read the 1 simple rule of the day.
   2. **Vocabulary (5 mins)**: Learn the 3 high-yield words (with their Urdu & Roman Urdu connections).
-  3. **Live Deconstruction (10 mins)**: Analyze the featured phrase from daily Namaz or the Holy Qur'an.
+  3. **Live Deconstruction (10 mins)**: Analyze the featured phrase from daily Namaz or the Holy Qur'an with Kanzul Iman & Kanzul Irfan.
   4. **Practice Check (3 mins)**: Solve the 2 daily micro-drills.
 
 ---

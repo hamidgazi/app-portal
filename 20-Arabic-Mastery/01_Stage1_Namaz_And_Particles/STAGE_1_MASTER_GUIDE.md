@@ -87,56 +87,83 @@ Here are the 8 most frequent prepositions in the Qur'an:
 ---
 
 ## 🔹 Lesson 1.4: Word-by-Word Linguistic Anatomy of Surah Al-Fatiha
+*All translations strictly sourced from the canonical database: **Kanzul Iman** (امام احمد رضا خان) and **Kanzul Irfan** (مفتی محمد قاسم قادری)*
 
-Let us apply our rules directly to **Surah Al-Fatiha**:
+---
 
 ### Ayah 1: بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
-- **بِـ** (*Bi-*): Harf Jarr (Preposition) = "With / In" (ساتھ / سے).
-- **اسْمِ** (*Ismi*): Ism (Noun) = "Name" (نام). Ends with a Kasrah (*Zer*) because of the Harf Jarr *Bi-*.
-- **اللَّهِ** (*Al-Laahi*): Proper Ism = "Allah". Ends with Kasrah (*Zer*) because of possession (*Mudhaf Ilayh* - "Name of Allah").
-- **الرَّحْمَٰنِ** (*Ar-Rahmaan-i*): Ism / Adjective (صفت) = "The Entirely Merciful" (نہایت مہربان).
-- **الرَّحِيمِ** (*Ar-Raheem-i*): Ism / Adjective (صفت) = "The Especially Merciful" (ہمیشہ رحم فرمانے والا).
+- 📜 **کنز الایمان**: اللہ کے نام سے شروع جو نہایت مہربان رحم والا۔
+- 📖 **کنز العرفان**: اللہ کے نام سے شروع جو بہت مہربان، رحمت والاہے۔
+- **بِـ** (*Bi-*): Harf Jarr (Preposition) = "سے / نام سے".
+- **اسْمِ** (*Ismi*): Ism (Noun) = "نام". Ends with a Kasrah (*Zer*) because of the Harf Jarr *Bi-*.
+- **اللَّهِ** (*Al-Laahi*): Proper Ism = "اللہ". Ends with Kasrah (*Zer*) because of possession (*Mudhaf Ilayh* - "اللہ کا نام").
+- **الرَّحْمَٰنِ** (*Ar-Rahmaan-i*): Ism / Adjective (صفت) = "نہایت مہربان" (Kanzul Iman) / "بہت مہربان" (Kanzul Irfan).
+- **الرَّحِيمِ** (*Ar-Raheem-i*): Ism / Adjective (صفت) = "رحم والا" (Kanzul Iman) / "رحمت والا" (Kanzul Irfan).
+
+---
 
 ### Ayah 2: الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ
-- **الْـ** (*Al-*): The Definite Article = "The" (تمام / خاص).
-- **حَمْدُ** (*Hamdu*): Ism = "Praise and gratitude" (تعریف اور شکر). Ends with Dammah (*Pesh*) because it is the Subject (*Mubtada*).
-- **لِـ** (*Li-*): Harf Jarr = "For / Belongs to" (کے لیے / اللہ کا حق).
-- **اللَّهِ** (*Al-Laahi*): Ism = "Allah" (مجرور due to *Li-*).
-- **رَبِّ** (*Rabbi*): Ism = "Lord, Sustainer, Nourisher" (پالنے والا، رب).
-- **الْعَالَمِينَ** (*Al-'Aalameen-a*): Ism (Plural of *'Aalam* - world) = "All the worlds / creations" (تمام جہانوں کا).
+- 📜 **کنز الایمان**: سب خوبیاں اللہ کو جو مالک سارے جہان والوں کا۔
+- 📖 **کنز العرفان**: سب تعریفیں اللہ کے لئے ہیں جو تمام جہان والوں کاپالنے والا ہے۔
+- **الْـ** (*Al-*): The Definite Article = "سب / تمام" (الاستغراق).
+- **حَمْدُ** (*Hamdu*): Ism = "خوبیاں" (Kanzul Iman) / "تعریفیں" (Kanzul Irfan). Ends with Dammah (*Pesh*) because it is the Subject (*Mubtada*).
+- **لِـ** (*Li-*): Harf Jarr = "کو / کے لیے" (اللہ کا حق).
+- **اللَّهِ** (*Al-Laahi*): Ism = "اللہ" (مجرور due to *Li-*).
+- **رَبِّ** (*Rabbi*): Ism = "جو مالک" (Kanzul Iman) / "پالنے والا" (Kanzul Irfan).
+- **الْعَالَمِينَ** (*Al-'Aalameen-a*): Ism (Plural of *'Aalam* - world) = "سارے جہان والوں کا" (Kanzul Iman) / "تمام جہان والوں کا" (Kanzul Irfan).
+
+---
 
 ### Ayah 3: الرَّحْمَٰنِ الرَّحِيمِ
-- Repeated attributes of divine mercy.
+- 📜 **کنز الایمان**: بہت مہربان رحمت والا۔
+- 📖 **کنز العرفان**: بہت مہربان رحمت والا۔
+- Attributes of divine mercy repeated with infinite grace.
+
+---
 
 ### Ayah 4: مَالِكِ يَوْمِ الدِّينِ
-- **مَالِكِ** (*Maaliki*): Ism (Active Participle / اسم فاعل from root *M-L-K*) = "Owner / Master" (مالک).
-- **يَوْمِ** (*Yawmi*): Ism = "Day" (دن).
-- **الدِّينِ** (*Ad-Deen-i*): Ism = "Judgment, Recompense, Accountability" (جزا اور سزا کا دن).
+- 📜 **کنز الایمان**: روزِ جزاء کا مالک۔
+- 📖 **کنز العرفان**: جزا کے دن کامالک۔
+- **مَالِكِ** (*Maaliki*): Ism (Active Participle / اسم فاعل from root *M-L-K*) = "مالک".
+- **يَوْمِ** (*Yawmi*): Ism = "روزِ / دن کا".
+- **الدِّينِ** (*Ad-Deen-i*): Ism = "جزاء کا" (Kanzul Iman) / "جزا کا" (Kanzul Irfan).
+
+---
 
 ### Ayah 5: إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ
-- **إِيَّاكَ** (*Iyyaa-ka*): Exclusive Pronoun (*Mansoob Munfasil*) = "You alone" (صرف آپ ہی کی). The *-ka* suffix is "You" (2nd person). Putting it first creates **exclusive emphasis** (*Hadr / Taqdeem* - "Only You and no one else!").
-- **نَعْبُدُ** (*Na'budu*): Fi'l Mudari' (Present Verb from root *'-B-D*) = "We worship" (ہم عبادت کرتے ہیں). The prefix **نَـ** (*Na-*) means "We"!
-- **وَ** (*Wa*): Harf 'Atf (Conjunction) = "And" (اور).
-- **إِيَّاكَ** (*Iyyaa-ka*): "You alone" (صرف آپ ہی سے).
-- **نَسْتَعِينُ** (*Nasta'een-u*): Fi'l Mudari' (Form X verb from root *'-W-N* - help) = "We seek help" (ہم مدد مانگتے ہیں). The prefix **نَـ** (*Na-*) means "We", and **استـ** (*Ista-*) means "to seek / request"!
+- 📜 **کنز الایمان**: ہم تجھی کو پوجیں اور تجھی سے مدد چاہیں۔
+- 📖 **کنز العرفان**: ہم تیری ہی عبادت کرتے ہیں اور تجھ ہی سے مدد چاہتے ہیں۔
+- **إِيَّاكَ** (*Iyyaa-ka*): Exclusive Pronoun (*Mansoob Munfasil*) = "ہم تجھی کو" (Kanzul Iman) / "ہم تیری ہی" (Kanzul Irfan). Putting it first creates **exclusive dedication** (*Hadr* - "صرف تیری اور کسی غیر کی نہیں!").
+- **نَعْبُدُ** (*Na'budu*): Fi'l Mudari' (Present Verb from root *'-B-D*) = "پوجیں" (Kanzul Iman) / "عبادت کرتے ہیں" (Kanzul Irfan). The prefix **نَـ** (*Na-*) means "We / ہم"!
+- **وَ** (*Wa*): Harf 'Atf (Conjunction) = "اور".
+- **إِيَّاكَ** (*Iyyaa-ka*): "تجھی سے" (Kanzul Iman) / "تجھ ہی سے" (Kanzul Irfan).
+- **نَسْتَعِينُ** (*Nasta'een-u*): Fi'l Mudari' (Form X verb from root *'-W-N* - help) = "مدد چاہیں" (Kanzul Iman) / "مدد چاہتے ہیں" (Kanzul Irfan). Prefix **نَـ** = "We", and **استـ** = "مانگنا / چاہنا".
+
+---
 
 ### Ayah 6: اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ
-- **اهْدِ** (*Ihd-i*): Fi'l Amr (Command / Supplication Verb from root *H-D-Y*) = "Guide!" (ہدایت فرما / رہنمائی فرما).
-- **ـنَا** (*-naa*): Attached Pronoun (ضمير متصل) = "Us" (ہمیں).
-- **الصِّرَاطَ** (*As-Siraat-a*): Ism = "The Path" (راستہ). Ends with Fathah (*Zabar*) because it is the Object (*Maf'ool*).
-- **الْمُسْتَقِيمَ** (*Al-Mustaqeem-a*): Ism / Adjective (صفت) = "The Straight" (سیدھا).
+- 📜 **کنز الایمان**: ہم کو سیدھا راستہ چلا۔
+- 📖 **کنز العرفان**: ہمیں سیدھے راستے پر چلا۔
+- **اهْدِ** (*Ihd-i*): Fi'l Amr (Command used as humble Du'a from root *H-D-Y*) = "چلا / رہنمائی فرما".
+- **ـنَا** (*-naa*): Attached Pronoun (ضمير متصل) = "ہم کو" (Kanzul Iman) / "ہمیں" (Kanzul Irfan).
+- **الصِّرَاطَ** (*As-Siraat-a*): Ism = "راستہ" (Kanzul Iman) / "راستے پر" (Kanzul Irfan). Ends with Fathah (*Zabar*) because it is the Object (*Maf'ool*).
+- **الْمُسْتَقِيمَ** (*Al-Mustaqeem-a*): Ism / Adjective (صفت) = "سیدھا" (Kanzul Iman) / "سیدھے" (Kanzul Irfan).
+
+---
 
 ### Ayah 7: صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ
-- **صِرَاطَ** (*Siraat-a*): "The path of" (راستہ).
-- **الَّذِينَ** (*Alladheena*): Relative Pronoun (اسم موصول) = "Those who" (ان لوگوں کا جن پر).
-- **أَنْعَمْتَ** (*An'am-ta*): Fi'l Maadi (Past Verb from root *N-'-M*) = "You bestowed favor" (آپ نے انعام فرمایا). The suffix **ـتَ** (*-ta*) means "You" (واحد حاضر)!
-- **عَلَيْهِمْ** (*'Alay-him*): Preposition *'Alaa* (upon) + Attached Pronoun *-him* (them) = "Upon them" (ان پر).
-- **غَيْرِ** (*Ghayri*): Ism = "Not / Other than" (نہ کہ).
-- **الْمَغْضُوبِ** (*Al-Maghdoobi*): Ism Maf'ool (Passive Participle from root *Gh-D-B*) = "Those who earned wrath" (جن پر غضب ہوا).
-- **عَلَيْهِمْ** (*'Alay-him*): "Upon them" (ان پر).
-- **وَ** (*Wa*): "And" (اور).
-- **لَا** (*Laa*): Harf Nafy = "Not / Nor" (اور نہ).
-- **الضَّالِّينَ** (*Ad-Daalleen-a*): Ism Faa'il Plural (from root *D-L-L* - to go astray) = "Those who are lost / astray" (گمراہ لوگ).
+- 📜 **کنز الایمان**: راستہ اُن کا جن پر تُو نے احسان کیا، نہ ان کا جن پر غضب ہوا اور نہ بہکے ہوؤں کا۔
+- 📖 **کنز العرفان**: ان لوگوں کا راستہ جن پر تو نے احسان کیا، نہ کہ ان کا راستہ جن پر غضب ہوا اور نہ بہکے ہوؤں کا۔
+- **صِرَاطَ** (*Siraat-a*): "راستہ" (بدل / مضاف).
+- **الَّذِينَ** (*Alladheena*): Relative Pronoun (اسم موصول) = "اُن کا جن پر" (Kanzul Iman) / "ان لوگوں کا جن پر" (Kanzul Irfan).
+- **أَنْعَمْتَ** (*An'am-ta*): Fi'l Maadi (Past Verb from root *N-'-M*) = "تُو نے احسان کیا". Suffix **ـتَ** (*-ta*) means "You / تُو نے"!
+- **عَلَيْهِمْ** (*'Alay-him*): Preposition *'Alaa* (upon) + Attached Pronoun *-him* (them) = "ان پر".
+- **غَيْرِ** (*Ghayri*): Ism = "نہ ان کا" (Kanzul Iman) / "نہ کہ ان کا" (Kanzul Irfan).
+- **الْمَغْضُوبِ** (*Al-Maghdoobi*): Ism Maf'ool (Passive Participle from root *Gh-D-B*) = "جن پر غضب ہوا".
+- **عَلَيْهِمْ** (*'Alay-him*): "ان پر".
+- **وَ** (*Wa*): "اور".
+- **لَا** (*Laa*): Harf Nafy = "نہ".
+- **الضَّالِّينَ** (*Ad-Daalleen-a*): Ism Faa'il Plural (from root *D-L-L* - to go astray) = "بہکے ہوؤں کا".
 
 ---
 
