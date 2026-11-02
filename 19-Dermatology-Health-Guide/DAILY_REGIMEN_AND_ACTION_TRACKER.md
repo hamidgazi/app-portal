@@ -168,22 +168,34 @@ PATIENT DISCUSSION SUMMARY FOR ATTENDING PHYSICIAN:
 
 ```
 +-------------------------------------------------------------------------------+
-| [ ] HAIR WASH DAY PROTOCOL (Every 2–3 Days)                                   |
+| [ ] HAIR WASH DAY & SALON-SPA CHECKLIST                                       |
 +-------------------------------------------------------------------------------+
-  [ ] Step 1: Scalp Cleansing
+  [ ] Scalp Cleansing & De-Sticking:
       * Mon & Sun: Ketoconazole 2% Shampoo (massage scalp, leave 3-5 min, rinse).
-      * Fri: Clarifying Shampoo (Neutrogena Anti-Residue) to strip sticky oxidized sebum.
-  [ ] Step 2: Cationic Conditioning (MANDATORY FOR THICK/COARSE HAIR)
-      * Squeeze excess water out from hair.
-      * Apply a palm-sized amount of Tresemmé Keratin Smooth / L'Oréal Conditioner
-        from mid-lengths to ends (keep off scalp).
-      * Leave for 2 to 3 minutes, then rinse with lukewarm/cool water.
-  [ ] Step 3: Weekly Acidic Cuticle Closing (Wednesday)
-      * Mix 1 tbsp Apple Cider Vinegar into 500ml water.
-      * Pour over hair after washing, leave for 1 min, rinse with cool water.
-      * Snaps cuticles shut, dissolves stickiness, and provides instant glass slip.
-  [ ] Step 4: Post-Shower Smoothing Shield (EVERY WASH DAY - ZERO OILINESS)
-      * On damp, towel-dried hair, rub 2 to 3 drops of Streax Pro / L'Oréal Serum
-        between your palms and glide through hair.
-      * Dries non-sticky in 10 seconds; keeps thick hair soft, pliable, and frizz-free.
+      * Fri: Clarifying Shampoo (Neutrogena Anti-Residue) on roots to strip oxidized sebum.
+  
+  [ ] Daily Cationic Conditioning (Every Wash Day - MANDATORY):
+      * Squeeze dripping water from hair.
+      * Apply Tresemmé Keratin Smooth / L'Oréal Conditioner from mid-lengths to ends.
+      * Leave for 2 to 3 minutes, then rinse with cool water.
+
+  [ ] Weekly Salon Hair Spa Day (Sunday - Deep Thermal Masking):
+      * Apply L'Oréal Absolut Repair / Tresemmé Deep Smoothing Mask generously from
+        ears-down to brittle ends (keep off scalp).
+      * Put on a shower cap; wrap with a warm damp towel for 15-20 minutes.
+      * Rinse with cool water. Leaves coarse hair extraordinarily soft and pliable.
+
+  [ ] Flash Lamellar Water Treatment (Wednesday - 8-Second De-Sticking):
+      * Apply 20ml of L'Oréal 8 Second Wonder Water to wet mid-lengths and ends.
+      * Massage 8 seconds (mild warmth activates), then rinse. Instantly unglues strands.
+
+  [ ] Post-Shower Smoothing Shield (EVERY WASH DAY - ZERO GREASINESS):
+      * Pat hair gently with a microfiber towel (never rub roughly).
+      * Rub 2 to 3 drops of Streax Pro / L'Oréal Extraordinary Serum between palms
+        and glide through damp lengths.
+      * Dries non-sticky in 10 seconds; locks out humidity and kills frizz all day.
+
+  [ ] Bedtime Friction Shield (Nightly Habit):
+      * Sleep on a 100% Satin or Silk Pillowcase (eliminates overnight static & frizz).
+      * Use a wide-tooth wooden or anti-static carbon comb (prevents breakage).
 ```
