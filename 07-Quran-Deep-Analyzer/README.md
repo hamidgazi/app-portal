@@ -2,7 +2,22 @@
 
 An authoritative, multidimensional analytical system and zero-latency Progressive Web Application (PWA) for the Holy Quran as a complete text and book. Integrating classical Islamic hermeneutics (*Ulum al-Qur'an*), Arabic linguistics, morphology, syntax, rhetoric (*Balaghah*), thematic ontologies, and modern quantitative corpus linguistics. Designed under a **Royal Islamic Luxury & Linear-Grade Data Studio** visual architecture.
 
-### 🌟 What's New in Version 2.1
+### 🌟 What's New in Version 2.2
+* 🤲 **Quranic Duas & Supplications Encyclopedia (`دعاؤں کا قرآنی انسائیکلوپیڈیا`)**:
+  * **Comprehensive Master Corpus (78 Canonical Duas)**: Complete collection comprising all 40 *Rabbana* supplications, 24 *Rabbi* invocations, Prophetic Duas (Adam, Nuh, Ibrahim, Yusuf, Musa, Yunus, Ayyub, Zakariya, Suleiman, Isa, Muhammad ﷺ), and righteous believers' prayers (Ashab al-Kahf, Ibad al-Rahman, Asiya, Talut's army).
+  * **High-Density 4-Tier Structured Cards**:
+    * **Tier 1 (Scriptural Core)**: Authentic vocalized Arabic text, audio recitation button, and parallel split-grid dual Urdu translations (**Kanzul Iman on Right**, **Kanzul Irfan on Left**), plus English subtitle.
+    * **Tier 2 (When to Use / کب پڑھیں؟)**: Actionable occasions and times for every Dua (after Salah, Tahajjud, distress, illness, provision, marriage, childbirth).
+    * **Tier 3 (Purpose & Spiritual Virtues / کس مقصد کے لیے؟)**: Authentic spiritual benefits, Hadith virtues, and targeted outcomes.
+    * **Tier 4 (Asbab al-Nuzul & Quranic Context / شانِ نزول و پس منظر)**: Scholarly historical context and exegesis excerpt directly from Mufti Muhammad Qasim Qadri's *Tafsir Sirat-ul-Jinan* with expandable exegesis drawer.
+  * **Tri-Tier Ecosystem Delivery**:
+    * Standalone Luxury Cyber-Glass Web App: [`duas.html`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-Quran-Deep-Analyzer/duas.html) with 9-sphere life need filter chips, prophet chips, and audio mini-dock.
+    * Dedicated 13th Tab in Main Analyzer: [`index.html#tab-duas`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-Quran-Deep-Analyzer/index.html) on single-row navigation ribbon with counter badge (`78`).
+    * Complete Offline Compendium: [`QURANIC_DUAS_COMPENDIUM.md`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-Quran-Deep-Analyzer/QURANIC_DUAS_COMPENDIUM.md) (264 KB exhaustive reference).
+  * **Direct Quran Integration ("Effortlessly Locate Duas in Quran")**:
+    * 1-Click `[ 🔍 Open in Quran ↗ ]` jumper navigating directly to that exact Surah and Ayah in the Deep Ayah Analyzer tab (`#ayahs`), scrolling right to it with high-visibility golden focus highlighting.
+    * Search Studio Integration: Verses that are Duas display an interactive `[ 🤲 قرآنی دعا: ... ]` badge, plus a 1-click `[ Duas (78) 🤲 ]` category chip to filter search results exclusively to Quranic Duas.
+* 🖥️ **High-Density Desktop Layout & Multi-Mode Dual Tarjuma Architecture**:
 * 🖥️ **High-Density Desktop Layout & Multi-Mode Dual Tarjuma Architecture**:
   * **Desktop Single-Row Smooth Navigation Ribbon**: Single-row 40px ribbon (`flex-wrap: nowrap; overflow-x: auto;`) with invisible scrollbar and native mouse-wheel delegation, reclaiming ~100px of vertical space previously eaten by 3 wrapping lines on 1080p monitors.
   * **3-Mode Dual Translation Architecture**:
