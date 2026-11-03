@@ -123,9 +123,9 @@
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid var(--border-color);
       color: var(--text-main);
-      width: 44px;
-      height: 44px;
-      min-height: 44px;
+      width: 48px;
+      height: 48px;
+      min-height: 48px;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -569,6 +569,14 @@
     .tarjuma-ki .tarjuma-tag { color: var(--gold-primary); }
     .tarjuma-kir .tarjuma-tag { color: var(--emerald-accent); }
 
+    /* Pure CSS Translation Filtering (Does not break flexbox) */
+    body[data-tarjuma="ki"] .tarjuma-kir {
+      display: none !important;
+    }
+    body[data-tarjuma="kir"] .tarjuma-ki {
+      display: none !important;
+    }
+
     /* Word Details Modal Sheet */
     .word-detail-sheet {
       background: var(--bg-card);
@@ -977,11 +985,11 @@
         </div>
         <div class="detail-arabic-word" id="detailArabicWord">الْحَمْدُ</div>
         
-        <div class="detail-row">
+        <div class="detail-row tarjuma-block tarjuma-ki" id="detailKIRow">
           <div class="detail-label">Kanzul Iman:</div>
           <div class="detail-value" id="detailKIMeaning" style="font-size: 1.08rem; color: #fef08a;">سب خوبیاں</div>
         </div>
-        <div class="detail-row">
+        <div class="detail-row tarjuma-block tarjuma-kir" id="detailKIrRow">
           <div class="detail-label">Kanzul Irfan:</div>
           <div class="detail-value" id="detailKIrMeaning" style="font-size: 1.05rem; color: #a7f3d0;">سب تعریفیں</div>
         </div>
@@ -1625,14 +1633,22 @@
             { ar: "اَلْحَمْدُ", ur: "سب تعریفیں / خوبیاں", en: "All praise" },
             { ar: "رَبِّ", ur: "مالک / پالنے والا", en: "Lord of" },
             { ar: "الْعٰلَمِیْنَ", ur: "سارے جہان والے", en: "All the worlds" },
+            { ar: "الرَّحْمٰنُ", ur: "بہت مہربان", en: "The Most Gracious" },
+            { ar: "الرَّحِیْمُ", ur: "رحمت والا", en: "The Most Merciful" },
+            { ar: "مٰلِكِ", ur: "مالک", en: "Master / Owner" },
+            { ar: "یَوْمِ الدِّیْنِ", ur: "روزِ جزا", en: "Day of Recompense" },
             { ar: "نَعْبُدُ", ur: "ہم عبادت کرتے ہیں", en: "We worship" },
             { ar: "نَسْتَعِیْنُ", ur: "ہم مدد چاہتے ہیں", en: "We seek help" },
-            { ar: "الصِّرَاطَ", ur: "سیدھا راستہ", en: "The Path" }
+            { ar: "الصِّرَاطَ", ur: "سیدھا راستہ", en: "The Path" },
+            { ar: "الْمُسْتَقِیْمَ", ur: "سیدھا", en: "Straight" },
+            { ar: "اَحَدٌ", ur: "ایک ہے", en: "The One" }
           ],
           sentences: [
             { ar: "اَلْحَمْدُ لِلّٰهِ رَبِّ الْعٰلَمِیْنَۙ", ur: "سب خوبیاں اللہ کو جو مالک سارے جہان والوں کا۔ (کنز الایمان)", en: "All praise is due to Allah, the Owner of all the worlds." },
             { ar: "اِیَّاكَ نَعْبُدُ وَاِیَّاكَ نَسْتَعِیْنُؕ", ur: "ہم تجھی کو پوجیں اور تجھی سے مدد چاہیں۔ (کنز الایمان)", en: "You alone do we worship, and from You alone do we seek help." },
-            { ar: "سُبْحَانَ رَبِّيَ الْعَظِيمِ", ur: "پاک ہے میرا رب عظمت والا۔ (نماز رکوع)", en: "Glory be to my Lord, the Magnificent." }
+            { ar: "سُبْحَانَ رَبِّيَ الْعَظِيمِ", ur: "پاک ہے میرا رب عظمت والا۔ (نماز رکوع)", en: "Glory be to my Lord, the Magnificent." },
+            { ar: "سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ", ur: "اللہ نے سن لیا اس کا جس نے اس کی تعریف کی۔ (کنز العرفان)", en: "Allah heard whoever praised Him." },
+            { ar: "قُلْ هُوَ اللّٰهُ اَحَدٌۚ", ur: "تم فرماؤ وہ اللہ ہے وہ ایک ہے ۔ (کنز الایمان)", en: "Say: He is Allah, the One." }
           ],
           trap: "In Ayahs starting with oath particles (وَالْعَصْرِ), the Waw is a Harf Jarr and forces the noun into a Kasrah / Zer!",
           quizQ: "Why does الْعٰلَمِیْنَ in Surah Al-Fatiha end in -eena rather than -oona?",
@@ -1725,6 +1741,8 @@
             "غَیْرِ": { cat: "اِسْم", role: "بدل / مضاف", ki: "نہ ان کا", kir: "نہ کہ ان کا", en: "Not of", rule: "Takes Kasrah and acts as Mudhaf.", root: "غ - ي - ر" },
             "الْمَغْضُوْبِ": { cat: "اسم مفعول", role: "مضاف إليه", ki: "جن پر غضب ہوا", kir: "جن پر غضب ہوا", en: "Those who earned wrath", rule: "Passive participle taking Kasrah.", root: "غ - ض - ب" },
             "عَلَیْهِمْ": { cat: "حرف جر + ضمير", role: "جار ومجرور", ki: "ان پر", kir: "ان پر", en: "Upon them", rule: "Preposition and pronoun.", root: "ع - ل - ى" },
+            "وَ": { cat: "حَرْفُ عَطْفٍ", role: "عاطفة", ki: "اور", kir: "اور", en: "And", rule: "Conjunction particle connecting elements.", root: "و" },
+            "لَا": { cat: "حَرْفُ نَفْيٍ", role: "نافية لتأكيد النفي", ki: "نہ", kir: "نہ", en: "Nor / not", rule: "Negative particle added to emphasize negation.", root: "ل - ا" },
             "الضَّآلِّیْنَ": { cat: "اسم فاعل", role: "معطوف", ki: "بہکے ہوؤں کا", kir: "بہکے ہوؤں کا", en: "The astray ones", rule: "Sound masculine plural in Majroor ending in -eena.", root: "ض - ل - ل" }
           }
         },
@@ -1745,8 +1763,15 @@
           kir: "پاک ہے تو اے اللہ! اور اپنی تعریف کے ساتھ اور بابرکت ہے تیرا نام اور بلند ہے تیری بزرگی اور تیرے سوا کوئی معبود نہیں۔",
           details: {
             "سُبْحَانَكَ": { cat: "مفعول مطلق + ضمير", role: "تنزيه", ki: "پاک ہے تو", kir: "پاک ہے تو", en: "Glory be to You", rule: "Absolute object with attached 2nd person suffix.", root: "س - ب - ح" },
-            "وَتَبَارَكَ": { cat: "فِعْلٌ مَاضٍ", role: "فعل", ki: "اور برکت والا ہے", kir: "اور بابرکت ہے", en: "And blessed is", rule: "Past tense verb.", root: "ب - ر - ك" },
-            "اسْمُكَ": { cat: "فاعل + ضمير", role: "فاعل مَرْفُوع", ki: "تیرا نام", kir: "تیرا نام", en: "Your name", rule: "Doer carrying Pesh + attached pronoun.", root: "س - م - و" }
+            "اللَّهُمَّ": { cat: "مُنَادَى (اِسْم)", role: "نداء ودعاء", ki: "اے اللہ!", kir: "اے اللہ!", en: "O Allah!", rule: "Vocative noun calling upon Allah with suffix Meem.", root: "أ - ل - ه" },
+            "وَبِحَمْدِكَ": { cat: "حرف + حرف جر + اسم + ضمير", role: "حال معطوفة", ki: "اور تیرے لیے حمد ہے", kir: "اور اپنی تعریف کے ساتھ", en: "And with Your praise", rule: "Conjunction Waw + Preposition Bi- + Hamd with Kasrah + pronoun Ka.", root: "ح - م - د" },
+            "وَتَبَارَكَ": { cat: "فِعْلٌ مَاضٍ", role: "فعل معطوف", ki: "اور برکت والا ہے", kir: "اور بابرکت ہے", en: "And blessed is", rule: "Past tense verb on Tafa'ala pattern (Chapter 11).", root: "ب - ر - ك" },
+            "اسْمُكَ": { cat: "فاعل + ضمير", role: "فاعل مَرْفُوع", ki: "تیرا نام", kir: "تیرا نام", en: "Your name", rule: "The Doer carrying Pesh + attached pronoun.", root: "س - م - و" },
+            "وَتَعَالَى": { cat: "فِعْلٌ مَاضٍ", role: "فعل معطوف", ki: "اور بلند ہے", kir: "اور بلند ہے", en: "And exalted is", rule: "Past tense verb on Tafa'ala pattern expressing majesty.", root: "ع - ل - و" },
+            "جَدُّكَ": { cat: "فاعل + ضمير", role: "فاعل مَرْفُوع", ki: "تیری شان", kir: "تیری بزرگی", en: "Your Majesty", rule: "The Doer with Pesh + attached pronoun Ka.", root: "ج - د - د" },
+            "وَلَا": { cat: "حرف عطف + حرف نفي", role: "نافية للجنس", ki: "اور نہیں", kir: "اور نہیں", en: "And no", rule: "Absolute categorical negation particle.", root: "ل - ا" },
+            "إِلٰهَ": { cat: "اِسْمُ لَا النَّافِيَةِ", role: "اسم لا مبني على الفتح", ki: "کوئی معبود", kir: "کوئی معبود", en: "Deity worthy of worship", rule: "Noun of generic negation ending in Fathah / Zabar.", root: "أ - ل - ه" },
+            "غَيْرُكَ": { cat: "اِسْم (خَبَر) + ضَمِير", role: "خبر لا / نعت", ki: "تیرے سوا", kir: "تیرے سوا", en: "Other than You", rule: "Marfoo' noun with Pesh + attached pronoun Ka.", root: "غ - ي - ر" }
           }
         },
         "namaz_ruku": {
@@ -1768,6 +1793,7 @@
           details: {
             "سَمِعَ": { cat: "فِعْلٌ مَاضٍ", role: "فعل", ki: "سن لی", kir: "سن لیا", en: "Heard", rule: "Past verb on Fa'ila pattern.", root: "س - م - ع" },
             "اللَّهُ": { cat: "اِسْم", role: "الفاعل", ki: "اللہ نے", kir: "اللہ نے", en: "Allah", rule: "The Doer carrying proud Dammah / Pesh.", root: "أ - ل - ه" },
+            "لِمَنْ": { cat: "حَرْفُ جَرٍّ + اسم موصول", role: "جار ومجرور", ki: "اس کی / جس نے", kir: "اس کا / جس نے", en: "To whoever", rule: "Preposition Li- + Relative pronoun Man (whoever).", root: "ل + مَنْ" },
             "حَمِدَهُ": { cat: "فِعْل + مفعول", role: "صلة الموصول", ki: "جس نے اس کی تعریف کی", kir: "جس نے اس کی حمد کی", en: "Praised Him", rule: "Past verb + attached object pronoun -hu.", root: "ح - م - د" }
           }
         },
@@ -1783,24 +1809,36 @@
           }
         },
         "namaz_tashahhud": {
-          arabic: ["التَّحِيَّاتُ", "لِلّٰهِ", "وَالصَّلَوَاتُ", "وَالطَّيِّبَاتُ"],
-          types: ["tag-ism", "tag-harf", "tag-ism", "tag-ism"],
-          ki: "تمام قولی عبادتیں اللہ کے لیے ہیں اور تمام بدنی اور مالی عبادتیں۔",
-          kir: "تمام زبانی عبادتیں اللہ کے لئے ہیں اور تمام جسمانی اور مالی عبادتیں۔",
+          arabic: ["التَّحِيَّاتُ", "لِلّٰهِ", "وَالصَّلَوَاتُ", "وَالطَّيِّبَاتُ", "السَّلَامُ", "عَلَيْكَ", "أَيُّهَا", "النَّبِيُّ", "وَرَحْمَةُ", "اللَّهِ", "وَبَرَكَاتُهُ"],
+          types: ["tag-ism", "tag-harf", "tag-ism", "tag-ism", "tag-ism", "tag-harf", "tag-harf", "tag-ism", "tag-ism", "tag-ism", "tag-ism"],
+          ki: "تمام قولی عبادتیں اللہ کے لیے ہیں اور تمام بدنی اور مالی عبادتیں، سلام ہو آپ پر اے نبی اور اللہ کی رحمت اور اس کی برکتیں۔",
+          kir: "تمام زبانی عبادتیں اللہ کے لئے ہیں اور تمام جسمانی اور مالی عبادتیں، سلام ہو آپ پر اے نبی اور اللہ کی رحمت اور اس کی برکتیں۔",
           details: {
-            "التَّحِيَّاتُ": { cat: "جمع مؤنث سالم", role: "المبتدأ", ki: "تمام قولی عبادتیں", kir: "تمام زبانی عبادتیں", en: "All oral greetings", rule: "Sound feminine plural ending in -aatu carrying Dammah.", root: "ح - ي - ي" },
-            "لِلّٰهِ": { cat: "حرف جر + اسم", role: "خبر", ki: "اللہ کے لیے ہیں", kir: "اللہ کے لئے ہیں", en: "Belong to Allah", rule: "Prepositional predicate.", root: "أ - ل - ه" }
+            "التَّحِيَّاتُ": { cat: "جمع مؤنث سالم", role: "المبتدأ", ki: "تمام قولی عبادتیں", kir: "تمام زبانی عبادتیں", en: "All oral greetings", rule: "Sound feminine plural ending in -aatu carrying Dammah (Chapter 10).", root: "ح - ي - ي" },
+            "لِلّٰهِ": { cat: "حرف جر + اسم", role: "خبر", ki: "اللہ کے لیے ہیں", kir: "اللہ کے لئے ہیں", en: "Belong to Allah", rule: "Prepositional predicate forcing Kasrah (Chapter 4).", root: "أ - ل - ه" },
+            "وَالصَّلَوَاتُ": { cat: "جمع مؤنث سالم", role: "معطوف على التحیات", ki: "اور تمام بدنی عبادتیں", kir: "اور تمام جسمانی عبادتیں", en: "And all bodily prayers", rule: "Sound feminine plural carrying Dammah.", root: "ص - ل - و" },
+            "وَالطَّيِّبَاتُ": { cat: "جمع مؤنث سالم", role: "معطوف", ki: "اور تمام مالی عبادتیں", kir: "اور تمام مالی عبادتیں", en: "And all pure deeds", rule: "Sound feminine plural carrying Dammah.", root: "ط - ي - ب" },
+            "السَّلَامُ": { cat: "اِسْم مَرْفُوع", role: "المبتدأ", ki: "سلام ہو", kir: "سلام ہو", en: "Peace", rule: "Definite noun with Pesh as Subject (Chapter 3).", root: "س - ل - م" },
+            "عَلَيْكَ": { cat: "حرف جر + ضمير", role: "شبه جملة خبر", ki: "آپ پر", kir: "آپ پر", en: "Upon you", rule: "Preposition 'alaa + 2nd person pronoun suffix (Chapter 9).", root: "ع - ل - ى" },
+            "أَيُّهَا": { cat: "أَدَاةُ نِدَاءٍ", role: "نداء", ki: "اے", kir: "اے", en: "O", rule: "Vocative particle connector for definite nouns.", root: "أ - ي - ي" },
+            "النَّبِيُّ": { cat: "اِسْم (مُنَادَى)", role: "تابع أی", ki: "نبی", kir: "نبی", en: "Prophet", rule: "Follows vocative with Dammah.", root: "ن - ب - أ" },
+            "وَرَحْمَةُ": { cat: "اِسْم مَعْطُوف + مُضَاف", role: "معطوف ومضاف", ki: "اور رحمت", kir: "اور رحمت", en: "And mercy of", rule: "Mudhaf stripped of Al- and tanween (Chapter 5).", root: "ر - ح - م" },
+            "اللَّهِ": { cat: "اِسْمُ جَلَالَةٍ مَجْرُور", role: "مضاف إليه", ki: "اللہ کی", kir: "اللہ کی", en: "Allah", rule: "Mudhaf Ilayh carrying Kasrah / Zer (Chapter 5).", root: "أ - ل - ه" },
+            "وَبَرَكَاتُهُ": { cat: "مضاف + ضمير", role: "معطوف", ki: "اور اس کی برکتیں", kir: "اور اس کی برکتیں", en: "And His blessings", rule: "Mudhaf with Pesh + attached pronoun -hu (Chapter 9).", root: "ب - ر - ك" }
           }
         },
         "namaz_durood": {
-          arabic: ["اللَّهُمَّ", "صَلِّ", "عَلَى", "مُحَمَّدٍ"],
-          types: ["tag-ism", "tag-fil", "tag-harf", "tag-ism"],
-          ki: "اے اللہ! درود بھیج محمد پر۔",
-          kir: "اے اللہ! رحمت نازل فرما محمد پر۔",
+          arabic: ["اللَّهُمَّ", "صَلِّ", "عَلَى", "مُحَمَّدٍ", "وَعَلَى", "آلِ", "مُحَمَّدٍ"],
+          types: ["tag-ism", "tag-fil", "tag-harf", "tag-ism", "tag-harf", "tag-ism", "tag-ism"],
+          ki: "اے اللہ! درود بھیج محمد پر اور ان کی آل پر۔",
+          kir: "اے اللہ! رحمت نازل فرما محمد پر اور ان کی آل پر۔",
           details: {
-            "اللَّهُمَّ": { cat: "منادى", role: "نداء", ki: "اے اللہ!", kir: "اے اللہ!", en: "O Allah", rule: "Vocative call to Allah Almighty.", root: "أ - ل - ه" },
-            "صَلِّ": { cat: "فعل دُعَاء / أمر", role: "فعل", ki: "درود بھیج", kir: "رحمت نازل فرما", en: "Send blessings", rule: "Imperative prayer verb.", root: "ص - ل - و" },
-            "مُحَمَّدٍ": { cat: "اِسْم مَجْرُور", role: "اسم مجرور", ki: "محمد پر", kir: "محمد پر", en: "Upon Muhammad", rule: "Takes double Kasrah due to preposition 'alaa.", root: "ح - م - د" }
+            "اللَّهُمَّ": { cat: "منادى", role: "نداء ودعاء", ki: "اے اللہ!", kir: "اے اللہ!", en: "O Allah!", rule: "Vocative call to Allah Almighty.", root: "أ - ل - ه" },
+            "صَلِّ": { cat: "فعل دُعَاء / أمر", role: "فعل طلب", ki: "درود بھیج", kir: "رحمت نازل فرما", en: "Send blessings", rule: "Imperative prayer verb.", root: "ص - ل - و" },
+            "عَلَى": { cat: "حَرْفُ جَرٍّ", role: "جار", ki: "پر", kir: "پر", en: "Upon", rule: "Preposition forcing noun into Kasrah (Chapter 4).", root: "ع - ل - ى" },
+            "مُحَمَّدٍ": { cat: "اِسْم مَجْرُور", role: "اسم مجرور", ki: "محمد پر", kir: "محمد پر", en: "Upon Muhammad", rule: "Takes double Kasrah due to preposition 'alaa.", root: "ح - م - د" },
+            "وَعَلَى": { cat: "حرف عطف + حرف جر", role: "معطوف وجار", ki: "اور پر", kir: "اور پر", en: "And upon", rule: "Conjunction + Preposition.", root: "ع - ل - ى" },
+            "آلِ": { cat: "اِسْم مَجْرُور + مُضَاف", role: "مجرور ومضاف", ki: "آل", kir: "آل", en: "Family of", rule: "Takes Kasrah due to 'alaa and acts as Mudhaf (Chapter 5).", root: "أ - و - ل" }
           }
         },
         "surah_ikhlas_1": {
@@ -1833,6 +1871,7 @@
           details: {
             "لَمْ": { cat: "حَرْفُ نَفْيٍ وَجَزْمٍ", role: "جازمة", ki: "نہ", kir: "نہ", en: "Did not", rule: "Negating particle giving Sukoon to present verb.", root: "ل - م" },
             "یَلِدْ": { cat: "فِعْلٌ مُضَارِعٌ مَجْزُومٌ", role: "فعل", ki: "اس کی کوئی اولاد", kir: "اس نے جنم دیا", en: "He beget", rule: "Jussive verb ending in Sukoon.", root: "و - ل - د" },
+            "وَ": { cat: "حَرْفُ عَطْفٍ", role: "عاطفة", ki: "اور", kir: "اور", en: "And", rule: "Conjunction particle.", root: "و" },
             "یُوْلَدْ": { cat: "فعل مضارع مبني للمجهول", role: "فعل مبني للمجهول", ki: "کسی سے پیدا ہوا", kir: "کسی سے پیدا ہوا", en: "Was He begotten", rule: "Passive voice present verb.", root: "و - ل - د" }
           }
         },
@@ -1842,6 +1881,8 @@
           ki: "اور نہ اس کے جوڑ کا کوئی۔",
           kir: "اور کوئی اس کے برابر نہیں ۔",
           details: {
+            "وَ": { cat: "حَرْفُ عَطْفٍ", role: "عاطفة", ki: "اور", kir: "اور", en: "And", rule: "Conjunction particle.", root: "و" },
+            "لَمْ": { cat: "حَرْفُ جَزْمٍ وَنَفْيٍ", role: "جازمة", ki: "نہ", kir: "نہیں", en: "Did not", rule: "Particle that negates and gives Sukoon.", root: "ل - م" },
             "یَكُنْ": { cat: "فعل مضارع ناقص", role: "ناقص", ki: "کوئی", kir: "نہیں", en: "Is there", rule: "Jussive verb with Sukoon.", root: "ك - و - ن" },
             "لَّهٗ": { cat: "جار ومجرور", role: "متعلق", ki: "اس کے", kir: "اس کے", en: "To Him", rule: "Preposition + attached pronoun.", root: "ل + ه" },
             "كُفُوًا": { cat: "اِسْم مَنْصُوب", role: "خبر كان مقدم", ki: "جوڑ کا", kir: "برابر", en: "Equal / Comparable", rule: "Fronted predicate carrying Tanween Fathah (Zabar).", root: "ك - ف - أ" },
@@ -1867,6 +1908,7 @@
           details: {
             "فَصَلِّ": { cat: "فِعْلُ أَمْرٍ", role: "أمر", ki: "تو تم نماز پڑھو", kir: "تو تم نماز پڑھو", en: "So pray", rule: "Command verb.", root: "ص - ل - و" },
             "لِرَبِّكَ": { cat: "حرف جر + مضاف + ضمير", role: "متعلق", ki: "اپنے رب کے لیے", kir: "اپنے رب کے لیے", en: "For your Lord", rule: "Preposition + Mudhaf + 2nd person suffix.", root: "ر - ب - ب" },
+            "وَ": { cat: "حَرْفُ عَطْفٍ", role: "عاطفة", ki: "اور", kir: "اور", en: "And", rule: "Conjunction particle connecting commands.", root: "و" },
             "انْحَرْ": { cat: "فِعْلُ أَمْرٍ", role: "أمر معطوف", ki: "اور قربانی کرو", kir: "اور قربانی کرو", en: "And sacrifice", rule: "Command verb ending in Sukoon.", root: "ن - ح - ر" }
           }
         },
@@ -1878,6 +1920,7 @@
           details: {
             "اِنَّ": { cat: "حرف توكيد", role: "توكيد", ki: "بیشک", kir: "بیشک", en: "Indeed", rule: "Emphatic particle.", root: "إِنَّ" },
             "شَانِئَكَ": { cat: "اسم إن + مضاف + ضمير", role: "اسم إن منصوب", ki: "جو تمہارا دشمن ہے", kir: "جو تمہارا دشمن ہے", en: "Your enemy", rule: "Noun of Inna taking Zabar + your suffix.", root: "ش - ن - أ" },
+            "هُوَ": { cat: "ضَمِيرُ فَصْلٍ", role: "ضمير فصل للتوكيد", ki: "وہی", kir: "وہی", en: "He alone is", rule: "Separating pronoun emphasizing the predicate (Chapter 8).", root: "هُوَ" },
             "الْاَبْتَرُ": { cat: "اِسْم", role: "خبر إن", ki: "وہی ہر خیر سے محروم ہے", kir: "وہی ہر خیر سے محروم ہے", en: "Cut off from goodness", rule: "Predicate of Inna taking Dammah.", root: "ب - ت - ر" }
           }
         },
@@ -1897,20 +1940,27 @@
           ki: "بیشک آدمی ضرور نقصان میں ہے ۔",
           kir: "بیشک آدمی ضرور خسارے میں ہے۔",
           details: {
+            "اِنَّ": { cat: "حَرْفُ تَوْكِيدٍ", role: "حرف مشبه بالفعل", ki: "بیشک", kir: "بیشک", en: "Indeed", rule: "Emphatic particle forcing its subject into Zabar / Fathah.", root: "إِنَّ" },
             "الْاِنْسَانَ": { cat: "اسم إن منصوب", role: "اسم إن", ki: "آدمی", kir: "آدمی", en: "Mankind", rule: "Takes Zabar / Fathah because of Inna.", root: "أ - ن - س" },
+            "لَفِیْ": { cat: "لَامُ التَّوْكِيدِ + حَرْفُ جَرٍّ", role: "توكيد وجار", ki: "ضرور میں", kir: "ضرور میں", en: "Surely in", rule: "Emphatic Laam + Preposition Fee which forces Khusrin into Kasrah.", root: "ل + فِي" },
             "خُسْرٍ": { cat: "اسم مجرور", role: "خبر إن", ki: "ضرور نقصان میں ہے", kir: "ضرور خسارے میں ہے", en: "In loss", rule: "Takes double Kasrah because of preposition Fee.", root: "خ - س - ر" }
           }
         },
         "surah_asr_3": {
-          arabic: ["اِلَّا", "الَّذِیْنَ", "اٰمَنُوْا", "وَ", "عَمِلُوا", "الصّٰلِحٰتِ"],
-          types: ["tag-harf", "tag-ism", "tag-fil", "tag-harf", "tag-fil", "tag-ism"],
+          arabic: ["اِلَّا", "الَّذِیْنَ", "اٰمَنُوْا", "وَ", "عَمِلُوا", "الصّٰلِحٰتِ", "وَ", "تَوَاصَوْا", "بِالْحَقِّ", "وَ", "تَوَاصَوْا", "بِالصَّبْرِ"],
+          types: ["tag-harf", "tag-ism", "tag-fil", "tag-harf", "tag-fil", "tag-ism", "tag-harf", "tag-fil", "tag-ism", "tag-harf", "tag-fil", "tag-ism"],
           ki: "مگر جو ایمان لائے اور اچھے کام کئے اور ایک دوسرے کو حق کی تاکید کی اور ایک دوسرے کو صبر کی وصیت کی ۔",
           kir: "مگر جو ایمان لائے اور انہوں نے اچھے کام کئے اور ایک دوسرے کو حق کی تاکید کی اور ایک دوسرے کو صبر کی وصیت کی۔",
           details: {
-            "اِلَّا": { cat: "أداة استثناء", role: "استثناء", ki: "مگر", kir: "مگر", en: "Except", rule: "Exception particle.", root: "إِلَّا" },
-            "اٰمَنُوْا": { cat: "فِعْلٌ مَاضٍ", role: "صلة الموصول", ki: "جو ایمان لائے", kir: "جو ایمان لائے", en: "Those who believed", rule: "Past verb with plural Waw + silent Alif (Chapter 12).", root: "أ - م - ن" },
-            "عَمِلُوا": { cat: "فِعْلٌ مَاضٍ", role: "معطوف", ki: "اور اچھے کام کئے", kir: "اور انہوں نے اچھے کام کئے", en: "And did", rule: "Past verb with plural Waw + silent Alif.", root: "ع - م - ل" },
-            "الصّٰلِحٰتِ": { cat: "جمع مؤنث سالم", role: "مفعول به منصوب بالكسرة", ki: "اچھے کام", kir: "اچھے کام", en: "Righteous deeds", rule: "Sound feminine plural object takes Kasrah instead of Fathah!", root: "ص - ل - ح" }
+            "اِلَّا": { cat: "أَدَاةُ اسْتِثْنَاءٍ", role: "استثناء", ki: "مگر", kir: "مگر", en: "Except", rule: "Particle of exception.", root: "إِلَّا" },
+            "الَّذِیْنَ": { cat: "اِسْمٌ مَوْصُولٌ", role: "مستثنى مبني", ki: "جو", kir: "وہ جنہوں نے", en: "Those who", rule: "Plural masculine relative pronoun.", root: "ل - ذ - ي" },
+            "اٰمَنُوْا": { cat: "فِعْلٌ مَاضٍ + فَاعِل", role: "صلة الموصول", ki: "ایمان لائے", kir: "ایمان لائے", en: "Believed", rule: "Past verb with Waw of plural + silent Alif (Chapter 12).", root: "أ - م - ن" },
+            "وَ": { cat: "حَرْفُ عَطْفٍ", role: "عاطفة", ki: "اور", kir: "اور", en: "And", rule: "Conjunction particle.", root: "و" },
+            "عَمِلُوا": { cat: "فِعْلٌ مَاضٍ + فَاعِل", role: "معطوف", ki: "اچھے کام کئے", kir: "انہوں نے کام کئے", en: "And did", rule: "Past verb with plural Waw + silent Alif.", root: "ع - م - ل" },
+            "الصّٰلِحٰتِ": { cat: "جَمْعُ مُؤَنَّثٍ سَالِمٌ", role: "مفعول به منصوب بالكسرة", ki: "نیک اعمال", kir: "اچھے کام", en: "Righteous deeds", rule: "Sound feminine plural object takes Kasrah instead of Fathah! (Chapter 10).", root: "ص - ل - ح" },
+            "تَوَاصَوْا": { cat: "فِعْلٌ مَاضٍ + فَاعِل", role: "معطوف", ki: "ایک دوسرے کو وصیت کی", kir: "ایک دوسرے کو تاکید کی", en: "Mutually exhorted", rule: "Past verb reciprocal plural ending in Waw of Jama'ah.", root: "و - ص - ي" },
+            "بِالْحَقِّ": { cat: "حَرْفُ جَرٍّ + اِسْمٌ", role: "جار ومجرور", ki: "حق کی", kir: "حق کی", en: "With / of truth", rule: "Preposition Bi- forces Al-Haqqi into Kasrah / Zer (Chapter 4).", root: "ح - ق - ق" },
+            "بِالصَّبْرِ": { cat: "حَرْفُ جَرٍّ + اِسْمٌ", role: "جار ومجرور", ki: "صبر کی", kir: "صبر کی", en: "With / of patience", rule: "Preposition Bi- forces As-Sabri into Kasrah / Zer (Chapter 4).", root: "ص - ب - ر" }
           }
         }
       };
@@ -2100,24 +2150,29 @@
         try {
           const saved = localStorage.getItem('arabic_mastery_15_completed');
           if (saved) {
-            completedChapters = JSON.parse(saved);
+            const parsed = JSON.parse(saved);
+            completedChapters = Array.isArray(parsed) ? parsed : [];
+          } else {
+            completedChapters = [];
           }
-          updateProgressBar();
         } catch (e) {
           console.warn("Storage load error:", e);
+          completedChapters = [];
         }
+        updateProgressBar();
       }
 
       function saveProgress() {
         try {
           localStorage.setItem('arabic_mastery_15_completed', JSON.stringify(completedChapters));
-          updateProgressBar();
         } catch (e) {
-          console.warn("Storage save error:", e);
+          console.warn("Storage save error (e.g. private browsing mode):", e);
         }
+        updateProgressBar();
       }
 
       function updateProgressBar() {
+        if (!Array.isArray(completedChapters)) completedChapters = [];
         const count = completedChapters.length;
         const total = 15;
         const pct = Math.round((count / total) * 100);
@@ -2129,6 +2184,7 @@
       }
 
       function toggleChapterComplete(num) {
+        if (!Array.isArray(completedChapters)) completedChapters = [];
         const idx = completedChapters.indexOf(num);
         if (idx === -1) {
           completedChapters.push(num);
@@ -2355,6 +2411,17 @@
             if (enEl) enEl.textContent = detail.en;
             if (ruleEl) ruleEl.textContent = detail.rule;
             if (rootEl) rootEl.textContent = detail.root;
+          } else {
+            if (badgeEl) {
+              badgeEl.textContent = 'حَرْف / أَدَاة';
+              badgeEl.className = 'category-badge badge-harf';
+            }
+            if (roleEl) roleEl.textContent = 'أداة ربط أو عطف';
+            if (kiEl) kiEl.textContent = '—';
+            if (kirEl) kirEl.textContent = '—';
+            if (enEl) enEl.textContent = 'Particle / Connector';
+            if (ruleEl) ruleEl.textContent = 'Grammatical particle or conjunction connecting sentence elements.';
+            if (rootEl) rootEl.textContent = '—';
           }
         } catch (err) {
           console.error("Show Word Detail Error:", err);
@@ -2501,19 +2568,12 @@
       // --- 11. Translation Mode Switcher ---
       function applyTarjumaMode(mode) {
         try {
-          const kiBlocks = document.querySelectorAll('.tarjuma-ki');
-          const kirBlocks = document.querySelectorAll('.tarjuma-kir');
-
-          if (mode === 'both') {
-            kiBlocks.forEach(b => b.style.display = 'block');
-            kirBlocks.forEach(b => b.style.display = 'block');
-          } else if (mode === 'ki') {
-            kiBlocks.forEach(b => b.style.display = 'block');
-            kirBlocks.forEach(b => b.style.display = 'none');
-          } else if (mode === 'kir') {
-            kiBlocks.forEach(b => b.style.display = 'none');
-            kirBlocks.forEach(b => b.style.display = 'block');
-          }
+          document.body.setAttribute('data-tarjuma', mode);
+          const blocks = document.querySelectorAll('.tarjuma-ki, .tarjuma-kir');
+          blocks.forEach(b => b.style.removeProperty('display'));
+          try {
+            localStorage.setItem('arabic_mastery_15_tarjuma_mode', mode);
+          } catch (e) {}
         } catch (err) {
           console.error("Apply Tarjuma Mode Error:", err);
         }
@@ -2522,7 +2582,17 @@
       function initTarjumaModeSwitcher() {
         try {
           const buttons = document.querySelectorAll('.btn-tarjuma-mode');
+          let savedMode = 'both';
+          try {
+            savedMode = localStorage.getItem('arabic_mastery_15_tarjuma_mode') || 'both';
+          } catch (e) {}
+
           buttons.forEach(btn => {
+            if (btn.getAttribute('data-mode') === savedMode) {
+              btn.classList.add('active');
+            } else {
+              btn.classList.remove('active');
+            }
             btn.addEventListener('click', function() {
               playAcousticTap();
               buttons.forEach(b => b.classList.remove('active'));
@@ -2531,6 +2601,7 @@
               applyTarjumaMode(mode);
             });
           });
+          applyTarjumaMode(savedMode);
         } catch (err) {
           console.error("Tarjuma Switcher Error:", err);
         }
@@ -2602,17 +2673,26 @@
         }
       }
 
-      // --- 14. Master Bootloader Execution ---
+      // --- 14. Master Bootloader Execution (Directive 5.1 Isolated Execution) ---
       document.addEventListener('DOMContentLoaded', function() {
-        initThemeAndAudioToggles();
-        initTarjumaModeSwitcher();
-        loadSavedProgress();
-        renderChapters();
-        initInspector();
-        initFlashcards();
-        initDrillArena();
-        initTabNavigation();
-        applyTarjumaMode('both');
+        const bootModules = [
+          { name: 'Theme & Audio Controls', fn: initThemeAndAudioToggles },
+          { name: 'Translation Mode Switcher', fn: initTarjumaModeSwitcher },
+          { name: 'Saved Progress Loader', fn: loadSavedProgress },
+          { name: '15-Chapter Reader', fn: renderChapters },
+          { name: 'Sacred Inspector', fn: initInspector },
+          { name: 'Flashcards Arena', fn: initFlashcards },
+          { name: 'Drill Arena', fn: initDrillArena },
+          { name: 'Tab Navigation', fn: initTabNavigation }
+        ];
+
+        bootModules.forEach(mod => {
+          try {
+            mod.fn();
+          } catch (err) {
+            console.error('Bootloader module failed [' + mod.name + ']:', err);
+          }
+        });
       });
 
     })();

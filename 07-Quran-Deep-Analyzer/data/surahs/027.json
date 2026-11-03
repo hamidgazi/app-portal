@@ -12,8 +12,8 @@
   "ayat": [
     {
       "number": 1,
-      "arabic": "طٰسٓ- تِلْكَ اٰیٰتُ الْقُرْاٰنِ وَكِتَابٍ مُّبِیْنٍۙ",
-      "arabic_clean": "طس- تلك ایت القران و كتاب مبین",
+      "arabic": "طٰسٓ ؕ تِلْكَ اٰیٰتُ الْقُرْاٰنِ وَكِتَابٍ مُّبِیْنٍۙ",
+      "arabic_clean": "طس ؕ تلك ایت القران و كتاب مبین",
       "translation_urdu_kanzul_iman": "یہ آیتیں  ہیں  قرآن اور روشن کتاب کی۔",
       "translation_urdu_kanzul_irfan": "طس، یہ قرآن اور روشن کتاب کی آیتیں   ہیں  ۔",
       "translation_english": "Ta-Seen. (These are individual letters of the Arabic alphabet; Allah and His Messenger know their exact meanings.) These are the verses of the Qur'aan and the Luminous Book (i.e. the Preserved Tablet or the Qur'aan itself).",
@@ -23,8 +23,8 @@
       "words": [
         {
           "index": 1,
-          "token": "طٰسٓ-",
-          "clean": "طس-"
+          "token": "طٰسٓؕ",
+          "clean": "طسؕ"
         },
         {
           "index": 2,
@@ -564,8 +564,8 @@
     },
     {
       "number": 10,
-      "arabic": "وَاَلْقِ عَصَاكَؕ-فَلَمَّا رَاٰهَا تَهْتَزُّ كَاَنَّهَا جَآنٌّ وَّلّٰى مُدْبِرًا وَّلَمْ یُعَقِّبْؕ-یٰمُوْسٰى لَا تَخَفْ- اِنِّیْ لَا یَخَافُ لَدَیَّ الْمُرْسَلُوْنَۗۖ",
-      "arabic_clean": "و الق عصاكؕ-فلما راها تهتز كانها جان ولي مدبرا و لم یعقبؕ-یموسي لا تخف- انی لا یخاف لدی المرسلون",
+      "arabic": "وَاَلْقِ عَصَاكَؕ-فَلَمَّا رَاٰهَا تَهْتَزُّ كَاَنَّهَا جَآنٌّ وَّلّٰى مُدْبِرًا وَّلَمْ یُعَقِّبْؕ-یٰمُوْسٰى لَا تَخَفْ ؕ اِنِّیْ لَا یَخَافُ لَدَیَّ الْمُرْسَلُوْنَۗۖ",
+      "arabic_clean": "و الق عصاكؕ-فلما راها تهتز كانها جان ولي مدبرا و لم یعقبؕ-یموسي لا تخف ؕ انی لا یخاف لدی المرسلون",
       "translation_urdu_kanzul_iman": "اور اپنا عصا ڈال دے پھر موسیٰ نے اسے دیکھا لہراتا ہوا گویا سانپ ہے پیٹھ پھیر کر چلا اور مڑ کر نہ دیکھا ہم نے فرمایا اے موسیٰ ڈر نہیں  بیشک میرے حضور رسولوں  کو خوف نہیں  ہوتا۔",
       "translation_urdu_kanzul_irfan": "اور اپنا عصا (زمین پر) ڈال دو توجب آپ نے اسے لہراتے ہوئے دیکھا کہ گویا سانپ ہے تو پیٹھ پھیر کر چلے اور مڑ کر نہ دیکھا۔ (ہم نے فرمایا) اے موسیٰ! ڈرو نہیں  ، بیشک میری بارگاہ میں   رسول ڈرتے نہیں  ۔",
       "translation_english": "'And put down your staff.' So, when he saw it wriggling as if it was a snake, he walked away; turning his back, and did not look behind. We said, 'O Moosa, do not fear. Indeed, the Messengers do not have fear in My Majestic Court.'",
@@ -640,8 +640,8 @@
         },
         {
           "index": 14,
-          "token": "تَخَفْ-",
-          "clean": "تخف-"
+          "token": "تَخَفْؕ",
+          "clean": "تخفؕ"
         },
         {
           "index": 15,
@@ -740,8 +740,8 @@
     },
     {
       "number": 12,
-      "arabic": "وَاَدْخِلْ یَدَكَ فِیْ جَیْبِكَ تَخْرُجْ بَیْضَآءَ مِنْ غَیْرِ سُوْٓءٍ- فِیْ تِسْعِ اٰیٰتٍ اِلٰى فِرْعَوْنَ وَقَوْمِهٖؕ-اِنَّهُمْ كَانُوْا قَوْمًا فٰسِقِیْنَ",
-      "arabic_clean": "و ادخل یدك فی جیبك تخر ج بیضاء من غیر سوء- فی تسع ایت الي فرعون و قومهؕ-انهم كانوا قوما فسقین",
+      "arabic": "وَاَدْخِلْ یَدَكَ فِیْ جَیْبِكَ تَخْرُجْ بَیْضَآءَ مِنْ غَیْرِ سُوْٓءٍ ؕ فِیْ تِسْعِ اٰیٰتٍ اِلٰى فِرْعَوْنَ وَقَوْمِهٖؕ-اِنَّهُمْ كَانُوْا قَوْمًا فٰسِقِیْنَ",
+      "arabic_clean": "و ادخل یدك فی جیبك تخر ج بیضاء من غیر سوء ؕ فی تسع ایت الي فرعون و قومهؕ-انهم كانوا قوما فسقین",
       "translation_urdu_kanzul_iman": "اور اپنا ہاتھ اپنے گریبان میں  ڈال نکلے گا سفید چمکتا بے عیب نو نشانیوں  میں  فرعون اور اس کی قوم کی طرف بیشک وہ بے حکم لوگ ہیں ۔",
       "translation_urdu_kanzul_irfan": "اور اپنا ہاتھ اپنے گریبان میں   ڈالوتووہ بغیر کسی عیب کے سفید چمکتا ہوا نکلے گا، (یہ بھی) فرعون اور اس کی قوم کی طرف نو نشانیوں   میں   سے ہے، بیشک وہ (فرعونی) نافرمان لوگ تھے۔",
       "translation_english": "'And put your hand inside the collar of your garment, it will come out luminously white; not due to any illness; (this is a sign) amongst the nine signs towards Fir'awn and his people; they are indeed disobedient people.'",
@@ -801,8 +801,8 @@
         },
         {
           "index": 11,
-          "token": "سُوْٓءٍ-",
-          "clean": "سوء-"
+          "token": "سُوْٓءٍؕ",
+          "clean": "سوءؕ"
         },
         {
           "index": 12,
@@ -5242,8 +5242,8 @@
     },
     {
       "number": 66,
-      "arabic": "بَلِ ادّٰرَكَ عِلْمُهُمْ فِی الْاٰخِرَةِ ۙ بَلْ هُمْ فِیْ شَكٍّ مِّنْهَا -بَلْ هُمْ مِّنْهَا عَمُوْنَ۠",
-      "arabic_clean": "بل ادرك علمهم فی الاخره  بل هم فی شك منها      -بل هم منها عمون",
+      "arabic": "بَلِ ادّٰرَكَ عِلْمُهُمْ فِی الْاٰخِرَةِ ۙ بَلْ هُمْ فِیْ شَكٍّ مِّنْهَا ؕ بَلْ هُمْ مِّنْهَا عَمُوْنَ۠",
+      "arabic_clean": "بل ادرك علمهم فی الاخره بل هم فی شك منها ؕ بل هم منها عمون",
       "translation_urdu_kanzul_iman": "کیا ان کے علم کا سلسلہ آخرت کے جاننے تک پہونچ گیا کوئی نہیں  وہ اس کی طرف سے شک میں  ہیں  بلکہ وہ اس سے اندھے ہیں ۔",
       "translation_urdu_kanzul_irfan": "کیا کافروں  کا علم آخرت کے بارے میں   مکمل ہوچکا ہے ؟ بلکہ وہ اس کی طرف سے شک میں   ہیں   بلکہ وہ اس سے اندھے ہیں  ۔",
       "translation_english": "Has the matter of their knowledge reached to the stage of knowing the Hereafter? Not at all; they are in doubt concerning it; rather, they are blind concerning it.",
@@ -5303,8 +5303,8 @@
         },
         {
           "index": 11,
-          "token": "-بَلْ",
-          "clean": "-بل"
+          "token": "ؕ-بَلْ",
+          "clean": "ؕ-بل"
         },
         {
           "index": 12,

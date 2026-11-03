@@ -12,8 +12,8 @@
   "ayat": [
     {
       "number": 1,
-      "arabic": "الٓرٰ- تِلْكَ اٰیٰتُ الْكِتٰبِ الْمُبِیْنِؕ",
-      "arabic_clean": "الر- تلك ایت الكتب المبین",
+      "arabic": "الٓرٰ ؕ تِلْكَ اٰیٰتُ الْكِتٰبِ الْمُبِیْنِؕ",
+      "arabic_clean": "الر ؕ تلك ایت الكتب المبین",
       "translation_urdu_kanzul_iman": "یہ روشن کتاب کی آیتیں ہیں۔",
       "translation_urdu_kanzul_irfan": "’’الر‘‘، یہ روشن کتاب کی آیتیں  ہیں۔",
       "translation_english": "Alif-Laam-Ra. (These are individual letters of the Arabic alphabet; Allah and His Messenger know their exact meanings.) These are the verses of the Luminous Book.",
@@ -23,8 +23,8 @@
       "words": [
         {
           "index": 1,
-          "token": "الٓرٰ-",
-          "clean": "الر-"
+          "token": "الٓرٰؕ",
+          "clean": "الرؕ"
         },
         {
           "index": 2,
@@ -9592,8 +9592,8 @@
     },
     {
       "number": 101,
-      "arabic": "رَبِّ قَدْ اٰتَیْتَنِیْ مِنَ الْمُلْكِ وَعَلَّمْتَنِیْ مِنْ تَاْوِیْلِ الْاَحَادِیْثِۚ-فَاطِرَ السَّمٰوٰتِ وَالْاَرْضِ- اَنْتَ وَلِیّٖ فِی الدُّنْیَا وَالْاٰخِرَةِۚ-تَـوَفَّنِیْ مُسْلِمًا وَّاَلْحِقْنِیْ بِالصّٰلِحِیْنَ",
-      "arabic_clean": "رب قد اتیتنی من الملك و علمتنی من تاویل الاحادیث-فاطر السموت و الارض- انت ولی فی الدنیا و الاخره-تـوفنی مسلما و الحقنی بالصلحین",
+      "arabic": "رَبِّ قَدْ اٰتَیْتَنِیْ مِنَ الْمُلْكِ وَعَلَّمْتَنِیْ مِنْ تَاْوِیْلِ الْاَحَادِیْثِۚ-فَاطِرَ السَّمٰوٰتِ وَالْاَرْضِ ؕ اَنْتَ وَلِیّٖ فِی الدُّنْیَا وَالْاٰخِرَةِۚ-تَـوَفَّنِیْ مُسْلِمًا وَّاَلْحِقْنِیْ بِالصّٰلِحِیْنَ",
+      "arabic_clean": "رب قد اتیتنی من الملك و علمتنی من تاویل الاحادیث-فاطر السموت و الارض ؕ انت ولی فی الدنیا و الاخره-تـوفنی مسلما و الحقنی بالصلحین",
       "translation_urdu_kanzul_iman": "اے میرے رب بے شک تو نے مجھے ایک سلطنت دی اور مجھے کچھ باتوں  کا انجام نکالنا سکھایا اے آسمانوں  اور زمین کے بنانے والے تو میرا کام بنانے والا ہے دنیا اور آخرت میں  مجھے مسلمان اٹھا اور ان سے ملا جو تیرے قربِ خاص کے لائق ہیں ۔",
       "translation_urdu_kanzul_irfan": "اے میرے رب! بیشک تو نے مجھے ایک سلطنت دی اور مجھے خوابوں کی تعبیر نکالنا سکھادیا۔ اے آسمانوں اور زمین کے بنانے والے! تو دنیا اور آخرت میں میرا مددگار ہے، مجھے اسلام کی حالت میں موت عطا فرما اور مجھے اپنے قرب کے لائق بندوں کے ساتھ شامل فرما۔",
       "translation_english": "'O my Lord, You have indeed given me a kingdom and have taught me how to deduce the solutions of some matters (i.e. interpreting dreams). O Creator of the heavens and the earth, You are my Supporter in this world and in the Hereafter; cause me to die as a Muslim, and include me with those who deserve Your closeness.'",
@@ -9663,8 +9663,8 @@
         },
         {
           "index": 13,
-          "token": "الْاَرْضِ-",
-          "clean": "الارض-"
+          "token": "الْاَرْضِؕ",
+          "clean": "الارضؕ"
         },
         {
           "index": 14,

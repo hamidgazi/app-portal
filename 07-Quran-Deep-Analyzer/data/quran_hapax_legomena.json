@@ -2508,8 +2508,8 @@
     "meaning_ur": "Munfarid lafz (Surah 2:81)"
   },
   {
-    "token": "اللّٰهَ-",
-    "clean": "الله-",
+    "token": "اللّٰهَؕ",
+    "clean": "اللهؕ",
     "location": [
       2,
       83,
@@ -5196,8 +5196,8 @@
     "meaning_ur": "Munfarid lafz (Surah 2:157)"
   },
   {
-    "token": "-وَ",
-    "clean": "-و",
+    "token": "ؕ-وَ",
+    "clean": "ؕ-و",
     "location": [
       2,
       157,
@@ -7836,8 +7836,8 @@
     "meaning_ur": "Munfarid lafz (Surah 2:212)"
   },
   {
-    "token": "وَّاحِدَةً-",
-    "clean": "واحده-",
+    "token": "وَّاحِدَةًؕ",
+    "clean": "واحدهؕ",
     "location": [
       2,
       213,
@@ -15360,8 +15360,8 @@
     "meaning_ur": "Munfarid lafz (Surah 3:61)"
   },
   {
-    "token": "اَنْفُسَكُمْ-",
-    "clean": "انفسكم-",
+    "token": "اَنْفُسَكُمْؕ",
+    "clean": "انفسكمؕ",
     "location": [
       3,
       61,
@@ -19308,8 +19308,8 @@
     "meaning_ur": "Munfarid lafz (Surah 3:186)"
   },
   {
-    "token": "اَنْفُسِكُمْ-",
-    "clean": "انفسكم-",
+    "token": "اَنْفُسِكُمْؕ",
+    "clean": "انفسكمؕ",
     "location": [
       3,
       186,
@@ -19716,8 +19716,8 @@
     "meaning_ur": "Munfarid lafz (Surah 3:196)"
   },
   {
-    "token": "قَلِیْلٌ-",
-    "clean": "قلیل-",
+    "token": "قَلِیْلٌؕ",
+    "clean": "قلیلؕ",
     "location": [
       3,
       197,
@@ -19788,8 +19788,8 @@
     "meaning_ur": "Munfarid lafz (Surah 3:200)"
   },
   {
-    "token": "رَابِطُوْا-",
-    "clean": "رابطوا-",
+    "token": "رَابِطُوْاؕ",
+    "clean": "رابطواؕ",
     "location": [
       3,
       200,
@@ -21708,8 +21708,8 @@
     "meaning_ur": "Munfarid lafz (Surah 4:28)"
   },
   {
-    "token": "مِّنْكُمْ-",
-    "clean": "منكم-",
+    "token": "مِّنْكُمْؕ",
+    "clean": "منكمؕ",
     "location": [
       4,
       29,
@@ -23628,8 +23628,8 @@
     "meaning_ur": "Munfarid lafz (Surah 4:77)"
   },
   {
-    "token": "اتَّقٰى-",
-    "clean": "اتقي-",
+    "token": "اتَّقٰىؕ",
+    "clean": "اتقيؕ",
     "location": [
       4,
       77,
@@ -24948,8 +24948,8 @@
     "meaning_ur": "Munfarid lafz (Surah 4:102)"
   },
   {
-    "token": "اَسْلِحَتَهُمْ-",
-    "clean": "اسلحتهم-",
+    "token": "اَسْلِحَتَهُمْؕ",
+    "clean": "اسلحتهمؕ",
     "location": [
       4,
       102,
@@ -25476,8 +25476,8 @@
     "meaning_ur": "Munfarid lafz (Surah 4:109)"
   },
   {
-    "token": "الدُّنْیَا-",
-    "clean": "الدنیا-",
+    "token": "الدُّنْیَاؕ",
+    "clean": "الدنیاؕ",
     "location": [
       4,
       109,
@@ -26388,8 +26388,8 @@
     "meaning_ur": "To Allah Ta'ala"
   },
   {
-    "token": "بِهِمَا-",
-    "clean": "بهما-",
+    "token": "بِهِمَاؕ",
+    "clean": "بهماؕ",
     "location": [
       4,
       135,
@@ -27936,8 +27936,8 @@
     "meaning_ur": "Munfarid lafz (Surah 5:3)"
   },
   {
-    "token": "ذَكَّیْتُمْ-",
-    "clean": "ذكیتم-",
+    "token": "ذَكَّیْتُمْؕ",
+    "clean": "ذكیتمؕ",
     "location": [
       5,
       3,
@@ -28512,8 +28512,8 @@
     "meaning_ur": "Munfarid lafz (Surah 5:8)"
   },
   {
-    "token": "تَعْدِلُوْاؕ-اِعْدِلُوْا-",
-    "clean": "تعدلواؕ-اعدلوا-",
+    "token": "تَعْدِلُوْاؕ-اِعْدِلُوْاؕ",
+    "clean": "تعدلواؕ-اعدلواؕ",
     "location": [
       5,
       8,
@@ -32736,8 +32736,8 @@
     "meaning_ur": "Munfarid lafz (Surah 5:110)"
   },
   {
-    "token": "الْقُدُسِ-",
-    "clean": "القدس-",
+    "token": "الْقُدُسِؕ",
+    "clean": "القدسؕ",
     "location": [
       5,
       110,
@@ -33540,8 +33540,8 @@
     "meaning_ur": "Munfarid lafz (Surah 6:19)"
   },
   {
-    "token": "اللّٰهُ-",
-    "clean": "الله-",
+    "token": "اللّٰهُؕ",
+    "clean": "اللهؕ",
     "location": [
       6,
       19,
@@ -33552,8 +33552,8 @@
     "meaning_ur": "Munfarid lafz (Surah 6:19)"
   },
   {
-    "token": "بَیْنَكُمْ-",
-    "clean": "بینكم-",
+    "token": "بَیْنَكُمْؕ",
+    "clean": "بینكمؕ",
     "location": [
       6,
       19,
@@ -34644,8 +34644,8 @@
     "meaning_ur": "Munfarid lafz (Surah 6:62)"
   },
   {
-    "token": "الْحُكْمُ-",
-    "clean": "الحكم-",
+    "token": "الْحُكْمُؕ",
+    "clean": "الحكمؕ",
     "location": [
       6,
       62,
@@ -39708,8 +39708,8 @@
     "meaning_ur": "Munfarid lafz (Surah 7:28)"
   },
   {
-    "token": "بِالْقِسْطِ-",
-    "clean": "بالقسط-",
+    "token": "بِالْقِسْطِؕ",
+    "clean": "بالقسطؕ",
     "location": [
       7,
       29,
@@ -40224,8 +40224,8 @@
     "meaning_ur": "Munfarid lafz (Surah 7:42)"
   },
   {
-    "token": "لِهٰذَا-",
-    "clean": "لهذا-",
+    "token": "لِهٰذَاؕ",
+    "clean": "لهذاؕ",
     "location": [
       7,
       43,
@@ -42240,8 +42240,8 @@
     "meaning_ur": "Munfarid lafz (Surah 7:133)"
   },
   {
-    "token": "مُّفَصَّلٰتٍ-",
-    "clean": "مفصلت-",
+    "token": "مُّفَصَّلٰتٍؕ",
+    "clean": "مفصلتؕ",
     "location": [
       7,
       133,
@@ -52380,8 +52380,8 @@
     "meaning_ur": "Munfarid lafz (Surah 9:101)"
   },
   {
-    "token": "النِّفَاقِ-لَا",
-    "clean": "النفاق-لا",
+    "token": "النِّفَاقِؕ-لَا",
+    "clean": "النفاقؕ-لا",
     "location": [
       9,
       101,
@@ -52884,8 +52884,8 @@
     "meaning_ur": "Munfarid lafz (Surah 9:111)"
   },
   {
-    "token": "یُقْتَلُوْنَ-",
-    "clean": "یقتلون-",
+    "token": "یُقْتَلُوْنَؕ",
+    "clean": "یقتلونؕ",
     "location": [
       9,
       111,
@@ -57468,8 +57468,8 @@
     "meaning_ur": "Munfarid lafz (Surah 11:34)"
   },
   {
-    "token": "رَبُّكُمْ-",
-    "clean": "ربكم-",
+    "token": "رَبُّكُمْؕ",
+    "clean": "ربكمؕ",
     "location": [
       11,
       34,
@@ -57528,8 +57528,8 @@
     "meaning_ur": "Munfarid lafz (Surah 11:36)"
   },
   {
-    "token": "الْفُلْكَ-",
-    "clean": "الفلك-",
+    "token": "الْفُلْكَؕ",
+    "clean": "الفلكؕ",
     "location": [
       11,
       38,
@@ -57684,8 +57684,8 @@
     "meaning_ur": "Munfarid lafz (Surah 11:42)"
   },
   {
-    "token": "كَالْجِبَالِ-",
-    "clean": "كالجبال-",
+    "token": "كَالْجِبَالِؕ",
+    "clean": "كالجبالؕ",
     "location": [
       11,
       42,
@@ -58512,8 +58512,8 @@
     "meaning_ur": "Munfarid lafz (Surah 11:62)"
   },
   {
-    "token": "عَصَیْتُهٗ-",
-    "clean": "عصیته-",
+    "token": "عَصَیْتُهٗؕ",
+    "clean": "عصیتهؕ",
     "location": [
       11,
       63,
@@ -65112,8 +65112,8 @@
     "meaning_ur": "Munfarid lafz (Surah 12:101)"
   },
   {
-    "token": "الْاَرْضِ-",
-    "clean": "الارض-",
+    "token": "الْاَرْضِؕ",
+    "clean": "الارضؕ",
     "location": [
       12,
       101,
@@ -65340,8 +65340,8 @@
     "meaning_ur": "Munfarid lafz (Surah 12:111)"
   },
   {
-    "token": "الٓـمّٓرٰ-",
-    "clean": "الـمر-",
+    "token": "الٓـمّٓرٰؕ",
+    "clean": "الـمرؕ",
     "location": [
       13,
       1,
@@ -65508,8 +65508,8 @@
     "meaning_ur": "Munfarid lafz (Surah 13:4)"
   },
   {
-    "token": "وَّاحِدٍ-",
-    "clean": "واحد-",
+    "token": "وَّاحِدٍؕ",
+    "clean": "واحدؕ",
     "location": [
       13,
       4,
@@ -66504,8 +66504,8 @@
     "meaning_ur": "Munfarid lafz (Surah 13:31)"
   },
   {
-    "token": "اَخَذْتُهُمْ-",
-    "clean": "اخذتهم-",
+    "token": "اَخَذْتُهُمْؕ",
+    "clean": "اخذتهمؕ",
     "location": [
       13,
       32,
@@ -68652,8 +68652,8 @@
     "meaning_ur": "Munfarid lafz (Surah 15:1)"
   },
   {
-    "token": "",
-    "clean": "",
+    "token": "ؕ",
+    "clean": "ؕ",
     "location": [
       15,
       1,
@@ -70980,8 +70980,8 @@
     "meaning_ur": "Munfarid lafz (Surah 16:54)"
   },
   {
-    "token": "اٰتَیْنٰهُمْؕ-فَتَمَتَّعُوْا-",
-    "clean": "اتینهمؕ-فتمتعوا-",
+    "token": "اٰتَیْنٰهُمْؕ-فَتَمَتَّعُوْاؕ",
+    "clean": "اتینهمؕ-فتمتعواؕ",
     "location": [
       16,
       55,
@@ -73212,8 +73212,8 @@
     "meaning_ur": "Munfarid lafz (Surah 17:6)"
   },
   {
-    "token": "لِاَنْفُسِكُمْ-",
-    "clean": "لانفسكم-",
+    "token": "لِاَنْفُسِكُمْؕ",
+    "clean": "لانفسكمؕ",
     "location": [
       17,
       7,
@@ -77784,8 +77784,8 @@
     "meaning_ur": "Munfarid lafz (Surah 18:28)"
   },
   {
-    "token": "رَّبِّكُمْ-",
-    "clean": "ربكم-",
+    "token": "رَّبِّكُمْؕ",
+    "clean": "ربكمؕ",
     "location": [
       18,
       29,
@@ -96888,8 +96888,8 @@
     "meaning_ur": "Munfarid lafz (Surah 25:8)"
   },
   {
-    "token": "بِالسَّاعَةِ-",
-    "clean": "بالساعه-",
+    "token": "بِالسَّاعَةِؕ",
+    "clean": "بالساعهؕ",
     "location": [
       25,
       11,
@@ -100620,8 +100620,8 @@
     "meaning_ur": "Munfarid lafz (Surah 26:227)"
   },
   {
-    "token": "طٰسٓ-",
-    "clean": "طس-",
+    "token": "طٰسٓؕ",
+    "clean": "طسؕ",
     "location": [
       27,
       1,
@@ -100752,8 +100752,8 @@
     "meaning_ur": "Munfarid lafz (Surah 27:12)"
   },
   {
-    "token": "سُوْٓءٍ-",
-    "clean": "سوء-",
+    "token": "سُوْٓءٍؕ",
+    "clean": "سوءؕ",
     "location": [
       27,
       12,
@@ -102408,8 +102408,8 @@
     "meaning_ur": "Munfarid lafz (Surah 27:66)"
   },
   {
-    "token": "-بَلْ",
-    "clean": "-بل",
+    "token": "ؕ-بَلْ",
+    "clean": "ؕ-بل",
     "location": [
       27,
       66,
@@ -105456,8 +105456,8 @@
     "meaning_ur": "Munfarid lafz (Surah 28:81)"
   },
   {
-    "token": "الْاَرْضَ-",
-    "clean": "الارض-",
+    "token": "الْاَرْضَؕ",
+    "clean": "الارضؕ",
     "location": [
       28,
       81,
@@ -106476,8 +106476,8 @@
     "meaning_ur": "Munfarid lafz (Surah 29:32)"
   },
   {
-    "token": "تَحْزَنْ-",
-    "clean": "تحزن-",
+    "token": "تَحْزَنْؕ",
+    "clean": "تحزنؕ",
     "location": [
       29,
       33,
@@ -106584,8 +106584,8 @@
     "meaning_ur": "Munfarid lafz (Surah 29:37)"
   },
   {
-    "token": "مَّسٰكِنِهِمْ-",
-    "clean": "مسكنهم-",
+    "token": "مَّسٰكِنِهِمْؕ",
+    "clean": "مسكنهمؕ",
     "location": [
       29,
       38,
@@ -107088,8 +107088,8 @@
     "meaning_ur": "Munfarid lafz (Surah 29:56)"
   },
   {
-    "token": "الْمَوْتِ-",
-    "clean": "الموت-",
+    "token": "الْمَوْتِؕ",
+    "clean": "الموتؕ",
     "location": [
       29,
       57,
@@ -107448,8 +107448,8 @@
     "meaning_ur": "Munfarid lafz (Surah 30:8)"
   },
   {
-    "token": "اَنْفُسِهِمْ-",
-    "clean": "انفسهم-",
+    "token": "اَنْفُسِهِمْؕ",
+    "clean": "انفسهمؕ",
     "location": [
       30,
       8,
@@ -114768,8 +114768,8 @@
     "meaning_ur": "Munfarid lafz (Surah 34:45)"
   },
   {
-    "token": "رُسُلِیْ-",
-    "clean": "رسلی-",
+    "token": "رُسُلِیْؕ",
+    "clean": "رسلیؕ",
     "location": [
       34,
       45,
@@ -114804,8 +114804,8 @@
     "meaning_ur": "Munfarid lafz (Surah 34:46)"
   },
   {
-    "token": "تَتَفَكَّرُوْا-",
-    "clean": "تتفكروا-",
+    "token": "تَتَفَكَّرُوْاؕ",
+    "clean": "تتفكرواؕ",
     "location": [
       34,
       46,
@@ -117468,8 +117468,8 @@
     "meaning_ur": "Munfarid lafz (Surah 36:57)"
   },
   {
-    "token": "سَلٰمٌ-",
-    "clean": "سلم-",
+    "token": "سَلٰمٌؕ",
+    "clean": "سلمؕ",
     "location": [
       36,
       58,
@@ -120156,8 +120156,8 @@
     "meaning_ur": "Munfarid lafz (Surah 38:10)"
   },
   {
-    "token": "بَیْنَهُمَا-",
-    "clean": "بینهما-",
+    "token": "بَیْنَهُمَاؕ",
+    "clean": "بینهماؕ",
     "location": [
       38,
       10,
@@ -120396,8 +120396,8 @@
     "meaning_ur": "Munfarid lafz (Surah 38:22)"
   },
   {
-    "token": "اَخِیْ-",
-    "clean": "اخی-",
+    "token": "اَخِیْؕ",
+    "clean": "اخیؕ",
     "location": [
       38,
       23,
@@ -120468,8 +120468,8 @@
     "meaning_ur": "Munfarid lafz (Surah 38:23)"
   },
   {
-    "token": "وَّاحِدَةٌ-",
-    "clean": "واحده-",
+    "token": "وَّاحِدَةٌؕ",
+    "clean": "واحدهؕ",
     "location": [
       38,
       23,
@@ -121548,8 +121548,8 @@
     "meaning_ur": "Munfarid lafz (Surah 38:59)"
   },
   {
-    "token": "اَنْتُمْ-",
-    "clean": "انتم-",
+    "token": "اَنْتُمْؕ",
+    "clean": "انتمؕ",
     "location": [
       38,
       60,
@@ -122028,8 +122028,8 @@
     "meaning_ur": "Munfarid lafz (Surah 39:6)"
   },
   {
-    "token": "عَنْكُمْ-",
-    "clean": "عنكم-",
+    "token": "عَنْكُمْؕ",
+    "clean": "عنكمؕ",
     "location": [
       39,
       7,
@@ -123876,8 +123876,8 @@
     "meaning_ur": "Munfarid lafz (Surah 40:5)"
   },
   {
-    "token": "فَاَخَذْتُهُمْ-",
-    "clean": "فاخذتهم-",
+    "token": "فَاَخَذْتُهُمْؕ",
+    "clean": "فاخذتهمؕ",
     "location": [
       40,
       5,
@@ -125292,8 +125292,8 @@
     "meaning_ur": "Munfarid lafz (Surah 40:46)"
   },
   {
-    "token": "السَّاعَةُ-",
-    "clean": "الساعه-",
+    "token": "السَّاعَةُؕ",
+    "clean": "الساعهؕ",
     "location": [
       40,
       46,
@@ -131544,8 +131544,8 @@
     "meaning_ur": "Munfarid lafz (Surah 45:27)"
   },
   {
-    "token": "جَاثِیَةً-",
-    "clean": "جاثیه-",
+    "token": "جَاثِیَةًؕ",
+    "clean": "جاثیهؕ",
     "location": [
       45,
       28,
@@ -131640,8 +131640,8 @@
     "meaning_ur": "Munfarid lafz (Surah 45:30)"
   },
   {
-    "token": "كَفَرُوْا-",
-    "clean": "كفروا-",
+    "token": "كَفَرُوْاؕ",
+    "clean": "كفرواؕ",
     "location": [
       45,
       31,
@@ -133404,8 +133404,8 @@
     "meaning_ur": "Munfarid lafz (Surah 47:16)"
   },
   {
-    "token": "اٰنِفًا-",
-    "clean": "انفا-",
+    "token": "اٰنِفًاؕ",
+    "clean": "انفاؕ",
     "location": [
       47,
       16,
@@ -133560,8 +133560,8 @@
     "meaning_ur": "Munfarid lafz (Surah 47:21)"
   },
   {
-    "token": "مَّعْرُوْفٌ-",
-    "clean": "معروف-",
+    "token": "مَّعْرُوْفٌؕ",
+    "clean": "معروفؕ",
     "location": [
       47,
       21,
@@ -133584,8 +133584,8 @@
     "meaning_ur": "Munfarid lafz (Surah 47:21)"
   },
   {
-    "token": "الْاَمْرُ-",
-    "clean": "الامر-",
+    "token": "الْاَمْرُؕ",
+    "clean": "الامرؕ",
     "location": [
       47,
       21,

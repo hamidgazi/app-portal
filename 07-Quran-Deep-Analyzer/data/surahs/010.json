@@ -12,8 +12,8 @@
   "ayat": [
     {
       "number": 1,
-      "arabic": "الٓرٰ- تِلْكَ اٰیٰتُ الْكِتٰبِ الْحَكِیْمِ",
-      "arabic_clean": "الر- تلك ایت الكتب الحكیم",
+      "arabic": "الٓرٰ ؕ تِلْكَ اٰیٰتُ الْكِتٰبِ الْحَكِیْمِ",
+      "arabic_clean": "الر ؕ تلك ایت الكتب الحكیم",
       "translation_urdu_kanzul_iman": "یہ حکمت والی کتاب کی آیتیں ہیں۔",
       "translation_urdu_kanzul_irfan": "’’الر‘‘، یہ حکمت والی کتاب کی آیتیں  ہیں ۔",
       "translation_english": "Alif-Laam-Ra. (These are individual letters of the Arabic alphabet; Allah and His Messenger know their exact meanings.) These are the verses of the Book of wisdom.",
@@ -23,8 +23,8 @@
       "words": [
         {
           "index": 1,
-          "token": "الٓرٰ-",
-          "clean": "الر-"
+          "token": "الٓرٰؕ",
+          "clean": "الرؕ"
         },
         {
           "index": 2,
@@ -3894,8 +3894,8 @@
     },
     {
       "number": 35,
-      "arabic": "قُلْ هَلْ مِنْ شُرَكَآىٕكُمْ مَّنْ یَّهْدِیْۤ اِلَى الْحَقِّؕ-قُلِ اللّٰهُ یَهْدِیْ لِلْحَقِّؕ-اَفَمَنْ یَّهْدِیْۤ اِلَى الْحَقِّ اَحَقُّ اَنْ یُّتَّبَعَ اَمَّنْ لَّا یَهِدِّیْۤ اِلَّاۤ اَنْ یُّهْدٰىۚ-فَمَا لَكُمْ- كَیْفَ تَحْكُمُوْنَ",
-      "arabic_clean": "قل هل من شركايكم من یهدی الي الحقؕ-قل الله یهدی للحقؕ-افمن یهدی الي الحق احق ان یتبع امن لا یهدی الا ان یهدي-فما لكم- كیف تحكمون",
+      "arabic": "قُلْ هَلْ مِنْ شُرَكَآىٕكُمْ مَّنْ یَّهْدِیْۤ اِلَى الْحَقِّؕ-قُلِ اللّٰهُ یَهْدِیْ لِلْحَقِّؕ-اَفَمَنْ یَّهْدِیْۤ اِلَى الْحَقِّ اَحَقُّ اَنْ یُّتَّبَعَ اَمَّنْ لَّا یَهِدِّیْۤ اِلَّاۤ اَنْ یُّهْدٰىۚ-فَمَا لَكُمْ ؕ كَیْفَ تَحْكُمُوْنَ",
+      "arabic_clean": "قل هل من شركايكم من یهدی الي الحقؕ-قل الله یهدی للحقؕ-افمن یهدی الي الحق احق ان یتبع امن لا یهدی الا ان یهدي-فما لكم ؕ كیف تحكمون",
       "translation_urdu_kanzul_iman": "تم فرماؤ تمہارے شریکوں میں کوئی ایسا ہے کہ حق کی راہ دکھائے تم فرماؤ کہ  اللہ  حق کی راہ دکھاتا ہے تو کیا جو حق کی راہ دکھائے اس کے حکم پر چلنا چاہیے یا اس کے جو خود ہی راہ نہ پائے جب تک راہ نہ دکھایا جائے تو تمہیں کیا ہوا کیسا حکم لگاتے ہو۔",
       "translation_urdu_kanzul_irfan": "تم فرماؤ: تمہارے شریکوں  میں  کوئی ایسا ہے جو حق کی طرف رہنمائی کرے ؟تم فرماؤ: اللہ  حق کی طرف ہدایت دیتا ہے، تو کیا جو حق کا راستہ دکھائے وہ اس کا حق دار ہے کہ اس کی پیروی کی جائے یا وہ (بت) جسے خود راستہ دکھائی نہ دے جب تک اسے راستہ دِکھا نہ دیا جائے تو تمہیں  کیا ہوا ، تم کیسا فیصلہ کرتے ہو؟",
       "translation_english": "Say you (O Beloved), 'Is there any amongst your partners (false deities) that shows the path of truth?' Say you; that 'Allah shows the path of truth, so, who should be obeyed; the One Who shows the path of truth, or the one (i.e. the idol) which itself cannot find the path unless it is directed to the path (i.e. being physically carried from place to place)? So, what has happened to you; how do you carry out judgement?'",
@@ -4020,8 +4020,8 @@
         },
         {
           "index": 24,
-          "token": "لَكُمْ-",
-          "clean": "لكم-"
+          "token": "لَكُمْؕ-",
+          "clean": "لكمؕ-"
         },
         {
           "index": 25,

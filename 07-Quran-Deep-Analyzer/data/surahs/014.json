@@ -12,8 +12,8 @@
   "ayat": [
     {
       "number": 1,
-      "arabic": "الٓرٰ- كِتٰبٌ اَنْزَلْنٰهُ اِلَیْكَ لِتُخْرِجَ النَّاسَ مِنَ الظُّلُمٰتِ اِلَى النُّوْرِ ۙ بِاِذْنِ رَبِّهِمْ اِلٰى صِرَاطِ الْعَزِیْزِ الْحَمِیْدِۙ",
-      "arabic_clean": "الر- كتب انزلنه الیك لتخر ج الناس من الظلمت الي النور  باذن ربهم الي صراط العزیز الحمید",
+      "arabic": "الٓرٰ ؕ كِتٰبٌ اَنْزَلْنٰهُ اِلَیْكَ لِتُخْرِجَ النَّاسَ مِنَ الظُّلُمٰتِ اِلَى النُّوْرِ ۙ بِاِذْنِ رَبِّهِمْ اِلٰى صِرَاطِ الْعَزِیْزِ الْحَمِیْدِۙ",
+      "arabic_clean": "الر ؕ كتب انزلنه الیك لتخر ج الناس من الظلمت الي النور باذن ربهم الي صراط العزیز الحمید",
       "translation_urdu_kanzul_iman": "ایک کتاب ہے کہ ہم نے تمہاری طرف اتاری کہ تم لوگوں  کو اندھیریوں  سے اجالے میں  لاؤ ان کے رب کے حکم سے اس کی راہ کی طرف جو عزت والا سب خوبیوں  والا ہے۔",
       "translation_urdu_kanzul_irfan": "’’الر‘‘،  یہ ایک کتاب ہے جو ہم نے تمہاری طرف نازل کی ہے تاکہ تم لوگوں   کو ان کے رب کے حکم سے اندھیروں   سے اجالے کی طرف،اس (اللہ ) کے راستے کی طرف نکالو جو عزت والا ،سب خوبیوں   والا ہے۔",
       "translation_english": "Alif-Laam-Ra. (These are individual letters of the Arabic alphabet; Allah and His Messenger know their exact meanings.) (This Qur'aan) is a Book that We have sent down upon you (O Beloved) that you may bring forth people from darknesses into light; by the command of their Lord, towards the path of the Most Honourable, the Most Praiseworthy.",
@@ -23,8 +23,8 @@
       "words": [
         {
           "index": 1,
-          "token": "الٓرٰ-",
-          "clean": "الر-"
+          "token": "الٓرٰؕ",
+          "clean": "الرؕ"
         },
         {
           "index": 2,
