@@ -1,10 +1,12 @@
 # 🩺 Clinical Dermatology & Skin Recovery Protocol (19-Dermatology-Health-Guide)
 
 A medical-grade, evidence-based dermatological action guide and daily therapeutic regimen system addressing three chronic, concurrent skin conditions:
-1. **Exfoliative Cheilitis** (*Chronic peeling, hardening, and crusting lips*).
-2. **Malassezia Folliculitis, Truncal Hyperhidrosis & Retention Hyperkeratosis** (*Back sweating, chest/back acne, and rolled dead-keratin sheets misperceived as dirt*).
-3. **Acanthosis Nigricans & Frictional Melanosis** (*Darkened velvety skin on back, joints, hips, and groin linked to systemic hyperinsulinemia*).
-4. **Clinical Trichology Protocol** (*Coarse, hard, thick, sticky, and frizzy hair restored via cationic conditioning and weightless lipid shields without hair oils*).
+1. **Oral Isotretinoin Master Protocol** (*13-cis-retinoic acid pharmacodynamics, cumulative targets, 20g fat rules, barrier skincare, and 15 clinical hidden gems*).
+2. **Master Facial Remedies, Creams & Medicines** (*Ranked pharmacological solutions for acne, scars, PIH, PIE, redness, blackheads, and barrier repair*).
+3. **Exfoliative Cheilitis** (*Chronic peeling, hardening, and crusting lips*).
+4. **Malassezia Folliculitis, Truncal Hyperhidrosis & Retention Hyperkeratosis** (*Back sweating, chest/back acne, and rolled dead-keratin sheets misperceived as dirt*).
+5. **Acanthosis Nigricans & Frictional Melanosis** (*Darkened velvety skin on back, joints, hips, and groin linked to systemic hyperinsulinemia*).
+6. **Clinical Trichology Protocol** (*Coarse, hard, thick, sticky, and frizzy hair restored via cationic conditioning and weightless lipid shields without hair oils*).
 
 ---
 
@@ -13,6 +15,7 @@ A medical-grade, evidence-based dermatological action guide and daily therapeuti
 This repository provides an integrated clinical roadmap that bridges root-cause pathophysiology, ranked pharmacological interventions (both OTC and **[Prescription Based]**), and habit-tracking tools. 
 
 Key diagnostic formulations established during clinical triage:
+- **Oral Isotretinoin**: Curative benchmark targeting all 4 acne pillars simultaneously via sebocyte apoptosis, infundibular comedolysis, *C. acnes* starvation, and monocyte TLR-2 suppression. Requires 20g dietary fat co-ingestion, cumulative dosing (120–150 mg/kg), and the strict "plus 2 months" clearance rule.
 - **Lips**: The desquamation trap—premature manual peeling exposes immature basal cells, triggering emergency reactive hyperkeratosis (hard crusts) exacerbated by salivary enzymes.
 - **Truncal Acne & Rolling Dead Skin**: Sweat-induced lipophilic yeast blooms (*Malassezia*), combined with retention hyperkeratosis (compacted corneocytes + soap scum). Aggressive manual rubbing creates mechanical trauma; gentle chemical keratolysis (AHA/BHA/Urea) replaces scrubbing entirely.
 - **Hyperpigmentation**: Acanthosis Nigricans driven by hyperinsulinemia (excess insulin binding to keratinocyte IGF-1 receptors), worsened by clothing friction.
@@ -23,6 +26,8 @@ Key diagnostic formulations established during clinical triage:
 
 | Production Deliverable | Format | Direct Clickable File Link | Description |
 | :--- | :--- | :--- | :--- |
+| **Oral Isotretinoin Master Clinical Guide** | Microsoft Word (.docx) | [Isotretinoin_Master_Clinical_Guide.docx](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/19-Dermatology-Health-Guide/Isotretinoin_Master_Clinical_Guide.docx) | Comprehensive, publication-grade clinical manual covering cellular pharmacokinetics, 120-150 mg/kg cumulative dosing tables, 20g fat rules, barrier skincare, lab monitoring, and 15 dermatologist hidden gems. |
+| **Oral Isotretinoin Canonical Markdown Compendium** | Markdown Document | [ISOTRETINOIN_MASTER_CLINICAL_GUIDE.md](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/19-Dermatology-Health-Guide/ISOTRETINOIN_MASTER_CLINICAL_GUIDE.md) | Full clinical Markdown dossier with Mermaid flowcharts, weight-by-weight titration schedules (40kg to 90kg), and mucosal triage protocols. |
 | **Master Facial Remedies, Creams & Medicines Compendium** | Microsoft Word (.docx) | [Master_Facial_Remedies_Creams_Medicines_Compendium.docx](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/19-Dermatology-Health-Guide/Master_Facial_Remedies_Creams_Medicines_Compendium.docx) | Definitive clinical Problem-Solution Formulary covering 9 facial conditions with chemical active percentages, pharmacy brand references, OTC vs Rx tags, and 15 hidden gems (0% surgery/lasers). |
 | **Facial Remedies & Medicine Markdown Compendium** | Markdown Document | [MASTER_FACIAL_REMEDIES_CREAMS_MEDICINES_COMPENDIUM.md](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/19-Dermatology-Health-Guide/MASTER_FACIAL_REMEDIES_CREAMS_MEDICINES_COMPENDIUM.md) | Canonical Markdown compendium with problem-by-problem medicine hierarchies, brand references, and active layering rules. |
 | **Level 10 Master Clinical Skincare & Acne Guide** | Microsoft Word (.docx) | [Level_10_Master_Clinical_Skincare_And_Acne_Guide.docx](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/19-Dermatology-Health-Guide/Level_10_Master_Clinical_Skincare_And_Acne_Guide.docx) | The comprehensive 5-part clinical dermatology reference guide covering topical protocols, scar hierarchies, endocrinology, photobiology, and barrier biophysics. |
@@ -39,6 +44,9 @@ Key diagnostic formulations established during clinical triage:
 ```
 c:/Users/Shop PC 2/OneDrive/Desktop/Antigravity Files/19-Dermatology-Health-Guide/
 ├── README.md                                                       # Master Project Navigation Hub & Executive Index
+├── Isotretinoin_Master_Clinical_Guide.docx                         # Oral Isotretinoin Master Word Deliverable
+├── ISOTRETINOIN_MASTER_CLINICAL_GUIDE.md                           # Canonical Markdown Isotretinoin Guide
+├── build_isotretinoin_guide.py                                     # Automated OpenXML Isotretinoin Generator
 ├── Master_Facial_Remedies_Creams_Medicines_Compendium.docx         # Master Facial Remedies & Medicine Word Deliverable
 ├── MASTER_FACIAL_REMEDIES_CREAMS_MEDICINES_COMPENDIUM.md           # Canonical Markdown Facial Remedies Formulary
 ├── build_face_remedies_compendium.py                               # Automated OpenXML Facial Remedies Engine
@@ -60,6 +68,11 @@ c:/Users/Shop PC 2/OneDrive/Desktop/Antigravity Files/19-Dermatology-Health-Guid
 Start-Process "c:\Users\Shop PC 2\OneDrive\Desktop\Antigravity Files\19-Dermatology-Health-Guide\index.html"
 ```
 
+### Build Word Compendiums with Python 3.13:
+```powershell
+py -3.13 "c:\Users\Shop PC 2\OneDrive\Desktop\Antigravity Files\19-Dermatology-Health-Guide\build_isotretinoin_guide.py"
+```
+
 ### Automated JavaScript Syntax Verification:
 ```powershell
 node -e "const fs = require('fs'); const content = fs.readFileSync('c:/Users/Shop PC 2/OneDrive/Desktop/Antigravity Files/19-Dermatology-Health-Guide/index.html', 'utf8'); const match = content.match(/<script>([\s\S]*?)<\/script>/i); if (!match) throw new Error('No script'); require('vm').runInNewContext(match[1], { window: {}, document: { addEventListener: () => {} }, console: console }); console.log('Syntax verification: 0 errors');"
@@ -79,3 +92,4 @@ python "c:\Users\Shop PC 2\OneDrive\Desktop\Antigravity Files\Common-Resources\A
 - **Zero External Assets**: No third-party CDNs, WebFonts, or music files; runs 100% offline.
 - **Audio Compliance**: Uses procedural `AudioContext` sine-wave micro-haptics (strict zero-music policy).
 - **DOM Identifier Hygiene**: Zero kebab-case global window aliasing; uses explicit DOM lookup.
+- **Workspace Confinement**: 100% of files, scripts, and documents strictly confined inside `Antigravity Files/`. Zero Desktop pollution.
