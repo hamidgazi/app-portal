@@ -1935,19 +1935,19 @@
        INTERACTIVE PRACTICE STUDIO MODAL
        ======================================== */
     .practice-modal-backdrop {
-      display: none;
+      display: none !important;
       position: fixed;
       inset: 0;
-      z-index: 3000;
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      justify-content: center;
+      z-index: 9999;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       align-items: center;
-      padding: 12px;
+      justify-content: center;
+      padding: 16px;
     }
     .practice-modal-backdrop.open {
-      display: flex;
+      display: flex !important;
     }
     .practice-studio-container {
       width: 100%;
@@ -2835,16 +2835,13 @@
        INTERACTIVE PRACTICE STUDIO MODAL OVERLAY
        ========================================================= */
     .practice-modal-backdrop {
+      display: none !important;
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      inset: 0;
+      z-index: 9999;
       background: rgba(0, 0, 0, 0.65);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      z-index: 9999;
-      display: flex;
       align-items: center;
       justify-content: center;
       padding: 16px;
@@ -8272,7 +8269,10 @@ const FULL_CHAPTERS_HTML = [
           if (chBadge) chBadge.textContent = `Chapter ${chapterNum}: Practice Arena`;
 
           renderPracticeDrill();
-          if (modal) modal.classList.add('open');
+          if (modal) {
+            modal.style.display = 'flex';
+            modal.classList.add('open');
+          }
         } catch (err) {
           console.error("Open Practice Studio Error:", err);
         }
@@ -8283,11 +8283,21 @@ const FULL_CHAPTERS_HTML = [
         try {
           playAcousticTap();
           const modal = document.getElementById('practiceStudioModal');
-          if (modal) modal.classList.remove('open');
+          if (modal) {
+            modal.style.display = 'none';
+            modal.classList.remove('open');
+          }
         } catch (err) {
           console.error("Close Practice Studio Error:", err);
         }
       }
+      window.closePracticeStudio = closePracticeStudio;
+
+      window.closePracticeStudioBackdrop = function(e) {
+        if (e && e.target && e.target.id === 'practiceStudioModal') {
+          closePracticeStudio();
+        }
+      };
       window.closePracticeStudio = closePracticeStudio;
 
       function renderPracticeDrill() {
@@ -8664,69 +8674,12 @@ const FULL_CHAPTERS_HTML = [
 
     })();
   </script>
-
   <!-- Interactive Practice Studio Modal -->
-  <div id="practiceStudioModal" class="practice-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="practiceChBadge">
-    <div class="practice-studio-container">
+  <div id="practiceStudioModal" class="practice-modal-backdrop" style="display: none;" onclick="window.closePracticeStudioBackdrop(event)" role="dialog" aria-modal="true" aria-labelledby="practiceChBadge">
+    <div class="practice-studio-container" onclick="event.stopPropagation()">
       <div class="practice-studio-topbar">
         <div class="practice-topbar-left">
-          <button class="btn-icon" id="closePracticeBtn" title="Close Practice" aria-label="Close Practice">✕</button>
-          <span class="practice-ch-badge" id="practiceChBadge">Chapter 1: Practice</span>
-        </div>
-        <div class="practice-streak-chip" id="practiceStreakChip">🔥 0 Streak</div>
-        <div class="practice-topbar-right">
-          <span class="practice-counter" id="practiceCounter">1 / 12</span>
-        </div>
-      </div>
-      <div class="practice-progress-track">
-        <div class="practice-progress-fill" id="practiceProgressFill" style="width: 8.33%;"></div>
-      </div>
-      <div class="practice-viewport" id="practiceViewport">
-        <div class="practice-tier-badge" id="practiceTierBadge">Tier 1: Rapid Recall</div>
-        <div class="practice-prompt-card">
-          <h3 class="practice-prompt-text" id="practicePromptText">Loading question...</h3>
-        </div>
-        <div class="practice-options-grid" id="practiceOptionsGrid"></div>
-        <div class="practice-rationale-box" id="practiceRationaleBox" style="display: none;">
-          <div class="rationale-header">👨‍🏫 Master Tutor Rationale:</div>
-          <div class="rationale-text" id="practiceRationaleText"></div>
-          <div class="rationale-rule" id="practiceRationaleRule"></div>
-          <button class="btn-next-drill" id="practiceNextBtn">Next Question ➔</button>
-        </div>
-      </div>
-      <div class="practice-summary-screen" id="practiceSummaryScreen" style="display: none;">
-        <div class="summary-celebration-icon" id="summaryStarsIcon">⭐⭐⭐</div>
-        <h2 class="summary-title" id="summaryTitle">Chapter Mastered!</h2>
-        <p class="summary-subtitle" id="summarySubtitle">You completed all 12 master drills.</p>
-        <div class="summary-stats-grid">
-          <div class="stat-card">
-            <div class="stat-num" id="summaryScoreDisplay">12 / 12</div>
-            <div class="stat-label">Correct</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-num" id="summaryAccuracyDisplay">100%</div>
-            <div class="stat-label">Accuracy</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-num" id="summaryStreakDisplay">🔥 12</div>
-            <div class="stat-label">Best Streak</div>
-          </div>
-        </div>
-        <div class="summary-actions">
-          <button class="btn-summary-primary" id="practiceRetryBtn">🔄 Practice Again</button>
-          <button class="btn-summary-secondary" id="practiceDoneBtn">✅ Return to Lessons</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- Interactive Practice Studio Modal -->
-  <div id="practiceStudioModal" class="practice-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="practiceChBadge">
-    <div class="practice-studio-container">
-      <div class="practice-studio-topbar">
-        <div class="practice-topbar-left">
-          <button class="btn-icon" id="closePracticeBtn" title="Close Practice" aria-label="Close Practice">✕</button>
+          <button class="btn-icon" id="closePracticeBtn" onclick="window.closePracticeStudio()" title="Close Practice" aria-label="Close Practice">✕</button>
           <span class="practice-ch-badge" id="practiceChBadge">Chapter 1: Practice</span>
         </div>
         <div class="practice-streak-chip" id="practiceStreakChip">🔥 0 Streak</div>
