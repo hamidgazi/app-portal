@@ -24,7 +24,8 @@ Designed according to the **Foundations-First Principle (The Madinah Book Law)**
 
 | Deliverable | Direct Clickable File Link | Format | Description |
 | :--- | :--- | :--- | :--- |
-| **Interactive PWA Studio** | [index.html](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/20-Arabic-Mastery/index.html) | HTML5 / PWA | Royal Emerald & Gold Master Study Studio with 15-chapter reader, Ayah inspector, flashcards & quizzes. |
+| **Interactive PWA Studio & Mobile Reader** | [index.html](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/20-Arabic-Mastery/index.html) | HTML5 / PWA | Royal Emerald & Gold Master Study Studio with embedded 15-chapter Kindle-style Mobile Book Reader, active-recall drills, Ayah inspector, flashcards & quizzes. |
+| **Live Mobile Cloud URL** | [Live Web App](https://hamidgazi.github.io/app-portal/20-Arabic-Mastery/index.html) | Live Cloud | 24/7 Mobile-optimized web portal accessible worldwide on iOS, Android, and desktop. |
 | **Chapter 01: Near Pointing (هٰذَا)** | [CHAPTER_01_THIS_IS_HAADHA.md](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/20-Arabic-Mastery/textbook_chapters/CHAPTER_01_THIS_IS_HAADHA.md) | Markdown | Near masculine demonstrative, Tanween, مَا vs مَنْ, and complete answer key. |
 | **Chapter 02: Distant Pointing (ذٰلِكَ)** | [CHAPTER_02_THAT_IS_DHAALIKA.md](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/20-Arabic-Mastery/textbook_chapters/CHAPTER_02_THAT_IS_DHAALIKA.md) | Markdown | Distant masculine demonstrative, conjunction وَ, contrast drills, and answer key. |
 | **Chapter 03: Definite & Nominal Sentences** | [CHAPTER_03_DEFINITE_NOUNS_AND_NOMINAL_SENTENCE.md](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/20-Arabic-Mastery/textbook_chapters/CHAPTER_03_DEFINITE_NOUNS_AND_NOMINAL_SENTENCE.md) | Markdown | The Al- vs Tanween duel, Solar/Lunar letters, Mubtada' and Khabar sentence structure. |
@@ -74,15 +75,24 @@ c:/Users/Shop PC 2/OneDrive/Desktop/Antigravity Files/20-Arabic-Mastery/
 │   ├── HIGH_FREQUENCY_QURANIC_PARTICLES_CHEATSHEET.md
 │   └── NAMAZ_AZKAAR_ANATOMY_CHEATSHEET.md
 │
+├── scripts/                                   # Build & Compilation Engine
+│   ├── compile_textbook_data.py               # Markdown-to-HTML parser & drill answer injector
+│   ├── chapters_data.js                       # Compiled JavaScript data bundle (263 KB)
+│   └── build_full_app.py                      # HTML single-file application bundler
+│
 └── tests/                                     # Automated Quality Assurance
-    └── test_interactive_app.py                # 10-test suite: node --check, strict 6-part anatomy, inspector DB completeness, zero music
+    └── test_interactive_app.py                # 13-test suite: node --check, 6-part anatomy, book reader modal, active recall drills, share modal, audio invariants.
 ```
 
 ---
 
 ## 4. Quick-Start & Daily Study Guidance
 
-- **Launch Interactive Web App**:
+- **Live Mobile Access**:
+  - Visit **[https://hamidgazi.github.io/app-portal/20-Arabic-Mastery/index.html](https://hamidgazi.github.io/app-portal/20-Arabic-Mastery/index.html)** on any smartphone.
+  - **Android (Chrome)**: Tap the 3 dots (`⋮`) ➔ Select **"Add to Home Screen"** or **"Install App"** to run full-screen as a standalone native app.
+  - **iOS (Safari)**: Tap the Share button (`↑`) ➔ Select **"Add to Home Screen"**.
+- **Launch Interactive Web App Locally**:
   - Open [index.html](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/20-Arabic-Mastery/index.html) in any modern browser on PC, tablet, or smartphone.
 - **Run Automated Quality Tests**:
   ```powershell
@@ -97,7 +107,14 @@ c:/Users/Shop PC 2/OneDrive/Desktop/Antigravity Files/20-Arabic-Mastery/
 
 ## 5. Automated Quality & Verification Status
 
-- **Automated Tests**: Passed (10/10 test cases, `node --check` 0 errors).
+- **Automated Tests**: Passed (**13/13 test cases**, `node --check` 0 errors).
+- **Directive Compliance**:
+  - **Directive 5.1 (Isolated Bootloader)**: All 9 modules run inside isolated `try/catch` wrappers.
+  - **Directive 5.3 (Touch Ergonomics)**: All interactive buttons maintain $\ge 48\text{ px}$ hitbox with `touch-action: manipulation;`.
+  - **Directive 5.4 (Node Compilation Check)**: Automated AST syntax validation passes with 0 syntax errors.
+  - **Directive 6 (Proactive Cloud Sync)**: Deployed to GitHub Pages via automated build script.
+  - **Directive 7 (Zero Music Jurisprudence)**: Procedural Web Audio API sound synthesis only (zero `.mp3` / `.wav` assets).
+  - **Directive 8 (Strict Workspace Confinement)**: 100% self-contained inside `20-Arabic-Mastery/`.
 - **Curriculum Completeness**: 15/15 chapters written with complete 6-part anatomy.
 - **Translation Standard**: 100% verified Kanzul Iman & Kanzul Irfan.
 - **Audio Architecture**: Procedural Web Audio API oscillator synthesis (0 external audio files, 100% Directive 7 compliant).
