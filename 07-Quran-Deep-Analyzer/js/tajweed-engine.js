@@ -384,7 +384,7 @@
         (m, p1) => makeTag('tj-madd', 'madd', 'Madd (مد - Prolongation 4-6 Counts)', p1));
 
       // 5. Madd Aaridh lil-Sukun (مد عارض للسکون - 2, 4, 6 counts): Vowel letter before final consonant at stop/waqf/verse-end
-      text = text.replace(/([\u064E\u064F\u0650]?[\u0648\u064A\u06CC\u0627\u0670])([\u0621-\u064A\u06CC][\u064B-\u0652\u0670]?\s*(?:[۝\u06DD]|[ۖ-ۛ]|[.,;!?\u061F]|\s*$))/gu,
+      text = text.replace(/([\u064E\u064F\u0650]?[\u0648\u064A\u06CC\u0627\u0670][\u0652\u06E1\u06DF]?)([\u0621-\u064A\u06CC][\u064B-\u0652\u0670]?\s*(?:[۝\u06DD\u0615\u06E0]|[ۖ-ۜ]|[.,;!?\u061F]|\s*$))/gu,
         (m, p1, p2) => makeTag('tj-madd', 'madd_aaridh', 'Madd Aaridh lil-Sukun (مد عارض للسکون - 2, 4, 6 Counts at Stop)', p1) + p2);
 
       // 6. Iqlab (اقلاب - Conversion to Meem 2 counts): Tanween or Noon Sakinah followed by small Meem or Baa
@@ -416,7 +416,7 @@
       // 11. Qalqalah (قلقلہ - Echoing Bounce): قطب جد with Sukun OR at verse end/waqf
       text = text.replace(/([قطبجد][\u0652\u06E1\u06DF])/gu,
         (m, p1) => makeTag('tj-qalqalah', 'qalqalah', 'Qalqalah (قلقلہ - Echoing Bounce)', p1));
-      text = text.replace(/([قطبجد][\u0651\u065F]?[\u064B-\u0650\u0670]?)(\s*(?:[۝\u06DD]|[ۖ-ۛ]|[.,;!?\u061F]|\s*$))/gu,
+      text = text.replace(/([قطبجد][\u0651\u065F]?[\u064B-\u0650\u0670]?)(\s*(?:[۝\u06DD\u0615\u06E0]|[ۖ-ۜ]|[.,;!?\u061F]|\s*$))/gu,
         (m, p1, p2) => makeTag('tj-qalqalah', 'qalqalah', 'Qalqalah at Waqf (قلقلہ کبریٰ - Echo at Stop)', p1) + p2);
 
 

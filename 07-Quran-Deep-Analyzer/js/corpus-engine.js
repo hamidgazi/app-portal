@@ -1442,20 +1442,30 @@ class CorpusEngine {
     const container = document.getElementById("waqf-rules-container");
     if (!container) return;
 
-    let html = `<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;">`;
+    let html = `<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px;">`;
     this.waqfRules.forEach(w => {
+      const displaySym = w.symbol === 'O' ? '۝' : w.symbol;
+      const titleUr = w.name_ur || displaySym;
+      const titleEn = w.name_en || 'Waqf Sign';
+      const actionEn = w.action_en ? `<div style="font-size: 0.82rem; color: #94a3b8; margin-top: 4px; line-height: 1.4;"><strong style="color: #cbd5e1;">Rule:</strong> ${w.action_en}</div>` : '';
+      const actionUr = w.action_ur ? `<div style="font-size: 0.92rem; color: #fbbf24; font-family: var(--font-urdu); direction: rtl; text-align: right; margin-top: 2px;">${w.action_ur}</div>` : '';
+
       html += `
-        <div class="semantic-card">
-          <div style="display: flex; align-items: center; gap: 14px;">
-            <div style="width: 50px; height: 50px; background: rgba(16, 185, 129, 0.15); border: 1px solid var(--border-accent); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-family: var(--font-arabic); font-size: 2rem; color: #34d399;">
-              ${w.symbol}
+        <div class="semantic-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 10px;">
+              <div style="width: 52px; height: 52px; background: rgba(16, 185, 129, 0.15); border: 1px solid var(--border-accent); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-family: 'AlMushafWaqf', var(--font-arabic); font-size: 2rem; color: #34d399; flex-shrink: 0;">
+                ${displaySym}
+              </div>
+              <div style="flex: 1; min-width: 0;">
+                <div style="font-size: 0.76rem; color: var(--accent-gold); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">${titleEn}</div>
+                <div style="font-size: 1.15rem; font-weight: 700; color: var(--text-main); font-family: var(--font-urdu); direction: rtl; text-align: right;">${titleUr}</div>
+              </div>
             </div>
-            <div>
-              <div style="font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase;">Waqf Sign</div>
-              <div style="font-size: 1.1rem; font-weight: 700; color: var(--text-main);">${w.symbol}</div>
-            </div>
+            ${actionEn}
+            ${actionUr}
           </div>
-          <div style="font-family: var(--font-urdu); font-size: 1.25rem; line-height: 1.8; color: #cbd5e1; direction: rtl; text-align: right; margin-top: 8px;">
+          <div style="font-family: var(--font-urdu); font-size: 1.20rem; line-height: 1.8; color: #cbd5e1; direction: rtl; text-align: right; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
             ${w.description}
           </div>
         </div>

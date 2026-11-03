@@ -4886,9 +4886,14 @@ mark.search-highlight {
   .trans-chip-en,
   .trans-chip-ar,
   .trans-chip-variant {
-    min-height: 44px;
-    padding: 8px 16px;
-    font-size: 0.9rem;
+    min-height: 48px !important;
+    padding: 10px 18px !important;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: manipulation;
+    user-select: none;
   }
 }
 
@@ -5388,30 +5393,60 @@ mark.search-highlight {
   }
 
   .search-studio-input {
-    height: 38px;
-    padding: 0 32px 0 32px;
-    font-size: 0.92rem;
+    height: 48px !important;
+    min-height: 48px !important;
+    padding: 0 44px 0 40px !important;
+    font-size: 1rem !important;
   }
 
   .search-studio-clear-btn {
-    right: 6px;
+    right: 2px !important;
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    min-height: 48px !important;
+    font-size: 1.1rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    touch-action: manipulation;
+    user-select: none;
   }
 
   .search-studio-ask-btn {
-    height: 38px;
-    padding: 0 10px;
-    font-size: 0.82rem;
+    height: 48px !important;
+    min-height: 48px !important;
+    padding: 0 16px !important;
+    font-size: 0.90rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    touch-action: manipulation;
+    user-select: none;
   }
 
   .search-density-btn {
-    height: 38px;
-    padding: 0 8px;
-    font-size: 0.78rem;
+    height: 48px !important;
+    min-height: 48px !important;
+    padding: 0 12px !important;
+    font-size: 0.84rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    touch-action: manipulation;
+    user-select: none;
   }
 
   .search-studio-settings-btn {
-    width: 38px;
-    height: 38px;
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    min-height: 48px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    touch-action: manipulation;
+    user-select: none;
   }
 
   .search-ayah-card {
@@ -5787,9 +5822,10 @@ span[class*="tj-"]:not(.tj-pill) {
   transform: scale(1.006);
 }
 
-/* 3. Comparative Split-View Drawer */
+/* 3. Comparative Split-View Drawer (Finding F-02: RTL Exegesis Alignment) */
 .comparative-drawer-grid {
   display: grid;
+  direction: rtl;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 12px;
   background: rgba(10, 15, 30, 0.88);
@@ -5807,6 +5843,19 @@ span[class*="tj-"]:not(.tj-pill) {
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   padding: 10px 12px;
+}
+
+/* Ensure English translation column header remains LTR flush with English text */
+.compare-col:last-child {
+  direction: ltr;
+}
+
+@media (max-width: 640px) {
+  .comparative-drawer-grid {
+    grid-template-columns: 1fr;
+    padding: 10px;
+    gap: 8px;
+  }
 }
 
 .compare-header {
@@ -7673,10 +7722,16 @@ span[class*="tj-"]:not(.tj-pill) {
     flex-shrink: 0;
   }
   .guide-trigger-btn {
-    padding: 6px 10px !important;
-    font-size: 0.75rem !important;
+    padding: 8px 14px !important;
+    font-size: 0.85rem !important;
     border-radius: var(--radius-full) !important;
-    min-height: 38px;
+    min-height: 48px !important;
+    min-width: 48px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    touch-action: manipulation;
+    user-select: none;
   }
   .guide-trigger-btn .guide-btn-text {
     display: none; /* Icon-only on narrow screens to prevent horizontal overflow */
@@ -7696,9 +7751,10 @@ span[class*="tj-"]:not(.tj-pill) {
     box-sizing: border-box !important;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    height: 42px !important;
-    padding: 4px 6px !important;
-    gap: 6px !important;
+    height: auto !important;
+    min-height: 52px !important;
+    padding: 4px 8px !important;
+    gap: 8px !important;
     background: rgba(10, 15, 28, 0.95);
     border-bottom: 1px solid var(--border-subtle);
     margin-top: 4px;
@@ -7708,13 +7764,19 @@ span[class*="tj-"]:not(.tj-pill) {
   }
   .app-nav.app-nav-tier .nav-tab-btn {
     flex: 0 0 auto !important;
-    padding: 6px 12px !important;
-    font-size: 0.80rem !important;
+    padding: 8px 16px !important;
+    font-size: 0.85rem !important;
     border-radius: var(--radius-full) !important;
-    height: 32px !important;
+    height: auto !important;
+    min-height: 48px !important;
     min-width: auto !important;
     white-space: nowrap !important;
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    touch-action: manipulation;
+    user-select: none;
   }
   .app-nav.app-nav-tier .nav-tab-btn.active {
     background: rgba(251, 191, 36, 0.15) !important;
@@ -7741,8 +7803,9 @@ span[class*="tj-"]:not(.tj-pill) {
     border-right: none !important;
     border-bottom: 1px solid var(--border-subtle) !important;
     background: rgba(7, 10, 18, 0.97) !important;
-    padding: 4px 12px !important;
-    height: 44px !important;
+    padding: 6px 12px !important;
+    height: auto !important;
+    min-height: 56px !important;
     z-index: 998 !important;
     box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.5) !important;
   }
@@ -7768,23 +7831,34 @@ span[class*="tj-"]:not(.tj-pill) {
     text-overflow: ellipsis;
   }
   .audio-reciter-select {
-    font-size: 0.70rem !important;
-    padding: 1px 4px !important;
-    max-width: 110px;
+    font-size: 0.80rem !important;
+    padding: 6px 8px !important;
+    min-height: 48px !important;
+    max-width: 120px;
+    touch-action: manipulation;
   }
   .audio-controls-wrap {
     gap: 6px !important;
     flex-shrink: 0;
   }
   .audio-btn {
-    width: 28px !important;
-    height: 28px !important;
-    font-size: 0.85rem !important;
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    min-height: 48px !important;
+    font-size: 1.1rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    touch-action: manipulation;
+    user-select: none;
   }
   .audio-btn.play-main {
-    width: 32px !important;
-    height: 32px !important;
-    font-size: 1rem !important;
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    min-height: 48px !important;
+    font-size: 1.25rem !important;
   }
   .audio-pill-toggles {
     display: none !important; /* Speed & repeat accessible via long-press or settings on mobile */
@@ -7793,15 +7867,19 @@ span[class*="tj-"]:not(.tj-pill) {
     background: rgba(255, 255, 255, 0.08);
     border: none;
     color: #94a3b8;
-    width: 24px;
-    height: 24px;
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    min-height: 48px !important;
     border-radius: 50%;
     cursor: pointer;
-    font-size: 0.75rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-size: 1rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     flex-shrink: 0;
+    touch-action: manipulation;
+    user-select: none;
   }
 
   /* 4. Universal Mobile Bottom Dock Ergonomics (Perfect 5-Column Grid) */
@@ -8397,15 +8475,19 @@ body[data-theme="parchment"] .more-sheet-title-wrap {
   background: rgba(255, 255, 255, 0.08);
   border: none;
   color: #94a3b8;
-  width: 32px;
-  height: 32px;
+  width: 48px !important;
+  height: 48px !important;
+  min-width: 48px !important;
+  min-height: 48px !important;
   border-radius: 50%;
-  font-size: 1rem;
+  font-size: 1.15rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.15s ease;
+  touch-action: manipulation;
+  user-select: none;
 }
 
 .more-sheet-close-btn:hover {
@@ -8661,3 +8743,94 @@ body[data-theme="parchment"] .jumper-preset-chip:hover {
   border-color: #b45309 !important;
   color: #b45309 !important;
 }
+
+/* ====================================================================
+   UNIVERSAL MOBILE TOUCH TARGET HITBOX ENFORCEMENT (>= 48px)
+   Finding F-05 / GEMINI.md Rule 5
+   ==================================================================== */
+@media (max-width: 768px) {
+  /* Mini Audio Dock */
+  .mini-dock-btn {
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    min-height: 48px !important;
+    font-size: 1.05rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    touch-action: manipulation;
+    user-select: none;
+  }
+
+  .mini-dock-close {
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    min-height: 48px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.2rem !important;
+    padding: 0 !important;
+    touch-action: manipulation;
+    user-select: none;
+  }
+
+  /* Universal Buttons, Pills & Filter Chips */
+  .filter-btn,
+  .surah-cat-filter-btn,
+  .search-tarjuma-chip,
+  .search-layout-chip,
+  .search-micro-chip,
+  .search-rev-chip,
+  .search-micro-action,
+  .search-topic-chip,
+  .theme-toggle-btn,
+  .density-btn,
+  .tafsir-toggle-btn,
+  .ayah-tool-btn,
+  .audio-control-btn,
+  .sticky-return-btn,
+  .floating-ctrl-btn,
+  .jumper-submit-btn,
+  .jumper-preset-chip,
+  .telemetry-toggle-btn,
+  .alphabet-chip {
+    min-height: 48px !important;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    touch-action: manipulation;
+    user-select: none;
+  }
+
+  /* Universal Modal & Dialog Close Buttons */
+  .modal-close-btn,
+  .waqf-modal-close-btn,
+  .waqf-popover-close-btn,
+  .quick-jump-close-btn,
+  .omnisearch-close-btn,
+  .occ-arrow-btn {
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    min-height: 48px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    touch-action: manipulation;
+    user-select: none;
+  }
+
+  /* Ayah Jumper Input */
+  .jumper-number-input {
+    min-height: 48px !important;
+    height: 48px !important;
+    font-size: 1.1rem !important;
+  }
+}
+

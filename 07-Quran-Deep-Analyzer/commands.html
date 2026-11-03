@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <title>📜 Divine Commands & Injunctions • Quranic Blueprint for Human Living</title>
-  <meta name="description" content="The 80 Canonical Divine Directives (Commands & Prohibitions) of the Holy Quran for Human Living, Health, Ethics, Compassion & Social Harmony with Kanzul Iman & Saheeh International.">
+  <meta name="description" content="The 80 Canonical Divine Directives (Commands & Prohibitions) of the Holy Quran for Human Living, Health, Ethics, Compassion & Social Harmony with Kanzul Iman, Kanzul Irfan & Saheeh International.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
   <link rel="stylesheet" href="css/app.css">
   <link rel="stylesheet" href="css/commands-manners.css">
@@ -1569,6 +1569,7 @@
                   `📍 *Surah ${it.surah_name_roman} (${it.surah_name_ar}) [${it.surah_id}:${it.ayah_num}]*\n\n` +
                   `📖 *Sacred Arabic:*\n${arText}\n\n` +
                   `💎 *Kanzul Iman Urdu Translation (Imam Ahmad Raza Khan):*\n${it.translation_urdu_kanzul_iman}\n\n` +
+                  (it.translation_urdu_kanzul_irfan ? `✨ *Kanzul Irfan Urdu Translation (Mufti Qasim Qadri):*\n${it.translation_urdu_kanzul_irfan}\n\n` : '') +
                   `🌐 *English Translation (Saheeh International):*\n${it.translation_english}\n\n` +
                   `💡 *Human Flourishing & Health Wisdom:*\n${it.wisdom_benefit_en}\n\n` +
                   `✨ *Quran Deep Analyzer*\nhttps://hamidgazi.github.io/app-portal/`;
@@ -1698,7 +1699,8 @@
             it.title_ur.toLowerCase().includes(q) ||
             it.title_en.toLowerCase().includes(q) ||
             it.arabic.includes(q) ||
-            it.translation_urdu_kanzul_iman.includes(q) ||
+            (it.translation_urdu_kanzul_iman && it.translation_urdu_kanzul_iman.includes(q)) ||
+            (it.translation_urdu_kanzul_irfan && it.translation_urdu_kanzul_irfan.includes(q)) ||
             it.translation_english.toLowerCase().includes(q) ||
             it.wisdom_benefit_ur.includes(q) ||
             it.wisdom_benefit_en.toLowerCase().includes(q) ||

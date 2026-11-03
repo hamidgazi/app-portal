@@ -134,6 +134,7 @@
           (it.arabic && it.arabic.includes(q)) ||
           (it.translation_english && it.translation_english.toLowerCase().includes(q)) ||
           (it.translation_urdu_kanzul_iman && it.translation_urdu_kanzul_iman.includes(q)) ||
+          (it.translation_urdu_kanzul_irfan && it.translation_urdu_kanzul_irfan.includes(q)) ||
           (it.wisdom_benefit_en && it.wisdom_benefit_en.toLowerCase().includes(q)) ||
           (it.wisdom_benefit_ur && it.wisdom_benefit_ur.includes(q)) ||
           (it.chapter_coordinate && it.chapter_coordinate.includes(q)) ||
@@ -265,6 +266,7 @@
            `📍 *Surah ${it.surah_name_roman} (${it.surah_name_ar}) [${it.surah_id}:${it.ayah_num}]*\n\n` +
            `📖 *Sacred Arabic:*\n${arText}\n\n` +
            `💎 *Kanzul Iman Urdu Translation (Imam Ahmad Raza Khan):*\n${it.translation_urdu_kanzul_iman}\n\n` +
+           (it.translation_urdu_kanzul_irfan ? `✨ *Kanzul Irfan Urdu Translation (Mufti Qasim Qadri):*\n${it.translation_urdu_kanzul_irfan}\n\n` : '') +
            `🌐 *English Translation (Saheeh International):*\n${it.translation_english}\n\n` +
            `💡 *Human Flourishing & Health Wisdom:*\n${it.wisdom_benefit_en}\n\n` +
            `✨ *Quran Deep Analyzer*\nhttps://hamidgazi.github.io/app-portal/`;
@@ -357,7 +359,8 @@
     const hTitleEn = highlightText(it.title_en, searchQuery);
     const hTitleUr = highlightText(it.title_ur, searchQuery);
     const hAr = highlightText(it.arabic, searchQuery);
-    const hUr = highlightText(it.translation_urdu_kanzul_iman, searchQuery);
+    const hKi = highlightText(it.translation_urdu_kanzul_iman, searchQuery);
+    const hKr = it.translation_urdu_kanzul_irfan ? highlightText(it.translation_urdu_kanzul_irfan, searchQuery) : "";
     const hEn = highlightText(it.translation_english, searchQuery);
     const hWisdomEn = highlightText(it.wisdom_benefit_en, searchQuery);
     const hWisdomUr = highlightText(it.wisdom_benefit_ur, searchQuery);
@@ -409,14 +412,36 @@
             ${showUrdu ? `
               <div class="command-pane-ur">
                 <div class="command-title-ur" dir="rtl">${hTitleUr}</div>
-                <div class="command-translation-ur" dir="rtl"><span class="ki-gold">(کنز الایمان)</span> ${hUr}</div>
+                <div class="trans-stack-ur">
+                  <div class="trans-item-ur">
+                    <div class="trans-header">
+                      <span class="trans-source-tag ki">کنز الایمان</span>
+                    </div>
+                    <div class="trans-body-ur">${hKi}</div>
+                  </div>
+                  ${hKr ? `
+                    <div class="trans-item-ur" style="margin-top: 2px;">
+                      <div class="trans-header">
+                        <span class="trans-source-tag kr">کنز العرفان</span>
+                      </div>
+                      <div class="trans-body-ur">${hKr}</div>
+                    </div>
+                  ` : ''}
+                </div>
               </div>
             ` : ''}
 
             ${showEnglish ? `
               <div class="command-pane-en">
                 <div class="command-title-en" dir="ltr">${hTitleEn}</div>
-                <div class="command-translation-en" dir="ltr">${hEn}</div>
+                <div class="trans-stack-en">
+                  <div class="trans-item-en">
+                    <div class="trans-header">
+                      <span class="trans-source-tag en">Saheeh International</span>
+                    </div>
+                    <div class="trans-body-en">${hEn}</div>
+                  </div>
+                </div>
               </div>
             ` : ''}
           </div>
@@ -457,8 +482,38 @@
           <div class="command-collapsible-body" id="col-body-${it.serial}">
             <div class="command-arabic-text" dir="rtl">${formattedAr}</div>
             <div class="command-content-grid ${!showEnglish ? 'urdu-only-grid' : (!showUrdu ? 'en-only-grid' : '')} ${isEngFirst ? 'mobile-order-en-first' : ''}">
-              ${showUrdu ? `<div class="command-pane-ur"><div class="command-translation-ur" dir="rtl">${hUr}</div></div>` : ''}
-              ${showEnglish ? `<div class="command-pane-en"><div class="command-translation-en" dir="ltr">${hEn}</div></div>` : ''}
+              ${showUrdu ? `
+                <div class="command-pane-ur">
+                  <div class="trans-stack-ur">
+                    <div class="trans-item-ur">
+                      <div class="trans-header">
+                        <span class="trans-source-tag ki">کنز الایمان</span>
+                      </div>
+                      <div class="trans-body-ur">${hKi}</div>
+                    </div>
+                    ${hKr ? `
+                      <div class="trans-item-ur" style="margin-top: 4px;">
+                        <div class="trans-header">
+                          <span class="trans-source-tag kr">کنز العرفان</span>
+                        </div>
+                        <div class="trans-body-ur">${hKr}</div>
+                      </div>
+                    ` : ''}
+                  </div>
+                </div>
+              ` : ''}
+              ${showEnglish ? `
+                <div class="command-pane-en">
+                  <div class="trans-stack-en">
+                    <div class="trans-item-en">
+                      <div class="trans-header">
+                        <span class="trans-source-tag en">Saheeh International</span>
+                      </div>
+                      <div class="trans-body-en">${hEn}</div>
+                    </div>
+                  </div>
+                </div>
+              ` : ''}
             </div>
             <div class="command-card-footer">
               <div class="card-actions-left">

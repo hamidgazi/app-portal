@@ -662,7 +662,7 @@
   height: 42px;
 }
 
-/* Responsive Overrides */
+/* Responsive Overrides & Mobile Touch Ergonomics (Finding F-05 / Directive 5) */
 @media (max-width: 768px) {
   .dua-tarjuma-grid {
     grid-template-columns: 1fr;
@@ -679,15 +679,138 @@
     border-left: none;
   }
 
-  .dua-micro-actions {
-    width: 100%;
-    justify-content: space-between;
-    margin-top: 4px;
-  }
-
   .dua-arabic {
     font-size: 1.30rem;
     line-height: 1.95;
+  }
+
+  /* Search Controls Touch Targets (>= 48px) */
+  .duas-search-input {
+    min-height: 48px !important;
+    height: 48px !important;
+    font-size: 1rem !important;
+    padding-left: 48px !important;
+  }
+
+  .duas-search-clear {
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    min-height: 48px !important;
+    left: 2px !important;
+    font-size: 1.1rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    touch-action: manipulation;
+    user-select: none;
+  }
+
+  /* Quick Pills & Category Chips Touch Targets (>= 48px) */
+  .duas-filter-strip,
+  .duas-category-strip,
+  .duas-prophet-bar {
+    gap: 8px;
+    padding-top: 4px;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .duas-pill-btn {
+    min-height: 48px !important;
+    padding: 8px 16px !important;
+    font-size: 0.88rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    touch-action: manipulation;
+    user-select: none;
+  }
+
+  .duas-cat-chip {
+    min-height: 48px !important;
+    padding: 8px 16px !important;
+    font-size: 0.88rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    touch-action: manipulation;
+    user-select: none;
+  }
+
+  .duas-prophet-chip {
+    min-height: 48px !important;
+    padding: 8px 14px !important;
+    font-size: 0.85rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    touch-action: manipulation;
+    user-select: none;
+  }
+
+  /* Card Micro Action Buttons Grid (>= 48px) */
+  .dua-micro-actions {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .dua-micro-btn {
+    min-height: 48px !important;
+    padding: 8px 14px !important;
+    font-size: 0.84rem !important;
+    flex: 1 1 calc(50% - 8px);
+    justify-content: center !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    touch-action: manipulation;
+    user-select: none;
+  }
+
+  /* Exegesis & Tafsir Expand Toggle (>= 48px) */
+  .dua-tafsir-toggle-btn {
+    min-height: 48px !important;
+    padding: 10px 14px !important;
+    font-size: 0.85rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    touch-action: manipulation;
+    user-select: none;
+  }
+
+  /* Mini Audio Dock Touch Targets (>= 48px) */
+  .dua-audio-dock {
+    padding: 10px 16px;
+    min-height: 64px;
+  }
+
+  .dua-dock-btn {
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    min-height: 48px !important;
+    touch-action: manipulation;
+    user-select: none;
+  }
+
+  .dua-dock-btn.main-play {
+    width: 52px !important;
+    height: 52px !important;
+    min-width: 52px !important;
+    min-height: 52px !important;
+  }
+
+  /* Search Studio Dua Badge Touch Target */
+  .search-dua-badge {
+    min-height: 48px !important;
+    padding: 8px 14px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    touch-action: manipulation;
+    user-select: none;
   }
 }
 
