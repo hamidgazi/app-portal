@@ -109,7 +109,7 @@ c:/Users/Shop PC 2/OneDrive/Desktop/Antigravity Files/20-Arabic-Mastery/
 
 ## 5. Automated Quality & Verification Status
 
-- **Automated Tests**: Passed (**17/17 test cases**, `node --check` 0 errors).
+- **Automated Tests**: Passed (**19/19 test cases**, `node --check` 0 errors).
 - **Beginner-Centric Overhaul**:
   - **Zero Raw LaTeX**: 100% elimination of unparsed LaTeX (`\text{}`, `\boxed{}`, `$$`, `{text\]`).
   - **Lego-Block Blueprints**: 59 semantic visual sentence cards (`.lego-blueprint-card`) with discrete directional isolation (Arabic RTL, English LTR, non-flipping operator icons).
