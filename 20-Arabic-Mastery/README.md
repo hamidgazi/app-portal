@@ -77,11 +77,13 @@ c:/Users/Shop PC 2/OneDrive/Desktop/Antigravity Files/20-Arabic-Mastery/
 │
 ├── scripts/                                   # Build & Compilation Engine
 │   ├── compile_textbook_data.py               # Markdown-to-HTML parser with BiDi isolation & drill answer injector
-│   ├── chapters_data.js                       # Compiled JavaScript data bundle (425 KB)
-│   └── apply_complete_bidi_redesign.py        # BiDi architecture & typography compiler/bundler
+│   ├── chapters_data.js                       # Compiled JavaScript data bundle (666 KB)
+│   ├── practice_questions_db.json             # 180-drill master practice database (15 chapters x 12 drills)
+│   ├── generate_practice_database.py          # 180-drill practice curriculum synthesizer
+│   └── build_neo_mushaf_practice_studio.py    # Neo-Mushaf luxury studio & practice engine compiler
 │
 └── tests/                                     # Automated Quality Assurance
-    └── test_interactive_app.py                # 13-test suite: node --check, 6-part anatomy, book reader modal, active recall drills, share modal, audio invariants.
+    └── test_interactive_app.py                # 15-test suite: node --check, 180-drill practice arena, frosted glass, book reader modal, active recall drills.
 ```
 
 ---
@@ -107,7 +109,7 @@ c:/Users/Shop PC 2/OneDrive/Desktop/Antigravity Files/20-Arabic-Mastery/
 
 ## 5. Automated Quality & Verification Status
 
-- **Automated Tests**: Passed (**13/13 test cases**, `node --check` 0 errors).
+- **Automated Tests**: Passed (**15/15 test cases**, `node --check` 0 errors).
 - **Directive Compliance**:
   - **Directive 5.1 (Isolated Bootloader)**: All 9 modules run inside isolated `try/catch` wrappers.
   - **Directive 5.3 (Touch Ergonomics)**: All interactive buttons maintain $\ge 48\text{ px}$ hitbox with `touch-action: manipulation;`.
