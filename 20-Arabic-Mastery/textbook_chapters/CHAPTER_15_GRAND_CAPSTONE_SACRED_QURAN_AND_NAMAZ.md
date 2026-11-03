@@ -170,7 +170,7 @@ This is a double-decker Possessive Compound (**إِضَافَةٌ مُتَدَا
 #### Grammatical Dissection:
 1. **اِهْدِ** (*Ihdii*): Imperative / Supplication Verb (فعل دُعَاء / أمر).
 2. **ـنَا** (*-naa*): Attached Object Pronoun (**مَفْعُولٌ بِهِ** = "Us" — Chapter 9).
-3. **الصِّرَاطَ** (*As-Siraata*): Second Object (مفعول به ثانٍ) $\to$ carries **Zabar (Fathah `َ`)**!
+3. **الصِّرَاطَ** (*As-Siraata*): Second Object (مفعول به ثانٍ) ➔ carries **Zabar (Fathah `َ`)**!
 4. **الْمُسْتَقِیْمَ** (*Al-Mustaqeema*): Adjective (**صِفَة**) describing the path. Mirrors the Al- and the Zabar (**الصِّرَاطَ الْمُسْتَقِيمَ** — Chapter 7).
 
 ---

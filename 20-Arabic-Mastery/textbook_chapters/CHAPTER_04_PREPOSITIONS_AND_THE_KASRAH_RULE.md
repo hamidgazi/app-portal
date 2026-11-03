@@ -91,25 +91,25 @@ $$\boxed{\text{أَيْنَ} + [\text{Subject}] \quad \longrightarrow \quad [\te
 
 Read these 12 sentences, focusing on the Zer at the end of each prepositional noun:
 
-1. **الْبَيْتُ $\to$ فِي الْبَيْتِ.**  
-   *Al-baytu $\to$ Fee al-bayti.*  
-   Urdu: گھر $\to$ گھر میں۔  
-   English: The house $\to$ In the house.
+1. **الْبَيْتُ ➔ فِي الْبَيْتِ.**  
+   *Al-baytu ➔ Fee al-bayti.*  
+   Urdu: گھر ➔ گھر میں۔  
+   English: The house ➔ In the house.
 
-2. **الْمَسْجِدُ $\to$ فِي الْمَسْجِدِ.**  
-   *Al-masjidu $\to$ Fee al-masjidi.*  
-   Urdu: مسجد $\to$ مسجد میں۔  
-   English: The mosque $\to$ In the mosque.
+2. **الْمَسْجِدُ ➔ فِي الْمَسْجِدِ.**  
+   *Al-masjidu ➔ Fee al-masjidi.*  
+   Urdu: مسجد ➔ مسجد میں۔  
+   English: The mosque ➔ In the mosque.
 
-3. **الْمَكْتَبُ $\to$ عَلَى الْمَكْتَبِ.**  
-   *Al-maktabu $\to$ 'Alaa al-maktabi.*  
-   Urdu: میز $\to$ میز پر۔  
-   English: The desk $\to$ On the desk.
+3. **الْمَكْتَبُ ➔ عَلَى الْمَكْتَبِ.**  
+   *Al-maktabu ➔ 'Alaa al-maktabi.*  
+   Urdu: میز ➔ میز پر۔  
+   English: The desk ➔ On the desk.
 
-4. **السَّرِيرُ $\to$ عَلَى السَّرِيرِ.**  
-   *As-sareeru $\to$ 'Alaa as-sareeri.*  
-   Urdu: چارپائی $\to$ چارپائی پر۔  
-   English: The bed $\to$ On the bed.
+4. **السَّرِيرُ ➔ عَلَى السَّرِيرِ.**  
+   *As-sareeru ➔ 'Alaa as-sareeri.*  
+   Urdu: چارپائی ➔ چارپائی پر۔  
+   English: The bed ➔ On the bed.
 
 5. **أَيْنَ حَامِدٌ؟ هُوَ فِي الْغُرْفَةِ.**  
    *Ayna Haamidun? Huwa fee al-ghurfati.*  
@@ -166,7 +166,7 @@ Read these 12 sentences, focusing on the Zer at the end of each prepositional no
 
 ### Trap 3: Treating inanimate feminine things as هُوَ
 - **Gender Note**: In Arabic, words ending in Ta Marbutah (`ة`) like **السَّاعَةُ** (the watch) are feminine! When referring to the watch with "it", use **هِيَ** (*Hiya*), not **هُوَ** (*Huwa*).
-  - *Where is the watch?* $\to$ **هِيَ عَلَى السَّرِيرِ.** (It is on the bed).
+  - *Where is the watch?* ➔ **هِيَ عَلَى السَّرِيرِ.** (It is on the bed).
 
 ---
 

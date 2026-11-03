@@ -167,8 +167,8 @@ Read these 12 sentences, identifying each prefix and vowel ending:
 ### Trap 1: Confusing تَذْهَبُ (You go) with تَذْهَبُ (She goes)
 - **The Twin Forms**: Look closely at **تَذْهَبُ**. It can mean *"You [m] go"* OR *"She goes"*.
 - **How to tell them apart**: Context decides!
-  - If addressed to a man: **أَيْنَ تَذْهَبُ يَا أَخِي؟** $\to$ *Where are you going?*
-  - If talking about a woman: **فَاطِمَةُ تَذْهَبُ إِلَى الْمَدْرَسَةِ** $\to$ *Fatimah is going to school.*
+  - If addressed to a man: **أَيْنَ تَذْهَبُ يَا أَخِي؟** ➔ *Where are you going?*
+  - If talking about a woman: **فَاطِمَةُ تَذْهَبُ إِلَى الْمَدْرَسَةِ** ➔ *Fatimah is going to school.*
 
 ### Trap 2: Negating Present Tense with مَا
 - **Mistake**: Saying `مَا أَذْهَبُ` for "I do not go".
@@ -191,9 +191,9 @@ Add the correct prefix (أَ / نَ / يَ / تَ) to make the present tense of 
 
 ### Drill 2: Present to Future Conversion (مستقبل بنائیں)
 Convert each sentence to near future using **سَـ**:
-1. يَذْهَبُ حَامِدٌ إِلَى الْمَسْجِدِ $\longrightarrow$ `(................................................)`
-2. أَغْسِلُ سَيَّارَتِي $\longrightarrow$ `(................................................)`
-3. نَقْرَأُ الْقُرْآنَ $\longrightarrow$ `(................................................)`
+1. يَذْهَبُ حَامِدٌ إِلَى الْمَسْجِدِ ➔ `(................................................)`
+2. أَغْسِلُ سَيَّارَتِي ➔ `(................................................)`
+3. نَقْرَأُ الْقُرْآنَ ➔ `(................................................)`
 
 ### Drill 3: Translation into Arabic
 1. Where are you [m] going? — I am going to the library.

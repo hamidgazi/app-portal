@@ -74,10 +74,10 @@ $$\boxed{\text{هٰذَا} + [\text{Noun A}] + \mathbf{وَ} + \text{ذٰلِك�
 ```
 
 ### Blueprint 3: Questions with ذٰلِكَ
-- **Non-Intellect (غیر عاقل)**: **مَا ذٰلِكَ؟** (*Maa dhaalika?* — What is that?) $\to$ **ذٰلِكَ نَجْمٌ.**
-- **Intellect (عاقل)**: **مَنْ ذٰلِكَ؟** (*Man dhaalika?* — Who is that?) $\to$ **ذٰلِكَ مُدَرِّسٌ.**
+- **Non-Intellect (غیر عاقل)**: **مَا ذٰلِكَ؟** (*Maa dhaalika?* — What is that?) ➔ **ذٰلِكَ نَجْمٌ.**
+- **Intellect (عاقل)**: **مَنْ ذٰلِكَ؟** (*Man dhaalika?* — Who is that?) ➔ **ذٰلِكَ مُدَرِّسٌ.**
 - **Alternative Choice (أَمْ — or)**: 
-  **أَذٰلِكَ قِطٌّ أَمْ كَلْبٌ؟** (*Is that a cat or a dog?*) $\to$ **ذٰلِكَ قِطٌّ.**
+  **أَذٰلِكَ قِطٌّ أَمْ كَلْبٌ؟** (*Is that a cat or a dog?*) ➔ **ذٰلِكَ قِطٌّ.**
 
 ---
 

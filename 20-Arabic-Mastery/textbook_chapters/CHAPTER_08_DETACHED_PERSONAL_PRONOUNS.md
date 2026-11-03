@@ -173,9 +173,9 @@ Fill in the blanks with the correct pronoun (**هُوَ** / **هِيَ** / **أ�
 
 ### Drill 2: Gender Transformation
 Convert each sentence to its opposite gender:
-1. هُوَ مُدَرِّسٌ $\longrightarrow$ `(........................................)`
-2. أَنْتَ طَالِبٌ $\longrightarrow$ `(........................................)`
-3. هُمْ مُسْلِمُونَ $\longrightarrow$ `(........................................)`
+1. هُوَ مُدَرِّسٌ ➔ `(........................................)`
+2. أَنْتَ طَالِبٌ ➔ `(........................................)`
+3. هُمْ مُسْلِمُونَ ➔ `(........................................)`
 
 ### Drill 3: Translation into Arabic
 1. Who is he? He is an engineer.

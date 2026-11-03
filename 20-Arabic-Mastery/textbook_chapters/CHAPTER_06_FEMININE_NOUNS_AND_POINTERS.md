@@ -43,8 +43,8 @@ When pointing to a feminine noun, you cannot use **هٰذَا** or **ذٰلِك�
 | **Near (قریب)** | **هٰذَا** (*Haadhaa*) | **هٰذِهِ** (*Haadhihi*) | This is |
 | **Distant (دور)** | **ذٰلِكَ** (*Dhaalika*) | **تِلْكَ** (*Tilka*) | That is |
 
-- **هٰذَا وَلَدٌ** (*This is a boy*) $\longleftrightarrow$ **هٰذِهِ بِنْتٌ** (*This is a girl*).
-- **ذٰلِكَ مَسْجِدٌ** (*That is a mosque*) $\longleftrightarrow$ **تِلْكَ مَدْرَسَةٌ** (*That is a school*).
+- **هٰذَا وَلَدٌ** (*This is a boy*) ↔ **هٰذِهِ بِنْتٌ** (*This is a girl*).
+- **ذٰلِكَ مَسْجِدٌ** (*That is a mosque*) ↔ **تِلْكَ مَدْرَسَةٌ** (*That is a school*).
 
 ---
 
@@ -93,10 +93,10 @@ $$\boxed{\mathbf{\text{تِلْكَ}} + [\text{اسْمٌ مُؤَنَّثٌ}\te
 
 ### Blueprint 3: Converting Masculine Adjectives to Feminine
 To describe a female person or feminine object, simply glue a **Taa Marbutah (`ـة`)** to the masculine word:
-- مُدَرِّسٌ (*male teacher*) $\xrightarrow{\,+\,\text{ة}\,}$ **مُدَرِّسَةٌ** (*female teacher*)
-- طَالِبٌ (*male student*) $\xrightarrow{\,+\,\text{ة}\,}$ **طَالِبَةٌ** (*female student*)
-- طَبِيبٌ (*male doctor*) $\xrightarrow{\,+\,\text{ة}\,}$ **طَبِيبَةٌ** (*female doctor*)
-- جَدِيدٌ (*new [m]*) $\xrightarrow{\,+\,\text{ة}\,}$ **جَدِيدَةٌ** (*new [f]*)
+- مُدَرِّسٌ (*male teacher*) (+ ة) ➔ **مُدَرِّسَةٌ** (*female teacher*)
+- طَالِبٌ (*male student*) (+ ة) ➔ **طَالِبَةٌ** (*female student*)
+- طَبِيبٌ (*male doctor*) (+ ة) ➔ **طَبِيبَةٌ** (*female doctor*)
+- جَدِيدٌ (*new [m]*) (+ ة) ➔ **جَدِيدَةٌ** (*new [f]*)
 
 ---
 
@@ -196,9 +196,9 @@ Choose either **هٰذَا** (masculine) or **هٰذِهِ** (feminine):
 
 ### Drill 2: Masculine to Feminine Conversion (مؤنث بنائیں)
 Convert these masculine sentences into feminine:
-1. هٰذَا طَالِبٌ جَدِيدٌ $\longrightarrow$ `(........................................)`
-2. الْوَلَدُ جَالِسٌ $\longrightarrow$ `(........................................)`
-3. ذٰلِكَ طَبِيبٌ $\longrightarrow$ `(........................................)`
+1. هٰذَا طَالِبٌ جَدِيدٌ ➔ `(........................................)`
+2. الْوَلَدُ جَالِسٌ ➔ `(........................................)`
+3. ذٰلِكَ طَبِيبٌ ➔ `(........................................)`
 
 ### Drill 3: Translation into Arabic
 1. This is a bicycle and that is a car.
@@ -211,11 +211,11 @@ Convert these masculine sentences into feminine:
 
 #### Drill 1 Answers:
 1. **هٰذَا** قَلَمٌ. (Pen is masculine).
-2. **هٰذِهِ** سَيَّارَةٌ. (Car ends in Taa Marbutah $\to$ feminine).
-3. **هٰذِهِ** بِنْتٌ. (Daughter is natural female $\to$ feminine).
+2. **هٰذِهِ** سَيَّارَةٌ. (Car ends in Taa Marbutah ➔ feminine).
+3. **هٰذِهِ** بِنْتٌ. (Daughter is natural female ➔ feminine).
 4. **هٰذَا** مَسْجِدٌ. (Mosque is masculine).
-5. **هٰذِهِ** عَيْنٌ. (Eye is a paired body part $\to$ feminine).
-6. **هٰذِهِ** سَاعَةٌ. (Watch ends in Taa Marbutah $\to$ feminine).
+5. **هٰذِهِ** عَيْنٌ. (Eye is a paired body part ➔ feminine).
+6. **هٰذِهِ** سَاعَةٌ. (Watch ends in Taa Marbutah ➔ feminine).
 
 #### Drill 2 Answers:
 1. **هٰذِهِ طَالِبَةٌ جَدِيدَةٌ.** (Pointer becomes هٰذِهِ, noun and adjective take Taa Marbutah).

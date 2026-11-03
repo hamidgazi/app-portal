@@ -171,11 +171,11 @@ Read these 12 sentences, noting the absence of Al- on the first noun and the Kas
 
 ### Drill 1: Possessive Phrase Construction (اضافت بنائیں)
 Form correct possessive phrases from the following pairs of words and apply complete vowels:
-1. قَلَمٌ + الْمُدَرِّسُ $\longrightarrow$ `(....................................)`
-2. بَابٌ + الْبَيْتُ $\longrightarrow$ `(....................................)`
-3. كِتَابٌ + حَامِدٌ $\longrightarrow$ `(....................................)`
-4. بِنْتٌ + الطَّبِيبُ $\longrightarrow$ `(....................................)`
-5. سَيَّارَةٌ + الْمُدِيرُ $\longrightarrow$ `(....................................)`
+1. قَلَمٌ + الْمُدَرِّسُ ➔ `(....................................)`
+2. بَابٌ + الْبَيْتُ ➔ `(....................................)`
+3. كِتَابٌ + حَامِدٌ ➔ `(....................................)`
+4. بِنْتٌ + الطَّبِيبُ ➔ `(....................................)`
+5. سَيَّارَةٌ + الْمُدِيرُ ➔ `(....................................)`
 
 ### Drill 2: Spatial Adverb Exercise (ظرف کے بعد اعراب لگائیں)
 Fill in the correct ending vowel on the bracketed word:

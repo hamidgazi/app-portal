@@ -178,11 +178,11 @@ Identify the person (1st, 2nd, 3rd) and number (singular, plural) for:
 ## 🔑 Complete Step-by-Step Answer Key
 
 #### Drill 1 Answers:
-1. أَنَا **كَتَبْتُ** الرِّسَالَةَ. (I wrote $\to$ كَتَبْتُ with Dammah).
-2. أَنْتَ **كَتَبْتَ** الدَّرْسَ. (You [m] wrote $\to$ كَتَبْتَ with Fathah).
-3. أَنْتِ **كَتَبْتِ** الْوَاجِبَ. (You [f] wrote $\to$ كَتَبْتِ with Kasrah).
-4. نَحْنُ **كَتَبْنَا** فِي الْفَصْلِ. (We wrote $\to$ كَتَبْنَا with Naa).
-5. الطُّلَّابُ **كَتَبُوا** بِالْقَلَمِ. (Plural 3rd person $\to$ كَتَبُوا with Waw and silent Alif).
+1. أَنَا **كَتَبْتُ** الرِّسَالَةَ. (I wrote ➔ كَتَبْتُ with Dammah).
+2. أَنْتَ **كَتَبْتَ** الدَّرْسَ. (You [m] wrote ➔ كَتَبْتَ with Fathah).
+3. أَنْتِ **كَتَبْتِ** الْوَاجِبَ. (You [f] wrote ➔ كَتَبْتِ with Kasrah).
+4. نَحْنُ **كَتَبْنَا** فِي الْفَصْلِ. (We wrote ➔ كَتَبْنَا with Naa).
+5. الطُّلَّابُ **كَتَبُوا** بِالْقَلَمِ. (Plural 3rd person ➔ كَتَبُوا with Waw and silent Alif).
 
 #### Drill 2 Answers:
 1. **جَلَسْتُ**: 1st Person Singular (*I sat* / متکلم واحد).

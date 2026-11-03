@@ -16,9 +16,9 @@ In Arabic, however, mathematics and linguistics merge into a 3-tier structure:
 
 ### 1. The Dual (تثنیہ — Exactly Two):
 To make any singular noun refer to two items, you don't add the number "two". You simply weld the royal dual suffix **ـَانِ** (*-aani*) to the end:
-- كِتَابٌ (*one book*) $\longrightarrow$ **كِتَابَانِ** (*two books*)
-- قَلَمٌ (*one pen*) $\longrightarrow$ **قَلَمَانِ** (*two pens*)
-- بِنْتٌ (*one girl*) $\longrightarrow$ **بِنْتَانِ** (*two girls*)
+- كِتَابٌ (*one book*) ➔ **كِتَابَانِ** (*two books*)
+- قَلَمٌ (*one pen*) ➔ **قَلَمَانِ** (*two pens*)
+- بِنْتٌ (*one girl*) ➔ **بِنْتَانِ** (*two girls*)
 
 ---
 
@@ -27,23 +27,23 @@ When counting 3 or more, Arabic branches into three distinct plural systems:
 
 #### Tribe A: The Sound Masculine Plural (جَمْعُ الْمُذَكَّرِ السَّالِمُ)
 Called "sound" (*saalim*) because the singular root word remains completely unharmed! You simply add **ـُونَ** (*-oona* in Marfoo') or **ـِينَ** (*-eena* in Majroor):
-- مُسْلِمٌ $\longrightarrow$ **مُسْلِمُونَ** (*Muslims*)
-- مُدَرِّسٌ $\longrightarrow$ **مُدَرِّسُونَ** (*Teachers*)
-- مُجْتَهِدٌ $\longrightarrow$ **مُجْتَهِدُونَ** (*Hardworking people*)
+- مُسْلِمٌ ➔ **مُسْلِمُونَ** (*Muslims*)
+- مُدَرِّسٌ ➔ **مُدَرِّسُونَ** (*Teachers*)
+- مُجْتَهِدٌ ➔ **مُجْتَهِدُونَ** (*Hardworking people*)
 
 #### Tribe B: The Sound Feminine Plural (جَمْعُ الْمُؤَنَّثِ السَّالِمُ)
 Drop the singular Taa Marbutah and add the long feminine suffix **ـَاتٌ** (*-aatun*):
-- مُسْلِمَةٌ $\longrightarrow$ **مُسْلِمَاتٌ** (*Muslim women*)
-- سَيَّارَةٌ $\longrightarrow$ **سَيَّارَاتٌ** (*Cars*)
-- سَاعَةٌ $\longrightarrow$ **سَاعَاتٌ** (*Watches / hours*)
+- مُسْلِمَةٌ ➔ **مُسْلِمَاتٌ** (*Muslim women*)
+- سَيَّارَةٌ ➔ **سَيَّارَاتٌ** (*Cars*)
+- سَاعَةٌ ➔ **سَاعَاتٌ** (*Watches / hours*)
 
 #### Tribe C: The Broken Plural (جَمْعُ التَّكْسِيرِ)
-Just like English "foot $\to$ feet" or "child $\to$ children", the internal vowel architecture of the singular word "breaks" and rearranges into classic rhythmic patterns:
-- كِتَابٌ $\longrightarrow$ **كُتُبٌ** (*Books*)
-- قَلَمٌ $\longrightarrow$ **أَقْلَامٌ** (*Pens*)
-- رَجُلٌ $\longrightarrow$ **رِجَالٌ** (*Men*)
-- بَيْتٌ $\longrightarrow$ **بُيُوتٌ** (*Houses*)
-- مَسْجِدٌ $\longrightarrow$ **مَسَاجِدُ** (*Mosques*)
+Just like English "foot ➔ feet" or "child ➔ children", the internal vowel architecture of the singular word "breaks" and rearranges into classic rhythmic patterns:
+- كِتَابٌ ➔ **كُتُبٌ** (*Books*)
+- قَلَمٌ ➔ **أَقْلَامٌ** (*Pens*)
+- رَجُلٌ ➔ **رِجَالٌ** (*Men*)
+- بَيْتٌ ➔ **بُيُوتٌ** (*Houses*)
+- مَسْجِدٌ ➔ **مَسَاجِدُ** (*Mosques*)
 
 ---
 
@@ -192,11 +192,11 @@ Read these 12 sentences, actively contrasting human plurals with non-human plura
 
 ### Drill 1: Plural Transformation & Pointer Selection (جمع بنائیں)
 Convert each phrase into the plural with the correct pointer (**هٰؤُلَاءِ** or **هٰذِهِ**):
-1. هٰذَا كِتَابٌ $\longrightarrow$ `(........................................)`
-2. هٰذَا طَالِبٌ $\longrightarrow$ `(........................................)`
-3. هٰذَا قَلَمٌ $\longrightarrow$ `(........................................)`
-4. هٰذَا رَجُلٌ $\longrightarrow$ `(........................................)`
-5. هٰذِهِ سَيَّارَةٌ $\longrightarrow$ `(........................................)`
+1. هٰذَا كِتَابٌ ➔ `(........................................)`
+2. هٰذَا طَالِبٌ ➔ `(........................................)`
+3. هٰذَا قَلَمٌ ➔ `(........................................)`
+4. هٰذَا رَجُلٌ ➔ `(........................................)`
+5. هٰذِهِ سَيَّارَةٌ ➔ `(........................................)`
 
 ### Drill 2: Adjective Agreement Drill (مناسب صفت چنیں)
 Choose the correct adjective form:
@@ -215,11 +215,11 @@ Choose the correct adjective form:
 ## 🔑 Complete Step-by-Step Answer Key
 
 #### Drill 1 Answers:
-1. **هٰذِهِ كُتُبٌ.** (Books are non-human $\to$ use هٰذِهِ).
-2. **هٰؤُلَاءِ طُلَّابٌ.** (Students are human $\to$ use هٰؤُلَاءِ).
-3. **هٰذِهِ أَقْلَامٌ.** (Pens are non-human $\to$ use هٰذِهِ).
-4. **هٰؤُلَاءِ رِجَالٌ.** (Men are human $\to$ use هٰؤُلَاءِ).
-5. **هٰذِهِ سَيَّارَاتٌ.** (Cars are non-human $\to$ use هٰذِهِ).
+1. **هٰذِهِ كُتُبٌ.** (Books are non-human ➔ use هٰذِهِ).
+2. **هٰؤُلَاءِ طُلَّابٌ.** (Students are human ➔ use هٰؤُلَاءِ).
+3. **هٰذِهِ أَقْلَامٌ.** (Pens are non-human ➔ use هٰذِهِ).
+4. **هٰؤُلَاءِ رِجَالٌ.** (Men are human ➔ use هٰؤُلَاءِ).
+5. **هٰذِهِ سَيَّارَاتٌ.** (Cars are non-human ➔ use هٰذِهِ).
 
 #### Drill 2 Answers:
 1. الْكُتُبُ **جَدِيدَةٌ** (Non-human plural takes Singular Feminine adjective).

@@ -13,7 +13,7 @@ Welcome to **Block 3: The Action Engine**!
 Up to Chapter 10, we examined the **Noun Universe** (*Asmaa'*): books, desks, pens, teachers, and pronouns.
 Now, we ignite the engine that makes the language move: **الفِعْلُ (The Verb / Action)**.
 
-If you have ever studied English or French, you know the frustration of memorizing hundreds of chaotic irregular verbs (*go $\to$ went $\to$ gone*, *buy $\to$ bought $\to$ bought*).
+If you have ever studied English or French, you know the frustration of memorizing hundreds of chaotic irregular verbs (*go ➔ went ➔ gone*, *buy ➔ bought ➔ bought*).
 
 **In Arabic, verbs are supremely logical, musical, and systematic.**
 This science is called **عِلْمُ الصَّرْفِ** (*'Ilm as-Sarf* — Arabic Morphology).
@@ -91,10 +91,10 @@ How do you say "She went"?
 Simply attach a quiet, resting **Taa with Sukoon** (**تْ** — called *Taa at-Ta'neeth as-Saakinah* / تاء التأنيث الساكنة):
 $$\boxed{\text{فَعَلَ} \quad (\text{He did}) \qquad \longleftrightarrow \qquad \mathbf{\text{فَعَلَتْ}} \quad (\text{She did})}$$
 
-- **ذَهَبَ** (*He went*) $\longleftrightarrow$ **ذَهَبَتْ** (*She went*)
-- **خَرَجَ** (*He left*) $\longleftrightarrow$ **خَرَجَتْ** (*She left*)
-- **كَتَبَ** (*He wrote*) $\longleftrightarrow$ **كَتَبَتْ** (*She wrote*)
-- **شَرِبَ** (*He drank*) $\longleftrightarrow$ **شَرِبَتْ** (*She drank*)
+- **ذَهَبَ** (*He went*) ↔ **ذَهَبَتْ** (*She went*)
+- **خَرَجَ** (*He left*) ↔ **خَرَجَتْ** (*She left*)
+- **كَتَبَ** (*He wrote*) ↔ **كَتَبَتْ** (*She wrote*)
+- **شَرِبَ** (*He drank*) ↔ **شَرِبَتْ** (*She drank*)
 
 ---
 
@@ -183,16 +183,16 @@ Read these 12 sentences, identifying the action and the doer:
 
 ### Drill 1: Root Extraction (تین حرفی مادہ نکالیں)
 Extract the 3-letter root for each word and identify its middle vowel:
-1. كَتَبَ $\longrightarrow$ Root: `(............... , ............... , ...............)`
-2. سَمِعَ $\longrightarrow$ Root: `(............... , ............... , ...............)`
-3. شَرِبَ $\longrightarrow$ Root: `(............... , ............... , ...............)`
-4. خَرَجَ $\longrightarrow$ Root: `(............... , ............... , ...............)`
+1. كَتَبَ ➔ Root: `(............... , ............... , ...............)`
+2. سَمِعَ ➔ Root: `(............... , ............... , ...............)`
+3. شَرِبَ ➔ Root: `(............... , ............... , ...............)`
+4. خَرَجَ ➔ Root: `(............... , ............... , ...............)`
 
 ### Drill 2: Masculine to Feminine Verb Conversion (مؤنث بنائیں)
 Convert these sentences from masculine to feminine:
-1. ذَهَبَ حَامِدٌ إِلَى الْمَسْجِدِ $\longrightarrow$ ذَهَبَتْ فَاطِمَةُ `(....................................)`
-2. خَرَجَ الطَّالِبُ مِنَ الْفَصْلِ $\longrightarrow$ `(............................................................)`
-3. جَلَسَ الْوَلَدُ عَلَى الْكُرْسِيِّ $\longrightarrow$ `(............................................................)`
+1. ذَهَبَ حَامِدٌ إِلَى الْمَسْجِدِ ➔ ذَهَبَتْ فَاطِمَةُ `(....................................)`
+2. خَرَجَ الطَّالِبُ مِنَ الْفَصْلِ ➔ `(............................................................)`
+3. جَلَسَ الْوَلَدُ عَلَى الْكُرْسِيِّ ➔ `(............................................................)`
 
 ### Drill 3: Translation into Arabic
 1. The student wrote the lesson.

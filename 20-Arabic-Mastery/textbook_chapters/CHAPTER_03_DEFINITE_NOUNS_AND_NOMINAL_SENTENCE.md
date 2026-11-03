@@ -184,10 +184,10 @@ Translate into vocalized Arabic:
 
 ### Drill 2: Tanween Removal Drill (معرفہ بنائیں)
 Convert these indefinite words into definite words with proper final vowels:
-1. بَابٌ $\longrightarrow$ `(..................)`
-2. حَجَرٌ $\longrightarrow$ `(..................)`
-3. قَمِيصٌ $\longrightarrow$ `(..................)`
-4. وَلَدٌ $\longrightarrow$ `(..................)`
+1. بَابٌ ➔ `(..................)`
+2. حَجَرٌ ➔ `(..................)`
+3. قَمِيصٌ ➔ `(..................)`
+4. وَلَدٌ ➔ `(..................)`
 
 ### Drill 3: Subject & Predicate Identification (مبتدأ اور خبر کی نشاندہی)
 In the sentence **الْقَمَرُ جَمِيلٌ**:
@@ -212,10 +212,10 @@ In the sentence **الْقَمَرُ جَمِيلٌ**:
    *Explanation*: The shirt is clean.
 
 #### Drill 2 Answers:
-1. بَابٌ $\longrightarrow$ **الْبَابُ** (Tanween drops to single Dammah).
-2. حَجَرٌ $\longrightarrow$ **الْحَجَرُ** (Definite stone).
-3. قَمِيصٌ $\longrightarrow$ **الْقَمِيصُ** (Definite shirt).
-4. وَلَدٌ $\longrightarrow$ **الْوَلَدُ** (Definite boy).
+1. بَابٌ ➔ **الْبَابُ** (Tanween drops to single Dammah).
+2. حَجَرٌ ➔ **الْحَجَرُ** (Definite stone).
+3. قَمِيصٌ ➔ **الْقَمِيصُ** (Definite shirt).
+4. وَلَدٌ ➔ **الْوَلَدُ** (Definite boy).
 
 #### Drill 3 Answers:
 1. **الْمُبْتَدَأ**: **الْقَمَرُ** (It is the definite subject being talked about).

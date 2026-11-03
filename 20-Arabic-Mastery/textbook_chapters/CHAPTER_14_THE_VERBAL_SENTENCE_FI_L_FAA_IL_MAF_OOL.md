@@ -18,9 +18,9 @@ Classical Arabic operates on an incomparably more sophisticated linguistic engin
 Consider this famous sentence:
 $$\mathbf{\text{شَرِبَ حَامِدٌ الْمَاءَ}}$$
 
-1. **شَرِبَ** (*Shariba*) = **The Verb (الْفِعْلُ)** $\to$ The action of drinking.
-2. **حَامِدٌ** (*Haamid-un*) = **The Doer (الْفَاعِلُ)** $\to$ Look at the double Pesh (`ٌ`)! In Arabic, whoever performs the action MUST carry a **Pesh (Dammah)**.
-3. **الْمَاءَ** (*Al-Maa'-a*) = **The Object (الْمَفْعُولُ بِهِ)** $\to$ Look at the single Zabar (`َ`)! In Arabic, whatever receives the action MUST carry a **Zabar (Fathah)**.
+1. **شَرِبَ** (*Shariba*) = **The Verb (الْفِعْلُ)** ➔ The action of drinking.
+2. **حَامِدٌ** (*Haamid-un*) = **The Doer (الْفَاعِلُ)** ➔ Look at the double Pesh (`ٌ`)! In Arabic, whoever performs the action MUST carry a **Pesh (Dammah)**.
+3. **الْمَاءَ** (*Al-Maa'-a*) = **The Object (الْمَفْعُولُ بِهِ)** ➔ Look at the single Zabar (`َ`)! In Arabic, whatever receives the action MUST carry a **Zabar (Fathah)**.
 
 ### The Mind-Blowing Flexibility of Arabic:
 Even if a poet or the Holy Quran reverses the word order:
@@ -190,8 +190,8 @@ Read these 12 sentences, vocally pronouncing the Pesh on the Doer and the Zabar 
 
 ### Trap 3: Feminine Subject Agreement
 - **Rule**: If the Faa'il (doer) is female, the verb MUST take the feminine marker:
-  - **ذَهَبَ حَامِدٌ** (Hamid went $\to$ masculine).
-  - **ذَهَبَتْ فَاطِمَةُ** (Fatimah went $\to$ feminine with `تْ`).
+  - **ذَهَبَ حَامِدٌ** (Hamid went ➔ masculine).
+  - **ذَهَبَتْ فَاطِمَةُ** (Fatimah went ➔ feminine with `تْ`).
 
 ---
 

@@ -56,14 +56,14 @@ Here are the high-yield attached suffixes:
 | **1st Plural (ہمارا)** | **ـنَا** | **كِتَابُنَا** | *Kitaabu-naa* | Our book |
 
 ### Vocabulary Bank (Identity & Relationships):
-1. **اسْمٌ** (*Ismun*) — Name $\longrightarrow$ **اسْمِي** (*My name*)
-2. **صَدِيقٌ** (*Sadeequn*) — Friend $\longrightarrow$ **صَدِيقِي** (*My friend*)
-3. **زَمِيلٌ** (*Zameelun*) — Classmate / colleague $\longrightarrow$ **زَمِيلُهُ** (*His classmate*)
-4. **بَلَدٌ** (*Baladun*) — Country / city $\longrightarrow$ **بَلَدُنَا** (*Our country*)
-5. **لُغَةٌ** (*Lughatun*) — Language $\longrightarrow$ **لُغَتِي** (*My language*)
-6. **دِينٌ** (*Deenun*) — Religion $\longrightarrow$ **دِينُنَا** (*Our religion*)
-7. **أَبٌ** (*Abun*) — Father $\longrightarrow$ **أَبُوكَ** (*Your father*)
-8. **أَخٌ** (*Akhun*) — Brother $\longrightarrow$ **أَخِي** (*My brother*)
+1. **اسْمٌ** (*Ismun*) — Name ➔ **اسْمِي** (*My name*)
+2. **صَدِيقٌ** (*Sadeequn*) — Friend ➔ **صَدِيقِي** (*My friend*)
+3. **زَمِيلٌ** (*Zameelun*) — Classmate / colleague ➔ **زَمِيلُهُ** (*His classmate*)
+4. **بَلَدٌ** (*Baladun*) — Country / city ➔ **بَلَدُنَا** (*Our country*)
+5. **لُغَةٌ** (*Lughatun*) — Language ➔ **لُغَتِي** (*My language*)
+6. **دِينٌ** (*Deenun*) — Religion ➔ **دِينُنَا** (*Our religion*)
+7. **أَبٌ** (*Abun*) — Father ➔ **أَبُوكَ** (*Your father*)
+8. **أَخٌ** (*Akhun*) — Brother ➔ **أَخِي** (*My brother*)
 
 ---
 
@@ -80,15 +80,15 @@ $$\boxed{\text{اسْمٌ (Stripped of Tanween)} + \text{ضَمِيرٌ مُتّ
 
 ### Blueprint 2: Prepositions with Attached Pronouns
 Observe how prepositions combine with suffixes:
-- **فِي** + **ـهِ** $\longrightarrow$ **فِيهِ** (*Fee-hi* — In it / in him)
-- **عَلَى** + **ـكَ** $\longrightarrow$ **عَلَيْكَ** (*'Alay-ka* — Upon you)
-- **مِنْ** + **ـهُ** $\longrightarrow$ **مِنْهُ** (*Min-hu* — From him)
-- **لِـ** + **ـنَا** $\longrightarrow$ **لَنَا** (*La-naa* — For us)
+- **فِي** + **ـهِ** ➔ **فِيهِ** (*Fee-hi* — In it / in him)
+- **عَلَى** + **ـكَ** ➔ **عَلَيْكَ** (*'Alay-ka* — Upon you)
+- **مِنْ** + **ـهُ** ➔ **مِنْهُ** (*Min-hu* — From him)
+- **لِـ** + **ـنَا** ➔ **لَنَا** (*La-naa* — For us)
 
 ### Blueprint 3: The Special "My" Suffix (ياء المتكلم / ـي)
 The 1st-person suffix **ـي** (*-ee*) is uncompromising: it forces the letter right before it to take a **Kasrah / Zer**, overriding all other vowels!
-- كِتَابُ $\xrightarrow{\,+\,\text{ـي}\,}$ **كِتَابِي** (*Kitaab-ee*)
-- قَلَمُ $\xrightarrow{\,+\,\text{ـي}\,}$ **قَلَمِي** (*Qalam-ee*)
+- كِتَابُ (+ ـي) ➔ **كِتَابِي** (*Kitaab-ee*)
+- قَلَمُ (+ ـي) ➔ **قَلَمِي** (*Qalam-ee*)
 
 ---
 
@@ -181,11 +181,11 @@ Read these 12 sentences with full conversational expression:
 
 ### Drill 1: Suffix Attachment Table (ضمیر جوڑیں)
 Attach the indicated suffix to the word **قَلَمٌ** (Pen):
-1. With "His" (ـهُ) $\longrightarrow$ `(........................)`
-2. With "Your [m]" (ـكَ) $\longrightarrow$ `(........................)`
-3. With "Your [f]" (ـكِ) $\longrightarrow$ `(........................)`
-4. With "My" (ـي) $\longrightarrow$ `(........................)`
-5. With "Our" (ـنَا) $\longrightarrow$ `(........................)`
+1. With "His" (ـهُ) ➔ `(........................)`
+2. With "Your [m]" (ـكَ) ➔ `(........................)`
+3. With "Your [f]" (ـكِ) ➔ `(........................)`
+4. With "My" (ـي) ➔ `(........................)`
+5. With "Our" (ـنَا) ➔ `(........................)`
 
 ### Drill 2: Dialogue Translation into Arabic
 Translate this interview into Arabic with vowels:

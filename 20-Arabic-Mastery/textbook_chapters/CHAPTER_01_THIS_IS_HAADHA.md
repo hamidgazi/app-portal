@@ -208,8 +208,8 @@ Add the correct vowel signs (Pesh / Dammah / Tanween) to each word:
    *Explanation*: The questioning Hamzah أَ initiates the question. The negative answer begins with لَا followed by the correct object.
 
 #### Drill 2 Answers:
-1. **مَنْ** هٰذَا؟ هٰذَا طَبِيبٌ. (Doctor is human $\to$ use مَنْ).
-2. **مَا** هٰذَا؟ هٰذَا كِتَابٌ. (Book is inanimate $\to$ use مَا).
+1. **مَنْ** هٰذَا؟ هٰذَا طَبِيبٌ. (Doctor is human ➔ use مَنْ).
+2. **مَا** هٰذَا؟ هٰذَا كِتَابٌ. (Book is inanimate ➔ use مَا).
 3. أَهٰذَا قَلَمٌ؟ **نَعَمْ**، هٰذَا قَلَمٌ. (Affirmation uses نَعَمْ).
 4. أَهٰذَا مَسْجِدٌ؟ **لَا**، هٰذَا بَيْتٌ. (Negation uses لَا).
 

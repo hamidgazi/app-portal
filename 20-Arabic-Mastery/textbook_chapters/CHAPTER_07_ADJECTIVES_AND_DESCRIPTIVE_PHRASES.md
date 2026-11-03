@@ -9,8 +9,8 @@
 ## 👨‍🏫 Part 1: Tutor Narrative & Conceptual Awakening
 
 In English and Urdu, when you describe something, the descriptive word comes **first**:
-- English: *"A new car"* (Adjective "new" $\to$ Noun "car")
-- Urdu: *"نئی کار"* (Adjective "نئی" $\to$ Noun "کار")
+- English: *"A new car"* (Adjective "new" ➔ Noun "car")
+- Urdu: *"نئی کار"* (Adjective "نئی" ➔ Noun "کار")
 
 If you try to translate this word-for-word into Arabic, you will stumble. 
 In Classical Arabic, **the physical object comes first**, and **its description follows immediately behind it**:
@@ -40,11 +40,11 @@ In Arabic, an adjective is completely subservient to its noun. It must agree wit
 Look very carefully at this comparison. It is the single most tested concept in Arabic grammar:
 
 1. **الْكِتَابُ جَدِيدٌ** (Definite Noun + Indefinite Adjective):  
-   $\longrightarrow$ **"The book is new."** (A COMPLETE SENTENCE with subject and predicate!).
+   ➔ **"The book is new."** (A COMPLETE SENTENCE with subject and predicate!).
 2. **الْكِتَابُ الْجَدِيدُ** (Definite Noun + Definite Adjective):  
-   $\longrightarrow$ **"The new book..."** (A FRAGMENT / PHRASE. It is not a complete sentence yet; what about the new book?).
+   ➔ **"The new book..."** (A FRAGMENT / PHRASE. It is not a complete sentence yet; what about the new book?).
 3. **كِتَابٌ جَدِيدٌ** (Indefinite Noun + Indefinite Adjective):  
-   $\longrightarrow$ **"A new book..."** (A descriptive phrase).
+   ➔ **"A new book..."** (A descriptive phrase).
 
 ---
 
@@ -214,10 +214,10 @@ Choose the correct adjective form:
 5. **الْقَلَمُ الْمَكْسُورُ**: **Incomplete Phrase (مركب)** — *"The broken pen..."*
 
 #### Drill 2 Answers:
-1. هٰذِهِ سَيَّارَةٌ **جَدِيدَةٌ** (Car is feminine $\to$ adjective needs Taa Marbutah).
-2. الْعَرَبِيَّةُ لُغَةٌ **سَهْلَةٌ** (Language is feminine $\to$ سَهْلَةٌ).
-3. الْمَسْجِدُ **كَبِيرٌ** (Mosque is masculine $\to$ كَبِيرٌ).
-4. هٰذِهِ عَيْنٌ **جَمِيلَةٌ** (Eye is a paired body part $\to$ feminine!).
+1. هٰذِهِ سَيَّارَةٌ **جَدِيدَةٌ** (Car is feminine ➔ adjective needs Taa Marbutah).
+2. الْعَرَبِيَّةُ لُغَةٌ **سَهْلَةٌ** (Language is feminine ➔ سَهْلَةٌ).
+3. الْمَسْجِدُ **كَبِيرٌ** (Mosque is masculine ➔ كَبِيرٌ).
+4. هٰذِهِ عَيْنٌ **جَمِيلَةٌ** (Eye is a paired body part ➔ feminine!).
 
 #### Drill 3 Answers:
 1. **الْمُدَرِّسُ الْجَدِيدُ فِي الْفَصْلِ.** (Descriptive subject + prepositional predicate).
