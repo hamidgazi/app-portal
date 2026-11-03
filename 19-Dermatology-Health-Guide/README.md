@@ -23,6 +23,8 @@ Key diagnostic formulations established during clinical triage:
 
 | Production Deliverable | Format | Direct Clickable File Link | Description |
 | :--- | :--- | :--- | :--- |
+| **Master Facial Remedies, Creams & Medicines Compendium** | Microsoft Word (.docx) | [Master_Facial_Remedies_Creams_Medicines_Compendium.docx](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/19-Dermatology-Health-Guide/Master_Facial_Remedies_Creams_Medicines_Compendium.docx) | Definitive clinical Problem-Solution Formulary covering 9 facial conditions with chemical active percentages, pharmacy brand references, OTC vs Rx tags, and 15 hidden gems (0% surgery/lasers). |
+| **Facial Remedies & Medicine Markdown Compendium** | Markdown Document | [MASTER_FACIAL_REMEDIES_CREAMS_MEDICINES_COMPENDIUM.md](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/19-Dermatology-Health-Guide/MASTER_FACIAL_REMEDIES_CREAMS_MEDICINES_COMPENDIUM.md) | Canonical Markdown compendium with problem-by-problem medicine hierarchies, brand references, and active layering rules. |
 | **Allopathy vs. Ayurveda vs. Homeopathy Master Dossier** | Microsoft Word (.docx) | [Allopathy_vs_Ayurveda_vs_Homeopathy_Comparative_Guide.docx](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/19-Dermatology-Health-Guide/Allopathy_vs_Ayurveda_vs_Homeopathy_Comparative_Guide.docx) | Publication-grade Word reference comparing therapeutic mechanisms, RCT trial evidence, safety/toxicology audits, and 12 hidden gems for Acne, Scars, PIH, and PIE. |
 | **Comparative Dermatology Markdown Guide** | Markdown Document | [ALLOPATHY_VS_AYURVEDA_VS_HOMEOPATHY_COMPARATIVE_GUIDE.md](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/19-Dermatology-Health-Guide/ALLOPATHY_VS_AYURVEDA_VS_HOMEOPATHY_COMPARATIVE_GUIDE.md) | Canonical Markdown compendium with Mermaid flowcharts, multi-column condition scorecards, and scenario decision algorithms. |
 | **Executive Clinical Protocol** | Markdown Document | [MASTER_DERMATOLOGY_PROTOCOL.md](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/19-Dermatology-Health-Guide/MASTER_DERMATOLOGY_PROTOCOL.md) | Exhaustive clinical reference with pathophysiological blueprints, efficacy rankings, active mechanisms, and prescription tags. |
@@ -36,6 +38,9 @@ Key diagnostic formulations established during clinical triage:
 ```
 c:/Users/Shop PC 2/OneDrive/Desktop/Antigravity Files/19-Dermatology-Health-Guide/
 ├── README.md                                                       # Master Project Navigation Hub & Executive Index
+├── Master_Facial_Remedies_Creams_Medicines_Compendium.docx         # Master Facial Remedies & Medicine Word Deliverable
+├── MASTER_FACIAL_REMEDIES_CREAMS_MEDICINES_COMPENDIUM.md           # Canonical Markdown Facial Remedies Formulary
+├── build_face_remedies_compendium.py                               # Automated OpenXML Facial Remedies Engine
 ├── Allopathy_vs_Ayurveda_vs_Homeopathy_Comparative_Guide.docx      # Master Comparative Medical Word Deliverable
 ├── ALLOPATHY_VS_AYURVEDA_VS_HOMEOPATHY_COMPARATIVE_GUIDE.md        # Canonical Markdown Comparative Compendium
 ├── build_comparative_guide.py                                      # Automated OpenXML Word Generation Engine
