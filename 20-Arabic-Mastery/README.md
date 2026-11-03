@@ -109,12 +109,17 @@ c:/Users/Shop PC 2/OneDrive/Desktop/Antigravity Files/20-Arabic-Mastery/
 
 ## 5. Automated Quality & Verification Status
 
-- **Automated Tests**: Passed (**15/15 test cases**, `node --check` 0 errors).
+- **Automated Tests**: Passed (**17/17 test cases**, `node --check` 0 errors).
+- **Beginner-Centric Overhaul**:
+  - **Zero Raw LaTeX**: 100% elimination of unparsed LaTeX (`\text{}`, `\boxed{}`, `$$`, `{text\]`).
+  - **Lego-Block Blueprints**: 59 semantic visual sentence cards (`.lego-blueprint-card`) with discrete directional isolation (Arabic RTL, English LTR, non-flipping operator icons).
+  - **10-Second Quick Wins**: 15 conversational opening hooks with everyday analogies (e.g. "Why Arabic has no 'is'").
+  - **Grammar Micro-Glossary**: 1-tap interactive modal explaining 16 foundational classical terms (Mubtada, Khabar, Tanween, etc.) in plain Urdu (آسان اردو) and simple English.
 - **Directive Compliance**:
   - **Directive 5.1 (Isolated Bootloader)**: All 9 modules run inside isolated `try/catch` wrappers.
   - **Directive 5.3 (Touch Ergonomics)**: All interactive buttons maintain $\ge 48\text{ px}$ hitbox with `touch-action: manipulation;`.
   - **Directive 5.4 (Node Compilation Check)**: Automated AST syntax validation passes with 0 syntax errors.
-  - **Directive 6 (Proactive Cloud Sync)**: Deployed to GitHub Pages via automated build script.
+  - **Directive 6 (Proactive Cloud Sync)**: Deployed to GitHub Pages via automated build script (`https://hamidgazi.github.io/app-portal/20-Arabic-Mastery/index.html`).
   - **Directive 7 (Zero Music Jurisprudence)**: Procedural Web Audio API sound synthesis only (zero `.mp3` / `.wav` assets).
   - **Directive 8 (Strict Workspace Confinement)**: 100% self-contained inside `20-Arabic-Mastery/`.
 - **Curriculum Completeness**: 15/15 chapters written with complete 6-part anatomy.
