@@ -76,9 +76,9 @@ c:/Users/Shop PC 2/OneDrive/Desktop/Antigravity Files/20-Arabic-Mastery/
 │   └── NAMAZ_AZKAAR_ANATOMY_CHEATSHEET.md
 │
 ├── scripts/                                   # Build & Compilation Engine
-│   ├── compile_textbook_data.py               # Markdown-to-HTML parser & drill answer injector
-│   ├── chapters_data.js                       # Compiled JavaScript data bundle (263 KB)
-│   └── build_full_app.py                      # HTML single-file application bundler
+│   ├── compile_textbook_data.py               # Markdown-to-HTML parser with BiDi isolation & drill answer injector
+│   ├── chapters_data.js                       # Compiled JavaScript data bundle (425 KB)
+│   └── apply_complete_bidi_redesign.py        # BiDi architecture & typography compiler/bundler
 │
 └── tests/                                     # Automated Quality Assurance
     └── test_interactive_app.py                # 13-test suite: node --check, 6-part anatomy, book reader modal, active recall drills, share modal, audio invariants.
