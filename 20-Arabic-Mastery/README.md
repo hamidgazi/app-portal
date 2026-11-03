@@ -109,7 +109,11 @@ c:/Users/Shop PC 2/OneDrive/Desktop/Antigravity Files/20-Arabic-Mastery/
 
 ## 5. Automated Quality & Verification Status
 
-- **Automated Tests**: Passed (**21/21 test cases**, `node --check` 0 errors).
+- **Automated Tests**: Passed (**22/22 test cases**, `node --check` 0 errors).
+- **Synchronized Balanced Practice Studio**:
+  - **100% Option A Predictability Solved**: Exactly 25% distribution across all 4 options (strictly 3 of A, 3 of B, 3 of C, and 3 of D in every single chapter; 45 of each across 180 drills).
+  - **1-to-1 Workbook & Studio Synchronization**: Part 6 in-lesson workbook and interactive studio match 1-to-1 with explicit lettered solutions (`Correct Answer: (B) A key (ایک چابی)`).
+  - **Modal Specificity Immunity**: Fixed backdrop display hierarchy preventing modal lockups and enabling 1-tap close responsiveness.
 - **Beginner-Centric Overhaul**:
   - **Zero Raw LaTeX**: 100% elimination of unparsed LaTeX (`\text{}`, `\boxed{}`, `$$`, `{text\]`).
   - **Lego-Block Blueprints**: 59 semantic visual sentence cards (`.lego-blueprint-card`) with discrete directional isolation (Arabic RTL, English LTR, non-flipping operator icons).
