@@ -199,3 +199,46 @@ PATIENT DISCUSSION SUMMARY FOR ATTENDING PHYSICIAN:
       * Sleep on a 100% Satin or Silk Pillowcase (eliminates overnight static & frizz).
       * Use a wide-tooth wooden or anti-static carbon comb (prevents breakage).
 ```
+
+
+---
+
+## 7. ENT, Respiratory & Cough Relief Checklist (7-Day Action Plan)
+
+```
++-------------------------------------------------------------------------------+
+| [ ] DAILY RESPIRATORY & NASAL CLEARANCE PROTOCOL                              |
++-------------------------------------------------------------------------------+
+  [ ] Morning Nasal Flush (NeilMed Saline Rinse):
+      * Flush sinuses with sterile/boiled-cooled saline water to evacuate overnight yellow-green plugs.
+  
+  [ ] Intranasal Anti-Inflammatory Spray (Fluticasone / Mometasone [OTC/Rx]):
+      * 2 sprays in each nostril every morning (aim outward towards ears, not at septum).
+      * Shrinks the 60% turbinate swelling to restore normal nasal breathing.
+
+  [ ] Mucus Liquefier (N-Acetylcysteine / NAC 600 mg):
+      * Dissolve 1 effervescent tablet of NAC 600mg in water after morning meal.
+      * Cleaves disulfide bonds, transforming thick sticky phlegm into thin watery fluid.
+
+  [ ] Continuous Internal Hydration:
+      * Drink 2.5 to 3 liters of warm water throughout the day (the cheapest natural mucolytic).
+      * Warm salt-water gargle mid-day to soothe the posterior pharynx.
+
+  [ ] Nighttime De-Congestion (Strict 3–4 Nights Max - Oxymetazoline 0.05%):
+      * 1 spray Otrivin/Afrin in each nostril at bedtime for maximum 3-4 consecutive nights.
+      * Opens airway instantly to eliminate choking/heavy sensation during sleep.
+
+  [ ] Pre-Sleep Steam & Posture Elevation:
+      * Inhale warm steam for 10 minutes before bed.
+      * Elevate head 30 degrees with 2 pillows to prevent nocturnal mucus pooling on vocal cords.
+
++-------------------------------------------------------------------------------+
+| [ ] CLINICAL RED-FLAG & DOCTOR CONSULTATION MONITOR                           |
++-------------------------------------------------------------------------------+
+  [ ] Day 7 to 10 Evaluation:
+      * If symptoms steadily improve under saline + NAC + Fluticasone -> Continue full 7-day course.
+      * If symptoms persist past 10 FULL DAYS with thick green mucus and nasal blockage ->
+        Consult doctor for Amoxicillin-Clavulanate (Augmentin 625mg/875mg) [Prescription Based].
+      * If high fever (>101°F / 38.3°C) or severe throbbing facial/tooth pain develops ->
+        Consult doctor immediately for acute bacterial sinusitis evaluation.
+```
