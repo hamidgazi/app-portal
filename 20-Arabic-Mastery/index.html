@@ -5,27 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Arabic Mastery 15 — کلاسیکی و قرآنی عربی ماسٹری اسٹوڈیو (کنز الایمان ایڈیشن)</title>
   <meta name="description" content="15-Chapter Classical & Quranic Arabic Mastery Studio with verified Kanzul Iman & Kanzul Irfan.">
-  <meta name="theme-color" content="#042f2e">
+  <meta name="theme-color" content="#FAF7F2" id="metaThemeColor">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg-primary: #022c22;
-      --bg-secondary: #064e3b;
-      --bg-card: #065f46;
-      --bg-surface: #0f766e;
-      --text-main: #f8fafc;
-      --text-muted: #cbd5e1;
-      --text-dim: #94a3b8;
-      --gold-primary: #f59e0b;
-      --gold-hover: #d97706;
-      --gold-glow: rgba(245, 158, 11, 0.25);
-      --emerald-accent: #10b981;
-      --ism-blue: #38bdf8;
-      --fil-amber: #fbbf24;
-      --harf-green: #34d399;
-      --border-color: rgba(245, 158, 11, 0.2);
+        :root {
+      /* --- WARM PARCHMENT & CLASSICAL MUSHAF GOLD (DEFAULT) --- */
+      --bg-primary: #FAF7F2;          /* Soft ivory parchment canvas */
+      --bg-secondary: #F3EBDD;        /* Warm cream sand for headers, docks, toolbars */
+      --bg-card: #FFFFFF;             /* Crisp elevated ivory card */
+      --bg-surface: #EFE5D3;          /* Sandstone pill & hover surface */
+      --bg-header: rgba(243, 235, 221, 0.96); /* Frosted warm sand header */
+      --bg-nav: rgba(243, 235, 221, 0.96);    /* Frosted warm sand bottom nav */
+      
+      --text-main: #1C1917;           /* Deep espresso ink (warm black) */
+      --text-muted: #44403C;          /* Warm charcoal for descriptions & translations */
+      --text-dim: #78716C;            /* Muted sandstone gray */
+      
+      --gold-primary: #B45309;        /* Burnished antique gold / rich amber */
+      --gold-hover: #92400E;          /* Deep bronze gold hover */
+      --gold-glow: rgba(180, 83, 9, 0.18);
+      --gold-light: #FDE68A;          /* Soft gold tint */
+      
+      /* Classical Manuscript Triad */
+      --ism-blue: #1D4ED8;            /* Lapis Lazuli for Noun (اسم) */
+      --fil-amber: #B45309;           /* Warm Terracotta / Amber for Verb (فعل) */
+      --harf-green: #047857;          /* Sacred Olive Cypress for Particle (حرف) */
+      
+      --emerald-accent: #047857;      /* Noble Olive Emerald for completed badges */
+      --border-color: rgba(180, 130, 60, 0.22); /* Warm sepia gold border */
+      --card-shadow: 0 4px 16px rgba(60, 40, 20, 0.06);
+      
       --font-ui: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       --font-arabic: 'Amiri', 'Traditional Arabic', 'Scheherazade New', serif;
       --radius-sm: 8px;
@@ -35,16 +46,32 @@
       --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
 
-    [data-theme="light"] {
-      --bg-primary: #f0fdf4;
-      --bg-secondary: #dcfce7;
-      --bg-card: #ffffff;
-      --bg-surface: #e2e8f0;
-      --text-main: #064e3b;
-      --text-muted: #1e293b;
-      --text-dim: #64748b;
-      --border-color: rgba(6, 78, 59, 0.15);
-      --gold-glow: rgba(217, 119, 6, 0.15);
+    [data-theme="dark"] {
+      /* --- NIGHT OBSIDIAN ESPRESSO (WARM DARK) --- */
+      --bg-primary: #141210;          /* Deep warm obsidian espresso */
+      --bg-secondary: #1F1B18;        /* Warm mahogany charcoal */
+      --bg-card: #282420;             /* Elevated warm charcoal card */
+      --bg-surface: #36302A;          /* Warm stone highlight */
+      --bg-header: rgba(31, 27, 24, 0.96);
+      --bg-nav: rgba(31, 27, 24, 0.96);
+      
+      --text-main: #F5EFEB;           /* Warm parchment white ink */
+      --text-muted: #D6CECA;          /* Soft warm sandstone */
+      --text-dim: #A8A19B;            /* Muted sandstone */
+      
+      --gold-primary: #F59E0B;        /* Radiant luminous gold */
+      --gold-hover: #D97706;
+      --gold-glow: rgba(245, 158, 11, 0.28);
+      --gold-light: rgba(245, 158, 11, 0.15);
+      
+      /* Classical Manuscript Triad (Night Mode Adjusted) */
+      --ism-blue: #60A5FA;            /* Soft Lapis Blue for Noun (اسم) */
+      --fil-amber: #FBBF24;           /* Warm Amber Gold for Verb (فعل) */
+      --harf-green: #34D399;          /* Luminous Olive Mint for Particle (حرف) */
+      
+      --emerald-accent: #10B981;
+      --border-color: rgba(245, 158, 11, 0.22);
+      --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     }
 
     * {
@@ -67,7 +94,7 @@
 
     /* Top Header */
     header {
-      background: linear-gradient(180deg, rgba(2, 44, 34, 0.98), rgba(6, 78, 59, 0.9));
+      background: var(--bg-header);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border-color);
@@ -94,7 +121,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #022c22;
+      color: #ffffff;
       font-family: var(--font-arabic);
       font-size: 26px;
       font-weight: bold;
@@ -165,7 +192,7 @@
     /* Translation Switcher Bar */
     .tarjuma-toggle-bar {
       display: flex;
-      background: rgba(0, 0, 0, 0.35);
+      background: var(--bg-surface);
       border: 1px solid var(--border-color);
       border-radius: 30px;
       padding: 4px;
@@ -190,14 +217,14 @@
     }
     .btn-tarjuma-mode.active {
       background: linear-gradient(135deg, var(--gold-primary), var(--gold-hover));
-      color: #022c22;
+      color: #ffffff;
       font-weight: 700;
       box-shadow: 0 2px 8px var(--gold-glow);
     }
 
     /* Progress Banner */
     .progress-card {
-      background: linear-gradient(135deg, rgba(6, 95, 70, 0.95), rgba(4, 47, 46, 0.98));
+      background: linear-gradient(135deg, var(--bg-card), var(--bg-surface));
       border: 1px solid var(--border-color);
       border-radius: var(--radius-md);
       padding: 16px 20px;
@@ -228,7 +255,7 @@
     .progress-bar-container {
       width: 100%;
       height: 10px;
-      background: rgba(0, 0, 0, 0.35);
+      background: var(--bg-surface);
       border-radius: 6px;
       overflow: hidden;
     }
@@ -251,7 +278,7 @@
     }
     .chapter-card.completed {
       border-color: var(--emerald-accent);
-      background: linear-gradient(180deg, rgba(16, 185, 129, 0.15), var(--bg-card));
+      background: linear-gradient(180deg, rgba(4, 120, 87, 0.08), var(--bg-card));
     }
     .chapter-header {
       padding: 16px 18px;
@@ -380,7 +407,7 @@
       margin: 10px 0;
     }
     .sentence-row {
-      background: rgba(2, 44, 34, 0.6);
+      background: var(--bg-surface);
       border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: var(--radius-sm);
       padding: 10px 14px;
@@ -449,7 +476,7 @@
     .quiz-opt-btn.correct {
       background: rgba(16, 185, 129, 0.28) !important;
       border-color: var(--emerald-accent) !important;
-      color: #6ee7b7;
+      color: var(--emerald-accent);
     }
     .quiz-opt-btn.wrong {
       background: rgba(239, 68, 68, 0.28) !important;
@@ -464,7 +491,7 @@
       background: linear-gradient(135deg, var(--gold-primary), var(--gold-hover));
       border: none;
       border-radius: var(--radius-sm);
-      color: #022c22;
+      color: #ffffff;
       font-weight: 700;
       font-size: 0.95rem;
       cursor: pointer;
@@ -502,7 +529,7 @@
       touch-action: manipulation;
     }
     .ayah-display-card {
-      background: linear-gradient(135deg, rgba(6, 95, 70, 0.85), rgba(2, 44, 34, 0.98));
+      background: linear-gradient(135deg, var(--bg-card), var(--bg-surface));
       border: 1px solid var(--border-color);
       border-radius: var(--radius-lg);
       padding: 24px 18px;
@@ -539,7 +566,7 @@
     }
     .word-token.tag-ism { color: var(--ism-blue); }
     .word-token.tag-fil { color: var(--fil-amber); }
-    .word-token.tag-harf { color: var(--harf-green); }
+    .word-token.tag-harf { color: var(--gold-primary); }
 
     /* Sacred Translation Cards */
     .tarjuma-block {
@@ -550,14 +577,14 @@
       line-height: 1.6;
     }
     .tarjuma-ki {
-      background: rgba(245, 158, 11, 0.12);
+      background: rgba(180, 83, 9, 0.08);
       border-left: 4px solid var(--gold-primary);
-      color: #fef3c7;
+      color: var(--text-main);
     }
     .tarjuma-kir {
-      background: rgba(16, 185, 129, 0.12);
+      background: rgba(4, 120, 87, 0.08);
       border-left: 4px solid var(--emerald-accent);
-      color: #d1fae5;
+      color: var(--text-main);
     }
     .tarjuma-tag {
       font-size: 0.74rem;
@@ -604,7 +631,7 @@
     }
     .badge-ism { background: rgba(56, 189, 248, 0.2); color: var(--ism-blue); border: 1px solid var(--ism-blue); }
     .badge-fil { background: rgba(251, 191, 36, 0.2); color: var(--fil-amber); border: 1px solid var(--fil-amber); }
-    .badge-harf { background: rgba(52, 211, 153, 0.2); color: var(--harf-green); border: 1px solid var(--harf-green); }
+    .badge-harf { background: rgba(52, 211, 153, 0.2); color: var(--gold-primary); border: 1px solid var(--harf-green); }
 
     .detail-arabic-word {
       font-family: var(--font-arabic);
@@ -671,10 +698,12 @@
       border: 1px solid var(--border-color);
     }
     .flashcard-front {
-      background: linear-gradient(135deg, #064e3b, #042f2e);
+      background: linear-gradient(135deg, var(--bg-card), var(--bg-secondary));
+      border: 2px solid var(--border-color);
     }
     .flashcard-back {
-      background: linear-gradient(135deg, #0f766e, #064e3b);
+      background: linear-gradient(135deg, var(--bg-surface), var(--bg-card));
+      border: 2px solid var(--gold-primary);
       transform: rotateY(180deg);
       text-align: center;
     }
@@ -701,7 +730,7 @@
       margin-bottom: 12px;
     }
     .fc-example {
-      background: rgba(0, 0, 0, 0.35);
+      background: var(--bg-surface);
       padding: 8px 14px;
       border-radius: var(--radius-sm);
       font-size: 0.88rem;
@@ -781,7 +810,7 @@
     .option-btn.correct {
       background: rgba(16, 185, 129, 0.25) !important;
       border-color: var(--emerald-accent) !important;
-      color: #6ee7b7;
+      color: var(--emerald-accent);
     }
     .option-btn.wrong {
       background: rgba(239, 68, 68, 0.25) !important;
@@ -835,7 +864,7 @@
       right: 0;
       height: calc(var(--nav-height) + var(--safe-bottom));
       padding-bottom: var(--safe-bottom);
-      background: rgba(2, 44, 34, 0.97);
+      background: var(--bg-nav);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border-top: 1px solid var(--border-color);
@@ -1036,14 +1065,14 @@
       color: var(--text-muted);
     }
     .math-formula {
-      background: rgba(16, 185, 129, 0.08);
-      border: 1px solid rgba(16, 185, 129, 0.25);
+      background: rgba(180, 83, 9, 0.06);
+      border: 1px solid var(--border-color);
       border-radius: var(--radius-sm);
       padding: 14px 16px;
       margin: 14px 0;
       font-family: var(--font-arabic), serif;
       font-size: 1.15rem;
-      color: var(--harf-green);
+      color: var(--gold-primary);
       direction: rtl;
       text-align: center;
       overflow-x: auto;
@@ -1051,14 +1080,14 @@
     }
     .math-inline {
       font-family: var(--font-arabic), serif;
-      color: var(--harf-green);
-      background: rgba(16, 185, 129, 0.12);
+      color: var(--gold-primary);
+      background: rgba(180, 83, 9, 0.1);
       padding: 2px 6px;
       border-radius: 4px;
       font-size: 1.05em;
     }
     .code-block {
-      background: rgba(0, 0, 0, 0.35);
+      background: var(--bg-surface);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-sm);
       padding: 14px 16px;
@@ -1069,7 +1098,7 @@
     .code-block pre {
       font-family: 'Courier New', monospace;
       font-size: 0.88rem;
-      color: var(--harf-green);
+      color: var(--gold-primary);
       white-space: pre;
       margin: 0;
     }
@@ -1160,8 +1189,8 @@
     }
     .solution-box {
       margin-top: 14px;
-      background: rgba(16, 185, 129, 0.07);
-      border: 1px solid rgba(16, 185, 129, 0.28);
+      background: rgba(4, 120, 87, 0.06);
+      border: 1px solid rgba(4, 120, 87, 0.25);
       border-radius: var(--radius-sm);
       padding: 14px 18px;
       color: var(--text-main);
@@ -1631,6 +1660,7 @@
         <span class="reader-chapter-title" id="readerChapterTitle">📖 Chapter</span>
       </div>
       <div class="reader-topbar-right">
+        <button class="reader-btn" id="readerThemeBtn" aria-label="Toggle Night Mode" title="Day / Night Mode">🌓</button>
         <button class="reader-btn" id="readerFontDown" aria-label="Decrease font size" title="A−">A−</button>
         <button class="reader-btn" id="readerFontUp" aria-label="Increase font size" title="A+">A+</button>
         <button class="reader-btn share-btn" id="readerShareBtn" aria-label="Share this app" title="Share">📲</button>
@@ -3230,28 +3260,47 @@ const FULL_CHAPTERS_HTML = [
       }
 
       // --- 12. Theme & Audio Controls ---
+      function toggleAppTheme() {
+        try {
+          playAcousticTap();
+          const isDark = document.body.getAttribute('data-theme') === 'dark';
+          const metaTheme = document.getElementById('metaThemeColor');
+          if (isDark) {
+            document.body.removeAttribute('data-theme');
+            localStorage.setItem('arabic_mastery_15_theme', 'parchment');
+            if (metaTheme) metaTheme.setAttribute('content', '#FAF7F2');
+          } else {
+            document.body.setAttribute('data-theme', 'dark');
+            localStorage.setItem('arabic_mastery_15_theme', 'dark');
+            if (metaTheme) metaTheme.setAttribute('content', '#141210');
+          }
+        } catch(err) {
+          console.error('Theme toggle error:', err);
+        }
+      }
+
       function initThemeAndAudioToggles() {
         try {
           const themeBtn = document.getElementById('themeToggleBtn');
+          const readerThemeBtn = document.getElementById('readerThemeBtn');
           const audioBtn = document.getElementById('audioToggleBtn');
 
           if (themeBtn) {
-            themeBtn.addEventListener('click', function() {
-              playAcousticTap();
-              const isLight = document.body.getAttribute('data-theme') === 'light';
-              if (isLight) {
-                document.body.removeAttribute('data-theme');
-                localStorage.setItem('arabic_mastery_15_theme', 'dark');
-              } else {
-                document.body.setAttribute('data-theme', 'light');
-                localStorage.setItem('arabic_mastery_15_theme', 'light');
-              }
-            });
+            themeBtn.addEventListener('click', toggleAppTheme);
+          }
+          if (readerThemeBtn) {
+            readerThemeBtn.addEventListener('click', toggleAppTheme);
+          }
 
-            const savedTheme = localStorage.getItem('arabic_mastery_15_theme');
-            if (savedTheme === 'light') {
-              document.body.setAttribute('data-theme', 'light');
-            }
+          // Load saved preference: Default is Warm Parchment (no attribute)
+          const savedTheme = localStorage.getItem('arabic_mastery_15_theme');
+          const metaTheme = document.getElementById('metaThemeColor');
+          if (savedTheme === 'dark') {
+            document.body.setAttribute('data-theme', 'dark');
+            if (metaTheme) metaTheme.setAttribute('content', '#141210');
+          } else {
+            document.body.removeAttribute('data-theme');
+            if (metaTheme) metaTheme.setAttribute('content', '#FAF7F2');
           }
 
           if (audioBtn) {
