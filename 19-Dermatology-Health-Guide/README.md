@@ -8,6 +8,7 @@ A medical-grade, evidence-based dermatological action guide and daily therapeuti
 5. **Acanthosis Nigricans & Frictional Melanosis** (*Darkened velvety skin on back, joints, hips, and groin linked to systemic hyperinsulinemia*).
 6. **Clinical Trichology Protocol** (*Coarse, hard, thick, sticky, and frizzy hair restored via cationic conditioning and weightless lipid shields without hair oils*).
 7. **Clinical ENT & Respiratory Protocol** (*Acute Rhinosinusitis, 60% Nasal Obstruction, Yellow-Green Phlegm & Upper Airway Cough Syndrome / Post-Nasal Drip*).
+8. **Master Vitality & Human Performance Protocol** (*Mitochondrial ATP bioenergetics, 90-min caffeine delay, laser focus nootropics, physiological sigh stress reset, gut-brain axis, endothelial nitric oxide, and restorative sleep architecture*).
 
 ---
 

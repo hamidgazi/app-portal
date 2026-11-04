@@ -242,3 +242,61 @@ PATIENT DISCUSSION SUMMARY FOR ATTENDING PHYSICIAN:
       * If high fever (>101°F / 38.3°C) or severe throbbing facial/tooth pain develops ->
         Consult doctor immediately for acute bacterial sinusitis evaluation.
 ```
+
+
+---
+
+## 8. Executive Vitality, Cognitive Focus & Daily Performance Tracker
+
+```
++-------------------------------------------------------------------------------+
+| [ ] MORNING BIOENERGETICS & CIRCADIAN ANCHOR (06:00 - 09:00)                  |
++-------------------------------------------------------------------------------+
+  [ ] Step 1: Cellular Hydration Anchor
+      * Drink 500ml room-temperature water with a pinch of unrefined sea salt / electrolytes.
+  [ ] Step 2: Natural Photobiological Sunlight (Within 30 min of waking)
+      * Step outside for 10 to 15 minutes of direct sunlight (no sunglasses, no window glass).
+      * Sets the circadian clock, spikes healthy morning cortisol, and starts the melatonin timer.
+  [ ] Step 3: Oral Hygiene & Nitric Oxide Protection
+      * Scrape tongue with copper/stainless steel scraper. 
+      * DO NOT use antiseptic alcohol mouthwash (protects oral nitrate-converting bacteria).
+  [ ] Step 4: Mitochondrial Substrate Loading
+      * Take Creatine Monohydrate (5g) in water + Ubiquinol CoQ10 (100mg) with healthy breakfast fat.
+  [ ] Step 5: The 90-Minute Caffeine Delay Rule
+      * Wait a full 90 to 120 minutes after waking before your first tea or coffee.
+      * Prevents the afternoon 2 PM crash by allowing natural adenosine clearance.
+
++-------------------------------------------------------------------------------+
+| [ ] WORKPLACE LASER FOCUS & ANTI-CRASH PROTOCOL (09:00 - 17:00)               |
++-------------------------------------------------------------------------------+
+  [ ] Focus Block 1 (90/20 Ultradian Rhythm):
+      * 90 minutes of single-task deep work + 20 minutes of eyes-rested panoramic gaze.
+      * (Optional Nootropic): Alpha-GPC 300mg + L-Tyrosine 500mg on empty stomach.
+  [ ] Low-Glycemic Lunch ("Savory Protein & Fiber First"):
+      * Eat vegetables/salad first, protein second, complex carbs last. Zero liquid sugars.
+  [ ] Post-Lunch Anti-Coma Walk (MANDATORY):
+      * 10-minute brisk walk immediately after lunch. Activates non-insulin GLUT4 glucose uptake.
+  [ ] Acute Workplace Stress / Panic Reset:
+      * Perform 3 to 5 Physiological Sighs (two sharp inhales via nose, long sigh out via mouth).
+
++-------------------------------------------------------------------------------+
+| [ ] GUT-BRAIN AXIS & CARDIOVASCULAR MAINTENANCE                               |
++-------------------------------------------------------------------------------+
+  [ ] Gut Mucosal Seal:
+      * 5g L-Glutamine powder in water on empty stomach (repairs tight junctions).
+  [ ] Microbiome Plant Diversity Tracking:
+      * Track 30 different plant foods per week (vegetables, seeds, nuts, spices, berries).
+  [ ] Cardiovascular Nitric Oxide & Endothelial Base:
+      * L-Citrulline Malate 3g–6g OR beetroot extract + 2000mg EPA/DHA Omega-3.
+      * 30 to 45 minutes of Zone 2 cardio (conversational pace, nasal breathing only).
+
++-------------------------------------------------------------------------------+
+| [ ] NIGHTTIME SLEEP ARCHITECTURE (21:00 - 23:00)                              |
++-------------------------------------------------------------------------------+
+  [ ] The 3-2-1 Sleep Rule:
+      * No food 3 hours before bed; no water 2 hours before bed; no blue screens 1 hour before bed.
+  [ ] Clinical Sleep Cocktail (60 min before sleep):
+      * Magnesium Bisglycinate (300mg) + L-Theanine (200mg) + Apigenin (50mg).
+  [ ] Bedroom Climate Optimization:
+      * Room cooled to 65–68°F (18–20°C); 100% pitch black darkness or sleep mask.
+```
