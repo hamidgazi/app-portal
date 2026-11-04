@@ -3,24 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <meta name="theme-color" content="#0d1117">
+  <meta name="theme-color" content="#090d16">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>Clinical Dermatology & Skin Recovery Protocol</title>
+  <title>Master Clinical Health, Dermatology & Vitality Encyclopedia</title>
   <style>
     :root {
       --bg: #090d16;
-      --card-bg: #131b2e;
-      --card-border: #1e2942;
-      --text: #e2e8f0;
+      --card-bg: #121929;
+      --card-border: #1e293b;
+      --card-hover: #182238;
+      --text: #f1f5f9;
       --text-muted: #94a3b8;
+      --text-sub: #cbd5e1;
       --accent: #38bdf8;
-      --accent-glow: rgba(56, 189, 248, 0.15);
-      --success: #10b981;
-      --warning: #f59e0b;
-      --danger: #ef4444;
-      --rx-badge: #8b5cf6;
-      --radius: 12px;
+      --accent-glow: rgba(56, 189, 248, 0.2);
+      --success: #34d399;
+      --warning: #fbbf24;
+      --danger: #f87171;
+      --rx-badge: #c084fc;
+      --rx-bg: rgba(192, 132, 252, 0.15);
+      --radius: 14px;
       --touch-min: 48px;
     }
 
@@ -35,25 +38,26 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       background-color: var(--bg);
       color: var(--text);
-      line-height: 1.6;
-      padding-bottom: 90px;
+      line-height: 1.65;
+      padding-bottom: 100px;
       overflow-x: hidden;
       min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Header */
+    /* Sticky Header */
     header {
-      background: linear-gradient(180deg, #162038 0%, #0d1424 100%);
-      padding: 20px 16px 14px;
+      background: linear-gradient(180deg, #131d33 0%, #090d16 100%);
+      padding: 18px 16px 12px;
       border-bottom: 1px solid var(--card-border);
       position: sticky;
       top: 0;
       z-index: 100;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
     }
 
     .header-content {
-      max-width: 900px;
+      max-width: 960px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
@@ -68,44 +72,48 @@
     }
 
     h1 {
-      font-size: clamp(1.2rem, 4vw, 1.6rem);
-      font-weight: 700;
+      font-size: clamp(1.15rem, 3.8vw, 1.55rem);
+      font-weight: 800;
       color: #ffffff;
       display: flex;
       align-items: center;
       gap: 8px;
+      letter-spacing: -0.02em;
     }
 
-    .status-badge {
-      font-size: 0.75rem;
-      padding: 4px 8px;
+    .badge-complete {
+      font-size: 0.72rem;
+      padding: 3px 8px;
       border-radius: 999px;
-      background: rgba(16, 185, 129, 0.2);
-      color: #34d399;
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      font-weight: 600;
+      background: rgba(56, 189, 248, 0.15);
+      color: #7dd3fc;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      font-weight: 700;
       white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     .subtitle {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       color: var(--text-muted);
     }
 
     /* Main Container */
     main {
-      max-width: 900px;
+      max-width: 960px;
       margin: 0 auto;
       padding: 16px;
     }
 
-    /* Tab Navigation */
+    /* Horizontal Nav Tabs */
     .tab-nav {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       overflow-x: auto;
       padding: 4px 2px 14px;
       scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
     }
 
     .tab-nav::-webkit-scrollbar {
@@ -116,10 +124,10 @@
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       color: var(--text-muted);
-      padding: 10px 16px;
+      padding: 10px 15px;
       border-radius: 999px;
-      font-size: 0.88rem;
-      font-weight: 600;
+      font-size: 0.84rem;
+      font-weight: 700;
       white-space: nowrap;
       cursor: pointer;
       min-height: var(--touch-min);
@@ -135,10 +143,10 @@
       background: var(--accent);
       color: #090d16;
       border-color: var(--accent);
-      box-shadow: 0 0 12px var(--accent-glow);
+      box-shadow: 0 0 16px var(--accent-glow);
     }
 
-    /* Content Cards */
+    /* Content Views */
     .section-view {
       display: none;
       animation: fadeIn 0.2s ease-in-out;
@@ -149,143 +157,243 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
+      from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* Structured Cards */
     .card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: var(--radius);
-      padding: 18px;
-      margin-bottom: 16px;
-    }
-
-    .card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 12px;
-      cursor: pointer;
-      user-select: none;
-      touch-action: manipulation;
+      padding: 20px;
+      margin-bottom: 18px;
     }
 
     .card-title {
-      font-size: 1.1rem;
-      font-weight: 700;
+      font-size: 1.15rem;
+      font-weight: 800;
       color: #ffffff;
       display: flex;
       align-items: center;
       gap: 8px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 10px;
     }
 
+    .section-desc {
+      font-size: 0.92rem;
+      color: var(--text-sub);
+      margin-bottom: 16px;
+      line-height: 1.7;
+    }
+
+    /* Alert Boxes */
     .alert-box {
-      border-radius: 8px;
-      padding: 12px 14px;
-      margin: 12px 0;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin: 14px 0;
       font-size: 0.88rem;
+      line-height: 1.6;
       display: flex;
-      gap: 10px;
-      align-items: flex-start;
+      flex-direction: column;
+      gap: 6px;
     }
 
     .alert-danger {
-      background: rgba(239, 68, 68, 0.15);
+      background: rgba(239, 68, 68, 0.12);
       border: 1px solid rgba(239, 68, 68, 0.4);
       color: #fca5a5;
     }
 
     .alert-warning {
-      background: rgba(245, 158, 11, 0.15);
+      background: rgba(245, 158, 11, 0.12);
       border: 1px solid rgba(245, 158, 11, 0.4);
       color: #fde68a;
     }
 
     .alert-info {
-      background: rgba(56, 189, 248, 0.15);
+      background: rgba(56, 189, 248, 0.12);
       border: 1px solid rgba(56, 189, 248, 0.4);
       color: #bae6fd;
     }
 
-    /* Product Item Table / Cards */
-    .product-item {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--card-border);
+    .alert-success {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #a7f3d0;
+    }
+
+    /* Mechanism Box (ASCII Blueprint) */
+    .mechanism-box {
+      background: #060911;
+      border: 1px solid #1e293b;
       border-radius: 10px;
       padding: 14px;
-      margin-bottom: 10px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.8rem;
+      color: #38bdf8;
+      overflow-x: auto;
+      white-space: pre;
+      line-height: 1.5;
+      margin: 14px 0 18px;
+    }
+
+    /* Detailed Tables */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      margin: 16px 0;
+      border-radius: 10px;
+      border: 1px solid var(--card-border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      text-align: left;
+      background: rgba(18, 25, 41, 0.7);
+    }
+
+    th {
+      background: #0b1120;
+      color: var(--accent);
+      font-weight: 700;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--card-border);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-sub);
+      vertical-align: top;
+      line-height: 1.55;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* Product Item Cards */
+    .product-list {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .product-item {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: border-color 0.2s ease;
+    }
+
+    .product-item:hover {
+      border-color: rgba(56, 189, 248, 0.4);
     }
 
     .product-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
     .product-rank {
-      font-size: 0.8rem;
-      font-weight: 700;
+      font-size: 0.75rem;
+      font-weight: 800;
       color: var(--accent);
       background: var(--accent-glow);
-      padding: 2px 8px;
-      border-radius: 4px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      letter-spacing: 0.04em;
     }
 
     .product-name {
-      font-size: 0.98rem;
-      font-weight: 700;
+      font-size: 1rem;
+      font-weight: 800;
       color: #ffffff;
     }
 
     .rx-badge {
-      background: rgba(139, 92, 246, 0.2);
-      border: 1px solid rgba(139, 92, 246, 0.5);
-      color: #c4b5fd;
+      background: var(--rx-bg);
+      border: 1px solid rgba(192, 132, 252, 0.45);
+      color: #e9d5ff;
       font-size: 0.72rem;
-      font-weight: 700;
-      padding: 2px 6px;
-      border-radius: 4px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .otc-badge {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #6ee7b7;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
       text-transform: uppercase;
     }
 
-    .product-detail {
-      font-size: 0.85rem;
-      color: var(--text-muted);
+    .product-mechanism {
+      font-size: 0.88rem;
+      color: var(--text-sub);
     }
 
     .product-usage {
-      font-size: 0.82rem;
+      font-size: 0.84rem;
       color: #38bdf8;
       background: rgba(56, 189, 248, 0.08);
-      padding: 6px 10px;
-      border-radius: 6px;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      padding: 8px 12px;
+      border-radius: 8px;
       margin-top: 4px;
+      line-height: 1.5;
     }
 
-    /* Interactive Checkbox Tracker */
+    /* Checklist Tracker */
     .checklist {
       display: flex;
       flex-direction: column;
       gap: 10px;
+      margin-top: 10px;
     }
 
     .check-item {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--card-border);
-      border-radius: 10px;
-      padding: 12px 14px;
+      border-radius: 12px;
+      padding: 14px 16px;
       display: flex;
       align-items: flex-start;
-      gap: 12px;
+      gap: 14px;
       cursor: pointer;
       user-select: none;
       touch-action: manipulation;
       min-height: var(--touch-min);
+      transition: all 0.2s ease;
+    }
+
+    .check-item:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(56, 189, 248, 0.3);
     }
 
     .check-item input[type="checkbox"] {
@@ -300,33 +408,34 @@
     .check-content {
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 3px;
     }
 
     .check-title {
-      font-size: 0.95rem;
-      font-weight: 600;
+      font-size: 0.96rem;
+      font-weight: 700;
       color: #ffffff;
     }
 
     .check-desc {
-      font-size: 0.82rem;
+      font-size: 0.84rem;
       color: var(--text-muted);
+      line-height: 1.5;
     }
 
-    /* Fixed Bottom Quick Action */
+    /* Fixed Bottom Bar */
     .bottom-bar {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
-      background: #0d1424;
+      background: #090d16;
       border-top: 1px solid var(--card-border);
-      padding: 10px 16px;
+      padding: 12px 16px;
       display: flex;
       justify-content: center;
       z-index: 100;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
     }
 
     .bottom-btn {
@@ -334,8 +443,8 @@
       color: #090d16;
       border: none;
       font-size: 0.95rem;
-      font-weight: 700;
-      padding: 12px 24px;
+      font-weight: 800;
+      padding: 12px 28px;
       border-radius: 999px;
       cursor: pointer;
       min-height: var(--touch-min);
@@ -347,7 +456,8 @@
       gap: 8px;
       user-select: none;
       touch-action: manipulation;
-      box-shadow: 0 4px 14px var(--accent-glow);
+      box-shadow: 0 4px 16px var(--accent-glow);
+      letter-spacing: -0.01em;
     }
   </style>
 </head>
@@ -356,85 +466,95 @@
   <header>
     <div class="header-content">
       <div class="title-row">
-        <h1>🩺 Dermatology Master Protocol</h1>
-        <span class="status-badge">Triage Verified</span>
+        <h1>🩺 Master Health Encyclopedia</h1>
+        <span class="badge-complete">100% Unabridged</span>
       </div>
-      <p class="subtitle">Evidence-based clinical guidelines & daily execution tracker</p>
+      <p class="subtitle">Evidence-based clinical protocols, pharmacology, trichology & executive vitality</p>
     </div>
   </header>
 
   <main>
-    <!-- Tab Controls -->
+    <!-- Navigation Tabs -->
     <div class="tab-nav" role="tablist">
-      <button class="tab-btn active" data-tab="tab-lips" id="btn-tab-lips">👄 Lips (Cheilitis)</button>
+      <button class="tab-btn active" data-tab="tab-lips" id="btn-tab-lips">👄 Lips</button>
       <button class="tab-btn" data-tab="tab-bacne" id="btn-tab-bacne">🚿 Bacne & Sweat</button>
       <button class="tab-btn" data-tab="tab-joints" id="btn-tab-joints">🌟 Dark Joints & AN</button>
-      <button class="tab-btn" data-tab="tab-hair" id="btn-tab-hair">💇 Hair Protocol</button>
+      <button class="tab-btn" data-tab="tab-perianal" id="btn-tab-perianal">🍑 Perianal / Cleft</button>
+      <button class="tab-btn" data-tab="tab-hair" id="btn-tab-hair">💇 Hair & Spa</button>
       <button class="tab-btn" data-tab="tab-cough" id="btn-tab-cough">🫁 Cough & Sinus</button>
       <button class="tab-btn" data-tab="tab-energy" id="btn-tab-energy">⚡ Energy & Vitality</button>
+      <button class="tab-btn" data-tab="tab-gems" id="btn-tab-gems">💎 Gems & Mistakes</button>
       <button class="tab-btn" data-tab="tab-daily" id="btn-tab-daily">📅 Daily Tracker</button>
-      <button class="tab-btn" data-tab="tab-doctor" id="btn-tab-doctor">🩺 Doctor Visit</button>
+      <button class="tab-btn" data-tab="tab-doctor" id="btn-tab-doctor">🩺 Doctor & Labs</button>
     </div>
 
     <!-- TAB 1: LIPS -->
     <section class="section-view active" id="tab-lips">
       <div class="card">
-        <div class="card-header">
-          <div class="card-title">👄 Exfoliative Cheilitis Management</div>
-        </div>
-        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;">
-          Your lips are in an active peeling-desquamation cycle. Manually peeling immature skin forces underlying cells into disordered "emergency hyperkeratosis," creating rigid, hardening crusts.
+        <div class="card-title">👄 Exfoliative Cheilitis (Dry, Peeling & Hardening Lips)</div>
+        <p class="section-desc">
+          The vermilion border of the lips lacks pilosebaceous units (oil glands) and has an exceptionally thin stratum corneum (only 3–5 cell layers thick compared to 15+ layers on facial skin). When you manually pick or bite off dry sheets of skin, you strip away immature keratinocytes before they complete their normal 14-to-28-day turnover. Licking introduces salivary amylase and lipases that digest mucosal barrier lipids, while rapid evaporation drives severe transepidermal water loss (TEWL). The body reacts with "emergency hyperkeratosis," rapidly producing a thick, rigid, dysfunctional crust.
         </p>
 
+        <div class="mechanism-box">+-----------------------------------------------------------------------+
+|  Manual Peeling / Biting / Licking                                     |
+|  --> Loss of Immature Stratum Corneum & Salivary Enzyme Digestion     |
+|  --> Severe Transepidermal Water Loss (TEWL) & Raw Basal Exposure     |
+|  --> Defensive Reactive Hyperkeratosis (Thick, Rigid, Hard Crust)     |
+|  --> Desiccation & Fissuring --> Triggers Next Urge to Peel           |
++-----------------------------------------------------------------------+</div>
+
         <div class="alert-box alert-danger">
-          <strong>⚠️ Inviolable Rule:</strong> Absolutely NEVER pick, bite, or peel lip flakes with fingers or teeth. Saliva contains digestive enzymes that destroy the mucosal barrier. If a flake lifts, snip it flush with sterile cuticle scissors.
+          <strong>⚠️ Inviolable Anti-Trauma Rule:</strong> Absolutely NEVER pick, bite, or peel lip flakes with fingers or teeth. Saliva contains digestive enzymes that destroy mucosal barrier lipids. If a flake lifts, snip it flush with sterile cuticle scissors—never pull.
         </div>
 
-        <h3 style="font-size: 0.95rem; margin: 16px 0 8px; color: var(--accent);">Ranked Solutions & Products:</h3>
+        <h3 style="font-size: 1rem; margin: 18px 0 10px; color: var(--accent);">Ranked Pharmacological & Barrier Interventions:</h3>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">100% Pure White Petrolatum (Vaseline)</span>
-            <span class="product-rank">Rank #1 (Gold Standard)</span>
+        <div class="product-list">
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">100% Pure White Petrolatum (Vaseline) / Medical Lanolin</span>
+              <span class="product-rank">Rank #1 (Gold Standard)</span>
+            </div>
+            <div class="product-mechanism">Completely eliminates mechanical shear. Petrolatum reduces transepidermal water loss (TEWL) by >98%, maintaining an enclosed, moist hydration chamber for basal keratinocytes to mature normally without producing hard crusts.</div>
+            <div class="product-usage">📌 Apply every 2–3 hours daytime and a thick "slugging" layer overnight extending slightly past the lip borders.</div>
           </div>
-          <div class="product-detail">Reduces transepidermal water loss (TEWL) by >98%, sealing in hydration so basal cells can mature without crusting.</div>
-          <div class="product-usage">📌 Apply every 2–3 hours daytime and a thick "slugging" layer overnight.</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">La Roche-Posay Cicaplast Lèvres / Avene Cicalfate</span>
-            <span class="product-rank">Rank #2 (Barrier Repair)</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">La Roche-Posay Cicaplast Lèvres / Avene Cicalfate Lips</span>
+              <span class="product-rank">Rank #2 (Barrier Repair)</span>
+            </div>
+            <div class="product-mechanism">Infuses Panthenol (Pro-Vitamin B5), Madecassoside (Centella Asiatica extract), and Copper-Zinc-Manganese complexes to accelerate mucosal re-epithelialization and repair the lipid bilayer.</div>
+            <div class="product-usage">📌 Apply a pea-sized amount onto damp lips first, then lock in immediately with pure Petrolatum.</div>
           </div>
-          <div class="product-detail">Panthenol (B5) + Madecassoside repair lipid bilayers and calm irritation.</div>
-          <div class="product-usage">📌 Apply onto damp lips first, then lock in with Vaseline.</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Hydrocortisone 1% Ointment</span>
-            <span class="rx-badge">[Prescription / Mild OTC]</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Hydrocortisone 1% Ointment</span>
+              <span class="rx-badge">[Prescription / Mild OTC]</span>
+            </div>
+            <div class="product-mechanism">Halts subclinical eczematous inflammation and cytokine cascades driving rapid crusting and erythema.</div>
+            <div class="product-usage">📌 Apply a thin layer twice daily for <strong>5 to 7 days maximum</strong> to break the acute cycle, then discontinue to prevent tissue atrophy.</div>
           </div>
-          <div class="product-detail">Short-pulse anti-inflammatory ointment to halt acute crusting and erythema.</div>
-          <div class="product-usage">📌 Apply thin layer 2x daily for 5 to 7 days maximum to break the cycle.</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Tacrolimus 0.03% Ointment</span>
-            <span class="rx-badge">[Prescription Based]</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Tacrolimus 0.03% Ointment / Pimecrolimus 1% Cream</span>
+              <span class="rx-badge">[Prescription Based]</span>
+            </div>
+            <div class="product-mechanism">Non-steroidal topical calcineurin inhibitor. Inhibits T-lymphocyte activation and inflammatory cytokines without any risk of mucosal thinning or atrophy.</div>
+            <div class="product-usage">📌 Apply twice daily under physician oversight for chronic, refractory exfoliative cheilitis that fails petrolatum alone.</div>
           </div>
-          <div class="product-detail">Non-steroidal immunomodulator for chronic refractory cases without skin thinning risk.</div>
-          <div class="product-usage">📌 Apply 2x daily under dermatologist supervision.</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">SLS-Free Toothpaste (Sensodyne Pronamel / Biotene)</span>
-            <span class="product-rank">Decontamination</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">SLS-Free Oral Hygiene (Sensodyne Pronamel / Biotene)</span>
+              <span class="product-rank">Decontamination</span>
+            </div>
+            <div class="product-mechanism">Eliminates Sodium Lauryl Sulfate (SLS) foaming surfactants, cinnamic aldehyde, and harsh mint/menthol flavorings that trigger chronic contact allergic cheilitis.</div>
+            <div class="product-usage">📌 Switch oral care permanently. Avoid all flavored, tinted, or camphor-based lip balms.</div>
           </div>
-          <div class="product-detail">Eliminates Sodium Lauryl Sulfate detergents and harsh mint flavorings that cause contact cheilitis.</div>
-          <div class="product-usage">📌 Switch oral care immediately and permanently.</div>
         </div>
       </div>
     </section>
@@ -442,62 +562,64 @@
     <!-- TAB 2: BACNE & SWEAT -->
     <section class="section-view" id="tab-bacne">
       <div class="card">
-        <div class="card-header">
-          <div class="card-title">🚿 Bacne, Hyperhidrosis & Dead Skin Rolls</div>
-        </div>
-        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;">
-          The rolls of "dirt" that come off when rubbing after soap are <strong>Retention Hyperkeratosis</strong>—compacted dead skin cells bonded with soap scum and sebum. The itchy uniform chest/back acne is <strong>Malassezia (Fungal) Folliculitis</strong>.
+        <div class="card-title">🚿 Truncal Hyperhidrosis, Malassezia Folliculitis & Retention Hyperkeratosis</div>
+        <p class="section-desc">
+          When you rub your arms or back after soap and greyish-black rolls come off, this is <strong>not actual dirt</strong>. It is <strong>Retention Hyperkeratosis</strong>—compacted sheets of dead stratum corneum cells bonded with sweat salts, oxidized sebum, and insoluble calcium-fatty acid precipitates (soap scum from alkaline bar soap reacting with tap water). Forceful rubbing with fingers causes mechanical abrasion, which paradoxically stimulates the skin to produce an even thicker stratum corneum. The itchy, uniform chest/back acne is <strong>Malassezia (Pityrosporum) Folliculitis</strong>—a lipophilic fungal yeast that feeds on sweat and sebum.
         </p>
 
-        <div class="alert-box alert-warning">
-          <strong>⚠️ Caution on Antibiotics:</strong> Never take typical bacterial acne antibiotics (e.g. Doxycycline) for fungal acne—they destroy beneficial bacteria and make yeast eruptions far more severe.
+        <div class="alert-box alert-danger">
+          <strong>⚠️ Critical Antibiotic Warning:</strong> Typical bacterial acne antibiotics (e.g. oral Doxycycline, Minocycline, or topical Clindamycin) will severely worsen fungal acne! Antibiotics destroy beneficial competing bacteria, allowing yeast colonies to proliferate unchecked.
         </div>
 
-        <h3 style="font-size: 0.95rem; margin: 16px 0 8px; color: var(--accent);">Ranked Solutions & Products:</h3>
+        <h3 style="font-size: 1rem; margin: 18px 0 10px; color: var(--accent);">Ranked Interventions & Contact Cleansers:</h3>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Ketoconazole 2% Wash (Nizoral) + Benzoyl Peroxide 10%</span>
-            <span class="product-rank">Rank #1 (Contact Cleanser)</span>
+        <div class="product-list">
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Ketoconazole 2% Wash (Nizoral 2%) + Benzoyl Peroxide 10%</span>
+              <span class="product-rank">Rank #1 (Contact Cleanser)</span>
+              <span class="rx-badge">[Rx 2% in some regions]</span>
+            </div>
+            <div class="product-mechanism">Ketoconazole directly eradicates Malassezia yeast cell walls; Benzoyl Peroxide oxidizes follicular sebum and clears bacterial co-factors.</div>
+            <div class="product-usage">📌 <strong>CRUCIAL CONTACT TIME:</strong> Apply in shower and leave suds on skin for a full <strong>3 to 5 minutes before rinsing</strong>! Use Ketoconazole on Mon/Wed/Fri; use Benzoyl Peroxide 10% on Tue/Thu/Sat.</div>
           </div>
-          <div class="product-detail">Ketoconazole eradicates Malassezia yeast; Benzoyl Peroxide clears follicular sebum.</div>
-          <div class="product-usage">📌 <strong>CRUCIAL:</strong> Leave suds on chest and back for a full 3 to 5 minutes before rinsing! Alternate days.</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">AmLactin 12% Lactic Acid Lotion / CeraVe SA Body Wash</span>
-            <span class="product-rank">Rank #2 (Keratolytic)</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">AmLactin Daily 12% Lactic Acid / CeraVe SA 2% Body Wash</span>
+              <span class="product-rank">Rank #2 (Chemical Keratolytic)</span>
+            </div>
+            <div class="product-mechanism">Salicylic acid (BHA) dissolves intra-pore sebum; Lactic and Glycolic acids (AHA) dissolve desmosomes (the intercellular protein glue binding dead skin cells), allowing the "dirt" layer to shed invisibly in microscopic flakes.</div>
+            <div class="product-usage">📌 <strong>Stop all manual finger rubbing and loofahs</strong>. Apply AmLactin 12% across back and arms after drying.</div>
           </div>
-          <div class="product-detail">Dissolves the microscopic protein glue (desmosomes) between dead skin cells. Ends the "dirt rolls" completely without any physical scrubbing.</div>
-          <div class="product-usage">📌 Stop all finger rubbing or loofahs. Apply AmLactin post-shower.</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Aluminum Chloride Hexahydrate (Certain Dri / Driclor)</span>
-            <span class="product-rank">Rank #3 (Sweat Control)</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Aluminum Chloride Hexahydrate 12–20% (Certain Dri / Driclor)</span>
+              <span class="product-rank">Rank #3 (Sweat Suppression)</span>
+              <span class="rx-badge">[Rx for >15%]</span>
+            </div>
+            <div class="product-mechanism">Precipitates into metal-protein complexes that temporarily block eccrine sweat ducts, stopping excessive back sweat and starving yeast of moisture.</div>
+            <div class="product-usage">📌 Apply to <strong>completely dry</strong> back skin at bedtime 2 nights per week. Wash off in the morning.</div>
           </div>
-          <div class="product-detail">Plugs eccrine sweat ducts, stopping excessive truncal sweat and starving yeast of moisture.</div>
-          <div class="product-usage">📌 Apply to bone-dry back at bedtime 2 nights per week.</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Trifarotene (Aklief) 0.005% Cream</span>
-            <span class="rx-badge">[Prescription Based]</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Trifarotene (Aklief) 0.005% Cream / Adapalene 0.1% Gel</span>
+              <span class="rx-badge">[Prescription Based]</span>
+            </div>
+            <div class="product-mechanism">4th-generation retinoid specifically FDA-approved for large truncal surface areas. Normalizes follicular keratinocyte turnover and clears post-inflammatory hyperpigmentation.</div>
+            <div class="product-usage">📌 Apply a thin layer across back 2–3 nights weekly over dry skin.</div>
           </div>
-          <div class="product-detail">4th-generation retinoid specifically approved for clearing large-surface truncal chest/back acne.</div>
-          <div class="product-usage">📌 Apply thin layer 2–3 nights weekly as directed by dermatologist.</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Oral Fluconazole (150–200mg weekly)</span>
-            <span class="rx-badge">[Prescription Based]</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Oral Fluconazole (150–200mg weekly) / Itraconazole</span>
+              <span class="rx-badge">[Prescription Based]</span>
+            </div>
+            <div class="product-mechanism">Systemic antifungal pulse therapy. Reaches deep into the bulb of hair follicles where topical rinses cannot penetrate during severe or recalcitrant yeast flares.</div>
+            <div class="product-usage">📌 1 tablet weekly for 2 to 4 weeks strictly under physician supervision.</div>
           </div>
-          <div class="product-detail">Systemic antifungal pulse therapy for rapid eradication of deep follicular yeast.</div>
-          <div class="product-usage">📌 1 tablet weekly for 2 to 4 weeks under medical supervision.</div>
         </div>
       </div>
     </section>
@@ -505,381 +627,571 @@
     <!-- TAB 3: JOINTS & ACANTHOSIS NIGRICANS -->
     <section class="section-view" id="tab-joints">
       <div class="card">
-        <div class="card-header">
-          <div class="card-title">🌟 Dark Joints, Groin, Hips & Back</div>
-        </div>
-        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;">
-          Velvety dark skin in folds (groin, hips, neck) is <strong>Acanthosis Nigricans (AN)</strong> caused by high insulin stimulating keratinocyte growth receptors. Dark elbows and knees are compounded by <strong>Frictional Melanosis</strong>.
+        <div class="card-title">🌟 Acanthosis Nigricans & Frictional Melanosis (Joints, Hips, Back)</div>
+        <p class="section-desc">
+          The velvety, thickened, hyperpigmented plaques across flexural folds (groin, hips, back/neck) and extensor joints (elbows, knees) are diagnostic of <strong>Acanthosis Nigricans (AN)</strong> with secondary <strong>Frictional Melanosis</strong>. High circulating insulin spills over into peripheral tissues and binds with high affinity to <strong>Insulin-like Growth Factor-1 (IGF-1) receptors</strong> on epidermal keratinocytes and dermal fibroblasts, forcing them into abnormal proliferation and excess melanin production. Tight waistbands and pressure on joints compound this with mechanical post-inflammatory hyperpigmentation (PIH).
         </p>
 
+        <div class="mechanism-box">+--------------------------------------------------------------------------+
+|  Systemic Insulin Resistance --> Compensatory Hyperinsulinemia            |
+|  --> Cross-stimulation of Epidermal Keratinocyte IGF-1 Receptors         |
+|  --> Accelerated Keratinocyte Proliferation + Hyperpigmentation (AN)     |
+|  + Mechanical Pressure & Chafing (Elbows, Knees, Groin, Hips)            |
+|  --> Compounded Frictional Melanosis & Keratotic Thickening             |
++--------------------------------------------------------------------------+</div>
+
         <div class="alert-box alert-info">
-          <strong>💡 Root Cause Key:</strong> Bleaching creams alone will not work permanently. Lowering circulating insulin through low-glycemic nutrition and medical guidance is the definitive cure.
+          <strong>💡 The Root-Cause Key:</strong> Topical bleaching creams alone will always fail unless systemic insulin levels are brought down. Reversing hyperinsulinemia through low-glycemic nutrition and medical guidance permanently clears the velvety darkness.
         </div>
 
-        <h3 style="font-size: 0.95rem; margin: 16px 0 8px; color: var(--accent);">Ranked Solutions & Products:</h3>
+        <h3 style="font-size: 1rem; margin: 18px 0 10px; color: var(--accent);">Ranked Therapeutic Solutions:</h3>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Oral Metformin (500mg–1000mg)</span>
-            <span class="rx-badge">[Prescription Based]</span>
+        <div class="product-list">
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Metabolic Correction & Oral Metformin 500mg–1000mg</span>
+              <span class="product-rank">Rank #1 (Root-Cause Cure)</span>
+              <span class="rx-badge">[Prescription Based]</span>
+            </div>
+            <div class="product-mechanism">Sensitizes cellular insulin receptors, lowering circulating insulin and depriving epidermal IGF-1 receptors of abnormal growth signals. Metformin is the clinical gold-standard systemic therapy for AN.</div>
+            <div class="product-usage">📌 Low-glycemic dietary lifestyle + Metformin prescribed by physician based on fasting insulin/glucose (HOMA-IR) labs.</div>
           </div>
-          <div class="product-detail">Clinical standard of care to resolve insulin resistance and normalize keratinocyte proliferation.</div>
-          <div class="product-usage">📌 Prescribed after reviewing fasting insulin, glucose, and HbA1c tests.</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Urea 10% to 20% Lotion (Eucerin Roughness Relief)</span>
-            <span class="product-rank">Rank #2 (Keratolytic)</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Urea 10% to 20% Lotion (Eucerin Roughness Relief / Kerasal)</span>
+              <span class="product-rank">Rank #2 (Keratolytic Plaque Breaker)</span>
+            </div>
+            <div class="product-mechanism">Urea is a natural moisturizing factor (NMF) that breaks hydrogen bonds in dense keratin plaques; Lactic Acid gently dissolves hyper-pigmented corneocytes while pulling water deep into the dermis.</div>
+            <div class="product-usage">📌 Massage into elbows, knees, hips, and back 1–2 times daily after showering.</div>
           </div>
-          <div class="product-detail">Breaks hydrogen bonds in thickened hyperkeratotic plaques on elbows, knees, hips, and back.</div>
-          <div class="product-usage">📌 Massage into dark rough areas 1–2 times daily after showering.</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Azelaic Acid 10% to 15% Gel (Finacea)</span>
-            <span class="rx-badge">[Rx 15% / OTC 10%]</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Azelaic Acid 10% to 15% Gel (Finacea) + Tranexamic Acid</span>
+              <span class="product-rank">Rank #3 (Non-Irritating Tyrosinase Inhibitor)</span>
+              <span class="rx-badge">[Rx 15% / OTC 10%]</span>
+            </div>
+            <div class="product-mechanism">Safely blocks tyrosinase in hyperactive melanocytes without the rebound hyperpigmentation risk of aggressive bleaching agents. Completely safe for thin groin and hip skin folds.</div>
+            <div class="product-usage">📌 Apply once daily to groin, inner thigh creases, and dark back spots.</div>
           </div>
-          <div class="product-detail">Inhibits tyrosinase without irritating sensitive groin and inner thigh folds. Safe for thin skin.</div>
-          <div class="product-usage">📌 Apply once daily to groin, private area creases, and post-acne back spots.</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Adapalene 0.1% Gel / Tretinoin 0.025% Cream</span>
-            <span class="rx-badge">[Prescription Based]</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Adapalene 0.1% Gel / Tretinoin 0.025% to 0.05% Cream</span>
+              <span class="rx-badge">[Prescription Based]</span>
+            </div>
+            <div class="product-mechanism">Increases basal cell turnover, thins hyperkeratotic plaques, and disperses melanin aggregates over 12–16 weeks.</div>
+            <div class="product-usage">📌 Apply 2–3 nights weekly over moisturizer on elbows, knees, and back. (Never apply potent retinoids directly to internal genital mucosa).</div>
           </div>
-          <div class="product-detail">Stimulates cell turnover and disperses clumped melanin over 12–16 weeks.</div>
-          <div class="product-usage">📌 Apply 2–3 nights weekly over moisturizer on elbows, knees, and back. (Avoid mucosal areas).</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Tri-Luma (Fluocinolone + Hydroquinone 4% + Tretinoin)</span>
-            <span class="rx-badge">[Prescription Based]</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Tri-Luma (Fluocinolone 0.01% + Hydroquinone 4% + Tretinoin 0.05%)</span>
+              <span class="rx-badge">[Prescription Based]</span>
+            </div>
+            <div class="product-mechanism">Synergistic combination of tyrosinase inhibition, keratolysis, and anti-inflammatory suppression. The dermatological gold standard for severe post-inflammatory hyperpigmentation.</div>
+            <div class="product-usage">📌 Applied strictly under dermatologist supervision for 8 to 12 weeks maximum. Contraindicated on thin inner groin mucous membranes.</div>
           </div>
-          <div class="product-detail">Triple combination therapy for stubborn, localized hyperpigmentation.</div>
-          <div class="product-usage">📌 Strictly under dermatologist supervision for max 8–12 weeks. Never apply to groin mucosa.</div>
         </div>
       </div>
+    </section>
 
-      <!-- SPECIAL PERIANAL / INTERGLUTEAL CARD -->
-      <div class="card" style="border-left: 4px solid var(--accent);">
-        <div class="card-header">
-          <div class="card-title">🍑 Perianal & Intergluteal Cleft ("Poop Area") Protocol</div>
-        </div>
-        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;">
-          The area between the buttock cheeks and surrounding the anus naturally has higher melanocyte density and suffers continuous friction, sweat, and residual digestive enzymes from stool.
+    <!-- TAB 4: PERIANAL / CLEFT -->
+    <section class="section-view" id="tab-perianal">
+      <div class="card">
+        <div class="card-title">🍑 Perianal, Intergluteal Cleft & Buttock Fold ("Poop Area") Protocol</div>
+        <p class="section-desc">
+          The skin of the natal cleft (between the buttock cheeks) and the perianal area naturally contains up to <strong>2x higher melanocyte density</strong> than surrounding skin. Residual digestive pancreatic enzymes in stool (elastase, trypsin, lipases, and bile salts) break down the delicate acid mantle, causing chronic subclinical chemical maceration. Rough dry-wiping, walking friction between gluteal cheeks, and sitting pressure trigger protective post-inflammatory hyperpigmentation and reactive thickening.
         </p>
 
         <div class="alert-box alert-danger">
-          <strong>🚫 CRITICAL DANGER:</strong> NEVER apply Glycolic Acid peels, Salicylic Acid, or Hydroquinone directly to the anal verge. The mucosal lining has no stratum corneum and will suffer painful chemical burns, fissures, and severe rebound darkening!
+          <strong>🚫 CRITICAL DANGER — WHAT NEVER TO DO:</strong>
+          • <strong>NEVER apply high-strength chemical peels or leave-on AHA toners</strong> (such as Glycolic Acid 7–10%, Salicylic Acid >2%, or lactic peels) directly to the anal verge. The anoderm lacks normal stratum corneum and will suffer painful chemical burns, excruciating fissures, and severe rebound darkening!<br>
+          • <strong>NEVER apply Hydroquinone 4% or Tri-Luma</strong> to the anal opening without specialized proctological supervision (risk of mucosal thinning and permanent exogenous ochronosis).<br>
+          • <strong>NEVER aggressively scrub with fingernails, loofahs, or harsh soaps</strong> after defecation.
         </div>
 
-        <h3 style="font-size: 0.95rem; margin: 16px 0 8px; color: var(--accent);">Safe & Effective Perianal Protocol:</h3>
+        <h3 style="font-size: 1rem; margin: 18px 0 10px; color: var(--accent);">Ranked Safe Solutions for Perianal Darkening:</h3>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Water Wash + Pat Dry + Zinc Oxide 10–20% Barrier</span>
-            <span class="product-rank">Rank #1 (Barrier Shield)</span>
+        <div class="product-list">
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Water Wash + Soft Pat Dry + Zinc Oxide 10–20% Barrier</span>
+              <span class="product-rank">Rank #1 (Barrier Shield)</span>
+            </div>
+            <div class="product-mechanism">Water eliminates fecal digestive enzymes without abrasive friction. Zinc Oxide (Sudocrem / Desitin / CeraVe Baby Healing Ointment) forms an anti-inflammatory, water-resistant barrier that neutralizes residual digestive proteases and eliminates cheek-to-cheek friction.</div>
+            <div class="product-usage">📌 After defecation, wash gently with water (bidet/hand spray). <strong>Pat dry gently with soft cloth (never rub)</strong>. Apply a thin layer between cheeks daily.</div>
           </div>
-          <div class="product-detail">Always use water/bidet after defecation. NEVER dry-wipe roughly. Zinc Oxide (Sudocrem/Desitin) or Vaseline neutralizes residual fecal digestive enzymes and stops cheek-to-cheek friction.</div>
-          <div class="product-usage">📌 Apply a thin layer between the buttock cheeks daily and after bowel movements.</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Azelaic Acid 10% to 15% Gel</span>
-            <span class="rx-badge">[Rx 15% / OTC 10%]</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Azelaic Acid 10% to 15% Gel (Finacea)</span>
+              <span class="product-rank">Rank #2 (Safe Depigmenting)</span>
+              <span class="rx-badge">[Rx 15% / OTC 10%]</span>
+            </div>
+            <div class="product-mechanism">Selectively inhibits tyrosinase in hyperactive melanocytes without burning or irritating delicate intertriginous skin. Completely non-cytotoxic and safe for perianal folds.</div>
+            <div class="product-usage">📌 Apply a pea-sized amount to the clean, dry cleft at bedtime (keep on outer fold; do not insert inside anal canal).</div>
           </div>
-          <div class="product-detail">The safest tyrosinase inhibitor for delicate intertriginous folds. Halts melanin overproduction without chemical burn risk.</div>
-          <div class="product-usage">📌 Apply a pea-sized amount to the clean, dry cleft at bedtime (avoid internal canal).</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Ketoconazole 2% or Clotrimazole 1% Cream</span>
-            <span class="rx-badge">[Rx / Mild OTC]</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Urea 5% to 10% Gentle Lotion (Eucerin Advanced Repair)</span>
+              <span class="product-rank">Rank #3 (Mild Keratolytic)</span>
+            </div>
+            <div class="product-mechanism">Gently softens thickened hyperkeratotic skin in the gluteal fold without causing stinging or mucosal erosion.</div>
+            <div class="product-usage">📌 Apply once daily to outer gluteal cleft and buttock fold after showering. (Avoid high 20–40% concentrations in this sensitive fold).</div>
           </div>
-          <div class="product-detail">Clears occult Candida/yeast intertrigo caused by heat and moisture, which is often the silent trigger for intense darkness.</div>
-          <div class="product-usage">📌 Apply 2x daily for 7–10 days if the cleft ever itches or burns.</div>
+
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Ketoconazole 2% Cream / Clotrimazole 1% Cream</span>
+              <span class="rx-badge">[Rx / Mild OTC]</span>
+            </div>
+            <div class="product-mechanism">Clears occult Candida or Malassezia yeast intertrigo caused by heat and moisture, which is often the silent trigger for intense darkness.</div>
+            <div class="product-usage">📌 Apply twice daily for 7 to 10 days if the cleft ever itches, stings, or burns.</div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- TAB: HAIR -->
+    <!-- TAB 5: HAIR & SPA -->
     <section class="section-view" id="tab-hair">
       <div class="card">
-        <div class="card-header">
-          <div class="card-title">💇 Comprehensive Hair Spa, Deep Mask & Anti-Frizz Protocol</div>
-        </div>
-        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;">
-          Thick coarse hair suffers from a dual gradient: <strong>sticky, waxy roots</strong> from oxidized sebum stagnation, and <strong>brittle, straw-like tips</strong> from total 18-MEA lipid starvation.
+        <div class="card-title">💇 Clinical Trichology: Coarse, Hard, Sticky & Frizzy Hair Protocol</div>
+        <p class="section-desc">
+          When thick, coarse hair strands feel hard, rough, sticky, and unmanageable in the absence of hair oils, two distinct gradients are at play:
+          <br>1. <strong>Proximal Sebum Stagnation (Sticky Roots & Mid-Lengths)</strong>: In the absence of conditioning, the scalp pumps viscous sebum (squalene, wax esters) that oxidizes upon air exposure into a tacky, sticky resin, gluing strands together into a stiff mass.
+          <br>2. <strong>Distal Lipid Starvation (Brittle, Frizzy Ends)</strong>: Sebum cannot travel down thick coarse hair ridges. The ends are stripped of their protective <strong>18-MEA hydrophobic lipid mantle</strong>, absorbing humidity unevenly (frizz) and remaining rigid like wire.
         </p>
 
         <div class="alert-box alert-info">
-          <strong>💡 The Thermal Spa Secret:</strong> Coarse cuticles are compact and rigid. Applying a Deep Mask with a <strong>warm damp towel wrap for 15 minutes</strong> dilates the cuticle scales, allowing hydrolyzed amino acids and fatty alcohols to penetrate 3x deeper into the cortex.
+          <strong>💡 The Thermal Spa Secret:</strong> Coarse hair cuticles are compact and rigid. Applying a Deep Mask with a <strong>warm damp towel wrap for 15 minutes</strong> dilates the cuticle scales, allowing hydrolyzed amino acids and fatty alcohols to penetrate 3x deeper into the cortex.
         </div>
 
-        <h3 style="font-size: 0.95rem; margin: 16px 0 8px; color: var(--accent);">Ranked Trichological Interventions:</h3>
+        <h3 style="font-size: 1rem; margin: 18px 0 10px; color: var(--accent);">Ranked Trichological Solutions:</h3>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Thermal Steam-Activated Deep Hair Mask</span>
-            <span class="product-rank">Rank #1 (Salon Hair Spa)</span>
+        <div class="product-list">
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Thermal Steam-Activated Deep Hair Mask</span>
+              <span class="product-rank">Rank #1 (Salon Hair Spa)</span>
+            </div>
+            <div class="product-mechanism">Contains 3x the density of fatty alcohols (Cetyl, Stearyl, Behenyl alcohol), gold quinoa, and hydrolyzed micro-proteins. Infiltrates the dense coarse cortex to permanently eliminate straw-like hardness and plasticize rigid keratin chains.</div>
+            <div class="product-usage">📌 <strong>L'Oréal Professionnel Absolut Repair Mask</strong> or <strong>Tresemmé Keratin Deep Mask</strong>. Apply ears-down to tips once weekly. Wrap with a warm damp towel over a shower cap for 15–20 minutes. Rinse cool.</div>
           </div>
-          <div class="product-detail">Contains 3x the density of fatty alcohols, gold quinoa, and hydrolyzed micro-proteins. Infiltrates the coarse cortex to permanently eliminate straw-like hardness.</div>
-          <div class="product-usage">📌 <strong>L'Oréal Professionnel Absolut Repair Mask</strong> or <strong>Tresemmé Keratin Deep Mask</strong>. Apply ears-down to tips once weekly. Wrap hair with a warm damp towel over a shower cap for 15–20 minutes. Rinse cool.</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">L'Oréal 8 Second Wonder Water (Lamellar Technology)</span>
-            <span class="product-rank">Rank #2 (Instant Flash Liquid)</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">L'Oréal 8 Second Wonder Water (Lamellar Technology)</span>
+              <span class="product-rank">Rank #2 (Instant Flash Liquid)</span>
+            </div>
+            <div class="product-mechanism">Ultra-thin liquid lamellar sheets automatically target damaged, rough spots in 8 seconds. Provides instant mirror slip with zero heavy wax, zero stickiness, and weightless glide.</div>
+            <div class="product-usage">📌 Apply 20ml to wet mid-lengths and ends 1–2x weekly after shampoo. Massage 8 seconds until warm; rinse immediately.</div>
           </div>
-          <div class="product-detail">Ultra-thin liquid lamellar sheets automatically target damaged, rough spots in 8 seconds. Provides instant mirror slip with zero wax and zero stickiness.</div>
-          <div class="product-usage">📌 Apply 20ml to wet mid-lengths and ends 1–2x weekly after shampoo. Massage 8 seconds until warm; rinse immediately.</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Tresemmé Keratin Smooth / L'Oréal Total Repair 5 Conditioner</span>
-            <span class="product-rank">Rank #3 (Every-Wash Core)</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Tresemmé Keratin Smooth / L'Oréal Total Repair 5 Conditioner</span>
+              <span class="product-rank">Rank #3 (Every-Wash Core)</span>
+            </div>
+            <div class="product-mechanism">Positively charged cationic surfactants (Behentrimonium Chloride) bind to negatively charged keratin, neutralizing static friction, flattening flared cuticles, and making thick hair soft and pliable.</div>
+            <div class="product-usage">📌 Apply after every shampoo from mid-lengths to ends. Leave 2–3 minutes, rinse cool. Never skip!</div>
           </div>
-          <div class="product-detail">Positively charged cationic surfactants bind to negatively charged keratin, neutralizing static friction and flattening flared cuticles.</div>
-          <div class="product-usage">📌 Apply every single wash after shampooing from mid-lengths to ends. Leave 2–3 minutes, rinse cool. Never skip!</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Streax Pro / L'Oréal Extraordinary Oil Serum</span>
-            <span class="product-rank">Rank #4 (Weightless Silk Shield)</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Streax Pro / L'Oréal Extraordinary Oil Serum</span>
+              <span class="product-rank">Rank #4 (Weightless Silk Shield)</span>
+            </div>
+            <div class="product-mechanism">Replaces the missing 18-MEA lipid mantle. High-refractive-index micro-silicones coat strands in a featherlight sheath, locking out humidity without grease, heaviness, or stickiness.</div>
+            <div class="product-usage">📌 Rub 2–3 drops between palms and glide through towel-damp hair after every wash. Dries silky in 10 seconds.</div>
           </div>
-          <div class="product-detail">High-refractive-index micro-silicones coat strands in a featherlight sheath, locking out humidity without grease, heaviness, or stickiness.</div>
-          <div class="product-usage">📌 Rub 2–3 drops between palms and glide through towel-damp hair after every wash. Dries silky in 10 seconds.</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Clarifying & Salicylic Acid Scalp Pre-Wash</span>
-            <span class="product-rank">Rank #5 (De-Sticking Roots)</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Clarifying & Salicylic Acid Scalp Pre-Wash</span>
+              <span class="product-rank">Rank #5 (De-Sticking Roots)</span>
+            </div>
+            <div class="product-mechanism">Dissolves the oxidized, gummy sebum glue at the scalp roots that makes proximal hair feel stiff and sticky.</div>
+            <div class="product-usage">📌 <strong>Neutrogena Anti-Residue</strong> or <strong>CeraVe SA Wash</strong> applied to damp scalp roots for 2 minutes once every 7–10 days before shampooing.</div>
           </div>
-          <div class="product-detail">Dissolves the oxidized, gummy sebum glue at the scalp roots that makes proximal hair feel stiff and sticky.</div>
-          <div class="product-usage">📌 <strong>Neutrogena Anti-Residue</strong> or <strong>CeraVe SA Wash</strong> applied to damp scalp roots for 2 minutes once every 7–10 days before shampooing.</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Diluted Apple Cider Vinegar (ACV) Acidic Rinse</span>
-            <span class="product-rank">Rank #6 (Acidic Cuticle Snap)</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Diluted Apple Cider Vinegar (ACV) Acidic Rinse</span>
+              <span class="product-rank">Rank #6 (Acidic Cuticle Snap)</span>
+            </div>
+            <div class="product-mechanism">Resets hair surface pH to 3.5–4.0, forcing cuticle scales tightly flat and dissolving surface precipitates.</div>
+            <div class="product-usage">📌 1–2 tbsp ACV in 500ml water. Pour over hair once weekly after washing; rinse with cool water after 1 minute.</div>
           </div>
-          <div class="product-detail">Resets hair surface pH to 3.5–4.0, forcing cuticle scales tightly flat and dissolving surface precipitates.</div>
-          <div class="product-usage">📌 1–2 tbsp ACV in 500ml water. Pour over hair once weekly after washing; rinse with cool water after 1 minute.</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Ketoconazole 2% Shampoo (Nizoral)</span>
-            <span class="rx-badge">[Prescription / Scalp Care]</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Ketoconazole 2% Shampoo (Nizoral 2%)</span>
+              <span class="rx-badge">[Prescription / Scalp Care]</span>
+            </div>
+            <div class="product-mechanism">Eradicates scalp Malassezia yeast (the same fungus behind back acne), eliminating itchy roots and greasy dandruff.</div>
+            <div class="product-usage">📌 Massage into scalp 2x weekly. Leave for 3 to 5 minutes before rinsing.</div>
           </div>
-          <div class="product-detail">Eradicates scalp Malassezia yeast (the same fungus behind back acne), eliminating itchy roots and greasy dandruff.</div>
-          <div class="product-usage">📌 Massage into scalp 2x weekly. Leave for 3 to 5 minutes before rinsing.</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Satin/Silk Pillowcase & Microfiber Towel</span>
-            <span class="product-rank">Rank #8 (Night Friction Shield)</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Satin/Silk Pillowcase & Microfiber Towel</span>
+              <span class="product-rank">Rank #8 (Night Friction Shield)</span>
+            </div>
+            <div class="product-mechanism">Cotton pillowcases suck moisture from coarse hair and shred cuticles through friction. Satin eliminates friction and morning bird's-nest frizz.</div>
+            <div class="product-usage">📌 Sleep on a 100% satin or mulberry silk pillowcase. Pat hair dry gently with a microfiber towel (never rub roughly).</div>
           </div>
-          <div class="product-detail">Cotton pillowcases suck moisture from coarse hair and shred cuticles through friction. Satin eliminates friction and morning frizz.</div>
-          <div class="product-usage">📌 Switch to a 100% satin or mulberry silk pillowcase. Pat hair dry gently with a microfiber towel (never rub roughly).</div>
         </div>
       </div>
     </section>
 
-    <!-- TAB: COUGH & SINUS -->
+    <!-- TAB 6: COUGH & SINUS -->
     <section class="section-view" id="tab-cough">
       <div class="card">
-        <div class="card-header">
-          <div class="card-title">🫁 Acute Rhinosinusitis & Upper Airway Cough Protocol</div>
-        </div>
-        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;">
-          Your 60% nasal obstruction forces stagnant inflammatory mucus backward down your throat (post-nasal drip). The yellow-green color is caused by <strong>neutrophil myeloperoxidase enzymes</strong> fighting the infection. Lying flat causes gravity pooling on vocal cords, triggering heaviness and nighttime coughing.
+        <div class="card-title">🫁 Acute Rhinosinusitis & Upper Airway Cough Syndrome (UACS)</div>
+        <p class="section-desc">
+          Your 60% nasal obstruction is caused by vasodilation of venous sinusoids in the inferior turbinates. Stagnant inflammatory mucus cannot drain forward, so it cascades backward through the posterior choanae down the throat (post-nasal drip). The yellow-green color is caused by <strong>neutrophil myeloperoxidase (MPO) enzymes</strong> fighting infection—not an automatic indication for antibiotics at day 7 without fever! Lying flat pools mucus on vocal cords, triggering heaviness, choking sensations, and coughing spells.
         </p>
 
+        <div class="mechanism-box">+-------------------------------------------------------------------------------+
+|  Viral/Inflammatory Rhinitis --> Inferior Turbinate Engorgement (60% Block)   |
+|  --> Neutrophil Recruitment --> Myeloperoxidase Release (Yellow-Green Mucus)   |
+|  --> Stagnant Posterior Choanae Drainage (Tenacious Post-Nasal Drip)          |
+|  --> Pools over Larynx --> Vagus Nerve Stimulation --> Persistent Cough       |
+|  + Supine Sleeping Posture --> Gravity Pooling & Increased Venous Congestion  |
++-------------------------------------------------------------------------------+</div>
+
         <div class="alert-box alert-warning">
-          <strong>⚠️ Yellow-Green Mucus Fact:</strong> Yellow-green phlegm at day 7 without fever does <strong>NOT</strong> mean you automatically need antibiotics—it is a normal sign of white blood cells clearing the passages. Antibiotics are only considered if symptoms persist past 10 full days or a high fever spikes.
+          <strong>⚠️ Antibiotic Stewardship Notice:</strong> At Day 7 with no fever, yellow-green mucus is normal white blood cell enzyme activity. Routine antibiotics are not indicated unless symptoms persist beyond 10 full days or a high fever/facial pain spikes.
         </div>
 
-        <h3 style="font-size: 0.95rem; margin: 16px 0 8px; color: var(--accent);">Ranked Clinical Solutions:</h3>
+        <h3 style="font-size: 1rem; margin: 18px 0 10px; color: var(--accent);">Ranked Clinical Solutions:</h3>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">High-Volume Saline Sinus Rinse (NeilMed Sinus Rinse)</span>
-            <span class="product-rank">Rank #1 (Mechanical Evacuation)</span>
+        <div class="product-list">
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">High-Volume Saline Sinus Rinse (NeilMed Sinus Rinse Kit)</span>
+              <span class="product-rank">Rank #1 (Mechanical Evacuation)</span>
+            </div>
+            <div class="product-mechanism">Flushes out sticky yellow-green mucus plugs, clears inflammatory cytokines, and draws water out of swollen turbinate tissues via osmotic pressure. The most effective step for 60% nasal blockage.</div>
+            <div class="product-usage">📌 Flush nasal passages 1–2x daily (morning & before bed) using distilled or boiled-cooled water.</div>
           </div>
-          <div class="product-detail">Flushes out sticky yellow-green mucus plugs and shrinks swollen turbinate tissues via osmotic pressure. The most effective step for 60% nasal blockage.</div>
-          <div class="product-usage">📌 Flush nasal passages 1–2x daily (especially morning & before bed) using distilled or boiled-cooled water.</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">N-Acetylcysteine (NAC) 600 mg Effervescent Tablets</span>
-            <span class="product-rank">Rank #2 (Chemical Mucolytic)</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">N-Acetylcysteine (NAC) 600 mg Effervescent Tablets</span>
+              <span class="product-rank">Rank #2 (Chemical Mucolytic)</span>
+            </div>
+            <div class="product-mechanism">Chemically cleaves the disulfide bonds in thick glycoprotein mucus. Transforms sticky phlegm into runny fluid so you don't have to strain your throat to spit it out.</div>
+            <div class="product-usage">📌 <strong>Fluimucil 600mg</strong> or <strong>Mucomix</strong>: Dissolve 1 tablet in half a glass of water once or twice daily after meals for 5–7 days.</div>
           </div>
-          <div class="product-detail">Chemically cleaves the disulfide bonds in thick glycoprotein mucus. Transforms sticky phlegm into runny fluid so you don't have to strain your throat to spit it out.</div>
-          <div class="product-usage">📌 <strong>Fluimucil 600mg</strong> or <strong>Mucomix</strong>: Dissolve 1 tablet in half a glass of water once or twice daily after meals for 5–7 days.</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Fluticasone / Mometasone Nasal Spray (Flonase / Nasonex)</span>
-            <span class="rx-badge">[Rx / Mild OTC]</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Fluticasone / Mometasone Nasal Spray (Flonase / Nasonex)</span>
+              <span class="rx-badge">[Rx / Mild OTC]</span>
+            </div>
+            <div class="product-mechanism">Potent anti-inflammatory steroid spray that shrinks engorged nasal turbinates, reopening the 60% blocked passages without rebound swelling.</div>
+            <div class="product-usage">📌 2 sprays per nostril once daily every morning. Point nozzle slightly outward toward your ear (not at nasal septum).</div>
           </div>
-          <div class="product-detail">Potent anti-inflammatory steroid spray that shrinks engorged nasal turbinates, reopening the 60% blocked passages without rebound swelling.</div>
-          <div class="product-usage">📌 2 sprays per nostril once daily every morning. Point nozzle slightly outward toward your ear (not at nasal septum).</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Oxymetazoline 0.05% Spray (Otrivin / Afrin)</span>
-            <span class="product-rank">Rank #4 (Nighttime Emergency)</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Oxymetazoline 0.05% Spray (Otrivin / Afrin)</span>
+              <span class="product-rank">Rank #4 (Nighttime Emergency)</span>
+            </div>
+            <div class="product-mechanism">Rapidly constricts swollen nasal blood vessels within 2 minutes to eliminate nighttime heaviness and restore 100% sleep breathing.</div>
+            <div class="product-usage">📌 <strong>STRICT RULE: Maximum 3 to 4 nights ONLY</strong>. 1 spray per nostril strictly at bedtime. Never exceed 5 days to avoid rebound congestion.</div>
           </div>
-          <div class="product-detail">Rapidly constricts swollen nasal blood vessels within 2 minutes to eliminate nighttime heaviness and restore 100% sleep breathing.</div>
-          <div class="product-usage">📌 <strong>STRICT RULE: Maximum 3 to 4 nights ONLY</strong>. 1 spray per nostril strictly at bedtime. Never exceed 5 days to avoid rebound congestion.</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Steam Inhalation & 30-Degree Head Elevation</span>
-            <span class="product-rank">Rank #5 (Posture & Moisture)</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Steam Inhalation & 30-Degree Head Elevation</span>
+              <span class="product-rank">Rank #5 (Posture & Moisture)</span>
+            </div>
+            <div class="product-mechanism">Warm steam liquefies laryngeal secretions. Elevating your head with 2 pillows prevents nocturnal mucus pooling on vocal cords.</div>
+            <div class="product-usage">📌 Inhale warm steam for 10 minutes before bed; sleep with head propped up on 2 pillows. Drink 2.5–3L of warm water daily.</div>
           </div>
-          <div class="product-detail">Warm steam liquefies laryngeal secretions. Elevating your head with 2 pillows prevents nocturnal mucus pooling on vocal cords.</div>
-          <div class="product-usage">📌 Inhale warm steam for 10 minutes before bed; sleep with head propped up on 2 pillows. Drink 2.5–3L of warm water daily.</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Amoxicillin-Clavulanate (Augmentin 625mg/875mg)</span>
-            <span class="rx-badge">[Prescription Based]</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Amoxicillin-Clavulanate (Augmentin 625mg/875mg)</span>
+              <span class="rx-badge">[Prescription Based]</span>
+            </div>
+            <div class="product-mechanism">First-line antibiotic therapy if acute post-viral rhinosinusitis turns into a true secondary bacterial sinus infection.</div>
+            <div class="product-usage">📌 Consult your physician <strong>ONLY if</strong> symptoms persist beyond 10 full days without improvement, or if a high fever/facial pain spikes.</div>
           </div>
-          <div class="product-detail">First-line antibiotic therapy if acute post-viral rhinosinusitis turns into a true secondary bacterial sinus infection.</div>
-          <div class="product-usage">📌 Consult your physician <strong>ONLY if</strong> symptoms persist beyond 10 full days without improvement, or if a high fever/facial pain spikes.</div>
         </div>
       </div>
     </section>
 
-    <!-- TAB: ENERGY & VITALITY -->
+    <!-- TAB 7: ENERGY & VITALITY -->
     <section class="section-view" id="tab-energy">
       <div class="card">
-        <div class="card-header">
-          <div class="card-title">⚡ Executive Vitality, Focus & Longevity Architecture</div>
-        </div>
-        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;">
+        <div class="card-title">⚡ Executive Vitality, Cognitive Focus & Complete Health Architecture</div>
+        <p class="section-desc">
           An evidence-based operating system for all-day stamina, laser focus, stress resilience, gut-brain health, and restorative sleep.
         </p>
 
         <!-- Quick Emergency Issue Matrix -->
-        <div class="alert-box alert-info" style="flex-direction: column; gap: 6px;">
-          <strong>🎯 Quick Issue Decision Matrix:</strong>
-          <div style="font-size: 0.82rem; line-height: 1.5; color: #e2e8f0;">
-            • <strong>Afternoon Sleepiness?</strong> 10-min walk + cold water with salt + Savory protein-first lunch.<br>
-            • <strong>Brain Fog?</strong> Alpha-GPC 300mg + L-Tyrosine 500mg + Citrulline 3g (boosts cerebral blood flow).<br>
-            • <strong>Stress / Panic Spike?</strong> 3 cycles of Physiological Sigh (2 sharp inhales via nose, long sigh mouth).<br>
-            • <strong>Gut Bloat?</strong> 5g L-Glutamine powder in water on empty stomach + eliminate artificial sweeteners.<br>
-            • <strong>Poor Sleep / Waking Tired?</strong> Magnesium Bisglycinate 300mg + L-Theanine 200mg + 66°F cool room.
+        <div class="alert-box alert-info" style="flex-direction: column; gap: 8px;">
+          <strong style="font-size: 0.95rem; color: #38bdf8;">🎯 Modular Issue Decision Matrix ("When You Experience X, Do Y"):</strong>
+          <div style="font-size: 0.84rem; line-height: 1.6; color: #e2e8f0;">
+            • <strong>Afternoon Sleepiness?</strong> 10-min brisk walk + 500ml cold water with salt + Savory protein-first lunch.<br>
+            • <strong>Brain Fog?</strong> Alpha-GPC 300mg + L-Tyrosine 500mg on empty stomach + Citrulline 3g (boosts cerebral blood flow).<br>
+            • <strong>Stress / Panic Spike?</strong> 3 cycles of Physiological Sigh (2 sharp inhales via nose, long sigh mouth) + splash cold water on eyes.<br>
+            • <strong>Low Physical Stamina?</strong> Electrolyte water + L-Citrulline Malate 3g + Zone 2 nasal cardio (150 min/wk).<br>
+            • <strong>Gut Bloat?</strong> 5g L-Glutamine powder in water on empty stomach + 30-plant weekly diversity rule.<br>
+            • <strong>Poor Sleep / Waking Tired?</strong> Magnesium Bisglycinate 300mg + L-Theanine 200mg + Apigenin 50mg + 66°F cool room.<br>
+            • <strong>Sluggish Circulation?</strong> 20 deep breaths + stair climb + High-dose Omega-3 (2000–3000mg EPA/DHA).
           </div>
         </div>
 
-        <h3 style="font-size: 0.95rem; margin: 16px 0 8px; color: var(--accent);">Ranked Vitality & Cognitive Interventions:</h3>
+        <h3 style="font-size: 1rem; margin: 18px 0 10px; color: var(--accent);">Ranked Vitality & Cognitive Interventions:</h3>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Morning Sunlight & The 90-Minute Caffeine Delay</span>
-            <span class="product-rank">Rank #1 (Circadian Foundation)</span>
+        <div class="product-list">
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Morning Sunlight & The 90-Minute Caffeine Delay</span>
+              <span class="product-rank">Rank #1 (Circadian Foundation)</span>
+            </div>
+            <div class="product-mechanism">Outdoor morning lux synchronizes the master circadian clock. Delaying caffeine 90–120 minutes allows natural adenosine clearance, curing the 2 PM afternoon crash permanently.</div>
+            <div class="product-usage">📌 10–15 min outside within 30 min of waking. First tea/coffee delayed until 90 min post-waking.</div>
           </div>
-          <div class="product-detail">Outdoor morning lux synchronizes the master circadian clock. Delaying caffeine 90–120 minutes allows natural adenosine clearance, curing the 2 PM afternoon crash permanently.</div>
-          <div class="product-usage">📌 10–15 min outside within 30 min of waking. First tea/coffee delayed until 90 min post-waking.</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Mitochondrial ATP Loading (Creatine + CoQ10 Ubiquinol)</span>
-            <span class="product-rank">Rank #2 (Cellular Stamina)</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Mitochondrial ATP Loading (Creatine 5g + CoQ10 Ubiquinol 100mg)</span>
+              <span class="product-rank">Rank #2 (Cellular Stamina)</span>
+            </div>
+            <div class="product-mechanism">Creatine monohydrate recycles ADP into ATP in brain and muscles. Ubiquinol optimizes mitochondrial electron transport for smooth physical and cognitive stamina.</div>
+            <div class="product-usage">📌 Creatine Monohydrate 5g daily in water + Ubiquinol CoQ10 100mg with breakfast fat.</div>
           </div>
-          <div class="product-detail">Creatine monohydrate recycles ADP into ATP in brain and muscles. Ubiquinol optimizes mitochondrial electron transport for smooth physical and cognitive stamina.</div>
-          <div class="product-usage">📌 Creatine Monohydrate 5g daily in water + Ubiquinol CoQ10 100mg with breakfast fat.</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Cholinergic & Dopaminergic Focus Stack (Alpha-GPC + L-Tyrosine)</span>
-            <span class="product-rank">Rank #3 (Laser Focus & Anti-Fog)</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Cholinergic & Dopaminergic Focus Stack (Alpha-GPC + L-Tyrosine)</span>
+              <span class="product-rank">Rank #3 (Laser Focus & Anti-Fog)</span>
+            </div>
+            <div class="product-mechanism">Alpha-GPC delivers bioavailable acetylcholine for working memory; L-Tyrosine synthesizes dopamine for executive motivation and sharp cognitive drive.</div>
+            <div class="product-usage">📌 Alpha-GPC 300mg + L-Tyrosine 500–1000mg on an empty stomach 30 min before deep work blocks.</div>
           </div>
-          <div class="product-detail">Alpha-GPC delivers bioavailable acetylcholine for working memory; L-Tyrosine synthesizes dopamine for executive motivation and sharp cognitive drive.</div>
-          <div class="product-usage">📌 Alpha-GPC 300mg + L-Tyrosine 500–1000mg on an empty stomach 30 min before deep work blocks.</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">The Physiological Sigh & Ashwagandha KSM-66</span>
-            <span class="product-rank">Rank #4 (Autonomic Stress Mastery)</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">The Physiological Sigh & Ashwagandha KSM-66</span>
+              <span class="product-rank">Rank #4 (Autonomic Stress Mastery)</span>
+            </div>
+            <div class="product-mechanism">Two sharp inhales via nose, long sigh out via mouth. Lowers heart rate in under 30 seconds via vagus nerve. Ashwagandha cuts systemic cortisol by up to 28%.</div>
+            <div class="product-usage">📌 Sigh 3x during acute work stress. Take Ashwagandha KSM-66 300–600mg in the evening with food.</div>
           </div>
-          <div class="product-detail">Two sharp inhales via nose, long sigh out via mouth. Lowers heart rate in under 30 seconds via vagus nerve. Ashwagandha cuts systemic cortisol by up to 28%.</div>
-          <div class="product-usage">📌 Sigh 3x during acute work stress. Take Ashwagandha KSM-66 300–600mg in the evening with food.</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Gut-Brain Axis Restoration (L-Glutamine + 30-Plant Rule)</span>
-            <span class="product-rank">Rank #5 (Microbiome Vitality)</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Gut-Brain Axis Restoration (L-Glutamine 5g + 30-Plant Rule)</span>
+              <span class="product-rank">Rank #5 (Microbiome Vitality)</span>
+            </div>
+            <div class="product-mechanism">90% of serotonin is synthesized in the gut. L-Glutamine seals tight junctions, stopping leaky-gut neuroinflammation and post-meal brain fog.</div>
+            <div class="product-usage">📌 L-Glutamine 5g morning on empty stomach. Eat 30 diverse plant species weekly + Spore Probiotics.</div>
           </div>
-          <div class="product-detail">90% of serotonin is synthesized in the gut. L-Glutamine seals tight junctions, stopping leaky-gut neuroinflammation and post-meal brain fog.</div>
-          <div class="product-usage">📌 L-Glutamine 5g morning on empty stomach. Eat 30 diverse plant species weekly + Spore Probiotics.</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Endothelial Nitric Oxide & Zone 2 Cardio (Heart Health)</span>
-            <span class="product-rank">Rank #6 (Microvascular Oxygen)</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Endothelial Nitric Oxide & Zone 2 Cardio (Heart Health)</span>
+              <span class="product-rank">Rank #6 (Microvascular Oxygen)</span>
+            </div>
+            <div class="product-mechanism">Zone 2 cardio builds new mitochondria. L-Citrulline and high-potency Omega-3 EPA/DHA dilate arteries and flood organs with oxygenated blood.</div>
+            <div class="product-usage">📌 150 min/week Zone 2 cardio (nasal breathing) + 2000mg Omega-3 EPA/DHA + L-Citrulline 3g–6g.</div>
           </div>
-          <div class="product-detail">Zone 2 cardio builds new mitochondria. L-Citrulline and high-potency Omega-3 EPA/DHA dilate arteries and flood organs with oxygenated blood.</div>
-          <div class="product-usage">📌 150 min/week Zone 2 cardio (nasal breathing) + 2000mg Omega-3 EPA/DHA + L-Citrulline 3g–6g.</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Clinical Sleep Cocktail (Magnesium Bisglycinate + Apigenin + Theanine)</span>
-            <span class="product-rank">Rank #7 (Deep Slow-Wave Sleep)</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Clinical Sleep Cocktail (Magnesium Bisglycinate + Apigenin + Theanine)</span>
+              <span class="product-rank">Rank #7 (Deep Slow-Wave Sleep)</span>
+            </div>
+            <div class="product-mechanism">Accelerates core temperature drop and stimulates GABA-A receptors, maximizing Stage 3/4 deep regenerative sleep without grogginess.</div>
+            <div class="product-usage">📌 Magnesium Bisglycinate 300mg + L-Theanine 200mg + Apigenin 50mg 60 min before bed. 3-2-1 rule.</div>
           </div>
-          <div class="product-detail">Accelerates core temperature drop and stimulates GABA-A receptors, maximizing Stage 3/4 deep regenerative sleep without grogginess.</div>
-          <div class="product-usage">📌 Magnesium Bisglycinate 300mg + L-Theanine 200mg + Apigenin 50mg 60 min before bed. 3-2-1 rule.</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Modafinil 100mg–200mg / Eugeroics</span>
-            <span class="rx-badge">[Prescription Based]</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Modafinil 100mg–200mg / Eugeroics</span>
+              <span class="rx-badge">[Prescription Based]</span>
+            </div>
+            <div class="product-mechanism">Selective orexinergic and dopaminergic wakefulness promoter for clinically diagnosed daytime hypersomnia.</div>
+            <div class="product-usage">📌 Strictly under physician supervision. Never used to replace foundational sleep.</div>
           </div>
-          <div class="product-detail">Selective orexinergic and dopaminergic wakefulness promoter for clinically diagnosed daytime hypersomnia.</div>
-          <div class="product-usage">📌 Strictly under physician supervision. Never used to replace foundational sleep.</div>
         </div>
       </div>
     </section>
 
-    <!-- TAB 4: DAILY TRACKER -->
+    <!-- TAB 8: GEMS & MISTAKES -->
+    <section class="section-view" id="tab-gems">
+      <div class="card">
+        <div class="card-title">💎 The 10 High-Leverage "Hidden Gems" (Biohacks with 10x ROI)</div>
+        <div class="product-list">
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">1. The 90-Minute Morning Caffeine Delay</span>
+              <span class="product-rank">Biohack #1</span>
+            </div>
+            <div class="product-mechanism">Waiting 90–120 minutes after waking allows natural adenosine clearance. Cures the 2 PM afternoon energy crash forever.</div>
+          </div>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">2. The 30-Second Physiological Sigh</span>
+              <span class="product-rank">Biohack #2</span>
+            </div>
+            <div class="product-mechanism">Double inhale through nose, long sigh out through mouth. The fastest evidence-based real-time nervous system reset known to modern neuroscience.</div>
+          </div>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">3. Nasal-Only Breathing in Daily Life & Work</span>
+              <span class="product-rank">Biohack #3</span>
+            </div>
+            <div class="product-mechanism">Mouth breathing expels too much CO2, restricting oxygen delivery to the brain (Bohr effect). Nasal breathing increases paranasal nitric oxide delivery by 600%.</div>
+          </div>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">4. The 10-Minute Post-Lunch Walk</span>
+              <span class="product-rank">Biohack #4</span>
+            </div>
+            <div class="product-mechanism">Activates non-insulin GLUT4 glucose transporters in skeletal muscle, dropping post-meal blood sugar spikes by 30% and eliminating food comas.</div>
+          </div>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">5. The Morning "Salt & Water" Hydration Anchor</span>
+              <span class="product-rank">Biohack #5</span>
+            </div>
+            <div class="product-mechanism">Drink 500ml of room-temperature water with a pinch of unrefined sea salt upon waking. Instantly cures morning grogginess caused by 8 hours of respiratory dehydration.</div>
+          </div>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">6. Magnesium Bisglycinate + L-Threonate Synergy</span>
+              <span class="product-rank">Biohack #6</span>
+            </div>
+            <div class="product-mechanism">Avoid cheap magnesium oxide (only 4% absorbed, causes diarrhea). Bisglycinate relaxes tense muscles; Threonate crosses the blood-brain barrier into neurons.</div>
+          </div>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">7. Bilateral Panoramic Visual Gaze</span>
+              <span class="product-rank">Biohack #7</span>
+            </div>
+            <div class="product-mechanism">When mentally overwhelmed, consciously expand your peripheral vision to see both side walls at once. Shuts down the sympathetic fight-or-flight focus network.</div>
+          </div>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">8. Preserving Oral Nitrate Bacteria</span>
+              <span class="product-rank">Biohack #8</span>
+            </div>
+            <div class="product-mechanism">Stop using alcohol-based antiseptic mouthwashes daily. They wipe out Veillonella bacteria in the mouth, destroying your body’s ability to convert dietary vegetables into heart-protective Nitric Oxide!</div>
+          </div>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">9. Cold Water Mammalian Dive Reflex</span>
+              <span class="product-rank">Biohack #9</span>
+            </div>
+            <div class="product-mechanism">Splashing ice-cold water onto your eyes and upper cheekbones stimulates the trigeminal nerve, forcing the vagal brake to slow down a racing heart.</div>
+          </div>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">10. The 30-Plant Weekly Fiber Invariant</span>
+              <span class="product-rank">Biohack #10</span>
+            </div>
+            <div class="product-mechanism">Tracking 30 different plant foods weekly (counting spices, garlic, herbs, nuts, and greens) maximizes microbial short-chain fatty acids (Butyrate), permanently ending gut-driven brain fog.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="border-left: 4px solid var(--danger);">
+        <div class="card-title">🚫 The 8 Fatal Health Mistakes to Avoid</div>
+        <div class="product-list">
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">1. Chugging Coffee on an Empty Stomach</span>
+              <span class="rx-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5; border-color: rgba(239, 68, 68, 0.5);">FATAL MISTAKE</span>
+            </div>
+            <div class="product-mechanism">Triggers extreme cortisol spikes, acid reflux, and early morning energy crashes.</div>
+          </div>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">2. High-Carb Lunches (White Rice, Breads, Sugars)</span>
+              <span class="rx-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5; border-color: rgba(239, 68, 68, 0.5);">FATAL MISTAKE</span>
+            </div>
+            <div class="product-mechanism">Shuts blood flow into the gut and triggers reactive hypoglycemia (instant drowsiness at your desk).</div>
+          </div>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">3. Daily Antiseptic Alcohol Mouthwash</span>
+              <span class="rx-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5; border-color: rgba(239, 68, 68, 0.5);">FATAL MISTAKE</span>
+            </div>
+            <div class="product-mechanism">Wipes out oral bacteria, reducing nitric oxide production and elevating arterial blood pressure.</div>
+          </div>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">4. Mega-Dosing Melatonin (5mg–10mg)</span>
+              <span class="rx-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5; border-color: rgba(239, 68, 68, 0.5);">FATAL MISTAKE</span>
+            </div>
+            <div class="product-mechanism">Desensitizes brain melatonin receptors, causing morning depression and hormone disruption. The physiological dose is only 0.3mg to 0.5mg!</div>
+          </div>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">5. Sleeping in a Warm, Closed Room</span>
+              <span class="rx-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5; border-color: rgba(239, 68, 68, 0.5);">FATAL MISTAKE</span>
+            </div>
+            <div class="product-mechanism">Prevents the critical 1°C core body temperature drop required to enter Stage 3/4 Deep Slow-Wave sleep.</div>
+          </div>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">6. Using Prescription Stimulants to Compensate for Lack of Sleep</span>
+              <span class="rx-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5; border-color: rgba(239, 68, 68, 0.5);">FATAL MISTAKE</span>
+            </div>
+            <div class="product-mechanism">Causes adrenal burnout, neurotransmitter depletion, and severe emotional blunting.</div>
+          </div>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">7. Sitting Motionless for Hours at a Desk</span>
+              <span class="rx-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5; border-color: rgba(239, 68, 68, 0.5);">FATAL MISTAKE</span>
+            </div>
+            <div class="product-mechanism">Decreases venous return and cerebral blood flow, causing brain fog and muscle stiffness.</div>
+          </div>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">8. Excessive Chronic HIIT When Already Burned Out</span>
+              <span class="rx-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5; border-color: rgba(239, 68, 68, 0.5);">FATAL MISTAKE</span>
+            </div>
+            <div class="product-mechanism">Pushes the HPA axis into adrenal exhaustion; prioritize Zone 2 cardio and strength training.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 9: DAILY TRACKER -->
     <section class="section-view" id="tab-daily">
       <div class="card">
-        <div class="card-header">
-          <div class="card-title">📅 Interactive Daily Regimen Tracker</div>
-        </div>
-        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">
-          Check off your completed daily actions. Progress automatically saves in your device's browser memory.
+        <div class="card-title">📅 Master Interactive Execution Tracker</div>
+        <p class="section-desc">
+          Check off completed daily actions. Progress automatically saves in your device's browser memory so you never lose your streaks.
         </p>
 
-        <h4 style="font-size: 0.95rem; color: #38bdf8; margin: 12px 0 8px;">🌅 Morning (AM) Protocol</h4>
+        <h4 style="font-size: 0.95rem; color: #38bdf8; margin: 16px 0 8px;">🌅 Morning (AM) Protocols</h4>
         <div class="checklist">
+          <label class="check-item">
+            <input type="checkbox" id="chk-en-sun">
+            <div class="check-content">
+              <span class="check-title">Sunlight & Salt Water Anchor</span>
+              <span class="check-desc">10–15 min outdoor sunlight + 500ml water with sea salt upon waking.</span>
+            </div>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" id="chk-en-caf">
+            <div class="check-content">
+              <span class="check-title">The 90-Minute Caffeine Delay</span>
+              <span class="check-desc">Waited 90–120 min post-waking before first coffee/tea (stops afternoon crash).</span>
+            </div>
+          </label>
           <label class="check-item">
             <input type="checkbox" id="chk-am-wash">
             <div class="check-content">
@@ -908,11 +1220,11 @@
               <span class="check-desc">Azelaic Acid 10–15% applied to inner thigh & groin creases.</span>
             </div>
           </label>
-                    <label class="check-item">
+          <label class="check-item">
             <input type="checkbox" id="chk-am-perianal">
             <div class="check-content">
-              <span class="check-title">Perianal Friction Barrier ("Poop Area")</span>
-              <span class="check-desc">Apply Zinc Oxide 10-20% (Sudocrem/Desitin) or Vaseline between buttock cheeks.</span>
+              <span class="check-title">Perianal Barrier ("Poop Area")</span>
+              <span class="check-desc">Apply Zinc Oxide 10–20% (Sudocrem/Desitin) or Vaseline between buttock cheeks.</span>
             </div>
           </label>
           <label class="check-item">
@@ -930,24 +1242,17 @@
             </div>
           </label>
           <label class="check-item">
-            <input type="checkbox" id="chk-hair-mask">
+            <input type="checkbox" id="chk-am-lips">
             <div class="check-content">
-              <span class="check-title">Weekly Deep Thermal Hair Spa (Sunday)</span>
-              <span class="check-desc">L'Oréal Absolut Repair / Tresemmé Mask for 15–20 min under warm towel wrap.</span>
-            </div>
-          </label>
-          <label class="check-item">
-            <input type="checkbox" id="chk-hair-pillow">
-            <div class="check-content">
-              <span class="check-title">Friction Shield (Satin Pillowcase)</span>
-              <span class="check-desc">Sleep on satin/silk pillowcase to prevent morning bird's-nest frizz.</span>
+              <span class="check-title">Lip Shield & Hydration</span>
+              <span class="check-desc">Water drop on lips + Cicaplast Lèvres or Aquaphor seal.</span>
             </div>
           </label>
           <label class="check-item">
             <input type="checkbox" id="chk-cough-saline">
             <div class="check-content">
-              <span class="check-title">Saline Sinus Flush (Morning & Evening)</span>
-              <span class="check-desc">NeilMed Saline rinse to flush out yellow-green mucus plugs and open nasal airway.</span>
+              <span class="check-title">Saline Sinus Flush (NeilMed)</span>
+              <span class="check-desc">Flush sinuses with saline water to evacuate yellow-green plugs & open airway.</span>
             </div>
           </label>
           <label class="check-item">
@@ -957,34 +1262,10 @@
               <span class="check-desc">1 effervescent tablet in water after food. Breaks down sticky throat phlegm.</span>
             </div>
           </label>
-          <label class="check-item">
-            <input type="checkbox" id="chk-cough-steroid">
-            <div class="check-content">
-              <span class="check-title">Nasal Steroid Spray (Fluticasone)</span>
-              <span class="check-desc">2 sprays per nostril in the morning (aim outward) to shrink 60% swelling.</span>
-            </div>
-          </label>
-          <label class="check-item">
-            <input type="checkbox" id="chk-cough-steam">
-            <div class="check-content">
-              <span class="check-title">Night Steam & 2-Pillow Elevation</span>
-              <span class="check-desc">10-min steam before bed + elevated pillows to prevent sleep heaviness and choking.</span>
-            </div>
-          </label>
-          <label class="check-item">
-            <input type="checkbox" id="chk-en-sun">
-            <div class="check-content">
-              <span class="check-title">Morning Sunlight & Salt Water Anchor</span>
-              <span class="check-desc">10–15 min outdoor sunlight + 500ml water with pinch of sea salt upon waking.</span>
-            </div>
-          </label>
-          <label class="check-item">
-            <input type="checkbox" id="chk-en-caf">
-            <div class="check-content">
-              <span class="check-title">The 90-Minute Caffeine Delay</span>
-              <span class="check-desc">Waited 90–120 min post-waking before first coffee/tea (stops afternoon crash).</span>
-            </div>
-          </label>
+        </div>
+
+        <h4 style="font-size: 0.95rem; color: #f59e0b; margin: 22px 0 8px;">☀️ Workplace & Mid-Day Protocols</h4>
+        <div class="checklist">
           <label class="check-item">
             <input type="checkbox" id="chk-en-walk">
             <div class="check-content">
@@ -993,22 +1274,15 @@
             </div>
           </label>
           <label class="check-item">
-            <input type="checkbox" id="chk-en-sleep">
+            <input type="checkbox" id="chk-work-sigh">
             <div class="check-content">
-              <span class="check-title">Night Sleep Cocktail & Cool Room</span>
-              <span class="check-desc">Magnesium Bisglycinate 300mg + L-Theanine 200mg + 66°F cool bedroom.</span>
-            </div>
-          </label>
-          <label class="check-item">
-            <input type="checkbox" id="chk-am-lips">
-            <div class="check-content">
-              <span class="check-title">Lip Shield & Hydration</span>
-              <span class="check-desc">Water drop on lips + Cicaplast Lèvres or Aquaphor seal.</span>
+              <span class="check-title">Work Stress Reset (Physiological Sigh)</span>
+              <span class="check-desc">3 cycles of double inhale via nose, long sigh mouth to down-regulate tension.</span>
             </div>
           </label>
         </div>
 
-        <h4 style="font-size: 0.95rem; color: #818cf8; margin: 20px 0 8px;">🌙 Evening (PM) Protocol</h4>
+        <h4 style="font-size: 0.95rem; color: #818cf8; margin: 22px 0 8px;">🌙 Evening (PM) Protocols</h4>
         <div class="checklist">
           <label class="check-item">
             <input type="checkbox" id="chk-pm-sweat">
@@ -1024,16 +1298,43 @@
               <span class="check-desc">Adapalene 0.1% or Tretinoin [Rx] over moisturizer on back & joints.</span>
             </div>
           </label>
-                    <label class="check-item">
+          <label class="check-item">
             <input type="checkbox" id="chk-pm-perianal">
             <div class="check-content">
               <span class="check-title">Cleft Depigmentation (Nightly)</span>
-              <span class="check-desc">Apply thin layer of Azelaic Acid 10-15% over clean, dry intergluteal fold.</span>
+              <span class="check-desc">Apply thin layer of Azelaic Acid 10–15% over clean, dry intergluteal fold.</span>
             </div>
           </label>
-<label class="check-item">
-            <input type="checkbox" id="chk-pm-perianal",
-            "chk-pm-slug">
+          <label class="check-item">
+            <input type="checkbox" id="chk-hair-mask">
+            <div class="check-content">
+              <span class="check-title">Weekly Deep Thermal Hair Spa (Sunday)</span>
+              <span class="check-desc">L'Oréal Absolut Repair / Tresemmé Mask for 15–20 min under warm towel wrap.</span>
+            </div>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" id="chk-hair-pillow">
+            <div class="check-content">
+              <span class="check-title">Friction Shield (Satin Pillowcase)</span>
+              <span class="check-desc">Sleep on satin/silk pillowcase to prevent morning bird's-nest frizz.</span>
+            </div>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" id="chk-cough-steam">
+            <div class="check-content">
+              <span class="check-title">Night Steam & 2-Pillow Elevation</span>
+              <span class="check-desc">10-min steam before bed + elevated pillows to prevent sleep heaviness and choking.</span>
+            </div>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" id="chk-en-sleep">
+            <div class="check-content">
+              <span class="check-title">Night Sleep Cocktail & Cool Room</span>
+              <span class="check-desc">Magnesium Bisglycinate 300mg + L-Theanine 200mg + 66°F cool bedroom.</span>
+            </div>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" id="chk-pm-slug">
             <div class="check-content">
               <span class="check-title">Lip Slugging Barrier (Nightly)</span>
               <span class="check-desc">Thick coating of 100% Pure Petrolatum (Vaseline) over lips. Zero peeling!</span>
@@ -1043,55 +1344,98 @@
       </div>
     </section>
 
-    <!-- TAB 5: DOCTOR VISIT -->
+    <!-- TAB 10: DOCTOR & LABS -->
     <section class="section-view" id="tab-doctor">
       <div class="card">
-        <div class="card-header">
-          <div class="card-title">🩺 Doctor Consultation Checklist</div>
-        </div>
-        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 14px;">
-          Bring or screenshot this exact panel for your consultation with a board-certified dermatologist and physician.
+        <div class="card-title">🩺 Complete Physician Consultation & Laboratory Testing Panel</div>
+        <p class="section-desc">
+          Screenshot or bring this exact diagnostic and pharmacological workup to your consultation with a board-certified dermatologist and internal medicine physician.
         </p>
 
-        <h4 style="font-size: 0.95rem; color: var(--accent); margin-bottom: 8px;">🩸 Mandatory Diagnostic Blood Panel:</h4>
-        <ul style="padding-left: 20px; font-size: 0.88rem; color: var(--text); display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px;">
-          <li><strong>Fasting Plasma Glucose (FPG)</strong> & <strong>Fasting Serum Insulin</strong> (to calculate HOMA-IR score for insulin resistance).</li>
-          <li><strong>Hemoglobin A1c (HbA1c)</strong> (evaluates 3-month average glycemic index).</li>
-          <li><strong>Serum Ferritin, Vitamin B12, Folate & Zinc</strong> (deficiencies cause non-healing lip cheilitis).</li>
-          <li><strong>Complete Lipid Profile</strong> (Triglycerides, HDL, LDL).</li>
-        </ul>
-
-        <h4 style="font-size: 0.95rem; color: var(--rx-badge); margin-bottom: 8px;">💊 Prescription Items to Inquire About:</h4>
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Metformin 500mg–1000mg</span>
-            <span class="rx-badge">[Prescription Based]</span>
+        <h4 style="font-size: 1rem; color: var(--accent); margin-bottom: 10px;">🩸 Mandatory Diagnostic Blood Panel:</h4>
+        <div class="product-list">
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Fasting Plasma Glucose & Fasting Serum Insulin</span>
+              <span class="product-rank">Metabolic AN Workup</span>
+            </div>
+            <div class="product-mechanism">Used to calculate the <strong>HOMA-IR score</strong>: [Glucose (mg/dL) × Insulin (µU/mL)] / 405. A score > 2.0 confirms insulin resistance driving Acanthosis Nigricans.</div>
           </div>
-          <div class="product-detail">If HOMA-IR shows insulin resistance, Metformin treats the root cause of Acanthosis Nigricans.</div>
+
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Hemoglobin A1c (HbA1c)</span>
+              <span class="product-rank">Glycemic Control</span>
+            </div>
+            <div class="product-mechanism">Evaluates your 3-month average glycemic index and pre-diabetes risk.</div>
+          </div>
+
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Serum Ferritin, Vitamin B12, Folate & Zinc</span>
+              <span class="product-rank">Mucosal Barrier Panel</span>
+            </div>
+            <div class="product-mechanism">Micronutrient deficiencies in iron, zinc, or B-vitamins are frequent medical triggers for chronic, non-healing exfoliative cheilitis and mouth peeling.</div>
+          </div>
+
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Complete Lipid Profile</span>
+              <span class="product-rank">Cardiovascular Health</span>
+            </div>
+            <div class="product-mechanism">Total cholesterol, Triglycerides, HDL, and LDL to assess arterial endothelial risk.</div>
+          </div>
         </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Ketoconazole 2% Wash / Oral Fluconazole</span>
-            <span class="rx-badge">[Prescription Based]</span>
+        <h4 style="font-size: 1rem; color: var(--rx-badge); margin: 24px 0 10px;">💊 Full Prescription Items Catalog to Discuss with Doctor:</h4>
+        <div class="product-list">
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Metformin 500mg–1000mg</span>
+              <span class="rx-badge">[Prescription Based]</span>
+            </div>
+            <div class="product-mechanism">If HOMA-IR shows insulin resistance, Metformin lowers circulating insulin, reversing the hormonal stimulus on keratinocyte IGF-1 receptors to clear Acanthosis Nigricans permanently.</div>
           </div>
-          <div class="product-detail">For deep follicular clearance if truncal yeast fails to clear with OTC strength.</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Trifarotene (Aklief) 0.005% Cream</span>
-            <span class="rx-badge">[Prescription Based]</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Ketoconazole 2% Wash / Oral Fluconazole (150–200mg weekly)</span>
+              <span class="rx-badge">[Prescription Based]</span>
+            </div>
+            <div class="product-mechanism">For deep follicular clearance if truncal Malassezia yeast fails to clear with over-the-counter wash strength.</div>
           </div>
-          <div class="product-detail">Specialized truncal retinoid for back acne and post-inflammatory marks.</div>
-        </div>
 
-        <div class="product-item">
-          <div class="product-header">
-            <span class="product-name">Tacrolimus 0.03% Ointment</span>
-            <span class="rx-badge">[Prescription Based]</span>
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Trifarotene (Aklief) 0.005% Cream / Tretinoin 0.05%</span>
+              <span class="rx-badge">[Prescription Based]</span>
+            </div>
+            <div class="product-mechanism">4th-generation retinoid designed specifically for large truncal surface areas and clearing post-inflammatory marks.</div>
           </div>
-          <div class="product-detail">Non-steroidal barrier repair ointment for chronic recalcitrant exfoliative cheilitis.</div>
+
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Tacrolimus 0.03% Ointment</span>
+              <span class="rx-badge">[Prescription Based]</span>
+            </div>
+            <div class="product-mechanism">Non-steroidal barrier repair ointment for chronic recalcitrant exfoliative cheilitis without tissue thinning risk.</div>
+          </div>
+
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Amoxicillin-Clavulanate (Augmentin 625mg/875mg)</span>
+              <span class="rx-badge">[Prescription Based]</span>
+            </div>
+            <div class="product-mechanism">Indicated only if acute post-viral rhinosinusitis persists beyond 10 full days or turns into a true secondary bacterial sinus infection.</div>
+          </div>
+
+          <div class="product-item">
+            <div class="product-header">
+              <span class="product-name">Modafinil 100mg–200mg / Eugeroics</span>
+              <span class="rx-badge">[Prescription Based]</span>
+            </div>
+            <div class="product-mechanism">Selective wakefulness promoter for clinically diagnosed excessive daytime sleepiness or narcolepsy.</div>
+          </div>
         </div>
       </div>
     </section>
@@ -1106,7 +1450,7 @@
     (function () {
       "use strict";
 
-      // 1. Procedural AudioContext Tap (Non-musical tactile UI feedback)
+      // 1. Procedural AudioContext Tap (Zero-Music Non-Musical Haptic SFX)
       let audioCtx = null;
       function playTactileTap() {
         try {
@@ -1141,7 +1485,18 @@
           const tabBtns = document.querySelectorAll(".tab-btn");
           const views = document.querySelectorAll(".section-view");
           const nextBtn = document.getElementById("btn-next-tab");
-          const tabOrder = ["tab-lips", "tab-bacne", "tab-joints", "tab-hair", "tab-cough", "tab-energy", "tab-daily", "tab-doctor"];
+          const tabOrder = [
+            "tab-lips", 
+            "tab-bacne", 
+            "tab-joints", 
+            "tab-perianal", 
+            "tab-hair", 
+            "tab-cough", 
+            "tab-energy", 
+            "tab-gems", 
+            "tab-daily", 
+            "tab-doctor"
+          ];
 
           function switchTab(targetId) {
             tabBtns.forEach(btn => {
@@ -1183,6 +1538,8 @@
       function initChecklistPersistence() {
         try {
           const checkboxes = [
+            "chk-en-sun",
+            "chk-en-caf",
             "chk-am-wash",
             "chk-am-noscrub",
             "chk-am-urea",
@@ -1190,20 +1547,18 @@
             "chk-am-perianal",
             "chk-hair-cond",
             "chk-hair-serum",
-            "chk-hair-mask",
-            "chk-hair-pillow",
+            "chk-am-lips",
             "chk-cough-saline",
             "chk-cough-nac",
-            "chk-cough-steroid",
-            "chk-cough-steam",
-            "chk-en-sun",
-            "chk-en-caf",
             "chk-en-walk",
-            "chk-en-sleep",
-            "chk-am-lips",
+            "chk-work-sigh",
             "chk-pm-sweat",
             "chk-pm-retinoid",
             "chk-pm-perianal",
+            "chk-hair-mask",
+            "chk-hair-pillow",
+            "chk-cough-steam",
+            "chk-en-sleep",
             "chk-pm-slug"
           ];
 
