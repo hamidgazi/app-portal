@@ -24,7 +24,7 @@
       --warning: #f59e0b;
       --danger: #ef4444;
       --rx: #fbbf24;
-      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", Helvetica, Arial, sans-serif;
     }
 
     * {
@@ -47,19 +47,20 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(9, 13, 22, 0.96);
+      background: rgba(9, 13, 22, 0.97);
       backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
-      padding: 12px 16px;
+      padding: 10px 16px;
     }
 
     .header-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      max-width: 1200px;
+      max-width: 1240px;
       margin: 0 auto;
       gap: 12px;
+      flex-wrap: wrap;
     }
 
     .app-branding {
@@ -69,7 +70,7 @@
     }
 
     .app-badge-icon {
-      font-size: 1.6rem;
+      font-size: 1.7rem;
       line-height: 1;
     }
 
@@ -86,17 +87,18 @@
     }
 
     .app-subtitle {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: var(--accent);
-      font-weight: 600;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.05em;
     }
 
     .header-actions {
       display: flex;
       align-items: center;
       gap: 8px;
+      flex-wrap: wrap;
     }
 
     .btn-action {
@@ -122,10 +124,21 @@
       border-color: var(--accent);
     }
 
+    .btn-action-primary {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: rgba(56, 189, 248, 0.4);
+      color: #38bdf8;
+    }
+
+    .btn-action-primary:hover {
+      background: #38bdf8;
+      color: #090d16;
+    }
+
     /* Global Real-Time Search Bar */
     .search-wrapper {
-      max-width: 1200px;
-      margin: 10px auto 4px;
+      max-width: 1240px;
+      margin: 8px auto 6px;
       position: relative;
     }
 
@@ -149,13 +162,13 @@
       background: #0f172a;
       border: 1.5px solid var(--border);
       border-radius: 10px;
-      padding: 10px 42px 10px 40px;
+      padding: 9px 42px 9px 40px;
       color: #fff;
       font-size: 0.9rem;
       font-family: inherit;
       outline: none;
       transition: all 0.2s ease;
-      min-height: 44px;
+      min-height: 42px;
     }
 
     .search-input:focus {
@@ -181,81 +194,177 @@
       display: none;
       align-items: center;
       justify-content: space-between;
-      margin-top: 6px;
+      margin-top: 4px;
       padding: 4px 6px;
       font-size: 0.78rem;
       color: var(--accent);
     }
 
-    /* Tab Navigation Pills */
-    .tab-nav-wrapper {
-      background: rgba(15, 23, 42, 0.9);
-      border-bottom: 1px solid var(--border);
+    /* Instant Symptom Triage Bar */
+    .triage-wrapper {
+      max-width: 1240px;
+      margin: 6px auto 2px;
       overflow-x: auto;
-      scrollbar-width: none;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(56, 189, 248, 0.4) transparent;
       -webkit-overflow-scrolling: touch;
-      position: sticky;
-      top: 110px;
-      z-index: 90;
-      padding: 6px 12px;
+      padding-bottom: 2px;
     }
 
-    .tab-nav-wrapper::-webkit-scrollbar {
-      display: none;
-    }
-
-    .tab-nav {
-      display: flex;
-      gap: 6px;
-      max-width: 1200px;
-      margin: 0 auto;
-      width: max-content;
-    }
-
-    .tab-btn {
-      background: transparent;
-      border: 1px solid transparent;
-      color: var(--text-muted);
-      padding: 9px 15px;
-      border-radius: 9999px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      white-space: nowrap;
-      cursor: pointer;
+    .triage-bar {
       display: flex;
       align-items: center;
-      gap: 7px;
-      min-height: 44px;
+      gap: 6px;
+      width: max-content;
+      padding: 2px 0;
+    }
+
+    .triage-label {
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      margin-right: 4px;
+    }
+
+    .triage-chip {
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid #334155;
+      color: #e2e8f0;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
       transition: all 0.2s ease;
       touch-action: manipulation;
     }
 
-    .tab-btn:hover {
+    .triage-chip:hover, .triage-chip:active {
+      border-color: var(--accent);
+      background: rgba(56, 189, 248, 0.15);
+      color: #fff;
+    }
+
+    /* Master Time-of-Day Filter Bar */
+    .tod-filter-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 6px 10px;
+      max-width: 600px;
+      margin: 14px auto 0;
+      flex-wrap: wrap;
+    }
+
+    .tod-filter-label {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .tod-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: #94a3b8;
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      touch-action: manipulation;
+    }
+
+    .tod-btn:hover {
       color: #fff;
       background: rgba(255, 255, 255, 0.05);
     }
 
+    .tod-btn.active {
+      background: var(--accent);
+      color: #090d16;
+      font-weight: 700;
+    }
+
+    /* 10-Tab Navigation Pills (FIXED: WRAPS CLEANLY ON DESKTOP & TABLET) */
+    .tab-nav-wrapper {
+      background: rgba(9, 13, 22, 0.98);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 135px;
+      z-index: 80;
+      padding: 8px 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .tab-nav {
+      display: flex;
+      flex-wrap: wrap; /* CRITICAL FIX: Wraps neatly into 2 tidy rows so ALL 10 TABS ARE VISIBLE! */
+      gap: 7px;
+      justify-content: center;
+      max-width: 1240px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .tab-btn {
+      background: #111827;
+      border: 1px solid #1f2937;
+      color: var(--text-muted);
+      padding: 8px 14px;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 40px;
+      transition: all 0.2s ease;
+      touch-action: manipulation;
+      user-select: none;
+    }
+
+    .tab-btn:hover {
+      color: #fff;
+      border-color: #374151;
+      background: #1f2937;
+    }
+
     .tab-btn.active {
-      color: #0f172a;
+      color: #090d16;
       background: var(--accent);
       border-color: var(--accent);
+      font-weight: 700;
       box-shadow: 0 2px 10px var(--accent-glow);
     }
 
     .tab-btn .badge-count {
       background: #ef4444;
       color: #fff;
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       padding: 2px 6px;
-      border-radius: 10px;
-      font-weight: 700;
+      border-radius: 9999px;
+      font-weight: 800;
       display: none;
     }
 
     /* Main Container & Sections */
     .main-container {
-      max-width: 1200px;
-      margin: 20px auto;
+      max-width: 1240px;
+      margin: 18px auto;
       padding: 0 16px;
     }
 
@@ -284,20 +393,191 @@
     }
 
     .card-title {
-      font-size: 1.35rem;
+      font-size: 1.32rem;
       font-weight: 800;
       color: #fff;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
       display: flex;
       align-items: center;
       gap: 10px;
+      flex-wrap: wrap;
     }
 
     .section-desc {
       color: var(--text-muted);
-      font-size: 0.95rem;
-      line-height: 1.7;
+      font-size: 0.94rem;
+      line-height: 1.68;
       margin-bottom: 18px;
+    }
+
+    /* Tier 1: Action-First 1-2-3 Step Cards */
+    .stepper-header {
+      font-size: 0.96rem;
+      font-weight: 700;
+      color: #38bdf8;
+      margin: 16px 0 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .stepper-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .step-card {
+      background: #0f172a;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      position: relative;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .step-card:hover {
+      border-color: #334155;
+      background: #141e33;
+    }
+
+    .step-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 3px 8px;
+      border-radius: 6px;
+      width: max-content;
+    }
+
+    .step-badge-am {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: #fbbf24;
+    }
+
+    .step-badge-shower {
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: #38bdf8;
+    }
+
+    .step-badge-pm {
+      background: rgba(168, 85, 247, 0.15);
+      border: 1px solid rgba(168, 85, 247, 0.4);
+      color: #c084fc;
+    }
+
+    .step-title {
+      font-size: 0.94rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .step-instruction {
+      font-size: 0.84rem;
+      color: #cbd5e1;
+      line-height: 1.55;
+    }
+
+    .step-tip {
+      font-size: 0.78rem;
+      color: var(--accent);
+      background: rgba(56, 189, 248, 0.08);
+      padding: 4px 8px;
+      border-radius: 4px;
+      margin-top: 4px;
+    }
+
+    /* Standardized Color-Coded Safety Badges */
+    .badge-blackbox {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.45);
+      color: #fca5a5;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+    }
+
+    .badge-rx {
+      background: rgba(251, 191, 36, 0.15);
+      border: 1px solid rgba(251, 191, 36, 0.5);
+      color: #fde68a;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+    }
+
+    .badge-safe {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.45);
+      color: #6ee7b7;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+    }
+
+    .badge-active {
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.45);
+      color: #38bdf8;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+    }
+
+    /* Alert Boxes */
+    .alert-box {
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin: 16px 0;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .alert-danger {
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      color: #fca5a5;
+    }
+
+    .alert-warning {
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      color: #fcd34d;
+    }
+
+    .alert-info {
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: #bae6fd;
+    }
+
+    .alert-success {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #6ee7b7;
     }
 
     /* Expandable Deep-Dive Drawers */
@@ -317,7 +597,7 @@
 
     summary.deep-dive-summary {
       padding: 14px 18px;
-      font-size: 0.95rem;
+      font-size: 0.94rem;
       font-weight: 700;
       color: var(--accent);
       cursor: pointer;
@@ -368,42 +648,6 @@
       margin-bottom: 6px;
     }
 
-    /* Alert Callout Boxes */
-    .alert-box {
-      border-radius: 10px;
-      padding: 14px 18px;
-      margin: 16px 0;
-      font-size: 0.88rem;
-      line-height: 1.6;
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-    }
-
-    .alert-danger {
-      background: rgba(239, 68, 68, 0.12);
-      border: 1px solid rgba(239, 68, 68, 0.35);
-      color: #fca5a5;
-    }
-
-    .alert-warning {
-      background: rgba(245, 158, 11, 0.12);
-      border: 1px solid rgba(245, 158, 11, 0.35);
-      color: #fcd34d;
-    }
-
-    .alert-info {
-      background: rgba(56, 189, 248, 0.12);
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      color: #bae6fd;
-    }
-
-    .alert-success {
-      background: rgba(16, 185, 129, 0.12);
-      border: 1px solid rgba(16, 185, 129, 0.35);
-      color: #6ee7b7;
-    }
-
     /* ASCII Mechanism Boxes */
     .mechanism-box {
       background: #060911;
@@ -420,7 +664,7 @@
       line-height: 1.45;
     }
 
-    /* Responsive Clinical Data Tables */
+    /* Clinical Data Tables & Mobile Responsive Transformations */
     .table-container {
       width: 100%;
       overflow-x: auto;
@@ -464,30 +708,6 @@
 
     table.clinical-table tr:hover td {
       background: rgba(56, 189, 248, 0.04);
-    }
-
-    .rx-badge {
-      display: inline-block;
-      background: rgba(251, 191, 36, 0.15);
-      border: 1px solid rgba(251, 191, 36, 0.4);
-      color: #fde68a;
-      padding: 3px 8px;
-      border-radius: 6px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      white-space: nowrap;
-    }
-
-    .product-rank {
-      display: inline-block;
-      background: rgba(56, 189, 248, 0.15);
-      border: 1px solid rgba(56, 189, 248, 0.4);
-      color: #38bdf8;
-      padding: 2px 7px;
-      border-radius: 6px;
-      font-size: 0.72rem;
-      font-weight: 700;
     }
 
     /* Product Cards */
@@ -639,22 +859,90 @@
       transition: width 0.3s ease;
     }
 
-    /* Search Highlights */
-    mark.search-match {
-      background: rgba(251, 191, 36, 0.35);
-      color: #fff;
-      padding: 1px 3px;
-      border-radius: 3px;
+    /* Clipboard Copy Toast */
+    .toast-notification {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #10b981;
+      color: #000;
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: 8px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      gap: 8px;
+      animation: slideUp 0.25s ease-out;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Print Stylesheet (@media print) */
+    @media print {
+      body {
+        background: #fff !important;
+        color: #000 !important;
+        padding-bottom: 0 !important;
+      }
+      .app-header, .tab-nav-wrapper, .triage-wrapper, .tod-filter-bar, .header-actions, .search-wrapper, .btn-action, .btn-action-primary {
+        display: none !important;
+      }
+      .section-view {
+        display: block !important;
+        page-break-after: always;
+      }
+      .card {
+        background: #fff !important;
+        color: #000 !important;
+        border: 1px solid #ccc !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+      }
+      .card-title, .stepper-header, .step-title {
+        color: #000 !important;
+      }
+      .step-card {
+        background: #f8fafc !important;
+        border: 1px solid #ccc !important;
+      }
+      .step-instruction, .product-mechanism, .deep-dive-content {
+        color: #333 !important;
+      }
+      table.clinical-table {
+        color: #000 !important;
+        border: 1px solid #999 !important;
+      }
+      table.clinical-table th {
+        background: #eee !important;
+        color: #000 !important;
+      }
+      table.clinical-table td {
+        border-bottom: 1px solid #ccc !important;
+        color: #111 !important;
+      }
+      details.deep-dive-card {
+        border: 1px solid #ccc !important;
+        background: #fafafa !important;
+      }
+      summary.deep-dive-summary {
+        background: #eee !important;
+        color: #000 !important;
+      }
     }
 
     /* Mobile Responsive Optimizations */
     @media (max-width: 768px) {
-      .app-header { padding: 10px 12px; }
-      .tab-nav-wrapper { top: 104px; }
+      .app-header { padding: 8px 12px; }
+      .tab-nav-wrapper { top: 125px; padding: 6px 8px; }
+      .tab-nav { gap: 5px; }
+      .tab-btn { padding: 6px 11px; font-size: 0.76rem; min-height: 38px; }
       .card { padding: 16px; }
-      .app-title { font-size: 1rem; }
-      .tab-btn { padding: 8px 12px; font-size: 0.8rem; min-height: 42px; }
-      .header-actions .btn-text { display: none; }
+      .stepper-grid { grid-template-columns: 1fr; }
     }
   
   </style>
@@ -672,8 +960,8 @@
         </div>
       </div>
       <div class="header-actions">
-        <button id="btn-nav-gems" class="btn-action">💎 <span class="btn-text">10 Gems & Mistakes</span></button>
-        <button id="btn-nav-tracker" class="btn-action">📅 <span class="btn-text">Daily Tracker</span></button>
+        <button id="btn-nav-gems" class="btn-action">💎 10 Gems</button>
+        <button id="btn-nav-tracker" class="btn-action">📅 Daily Tracker</button>
       </div>
     </div>
 
@@ -688,9 +976,34 @@
         <span id="search-result-count">0 matches</span>
       </div>
     </div>
+
+    <!-- Instant Symptom Triage Bar -->
+    <div class="triage-wrapper">
+      <div class="triage-bar">
+        <span class="triage-label">⚡ Fast Triage:</span>
+        <button class="triage-chip" data-target-tab="tab-lips">👄 Chapped Lips</button>
+        <button class="triage-chip" data-target-tab="tab-bacne">🚿 Bacne & Sweat</button>
+        <button class="triage-chip" data-target-tab="tab-joints">🌟 Dark Joints / AN</button>
+        <button class="triage-chip" data-target-tab="tab-perianal">🍑 Cleft Darkening</button>
+        <button class="triage-chip" data-target-tab="tab-hair">💇 Hard Frizzy Hair</button>
+        <button class="triage-chip" data-target-tab="tab-cough">🫁 60% Sinus Block</button>
+        <button class="triage-chip" data-target-tab="tab-vitality">⚡ 2PM Fatigue Crash</button>
+        <button class="triage-chip" data-target-tab="tab-gems">💎 10 Hidden Gems</button>
+        <button class="triage-chip" data-target-tab="tab-doctor">🩺 Doctor Visit Sheet</button>
+      </div>
+    </div>
+
+    <!-- Master Time-of-Day Filter Bar -->
+    <div class="tod-filter-bar">
+      <span class="tod-filter-label">Filter Routine:</span>
+      <button class="tod-btn active" data-time-filter="all">All Topics</button>
+      <button class="tod-btn" data-time-filter="am">🌅 Morning (AM)</button>
+      <button class="tod-btn" data-time-filter="shower">🚿 Shower / Midday</button>
+      <button class="tod-btn" data-time-filter="pm">🌙 Night (PM)</button>
+    </div>
   </header>
 
-  <!-- Sticky 10-Tab Navigation Bar -->
+  <!-- Sticky 10-Tab Navigation Bar (WRAPS NEATLY SO ALL 10 PILLS ARE VISIBLE) -->
   <nav class="tab-nav-wrapper" role="tablist">
     <div class="tab-nav">
       <button class="tab-btn active" data-tab="tab-lips" id="btn-tab-lips" role="tab" aria-selected="true">👄 Lips & Cheilitis <span class="badge-count"></span></button>
@@ -711,14 +1024,40 @@
 
     <section class="section-view active" id="tab-lips" data-tab-name="Lips & Cheilitis">
       <div class="card">
-        <div class="card-title">👄 Exfoliative Cheilitis: Chronic Dry, Peeling & Hardening Lips</div>
+        <div class="card-title">
+          <span>👄 Exfoliative Cheilitis: Chronic Dry, Peeling & Hardening Lips</span>
+          <span class="badge-blackbox">Strict Anti-Trauma Protocol</span>
+        </div>
         <p class="section-desc">
-          A chronic mucosal desquamation disorder characterized by the continual formation and shedding of thick hyperkeratotic crusts over the vermilion border.
+          A chronic mucosal desquamation disorder of the vermilion border. Characterized by continuous formation and shedding of thick hyperkeratotic crusts driven by saliva enzymes and picking cycles.
         </p>
 
-        <!-- Inviolable Mandate -->
+        <!-- Tier 1: Action-First Stepper -->
+        <div class="stepper-header">⚡ Immediate 3-Step Daily Execution Stack</div>
+        <div class="stepper-grid">
+          <div class="step-card" data-time="am">
+            <span class="step-badge step-badge-am">Step 01 • Morning (AM)</span>
+            <span class="step-title">Barrier Priming & Anti-Inflammatory Pulse</span>
+            <span class="step-instruction">After gentle rinsing with lukewarm water, apply a pea-sized amount of Cica Balm (Panthenol + Madecassoside). If inflamed/crusting, apply a micro-film of <strong>Hydrocortisone 1% ointment</strong> [Rx/OTC] (Days 1–7 only).</span>
+            <span class="step-tip">💡 Tip: Never rub with a rough washcloth.</span>
+          </div>
+          <div class="step-card" data-time="midday">
+            <span class="step-badge step-badge-shower">Step 02 • Midday & Post-Meal</span>
+            <span class="step-title">Hydration Lock & Anti-Trauma Trimming</span>
+            <span class="step-instruction">Re-apply pure White Petrolatum or Medical Lanolin every 2 hours and immediately after eating. <strong>Inviolable Rule:</strong> If an edge lifts, snip it flush with sterile cuticle scissors—never peel or tear with teeth.</span>
+            <span class="step-tip">💡 Tip: Keep a pocket tube in your car, desk, and bedside.</span>
+          </div>
+          <div class="step-card" data-time="pm">
+            <span class="step-badge step-badge-pm">Step 03 • Night (PM)</span>
+            <span class="step-title">Heavy Night Lip Slugging Chamber</span>
+            <span class="step-instruction">Before sleep, apply a generous "slugging" layer of 100% Medical Grade Lanolin or Vaseline extending 2mm beyond the lip border. Sleep on a silk/satin pillowcase to prevent moisture absorption.</span>
+            <span class="step-tip">💡 Tip: For refractory cases, replace with Tacrolimus 0.03% [Rx].</span>
+          </div>
+        </div>
+
+        <!-- Inviolable Mandate Box -->
         <div class="alert-box alert-danger">
-          <strong>⚠️ Inviolable Anti-Trauma Rule:</strong> Absolutely NEVER pick, peel, or bite dry lip skin with teeth or fingers. Saliva contains digestive enzymes (amylase and lipase) that dissolve the mucosal lipid mantle. When an elevated crust catches, snip it flush with sterile cuticle scissors—never tear or pull.
+          <strong>⚠️ Inviolable Anti-Trauma Mandate:</strong> Absolutely NEVER pick, peel, or bite dry lip skin with teeth or fingers. Saliva contains digestive amylase and lipases that dissolve mucosal barrier lipids. When a crust catches, snip it flush with sterile cuticle scissors—never pull.
         </div>
 
         <!-- Full Clinical Data Table -->
@@ -736,35 +1075,35 @@
             </thead>
             <tbody>
               <tr>
-                <td><span class="product-rank">Rank #1</span></td>
+                <td><span class="badge-safe">Rank #1 Gold</span></td>
                 <td><strong>Strict Anti-Trauma & Occlusive Chamber</strong></td>
                 <td>Eliminates mechanical shear completely. High-purity petrolatum reduces transepidermal water loss (TEWL) by &gt;98%, maintaining a closed hydration chamber for basal keratinocytes to mature normally without compensatory crusting.</td>
                 <td><strong>100% Pure White Petrolatum</strong> (<em>Vaseline</em>) or <strong>100% Medical-Grade Pure Lanolin</strong> (<em>Lansinoh</em>).</td>
                 <td>Apply every 2–3 hours throughout the day and heavily before sleep ("slugging"). <strong>Absolute Rule:</strong> Never bite or peel.</td>
               </tr>
               <tr>
-                <td><span class="product-rank">Rank #2</span></td>
+                <td><span class="badge-safe">Rank #2</span></td>
                 <td><strong>Epidermal Cica / Barrier Repair Ointment</strong></td>
                 <td>Infuses Panthenol (Pro-Vitamin B5), Madecassoside (<em>Centella Asiatica</em> extract), and Copper-Zinc-Manganese complexes to accelerate mucosal re-epithelialization and membrane repair.</td>
                 <td><strong>La Roche-Posay Cicaplast Lèvres</strong>, <strong>Avene Cicalfate Lips Repair Balm</strong>, or <strong>Bioderma Atoderm Lèvres</strong>.</td>
                 <td>Apply a pea-sized layer directly onto damp lips before layering pure petrolatum over top.</td>
               </tr>
               <tr>
-                <td><span class="rx-badge">[Prescription / Mild OTC]</span></td>
+                <td><span class="badge-rx">[Prescription Based]</span></td>
                 <td><strong>Acute Anti-Inflammatory Pulse Therapy</strong></td>
                 <td>Halts subclinical eczematous inflammation and cytokine cascades driving rapid crusting and erythema. Short pulsed course prevents mucosal atrophy.</td>
                 <td><strong>Hydrocortisone 1% Ointment</strong> [Prescription Based or Mild OTC].</td>
                 <td>Apply a thin layer twice daily for <strong>5 to 7 days maximum</strong> to break the acute cycle, then discontinue immediately.</td>
               </tr>
               <tr>
-                <td><span class="rx-badge">[Prescription Based]</span></td>
+                <td><span class="badge-rx">[Prescription Based]</span></td>
                 <td><strong>Topical Calcineurin Inhibitors (Refractory Cases)</strong></td>
                 <td>Non-steroidal immunomodulator that inhibits calcineurin-mediated T-lymphocyte activation. Completely safe for prolonged mucosal recovery with zero risk of cutaneous or mucosal thinning.</td>
                 <td><strong>Tacrolimus 0.03% Ointment</strong> or <strong>Pimecrolimus 1% Cream</strong> [Prescription Based].</td>
                 <td>Apply twice daily under physician oversight if severe peeling and cracking persists beyond 3 weeks of strict occlusion.</td>
               </tr>
               <tr>
-                <td><span class="product-rank">Decontamination</span></td>
+                <td><span class="badge-active">Decontamination</span></td>
                 <td><strong>Contact Irritant Decontamination</strong></td>
                 <td>Eliminates Sodium Lauryl Sulfate (SLS), cinnamic aldehyde, and harsh mint/menthol flavorings that trigger chronic contact allergic cheilitis.</td>
                 <td><strong>SLS-Free Toothpastes:</strong> <em>Sensodyne Pronamel Daily Protection</em>, <em>Biotene Gentle Mint</em>, or <em>Jason Sea Fresh SLS-Free</em>.</td>
@@ -774,11 +1113,11 @@
           </table>
         </div>
 
-        <!-- Expandable Deep-Dive Reading Drawer -->
-        <details class="deep-dive-card" open>
+        <!-- Tier 3: Unabridged Science Deep-Dive Drawer -->
+        <details class="deep-dive-card">
           <summary class="deep-dive-summary">
             <span>🔬 Deep-Dive Clinical Mechanism & Cellular Biology</span>
-            <span style="font-size: 0.8rem; opacity: 0.8;">▼ Click to Collapse / Expand</span>
+            <span style="font-size: 0.8rem; opacity: 0.8;">▼ Click to Expand Unabridged Anatomy</span>
           </summary>
           <div class="deep-dive-content">
             <h4>The Unique Vermilion Anatomy & Desquamation Trap</h4>
@@ -813,10 +1152,36 @@
 
     <section class="section-view" id="tab-bacne" data-tab-name="Bacne & Sweat">
       <div class="card">
-        <div class="card-title">🚿 Bacne, Excessive Back Sweating & Retention Hyperkeratosis</div>
+        <div class="card-title">
+          <span>🚿 Bacne, Excessive Back Sweating & Retention Hyperkeratosis</span>
+          <span class="badge-blackbox">Zero-Scrub Mandate</span>
+        </div>
         <p class="section-desc">
-          A dual presentation of fungal/bacterial follicular infection (*Malassezia Folliculitis*) combined with abnormal corneocyte cohesion (*Retention Hyperkeratosis*).
+          A dual presentation of fungal follicular colonization (*Malassezia Folliculitis*) combined with abnormal corneocyte cohesion (*Retention Hyperkeratosis*) misidentified as dirt rolls.
         </p>
+
+        <!-- Tier 1: Action-First Stepper -->
+        <div class="stepper-header">⚡ Immediate 3-Step Daily Execution Stack</div>
+        <div class="stepper-grid">
+          <div class="step-card" data-time="shower">
+            <span class="step-badge step-badge-shower">Step 01 • Shower Contact Wash</span>
+            <span class="step-title">The 5-Minute Medicated Dwell Rule</span>
+            <span class="step-instruction">Wet torso; apply <strong>Ketoconazole 2% wash</strong> (Mon/Wed/Fri) or <strong>Benzoyl Peroxide 10%</strong> (Tue/Thu/Sat). Turn off stream; let lather sit on skin for a full <strong>3 to 5 minutes</strong> by timer before rinsing.</span>
+            <span class="step-tip">💡 Tip: Washing off immediately renders active ingredients 80% useless.</span>
+          </div>
+          <div class="step-card" data-time="am">
+            <span class="step-badge step-badge-am">Step 02 • Post-Shower Pat Dry</span>
+            <span class="step-title">Zero Friction Microfiber Blotting</span>
+            <span class="step-instruction">Gently pat dry with a clean microfiber towel. <strong>Never forcefully rub with fingers or loofahs.</strong> That thick rolling layer is retention hyperkeratosis; friction triggers rebound keratin synthesis within 48 hours.</span>
+            <span class="step-tip">💡 Tip: Throw away mesh loofahs—they harbor high yeast counts.</span>
+          </div>
+          <div class="step-card" data-time="pm">
+            <span class="step-badge step-badge-pm">Step 03 • Evening Leave-On Mist</span>
+            <span class="step-title">Chemical Desmosome Purge</span>
+            <span class="step-instruction">3 evenings per week, mist clean dry back with <strong>Glycolic Acid 7%</strong> or <strong>Salicylic Acid 2% body spray</strong>. Dissolves intercellular cement silently without mechanical trauma.</span>
+            <span class="step-tip">💡 Tip: Oral Fluconazole 150mg [Rx] reserved for refractory fungal cases.</span>
+          </div>
+        </div>
 
         <!-- Zero Friction Warning -->
         <div class="alert-box alert-danger">
@@ -838,35 +1203,35 @@
             </thead>
             <tbody>
               <tr>
-                <td><span class="product-rank">Rank #1</span></td>
+                <td><span class="badge-safe">Rank #1</span></td>
                 <td><strong>Antifungal Contact Therapy (The 5-Minute Rule)</strong></td>
                 <td>Inhibits fungal lanosterol 14-alpha-demethylase, blocking ergosterol synthesis in <em>Malassezia</em> cell membranes. Directly eradicates yeast colonies colonizing deep follicular infundibula.</td>
                 <td><strong>Ketoconazole 2% Shampoo / Wash</strong> (<em>Nizoral</em> or generic 2%) or <strong>Zinc Pyrithione 1–2% Cleanser</strong>.</td>
                 <td>Apply to chest, back, and arms in the shower. Lather and <strong>leave on skin for a full 3 to 5 minutes</strong> before rinsing. 3x weekly.</td>
               </tr>
               <tr>
-                <td><span class="product-rank">Rank #2</span></td>
+                <td><span class="badge-active">Rank #2</span></td>
                 <td><strong>Keratolytic Antibacterial Contact Wash</strong></td>
                 <td>Generates reactive oxygen species (ROS) that oxidize bacterial cell proteins (<em>Cutibacterium acnes</em>). Rapidly softens keratin plugs without inducing microbial resistance.</td>
                 <td><strong>Benzoyl Peroxide 5% to 10% Wash</strong> (<em>PanOxyl 10% Foaming Wash</em> or <em>Benzac AC 5%</em>).</td>
                 <td>Alternate with Ketoconazole on non-fungal days. Apply to damp chest/back, let dwell for <strong>3 to 5 minutes</strong>, then rinse thoroughly.</td>
               </tr>
               <tr>
-                <td><span class="rx-badge">[Prescription Based]</span></td>
+                <td><span class="badge-rx">[Prescription Based]</span></td>
                 <td><strong>Systemic Antifungal Pulse (Severe / Refractory Cases)</strong></td>
                 <td>Reaches high concentrations in eccrine sweat and sebum, eradicating follicular Malassezia reservoirs that topical washes cannot reach.</td>
                 <td><strong>Oral Fluconazole 150 mg – 200 mg</strong> [Prescription Based].</td>
                 <td>Once weekly for 2 to 4 weeks under medical supervision. (Avoid alcohol; monitor liver enzymes if prolonged).</td>
               </tr>
               <tr>
-                <td><span class="product-rank">Rank #3</span></td>
+                <td><span class="badge-active">Rank #3</span></td>
                 <td><strong>Chemical Exfoliating Leave-On Sprays</strong></td>
                 <td>AHA (Glycolic Acid) dissolves calcium-dependent desmosomes; BHA (Salicylic Acid) is lipophilic, penetrating sebum to unclog pores and purge dead keratin silently.</td>
                 <td><strong>The Ordinary Glycolic Acid 7% Toning Solution</strong> (in a spray bottle) or <strong>Paula's Choice 2% BHA Body Spray</strong>.</td>
                 <td>Mist across clean, dry back and chest 3 evenings per week after showering. Do not rinse off.</td>
               </tr>
               <tr>
-                <td><span class="product-rank">Rank #4</span></td>
+                <td><span class="badge-safe">Rank #4</span></td>
                 <td><strong>Zero-Friction Microfiber & Breathable Textiles</strong></td>
                 <td>Prevents friction-induced hyperkeratosis and mechanical micro-tears that invite bacterial entry. Sweat-wicking fabrics prevent moisture maceration.</td>
                 <td>100% Ring-Spun Cotton or high-grade seamless moisture-wicking athletic fabrics. Soft microfiber towels.</td>
@@ -876,11 +1241,11 @@
           </table>
         </div>
 
-        <!-- Expandable Deep-Dive Reading Drawer -->
-        <details class="deep-dive-card" open>
+        <!-- Tier 3: Unabridged Science Deep-Dive Drawer -->
+        <details class="deep-dive-card">
           <summary class="deep-dive-summary">
             <span>🔬 Deep-Dive Clinical Mechanism & Cellular Biology</span>
-            <span style="font-size: 0.8rem; opacity: 0.8;">▼ Click to Collapse / Expand</span>
+            <span style="font-size: 0.8rem; opacity: 0.8;">▼ Click to Expand Unabridged Anatomy</span>
           </summary>
           <div class="deep-dive-content">
             <h4>Malassezia Yeast vs. True Acne Vulgaris</h4>
@@ -921,10 +1286,36 @@
 
     <section class="section-view" id="tab-joints" data-tab-name="Dark Joints & AN">
       <div class="card">
-        <div class="card-title">🌟 Dark Joints (Elbows, Knees, Hips) & Acanthosis Nigricans</div>
+        <div class="card-title">
+          <span>🌟 Dark Joints (Elbows, Knees, Hips) & Acanthosis Nigricans</span>
+          <span class="badge-active">IGF-1 & Keratolytic Reversal</span>
+        </div>
         <p class="section-desc">
-          Symmetrical hyperpigmented, velvety cutaneous thickening over flexural creases, joint extensor surfaces, and body folds. Driven by insulin receptor signaling and chronic mechanical friction.
+          Symmetrical hyperpigmented, velvety cutaneous thickening over flexural creases, joint extensor surfaces, and body folds. Driven by hyperinsulinemia and compounded by mechanical friction.
         </p>
+
+        <!-- Tier 1: Action-First Stepper -->
+        <div class="stepper-header">⚡ Immediate 3-Step Daily Execution Stack</div>
+        <div class="stepper-grid">
+          <div class="step-card" data-time="am">
+            <span class="step-badge step-badge-am">Step 01 • Morning Depigmentation</span>
+            <span class="step-title">Tyrosinase Downregulation</span>
+            <span class="step-instruction">Apply a thin layer of <strong>Azelaic Acid 15% to 20%</strong> (or 10% suspension) to darkened elbows, knees, hips, and groin folds. Suppresses abnormal melanocyte activity safely without rebound irritation.</span>
+            <span class="step-tip">💡 Tip: Safe for daily long-term use across all body folds.</span>
+          </div>
+          <div class="step-card" data-time="midday">
+            <span class="step-badge step-badge-shower">Step 02 • Post-Bathing Keratolysis</span>
+            <span class="step-title">High-Potency Urea Hydration</span>
+            <span class="step-instruction">While skin is damp post-shower, massage <strong>20% to 40% Urea cream</strong> (or AmLactin 12% Lactic Acid) into rough joint skin. Urea dissolves intracellular keratin bonds, converting sandpaper skin to smooth texture.</span>
+            <span class="step-tip">💡 Tip: Never pumice stone or aggressively scrub knees or elbows!</span>
+          </div>
+          <div class="step-card" data-time="pm">
+            <span class="step-badge step-badge-pm">Step 03 • Metabolic & Friction Reset</span>
+            <span class="step-title">Insulin Sensitivity & Shear Defense</span>
+            <span class="step-instruction">Follow 16:8 intermittent fasting and &lt;100g net carb limit to reduce fasting insulin. Avoid resting elbows on hard desks or sitting cross-legged on rough floors. Prescribed <strong>Metformin [Rx]</strong> if HOMA-IR &gt; 1.5.</span>
+            <span class="step-tip">💡 Tip: Acanthosis Nigricans resolves from the inside out.</span>
+          </div>
+        </div>
 
         <!-- Insulin Resistance Warning -->
         <div class="alert-box alert-warning">
@@ -946,35 +1337,35 @@
             </thead>
             <tbody>
               <tr>
-                <td><span class="product-rank">Rank #1</span></td>
+                <td><span class="badge-active">Rank #1</span></td>
                 <td><strong>High-Potency Dual Keratolytic Emollients</strong></td>
                 <td>Urea breaks hydrogen bonds in stratum corneum keratin while drawing water into intercellular matrices. Lactic/Glycolic acid cleaves desmosomes, accelerating desquamation of darkened keratin sheets.</td>
                 <td><strong>Urea 20% to 40% Cream</strong> (<em>Eucerin Roughness Relief</em> or <em>UreaCream 40%</em>) + <strong>AmLactin 12% Moisturizing Lotion</strong> (Ammonium Lactate).</td>
                 <td>Apply Urea 20% or AmLactin nightly to darkened elbows, knees, hips, and back. Massage until absorbed.</td>
               </tr>
               <tr>
-                <td><span class="product-rank">Rank #2</span></td>
+                <td><span class="badge-safe">Rank #2</span></td>
                 <td><strong>Targeted Tyrosinase & Keratinocyte Regulation</strong></td>
                 <td>Competitively inhibits tyrosinase in hyperactive melanocytes and downregulates epidermal turnover, clearing post-inflammatory and frictional hyperpigmentation.</td>
                 <td><strong>Azelaic Acid 15% to 20% Gel/Cream</strong> (<em>Finacea 15%</em> or <em>Aziderm 20%</em>) or <strong>The Ordinary Azelaic Acid Suspension 10%</strong>.</td>
                 <td>Apply a thin layer to clean joints, hips, and groin folds every morning. Safe for long-term use.</td>
               </tr>
               <tr>
-                <td><span class="rx-badge">[Prescription Based]</span></td>
+                <td><span class="badge-rx">[Prescription Based]</span></td>
                 <td><strong>Metabolic Insulin Sensitizers (Root Cause Resolution)</strong></td>
                 <td>Suppresses hepatic gluconeogenesis and increases peripheral glucose uptake via AMPK activation, directly reducing fasting plasma insulin levels and silencing IGF-1 receptors on skin cells.</td>
                 <td><strong>Metformin 500 mg to 1000 mg</strong> [Prescription Based].</td>
                 <td>Prescribed by an endocrinologist or physician after evaluating Fasting Insulin, Fasting Glucose, and HbA1c panels.</td>
               </tr>
               <tr>
-                <td><span class="product-rank">Rank #3</span></td>
+                <td><span class="badge-safe">Rank #3</span></td>
                 <td><strong>Strict Friction & Pressure Elimination</strong></td>
                 <td>Mechanical trauma triggers localized protective melanogenesis (frictional melanosis). Eliminating repetitive shear prevents melanocyte activation.</td>
                 <td>Elbow cushions, padded seating, seamless smooth underwear, avoiding resting elbows on desks while working.</td>
                 <td>Adopt non-friction habits immediately. Never sit cross-legged on rough carpets without cushioning.</td>
               </tr>
               <tr>
-                <td><span class="product-rank">Rank #4</span></td>
+                <td><span class="badge-active">Rank #4</span></td>
                 <td><strong>Metabolic Carbohydrate & Insulin Thresholding</strong></td>
                 <td>Eliminates sharp glycemic and insulinemic spikes that trigger IGF-1 driven keratinocyte and fibroblast proliferation.</td>
                 <td>Low-Glycemic Load Diet: eliminating refined sugars, ultra-processed flours, sodas, and sweet snacks. 16:8 Intermittent Fasting.</td>
@@ -984,11 +1375,11 @@
           </table>
         </div>
 
-        <!-- Expandable Deep-Dive Reading Drawer -->
-        <details class="deep-dive-card" open>
+        <!-- Tier 3: Unabridged Science Deep-Dive Drawer -->
+        <details class="deep-dive-card">
           <summary class="deep-dive-summary">
             <span>🔬 Deep-Dive Clinical Mechanism & Cellular Biology</span>
-            <span style="font-size: 0.8rem; opacity: 0.8;">▼ Click to Collapse / Expand</span>
+            <span style="font-size: 0.8rem; opacity: 0.8;">▼ Click to Expand Unabridged Anatomy</span>
           </summary>
           <div class="deep-dive-content">
             <h4>Endocrine Signaling: Hyperinsulinemia & The IGF-1 Pathway</h4>
@@ -1027,10 +1418,36 @@
 
     <section class="section-view" id="tab-perianal" data-tab-name="Perianal / Cleft">
       <div class="card">
-        <div class="card-title">🍑 Perianal, Intergluteal Cleft & Buttock Fold Darkening</div>
+        <div class="card-title">
+          <span>🍑 Perianal, Intergluteal Cleft & Buttock Fold Darkening</span>
+          <span class="badge-blackbox">Strict Mucosal Warnings</span>
+        </div>
         <p class="section-desc">
           A specialized anatomical protocol for profound hyperpigmentation located in the natal cleft, perianal mucosa, and intergluteal junction.
         </p>
+
+        <!-- Tier 1: Action-First Stepper -->
+        <div class="stepper-header">⚡ Immediate 3-Step Daily Execution Stack</div>
+        <div class="stepper-grid">
+          <div class="step-card" data-time="shower">
+            <span class="step-badge step-badge-shower">Step 01 • Toilet & Bathing Hygiene</span>
+            <span class="step-title">Water-Based Bidet Only</span>
+            <span class="step-instruction">Cleanse with a handheld bidet or water spray after every bowel movement. <strong>Zero dry wiping with rough paper.</strong> Fecal proteases (trypsin/chymotrypsin) digest skin proteins; dry paper grinds them deeper and causes micro-tears.</span>
+            <span class="step-tip">💡 Tip: Gently pat dry with soft unbleached tissue or a clean cloth.</span>
+          </div>
+          <div class="step-card" data-time="pm">
+            <span class="step-badge step-badge-pm">Step 02 • Nightly Depigmentation</span>
+            <span class="step-title">Gentle Peripheral Azelaic Acid</span>
+            <span class="step-instruction">3 nights per week, apply a pea-sized dot of <strong>Azelaic Acid 10% to 15%</strong> to the outer darkened skin of the buttock fold. <strong>Strict Rule:</strong> Keep at least 1–2 cm away from the mucosal anal verge.</span>
+            <span class="step-tip">💡 Tip: Never use glycolic acid, salicylic acid, or hydroquinone here!</span>
+          </div>
+          <div class="step-card" data-time="pm">
+            <span class="step-badge step-badge-pm">Step 03 • Night Moisture Barrier</span>
+            <span class="step-title">40% Micronized Zinc Oxide Shield</span>
+            <span class="step-instruction">Every single night before sleep, apply a protective coating of <strong>40% Zinc Oxide paste</strong> (Desitin / Butt Paste). Creates an impenetrable shield against sweat, moisture maceration, and friction during sleep.</span>
+            <span class="step-tip">💡 Tip: Sleep in loose 100% breathable cotton boxers.</span>
+          </div>
+        </div>
 
         <!-- Black Box Safety Warnings -->
         <div class="alert-box alert-danger">
@@ -1088,28 +1505,28 @@
             </thead>
             <tbody>
               <tr>
-                <td><span class="product-rank">Rank #1</span></td>
+                <td><span class="badge-safe">Rank #1</span></td>
                 <td><strong>Water-Based Bidet Hygiene (Zero Friction)</strong></td>
                 <td>Eliminates mechanical toilet paper shear. Removes microscopic fecal enzyme residues (trypsin and chymotrypsin) that actively digest epidermal proteins.</td>
                 <td>Handheld bidet sprayer, electronic bidet seat, or warm water wash bottle (<em>Lota / Peri Bottle</em>).</td>
                 <td>Cleanse with water after every bowel movement. <strong>Gently pat dry</strong>—never wipe or rub with paper.</td>
               </tr>
               <tr>
-                <td><span class="product-rank">Rank #2</span></td>
+                <td><span class="badge-safe">Rank #2</span></td>
                 <td><strong>High-Dose Micronized Zinc Oxide Moisture Barrier</strong></td>
                 <td>Forms an impermeable, non-irritating lipid-mineral shield over the skin. Neutralizes fecal enzymes, stops moisture maceration, and halts frictional rubbing.</td>
                 <td><strong>Desitin Maximum Strength (40% Zinc Oxide)</strong>, <strong>Boudreaux's Butt Paste 40%</strong>, or <strong>Sudocrem</strong>.</td>
                 <td>Apply a thin layer across the intergluteal cleft and outer perianal folds every night before bed and prior to intense sweating.</td>
               </tr>
               <tr>
-                <td><span class="product-rank">Rank #3</span></td>
+                <td><span class="badge-safe">Rank #3</span></td>
                 <td><strong>Gentle Non-Mucosal Depigmentation</strong></td>
                 <td>Selectively downregulates hyperactive melanocytes without burning or irritating delicate intertriginous fold tissues. Safe for long-term use.</td>
                 <td><strong>Azelaic Acid 10% to 15% Gel</strong> (<em>The Ordinary 10%</em> or <em>Finacea 15%</em>).</td>
                 <td>Apply a small pea-sized amount to the outer darkened cleft skin 3 nights per week. Keep at least 1–2 cm away from the anal orifice.</td>
               </tr>
               <tr>
-                <td><span class="product-rank">Rank #4</span></td>
+                <td><span class="badge-safe">Rank #4</span></td>
                 <td><strong>Friction-Free Loose Breathable Textiles</strong></td>
                 <td>Tight synthetic underwear creates an airtight greenhouse that traps sweat and creates high shear during walking, driving melanocytes into defensive overdrive.</td>
                 <td>100% Ring-Spun Cotton boxers or loose modal underwear. Avoid tight synthetic boxer briefs.</td>
@@ -1119,11 +1536,11 @@
           </table>
         </div>
 
-        <!-- Expandable Deep-Dive Reading Drawer -->
-        <details class="deep-dive-card" open>
+        <!-- Tier 3: Unabridged Science Deep-Dive Drawer -->
+        <details class="deep-dive-card">
           <summary class="deep-dive-summary">
             <span>🔬 Deep-Dive Clinical Mechanism & Cellular Biology</span>
-            <span style="font-size: 0.8rem; opacity: 0.8;">▼ Click to Collapse / Expand</span>
+            <span style="font-size: 0.8rem; opacity: 0.8;">▼ Click to Expand Unabridged Anatomy</span>
           </summary>
           <div class="deep-dive-content">
             <h4>Why the Perianal Cleft Becomes Significantly Darker</h4>
@@ -1160,10 +1577,36 @@
 
     <section class="section-view" id="tab-hair" data-tab-name="Hair & Spa">
       <div class="card">
-        <div class="card-title">💇 Clinical Trichology: Coarse, Hard, Sticky & Frizzy Hair Protocol</div>
+        <div class="card-title">
+          <span>💇 Clinical Trichology: Coarse, Hard, Sticky & Frizzy Hair Protocol</span>
+          <span class="badge-blackbox">Zero Raw Oils Rule</span>
+        </div>
         <p class="section-desc">
-          A targeted biochemical restorative regimen for thick, rough, hydrophobic-depleted hair suffering from cuticle flared porosity and sebum stasis.
+          A targeted biochemical restorative regimen for thick, rough, hydrophobic-depleted hair suffering from 18-MEA f-layer loss, cuticle flared porosity, and sebum stasis.
         </p>
+
+        <!-- Tier 1: Action-First Stepper -->
+        <div class="stepper-header">⚡ Immediate 3-Step Daily Execution Stack</div>
+        <div class="stepper-grid">
+          <div class="step-card" data-time="shower">
+            <span class="step-badge step-badge-shower">Step 01 • Sunday Spa Deep Mask</span>
+            <span class="step-title">The Thermal Steam Dilatation Protocol</span>
+            <span class="step-instruction">Wash scalp with sulfate-free shampoo. Squeeze out excess water; apply rich deep hair mask from mid-lengths to ends. Cover with shower cap + warm wet towel or heat cap for <strong>15–20 minutes</strong>. Rinse cool.</span>
+            <span class="step-tip">💡 Tip: Heat temporarily opens cuticles so lipids penetrate the cortex.</span>
+          </div>
+          <div class="step-card" data-time="shower">
+            <span class="step-badge step-badge-shower">Step 02 • Wednesday Mid-Week Refresh</span>
+            <span class="step-title">8-Second Lamellar Water Smoothing</span>
+            <span class="step-instruction">Post-cleansing, apply 10–20 ml of <strong>Lamellar Wonder Water</strong> directly onto wet mid-lengths/ends. Massage for 8 seconds until a gentle warming lather forms; rinse clean immediately.</span>
+            <span class="step-tip">💡 Tip: Micro-lamellae deposit ultra-fine smoothing polymers with 0 weight.</span>
+          </div>
+          <div class="step-card" data-time="pm">
+            <span class="step-badge step-badge-pm">Step 03 • Nightly Friction Elimination</span>
+            <span class="step-title">Mulberry Silk Pillowcase Chamber</span>
+            <span class="step-instruction">Sleep on a <strong>100% Mulberry Silk (22 momme)</strong> or satin pillowcase. Cotton acts like high-friction sandpaper, absorbing essential moisture and tearing fragile flared cuticles during sleep.</span>
+            <span class="step-tip">💡 Tip: Zero coconut, castor, or heavy oils—they form sticky cement.</span>
+          </div>
+        </div>
 
         <!-- No Oil Warning -->
         <div class="alert-box alert-danger">
@@ -1185,42 +1628,42 @@
             </thead>
             <tbody>
               <tr>
-                <td><span class="product-rank">Rank #1</span></td>
+                <td><span class="badge-safe">Rank #1</span></td>
                 <td><strong>Thermal Steam Deep Masking (The Golden Protocol)</strong></td>
                 <td>Moist thermal heat temporarily expands the hair cortex and swells keratin fibers, allowing cationic surfactants (cetrimonium chloride, behentrimonium methosulfate), fatty alcohols, and hydrolyzed lipids to bypass lifted cuticles and deposit deeply into the cortex.</td>
                 <td><strong>Olaplex No. 8 Bond Intense Moisture Mask</strong>, <strong>Shea Moisture Manuka Honey & Mafura Oil Mask</strong>, or <strong>Kérastase Nutritive Masquintense</strong>.</td>
                 <td>Apply to damp mid-lengths and ends once weekly. Cover with shower cap + warm wet towel or thermal heat cap for <strong>15–20 minutes</strong>. Rinse with cool water.</td>
               </tr>
               <tr>
-                <td><span class="product-rank">Rank #2</span></td>
+                <td><span class="badge-safe">Rank #2</span></td>
                 <td><strong>Lamellar Water Resurfacing Therapy</strong></td>
                 <td>Ultra-fine water-activated lamellar lipid sheets deposit targeted ultra-thin smoothing polymers onto damaged, negatively charged patches of the cuticle without any greasy buildup or weight. Smoothes rough texture in 8 seconds.</td>
                 <td><strong>L'Oréal Paris Elvive 8 Second Wonder Water</strong> or <strong>Redken Extreme Bleach Recovery Lamellar Water</strong>.</td>
                 <td>Apply 10–20 ml to wet mid-lengths/ends post-shampoo, massage for 8 seconds until a gentle warming sensation occurs, then rinse clean. 1–2x weekly.</td>
               </tr>
               <tr>
-                <td><span class="product-rank">Rank #3</span></td>
+                <td><span class="badge-active">Rank #3</span></td>
                 <td><strong>Cuticle-Contracting Acidic Rinses (pH 3.5 – 4.5)</strong></td>
                 <td>Alkaline tap water swells the hair shaft and splays cuticles outward, causing rough texture and frizz. Weak organic acid lowers hair pH to its natural isoelectric point (~3.67), contracting cuticles flat and dissolving mineral buildup.</td>
                 <td><strong>Raw Organic Apple Cider Vinegar (ACV)</strong> (<em>Bragg</em>) diluted 1:8 in cool filtered water, or <strong>L'Oréal Paris EverPure Glossing Acidic Rinse</strong>.</td>
                 <td>Pour diluted ACV rinse over scalp and hair as a final rinse post-wash once every 10–14 days. Leave for 1 minute, then brief cool water rinse.</td>
               </tr>
               <tr>
-                <td><span class="product-rank">Rank #4</span></td>
+                <td><span class="badge-safe">Rank #4</span></td>
                 <td><strong>Sulfate-Free Clarifying & Hydrating Cleansing</strong></td>
                 <td>Sodium Laureth Sulfate (SLS) violently strips hair lipids, triggering compensatory scalp sebum flooding that leaves roots greasy while ends remain brittle and hard.</td>
                 <td><strong>Olaplex No. 4 Bond Maintenance Shampoo</strong>, <strong>Pureology Hydrate Shampoo</strong>, or <strong>Aveeno Oat Milk Blend Shampoo</strong>.</td>
                 <td>Wash 2 times per week only. Focus shampoo on the scalp; let the runoff cleanse the hair shafts. Never ball up or scrub the hair lengths.</td>
               </tr>
               <tr>
-                <td><span class="product-rank">Rank #5</span></td>
+                <td><span class="badge-safe">Rank #5</span></td>
                 <td><strong>100% Mulberry Silk / Satin Night Friction Elimination</strong></td>
                 <td>Cotton pillowcases act like high-friction sandpaper and dry sponges, absorbing internal moisture from hair fibers and tearing lifted cuticles during sleep.</td>
                 <td>100% Mulberry Silk Pillowcase (22 momme) or high-grade Satin Pillowcase + Microfiber hair turban.</td>
                 <td>Sleep on silk/satin every night. Swap rough terrycloth towels for smooth microfiber hair wraps.</td>
               </tr>
               <tr>
-                <td><span class="product-rank">Mandate</span></td>
+                <td><span class="badge-blackbox">Mandate</span></td>
                 <td><strong>Permanent Raw Oil Elimination</strong></td>
                 <td>Eliminates the heavy hydrophobic barrier that repels water vapor, prevents moisturizing conditioners from penetrating, and creates sticky buildup.</td>
                 <td>Zero coconut, castor, mustard, or olive oils. Replace with water-based leave-in conditioners (<em>Kérastase Elixir Ultime</em> or <em>It's a 10 Miracle Leave-In</em>).</td>
@@ -1271,11 +1714,11 @@
           </table>
         </div>
 
-        <!-- Expandable Deep-Dive Reading Drawer -->
-        <details class="deep-dive-card" open>
+        <!-- Tier 3: Unabridged Science Deep-Dive Drawer -->
+        <details class="deep-dive-card">
           <summary class="deep-dive-summary">
             <span>🔬 Deep-Dive Clinical Mechanism & Cellular Biology</span>
-            <span style="font-size: 0.8rem; opacity: 0.8;">▼ Click to Collapse / Expand</span>
+            <span style="font-size: 0.8rem; opacity: 0.8;">▼ Click to Expand Unabridged Anatomy</span>
           </summary>
           <div class="deep-dive-content">
             <h4>The "Sticky Roots vs. Brittle Ends" Paradox</h4>
@@ -1313,10 +1756,36 @@
 
     <section class="section-view" id="tab-cough" data-tab-name="Cough & Sinus">
       <div class="card">
-        <div class="card-title">🫁 Clinical ENT Protocol: Rhinosinusitis, 60% Nasal Blockage & Upper Airway Cough</div>
+        <div class="card-title">
+          <span>🫁 Clinical ENT Protocol: Rhinosinusitis, 60% Nasal Blockage & Upper Airway Cough</span>
+          <span class="badge-blackbox">Otrivin 3-Day Maximum</span>
+        </div>
         <p class="section-desc">
           An evidence-based otorhinolaryngology protocol targeting acute ostiomeatal complex obstruction, neutrophil-driven mucopurulent secretions, and post-nasal drip cough reflex hypersensitivity.
         </p>
+
+        <!-- Tier 1: Action-First Stepper -->
+        <div class="stepper-header">⚡ Immediate 3-Step Daily Execution Stack</div>
+        <div class="stepper-grid">
+          <div class="step-card" data-time="am">
+            <span class="step-badge step-badge-am">Step 01 • Morning Lavage & Spray</span>
+            <span class="step-title">NeilMed Hypertonic Alkaline Flush</span>
+            <span class="step-instruction">Irrigate both nostrils using <strong>NeilMed hypertonic saline buffer</strong> (draws fluid from swollen turbinates). Wait 5 minutes; follow with 2 sprays of <strong>Fluticasone Furoate</strong> [Rx] per nostril (pointed outward toward ear).</span>
+            <span class="step-tip">💡 Tip: Use distilled or boiled lukewarm water only. Never tap water!</span>
+          </div>
+          <div class="step-card" data-time="midday">
+            <span class="step-badge step-badge-shower">Step 02 • Midday Mucolytic Cleavage</span>
+            <span class="step-title">NAC 600mg Disulfide Liquefaction</span>
+            <span class="step-instruction">Dissolve 1 effervescent tablet of <strong>N-Acetylcysteine (NAC) 600 mg</strong> [OTC/Rx] in 200 ml room temperature water post-meal. Cleaves mucin disulfide bonds, turning rubbery green phlegm into watery drainage.</span>
+            <span class="step-tip">💡 Tip: Drink 2.5–3 liters of warm water daily to accelerate clearance.</span>
+          </div>
+          <div class="step-card" data-time="pm">
+            <span class="step-badge step-badge-pm">Step 03 • Evening Steam & Gravity Sleep</span>
+            <span class="step-title">Sinus Flush & 30-Degree Head Elevation</span>
+            <span class="step-instruction">Perform 10 minutes of saline steam inhalation, followed by an evening NeilMed flush. Sleep with head elevated 30° on two pillows or an inclined wedge to prevent nocturnal phlegm pooling in throat.</span>
+            <span class="step-tip">💡 Tip: Strict 3-day max on Otrivin to prevent rebound Rhinitis Medicamentosa.</span>
+          </div>
+        </div>
 
         <!-- Otrivin Rebound Warning -->
         <div class="alert-box alert-danger">
@@ -1338,35 +1807,35 @@
             </thead>
             <tbody>
               <tr>
-                <td><span class="product-rank">Rank #1</span></td>
+                <td><span class="badge-safe">Rank #1</span></td>
                 <td><strong>Alkaline-Buffered Hypertonic Sinus Irrigation</strong></td>
                 <td>High-volume positive pressure physically flushes trapped mucopurulent secretions from the ostiomeatal complex. Hypertonic saline draws fluid out of engorged turbinates via osmosis, while sodium bicarbonate liquefies thick mucus strands.</td>
                 <td><strong>NeilMed Sinus Rinse Kit</strong> (Hypertonic: 2 packets in 240 ml distilled/boiled lukewarm water).</td>
                 <td>Irrigate both nostrils twice daily (morning and 1 hour before bed). Lean forward over sink; breathe through mouth.</td>
               </tr>
               <tr>
-                <td><span class="product-rank">Rank #2</span></td>
+                <td><span class="badge-safe">Rank #2</span></td>
                 <td><strong>Oral Disulfide-Cleaving Mucolytic Therapy</strong></td>
                 <td>Free sulfhydryl group directly cleaves disulfide bonds in mucoprotein complexes, breaking cross-linked mucin oligomers into low-viscosity liquid that drains effortlessly without gagging. Restores intracellular glutathione in inflamed mucosa.</td>
                 <td><strong>N-Acetylcysteine (NAC) 600 mg Effervescent Tablets</strong> (<em>ACC 600</em>, <em>Mucinac 600</em>) [OTC / Rx].</td>
                 <td>Dissolve 1 tablet in 200 ml of room-temperature water. Drink once or twice daily with food for 5 to 7 days.</td>
               </tr>
               <tr>
-                <td><span class="rx-badge">[Prescription Based]</span></td>
+                <td><span class="badge-rx">[Prescription Based]</span></td>
                 <td><strong>Intranasal Corticosteroid (Mucosal Anti-Inflammatory)</strong></td>
                 <td>Inhibits transcription of pro-inflammatory cytokines, eosinophil chemotaxis, and vascular permeability. Directly shrinks hypertrophied inferior turbinates and halts the post-nasal drip trigger at its source.</td>
                 <td><strong>Fluticasone Furoate Nasal Spray</strong> (<em>Avamys</em>) or <strong>Mometasone Furoate</strong> (<em>Nasonex 50 mcg</em>) [Prescription Based].</td>
                 <td>2 sprays per nostril once daily every morning. Point nozzle slightly outward toward the ear—never directly at the nasal septum.</td>
               </tr>
               <tr>
-                <td><span class="product-rank">Rescue Only</span></td>
+                <td><span class="badge-blackbox">Rescue Only</span></td>
                 <td><strong>Topical Alpha-1/2 Adrenergic Agonist Decongestant</strong></td>
                 <td>Potent vasoconstriction of cavernous sinusoids in the inferior turbinates, providing rapid opening of the 60% obstruction within 3 minutes.</td>
                 <td><strong>Xylometazoline 0.1% Nasal Drops/Spray</strong> (<em>Otrivin</em>) [OTC].</td>
                 <td>1–2 sprays per nostril twice daily for <strong>3 days maximum</strong>. Use exclusively as an acute bridge to allow saline irrigation and steroid penetration.</td>
               </tr>
               <tr>
-                <td><span class="product-rank">Rank #3</span></td>
+                <td><span class="badge-safe">Rank #3</span></td>
                 <td><strong>Systemic Hydration & Moist Saline Steam Inhalation</strong></td>
                 <td>Moist heated vapor hydrates desiccated airway cilia, accelerating the mucociliary escalator clearance rate while lowering sputum viscosity.</td>
                 <td>Facial steam inhaler or hot steam bowl. Plain water or isotonic saline only (no harsh menthol or camphor crystals).</td>
@@ -1411,11 +1880,11 @@
           </table>
         </div>
 
-        <!-- Expandable Deep-Dive Reading Drawer -->
-        <details class="deep-dive-card" open>
+        <!-- Tier 3: Unabridged Science Deep-Dive Drawer -->
+        <details class="deep-dive-card">
           <summary class="deep-dive-summary">
             <span>🔬 Deep-Dive Clinical Mechanism & Cellular Biology</span>
-            <span style="font-size: 0.8rem; opacity: 0.8;">▼ Click to Collapse / Expand</span>
+            <span style="font-size: 0.8rem; opacity: 0.8;">▼ Click to Expand Unabridged Anatomy</span>
           </summary>
           <div class="deep-dive-content">
             <h4>Pathophysiology of 60% Obstruction & Yellow-Green Phlegm</h4>
@@ -1452,10 +1921,36 @@
 
     <section class="section-view" id="tab-vitality" data-tab-name="Energy & Vitality">
       <div class="card">
-        <div class="card-title">⚡ Master Clinical Guide: Stamina, Energy, Focus, Stress & Organ Vitality</div>
+        <div class="card-title">
+          <span>⚡ Master Clinical Guide: Stamina, Energy, Focus, Stress & Organ Vitality</span>
+          <span class="badge-active">Systems Biology & Bioenergetics</span>
+        </div>
         <p class="section-desc">
           An exhaustive systems-biology manual designed to eliminate midday fatigue, brain fog, acute anxiety spikes, gastrointestinal permeability, and microvascular stagnation.
         </p>
+
+        <!-- Tier 1: Action-First Stepper -->
+        <div class="stepper-header">⚡ Immediate 3-Step Daily Execution Stack</div>
+        <div class="stepper-grid">
+          <div class="step-card" data-time="am">
+            <span class="step-badge step-badge-am">Step 01 • Morning Bioenergetic Anchor</span>
+            <span class="step-title">Sunlight, Salt Water & 90-Min Caffeine Delay</span>
+            <span class="step-instruction">Get 10–15 mins outdoor sunlight within 30 mins of waking. Drink 500ml water with sea salt. <strong>Delay first coffee/tea 90 to 120 minutes</strong> post-waking to clear residual adenosine naturally.</span>
+            <span class="step-tip">💡 Tip: Completely cures the 2:00 PM afternoon energy crash.</span>
+          </div>
+          <div class="step-card" data-time="midday">
+            <span class="step-badge step-badge-shower">Step 02 • Workplace Focus & Stress Relief</span>
+            <span class="step-title">Alpha-GPC Focus & The 2-Breath Physiological Sigh</span>
+            <span class="step-instruction">For brain fog, take <strong>Alpha-GPC 300mg + L-Tyrosine 500mg</strong> with cold water. When stressed or anxious, perform 3 rounds of the <strong>Physiological Sigh</strong> (2 sharp nasal inhales + long slow mouth exhale).</span>
+            <span class="step-tip">💡 Tip: Drops heart rate and downregulates autonomic arousal in 45 secs.</span>
+          </div>
+          <div class="step-card" data-time="pm">
+            <span class="step-badge step-badge-pm">Step 03 • Evening Gut & Glymphatic Reset</span>
+            <span class="step-title">L-Glutamine Gut Sealing & Sleep Cocktail</span>
+            <span class="step-instruction">Take <strong>5g L-Glutamine</strong> to seal intestinal tight junctions. Before bed, take <strong>Magnesium L-Threonate / Bisglycinate (200–300mg) + Apigenin (50mg) + L-Theanine (100–200mg)</strong> in a cool ~66°F room.</span>
+            <span class="step-tip">💡 Tip: Facilitates nocturnal glymphatic brain waste drainage.</span>
+          </div>
+        </div>
 
         <!-- Quick Emergency Issue Matrix Full Table -->
         <h3 style="font-size: 1.05rem; margin: 18px 0 10px; color: var(--accent);">The Modular Clinical Decision Matrix ("When You Experience X, Do Y")</h3>
@@ -1514,10 +2009,10 @@
         <h3 style="font-size: 1.05rem; margin: 24px 0 10px; color: var(--accent);">The 7 Pillars of Human Longevity & Physiological Architecture</h3>
 
         <!-- Pillar 1 -->
-        <details class="deep-dive-card" open>
+        <details class="deep-dive-card">
           <summary class="deep-dive-summary">
             <span>🔋 Pillar 1: Cellular Bioenergetics, Stamina & Solving the Afternoon Crash</span>
-            <span style="font-size: 0.8rem; opacity: 0.8;">▼ Click to Collapse / Expand</span>
+            <span style="font-size: 0.8rem; opacity: 0.8;">▼ Click to Expand Architecture</span>
           </summary>
           <div class="deep-dive-content">
             <h4>Mitochondrial ATP Synthesis & The Adenosine Cascade</h4>
@@ -1537,7 +2032,7 @@
         <details class="deep-dive-card">
           <summary class="deep-dive-summary">
             <span>🧠 Pillar 2: Neurochemical Focus, Workplace Alertness & Conquering Brain Fog</span>
-            <span style="font-size: 0.8rem; opacity: 0.8;">▼ Click to Collapse / Expand</span>
+            <span style="font-size: 0.8rem; opacity: 0.8;">▼ Click to Expand Architecture</span>
           </summary>
           <div class="deep-dive-content">
             <h4>The Dopamine-Acetylcholine Dual Cognitive Engine</h4>
@@ -1556,7 +2051,7 @@
         <details class="deep-dive-card">
           <summary class="deep-dive-summary">
             <span>🧘 Pillar 3: Stress Mastery, Panic Down-Regulation & Autonomic Balance</span>
-            <span style="font-size: 0.8rem; opacity: 0.8;">▼ Click to Collapse / Expand</span>
+            <span style="font-size: 0.8rem; opacity: 0.8;">▼ Click to Expand Architecture</span>
           </summary>
           <div class="deep-dive-content">
             <h4>HPA Axis Dynamics & The Autonomic Nervous System</h4>
@@ -1581,7 +2076,7 @@
         <details class="deep-dive-card">
           <summary class="deep-dive-summary">
             <span>🥗 Pillar 4: The Gut-Brain Axis, Microbiome & Digestive Vitality</span>
-            <span style="font-size: 0.8rem; opacity: 0.8;">▼ Click to Collapse / Expand</span>
+            <span style="font-size: 0.8rem; opacity: 0.8;">▼ Click to Expand Architecture</span>
           </summary>
           <div class="deep-dive-content">
             <h4>Zonulin, Tight Junctions & Metabolic Endotoxemia</h4>
@@ -1601,7 +2096,7 @@
         <details class="deep-dive-card">
           <summary class="deep-dive-summary">
             <span>❤️ Pillar 5: Cardiovascular, Endothelial & Microvascular Longevity</span>
-            <span style="font-size: 0.8rem; opacity: 0.8;">▼ Click to Collapse / Expand</span>
+            <span style="font-size: 0.8rem; opacity: 0.8;">▼ Click to Expand Architecture</span>
           </summary>
           <div class="deep-dive-content">
             <h4>The Endothelial Nitric Oxide (eNOS) Cascade</h4>
@@ -1620,7 +2115,7 @@
         <details class="deep-dive-card">
           <summary class="deep-dive-summary">
             <span>🌙 Pillar 6: Deep Sleep Architecture & Circadian Entrainment</span>
-            <span style="font-size: 0.8rem; opacity: 0.8;">▼ Click to Collapse / Expand</span>
+            <span style="font-size: 0.8rem; opacity: 0.8;">▼ Click to Expand Architecture</span>
           </summary>
           <div class="deep-dive-content">
             <h4>Glymphatic Cleansing & Core Temperature Drops</h4>
@@ -1645,7 +2140,7 @@
         <details class="deep-dive-card">
           <summary class="deep-dive-summary">
             <span>🛡️ Pillar 7: Whole-Body Hygiene & Phase 1/2 Liver Detoxification</span>
-            <span style="font-size: 0.8rem; opacity: 0.8;">▼ Click to Collapse / Expand</span>
+            <span style="font-size: 0.8rem; opacity: 0.8;">▼ Click to Expand Architecture</span>
           </summary>
           <div class="deep-dive-content">
             <h4>Biotransformation Enzymes & The Non-Abrasive Hygiene Doctrine</h4>
@@ -1670,7 +2165,10 @@
 
     <section class="section-view" id="tab-gems" data-tab-name="Gems & Mistakes">
       <div class="card">
-        <div class="card-title">💎 The 10 High-Leverage Hidden Gems & 8 Fatal Health Mistakes</div>
+        <div class="card-title">
+          <span>💎 The 10 High-Leverage Hidden Gems & 8 Fatal Health Mistakes</span>
+          <span class="badge-safe">Maximum Leverage Biohacks</span>
+        </div>
         <p class="section-desc">
           High-yield physiological biohacks with disproportionate clinical returns, paired with the catastrophic everyday habits that sabotage dermatological and systemic recovery.
         </p>
@@ -1699,7 +2197,7 @@
               <tr>
                 <td><strong>2</strong></td>
                 <td><strong>The 2-Breath "Physiological Sigh"</strong></td>
-                <td>Double inhale re-inflates collapsed pulmonary alveoli, increasing surface area for CO2 offloading; prolonged exhale engages the vagus nerve and slows sinoatrial firing.</td>
+                <td>Double inhale re-inflates collapsed pulmonary alveoli, increasing surface area for CO2 offloading; prolonged exhale engages the vagal nerve and slows sinoatrial firing.</td>
                 <td>Inhale deeply through nose, take a second sharp top-up inhale, then release a long, slow exhale via mouth. 3 rounds.</td>
                 <td>Immediate autonomic down-regulation; drops heart rate and stops panic within 45 seconds.</td>
               </tr>
@@ -1833,7 +2331,10 @@
 
     <section class="section-view" id="tab-daily" data-tab-name="Action Tracker & Hub">
       <div class="card">
-        <div class="card-title">📅 Master Interactive Execution Tracker & Lifestyle Engine</div>
+        <div class="card-title">
+          <span>📅 Master Interactive Execution Tracker & Lifestyle Engine</span>
+          <span class="badge-safe">Auto-Saving Memory</span>
+        </div>
         <p class="section-desc">
           Interactive daily clinical checklist, weekly cadence calendar, 12-week recovery milestones, and metabolic lifestyle protocol. Progress auto-saves directly in your device.
         </p>
@@ -1856,56 +2357,56 @@
         <!-- 1. Daily AM Checklist -->
         <h4 style="font-size: 1rem; color: #38bdf8; margin: 18px 0 10px;">🌅 Morning (AM) Protocols</h4>
         <div class="checklist">
-          <label class="check-item">
+          <label class="check-item" data-time="am">
             <input type="checkbox" id="chk-en-sun">
             <div class="check-content">
               <span class="check-title">Sunlight & Salt Water Anchor</span>
               <span class="check-desc">10–15 min outdoor sunlight + 500ml water with a pinch of sea salt immediately upon waking.</span>
             </div>
           </label>
-          <label class="check-item">
+          <label class="check-item" data-time="am">
             <input type="checkbox" id="chk-en-caf">
             <div class="check-content">
               <span class="check-title">The 90-Minute Caffeine Delay</span>
               <span class="check-desc">Waited 90–120 min post-waking before first coffee/tea (ensures natural adenosine clearance).</span>
             </div>
           </label>
-          <label class="check-item">
+          <label class="check-item" data-time="am">
             <input type="checkbox" id="chk-am-wash">
             <div class="check-content">
               <span class="check-title">Shower Contact Wash (3–5 Minutes)</span>
               <span class="check-desc">Ketoconazole 2% (Mon/Wed/Fri) or Benzoyl Peroxide 5–10% (Tue/Thu/Sat) on chest & back. Dwell 3–5 mins.</span>
             </div>
           </label>
-          <label class="check-item">
+          <label class="check-item" data-time="am">
             <input type="checkbox" id="chk-am-noscrub">
             <div class="check-content">
               <span class="check-title">Zero Friction Cleansing</span>
               <span class="check-desc">No loofahs, brushes, or aggressive finger-rubbing on arms/back. Gentle syndet wash only.</span>
             </div>
           </label>
-          <label class="check-item">
+          <label class="check-item" data-time="am">
             <input type="checkbox" id="chk-am-urea">
             <div class="check-content">
               <span class="check-title">Body Keratolytic Application</span>
               <span class="check-desc">Urea 20% or AmLactin 12% applied to darkened elbows, knees, hips, and back while skin is damp.</span>
             </div>
           </label>
-          <label class="check-item">
+          <label class="check-item" data-time="am">
             <input type="checkbox" id="chk-am-groin">
             <div class="check-content">
               <span class="check-title">Groin & Joint Depigmentation</span>
               <span class="check-desc">Azelaic Acid 10–15% applied to darkened joint creases and outer buttock folds.</span>
             </div>
           </label>
-          <label class="check-item">
+          <label class="check-item" data-time="am">
             <input type="checkbox" id="chk-am-lips">
             <div class="check-content">
               <span class="check-title">Lip Barrier Sealing (Strict Anti-Trauma)</span>
               <span class="check-desc">Cica balm + pure petrolatum/lanolin applied. ZERO picking/peeling of dry flakes with teeth/fingers.</span>
             </div>
           </label>
-          <label class="check-item">
+          <label class="check-item" data-time="am">
             <input type="checkbox" id="chk-am-sinus">
             <div class="check-content">
               <span class="check-title">Morning Sinus Rinse & Spray</span>
@@ -1917,21 +2418,21 @@
         <!-- 2. Midday Checklist -->
         <h4 style="font-size: 1rem; color: #38bdf8; margin: 24px 0 10px;">☀️ Midday Protocols</h4>
         <div class="checklist">
-          <label class="check-item">
+          <label class="check-item" data-time="midday">
             <input type="checkbox" id="chk-md-muc">
             <div class="check-content">
               <span class="check-title">NAC 600mg Mucolytic Dose</span>
               <span class="check-desc">1 effervescent tablet of NAC 600mg in water post-meal to cleave mucus disulfide bonds.</span>
             </div>
           </label>
-          <label class="check-item">
+          <label class="check-item" data-time="midday">
             <input type="checkbox" id="chk-md-walk">
             <div class="check-content">
               <span class="check-title">10-Minute Post-Lunch Brisk Walk</span>
               <span class="check-desc">Gentle movement post-meal to blunt blood glucose spikes and prevent afternoon brain fog.</span>
             </div>
           </label>
-          <label class="check-item">
+          <label class="check-item" data-time="midday">
             <input type="checkbox" id="chk-md-lip">
             <div class="check-content">
               <span class="check-title">Lip Re-hydration Barrier</span>
@@ -1943,28 +2444,28 @@
         <!-- 3. Evening & Night Checklist -->
         <h4 style="font-size: 1rem; color: #38bdf8; margin: 24px 0 10px;">🌙 Evening (PM) Protocols</h4>
         <div class="checklist">
-          <label class="check-item">
+          <label class="check-item" data-time="pm">
             <input type="checkbox" id="chk-pm-cleft">
             <div class="check-content">
               <span class="check-title">Perianal Zinc Oxide Shield</span>
               <span class="check-desc">40% Zinc Oxide barrier paste applied across intergluteal cleft and outer folds before bed.</span>
             </div>
           </label>
-          <label class="check-item">
+          <label class="check-item" data-time="pm">
             <input type="checkbox" id="chk-pm-sinus">
             <div class="check-content">
               <span class="check-title">Evening NeilMed Sinus Rinse & Steam</span>
               <span class="check-desc">Second sinus irrigation + 10 mins saline steam inhalation to ensure clear nocturnal breathing.</span>
             </div>
           </label>
-          <label class="check-item">
+          <label class="check-item" data-time="pm">
             <input type="checkbox" id="chk-pm-lipslug">
             <div class="check-content">
               <span class="check-title">Heavy Night Lip Slugging</span>
               <span class="check-desc">Thick layer of pure Medical Lanolin or Vaseline extending slightly beyond the vermilion border.</span>
             </div>
           </label>
-          <label class="check-item">
+          <label class="check-item" data-time="pm">
             <input type="checkbox" id="chk-pm-silk">
             <div class="check-content">
               <span class="check-title">Silk Pillowcase & Sleep Hygiene</span>
@@ -2096,9 +2597,12 @@
 
     <section class="section-view" id="tab-doctor" data-tab-name="Doctor & Labs">
       <div class="card">
-        <div class="card-title">🩺 Physician Consultation, Laboratory Diagnostics & Prescription Compendium</div>
+        <div class="card-title">
+          <span>🩺 Physician Consultation, Laboratory Diagnostics & Prescription Compendium</span>
+          <button id="btn-print-doctor" class="btn-action btn-action-primary" style="margin-left: auto;">🖨️ Print Doctor Handover Report</button>
+        </div>
         <p class="section-desc">
-          Comprehensive diagnostic blood test panel, clinical evaluation scripts, red flag warnings, and the complete catalog of prescription agents.
+          Comprehensive diagnostic blood test panel, clinical evaluation scripts with 1-tap clipboard copying, red flag warnings, and the complete catalog of prescription agents.
         </p>
 
         <!-- Lab Blood Test Panel Full Table -->
@@ -2172,15 +2676,40 @@
           </table>
         </div>
 
-        <!-- Doctor Consultation Scripts -->
-        <h3 style="font-size: 1.1rem; margin: 24px 0 10px; color: var(--accent);">Doctor Consultation Guide & What to Tell Your Physician</h3>
-        <div class="alert-box alert-info" style="flex-direction: column; gap: 8px;">
-          <strong style="color: #38bdf8; font-size: 0.95rem;">📋 What to Discuss with Your Dermatologist & Endocrinologist:</strong>
-          <div style="font-size: 0.88rem; line-height: 1.7; color: #e2e8f0;">
-            1. <strong>For Lips (Exfoliative Cheilitis):</strong> <em>"I have experienced chronic peeling and hardening of my lips for months. I would like to rule out contact allergic cheilitis and discuss a short pulse of Hydrocortisone 1% ointment or Tacrolimus 0.03% to break the inflammatory cycle."</em><br>
-            2. <strong>For Chest/Back Acne & Sweating:</strong> <em>"My back breakouts flare with sweating and do not respond to ordinary acne cleansers. I suspect Malassezia Folliculitis with retention hyperkeratosis. I am using Ketoconazole 2% contact wash and would like to know if a short pulse of oral Fluconazole is indicated."</em><br>
-            3. <strong>For Dark Joints, Hips & Cleft:</strong> <em>"I have velvety hyperpigmented thickening on my joints, back, and body folds consistent with Acanthosis Nigricans. I would like a Fasting Insulin and HOMA-IR panel to check for underlying hyperinsulinemia."</em><br>
-            4. <strong>For Sinus Blockage & Green Sputum:</strong> <em>"I have 60% bilateral nasal obstruction with thick mucopurulent yellow-green phlegm and post-nasal drip cough. I am using hypertonic saline rinses and would like a prescription for Fluticasone furoate nasal spray."</em>
+        <!-- Doctor Consultation Scripts with 1-Tap Copy Buttons -->
+        <h3 style="font-size: 1.1rem; margin: 24px 0 10px; color: var(--accent);">Doctor Consultation Guide & What to Tell Your Physician (1-Tap Copy)</h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 12px; margin: 16px 0;">
+          <div class="product-item">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <strong style="color: #38bdf8;">👄 Lips (Exfoliative Cheilitis Script):</strong>
+              <button class="btn-action btn-copy-script" data-text="I have experienced chronic peeling and hardening of my lips for months. I would like to rule out contact allergic cheilitis and discuss a short pulse of Hydrocortisone 1% ointment or Tacrolimus 0.03% to break the inflammatory cycle.">📋 Copy Script</button>
+            </div>
+            <p style="font-size: 0.86rem; color: #cbd5e1; line-height: 1.6;"><em>"I have experienced chronic peeling and hardening of my lips for months. I would like to rule out contact allergic cheilitis and discuss a short pulse of Hydrocortisone 1% ointment or Tacrolimus 0.03% to break the inflammatory cycle."</em></p>
+          </div>
+
+          <div class="product-item">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <strong style="color: #38bdf8;">🚿 Chest & Back Acne / Sweating Script:</strong>
+              <button class="btn-action btn-copy-script" data-text="My back breakouts flare with sweating and do not respond to ordinary acne cleansers. I suspect Malassezia Folliculitis with retention hyperkeratosis. I am using Ketoconazole 2% contact wash and would like to know if a short pulse of oral Fluconazole is indicated.">📋 Copy Script</button>
+            </div>
+            <p style="font-size: 0.86rem; color: #cbd5e1; line-height: 1.6;"><em>"My back breakouts flare with sweating and do not respond to ordinary acne cleansers. I suspect Malassezia Folliculitis with retention hyperkeratosis. I am using Ketoconazole 2% contact wash and would like to know if a short pulse of oral Fluconazole is indicated."</em></p>
+          </div>
+
+          <div class="product-item">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <strong style="color: #38bdf8;">🌟 Dark Joints & Acanthosis Nigricans Script:</strong>
+              <button class="btn-action btn-copy-script" data-text="I have velvety hyperpigmented thickening on my joints, back, and body folds consistent with Acanthosis Nigricans. I would like a Fasting Insulin and HOMA-IR panel to check for underlying hyperinsulinemia.">📋 Copy Script</button>
+            </div>
+            <p style="font-size: 0.86rem; color: #cbd5e1; line-height: 1.6;"><em>"I have velvety hyperpigmented thickening on my joints, back, and body folds consistent with Acanthosis Nigricans. I would like a Fasting Insulin and HOMA-IR panel to check for underlying hyperinsulinemia."</em></p>
+          </div>
+
+          <div class="product-item">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <strong style="color: #38bdf8;">🫁 Sinus Blockage & Yellow-Green Sputum Script:</strong>
+              <button class="btn-action btn-copy-script" data-text="I have 60% bilateral nasal obstruction with thick mucopurulent yellow-green phlegm and post-nasal drip cough. I am using hypertonic saline rinses and would like a prescription for Fluticasone furoate nasal spray.">📋 Copy Script</button>
+            </div>
+            <p style="font-size: 0.86rem; color: #cbd5e1; line-height: 1.6;"><em>"I have 60% bilateral nasal obstruction with thick mucopurulent yellow-green phlegm and post-nasal drip cough. I am using hypertonic saline rinses and would like a prescription for Fluticasone furoate nasal spray."</em></p>
           </div>
         </div>
 
@@ -2226,7 +2755,7 @@
           <div class="product-item">
             <div class="product-header">
               <span class="product-name">Hydrocortisone 1% Ointment</span>
-              <span class="rx-badge">[Prescription / Mild OTC]</span>
+              <span class="badge-rx">[Prescription / Mild OTC]</span>
             </div>
             <div class="product-mechanism">Low-potency Class VII topical corticosteroid. Halts subclinical eczematous inflammation and cytokine cascades on the vermilion border.</div>
             <div class="product-usage">📌 Apply thin film twice daily for 5 to 7 days maximum. Discontinue immediately after to avoid skin thinning.</div>
@@ -2235,7 +2764,7 @@
           <div class="product-item">
             <div class="product-header">
               <span class="product-name">Tacrolimus 0.03% Ointment (Protopic)</span>
-              <span class="rx-badge">[Prescription Based]</span>
+              <span class="badge-rx">[Prescription Based]</span>
             </div>
             <div class="product-mechanism">Topical calcineurin inhibitor. Inhibits T-cell activation and IL-2 production. Completely non-atrophying; safe for delicate mucosal lips and cleft skin.</div>
             <div class="product-usage">📌 Apply twice daily under physician oversight for chronic, recalcitrant exfoliative cheilitis.</div>
@@ -2244,7 +2773,7 @@
           <div class="product-item">
             <div class="product-header">
               <span class="product-name">Oral Fluconazole 150 mg – 200 mg</span>
-              <span class="rx-badge">[Prescription Based]</span>
+              <span class="badge-rx">[Prescription Based]</span>
             </div>
             <div class="product-mechanism">Systemic triazole antifungal. High bioavailability in sebum and sweat; eradicates deep Malassezia yeast reservoirs in hair follicles.</div>
             <div class="product-usage">📌 150 mg once weekly for 2 to 4 weeks under medical supervision. (Avoid alcohol; liver function monitoring if prolonged).</div>
@@ -2253,7 +2782,7 @@
           <div class="product-item">
             <div class="product-header">
               <span class="product-name">Fluticasone Furoate Nasal Spray (Avamys 27.5 mcg)</span>
-              <span class="rx-badge">[Prescription Based]</span>
+              <span class="badge-rx">[Prescription Based]</span>
             </div>
             <div class="product-mechanism">High-affinity glucocorticoid receptor agonist. Potent topical anti-inflammatory that shrinks swollen turbinates and halts post-nasal drip at the source.</div>
             <div class="product-usage">📌 2 sprays per nostril once daily every morning. Spray outward toward the ear; never toward the nasal septum.</div>
@@ -2262,7 +2791,7 @@
           <div class="product-item">
             <div class="product-header">
               <span class="product-name">Metformin 500 mg – 1000 mg Extended Release</span>
-              <span class="rx-badge">[Prescription Based]</span>
+              <span class="badge-rx">[Prescription Based]</span>
             </div>
             <div class="product-mechanism">Biguanide antihyperglycemic. Activates AMPK, suppresses hepatic gluconeogenesis, lowers fasting insulin, and silences IGF-1 cutaneous proliferation.</div>
             <div class="product-usage">📌 Prescribed by an endocrinologist for insulin resistance and metabolic Acanthosis Nigricans reversal. Take with evening meal.</div>
@@ -2273,11 +2802,23 @@
     
   </main>
 
+  <!-- Toast Notification -->
+  <div id="toast-msg" class="toast-notification">Notification</div>
+
   <!-- Application Script Engine -->
   <script>
 
     // Defensive Bootloader & Application Engine
     document.addEventListener("DOMContentLoaded", function() {
+      // Toast notification helper
+      const toast = document.getElementById("toast-msg");
+      function showToast(msg) {
+        if (!toast) return;
+        toast.textContent = msg;
+        toast.style.display = "flex";
+        setTimeout(() => { toast.style.display = "none"; }, 2500);
+      }
+
       // 1. Audio SFX Engine (Zero-Music Tactile Synthesizer via Web Audio API)
       let audioCtx = null;
       function playTactileClick() {
@@ -2299,9 +2840,7 @@
           gain.connect(audioCtx.destination);
           osc.start();
           osc.stop(audioCtx.currentTime + 0.03);
-        } catch (e) {
-          // Silent fallback if audio context is blocked
-        }
+        } catch (e) {}
       }
 
       function playSuccessChime() {
@@ -2318,8 +2857,8 @@
           const gain = audioCtx.createGain();
           osc1.type = "sine";
           osc2.type = "sine";
-          osc1.frequency.setValueAtTime(523.25, now); // C5
-          osc2.frequency.setValueAtTime(659.25, now + 0.05); // E5
+          osc1.frequency.setValueAtTime(523.25, now);
+          osc2.frequency.setValueAtTime(659.25, now + 0.05);
           gain.gain.setValueAtTime(0.07, now);
           gain.gain.exponentialRampToValueAtTime(0.001, now + 0.14);
           osc1.connect(gain);
@@ -2329,12 +2868,10 @@
           osc1.stop(now + 0.07);
           osc2.start(now + 0.05);
           osc2.stop(now + 0.14);
-        } catch (e) {
-          // Silent fallback
-        }
+        } catch (e) {}
       }
 
-      // 2. Tab Navigation Engine
+      // 2. Tab Navigation & Instant Symptom Triage Engine
       try {
         const tabBtns = document.querySelectorAll(".tab-btn");
         const sections = document.querySelectorAll(".section-view");
@@ -2353,7 +2890,16 @@
 
           playTactileClick();
 
-          // Scroll active tab button into view on mobile
+          // Scroll target section into view smoothly
+          const targetSec = document.getElementById(targetId);
+          if (targetSec) {
+            window.scrollTo({
+              top: targetSec.offsetTop - 140,
+              behavior: "smooth"
+            });
+          }
+
+          // Scroll active tab button into center on mobile
           const activeBtn = document.querySelector(`.tab-btn[data-tab="${targetId}"]`);
           if (activeBtn) {
             activeBtn.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
@@ -2364,6 +2910,18 @@
           btn.addEventListener("click", function() {
             const targetId = this.getAttribute("data-tab");
             if (targetId) switchTab(targetId);
+          });
+        });
+
+        // Instant Symptom Triage Chips
+        const triageChips = document.querySelectorAll(".triage-chip");
+        triageChips.forEach(chip => {
+          chip.addEventListener("click", function() {
+            const targetTab = this.getAttribute("data-target-tab");
+            if (targetTab) {
+              switchTab(targetTab);
+              showToast("Switched to " + (this.textContent.trim()));
+            }
           });
         });
 
@@ -2380,14 +2938,81 @@
         console.error("Tab navigation error:", err);
       }
 
-      // 3. Interactive Daily Tracker with LocalStorage Persistence
+      // 3. Time-of-Day Routine Filter Engine
+      try {
+        const todBtns = document.querySelectorAll(".tod-btn");
+        const stepCards = document.querySelectorAll(".step-card");
+        const checkItems = document.querySelectorAll(".check-item");
+
+        todBtns.forEach(btn => {
+          btn.addEventListener("click", function() {
+            todBtns.forEach(b => b.classList.remove("active"));
+            this.classList.add("active");
+            const filter = this.getAttribute("data-time-filter");
+            playTactileClick();
+
+            stepCards.forEach(card => {
+              const cardTime = card.getAttribute("data-time");
+              if (filter === "all" || cardTime === filter) {
+                card.style.display = "flex";
+                card.style.opacity = "1";
+              } else {
+                card.style.display = "none";
+              }
+            });
+
+            checkItems.forEach(item => {
+              const itemTime = item.getAttribute("data-time");
+              if (filter === "all" || itemTime === filter || !itemTime) {
+                item.style.display = "flex";
+              } else {
+                item.style.display = "none";
+              }
+            });
+
+            showToast("Filtered by: " + (filter.toUpperCase()));
+          });
+        });
+      } catch (err) {
+        console.error("Time-of-day filter error:", err);
+      }
+
+      // 4. Doctor Consultation Print & Copy Engine
+      try {
+        const btnPrintDoctor = document.getElementById("btn-print-doctor");
+        if (btnPrintDoctor) {
+          btnPrintDoctor.addEventListener("click", function() {
+            playTactileClick();
+            window.print();
+          });
+        }
+
+        const copyBtns = document.querySelectorAll(".btn-copy-script");
+        copyBtns.forEach(btn => {
+          btn.addEventListener("click", function() {
+            const textToCopy = this.getAttribute("data-text");
+            if (textToCopy && navigator.clipboard) {
+              navigator.clipboard.writeText(textToCopy).then(() => {
+                playSuccessChime();
+                showToast("📋 Script copied to clipboard!");
+              }).catch(() => {
+                showToast("⚠️ Could not copy automatically.");
+              });
+            }
+          });
+        });
+      } catch (err) {
+        console.error("Doctor print/copy error:", err);
+      }
+
+      // 5. Interactive Daily Tracker with LocalStorage Persistence
       try {
         const checkboxes = document.querySelectorAll('.checklist input[type="checkbox"]');
         const fillBar = document.getElementById("tracker-fill");
         const percentText = document.getElementById("tracker-percent");
         const resetBtn = document.getElementById("btn-reset-tracker");
 
-        const STORAGE_KEY = "antigravity_clinical_tracker_v2";
+        const STORAGE_KEY = "antigravity_clinical_tracker_v3";
 
         function updateProgress() {
           if (!checkboxes.length) return;
@@ -2414,9 +3039,7 @@
           });
           try {
             localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-          } catch (e) {
-            console.warn("Storage quota exceeded or private mode active");
-          }
+          } catch (e) {}
         }
 
         function loadState() {
@@ -2430,9 +3053,7 @@
                 }
               });
             }
-          } catch (e) {
-            console.error("Failed to load tracker state:", e);
-          }
+          } catch (e) {}
           updateProgress();
         }
 
@@ -2455,6 +3076,7 @@
               updateProgress();
               saveState();
               playTactileClick();
+              showToast("Tracker reset to 0%");
             }
           });
         }
@@ -2464,29 +3086,16 @@
         console.error("Tracker engine error:", err);
       }
 
-      // 4. Global Real-Time Search & Filtering Engine
+      // 6. Global Real-Time Search & Filtering Engine
       try {
         const searchInput = document.getElementById("global-search-input");
         const searchClear = document.getElementById("search-clear-btn");
         const searchStatus = document.getElementById("search-status-bar");
         const searchResultCount = document.getElementById("search-result-count");
         const tabBtns = document.querySelectorAll(".tab-btn");
-        const sections = document.querySelectorAll(".section-view");
-
-        function removeHighlights() {
-          const marks = document.querySelectorAll("mark.search-match");
-          marks.forEach(m => {
-            const parent = m.parentNode;
-            if (parent) {
-              parent.replaceChild(document.createTextNode(m.textContent), m);
-              parent.normalize();
-            }
-          });
-        }
 
         function runSearch(query) {
           const q = (query || "").trim().toLowerCase();
-          removeHighlights();
 
           if (!q || q.length < 2) {
             if (searchClear) searchClear.style.display = "none";
@@ -2509,12 +3118,10 @@
 
             if (!sec) return;
 
-            // Search within this section
             const text = sec.innerText.toLowerCase();
             let countInTab = 0;
 
             if (text.includes(q)) {
-              // Count occurrences roughly
               let pos = 0;
               while ((pos = text.indexOf(q, pos)) !== -1) {
                 countInTab++;
@@ -2529,7 +3136,6 @@
                 badge.textContent = countInTab;
                 badge.style.display = "inline-block";
               }
-              // If there are deep-dive cards containing the query, expand them automatically
               const detailsList = sec.querySelectorAll("details.deep-dive-card");
               detailsList.forEach(det => {
                 if (det.innerText.toLowerCase().includes(q)) {
@@ -2543,7 +3149,7 @@
 
           if (searchStatus && searchResultCount) {
             searchStatus.style.display = "flex";
-            searchResultCount.textContent = `Found ${totalMatches} matching items across ${matchedTabs} tab(s). Click any tab pill with a badge to view.`;
+            searchResultCount.textContent = `Found ${totalMatches} matching items across ${matchedTabs} tab(s). Click any tab pill with a red badge to view.`;
           }
         }
 
