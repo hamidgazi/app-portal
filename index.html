@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#09090b">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
-  <link rel="stylesheet" href="ai_search.css">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
 
   <style>
     /* ==========================================================================
@@ -47,7 +47,10 @@
       
       --header-height: 56px;
       --active-header-height: 42px;
+      --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-left: env(safe-area-inset-left, 0px);
+      --safe-right: env(safe-area-inset-right, 0px);
     }
 
     * {
@@ -758,6 +761,19 @@
       color: var(--accent-cyan);
     }
 
+    /* Directive 5: Enforce >= 48px touch target hitbox */
+    .launcher-menu-trigger::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      min-width: 48px;
+      min-height: 48px;
+      width: 48px;
+      height: 48px;
+    }
+
     /* Centered 1-2 Line Typography */
     .app-launcher-label {
       font-size: 11.5px;
@@ -1076,14 +1092,14 @@
        UNIVERSAL FIXED 42PX SLIM NAVIGATION BAR (Desktop & Mobile)
        ========================================================================== */
     .active-topbar {
-      height: var(--active-header-height);
-      min-height: 42px;
+      padding: max(6px, var(--safe-top)) max(10px, var(--safe-right)) 6px max(8px, var(--safe-left));
+      height: calc(var(--active-header-height) + var(--safe-top));
+      min-height: 48px;
       background: #09090b;
       border-bottom: 1px solid var(--border-subtle);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 10px 0 6px;
       gap: 8px;
       z-index: 10;
       flex-shrink: 0;
@@ -1217,8 +1233,8 @@
     .stage-canvas {
       flex: 1;
       width: 100%;
-      height: calc(100vh - var(--active-header-height));
-      height: calc(100dvh - var(--active-header-height));
+      height: calc(100vh - var(--active-header-height) - var(--safe-top));
+      height: calc(100dvh - var(--active-header-height) - var(--safe-top));
       position: relative;
       overflow: hidden;
       background: var(--bg-base);
@@ -1597,7 +1613,7 @@
         <div class="iframe-spinner"></div>
         <div class="iframe-loader-text" id="loader-app-title">Loading Application...</div>
       </div>
-      <iframe class="app-iframe" id="content-iframe" title="Active Tool Stage" src="about:blank"></iframe>
+      <iframe class="app-iframe" id="content-iframe" title="Active Tool Stage" src="about:blank" allow="camera; microphone; geolocation; clipboard-write; clipboard-read; accelerometer; gyroscope"></iframe>
     </div>
 
   </div>
@@ -1692,7 +1708,6 @@
   <!-- Catalogs & Search Scripts -->
   <script src="portal_catalog.js"></script>
   <script src="links_catalog.js"></script>
-  <script src="ai_search.js"></script>
 
   <!-- ==========================================================================
        APPLICATION LOGIC & DEFENSIVE BOOTLOADER
@@ -1804,24 +1819,31 @@
       return "";
     }
 
-    /* Helper: Map App to Workspace Cluster */
+    /* Helper: Map App to Workspace Cluster (Strict Project Number Precedence) */
     function getAppCluster(app) {
-      const id = String(app.id || "").toLowerCase();
-      const cat = String(app.category || "").toLowerCase();
       const rel = String(app.relPath || "").toLowerCase();
+      const cat = String(app.category || "").toLowerCase();
 
-      if (rel.startsWith("01-") || rel.startsWith("02-") || rel.startsWith("03-") || rel.startsWith("04-") || rel.startsWith("05-") || rel.startsWith("06-") || rel.startsWith("22-") || rel.includes("tempo") || cat.includes("productivity") || cat.includes("utilities") || cat.includes("health")) {
-        return "web";
-      }
-      if (rel.startsWith("07-") || rel.startsWith("08-") || rel.startsWith("09-") || rel.startsWith("10-") || rel.startsWith("11-") || cat.includes("islamic")) {
-        return "sacred";
-      }
+      // 1. Strict Project Folder Number Precedence
       if (rel.startsWith("12-") || rel.startsWith("13-") || rel.startsWith("14-") || rel.startsWith("15-")) {
         return "windows";
       }
-      if (rel.startsWith("16-") || rel.startsWith("17-") || rel.startsWith("18-") || cat.includes("android")) {
+      if (rel.startsWith("16-") || rel.startsWith("17-") || rel.startsWith("18-")) {
         return "android";
       }
+      if (rel.startsWith("07-") || rel.startsWith("08-") || rel.startsWith("09-") || rel.startsWith("10-") || rel.startsWith("11-") || rel.startsWith("20-") || rel.startsWith("21-")) {
+        return "sacred";
+      }
+      if (rel.startsWith("01-") || rel.startsWith("02-") || rel.startsWith("03-") || rel.startsWith("04-") || rel.startsWith("05-") || rel.startsWith("06-") || rel.startsWith("19-") || rel.startsWith("22-")) {
+        return "web";
+      }
+
+      // 2. Generic Category / Keyword Fallback
+      if (cat.includes("android")) return "android";
+      if (cat.includes("windows") || cat.includes("workstation")) return "windows";
+      if (cat.includes("islamic") || cat.includes("quran") || cat.includes("hadith") || cat.includes("faith")) return "sacred";
+      if (cat.includes("web") || cat.includes("productivity") || cat.includes("utilities") || cat.includes("health")) return "web";
+
       return "tools";
     }
 
@@ -1898,19 +1920,23 @@
       let startX = 0;
       let startY = 0;
       let isLongPress = false;
+      let pressStartTime = 0;
 
-      // Mobile Touch Handling (500ms threshold)
+      // Mobile Touch Handling (450ms+ threshold guard)
       element.addEventListener("touchstart", (e) => {
         isLongPress = false;
         if (e.target.closest(".launcher-menu-trigger")) return;
         if (!e.touches || !e.touches[0]) return;
         startX = e.touches[0].clientX;
         startY = e.touches[0].clientY;
+        pressStartTime = Date.now();
         pressTimer = setTimeout(() => {
-          isLongPress = true;
-          AudioEngine.blip();
-          openQuickActionSheet(app);
-        }, 500);
+          if (Date.now() - pressStartTime >= 450) {
+            isLongPress = true;
+            AudioEngine.blip();
+            openQuickActionSheet(app);
+          }
+        }, 480);
       }, { passive: true });
 
       element.addEventListener("touchmove", (e) => {
@@ -1920,6 +1946,7 @@
             clearTimeout(pressTimer);
             pressTimer = null;
           }
+          pressStartTime = 0;
         }
       }, { passive: true });
 
@@ -1928,9 +1955,14 @@
           clearTimeout(pressTimer);
           pressTimer = null;
         }
-        if (isLongPress) {
+        if (isLongPress || (pressStartTime && (Date.now() - pressStartTime > 450))) {
           if (e.cancelable) e.preventDefault();
-          setTimeout(() => { isLongPress = false; }, 100);
+          setTimeout(() => { 
+            isLongPress = false; 
+            pressStartTime = 0;
+          }, 120);
+        } else {
+          pressStartTime = 0;
         }
       });
 
@@ -1940,6 +1972,7 @@
           pressTimer = null;
         }
         isLongPress = false;
+        pressStartTime = 0;
       });
 
       // Right-Click Context Menu
@@ -1959,10 +1992,11 @@
         });
       }
 
-      // Primary Click: 1-Tap Launch
+      // Primary Click: 1-Tap Launch (Guarded against long-press taps)
       element.addEventListener("click", (e) => {
-        if (isLongPress) {
+        if (isLongPress || (pressStartTime && (Date.now() - pressStartTime > 450))) {
           isLongPress = false;
+          pressStartTime = 0;
           return;
         }
         if (e.target.closest(".launcher-menu-trigger")) {
@@ -2194,7 +2228,24 @@
       "acceleration": ["acceleration", "speed", "system", "sysmain", "usn"],
       "updater": ["updater", "update", "winget", "software", "suite"],
       "update": ["updater", "update", "winget", "software"],
-      "software": ["software", "freeware", "suite", "apps", "tools", "winget"]
+      "software": ["software", "freeware", "suite", "apps", "tools", "winget"],
+
+      // Dermatology & Skin Recovery
+      "skin": ["skin", "dermatology", "acne", "derma", "isotretinoin", "skincare", "clinical", "recovery"],
+      "acne": ["skin", "acne", "isotretinoin", "dermatology", "derma", "blemish", "pimples"],
+      "derma": ["dermatology", "derma", "skin", "acne", "isotretinoin", "skincare"],
+      "dermatology": ["dermatology", "derma", "skin", "acne", "isotretinoin", "clinical"],
+      "isotretinoin": ["isotretinoin", "accutane", "retinoid", "acne", "skin", "dermatology"],
+
+      // Arabic Language & Grammar
+      "arabic": ["arabic", "sarf", "nahw", "grammar", "mastery", "particles", "harf", "vocabulary"],
+      "sarf": ["arabic", "sarf", "morphology", "grammar", "verb", "roots"],
+      "nahw": ["arabic", "nahw", "syntax", "grammar", "irab", "sentence"],
+
+      // Hadith Sciences
+      "mustalah": ["mustalah", "hadith", "sciences", "usul", "isnad", "sanad", "matn", "authentication"],
+      "usul": ["usul", "mustalah", "hadith", "principles", "fiqh", "jurisprudence"],
+      "isnad": ["isnad", "sanad", "hadith", "mustalah", "chain", "narrators"]
     };
 
     function getExpandedTokens(rawQuery) {
@@ -2465,13 +2516,32 @@
       if (loader) loader.classList.remove("active");
     }
 
-    /* Launch Application (Pure Full-Stage Execution) */
-    function launchApp(appId) {
+    /* Hardware Back Button & State Synchronization from URL Hash */
+    function syncStateFromHash() {
+      const hash = window.location.hash || "";
+      if (hash.startsWith("#app=")) {
+        const id = decodeURIComponent(hash.slice(5));
+        if (!State.activeApp || State.activeApp.id !== id) {
+          launchApp(id, false);
+        }
+      } else {
+        if (State.activeApp) {
+          returnToHub(false);
+        }
+      }
+    }
+
+    /* Launch Application (Pure Full-Stage Execution with URL Hash Routing) */
+    function launchApp(appId, updateHash = true) {
       const app = State.apps.find(a => a.id === appId);
       if (!app) return;
 
       AudioEngine.tap();
       State.activeApp = app;
+
+      if (updateHash) {
+        window.location.hash = "app=" + encodeURIComponent(appId);
+      }
 
       // Update Recents
       const rIdx = State.recents.indexOf(appId);
@@ -2521,10 +2591,14 @@
       }
     }
 
-    /* Return to Dashboard Hub */
-    function returnToHub() {
+    /* Return to Dashboard Hub with History State Clearing */
+    function returnToHub(updateHash = true) {
       AudioEngine.tap();
       State.activeApp = null;
+
+      if (updateHash && window.location.hash) {
+        history.pushState("", document.title, window.location.pathname + window.location.search);
+      }
 
       const dashboard = document.getElementById("dashboard-view");
       const topbar = document.getElementById("main-topbar");
@@ -2747,28 +2821,6 @@
         }],
 
         ["Initialize In-Place AI Search Engine", () => {
-          // Initialize AI Search catalog without popup modals or shortcut hijacking
-          if (window.AISearch && typeof window.AISearch.init === 'function') {
-            try {
-              window.AISearch.init({
-                autoCrawl: false,
-                enableHistory: false,
-                enableSound: !State.audioMuted,
-                enableVoice: false,
-                enableFloatingPill: false,
-                enableShortcuts: false, // In-place search handles Ctrl+K directly
-                catalog: State.apps,
-                onSelect: (item) => {
-                  if (item && item.id) launchApp(item.id);
-                }
-              });
-              // Guarantee no modal popup can ever open
-              window.AISearch.open = (q) => focusSearchInput();
-            } catch (err) {
-              console.warn('[AISearch Init Warning]', err);
-            }
-          }
-
           // Topbar Search Button -> Focus In-Page Search Bar
           const topbarSearchBtn = document.getElementById("btn-open-spotlight");
           if (topbarSearchBtn) {
@@ -2893,6 +2945,21 @@
           renderCategoryPills();
           renderDailyDock();
           renderDashboardClusters();
+        }],
+
+        ["Initialize URL Hash Navigation", () => {
+          window.addEventListener("hashchange", syncStateFromHash);
+          syncStateFromHash();
+        }],
+
+        ["Register Service Worker", () => {
+          if ("serviceWorker" in navigator && (window.location.protocol === "https:" || window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")) {
+            navigator.serviceWorker.register("sw.js").then(reg => {
+              console.log("[Master Index] ServiceWorker registered with scope:", reg.scope);
+            }).catch(err => {
+              console.warn("[Master Index] ServiceWorker registration failed:", err);
+            });
+          }
         }],
 
         ["Bind Keyboard Shortcuts", () => {

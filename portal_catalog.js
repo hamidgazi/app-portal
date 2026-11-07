@@ -1,12 +1,14 @@
 // Web Distribution - Zero-CORS Portal Catalog
 window.PORTAL_CATALOG = {
-  "version": "1.0.0",
+  "version": "2.2.0",
   "lastUpdated": "Antigravity Files",
-  "totalApps": 38,
+  "totalApps": 40,
   "categories": [
     "Islamic & Faith",
     "Productivity & Utilities",
     "Health & Nutrition",
+    "Windows Workstation",
+    "Android Native & Systems",
     "Knowledge & Engineering",
     "Discovered Tools"
   ],
@@ -96,6 +98,30 @@ window.PORTAL_CATALOG = {
       "relPath": "09-Fatawa-Project/output/index.html",
       "portalHref": "./09-Fatawa-Project/output/index.html",
       "serverHref": "./09-Fatawa-Project/output/index.html"
+    },
+    {
+      "id": "21-Hadith-Sciences-Encyclopedia__web__index_html",
+      "title": "Hadith Sciences Encyclopedia",
+      "category": "Islamic & Faith",
+      "icon": "📜",
+      "badge": "Bilingual PWA • Uloom al-Hadith",
+      "description": "Definitive bilingual reference compendium on the Sciences of Hadith (علمِ حدیث). Classical terminology, Sanad authentication criteria, and scholarly biographical methodologies.",
+      "tags": [
+        "hadith",
+        "hadith-sciences",
+        "mustalah",
+        "uloom",
+        "isnad",
+        "sanad",
+        "arabic",
+        "urdu",
+        "islamic",
+        "pwa"
+      ],
+      "primary": true,
+      "relPath": "21-Hadith-Sciences-Encyclopedia/web/index.html",
+      "portalHref": "./21-Hadith-Sciences-Encyclopedia/web/index.html",
+      "serverHref": "./21-Hadith-Sciences-Encyclopedia/web/index.html"
     },
     {
       "id": "02-Namaz-Prayer-Times__index_html",
@@ -228,6 +254,28 @@ window.PORTAL_CATALOG = {
       "relPath": "08-Hadith-Roman-Urdu/web/top_100_short_hadiths.html",
       "portalHref": "./08-Hadith-Roman-Urdu/web/top_100_short_hadiths.html",
       "serverHref": "./08-Hadith-Roman-Urdu/web/top_100_short_hadiths.html"
+    },
+    {
+      "id": "07-Quran-Deep-Analyzer__commands_html",
+      "title": "Divine Commands & Injunctions (احکامِ قرآنی)",
+      "category": "Islamic & Faith",
+      "icon": "⚖️",
+      "badge": "Legal & Moral Injunctions",
+      "description": "Quranic blueprint for human living: exhaustive catalog of divine legal commands, prohibitions, and moral duties classified across individual, civil, and criminal law.",
+      "tags": [
+        "quran",
+        "commands",
+        "injunctions",
+        "ahkam",
+        "shariah",
+        "law",
+        "ethics",
+        "islamic"
+      ],
+      "primary": false,
+      "relPath": "07-Quran-Deep-Analyzer/commands.html",
+      "portalHref": "./07-Quran-Deep-Analyzer/commands.html",
+      "serverHref": "./07-Quran-Deep-Analyzer/commands.html"
     },
     {
       "id": "01-Events-Countdown__events_visitor_html",
@@ -383,6 +431,28 @@ window.PORTAL_CATALOG = {
       "serverHref": "./02-Namaz-Prayer-Times/widget.html"
     },
     {
+      "id": "07-Quran-Deep-Analyzer__duas_html",
+      "title": "Quranic Duas Encyclopedia (قرآنی دعائیں)",
+      "category": "Islamic & Faith",
+      "icon": "🤲",
+      "badge": "Prophetic Supplications",
+      "description": "Interactive Quranic supplication treasury organized by prophetic origin (Adam, Ibrahim, Musa, Muhammad ﷺ) and emotional state with Arabic phonetics and translations.",
+      "tags": [
+        "quran",
+        "duas",
+        "supplications",
+        "prayers",
+        "prophets",
+        "arabic",
+        "urdu",
+        "islamic"
+      ],
+      "primary": false,
+      "relPath": "07-Quran-Deep-Analyzer/duas.html",
+      "portalHref": "./07-Quran-Deep-Analyzer/duas.html",
+      "serverHref": "./07-Quran-Deep-Analyzer/duas.html"
+    },
+    {
       "id": "05-Cloud-Clipboard__index_html",
       "title": "CloudClip PRO",
       "category": "Productivity & Utilities",
@@ -421,26 +491,6 @@ window.PORTAL_CATALOG = {
       "relPath": "04-Pincode-Search/index.html",
       "portalHref": "./04-Pincode-Search/index.html",
       "serverHref": "./04-Pincode-Search/index.html"
-    },
-    {
-      "id": "15-Mobile-Phone-Analysis__index_html",
-      "title": "Smartphone Hardware & Decision Studio",
-      "category": "Productivity & Utilities",
-      "icon": "📱",
-      "badge": "Hardware Telemetry",
-      "description": "Practical smartphone hardware comparison and decision studio with PWM eye-safety metrics, thermal stress tests, and dynamic score weightings.",
-      "tags": [
-        "mobile",
-        "hardware",
-        "smartphone",
-        "pwm",
-        "display",
-        "benchmarks"
-      ],
-      "primary": true,
-      "relPath": "15-Mobile-Phone-Analysis/index.html",
-      "portalHref": "./15-Mobile-Phone-Analysis/index.html",
-      "serverHref": "./15-Mobile-Phone-Analysis/index.html"
     },
     {
       "id": "22-Tempo-Payment-Tracker__index_html",
@@ -505,6 +555,28 @@ window.PORTAL_CATALOG = {
       "serverHref": "./04-Pincode-Search/Pincode_Search_Offline.html"
     },
     {
+      "id": "19-Dermatology-Health-Guide__index_html",
+      "title": "Clinical Dermatology Protocol",
+      "category": "Health & Nutrition",
+      "icon": "🩺",
+      "badge": "Clinical PWA • Pareto 80/20",
+      "description": "Medical-grade clinical skincare action suite and diagnostic compendium. Features 80/20 high-yield protocols, active medication safety checks, and interactive regimen tracking.",
+      "tags": [
+        "dermatology",
+        "skincare",
+        "acne",
+        "isotretinoin",
+        "health",
+        "clinical",
+        "medicine",
+        "pwa"
+      ],
+      "primary": true,
+      "relPath": "19-Dermatology-Health-Guide/index.html",
+      "portalHref": "./19-Dermatology-Health-Guide/index.html",
+      "serverHref": "./19-Dermatology-Health-Guide/index.html"
+    },
+    {
       "id": "06-Sustainable-Weight-Gain-Guide__Weight_Gain_Dashboard_html",
       "title": "Sustainable Weight Gain Suite",
       "category": "Health & Nutrition",
@@ -523,6 +595,157 @@ window.PORTAL_CATALOG = {
       "relPath": "06-Sustainable-Weight-Gain-Guide/Weight_Gain_Dashboard.html",
       "portalHref": "./06-Sustainable-Weight-Gain-Guide/Weight_Gain_Dashboard.html",
       "serverHref": "./06-Sustainable-Weight-Gain-Guide/Weight_Gain_Dashboard.html"
+    },
+    {
+      "id": "14-Essential-PC-Software-Suite__README_md",
+      "title": "Essential PC Software Suite",
+      "category": "Windows Workstation",
+      "icon": "🖥️",
+      "badge": "Curated Workstation • Winget",
+      "description": "Curated workstation software, web superpowers, and 1-click Winget deployment center organized across 5 clusters.",
+      "tags": [
+        "windows",
+        "software",
+        "winget",
+        "workstation",
+        "suite",
+        "tools"
+      ],
+      "primary": true,
+      "isDoc": true,
+      "relPath": "14-Essential-PC-Software-Suite/README.md",
+      "portalHref": "doc_viewer.html?doc=./14-Essential-PC-Software-Suite/README.md&title=Essential%20PC%20Software%20Suite&icon=%F0%9F%96%A5%EF%B8%8F&badge=Curated%20Workstation%20%E2%80%A2%20Winget",
+      "serverHref": "doc_viewer.html?doc=./14-Essential-PC-Software-Suite/README.md&title=Essential%20PC%20Software%20Suite&icon=%F0%9F%96%A5%EF%B8%8F&badge=Curated%20Workstation%20%E2%80%A2%20Winget"
+    },
+    {
+      "id": "13-Update-Software__README_md",
+      "title": "PC Software Update Hub",
+      "category": "Windows Workstation",
+      "icon": "⚡",
+      "badge": "WPF Desktop • Winget",
+      "description": "Autonomous dual-channel package engine and modern WPF desktop center for automated 1-click software updates.",
+      "tags": [
+        "windows",
+        "updates",
+        "winget",
+        "msstore",
+        "software",
+        "wpf",
+        "tools"
+      ],
+      "primary": true,
+      "isDoc": true,
+      "relPath": "13-Update-Software/README.md",
+      "portalHref": "doc_viewer.html?doc=./13-Update-Software/README.md&title=PC%20Software%20Update%20Hub&icon=%E2%9A%A1&badge=WPF%20Desktop%20%E2%80%A2%20Winget",
+      "serverHref": "doc_viewer.html?doc=./13-Update-Software/README.md&title=PC%20Software%20Update%20Hub&icon=%E2%9A%A1&badge=WPF%20Desktop%20%E2%80%A2%20Winget"
+    },
+    {
+      "id": "15-Mobile-Phone-Analysis__index_html",
+      "title": "Smartphone Hardware & Decision Studio",
+      "category": "Windows Workstation",
+      "icon": "📱",
+      "badge": "Hardware Telemetry",
+      "description": "Practical smartphone hardware comparison and decision studio with PWM eye-safety metrics, thermal stress tests, and dynamic score weightings.",
+      "tags": [
+        "mobile",
+        "hardware",
+        "smartphone",
+        "pwm",
+        "display",
+        "benchmarks",
+        "windows"
+      ],
+      "primary": true,
+      "relPath": "15-Mobile-Phone-Analysis/index.html",
+      "portalHref": "./15-Mobile-Phone-Analysis/index.html",
+      "serverHref": "./15-Mobile-Phone-Analysis/index.html"
+    },
+    {
+      "id": "12-System-Acceleration__README_md",
+      "title": "System Acceleration & Latency Suite",
+      "category": "Windows Workstation",
+      "icon": "🚀",
+      "badge": "Zero-Lag Tuning • Windows",
+      "description": "Hardware-targeted system latency elimination, Windows Defender optimization, and telemetry suppression pipeline.",
+      "tags": [
+        "windows",
+        "system",
+        "acceleration",
+        "latency",
+        "optimization",
+        "intel",
+        "tools"
+      ],
+      "primary": true,
+      "isDoc": true,
+      "relPath": "12-System-Acceleration/README.md",
+      "portalHref": "doc_viewer.html?doc=./12-System-Acceleration/README.md&title=System%20Acceleration%20%26%20Latency%20Suite&icon=%F0%9F%9A%80&badge=Zero-Lag%20Tuning%20%E2%80%A2%20Windows",
+      "serverHref": "doc_viewer.html?doc=./12-System-Acceleration/README.md&title=System%20Acceleration%20%26%20Latency%20Suite&icon=%F0%9F%9A%80&badge=Zero-Lag%20Tuning%20%E2%80%A2%20Windows"
+    },
+    {
+      "id": "18-Essential-Android-Apps-Suite__README_md",
+      "title": "Essential Android Apps Suite",
+      "category": "Android Native & Systems",
+      "icon": "⚡",
+      "badge": "Shizuku System Center",
+      "description": "Curated high-performance Android software, web superpowers, and Shizuku system tools across 5 mobile clusters.",
+      "tags": [
+        "android",
+        "apps",
+        "shizuku",
+        "mobile",
+        "suite",
+        "tools"
+      ],
+      "primary": true,
+      "isDoc": true,
+      "relPath": "18-Essential-Android-Apps-Suite/README.md",
+      "portalHref": "doc_viewer.html?doc=./18-Essential-Android-Apps-Suite/README.md&title=Essential%20Android%20Apps%20Suite&icon=%E2%9A%A1&badge=Shizuku%20System%20Center",
+      "serverHref": "doc_viewer.html?doc=./18-Essential-Android-Apps-Suite/README.md&title=Essential%20Android%20Apps%20Suite&icon=%E2%9A%A1&badge=Shizuku%20System%20Center"
+    },
+    {
+      "id": "17-Android-Backup-Guide__README_md",
+      "title": "Samsung Galaxy Zero-Loss Backup",
+      "category": "Android Native & Systems",
+      "icon": "📱",
+      "badge": "Samsung One UI • Playbook",
+      "description": "Master engineering framework and operational playbook guaranteeing 100% data preservation and zero lockouts.",
+      "tags": [
+        "android",
+        "samsung",
+        "backup",
+        "restore",
+        "oneui",
+        "guide",
+        "tools"
+      ],
+      "primary": true,
+      "isDoc": true,
+      "relPath": "17-Android-Backup-Guide/README.md",
+      "portalHref": "doc_viewer.html?doc=./17-Android-Backup-Guide/README.md&title=Samsung%20Galaxy%20Zero-Loss%20Backup&icon=%F0%9F%93%B1&badge=Samsung%20One%20UI%20%E2%80%A2%20Playbook",
+      "serverHref": "doc_viewer.html?doc=./17-Android-Backup-Guide/README.md&title=Samsung%20Galaxy%20Zero-Loss%20Backup&icon=%F0%9F%93%B1&badge=Samsung%20One%20UI%20%E2%80%A2%20Playbook"
+    },
+    {
+      "id": "16-Smart-Organizer-Android__README_md",
+      "title": "Smart File Organizer Android",
+      "category": "Android Native & Systems",
+      "icon": "📁",
+      "badge": "Kotlin • Jetpack Compose",
+      "description": "Modern Android application for intelligent file sorting, duplicate detection, photo organization, and batch undo.",
+      "tags": [
+        "android",
+        "organizer",
+        "files",
+        "kotlin",
+        "compose",
+        "apk",
+        "tools"
+      ],
+      "primary": true,
+      "isDoc": true,
+      "relPath": "16-Smart-Organizer-Android/README.md",
+      "portalHref": "doc_viewer.html?doc=./16-Smart-Organizer-Android/README.md&title=Smart%20File%20Organizer%20Android&icon=%F0%9F%93%81&badge=Kotlin%20%E2%80%A2%20Jetpack%20Compose",
+      "serverHref": "doc_viewer.html?doc=./16-Smart-Organizer-Android/README.md&title=Smart%20File%20Organizer%20Android&icon=%F0%9F%93%81&badge=Kotlin%20%E2%80%A2%20Jetpack%20Compose"
     },
     {
       "id": "Common-Resources__Knowledge_Navigator_html",
@@ -601,102 +824,6 @@ window.PORTAL_CATALOG = {
       "serverHref": "./Common-Resources/WhatsApp-Gate-Kit/WHATSAPP_GATE_TEMPLATE.html"
     },
     {
-      "id": "19-Dermatology-Health-Guide__index_html",
-      "title": "Clinical Health & Vitality Portal | Antigravity",
-      "category": "Discovered Tools",
-      "icon": "📄",
-      "badge": "19-Dermatology-Health-Guide",
-      "description": "Antigravity Clinical Health & Vitality Portal: Plain-language, evidence-based protocols for dermatology, trichology, respiratory, and executive longevity.",
-      "tags": [
-        "19-dermatology-health-guide",
-        "index.html"
-      ],
-      "primary": false,
-      "relPath": "19-Dermatology-Health-Guide/index.html",
-      "portalHref": "./19-Dermatology-Health-Guide/index.html",
-      "serverHref": "./19-Dermatology-Health-Guide/index.html"
-    },
-    {
-      "id": "21-Hadith-Sciences-Encyclopedia__web__index_html",
-      "title": "Hadith Sciences Encyclopedia | موسوعة علوم الحديث",
-      "category": "Discovered Tools",
-      "icon": "📄",
-      "badge": "21-Hadith-Sciences-Encyclopedia",
-      "description": "The Master Encyclopedia of Hadith Sciences - Complete bilingual offline mobile reader with live font controls.",
-      "tags": [
-        "21-hadith-sciences-encyclopedia",
-        "index.html"
-      ],
-      "primary": false,
-      "relPath": "21-Hadith-Sciences-Encyclopedia/web/index.html",
-      "portalHref": "./21-Hadith-Sciences-Encyclopedia/web/index.html",
-      "serverHref": "./21-Hadith-Sciences-Encyclopedia/web/index.html"
-    },
-    {
-      "id": "07-Quran-Deep-Analyzer__archive__inspect_dock_html",
-      "title": "Inspect Dock",
-      "category": "Discovered Tools",
-      "icon": "📄",
-      "badge": "07-Quran-Deep-Analyzer",
-      "description": "HTML application located in 07-Quran-Deep-Analyzer.",
-      "tags": [
-        "07-quran-deep-analyzer",
-        "inspect_dock.html"
-      ],
-      "primary": false,
-      "relPath": "07-Quran-Deep-Analyzer/archive/inspect_dock.html",
-      "portalHref": "./07-Quran-Deep-Analyzer/archive/inspect_dock.html",
-      "serverHref": "./07-Quran-Deep-Analyzer/archive/inspect_dock.html"
-    },
-    {
-      "id": "05-Cloud-Clipboard__Clipboard Sync_html",
-      "title": "My Cloud Clipboard Pro",
-      "category": "Discovered Tools",
-      "icon": "📄",
-      "badge": "05-Cloud-Clipboard",
-      "description": "HTML application located in 05-Cloud-Clipboard.",
-      "tags": [
-        "05-cloud-clipboard",
-        "clipboard sync.html"
-      ],
-      "primary": false,
-      "relPath": "05-Cloud-Clipboard/Clipboard Sync.html",
-      "portalHref": "./05-Cloud-Clipboard/Clipboard Sync.html",
-      "serverHref": "./05-Cloud-Clipboard/Clipboard Sync.html"
-    },
-    {
-      "id": "04-Pincode-Search__phone_qr_html",
-      "title": "Scan with Phone — Courier Pincode Search",
-      "category": "Discovered Tools",
-      "icon": "📄",
-      "badge": "04-Pincode-Search",
-      "description": "HTML application located in 04-Pincode-Search.",
-      "tags": [
-        "04-pincode-search",
-        "phone_qr.html"
-      ],
-      "primary": false,
-      "relPath": "04-Pincode-Search/phone_qr.html",
-      "portalHref": "./04-Pincode-Search/phone_qr.html",
-      "serverHref": "./04-Pincode-Search/phone_qr.html"
-    },
-    {
-      "id": "21-Hadith-Sciences-Encyclopedia__typography_studio_html",
-      "title": "Urdu & Arabic Typography Studio | خط شناسی و فانٹ اسٹوڈیو",
-      "category": "Discovered Tools",
-      "icon": "📄",
-      "badge": "21-Hadith-Sciences-Encyclopedia",
-      "description": "Professional Urdu & Arabic Typography Studio - Interactive Font Comparer & Switcher",
-      "tags": [
-        "21-hadith-sciences-encyclopedia",
-        "typography_studio.html"
-      ],
-      "primary": false,
-      "relPath": "21-Hadith-Sciences-Encyclopedia/typography_studio.html",
-      "portalHref": "./21-Hadith-Sciences-Encyclopedia/typography_studio.html",
-      "serverHref": "./21-Hadith-Sciences-Encyclopedia/typography_studio.html"
-    },
-    {
       "id": "Common-Resources__Typography-Studio__index_html",
       "title": "Urdu & Arabic Typography Studio | خط شناسی و فانٹ اسٹوڈیو",
       "category": "Discovered Tools",
@@ -711,38 +838,6 @@ window.PORTAL_CATALOG = {
       "relPath": "Common-Resources/Typography-Studio/index.html",
       "portalHref": "./Common-Resources/Typography-Studio/index.html",
       "serverHref": "./Common-Resources/Typography-Studio/index.html"
-    },
-    {
-      "id": "07-Quran-Deep-Analyzer__commands_html",
-      "title": "📜 Divine Commands & Injunctions • Quranic Blueprint for Human Living",
-      "category": "Discovered Tools",
-      "icon": "📄",
-      "badge": "07-Quran-Deep-Analyzer",
-      "description": "The 80 Canonical Divine Directives (Commands & Prohibitions) of the Holy Quran for Human Living, Health, Ethics, Compassion & Social Harmony with Kanzul Iman, Kanzul Irfan & Saheeh International.",
-      "tags": [
-        "07-quran-deep-analyzer",
-        "commands.html"
-      ],
-      "primary": false,
-      "relPath": "07-Quran-Deep-Analyzer/commands.html",
-      "portalHref": "./07-Quran-Deep-Analyzer/commands.html",
-      "serverHref": "./07-Quran-Deep-Analyzer/commands.html"
-    },
-    {
-      "id": "07-Quran-Deep-Analyzer__duas_html",
-      "title": "🤲 Quranic Duas Encyclopedia • دعاؤں کا قرآنی انسائیکلوپیڈیا",
-      "category": "Discovered Tools",
-      "icon": "📄",
-      "badge": "07-Quran-Deep-Analyzer",
-      "description": "The 78 Canonical Quranic Supplications (40 Rabbana, Prophetic & Believers",
-      "tags": [
-        "07-quran-deep-analyzer",
-        "duas.html"
-      ],
-      "primary": false,
-      "relPath": "07-Quran-Deep-Analyzer/duas.html",
-      "portalHref": "./07-Quran-Deep-Analyzer/duas.html",
-      "serverHref": "./07-Quran-Deep-Analyzer/duas.html"
     }
   ]
 };

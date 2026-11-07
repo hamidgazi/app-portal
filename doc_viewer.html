@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>Antigravity Document Viewer</title>
+  <meta name="description" content="Cyber-Glass Markdown & Project Document Viewer for Antigravity Workspace">
+  <meta name="theme-color" content="#09090b">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📄</text></svg>">
+  <style>
+    :root {
+      --bg-base: #09090b;
+      --bg-surface: #121215;
+      --bg-surface-elevated: #18181d;
+      --bg-code: #0d0d11;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(56, 189, 248, 0.3);
+      --accent-cyan: #38bdf8;
+      --accent-emerald: #10b981;
+      --accent-purple: #c084fc;
+      --text-primary: #f4f4f5;
+      --text-secondary: #a1a1aa;
+      --text-dim: #71717a;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-left: env(safe-area-inset-left, 0px);
+      --safe-right: env(safe-area-inset-right, 0px);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background: var(--bg-base);
+      color: var(--text-primary);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.65;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding-top: var(--safe-top);
+      padding-bottom: var(--safe-bottom);
+      padding-left: var(--safe-left);
+      padding-right: var(--safe-right);
+    }
+
+    /* Sticky Doc Header */
+    .doc-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(18, 18, 21, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 50px;
+    }
+
+    .doc-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .doc-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .doc-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .doc-badge {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      flex-shrink: 0;
+    }
+
+    .doc-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .btn-action {
+      background: var(--bg-surface-elevated);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+      touch-action: manipulation;
+      min-height: 36px;
+    }
+
+    .btn-action:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-primary);
+      border-color: var(--border-accent);
+    }
+
+    /* Main Content Container */
+    .doc-container {
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 24px 20px 60px;
+      flex: 1;
+    }
+
+    /* Markdown Typography */
+    .markdown-body {
+      color: var(--text-primary);
+      font-size: 15px;
+    }
+
+    .markdown-body h1 {
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: #fff;
+      margin: 1.2rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .markdown-body h2 {
+      font-size: 1.45rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: #fff;
+      margin: 1.8rem 0 0.8rem;
+      padding-bottom: 0.3rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .markdown-body h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #e4e4e7;
+      margin: 1.4rem 0 0.6rem;
+    }
+
+    .markdown-body h4, .markdown-body h5, .markdown-body h6 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #d4d4d8;
+      margin: 1rem 0 0.4rem;
+    }
+
+    .markdown-body p {
+      margin-bottom: 1rem;
+      color: #d4d4d8;
+    }
+
+    .markdown-body strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .markdown-body em {
+      color: #cbd5e1;
+    }
+
+    .markdown-body a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(56, 189, 248, 0.4);
+      transition: color 0.15s ease;
+    }
+
+    .markdown-body a:hover {
+      color: #7dd3fc;
+      border-bottom-style: solid;
+    }
+
+    .markdown-body blockquote {
+      border-left: 3px solid var(--accent-cyan);
+      padding: 8px 16px;
+      margin: 1rem 0;
+      background: rgba(56, 189, 248, 0.05);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      color: #cbd5e1;
+    }
+
+    .markdown-body blockquote p:last-child {
+      margin-bottom: 0;
+    }
+
+    .markdown-body ul, .markdown-body ol {
+      margin: 0.6rem 0 1rem 1.4rem;
+      color: #d4d4d8;
+    }
+
+    .markdown-body li {
+      margin-bottom: 0.35rem;
+    }
+
+    .markdown-body li input[type="checkbox"] {
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+
+    .markdown-body hr {
+      border: 0;
+      height: 1px;
+      background: var(--border-subtle);
+      margin: 2rem 0;
+    }
+
+    /* Code Blocks & Inline Code */
+    .markdown-body code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.88em;
+      background: rgba(255, 255, 255, 0.07);
+      color: #38bdf8;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .code-block-wrapper {
+      position: relative;
+      margin: 1rem 0 1.2rem;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: var(--bg-code);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .code-block-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      font-size: 11px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .code-copy-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 11px;
+      cursor: pointer;
+      padding: 2px 6px;
+      border-radius: 4px;
+      transition: all 0.15s ease;
+    }
+
+    .code-copy-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    .markdown-body pre {
+      margin: 0;
+      padding: 14px 16px;
+      overflow-x: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.55;
+      color: #e2e8f0;
+      background: transparent;
+    }
+
+    .markdown-body pre code {
+      background: transparent;
+      padding: 0;
+      border: none;
+      color: inherit;
+    }
+
+    /* Tables */
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      margin: 1rem 0 1.5rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .markdown-body table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13.5px;
+    }
+
+    .markdown-body th {
+      background: rgba(255, 255, 255, 0.04);
+      padding: 10px 14px;
+      font-weight: 600;
+      color: #fff;
+      border-bottom: 1px solid var(--border-subtle);
+      white-space: nowrap;
+    }
+
+    .markdown-body td {
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: #d4d4d8;
+    }
+
+    .markdown-body tr:last-child td {
+      border-bottom: none;
+    }
+
+    .markdown-body tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* Loading and Status */
+    .doc-loading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+      gap: 16px;
+      color: var(--text-secondary);
+    }
+
+    .spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid rgba(56, 189, 248, 0.15);
+      border-top-color: var(--accent-cyan);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .doc-error {
+      background: rgba(244, 63, 94, 0.08);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin: 20px 0;
+      color: #fecdd3;
+    }
+
+    .doc-error h3 {
+      color: #fda4af;
+      margin-bottom: 8px;
+    }
+
+    @media (max-width: 640px) {
+      .doc-container {
+        padding: 16px 12px 40px;
+      }
+      .markdown-body h1 {
+        font-size: 1.5rem;
+      }
+      .markdown-body h2 {
+        font-size: 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="doc-header">
+    <div class="doc-meta">
+      <span class="doc-icon" id="header-icon">📄</span>
+      <div class="doc-title" id="header-title">Document Viewer</div>
+      <span class="doc-badge" id="header-badge">README</span>
+    </div>
+    <div class="doc-actions">
+      <button class="btn-action" id="btn-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Back to top">
+        ↑ Top
+      </button>
+      <button class="btn-action" id="btn-reload" onclick="loadDocument()" title="Reload document">
+        ↻ Reload
+      </button>
+    </div>
+  </header>
+
+  <main class="doc-container">
+    <div id="content" class="markdown-body">
+      <div class="doc-loading">
+        <div class="spinner"></div>
+        <div>Loading documentation...</div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Audio Micro-Haptic Feedback (Directive 7: Web Audio API Procedural Only)
+    const AudioEngine = {
+      ctx: null,
+      init() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) this.ctx = new AudioContext();
+        }
+      },
+      click() {
+        try {
+          this.init();
+          if (!this.ctx || this.ctx.state === "suspended") return;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(800, this.ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(400, this.ctx.currentTime + 0.04);
+          gain.gain.setValueAtTime(0.04, this.ctx.currentTime);
+          gain.gain.linearRampToValueAtTime(0.001, this.ctx.currentTime + 0.04);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.04);
+        } catch (_) {}
+      }
+    };
+
+    // Lightweight Robust Markdown Parser
+    function parseMarkdown(md) {
+      if (!md) return "";
+
+      // Escape raw HTML entities
+      let html = md
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+
+      // Extract code blocks first to protect code content
+      const codeBlocks = [];
+      html = html.replace(/```([a-zA-Z0-9_\-\+]*)\n([\s\S]*?)```/g, (match, lang, code) => {
+        const id = "CODEBLOCK_" + codeBlocks.length;
+        codeBlocks.push({ lang: lang || "text", code });
+        return id;
+      });
+
+      // Inline code
+      const inlineCodes = [];
+      html = html.replace(/`([^`\n]+)`/g, (match, code) => {
+        const id = "INLINECODE_" + inlineCodes.length;
+        inlineCodes.push(code);
+        return id;
+      });
+
+      // Split lines
+      const lines = html.split(/\r?\n/);
+      const out = [];
+      let inTable = false;
+      let inList = false;
+      let listType = "ul";
+
+      for (let i = 0; i < lines.length; i++) {
+        let line = lines[i];
+
+        // Horizontal Rules
+        if (/^(\*{3,}|-{3,}|_{3,})$/.test(line.trim())) {
+          if (inList) { out.push(`</${listType}>`); inList = false; }
+          if (inTable) { out.push("</tbody></table></div>"); inTable = false; }
+          out.push("<hr>");
+          continue;
+        }
+
+        // Headings
+        const headingMatch = line.match(/^(#{1,6})\s+(.*)$/);
+        if (headingMatch) {
+          if (inList) { out.push(`</${listType}>`); inList = false; }
+          if (inTable) { out.push("</tbody></table></div>"); inTable = false; }
+          const level = headingMatch[1].length;
+          out.push(`<h${level}>${formatInline(headingMatch[2])}</h${level}>`);
+          continue;
+        }
+
+        // Blockquotes
+        if (line.startsWith("&gt;")) {
+          if (inList) { out.push(`</${listType}>`); inList = false; }
+          if (inTable) { out.push("</tbody></table></div>"); inTable = false; }
+          let quoteContent = line.replace(/^&gt;\s?/, "");
+          out.push(`<blockquote><p>${formatInline(quoteContent)}</p></blockquote>`);
+          continue;
+        }
+
+        // Tables: simple detection via |
+        if (line.trim().startsWith("|") && line.trim().endsWith("|")) {
+          if (inList) { out.push(`</${listType}>`); inList = false; }
+          const cells = line.split("|").slice(1, -1).map(c => c.trim());
+          
+          if (!inTable) {
+            inTable = true;
+            // First table row is header
+            out.push('<div class="table-wrapper"><table><thead><tr>');
+            cells.forEach(c => out.push(`<th>${formatInline(c)}</th>`));
+            out.push('</tr></thead><tbody>');
+            // Check if next row is separator
+            if (i + 1 < lines.length && /^\|(\s*:?-+:?\s*\|)+$/.test(lines[i + 1].trim())) {
+              i++; // Skip delimiter line
+            }
+          } else {
+            out.push('<tr>');
+            cells.forEach(c => out.push(`<td>${formatInline(c)}</td>`));
+            out.push('</tr>');
+          }
+          continue;
+        } else if (inTable) {
+          out.push('</tbody></table></div>');
+          inTable = false;
+        }
+
+        // Unordered Lists
+        const ulMatch = line.match(/^(\s*)[-*+]\s+(.*)$/);
+        if (ulMatch) {
+          if (!inList || listType !== "ul") {
+            if (inList) out.push(`</${listType}>`);
+            out.push('<ul>');
+            inList = true;
+            listType = "ul";
+          }
+          let item = ulMatch[2];
+          // Check task list
+          if (item.startsWith("[ ] ") || item.startsWith("&lt;input type=&quot;checkbox&quot;&gt;")) {
+            item = '<input type="checkbox" disabled> ' + item.replace(/^(\[ \]|&lt;input.*?&gt;)\s*/, "");
+          } else if (item.startsWith("[x] ") || item.startsWith("[X] ")) {
+            item = '<input type="checkbox" checked disabled> ' + item.replace(/^\[[xX]\]\s*/, "");
+          }
+          out.push(`<li>${formatInline(item)}</li>`);
+          continue;
+        }
+
+        // Ordered Lists
+        const olMatch = line.match(/^(\s*)\d+\.\s+(.*)$/);
+        if (olMatch) {
+          if (!inList || listType !== "ol") {
+            if (inList) out.push(`</${listType}>`);
+            out.push('<ol>');
+            inList = true;
+            listType = "ol";
+          }
+          out.push(`<li>${formatInline(olMatch[2])}</li>`);
+          continue;
+        }
+
+        // End of list
+        if (inList && line.trim() === "") {
+          out.push(`</${listType}>`);
+          inList = false;
+        }
+
+        // Empty lines
+        if (line.trim() === "") {
+          continue;
+        }
+
+        // Regular paragraphs
+        out.push(`<p>${formatInline(line)}</p>`);
+      }
+
+      if (inList) out.push(`</${listType}>`);
+      if (inTable) out.push("</tbody></table></div>");
+
+      let rendered = out.join("\n");
+
+      // Restore inline code
+      rendered = rendered.replace(/INLINECODE_(\d+)/g, (match, idx) => {
+        return `<code>${inlineCodes[idx]}</code>`;
+      });
+
+      // Restore code blocks with copy action
+      rendered = rendered.replace(/CODEBLOCK_(\d+)/g, (match, idx) => {
+        const item = codeBlocks[idx];
+        const rawCode = item.code.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&");
+        const encoded = encodeURIComponent(rawCode);
+        return `<div class="code-block-wrapper">
+          <div class="code-block-header">
+            <span>${item.lang}</span>
+            <button class="code-copy-btn" onclick="copyCode(this, '${encoded}')">Copy</button>
+          </div>
+          <pre><code>${item.code}</code></pre>
+        </div>`;
+      });
+
+      return rendered;
+    }
+
+    function formatInline(text) {
+      if (!text) return "";
+      return text
+        // Bold
+        .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+        .replace(/__([^_]+)__/g, "<strong>$1</strong>")
+        // Italic
+        .replace(/\*([^*]+)\*/g, "<em>$1</em>")
+        .replace(/_([^_]+)_/g, "<em>$1</em>")
+        // Links
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    }
+
+    function copyCode(btn, encoded) {
+      AudioEngine.click();
+      const code = decodeURIComponent(encoded);
+      navigator.clipboard.writeText(code).then(() => {
+        const orig = btn.textContent;
+        btn.textContent = "Copied!";
+        btn.style.color = "var(--accent-emerald)";
+        setTimeout(() => {
+          btn.textContent = orig;
+          btn.style.color = "";
+        }, 1800);
+      });
+    }
+
+    async function loadDocument() {
+      const params = new URLSearchParams(window.location.search);
+      const docPath = params.get("doc");
+      const title = params.get("title");
+      const icon = params.get("icon");
+      const badge = params.get("badge");
+
+      const headerTitle = document.getElementById("header-title");
+      const headerIcon = document.getElementById("header-icon");
+      const headerBadge = document.getElementById("header-badge");
+      const content = document.getElementById("content");
+
+      if (icon) headerIcon.textContent = icon;
+      if (title) headerTitle.textContent = title;
+      if (badge) headerBadge.textContent = badge;
+
+      if (!docPath) {
+        content.innerHTML = `
+          <div class="doc-error">
+            <h3>⚠️ No Document Specified</h3>
+            <p>Please provide a document path using the <code>?doc=...</code> query parameter.</p>
+          </div>
+        `;
+        return;
+      }
+
+      content.innerHTML = `
+        <div class="doc-loading">
+          <div class="spinner"></div>
+          <div>Loading ${escapeHtml(docPath)}...</div>
+        </div>
+      `;
+
+      try {
+        const res = await fetch(docPath);
+        if (!res.ok) {
+          throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+        }
+        const markdown = await res.text();
+        
+        // Auto-extract first # Heading if title not provided
+        if (!title) {
+          const match = markdown.match(/^#\s+(.+)$/m);
+          if (match) {
+            headerTitle.textContent = match[1].replace(/[^\w\s\u0600-\u06FF•—–-]/g, "").trim();
+          }
+        }
+
+        content.innerHTML = parseMarkdown(markdown);
+      } catch (err) {
+        console.error("Failed to load document:", err);
+        content.innerHTML = `
+          <div class="doc-error">
+            <h3>⚠️ Unable to Load Document</h3>
+            <p><strong>Path:</strong> <code>${escapeHtml(docPath)}</code></p>
+            <p><strong>Reason:</strong> ${escapeHtml(err.message)}</p>
+            <p style="margin-top: 10px; font-size: 13px; color: var(--text-secondary);">
+              If running directly via <code>file://</code> protocol, browser CORS may restrict local file reads.
+              Launch via <code>python server.py</code> or visit the live cloud portal.
+            </p>
+          </div>
+        `;
+      }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return "";
+      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      loadDocument();
+    });
+  </script>
+</body>
+</html>
