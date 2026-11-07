@@ -126,7 +126,7 @@
       if (btn) {
         const starred = list.includes(serial);
         btn.classList.toggle("starred", starred);
-        btn.innerHTML = starred ? `<span>⭐ Starred</span>` : `<span>☆ Star</span>`;
+        btn.innerHTML = `<span>${starred ? '⭐' : '☆'}</span>`;
       }
 
       if (activeQuickFilter === "starred") {
@@ -225,66 +225,63 @@
             <span class="dua-speaker-tag">${escapeHtml(d.speaker_ur)}</span>
           </div>
 
-          <div class="dua-micro-actions">
-            <button class="dua-micro-btn play-btn" onclick="DuasEngine.playDua(${d.serial})" title="Listen to Mishary Alafasy Recitation">
-              <span>${isPlaying ? '⏸️ Pause' : '▶ Recite'}</span>
+          <!-- Minimal Header Actions: Discreet Recite & Bookmark -->
+          <div class="dua-header-actions">
+            <button type="button" class="dua-header-btn play-btn ${isPlaying ? 'playing' : ''}" onclick="DuasEngine.playDua(${d.serial})" title="Listen to Mishary Alafasy Recitation" aria-label="Play Recitation">
+              <span>${isPlaying ? '⏸️' : '▶'}</span>
+              <span class="btn-label-text">${isPlaying ? 'Pause' : 'Recite'}</span>
             </button>
-            <button class="dua-micro-btn analyzer-btn" onclick="DuasEngine.jumpToQuran(${d.surah_id}, ${d.ayah_start})" title="Open in Quran Deep Ayah Analyzer">
-              <span>🔍 Open in Quran ↗</span>
-            </button>
-            <button class="dua-micro-btn star-btn ${isStarred ? 'starred' : ''}" data-serial="${d.serial}" onclick="DuasEngine.toggleStar(${d.serial})" title="Bookmark Dua">
-              <span>${isStarred ? '⭐ Starred' : '☆ Star'}</span>
-            </button>
-            <button class="dua-micro-btn copy-btn" onclick="DuasEngine.copyDua(${d.serial})" title="Copy Full Dua with Exegesis">
-              <span>📋 Copy</span>
-            </button>
-            <button class="dua-micro-btn whatsapp-btn" onclick="DuasEngine.shareWhatsApp(${d.serial})" title="Share on WhatsApp">
-              <span>💬 WhatsApp</span>
+            <button type="button" class="dua-header-btn star-btn ${isStarred ? 'starred' : ''}" data-serial="${d.serial}" onclick="DuasEngine.toggleStar(${d.serial})" title="Bookmark Dua" aria-label="Bookmark">
+              <span>${isStarred ? '⭐' : '☆'}</span>
             </button>
           </div>
         </header>
 
-        <!-- Tier 1: Scriptural Core -->
+        <!-- Tier 1: Scriptural Core (HERO: Placed Directly Below Header) -->
         <div class="dua-arabic" dir="rtl">
           ${escapeHtml(d.arabic)} <span class="dua-ayah-num">${d.ayah_coordinate}</span>
         </div>
 
-        <!-- In-Card Interactive Translation Switcher (Finding F-09) -->
-        <div class="dua-trans-pill-group" role="tablist" aria-label="Translation Selector">
-          <button type="button" class="dua-trans-pill ${cardTrans === 'iman' ? 'active' : ''}" data-trans="iman" onclick="DuasEngine.switchCardTranslation(${d.serial}, 'iman')" title="امام احمد رضا خان علیہ الرحمہ">
-            <span>👑 کنز الایمان</span>
-          </button>
-          <button type="button" class="dua-trans-pill ${cardTrans === 'irfan' ? 'active' : ''}" data-trans="irfan" onclick="DuasEngine.switchCardTranslation(${d.serial}, 'irfan')" title="مفتی محمد قاسم قادری">
-            <span>📖 کنز العرفان</span>
-          </button>
-          <button type="button" class="dua-trans-pill ${cardTrans === 'both' ? 'active' : ''}" data-trans="both" onclick="DuasEngine.switchCardTranslation(${d.serial}, 'both')" title="دونوں اردو تراجم ساتھ ساتھ">
-            <span>⊞ دونوں تراجم</span>
-          </button>
-          <button type="button" class="dua-trans-pill ${cardTrans === 'english' ? 'active' : ''}" data-trans="english" onclick="DuasEngine.switchCardTranslation(${d.serial}, 'english')" title="English Translation">
-            <span>🌐 English</span>
-          </button>
-        </div>
-
-        <!-- High-Density Dual Translation Grid -->
-        <div class="dua-tarjuma-grid">
-          <div class="dua-tarjuma-pane iman">
-            <div class="dua-tarjuma-label">
-              <span>👑 کنز الایمان (امام احمد رضا خان علیہ الرحمہ)</span>
-            </div>
-            <div class="dua-tarjuma-text">${escapeHtml(d.urdu_kanzul_iman)}</div>
+        <!-- Integrated Translation Container with Sleek Segmented Switcher Header -->
+        <div class="dua-translation-container">
+          <div class="dua-trans-segmented-bar" role="tablist" aria-label="Translation Selector">
+            <button type="button" class="dua-segment-btn ${cardTrans === 'iman' ? 'active' : ''}" data-trans="iman" onclick="DuasEngine.switchCardTranslation(${d.serial}, 'iman')" title="امام احمد رضا خان علیہ الرحمہ">
+              <span>👑 ایمان</span>
+            </button>
+            <button type="button" class="dua-segment-btn ${cardTrans === 'irfan' ? 'active' : ''}" data-trans="irfan" onclick="DuasEngine.switchCardTranslation(${d.serial}, 'irfan')" title="مفتی محمد قاسم قادری">
+              <span>📖 عرفان</span>
+            </button>
+            <button type="button" class="dua-segment-btn ${cardTrans === 'both' ? 'active' : ''}" data-trans="both" onclick="DuasEngine.switchCardTranslation(${d.serial}, 'both')" title="دونوں اردو تراجم ساتھ ساتھ">
+              <span>⊞ دونوں</span>
+            </button>
+            <button type="button" class="dua-segment-btn ${cardTrans === 'english' ? 'active' : ''}" data-trans="english" onclick="DuasEngine.switchCardTranslation(${d.serial}, 'english')" title="English Translation">
+              <span>🌐 EN</span>
+            </button>
           </div>
 
-          <div class="dua-tarjuma-pane irfan">
-            <div class="dua-tarjuma-label">
-              <span>📖 کنز العرفان (مفتی محمد قاسم قادری)</span>
-            </div>
-            <div class="dua-tarjuma-text">${escapeHtml(d.urdu_kanzul_irfan)}</div>
-          </div>
-        </div>
+          <div class="dua-translation-body">
+            <!-- High-Density Dual Translation Grid -->
+            <div class="dua-tarjuma-grid">
+              <div class="dua-tarjuma-pane iman">
+                <div class="dua-tarjuma-label">
+                  <span>👑 کنز الایمان (امام احمد رضا خان علیہ الرحمہ)</span>
+                </div>
+                <div class="dua-tarjuma-text">${escapeHtml(d.urdu_kanzul_iman)}</div>
+              </div>
 
-        <!-- English Translation -->
-        <div class="dua-english" dir="ltr">
-          ${escapeHtml(d.english)}
+              <div class="dua-tarjuma-pane irfan">
+                <div class="dua-tarjuma-label">
+                  <span>📖 کنز العرفان (مفتی محمد قاسم قادری)</span>
+                </div>
+                <div class="dua-tarjuma-text">${escapeHtml(d.urdu_kanzul_irfan)}</div>
+              </div>
+            </div>
+
+            <!-- English Translation -->
+            <div class="dua-english" dir="ltr">
+              ${escapeHtml(d.english)}
+            </div>
+          </div>
         </div>
 
         <!-- 1-Tap Expandable Context & Exegesis Drawer -->
@@ -333,6 +330,19 @@
             </div>
           </div>
         </div>
+
+        <!-- Discreet Card Footer Action Bar (Zero visual pollution above scripture) -->
+        <footer class="dua-card-footer">
+          <button type="button" class="dua-footer-btn analyzer-btn" onclick="DuasEngine.jumpToQuran(${d.surah_id}, ${d.ayah_start})" title="Open in Quran Deep Ayah Analyzer">
+            <span>🔍 Open in Quran ↗</span>
+          </button>
+          <button type="button" class="dua-footer-btn copy-btn" onclick="DuasEngine.copyDua(${d.serial})" title="Copy Full Dua with Exegesis">
+            <span>📋 Copy</span>
+          </button>
+          <button type="button" class="dua-footer-btn whatsapp-btn" onclick="DuasEngine.shareWhatsApp(${d.serial})" title="Share on WhatsApp">
+            <span>💬 WhatsApp</span>
+          </button>
+        </footer>
       </article>
     `;
   }
@@ -580,8 +590,14 @@
       const ser = parseInt(c.getAttribute("data-serial"), 10);
       const isPlay = ser === currentlyPlayingSerial;
       c.classList.toggle("playing-now", isPlay);
-      const playBtn = c.querySelector(".play-btn span");
-      if (playBtn) playBtn.textContent = isPlay ? "⏸️ Pause" : "▶ Recite";
+      const playBtn = c.querySelector(".play-btn");
+      if (playBtn) {
+        playBtn.classList.toggle("playing", isPlay);
+        const iconSpan = playBtn.querySelector("span:first-child");
+        if (iconSpan) iconSpan.textContent = isPlay ? "⏸️" : "▶";
+        const textSpan = playBtn.querySelector(".btn-label-text");
+        if (textSpan) textSpan.textContent = isPlay ? "Pause" : "Recite";
+      }
     });
   }
 
@@ -719,8 +735,8 @@ ${d.urdu_kanzul_irfan}
     const card = document.getElementById(`dua-card-${serial}`);
     if (card) {
       card.setAttribute("data-active-trans", transMode);
-      const pills = card.querySelectorAll(".dua-trans-pill");
-      pills.forEach(p => {
+      const segments = card.querySelectorAll(".dua-segment-btn");
+      segments.forEach(p => {
         p.classList.toggle("active", p.getAttribute("data-trans") === transMode);
       });
     }

@@ -363,23 +363,86 @@
 }
 
 /* ==========================================================================
-   IN-CARD TRANSLATION SWITCHER & 1-TAP PROGRESSIVE DRAWER
+   REFINED SACRED HIERARCHY: HEADER ACTIONS, SEGMENTED SWITCHER & FOOTER
    ========================================================================== */
-.dua-trans-pill-group {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin: 6px 0 8px 0;
-  flex-wrap: wrap;
-}
 
-.dua-trans-pill {
+/* Header Minimal Actions */
+.dua-header-actions {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  padding: 4px 11px;
-  background: rgba(255, 255, 255, 0.04);
+  gap: 6px;
+}
+
+.dua-header-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 32px;
+  padding: 3px 9px;
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  color: #cbd5e1;
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.dua-header-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.dua-header-btn.play-btn {
+  color: var(--dua-gold);
+  border-color: rgba(251, 191, 36, 0.35);
+  background: rgba(251, 191, 36, 0.08);
+}
+
+.dua-header-btn.play-btn.playing {
+  background: var(--dua-gold);
+  color: #06080e;
+  font-weight: 700;
+  box-shadow: 0 0 10px var(--dua-gold-glow);
+}
+
+.dua-header-btn.star-btn.starred {
+  color: var(--dua-gold);
+  border-color: var(--dua-gold);
+  background: rgba(251, 191, 36, 0.15);
+}
+
+/* Unified Segmented Translation Container */
+.dua-translation-container {
+  background: rgba(6, 8, 14, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 6px 0;
+}
+
+.dua-trans-segmented-bar {
+  display: flex;
+  align-items: center;
+  background: rgba(15, 23, 42, 0.7);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 3px;
+  gap: 3px;
+}
+
+.dua-segment-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 32px;
+  padding: 4px 6px;
+  background: transparent;
+  border: none;
   border-radius: 6px;
   color: #94a3b8;
   font-size: 0.78rem;
@@ -388,37 +451,38 @@
   transition: all 0.15s ease;
   user-select: none;
   touch-action: manipulation;
+  white-space: nowrap;
 }
 
-.dua-trans-pill:hover {
+.dua-segment-btn:hover {
   color: #f8fafc;
-  border-color: rgba(255, 255, 255, 0.25);
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.05);
 }
 
-.dua-trans-pill.active {
-  background: rgba(251, 191, 36, 0.16);
-  border-color: var(--dua-gold);
+.dua-segment-btn.active {
+  background: rgba(251, 191, 36, 0.18);
   color: var(--dua-gold);
   font-weight: 700;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
 }
 
-.dua-trans-pill[data-trans="irfan"].active {
-  background: rgba(56, 189, 248, 0.16);
-  border-color: var(--dua-cyan);
+.dua-segment-btn[data-trans="irfan"].active {
+  background: rgba(56, 189, 248, 0.18);
   color: var(--dua-cyan);
 }
 
-.dua-trans-pill[data-trans="both"].active {
-  background: rgba(16, 185, 129, 0.16);
-  border-color: var(--dua-emerald);
+.dua-segment-btn[data-trans="both"].active {
+  background: rgba(16, 185, 129, 0.18);
   color: var(--dua-emerald);
 }
 
-.dua-trans-pill[data-trans="english"].active {
+.dua-segment-btn[data-trans="english"].active {
   background: rgba(148, 163, 184, 0.18);
-  border-color: #94a3b8;
   color: #f8fafc;
+}
+
+.dua-translation-body {
+  padding: 10px 12px;
 }
 
 /* Progressive translation visibility according to active selection */
@@ -457,17 +521,17 @@
 /* 1-Tap Expandable Drawer for 3 Scholarly Tiers */
 .dua-drawer-trigger {
   width: 100%;
-  min-height: 42px;
+  min-height: 38px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  padding: 8px 14px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px dashed rgba(255, 255, 255, 0.14);
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px dashed rgba(255, 255, 255, 0.12);
   border-radius: 8px;
   color: #cbd5e1;
-  font-size: 0.82rem;
+  font-size: 0.80rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -477,7 +541,7 @@
 }
 
 .dua-drawer-trigger:hover {
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.06);
   border-color: rgba(251, 191, 36, 0.35);
   color: #f8fafc;
 }
@@ -513,6 +577,59 @@
 
 .dua-card.mode-study .dua-drawer-trigger .drawer-chevron {
   transform: rotate(180deg);
+}
+
+/* Discreet Card Footer Action Bar */
+.dua-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 8px;
+  margin-top: 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.dua-footer-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 38px;
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #cbd5e1;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.dua-footer-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.dua-footer-btn.analyzer-btn {
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.25);
+}
+.dua-footer-btn.analyzer-btn:hover {
+  background: rgba(56, 189, 248, 0.12);
+}
+
+.dua-footer-btn.whatsapp-btn {
+  color: #34d399;
+  border-color: rgba(52, 211, 153, 0.25);
+}
+.dua-footer-btn.whatsapp-btn:hover {
+  background: rgba(52, 211, 153, 0.12);
 }
 
 /* === HIGH-DENSITY DUA CARD === */
@@ -1058,25 +1175,25 @@
     user-select: none;
   }
 
-  /* Card Micro Action Buttons Grid (>= 48px) */
-  .dua-micro-actions {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 8px;
+  /* Footer Action Buttons Mobile Touch Target */
+  .dua-card-footer {
+    gap: 6px;
   }
 
-  .dua-micro-btn {
-    min-height: 48px !important;
-    padding: 8px 14px !important;
-    font-size: 0.84rem !important;
-    flex: 1 1 calc(50% - 8px);
-    justify-content: center !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    touch-action: manipulation;
-    user-select: none;
+  .dua-footer-btn {
+    min-height: 42px !important;
+    font-size: 0.80rem !important;
+    padding: 6px 8px !important;
+  }
+
+  .dua-header-btn {
+    min-height: 38px !important;
+    padding: 4px 10px !important;
+  }
+
+  .dua-segment-btn {
+    min-height: 36px !important;
+    font-size: 0.78rem !important;
   }
 
   /* Exegesis & Tafsir Expand Toggle (>= 48px) */
