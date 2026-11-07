@@ -9,7 +9,7 @@
  * ============================================================================
  */
 
-const CACHE_NAME = 'quran-deep-analyzer-v2.1.1';
+const CACHE_NAME = 'quran-deep-analyzer-v2.1.3';
 
 const PRECACHE_ASSETS = [
   './',
@@ -38,6 +38,10 @@ const PRECACHE_ASSETS = [
   './data/quran_core_data.js',
   './data/quran_commands_data.js',
   './data/quran_manners_data.js',
+  './duas.html',
+  './css/duas.css',
+  './js/duas-engine.js',
+  './data/quran_duas_data.js',
   './icons/icon.svg',
   './icons/icon-192.png',
   './icons/icon-512.png'

@@ -818,6 +818,8 @@
   text-align: center;
   direction: ltr !important;
   unicode-bidi: isolate;
+  white-space: nowrap !important;
+  word-break: keep-all !important;
   user-select: none;
   box-sizing: border-box;
   flex-shrink: 0;
