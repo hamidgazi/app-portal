@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>🤲 Quranic Duas Encyclopedia • دعاؤں کا قرآنی انسائیکلوپیڈیا</title>
+  <meta name="description" content="The 78 Canonical Quranic Supplications (40 Rabbana, Prophetic & Believers' Duas) with Occasions (کب پڑھیں), Purposes (کس مقصد کے لیے), and Reasons for Revelation (شانِ نزول).">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤲</text></svg>">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/commands-manners.css">
+  <link rel="stylesheet" href="css/duas.css">
+  <style>
+    body {
+      background: radial-gradient(circle at 50% 0%, #17153a 0%, #06080e 75%);
+      color: #f8fafc;
+      font-family: var(--font-ui), sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      padding-bottom: 80px;
+      direction: rtl;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    .duas-app-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(6, 8, 14, 0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 10px 16px;
+    }
+
+    .duas-header-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .duas-header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .duas-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .duas-logo-badge {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      box-shadow: 0 0 15px rgba(251, 191, 36, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .duas-title-group h1 {
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #f8fafc;
+      letter-spacing: -0.3px;
+    }
+
+    .duas-title-group p {
+      margin: 2px 0 0 0;
+      font-size: 0.82rem;
+      color: #94a3b8;
+    }
+
+    .duas-back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: #38bdf8;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      transition: all 0.2s ease;
+    }
+
+    .duas-back-btn:hover {
+      background: rgba(56, 189, 248, 0.22);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- App Header -->
+  <header class="duas-app-header">
+    <div class="duas-header-inner">
+      <div class="duas-header-top">
+        <a href="duas.html" class="duas-brand">
+          <div class="duas-logo-badge">🤲</div>
+          <div class="duas-title-group">
+            <h1>دعاؤں کا قرآنی انسائیکلوپیڈیا • Quranic Duas Encyclopedia</h1>
+            <p>78 Canonical Quranic Supplications with Occasions, Spiritual Virtues & Asbab al-Nuzul</p>
+          </div>
+        </a>
+
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <a href="index.html#ayahs" class="duas-back-btn">
+            <span>📖 Deep Quran Analyzer</span>
+            <span>↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Workspace -->
+  <main class="duas-main-container">
+    
+    <!-- Search & Filter Controls -->
+    <div class="duas-toolbar-wrap">
+      <div class="duas-search-row">
+        <div class="duas-search-input-wrap">
+          <span class="duas-search-icon">🔍</span>
+          <input type="text" id="duas-search-input" class="duas-search-input" placeholder="Search Duas by topic, occasion, prophet or verse (e.g. shifa, rizq, aulad, parents, rabbana, 2:201)..." autocomplete="off">
+          <button type="button" id="duas-search-clear" class="duas-search-clear" title="Clear Search">✕</button>
+        </div>
+        <div id="duas-count-badge" class="duas-badge-counter">78 Duas (دعائیں)</div>
+      </div>
+
+      <!-- Quick Type Filter Strip -->
+      <div class="duas-filter-strip">
+        <button type="button" class="duas-pill-btn active" data-filter="all">
+          <span>سب دعائیں (All 78)</span>
+        </button>
+        <button type="button" class="duas-pill-btn" data-filter="40_rabbana">
+          <span>۴۰ ربنا دعائیں (40 Rabbana)</span>
+          <span class="pill-count">40</span>
+        </button>
+        <button type="button" class="duas-pill-btn" data-filter="rabbi">
+          <span>ربِّ ندائیں (Rabbi Invocations)</span>
+          <span class="pill-count">24</span>
+        </button>
+        <button type="button" class="duas-pill-btn" data-filter="prophet">
+          <span>انبیاء علیہم السلام کی دعائیں</span>
+        </button>
+        <button type="button" class="duas-pill-btn" data-filter="believer">
+          <span>مؤمنین و صالحین کی دعائیں</span>
+        </button>
+        <button type="button" class="duas-pill-btn" data-filter="starred">
+          <span>⭐ پسندیدہ (Starred)</span>
+        </button>
+      </div>
+
+      <!-- 9 Life Spheres / Categories -->
+      <div class="duas-category-strip">
+        <button type="button" class="duas-cat-chip active" data-cat="all">سب شعبہ جات (All Needs)</button>
+        <button type="button" class="duas-cat-chip" data-cat="forgiveness">🕊️ مغفرت و توبہ</button>
+        <button type="button" class="duas-cat-chip" data-cat="guidance">🧭 ہدایت و استقامت</button>
+        <button type="button" class="duas-cat-chip" data-cat="family">👨‍👩‍👧‍👦 اہل و عیال و والدین</button>
+        <button type="button" class="duas-cat-chip" data-cat="healing">🩺 شفاء و کشائشِ مصائب</button>
+        <button type="button" class="duas-cat-chip" data-cat="sustenance">🌾 رزقِ حلال و برکت</button>
+        <button type="button" class="duas-cat-chip" data-cat="protection">🛡️ حفاظت و نصرت</button>
+        <button type="button" class="duas-cat-chip" data-cat="knowledge">📖 علم، حکمت و فصاحت</button>
+        <button type="button" class="duas-cat-chip" data-cat="good_ending">🌅 حسنِ خاتمہ و نجات</button>
+        <button type="button" class="duas-cat-chip" data-cat="praise">✨ حمد و شکرِ الٰہی</button>
+      </div>
+
+      <!-- Prophet Filter Bar -->
+      <div class="duas-prophet-bar">
+        <span style="color: #94a3b8; font-weight: 700;">انبیاء کرام:</span>
+        <button type="button" class="duas-prophet-chip active" data-prophet="all">سب انبیاء</button>
+        <button type="button" class="duas-prophet-chip" data-prophet="adam">آدم علیہ السلام</button>
+        <button type="button" class="duas-prophet-chip" data-prophet="nuh">نوح علیہ السلام</button>
+        <button type="button" class="duas-prophet-chip" data-prophet="ibrahim">ابراہیم علیہ السلام</button>
+        <button type="button" class="duas-prophet-chip" data-prophet="yusuf">یوسف علیہ السلام</button>
+        <button type="button" class="duas-prophet-chip" data-prophet="musa">موسیٰ علیہ السلام</button>
+        <button type="button" class="duas-prophet-chip" data-prophet="yunus">یونس علیہ السلام</button>
+        <button type="button" class="duas-prophet-chip" data-prophet="ayyub">ایوب علیہ السلام</button>
+        <button type="button" class="duas-prophet-chip" data-prophet="zakariya">زکریا علیہ السلام</button>
+        <button type="button" class="duas-prophet-chip" data-prophet="suleiman">سلیمان علیہ السلام</button>
+        <button type="button" class="duas-prophet-chip" data-prophet="isa">عیسیٰ علیہ السلام</button>
+        <button type="button" class="duas-prophet-chip" data-prophet="muhammad">نبی کریم ﷺ</button>
+      </div>
+    </div>
+
+    <!-- Mount Container for Dua Cards -->
+    <section id="duas-list-mount" class="duas-list-container"></section>
+    <div id="duas-scroll-sentinel" style="height: 40px; width: 100%;"></div>
+
+  </main>
+
+  <!-- Audio Mini Dock -->
+  <aside id="duas-audio-dock" class="dua-audio-dock">
+    <div class="dua-dock-meta">
+      <span style="font-size: 1.4rem;">🎙️</span>
+      <div>
+        <div class="dock-dua-title" style="font-weight: 700; color: #fbbf24; font-size: 0.90rem;">تلاوت قرآنِ کریم</div>
+        <div style="font-size: 0.75rem; color: #94a3b8;">قاری مشاری راشد العفاسی (Mishary Rashid Alafasy)</div>
+      </div>
+    </div>
+
+    <div class="dua-dock-controls">
+      <button type="button" class="dua-dock-btn main-play" onclick="DuasEngine.playDua(DuasEngine.currentlyPlayingSerial)" title="Play / Pause">⏸️</button>
+      <button type="button" class="dua-dock-btn" onclick="document.getElementById('duas-audio-dock').classList.remove('show');" title="Close Mini Player">✕</button>
+    </div>
+  </aside>
+
+  <!-- Load Assets & Engine -->
+  <script src="data/quran_duas_data.js"></script>
+  <script src="js/duas-engine.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (window.DuasEngine) {
+        window.DuasEngine.init();
+      }
+    });
+  </script>
+</body>
+</html>
