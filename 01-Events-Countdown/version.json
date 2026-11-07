@@ -1,6 +1,6 @@
 {
-  "version": "1.6.1",
+  "version": "1.6.2",
   "name": "Events Countdown",
-  "updated": "2026-10-26",
-  "changelog": "v1.6.1: Synchronized More sheet version display to match home screen. Completely removed family tags, relationship labels, and stars/zodiac information across cards, hero spotlight, detail sheet, and forms for a pristine, clean date-focused countdown."
+  "updated": "2026-11-07",
+  "changelog": "v1.6.2: Fixed 24-hour countdown ticker offset bug by targeting start-of-day (T00:00:00). When an event is tomorrow, ticker now cleanly displays hours remaining (e.g. '11h 38m 11s') without an extra day. Once celebration arrives, ticker proudly displays '🎉 TODAY!'. Also added unconditional cleanup of lingering 'Family Member' notes and synchronized detail modal live countdown."
 }

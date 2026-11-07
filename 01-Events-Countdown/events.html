@@ -9,14 +9,14 @@
     <meta name="theme-color" content="#0d1117">
     <title>Events Countdown</title>
     <!-- Mobile Home Screen Icons & Favicon -->
-    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-app-192.png?v=1.6.1">
-    <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-app-512.png?v=1.6.1">
-    <link rel="icon" type="image/svg+xml" href="icons/icon.svg?v=1.6.1">
-    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png?v=1.6.1">
-    <link rel="apple-touch-icon" sizes="512x512" href="icons/icon-app-512.png?v=1.6.1">
-    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=1.6.1">
-    <link rel="shortcut icon" href="icons/icon-app-192.png?v=1.6.1">
-    <link rel="manifest" href="manifest.json?v=1.6.1">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-app-192.png?v=1.6.2">
+    <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-app-512.png?v=1.6.2">
+    <link rel="icon" type="image/svg+xml" href="icons/icon.svg?v=1.6.2">
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png?v=1.6.2">
+    <link rel="apple-touch-icon" sizes="512x512" href="icons/icon-app-512.png?v=1.6.2">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=1.6.2">
+    <link rel="shortcut icon" href="icons/icon-app-192.png?v=1.6.2">
+    <link rel="manifest" href="manifest.json?v=1.6.2">
     <style>
         /* ============================================
            CSS VARIABLES (Deep OLED Glassmorphic)
@@ -1838,7 +1838,7 @@
 <div id="updateBanner" style="display:none; align-items:center; justify-content:space-between; background:linear-gradient(90deg, #1f6feb, #238636); color:#fff; padding:10px 16px; font-size:13px; font-weight:600; position:sticky; top:0; z-index:999; box-shadow:0 4px 14px rgba(0,0,0,0.5);">
     <div style="display:flex; align-items:center; gap:8px;">
         <span>✨</span>
-        <span>New update available! (<span id="txtNewVersion">v1.6.1</span>)</span>
+        <span>New update available! (<span id="txtNewVersion">v1.6.2</span>)</span>
     </div>
     <button id="btnReloadUpdate" style="background:#fff; color:#0d1117; border:none; padding:6px 12px; border-radius:8px; font-weight:700; font-size:12px; cursor:pointer;">Update Now</button>
 </div>
@@ -2147,7 +2147,7 @@
         </div>
         <input type="file" id="file-import" accept=".json,application/json" style="display:none">
         <div class="more-footer-info">
-            <span>📅 Events Countdown <span class="footer-version-badge" id="more-version-display">v1.6.1</span></span>
+            <span>📅 Events Countdown <span class="footer-version-badge" id="more-version-display">v1.6.2</span></span>
             <span style="opacity:0.6;">• 100% Offline PWA</span>
         </div>
         <button type="button" class="del-cancel" id="more-close" style="width:100%;margin-top:12px">Close</button>
@@ -2194,7 +2194,7 @@
         <div style="font-size:40px; margin-bottom:6px;">🚀</div>
         <h3 style="font-size:18px; margin-bottom:4px; color:#fff;">New Update Available!</h3>
         <p style="font-size:13.5px; color:var(--text-2); margin-bottom:14px;">
-            A newer version <b id="popup-new-version" style="color:#3dd68c;">v1.6.1</b> is ready for you.
+            A newer version <b id="popup-new-version" style="color:#3dd68c;">v1.6.2</b> is ready for you.
         </p>
         <div id="popup-changelog-box" style="background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:10px; padding:12px; font-size:12px; color:var(--text-1); text-align:left; margin-bottom:18px; line-height:1.45;">
             <b style="color:var(--text-3); font-size:11px; text-transform:uppercase;">What's New:</b><br>
@@ -2616,9 +2616,19 @@ function doHaptic(pattern = 10) {
 }
 
 function liveExactTicker(dateStr) {
-    const end = new Date(dateStr + 'T23:59:59');
-    const diff = end - Date.now();
-    if (diff <= 0) return 'Today!';
+    if (!dateStr) return '';
+    const start = new Date(dateStr + 'T00:00:00');
+    const now = Date.now();
+    const diff = start - now;
+
+    if (diff <= 0) {
+        const end = new Date(dateStr + 'T23:59:59');
+        if (now <= end) {
+            return '🎉 TODAY!';
+        }
+        return 'Today!';
+    }
+
     const d = Math.floor(diff / 864e5);
     const h = Math.floor((diff % 864e5) / 36e5);
     const m = Math.floor((diff % 36e5) / 6e4);
@@ -3417,6 +3427,34 @@ function migrateFamilyRoster() {
     } catch (_) {}
 }
 
+function cleanLegacyNotes() {
+    let changed = false;
+    events.forEach(function(e) {
+        if (!e.notes) return;
+        const trimmed = e.notes.trim();
+        if (trimmed === 'Family Member' || trimmed.toLowerCase() === 'family member') {
+            e.notes = '';
+            changed = true;
+        } else if (trimmed.includes('Diamond Jubilee')) {
+            if (e.notes !== 'Diamond Jubilee (60)') {
+                e.notes = 'Diamond Jubilee (60)';
+                changed = true;
+            }
+        } else if (trimmed.includes('55th Milestone')) {
+            if (e.notes !== '55th Milestone') {
+                e.notes = '55th Milestone';
+                changed = true;
+            }
+        } else if (trimmed.includes('30th Milestone')) {
+            if (e.notes !== '30th Milestone upcoming') {
+                e.notes = '30th Milestone upcoming';
+                changed = true;
+            }
+        }
+    });
+    if (changed) save();
+}
+
 function load() {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
@@ -3430,6 +3468,7 @@ function load() {
         save();
     }
     migrateFamilyRoster();
+    cleanLegacyNotes();
     syncToAndroidWidget();
 }
 
@@ -4018,6 +4057,19 @@ function setupLive() {
             }
         }
 
+        // Update live countdown in detail sheet if open
+        const detailSheet = document.getElementById('detail-sheet');
+        const detailTimer = document.getElementById('detail-timer-val');
+        if (detailSheet && detailSheet.classList.contains('open') && detailTimer && currentDetailId) {
+            const dEv = events.find(function(ev) { return ev.id === currentDetailId; });
+            if (dEv) {
+                const targetDate = (dEv.category === 'birthday')
+                    ? (computeBirthdayMetrics(dEv.birthDate || dEv.date).nextDateStr)
+                    : dEv.date;
+                detailTimer.textContent = liveExactTicker(targetDate);
+            }
+        }
+
         // Update live countdown badges for today's events
         events.forEach(function(ev) {
             if (daysLeft(ev.date) === 0) {
@@ -4599,7 +4651,7 @@ render();
 /* =====================================================
    ONLINE AUTO-UPDATE SYSTEM (PWA & Service Worker)
 ===================================================== */
-const CURRENT_APP_VERSION = "1.6.1";
+const CURRENT_APP_VERSION = "1.6.2";
 
 // Display current version across all badges on load
 document.querySelectorAll('.footer-version-badge').forEach(function(b) {
