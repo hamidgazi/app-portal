@@ -1810,7 +1810,7 @@
       const cat = String(app.category || "").toLowerCase();
       const rel = String(app.relPath || "").toLowerCase();
 
-      if (rel.startsWith("01-") || rel.startsWith("02-") || rel.startsWith("03-") || rel.startsWith("04-") || rel.startsWith("05-") || rel.startsWith("06-")) {
+      if (rel.startsWith("01-") || rel.startsWith("02-") || rel.startsWith("03-") || rel.startsWith("04-") || rel.startsWith("05-") || rel.startsWith("06-") || rel.startsWith("22-") || rel.includes("tempo") || cat.includes("productivity") || cat.includes("utilities") || cat.includes("health")) {
         return "web";
       }
       if (rel.startsWith("07-") || rel.startsWith("08-") || rel.startsWith("09-") || rel.startsWith("10-") || rel.startsWith("11-") || cat.includes("islamic")) {
@@ -2143,6 +2143,14 @@
       "naat": ["naat", "kalam", "kalaam", "diwan", "shairi", "hassan", "bareilvi", "poetry"],
       "kalam": ["naat", "kalam", "kalaam", "poetry"],
       "kalaam": ["naat", "kalam", "kalaam"],
+
+      // Tempo / Transport Payment Tracker
+      "tempo": ["tempo", "transport", "freight", "bilty", "khata", "hisaab", "payment", "dispatch"],
+      "transport": ["tempo", "transport", "freight", "bilty", "dispatch"],
+      "bilty": ["tempo", "transport", "bilty", "freight", "slip"],
+      "freight": ["tempo", "transport", "freight", "bilty"],
+      "hisaab": ["tempo", "hisaab", "khata", "ledger", "passbook", "stock", "thela"],
+      "khata": ["tempo", "khata", "hisaab", "passbook", "ledger"],
 
       // POS / Thela
       "thela": ["thela", "stock", "inventory", "pos", "billing", "store", "layman"],

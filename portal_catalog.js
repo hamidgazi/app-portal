@@ -2,7 +2,7 @@
 window.PORTAL_CATALOG = {
   "version": "1.0.0",
   "lastUpdated": "Antigravity Files",
-  "totalApps": 36,
+  "totalApps": 38,
   "categories": [
     "Islamic & Faith",
     "Productivity & Utilities",
@@ -11,29 +11,6 @@ window.PORTAL_CATALOG = {
     "Discovered Tools"
   ],
   "apps": [
-    {
-      "id": "21-Hadith-Sciences-Encyclopedia__web_index_html",
-      "title": "Hadith Sciences Encyclopedia",
-      "category": "Islamic & Faith",
-      "icon": "📜",
-      "badge": "PWA • 12 Chapters",
-      "description": "Comprehensive bilingual mobile reader for the Sciences of Hadith (Ilm al-Hadith). Features live font switcher (Nastaliq/Naskh, Amiri/Readex), reading progress bar, chapter drawer, and offline search.",
-      "tags": [
-        "hadith",
-        "sunnah",
-        "sanad",
-        "islamic",
-        "pwa",
-        "urdu",
-        "arabic",
-        "education",
-        "encyclopedia"
-      ],
-      "primary": true,
-      "relPath": "21-Hadith-Sciences-Encyclopedia/web/index.html",
-      "portalHref": "./21-Hadith-Sciences-Encyclopedia/web/index.html",
-      "serverHref": "./21-Hadith-Sciences-Encyclopedia/web/index.html"
-    },
     {
       "id": "20-Arabic-Mastery__index_html",
       "title": "Arabic Mastery 30",
@@ -466,6 +443,29 @@ window.PORTAL_CATALOG = {
       "serverHref": "./15-Mobile-Phone-Analysis/index.html"
     },
     {
+      "id": "22-Tempo-Payment-Tracker__index_html",
+      "title": "Tempo Hisaab Pro (Transport Khata)",
+      "category": "Productivity & Utilities",
+      "icon": "🚚",
+      "badge": "PWA • Passbook Ledger",
+      "description": "Mobile-first transport freight & tempo khata manager. Evening batch dispatch, morning slip settlement with camera photo attach, running passbook ledger, and A4 print statements.",
+      "tags": [
+        "tempo",
+        "transport",
+        "freight",
+        "khata",
+        "hisaab",
+        "bilty",
+        "payment",
+        "dispatch",
+        "pwa"
+      ],
+      "primary": true,
+      "relPath": "22-Tempo-Payment-Tracker/index.html",
+      "portalHref": "./22-Tempo-Payment-Tracker/index.html",
+      "serverHref": "./22-Tempo-Payment-Tracker/index.html"
+    },
+    {
       "id": "03-Thela-Stock-Manager__index_html",
       "title": "Thela Stock Manager PWA",
       "category": "Productivity & Utilities",
@@ -617,6 +617,22 @@ window.PORTAL_CATALOG = {
       "serverHref": "./19-Dermatology-Health-Guide/index.html"
     },
     {
+      "id": "21-Hadith-Sciences-Encyclopedia__web__index_html",
+      "title": "Hadith Sciences Encyclopedia | موسوعة علوم الحديث",
+      "category": "Discovered Tools",
+      "icon": "📄",
+      "badge": "21-Hadith-Sciences-Encyclopedia",
+      "description": "The Master Encyclopedia of Hadith Sciences - Complete bilingual offline mobile reader with live font controls.",
+      "tags": [
+        "21-hadith-sciences-encyclopedia",
+        "index.html"
+      ],
+      "primary": false,
+      "relPath": "21-Hadith-Sciences-Encyclopedia/web/index.html",
+      "portalHref": "./21-Hadith-Sciences-Encyclopedia/web/index.html",
+      "serverHref": "./21-Hadith-Sciences-Encyclopedia/web/index.html"
+    },
+    {
       "id": "07-Quran-Deep-Analyzer__archive__inspect_dock_html",
       "title": "Inspect Dock",
       "category": "Discovered Tools",
@@ -665,6 +681,38 @@ window.PORTAL_CATALOG = {
       "serverHref": "./04-Pincode-Search/phone_qr.html"
     },
     {
+      "id": "21-Hadith-Sciences-Encyclopedia__typography_studio_html",
+      "title": "Urdu & Arabic Typography Studio | خط شناسی و فانٹ اسٹوڈیو",
+      "category": "Discovered Tools",
+      "icon": "📄",
+      "badge": "21-Hadith-Sciences-Encyclopedia",
+      "description": "Professional Urdu & Arabic Typography Studio - Interactive Font Comparer & Switcher",
+      "tags": [
+        "21-hadith-sciences-encyclopedia",
+        "typography_studio.html"
+      ],
+      "primary": false,
+      "relPath": "21-Hadith-Sciences-Encyclopedia/typography_studio.html",
+      "portalHref": "./21-Hadith-Sciences-Encyclopedia/typography_studio.html",
+      "serverHref": "./21-Hadith-Sciences-Encyclopedia/typography_studio.html"
+    },
+    {
+      "id": "Common-Resources__Typography-Studio__index_html",
+      "title": "Urdu & Arabic Typography Studio | خط شناسی و فانٹ اسٹوڈیو",
+      "category": "Discovered Tools",
+      "icon": "📄",
+      "badge": "Common-Resources",
+      "description": "Professional Urdu & Arabic Typography Studio - Interactive Font Comparer & Switcher",
+      "tags": [
+        "common-resources",
+        "index.html"
+      ],
+      "primary": false,
+      "relPath": "Common-Resources/Typography-Studio/index.html",
+      "portalHref": "./Common-Resources/Typography-Studio/index.html",
+      "serverHref": "./Common-Resources/Typography-Studio/index.html"
+    },
+    {
       "id": "07-Quran-Deep-Analyzer__commands_html",
       "title": "📜 Divine Commands & Injunctions • Quranic Blueprint for Human Living",
       "category": "Discovered Tools",
@@ -679,22 +727,6 @@ window.PORTAL_CATALOG = {
       "relPath": "07-Quran-Deep-Analyzer/commands.html",
       "portalHref": "./07-Quran-Deep-Analyzer/commands.html",
       "serverHref": "./07-Quran-Deep-Analyzer/commands.html"
-    },
-    {
-      "id": "Tempo-Payment-Tracker__index_html",
-      "title": "🚚 Tempo Hisaab",
-      "category": "Discovered Tools",
-      "icon": "📄",
-      "badge": "Tempo-Payment-Tracker",
-      "description": "HTML application located in Tempo-Payment-Tracker.",
-      "tags": [
-        "tempo-payment-tracker",
-        "index.html"
-      ],
-      "primary": false,
-      "relPath": "Tempo-Payment-Tracker/index.html",
-      "portalHref": "./Tempo-Payment-Tracker/index.html",
-      "serverHref": "./Tempo-Payment-Tracker/index.html"
     },
     {
       "id": "07-Quran-Deep-Analyzer__duas_html",

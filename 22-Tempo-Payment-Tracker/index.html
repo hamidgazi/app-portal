@@ -1,0 +1,4253 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#09090b" id="meta-theme-color" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>🚚 Tempo Hisaab Pro</title>
+  <style>
+    /* ═══════════════════════════════════════════
+       THEME ENGINE & DESIGN SYSTEM VARIABLES
+    ═══════════════════════════════════════════ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    :root, [data-theme="dark"] {
+      --accent:         #f97316; /* Vibrant Orange */
+      --accent-glow:    rgba(249, 115, 22, 0.25);
+      --accent-sub:     #fb923c;
+      --bg:             #09090b; /* Deep Zinc OLED */
+      --bg-surface:     #121215;
+      --bg-elevated:    #1c1c21;
+      --card:           #18181b;
+      --card-border:    #27272a;
+      --border-focus:   #ea580c;
+      --text-main:      #fafafa;
+      --text-muted:     #a1a1aa;
+      --text-dim:       #71717a;
+      --green:          #10b981;
+      --green-glow:     rgba(16, 185, 129, 0.2);
+      --red:            #ef4444;
+      --red-glow:       rgba(239, 68, 68, 0.2);
+      --yellow:         #f59e0b;
+      --blue:           #38bdf8;
+      --radius-sm:      8px;
+      --radius-md:      14px;
+      --radius-lg:      20px;
+      --tab-h:          64px;
+      --safe-b:         env(safe-area-inset-bottom, 0px);
+    }
+
+    [data-theme="light"] {
+      --accent:         #ea580c; /* Deep Crisp Amber-Orange */
+      --accent-glow:    rgba(234, 88, 12, 0.18);
+      --accent-sub:     #c2410c;
+      --bg:             #f8fafc; /* High-Visibility Clean White */
+      --bg-surface:     #ffffff;
+      --bg-elevated:    #f1f5f9;
+      --card:           #ffffff;
+      --card-border:    #e2e8f0;
+      --border-focus:   #ea580c;
+      --text-main:      #0f172a; /* Deep Charcoal */
+      --text-muted:     #475569;
+      --text-dim:       #64748b;
+      --green:          #059669;
+      --green-glow:     rgba(5, 150, 105, 0.15);
+      --red:            #dc2626;
+      --red-glow:       rgba(220, 38, 38, 0.15);
+      --yellow:         #d97706;
+      --blue:           #0284c7;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.45;
+      overflow: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    /* ═══════════════════════════════════════════
+       APP SHELL CONTAINER
+    ═══════════════════════════════════════════ */
+    #app-container {
+      display: flex;
+      flex-direction: column;
+      height: 100dvh;
+      max-width: 540px;
+      margin: 0 auto;
+      background: var(--bg);
+      position: relative;
+      box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    }
+
+    /* Top Bar */
+    #top-bar {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--card-border);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      z-index: 20;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-icon {
+      font-size: 1.45rem;
+      filter: drop-shadow(0 2px 6px var(--accent-glow));
+    }
+
+    .brand-text h1 {
+      font-size: 1.12rem;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: -0.3px;
+      line-height: 1.15;
+    }
+
+    .brand-text span {
+      font-size: 0.68rem;
+      color: var(--text-dim);
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .header-btn {
+      background: var(--bg-elevated);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      border-radius: 10px;
+      padding: 8px 10px;
+      min-height: 40px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      touch-action: manipulation;
+      transition: background 0.15s, transform 0.1s;
+    }
+
+    .header-btn:active {
+      transform: scale(0.95);
+      background: var(--card-border);
+    }
+
+    /* Viewport */
+    #screens-viewport {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .screen-panel {
+      position: absolute;
+      inset: 0;
+      overflow-y: auto;
+      overscroll-behavior-y: contain;
+      padding: 14px 14px calc(var(--tab-h) + var(--safe-b) + 20px);
+      display: none;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .screen-panel::-webkit-scrollbar { display: none; }
+    .screen-panel.active { display: block; }
+
+    /* Bottom Tab Bar */
+    #bottom-tabbar {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 540px;
+      height: calc(var(--tab-h) + var(--safe-b));
+      padding-bottom: var(--safe-b);
+      background: var(--bg-surface);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--card-border);
+      display: flex;
+      z-index: 100;
+    }
+
+    .nav-tab {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      color: var(--text-dim);
+      transition: color 0.15s, transform 0.1s;
+      min-height: 52px;
+      touch-action: manipulation;
+    }
+
+    .nav-tab:active { transform: scale(0.94); }
+    .nav-tab.active { color: var(--accent); }
+
+    .nav-tab .tab-ico {
+      font-size: 1.3rem;
+      line-height: 1;
+    }
+
+    .nav-tab .tab-lbl {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    /* Sub-Tab Navigation Bar (Inside Screens) */
+    .sub-tab-group {
+      display: flex;
+      background: var(--bg-elevated);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 3px;
+      margin-bottom: 14px;
+      gap: 3px;
+    }
+
+    .sub-tab-btn {
+      flex: 1;
+      min-height: 44px;
+      border: none;
+      background: transparent;
+      color: var(--text-dim);
+      font-size: 0.82rem;
+      font-weight: 700;
+      border-radius: 9px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      touch-action: manipulation;
+      transition: all 0.15s ease;
+    }
+
+    .sub-tab-btn.active {
+      background: var(--card);
+      color: var(--accent);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      font-weight: 800;
+    }
+
+    /* ═══════════════════════════════════════════
+       CARDS & TILES
+    ═══════════════════════════════════════════ */
+    .glass-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    }
+
+    .card-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .card-title-sm {
+      font-size: 0.76rem;
+      font-weight: 800;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    /* Running Balance Hero Card */
+    .balance-hero {
+      border-radius: var(--radius-lg);
+      padding: 18px 20px;
+      text-align: center;
+      border: 2px solid;
+      margin-bottom: 14px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.2s;
+    }
+
+    .balance-hero.jama {
+      border-color: var(--green);
+      background: linear-gradient(180deg, rgba(16,185,129,0.14) 0%, rgba(16,185,129,0.03) 100%);
+      box-shadow: 0 4px 20px var(--green-glow);
+    }
+
+    .balance-hero.baaki {
+      border-color: var(--red);
+      background: linear-gradient(180deg, rgba(239,68,68,0.14) 0%, rgba(239,68,68,0.03) 100%);
+      box-shadow: 0 4px 20px var(--red-glow);
+    }
+
+    .balance-hero.zero {
+      border-color: var(--card-border);
+      background: var(--bg-surface);
+    }
+
+    .balance-hero .hero-tag {
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .balance-hero.jama .hero-tag { color: var(--green); }
+    .balance-hero.baaki .hero-tag { color: var(--red); }
+    .balance-hero.zero .hero-tag { color: var(--text-dim); }
+
+    .balance-hero .hero-num {
+      font-size: 2.6rem;
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -1px;
+    }
+
+    .balance-hero.jama .hero-num { color: var(--green); }
+    .balance-hero.baaki .hero-num { color: var(--red); }
+    .balance-hero.zero .hero-num { color: var(--text-muted); }
+
+    .balance-hero .hero-sub {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      margin-top: 6px;
+    }
+
+    /* Master Settle Banner */
+    .master-settle-banner {
+      background: linear-gradient(135deg, #c2410c 0%, #ea580c 100%);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 6px 20px rgba(234, 88, 12, 0.35);
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: transform 0.15s;
+    }
+
+    .master-settle-banner:active { transform: scale(0.98); }
+
+    .ms-info h3 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .ms-info p {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.9);
+      margin-top: 2px;
+    }
+
+    .ms-btn {
+      background: #ffffff;
+      color: #c2410c;
+      border: none;
+      font-weight: 800;
+      font-size: 0.85rem;
+      padding: 10px 16px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    /* Summary Matrix */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .stat-tile {
+      background: var(--bg-surface);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-sm);
+      padding: 12px;
+    }
+
+    .stat-tile .st-label {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .stat-tile .st-val {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-top: 4px;
+      line-height: 1.1;
+    }
+
+    .st-val.accent { color: var(--accent); }
+    .st-val.yellow { color: var(--yellow); }
+    .st-val.green  { color: var(--green); }
+
+    /* Section divider */
+    .section-title {
+      font-size: 0.76rem;
+      font-weight: 800;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin: 18px 0 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .section-title span.count-badge {
+      background: var(--bg-elevated);
+      color: var(--text-muted);
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.72rem;
+      border: 1px solid var(--card-border);
+    }
+
+    /* ═══════════════════════════════════════════
+       ENTRY CARDS & LISTS
+    ═══════════════════════════════════════════ */
+    .entry-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      position: relative;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .entry-card.status-pending { border-left: 4px solid var(--yellow); }
+    .entry-card.status-settled { border-left: 4px solid var(--green); }
+    .entry-card.status-unpaid  { border-left: 4px solid var(--blue); }
+
+    .entry-row-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+
+    .transport-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+
+    .destination-sub {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .badge-pill {
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+
+    .badge-pill.pending { background: rgba(245, 158, 11, 0.15); color: var(--yellow); border: 1px solid rgba(245, 158, 11, 0.3); }
+    .badge-pill.settled { background: rgba(16, 185, 129, 0.15); color: var(--green); border: 1px solid rgba(16, 185, 129, 0.3); }
+    .badge-pill.unpaid  { background: rgba(56, 189, 248, 0.15); color: var(--blue); border: 1px solid rgba(56, 189, 248, 0.3); }
+
+    .entry-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+      gap: 6px 12px;
+      padding: 8px 0;
+      border-top: 1px dashed var(--card-border);
+      border-bottom: 1px dashed var(--card-border);
+      margin: 8px 0;
+    }
+
+    .meta-item {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+    }
+
+    .meta-item strong {
+      color: var(--text-main);
+      font-weight: 700;
+      display: block;
+      font-size: 0.85rem;
+    }
+
+    .entry-card-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    /* ═══════════════════════════════════════════
+       INTERACTIVE BUTTONS & HITBOXES (>= 48px)
+    ═══════════════════════════════════════════ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      border: none;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      touch-action: manipulation;
+      min-height: 48px;
+      padding: 12px 18px;
+      transition: all 0.12s ease-in-out;
+      user-select: none;
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+      opacity: 0.9;
+    }
+
+    .btn-accent {
+      background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+      color: #ffffff;
+      box-shadow: 0 4px 16px var(--accent-glow);
+    }
+
+    .btn-green {
+      background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+      color: #ffffff;
+      box-shadow: 0 4px 16px var(--green-glow);
+    }
+
+    .btn-outline {
+      background: var(--bg-surface);
+      color: var(--text-muted);
+      border: 1.5px solid var(--card-border);
+    }
+
+    .btn-outline:active {
+      background: var(--bg-elevated);
+      color: var(--text-main);
+    }
+
+    .btn-ghost-sm {
+      min-height: 40px;
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      background: var(--bg-elevated);
+      color: var(--text-muted);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+    }
+
+    .btn-danger-ghost {
+      color: var(--red);
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.25);
+    }
+
+    /* ═══════════════════════════════════════════
+       FORMS, STEPPERS & INPUTS
+    ═══════════════════════════════════════════ */
+    .field-group {
+      margin-bottom: 14px;
+    }
+
+    .field-label {
+      display: block;
+      font-size: 0.76rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 6px;
+    }
+
+    .field-input {
+      width: 100%;
+      background: var(--bg-surface);
+      border: 1.5px solid var(--card-border);
+      border-radius: 12px;
+      color: var(--text-main);
+      font-size: 1rem;
+      padding: 12px 14px;
+      outline: none;
+      min-height: 48px;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .field-input:focus {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .field-input::placeholder { color: var(--text-dim); }
+
+    /* Quantity Stepper ([-] 1 [+]) */
+    .stepper-container {
+      display: flex;
+      align-items: center;
+      background: var(--bg-surface);
+      border: 1.5px solid var(--card-border);
+      border-radius: 12px;
+      overflow: hidden;
+      min-height: 48px;
+    }
+
+    .stepper-btn {
+      width: 56px;
+      height: 48px;
+      background: var(--bg-elevated);
+      border: none;
+      color: var(--text-main);
+      font-size: 1.4rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      touch-action: manipulation;
+    }
+
+    .stepper-btn:active { background: var(--card-border); }
+
+    .stepper-input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      color: var(--text-main);
+      font-size: 1.25rem;
+      font-weight: 800;
+      text-align: center;
+      outline: none;
+    }
+
+    /* Type Segmented Buttons */
+    .type-segment-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .type-segment-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      background: var(--bg-surface);
+      border: 2px solid var(--card-border);
+      border-radius: 12px;
+      padding: 10px;
+      min-height: 52px;
+      cursor: pointer;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 800;
+      touch-action: manipulation;
+      transition: all 0.15s;
+    }
+
+    .type-segment-btn.active.paid {
+      border-color: var(--accent);
+      background: rgba(249, 115, 22, 0.12);
+      color: var(--accent-sub);
+    }
+
+    .type-segment-btn.active.unpaid {
+      border-color: var(--blue);
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--blue);
+    }
+
+    .type-segment-btn small {
+      font-size: 0.65rem;
+      font-weight: 600;
+      opacity: 0.85;
+    }
+
+    /* Quick Suggestion Chips */
+    .chips-row {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 4px;
+    }
+
+    .chips-row::-webkit-scrollbar { display: none; }
+
+    .chip-tag {
+      background: var(--bg-elevated);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 8px 12px;
+      min-height: 36px;
+      border-radius: 20px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      touch-action: manipulation;
+    }
+
+    .chip-tag:active, .chip-tag.active {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(249, 115, 22, 0.1);
+    }
+
+    /* Quick Cash Presets */
+    .cash-presets {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .cash-preset-btn {
+      flex: 1;
+      min-width: 68px;
+      min-height: 44px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      border-radius: 8px;
+      padding: 8px 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      touch-action: manipulation;
+      text-align: center;
+    }
+
+    .cash-preset-btn:active {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    /* ═══════════════════════════════════════════
+       STEP 1: BATCH DISPATCH CARD STYLES
+    ═══════════════════════════════════════════ */
+    .batch-row-card {
+      background: var(--card);
+      border: 1.5px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .batch-row-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .batch-row-badge {
+      font-size: 0.76rem;
+      font-weight: 800;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    .batch-row-del-btn {
+      background: transparent;
+      border: none;
+      color: var(--red);
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 4px 8px;
+      min-height: 36px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* ═══════════════════════════════════════════
+       STEP 3: PASSBOOK LEDGER STYLES
+    ═══════════════════════════════════════════ */
+    .passbook-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .ledger-entry-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .ledger-row-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .ledger-time {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      font-weight: 600;
+    }
+
+    .ledger-desc {
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .ledger-sub {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .ledger-figures-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      background: var(--bg-surface);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-sm);
+      padding: 8px 10px;
+    }
+
+    .lf-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .lf-label {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .lf-val {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-top: 2px;
+    }
+
+    .lf-val.out { color: var(--accent); }
+    .lf-val.incurred { color: var(--yellow); }
+    .lf-val.jama { color: var(--green); }
+    .lf-val.baaki { color: var(--red); }
+
+    /* ═══════════════════════════════════════════
+       MODALS & BOTTOM SHEETS
+    ═══════════════════════════════════════════ */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(6px);
+      z-index: 300;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      padding-bottom: var(--safe-b);
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .sheet-drawer {
+      background: var(--bg-surface);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      width: 100%;
+      max-width: 540px;
+      max-height: 92dvh;
+      overflow-y: auto;
+      padding: 20px 18px 24px;
+      transform: translateY(100%);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      scrollbar-width: none;
+    }
+
+    .sheet-drawer::-webkit-scrollbar { display: none; }
+    .modal-overlay.open .sheet-drawer { transform: translateY(0); }
+
+    .sheet-pill-handle {
+      width: 44px;
+      height: 4px;
+      background: var(--card-border);
+      border-radius: 2px;
+      margin: 0 auto 16px;
+    }
+
+    .sheet-title-group {
+      margin-bottom: 16px;
+    }
+
+    .sheet-title-group h2 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .sheet-title-group p {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+
+    /* Batch Settlement Slip Table */
+    .batch-item-row {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      margin-bottom: 10px;
+    }
+
+    .batch-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .batch-item-title {
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .batch-inputs-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    /* Live Breakdown Receipt Card */
+    .breakdown-box {
+      background: var(--bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      margin: 14px 0;
+    }
+
+    .bd-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      padding: 5px 0;
+    }
+
+    .bd-row strong {
+      color: var(--text-main);
+      font-weight: 700;
+    }
+
+    .bd-row.divider {
+      border-top: 1px dashed var(--card-border);
+      margin: 8px 0;
+      padding-top: 8px;
+    }
+
+    .bd-row.grand-total {
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: var(--accent-sub);
+    }
+
+    /* Slip Photo Attachment Preview */
+    .photo-thumb-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .photo-thumb-img {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid var(--card-border);
+      cursor: pointer;
+    }
+
+    /* Toast */
+    #action-toast {
+      position: fixed;
+      bottom: calc(var(--tab-h) + var(--safe-b) + 14px);
+      left: 50%;
+      transform: translateX(-50%) translateY(30px);
+      background: var(--bg-surface);
+      border: 1.5px solid var(--accent);
+      color: var(--text-main);
+      font-size: 0.86rem;
+      font-weight: 700;
+      padding: 11px 22px;
+      border-radius: 30px;
+      z-index: 999;
+      opacity: 0;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      white-space: nowrap;
+      text-align: center;
+    }
+
+    #action-toast.visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Empty State */
+    .empty-block {
+      text-align: center;
+      padding: 44px 20px;
+      color: var(--text-dim);
+    }
+
+    .empty-block .empty-emoji {
+      font-size: 3rem;
+      margin-bottom: 8px;
+    }
+
+    .empty-block h4 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .empty-block p {
+      font-size: 0.82rem;
+    }
+
+    /* ═══════════════════════════════════════════
+       COMMERCIAL PRINT STATEMENT (@media print)
+    ═══════════════════════════════════════════ */
+    .statement-table-box {
+      overflow-x: auto;
+      margin: 14px 0;
+    }
+
+    .statement-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.78rem;
+    }
+
+    .statement-table th, .statement-table td {
+      border: 1px solid var(--card-border);
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    .statement-table th {
+      background: var(--bg-elevated);
+      color: var(--text-muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.68rem;
+      letter-spacing: 0.5px;
+    }
+
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-size: 10pt;
+        overflow: visible !important;
+      }
+      #app-container, #top-bar, #bottom-tabbar, #screens-viewport,
+      .modal-overlay:not(#modal-print-statement), #action-toast {
+        display: none !important;
+      }
+      #modal-print-statement {
+        position: static !important;
+        display: block !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        background: #ffffff !important;
+        padding: 0 !important;
+      }
+      #modal-print-statement .sheet-drawer {
+        box-shadow: none !important;
+        border: none !important;
+        max-height: none !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        transform: none !important;
+        overflow: visible !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+      #modal-print-statement * {
+        color: #000000 !important;
+        border-color: #cccccc !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-only {
+        display: block !important;
+      }
+      .statement-table {
+        border-collapse: collapse !important;
+        width: 100% !important;
+      }
+      .statement-table th, .statement-table td {
+        border: 1px solid #444444 !important;
+        color: #000000 !important;
+        padding: 6px 8px !important;
+      }
+      .statement-table th {
+        background: #f1f5f9 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div id="app-container">
+
+  <!-- TOP APP BAR -->
+  <header id="top-bar">
+    <div class="brand-wrap">
+      <span class="brand-icon">🚚</span>
+      <div class="brand-text">
+        <h1 id="brand-header-title">Tempo Hisaab</h1>
+        <span id="display-date">Loading...</span>
+      </div>
+    </div>
+    <div class="header-actions">
+      <!-- Theme Switcher -->
+      <button class="header-btn" id="btn-theme-toggle" onclick="toggleTheme()" title="Toggle Day/Night Mode">
+        <span id="theme-btn-icon">☀️</span>
+        <span id="theme-btn-label">Light</span>
+      </button>
+
+      <!-- Shop Settings -->
+      <button class="header-btn" onclick="openShopSettingsModal()" title="Shop Header Settings">
+        <span>⚙️</span> Shop
+      </button>
+
+      <!-- Khata Cash Entry -->
+      <button class="header-btn" onclick="openCashAdjustModal()" title="Direct Cash Entry">
+        <span>💵</span> Khata
+      </button>
+    </div>
+  </header>
+
+  <!-- SCREEN VIEWPORT -->
+  <main id="screens-viewport">
+
+    <!-- ══════════════════════════════════════
+         SCREEN 1: DASHBOARD (Aaj Ka Hisaab)
+    ══════════════════════════════════════ -->
+    <section class="screen-panel active" id="screen-dashboard">
+
+      <!-- Running Balance Hero -->
+      <div id="hero-balance-card" class="balance-hero zero">
+        <div class="hero-tag" id="hero-tag">⚖️ Running Balance</div>
+        <div class="hero-num" id="hero-amount">₹0</div>
+        <div class="hero-sub" id="hero-desc">Koi balance baaki ya jama nahi hai</div>
+      </div>
+
+      <!-- Master Batch Settle Button -->
+      <div id="batch-banner-container" style="display:none;">
+        <div class="master-settle-banner" onclick="openBatchSettleModal()">
+          <div class="ms-info">
+            <h3 id="ms-title">⚡ Slips Settle Karo (<span id="ms-count">0</span>)</h3>
+            <p id="ms-sub">Ek click mein saari slips aur commission ka hisaab</p>
+          </div>
+          <button class="ms-btn" type="button">Hisaab Karo ➔</button>
+        </div>
+      </div>
+
+      <!-- Quick Metrics Grid -->
+      <div class="stat-grid">
+        <div class="stat-tile">
+          <div class="st-label">📦 Aaj Ke Parcels</div>
+          <div class="st-val accent" id="metric-parcels">0</div>
+        </div>
+        <div class="stat-tile">
+          <div class="st-label">💵 Advance Diya</div>
+          <div class="st-val" id="metric-advance">₹0</div>
+        </div>
+        <div class="stat-tile">
+          <div class="st-label">🏷️ Total Commission</div>
+          <div class="stat-val" id="metric-commission">₹0</div>
+        </div>
+        <div class="stat-tile">
+          <div class="st-label">⏳ Slips Pending</div>
+          <div class="st-val yellow" id="metric-pending">0</div>
+        </div>
+      </div>
+
+      <!-- Pending Entries Section -->
+      <div class="section-title">
+        <span>⏳ Aane Wali Slips / Pending Parcels</span>
+        <span class="count-badge" id="pending-count-badge">0</span>
+      </div>
+      <div id="pending-entries-list"></div>
+
+      <!-- Settled Today Section -->
+      <div id="settled-today-container" style="display:none; margin-top:20px;">
+        <div class="section-title">
+          <span>✅ Aaj Settle Huye Parcels</span>
+          <span class="count-badge" id="settled-count-badge">0</span>
+        </div>
+        <div id="settled-entries-list"></div>
+      </div>
+
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SCREEN 2: PARCEL BHEJO (Dispatch Screen)
+    ══════════════════════════════════════ -->
+    <section class="screen-panel" id="screen-entry">
+
+      <!-- Dispatch Mode Switcher -->
+      <div class="sub-tab-group">
+        <button class="sub-tab-btn active" id="subtab-batch" type="button" onclick="switchDispatchMode('batch')">
+          📋 Multi-Row Batch Sheet
+        </button>
+        <button class="sub-tab-btn" id="subtab-single" type="button" onclick="switchDispatchMode('single')">
+          ⚡ Single Express Form
+        </button>
+      </div>
+
+      <!-- DISPATCH MODE A: MULTI-ROW BATCH SHEET -->
+      <div id="dispatch-view-batch">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+          <div>
+            <h3 style="font-size:0.95rem; font-weight:800; color:var(--text-main);">Rapid Batch Dispatch</h3>
+            <p style="font-size:0.75rem; color:var(--text-dim);">Sabhi transports ek hi screen par enter karein</p>
+          </div>
+          <button class="btn btn-outline btn-ghost-sm" type="button" onclick="addBatchRow()">
+            + Naya Row Jodo
+          </button>
+        </div>
+
+        <!-- Batch Date Selection -->
+        <div class="glass-card" style="padding:12px; margin-bottom:12px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+            <label class="field-label" style="margin-bottom:0;">📅 Dispatch Date:</label>
+            <input class="field-input" id="inp-batch-date" type="date" style="max-width:180px; min-height:40px; padding:6px 10px;" />
+          </div>
+        </div>
+
+        <!-- Rows Container -->
+        <div id="batch-rows-list"></div>
+
+        <!-- Master Save All Button -->
+        <div style="display:flex; flex-direction:column; gap:10px; margin-top:14px;">
+          <button class="btn btn-outline" type="button" onclick="addBatchRow()" style="width:100%;">
+            ➕ Ek Aur Row Jodo (+ Add Row)
+          </button>
+          <button class="btn btn-accent" id="btn-batch-save-master" type="button" onclick="saveAllBatchRows()" style="width:100%; font-size:1rem;">
+            🚀 Sabhi Parcels Save Karo
+          </button>
+        </div>
+      </div>
+
+      <!-- DISPATCH MODE B: SINGLE EXPRESS FORM -->
+      <div id="dispatch-view-single" style="display:none;">
+        <div class="glass-card">
+          <div class="card-header-row">
+            <span class="card-title-sm">📦 Single Express Dispatch</span>
+            <span style="font-size:0.75rem; color:var(--accent); font-weight:700;">₹100 Comm/Parcel</span>
+          </div>
+
+          <!-- Date & Bilty Row -->
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:14px;">
+            <div class="field-group" style="margin-bottom:0;">
+              <label class="field-label">📅 Date / Tareekh</label>
+              <input class="field-input" id="inp-date" type="date" />
+            </div>
+            <div class="field-group" style="margin-bottom:0;">
+              <label class="field-label">📝 Bilty# (Optional)</label>
+              <input class="field-input" id="inp-bilty" type="text" placeholder="e.g. 4812" autocomplete="off" />
+            </div>
+          </div>
+
+          <!-- Transport Name -->
+          <div class="field-group">
+            <label class="field-label">🚚 Transport Ka Naam</label>
+            <input class="field-input" id="inp-transport" type="text" placeholder="e.g. Shyam Transport, V-Trans" autocomplete="off" />
+            <div class="chips-row" id="chips-transports"></div>
+          </div>
+
+          <!-- Destination City -->
+          <div class="field-group">
+            <label class="field-label">📍 Destination City</label>
+            <input class="field-input" id="inp-city" type="text" placeholder="e.g. Mumbai, Surat, Delhi" autocomplete="off" />
+            <div class="chips-row" id="chips-cities"></div>
+          </div>
+
+          <!-- Parcel Count Stepper -->
+          <div class="field-group">
+            <label class="field-label">📦 Parcels Ki Ginti (Default: 1)</label>
+            <div class="stepper-container">
+              <button class="stepper-btn" type="button" onclick="stepParcelCount(-1)">−</button>
+              <input class="stepper-input" id="inp-count" type="number" inputmode="numeric" value="1" min="1" oninput="handleCountChange()" />
+              <button class="stepper-btn" type="button" onclick="stepParcelCount(1)">+</button>
+            </div>
+            <div style="font-size:0.75rem; color:var(--accent); font-weight:700; margin-top:5px;" id="lbl-comm-preview">
+              🏷️ Commission: 1 × ₹100 = ₹100
+            </div>
+          </div>
+
+          <!-- Parcel Type -->
+          <div class="field-group">
+            <label class="field-label">💳 Parcel Type</label>
+            <div class="type-segment-box">
+              <div class="type-segment-btn active paid" id="btn-type-paid" onclick="setParcelType('paid')">
+                <span>💰 PAID</span>
+                <small>Hum transport bharenge (Advance)</small>
+              </div>
+              <div class="type-segment-btn" id="btn-type-unpaid" onclick="setParcelType('unpaid')">
+                <span>🔄 UNPAID</span>
+                <small>Customer wahan bharega (Sirf Comm)</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Advance Given (Only for Paid) -->
+          <div class="field-group" id="group-advance">
+            <label class="field-label">💵 Advance Diya (Approx Transport Cost ₹)</label>
+            <input class="field-input" id="inp-advance" type="number" inputmode="decimal" placeholder="e.g. 500" min="0" />
+            <div class="cash-presets">
+              <button class="cash-preset-btn" type="button" onclick="setAdvancePreset(300)">₹300</button>
+              <button class="cash-preset-btn" type="button" onclick="setAdvancePreset(500)">₹500</button>
+              <button class="cash-preset-btn" type="button" onclick="setAdvancePreset(800)">₹800</button>
+              <button class="cash-preset-btn" type="button" onclick="setAdvancePreset(1000)">₹1,000</button>
+              <button class="cash-preset-btn" type="button" onclick="setAdvancePreset(1500)">₹1,500</button>
+            </div>
+          </div>
+
+          <!-- Dual Buttons: Save & Next vs Save & Dashboard -->
+          <div style="display:flex; flex-direction:column; gap:10px; margin-top:14px;">
+            <button class="btn btn-green" type="button" onclick="saveExpressEntry(true)">
+              💾 Save & Agla Entry (Clear for Next)
+            </button>
+            <button class="btn btn-accent" type="button" onclick="saveExpressEntry(false)">
+              ✅ Save & Dashboard
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SCREEN 3: HISAAB-KITAAB (Dual-View Ledger & Statement)
+    ══════════════════════════════════════ -->
+    <section class="screen-panel" id="screen-history">
+
+      <!-- View Switcher & Statement Print -->
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:12px;">
+        <div class="sub-tab-group" style="margin-bottom:0; flex:1;">
+          <button class="sub-tab-btn active" id="subtab-passbook" type="button" onclick="switchKhataView('passbook')">
+            📒 Passbook Ledger
+          </button>
+          <button class="sub-tab-btn" id="subtab-parcels" type="button" onclick="switchKhataView('parcels')">
+            📦 Parcel Log
+          </button>
+        </div>
+
+        <button class="btn btn-outline btn-ghost-sm" type="button" onclick="openPrintStatementModal()" title="Print Commercial Statement">
+          🖨️ Statement Print
+        </button>
+      </div>
+
+      <!-- KHATA VIEW A: PASSBOOK LEDGER -->
+      <div id="khata-view-passbook">
+        <div class="glass-card" style="padding:12px 14px; margin-bottom:12px;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <div style="font-size:0.75rem; color:var(--text-dim); text-transform:uppercase; font-weight:700;">Running Khata Passbook</div>
+              <div style="font-size:0.95rem; font-weight:800; color:var(--text-main);" id="passbook-hero-balance">Loading balance...</div>
+            </div>
+            <button class="btn btn-outline btn-ghost-sm" type="button" onclick="openCashAdjustModal()">
+              + Cash Entry
+            </button>
+          </div>
+        </div>
+
+        <div id="passbook-entries-container" class="passbook-timeline"></div>
+      </div>
+
+      <!-- KHATA VIEW B: PARCEL LOG -->
+      <div id="khata-view-parcels" style="display:none;">
+        <!-- Search & Filters -->
+        <div style="margin-bottom:12px;">
+          <input class="field-input" id="search-history" type="text" placeholder="🔍 Transport, city, ya bilty# dhundo..." oninput="renderParcelLog()" />
+        </div>
+
+        <div class="chips-row" style="margin-bottom:14px;" id="history-filter-chips">
+          <div class="chip-tag active" data-filter="all" onclick="selectHistoryFilter('all', this)">🗂️ All / Sabhi</div>
+          <div class="chip-tag" data-filter="pending" onclick="selectHistoryFilter('pending', this)">⏳ Pending Slips</div>
+          <div class="chip-tag" data-filter="settled" onclick="selectHistoryFilter('settled', this)">✅ Settled</div>
+          <div class="chip-tag" data-filter="paid" onclick="selectHistoryFilter('paid', this)">💰 Paid Only</div>
+          <div class="chip-tag" data-filter="unpaid" onclick="selectHistoryFilter('unpaid', this)">🔄 Unpaid Only</div>
+        </div>
+
+        <!-- History Entries Container -->
+        <div id="history-entries-container"></div>
+      </div>
+
+      <!-- Data Backup & Cloud Sync Card -->
+      <div class="glass-card" style="margin-top:24px;">
+        <div class="card-title-sm" style="margin-bottom:10px;">💾 Backup & Cloud Sync</div>
+        <p style="font-size:0.75rem; color:var(--text-dim); margin-bottom:12px;">
+          Apna hisaab doosre phone ya computer par le jaane ke liye export/import karein.
+        </p>
+        <div style="display:flex; gap:10px;">
+          <button class="btn btn-outline" style="flex:1;" type="button" onclick="exportAllData()">
+            📤 Export JSON
+          </button>
+          <button class="btn btn-outline" style="flex:1;" type="button" onclick="document.getElementById('import-file-inp').click()">
+            📥 Import JSON
+          </button>
+        </div>
+        <input type="file" id="import-file-inp" accept=".json" style="display:none;" onchange="importDataFile(this)" />
+      </div>
+
+      <!-- Reset Option -->
+      <div style="text-align:center; margin:16px 0;">
+        <button class="btn btn-danger-ghost btn-ghost-sm" type="button" onclick="promptResetAll()">
+          🗑️ Reset All Data
+        </button>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- BOTTOM TAB NAVIGATION -->
+  <nav id="bottom-tabbar">
+    <button class="nav-tab active" id="tab-btn-dashboard" type="button" onclick="switchNavTab('dashboard')">
+      <span class="tab-ico">🏠</span>
+      <span class="tab-lbl">Dashboard</span>
+    </button>
+    <button class="nav-tab" id="tab-btn-entry" type="button" onclick="switchNavTab('entry')">
+      <span class="tab-ico">📦</span>
+      <span class="tab-lbl">Parcel Bhejo</span>
+    </button>
+    <button class="nav-tab" id="tab-btn-history" type="button" onclick="switchNavTab('history')">
+      <span class="tab-ico">📒</span>
+      <span class="tab-lbl">Hisaab-Kitaab</span>
+    </button>
+  </nav>
+
+</div>
+
+<!-- ══════════════════════════════════════
+     MODAL 1: BATCH DAILY SETTLEMENT (DAILY CHECKOUT)
+══════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-batch-settle">
+  <div class="sheet-drawer">
+    <div class="sheet-pill-handle"></div>
+    <div class="sheet-title-group">
+      <h2>⚡ Morning Slip Settlement Sheet</h2>
+      <p>Slips ke actual amounts aur photos attach karein</p>
+    </div>
+
+    <!-- Slips List -->
+    <div id="batch-slips-items"></div>
+
+    <!-- Live Master Breakdown -->
+    <div class="breakdown-box" id="batch-breakdown-card">
+      <div class="bd-row">
+        <span>🧾 Total Actual Slips:</span>
+        <strong id="bb-slips-total">₹0</strong>
+      </div>
+      <div class="bd-row">
+        <span>🏷️ Total Commission (₹100×):</span>
+        <strong style="color:var(--accent);" id="bb-comm-total">₹0</strong>
+      </div>
+      <div class="bd-row">
+        <span>💵 Pehle Diya Advance:</span>
+        <strong style="color:var(--red);" id="bb-adv-total">-₹0</strong>
+      </div>
+      <div class="bd-row">
+        <span>⚖️ Purana Running Balance:</span>
+        <strong id="bb-bal-status">₹0</strong>
+      </div>
+      <div class="bd-row divider grand-total">
+        <span id="bb-net-label">💸 Net Cash Dena Hai:</span>
+        <span id="bb-net-amount">₹0</span>
+      </div>
+    </div>
+
+    <!-- Actual Cash Given Input -->
+    <div class="field-group">
+      <label class="field-label">💵 Tempo Wala Ko Kitna Cash Diya? (₹)</label>
+      <input class="field-input" id="inp-batch-cash" type="number" inputmode="decimal" placeholder="Enter cash given" oninput="recalcBatchCashDifference()" />
+      <div class="cash-presets" id="batch-cash-presets"></div>
+      <div id="bb-resulting-balance-info" style="font-size:0.82rem; font-weight:700; margin-top:8px; text-align:center;"></div>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:10px; margin-top:16px;">
+      <button class="btn btn-green" type="button" onclick="confirmBatchSettlement(true)">
+        📲 Settle Karo & WhatsApp Bhejo
+      </button>
+      <button class="btn btn-accent" type="button" onclick="confirmBatchSettlement(false)">
+        ✅ Sirf Settle Karo
+      </button>
+      <button class="btn btn-outline" type="button" onclick="closeModal('modal-batch-settle')">
+        ✖ Band Karo (Close)
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     MODAL 2: SINGLE ENTRY SLIP SETTLEMENT
+══════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-single-settle">
+  <div class="sheet-drawer">
+    <div class="sheet-pill-handle"></div>
+    <div class="sheet-title-group">
+      <h2 id="single-settle-title">📋 Slip Amount Enter Karein</h2>
+      <p id="single-settle-sub"></p>
+    </div>
+
+    <div class="field-group" id="single-actual-group">
+      <label class="field-label">🧾 Slip Mein Likha Actual Amount (₹)</label>
+      <input class="field-input" id="inp-single-actual" type="number" inputmode="decimal" placeholder="e.g. 450" oninput="recalcSingleModal()" />
+    </div>
+
+    <!-- Slip Photo Input -->
+    <div class="field-group">
+      <label class="field-label">📷 Slip Photo / Bilty Snapshot (Optional)</label>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <button class="btn btn-outline btn-ghost-sm" type="button" onclick="document.getElementById('inp-single-photo-cam').click()">
+          📷 Snap / Upload Photo
+        </button>
+        <input type="file" id="inp-single-photo-cam" accept="image/*" capture="environment" style="display:none;" onchange="handleSingleSlipPhoto(this)" />
+        <span id="single-photo-status" style="font-size:0.75rem; color:var(--text-dim);">Koi photo nahi</span>
+      </div>
+      <div id="single-photo-preview-wrap" style="display:none; margin-top:8px;">
+        <img id="single-photo-thumb" class="photo-thumb-img" alt="Slip thumbnail" onclick="viewPhotoInModal(this.src, 'Single Slip Photo')" />
+      </div>
+    </div>
+
+    <div class="breakdown-box">
+      <div class="bd-row" id="single-row-actual">
+        <span>🧾 Slip Amount (Actual):</span>
+        <strong id="single-val-actual">₹0</strong>
+      </div>
+      <div class="bd-row">
+        <span>🏷️ Commission (₹100 × <span id="single-val-count">1</span>):</span>
+        <strong style="color:var(--accent);" id="single-val-comm">₹100</strong>
+      </div>
+      <div class="bd-row" id="single-row-adv">
+        <span>💵 Advance Diya Tha:</span>
+        <strong style="color:var(--red);" id="single-val-adv">-₹0</strong>
+      </div>
+      <div class="bd-row">
+        <span>⚖️ Running Balance:</span>
+        <strong id="single-val-bal">₹0</strong>
+      </div>
+      <div class="bd-row divider grand-total">
+        <span id="single-lbl-net">💸 Net Dena Hai:</span>
+        <span id="single-val-net">₹0</span>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">💵 Actual Cash Diya (₹)</label>
+      <input class="field-input" id="inp-single-cash" type="number" inputmode="decimal" placeholder="Cash given" oninput="recalcSingleCashDiff()" />
+      <div class="cash-presets" id="single-cash-presets"></div>
+      <div id="single-resulting-bal-info" style="font-size:0.82rem; font-weight:700; margin-top:8px; text-align:center;"></div>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:10px; margin-top:16px;">
+      <button class="btn btn-green" type="button" onclick="confirmSingleSettlement(true)">
+        📲 Settle Karo & WhatsApp Share
+      </button>
+      <button class="btn btn-accent" type="button" onclick="confirmSingleSettlement(false)">
+        ✅ Confirm Karo
+      </button>
+      <button class="btn btn-outline" type="button" onclick="closeModal('modal-single-settle')">
+        ✖ Cancel
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     MODAL 3: EDIT ENTRY (Fix typos)
+══════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-edit-entry">
+  <div class="sheet-drawer">
+    <div class="sheet-pill-handle"></div>
+    <div class="sheet-title-group">
+      <h2>✏️ Entry Edit Karein</h2>
+      <p>Mistake theek karein</p>
+    </div>
+
+    <input type="hidden" id="edit-entry-id" />
+
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:14px;">
+      <div class="field-group" style="margin-bottom:0;">
+        <label class="field-label">📅 Date / Tareekh</label>
+        <input class="field-input" id="edit-inp-date" type="date" />
+      </div>
+      <div class="field-group" style="margin-bottom:0;">
+        <label class="field-label">📝 Bilty#</label>
+        <input class="field-input" id="edit-inp-bilty" type="text" />
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">🚚 Transport Ka Naam</label>
+      <input class="field-input" id="edit-inp-transport" type="text" />
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">📍 Destination City</label>
+      <input class="field-input" id="edit-inp-city" type="text" />
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">📦 Parcels Ki Ginti (Count)</label>
+      <input class="field-input" id="edit-inp-count" type="number" min="1" />
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">💵 Advance Diya (₹)</label>
+      <input class="field-input" id="edit-inp-advance" type="number" min="0" />
+    </div>
+
+    <div class="field-group" id="edit-group-actual" style="display:none;">
+      <label class="field-label">🧾 Actual Slip Amount (₹)</label>
+      <input class="field-input" id="edit-inp-actual" type="number" min="0" />
+    </div>
+
+    <div style="display:flex; gap:10px; margin-top:16px;">
+      <button class="btn btn-outline" style="flex:1;" type="button" onclick="closeModal('modal-edit-entry')">✖ Cancel</button>
+      <button class="btn btn-accent" style="flex:1.5;" type="button" onclick="saveEditedEntry()">💾 Update Karo</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     MODAL 4: DIRECT CASH / KHATA ADJUSTMENT
+══════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-cash-adjust">
+  <div class="sheet-drawer">
+    <div class="sheet-pill-handle"></div>
+    <div class="sheet-title-group">
+      <h2>💵 Direct Khata / Cash Entry</h2>
+      <p>Tempo wala ko alag se cash diya ya usne wapas kiya</p>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Action Type</label>
+      <div class="type-segment-box">
+        <div class="type-segment-btn active paid" id="btn-khata-give" onclick="setKhataAction('give')">
+          <span>💸 Cash Diya</span>
+          <small>Tempo ko cash diya</small>
+        </div>
+        <div class="type-segment-btn" id="btn-khata-take" onclick="setKhataAction('take')">
+          <span>💰 Cash Wapas Liya</span>
+          <small>Tempo ne wapas kiya</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Amount (₹)</label>
+      <input class="field-input" id="inp-khata-amount" type="number" inputmode="decimal" placeholder="e.g. 500" />
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Note / Reason (Optional)</label>
+      <input class="field-input" id="inp-khata-note" type="text" placeholder="e.g. Purana hisaab clear kiya" />
+    </div>
+
+    <div style="display:flex; gap:10px; margin-top:16px;">
+      <button class="btn btn-outline" style="flex:1;" type="button" onclick="closeModal('modal-cash-adjust')">✖ Cancel</button>
+      <button class="btn btn-accent" style="flex:1.5;" type="button" onclick="saveKhataAdjustment()">💾 Save Entry</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     MODAL 5: DELETE CONFIRM
+══════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-delete-confirm">
+  <div class="sheet-drawer">
+    <div class="sheet-pill-handle"></div>
+    <div class="sheet-title-group">
+      <h2 style="color:var(--red);">🗑️ Delete Confirm Karein</h2>
+      <p id="delete-confirm-text">Yeh entry hamesha ke liye delete ho jayegi.</p>
+    </div>
+    <div style="display:flex; gap:10px; margin-top:16px;">
+      <button class="btn btn-outline" style="flex:1;" type="button" onclick="closeModal('modal-delete-confirm')">✖ Nahi (No)</button>
+      <button class="btn btn-danger-ghost" style="flex:1.2;" type="button" onclick="executeDelete()">🗑️ Haan, Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     MODAL 6: SLIP PHOTO VIEWER
+══════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-photo-viewer">
+  <div class="sheet-drawer" style="max-height:94dvh; padding:16px;">
+    <div class="sheet-pill-handle"></div>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+      <h3 id="photo-viewer-title" style="font-size:1rem; font-weight:800; color:var(--text-main);">📷 Bilty Photo</h3>
+      <button class="btn btn-outline btn-ghost-sm" type="button" onclick="closeModal('modal-photo-viewer')">✕ Close</button>
+    </div>
+    <div style="text-align:center; background:#000; border-radius:12px; overflow:hidden; padding:4px;">
+      <img id="photo-viewer-img" src="" alt="Full view" style="max-width:100%; max-height:70dvh; object-fit:contain; border-radius:8px;" />
+    </div>
+    <div style="margin-top:12px; text-align:center;">
+      <button class="btn btn-outline" style="width:100%;" type="button" onclick="closeModal('modal-photo-viewer')">
+        Close Window
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     MODAL 7: COMMERCIAL STATEMENT & PRINT
+══════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-print-statement">
+  <div class="sheet-drawer" style="max-width:680px;">
+    <div class="sheet-pill-handle no-print"></div>
+
+    <div class="sheet-title-group no-print">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <h2>🖨️ Transport Commercial Statement</h2>
+          <p>Print karein ya PDF save karein</p>
+        </div>
+        <button class="btn btn-outline btn-ghost-sm" type="button" onclick="closeModal('modal-print-statement')">✕ Close</button>
+      </div>
+    </div>
+
+    <!-- Filter & Range Selector (Screen only) -->
+    <div class="no-print" style="margin-bottom:14px;">
+      <label class="field-label">Date Filter:</label>
+      <div class="chips-row" id="statement-range-chips">
+        <div class="chip-tag active" data-range="today" onclick="changePrintRange('today', this)">Today</div>
+        <div class="chip-tag" data-range="week" onclick="changePrintRange('week', this)">Last 7 Days</div>
+        <div class="chip-tag" data-range="month" onclick="changePrintRange('month', this)">This Month</div>
+        <div class="chip-tag" data-range="all" onclick="changePrintRange('all', this)">All Records</div>
+      </div>
+    </div>
+
+    <!-- PRINTABLE CONTENT CONTAINER -->
+    <div id="printable-statement-content">
+      <!-- Printable Header -->
+      <div style="border-bottom:2px solid #333; padding-bottom:10px; margin-bottom:12px;">
+        <h2 id="print-shop-name" style="font-size:1.35rem; font-weight:900; color:var(--text-main); margin-bottom:2px;">
+          M/s Tempo Transport Hisaab
+        </h2>
+        <div style="display:flex; justify-content:space-between; font-size:0.78rem; color:var(--text-muted);">
+          <span id="print-range-label">Period: All Time</span>
+          <span id="print-generated-date">Printed: Sat, 7 Nov 2026</span>
+        </div>
+      </div>
+
+      <!-- Key Metrics Summary in Statement -->
+      <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:8px; margin-bottom:14px;" id="statement-metrics-grid">
+        <div style="border:1px solid var(--card-border); padding:8px; border-radius:6px; text-align:center;">
+          <div style="font-size:0.65rem; color:var(--text-dim); text-transform:uppercase;">Dispatches</div>
+          <strong id="sm-count" style="font-size:1rem;">0</strong>
+        </div>
+        <div style="border:1px solid var(--card-border); padding:8px; border-radius:6px; text-align:center;">
+          <div style="font-size:0.65rem; color:var(--text-dim); text-transform:uppercase;">Parcels</div>
+          <strong id="sm-parcels" style="font-size:1rem;">0</strong>
+        </div>
+        <div style="border:1px solid var(--card-border); padding:8px; border-radius:6px; text-align:center;">
+          <div style="font-size:0.65rem; color:var(--text-dim); text-transform:uppercase;">Total Comm</div>
+          <strong id="sm-comm" style="font-size:1rem; color:var(--accent);">₹0</strong>
+        </div>
+        <div style="border:1px solid var(--card-border); padding:8px; border-radius:6px; text-align:center;">
+          <div style="font-size:0.65rem; color:var(--text-dim); text-transform:uppercase;">Balance</div>
+          <strong id="sm-balance" style="font-size:1rem;">₹0</strong>
+        </div>
+      </div>
+
+      <!-- Printable Table -->
+      <div class="statement-table-box">
+        <table class="statement-table" id="statement-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Transport</th>
+              <th>City</th>
+              <th>Bilty#</th>
+              <th>Pcs</th>
+              <th>Type</th>
+              <th>Advance</th>
+              <th>Slip</th>
+              <th>Comm</th>
+              <th>Net Due</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="statement-table-body"></tbody>
+        </table>
+      </div>
+
+      <!-- Statement Footer Note -->
+      <div style="font-size:0.72rem; color:var(--text-dim); margin-top:12px; border-top:1px dashed var(--card-border); padding-top:8px;">
+        * Generated digitally via Tempo Hisaab Pro. All figures verified against bilty receipts and khata ledger.
+      </div>
+    </div>
+
+    <!-- Action Buttons (Screen Only) -->
+    <div class="no-print" style="display:flex; gap:10px; margin-top:16px;">
+      <button class="btn btn-outline" style="flex:1;" type="button" onclick="closeModal('modal-print-statement')">
+        ✖ Band Karo
+      </button>
+      <button class="btn btn-accent" style="flex:1.5;" type="button" onclick="window.print()">
+        🖨️ Print / Save PDF
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     MODAL 8: SHOP HEADER SETTINGS
+══════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-shop-settings">
+  <div class="sheet-drawer">
+    <div class="sheet-pill-handle"></div>
+    <div class="sheet-title-group">
+      <h2>⚙️ Shop Name & Statement Settings</h2>
+      <p>Statements aur receipts par aane wala shop header customise karein</p>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Shop / Firm Name</label>
+      <input class="field-input" id="inp-shop-name" type="text" placeholder="e.g. M/s ABC Garments & Transport" />
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Owner / Contact Person (Optional)</label>
+      <input class="field-input" id="inp-shop-owner" type="text" placeholder="e.g. Hamid Bhai" />
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">City / Market Location</label>
+      <input class="field-input" id="inp-shop-location" type="text" placeholder="e.g. Wholesale Cloth Market" />
+    </div>
+
+    <div style="display:flex; gap:10px; margin-top:16px;">
+      <button class="btn btn-outline" style="flex:1;" type="button" onclick="closeModal('modal-shop-settings')">✖ Cancel</button>
+      <button class="btn btn-accent" style="flex:1.5;" type="button" onclick="saveShopSettings()">💾 Save Settings</button>
+    </div>
+  </div>
+</div>
+
+<!-- ACTION TOAST -->
+<div id="action-toast"></div>
+
+<!-- ══════════════════════════════════════
+     JAVASCRIPT APPLICATION LOGIC
+══════════════════════════════════════ -->
+<script>
+/* ═══════════════════════════════════════════
+   1. PROCEDURAL SOUND SYNTHESIZER (ZERO ASSET)
+═══════════════════════════════════════════ */
+let webAudioCtx = null;
+
+function obtainAudio() {
+  try {
+    if (!webAudioCtx) {
+      const AudioCtor = window.AudioContext || window.webkitAudioContext;
+      if (AudioCtor) webAudioCtx = new AudioCtor();
+    }
+    if (webAudioCtx && webAudioCtx.state === 'suspended') {
+      webAudioCtx.resume();
+    }
+    return webAudioCtx;
+  } catch (err) {
+    return null;
+  }
+}
+
+function sfxClick() {
+  try {
+    const ctx = obtainAudio();
+    if (!ctx) return;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(820, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(420, ctx.currentTime + 0.05);
+    gain.gain.setValueAtTime(0.12, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.06);
+    osc.start(ctx.currentTime);
+    osc.stop(ctx.currentTime + 0.06);
+  } catch(e) {}
+}
+
+function sfxSuccess() {
+  try {
+    const ctx = obtainAudio();
+    if (!ctx) return;
+    [523.25, 659.25, 783.99].forEach((freq, idx) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.08);
+      const t = ctx.currentTime + idx * 0.08;
+      gain.gain.setValueAtTime(0, t);
+      gain.gain.linearRampToValueAtTime(0.12, t + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.16);
+      osc.start(t);
+      osc.stop(t + 0.16);
+    });
+  } catch(e) {}
+}
+
+function sfxAlert() {
+  try {
+    const ctx = obtainAudio();
+    if (!ctx) return;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(260, ctx.currentTime);
+    gain.gain.setValueAtTime(0.12, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.14);
+    osc.start(ctx.currentTime);
+    osc.stop(ctx.currentTime + 0.14);
+  } catch(e) {}
+}
+
+/* ═══════════════════════════════════════════
+   2. ADAPTIVE DAY / NIGHT THEME ENGINE
+═══════════════════════════════════════════ */
+const DB_THEME_KEY = 'tempo_theme';
+
+function initTheme() {
+  try {
+    const saved = localStorage.getItem(DB_THEME_KEY) || 'dark';
+    applyTheme(saved);
+  } catch(e) {
+    applyTheme('dark');
+  }
+}
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  const metaTheme = document.getElementById('meta-theme-color');
+  const iconEl = document.getElementById('theme-btn-icon');
+  const labelEl = document.getElementById('theme-btn-label');
+
+  if (theme === 'light') {
+    if (metaTheme) metaTheme.setAttribute('content', '#f8fafc');
+    if (iconEl) iconEl.textContent = '🌙';
+    if (labelEl) labelEl.textContent = 'Dark';
+  } else {
+    if (metaTheme) metaTheme.setAttribute('content', '#09090b');
+    if (iconEl) iconEl.textContent = '☀️';
+    if (labelEl) labelEl.textContent = 'Light';
+  }
+}
+
+function toggleTheme() {
+  sfxClick();
+  const current = document.documentElement.getAttribute('data-theme') || 'dark';
+  const target = current === 'dark' ? 'light' : 'dark';
+  applyTheme(target);
+  try {
+    localStorage.setItem(DB_THEME_KEY, target);
+  } catch(e) {}
+  toastNotify(target === 'light' ? '☀️ High-Visibility Day Mode On' : '🌙 Deep Zinc Night Mode On');
+}
+
+/* ═══════════════════════════════════════════
+   3. DATA PERSISTENCE & SETTINGS LAYER
+═══════════════════════════════════════════ */
+const DB_ENTRIES_KEY    = 'tempo_hisaab_v2_entries';
+const DB_BALANCE_KEY    = 'tempo_hisaab_v2_balance';
+const DB_AUTO_NAMES     = 'tempo_hisaab_v2_transports';
+const DB_AUTO_CITIES    = 'tempo_hisaab_v2_cities';
+const DB_SHOP_NAME_KEY  = 'tempo_shop_name';
+const DB_SHOP_OWNER_KEY = 'tempo_shop_owner';
+const DB_SHOP_LOC_KEY   = 'tempo_shop_location';
+
+function dbGetEntries() {
+  try {
+    const raw = localStorage.getItem(DB_ENTRIES_KEY);
+    if (raw) return JSON.parse(raw);
+    const legacy = localStorage.getItem('tempo_hisaab_v1');
+    if (legacy) {
+      const parsed = JSON.parse(legacy);
+      saveEntries(parsed);
+      return parsed;
+    }
+    return [];
+  } catch(e) { return []; }
+}
+
+function saveEntries(arr) {
+  try {
+    localStorage.setItem(DB_ENTRIES_KEY, JSON.stringify(arr));
+    return true;
+  } catch(e) {
+    console.error('Failed to save entries to localStorage:', e);
+    // If QuotaExceededError, safely prune photos from older settled entries
+    if (e && (e.name === 'QuotaExceededError' || e.code === 22 || e.number === -2147024882)) {
+      try {
+        const pruned = arr.map((item, idx) => {
+          if (idx > 15 && item.status === 'settled' && item.slipPhoto) {
+            return Object.assign({}, item, { slipPhoto: null });
+          }
+          return item;
+        });
+        localStorage.setItem(DB_ENTRIES_KEY, JSON.stringify(pruned));
+        if (typeof toastNotify === 'function') {
+          toastNotify('⚠️ Storage limit reached: Purani photos compress ki gayi.');
+        }
+        return true;
+      } catch(inner) {
+        if (typeof toastNotify === 'function') {
+          toastNotify('🚨 Storage full! Backup export karke reset karein.');
+        }
+        return false;
+      }
+    }
+    return false;
+  }
+}
+
+function dbGetBalance() {
+  try {
+    const raw = localStorage.getItem(DB_BALANCE_KEY);
+    if (raw) return JSON.parse(raw);
+    const legacy = localStorage.getItem('tempo_balance_v1');
+    if (legacy) {
+      const parsed = JSON.parse(legacy);
+      saveBalance(parsed);
+      return parsed;
+    }
+    return { amount: 0, type: 'zero' };
+  } catch(e) { return { amount: 0, type: 'zero' }; }
+}
+
+function saveBalance(bal) {
+  try {
+    localStorage.setItem(DB_BALANCE_KEY, JSON.stringify(bal));
+  } catch(e) {}
+}
+
+function dbGetFrequent(key, defaults) {
+  try {
+    const raw = localStorage.getItem(key);
+    if (raw) return JSON.parse(raw);
+    localStorage.setItem(key, JSON.stringify(defaults));
+    return defaults;
+  } catch(e) { return defaults; }
+}
+
+function rememberFrequent(key, val) {
+  if (!val || val.trim().length < 2) return;
+  try {
+    let list = dbGetFrequent(key, []);
+    const clean = val.trim();
+    list = list.filter(item => item.toLowerCase() !== clean.toLowerCase());
+    list.unshift(clean);
+    if (list.length > 8) list = list.slice(0, 8);
+    localStorage.setItem(key, JSON.stringify(list));
+  } catch(e) {}
+}
+
+function getShopDetails() {
+  return {
+    name: localStorage.getItem(DB_SHOP_NAME_KEY) || 'M/s Tempo Transport Hisaab',
+    owner: localStorage.getItem(DB_SHOP_OWNER_KEY) || '',
+    location: localStorage.getItem(DB_SHOP_LOC_KEY) || ''
+  };
+}
+
+function getTodayIso() {
+  const d = new Date();
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+function formatInr(num) {
+  const rounded = Math.round(Math.abs(num));
+  return '₹' + rounded.toLocaleString('en-IN');
+}
+
+// Pure English date formatting (ZERO Devanagari script)
+function formatPrettyDate(isoDateStr) {
+  if (!isoDateStr) return '';
+  try {
+    const parts = isoDateStr.split('-');
+    const dt = new Date(parts[0], parts[1] - 1, parts[2]);
+    return dt.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
+  } catch(e) { return isoDateStr; }
+}
+
+/* ═══════════════════════════════════════════
+   4. APP STATE
+═══════════════════════════════════════════ */
+let appCurrentTab = 'dashboard';
+let currentDispatchMode = 'batch'; // 'batch' | 'single'
+let currentKhataView = 'passbook'; // 'passbook' | 'parcels'
+let currentParcelType = 'paid';
+let currentHistoryFilter = 'all';
+let currentPrintRange = 'today';
+let khataActionType = 'give';
+
+// Modal and batch state
+let activeSingleSettleId = null;
+let activeDeleteTargetId = null;
+let singleTempPhoto = null;
+let batchSettlementData = {
+  entries: [],
+  netBeforeCash: 0,
+  cashGiven: 0
+};
+let batchPhotos = {}; // entryId -> base64
+
+// Step 1: Multi-Row Batch Dispatch State
+let batchRowsData = [];
+
+/* ═══════════════════════════════════════════
+   5. NAVIGATION & VIEW SWITCHING
+═══════════════════════════════════════════ */
+function switchNavTab(tabName) {
+  sfxClick();
+  appCurrentTab = tabName;
+
+  document.querySelectorAll('.screen-panel').forEach(panel => panel.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(btn => btn.classList.remove('active'));
+
+  const targetPanel = document.getElementById('screen-' + tabName);
+  const targetBtn = document.getElementById('tab-btn-' + tabName);
+
+  if (targetPanel) targetPanel.classList.add('active');
+  if (targetBtn) targetBtn.classList.add('active');
+
+  if (tabName === 'dashboard') renderDashboardView();
+  if (tabName === 'history') renderHistoryView();
+  if (tabName === 'entry') {
+    if (currentDispatchMode === 'batch') renderBatchRows();
+    else renderEntryFormSuggestions();
+  }
+}
+
+function switchDispatchMode(mode) {
+  sfxClick();
+  currentDispatchMode = mode;
+  const viewBatch = document.getElementById('dispatch-view-batch');
+  const viewSingle = document.getElementById('dispatch-view-single');
+  const subBatch = document.getElementById('subtab-batch');
+  const subSingle = document.getElementById('subtab-single');
+
+  if (mode === 'batch') {
+    if (viewBatch) viewBatch.style.display = 'block';
+    if (viewSingle) viewSingle.style.display = 'none';
+    if (subBatch) subBatch.classList.add('active');
+    if (subSingle) subSingle.classList.remove('active');
+    renderBatchRows();
+  } else {
+    if (viewBatch) viewBatch.style.display = 'none';
+    if (viewSingle) viewSingle.style.display = 'block';
+    if (subBatch) subBatch.classList.remove('active');
+    if (subSingle) subSingle.classList.add('active');
+    renderEntryFormSuggestions();
+  }
+}
+
+function switchKhataView(view) {
+  sfxClick();
+  currentKhataView = view;
+  const viewPassbook = document.getElementById('khata-view-passbook');
+  const viewParcels = document.getElementById('khata-view-parcels');
+  const subPassbook = document.getElementById('subtab-passbook');
+  const subParcels = document.getElementById('subtab-parcels');
+
+  if (view === 'passbook') {
+    if (viewPassbook) viewPassbook.style.display = 'block';
+    if (viewParcels) viewParcels.style.display = 'none';
+    if (subPassbook) subPassbook.classList.add('active');
+    if (subParcels) subParcels.classList.remove('active');
+    renderPassbookLedger();
+  } else {
+    if (viewPassbook) viewPassbook.style.display = 'none';
+    if (viewParcels) viewParcels.style.display = 'block';
+    if (subPassbook) subPassbook.classList.remove('active');
+    if (subParcels) subParcels.classList.add('active');
+    renderParcelLog();
+  }
+}
+
+/* ═══════════════════════════════════════════
+   6. STEP 1: RAPID MULTI-ROW BATCH DISPATCH
+═══════════════════════════════════════════ */
+function initBatchRows() {
+  if (batchRowsData.length === 0) {
+    batchRowsData = [createEmptyBatchRowObj()];
+  }
+  const dateInp = document.getElementById('inp-batch-date');
+  if (dateInp && !dateInp.value) dateInp.value = getTodayIso();
+}
+
+function createEmptyBatchRowObj() {
+  return {
+    id: 'brow_' + Date.now().toString(36) + Math.random().toString(36).substring(2, 6),
+    transport: '',
+    city: '',
+    count: 1,
+    type: 'paid',
+    advance: '',
+    bilty: ''
+  };
+}
+
+function addBatchRow() {
+  sfxClick();
+  batchRowsData.push(createEmptyBatchRowObj());
+  renderBatchRows();
+  // Scroll to bottom
+  const container = document.getElementById('batch-rows-list');
+  if (container && container.lastElementChild) {
+    container.lastElementChild.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function removeBatchRow(index) {
+  sfxClick();
+  if (batchRowsData.length <= 1) {
+    toastNotify('Kam se kam 1 row hona zaroori hai!');
+    return;
+  }
+  batchRowsData.splice(index, 1);
+  renderBatchRows();
+}
+
+function updateBatchRowField(index, field, value) {
+  if (batchRowsData[index]) {
+    batchRowsData[index][field] = value;
+    if (field === 'count' || field === 'advance' || field === 'type') {
+      updateBatchMasterSaveButton();
+    }
+  }
+}
+
+function stepBatchRowCount(index, delta) {
+  sfxClick();
+  if (batchRowsData[index]) {
+    let current = parseInt(batchRowsData[index].count) || 1;
+    current = Math.max(1, current + delta);
+    batchRowsData[index].count = current;
+    const inp = document.getElementById('batch-row-count-' + index);
+    const commLbl = document.getElementById('batch-row-comm-' + index);
+    if (inp) inp.value = current;
+    if (commLbl) commLbl.textContent = `₹100 × ${current} = ${formatInr(current * 100)}`;
+    updateBatchMasterSaveButton();
+  }
+}
+
+function setBatchRowType(index, type) {
+  sfxClick();
+  if (batchRowsData[index]) {
+    batchRowsData[index].type = type;
+    const advGroup = document.getElementById('batch-row-adv-group-' + index);
+    const btnPaid = document.getElementById('btn-batch-paid-' + index);
+    const btnUnpaid = document.getElementById('btn-batch-unpaid-' + index);
+
+    if (type === 'paid') {
+      if (advGroup) advGroup.style.display = 'block';
+      if (btnPaid) btnPaid.className = 'type-segment-btn active paid';
+      if (btnUnpaid) btnUnpaid.className = 'type-segment-btn';
+    } else {
+      if (advGroup) advGroup.style.display = 'none';
+      if (btnPaid) btnPaid.className = 'type-segment-btn';
+      if (btnUnpaid) btnUnpaid.className = 'type-segment-btn active unpaid';
+    }
+    updateBatchMasterSaveButton();
+  }
+}
+
+function setBatchRowAdvancePreset(index, amt) {
+  sfxClick();
+  if (batchRowsData[index]) {
+    batchRowsData[index].advance = amt;
+    const inp = document.getElementById('batch-row-adv-' + index);
+    if (inp) inp.value = amt;
+    updateBatchMasterSaveButton();
+  }
+}
+
+function renderBatchRows() {
+  const container = document.getElementById('batch-rows-list');
+  if (!container) return;
+
+  const defTrans = ['Shyam Transport', 'V-Trans', 'Jaipur Golden', 'TCI Express'];
+  const defCities = ['Mumbai', 'Delhi', 'Surat', 'Ahmedabad', 'Jaipur'];
+  const transList = dbGetFrequent(DB_AUTO_NAMES, defTrans);
+  const citiesList = dbGetFrequent(DB_AUTO_CITIES, defCities);
+
+  container.innerHTML = batchRowsData.map((row, index) => {
+    const isPaid = row.type === 'paid';
+    const rowNum = index + 1;
+    return `
+      <div class="batch-row-card" id="batch-row-card-${index}">
+        <div class="batch-row-header">
+          <span class="batch-row-badge">📦 Row #${rowNum}</span>
+          ${batchRowsData.length > 1 ? `
+            <button class="batch-row-del-btn" type="button" onclick="removeBatchRow(${index})" title="Remove this row">
+              🗑️ Hatao
+            </button>
+          ` : ''}
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:10px;">
+          <div class="field-group" style="margin-bottom:0;">
+            <label class="field-label">🚚 Transport</label>
+            <input class="field-input" id="batch-row-trans-${index}" type="text"
+              placeholder="e.g. Shyam" value="${escapeHtml(row.transport)}"
+              oninput="updateBatchRowField(${index}, 'transport', this.value)" />
+          </div>
+          <div class="field-group" style="margin-bottom:0;">
+            <label class="field-label">📍 City</label>
+            <input class="field-input" id="batch-row-city-${index}" type="text"
+              placeholder="e.g. Mumbai" value="${escapeHtml(row.city)}"
+              oninput="updateBatchRowField(${index}, 'city', this.value)" />
+          </div>
+        </div>
+
+        <!-- Suggestion Chips for Transport & City -->
+        <div style="margin-bottom:10px;">
+          <div class="chips-row" style="margin-top:2px;">
+            ${transList.slice(0, 4).map(t =>
+              `<span class="chip-tag" data-row="${index}" data-field="transport" data-val="${escapeHtml(t)}" onclick="fillBatchInputSafe(this)">${escapeHtml(t)}</span>`
+            ).join('')}
+            ${citiesList.slice(0, 3).map(c =>
+              `<span class="chip-tag" data-row="${index}" data-field="city" data-val="${escapeHtml(c)}" onclick="fillBatchInputSafe(this)">📍 ${escapeHtml(c)}</span>`
+            ).join('')}
+          </div>
+        </div>
+
+        <!-- Parcels & Type Row -->
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:10px;">
+          <div class="field-group" style="margin-bottom:0;">
+            <label class="field-label">📦 Parcels</label>
+            <div class="stepper-container" style="min-height:44px;">
+              <button class="stepper-btn" style="height:44px; width:44px;" type="button" onclick="stepBatchRowCount(${index}, -1)">−</button>
+              <input class="stepper-input" id="batch-row-count-${index}" type="number" min="1" value="${row.count}"
+                oninput="updateBatchRowField(${index}, 'count', parseInt(this.value)||1)" />
+              <button class="stepper-btn" style="height:44px; width:44px;" type="button" onclick="stepBatchRowCount(${index}, 1)">+</button>
+            </div>
+            <span id="batch-row-comm-${index}" style="font-size:0.7rem; color:var(--accent); font-weight:700;">
+              ₹100 × ${row.count} = ${formatInr(row.count * 100)}
+            </span>
+          </div>
+
+          <div class="field-group" style="margin-bottom:0;">
+            <label class="field-label">💳 Type</label>
+            <div class="type-segment-box" style="gap:6px;">
+              <div class="type-segment-btn ${isPaid ? 'active paid' : ''}" id="btn-batch-paid-${index}" style="min-height:44px; padding:6px;" onclick="setBatchRowType(${index}, 'paid')">
+                <span style="font-size:0.8rem;">💰 Paid</span>
+              </div>
+              <div class="type-segment-btn ${!isPaid ? 'active unpaid' : ''}" id="btn-batch-unpaid-${index}" style="min-height:44px; padding:6px;" onclick="setBatchRowType(${index}, 'unpaid')">
+                <span style="font-size:0.8rem;">🔄 Unpaid</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Advance Input (if Paid) -->
+        <div class="field-group" id="batch-row-adv-group-${index}" style="display:${isPaid ? 'block' : 'none'}; margin-bottom:0;">
+          <label class="field-label">💵 Advance Diya (₹)</label>
+          <input class="field-input" id="batch-row-adv-${index}" type="number" inputmode="decimal"
+            placeholder="e.g. 500" value="${row.advance}"
+            oninput="updateBatchRowField(${index}, 'advance', this.value)" style="min-height:44px;" />
+          <div class="cash-presets" style="margin-top:4px;">
+            <button class="cash-preset-btn" style="min-height:36px; padding:4px;" type="button" onclick="setBatchRowAdvancePreset(${index}, 300)">₹300</button>
+            <button class="cash-preset-btn" style="min-height:36px; padding:4px;" type="button" onclick="setBatchRowAdvancePreset(${index}, 500)">₹500</button>
+            <button class="cash-preset-btn" style="min-height:36px; padding:4px;" type="button" onclick="setBatchRowAdvancePreset(${index}, 800)">₹800</button>
+            <button class="cash-preset-btn" style="min-height:36px; padding:4px;" type="button" onclick="setBatchRowAdvancePreset(${index}, 1000)">₹1,000</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  updateBatchMasterSaveButton();
+}
+
+function fillBatchInput(index, field, val) {
+  sfxClick();
+  if (batchRowsData[index]) {
+    batchRowsData[index][field] = val;
+    const el = document.getElementById(field === 'transport' ? 'batch-row-trans-' + index : 'batch-row-city-' + index);
+    if (el) el.value = val;
+  }
+}
+
+function fillBatchInputSafe(el) {
+  if (!el) return;
+  const row = parseInt(el.getAttribute('data-row'));
+  const field = el.getAttribute('data-field');
+  const val = el.getAttribute('data-val');
+  if (!isNaN(row) && field && val !== null) {
+    fillBatchInput(row, field, val);
+  }
+}
+
+function updateBatchMasterSaveButton() {
+  const saveBtn = document.getElementById('btn-batch-save-master');
+  if (!saveBtn) return;
+
+  let totalParcels = 0;
+  let totalAdvance = 0;
+
+  batchRowsData.forEach(r => {
+    totalParcels += parseInt(r.count) || 1;
+    if (r.type === 'paid') {
+      totalAdvance += parseFloat(r.advance) || 0;
+    }
+  });
+
+  saveBtn.innerHTML = `🚀 Sabhi Parcels Save Karo (${totalParcels} Parcels • Adv: ${formatInr(totalAdvance)})`;
+}
+
+function saveAllBatchRows() {
+  const dateVal = document.getElementById('inp-batch-date').value || getTodayIso();
+
+  // Validate each row
+  for (let i = 0; i < batchRowsData.length; i++) {
+    const row = batchRowsData[i];
+    if (!row.transport || !row.transport.trim()) {
+      toastNotify(`⚠️ Row #${i+1} mein Transport ka naam likhein!`);
+      sfxAlert();
+      const el = document.getElementById('batch-row-trans-' + i);
+      if (el) el.focus();
+      return;
+    }
+    if (!row.city || !row.city.trim()) {
+      toastNotify(`⚠️ Row #${i+1} mein Destination City likhein!`);
+      sfxAlert();
+      const el = document.getElementById('batch-row-city-' + i);
+      if (el) el.focus();
+      return;
+    }
+    if (row.type === 'paid') {
+      const adv = parseFloat(row.advance) || 0;
+      if (adv <= 0) {
+        toastNotify(`⚠️ Row #${i+1} mein Advance amount likhein (e.g. ₹500)!`);
+        sfxAlert();
+        const el = document.getElementById('batch-row-adv-' + i);
+        if (el) el.focus();
+        return;
+      }
+    }
+  }
+
+  const entries = dbGetEntries();
+  const createdEntries = [];
+
+  batchRowsData.forEach((row, idx) => {
+    const count = parseInt(row.count) || 1;
+    const isPaid = row.type === 'paid';
+    const adv = isPaid ? (parseFloat(row.advance) || 0) : 0;
+
+    const newEntry = {
+      id: 'ent_' + Date.now().toString(36) + Math.random().toString(36).substring(2, 6) + '_' + idx,
+      date: dateVal,
+      bilty: row.bilty || '',
+      transport: row.transport.trim(),
+      city: row.city.trim(),
+      parcelCount: count,
+      type: row.type,
+      advanceGiven: adv,
+      actualAmount: null,
+      commission: count * 100,
+      status: 'pending',
+      netPayment: null,
+      settledDate: null,
+      slipPhoto: null,
+      createdAt: new Date().toISOString()
+    };
+
+    createdEntries.push(newEntry);
+    rememberFrequent(DB_AUTO_NAMES, row.transport.trim());
+    rememberFrequent(DB_AUTO_CITIES, row.city.trim());
+  });
+
+  // Prepend to entries
+  createdEntries.reverse().forEach(e => entries.unshift(e));
+  saveEntries(entries);
+
+  // Reset batch rows
+  batchRowsData = [createEmptyBatchRowObj()];
+  renderBatchRows();
+
+  sfxSuccess();
+  toastNotify(`✅ Sabhi ${createdEntries.length} parcels successfully save huye!`);
+  switchNavTab('dashboard');
+}
+
+/* ═══════════════════════════════════════════
+   7. STEP 1: SINGLE EXPRESS DISPATCH FORM
+═══════════════════════════════════════════ */
+function setParcelType(type) {
+  sfxClick();
+  currentParcelType = type;
+
+  const btnPaid = document.getElementById('btn-type-paid');
+  const btnUnpaid = document.getElementById('btn-type-unpaid');
+  const advGroup = document.getElementById('group-advance');
+
+  if (type === 'paid') {
+    if (btnPaid) btnPaid.className = 'type-segment-btn active paid';
+    if (btnUnpaid) btnUnpaid.className = 'type-segment-btn';
+    if (advGroup) advGroup.style.display = 'block';
+  } else {
+    if (btnPaid) btnPaid.className = 'type-segment-btn';
+    if (btnUnpaid) btnUnpaid.className = 'type-segment-btn active unpaid';
+    if (advGroup) advGroup.style.display = 'none';
+  }
+  handleCountChange();
+}
+
+function stepParcelCount(delta) {
+  sfxClick();
+  const inp = document.getElementById('inp-count');
+  let val = parseInt(inp.value) || 1;
+  val = Math.max(1, val + delta);
+  inp.value = val;
+  handleCountChange();
+}
+
+function handleCountChange() {
+  const countInp = document.getElementById('inp-count');
+  const count = parseInt(countInp.value) || 1;
+  const commTotal = count * 100;
+  const previewLbl = document.getElementById('lbl-comm-preview');
+  if (previewLbl) {
+    previewLbl.textContent = `🏷️ Commission: ${count} × ₹100 = ${formatInr(commTotal)}`;
+  }
+}
+
+function setAdvancePreset(amt) {
+  sfxClick();
+  const inp = document.getElementById('inp-advance');
+  if (inp) inp.value = amt;
+}
+
+function renderEntryFormSuggestions() {
+  const defTrans = ['Shyam Transport', 'V-Trans', 'Jaipur Golden', 'TCI Express', 'Ghati Transport'];
+  const defCities = ['Mumbai', 'Delhi', 'Surat', 'Ahmedabad', 'Jaipur', 'Indore', 'Kolkata'];
+
+  const transList = dbGetFrequent(DB_AUTO_NAMES, defTrans);
+  const citiesList = dbGetFrequent(DB_AUTO_CITIES, defCities);
+
+  const transContainer = document.getElementById('chips-transports');
+  const citiesContainer = document.getElementById('chips-cities');
+
+  if (transContainer) {
+    transContainer.innerHTML = transList.map(t =>
+      `<span class="chip-tag" data-target="inp-transport" data-val="${escapeHtml(t)}" onclick="fillInputSafe(this)">${escapeHtml(t)}</span>`
+    ).join('');
+  }
+
+  if (citiesContainer) {
+    citiesContainer.innerHTML = citiesList.map(c =>
+      `<span class="chip-tag" data-target="inp-city" data-val="${escapeHtml(c)}" onclick="fillInputSafe(this)">📍 ${escapeHtml(c)}</span>`
+    ).join('');
+  }
+}
+
+function fillInput(id, val) {
+  sfxClick();
+  const el = document.getElementById(id);
+  if (el) {
+    el.value = val;
+    el.focus();
+  }
+}
+
+function fillInputSafe(el) {
+  if (!el) return;
+  const targetId = el.getAttribute('data-target');
+  const val = el.getAttribute('data-val');
+  if (targetId && val !== null) {
+    fillInput(targetId, val);
+  }
+}
+
+function saveExpressEntry(andNext = false) {
+  const dateVal = document.getElementById('inp-date').value || getTodayIso();
+  const biltyVal = document.getElementById('inp-bilty').value.trim();
+  const transportVal = document.getElementById('inp-transport').value.trim();
+  const cityVal = document.getElementById('inp-city').value.trim();
+  const countVal = parseInt(document.getElementById('inp-count').value) || 1;
+  const advanceVal = currentParcelType === 'paid' ? (parseFloat(document.getElementById('inp-advance').value) || 0) : 0;
+
+  if (!transportVal) {
+    toastNotify('⚠️ Transport ka naam likhein!');
+    sfxAlert();
+    document.getElementById('inp-transport').focus();
+    return;
+  }
+
+  if (!cityVal) {
+    toastNotify('⚠️ Destination city likhein!');
+    sfxAlert();
+    document.getElementById('inp-city').focus();
+    return;
+  }
+
+  if (currentParcelType === 'paid' && advanceVal <= 0) {
+    toastNotify('⚠️ Advance amount likhein (e.g. ₹500)!');
+    sfxAlert();
+    document.getElementById('inp-advance').focus();
+    return;
+  }
+
+  const newEntry = {
+    id: 'ent_' + Date.now().toString(36) + Math.random().toString(36).substring(2, 6),
+    date: dateVal,
+    bilty: biltyVal,
+    transport: transportVal,
+    city: cityVal,
+    parcelCount: countVal,
+    type: currentParcelType,
+    advanceGiven: advanceVal,
+    actualAmount: null,
+    commission: countVal * 100,
+    status: 'pending',
+    netPayment: null,
+    settledDate: null,
+    slipPhoto: null,
+    createdAt: new Date().toISOString()
+  };
+
+  const entries = dbGetEntries();
+  entries.unshift(newEntry);
+  saveEntries(entries);
+
+  rememberFrequent(DB_AUTO_NAMES, transportVal);
+  rememberFrequent(DB_AUTO_CITIES, cityVal);
+
+  // Clear fields
+  document.getElementById('inp-bilty').value = '';
+  document.getElementById('inp-transport').value = '';
+  document.getElementById('inp-city').value = '';
+  document.getElementById('inp-count').value = '1';
+  document.getElementById('inp-advance').value = '';
+  handleCountChange();
+
+  sfxSuccess();
+
+  if (andNext) {
+    toastNotify('✅ Parcel save hua! Agla enter karein');
+    document.getElementById('inp-transport').focus();
+  } else {
+    toastNotify('✅ Parcel successfully save hua!');
+    switchNavTab('dashboard');
+  }
+}
+
+/* ═══════════════════════════════════════════
+   8. SLIP PHOTO CAMERA & COMPRESSION ENGINE
+═══════════════════════════════════════════ */
+function compressImageFile(file, maxDim = 800, quality = 0.65, callback) {
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const img = new Image();
+    img.onload = function() {
+      let width = img.width;
+      let height = img.height;
+      if (width > maxDim || height > maxDim) {
+        if (width > height) {
+          height = Math.round((height * maxDim) / width);
+          width = maxDim;
+        } else {
+          width = Math.round((width * maxDim) / height);
+          height = maxDim;
+        }
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, width, height);
+      const dataUrl = canvas.toDataURL('image/jpeg', quality);
+      callback(dataUrl);
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function handleBatchSlipPhoto(input, entryId) {
+  const file = input.files[0];
+  if (!file) return;
+
+  compressImageFile(file, 800, 0.65, (base64) => {
+    batchPhotos[entryId] = base64;
+    const previewWrap = document.getElementById('batch-photo-wrap-' + entryId);
+    if (previewWrap) {
+      previewWrap.innerHTML = `
+        <img src="${base64}" class="photo-thumb-img" alt="Bilty" onclick="viewBatchPhoto('${entryId}')" />
+        <span style="font-size:0.7rem; color:var(--green); font-weight:700;">✓ Photo attached</span>
+      `;
+    }
+    sfxSuccess();
+    toastNotify('📷 Slip photo attach ho gayi!');
+  });
+}
+
+function viewBatchPhoto(entryId) {
+  sfxClick();
+  const b64 = batchPhotos[entryId];
+  if (b64) {
+    viewPhotoInModal(b64, 'Pending Slip Photo');
+  }
+}
+
+function handleSingleSlipPhoto(input) {
+  const file = input.files[0];
+  if (!file) return;
+
+  compressImageFile(file, 800, 0.65, (base64) => {
+    singleTempPhoto = base64;
+    const statusEl = document.getElementById('single-photo-status');
+    const previewWrap = document.getElementById('single-photo-preview-wrap');
+    const thumb = document.getElementById('single-photo-thumb');
+
+    if (statusEl) statusEl.textContent = '✓ Photo attached';
+    if (thumb) thumb.src = base64;
+    if (previewWrap) previewWrap.style.display = 'block';
+
+    sfxSuccess();
+    toastNotify('📷 Slip photo attach ho gayi!');
+  });
+}
+
+function viewPhotoForEntry(id) {
+  sfxClick();
+  const entries = dbGetEntries();
+  const entry = entries.find(e => e.id === id);
+  if (!entry || !entry.slipPhoto) {
+    toastNotify('Koi photo nahi mili');
+    return;
+  }
+  viewPhotoInModal(entry.slipPhoto, (entry.transport || 'Slip') + ' Bilty Photo');
+}
+
+function viewPhotoInModal(imgSrc, title = 'Bilty Slip Photo') {
+  sfxClick();
+  const modalImg = document.getElementById('photo-viewer-img');
+  const modalTitle = document.getElementById('photo-viewer-title');
+  if (modalImg) modalImg.src = imgSrc;
+  if (modalTitle) modalTitle.textContent = title;
+  openModal('modal-photo-viewer');
+}
+
+/* ═══════════════════════════════════════════
+   9. DASHBOARD RENDERING & BUSINESS LOGIC
+═══════════════════════════════════════════ */
+function renderDashboardView() {
+  const entries = dbGetEntries();
+  const balance = dbGetBalance();
+  const todayStr = getTodayIso();
+  const shop = getShopDetails();
+
+  // Header Title
+  const brandTitle = document.getElementById('brand-header-title');
+  if (brandTitle) brandTitle.textContent = shop.name || 'Tempo Hisaab';
+
+  // Date banner (Clean English)
+  const dateEl = document.getElementById('display-date');
+  if (dateEl) {
+    dateEl.textContent = new Date().toLocaleDateString('en-GB', {
+      weekday: 'short', day: 'numeric', month: 'short', year: 'numeric'
+    });
+  }
+
+  // Hero Running Balance
+  const heroCard = document.getElementById('hero-balance-card');
+  const heroTag = document.getElementById('hero-tag');
+  const heroAmount = document.getElementById('hero-amount');
+  const heroDesc = document.getElementById('hero-desc');
+
+  heroCard.className = 'balance-hero ' + (balance.type === 'zero' ? 'zero' : balance.type);
+
+  if (balance.type === 'jama') {
+    heroTag.textContent = '💚 JAMA (Tempo Wala Ke Paas Humara Credit)';
+    heroAmount.textContent = formatInr(balance.amount);
+    heroDesc.textContent = 'Agli payment mein yeh amount minus hoga';
+  } else if (balance.type === 'baaki') {
+    heroTag.textContent = '🔴 BAAKI (Humein Dena Hai)';
+    heroAmount.textContent = formatInr(balance.amount);
+    heroDesc.textContent = 'Tempo wala ko yeh amount dena baaki hai';
+  } else {
+    heroTag.textContent = '⚖️ Balance Barabar (Nil)';
+    heroAmount.textContent = '₹0';
+    heroDesc.textContent = 'Koi hisaab baaki nahi hai — sab settle hai!';
+  }
+
+  // Metrics for Today's Activity (only parcel shipments)
+  const todayEntries = entries.filter(e => e.date === todayStr);
+  const todayParcels = todayEntries.filter(e => e.type !== 'khata');
+  const totalParcelsToday = todayParcels.reduce((acc, cur) => acc + (cur.parcelCount || 1), 0);
+  const totalAdvanceToday = todayEntries.filter(e => e.type === 'paid').reduce((acc, cur) => acc + (cur.advanceGiven || 0), 0);
+  const totalCommToday = todayParcels.reduce((acc, cur) => acc + (cur.commission || 0), 0);
+
+  // All pending entries across all days (only parcels can be pending)
+  const pendingEntries = entries.filter(e => e.status === 'pending' && e.type !== 'khata');
+  const settledTodayEntries = entries.filter(e => e.status === 'settled' && e.settledDate === todayStr && e.type !== 'khata');
+
+  document.getElementById('metric-parcels').textContent = totalParcelsToday;
+  document.getElementById('metric-advance').textContent = formatInr(totalAdvanceToday);
+  document.getElementById('metric-commission').textContent = formatInr(totalCommToday);
+  document.getElementById('metric-pending').textContent = pendingEntries.length;
+
+  // Master Batch Settle Banner Visibility
+  const batchBanner = document.getElementById('batch-banner-container');
+  const msCount = document.getElementById('ms-count');
+  if (pendingEntries.length > 0) {
+    batchBanner.style.display = 'block';
+    msCount.textContent = pendingEntries.length;
+  } else {
+    batchBanner.style.display = 'none';
+  }
+
+  // Pending Entries List
+  const pendingList = document.getElementById('pending-entries-list');
+  const pendingBadge = document.getElementById('pending-count-badge');
+  pendingBadge.textContent = pendingEntries.length;
+
+  if (pendingEntries.length === 0) {
+    pendingList.innerHTML = `
+      <div class="empty-block">
+        <div class="empty-emoji">🎉</div>
+        <h4>Koi Pending Slip Nahi Hai</h4>
+        <p>Saara hisaab clear hai. Naya parcel bhejne ke liye 'Parcel Bhejo' tab dabayein.</p>
+      </div>
+    `;
+  } else {
+    pendingList.innerHTML = pendingEntries.map(e => createEntryHtml(e, true)).join('');
+  }
+
+  // Settled Today Section
+  const settledSection = document.getElementById('settled-today-container');
+  const settledList = document.getElementById('settled-entries-list');
+  const settledBadge = document.getElementById('settled-count-badge');
+  settledBadge.textContent = settledTodayEntries.length;
+
+  if (settledTodayEntries.length > 0) {
+    settledSection.style.display = 'block';
+    settledList.innerHTML = settledTodayEntries.map(e => createEntryHtml(e, false)).join('');
+  } else {
+    settledSection.style.display = 'none';
+  }
+}
+
+function createEntryHtml(entry, showSettleAction) {
+  const isPaid = entry.type === 'paid';
+  const isSettled = entry.status === 'settled';
+
+  let statusClass = 'status-pending';
+  let badgePill = '<span class="badge-pill pending">⏳ Slip Pending</span>';
+
+  if (isSettled) {
+    statusClass = 'status-settled';
+    badgePill = '<span class="badge-pill settled">✅ Settled</span>';
+  } else if (!isPaid) {
+    statusClass = 'status-unpaid';
+    badgePill = '<span class="badge-pill unpaid">🔄 Unpaid</span>';
+  }
+
+  let photoBadge = '';
+  if (entry.slipPhoto) {
+    photoBadge = `
+      <button class="btn btn-outline btn-ghost-sm" type="button" style="padding:4px 8px;" onclick="viewPhotoForEntry('${entry.id}')">
+        📷 Photo
+      </button>
+    `;
+  }
+
+  let actionsHtml = '';
+  if (showSettleAction) {
+    actionsHtml = `
+      <div class="entry-card-actions">
+        <button class="btn btn-outline btn-ghost-sm" style="flex:1;" type="button" onclick="openSingleSettleModal('${entry.id}')">
+          ${isPaid ? '📋 Slip Aayi — Settle' : '💰 Commission Settle'}
+        </button>
+        ${photoBadge}
+        <button class="btn btn-outline btn-ghost-sm" type="button" onclick="openEditModal('${entry.id}')">✏️ Edit</button>
+        <button class="btn btn-outline btn-ghost-sm btn-danger-ghost" type="button" onclick="promptDelete('${entry.id}')">🗑️</button>
+      </div>
+    `;
+  } else {
+    actionsHtml = `
+      <div class="entry-card-actions">
+        <span style="font-size:0.8rem; color:var(--green); font-weight:700;">
+          💰 Net: ${entry.netPayment !== null ? formatInr(entry.netPayment) : 'Settle'}
+        </span>
+        ${photoBadge}
+        <button class="btn btn-outline btn-ghost-sm" style="margin-left:auto;" type="button" onclick="openEditModal('${entry.id}')">✏️ Edit</button>
+        <button class="btn btn-outline btn-ghost-sm btn-danger-ghost" type="button" onclick="promptDelete('${entry.id}')">🗑️</button>
+      </div>
+    `;
+  }
+
+  return `
+    <div class="entry-card ${statusClass}">
+      <div class="entry-row-top">
+        <div>
+          <div class="transport-title">${escapeHtml(entry.transport)}</div>
+          <div class="destination-sub">
+            📍 ${escapeHtml(entry.city)}
+            ${entry.bilty ? `<span style="color:var(--text-dim); margin-left:6px;">• Bilty: #${escapeHtml(entry.bilty)}</span>` : ''}
+          </div>
+        </div>
+        ${badgePill}
+      </div>
+
+      <div class="entry-meta-grid">
+        <div class="meta-item">
+          Parcels
+          <strong>📦 ${entry.parcelCount}</strong>
+        </div>
+        <div class="meta-item">
+          Commission
+          <strong style="color:var(--accent);">🏷️ ${formatInr(entry.commission)}</strong>
+        </div>
+        <div class="meta-item">
+          Type
+          <strong>${isPaid ? '💰 Paid' : '🔄 Unpaid'}</strong>
+        </div>
+        ${isPaid ? `
+          <div class="meta-item">
+            Advance
+            <strong style="color:var(--yellow);">💵 ${formatInr(entry.advanceGiven)}</strong>
+          </div>
+        ` : ''}
+        ${isSettled && isPaid ? `
+          <div class="meta-item">
+            Actual Slip
+            <strong style="color:var(--green);">🧾 ${formatInr(entry.actualAmount || 0)}</strong>
+          </div>
+        ` : ''}
+        <div class="meta-item">
+          Date
+          <strong>📅 ${formatPrettyDate(entry.date)}</strong>
+        </div>
+      </div>
+
+      ${actionsHtml}
+    </div>
+  `;
+}
+
+/* ═══════════════════════════════════════════
+   10. STEP 2: INTERACTIVE MORNING SETTLEMENT
+═══════════════════════════════════════════ */
+function openBatchSettleModal() {
+  sfxClick();
+  const entries = dbGetEntries();
+  const pending = entries.filter(e => e.status === 'pending');
+  if (pending.length === 0) {
+    toastNotify('Koi pending slip nahi hai!');
+    return;
+  }
+
+  batchSettlementData.entries = pending;
+  batchPhotos = {};
+
+  const container = document.getElementById('batch-slips-items');
+  container.innerHTML = pending.map((e, index) => {
+    const isPaid = e.type === 'paid';
+    return `
+      <div class="batch-item-row" id="batch-row-${e.id}">
+        <div class="batch-item-header">
+          <div>
+            <div class="batch-item-title">${escapeHtml(e.transport)} → ${escapeHtml(e.city)}</div>
+            <div style="font-size:0.75rem; color:var(--text-dim);">
+              ${e.parcelCount} parcel${e.parcelCount>1?'s':''} (Comm: ${formatInr(e.commission)})
+              ${isPaid ? `• Adv: ${formatInr(e.advanceGiven)}` : '• Unpaid'}
+            </div>
+          </div>
+          <label style="font-size:0.75rem; color:var(--text-muted); display:flex; align-items:center; gap:4px; cursor:pointer;">
+            <input type="checkbox" id="batch-chk-${e.id}" checked onchange="recalcBatchCalculations()" /> Settle
+          </label>
+        </div>
+
+        ${isPaid ? `
+          <div class="batch-inputs-row">
+            <div style="flex:1; min-width:140px;">
+              <span style="font-size:0.74rem; color:var(--text-muted); font-weight:700;">Slip Freight:</span>
+              <input class="field-input" id="batch-actual-${e.id}" type="number" inputmode="decimal"
+                placeholder="e.g. 450" style="padding:8px 12px; font-size:0.95rem; min-height:42px;" oninput="recalcBatchCalculations()" />
+            </div>
+
+            <div style="display:flex; flex-direction:column; justify-content:flex-end;">
+              <button class="btn btn-outline btn-ghost-sm" type="button" onclick="document.getElementById('batch-cam-${e.id}').click()" style="min-height:42px;">
+                📷 Photo
+              </button>
+              <input type="file" id="batch-cam-${e.id}" accept="image/*" capture="environment" style="display:none;" onchange="handleBatchSlipPhoto(this, '${e.id}')" />
+            </div>
+          </div>
+          <div id="batch-photo-wrap-${e.id}" class="photo-thumb-wrap"></div>
+        ` : `
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div style="font-size:0.75rem; color:var(--blue); font-weight:700;">
+              ✓ ₹100/parcel commission auto-included
+            </div>
+            <button class="btn btn-outline btn-ghost-sm" type="button" onclick="document.getElementById('batch-cam-${e.id}').click()" style="min-height:36px; padding:4px 8px;">
+              📷 Photo
+            </button>
+            <input type="file" id="batch-cam-${e.id}" accept="image/*" capture="environment" style="display:none;" onchange="handleBatchSlipPhoto(this, '${e.id}')" />
+          </div>
+          <div id="batch-photo-wrap-${e.id}" class="photo-thumb-wrap"></div>
+        `}
+      </div>
+    `;
+  }).join('');
+
+  recalcBatchCalculations();
+  openModal('modal-batch-settle');
+}
+
+function recalcBatchCalculations() {
+  const pending = batchSettlementData.entries;
+  let totalActualSlip = 0;
+  let totalCommission = 0;
+  let totalAdvance = 0;
+
+  pending.forEach(e => {
+    const chk = document.getElementById('batch-chk-' + e.id);
+    if (chk && chk.checked) {
+      totalCommission += e.commission;
+      if (e.type === 'paid') {
+        totalAdvance += e.advanceGiven;
+        const actualInp = document.getElementById('batch-actual-' + e.id);
+        const actualVal = parseFloat(actualInp ? actualInp.value : 0) || 0;
+        totalActualSlip += actualVal;
+      }
+    }
+  });
+
+  const curBalance = dbGetBalance();
+  let jamaCredit = curBalance.type === 'jama' ? curBalance.amount : 0;
+  let baakiDebt = curBalance.type === 'baaki' ? curBalance.amount : 0;
+
+  // Formula: Net Due = (Actual Transport) + (Commission) - (Advance Given) - (Prior Jama) + (Prior Baaki)
+  const netPayable = (totalActualSlip + totalCommission - totalAdvance) - jamaCredit + baakiDebt;
+
+  batchSettlementData.netBeforeCash = netPayable;
+
+  document.getElementById('bb-slips-total').textContent = formatInr(totalActualSlip);
+  document.getElementById('bb-comm-total').textContent = formatInr(totalCommission);
+  document.getElementById('bb-adv-total').textContent = '-' + formatInr(totalAdvance);
+
+  const balStatusEl = document.getElementById('bb-bal-status');
+  if (curBalance.type === 'jama') {
+    balStatusEl.textContent = '- ' + formatInr(curBalance.amount) + ' (Jama)';
+    balStatusEl.style.color = 'var(--green)';
+  } else if (curBalance.type === 'baaki') {
+    balStatusEl.textContent = '+ ' + formatInr(curBalance.amount) + ' (Baaki)';
+    balStatusEl.style.color = 'var(--red)';
+  } else {
+    balStatusEl.textContent = '₹0 (Nil)';
+    balStatusEl.style.color = 'var(--text-muted)';
+  }
+
+  const netLabel = document.getElementById('bb-net-label');
+  const netAmt = document.getElementById('bb-net-amount');
+
+  if (netPayable > 0) {
+    netLabel.textContent = '💸 Tempo Ko Cash Dena Hai:';
+    netAmt.textContent = formatInr(netPayable);
+    netAmt.style.color = 'var(--accent)';
+  } else if (netPayable < 0) {
+    netLabel.textContent = '💚 Tempo Ke Paas Jama Banega:';
+    netAmt.textContent = formatInr(Math.abs(netPayable));
+    netAmt.style.color = 'var(--green)';
+  } else {
+    netLabel.textContent = '⚖️ Hisaab Barabar (Nil):';
+    netAmt.textContent = '₹0';
+    netAmt.style.color = 'var(--text-main)';
+  }
+
+  // Quick Preset Buttons
+  const presetContainer = document.getElementById('batch-cash-presets');
+  if (netPayable > 0) {
+    const exact = Math.round(netPayable);
+    const round100 = Math.ceil(exact / 100) * 100;
+    const round500 = Math.ceil(exact / 500) * 500;
+
+    const presets = [exact];
+    if (round100 > exact && !presets.includes(round100)) presets.push(round100);
+    if (round500 > exact && !presets.includes(round500)) presets.push(round500);
+
+    presetContainer.innerHTML = presets.map(p =>
+      `<button class="cash-preset-btn" type="button" onclick="setBatchCash(${p})">${formatInr(p)}</button>`
+    ).join('');
+  } else {
+    presetContainer.innerHTML = `<button class="cash-preset-btn" type="button" onclick="setBatchCash(0)">₹0</button>`;
+  }
+
+  recalcBatchCashDifference();
+}
+
+function setBatchCash(amt) {
+  sfxClick();
+  const inp = document.getElementById('inp-batch-cash');
+  inp.value = amt;
+  recalcBatchCashDifference();
+}
+
+function recalcBatchCashDifference() {
+  const netDue = batchSettlementData.netBeforeCash;
+  const cashInp = document.getElementById('inp-batch-cash');
+  const cashVal = parseFloat(cashInp.value) || 0;
+  batchSettlementData.cashGiven = cashVal;
+
+  const resultInfo = document.getElementById('bb-resulting-balance-info');
+
+  if (netDue > 0) {
+    const diff = cashVal - netDue;
+    if (diff > 0) {
+      resultInfo.innerHTML = `<span style="color:var(--green);">✨ Naya Jama: ${formatInr(diff)} (Tempo holds credit for next run)</span>`;
+    } else if (diff < 0) {
+      resultInfo.innerHTML = `<span style="color:var(--red);">⚠️ Naya Baaki: ${formatInr(Math.abs(diff))} (Tempo ko dena baaki hai)</span>`;
+    } else {
+      resultInfo.innerHTML = `<span style="color:var(--green);">⚖️ Balance Nil — Hisaab bilkul barabar!</span>`;
+    }
+  } else if (netDue < 0) {
+    const totalJama = Math.abs(netDue) + cashVal;
+    resultInfo.innerHTML = `<span style="color:var(--green);">✨ Naya Jama: ${formatInr(totalJama)} (Tempo holds credit)</span>`;
+  } else {
+    if (cashVal > 0) {
+      resultInfo.innerHTML = `<span style="color:var(--green);">✨ Naya Jama: ${formatInr(cashVal)}</span>`;
+    } else {
+      resultInfo.innerHTML = `<span style="color:var(--green);">⚖️ Balance Nil</span>`;
+    }
+  }
+}
+
+function confirmBatchSettlement(sendWhatsApp) {
+  const entries = dbGetEntries();
+  const pending = batchSettlementData.entries;
+  const todayStr = getTodayIso();
+
+  // Validate slips have actual amount
+  let hasMissingActual = false;
+  pending.forEach(e => {
+    const chk = document.getElementById('batch-chk-' + e.id);
+    if (chk && chk.checked && e.type === 'paid') {
+      const actualInp = document.getElementById('batch-actual-' + e.id);
+      const val = parseFloat(actualInp ? actualInp.value : 0) || 0;
+      if (val <= 0) hasMissingActual = true;
+    }
+  });
+
+  if (hasMissingActual) {
+    toastNotify('⚠️ Please sabhi paid slips ka actual amount likhein!');
+    sfxAlert();
+    return;
+  }
+
+  const settledItems = [];
+  pending.forEach(e => {
+    const chk = document.getElementById('batch-chk-' + e.id);
+    if (chk && chk.checked) {
+      const idx = entries.findIndex(item => item.id === e.id);
+      if (idx !== -1) {
+        let actualVal = 0;
+        if (e.type === 'paid') {
+          const actualInp = document.getElementById('batch-actual-' + e.id);
+          actualVal = parseFloat(actualInp ? actualInp.value : 0) || 0;
+        }
+        entries[idx].status = 'settled';
+        entries[idx].actualAmount = actualVal;
+        entries[idx].settledDate = todayStr;
+        entries[idx].settledAt = new Date().toISOString();
+        entries[idx].netPayment = actualVal + entries[idx].commission - entries[idx].advanceGiven;
+        if (batchPhotos[e.id]) {
+          entries[idx].slipPhoto = batchPhotos[e.id];
+        }
+        settledItems.push(entries[idx]);
+      }
+    }
+  });
+
+  // Calculate new resulting balance based on cash handed over
+  const netDue = batchSettlementData.netBeforeCash;
+  const cashGiven = batchSettlementData.cashGiven;
+  let newBalance = { amount: 0, type: 'zero' };
+
+  if (netDue > 0) {
+    const diff = cashGiven - netDue;
+    if (diff > 0) newBalance = { amount: Math.round(diff), type: 'jama' };
+    else if (diff < 0) newBalance = { amount: Math.round(Math.abs(diff)), type: 'baaki' };
+  } else if (netDue < 0) {
+    newBalance = { amount: Math.round(Math.abs(netDue) + cashGiven), type: 'jama' };
+  } else {
+    if (cashGiven > 0) newBalance = { amount: Math.round(cashGiven), type: 'jama' };
+  }
+
+  // Record cash handed over in ledger
+  if (cashGiven > 0) {
+    const cashEntry = {
+      id: 'kht_set_' + Date.now().toString(36),
+      date: todayStr,
+      bilty: '',
+      transport: '💵 Settlement Cash Diya',
+      city: `Morning Settlement Cash (${settledItems.length} slips)`,
+      parcelCount: 0,
+      type: 'khata',
+      advanceGiven: 0,
+      actualAmount: cashGiven,
+      commission: 0,
+      status: 'settled',
+      netPayment: cashGiven,
+      settledDate: todayStr,
+      slipPhoto: null,
+      createdAt: new Date().toISOString()
+    };
+    entries.unshift(cashEntry);
+  }
+
+  saveEntries(entries);
+  saveBalance(newBalance);
+
+  closeModal('modal-batch-settle');
+  sfxSuccess();
+  toastNotify('✅ Batch Hisaab Settle Hua!');
+
+  if (sendWhatsApp) {
+    shareBatchWhatsApp(settledItems, netDue, cashGiven, newBalance);
+  }
+
+  renderDashboardView();
+}
+
+function shareBatchWhatsApp(items, netDue, cashGiven, newBalance) {
+  const shop = getShopDetails();
+  let text = `🚚 *${(shop.name || 'TEMPO HISAAB').toUpperCase()} — SETTLEMENT RECEIPT*\n`;
+  text += `📅 Date: ${new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}\n\n`;
+
+  text += `📦 *Settle Ki Gayi Slips (${items.length}):*\n`;
+  items.forEach((item, i) => {
+    if (item.type === 'paid') {
+      text += `${i+1}. ${item.transport} (${item.city}) - ${item.parcelCount} pcs | Slip: ₹${item.actualAmount} | Adv: ₹${item.advanceGiven}\n`;
+    } else {
+      text += `${i+1}. ${item.transport} (${item.city}) - ${item.parcelCount} pcs (Unpaid) | Comm: ₹${item.commission}\n`;
+    }
+  });
+
+  text += `\n📊 *Final Hisaab Summary:*\n`;
+  text += `• Net Payable: ${formatInr(netDue)}\n`;
+  text += `• Cash Diya: ${formatInr(cashGiven)}\n`;
+
+  if (newBalance.type === 'jama') {
+    text += `✨ *Naya Balance:* ${formatInr(newBalance.amount)} JAMA (Tempo ke paas credit)\n`;
+  } else if (newBalance.type === 'baaki') {
+    text += `⚠️ *Naya Balance:* ${formatInr(newBalance.amount)} BAAKI (Humein dena hai)\n`;
+  } else {
+    text += `⚖️ *Naya Balance:* ₹0 (Hisaab Barabar)\n`;
+  }
+
+  text += `\n_Generated via Tempo Hisaab App_`;
+
+  const url = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(text);
+  window.open(url, '_blank');
+}
+
+/* ═══════════════════════════════════════════
+   11. SINGLE ENTRY SLIP SETTLEMENT MODAL
+═══════════════════════════════════════════ */
+function openSingleSettleModal(id) {
+  sfxClick();
+  activeSingleSettleId = id;
+  singleTempPhoto = null;
+
+  const entries = dbGetEntries();
+  const entry = entries.find(e => e.id === id);
+  if (!entry) return;
+
+  const isPaid = entry.type === 'paid';
+  document.getElementById('single-settle-title').textContent = isPaid ? '📋 Slip Amount Enter Karein' : '💰 Commission Settle Karein';
+  document.getElementById('single-settle-sub').textContent = `${entry.transport} → ${entry.city} | ${entry.parcelCount} parcel${entry.parcelCount>1?'s':''}`;
+
+  document.getElementById('single-actual-group').style.display = isPaid ? 'block' : 'none';
+  document.getElementById('single-row-actual').style.display = isPaid ? 'flex' : 'none';
+  document.getElementById('single-row-adv').style.display = isPaid ? 'flex' : 'none';
+
+  document.getElementById('single-val-count').textContent = entry.parcelCount;
+  document.getElementById('single-val-comm').textContent = formatInr(entry.commission);
+  if (isPaid) {
+    document.getElementById('single-val-adv').textContent = '-' + formatInr(entry.advanceGiven);
+  }
+
+  document.getElementById('inp-single-actual').value = '';
+  document.getElementById('inp-single-cash').value = '';
+
+  const photoStatus = document.getElementById('single-photo-status');
+  const photoWrap = document.getElementById('single-photo-preview-wrap');
+  const photoThumb = document.getElementById('single-photo-thumb');
+
+  if (entry.slipPhoto) {
+    singleTempPhoto = entry.slipPhoto;
+    if (photoStatus) photoStatus.textContent = '✓ Saved photo';
+    if (photoThumb) photoThumb.src = entry.slipPhoto;
+    if (photoWrap) photoWrap.style.display = 'block';
+  } else {
+    if (photoStatus) photoStatus.textContent = 'Koi photo nahi';
+    if (photoWrap) photoWrap.style.display = 'none';
+  }
+
+  recalcSingleModal();
+  openModal('modal-single-settle');
+}
+
+function recalcSingleModal() {
+  const entries = dbGetEntries();
+  const entry = entries.find(e => e.id === activeSingleSettleId);
+  if (!entry) return;
+
+  const isPaid = entry.type === 'paid';
+  const actualVal = isPaid ? (parseFloat(document.getElementById('inp-single-actual').value) || 0) : 0;
+  document.getElementById('single-val-actual').textContent = formatInr(actualVal);
+
+  const curBalance = dbGetBalance();
+  const jamaCredit = curBalance.type === 'jama' ? curBalance.amount : 0;
+  const baakiDebt = curBalance.type === 'baaki' ? curBalance.amount : 0;
+
+  const balEl = document.getElementById('single-val-bal');
+  if (curBalance.type === 'jama') {
+    balEl.textContent = '- ' + formatInr(curBalance.amount) + ' (Jama)';
+    balEl.style.color = 'var(--green)';
+  } else if (curBalance.type === 'baaki') {
+    balEl.textContent = '+ ' + formatInr(curBalance.amount) + ' (Baaki)';
+    balEl.style.color = 'var(--red)';
+  } else {
+    balEl.textContent = '₹0';
+    balEl.style.color = 'var(--text-muted)';
+  }
+
+  const rawNet = (isPaid ? (actualVal - entry.advanceGiven) : 0) + entry.commission;
+  const finalNet = rawNet - jamaCredit + baakiDebt;
+
+  const lblNet = document.getElementById('single-lbl-net');
+  const valNet = document.getElementById('single-val-net');
+
+  if (finalNet > 0) {
+    lblNet.textContent = '💸 Tempo Ko Dena Hai:';
+    valNet.textContent = formatInr(finalNet);
+    valNet.style.color = 'var(--accent)';
+  } else if (finalNet < 0) {
+    lblNet.textContent = '💚 Tempo Ke Paas Jama:';
+    valNet.textContent = formatInr(Math.abs(finalNet));
+    valNet.style.color = 'var(--green)';
+  } else {
+    lblNet.textContent = '⚖️ Hisaab Barabar:';
+    valNet.textContent = '₹0';
+    valNet.style.color = 'var(--text-main)';
+  }
+
+  const presetContainer = document.getElementById('single-cash-presets');
+  if (finalNet > 0) {
+    const exact = Math.round(finalNet);
+    const round100 = Math.ceil(exact / 100) * 100;
+    presetContainer.innerHTML = `
+      <button class="cash-preset-btn" type="button" onclick="setSingleCash(${exact})">${formatInr(exact)}</button>
+      ${round100 > exact ? `<button class="cash-preset-btn" type="button" onclick="setSingleCash(${round100})">${formatInr(round100)}</button>` : ''}
+    `;
+  } else {
+    presetContainer.innerHTML = `<button class="cash-preset-btn" type="button" onclick="setSingleCash(0)">₹0</button>`;
+  }
+
+  recalcSingleCashDiff();
+}
+
+function setSingleCash(amt) {
+  sfxClick();
+  document.getElementById('inp-single-cash').value = amt;
+  recalcSingleCashDiff();
+}
+
+function recalcSingleCashDiff() {
+  const entries = dbGetEntries();
+  const entry = entries.find(e => e.id === activeSingleSettleId);
+  if (!entry) return;
+
+  const isPaid = entry.type === 'paid';
+  const actualVal = isPaid ? (parseFloat(document.getElementById('inp-single-actual').value) || 0) : 0;
+  const curBalance = dbGetBalance();
+  const jamaCredit = curBalance.type === 'jama' ? curBalance.amount : 0;
+  const baakiDebt = curBalance.type === 'baaki' ? curBalance.amount : 0;
+  const finalNet = (isPaid ? (actualVal - entry.advanceGiven) : 0) + entry.commission - jamaCredit + baakiDebt;
+
+  const cashVal = parseFloat(document.getElementById('inp-single-cash').value) || 0;
+  const resultInfo = document.getElementById('single-resulting-bal-info');
+
+  if (finalNet > 0) {
+    const diff = cashVal - finalNet;
+    if (diff > 0) {
+      resultInfo.innerHTML = `<span style="color:var(--green);">✨ Naya Jama: ${formatInr(diff)}</span>`;
+    } else if (diff < 0) {
+      resultInfo.innerHTML = `<span style="color:var(--red);">⚠️ Naya Baaki: ${formatInr(Math.abs(diff))}</span>`;
+    } else {
+      resultInfo.innerHTML = `<span style="color:var(--green);">⚖️ Balance Nil</span>`;
+    }
+  } else {
+    resultInfo.innerHTML = `<span style="color:var(--green);">✨ Naya Jama: ${formatInr(Math.abs(finalNet) + cashVal)}</span>`;
+  }
+}
+
+function confirmSingleSettlement(sendWhatsApp) {
+  const entries = dbGetEntries();
+  const idx = entries.findIndex(e => e.id === activeSingleSettleId);
+  if (idx === -1) return;
+
+  const entry = entries[idx];
+  const isPaid = entry.type === 'paid';
+  const actualVal = isPaid ? (parseFloat(document.getElementById('inp-single-actual').value) || 0) : 0;
+
+  if (isPaid && actualVal <= 0) {
+    toastNotify('⚠️ Slip ka actual amount likhein!');
+    sfxAlert();
+    return;
+  }
+
+  const curBalance = dbGetBalance();
+  const jamaCredit = curBalance.type === 'jama' ? curBalance.amount : 0;
+  const baakiDebt = curBalance.type === 'baaki' ? curBalance.amount : 0;
+  const finalNet = (isPaid ? (actualVal - entry.advanceGiven) : 0) + entry.commission - jamaCredit + baakiDebt;
+
+  const cashVal = parseFloat(document.getElementById('inp-single-cash').value) || 0;
+
+  let newBalance = { amount: 0, type: 'zero' };
+  if (finalNet > 0) {
+    const diff = cashVal - finalNet;
+    if (diff > 0) newBalance = { amount: Math.round(diff), type: 'jama' };
+    else if (diff < 0) newBalance = { amount: Math.round(Math.abs(diff)), type: 'baaki' };
+  } else {
+    newBalance = { amount: Math.round(Math.abs(finalNet) + cashVal), type: 'jama' };
+  }
+
+  entries[idx].status = 'settled';
+  entries[idx].actualAmount = actualVal;
+  entries[idx].settledDate = getTodayIso();
+  entries[idx].settledAt = new Date().toISOString();
+  entries[idx].netPayment = actualVal + entries[idx].commission - entries[idx].advanceGiven;
+  if (singleTempPhoto) {
+    entries[idx].slipPhoto = singleTempPhoto;
+  }
+
+  // Record cash handed over in ledger
+  if (cashVal > 0) {
+    const cashEntry = {
+      id: 'kht_set_' + Date.now().toString(36),
+      date: getTodayIso(),
+      bilty: '',
+      transport: '💵 Settlement Cash Diya',
+      city: `Slip Settlement Cash (${entry.transport})`,
+      parcelCount: 0,
+      type: 'khata',
+      advanceGiven: 0,
+      actualAmount: cashVal,
+      commission: 0,
+      status: 'settled',
+      netPayment: cashVal,
+      settledDate: getTodayIso(),
+      slipPhoto: null,
+      createdAt: new Date().toISOString()
+    };
+    entries.unshift(cashEntry);
+  }
+
+  saveEntries(entries);
+  saveBalance(newBalance);
+
+  closeModal('modal-single-settle');
+  sfxSuccess();
+  toastNotify('✅ Slip settle ho gayi!');
+
+  if (sendWhatsApp) {
+    shareBatchWhatsApp([entries[idx]], finalNet, cashVal, newBalance);
+  }
+
+  renderDashboardView();
+}
+
+/* ═══════════════════════════════════════════
+   12. DIRECT KHATA CASH ENTRY
+═══════════════════════════════════════════ */
+function openCashAdjustModal() {
+  sfxClick();
+  document.getElementById('inp-khata-amount').value = '';
+  document.getElementById('inp-khata-note').value = '';
+  setKhataAction('give');
+  openModal('modal-cash-adjust');
+}
+
+function setKhataAction(action) {
+  sfxClick();
+  khataActionType = action;
+  const btnGive = document.getElementById('btn-khata-give');
+  const btnTake = document.getElementById('btn-khata-take');
+
+  if (action === 'give') {
+    btnGive.className = 'type-segment-btn active paid';
+    btnTake.className = 'type-segment-btn';
+  } else {
+    btnGive.className = 'type-segment-btn';
+    btnTake.className = 'type-segment-btn active unpaid';
+  }
+}
+
+function saveKhataAdjustment() {
+  const amt = parseFloat(document.getElementById('inp-khata-amount').value) || 0;
+  const note = document.getElementById('inp-khata-note').value.trim();
+
+  if (amt <= 0) {
+    toastNotify('⚠️ Valid amount likhein!');
+    sfxAlert();
+    return;
+  }
+
+  const curBalance = dbGetBalance();
+  let currentCredit = curBalance.type === 'jama' ? curBalance.amount : (curBalance.type === 'baaki' ? -curBalance.amount : 0);
+
+  if (khataActionType === 'give') {
+    currentCredit += amt;
+  } else {
+    currentCredit -= amt;
+  }
+
+  let newBal = { amount: 0, type: 'zero' };
+  if (currentCredit > 0) newBal = { amount: Math.round(currentCredit), type: 'jama' };
+  else if (currentCredit < 0) newBal = { amount: Math.round(Math.abs(currentCredit)), type: 'baaki' };
+
+  saveBalance(newBal);
+
+  const logEntry = {
+    id: 'kht_' + Date.now().toString(36),
+    date: getTodayIso(),
+    bilty: '',
+    transport: khataActionType === 'give' ? '💵 Cash Diya Tempo Ko' : '💰 Cash Wapas Liya',
+    city: note || (khataActionType === 'give' ? 'Direct Cash Payment' : 'Cash Received Back'),
+    parcelCount: 0,
+    type: 'khata',
+    advanceGiven: 0,
+    actualAmount: amt,
+    commission: 0,
+    status: 'settled',
+    netPayment: khataActionType === 'give' ? amt : -amt,
+    settledDate: getTodayIso(),
+    slipPhoto: null,
+    createdAt: new Date().toISOString()
+  };
+
+  const entries = dbGetEntries();
+  entries.unshift(logEntry);
+  saveEntries(entries);
+
+  closeModal('modal-cash-adjust');
+  sfxSuccess();
+  toastNotify('✅ Khata balance update ho gaya!');
+  renderDashboardView();
+  if (appCurrentTab === 'history') renderHistoryView();
+}
+
+/* ═══════════════════════════════════════════
+   13. STEP 3: DUAL-VIEW HISAAB-KITAAB & PASSBOOK
+═══════════════════════════════════════════ */
+function renderHistoryView() {
+  if (currentKhataView === 'passbook') {
+    renderPassbookLedger();
+  } else {
+    renderParcelLog();
+  }
+}
+
+// VIEW A: PASSBOOK LEDGER TIMELINE (Chronological running balance)
+function renderPassbookLedger() {
+  const entries = dbGetEntries();
+  const curBal = dbGetBalance();
+
+  const heroBal = document.getElementById('passbook-hero-balance');
+  if (heroBal) {
+    if (curBal.type === 'jama') {
+      heroBal.innerHTML = `<span style="color:var(--green);">${formatInr(curBal.amount)} JAMA</span> (Humara credit)`;
+    } else if (curBal.type === 'baaki') {
+      heroBal.innerHTML = `<span style="color:var(--red);">${formatInr(curBal.amount)} BAAKI</span> (Dena baaki hai)`;
+    } else {
+      heroBal.innerHTML = `<span>₹0 (Nil / Barabar)</span>`;
+    }
+  }
+
+  const container = document.getElementById('passbook-entries-container');
+  if (!container) return;
+
+  if (entries.length === 0) {
+    container.innerHTML = `
+      <div class="empty-block">
+        <div class="empty-emoji">📒</div>
+        <h4>Koi Passbook Entry Nahi Hai</h4>
+        <p>Parcels dispatch karein ya direct cash entry karein.</p>
+      </div>
+    `;
+    return;
+  }
+
+  // Build individual financial events as distinct chronological ledger entries:
+  // 1. Dispatch advance (when paid parcel dispatched)
+  // 2. Slip settlement charges (when slips confirmed)
+  // 3. Khata Cash payments and refunds
+  const timelineEvents = [];
+
+  entries.forEach(e => {
+    if (e.type === 'khata') {
+      const isGive = (e.transport || '').includes('Diya');
+      const amt = e.actualAmount || 0;
+      const ts = e.createdAt || (e.date ? e.date + 'T12:00:00.000Z' : new Date().toISOString());
+      timelineEvents.push({
+        id: e.id,
+        date: e.date,
+        time: e.createdAt ? new Date(e.createdAt).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) : '',
+        timestamp: ts,
+        title: e.transport || (isGive ? '💵 Cash Diya Tempo Ko' : '💰 Cash Wapas Liya'),
+        sub: e.city || (isGive ? 'Direct Cash Payment' : 'Cash Received Back'),
+        moneyGiven: isGive ? amt : 0,
+        moneyTaken: !isGive ? amt : 0,
+        incurred: 0
+      });
+    } else {
+      // 1. Dispatch Advance Event
+      if (e.type === 'paid' && (e.advanceGiven || 0) > 0) {
+        const advTs = e.createdAt || (e.date ? e.date + 'T17:00:00.000Z' : new Date().toISOString());
+        timelineEvents.push({
+          id: e.id + '_adv',
+          date: e.date,
+          time: e.createdAt ? new Date(e.createdAt).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) : '',
+          timestamp: advTs,
+          title: `🚚 Dispatch Adv: ${e.transport}`,
+          sub: `${e.city} (${e.parcelCount} parcel${e.parcelCount > 1 ? 's' : ''})`,
+          moneyGiven: e.advanceGiven,
+          moneyTaken: 0,
+          incurred: 0
+        });
+      }
+
+      // 2. Settlement Charges Event
+      if (e.status === 'settled') {
+        const totalCharges = (e.type === 'paid' ? (e.actualAmount || 0) : 0) + (e.commission || 0);
+        const settleTs = e.settledAt || (e.settledDate ? e.settledDate + 'T09:00:00.000Z' : (e.createdAt || new Date().toISOString()));
+        const timeStr = e.settledAt ? new Date(e.settledAt).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) : '';
+        timelineEvents.push({
+          id: e.id + '_stl',
+          date: e.settledDate || e.date,
+          time: timeStr,
+          timestamp: settleTs,
+          title: `🧾 Settle: ${e.transport}`,
+          sub: `${e.city} • Freight: ₹${e.actualAmount || 0} + Comm: ₹${e.commission}`,
+          moneyGiven: 0,
+          moneyTaken: 0,
+          incurred: totalCharges
+        });
+      }
+    }
+  });
+
+  // Sort ALL events strictly chronologically (oldest to newest)
+  timelineEvents.sort((a, b) => (a.timestamp || a.date).localeCompare(b.timestamp || b.date));
+
+  // Compute exact sequential running balance
+  let runningCredit = 0; // Positive = Jama, Negative = Baaki
+  timelineEvents.forEach(item => {
+    runningCredit += (item.moneyGiven - item.moneyTaken - item.incurred);
+    item.balanceAfter = runningCredit;
+  });
+
+  // Display reverse chronological (newest on top)
+  const displayList = [...timelineEvents].reverse();
+
+  container.innerHTML = displayList.map(item => {
+    let balBadge = '';
+    if (item.balanceAfter > 0) {
+      balBadge = `<span class="lf-val jama">+${formatInr(item.balanceAfter)} Jama</span>`;
+    } else if (item.balanceAfter < 0) {
+      balBadge = `<span class="lf-val baaki">-${formatInr(Math.abs(item.balanceAfter))} Baaki</span>`;
+    } else {
+      balBadge = `<span class="lf-val">₹0 Nil</span>`;
+    }
+
+    return `
+      <div class="ledger-entry-card">
+        <div class="ledger-row-header">
+          <div>
+            <div class="ledger-desc">${escapeHtml(item.title)}</div>
+            <div class="ledger-sub">${escapeHtml(item.sub)}</div>
+          </div>
+          <div class="ledger-time">
+            📅 ${formatPrettyDate(item.date)} ${item.time ? '• ' + item.time : ''}
+          </div>
+        </div>
+
+        <div class="ledger-figures-grid">
+          <div class="lf-item">
+            <span class="lf-label">Money Given</span>
+            <span class="lf-val out">${item.moneyGiven > 0 ? formatInr(item.moneyGiven) : (item.moneyTaken > 0 ? '-' + formatInr(item.moneyTaken) : '—')}</span>
+          </div>
+          <div class="lf-item">
+            <span class="lf-label">Charges / Freight</span>
+            <span class="lf-val incurred">${item.incurred > 0 ? formatInr(item.incurred) : '—'}</span>
+          </div>
+          <div class="lf-item">
+            <span class="lf-label">Running Balance</span>
+            ${balBadge}
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// VIEW B: SEARCHABLE & FILTERABLE PARCEL LOG
+function selectHistoryFilter(filter, chipEl) {
+  sfxClick();
+  currentHistoryFilter = filter;
+  document.querySelectorAll('#history-filter-chips .chip-tag').forEach(c => c.classList.remove('active'));
+  if (chipEl) chipEl.classList.add('active');
+  renderParcelLog();
+}
+
+function renderParcelLog() {
+  const entries = dbGetEntries();
+  const searchInp = document.getElementById('search-history');
+  const query = searchInp ? searchInp.value.trim().toLowerCase() : '';
+
+  let list = entries.filter(e => {
+    if (e.type === 'khata') return false; // Parcel Log tracks shipment parcels only
+
+    if (query) {
+      const matchTrans = (e.transport || '').toLowerCase().includes(query);
+      const matchCity = (e.city || '').toLowerCase().includes(query);
+      const matchBilty = (e.bilty || '').toLowerCase().includes(query);
+      if (!matchTrans && !matchCity && !matchBilty) return false;
+    }
+
+    if (currentHistoryFilter === 'pending') return e.status === 'pending';
+    if (currentHistoryFilter === 'settled') return e.status === 'settled';
+    if (currentHistoryFilter === 'paid') return e.type === 'paid';
+    if (currentHistoryFilter === 'unpaid') return e.type === 'unpaid';
+    return true;
+  });
+
+  const container = document.getElementById('history-entries-container');
+  if (!container) return;
+
+  if (list.length === 0) {
+    container.innerHTML = `
+      <div class="empty-block">
+        <div class="empty-emoji">📭</div>
+        <h4>Koi Record Nahi Mila</h4>
+        <p>Filter change karein ya search clear karein.</p>
+      </div>
+    `;
+    return;
+  }
+
+  // Group by date
+  const grouped = {};
+  list.forEach(e => {
+    if (!grouped[e.date]) grouped[e.date] = [];
+    grouped[e.date].push(e);
+  });
+
+  const datesDesc = Object.keys(grouped).sort((a, b) => b.localeCompare(a));
+  let html = '';
+
+  datesDesc.forEach(dateStr => {
+    html += `
+      <div style="font-size:0.75rem; font-weight:800; color:var(--accent); text-transform:uppercase; letter-spacing:0.5px; padding:12px 0 6px;">
+        📅 ${formatPrettyDate(dateStr)}
+      </div>
+    `;
+    grouped[dateStr].forEach(item => {
+      html += createEntryHtml(item, item.status === 'pending');
+    });
+  });
+
+  container.innerHTML = html;
+}
+
+/* ═══════════════════════════════════════════
+   14. COMMERCIAL STATEMENT & PRINT ENGINE
+═══════════════════════════════════════════ */
+function openPrintStatementModal() {
+  sfxClick();
+  currentPrintRange = 'today';
+  renderPrintStatement();
+  openModal('modal-print-statement');
+}
+
+function changePrintRange(range, chipEl) {
+  sfxClick();
+  currentPrintRange = range;
+  document.querySelectorAll('#statement-range-chips .chip-tag').forEach(c => c.classList.remove('active'));
+  if (chipEl) chipEl.classList.add('active');
+  renderPrintStatement();
+}
+
+function renderPrintStatement() {
+  const entries = dbGetEntries();
+  const balance = dbGetBalance();
+  const shop = getShopDetails();
+  const todayStr = getTodayIso();
+
+  // Shop Name & Printed Info
+  document.getElementById('print-shop-name').textContent = shop.name || 'M/s Tempo Transport Hisaab';
+  document.getElementById('print-generated-date').textContent = 'Printed: ' + new Date().toLocaleDateString('en-GB', {
+    weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
+  });
+
+  const rangeLabel = document.getElementById('print-range-label');
+
+  // Filter entries according to selected range
+  let filtered = [];
+  if (currentPrintRange === 'today') {
+    rangeLabel.textContent = `Period: Today (${formatPrettyDate(todayStr)})`;
+    filtered = entries.filter(e => e.date === todayStr);
+  } else if (currentPrintRange === 'week') {
+    const d = new Date();
+    d.setDate(d.getDate() - 7);
+    const past7 = d.toISOString().split('T')[0];
+    rangeLabel.textContent = `Period: Last 7 Days (From ${formatPrettyDate(past7)})`;
+    filtered = entries.filter(e => e.date >= past7);
+  } else if (currentPrintRange === 'month') {
+    const curMonth = todayStr.substring(0, 7);
+    rangeLabel.textContent = `Period: This Month (${new Date().toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })})`;
+    filtered = entries.filter(e => (e.date || '').startsWith(curMonth));
+  } else {
+    rangeLabel.textContent = 'Period: All Time (Complete Log)';
+    filtered = entries;
+  }
+
+  // Calculate Metrics
+  const parcelDispatches = filtered.filter(e => e.type !== 'khata');
+  const totalParcels = parcelDispatches.reduce((a, c) => a + (c.parcelCount || 1), 0);
+  const totalComm = parcelDispatches.reduce((a, c) => a + (c.commission || 0), 0);
+
+  document.getElementById('sm-count').textContent = parcelDispatches.length;
+  document.getElementById('sm-parcels').textContent = totalParcels;
+  document.getElementById('sm-comm').textContent = formatInr(totalComm);
+
+  const balEl = document.getElementById('sm-balance');
+  if (balance.type === 'jama') {
+    balEl.textContent = formatInr(balance.amount) + ' (Jama)';
+    balEl.style.color = 'var(--green)';
+  } else if (balance.type === 'baaki') {
+    balEl.textContent = formatInr(balance.amount) + ' (Baaki)';
+    balEl.style.color = 'var(--red)';
+  } else {
+    balEl.textContent = '₹0 (Nil)';
+    balEl.style.color = 'var(--text-main)';
+  }
+
+  // Populate Table Body
+  const tbody = document.getElementById('statement-table-body');
+  if (filtered.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="11" style="text-align:center; padding:18px; color:#777;">Koi dispatches record nahi mila.</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = filtered.map((e, idx) => {
+    const isPaid = e.type === 'paid';
+    return `
+      <tr>
+        <td>${formatPrettyDate(e.date)}</td>
+        <td><strong>${escapeHtml(e.transport)}</strong></td>
+        <td>${escapeHtml(e.city)}</td>
+        <td>${e.bilty ? '#' + escapeHtml(e.bilty) : '—'}</td>
+        <td style="text-align:center;">${e.parcelCount || 0}</td>
+        <td>${isPaid ? 'PAID' : (e.type === 'unpaid' ? 'UNPAID' : 'KHATA')}</td>
+        <td style="text-align:right;">${isPaid ? formatInr(e.advanceGiven) : '—'}</td>
+        <td style="text-align:right;">${e.actualAmount !== null ? formatInr(e.actualAmount) : 'Pending'}</td>
+        <td style="text-align:right;">${formatInr(e.commission)}</td>
+        <td style="text-align:right; font-weight:700;">${e.netPayment !== null ? formatInr(e.netPayment) : '—'}</td>
+        <td>${e.status === 'settled' ? '✅ Settled' : '⏳ Pending'}</td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function openShopSettingsModal() {
+  sfxClick();
+  const shop = getShopDetails();
+  document.getElementById('inp-shop-name').value = shop.name;
+  document.getElementById('inp-shop-owner').value = shop.owner;
+  document.getElementById('inp-shop-location').value = shop.location;
+  openModal('modal-shop-settings');
+}
+
+function saveShopSettings() {
+  const nameVal = document.getElementById('inp-shop-name').value.trim() || 'M/s Tempo Transport Hisaab';
+  const ownerVal = document.getElementById('inp-shop-owner').value.trim();
+  const locVal = document.getElementById('inp-shop-location').value.trim();
+
+  localStorage.setItem(DB_SHOP_NAME_KEY, nameVal);
+  localStorage.setItem(DB_SHOP_OWNER_KEY, ownerVal);
+  localStorage.setItem(DB_SHOP_LOC_KEY, locVal);
+
+  closeModal('modal-shop-settings');
+  sfxSuccess();
+  toastNotify('✅ Shop settings save ho gayi!');
+  renderDashboardView();
+}
+
+/* ═══════════════════════════════════════════
+   15. EDIT, DELETE & BACKUP UTILITIES
+═══════════════════════════════════════════ */
+function openEditModal(id) {
+  sfxClick();
+  const entries = dbGetEntries();
+  const entry = entries.find(e => e.id === id);
+  if (!entry) return;
+
+  document.getElementById('edit-entry-id').value = entry.id;
+  document.getElementById('edit-inp-date').value = entry.date;
+  document.getElementById('edit-inp-bilty').value = entry.bilty || '';
+  document.getElementById('edit-inp-transport').value = entry.transport;
+  document.getElementById('edit-inp-city').value = entry.city;
+  document.getElementById('edit-inp-count').value = entry.parcelCount;
+  document.getElementById('edit-inp-advance').value = entry.advanceGiven || 0;
+
+  const actualGroup = document.getElementById('edit-group-actual');
+  if (entry.status === 'settled' && entry.type === 'paid') {
+    actualGroup.style.display = 'block';
+    document.getElementById('edit-inp-actual').value = entry.actualAmount || 0;
+  } else {
+    actualGroup.style.display = 'none';
+  }
+
+  openModal('modal-edit-entry');
+}
+
+function saveEditedEntry() {
+  const id = document.getElementById('edit-entry-id').value;
+  const entries = dbGetEntries();
+  const idx = entries.findIndex(e => e.id === id);
+  if (idx === -1) return;
+
+  const transport = document.getElementById('edit-inp-transport').value.trim();
+  const city = document.getElementById('edit-inp-city').value.trim();
+  const count = parseInt(document.getElementById('edit-inp-count').value) || 1;
+  const advance = parseFloat(document.getElementById('edit-inp-advance').value) || 0;
+  const date = document.getElementById('edit-inp-date').value;
+  const bilty = document.getElementById('edit-inp-bilty').value.trim();
+
+  if (!transport || !city) {
+    toastNotify('⚠️ Transport aur City enter karein!');
+    sfxAlert();
+    return;
+  }
+
+  entries[idx].transport = transport;
+  entries[idx].city = city;
+  entries[idx].parcelCount = count;
+  entries[idx].commission = count * 100;
+  entries[idx].advanceGiven = advance;
+  entries[idx].date = date;
+  entries[idx].bilty = bilty;
+
+  if (entries[idx].status === 'settled') {
+    if (entries[idx].type === 'paid') {
+      const act = parseFloat(document.getElementById('edit-inp-actual').value) || 0;
+      entries[idx].actualAmount = act;
+      entries[idx].netPayment = act + entries[idx].commission - advance;
+    } else if (entries[idx].type === 'unpaid') {
+      entries[idx].netPayment = entries[idx].commission;
+    }
+  }
+
+  saveEntries(entries);
+  closeModal('modal-edit-entry');
+  sfxSuccess();
+  toastNotify('✅ Entry update ho gayi!');
+
+  if (appCurrentTab === 'dashboard') renderDashboardView();
+  if (appCurrentTab === 'history') renderHistoryView();
+}
+
+function promptDelete(id) {
+  sfxClick();
+  activeDeleteTargetId = id;
+  const entries = dbGetEntries();
+  const entry = entries.find(e => e.id === id);
+  if (entry) {
+    document.getElementById('delete-confirm-text').textContent =
+      `"${entry.transport} → ${entry.city}" (${entry.parcelCount} parcel) delete karein?`;
+  }
+  openModal('modal-delete-confirm');
+}
+
+function executeDelete() {
+  if (!activeDeleteTargetId) return;
+  const entries = dbGetEntries();
+  const target = entries.find(e => e.id === activeDeleteTargetId);
+  const updatedEntries = entries.filter(e => e.id !== activeDeleteTargetId);
+  saveEntries(updatedEntries);
+
+  if (target && target.type === 'khata') {
+    const curBal = dbGetBalance();
+    let credit = curBal.type === 'jama' ? curBal.amount : (curBal.type === 'baaki' ? -curBal.amount : 0);
+    const isGive = (target.transport || '').includes('Diya');
+    if (isGive) credit -= (target.actualAmount || 0);
+    else credit += (target.actualAmount || 0);
+
+    let newBal = { amount: 0, type: 'zero' };
+    if (credit > 0) newBal = { amount: Math.round(credit), type: 'jama' };
+    else if (credit < 0) newBal = { amount: Math.round(Math.abs(credit)), type: 'baaki' };
+    saveBalance(newBal);
+  }
+
+  closeModal('modal-delete-confirm');
+  sfxSuccess();
+  toastNotify('🗑️ Entry delete ho gayi');
+
+  if (appCurrentTab === 'dashboard') renderDashboardView();
+  if (appCurrentTab === 'history') renderHistoryView();
+}
+
+function exportAllData() {
+  sfxClick();
+  const payload = {
+    version: 3,
+    exportedAt: new Date().toISOString(),
+    shop: getShopDetails(),
+    theme: localStorage.getItem(DB_THEME_KEY) || 'dark',
+    balance: dbGetBalance(),
+    entries: dbGetEntries(),
+    transports: dbGetFrequent(DB_AUTO_NAMES, []),
+    cities: dbGetFrequent(DB_AUTO_CITIES, [])
+  };
+
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `tempo-hisaab-backup-${getTodayIso()}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  sfxSuccess();
+  toastNotify('📤 Backup download ho gaya!');
+}
+
+function importDataFile(fileInput) {
+  const file = fileInput.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (data && Array.isArray(data.entries)) {
+        saveEntries(data.entries);
+        if (data.balance) saveBalance(data.balance);
+        if (data.transports) localStorage.setItem(DB_AUTO_NAMES, JSON.stringify(data.transports));
+        if (data.cities) localStorage.setItem(DB_AUTO_CITIES, JSON.stringify(data.cities));
+        if (data.shop && data.shop.name) localStorage.setItem(DB_SHOP_NAME_KEY, data.shop.name);
+
+        sfxSuccess();
+        toastNotify('📥 Data successfully restore hua!');
+        renderDashboardView();
+        renderHistoryView();
+      } else {
+        toastNotify('⚠️ File format galat hai!');
+        sfxAlert();
+      }
+    } catch(err) {
+      toastNotify('⚠️ File read nahi ho saki!');
+      sfxAlert();
+    }
+  };
+  reader.readAsText(file);
+  fileInput.value = '';
+}
+
+function promptResetAll() {
+  sfxClick();
+  if (confirm('⚠️ KYA AAP SURE HAIN?\nSaara hisaab, data aur balance hamesha ke liye delete ho jayega!')) {
+    localStorage.removeItem(DB_ENTRIES_KEY);
+    localStorage.removeItem(DB_BALANCE_KEY);
+    localStorage.removeItem('tempo_hisaab_v1');
+    localStorage.removeItem('tempo_balance_v1');
+    sfxSuccess();
+    toastNotify('✅ Saara data reset hua!');
+    renderDashboardView();
+    renderHistoryView();
+  }
+}
+
+/* ═══════════════════════════════════════════
+   16. MODAL & TOAST HELPERS
+═══════════════════════════════════════════ */
+function openModal(modalId) {
+  const el = document.getElementById(modalId);
+  if (el) el.classList.add('open');
+}
+
+function closeModal(modalId) {
+  sfxClick();
+  const el = document.getElementById(modalId);
+  if (el) el.classList.remove('open');
+}
+
+let toastTimerId = null;
+function toastNotify(msg) {
+  const t = document.getElementById('action-toast');
+  if (!t) return;
+  t.textContent = msg;
+  t.classList.add('visible');
+  if (toastTimerId) clearTimeout(toastTimerId);
+  toastTimerId = setTimeout(() => t.classList.remove('visible'), 2600);
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      overlay.classList.remove('open');
+      sfxClick();
+    }
+  });
+});
+
+/* ═══════════════════════════════════════════
+   17. APPLICATION BOOTLOADER (DEFENSIVE ISOLATION)
+═══════════════════════════════════════════ */
+(function applicationBoot() {
+  try {
+    initTheme();
+  } catch(err) { console.error('Theme init error:', err); }
+
+  try {
+    const dateInput = document.getElementById('inp-date');
+    if (dateInput) dateInput.value = getTodayIso();
+    const batchDate = document.getElementById('inp-batch-date');
+    if (batchDate) batchDate.value = getTodayIso();
+  } catch(err) { console.error('Date init error:', err); }
+
+  try {
+    initBatchRows();
+    handleCountChange();
+    setParcelType('paid');
+    renderEntryFormSuggestions();
+  } catch(err) { console.error('Form init error:', err); }
+
+  try {
+    renderDashboardView();
+  } catch(err) { console.error('Dashboard boot error:', err); }
+})();
+</script>
+</body>
+</html>
