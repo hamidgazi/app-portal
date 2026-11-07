@@ -2,7 +2,7 @@
 window.PORTAL_CATALOG = {
   "version": "1.0.0",
   "lastUpdated": "Antigravity Files",
-  "totalApps": 33,
+  "totalApps": 35,
   "categories": [
     "Islamic & Faith",
     "Productivity & Utilities",
@@ -579,11 +579,11 @@ window.PORTAL_CATALOG = {
     },
     {
       "id": "19-Dermatology-Health-Guide__index_html",
-      "title": "Clinical Dermatology & Skin Recovery Protocol",
+      "title": "Clinical Health & Vitality Portal | Antigravity",
       "category": "Discovered Tools",
       "icon": "📄",
       "badge": "19-Dermatology-Health-Guide",
-      "description": "HTML application located in 19-Dermatology-Health-Guide.",
+      "description": "Antigravity Clinical Health & Vitality Portal: Plain-language, evidence-based protocols for dermatology, trichology, respiratory, and executive longevity.",
       "tags": [
         "19-dermatology-health-guide",
         "index.html"
@@ -647,7 +647,7 @@ window.PORTAL_CATALOG = {
       "category": "Discovered Tools",
       "icon": "📄",
       "badge": "07-Quran-Deep-Analyzer",
-      "description": "The 80 Canonical Divine Directives (Commands & Prohibitions) of the Holy Quran for Human Living, Health, Ethics, Compassion & Social Harmony with Kanzul Iman & Saheeh International.",
+      "description": "The 80 Canonical Divine Directives (Commands & Prohibitions) of the Holy Quran for Human Living, Health, Ethics, Compassion & Social Harmony with Kanzul Iman, Kanzul Irfan & Saheeh International.",
       "tags": [
         "07-quran-deep-analyzer",
         "commands.html"
@@ -656,6 +656,38 @@ window.PORTAL_CATALOG = {
       "relPath": "07-Quran-Deep-Analyzer/commands.html",
       "portalHref": "./07-Quran-Deep-Analyzer/commands.html",
       "serverHref": "./07-Quran-Deep-Analyzer/commands.html"
+    },
+    {
+      "id": "Tempo-Payment-Tracker__index_html",
+      "title": "🚚 Tempo Hisaab",
+      "category": "Discovered Tools",
+      "icon": "📄",
+      "badge": "Tempo-Payment-Tracker",
+      "description": "HTML application located in Tempo-Payment-Tracker.",
+      "tags": [
+        "tempo-payment-tracker",
+        "index.html"
+      ],
+      "primary": false,
+      "relPath": "Tempo-Payment-Tracker/index.html",
+      "portalHref": "./Tempo-Payment-Tracker/index.html",
+      "serverHref": "./Tempo-Payment-Tracker/index.html"
+    },
+    {
+      "id": "07-Quran-Deep-Analyzer__duas_html",
+      "title": "🤲 Quranic Duas Encyclopedia • دعاؤں کا قرآنی انسائیکلوپیڈیا",
+      "category": "Discovered Tools",
+      "icon": "📄",
+      "badge": "07-Quran-Deep-Analyzer",
+      "description": "The 78 Canonical Quranic Supplications (40 Rabbana, Prophetic & Believers",
+      "tags": [
+        "07-quran-deep-analyzer",
+        "duas.html"
+      ],
+      "primary": false,
+      "relPath": "07-Quran-Deep-Analyzer/duas.html",
+      "portalHref": "./07-Quran-Deep-Analyzer/duas.html",
+      "serverHref": "./07-Quran-Deep-Analyzer/duas.html"
     }
   ]
 };
