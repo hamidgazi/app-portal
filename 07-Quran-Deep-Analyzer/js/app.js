@@ -94,12 +94,23 @@ function switchAppTab(tabName) {
   // Synchronize mobile bottom dock buttons
   const dockBtns = document.querySelectorAll(".mobile-dock-btn");
   dockBtns.forEach(btn => {
-    btn.classList.remove("active");
-    if (tabName === "ayahs" && btn.id === "dock-btn-read") btn.classList.add("active");
-    else if (tabName === "search" && btn.id === "dock-btn-search") btn.classList.add("active");
-    else if (tabName === "commands" && btn.id === "dock-btn-commands") btn.classList.add("active");
-    else if (tabName === "manners" && btn.id === "dock-btn-manners") btn.classList.add("active");
-    else if (!["ayahs", "search", "commands", "manners"].includes(tabName) && btn.id === "dock-btn-more") btn.classList.add("active");
+    if (btn.dataset.tab === tabName) {
+      btn.classList.add("active");
+    } else if (tabName === "ayahs" && btn.id === "dock-btn-read") {
+      btn.classList.add("active");
+    } else if (tabName === "search" && btn.id === "dock-btn-search") {
+      btn.classList.add("active");
+    } else if (tabName === "commands" && btn.id === "dock-btn-commands") {
+      btn.classList.add("active");
+    } else if (tabName === "manners" && btn.id === "dock-btn-manners") {
+      btn.classList.add("active");
+    } else if (tabName === "duas" && btn.id === "dock-btn-duas") {
+      btn.classList.add("active");
+    } else if (tabName === "studio" && btn.id === "dock-btn-studio") {
+      btn.classList.add("active");
+    } else {
+      btn.classList.remove("active");
+    }
   });
 
   // Automatically close mobile bottom sheet on navigation
@@ -199,21 +210,18 @@ function initTabs() {
   if (hash && document.getElementById(`tab-${hash}`)) {
     switchAppTab(hash);
   }
-  // Mobile dock internal tab switches
-  const dockRead = document.getElementById("dock-btn-read");
-  if (dockRead) {
-    dockRead.addEventListener("click", (e) => {
+  // Mobile dock internal tab switches - Universal delegation for all dock buttons
+  const dockBtns = document.querySelectorAll(".mobile-dock-btn");
+  dockBtns.forEach(btn => {
+    btn.addEventListener("click", (e) => {
       e.preventDefault();
-      switchAppTab("ayahs");
+      const tabName = btn.dataset.tab;
+      if (tabName) {
+        switchAppTab(tabName);
+      }
     });
-  }
-  const dockSearch = document.getElementById("dock-btn-search");
-  if (dockSearch) {
-    dockSearch.addEventListener("click", (e) => {
-      e.preventDefault();
-      switchAppTab("search");
-    });
-  }
+  });
+
   const dockMore = document.getElementById("dock-btn-more");
   if (dockMore) {
     dockMore.addEventListener("click", (e) => {
@@ -236,20 +244,6 @@ function initTabs() {
       if (e.target === moreSheetOverlay) {
         window.closeMobileMoreSheet();
       }
-    });
-  }
-  const dockCommands = document.getElementById("dock-btn-commands");
-  if (dockCommands) {
-    dockCommands.addEventListener("click", (e) => {
-      e.preventDefault();
-      switchAppTab("commands");
-    });
-  }
-  const dockManners = document.getElementById("dock-btn-manners");
-  if (dockManners) {
-    dockManners.addEventListener("click", (e) => {
-      e.preventDefault();
-      switchAppTab("manners");
     });
   }
 

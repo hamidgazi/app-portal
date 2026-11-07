@@ -33,7 +33,9 @@
       --gold-primary: #f59e0b;
       --gold-glow: rgba(245, 158, 11, 0.16);
       --emerald-primary: #10b981;
+      --emerald-glow: rgba(16, 185, 129, 0.16);
       --cyan-primary: #38bdf8;
+      --red-primary: #ef4444;
 
       /* Typography Default Variables */
       --font-ui: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -302,6 +304,385 @@
     .btn-card-action:hover {
       color: var(--gold-primary);
       border-color: var(--gold-primary);
+    }
+
+    /* ==========================================================================
+       3. NATIVE VISUAL FLOWCHARTS & DIAGRAMS (Zero-Library CSS Architecture)
+       ========================================================================== */
+    .visual-flowchart-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 1rem;
+      padding: 1.25rem 1rem;
+      margin: 2rem 0;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+    }
+
+    .flowchart-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gold-primary);
+      text-align: center;
+      margin-bottom: 1.25rem;
+      letter-spacing: 0.02em;
+    }
+
+    .visual-flow-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .visual-flow-step {
+      width: 100%;
+      max-width: 600px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-left: 4px solid var(--gold-primary);
+      border-radius: 0.75rem;
+      padding: 1rem 1.25rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: transform 0.15s ease, border-color 0.2s ease;
+    }
+
+    .visual-flow-step:hover {
+      transform: translateY(-2px);
+      border-color: var(--gold-primary);
+    }
+
+    .flow-step-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.35rem;
+    }
+
+    .flow-step-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.2rem 0.55rem;
+      border-radius: 9999px;
+      background: var(--gold-glow);
+      color: var(--gold-primary);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .flow-step-era {
+      font-size: 0.75rem;
+      color: var(--cyan-primary);
+      font-weight: 600;
+    }
+
+    .flow-step-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .flow-step-desc {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .flow-step-arrow {
+      font-size: 1.2rem;
+      color: var(--gold-primary);
+      padding: 0.15rem 0;
+      animation: bounceArrow 2s infinite ease-in-out;
+    }
+
+    @keyframes bounceArrow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(3px); }
+    }
+
+    /* Twin Pillars Visual */
+    .twin-pillars-wrapper {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+
+    .pillar-card {
+      flex: 1;
+      min-width: 260px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 0.85rem;
+      padding: 1.25rem;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    }
+
+    .pillar-sanad { border-top: 4px solid var(--gold-primary); }
+    .pillar-matn { border-top: 4px solid var(--cyan-primary); }
+
+    .pillar-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--gold-primary);
+      letter-spacing: 0.06em;
+      margin-bottom: 0.35rem;
+    }
+
+    .pillar-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.4rem;
+    }
+
+    .pillar-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: 0.5rem;
+    }
+
+    .pillar-urdu {
+      font-family: var(--font-urdu-active);
+      color: var(--cyan-primary);
+      font-size: 1.05rem;
+      line-height: 2.0;
+    }
+
+    .pillar-plus {
+      font-size: 1.5rem;
+      color: var(--gold-primary);
+    }
+
+    /* Transmission Chain Stepper */
+    .transmission-chain-wrapper {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 1rem;
+      padding: 1.25rem 1rem;
+      margin: 2rem 0;
+    }
+
+    .chain-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gold-primary);
+      text-align: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .chain-flow-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .chain-node {
+      width: 100%;
+      max-width: 580px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 0.75rem;
+      padding: 0.85rem 1.1rem;
+    }
+
+    .chain-node-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.25rem;
+    }
+
+    .chain-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--gold-primary);
+    }
+
+    .chain-loc {
+      font-size: 0.75rem;
+      color: var(--cyan-primary);
+    }
+
+    .chain-name {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .chain-bio {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .chain-verb {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.2rem 0;
+    }
+
+    .verb-arrow { font-size: 0.95rem; color: var(--gold-primary); }
+    .verb-tag {
+      font-family: var(--font-arabic-active);
+      font-size: 1.1rem;
+      color: #fbbf24;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      padding: 0.15rem 0.6rem;
+      border-radius: 0.35rem;
+    }
+
+    /* Broken Chains Grid */
+    .broken-chains-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .broken-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-top: 3px solid var(--red-primary);
+      border-radius: 0.75rem;
+      padding: 1rem;
+    }
+
+    .broken-pos {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--red-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.35rem;
+    }
+
+    .broken-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.35rem;
+    }
+
+    .broken-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.45;
+    }
+
+    /* Modern Takhrij Stepper */
+    .takhrij-protocol-wrapper {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 1rem;
+      padding: 1.25rem 1rem;
+      margin: 2rem 0;
+    }
+
+    .takhrij-title-bar {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--cyan-primary);
+      text-align: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .takhrij-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      align-items: stretch;
+    }
+
+    .takhrij-step-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 0.75rem;
+      padding: 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .takhrij-icon { font-size: 1.4rem; margin-bottom: 0.2rem; }
+    .takhrij-badge { font-size: 0.72rem; font-weight: 700; color: var(--gold-primary); }
+    .takhrij-title { font-size: 0.95rem; font-weight: 700; color: var(--text-primary); }
+    .takhrij-desc { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.4; }
+    .takhrij-arrow { display: none; }
+
+    /* Decision Tree Card */
+    .decision-tree-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 1rem;
+      padding: 1.5rem 1.25rem;
+      margin: 2rem 0;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+
+    .tree-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gold-primary);
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .tree-node-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+    }
+
+    .tree-question {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .tree-answers {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.85rem;
+    }
+
+    @media (min-width: 640px) {
+      .tree-answers { grid-template-columns: 1fr 1fr; }
+    }
+
+    .tree-branch-no, .tree-branch-yes {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 0.5rem;
+      padding: 0.85rem;
+    }
+
+    .branch-pill {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      margin-bottom: 0.5rem;
+    }
+
+    .branch-pill.red { background: rgba(239, 68, 68, 0.2); color: var(--red-primary); }
+    .branch-pill.green { background: rgba(16, 185, 129, 0.2); color: var(--emerald-primary); }
+    .branch-pill.gold { background: var(--gold-glow); color: var(--gold-primary); }
+
+    .branch-content {
+      font-size: 0.84rem;
+      line-height: 1.5;
+      color: var(--text-secondary);
     }
 
     /* Diagrams & ASCII Charts */
@@ -735,21 +1116,23 @@
 <hr class="section-divider">
 <h3 id="2-the-twin-pillars-of-every-hadith">2. The Twin Pillars of Every Hadith</h3>
 <p>Every single Hadith in existence consists of two distinct, indivisible components:</p>
-<pre class="diagram-box"><code>                       ┌──────────────────────────────────────────────┐
-                       │           THE COMPLETE HADITH (الحديث)        │
-                       └──────────────────────┬───────────────────────┘
-                                              │
-                      ┌───────────────────────┴───────────────────────┐
-                      ▼                                               ▼
-      ┌───────────────────────────────┐               ┌───────────────────────────────┐
-      │         SANAD / ISNAD         │               │             MATN              │
-      │        (السَّنَد / الإِسْنَاد)       │               │            (المَتْن)          │
-      ├───────────────────────────────┤               ├───────────────────────────────┤
-      │ The chronological chain of    │               │ The actual text, speech, or   │
-      │ transmitters connecting the   │               │ narration conveyed at the     │
-      │ collector to the Prophet ﷺ.   │               │ end of the chain.             │
-      │ (راویوں کا باقاعدہ تسلسل)     │               │ (کلام، قول یا واقعہ کا اصل متن)│
-      └───────────────────────────────┘               └───────────────────────────────┘</code></pre>
+
+        <div class="twin-pillars-wrapper">
+          <div class="pillar-card pillar-sanad">
+            <div class="pillar-badge">PILLAR 1</div>
+            <div class="pillar-title">AL-SANAD (السَّنَد / الإِسْنَاد)</div>
+            <div class="pillar-desc">The chronological chain of human transmitters connecting the collector directly to the Prophet ﷺ.</div>
+            <div class="pillar-urdu" dir="rtl">راویوں کا باقاعدہ تسلسل اور کڑی</div>
+          </div>
+          <div class="pillar-plus">➕</div>
+          <div class="pillar-card pillar-matn">
+            <div class="pillar-badge">PILLAR 2</div>
+            <div class="pillar-title">AL-MATN (المَتْن)</div>
+            <div class="pillar-desc">The substantive speech, action, approval, or trait conveyed at the termination of the Sanad.</div>
+            <div class="pillar-urdu" dir="rtl">حدیث کا اصل کلام، قول یا واقعہ</div>
+          </div>
+        </div>
+        
 <hr class="section-divider">
 <h3 id="3-the-miracle-of-the-isnad-system">3. The Miracle of the Isnad System</h3>
 <p>No civilization in human history ever developed an evidentiary apparatus as intellectually rigorous, ruthless, and exhaustive as the Islamic science of <strong>Isnad (Chain of Transmission)</strong>.</p>
@@ -779,12 +1162,68 @@
 <div class="chapter-anchor" id="chapter-1-history-origin-of-hadith-compilation-تاریخ-تدوین-حدیث"></div>
 <h2 class="chapter-heading" data-chapter="chapter-1-history-origin-of-hadith-compilation-تاریخ-تدوین-حدیث">Chapter 1: History & Origin of Hadith Compilation (تاریخِ تدوینِ حدیث)</h2>
 <p>The history of Hadith compilation is not an accidental, late development; it was a deliberate, multi-generational preservation program spanning six distinct epochs.</p>
-<pre class="diagram-box"><code>flowchart TD
-    E1["Epoch 1: Prophetic Era (عہدِ نبوی)<br>Memorization, Direct Practice & Personal Notebooks"] --> E2["Epoch 2: Sahabah & Early Tabi'in (عہدِ صحابہ)<br>Strict Witness Verification & Birth of Isnad Scrutiny"]
-    E2 --> E3["Epoch 3: Official State Tadwin (عہدِ تدوینِ عام)<br>Order of Caliph Umar ibn Abd al-Aziz & al-Zuhri"]
-    E3 --> E4["Epoch 4: Musannafat & Early Thematic Codification (عہدِ مصنفات)<br>Muwatta Malik, Musannaf Abd al-Razzaq"]
-    E4 --> E5["Epoch 5: The Golden Age of Critical Sifting (العصر الذهبي)<br>Bukhari, Muslim & The Canonical Six (Kutub al-Sittah)"]
-    E5 --> E6["Epoch 6: Encyclopedias, Mustadrakat & Textual Synthesis<br>Ibn al-Salah, Nawawi, Ibn Hajar al-Asqalani"]</code></pre>
+
+        <div class="visual-flowchart-card">
+          <div class="flowchart-title">🌟 The 6 Epochs of Hadith Preservation (تاریخِ تدوینِ حدیث کا ارتقائی خاکہ)</div>
+          <div class="visual-flow-container">
+            
+            <div class="visual-flow-step">
+              <div class="flow-step-header">
+                <span class="flow-step-badge">EPOCH 1</span>
+                <span class="flow-step-era">1–11 AH</span>
+              </div>
+              <div class="flow-step-title">Prophetic Era (عہدِ نبوی ﷺ)</div>
+              <div class="flow-step-desc">Oral preservation, living practice, Sahifah of Ali (RA), and al-Sahifah al-Sadiqah by Abdullah ibn 'Amr (RA).</div>
+            </div>
+            <div class="flow-step-arrow">⬇️</div>
+            <div class="visual-flow-step">
+              <div class="flow-step-header">
+                <span class="flow-step-badge">EPOCH 2</span>
+                <span class="flow-step-era">11–100 AH</span>
+              </div>
+              <div class="flow-step-title">Sahabah & Early Tabi'in (عہدِ صحابہ)</div>
+              <div class="flow-step-desc">Strict witness demands by Abu Bakr & Umar (RA); birth of Isnad scrutiny after the Fitnah ("Name your men to us!").</div>
+            </div>
+            <div class="flow-step-arrow">⬇️</div>
+            <div class="visual-flow-step">
+              <div class="flow-step-header">
+                <span class="flow-step-badge">EPOCH 3</span>
+                <span class="flow-step-era">99–124 AH</span>
+              </div>
+              <div class="flow-step-title">Official State Tadwin (عہدِ تدوینِ عام)</div>
+              <div class="flow-step-desc">Imperial royal decree of Caliph Umar ibn Abd al-Aziz; systematic national codification led by Ibn Shihab al-Zuhri.</div>
+            </div>
+            <div class="flow-step-arrow">⬇️</div>
+            <div class="visual-flow-step">
+              <div class="flow-step-header">
+                <span class="flow-step-badge">EPOCH 4</span>
+                <span class="flow-step-era">2nd Century AH</span>
+              </div>
+              <div class="flow-step-title">Thematic Musannafat Era (عہدِ مصنفات)</div>
+              <div class="flow-step-desc">Subject-based Fiqhi compilation alongside Sahabah verdicts: Muwatta Imam Malik, Musannaf Abd al-Razzaq.</div>
+            </div>
+            <div class="flow-step-arrow">⬇️</div>
+            <div class="visual-flow-step">
+              <div class="flow-step-header">
+                <span class="flow-step-badge">EPOCH 5</span>
+                <span class="flow-step-era">3rd Century AH</span>
+              </div>
+              <div class="flow-step-title">The Golden Age of Critical Sifting (العصر الذهبي)</div>
+              <div class="flow-step-desc">Separation of pure Sahih from other grades: Imam al-Bukhari, Imam Muslim, and the Kutub al-Sittah.</div>
+            </div>
+            <div class="flow-step-arrow">⬇️</div>
+            <div class="visual-flow-step">
+              <div class="flow-step-header">
+                <span class="flow-step-badge">EPOCH 6</span>
+                <span class="flow-step-era">4th–9th Century AH</span>
+              </div>
+              <div class="flow-step-title">Encyclopedias & Textual Synthesis (شروح و موسوعات)</div>
+              <div class="flow-step-desc">Master canons, Mustalah terminology codification, and grand commentaries: Ibn al-Salah, al-Nawawi, Ibn Hajar al-Asqalani.</div>
+            </div>
+            
+          </div>
+        </div>
+        
 <hr class="section-divider">
 <h3 id="phase-1-the-prophetic-era-عہد-نبوی-ﷺ">Phase 1: The Prophetic Era (عہدِ نبوی ﷺ)</h3>
 <p>During the lifetime of the Prophet ﷺ, preservation operated through three synchronized channels:</p>
@@ -863,27 +1302,94 @@
 <p>Let us examine the very first Hadith in <strong>Sahih al-Bukhari</strong>:</p>
 <p><span class="katex-math">$\text{<span class="arabic-matn" dir="rtl">«إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ...»</span>} \quad \text{(Actions are judged only by intentions...)}</span>$</p>
 <p>Below is the complete chain of transmission illustrating how Imam al-Bukhari (in Uzbekistan) received this statement from the Prophet Muhammad ﷺ (in Madinah) over a span of 240 years:</p>
-<pre class="diagram-box"><code>┌────────────────────────────────────────────────────────────────────────────────┐
-│                        ANATOMY OF A TRANSMISSION CHAIN                         │
-└──────────────────────────────────────┬─────────────────────────────────────────┘
-                                       ▼
-  [AUTHOR / COLLECTOR]           Imam Muhammad ibn Isma'il al-Bukhari (d. 256 AH)
-                                       │ ◄─── "Haddathana" (حَدَّثَنَا - He narrated to us)
-  [LINK 1: Teacher]              Al-Humaydi (Abdullah ibn al-Zubayr) (d. 219 AH, Mecca)
-                                       │ ◄─── "Haddathana" (حَدَّثَنَا)
-  [LINK 2: Teacher's Teacher]    Sufyan ibn 'Uyaynah (d. 198 AH, Kufa / Mecca)
-                                       │ ◄─── "Haddathana" (حَدَّثَنَا)
-  [LINK 3: Senior Tabi'i]        Yahya ibn Sa'id al-Ansari (d. 143 AH, Madinah)
-                                       │ ◄─── "Akhbarani" (أَخْبَرَنِي - He informed me)
-  [LINK 4: Mid Tabi'i]           Muhammad ibn Ibrahim al-Taymi (d. 120 AH, Madinah)
-                                       │ ◄─── "Sami'a" (أَنَّهُ سَمِعَ - That he heard)
-  [LINK 5: Junior Tabi'i]        'Alqamah ibn Waqqas al-Laythi (d. ~75 AH, Madinah)
-                                       │ ◄─── "Yaquul: Sami'tu" (يَقُولُ: سَمِعْتُ)
-  [LINK 6: The Sahabi]           Amir al-Mu'minin 'Umar ibn al-Khattab (RA) (d. 23 AH)
-                                       │ ◄─── "Sami'tu Rasulullah ﷺ yaqul"
-  [SOURCE OF REVELATION]         Prophet Muhammad ﷺ (d. 11 AH, Madinah)
-                                       ▼
-  [THE MATN / TEXT]              «إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى...»</code></pre>
+
+        <div class="transmission-chain-wrapper">
+          <div class="chain-title">🔗 Anatomy of a Pristine Sahih Isnad (سندِ متصل کا عملی خاکہ)</div>
+          <div class="chain-flow-container">
+            
+            <div class="chain-node">
+              <div class="chain-node-header">
+                <span class="chain-badge">COLLECTOR</span>
+                <span class="chain-loc">📍 Bukhara / Uzbekistan</span>
+              </div>
+              <div class="chain-name">Imam al-Bukhari (d. 256 AH)</div>
+              <div class="chain-bio">Author of Sahih al-Bukhari</div>
+            </div>
+            <div class="chain-verb"><span class="verb-arrow">⬇️</span> <span class="verb-tag">حَدَّثَنَا</span></div>
+            
+            <div class="chain-node">
+              <div class="chain-node-header">
+                <span class="chain-badge">LINK 1</span>
+                <span class="chain-loc">📍 Mecca al-Mukarramah</span>
+              </div>
+              <div class="chain-name">Al-Humaydi (Abdullah ibn al-Zubayr) (d. 219 AH)</div>
+              <div class="chain-bio">Undisputed Hafiz & Jurist</div>
+            </div>
+            <div class="chain-verb"><span class="verb-arrow">⬇️</span> <span class="verb-tag">حَدَّثَنَا</span></div>
+            
+            <div class="chain-node">
+              <div class="chain-node-header">
+                <span class="chain-badge">LINK 2</span>
+                <span class="chain-loc">📍 Kufa / Mecca</span>
+              </div>
+              <div class="chain-name">Sufyan ibn 'Uyaynah (d. 198 AH)</div>
+              <div class="chain-bio">The Great Pillar of the Hijaz</div>
+            </div>
+            <div class="chain-verb"><span class="verb-arrow">⬇️</span> <span class="verb-tag">حَدَّثَنَا</span></div>
+            
+            <div class="chain-node">
+              <div class="chain-node-header">
+                <span class="chain-badge">LINK 3</span>
+                <span class="chain-loc">📍 Madinah al-Munawwarah</span>
+              </div>
+              <div class="chain-name">Yahya ibn Sa'id al-Ansari (d. 143 AH)</div>
+              <div class="chain-bio">Supreme Judge of Iraq & Madinah</div>
+            </div>
+            <div class="chain-verb"><span class="verb-arrow">⬇️</span> <span class="verb-tag">أَخْبَرَنِي</span></div>
+            
+            <div class="chain-node">
+              <div class="chain-node-header">
+                <span class="chain-badge">LINK 4</span>
+                <span class="chain-loc">📍 Madinah al-Munawwarah</span>
+              </div>
+              <div class="chain-name">Muhammad ibn Ibrahim al-Taymi (d. 120 AH)</div>
+              <div class="chain-bio">Eminent Tabi'i</div>
+            </div>
+            <div class="chain-verb"><span class="verb-arrow">⬇️</span> <span class="verb-tag">أَنَّهُ سَمِعَ</span></div>
+            
+            <div class="chain-node">
+              <div class="chain-node-header">
+                <span class="chain-badge">LINK 5</span>
+                <span class="chain-loc">📍 Madinah al-Munawwarah</span>
+              </div>
+              <div class="chain-name">'Alqamah ibn Waqqas al-Laythi (d. ~75 AH)</div>
+              <div class="chain-bio">Senior Tabi'i Jurist</div>
+            </div>
+            <div class="chain-verb"><span class="verb-arrow">⬇️</span> <span class="verb-tag">يَقُولُ: سَمِعْتُ</span></div>
+            
+            <div class="chain-node">
+              <div class="chain-node-header">
+                <span class="chain-badge">THE SAHABI</span>
+                <span class="chain-loc">📍 Madinah al-Munawwarah</span>
+              </div>
+              <div class="chain-name">Amir al-Mu'minin 'Umar ibn al-Khattab (RA) (d. 23 AH)</div>
+              <div class="chain-bio">The 2nd Rightly Guided Caliph</div>
+            </div>
+            <div class="chain-verb"><span class="verb-arrow">⬇️</span> <span class="verb-tag">سَمِعْتُ رَسُولَ اللَّهِ</span></div>
+            
+            <div class="chain-node">
+              <div class="chain-node-header">
+                <span class="chain-badge">FINAL REVELATION</span>
+                <span class="chain-loc">📍 Madinah al-Munawwarah</span>
+              </div>
+              <div class="chain-name">Prophet Muhammad ﷺ (d. 11 AH)</div>
+              <div class="chain-bio">The Messenger of Allah</div>
+            </div>
+            
+            
+          </div>
+        </div>
+        
 <h4 id="what-the-muhaddith-investigates-in-this-chain">What the Muhaddith Investigates in this Chain:</h4>
 <ol class="reader-list">
 <li>Did al-Bukhari personally sit with al-Humaydi in Mecca? <strong>Yes, proven.</strong></li>
@@ -1097,27 +1603,30 @@
 </ul>
 <hr class="section-divider">
 <h3 id="dimension-4-broken-chains-structural-defects-انقطاع-السند">Dimension 4: Broken Chains & Structural Defects (انقطاع السند)</h3>
-<pre class="diagram-box"><code>        ========================================================================
-                               WHERE IS THE CHAIN BROKEN?
-        ========================================================================
 
-        [Collector: e.g., Bukhari]
-              │
-              ├── [Missing Link at the Beginning] ───────►  MU'ALLAQ (مُعَلَّق)
-              │
-        [Intermediate Narrator 1]
-              │
-              ├── [One Missing Link in Middle]   ───────►  MUNQATI' (مُنْقَطِع)
-              │
-        [Intermediate Narrator 2]
-              │
-              ├── [Two+ Consecutive Missing]     ───────►  MU'DAL (مُعْضَل)
-              │
-        [Tabi'i (Successor)]
-              │
-              ├── [Missing Sahabi Link at End]   ───────►  MURSAL (مُرْسَل)
-              │
-        [Prophet Muhammad ﷺ]</code></pre>
+        <div class="broken-chains-grid">
+          <div class="broken-card">
+            <div class="broken-pos">At the Collector's Start</div>
+            <div class="broken-name">Al-Mu'allaq (المُعَلَّق)</div>
+            <div class="broken-desc">One or more consecutive narrators omitted from the beginning of the chain by the author.</div>
+          </div>
+          <div class="broken-card">
+            <div class="broken-pos">In the Middle (1 Link)</div>
+            <div class="broken-name">Al-Munqati' (المُنْقَطِع)</div>
+            <div class="broken-desc">A single missing link anywhere in the middle of the chain.</div>
+          </div>
+          <div class="broken-card">
+            <div class="broken-pos">In the Middle (2+ Consecutive)</div>
+            <div class="broken-name">Al-Mu'dal (المُعْضَل)</div>
+            <div class="broken-desc">Two or more consecutive transmitters missing. Severely weak.</div>
+          </div>
+          <div class="broken-card">
+            <div class="broken-pos">At the End (Sahabi Dropped)</div>
+            <div class="broken-name">Al-Mursal (المُرْسَل)</div>
+            <div class="broken-desc">A Tabi'i jumps directly to the Prophet ﷺ, omitting the Sahabi.</div>
+          </div>
+        </div>
+        
 <ol class="reader-list">
 <li><strong>Al-Mu'allaq (المُعَلَّق - Suspended):</strong> A chain where the author/collector omits one or more narrators from the <strong>beginning</strong> of the Sanad (his end).</li>
 <li><strong>Al-Mursal (المُرْسَل - Hurried / Dropped Sahabi):</strong> A chain where the <strong>Tabi'i</strong> bypasses the Sahabi and says directly: <em>"The Prophet ﷺ said..."</em></li>
@@ -1694,23 +2203,42 @@
 <h2 class="chapter-heading" data-chapter="chapter-12-how-to-verify-a-hadith-today-a-modern-hands-on-field-guide">Chapter 12: How to Verify a Hadith Today — A Modern Hands-On Field Guide</h2>
 <h3 id="دور-حاضر-میں-تخریج-و-تحقیق-کا-عملی-طریقہ">(دورِ حاضر میں تخریج و تحقیق کا عملی طریقہ)</h3>
 <p>Today, you do not need to spend 20 years traveling to Baghdad, Damascus, and Cairo to verify a Hadith. The digital preservation of Islamic literature allows anyone with basic training to conduct professional <strong>Takhrij</strong> in under five minutes.</p>
-<pre class="diagram-box"><code>┌────────────────────────────────────────────────────────────────────────────────────────┐
-│                        THE 4-STEP MODERN TAKHRIJ PROTOCOL                              │
-└──────────────────────────────────────┬─────────────────────────────────────────────────┘
-                                       ▼
-  [STEP 1: ISOLATE KEYWORDS]     Extract rare, unique Arabic words from the text
-                                       │ (e.g., instead of "Salah", search "Dhira'ayn")
-                                       ▼
-  [STEP 2: QUERY DIGITAL DESK]   Search primary databases (Sunnah.com / Dorar.net)
-                                       │
-                                       ▼
-  [STEP 3: IDENTIFY SOURCE BOOK] Locate the primary source (Bukhari, Ahmad, Tabarani)
-                                       │ Check if it's Tier 1, 2, 3, or 4!
-                                       ▼
-  [STEP 4: READ SCHOLARLY HUKM]  Examine the grading verdict (Hukm al-Muhaddith)
-                                       │ Cross-reference classical & contemporary critics
-                                       ▼
-  [FINAL VERDICT ESTABLISHED]    Determine legal and spiritual usability</code></pre>
+
+        <div class="takhrij-protocol-wrapper">
+          <div class="takhrij-title-bar">⚡ The 4-Step Modern Takhrij Protocol (جدید دور میں تخریج کا طریقہ کار)</div>
+          <div class="takhrij-cards-grid">
+            
+            <div class="takhrij-step-card">
+              <div class="takhrij-icon">🔍</div>
+              <div class="takhrij-badge">STEP 1</div>
+              <div class="takhrij-title">Isolate Rare Keywords</div>
+              <div class="takhrij-desc">Extract unique, uncommon Arabic phrases (e.g., search rare verbs instead of generic words like 'Salah').</div>
+            </div>
+            <div class="takhrij-arrow">➔</div>
+            <div class="takhrij-step-card">
+              <div class="takhrij-icon">💻</div>
+              <div class="takhrij-badge">STEP 2</div>
+              <div class="takhrij-title">Query Primary Digital Engines</div>
+              <div class="takhrij-desc">Search Dorar.net or Sunnah.com to instantly locate authentic source collections.</div>
+            </div>
+            <div class="takhrij-arrow">➔</div>
+            <div class="takhrij-step-card">
+              <div class="takhrij-icon">📚</div>
+              <div class="takhrij-badge">STEP 3</div>
+              <div class="takhrij-title">Identify the Source Book</div>
+              <div class="takhrij-desc">Determine if the Hadith originates in Tier 1 (Bukhari/Muslim), Tier 2 (Sunan), or Tier 3/4.</div>
+            </div>
+            <div class="takhrij-arrow">➔</div>
+            <div class="takhrij-step-card">
+              <div class="takhrij-icon">⚖️</div>
+              <div class="takhrij-badge">STEP 4</div>
+              <div class="takhrij-title">Analyze Scholarly Ruling (Hukm)</div>
+              <div class="takhrij-desc">Check the evaluating verdicts of classical and modern Hadith critics.</div>
+            </div>
+            
+          </div>
+        </div>
+        
 <hr class="section-divider">
 <h3 id="1-the-essential-digital-tool-suite">1. The Essential Digital Tool Suite</h3>
 <h4 id="a-sunnahcom-the-gold-standard-for-english-urdu-readers">A. Sunnah.com (The Gold Standard for English / Urdu Readers)</h4>
@@ -1767,24 +2295,30 @@
 <h2 class="chapter-heading" data-chapter="appendix-master-classification-matrix-the-students-curriculum">Appendix: Master Classification Matrix & The Student's Curriculum</h2>
 <h3 id="ضمیمہ-اصطلاحی-خلاصہ-اور-نصاب-تعلیم">(ضمیمہ: اصطلاحی خلاصہ اور نصابِ تعلیم)</h3>
 <h3 id="1-the-ultimate-hadith-classification-cheat-sheet">1. The Ultimate Hadith Classification Cheat Sheet</h3>
-<pre class="diagram-box"><code>Is the Chain Connected (Muttasil)?
-   ├── NO  ──► Missing at start? ──────────────► MU'ALLAQ (معلق)
-   │       ──► Missing Sahabi at end? ─────────► MURSAL (مرسل)
-   │       ──► Missing 2+ consecutive? ────────► MU'DAL (معضل)
-   │       ──► Missing intermediate link? ─────► MUNQATI' (منقطع)
-   │       ──► Hidden, concealed gap? ─────────► MUDALLAS (مدلس) / MURSAL KHAFI
-   │
-   └── YES ──► Are all narrators Upright ('Adl) and Precise (Dabit)?
-                 ├── NO  ──► Accused of lying? ──────► MAWDU' (موضوع) / MATRUK
-                 │       ──► Poor memory / weak? ────► DA'IF (ضعيف)
-                 │             └── Elevated by multiple paths? ──► HASAN LI-GHAYRIHI
-                 │
-                 └── YES ──► Free from Shudhudh and 'Illah?
-                               ├── NO  ──► Contradicts superior? ─► SHADH (شاذ)
-                               │       ──► Hidden subtle defect? ─► MU'ALLAL (معلل)
-                               │
-                               └── YES ──► Highest retention? ────► SAHIH LI-DHATIHI
-                                           Slightly lighter? ─────► HASAN LI-DHATIHI</code></pre>
+
+        <div class="broken-chains-grid">
+          <div class="broken-card">
+            <div class="broken-pos">At the Collector's Start</div>
+            <div class="broken-name">Al-Mu'allaq (المُعَلَّق)</div>
+            <div class="broken-desc">One or more consecutive narrators omitted from the beginning of the chain by the author.</div>
+          </div>
+          <div class="broken-card">
+            <div class="broken-pos">In the Middle (1 Link)</div>
+            <div class="broken-name">Al-Munqati' (المُنْقَطِع)</div>
+            <div class="broken-desc">A single missing link anywhere in the middle of the chain.</div>
+          </div>
+          <div class="broken-card">
+            <div class="broken-pos">In the Middle (2+ Consecutive)</div>
+            <div class="broken-name">Al-Mu'dal (المُعْضَل)</div>
+            <div class="broken-desc">Two or more consecutive transmitters missing. Severely weak.</div>
+          </div>
+          <div class="broken-card">
+            <div class="broken-pos">At the End (Sahabi Dropped)</div>
+            <div class="broken-name">Al-Mursal (المُرْسَل)</div>
+            <div class="broken-desc">A Tabi'i jumps directly to the Prophet ﷺ, omitting the Sahabi.</div>
+          </div>
+        </div>
+        
 <hr class="section-divider">
 <h3 id="2-the-progressive-5-stage-curriculum-for-mastery-in-hadith-sciences">2. The Progressive 5-Stage Curriculum for Mastery in Hadith Sciences</h3>
 <p>If you wish to progress from a passionate beginner to an independent researcher (<em>Muhaqqiq</em>), follow the time-tested classical curriculum:</p>

@@ -203,12 +203,32 @@ The Muhaddithin scrutinized over **500,000 individual narrators**, detailing the
 The history of Hadith compilation is not an accidental, late development; it was a deliberate, multi-generational preservation program spanning six distinct epochs.
 
 ```
-flowchart TD
-    E1["Epoch 1: Prophetic Era (عہدِ نبوی)<br>Memorization, Direct Practice & Personal Notebooks"] --> E2["Epoch 2: Sahabah & Early Tabi'in (عہدِ صحابہ)<br>Strict Witness Verification & Birth of Isnad Scrutiny"]
-    E2 --> E3["Epoch 3: Official State Tadwin (عہدِ تدوینِ عام)<br>Order of Caliph Umar ibn Abd al-Aziz & al-Zuhri"]
-    E3 --> E4["Epoch 4: Musannafat & Early Thematic Codification (عہدِ مصنفات)<br>Muwatta Malik, Musannaf Abd al-Razzaq"]
-    E4 --> E5["Epoch 5: The Golden Age of Critical Sifting (العصر الذهبي)<br>Bukhari, Muslim & The Canonical Six (Kutub al-Sittah)"]
-    E5 --> E6["Epoch 6: Encyclopedias, Mustadrakat & Textual Synthesis<br>Ibn al-Salah, Nawawi, Ibn Hajar al-Asqalani"]
+┌────────────────────────────────────────────────────────────────────────┐
+│               THE 6 EPOCHS OF HADITH COMPILATION                       │
+└───────────────────────────────────┬────────────────────────────────────┘
+                                    ▼
+  [EPOCH 1: Prophetic Era]          Oral preservation, living practice &
+  (عہدِ نبوی ﷺ)                     personal notebooks (al-Sahifah al-Sadiqah)
+                                    │
+                                    ▼
+  [EPOCH 2: Sahabah & Tabi'in]      Strict witness verification & birth of
+  (عہدِ صحابہ و کبار تابعین)        Isnad scrutiny ("Name your men to us!")
+                                    │
+                                    ▼
+  [EPOCH 3: Official State Tadwin]  Imperial decree of Caliph Umar ibn
+  (عہدِ تدوینِ عام)                 Abd al-Aziz & Ibn Shihab al-Zuhri
+                                    │
+                                    ▼
+  [EPOCH 4: Musannafat Era]         Thematic legal codification: Muwatta
+  (عہدِ مصنفات)                     Imam Malik, Musannaf Abd al-Razzaq
+                                    │
+                                    ▼
+  [EPOCH 5: The Golden Age]         Strict filtering of pure Sahih:
+  (العصر الذهبي)                    Bukhari, Muslim & Kutub al-Sittah
+                                    │
+                                    ▼
+  [EPOCH 6: Textual Synthesis]      Encyclopedic commentaries & Mustalah:
+  (شروح و موسوعات)                  Ibn al-Salah, al-Nawawi, Ibn Hajar
 ```
 
 ---
