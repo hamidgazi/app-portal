@@ -21,18 +21,22 @@
   --dua-font-scale: 1.0;
   --dua-arabic-size: calc(1.50rem * var(--dua-font-scale, 1.0));
   --dua-arabic-lh: 2.2;
-  --dua-urdu-size: calc(1.48rem * var(--dua-font-scale, 1.0));
-  --dua-urdu-lh: 2.1;
+  --dua-urdu-size: calc(1.32rem * var(--dua-font-scale, 1.0));
+  --dua-urdu-lh: 1.85;
   --dua-english-size: calc(0.92rem * var(--dua-font-scale, 1.0));
 }
 
 /* Font Switcher Mode (Naskh vs Nastaleeq) */
+.font-mode-naskh {
+  --dua-urdu-lh: 1.65 !important;
+}
+
 .font-mode-naskh .dua-tarjuma-text,
 .font-mode-naskh .dua-tier-title-ur,
 .font-mode-naskh .dua-tafsir-snippet,
 .font-mode-naskh .dua-speaker-tag {
   font-family: 'Al Qalam Quran Majeed', 'Amiri', 'Scheherazade New', 'Tahoma', serif !important;
-  line-height: 1.85 !important;
+  line-height: 1.65 !important;
 }
 
 /* === DUAS CONTAINER & LAYOUT === */
@@ -855,8 +859,8 @@
 
 .dua-tarjuma-text {
   font-family: var(--font-urdu-current, var(--font-urdu, 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif));
-  font-size: var(--dua-urdu-size, 1.48rem);
-  line-height: var(--dua-urdu-lh, 2.1);
+  font-size: var(--dua-urdu-size, 1.32rem);
+  line-height: var(--dua-urdu-lh, 1.85);
   color: #f1f5f9;
   text-align: right;
   direction: rtl;
@@ -1063,10 +1067,10 @@
     line-height: 2.05 !important;
   }
 
-  /* Boost Mobile Urdu Translation Typography (Finding F-09) */
+  /* Balanced Mobile Urdu Translation Typography (Finding F-09) */
   .dua-tarjuma-text {
-    font-size: calc(1.50rem * var(--dua-font-scale, 1.0)) !important;
-    line-height: 2.15 !important;
+    font-size: calc(1.32rem * var(--dua-font-scale, 1.0)) !important;
+    line-height: var(--dua-urdu-lh, 1.85) !important;
   }
 
   .dua-tier-title-ur {

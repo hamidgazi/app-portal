@@ -19,15 +19,15 @@
       --font-urdu-nastaleeq: var(--font-urdu, 'JameelNoori'), 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
       --font-urdu-naskh: 'Scheherazade New', 'Amiri', 'Traditional Arabic', 'Segoe UI', sans-serif;
       --font-urdu-current: var(--font-urdu-nastaleeq);
-      --urdu-line-height: 1.82;
-      --urdu-font-size: calc(1.40rem * var(--ayah-font-scale, 1.0));
-      --urdu-wisdom-size: calc(1.30rem * var(--ayah-font-scale, 1.0));
+      --urdu-line-height: 1.85;
+      --urdu-font-size: calc(1.32rem * var(--ayah-font-scale, 1.0));
+      --urdu-wisdom-size: calc(1.20rem * var(--ayah-font-scale, 1.0));
       --arabic-font-size: calc(1.40rem * var(--ayah-font-scale, 1.0));
     }
 
     body.font-mode-naskh {
       --font-urdu-current: var(--font-urdu-naskh) !important;
-      --urdu-line-height: 1.62 !important;
+      --urdu-line-height: 1.65 !important;
     }
 
     *, *::before, *::after {
@@ -690,8 +690,8 @@
     .command-translation-ur,
     .trans-body-ur {
       font-family: var(--font-urdu-current, var(--font-urdu), 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif) !important;
-      font-size: var(--urdu-font-size, 1.30rem) !important;
-      line-height: var(--urdu-line-height, 1.82) !important;
+      font-size: var(--urdu-font-size, 1.32rem) !important;
+      line-height: var(--urdu-line-height, 1.85) !important;
       color: #f8fafc !important;
       text-align: right !important;
       direction: rtl !important;
@@ -1163,7 +1163,8 @@
       --gold-primary: #fbbf24;
       --gold-border: rgba(212, 175, 55, 0.35);
       --emerald-glow: #10b981;
-      --urdu-font-size: calc(1.15rem * var(--ayah-font-scale, 1.0));
+      --urdu-line-height: 1.85;
+      --urdu-font-size: calc(1.32rem * var(--ayah-font-scale, 1.0));
       --arabic-font-size: calc(1.55rem * var(--ayah-font-scale, 1.0));
     }
 
@@ -1841,8 +1842,8 @@
 
     .manner-urdu-kanzuliman {
       font-family: var(--font-urdu-current, var(--font-urdu), 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif) !important;
-      font-size: var(--urdu-font-size, 1.30rem) !important;
-      line-height: var(--urdu-line-height, 1.82) !important;
+      font-size: var(--urdu-font-size, 1.32rem) !important;
+      line-height: var(--urdu-line-height, 1.85) !important;
       color: #f8fafc !important;
       text-align: right !important;
       direction: rtl !important;
@@ -2095,7 +2096,8 @@
         padding: 10px 12px;
       }
       :root {
-        --urdu-font-size: calc(1.05rem * var(--ayah-font-scale, 1.0));
+        --urdu-line-height: 1.85;
+        --urdu-font-size: calc(1.32rem * var(--ayah-font-scale, 1.0));
         --arabic-font-size: calc(1.35rem * var(--ayah-font-scale, 1.0));
       }
       .manners-kpi-ribbon {
