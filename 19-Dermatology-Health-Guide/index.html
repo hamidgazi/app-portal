@@ -448,6 +448,101 @@
       margin-bottom: 18px;
     }
 
+
+    /* 80/20 High-Yield Clinical Capsule Component */
+    .high-yield-capsule {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98));
+      border: 1.5px solid rgba(56, 189, 248, 0.35);
+      border-left: 6px solid #38bdf8;
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin: 18px 0;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35), 0 0 16px rgba(56, 189, 248, 0.1);
+    }
+
+    .capsule-badge-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .capsule-title {
+      font-size: 1.02rem;
+      font-weight: 800;
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    .capsule-subtitle {
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: rgba(56, 189, 248, 0.12);
+      color: #7dd3fc;
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+
+    .capsule-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    @media (max-width: 768px) {
+      .capsule-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .capsule-item {
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .capsule-item-golden { border-left: 4px solid #10b981; }
+    .capsule-item-medicine { border-left: 4px solid #38bdf8; }
+    .capsule-item-trap { border-left: 4px solid #ef4444; }
+    .capsule-item-timeline { border-left: 4px solid #f59e0b; }
+
+    .capsule-label {
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .capsule-label-golden { color: #34d399; }
+    .capsule-label-medicine { color: #38bdf8; }
+    .capsule-label-trap { color: #f87171; }
+    .capsule-label-timeline { color: #fbbf24; }
+
+    .capsule-value {
+      font-size: 0.86rem;
+      color: #e2e8f0;
+      line-height: 1.5;
+    }
+
+    .capsule-value strong {
+      color: #fff;
+    }
+
     /* Plain-Language Explainer Callout Box */
     .plain-language-box {
       background: rgba(16, 185, 129, 0.08);
@@ -1098,6 +1193,32 @@
         <p class="section-desc">
           A chronic peeling condition of the lips where skin continually hardens, splits, and sheds in rigid sheets.
         </p>
+        <!-- 80/20 High-Yield Clinical Capsule -->
+        <div class="high-yield-capsule">
+          <div class="capsule-badge-row">
+            <span class="capsule-title">⭐ 80/20 High-Yield Clinical Capsule</span>
+            <span class="capsule-subtitle">Top 20% Protocols Delivering 80% of Healing</span>
+          </div>
+          <div class="capsule-grid">
+            <div class="capsule-item capsule-item-golden">
+              <span class="capsule-label capsule-label-golden">🎯 1. The Golden Action</span>
+              <span class="capsule-value"><strong>Zero peeling, biting, or licking.</strong> Snip lifting flakes flush with sterile cuticle scissors—never tear. Apply protective ointment every 2–3 hours without fail.</span>
+            </div>
+            <div class="capsule-item capsule-item-medicine">
+              <span class="capsule-label capsule-label-medicine">💊 2. Gold-Standard Active / Medicine</span>
+              <span class="capsule-value"><strong>Pure White Petrolatum (Vaseline)</strong> or <strong>Medical Lanolin (Lansinoh)</strong> <span class="badge-safe">OTC</span> q2-3h; plus <strong>Tacrolimus 0.03%–0.1% Ointment (Protopic)</strong> <span class="badge-rx">[Prescription Based]</span> bid if chronic/refractory.</span>
+            </div>
+            <div class="capsule-item capsule-item-trap">
+              <span class="capsule-label capsule-label-trap">🚫 3. The Fatal 80% Trap</span>
+              <span class="capsule-value"><strong>Licking lips to wet them or pulling dry crusts.</strong> Salivary digestive enzymes (amylase/lipase) eat mucosal lipids; peeling rips immature cells, triggering reactive hyperkeratotic crusts.</span>
+            </div>
+            <div class="capsule-item capsule-item-timeline">
+              <span class="capsule-label capsule-label-timeline">⏱️ 4. Expected Clinical Timeline</span>
+              <span class="capsule-value"><strong>48–72h:</strong> Raw burning calms | <strong>10–14 days:</strong> Crusting thickness halts | <strong>3–4 weeks:</strong> Complete mucosal barrier re-epithelialization.</span>
+            </div>
+          </div>
+        </div>
+
 
         <!-- Plain English Translation Box -->
         <div class="plain-language-box">
@@ -1218,6 +1339,27 @@
 |  --> Desiccation & Fissuring --> Triggers Next Urge to Peel           |
 +-----------------------------------------------------------------------+</div>
 
+            
+            <h4>Lanolin vs. Petrolatum: Lipid Biochemistry & Barrier Mechanics</h4>
+            <p>
+              Both agents are non-comedogenic gold standards, but operate through distinct physiological mechanisms:
+            </p>
+            <ul>
+              <li><strong>100% Pure White Petrolatum (Vaseline):</strong> Inert, ultra-purified hydrocarbon matrix that does not penetrate viable tissue. It forms a non-permeable hydrophobic shield providing <strong>>98% passive TEWL reduction</strong>. Ideal for bedtime slugging to create a sealed humidity chamber.</li>
+              <li><strong>100% Medical-Grade Pure Lanolin (Lansinoh USP):</strong> A complex biomimetic mixture of high-molecular-weight esters, sterols (cholesterol, lanosterol), and fatty acids that chemically mimic human stratum corneum intercellular lipids. Lanolin penetrates deeper into micro-fissures and can absorb up to 200% of its weight in water, acting as a flexible, semi-occlusive cushion that keeps rigid plaques pliable during speech and eating.</li>
+            </ul>
+
+            <h4>Systemic Nutritional & Hematologic Deficiency Screening</h4>
+            <p>
+              Chronic, refractory exfoliative cheilitis and angular cheilitis frequently indicate subclinical nutritional depletion. Ask your physician to evaluate:
+            </p>
+            <ul>
+              <li><strong>Vitamin B2 (Riboflavin):</strong> Co-factor for flavoproteins required in cellular energy and mucosal epithelial turnover. Deficiency causes painful cheilosis, mucosal swelling, and red tongue.</li>
+              <li><strong>Vitamin B6 (Pyridoxine) & B12 (Cobalamin):</strong> Required for nucleic acid synthesis in rapidly dividing basal keratinocytes.</li>
+              <li><strong>Serum Ferritin (Iron Stores):</strong> Iron deficiency halts epithelial ribonucleotide reductase activity, leading to mucosal thinning, atrophy, and chronic fissures.</li>
+              <li><strong>Serum Zinc:</strong> Critical co-factor for metalloproteinases and mucosal re-epithelialization.</li>
+            </ul>
+
             <h4>The Clinical 3-Phase Mucosal Healing Protocol</h4>
             <ol>
               <li><strong>Phase 1: Acute Cessation (Days 1–7):</strong> Apply Hydrocortisone 1% ointment twice daily. Layer pure petrolatum or medical lanolin generously every 2–3 hours. Strict zero-peeling rule: if a crust catches, snip the edge with sterile scissors.</li>
@@ -1239,6 +1381,32 @@
         <p class="section-desc">
           Chest and back acne that gets worse with sweat, combined with thick dead skin rolls that rub off after soap.
         </p>
+        <!-- 80/20 High-Yield Clinical Capsule -->
+        <div class="high-yield-capsule">
+          <div class="capsule-badge-row">
+            <span class="capsule-title">⭐ 80/20 High-Yield Clinical Capsule</span>
+            <span class="capsule-subtitle">Top 20% Protocols Delivering 80% of Healing</span>
+          </div>
+          <div class="capsule-grid">
+            <div class="capsule-item capsule-item-golden">
+              <span class="capsule-label capsule-label-golden">🎯 1. The Golden Action</span>
+              <span class="capsule-value"><strong>Antifungal contact wash dwell time (3 to 5 minutes)</strong> before rinsing + throw away all rough loofahs and stop aggressive finger rubbing.</span>
+            </div>
+            <div class="capsule-item capsule-item-medicine">
+              <span class="capsule-label capsule-label-medicine">💊 2. Gold-Standard Active / Medicine</span>
+              <span class="capsule-value"><strong>Ketoconazole 2% Wash (Nizoral)</strong> <span class="badge-rx">[Rx/OTC]</span> (Mon/Wed/Fri) alternating with <strong>Benzoyl Peroxide 10% Wash (PanOxyl)</strong> <span class="badge-safe">OTC</span> (Tue/Thu/Sat) + leave-on <strong>AmLactin 12% Lactic Acid Lotion</strong> <span class="badge-safe">OTC</span>.</span>
+            </div>
+            <div class="capsule-item capsule-item-trap">
+              <span class="capsule-label capsule-label-trap">🚫 3. The Fatal 80% Trap</span>
+              <span class="capsule-value"><strong>Aggressively rubbing skin with fingers or loofahs</strong> to strip greyish 'dirt'. It is retention hyperkeratosis with hard water soap scum; scrubbing stimulates traumatic frictional hyperkeratosis.</span>
+            </div>
+            <div class="capsule-item capsule-item-timeline">
+              <span class="capsule-label capsule-label-timeline">⏱️ 4. Expected Clinical Timeline</span>
+              <span class="capsule-value"><strong>3–5 days:</strong> Itching halts | <strong>2 weeks:</strong> New pustules cease | <strong>4–6 weeks:</strong> Dead rolls stop forming | <strong>8–12 weeks:</strong> Post-inflammatory marks fade.</span>
+            </div>
+          </div>
+        </div>
+
 
         <!-- Plain English Translation Box -->
         <div class="plain-language-box">
@@ -1386,6 +1554,32 @@
         <p class="section-desc">
           Darkened, velvety, thickened skin on joint creases, elbows, knees, hips, and back. Driven by internal insulin signaling and physical friction.
         </p>
+        <!-- 80/20 High-Yield Clinical Capsule -->
+        <div class="high-yield-capsule">
+          <div class="capsule-badge-row">
+            <span class="capsule-title">⭐ 80/20 High-Yield Clinical Capsule</span>
+            <span class="capsule-subtitle">Top 20% Protocols Delivering 80% of Healing</span>
+          </div>
+          <div class="capsule-grid">
+            <div class="capsule-item capsule-item-golden">
+              <span class="capsule-label capsule-label-golden">🎯 1. The Golden Action</span>
+              <span class="capsule-value"><strong>Systemic insulin sensitization</strong> via low-glycemic eating, 15-minute post-meal GLUT4 walking, and zero pressure/friction on elbows, knees, hips, and groin.</span>
+            </div>
+            <div class="capsule-item capsule-item-medicine">
+              <span class="capsule-label capsule-label-medicine">💊 2. Gold-Standard Active / Medicine</span>
+              <span class="capsule-value"><strong>Oral Berberine HCl 500mg 2–3x/day</strong> <span class="badge-safe">OTC</span> (AMPK activator) or <strong>Metformin 500–1000mg XR</strong> <span class="badge-rx">[Prescription Based]</span> + <strong>Urea 10%–20% Lotion (Eucerin)</strong> <span class="badge-safe">OTC</span> twice daily.</span>
+            </div>
+            <div class="capsule-item capsule-item-trap">
+              <span class="capsule-label capsule-label-trap">🚫 3. The Fatal 80% Trap</span>
+              <span class="capsule-value"><strong>Attempting to scrub or bleach dark skin away</strong> with pumice stones or harsh bleaching creams. Acanthosis Nigricans is an internal hormonal condition (IGF-1 receptor activation); scrubbing causes severe frictional melanosis.</span>
+            </div>
+            <div class="capsule-item capsule-item-timeline">
+              <span class="capsule-label capsule-label-timeline">⏱️ 4. Expected Clinical Timeline</span>
+              <span class="capsule-value"><strong>2–3 weeks:</strong> Velvety texture softens | <strong>6–8 weeks:</strong> Visual lightening begins | <strong>12–16 weeks:</strong> Deep epidermal clearance as insulin normalizes.</span>
+            </div>
+          </div>
+        </div>
+
 
         <!-- Plain English Translation Box -->
         <div class="plain-language-box">
@@ -1531,6 +1725,32 @@
         <p class="section-desc">
           Special protocol for severe darkening in the deep buttock cleft and around the anal area ("where the poop is done").
         </p>
+        <!-- 80/20 High-Yield Clinical Capsule -->
+        <div class="high-yield-capsule">
+          <div class="capsule-badge-row">
+            <span class="capsule-title">⭐ 80/20 High-Yield Clinical Capsule</span>
+            <span class="capsule-subtitle">Top 20% Protocols Delivering 80% of Healing</span>
+          </div>
+          <div class="capsule-grid">
+            <div class="capsule-item capsule-item-golden">
+              <span class="capsule-label capsule-label-golden">🎯 1. The Golden Action</span>
+              <span class="capsule-value"><strong>Post-defecation water rinse (bidet/hand spray)</strong> + gentle pat dry (never wipe roughly) + immediate barrier paste application after every bowel movement.</span>
+            </div>
+            <div class="capsule-item capsule-item-medicine">
+              <span class="capsule-label capsule-label-medicine">💊 2. Gold-Standard Active / Medicine</span>
+              <span class="capsule-value"><strong>Zinc Oxide 40% Barrier Paste (Desitin Max / Sudocrem)</strong> <span class="badge-safe">OTC</span> after every bowel movement + <strong>Azelaic Acid 10%–15% Gel (Finacea)</strong> <span class="badge-rx">[Rx/OTC]</span> at bedtime.</span>
+            </div>
+            <div class="capsule-item capsule-item-trap">
+              <span class="capsule-label capsule-label-trap">🚫 3. The Fatal 80% Trap</span>
+              <span class="capsule-value"><strong>Dry-wiping with abrasive toilet paper</strong>, washing anal skin with bar soap, or applying harsh AHA peels/steroids. Fecal proteases (trypsin/elastase) digest thin anoderm, causing severe chemical burns and rebound PIH.</span>
+            </div>
+            <div class="capsule-item capsule-item-timeline">
+              <span class="capsule-label capsule-label-timeline">⏱️ 4. Expected Clinical Timeline</span>
+              <span class="capsule-value"><strong>24–48h:</strong> Stinging and soreness vanish | <strong>2–3 weeks:</strong> Subclinical inflammation clears | <strong>8–12 weeks:</strong> Frictional hyperpigmentation fades.</span>
+            </div>
+          </div>
+        </div>
+
 
         <!-- Plain English Translation Box -->
         <div class="plain-language-box">
@@ -1691,6 +1911,14 @@
               <li>Every 2nd night, apply a pea-sized dot of <strong>Azelaic Acid 10–15%</strong> to the outer darkened skin of the cleft (keeping clear of the anal mucosa).</li>
               <li>Immediately seal with a thin layer of <strong>40% Zinc Oxide paste</strong>. Sleep in loose 100% cotton boxer shorts.</li>
             </ol>
+            <h4>Mechanical Shear Elimination: Lyocell (Tencel) Anti-Friction Underwear</h4>
+            <p>
+              The natal cleft experiences continuous frictional shear during walking and sitting. Traditional rough cotton weaves or non-breathable polyester trap sweat and act like sandpaper against inflamed perianal skin:
+            </p>
+            <ul>
+              <li><strong>100% Lyocell (Tencel) / Micro-Modal Seamless Briefs:</strong> Derived from eucalyptus wood pulp, Lyocell fibers have a perfectly smooth, circular microscopic cross-section that reduces skin-on-fabric friction coefficients by <strong>over 60%</strong> compared to standard cotton.</li>
+              <li><strong>Superior Moisture Vapor Transmission:</strong> Lyocell wicks away moisture 50% faster than cotton, preventing intertriginous heat entrapment and sweat-induced chemical maceration that keeps melanocytes chronically inflamed.</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -1706,6 +1934,32 @@
         <p class="section-desc">
           Restorative protocol for thick, rough, hard hair that feels sticky near the roots but bone dry, frizzy, and brittle at the ends.
         </p>
+        <!-- 80/20 High-Yield Clinical Capsule -->
+        <div class="high-yield-capsule">
+          <div class="capsule-badge-row">
+            <span class="capsule-title">⭐ 80/20 High-Yield Clinical Capsule</span>
+            <span class="capsule-subtitle">Top 20% Protocols Delivering 80% of Healing</span>
+          </div>
+          <div class="capsule-grid">
+            <div class="capsule-item capsule-item-golden">
+              <span class="capsule-label capsule-label-golden">🎯 1. The Golden Action</span>
+              <span class="capsule-value"><strong>Weekly salon-grade thermal steam mask</strong> (ears-down to tips) + cool water cuticle reset + absolute zero raw scalp oils (which feed Malassezia and oxidize into sticky wax).</span>
+            </div>
+            <div class="capsule-item capsule-item-medicine">
+              <span class="capsule-label capsule-label-medicine">💊 2. Gold-Standard Active / Medicine</span>
+              <span class="capsule-value"><strong>Hard Water Chelating / Demineralizing Shampoo (Disodium EDTA + Citric Acid)</strong> <span class="badge-safe">OTC</span> + <strong>L'Oréal 8 Second Wonder Water (Lamellar)</strong> <span class="badge-safe">OTC</span> + <strong>Ketoconazole 2% Scalp Wash</strong> <span class="badge-rx">[Rx/OTC]</span>.</span>
+            </div>
+            <div class="capsule-item capsule-item-trap">
+              <span class="capsule-label capsule-label-trap">🚫 3. The Fatal 80% Trap</span>
+              <span class="capsule-value"><strong>Applying coconut, castor, or olive oil to sticky roots.</strong> Roots are already choked with oxidized sebum wax; raw oils feed Malassezia yeast, glue hair into stiff clumps, and worsen frizz.</span>
+            </div>
+            <div class="capsule-item capsule-item-timeline">
+              <span class="capsule-label capsule-label-timeline">⏱️ 4. Expected Clinical Timeline</span>
+              <span class="capsule-value"><strong>Instant (8 sec):</strong> Weightless slip with Lamellar water | <strong>1 Wash:</strong> Sticky root film dissolved by chelating/BHA wash | <strong>3–4 Weeks:</strong> Coarse strands become soft and supple.</span>
+            </div>
+          </div>
+        </div>
+
 
         <!-- Plain English Translation Box -->
         <div class="plain-language-box">
@@ -1883,6 +2137,20 @@
               <li><strong>Thermal Cuticle Dilation:</strong> Moist heat at 40°C–45°C expands the hair fiber's cross-sectional diameter by up to 15%, temporarily lifting the cuticle scales gently without damaging them.</li>
               <li><strong>Cationic Surfactant Penetration:</strong> Positively charged conditioning molecules (like Behentrimonium Methosulfate) migrate down the concentration gradient into the negative interior of the cortex. When rinsed with cool water, the cuticles contract, trapping the restorative lipids and fatty alcohols inside the hair core for days.</li>
             </ol>
+            <h4>Hair Elasticity Diagnostics: The Wet Strand Protein vs. Moisture Test</h4>
+            <p>
+              Before applying treatments, accurately assess your hair's internal biophysical state using the <strong>Wet Strand Stretch Test</strong>:
+            </p>
+            <ul>
+              <li><strong>Balanced Elasticity:</strong> Take a clean, wet strand and gently stretch it between two fingers. If it stretches ~20–30% of its length and smoothly bounces back to its original length without breaking, your cortex is balanced. Maintain weekly thermal hydration.</li>
+              <li><strong>Moisture Deficient (Protein Overload):</strong> Strand barely stretches (&lt;5%), feels stiff, rough, and wire-like, and snaps immediately with a sharp click. <em>Clinical Action:</em> Immediately halt all protein/keratin treatments. Infuse heavy moisture masks, fatty alcohols (Cetyl/Stearyl alcohol), and thermal steam therapy.</li>
+              <li><strong>Protein Deficient (Hygral Fatigue / Mushy Hair):</strong> Strand stretches excessively (&gt;40%) like limp bubble gum, feels gummy or slimy when wet, and fails to return to shape, breaking weakly. <em>Clinical Action:</em> Incorporate hydrolyzed quinoa/wheat micro-proteins and amino acid bond builders.</li>
+            </ul>
+
+            <h4>Pre-Wash Scalp Exfoliation: Lipophilic Salicylic Acid (BHA 2%)</h4>
+            <p>
+              Because coarse hair roots accumulate heavy, oxidized sebum wax esters and squalene polymers that normal clarifying shampoos cannot dissolve, apply <strong>Salicylic Acid (BHA 2%)</strong> (e.g. CeraVe SA Body Wash or Paula's Choice 2% BHA) directly to dry/damp roots for <strong>2 to 5 minutes before showering</strong>. As a lipophilic acid, BHA penetrates into the sebum-filled follicular infundibulum, dissolving wax plugs at the root so hair dries light, airy, and non-sticky.
+            </p>
           </div>
         </div>
       </div>
@@ -1898,6 +2166,32 @@
         <p class="section-desc">
           Relief protocol for 60% blocked nose, thick yellow-green phlegm in throat, post-nasal drip, and strained throat coughing.
         </p>
+        <!-- 80/20 High-Yield Clinical Capsule -->
+        <div class="high-yield-capsule">
+          <div class="capsule-badge-row">
+            <span class="capsule-title">⭐ 80/20 High-Yield Clinical Capsule</span>
+            <span class="capsule-subtitle">Top 20% Protocols Delivering 80% of Healing</span>
+          </div>
+          <div class="capsule-grid">
+            <div class="capsule-item capsule-item-golden">
+              <span class="capsule-label capsule-label-golden">🎯 1. The Golden Action</span>
+              <span class="capsule-value"><strong>High-volume hypertonic (2.7%) alkaline sinus rinse</strong> in Mygind's or Vertex-to-Floor postural drainage position + 30-degree sleep elevation to stop nocturnal post-nasal drip pooling.</span>
+            </div>
+            <div class="capsule-item capsule-item-medicine">
+              <span class="capsule-label capsule-label-medicine">💊 2. Gold-Standard Active / Medicine</span>
+              <span class="capsule-value"><strong>Dual-Action Mucolytic: Guaifenesin 600–1200mg ER + NAC 600mg</strong> <span class="badge-safe">OTC</span> + <strong>Fluticasone / Budesonide 0.5mg Respules</strong> <span class="badge-rx">[Prescription Based]</span> sinus flush; bedtime <strong>Oxymetazoline 0.05%</strong> <span class="badge-safe">OTC</span> capped at 3–4 nights max.</span>
+            </div>
+            <div class="capsule-item capsule-item-trap">
+              <span class="capsule-label capsule-label-trap">🚫 3. The Fatal 80% Trap</span>
+              <span class="capsule-value"><strong>Taking antibiotics for yellow-green mucus without fever</strong> (it's normal neutrophil myeloperoxidase enzyme, not bacteria) or using Otrivin for >4 nights (causes severe rebound rhinitis medicamentosa).</span>
+            </div>
+            <div class="capsule-item capsule-item-timeline">
+              <span class="capsule-label capsule-label-timeline">⏱️ 4. Expected Clinical Timeline</span>
+              <span class="capsule-value"><strong>2 Min:</strong> Immediate nasal airway opening | <strong>12–24h:</strong> NAC liquefies thick mucus | <strong>3–5 Days:</strong> Turbinates shrink; cough reflex subsides.</span>
+            </div>
+          </div>
+        </div>
+
 
         <!-- Plain English Translation Box -->
         <div class="plain-language-box">
@@ -2064,6 +2358,14 @@
             <p>
               <strong>N-Acetylcysteine (NAC)</strong> provides a free sulfhydryl group (-SH) that chemically attacks and cleaves these disulfide bonds. Within 60 to 90 minutes of oral ingestion, the thick mucus liquefies into a watery consistency, allowing your sinuses to drain effortlessly and ending the throat-straining cough.
             </p>
+            <h4>Alkaline Sodium Bicarbonate Gargles: Neutralizing Reflux Pepsin (LPR)</h4>
+            <p>
+              Many cases of chronic nocturnal throat-clearing, glottic heaviness, and stubborn morning cough are exacerbated by silent <strong>Laryngopharyngeal Reflux (LPR)</strong>:
+            </p>
+            <ul>
+              <li><strong>The Pepsin Mechanism:</strong> Microscopic aerosolized droplets of gastric pepsin travel up into the hypopharynx and embed in laryngeal tissues. Pepsin remains bound to mucosal cells and is reactivated every time local pH drops below 6.5, digesting laryngeal membranes and causing chronic neurogenic cough hypersensitivity.</li>
+              <li><strong>Alkaline Inactivation:</strong> Gargling with an alkaline solution (<strong>1/2 teaspoon USP Sodium Bicarbonate dissolved in 200 ml warm water</strong>) elevates pharyngeal pH above 8.0, which <strong>permanently and irreversibly denatures pepsin enzymes</strong>, instantly calming laryngeal irritation and reducing the urge to cough.</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -2079,6 +2381,32 @@
         <p class="section-desc">
           Complete blueprint for all-day stamina, laser focus, stress control, gut healing, microvascular flow, and deep restorative sleep.
         </p>
+        <!-- 80/20 High-Yield Clinical Capsule -->
+        <div class="high-yield-capsule">
+          <div class="capsule-badge-row">
+            <span class="capsule-title">⭐ 80/20 High-Yield Clinical Capsule</span>
+            <span class="capsule-subtitle">Top 20% Protocols Delivering 80% of Healing</span>
+          </div>
+          <div class="capsule-grid">
+            <div class="capsule-item capsule-item-golden">
+              <span class="capsule-label capsule-label-golden">🎯 1. The Golden Action</span>
+              <span class="capsule-value"><strong>The 90-minute morning caffeine delay</strong> + 10,000+ lux natural sunlight within 30 min of waking + 15-minute post-meal GLUT4 walking + 30-second Physiological Sigh for instant vagal reset.</span>
+            </div>
+            <div class="capsule-item capsule-item-medicine">
+              <span class="capsule-label capsule-label-medicine">💊 2. Gold-Standard Active / Medicine</span>
+              <span class="capsule-value"><strong>Creatine Monohydrate 5g/day</strong> <span class="badge-safe">OTC</span> + <strong>Ubiquinol CoQ10 100–200mg</strong> <span class="badge-safe">OTC</span> + <strong>Magnesium Bisglycinate 300–400mg + Glycine 3g</strong> <span class="badge-safe">OTC</span> nightly; focus stack: <strong>Alpha-GPC 300mg + L-Tyrosine 500–1000mg</strong> <span class="badge-safe">OTC</span>.</span>
+            </div>
+            <div class="capsule-item capsule-item-trap">
+              <span class="capsule-label capsule-label-trap">🚫 3. The Fatal 80% Trap</span>
+              <span class="capsule-value"><strong>Downing caffeine immediately upon waking</strong> or eating high-glycemic carb lunches (white rice/flour/sugar). Masking morning adenosine guarantees a brutal 2 PM crash, while glycemic spikes shunt tryptophan into a post-lunch food coma.</span>
+            </div>
+            <div class="capsule-item capsule-item-timeline">
+              <span class="capsule-label capsule-label-timeline">⏱️ 4. Expected Clinical Timeline</span>
+              <span class="capsule-value"><strong>Day 1:</strong> Afternoon crash eliminated | <strong>7–10 Days:</strong> Phosphocreatine ATP saturation | <strong>3–4 Weeks:</strong> Deep mitochondrial biogenesis & autonomic vagal remodeling.</span>
+            </div>
+          </div>
+        </div>
+
 
         <!-- Sticky In-Tab Sub-Nav Anchor Bar -->
         <div class="sub-nav-bar">
@@ -2247,6 +2575,7 @@
                   <li>Repeat for 3 cycles. During the prolonged exhalation, the diaphragm moves upward, compressing the heart. The sinoatrial node senses increased blood volume and signals the brain via the vagus nerve to slow the heart rate immediately!</li>
                 </ol>
               </li>
+                            <li><strong>Rhodiola Rosea (200–400 mg standardized to 3% rosavins and 1% salidroside):</strong> High-potency Arctic adaptogen that modulates the hypothalamic-pituitary-adrenal (HPA) axis and neuropeptide Y. Clinically shown to prevent stress-induced catecholamine depletion, reduce mental fatigue during prolonged cognitive load, and blunt executive burnout without stimulant jitter.</li>
               <li><strong>KSM-66 Ashwagandha (300–600 mg):</strong> A standardized root extract shown in double-blind placebo-controlled trials to lower serum cortisol levels by up to 27.9% and significantly improve perceived stress scale scores when taken nightly for 60 days.</li>
             </ul>
           </div>
@@ -2348,6 +2677,32 @@
         <p class="section-desc">
           High-yield physiological biohacks with disproportionate clinical returns, paired with the catastrophic everyday habits that sabotage dermatological and systemic recovery.
         </p>
+        <!-- 80/20 High-Yield Clinical Capsule -->
+        <div class="high-yield-capsule">
+          <div class="capsule-badge-row">
+            <span class="capsule-title">⭐ 80/20 High-Yield Clinical Capsule</span>
+            <span class="capsule-subtitle">Top 20% Protocols Delivering 80% of Healing</span>
+          </div>
+          <div class="capsule-grid">
+            <div class="capsule-item capsule-item-golden">
+              <span class="capsule-label capsule-label-golden">🎯 1. The Golden Action</span>
+              <span class="capsule-value"><strong>Master the Top 3 High-Yield Biohacks:</strong> (1) 90-Min Caffeine Delay, (2) 30-Sec Physiological Sigh, (3) Post-Meal 10-Minute Walk.</span>
+            </div>
+            <div class="capsule-item capsule-item-medicine">
+              <span class="capsule-label capsule-label-medicine">💊 2. Gold-Standard Active / Medicine</span>
+              <span class="capsule-value"><strong>Synergistic Magnesium Dual-Stack:</strong> <strong>Magnesium L-Threonate (145mg elemental)</strong> <span class="badge-safe">OTC</span> for synaptic density/cognition + <strong>Magnesium Bisglycinate (300mg)</strong> <span class="badge-safe">OTC</span> for somatic muscular relaxation.</span>
+            </div>
+            <div class="capsule-item capsule-item-trap">
+              <span class="capsule-label capsule-label-trap">🚫 3. The Fatal 80% Trap</span>
+              <span class="capsule-value"><strong>Daily use of antiseptic/alcohol mouthwashes</strong> (destroys oral Veillonella, slashing cardiovascular nitric oxide by 90%) and megadosing Melatonin (5–10mg instead of physiological 0.3mg).</span>
+            </div>
+            <div class="capsule-item capsule-item-timeline">
+              <span class="capsule-label capsule-label-timeline">⏱️ 4. Expected Clinical Timeline</span>
+              <span class="capsule-value"><strong>30 Sec:</strong> Instant vagal reset via Physiological Sigh | <strong>48 Hours:</strong> Oral nitric oxide synthesis restored | <strong>1–2 Weeks:</strong> Brain melatonin receptors resensitized.</span>
+            </div>
+          </div>
+        </div>
+
 
         <!-- Plain English Translation Box -->
         <div class="plain-language-box">
@@ -2525,6 +2880,32 @@
         <p class="section-desc">
           Interactive daily clinical checklist, weekly cadence calendar, 12-week recovery milestones, and metabolic lifestyle protocol. Progress auto-saves directly in your device.
         </p>
+        <!-- 80/20 High-Yield Clinical Capsule -->
+        <div class="high-yield-capsule">
+          <div class="capsule-badge-row">
+            <span class="capsule-title">⭐ 80/20 High-Yield Clinical Capsule</span>
+            <span class="capsule-subtitle">Top 20% Protocols Delivering 80% of Healing</span>
+          </div>
+          <div class="capsule-grid">
+            <div class="capsule-item capsule-item-golden">
+              <span class="capsule-label capsule-label-golden">🎯 1. The Golden Action</span>
+              <span class="capsule-value"><strong>Execute the core AM/Shower/PM protocol consistently</strong> using the interactive auto-saving checklist with zero skipped days in the first 21 days.</span>
+            </div>
+            <div class="capsule-item capsule-item-medicine">
+              <span class="capsule-label capsule-label-medicine">💊 2. Gold-Standard Active / Medicine</span>
+              <span class="capsule-value"><strong>The Tri-Daily Active Anchor:</strong> AM: Urea 10% / AmLactin 12% + Cica Balm; Shower: Ketoconazole 2% / BP 10% (3-5 min dwell); PM: Zinc Oxide barrier + Retinoid (Adapalene/Tretinoin) + Vaseline slugging.</span>
+            </div>
+            <div class="capsule-item capsule-item-trap">
+              <span class="capsule-label capsule-label-trap">🚫 3. The Fatal 80% Trap</span>
+              <span class="capsule-value"><strong>'Treatment overload'</strong>—introducing 5 new high-strength actives on the same day without patch-testing, or skipping barrier repair when skin begins feeling slightly dry.</span>
+            </div>
+            <div class="capsule-item capsule-item-timeline">
+              <span class="capsule-label capsule-label-timeline">⏱️ 4. Expected Clinical Timeline</span>
+              <span class="capsule-value"><strong>Phase 1 (Weeks 1–2):</strong> Acute reset & habit lock-in | <strong>Phase 2 (Weeks 3–4):</strong> Dead skin clearance | <strong>Phase 3 (Weeks 5–8):</strong> Pigment fading | <strong>Phase 4 (Weeks 9–12):</strong> Permanent remission.</span>
+            </div>
+          </div>
+        </div>
+
 
         <!-- Sticky In-Tab Sub-Nav Anchor Bar -->
         <div class="sub-nav-bar">
@@ -2808,6 +3189,32 @@
         <p class="section-desc">
           Diagnostic blood test panel, clinical evaluation scripts with 1-tap clipboard copying, red flag warnings, and the complete catalog of prescription agents.
         </p>
+        <!-- 80/20 High-Yield Clinical Capsule -->
+        <div class="high-yield-capsule">
+          <div class="capsule-badge-row">
+            <span class="capsule-title">⭐ 80/20 High-Yield Clinical Capsule</span>
+            <span class="capsule-subtitle">Top 20% Protocols Delivering 80% of Healing</span>
+          </div>
+          <div class="capsule-grid">
+            <div class="capsule-item capsule-item-golden">
+              <span class="capsule-label capsule-label-golden">🎯 1. The Golden Action</span>
+              <span class="capsule-value"><strong>Arrive at your appointment with an objective diagnostic blood panel</strong> (HOMA-IR, Fasting Insulin, HbA1c, Ferritin, B12, Zinc) and the 1-click printable clinical summary.</span>
+            </div>
+            <div class="capsule-item capsule-item-medicine">
+              <span class="capsule-label capsule-label-medicine">💊 2. Gold-Standard Active / Medicine</span>
+              <span class="capsule-value"><strong>Oral Metformin 500–1000mg XR</strong> <span class="badge-rx">[Prescription Based]</span> (for hyperinsulinemic Acanthosis Nigricans) + <strong>Ketoconazole 2% Wash & Oral Fluconazole 150mg</strong> <span class="badge-rx">[Prescription Based]</span> (for refractory Malassezia).</span>
+            </div>
+            <div class="capsule-item capsule-item-trap">
+              <span class="capsule-label capsule-label-trap">🚫 3. The Fatal 80% Trap</span>
+              <span class="capsule-value"><strong>Accepting generic oral antibacterial antibiotics</strong> (Doxycycline/Minocycline) for fungal back acne, or accepting topical steroids for chronic lip peeling (causes steroid addiction/atrophy).</span>
+            </div>
+            <div class="capsule-item capsule-item-timeline">
+              <span class="capsule-label capsule-label-timeline">⏱️ 4. Expected Clinical Timeline</span>
+              <span class="capsule-value"><strong>24–48h:</strong> Comprehensive blood panel results | <strong>Visit 1:</strong> Physician prescription clearance | <strong>4–8 Weeks:</strong> Targeted pharmacological resolution under medical supervision.</span>
+            </div>
+          </div>
+        </div>
+
 
         <!-- Sticky In-Tab Sub-Nav Anchor Bar -->
         <div class="sub-nav-bar">

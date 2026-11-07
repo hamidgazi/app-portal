@@ -621,6 +621,7 @@
       cursor: pointer;
       user-select: none;
       -webkit-user-select: none;
+      -webkit-touch-callout: none;
       touch-action: manipulation;
       position: relative;
       background: transparent;
@@ -954,6 +955,16 @@
       font-weight: 600;
     }
 
+    .sheet-app-version {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-dim);
+      background: rgba(255, 255, 255, 0.06);
+      padding: 1px 7px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-subtle);
+    }
+
     .sheet-close-btn {
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid var(--border-subtle);
@@ -1087,11 +1098,12 @@
     }
 
     .btn-back-hub {
+      position: relative;
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.14);
       color: var(--text-primary);
-      height: 32px;
-      min-height: 42px;
+      height: 34px;
+      min-height: 34px;
       min-width: 48px;
       padding: 0 12px;
       border-radius: var(--radius-sm);
@@ -1104,6 +1116,17 @@
       transition: all 0.15s ease;
       touch-action: manipulation;
       flex-shrink: 0;
+    }
+
+    /* Directive 5: Extend touch hitbox vertically to >= 48px on slim 42px bar */
+    .btn-back-hub::after {
+      content: "";
+      position: absolute;
+      top: -7px;
+      bottom: -7px;
+      left: 0;
+      right: 0;
+      min-height: 48px;
     }
 
     .btn-back-hub:hover {
@@ -1158,14 +1181,27 @@
     }
 
     .active-topbar-right .action-btn {
+      position: relative;
       height: 32px;
-      min-height: 42px;
+      min-height: 32px;
       min-width: 42px;
       padding: 0 10px;
       font-size: 12px;
       display: inline-flex;
       align-items: center;
       gap: 4px;
+    }
+
+    /* Directive 5: Hitbox expansion for mobile touch ergonomics */
+    .active-topbar-right .action-btn::after {
+      content: "";
+      position: absolute;
+      top: -8px;
+      bottom: -8px;
+      left: -4px;
+      right: -4px;
+      min-height: 48px;
+      min-width: 48px;
     }
 
     @media (max-width: 600px) {
@@ -1578,7 +1614,10 @@
       <div class="sheet-app-header">
         <div class="sheet-app-icon" id="qa-icon">📦</div>
         <div class="sheet-app-meta">
-          <h3 class="sheet-app-title" id="qa-title">Application</h3>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <h3 class="sheet-app-title" id="qa-title">Application</h3>
+            <span class="sheet-app-version" id="qa-version">v1.0.0</span>
+          </div>
           <div class="sheet-app-badge" id="qa-badge">Essential</div>
         </div>
         <button class="sheet-close-btn" id="qa-close-btn" aria-label="Close Sheet">✕</button>
@@ -1623,6 +1662,7 @@
       </p>
       <div style="margin-top:16px; display:flex; gap:8px;">
         <button class="action-btn btn-primary" id="btn-copy-qr-url" style="flex:1; justify-content:center;">📋 Copy Link</button>
+        <button class="action-btn" id="btn-share-native" style="display:none; justify-content:center;">📤 Share</button>
         <button class="action-btn" id="btn-share-wa" style="justify-content:center;">💬 WhatsApp</button>
       </div>
     </div>
@@ -1658,13 +1698,32 @@
        APPLICATION LOGIC & DEFENSIVE BOOTLOADER
        ========================================================================== -->
   <script>
+    /* Default Daily Essentials IDs */
+    const DEFAULT_DAILY_IDS = [
+      "02-Namaz-Prayer-Times__index_html",
+      "08-Hadith-Roman-Urdu__web__index_html",
+      "20-Arabic-Mastery__index_html",
+      "01-Events-Countdown__index_html",
+      "03-Thela-Stock-Manager__index_html",
+      "05-Cloud-Clipboard__index_html"
+    ];
+
     /* Global Application State */
     const State = {
       selectedCluster: "all",
       searchQuery: "",
       activeApp: null,
       audioMuted: localStorage.getItem("master_index_audio_muted") === "true",
-      favorites: JSON.parse(localStorage.getItem("master_index_favorites") || "[]"),
+      favorites: (function() {
+        const saved = localStorage.getItem("master_index_favorites");
+        if (saved !== null) {
+          try {
+            const parsed = JSON.parse(saved);
+            if (Array.isArray(parsed)) return parsed;
+          } catch (e) {}
+        }
+        return [...DEFAULT_DAILY_IDS];
+      })(),
       recents: JSON.parse(localStorage.getItem("master_index_recents") || "[]"),
       apps: []
     };
@@ -1799,14 +1858,7 @@
     /* ==========================================================================
        SMARTPHONE LAUNCHER ENGINE & INTERACTION LOGIC
        ========================================================================== */
-    const DEFAULT_DAILY_IDS = [
-      "02-Namaz-Prayer-Times__index_html",
-      "08-Hadith-Roman-Urdu__web__index_html",
-      "20-Arabic-Mastery__index_html",
-      "01-Events-Countdown__index_html",
-      "03-Thela-Stock-Manager__index_html",
-      "05-Cloud-Clipboard__index_html"
-    ];
+    /* (DEFAULT_DAILY_IDS defined at top of script) */
 
     function getClusterGradClass(clusterId) {
       switch (clusterId) {
@@ -1850,6 +1902,7 @@
       // Mobile Touch Handling (500ms threshold)
       element.addEventListener("touchstart", (e) => {
         isLongPress = false;
+        if (e.target.closest(".launcher-menu-trigger")) return;
         if (!e.touches || !e.touches[0]) return;
         startX = e.touches[0].clientX;
         startY = e.touches[0].clientY;
@@ -1876,7 +1929,8 @@
           pressTimer = null;
         }
         if (isLongPress) {
-          e.preventDefault();
+          if (e.cancelable) e.preventDefault();
+          setTimeout(() => { isLongPress = false; }, 100);
         }
       });
 
@@ -1885,6 +1939,7 @@
           clearTimeout(pressTimer);
           pressTimer = null;
         }
+        isLongPress = false;
       });
 
       // Right-Click Context Menu
@@ -1894,7 +1949,7 @@
         openQuickActionSheet(app);
       });
 
-      // Desktop 3-Dots Button
+      // Desktop / Accessible 3-Dots Button
       const menuTrigger = element.querySelector(".launcher-menu-trigger");
       if (menuTrigger) {
         menuTrigger.addEventListener("click", (e) => {
@@ -1931,6 +1986,7 @@
       const modal = document.getElementById("quick-actions-modal");
       const iconEl = document.getElementById("qa-icon");
       const titleEl = document.getElementById("qa-title");
+      const versionEl = document.getElementById("qa-version");
       const badgeEl = document.getElementById("qa-badge");
       const descEl = document.getElementById("qa-desc");
       const tagsEl = document.getElementById("qa-tags");
@@ -1953,6 +2009,10 @@
         iconEl.textContent = app.icon || "📦";
       }
       if (titleEl) titleEl.textContent = app.title;
+      if (versionEl) {
+        const appVer = app.version || (app.badge && app.badge.includes("v") ? app.badge.match(/v\d+(\.\d+)*/)?.[0] : null) || "1.0.0";
+        versionEl.textContent = appVer.startsWith("v") ? appVer : `v${appVer}`;
+      }
       if (badgeEl) badgeEl.textContent = app.badge || app.category || "Application";
       if (descEl) descEl.textContent = app.description || "No description available.";
       if (tagsEl) {
@@ -2024,13 +2084,18 @@
       const countEl = document.getElementById("favorites-count");
       if (!gridEl) return;
 
-      let favApps = State.apps.filter(a => State.favorites.includes(a.id));
-
-      if (favApps.length === 0) {
-        favApps = State.apps.filter(a => DEFAULT_DAILY_IDS.includes(a.id));
-      }
+      const favApps = State.apps.filter(a => State.favorites.includes(a.id));
 
       if (countEl) countEl.textContent = favApps.length;
+
+      if (favApps.length === 0) {
+        gridEl.innerHTML = `
+          <div class="empty-dock-hint" style="grid-column: 1 / -1; padding: 18px 12px; text-align: center; color: var(--text-dim); font-size: 13px; border: 1px dashed var(--border-subtle); border-radius: var(--radius-md);">
+            <span>⭐ No pinned essentials yet. Tap the <strong style="color:var(--text-secondary);">⋮</strong> button or long-press any tool below to pin it here.</span>
+          </div>
+        `;
+        return;
+      }
 
       gridEl.innerHTML = favApps.map(app => renderLauncherItem(app, [])).join("");
 
@@ -2287,9 +2352,9 @@
       const hasQuery = State.searchQuery && State.searchQuery.trim().length > 0;
       const tokenGroups = hasQuery ? getExpandedTokens(State.searchQuery) : [];
 
-      // Hide favorites during active search to keep focus on matching tools
+      // Hide favorites during active search or cluster filter to keep focus on relevant tools
       if (favoritesSection) {
-        favoritesSection.style.display = hasQuery ? "none" : "block";
+        favoritesSection.style.display = (hasQuery || State.selectedCluster !== "all") ? "none" : "block";
       }
 
       let activeClusters = CLUSTERS;
@@ -2500,6 +2565,22 @@
                style="display:block; border-radius:8px;" 
                onerror="this.onerror=null; this.outerHTML = generateQrSvg('${escapeHtml(shareUrl)}');" />
         `;
+      }
+
+      const btnNative = document.getElementById("btn-share-native");
+      if (btnNative) {
+        if (typeof navigator !== "undefined" && navigator.share) {
+          btnNative.style.display = "inline-flex";
+          btnNative.onclick = () => {
+            navigator.share({
+              title: app.title,
+              text: app.description || app.title,
+              url: shareUrl
+            }).catch(() => {});
+          };
+        } else {
+          btnNative.style.display = "none";
+        }
       }
 
       if (btnCopy) {
