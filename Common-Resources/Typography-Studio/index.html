@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="theme-color" content="#0a0a0c">
+  <meta name="description" content="Professional Urdu & Arabic Typography Studio - Interactive Font Comparer & Switcher">
+  <title>Urdu & Arabic Typography Studio | خط شناسی و فانٹ اسٹوڈیو</title>
+
+  <!-- Google Fonts Preconnect & Optimized Multi-Font Loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Gulzar&family=Noto+Nastaliq+Urdu:wght@400..700&family=Noto+Sans+Arabic:wght@400;600;700&family=Readex+Pro:wght@400;500;600;700&family=Scheherazade+New:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       1. CSS Custom Properties & Dynamic Font Stacks
+       ========================================================================== */
+    :root {
+      /* Theme Palette: AMOLED Pitch Black / High Contrast Gold & Emerald */
+      --bg-base: #070709;
+      --bg-surface: #111116;
+      --bg-card: #171720;
+      --bg-card-hover: #1e1e2b;
+      --border-subtle: #262638;
+      --border-active: #d97706;
+
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+
+      --gold-primary: #f59e0b;
+      --gold-glow: rgba(245, 158, 11, 0.18);
+      --emerald-primary: #10b981;
+      --emerald-glow: rgba(16, 185, 129, 0.18);
+      --cyan-primary: #06b6d4;
+
+      /* Dynamic Typography Variables */
+      --font-ui: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      
+      /* Active Selections (Managed via JS) */
+      --font-urdu-current: 'Noto Nastaliq Urdu', 'Gulzar', 'Jameel Noori Nastaleeq', serif;
+      --font-arabic-current: 'Amiri', 'Scheherazade New', 'Traditional Arabic', serif;
+      
+      --urdu-line-height: 2.3;
+      --arabic-line-height: 1.9;
+      --preview-font-size: 24px;
+    }
+
+    /* Light Theme Modifier */
+    body.theme-light {
+      --bg-base: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-card: #f1f5f9;
+      --bg-card-hover: #e2e8f0;
+      --border-subtle: #cbd5e1;
+      --border-active: #d97706;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+    }
+
+    /* ==========================================================================
+       2. Reset & Layout Fundamentals
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-ui);
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 1.25rem 1rem 5rem 1rem;
+    }
+
+    /* ==========================================================================
+       3. Header & Navigation Hub
+       ========================================================================== */
+    header.hero-header {
+      text-align: center;
+      padding: 1.5rem 0.5rem 1rem 0.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background: var(--gold-glow);
+      color: var(--gold-primary);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      margin-bottom: 0.75rem;
+    }
+
+    h1.hero-title {
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.35rem;
+    }
+
+    p.hero-subtitle {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    /* ==========================================================================
+       4. Interactive Font Switching Dashboard
+       ========================================================================== */
+    .controls-panel {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 1rem;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+    }
+
+    .panel-section-title {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 700;
+      color: var(--gold-primary);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .switchers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .switcher-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .switcher-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .switcher-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .switcher-badge {
+      font-size: 0.72rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 0.375rem;
+      background: var(--bg-surface);
+      color: var(--text-muted);
+      border: 1px solid var(--border-subtle);
+    }
+
+    /* Toggle Pills Container */
+    .toggle-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      background: var(--bg-surface);
+      padding: 0.35rem;
+      border-radius: 0.6rem;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .btn-toggle {
+      min-height: 48px; /* Strict Directive 5.3 Hitbox requirement */
+      padding: 0.5rem 0.75rem;
+      border: 1px solid transparent;
+      border-radius: 0.45rem;
+      background: transparent;
+      color: var(--text-secondary);
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 0.35rem;
+      user-select: none;
+      touch-action: manipulation;
+      transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .btn-toggle:hover {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .btn-toggle.active {
+      background: var(--gold-primary);
+      color: #000000;
+      font-weight: 700;
+      border-color: var(--gold-primary);
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+    }
+
+    .btn-toggle.emerald-active.active {
+      background: var(--emerald-primary);
+      color: #000000;
+      border-color: var(--emerald-primary);
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    }
+
+    /* Sliders & Fine Tuning */
+    .tuning-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .tuning-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .tuning-label {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .tuning-value {
+      font-weight: 700;
+      color: var(--gold-primary);
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: 9999px;
+      background: var(--border-subtle);
+      outline: none;
+      cursor: pointer;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--gold-primary);
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    /* ==========================================================================
+       5. Live Typography Preview Cards
+       ========================================================================== */
+    .preview-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .preview-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+      transition: border-color 0.2s ease;
+    }
+
+    .preview-card:hover {
+      border-color: var(--border-active);
+    }
+
+    .preview-card-header {
+      padding: 0.85rem 1.25rem;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .card-title-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .card-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .card-meta-pill {
+      font-size: 0.72rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 9999px;
+      background: var(--bg-surface);
+      color: var(--gold-primary);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+    }
+
+    .preview-card-body {
+      padding: 1.5rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    /* Typography Rendering Elements */
+    .arabic-render {
+      font-family: var(--font-arabic-current);
+      font-size: var(--preview-font-size);
+      line-height: var(--arabic-line-height);
+      color: #fbbf24;
+      text-align: right;
+      direction: rtl;
+      unicode-bidi: isolate;
+      word-spacing: 0.08em;
+    }
+
+    .urdu-render {
+      font-family: var(--font-urdu-current);
+      font-size: calc(var(--preview-font-size) * 0.95);
+      line-height: var(--urdu-line-height);
+      color: #38bdf8;
+      text-align: right;
+      direction: rtl;
+      unicode-bidi: isolate;
+      word-spacing: 0.05em;
+    }
+
+    .english-render {
+      font-family: var(--font-ui);
+      font-size: calc(var(--preview-font-size) * 0.65);
+      line-height: 1.6;
+      color: var(--text-secondary);
+      border-left: 3px solid var(--emerald-primary);
+      padding-left: 0.85rem;
+      margin-top: 0.25rem;
+    }
+
+    /* ==========================================================================
+       6. Production Code Export & Implementation Drawer
+       ========================================================================== */
+    .export-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 1rem;
+      padding: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .export-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.85rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .btn-copy {
+      min-height: 48px;
+      padding: 0 1.25rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--emerald-primary);
+      background: var(--emerald-glow);
+      color: var(--emerald-primary);
+      font-family: var(--font-ui);
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      touch-action: manipulation;
+      transition: all 0.2s ease;
+    }
+
+    .btn-copy:hover {
+      background: var(--emerald-primary);
+      color: #000000;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+    }
+
+    pre.code-display {
+      background: #09090d;
+      border: 1px solid #1f1f2e;
+      border-radius: 0.6rem;
+      padding: 1rem;
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 0.82rem;
+      color: #e2e8f0;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      line-height: 1.5;
+    }
+
+    /* ==========================================================================
+       7. Educational Font Comparison Table
+       ========================================================================== */
+    .table-container {
+      overflow-x: auto;
+      border-radius: 0.75rem;
+      border: 1px solid var(--border-subtle);
+      margin-bottom: 2rem;
+    }
+
+    table.font-matrix {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.85rem;
+    }
+
+    table.font-matrix th, table.font-matrix td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    table.font-matrix th {
+      background: var(--bg-card);
+      color: var(--gold-primary);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+
+    table.font-matrix tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* ==========================================================================
+       8. Mobile Fixed Bottom Navigation Bar
+       ========================================================================== */
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(17, 17, 22, 0.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border-subtle);
+      padding: 0.6rem 1rem;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .btn-quick-toggle {
+      min-height: 48px;
+      padding: 0.4rem 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-card);
+      color: var(--text-primary);
+      font-family: var(--font-ui);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      touch-action: manipulation;
+    }
+
+    .btn-quick-toggle:active {
+      transform: scale(0.97);
+    }
+
+    /* Notification Toast */
+    #toast-msg {
+      position: fixed;
+      top: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100px);
+      background: var(--emerald-primary);
+      color: #000000;
+      font-weight: 700;
+      padding: 0.6rem 1.25rem;
+      border-radius: 9999px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      font-size: 0.85rem;
+      transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+      z-index: 1000;
+      pointer-events: none;
+    }
+
+    #toast-msg.show {
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Toast Notification -->
+  <div id="toast-msg">✅ Production CSS Copied to Clipboard!</div>
+
+  <div class="container">
+    <!-- Header -->
+    <header class="hero-header">
+      <div class="hero-badge">✨ Typography Engineering Suite</div>
+      <h1 class="hero-title">Urdu & Arabic Font Studio</h1>
+      <p class="hero-subtitle">High-visibility, crystal-clear typography optimized for mobile devices, high-DPI displays, and classical Tashkeel readability.</p>
+    </header>
+
+    <!-- Interactive Controller Dashboard -->
+    <section class="controls-panel" aria-label="Font Controls">
+      <div class="panel-section-title">
+        <span>🎮 Dynamic Live Switcher</span>
+        <button id="btn-theme-toggle" class="btn-quick-toggle" title="Toggle Dark/Light Mode">🌓 Theme</button>
+      </div>
+
+      <div class="switchers-grid">
+        <!-- Urdu Switcher Card -->
+        <div class="switcher-card">
+          <div class="switcher-header">
+            <span class="switcher-title">🇵🇰 Urdu Typography</span>
+            <span id="badge-urdu-font" class="switcher-badge">Noto Nastaliq</span>
+          </div>
+          <div class="toggle-group" role="group" aria-label="Urdu Font Selection">
+            <button id="btn-urdu-nastaliq" class="btn-toggle active" data-style="nastaliq">
+              <span>📜 Traditional</span>
+              <small style="opacity:0.8;">(Nastaliq)</small>
+            </button>
+            <button id="btn-urdu-naskh" class="btn-toggle" data-style="naskh">
+              <span>🔤 Modern Flat</span>
+              <small style="opacity:0.8;">(Naskh/Sans)</small>
+            </button>
+          </div>
+        </div>
+
+        <!-- Arabic Switcher Card -->
+        <div class="switcher-card">
+          <div class="switcher-header">
+            <span class="switcher-title">🇸🇦 Arabic Typography</span>
+            <span id="badge-arabic-font" class="switcher-badge">Amiri (Quranic)</span>
+          </div>
+          <div class="toggle-group" role="group" aria-label="Arabic Font Selection">
+            <button id="btn-arabic-amiri" class="btn-toggle emerald-active active" data-style="amiri">
+              <span>📖 Classical</span>
+              <small style="opacity:0.8;">(Amiri Naskh)</small>
+            </button>
+            <button id="btn-arabic-readex" class="btn-toggle emerald-active" data-style="readex">
+              <span>✨ Modern</span>
+              <small style="opacity:0.8;">(Readex Pro)</small>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sliders for Size & Metrics -->
+      <div class="tuning-grid">
+        <div class="tuning-item">
+          <label class="tuning-label" for="slider-font-size">
+            <span>Font Size (حجم الخط)</span>
+            <span id="val-font-size" class="tuning-value">24 px</span>
+          </label>
+          <input type="range" id="slider-font-size" min="16" max="38" value="24" step="1">
+        </div>
+
+        <div class="tuning-item">
+          <label class="tuning-label" for="slider-line-height">
+            <span>Urdu Line-Height (فاصلہ سطر)</span>
+            <span id="val-line-height" class="tuning-value">2.3</span>
+          </label>
+          <input type="range" id="slider-line-height" min="1.4" max="3.0" value="2.3" step="0.1">
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Preview Display Stack -->
+    <section class="preview-stack" aria-label="Live Hadith Previews">
+      <!-- Card 1: Intentions Hadith -->
+      <article class="preview-card">
+        <div class="preview-card-header">
+          <div class="card-title-group">
+            <span style="font-size: 1.1rem;">💎</span>
+            <span class="card-title">Sample 1: Hadith al-Niyyah (حديث النية)</span>
+          </div>
+          <span class="card-meta-pill">Sahih al-Bukhari #1</span>
+        </div>
+        <div class="preview-card-body">
+          <div class="arabic-render" id="render-ar-1">
+            إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى ، فَمَنْ كَانَتْ هِجْرَتُهُ إِلَى دُنْيَا يُصِيبُهَا أَوْ إِلَى امْرَأَةٍ يَنْكِحُهَا ، فَهِجْرَتُهُ إِلَى مَا هَاجَرَ إِلَيْهِ.
+          </div>
+          <div class="urdu-render" id="render-ur-1">
+            تمام اعمال کا دارومدار نیتوں پر ہے، اور ہر شخص کے لیے وہی ہے جس کی اس نے نیت کی۔ پس جس کی ہجرت دنیا حاصل کرنے یا کسی عورت سے نکاح کی غرض سے ہو، تو اس کی ہجرت اسی مقصد کے لیے شمار ہوگی جس کے لیے اس نے ہجرت کی۔
+          </div>
+          <div class="english-render">
+            "Actions are judged only by intentions, and every person will get the reward only of what he intended. So whoever emigrated for worldly benefits or for a woman to marry, his emigration was for what he emigrated for."
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2: Friday Travel Precedent -->
+      <article class="preview-card">
+        <div class="preview-card-header">
+          <div class="card-title-group">
+            <span style="font-size: 1.1rem;">🕌</span>
+            <span class="card-title">Sample 2: Friday Travel Precedent (أثر عمر بن الخطابؓ)</span>
+          </div>
+          <span class="card-meta-pill">Musannaf Abd al-Razzaq #5532</span>
+        </div>
+        <div class="preview-card-body">
+          <div class="arabic-render" id="render-ar-2">
+            إِنَّ الْجُمُعَةَ لَا تَحْبِسُ عَنْ سَفَرٍ ، مَا لَمْ يَحْضُرْ وَقْتُ الصَّلَاةِ.
+          </div>
+          <div class="urdu-render" id="render-ur-2">
+            بے شک جمعہ کا دن سفر سے مانع نہیں ہوتا، جب تک کہ نماز کا وقت داخل نہ ہو جائے۔
+          </div>
+          <div class="english-render">
+            "Indeed, Friday does not prevent one from travel, as long as the time for prayer has not arrived."
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3: Dense Technical Mustalah Definition -->
+      <article class="preview-card">
+        <div class="preview-card-header">
+          <div class="card-title-group">
+            <span style="font-size: 1.1rem;">📜</span>
+            <span class="card-title">Sample 3: Dense Mustalah Technical Definition (تعریفِ حدیثِ صحیح)</span>
+          </div>
+          <span class="card-meta-pill">Nukhbat al-Fikar / Muqaddimah</span>
+        </div>
+        <div class="preview-card-body">
+          <div class="arabic-render" id="render-ar-3">
+            هُوَ مَا اتَّصَلَ سَنَدُهُ بِنَقْلِ العَدْلِ الضَّابِطِ عَنْ مِثْلِهِ إِلَى مُنْتَهَاهُ مِنْ غَيْرِ شُذُوذٍ وَلَا عِلَّةٍ قَادِحَةٍ.
+          </div>
+          <div class="urdu-render" id="render-ur-3">
+            حدیثِ صحیح وہ حدیث ہے جس کی سند شروع سے لے کر آخر تک متصل ہو، اسے عادل اور کامل الضبط راوی نے اپنے جیسے راوی سے روایت کیا ہو، اور وہ شذوذ اور کسی مخفی علتِ قادحہ سے بالکل پاک ہو۔
+          </div>
+          <div class="english-render">
+            "A Sahih Hadith is that whose chain is continuous through the transmission of an upright, highly precise narrator from his peer all the way to its termination, without irregularity or subtle defect."
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- Educational Font Analysis Matrix -->
+    <div class="table-container">
+      <table class="font-matrix">
+        <thead>
+          <tr>
+            <th>Font Name</th>
+            <th>Family</th>
+            <th>Primary Strengths</th>
+            <th>Ideal Usage</th>
+            <th>Critical CSS Rule</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Noto Nastaliq Urdu</strong></td>
+            <td>Nastaliq (Google)</td>
+            <td>Authentic Urdu calligraphy, cascading ligatures, cultural elegance.</td>
+            <td>Book titles, Hadith translations, literary articles.</td>
+            <td><code>line-height: 2.3+</code> (prevents dot clipping)</td>
+          </tr>
+          <tr>
+            <td><strong>Noto Sans Arabic</strong></td>
+            <td>Naskh / Sans (Google)</td>
+            <td>Flat baseline, ultra-crisp at 14px–16px, zero dot collisions.</td>
+            <td>Mobile UI, buttons, dashboards, search bars.</td>
+            <td><code>line-height: 1.6</code>, <code>font-size: 16px</code></td>
+          </tr>
+          <tr>
+            <td><strong>Amiri</strong></td>
+            <td>Classical Naskh</td>
+            <td>Bulaq Press pedigree, perfect vertical Tashkeel stacking.</td>
+            <td>Quranic Ayat, Hadith Matn with complete Harakat.</td>
+            <td><code>font-size: 22px+</code>, <code>letter-spacing: normal</code></td>
+          </tr>
+          <tr>
+            <td><strong>Readex Pro</strong></td>
+            <td>Geometric Modern</td>
+            <td>Ultra-modern high-contrast curves, wide counters, effortless reading.</td>
+            <td>Smartphone apps, subheadings, modern articles.</td>
+            <td><code>font-weight: 500</code>, <code>line-height: 1.7</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Production Code Export Drawer -->
+    <section class="export-box" aria-label="Export Production CSS">
+      <div class="export-header">
+        <div>
+          <h2 style="font-size: 1.05rem; font-weight: 700;">📋 Ready-to-Paste Production CSS Code</h2>
+          <p style="font-size: 0.82rem; color: var(--text-muted);">Self-contained font stacks with Google Fonts CDN and bulletproof local system fallbacks.</p>
+        </div>
+        <button id="btn-copy-code" class="btn-copy">
+          <span>📋</span>
+          <span>Copy CSS Snippet</span>
+        </button>
+      </div>
+
+      <pre class="code-display" id="css-code-snippet">/* === Antigravity Verified Dual-Font Stacks === */
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Gulzar&family=Noto+Nastaliq+Urdu:wght@400..700&family=Noto+Sans+Arabic:wght@400;600;700&family=Readex+Pro:wght@400;500;600;700&display=swap');
+
+:root {
+  /* 1. Traditional Nastaliq (Books, Literature & Headings) */
+  --font-urdu-nastaliq: 'Noto Nastaliq Urdu', 'Gulzar', 'Jameel Noori Nastaleeq', 'Urdu Typesetting', serif;
+  --line-height-nastaliq: 2.3; /* Critical: Nastaliq requires >= 2.2 to prevent dot clipping */
+
+  /* 2. Modern Clean Naskh (Mobile UI, Buttons & Dense Text) */
+  --font-urdu-naskh: 'Noto Sans Arabic', 'Almarai', 'Segoe UI', Tahoma, sans-serif;
+  --line-height-naskh: 1.6;
+
+  /* 3. Classical Quranic & Hadith Arabic (Flawless Tashkeel/Harakat) */
+  --font-arabic-quranic: 'Amiri', 'Scheherazade New', 'Traditional Arabic', serif;
+  --line-height-arabic-quranic: 1.9;
+
+  /* 4. Modern Geometric Arabic (Crisp Mobile Display) */
+  --font-arabic-modern: 'Readex Pro', 'Noto Sans Arabic', 'IBM Plex Sans Arabic', sans-serif;
+  --line-height-arabic-modern: 1.7;
+}
+
+/* Sample Classes */
+.text-urdu-nastaliq {
+  font-family: var(--font-urdu-nastaliq);
+  line-height: var(--line-height-nastaliq);
+  direction: rtl;
+  text-align: right;
+}
+
+.text-urdu-naskh {
+  font-family: var(--font-urdu-naskh);
+  line-height: var(--line-height-naskh);
+  direction: rtl;
+  text-align: right;
+}
+
+.text-arabic-quranic {
+  font-family: var(--font-arabic-quranic);
+  line-height: var(--line-height-arabic-quranic);
+  direction: rtl;
+  text-align: right;
+}
+
+.text-arabic-modern {
+  font-family: var(--font-arabic-modern);
+  line-height: var(--line-height-arabic-modern);
+  direction: rtl;
+  text-align: right;
+}</pre>
+    </section>
+  </div>
+
+  <!-- Mobile Fixed Bottom Quick Bar -->
+  <aside class="bottom-bar" aria-label="Quick Switcher Controls">
+    <button id="btn-bottom-urdu-toggle" class="btn-quick-toggle">
+      <span>🇵🇰 Urdu:</span>
+      <strong id="label-bottom-urdu">Nastaliq</strong>
+    </button>
+    <button id="btn-bottom-arabic-toggle" class="btn-quick-toggle">
+      <span>🇸🇦 Arabic:</span>
+      <strong id="label-bottom-arabic">Amiri</strong>
+    </button>
+  </aside>
+
+  <!-- ==========================================================================
+       JavaScript: Fault-Tolerant Audio UI & Dynamic Font State Engine
+       ========================================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      // 1. Procedural Audio Synthesis (Strict Directive 7 Compliant: Non-musical tactical SFX)
+      let audioCtx = null;
+      function playTactileTick(freq = 600, duration = 0.04) {
+        try {
+          if (!audioCtx) {
+            const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+            if (AudioContextClass) audioCtx = new AudioContextClass();
+          }
+          if (audioCtx && audioCtx.state === 'suspended') {
+            audioCtx.resume();
+          }
+          if (audioCtx) {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + duration);
+          }
+        } catch (e) {
+          // Audio fails silently on locked autoplay policies without breaking UI
+        }
+      }
+
+      function playSuccessChime() {
+        playTactileTick(880, 0.06);
+        setTimeout(() => playTactileTick(1174.66, 0.08), 50);
+      }
+
+      // 2. State & Typography Definitions
+      const FONTS = {
+        urdu: {
+          nastaliq: {
+            stack: "'Noto Nastaliq Urdu', 'Gulzar', 'Jameel Noori Nastaleeq', 'Urdu Typesetting', serif",
+            name: "Noto Nastaliq (روایتی)",
+            badge: "Nastaliq",
+            defaultLineHeight: 2.3
+          },
+          naskh: {
+            stack: "'Noto Sans Arabic', 'Almarai', 'Segoe UI', Tahoma, sans-serif",
+            name: "Noto Sans (سیدھا خط)",
+            badge: "Modern Naskh",
+            defaultLineHeight: 1.7
+          }
+        },
+        arabic: {
+          amiri: {
+            stack: "'Amiri', 'Scheherazade New', 'Traditional Arabic', serif",
+            name: "Amiri Naskh (قرآنی)",
+            badge: "Amiri (Quranic)"
+          },
+          readex: {
+            stack: "'Readex Pro', 'Noto Sans Arabic', 'IBM Plex Sans Arabic', sans-serif",
+            name: "Readex Pro (جدید)",
+            badge: "Readex (Modern)"
+          }
+        }
+      };
+
+      let state = {
+        urduStyle: 'nastaliq',
+        arabicStyle: 'amiri',
+        fontSize: 24,
+        urduLineHeight: 2.3,
+        isLight: false
+      };
+
+      // 3. Defensive Component Bootloader
+      function initApp() {
+        // Safe DOM selection
+        const btnUrduNastaliq = document.getElementById('btn-urdu-nastaliq');
+        const btnUrduNaskh = document.getElementById('btn-urdu-naskh');
+        const btnArabicAmiri = document.getElementById('btn-arabic-amiri');
+        const btnArabicReadex = document.getElementById('btn-arabic-readex');
+        const badgeUrduFont = document.getElementById('badge-urdu-font');
+        const badgeArabicFont = document.getElementById('badge-arabic-font');
+
+        const sliderFontSize = document.getElementById('slider-font-size');
+        const sliderLineHeight = document.getElementById('slider-line-height');
+        const valFontSize = document.getElementById('val-font-size');
+        const valLineHeight = document.getElementById('val-line-height');
+
+        const btnThemeToggle = document.getElementById('btn-theme-toggle');
+        const btnCopyCode = document.getElementById('btn-copy-code');
+        const toastMsg = document.getElementById('toast-msg');
+
+        const btnBottomUrduToggle = document.getElementById('btn-bottom-urdu-toggle');
+        const btnBottomArabicToggle = document.getElementById('btn-bottom-arabic-toggle');
+        const labelBottomUrdu = document.getElementById('label-bottom-urdu');
+        const labelBottomArabic = document.getElementById('label-bottom-arabic');
+
+        // Apply Urdu Selection
+        function applyUrdu(styleKey) {
+          state.urduStyle = styleKey;
+          const config = FONTS.urdu[styleKey];
+          document.documentElement.style.setProperty('--font-urdu-current', config.stack);
+          
+          if (badgeUrduFont) badgeUrduFont.textContent = config.badge;
+          if (labelBottomUrdu) labelBottomUrdu.textContent = config.badge;
+
+          if (btnUrduNastaliq && btnUrduNaskh) {
+            btnUrduNastaliq.classList.toggle('active', styleKey === 'nastaliq');
+            btnUrduNaskh.classList.toggle('active', styleKey === 'naskh');
+          }
+
+          // Adjust line height automatically if on standard values
+          if (styleKey === 'nastaliq') {
+            state.urduLineHeight = 2.3;
+          } else {
+            state.urduLineHeight = 1.7;
+          }
+          if (sliderLineHeight) sliderLineHeight.value = state.urduLineHeight;
+          if (valLineHeight) valLineHeight.textContent = state.urduLineHeight;
+          document.documentElement.style.setProperty('--urdu-line-height', state.urduLineHeight);
+
+          playTactileTick(520, 0.03);
+        }
+
+        // Apply Arabic Selection
+        function applyArabic(styleKey) {
+          state.arabicStyle = styleKey;
+          const config = FONTS.arabic[styleKey];
+          document.documentElement.style.setProperty('--font-arabic-current', config.stack);
+          
+          if (badgeArabicFont) badgeArabicFont.textContent = config.badge;
+          if (labelBottomArabic) labelBottomArabic.textContent = config.badge;
+
+          if (btnArabicAmiri && btnArabicReadex) {
+            btnArabicAmiri.classList.toggle('active', styleKey === 'amiri');
+            btnArabicReadex.classList.toggle('active', styleKey === 'readex');
+          }
+
+          playTactileTick(680, 0.03);
+        }
+
+        // Event Listeners for Urdu
+        if (btnUrduNastaliq) {
+          btnUrduNastaliq.addEventListener('click', () => applyUrdu('nastaliq'));
+        }
+        if (btnUrduNaskh) {
+          btnUrduNaskh.addEventListener('click', () => applyUrdu('naskh'));
+        }
+        if (btnBottomUrduToggle) {
+          btnBottomUrduToggle.addEventListener('click', () => {
+            applyUrdu(state.urduStyle === 'nastaliq' ? 'naskh' : 'nastaliq');
+          });
+        }
+
+        // Event Listeners for Arabic
+        if (btnArabicAmiri) {
+          btnArabicAmiri.addEventListener('click', () => applyArabic('amiri'));
+        }
+        if (btnArabicReadex) {
+          btnArabicReadex.addEventListener('click', () => applyArabic('readex'));
+        }
+        if (btnBottomArabicToggle) {
+          btnBottomArabicToggle.addEventListener('click', () => {
+            applyArabic(state.arabicStyle === 'amiri' ? 'readex' : 'amiri');
+          });
+        }
+
+        // Font Size Slider
+        if (sliderFontSize && valFontSize) {
+          sliderFontSize.addEventListener('input', (e) => {
+            const sz = e.target.value;
+            state.fontSize = sz;
+            valFontSize.textContent = sz + ' px';
+            document.documentElement.style.setProperty('--preview-font-size', sz + 'px');
+          });
+        }
+
+        // Line Height Slider
+        if (sliderLineHeight && valLineHeight) {
+          sliderLineHeight.addEventListener('input', (e) => {
+            const lh = e.target.value;
+            state.urduLineHeight = lh;
+            valLineHeight.textContent = lh;
+            document.documentElement.style.setProperty('--urdu-line-height', lh);
+          });
+        }
+
+        // Dark/Light Theme Toggle
+        if (btnThemeToggle) {
+          btnThemeToggle.addEventListener('click', () => {
+            state.isLight = !state.isLight;
+            document.body.classList.toggle('theme-light', state.isLight);
+            playTactileTick(440, 0.04);
+          });
+        }
+
+        // Copy CSS Button with Clipboard API
+        if (btnCopyCode && toastMsg) {
+          btnCopyCode.addEventListener('click', async () => {
+            const snippet = document.getElementById('css-code-snippet');
+            if (snippet) {
+              try {
+                await navigator.clipboard.writeText(snippet.textContent);
+                playSuccessChime();
+                toastMsg.classList.add('show');
+                setTimeout(() => toastMsg.classList.remove('show'), 2600);
+              } catch (err) {
+                // Fallback copy
+                const textArea = document.createElement('textarea');
+                textArea.value = snippet.textContent;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                playSuccessChime();
+                toastMsg.classList.add('show');
+                setTimeout(() => toastMsg.classList.remove('show'), 2600);
+              }
+            }
+          });
+        }
+      }
+
+      // Safe DOM Ready Bootloader
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initApp);
+      } else {
+        initApp();
+      }
+    })();
+  </script>
+</body>
+</html>
