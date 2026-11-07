@@ -1,4 +1,4 @@
-# 📖 Quran Deep Analyzer (Version 2.2)
+# 📖 Quran Deep Analyzer (Version 2.3)
 
 An authoritative, multidimensional analytical platform and zero-latency Progressive Web Application (PWA) for the Holy Quran as a complete text and book. Integrating classical Islamic hermeneutics (*Ulum al-Qur'an*), Arabic linguistics, morphology, syntax, rhetoric (*Balaghah*), thematic ontologies, and modern quantitative corpus linguistics. Designed under a **Royal Islamic Luxury & Linear-Grade Data Studio** visual architecture.
 
@@ -47,7 +47,7 @@ Rather than a superficial reading or listening application, **Quran Deep Analyze
 ### 🌟 3 Standalone Luxury Portals
 - **Commands & Injunctions Portal (`commands.html`)**: Complete compendium of 521 Quranic commands and prohibitions across 29 thematic spheres, featuring parallel split-grid dual Urdu translations (**Kanzul Iman on Right**, **Kanzul Irfan on Left**).
 - **Manners & Etiquette Portal (`manners.html`)**: Deduplicated, lightweight portal covering 67 canonical verses across 9 modules of Quranic social etiquette and personal conduct.
-- **Duas & Supplications Encyclopedia (`duas.html`)**: Standalone luxury web app with 78 canonical Duas (40 Rabbana, 24 Rabbi, Prophetic Duas), 4-tier structured cards, and expandable *Tafsir Sirat-ul-Jinan* exegesis drawer.
+- **Duas & Supplications Encyclopedia (`duas.html`)**: Standalone luxury web app with 78 canonical Duas (40 Rabbana, 24 Rabbi, Prophetic Duas), Executive Dual-Mode architecture (Devotional Clean vs Study Exegesis), In-Card interactive translation switcher (Kanzul Iman / Kanzul Irfan / Both / English), dynamic typography scaler (A-/A+), and mobile Nastaleeq font boosting.
 
 ---
 
@@ -293,6 +293,7 @@ The entire Quran Deep Analyzer repository underwent an intensive, multi-perspect
 | **Zero-CORS Deduplication (F-06)** | Slashed inline redundancy | **`manners.html` reduced from 150 KB to 56 KB via external script link** | ✅ PASS |
 | **Dual-Tarjuma Parity (F-07)** | Kanzul Iman + Kanzul Irfan | **`commands.html` & `js/commands-engine.js` feature parallel dual translations** | ✅ PASS |
 | **Sacred Rosette Normalization (F-08)** | 0 Latin 'O' artifacts | **100% canonical Ayah stop rosette ۝ (`\u06DD`) with AlMushafWaqf alignment** | ✅ PASS |
+| **Mobile Typography & Dock Fix (F-09)** | Optical parity & delegation | **Urdu boosted to 1.50rem, A-/A+ scaler, Nastaleeq/Naskh toggle & universal dock delegation** | ✅ PASS |
 | **AST JavaScript Integrity** | 0 syntax errors | **140 / 140 JS files pass `node --check` cleanly** | ✅ PASS |
 | **JSON Data Integrity** | 100% valid JSON | **137 / 137 JSON files parsed with zero syntax errors** | ✅ PASS |
 | **Zero Desktop Pollution** | 0 loose root files | **100% of assets confined inside `Antigravity Files/`** | ✅ PASS |
