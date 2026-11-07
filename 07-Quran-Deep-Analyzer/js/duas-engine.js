@@ -27,7 +27,33 @@
   let activeCategory = "all";
   let activeProphet = "all";
   let searchQuery = "";
-  let activeLang = "both-ur"; // 'both-ur', 'iman', 'irfan', 'all-three'
+
+  // Executive Dual-Mode & Typography Engine State (Finding F-09)
+  let viewMode = "devotional"; // 'devotional' (default clean) or 'study' (full exegesis)
+  let fontScale = 1.0; // 0.85 to 1.40
+  let fontFamily = "nastaleeq"; // 'nastaleeq' or 'naskh'
+  let defaultCardTrans = "iman"; // 'iman', 'irfan', 'both', 'english'
+  const cardTransState = new Map(); // serial -> 'iman'|'irfan'|'both'|'english'
+
+  // Load preferences from localStorage safely
+  try {
+    const savedMode = localStorage.getItem("quran_duas_view_mode");
+    if (savedMode === "devotional" || savedMode === "study") {
+      viewMode = savedMode;
+    }
+    const savedScale = parseFloat(localStorage.getItem("quran_duas_font_scale"));
+    if (!isNaN(savedScale) && savedScale >= 0.8 && savedScale <= 1.5) {
+      fontScale = Math.round(savedScale * 100) / 100;
+    }
+    const savedFont = localStorage.getItem("quran_duas_font_family");
+    if (savedFont === "nastaleeq" || savedFont === "naskh") {
+      fontFamily = savedFont;
+    }
+    const savedTrans = localStorage.getItem("quran_duas_default_trans");
+    if (savedTrans) {
+      defaultCardTrans = savedTrans;
+    }
+  } catch(e) {}
 
   // Virtualization / Chunk rendering state
   const CHUNK_SIZE = 15;
@@ -113,7 +139,7 @@
     if (!txt) return "";
     return txt
       .toLowerCase()
-      .replace(/[\u064B-\u065F\u0670\u06D6-\u06ED]/g, "") // Diacritics
+      .replace(/[ً-ٰٟۖ-ۭ]/g, "") // Diacritics
       .replace(/[أإآ]/g, "ا")
       .replace(/ة/g, "ہ")
       .replace(/ي/g, "ی")
@@ -179,6 +205,7 @@
   function buildDuaCardHtml(d) {
     const isStarred = isBookmarked(d.serial);
     const isPlaying = currentlyPlayingSerial === d.serial;
+    const cardTrans = cardTransState.get(d.serial) || defaultCardTrans;
 
     // Type badge format
     let typeBadgeLabel = "قرآنی دعا";
@@ -188,7 +215,7 @@
     else if (d.type === "believer") typeBadgeLabel = "دعائے مؤمنین";
 
     return `
-      <article class="dua-card ${isPlaying ? 'playing-now' : ''}" id="dua-card-${d.serial}" data-serial="${d.serial}">
+      <article class="dua-card mode-${viewMode} ${isPlaying ? 'playing-now' : ''}" id="dua-card-${d.serial}" data-serial="${d.serial}" data-active-trans="${cardTrans}">
         <header class="dua-card-header">
           <div class="dua-meta-left">
             <span class="dua-serial-pill">#${d.serial_ur} (${d.serial})</span>
@@ -222,7 +249,23 @@
           ${escapeHtml(d.arabic)} <span class="dua-ayah-num">${d.ayah_coordinate}</span>
         </div>
 
-        <!-- High-Density Dual Translation: Kanzul Iman on Right, Kanzul Irfan on Left -->
+        <!-- In-Card Interactive Translation Switcher (Finding F-09) -->
+        <div class="dua-trans-pill-group" role="tablist" aria-label="Translation Selector">
+          <button type="button" class="dua-trans-pill ${cardTrans === 'iman' ? 'active' : ''}" data-trans="iman" onclick="DuasEngine.switchCardTranslation(${d.serial}, 'iman')" title="امام احمد رضا خان علیہ الرحمہ">
+            <span>👑 کنز الایمان</span>
+          </button>
+          <button type="button" class="dua-trans-pill ${cardTrans === 'irfan' ? 'active' : ''}" data-trans="irfan" onclick="DuasEngine.switchCardTranslation(${d.serial}, 'irfan')" title="مفتی محمد قاسم قادری">
+            <span>📖 کنز العرفان</span>
+          </button>
+          <button type="button" class="dua-trans-pill ${cardTrans === 'both' ? 'active' : ''}" data-trans="both" onclick="DuasEngine.switchCardTranslation(${d.serial}, 'both')" title="دونوں اردو تراجم ساتھ ساتھ">
+            <span>⊞ دونوں تراجم</span>
+          </button>
+          <button type="button" class="dua-trans-pill ${cardTrans === 'english' ? 'active' : ''}" data-trans="english" onclick="DuasEngine.switchCardTranslation(${d.serial}, 'english')" title="English Translation">
+            <span>🌐 English</span>
+          </button>
+        </div>
+
+        <!-- High-Density Dual Translation Grid -->
         <div class="dua-tarjuma-grid">
           <div class="dua-tarjuma-pane iman">
             <div class="dua-tarjuma-label">
@@ -239,49 +282,55 @@
           </div>
         </div>
 
+        <!-- English Translation -->
         <div class="dua-english" dir="ltr">
           ${escapeHtml(d.english)}
         </div>
 
-        <!-- 3-Tier Structured Context Box -->
-        <div class="dua-context-box">
-          <!-- Tier 2: When to Use -->
-          <div class="dua-tier-item occasion">
-            <div class="dua-tier-icon">⏱️</div>
-            <div class="dua-tier-content">
-              <div class="dua-tier-title-ur"><strong>کب پڑھیں؟ (Occasions & Times):</strong> ${escapeHtml(d.when_to_use_ur)}</div>
-              <div class="dua-tier-title-en">${escapeHtml(d.when_to_use_en)}</div>
-            </div>
-          </div>
+        <!-- 1-Tap Expandable Context & Exegesis Drawer -->
+        <button type="button" class="dua-drawer-trigger ${viewMode === 'study' ? 'open' : ''}" id="dua-drawer-trigger-${d.serial}" onclick="DuasEngine.toggleContextDrawer(${d.serial})" aria-expanded="${viewMode === 'study'}">
+          <span>💡 حکمت، فضائل و پس منظر (کب پڑھیں، کس مقصد کے لیے، شانِ نزول)</span>
+          <span class="drawer-chevron">▾</span>
+        </button>
 
-          <!-- Tier 3: Purpose & Spiritual Virtues -->
-          <div class="dua-tier-item purpose">
-            <div class="dua-tier-icon">🎯</div>
-            <div class="dua-tier-content">
-              <div class="dua-tier-title-ur"><strong>کس مقصد کے لیے؟ (Spiritual Virtues & Benefits):</strong> ${escapeHtml(d.purpose_virtue_ur)}</div>
-              <div class="dua-tier-title-en">${escapeHtml(d.purpose_virtue_en)}</div>
-            </div>
-          </div>
-
-          <!-- Tier 4: Quranic Context & Reason for Revelation -->
-          <div class="dua-tier-item revelation">
-            <div style="display: flex; align-items: flex-start; gap: 8px;">
-              <div class="dua-tier-icon">📜</div>
+        <div class="dua-drawer-content ${viewMode === 'study' ? 'drawer-open' : ''}" id="dua-drawer-content-${d.serial}">
+          <div class="dua-context-box" style="margin-top: 0; padding-top: 4px; border-top: none;">
+            <!-- Tier 2: When to Use -->
+            <div class="dua-tier-item occasion">
+              <div class="dua-tier-icon">⏱️</div>
               <div class="dua-tier-content">
-                <div class="dua-tier-title-ur"><strong>شانِ نزول و قرآنی پس منظر:</strong> ${escapeHtml(d.reason_for_revelation_ur)}</div>
-                <div class="dua-tier-title-en">${escapeHtml(d.reason_for_revelation_en)}</div>
+                <div class="dua-tier-title-ur"><strong>کب پڑھیں؟ (Occasions & Times):</strong> ${escapeHtml(d.when_to_use_ur)}</div>
+                <div class="dua-tier-title-en">${escapeHtml(d.when_to_use_en)}</div>
               </div>
             </div>
 
-            <!-- Exegesis Snippet from Sirat-ul-Jinan -->
-            ${d.tafsir_snippet_ur ? `
-              <div class="dua-tafsir-snippet" id="tafsir-snippet-${d.serial}">
-                <strong>تفسیر صراط الجنان کا خلاصہ:</strong> ${escapeHtml(d.tafsir_snippet_ur)}
+            <!-- Tier 3: Purpose & Spiritual Virtues -->
+            <div class="dua-tier-item purpose">
+              <div class="dua-tier-icon">🎯</div>
+              <div class="dua-tier-content">
+                <div class="dua-tier-title-ur"><strong>کس مقصد کے لیے؟ (Virtues & Benefits):</strong> ${escapeHtml(d.purpose_virtue_ur)}</div>
+                <div class="dua-tier-title-en">${escapeHtml(d.purpose_virtue_en)}</div>
               </div>
-              <button class="dua-tafsir-toggle-btn" onclick="DuasEngine.toggleTafsirSnippet(${d.serial})">
-                [ 📖 مکمل تفسیر صراط الجنان دیکھیں / سمیٹیں ]
-              </button>
-            ` : ''}
+            </div>
+
+            <!-- Tier 4: Asbab al-Nuzul & Sirat-ul-Jinan Exegesis -->
+            <div class="dua-tier-item revelation">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="dua-tier-icon">📖</span>
+                <span class="dua-tier-title-ur" style="color: #c084fc;"><strong>شانِ نزول و تفسیری پس منظر (صراط الجنان):</strong></span>
+              </div>
+              <div class="dua-tier-title-ur" style="color: #e2e8f0; font-size: 0.95rem;">
+                ${escapeHtml(d.reason_for_revelation_ur)}
+              </div>
+              ${d.sirat_ul_jinan_snippet ? `
+                <div class="dua-tafsir-snippet" id="tafsir-snippet-${d.serial}">
+                  ${escapeHtml(d.sirat_ul_jinan_snippet)}
+                </div>
+                <button class="dua-tafsir-toggle-btn" onclick="DuasEngine.toggleTafsirSnippet(${d.serial})">
+                  مکمل تفسیری نوٹ پڑھیں ▾
+                </button>
+              ` : ''}
+            </div>
           </div>
         </div>
       </article>
@@ -347,6 +396,36 @@
     observer.observe(sentinel);
   }
 
+  function applyTypographyAndModeStyles() {
+    try {
+      document.documentElement.style.setProperty("--dua-font-scale", fontScale.toString());
+
+      const scope = document.getElementById("tab-duas") || document.body;
+      if (fontFamily === "naskh") {
+        scope.classList.add("font-mode-naskh");
+      } else {
+        scope.classList.remove("font-mode-naskh");
+      }
+
+      // Update Toolbar indicators if present
+      const scaleDisplays = document.querySelectorAll(".dua-font-scale-val");
+      scaleDisplays.forEach(el => {
+        el.textContent = `${Math.round(fontScale * 100)}%`;
+      });
+
+      const fontToggles = document.querySelectorAll(".dua-font-toggle-btn");
+      fontToggles.forEach(el => {
+        el.textContent = fontFamily === "naskh" ? "📖 نسخ" : "🖋️ نستعلیق";
+      });
+
+      // Update View mode buttons
+      const modeDevoBtns = document.querySelectorAll(".dua-mode-btn[data-mode='devotional']");
+      modeDevoBtns.forEach(btn => btn.classList.toggle("active", viewMode === "devotional"));
+      const modeStudyBtns = document.querySelectorAll(".dua-mode-btn[data-mode='study']");
+      modeStudyBtns.forEach(btn => btn.classList.toggle("active", viewMode === "study"));
+    } catch(e) {}
+  }
+
   function bindEvents(scope) {
     if (!scope) scope = document;
 
@@ -384,7 +463,7 @@
       });
     });
 
-    // Category chips
+    // Category chips (if rendered as chips)
     const catChips = scope.querySelectorAll(".duas-cat-chip");
     catChips.forEach(c => {
       c.addEventListener("click", () => {
@@ -392,11 +471,24 @@
         catChips.forEach(x => x.classList.remove("active"));
         c.classList.add("active");
         activeCategory = c.getAttribute("data-cat") || "all";
+        // Sync dropdown if exists
+        const catSelect = scope.querySelector("#duas-cat-select") || scope.querySelector("#native-duas-cat-select");
+        if (catSelect) catSelect.value = activeCategory;
         renderList();
       });
     });
 
-    // Prophet chips
+    // Category dropdown select
+    const catSelect = scope.querySelector("#duas-cat-select") || scope.querySelector("#native-duas-cat-select");
+    if (catSelect) {
+      catSelect.addEventListener("change", (e) => {
+        playClickSfx();
+        activeCategory = e.target.value;
+        renderList();
+      });
+    }
+
+    // Prophet chips (if rendered as chips)
     const prophetChips = scope.querySelectorAll(".duas-prophet-chip");
     prophetChips.forEach(pr => {
       pr.addEventListener("click", () => {
@@ -404,8 +496,50 @@
         prophetChips.forEach(x => x.classList.remove("active"));
         pr.classList.add("active");
         activeProphet = pr.getAttribute("data-prophet") || "all";
+        // Sync dropdown if exists
+        const prophetSelect = scope.querySelector("#duas-prophet-select") || scope.querySelector("#native-duas-prophet-select");
+        if (prophetSelect) prophetSelect.value = activeProphet;
         renderList();
       });
+    });
+
+    // Prophet dropdown select
+    const prophetSelect = scope.querySelector("#duas-prophet-select") || scope.querySelector("#native-duas-prophet-select");
+    if (prophetSelect) {
+      prophetSelect.addEventListener("change", (e) => {
+        playClickSfx();
+        activeProphet = e.target.value;
+        renderList();
+      });
+    }
+
+    // View Mode Switchers
+    const modeBtns = scope.querySelectorAll(".dua-mode-btn");
+    modeBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const targetMode = btn.getAttribute("data-mode");
+        if (targetMode) setViewMode(targetMode);
+      });
+    });
+
+    // Font Scaler Buttons
+    const decBtn = scope.querySelector("#dua-font-dec") || scope.querySelector("#native-dua-font-dec");
+    if (decBtn) {
+      decBtn.addEventListener("click", () => setFontScale(-0.1));
+    }
+    const incBtn = scope.querySelector("#dua-font-inc") || scope.querySelector("#native-dua-font-inc");
+    if (incBtn) {
+      incBtn.addEventListener("click", () => setFontScale(0.1));
+    }
+    const resetBtn = scope.querySelector("#dua-font-reset") || scope.querySelector("#native-dua-font-reset");
+    if (resetBtn) {
+      resetBtn.addEventListener("click", () => setFontScale(0));
+    }
+
+    // Font Switcher (Nastaleeq / Naskh)
+    const fontToggles = scope.querySelectorAll(".dua-font-toggle-btn");
+    fontToggles.forEach(toggle => {
+      toggle.addEventListener("click", () => toggleFontFamily());
     });
   }
 
@@ -573,9 +707,105 @@ ${d.urdu_kanzul_irfan}
     }
   }
 
+  // In-Card Translation Switcher
+  function switchCardTranslation(serial, transMode) {
+    playClickSfx();
+    cardTransState.set(serial, transMode);
+    try {
+      localStorage.setItem("quran_duas_default_trans", transMode);
+      defaultCardTrans = transMode;
+    } catch(e) {}
+
+    const card = document.getElementById(`dua-card-${serial}`);
+    if (card) {
+      card.setAttribute("data-active-trans", transMode);
+      const pills = card.querySelectorAll(".dua-trans-pill");
+      pills.forEach(p => {
+        p.classList.toggle("active", p.getAttribute("data-trans") === transMode);
+      });
+    }
+  }
+
+  // 1-Tap Expandable Drawer
+  function toggleContextDrawer(serial) {
+    playClickSfx();
+    const content = document.getElementById(`dua-drawer-content-${serial}`);
+    const trigger = document.getElementById(`dua-drawer-trigger-${serial}`);
+    if (content) {
+      const isOpen = content.classList.toggle("drawer-open");
+      if (trigger) {
+        trigger.classList.toggle("open", isOpen);
+        trigger.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      }
+    }
+  }
+
+  // View Mode Switcher
+  function setViewMode(mode) {
+    playClickSfx();
+    if (mode !== "devotional" && mode !== "study") return;
+    viewMode = mode;
+    try {
+      localStorage.setItem("quran_duas_view_mode", mode);
+    } catch(e) {}
+
+    // Update all cards on screen
+    document.querySelectorAll(".dua-card").forEach(c => {
+      c.classList.remove("mode-devotional", "mode-study");
+      c.classList.add(`mode-${mode}`);
+
+      const trigger = c.querySelector(".dua-drawer-trigger");
+      const content = c.querySelector(".dua-drawer-content");
+      if (mode === "study") {
+        if (trigger) {
+          trigger.classList.add("open");
+          trigger.setAttribute("aria-expanded", "true");
+        }
+        if (content) content.classList.add("drawer-open");
+      } else {
+        if (trigger) {
+          trigger.classList.remove("open");
+          trigger.setAttribute("aria-expanded", "false");
+        }
+        if (content) content.classList.remove("drawer-open");
+      }
+    });
+
+    applyTypographyAndModeStyles();
+  }
+
+  function toggleViewMode() {
+    setViewMode(viewMode === "devotional" ? "study" : "devotional");
+  }
+
+  // Font Scaler
+  function setFontScale(delta) {
+    playClickSfx();
+    if (delta === 0) {
+      fontScale = 1.0;
+    } else {
+      fontScale = Math.min(1.4, Math.max(0.85, Math.round((fontScale + delta) * 10) / 10));
+    }
+    try {
+      localStorage.setItem("quran_duas_font_scale", fontScale.toString());
+    } catch(e) {}
+    applyTypographyAndModeStyles();
+  }
+
+  // Font Family Switcher
+  function toggleFontFamily() {
+    playClickSfx();
+    fontFamily = (fontFamily === "nastaleeq") ? "naskh" : "nastaleeq";
+    try {
+      localStorage.setItem("quran_duas_font_family", fontFamily);
+    } catch(e) {}
+    applyTypographyAndModeStyles();
+  }
+
   return {
     init: function () {
       initData();
+      applyTypographyAndModeStyles();
       const scope = document.getElementById("tab-duas") || document;
       bindEvents(scope);
       renderList();
@@ -584,6 +814,7 @@ ${d.urdu_kanzul_irfan}
     },
 
     onTabActivated: function () {
+      applyTypographyAndModeStyles();
       if (!initialized) {
         this.init();
       } else {
@@ -597,6 +828,16 @@ ${d.urdu_kanzul_irfan}
     copyDua: copyDua,
     shareWhatsApp: shareWhatsApp,
     toggleTafsirSnippet: toggleTafsirSnippet,
+    switchCardTranslation: switchCardTranslation,
+    toggleContextDrawer: toggleContextDrawer,
+    setViewMode: setViewMode,
+    toggleViewMode: toggleViewMode,
+    setFontScale: setFontScale,
+    toggleFontFamily: toggleFontFamily,
+    getViewMode: () => viewMode,
+    getFontScale: () => fontScale,
+    getFontFamily: () => fontFamily,
+
     setSearchQuery: function(q) {
       searchQuery = q;
       const searchInput = document.getElementById("native-duas-search") || document.getElementById("duas-search-input");

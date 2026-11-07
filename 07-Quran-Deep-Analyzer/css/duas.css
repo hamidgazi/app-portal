@@ -16,6 +16,23 @@
   --dua-rose: #f43f5e;
   --dua-card-bg: rgba(15, 23, 42, 0.82);
   --dua-card-border: rgba(255, 255, 255, 0.08);
+
+  /* Dynamic Typography Engine (Finding F-09 / Directive 5) */
+  --dua-font-scale: 1.0;
+  --dua-arabic-size: calc(1.50rem * var(--dua-font-scale, 1.0));
+  --dua-arabic-lh: 2.2;
+  --dua-urdu-size: calc(1.48rem * var(--dua-font-scale, 1.0));
+  --dua-urdu-lh: 2.1;
+  --dua-english-size: calc(0.92rem * var(--dua-font-scale, 1.0));
+}
+
+/* Font Switcher Mode (Naskh vs Nastaleeq) */
+.font-mode-naskh .dua-tarjuma-text,
+.font-mode-naskh .dua-tier-title-ur,
+.font-mode-naskh .dua-tafsir-snippet,
+.font-mode-naskh .dua-speaker-tag {
+  font-family: 'Al Qalam Quran Majeed', 'Amiri', 'Scheherazade New', 'Tahoma', serif !important;
+  line-height: 1.85 !important;
 }
 
 /* === DUAS CONTAINER & LAYOUT === */
@@ -255,6 +272,249 @@
   font-weight: 700;
 }
 
+
+/* ==========================================================================
+   CONSOLIDATED EXECUTIVE TOOLBAR & DUAL-MODE CONTROLS
+   ========================================================================== */
+.duas-controls-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-top: 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.duas-controls-left,
+.duas-controls-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.duas-controls-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: rgba(6, 8, 14, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 2px 4px;
+}
+
+.duas-ctrl-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-height: 34px;
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: #cbd5e1;
+  font-size: 0.80rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.duas-ctrl-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+.duas-ctrl-btn.active {
+  background: var(--dua-gold);
+  color: #06080e;
+  border-color: var(--dua-gold);
+  font-weight: 700;
+  box-shadow: 0 0 10px var(--dua-gold-glow);
+}
+
+.duas-dropdown-select {
+  height: 38px;
+  background: rgba(6, 8, 14, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  color: #f1f5f9;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0 10px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+  min-width: 150px;
+}
+
+.duas-dropdown-select:focus {
+  border-color: var(--dua-gold);
+  box-shadow: 0 0 0 2px var(--dua-gold-glow);
+}
+
+.duas-dropdown-select option {
+  background: #0f172a;
+  color: #f8fafc;
+  padding: 8px;
+}
+
+/* ==========================================================================
+   IN-CARD TRANSLATION SWITCHER & 1-TAP PROGRESSIVE DRAWER
+   ========================================================================== */
+.dua-trans-pill-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 6px 0 8px 0;
+  flex-wrap: wrap;
+}
+
+.dua-trans-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 11px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  color: #94a3b8;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.dua-trans-pill:hover {
+  color: #f8fafc;
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.dua-trans-pill.active {
+  background: rgba(251, 191, 36, 0.16);
+  border-color: var(--dua-gold);
+  color: var(--dua-gold);
+  font-weight: 700;
+}
+
+.dua-trans-pill[data-trans="irfan"].active {
+  background: rgba(56, 189, 248, 0.16);
+  border-color: var(--dua-cyan);
+  color: var(--dua-cyan);
+}
+
+.dua-trans-pill[data-trans="both"].active {
+  background: rgba(16, 185, 129, 0.16);
+  border-color: var(--dua-emerald);
+  color: var(--dua-emerald);
+}
+
+.dua-trans-pill[data-trans="english"].active {
+  background: rgba(148, 163, 184, 0.18);
+  border-color: #94a3b8;
+  color: #f8fafc;
+}
+
+/* Progressive translation visibility according to active selection */
+.dua-card[data-active-trans="iman"] .dua-tarjuma-pane.iman {
+  display: flex;
+}
+.dua-card[data-active-trans="iman"] .dua-tarjuma-pane.irfan,
+.dua-card[data-active-trans="iman"] .dua-english {
+  display: none !important;
+}
+
+.dua-card[data-active-trans="irfan"] .dua-tarjuma-pane.irfan {
+  display: flex;
+}
+.dua-card[data-active-trans="irfan"] .dua-tarjuma-pane.iman,
+.dua-card[data-active-trans="irfan"] .dua-english {
+  display: none !important;
+}
+
+.dua-card[data-active-trans="both"] .dua-tarjuma-pane {
+  display: flex;
+}
+.dua-card[data-active-trans="both"] .dua-english {
+  display: none !important;
+}
+
+.dua-card[data-active-trans="english"] .dua-tarjuma-pane {
+  display: none !important;
+}
+.dua-card[data-active-trans="english"] .dua-english {
+  display: block !important;
+  font-size: calc(1.05rem * var(--dua-font-scale, 1.0));
+  line-height: 1.65;
+}
+
+/* 1-Tap Expandable Drawer for 3 Scholarly Tiers */
+.dua-drawer-trigger {
+  width: 100%;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px dashed rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  color: #cbd5e1;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  touch-action: manipulation;
+  margin-top: 4px;
+}
+
+.dua-drawer-trigger:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(251, 191, 36, 0.35);
+  color: #f8fafc;
+}
+
+.dua-drawer-trigger .drawer-chevron {
+  font-size: 0.85rem;
+  transition: transform 0.25s ease;
+}
+
+.dua-drawer-content {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.dua-drawer-content.drawer-open {
+  display: flex;
+}
+
+.dua-drawer-trigger.open .drawer-chevron {
+  transform: rotate(180deg);
+}
+
+/* Dual Mode Rules */
+.dua-card.mode-devotional .dua-drawer-content:not(.drawer-open) {
+  display: none;
+}
+
+.dua-card.mode-study .dua-drawer-content {
+  display: flex !important;
+}
+
+.dua-card.mode-study .dua-drawer-trigger .drawer-chevron {
+  transform: rotate(180deg);
+}
+
 /* === HIGH-DENSITY DUA CARD === */
 .duas-list-container {
   display: flex;
@@ -406,8 +666,8 @@
 /* Tier 1: Scriptural Core */
 .dua-arabic {
   font-family: var(--font-arabic, 'Amiri', 'Traditional Arabic', serif);
-  font-size: 1.45rem;
-  line-height: 2.1;
+  font-size: var(--dua-arabic-size, 1.50rem);
+  line-height: var(--dua-arabic-lh, 2.2);
   color: #ffffff;
   text-align: right;
   direction: rtl;
@@ -478,11 +738,13 @@
 
 .dua-tarjuma-text {
   font-family: var(--font-urdu-current, var(--font-urdu, 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif));
-  font-size: 1.15rem;
-  line-height: 1.85;
-  color: #e2e8f0;
+  font-size: var(--dua-urdu-size, 1.48rem);
+  line-height: var(--dua-urdu-lh, 2.1);
+  color: #f1f5f9;
   text-align: right;
   direction: rtl;
+  letter-spacing: 0;
+  word-spacing: 1px;
 }
 
 /* English Translation */
@@ -680,8 +942,55 @@
   }
 
   .dua-arabic {
-    font-size: 1.30rem;
-    line-height: 1.95;
+    font-size: calc(1.35rem * var(--dua-font-scale, 1.0)) !important;
+    line-height: 2.05 !important;
+  }
+
+  /* Boost Mobile Urdu Translation Typography (Finding F-09) */
+  .dua-tarjuma-text {
+    font-size: calc(1.50rem * var(--dua-font-scale, 1.0)) !important;
+    line-height: 2.15 !important;
+  }
+
+  .dua-tier-title-ur {
+    font-size: calc(1.05rem * var(--dua-font-scale, 1.0)) !important;
+    line-height: 1.75 !important;
+  }
+
+  .dua-drawer-trigger {
+    min-height: 48px !important;
+    padding: 10px 14px !important;
+    font-size: 0.88rem !important;
+  }
+
+  .dua-trans-pill {
+    min-height: 42px !important;
+    padding: 8px 12px !important;
+    font-size: 0.84rem !important;
+  }
+
+  .duas-controls-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .duas-controls-left,
+  .duas-controls-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .duas-dropdown-select {
+    min-height: 48px !important;
+    height: 48px !important;
+    font-size: 0.88rem !important;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .duas-ctrl-btn {
+    min-height: 44px !important;
+    padding: 6px 12px !important;
   }
 
   /* Search Controls Touch Targets (>= 48px) */

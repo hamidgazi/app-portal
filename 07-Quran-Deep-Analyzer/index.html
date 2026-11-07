@@ -972,7 +972,8 @@
       <!-- Tab 13: Quranic Duas & Supplications Encyclopedia (78 Duas) -->
       <section id="tab-duas" class="tab-panel">
         <div class="duas-main-container" style="padding: 0;">
-          <div class="duas-toolbar-wrap">
+          <div class="duas-toolbar-wrap duas-executive-toolbar">
+            <!-- Row 1: Universal Search, Count Badge & Standalone App Link -->
             <div class="duas-search-row">
               <div class="duas-search-input-wrap">
                 <span class="duas-search-icon">🔍</span>
@@ -985,59 +986,78 @@
               </a>
             </div>
 
-            <!-- Quick Type Filter Strip -->
-            <div class="duas-filter-strip">
-              <button type="button" class="duas-pill-btn active" data-filter="all">
-                <span>سب دعائیں (All 78)</span>
-              </button>
-              <button type="button" class="duas-pill-btn" data-filter="40_rabbana">
-                <span>۴۰ ربنا دعائیں (40 Rabbana)</span>
-                <span class="pill-count">40</span>
-              </button>
-              <button type="button" class="duas-pill-btn" data-filter="rabbi">
-                <span>ربِّ ندائیں (Rabbi)</span>
-                <span class="pill-count">24</span>
-              </button>
-              <button type="button" class="duas-pill-btn" data-filter="prophet">
-                <span>انبیاء علیہم السلام کی دعائیں</span>
-              </button>
-              <button type="button" class="duas-pill-btn" data-filter="believer">
-                <span>مؤمنین و صالحین کی دعائیں</span>
-              </button>
-              <button type="button" class="duas-pill-btn" data-filter="starred">
-                <span>⭐ پسندیدہ (Starred)</span>
-              </button>
-            </div>
+            <!-- Row 2: Quick Filter Pills, Dropdowns, Font Controls & Dual Modes -->
+            <div class="duas-controls-row">
+              <!-- Quick Navigation Pills -->
+              <div class="duas-controls-left">
+                <div class="duas-filter-strip" style="padding-bottom: 0;">
+                  <button type="button" class="duas-pill-btn active" data-filter="all">
+                    <span>سب دعائیں (All 78)</span>
+                  </button>
+                  <button type="button" class="duas-pill-btn" data-filter="40_rabbana">
+                    <span>۴۰ ربنا (40)</span>
+                  </button>
+                  <button type="button" class="duas-pill-btn" data-filter="starred">
+                    <span>⭐ پسندیدہ</span>
+                  </button>
+                </div>
 
-            <!-- 9 Life Spheres / Categories -->
-            <div class="duas-category-strip">
-              <button type="button" class="duas-cat-chip active" data-cat="all">سب شعبہ جات (All Needs)</button>
-              <button type="button" class="duas-cat-chip" data-cat="forgiveness">🕊️ مغفرت و توبہ</button>
-              <button type="button" class="duas-cat-chip" data-cat="guidance">🧭 ہدایت و استقامت</button>
-              <button type="button" class="duas-cat-chip" data-cat="family">👨‍👩‍👧‍👦 اہل و عیال و والدین</button>
-              <button type="button" class="duas-cat-chip" data-cat="healing">🩺 شفاء و کشائشِ مصائب</button>
-              <button type="button" class="duas-cat-chip" data-cat="sustenance">🌾 رزقِ حلال و برکت</button>
-              <button type="button" class="duas-cat-chip" data-cat="protection">🛡️ حفاظت و نصرت</button>
-              <button type="button" class="duas-cat-chip" data-cat="knowledge">📖 علم، حکمت و فصاحت</button>
-              <button type="button" class="duas-cat-chip" data-cat="good_ending">🌅 حسنِ خاتمہ و نجات</button>
-              <button type="button" class="duas-cat-chip" data-cat="praise">✨ حمد و شکرِ الٰہی</button>
-            </div>
+                <!-- 9 Life Needs Dropdown -->
+                <select id="native-duas-cat-select" class="duas-dropdown-select" aria-label="Select Life Need">
+                  <option value="all">🏷️ سب شعبہ جات (All 9 Needs)</option>
+                  <option value="forgiveness">🕊️ مغفرت و توبہ (Forgiveness)</option>
+                  <option value="guidance">🧭 ہدایت و استقامت (Guidance)</option>
+                  <option value="family">👨‍👩‍👧‍👦 اہل و عیال و والدین (Family)</option>
+                  <option value="healing">🩺 شفاء و مصائب (Healing)</option>
+                  <option value="sustenance">🌾 رزقِ حلال (Sustenance)</option>
+                  <option value="protection">🛡️ حفاظت و نصرت (Protection)</option>
+                  <option value="knowledge">📖 علم و حکمت (Knowledge)</option>
+                  <option value="good_ending">🌅 حسنِ خاتمہ (Good Ending)</option>
+                  <option value="praise">✨ حمد و شکر (Praise)</option>
+                </select>
 
-            <!-- Prophet Filter Bar -->
-            <div class="duas-prophet-bar">
-              <span style="color: #94a3b8; font-weight: 700;">انبیاء کرام:</span>
-              <button type="button" class="duas-prophet-chip active" data-prophet="all">سب انبیاء</button>
-              <button type="button" class="duas-prophet-chip" data-prophet="adam">آدم علیہ السلام</button>
-              <button type="button" class="duas-prophet-chip" data-prophet="nuh">نوح علیہ السلام</button>
-              <button type="button" class="duas-prophet-chip" data-prophet="ibrahim">ابراہیم علیہ السلام</button>
-              <button type="button" class="duas-prophet-chip" data-prophet="yusuf">یوسف علیہ السلام</button>
-              <button type="button" class="duas-prophet-chip" data-prophet="musa">موسیٰ علیہ السلام</button>
-              <button type="button" class="duas-prophet-chip" data-prophet="yunus">یونس علیہ السلام</button>
-              <button type="button" class="duas-prophet-chip" data-prophet="ayyub">ایوب علیہ السلام</button>
-              <button type="button" class="duas-prophet-chip" data-prophet="zakariya">زکریا علیہ السلام</button>
-              <button type="button" class="duas-prophet-chip" data-prophet="suleiman">سلیمان علیہ السلام</button>
-              <button type="button" class="duas-prophet-chip" data-prophet="isa">عیسیٰ علیہ السلام</button>
-              <button type="button" class="duas-prophet-chip" data-prophet="muhammad">نبی کریم ﷺ</button>
+                <!-- 12 Prophets Dropdown -->
+                <select id="native-duas-prophet-select" class="duas-dropdown-select" aria-label="Select Prophet">
+                  <option value="all">👳 سب انبیاء (All Prophets)</option>
+                  <option value="adam">آدم علیہ السلام</option>
+                  <option value="nuh">نوح علیہ السلام</option>
+                  <option value="ibrahim">ابراہیم علیہ السلام</option>
+                  <option value="yusuf">یوسف علیہ السلام</option>
+                  <option value="musa">موسیٰ علیہ السلام</option>
+                  <option value="yunus">یونس علیہ السلام</option>
+                  <option value="ayyub">ایوب علیہ السلام</option>
+                  <option value="zakariya">زکریا علیہ السلام</option>
+                  <option value="suleiman">سلیمان علیہ السلام</option>
+                  <option value="isa">عیسیٰ علیہ السلام</option>
+                  <option value="muhammad">نبی کریم ﷺ</option>
+                </select>
+              </div>
+
+              <!-- Typography & Dual-Mode Controls -->
+              <div class="duas-controls-right">
+                <!-- Font Size Scaler -->
+                <div class="duas-controls-group" title="Adjust Arabic & Urdu Typography Scale">
+                  <button type="button" id="native-dua-font-dec" class="duas-ctrl-btn" title="Decrease font size">A−</button>
+                  <span id="native-dua-font-scale-val" class="dua-font-scale-val" style="font-size: 0.76rem; font-weight: 700; color: #94a3b8; padding: 0 4px; min-width: 38px; text-align: center;">100%</span>
+                  <button type="button" id="native-dua-font-inc" class="duas-ctrl-btn" title="Increase font size">A+</button>
+                  <button type="button" id="native-dua-font-reset" class="duas-ctrl-btn" title="Reset font scale" style="padding: 4px 6px;">⟲</button>
+                </div>
+
+                <!-- Font Typeface Switcher -->
+                <button type="button" id="native-dua-font-toggle" class="duas-ctrl-btn dua-font-toggle-btn" title="Switch Urdu Font: Nastaleeq vs Naskh">
+                  <span>🖋️ نستعلیق</span>
+                </button>
+
+                <!-- Executive Dual Mode -->
+                <div class="duas-controls-group" title="Switch Presentation Mode">
+                  <button type="button" class="duas-ctrl-btn dua-mode-btn active" data-mode="devotional" title="Clean Devotional Reading">
+                    <span>📖 عقیدت</span>
+                  </button>
+                  <button type="button" class="duas-ctrl-btn dua-mode-btn" data-mode="study" title="Full Exegesis & Scholarly Tiers">
+                    <span>🔬 مطالعہ</span>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
 
