@@ -1084,8 +1084,9 @@
     font-size: 0.88rem !important;
   }
 
-  .dua-trans-pill {
-    min-height: 42px !important;
+  .dua-trans-pill,
+  .dua-micro-btn {
+    min-height: 48px !important;
     padding: 8px 12px !important;
     font-size: 0.84rem !important;
   }
@@ -1110,7 +1111,7 @@
   }
 
   .duas-ctrl-btn {
-    min-height: 44px !important;
+    min-height: 48px !important;
     padding: 6px 12px !important;
   }
 
@@ -1185,18 +1186,18 @@
   }
 
   .dua-footer-btn {
-    min-height: 42px !important;
+    min-height: 48px !important;
     font-size: 0.80rem !important;
     padding: 6px 8px !important;
   }
 
   .dua-header-btn {
-    min-height: 38px !important;
+    min-height: 48px !important;
     padding: 4px 10px !important;
   }
 
   .dua-segment-btn {
-    min-height: 36px !important;
+    min-height: 48px !important;
     font-size: 0.78rem !important;
   }
 

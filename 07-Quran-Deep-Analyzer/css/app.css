@@ -2139,19 +2139,19 @@ footer.app-footer {
 }
 
 /* ==========================================================================
-   Sticky Floating Quick-Nav Controller in Deep Ayah Analyzer
+   Sticky Quick-Nav Sub-Header in Deep Ayah Analyzer (Smart Auto-Hide Engine)
    ========================================================================== */
 .sticky-ayah-controller {
   position: fixed;
-  top: 75px;
+  top: 72px;
   left: 50%;
   transform: translate(-50%, -20px);
   z-index: 999;
   width: calc(100% - 32px);
   max-width: 900px;
   background: rgba(10, 14, 24, 0.94);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(212, 175, 55, 0.35);
   border-radius: var(--radius-full);
   padding: 6px 14px;
@@ -2159,14 +2159,21 @@ footer.app-footer {
   opacity: 0;
   pointer-events: none;
   visibility: hidden;
-  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
 }
 
 .sticky-ayah-controller.visible {
-  opacity: 1;
-  pointer-events: auto;
+  opacity: 1 !important;
+  pointer-events: auto !important;
   visibility: visible;
-  transform: translate(-50%, 0);
+  transform: translate(-50%, 0) !important;
+}
+
+.sticky-ayah-controller.scrolled-hidden {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+  transform: translate(-50%, -30px) !important;
 }
 
 @keyframes slideDownFade {
@@ -2178,64 +2185,200 @@ footer.app-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: nowrap;
 }
 
-.sticky-surah-group {
-  display: flex;
+.sticky-return-btn {
+  background: rgba(16, 185, 129, 0.18);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #34d399;
+  border-radius: var(--radius-full);
+  padding: 4px 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
-  flex: 1;
-  min-width: 160px;
+  gap: 4px;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  touch-action: manipulation;
 }
 
-.sticky-label {
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--accent-gold);
-  text-transform: uppercase;
+.sticky-return-btn:hover {
+  background: rgba(16, 185, 129, 0.3);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+}
+
+.sticky-divider {
+  width: 1px;
+  height: 22px;
+  background: rgba(255, 255, 255, 0.12);
+  flex-shrink: 0;
+}
+
+.sticky-select-wrap {
+  flex: 1 1 auto;
+  min-width: 140px;
+  display: flex;
+  align-items: center;
 }
 
 .sticky-select {
-  padding: 6px 12px;
-  min-height: 34px;
-  font-size: 0.85rem;
+  padding: 5px 12px;
+  min-height: 32px;
+  height: 32px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: var(--radius-full);
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
   width: 100%;
 }
 
-.sticky-jump-group {
-  display: flex;
+.sticky-select:hover,
+.sticky-select:focus {
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.3);
+}
+
+.sticky-select option {
+  background: #090e18;
+  color: #f1f5f9;
+  padding: 8px 12px;
+}
+
+.sticky-jump-wrap {
+  display: inline-flex;
   align-items: center;
   gap: 4px;
+  flex-shrink: 0;
+  white-space: nowrap;
+  flex-wrap: nowrap;
+}
+
+.sticky-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .sticky-input {
-  width: 70px;
-  min-height: 34px;
-  background: rgba(0, 0, 0, 0.5);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
-  color: var(--text-main);
-  padding: 4px 8px;
-  font-size: 0.85rem;
+  width: 50px;
+  min-height: 32px;
+  height: 32px;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 8px;
+  color: #ffffff;
+  padding: 0 4px;
+  font-size: 0.82rem;
+  font-weight: 700;
   text-align: center;
   outline: none;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
 }
 
 .sticky-input:focus {
-  border-color: var(--border-focus);
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.35);
 }
 
-.sticky-go-btn {
-  min-height: 34px;
-  padding: 4px 10px;
-}
-
-.sticky-actions-group {
-  display: flex;
+/* Cyber-Obsidian Action Button (Replaces raw white button) */
+.sticky-action-btn {
+  min-height: 32px;
+  height: 32px;
+  padding: 0 10px;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.25) 0%, rgba(212, 175, 55, 0.12) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  color: #fbbf24;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
+  transition: all 0.2s ease;
+  touch-action: manipulation;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.sticky-action-btn:hover,
+.sticky-action-btn:active {
+  background: rgba(212, 175, 55, 0.38);
+  color: #ffffff;
+  border-color: #fbbf24;
+  box-shadow: 0 0 10px rgba(251, 191, 36, 0.35);
+}
+
+/* Cyber-Obsidian Density Toggle (Replaces raw white button) */
+.sticky-density-btn {
+  min-height: 32px;
+  height: 32px;
+  padding: 0 10px;
+  background: rgba(15, 23, 42, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #cbd5e1;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s ease;
+  touch-action: manipulation;
+  user-select: none;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.sticky-density-btn:hover,
+.sticky-density-btn:active {
+  border-color: var(--accent-gold);
+  color: #f8fafc;
+  background: rgba(212, 175, 55, 0.15);
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.25);
+}
+
+/* Cyber-Obsidian Scroll-Top Button (Replaces raw white button) */
+.sticky-icon-btn {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #94a3b8;
+  font-size: 0.72rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  touch-action: manipulation;
+  user-select: none;
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.sticky-icon-btn:hover,
+.sticky-icon-btn:active {
+  background: rgba(56, 189, 248, 0.2);
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.5);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
 }
 
 /* ==========================================================================
@@ -3772,34 +3915,7 @@ mark.search-highlight {
   line-height: 1.8;
 }
 
-/* Sticky Quick-Nav Controller Modernization */
-.sticky-ayah-controller {
-  position: fixed;
-  top: 76px;
-  left: 50%;
-  transform: translate(-50%, -20px);
-  z-index: 999;
-  width: calc(100% - 32px);
-  max-width: 900px;
-  background: rgba(10, 14, 24, 0.96);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(212, 175, 55, 0.4);
-  border-radius: var(--radius-full);
-  padding: 6px 14px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(212, 175, 55, 0.18);
-  opacity: 0;
-  pointer-events: none;
-  visibility: hidden;
-  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
-}
-
-.sticky-ayah-controller.visible {
-  opacity: 1;
-  pointer-events: auto;
-  visibility: visible;
-  transform: translate(-50%, 0);
-}
+/* Sticky Quick-Nav Sub-Header Consolidated (See line ~2144) */
 
 .sticky-select {
   padding: 6px 14px;
@@ -3895,7 +4011,7 @@ mark.search-highlight {
   padding: 12px 18px;
 }
 
-/* Mobile Touch Ergonomics */
+/* Mobile Touch Ergonomics & Smart Sub-Header Architecture */
 @media (max-width: 768px) {
   header.app-header {
     padding: 10px 14px;
@@ -3913,11 +4029,142 @@ mark.search-highlight {
   .trans-text.urdu,
   .compact-mode .trans-text.urdu,
   .ayah-card.compact-card .trans-text.urdu {
-    font-size: calc(1.2rem * var(--ayah-font-scale));
-    line-height: 1.65;
+    font-size: calc(1.32rem * var(--ayah-font-scale, 1.0));
+    line-height: var(--urdu-line-height, 1.85);
   }
   .surah-grid {
     grid-template-columns: 1fr;
+  }
+
+  /* Mobile Quick-Nav Sub-Header (Integrated Dock Beneath App Header) */
+  .sticky-ayah-controller {
+    top: 52px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0 0 14px 14px;
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 6px 8px;
+    transform: translateY(-120%);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .sticky-ayah-controller.visible {
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+
+  .sticky-ayah-controller.scrolled-hidden {
+    transform: translateY(-120%) !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
+  .sticky-inner-wrapper {
+    gap: 6px;
+    justify-content: flex-start;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 2px 2px;
+  }
+  .sticky-inner-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sticky-select-wrap {
+    flex: 1 1 auto;
+    min-width: 105px;
+    max-width: 160px;
+  }
+
+  .sticky-select {
+    font-size: 0.76rem;
+    padding: 4px 6px;
+    min-height: 30px;
+    height: 30px;
+  }
+
+  .sticky-label {
+    font-size: 0.65rem;
+  }
+
+  .sticky-input {
+    width: 44px;
+    min-height: 30px;
+    height: 30px;
+    font-size: 0.78rem;
+  }
+
+  .sticky-action-btn,
+  .sticky-density-btn {
+    min-height: 30px;
+    height: 30px;
+    padding: 0 8px;
+    font-size: 0.74rem;
+  }
+
+  .sticky-icon-btn {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    min-height: 30px;
+  }
+
+  /* 2-Tier Mobile Card Header & Horizontal Action Swipe Strip */
+  .ayah-card-meta {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .ayah-meta-left {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .ayah-meta-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    flex-wrap: nowrap !important;
+    padding-bottom: 4px !important;
+    mask-image: linear-gradient(to right, black 88%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, black 88%, transparent 100%);
+  }
+
+  .ayah-meta-actions::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .ayah-tool-btn {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    min-height: 32px !important;
+    padding: 4px 10px !important;
+    font-size: 0.76rem !important;
+  }
+
+  /* Mobile Responsive Scrubber Defense: Auto-Hide on Screens <= 768px */
+  .quick-scrubber-rail {
+    display: none !important;
   }
 }
 

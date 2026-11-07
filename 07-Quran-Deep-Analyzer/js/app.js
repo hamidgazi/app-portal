@@ -91,6 +91,27 @@ function switchAppTab(tabName) {
 
   window.location.hash = tabName;
   window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Dynamic Cross-Frame Portal Title Synchronization
+  try {
+    const TAB_TITLE_MAP = {
+      ayahs: { title: "Quran Deep Analyzer • Reader", icon: "📖", badge: "07 • Quran Reader" },
+      search: { title: "Quran Deep Analyzer • AI Search", icon: "⚡", badge: "07 • AI Search" },
+      commands: { title: "Quranic Commands & Injunctions", icon: "📜", badge: "07 • Commands" },
+      manners: { title: "Quranic Manners & Social Ethics", icon: "🌿", badge: "07 • Manners" },
+      duas: { title: "Quranic Duas Encyclopedia", icon: "🤲", badge: "07 • Duas" },
+      studio: { title: "Quranic Analytics Studio", icon: "📊", badge: "07 • Analytics" }
+    };
+    const tabInfo = TAB_TITLE_MAP[tabName] || { title: "Quran Deep Analyzer", icon: "📖", badge: "07 • Scripture" };
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({
+        type: "PORTAL_SYNC_TITLE",
+        title: tabInfo.title,
+        icon: tabInfo.icon,
+        badge: tabInfo.badge
+      }, "*");
+    }
+  } catch(e) {}
   // Synchronize mobile bottom dock buttons
   const dockBtns = document.querySelectorAll(".mobile-dock-btn");
   dockBtns.forEach(btn => {

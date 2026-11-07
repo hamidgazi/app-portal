@@ -1427,13 +1427,39 @@ class CorpusEngine {
       });
     }
 
-    // Show/hide on scroll
+    // Smart Directional Auto-Hide Scroll Controller (Anti-Occlusion Invariant)
+    let lastScrollY = window.scrollY || 0;
+    let ticking = false;
+
     window.addEventListener("scroll", () => {
-      const tabAyahs = document.getElementById("tab-ayahs");
-      if (tabAyahs && tabAyahs.classList.contains("active") && window.scrollY > 450) {
-        stickyCtrl.classList.add("visible");
-      } else {
-        stickyCtrl.classList.remove("visible");
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const tabAyahs = document.getElementById("tab-ayahs");
+          const isAyahsActive = tabAyahs && tabAyahs.classList.contains("active");
+          const currentY = window.scrollY || 0;
+          const diff = currentY - lastScrollY;
+
+          if (!isAyahsActive) {
+            stickyCtrl.classList.remove("visible");
+            stickyCtrl.classList.remove("scrolled-hidden");
+          } else if (currentY <= 140) {
+            // Near top of page: keep controller hidden so grand Surah banner and Ayah 1 are 100% visible
+            stickyCtrl.classList.remove("visible");
+            stickyCtrl.classList.remove("scrolled-hidden");
+          } else if (diff > 8 && currentY > 200) {
+            // Scrolling down to read: auto-hide out of view for 100% full-screen scripture reading
+            stickyCtrl.classList.remove("visible");
+            stickyCtrl.classList.add("scrolled-hidden");
+          } else if (diff < -8) {
+            // Scrolling up to navigate: smoothly reveal
+            stickyCtrl.classList.remove("scrolled-hidden");
+            stickyCtrl.classList.add("visible");
+          }
+
+          lastScrollY = currentY;
+          ticking = false;
+        });
+        ticking = true;
       }
     }, { passive: true });
   }

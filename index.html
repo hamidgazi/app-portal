@@ -2715,6 +2715,18 @@
             });
           }
 
+          // Cross-Frame Stage Title Synchronizer
+          window.addEventListener("message", (e) => {
+            if (e.data && e.data.type === "PORTAL_SYNC_TITLE") {
+              const iconEl = document.getElementById("top-app-icon");
+              const titleEl = document.getElementById("top-app-title");
+              const tagEl = document.getElementById("top-app-tag");
+              if (iconEl && e.data.icon) iconEl.textContent = e.data.icon;
+              if (titleEl && e.data.title) titleEl.textContent = e.data.title;
+              if (tagEl && e.data.badge) tagEl.textContent = e.data.badge;
+            }
+          });
+
           // Top QR Modal Trigger
           const btnTopQr = document.getElementById("btn-top-qr");
           const modalQr = document.getElementById("modal-qr");
