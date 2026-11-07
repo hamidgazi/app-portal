@@ -106,15 +106,15 @@
       background: var(--bg-card);
       border: 1px solid var(--border);
       color: var(--text-main);
-      padding: 7px 12px;
+      padding: 8px 14px;
       border-radius: 8px;
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       font-weight: 600;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      min-height: 38px;
+      min-height: 48px;
       transition: all 0.2s ease;
       touch-action: manipulation;
     }
@@ -325,18 +325,30 @@
       background: #111827;
       border: 1px solid #1f2937;
       color: var(--text-muted);
-      padding: 8px 14px;
+      padding: 9px 12px;
       border-radius: 9999px;
       font-size: 0.82rem;
       font-weight: 600;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 6px;
-      min-height: 40px;
+      min-height: 48px;
+      flex: 1 1 calc(20% - 10px);
+      max-width: calc(20% - 8px);
+      text-align: center;
       transition: all 0.2s ease;
       touch-action: manipulation;
       user-select: none;
+    }
+
+    .tab-label-full {
+      display: inline-block;
+    }
+
+    .tab-label-short {
+      display: none;
     }
 
     .tab-btn:hover {
@@ -1100,9 +1112,20 @@
     /* Mobile Responsive Optimizations */
     @media (max-width: 768px) {
       .app-header { padding: 8px 12px; }
-      .tab-nav-wrapper { top: 0; padding: 6px 8px; }
-      .tab-nav { gap: 5px; }
-      .tab-btn { padding: 6px 11px; font-size: 0.76rem; min-height: 38px; }
+      .tab-nav-wrapper { top: 0; padding: 6px 6px; }
+      .tab-nav { gap: 4px; }
+      .tab-btn {
+        flex: 1 1 calc(20% - 6px);
+        max-width: calc(20% - 4px);
+        padding: 6px 2px;
+        font-size: 0.72rem;
+        min-height: 48px;
+        border-radius: 8px;
+        gap: 3px;
+        line-height: 1.2;
+      }
+      .tab-label-full { display: none; }
+      .tab-label-short { display: inline-block; font-weight: 700; }
       .card { padding: 16px; }
       .stepper-grid { grid-template-columns: 1fr; }
     }
@@ -1151,6 +1174,7 @@
         <button class="triage-chip" data-target-tab="tab-cough">🫁 60% Sinus Block</button>
         <button class="triage-chip" data-target-tab="tab-vitality">⚡ 2PM Fatigue Crash</button>
         <button class="triage-chip" data-target-tab="tab-gems">💎 10 Hidden Gems</button>
+        <button class="triage-chip" data-target-tab="tab-daily">📅 Daily Tracker</button>
         <button class="triage-chip" data-target-tab="tab-doctor">🩺 Doctor Visit Sheet</button>
       </div>
     </div>
@@ -1165,19 +1189,19 @@
     </div>
   </header>
 
-  <!-- Sticky 10-Tab Navigation Bar (WRAPS NEATLY: ALL 10 PILLS 100% VISIBLE) -->
+  <!-- Sticky 10-Tab Navigation Bar (WRAPS NEATLY ACROSS EXACTLY 2 ROWS) -->
   <nav class="tab-nav-wrapper" role="tablist">
     <div class="tab-nav">
-      <button class="tab-btn active" data-tab="tab-lips" id="btn-tab-lips" role="tab" aria-selected="true">👄 Lips & Cheilitis <span class="badge-count"></span></button>
-      <button class="tab-btn" data-tab="tab-bacne" id="btn-tab-bacne" role="tab" aria-selected="false">🚿 Bacne & Sweat <span class="badge-count"></span></button>
-      <button class="tab-btn" data-tab="tab-joints" id="btn-tab-joints" role="tab" aria-selected="false">🌟 Dark Joints & AN <span class="badge-count"></span></button>
-      <button class="tab-btn" data-tab="tab-perianal" id="btn-tab-perianal" role="tab" aria-selected="false">🍑 Perianal / Cleft <span class="badge-count"></span></button>
-      <button class="tab-btn" data-tab="tab-hair" id="btn-tab-hair" role="tab" aria-selected="false">💇 Hair & Spa <span class="badge-count"></span></button>
-      <button class="tab-btn" data-tab="tab-cough" id="btn-tab-cough" role="tab" aria-selected="false">🫁 Cough & Sinus <span class="badge-count"></span></button>
-      <button class="tab-btn" data-tab="tab-vitality" id="btn-tab-vitality" role="tab" aria-selected="false">⚡ Vitality & Stamina <span class="badge-count"></span></button>
-      <button class="tab-btn" data-tab="tab-gems" id="btn-tab-gems" role="tab" aria-selected="false">💎 Gems & Mistakes <span class="badge-count"></span></button>
-      <button class="tab-btn" data-tab="tab-daily" id="btn-tab-daily" role="tab" aria-selected="false">📅 Action Tracker <span class="badge-count"></span></button>
-      <button class="tab-btn" data-tab="tab-doctor" id="btn-tab-doctor" role="tab" aria-selected="false">🩺 Doctor & Labs <span class="badge-count"></span></button>
+      <button class="tab-btn active" data-tab="tab-lips" id="btn-tab-lips" role="tab" aria-selected="true"><span class="tab-label-full">👄 Lips & Cheilitis</span><span class="tab-label-short">👄 Lips</span> <span class="badge-count"></span></button>
+      <button class="tab-btn" data-tab="tab-bacne" id="btn-tab-bacne" role="tab" aria-selected="false"><span class="tab-label-full">🚿 Bacne & Sweat</span><span class="tab-label-short">🚿 Bacne</span> <span class="badge-count"></span></button>
+      <button class="tab-btn" data-tab="tab-joints" id="btn-tab-joints" role="tab" aria-selected="false"><span class="tab-label-full">🌟 Dark Joints & AN</span><span class="tab-label-short">🌟 Joints</span> <span class="badge-count"></span></button>
+      <button class="tab-btn" data-tab="tab-perianal" id="btn-tab-perianal" role="tab" aria-selected="false"><span class="tab-label-full">🍑 Perianal / Cleft</span><span class="tab-label-short">🍑 Cleft</span> <span class="badge-count"></span></button>
+      <button class="tab-btn" data-tab="tab-hair" id="btn-tab-hair" role="tab" aria-selected="false"><span class="tab-label-full">💇 Hair & Spa</span><span class="tab-label-short">💇 Hair</span> <span class="badge-count"></span></button>
+      <button class="tab-btn" data-tab="tab-cough" id="btn-tab-cough" role="tab" aria-selected="false"><span class="tab-label-full">🫁 Cough & Sinus</span><span class="tab-label-short">🫁 Sinus</span> <span class="badge-count"></span></button>
+      <button class="tab-btn" data-tab="tab-vitality" id="btn-tab-vitality" role="tab" aria-selected="false"><span class="tab-label-full">⚡ Vitality & Stamina</span><span class="tab-label-short">⚡ Vitality</span> <span class="badge-count"></span></button>
+      <button class="tab-btn" data-tab="tab-gems" id="btn-tab-gems" role="tab" aria-selected="false"><span class="tab-label-full">💎 Gems & Mistakes</span><span class="tab-label-short">💎 Gems</span> <span class="badge-count"></span></button>
+      <button class="tab-btn" data-tab="tab-daily" id="btn-tab-daily" role="tab" aria-selected="false"><span class="tab-label-full">📅 Action Tracker</span><span class="tab-label-short">📅 Tracker</span> <span class="badge-count"></span></button>
+      <button class="tab-btn" data-tab="tab-doctor" id="btn-tab-doctor" role="tab" aria-selected="false"><span class="tab-label-full">🩺 Doctor & Labs</span><span class="tab-label-short">🩺 Doctor</span> <span class="badge-count"></span></button>
     </div>
   </nav>
 
@@ -2938,29 +2962,43 @@
             <label class="check-item" data-time="am">
               <input type="checkbox" id="chk-en-sun">
               <div class="check-content">
-                <span class="check-title">Sunlight & Salt Water Anchor</span>
-                <span class="check-desc">10–15 min outdoor sunlight + 500ml water with a pinch of sea salt immediately upon waking.</span>
+                <span class="check-title">10,000+ Lux Sunlight & Salt Water Anchor</span>
+                <span class="check-desc">10–15 min direct outdoor sunlight (sets circadian clock) + 500ml room-temperature water with a pinch of unrefined sea salt upon waking.</span>
               </div>
             </label>
             <label class="check-item" data-time="am">
               <input type="checkbox" id="chk-en-caf">
               <div class="check-content">
                 <span class="check-title">The 90-Minute Caffeine Delay</span>
-                <span class="check-desc">Waited 90–120 min post-waking before first coffee/tea (ensures natural adenosine clearance).</span>
+                <span class="check-desc">Waited 90–120 min post-waking before first coffee/tea (clears endogenous adenosine naturally; prevents 2 PM crash).</span>
               </div>
             </label>
             <label class="check-item" data-time="am">
+              <input type="checkbox" id="chk-am-oral-metabolic">
+              <div class="check-content">
+                <span class="check-title">Systemic Metabolic Sensitization</span>
+                <span class="check-desc">Oral Berberine HCl 500mg (activates AMPK fuel gauge) or Myo-Inositol 2,000mg with breakfast (Metformin XR under physician oversight).</span>
+              </div>
+            </label>
+            <label class="check-item" data-time="am">
+              <input type="checkbox" id="chk-am-bioenergetics">
+              <div class="check-content">
+                <span class="check-title">Cellular Bioenergetics & ATP Reload</span>
+                <span class="check-desc">Creatine Monohydrate 5g in water (phosphocreatine ATP buffer) + Ubiquinol CoQ10 100–200mg (mitochondrial electron chain).</span>
+              </div>
+            </label>
+            <label class="check-item" data-time="shower">
               <input type="checkbox" id="chk-am-wash">
               <div class="check-content">
-                <span class="check-title">Shower Contact Wash (3–5 Minutes)</span>
-                <span class="check-desc">Ketoconazole 2% (Mon/Wed/Fri) or Benzoyl Peroxide 5–10% (Tue/Thu/Sat) on chest & back. Dwell 3–5 mins.</span>
+                <span class="check-title">Shower Contact Wash (3–5 Min Dwell)</span>
+                <span class="check-desc">Ketoconazole 2% Wash (Mon/Wed/Fri) or Benzoyl Peroxide 10% (Tue/Thu/Sat) on chest & back. Dwell 3–5 mins before rinsing.</span>
               </div>
             </label>
-            <label class="check-item" data-time="am">
+            <label class="check-item" data-time="shower">
               <input type="checkbox" id="chk-am-noscrub">
               <div class="check-content">
-                <span class="check-title">Zero Friction Cleansing</span>
-                <span class="check-desc">No loofahs, brushes, or aggressive finger-rubbing on arms/back. Gentle syndet wash only.</span>
+                <span class="check-title">Zero-Friction Cleansing (No Rubbing!)</span>
+                <span class="check-desc">Gentle syndet wash only. No loofahs, brushes, or aggressive finger rubbing. Pat dry with microfiber towel.</span>
               </div>
             </label>
             <label class="check-item" data-time="am">
@@ -2974,47 +3012,103 @@
               <input type="checkbox" id="chk-am-groin">
               <div class="check-content">
                 <span class="check-title">Groin & Joint Depigmentation</span>
-                <span class="check-desc">Azelaic Acid 10–15% applied to darkened joint creases and outer buttock folds.</span>
+                <span class="check-desc">Azelaic Acid 10–15% applied to darkened joint creases and outer buttock folds (safe non-irritating tyrosinase inhibitor).</span>
               </div>
             </label>
             <label class="check-item" data-time="am">
               <input type="checkbox" id="chk-am-lips">
               <div class="check-content">
                 <span class="check-title">Lip Barrier Sealing (Strict Anti-Trauma)</span>
-                <span class="check-desc">Cica balm + pure petrolatum/lanolin applied. ZERO picking/peeling of dry flakes with teeth/fingers.</span>
+                <span class="check-desc">Tap with water, apply Cica balm, seal with pure petrolatum/lanolin. Inviolable Rule: Zero picking or licking; snip loose flakes flush with cuticle scissors.</span>
               </div>
             </label>
             <label class="check-item" data-time="am">
               <input type="checkbox" id="chk-am-sinus">
               <div class="check-content">
-                <span class="check-title">Morning Sinus Rinse & Spray</span>
-                <span class="check-desc">NeilMed alkaline hypertonic rinse to flush thick secretions, followed by Fluticasone 2 sprays per nostril.</span>
+                <span class="check-title">Postural Sinus Drainage Flush</span>
+                <span class="check-desc">NeilMed hypertonic 2.7% alkaline rinse in Mygind's or Vertex-to-Floor posture (flushes 60% block), followed by Fluticasone 2 sprays/nostril.</span>
+              </div>
+            </label>
+            <label class="check-item" data-time="am">
+              <input type="checkbox" id="chk-am-sls-free">
+              <div class="check-content">
+                <span class="check-title">SLS-Free Oral Care & Nitric Oxide Protection</span>
+                <span class="check-desc">Brush with Sensodyne Pronamel / Biotene (SLS-free); scrape tongue with copper scraper. Avoid alcohol mouthwash (protects oral Veillonella NO bacteria).</span>
               </div>
             </label>
           </div>
 
-          <!-- 2. Midday Checklist -->
-          <h4 style="font-size: 1rem; color: #38bdf8; margin: 24px 0 10px;">☀️ Midday Protocols</h4>
+          <!-- 2. Midday, Toilet & Shower Protocols -->
+          <h4 style="font-size: 1rem; color: #38bdf8; margin: 24px 0 10px;">☀️ Midday, Shower & Toilet Protocols</h4>
           <div class="checklist">
             <label class="check-item" data-time="midday">
               <input type="checkbox" id="chk-md-muc">
               <div class="check-content">
-                <span class="check-title">NAC 600mg Mucolytic Dose</span>
-                <span class="check-desc">1 effervescent tablet of NAC 600mg in water post-meal to cleave mucus disulfide bonds.</span>
+                <span class="check-title">Dual-Action Mucolytic Protocol</span>
+                <span class="check-desc">1 effervescent tablet of NAC 600mg in water + Guaifenesin 600–1200mg ER post-meal (cleaves mucus disulfide bonds; liquefies throat phlegm).</span>
+              </div>
+            </label>
+            <label class="check-item" data-time="midday">
+              <input type="checkbox" id="chk-md-gargle">
+              <div class="check-content">
+                <span class="check-title">Alkaline Anti-Pepsin Gargle</span>
+                <span class="check-desc">Gargle with 1/2 tsp USP Sodium Bicarbonate in warm water to raise pH >8.0, permanently denaturing reflux pepsin and soothing throat cough.</span>
               </div>
             </label>
             <label class="check-item" data-time="midday">
               <input type="checkbox" id="chk-md-walk">
               <div class="check-content">
-                <span class="check-title">10-Minute Post-Lunch Brisk Walk</span>
-                <span class="check-desc">Gentle movement post-meal to blunt blood glucose spikes and prevent afternoon brain fog.</span>
+                <span class="check-title">15-Minute Post-Lunch GLUT4 Walk</span>
+                <span class="check-desc">Brisk walk immediately after lunch; stimulates non-insulin GLUT4 muscle glucose uptake, blunting postprandial insulin surges by 30%.</span>
               </div>
             </label>
             <label class="check-item" data-time="midday">
               <input type="checkbox" id="chk-md-lip">
               <div class="check-content">
-                <span class="check-title">Lip Re-hydration Barrier</span>
-                <span class="check-desc">Re-applied pure petrolatum / lanolin over lips post-meal.</span>
+                <span class="check-title">Midday Lip Re-hydration Barrier</span>
+                <span class="check-desc">Re-applied pure petrolatum (Vaseline) or Medical Lanolin (Lansinoh) over lips post-meal (every 2–3 hours).</span>
+              </div>
+            </label>
+            <label class="check-item" data-time="midday">
+              <input type="checkbox" id="chk-md-focus">
+              <div class="check-content">
+                <span class="check-title">Workplace Focus Stack & Vagal Reset</span>
+                <span class="check-desc">Alpha-GPC 300mg + L-Tyrosine 500mg if experiencing brain fog; 3 rounds of the Physiological Sigh (double inhale nose, long sigh mouth) if stressed.</span>
+              </div>
+            </label>
+            <label class="check-item" data-time="shower">
+              <input type="checkbox" id="chk-toilet-water">
+              <div class="check-content">
+                <span class="check-title">Post-Defecation Water Wash (Zero Paper Friction)</span>
+                <span class="check-desc">Wash thoroughly with water (bidet/hand spray) after every bowel movement. Gently pat dry with soft tissue. Never dry-wipe or rub.</span>
+              </div>
+            </label>
+            <label class="check-item" data-time="shower">
+              <input type="checkbox" id="chk-toilet-zinc">
+              <div class="check-content">
+                <span class="check-title">Perianal Zinc Oxide 40% Barrier Paste</span>
+                <span class="check-desc">Apply pea-sized dab of Zinc Oxide 40% paste (Desitin Max / Sudocrem) between gluteal cheeks (neutralizes fecal digestive proteases trypsin/elastase).</span>
+              </div>
+            </label>
+            <label class="check-item" data-time="midday">
+              <input type="checkbox" id="chk-toilet-lyocell">
+              <div class="check-content">
+                <span class="check-title">Anti-Friction Lyocell (Tencel) Underwear</span>
+                <span class="check-desc">Wearing seamless 100% Lyocell or micro-modal boxer briefs (slashes kinetic friction coefficient by >60%; halts frictional melanosis).</span>
+              </div>
+            </label>
+            <label class="check-item" data-time="shower">
+              <input type="checkbox" id="chk-hair-wash">
+              <div class="check-content">
+                <span class="check-title">Hair Wash Day & Demineralizing Chelation</span>
+                <span class="check-desc">Pre-wash Salicylic Acid 2% scalp exfoliant on dry roots; wash with Hard Water Chelating Shampoo (EDTA/Citric) or Ketoconazole 2% (dwell 3-5 min).</span>
+              </div>
+            </label>
+            <label class="check-item" data-time="shower">
+              <input type="checkbox" id="chk-hair-mask">
+              <div class="check-content">
+                <span class="check-title">Thermal Steam Mask / Lamellar Water</span>
+                <span class="check-desc">Sunday: Deep thermal steam mask with warm towel wrap for 15-20 min; Wednesday: 8-Second Lamellar Wonder Water flash treatment.</span>
               </div>
             </label>
           </div>
@@ -3025,29 +3119,50 @@
             <label class="check-item" data-time="pm">
               <input type="checkbox" id="chk-pm-cleft">
               <div class="check-content">
-                <span class="check-title">Perianal Zinc Oxide Shield</span>
-                <span class="check-desc">40% Zinc Oxide barrier paste applied across intergluteal cleft and outer folds before bed.</span>
+                <span class="check-title">Perianal Zinc Oxide & Azelaic Shield</span>
+                <span class="check-desc">Azelaic Acid 10–15% on outer darkened cleft skin (3x/week) + Zinc Oxide 40% barrier paste nightly before bed.</span>
+              </div>
+            </label>
+            <label class="check-item" data-time="pm">
+              <input type="checkbox" id="chk-pm-remodel">
+              <div class="check-content">
+                <span class="check-title">Cellular Remodeling Retinoids</span>
+                <span class="check-desc">Adapalene 0.1% or Tretinoin mixed with moisturizer over back, elbows, and knees (Mon/Thu/Sat nights) to clear post-acne marks and AN.</span>
+              </div>
+            </label>
+            <label class="check-item" data-time="pm">
+              <input type="checkbox" id="chk-pm-hyperhidrosis">
+              <div class="check-content">
+                <span class="check-title">Truncal Hyperhidrosis Control</span>
+                <span class="check-desc">Aluminum Chloride 12–20% (Certain Dri / Driclor) applied to bone-dry upper/mid-back before bed (Sun & Wed nights only).</span>
               </div>
             </label>
             <label class="check-item" data-time="pm">
               <input type="checkbox" id="chk-pm-sinus">
               <div class="check-content">
                 <span class="check-title">Evening NeilMed Sinus Rinse & Steam</span>
-                <span class="check-desc">Second sinus irrigation + 10 mins saline steam inhalation to ensure clear nocturnal breathing.</span>
+                <span class="check-desc">Second sinus irrigation + 10 mins steam inhalation; elevate head 30 degrees with 2 pillows to prevent nocturnal mucus pooling on vocal cords.</span>
               </div>
             </label>
             <label class="check-item" data-time="pm">
               <input type="checkbox" id="chk-pm-lipslug">
               <div class="check-content">
                 <span class="check-title">Heavy Night Lip Slugging</span>
-                <span class="check-desc">Thick layer of pure Medical Lanolin or Vaseline extending slightly beyond the vermilion border.</span>
+                <span class="check-desc">Thick layer of pure Medical Lanolin (Lansinoh) or Vaseline extending 1mm beyond the vermilion border to form an occlusive nocturnal chamber.</span>
+              </div>
+            </label>
+            <label class="check-item" data-time="pm">
+              <input type="checkbox" id="chk-pm-sleep-cocktail">
+              <div class="check-content">
+                <span class="check-title">Clinical Sleep & Glymphatic Cocktail</span>
+                <span class="check-desc">Magnesium Bisglycinate (300mg) + Glycine 3g (lowers core body temperature by 1°C for deep Stage 3/4 sleep) + Micro-Dose Melatonin (0.3mg).</span>
               </div>
             </label>
             <label class="check-item" data-time="pm">
               <input type="checkbox" id="chk-pm-silk">
               <div class="check-content">
-                <span class="check-title">Silk Pillowcase & Sleep Hygiene</span>
-                <span class="check-desc">Sleeping on 100% Mulberry silk/satin pillowcase. Room cooled to ~66°F. Elevated headrest.</span>
+                <span class="check-title">Silk Pillowcase & Bedroom Climate</span>
+                <span class="check-desc">Sleeping on 100% Mulberry silk/satin pillowcase (prevents friction); bedroom cooled to 66°F (19°C); pitch-black darkness.</span>
               </div>
             </label>
           </div>
@@ -3341,9 +3456,17 @@
             <div class="product-item">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                 <strong style="color: #38bdf8;">🫁 Sinus Blockage & Yellow-Green Sputum Script:</strong>
-                <button class="btn-action btn-copy-script" data-text="I have 60% bilateral nasal obstruction with thick mucopurulent yellow-green phlegm and post-nasal drip cough. I am using hypertonic saline rinses and would like a prescription for Fluticasone furoate nasal spray.">📋 Copy Script</button>
+                <button class="btn-action btn-copy-script" data-text="I have 60% bilateral nasal obstruction with thick mucopurulent yellow-green phlegm and post-nasal drip cough. I am using hypertonic saline rinses and would like a prescription for Fluticasone furoate nasal spray or Budesonide 0.5mg respules for high-volume sinus flushes.">📋 Copy Script</button>
               </div>
-              <p style="font-size: 0.86rem; color: #cbd5e1; line-height: 1.6;"><em>"I have 60% bilateral nasal obstruction with thick mucopurulent yellow-green phlegm and post-nasal drip cough. I am using hypertonic saline rinses and would like a prescription for Fluticasone furoate nasal spray."</em></p>
+              <p style="font-size: 0.86rem; color: #cbd5e1; line-height: 1.6;"><em>"I have 60% bilateral nasal obstruction with thick mucopurulent yellow-green phlegm and post-nasal drip cough. I am using hypertonic saline rinses and would like a prescription for Fluticasone furoate nasal spray or Budesonide 0.5mg respules for high-volume sinus flushes."</em></p>
+            </div>
+
+            <div class="product-item">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <strong style="color: #38bdf8;">⚡ Executive Vitality & Metabolic Blood Panel Script:</strong>
+                <button class="btn-action btn-copy-script" data-text="I would like to order a comprehensive metabolic and micronutrient panel: Fasting Glucose & Fasting Serum Insulin (to calculate HOMA-IR), HbA1c, Serum Ferritin, Vitamin B12, Folate, Vitamin D3, Serum Zinc, and Lipid Profile to evaluate underlying cellular bioenergetics and insulin resistance.">📋 Copy Script</button>
+              </div>
+              <p style="font-size: 0.86rem; color: #cbd5e1; line-height: 1.6;"><em>"I would like to order a comprehensive metabolic and micronutrient panel: Fasting Glucose & Fasting Serum Insulin (to calculate HOMA-IR), HbA1c, Serum Ferritin, Vitamin B12, Folate, Vitamin D3, Serum Zinc, and Lipid Profile to evaluate underlying cellular bioenergetics and insulin resistance."</em></p>
             </div>
           </div>
         </div>
@@ -3433,6 +3556,33 @@
               </div>
               <div class="product-mechanism">Insulin-sensitizing medication. Lowers blood insulin, turning off the switches driving Acanthosis Nigricans.</div>
               <div class="product-usage">📌 Prescribed by an endocrinologist for insulin resistance and dark joint skin reversal. Take with evening meal.</div>
+            </div>
+
+            <div class="product-item">
+              <div class="product-header">
+                <span class="product-name">Budesonide Respules 0.5 mg / 2 ml (Pulmicort)</span>
+                <span class="badge-rx">[Prescription Based]</span>
+              </div>
+              <div class="product-mechanism">High-potency topical glucocorticoid liquid respule added into hypertonic saline sinus irrigation. Directly washes ethmoid/maxillary sinus walls with near-zero systemic absorption.</div>
+              <div class="product-usage">📌 Empty one 0.5 mg respule into 240 ml NeilMed bottle once daily for severe chronic rhinosinusitis and 60% obstruction.</div>
+            </div>
+
+            <div class="product-item">
+              <div class="product-header">
+                <span class="product-name">Trifarotene (Aklief) 0.005% Cream</span>
+                <span class="badge-rx">[Prescription Based]</span>
+              </div>
+              <div class="product-mechanism">4th-generation selective RAR-gamma retinoid. Specifically FDA-approved for truncal acne; stimulates rapid cellular turnover across large back and shoulder surfaces without excessive irritation.</div>
+              <div class="product-usage">📌 Apply a thin layer across back and shoulders 2–3 nights weekly over dry, clean skin.</div>
+            </div>
+
+            <div class="product-item">
+              <div class="product-header">
+                <span class="product-name">Ketoconazole 2% Wash / Shampoo (Nizoral Rx)</span>
+                <span class="badge-rx">[Prescription Based]</span>
+              </div>
+              <div class="product-mechanism">Broad-spectrum imidazole antifungal. Eradicates lipophilic Malassezia yeast residing within chest, back, and scalp follicles.</div>
+              <div class="product-usage">📌 Apply to wet skin/scalp, leave suds for 3 to 5 minutes by clock before rinsing. Use 3 times weekly.</div>
             </div>
           </div>
         </div>
@@ -3647,7 +3797,8 @@
 
             stepCards.forEach(card => {
               const cardTime = card.getAttribute("data-time");
-              if (filter === "all" || cardTime === filter) {
+              const isMatch = (filter === "all") || (cardTime === filter) || (filter === "shower" && (cardTime === "shower" || cardTime === "midday"));
+              if (isMatch) {
                 card.style.display = "flex";
                 card.style.opacity = "1";
               } else {
@@ -3657,7 +3808,8 @@
 
             checkItems.forEach(item => {
               const itemTime = item.getAttribute("data-time");
-              if (filter === "all" || itemTime === filter || !itemTime) {
+              const isMatch = (filter === "all") || (itemTime === filter) || (!itemTime) || (filter === "shower" && (itemTime === "shower" || itemTime === "midday"));
+              if (isMatch) {
                 item.style.display = "flex";
               } else {
                 item.style.display = "none";
@@ -3707,6 +3859,42 @@
         const resetBtn = document.getElementById("btn-reset-tracker");
 
         const STORAGE_KEY = "antigravity_clinical_tracker_v4";
+        const memoryFallback = {};
+
+        function safeGet(key) {
+          try {
+            if (window.localStorage) {
+              const val = localStorage.getItem(key);
+              if (val !== null) return val;
+            }
+          } catch (e) {}
+          try {
+            if (window.sessionStorage) {
+              const val = sessionStorage.getItem(key);
+              if (val !== null) return val;
+            }
+          } catch (e) {}
+          return memoryFallback[key] || null;
+        }
+
+        function safeSet(key, val) {
+          let saved = false;
+          try {
+            if (window.localStorage) {
+              localStorage.setItem(key, val);
+              saved = true;
+            }
+          } catch (e) {}
+          if (!saved) {
+            try {
+              if (window.sessionStorage) {
+                sessionStorage.setItem(key, val);
+                saved = true;
+              }
+            } catch (e) {}
+          }
+          memoryFallback[key] = val;
+        }
 
         function updateProgress() {
           if (!checkboxes.length) return;
@@ -3731,14 +3919,12 @@
           checkboxes.forEach(cb => {
             if (cb.id) state[cb.id] = cb.checked;
           });
-          try {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-          } catch (e) {}
+          safeSet(STORAGE_KEY, JSON.stringify(state));
         }
 
         function loadState() {
           try {
-            const raw = localStorage.getItem(STORAGE_KEY);
+            const raw = safeGet(STORAGE_KEY);
             if (raw) {
               const state = JSON.parse(raw);
               checkboxes.forEach(cb => {
@@ -3812,7 +3998,7 @@
 
             if (!sec) return;
 
-            const text = sec.innerText.toLowerCase();
+            const text = (sec.textContent || "").toLowerCase();
             let countInTab = 0;
 
             if (text.includes(q)) {

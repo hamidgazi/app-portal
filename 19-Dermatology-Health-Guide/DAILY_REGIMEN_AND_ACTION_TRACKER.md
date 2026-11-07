@@ -167,10 +167,10 @@ PATIENT DISCUSSION SUMMARY FOR ATTENDING PHYSICIAN:
       (Acanthosis Nigricans + Frictional Melanosis).
 
 2. Tests Requested:
-   [ ] Fasting Plasma Glucose & Fasting Serum Insulin (calculate HOMA-IR)
-   [ ] HbA1c
-   [ ] Serum Ferritin, Vitamin B12, Folate, Zinc
-   [ ] Complete Lipid Profile
+   [ ] Fasting Plasma Glucose & Fasting Serum Insulin (calculate HOMA-IR: [Glucose x Insulin] / 405)
+   [ ] HbA1c (90-day glycemic control)
+   [ ] Complete Nutritional Deficiency Panel: Vitamin B2 (Riboflavin), Vitamin B6 (Pyridoxine), Vitamin B12, Folate, Serum Ferritin (Iron stores), Serum Zinc
+   [ ] Complete Lipid Profile (Triglycerides, HDL, LDL, ApoB)
 
 3. Pharmacological Considerations for Physician Approval:
    [ ] Metformin 500mg-1000mg XR [Prescription Based] (for insulin-mediated Acanthosis Nigricans)
@@ -191,7 +191,7 @@ PATIENT DISCUSSION SUMMARY FOR ATTENDING PHYSICIAN:
 | [ ] HAIR WASH DAY & SALON-SPA CHECKLIST                                       |
 +-------------------------------------------------------------------------------+
   [ ] Hair Elasticity Diagnostic & Scalp Exfoliation:
-      * Perform wet strand Hair Elasticity test (assess Protein vs. Moisture balance).
+      * Perform wet strand stretch Hair Elasticity test (assess Protein vs. Moisture balance: stretch 20-30% = balanced; <5% snap = moisture deficient; >40% gummy = protein deficient).
       * Pre-Wash Salicylic Acid (BHA 2%) Scalp Exfoliation on dry roots 2-5 min before washing.
   [ ] Scalp Cleansing & De-Sticking:
       * Mon & Sun: Ketoconazole 2% Shampoo (massage scalp, leave 3-5 min, rinse).
@@ -279,8 +279,8 @@ PATIENT DISCUSSION SUMMARY FOR ATTENDING PHYSICIAN:
   [ ] Step 1: Cellular Hydration Anchor
       * Drink 500ml room-temperature water with a pinch of unrefined sea salt / electrolytes.
   [ ] Step 2: Natural Photobiological Sunlight (Within 30 min of waking)
-      * Step outside for 10 to 15 minutes of direct sunlight (no sunglasses, no window glass).
-      * Sets the circadian clock, spikes healthy morning cortisol, and starts the melatonin timer.
+      * Step outside for 10 to 15 minutes of direct natural sunlight (10,000+ lux intensity; no sunglasses, no window glass).
+      * Sets the master suprachiasmatic circadian clock, spikes healthy morning cortisol, and starts the 14-hour melatonin timer.
   [ ] Step 3: Oral Hygiene & Nitric Oxide Protection
       * Scrape tongue with copper/stainless steel scraper. 
       * DO NOT use antiseptic alcohol mouthwash (protects oral nitrate-converting bacteria).
