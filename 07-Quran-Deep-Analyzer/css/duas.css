@@ -797,19 +797,47 @@
 }
 
 .dua-ayah-num {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: rgba(251, 191, 36, 0.15);
-  color: var(--dua-gold);
-  border: 1px solid var(--dua-gold-border);
-  font-size: 0.75rem;
-  font-family: sans-serif;
-  margin: 0 4px;
+  min-width: 1.35em;
+  height: 1.35em;
+  padding: 0 0.28em;
+  margin: 0 0.40em;
   vertical-align: middle;
+  border-radius: 9999px;
+  background: rgba(251, 191, 36, 0.12);
+  color: #fef08a;
+  border: 1.5px solid rgba(251, 191, 36, 0.6);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4), inset 0 0 4px rgba(251, 191, 36, 0.18);
+  font-family: var(--font-ui), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 0.58em;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  direction: ltr !important;
+  unicode-bidi: isolate;
+  user-select: none;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  cursor: default;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dua-ayah-num:hover {
+  background: rgba(251, 191, 36, 0.22);
+  border-color: rgba(251, 191, 36, 0.9);
+  box-shadow: 0 0 8px rgba(251, 191, 36, 0.4), inset 0 0 6px rgba(251, 191, 36, 0.25);
+  transform: translateY(-1px) scale(1.06);
+}
+
+.dua-ayah-num.digits-3,
+.dua-ayah-num[data-ayah*="-"],
+.dua-ayah-num[data-ayah*=":"] {
+  font-size: 0.50em;
+  letter-spacing: -0.02em;
+  padding: 0 0.35em;
 }
 
 /* Dual Urdu Translations Split Grid */

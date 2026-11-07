@@ -167,7 +167,7 @@
       // 2. Append End-of-Ayah Sign (۝ [number]) if ayahNum provided and not already present
       if (num && !text.includes('quran-ayah-stop-mark') && !text.includes('۝')) {
         // Strip trailing dashes, waqf mutlaq at very end or spaces
-        text = text.replace(/[\s\-\u0615\u06D5-\u06DC\u06EB\u06EA\u06EC\u06ED\u06E2\u06E9]+$/, '');
+        text = text.replace(/[\s\-\u0615\u06D5-\u06DC\u06DF-\u06ED\u06E0\u06E2\u06E9]+$/, '');
         const digitsClass = num.length >= 3 ? ' digits-3' : '';
         const endSignHtml = ` <span class="quran-ayah-stop-mark" data-waqf-key="ayah_end" data-ayah="${num}" data-digits="${num.length}" role="button" tabindex="0" title="End of Ayah ${num} • وقفِ تام" aria-label="End of Ayah ${num}"><span class="quran-ayah-stop-symbol">۝</span><span class="quran-ayah-stop-num${digitsClass}">${num}</span></span>`;
         text = text + endSignHtml;
@@ -264,7 +264,7 @@
       let clean = String(arabicText).replace(/<[^>]+>/g, '').replace(/[«»]/g, '').trim();
       const num = (ayahNum !== undefined && ayahNum !== null) ? String(ayahNum) : '';
       if (num && !clean.includes('۝')) {
-        clean = clean.replace(/[\s\-\u0615\u06D5-\u06DB\u06EB]+$/, '') + ` ۝ ${num}`;
+        clean = clean.replace(/[\s\-\u0615\u06D5-\u06DC\u06DF-\u06ED\u06E0\u06E2\u06E9]+$/, '') + ` ۝ ${num}`;
       }
       return clean;
     }

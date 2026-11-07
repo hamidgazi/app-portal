@@ -202,6 +202,47 @@
       .replace(/'/g, "&#39;");
   }
 
+    /**
+   * Format Sacred Arabic Verse with canonical End-of-Ayah Rosette Medallions
+   * - Strips trailing waqf pause marks (e.g. \u06e0) to prevent glyph collisions
+   * - Renders pure canonical Ayah numbers (e.g. 286 instead of 2:286)
+   * - Supports multi-ayah duas by formatting each embedded rosette boundary
+   */
+  function formatArabicVerse(d) {
+    if (!d || !d.arabic) return "";
+    const raw = String(d.arabic).trim();
+    const start = d.ayah_start;
+    const end = d.ayah_end;
+
+    // Check if text contains pre-embedded \u06dd or ۝ rosettes
+    if (raw.includes("\u06dd") || raw.includes("۝")) {
+      let curr = start;
+      const parts = raw.split(/[\u06dd۝]/);
+      const res = [];
+      for (let idx = 0; idx < parts.length; idx++) {
+        const pClean = parts[idx].trim().replace(/[\s\-\u0615\u06D5-\u06DC\u06DF-\u06ED]+$/, "");
+        if (pClean) {
+          res.push(escapeHtml(pClean));
+        }
+        if (idx < parts.length - 1) {
+          const num = (curr !== undefined && curr !== null) ? String(curr) : "";
+          const digitsClass = num.length >= 3 ? " digits-3" : "";
+          res.push(` <span class="dua-ayah-num${digitsClass}" data-ayah="${num}" role="button" tabindex="0" title="Ayah ${num}">${num}</span> `);
+          if (curr !== undefined && curr !== null && (end === undefined || curr < end)) {
+            curr++;
+          }
+        }
+      }
+      return res.join("").trim();
+    } else {
+      // Single Ayah: strip trailing pause marks & append single canonical rosette
+      const pClean = raw.replace(/[\s\-\u0615\u06D5-\u06DC\u06DF-\u06ED]+$/, "");
+      const num = (start !== undefined && start !== null) ? String(start) : String(d.ayah_coordinate || "");
+      const digitsClass = num.length >= 3 ? " digits-3" : "";
+      return `${escapeHtml(pClean)} <span class="dua-ayah-num${digitsClass}" data-ayah="${num}" role="button" tabindex="0" title="Ayah ${num}">${num}</span>`;
+    }
+  }
+
   function buildDuaCardHtml(d) {
     const isStarred = isBookmarked(d.serial);
     const isPlaying = currentlyPlayingSerial === d.serial;
@@ -239,7 +280,7 @@
 
         <!-- Tier 1: Scriptural Core (HERO: Placed Directly Below Header) -->
         <div class="dua-arabic" dir="rtl">
-          ${escapeHtml(d.arabic)} <span class="dua-ayah-num">${d.ayah_coordinate}</span>
+          ${formatArabicVerse(d)}
         </div>
 
         <!-- Integrated Translation Container with Sleek Segmented Switcher Header -->
@@ -853,6 +894,7 @@ ${d.urdu_kanzul_irfan}
     getViewMode: () => viewMode,
     getFontScale: () => fontScale,
     getFontFamily: () => fontFamily,
+    formatArabicVerse: formatArabicVerse,
 
     setSearchQuery: function(q) {
       searchQuery = q;
