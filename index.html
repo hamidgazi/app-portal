@@ -1434,8 +1434,8 @@
         display: flex !important;
       }
       .stage-canvas {
-        height: calc(100vh - var(--active-header-height)) !important;
-        height: calc(100dvh - var(--active-header-height)) !important;
+        height: calc(100vh - var(--active-header-height) - var(--safe-top)) !important;
+        height: calc(100dvh - var(--active-header-height) - var(--safe-top)) !important;
       }
     }
 
@@ -1921,6 +1921,7 @@
       let startY = 0;
       let isLongPress = false;
       let pressStartTime = 0;
+      let lastLongPressTime = 0;
 
       // Mobile Touch Handling (450ms+ threshold guard)
       element.addEventListener("touchstart", (e) => {
@@ -1933,10 +1934,11 @@
         pressTimer = setTimeout(() => {
           if (Date.now() - pressStartTime >= 450) {
             isLongPress = true;
+            lastLongPressTime = Date.now();
             AudioEngine.blip();
             openQuickActionSheet(app);
           }
-        }, 480);
+        }, 450);
       }, { passive: true });
 
       element.addEventListener("touchmove", (e) => {
@@ -1957,10 +1959,11 @@
         }
         if (isLongPress || (pressStartTime && (Date.now() - pressStartTime > 450))) {
           if (e.cancelable) e.preventDefault();
+          lastLongPressTime = Date.now();
           setTimeout(() => { 
             isLongPress = false; 
             pressStartTime = 0;
-          }, 120);
+          }, 300);
         } else {
           pressStartTime = 0;
         }
@@ -1992,9 +1995,9 @@
         });
       }
 
-      // Primary Click: 1-Tap Launch (Guarded against long-press taps)
+      // Primary Click: 1-Tap Launch (Guarded against long-press taps and delayed synthetic clicks)
       element.addEventListener("click", (e) => {
-        if (isLongPress || (pressStartTime && (Date.now() - pressStartTime > 450))) {
+        if (isLongPress || (pressStartTime && (Date.now() - pressStartTime > 450)) || (lastLongPressTime && (Date.now() - lastLongPressTime < 800))) {
           isLongPress = false;
           pressStartTime = 0;
           return;

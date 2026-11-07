@@ -459,15 +459,18 @@
     function parseMarkdown(md) {
       if (!md) return "";
 
+      // Normalize line endings to LF
+      md = md.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+
       // Escape raw HTML entities
       let html = md
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;");
 
-      // Extract code blocks first to protect code content
+      // Extract code blocks first to protect code content (handles CRLF and trailing whitespace)
       const codeBlocks = [];
-      html = html.replace(/```([a-zA-Z0-9_\-\+]*)\n([\s\S]*?)```/g, (match, lang, code) => {
+      html = html.replace(/```([a-zA-Z0-9_\-\+]*)[^\S\n]*\n([\s\S]*?)```/g, (match, lang, code) => {
         const id = "CODEBLOCK_" + codeBlocks.length;
         codeBlocks.push({ lang: lang || "text", code });
         return id;
@@ -588,7 +591,9 @@
           continue;
         }
 
-        // Regular paragraphs
+        // Regular paragraphs (ensure previous lists and tables are closed)
+        if (inList) { out.push(`</${listType}>`); inList = false; }
+        if (inTable) { out.push("</tbody></table></div>"); inTable = false; }
         out.push(`<p>${formatInline(line)}</p>`);
       }
 
@@ -602,11 +607,11 @@
         return `<code>${inlineCodes[idx]}</code>`;
       });
 
-      // Restore code blocks with copy action
+      // Restore code blocks with copy action (safe single-quote escaping)
       rendered = rendered.replace(/CODEBLOCK_(\d+)/g, (match, idx) => {
         const item = codeBlocks[idx];
         const rawCode = item.code.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&");
-        const encoded = encodeURIComponent(rawCode);
+        const encoded = encodeURIComponent(rawCode).replace(/'/g, "%27");
         return `<div class="code-block-wrapper">
           <div class="code-block-header">
             <span>${item.lang}</span>
@@ -679,36 +684,47 @@
         </div>
       `;
 
+      let markdown = "";
       try {
         const res = await fetch(docPath);
         if (!res.ok) {
           throw new Error(`HTTP ${res.status}: ${res.statusText}`);
         }
-        const markdown = await res.text();
-        
-        // Auto-extract first # Heading if title not provided
-        if (!title) {
-          const match = markdown.match(/^#\s+(.+)$/m);
-          if (match) {
-            headerTitle.textContent = match[1].replace(/[^\w\s\u0600-\u06FF•—–-]/g, "").trim();
-          }
+        markdown = await res.text();
+      } catch (localErr) {
+        // Fallback: If local fetch fails (e.g. file:// CORS), attempt live GitHub Pages fetch
+        const cleanDocPath = docPath.replace(/^(\.\.\/|\.\/|\/)+/, "");
+        const cloudUrl = `https://hamidgazi.github.io/app-portal/${cleanDocPath}`;
+        try {
+          const cloudRes = await fetch(cloudUrl);
+          if (!cloudRes.ok) throw new Error(`Cloud fetch failed (${cloudRes.status})`);
+          markdown = await cloudRes.text();
+        } catch (_) {
+          console.error("Failed to load document locally and from cloud:", localErr);
+          content.innerHTML = `
+            <div class="doc-error">
+              <h3>⚠️ Unable to Load Document</h3>
+              <p><strong>Path:</strong> <code>${escapeHtml(docPath)}</code></p>
+              <p><strong>Reason:</strong> ${escapeHtml(localErr.message)}</p>
+              <p style="margin-top: 10px; font-size: 13px; color: var(--text-secondary);">
+                If running directly via <code>file://</code> protocol, browser CORS may restrict local file reads.
+                Launch via <code>python server.py</code> or visit the live cloud portal.
+              </p>
+            </div>
+          `;
+          return;
         }
-
-        content.innerHTML = parseMarkdown(markdown);
-      } catch (err) {
-        console.error("Failed to load document:", err);
-        content.innerHTML = `
-          <div class="doc-error">
-            <h3>⚠️ Unable to Load Document</h3>
-            <p><strong>Path:</strong> <code>${escapeHtml(docPath)}</code></p>
-            <p><strong>Reason:</strong> ${escapeHtml(err.message)}</p>
-            <p style="margin-top: 10px; font-size: 13px; color: var(--text-secondary);">
-              If running directly via <code>file://</code> protocol, browser CORS may restrict local file reads.
-              Launch via <code>python server.py</code> or visit the live cloud portal.
-            </p>
-          </div>
-        `;
       }
+
+      // Auto-extract first # Heading if title not provided
+      if (!title) {
+        const match = markdown.match(/^#\s+(.+)$/m);
+        if (match) {
+          headerTitle.textContent = match[1].replace(/[^\w\s\u0600-\u06FF•—–-]/g, "").trim();
+        }
+      }
+
+      content.innerHTML = parseMarkdown(markdown);
     }
 
     function escapeHtml(str) {
