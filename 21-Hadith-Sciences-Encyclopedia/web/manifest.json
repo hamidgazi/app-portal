@@ -1,0 +1,20 @@
+{
+  "name": "Hadith Sciences Encyclopedia | علوم الحديث",
+  "short_name": "Hadith Sciences",
+  "description": "Comprehensive Mobile Reader for the Sciences of Hadith, Sanad, Matn, Rijal, and Verification.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#070709",
+  "theme_color": "#070709",
+  "lang": "en",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "./icons/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

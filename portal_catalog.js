@@ -2,7 +2,7 @@
 window.PORTAL_CATALOG = {
   "version": "1.0.0",
   "lastUpdated": "Antigravity Files",
-  "totalApps": 35,
+  "totalApps": 36,
   "categories": [
     "Islamic & Faith",
     "Productivity & Utilities",
@@ -11,6 +11,29 @@ window.PORTAL_CATALOG = {
     "Discovered Tools"
   ],
   "apps": [
+    {
+      "id": "21-Hadith-Sciences-Encyclopedia__web_index_html",
+      "title": "Hadith Sciences Encyclopedia",
+      "category": "Islamic & Faith",
+      "icon": "📜",
+      "badge": "PWA • 12 Chapters",
+      "description": "Comprehensive bilingual mobile reader for the Sciences of Hadith (Ilm al-Hadith). Features live font switcher (Nastaliq/Naskh, Amiri/Readex), reading progress bar, chapter drawer, and offline search.",
+      "tags": [
+        "hadith",
+        "sunnah",
+        "sanad",
+        "islamic",
+        "pwa",
+        "urdu",
+        "arabic",
+        "education",
+        "encyclopedia"
+      ],
+      "primary": true,
+      "relPath": "21-Hadith-Sciences-Encyclopedia/web/index.html",
+      "portalHref": "./21-Hadith-Sciences-Encyclopedia/web/index.html",
+      "serverHref": "./21-Hadith-Sciences-Encyclopedia/web/index.html"
+    },
     {
       "id": "20-Arabic-Mastery__index_html",
       "title": "Arabic Mastery 30",

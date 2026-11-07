@@ -1,0 +1,2288 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="theme-color" content="#070709">
+  <meta name="description" content="The Master Encyclopedia of Hadith Sciences - Complete bilingual offline mobile reader with live font controls.">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="./icons/icon.svg">
+  <title>Hadith Sciences Encyclopedia | موسوعة علوم الحديث</title>
+
+  <!-- Google Fonts Preconnect & Multi-Font Web Embed -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Gulzar&family=Noto+Nastaliq+Urdu:wght@400..700&family=Noto+Sans+Arabic:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Readex+Pro:wght@400;500;600;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       1. Core CSS Variables & Dynamic Font Switcher Stacks
+       ========================================================================== */
+    :root {
+      --bg-base: #070709;
+      --bg-surface: #101016;
+      --bg-card: #161622;
+      --bg-card-hover: #1e1e2d;
+      --border-subtle: #242436;
+      --border-active: #f59e0b;
+
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+
+      --gold-primary: #f59e0b;
+      --gold-glow: rgba(245, 158, 11, 0.16);
+      --emerald-primary: #10b981;
+      --cyan-primary: #38bdf8;
+
+      /* Typography Default Variables */
+      --font-ui: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-arabic-active: 'Amiri', 'Scheherazade New', 'Traditional Arabic', serif;
+      --font-urdu-active: 'Noto Nastaliq Urdu', 'Gulzar', 'Jameel Noori Nastaleeq', serif;
+
+      --reader-font-size: 18px;
+      --urdu-line-height: 2.3;
+      --arabic-line-height: 2.0;
+    }
+
+    /* Theme: Sepia Paper */
+    [data-theme="sepia"] {
+      --bg-base: #fbf7ee;
+      --bg-surface: #f4ecd8;
+      --bg-card: #ede3cb;
+      --bg-card-hover: #e2d6b9;
+      --border-subtle: #d6c6a5;
+      --border-active: #b45309;
+      --text-primary: #2d261e;
+      --text-secondary: #655643;
+      --text-muted: #8b7961;
+      --gold-primary: #b45309;
+    }
+
+    /* Theme: Crisp Light */
+    [data-theme="light"] {
+      --bg-base: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-card: #f1f5f9;
+      --bg-card-hover: #e2e8f0;
+      --border-subtle: #cbd5e1;
+      --border-active: #d97706;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      --gold-primary: #d97706;
+    }
+
+    /* ==========================================================================
+       2. Reset & Layout
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-ui);
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      min-height: 100vh;
+      font-size: var(--reader-font-size);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      padding-bottom: 5.5rem;
+    }
+
+    /* Reading Progress Bar */
+    #progress-bar-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: transparent;
+      z-index: 1000;
+    }
+
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--gold-primary), var(--cyan-primary));
+      transition: width 0.1s ease-out;
+    }
+
+    /* Sticky Header */
+    header.sticky-nav {
+      position: sticky;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: rgba(16, 16, 22, 0.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1rem;
+      z-index: 900;
+    }
+
+    [data-theme="sepia"] header.sticky-nav {
+      background: rgba(244, 236, 216, 0.94);
+    }
+    [data-theme="light"] header.sticky-nav {
+      background: rgba(255, 255, 255, 0.94);
+    }
+
+    .nav-left, .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-nav {
+      min-width: 48px;
+      min-height: 48px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-card);
+      color: var(--text-primary);
+      border-radius: 0.5rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      user-select: none;
+      touch-action: manipulation;
+      transition: transform 0.1s ease, border-color 0.2s ease;
+    }
+
+    .btn-nav:active {
+      transform: scale(0.95);
+    }
+
+    .brand-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* Main Reader Container */
+    main.reader-container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem;
+    }
+
+    /* Typography Rendering Elements */
+    .arabic-matn, .ar-block {
+      font-family: var(--font-arabic-active);
+      color: #fbbf24;
+      line-height: var(--arabic-line-height);
+      font-size: 1.35em;
+      direction: rtl;
+      text-align: right;
+      unicode-bidi: isolate;
+    }
+
+    [data-theme="sepia"] .arabic-matn, [data-theme="sepia"] .ar-block {
+      color: #78350f;
+    }
+    [data-theme="light"] .arabic-matn, [data-theme="light"] .ar-block {
+      color: #b45309;
+    }
+
+    .urdu-trans, .ar-ur-paragraph {
+      font-family: var(--font-urdu-active);
+      color: #38bdf8;
+      line-height: var(--urdu-line-height);
+      font-size: 1.15em;
+      direction: rtl;
+      text-align: right;
+      unicode-bidi: isolate;
+    }
+
+    [data-theme="sepia"] .urdu-trans, [data-theme="sepia"] .ar-ur-paragraph {
+      color: #0369a1;
+    }
+    [data-theme="light"] .urdu-trans, [data-theme="light"] .ar-ur-paragraph {
+      color: #0284c7;
+    }
+
+    /* Headings */
+    h1, h2, h3, h4 {
+      color: var(--text-primary);
+      font-weight: 700;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+    }
+
+    h1 { font-size: 1.85rem; border-bottom: 2px solid var(--border-subtle); padding-bottom: 0.5rem; }
+    h2.chapter-heading {
+      font-size: 1.45rem;
+      color: var(--gold-primary);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-left: 4px solid var(--gold-primary);
+      padding: 0.85rem 1.1rem;
+      border-radius: 0.6rem;
+      margin-top: 3rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    h3 { font-size: 1.25rem; color: var(--cyan-primary); margin-top: 1.5rem; }
+    h4 { font-size: 1.1rem; }
+
+    p {
+      margin-bottom: 1.15rem;
+      color: var(--text-primary);
+    }
+
+    /* Reader List */
+    .reader-list {
+      padding-left: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .reader-list li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Quote Cards with 1-Tap Copy/Share */
+    .quote-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-left: 4px solid var(--gold-primary);
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .quote-body {
+      font-size: 1.05em;
+      line-height: 2.1;
+      margin-bottom: 0.75rem;
+    }
+
+    .quote-actions {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: flex-end;
+    }
+
+    .btn-card-action {
+      min-height: 38px;
+      padding: 0.35rem 0.85rem;
+      border-radius: 0.45rem;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-surface);
+      color: var(--text-secondary);
+      font-family: var(--font-ui);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      touch-action: manipulation;
+    }
+
+    .btn-card-action:hover {
+      color: var(--gold-primary);
+      border-color: var(--gold-primary);
+    }
+
+    /* Diagrams & ASCII Charts */
+    pre.diagram-box {
+      background: #09090d;
+      border: 1px solid var(--border-subtle);
+      border-radius: 0.6rem;
+      padding: 1rem;
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 0.85rem;
+      color: var(--cyan-primary);
+      overflow-x: auto;
+      margin: 1.25rem 0;
+      line-height: 1.45;
+    }
+
+    [data-theme="sepia"] pre.diagram-box, [data-theme="light"] pre.diagram-box {
+      background: #1e1e2d;
+      color: #38bdf8;
+    }
+
+    /* Tables */
+    .table-responsive {
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      border-radius: 0.6rem;
+      border: 1px solid var(--border-subtle);
+    }
+
+    table.reader-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      text-align: left;
+    }
+
+    table.reader-table th {
+      background: var(--bg-card);
+      color: var(--gold-primary);
+      padding: 0.85rem 1rem;
+      font-weight: 700;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    table.reader-table td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    table.reader-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Drawer: Chapter Navigation */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 950;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .drawer-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .chapter-drawer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 310px;
+      max-width: 85vw;
+      height: 100%;
+      background: var(--bg-surface);
+      border-right: 1px solid var(--border-subtle);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(-100%);
+      transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .chapter-drawer.active {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      padding: 1.25rem 1rem;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .drawer-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gold-primary);
+    }
+
+    .drawer-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0.75rem 0.5rem;
+    }
+
+    .toc-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.75rem 0.85rem;
+      border-radius: 0.5rem;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 0.88rem;
+      min-height: 48px;
+      margin-bottom: 0.25rem;
+      touch-action: manipulation;
+      transition: background 0.15s ease;
+    }
+
+    .toc-item:hover, .toc-item.active {
+      background: var(--bg-card);
+      color: var(--gold-primary);
+    }
+
+    .toc-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.15rem 0.4rem;
+      border-radius: 0.35rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--cyan-primary);
+    }
+
+    /* Bottom Settings Sheet */
+    .settings-sheet {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-subtle);
+      border-radius: 1.25rem 1.25rem 0 0;
+      padding: 1.25rem 1.25rem 2.5rem 1.25rem;
+      z-index: 1000;
+      transform: translateY(100%);
+      transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .settings-sheet.active {
+      transform: translateY(0);
+    }
+
+    .sheet-handle {
+      width: 40px;
+      height: 4px;
+      border-radius: 9999px;
+      background: var(--border-subtle);
+      margin: -0.5rem auto 1rem auto;
+    }
+
+    .settings-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .settings-group-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--gold-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .toggle-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+
+    .btn-toggle {
+      min-height: 48px;
+      border: 1px solid var(--border-subtle);
+      border-radius: 0.5rem;
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      touch-action: manipulation;
+    }
+
+    .btn-toggle.active {
+      background: var(--gold-primary);
+      color: #000000;
+      font-weight: 700;
+      border-color: var(--gold-primary);
+    }
+
+    /* Floating Quick Bar at Bottom */
+    .floating-bar {
+      position: fixed;
+      bottom: 1.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(22, 22, 34, 0.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 9999px;
+      padding: 0.35rem 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      z-index: 850;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    [data-theme="sepia"] .floating-bar { background: rgba(237, 227, 203, 0.94); }
+    [data-theme="light"] .floating-bar { background: rgba(255, 255, 255, 0.94); }
+
+    .btn-floating {
+      min-height: 44px;
+      min-width: 44px;
+      border: none;
+      background: transparent;
+      color: var(--text-primary);
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 50%;
+      touch-action: manipulation;
+    }
+
+    /* Search Modal Palette */
+    .search-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 1100;
+      display: flex;
+      flex-direction: column;
+      padding: 1.25rem 1rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s ease;
+    }
+
+    .search-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .search-box {
+      width: 100%;
+      max-width: 600px;
+      margin: 2rem auto 1rem auto;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      min-height: 52px;
+      background: var(--bg-card);
+      border: 2px solid var(--border-subtle);
+      border-radius: 0.75rem;
+      padding: 0 1rem 0 3rem;
+      color: var(--text-primary);
+      font-family: var(--font-ui);
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .search-input:focus {
+      border-color: var(--gold-primary);
+    }
+
+    .search-results {
+      max-width: 600px;
+      width: 100%;
+      margin: 0 auto;
+      max-height: 60vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .search-result-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 0.6rem;
+      padding: 0.85rem 1rem;
+      color: var(--text-primary);
+      text-decoration: none;
+      min-height: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .search-result-item:hover {
+      border-color: var(--gold-primary);
+    }
+
+    /* Toast Notification */
+    #reader-toast {
+      position: fixed;
+      top: 4.5rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(-30px);
+      background: var(--emerald-primary);
+      color: #000000;
+      font-weight: 700;
+      padding: 0.6rem 1.25rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      z-index: 1200;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    }
+
+    #reader-toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Reading Progress Bar -->
+  <div id="progress-bar-container">
+    <div id="progress-bar"></div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="reader-toast">✅ Copied to Clipboard!</div>
+
+  <!-- Sticky Top Header -->
+  <header class="sticky-nav">
+    <div class="nav-left">
+      <button id="btn-open-drawer" class="btn-nav" aria-label="Open Chapter Drawer">☰</button>
+      <div class="brand-title">
+        <span>📖</span>
+        <span>Hadith Sciences</span>
+      </div>
+    </div>
+    <div class="nav-right">
+      <button id="btn-open-search" class="btn-nav" aria-label="Search Topics">🔍</button>
+      <button id="btn-open-settings" class="btn-nav" aria-label="Typography Settings">Aa</button>
+    </div>
+  </header>
+
+  <!-- Main Reader Body -->
+  <main class="reader-container" id="reader-main">
+    <h1 id="الجامع-في-علوم-الحديث-ومصطلحه">📜 الجامع في علوم الحديث ومصطلحه</h1>
+<h1 id="the-master-encyclopedia-of-hadith-sciences">The Master Encyclopedia of Hadith Sciences</h1>
+<h2 id="from-beginner-to-scholar-a-comprehensive-bilingual-guide-english-اردو"><em>From Beginner to Scholar — A Comprehensive Bilingual Guide (English & اردو)</em></h2>
+<hr class="section-divider">
+<pre class="diagram-box"><code>   بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+   الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ، وَالصَّلَاةُ وَالسَّلَامُ عَلَى سَيِّدِ الْمُرْسَلِينَ
+   نَبِيِّنَا مُحَمَّدٍ وَعَلَى آلِهِ وَصَحْبِهِ أَجْمَعِينَ ، أَمَّا بَعْدُ:</code></pre>
+
+            <div class="quote-card">
+              <div class="quote-body"><em>"Indeed, this knowledge is religion, so be careful from whom you take your religion."</em><br><strong>— Imam Muhammad ibn Sirin (رحمه الله)</strong><br><em><span class="arabic-matn" dir="rtl">«إِنَّ هَذَا الْعِلْمَ دِينٌ، فَانْظُرُوا عَمَّنْ تَأْخُذُونَ دِينَكُمْ»</span></em><br><em>(بے شک یہ علمِ حدیث دین ہے، پس خوب دیکھ بھال لو کہ تم اپنا دین کن لوگوں سے حاصل کر رہے ہو)</em></div>
+              <div class="quote-actions">
+                <button class="btn-card-action btn-copy-quote" title="Copy Text">📋 Copy</button>
+                <button class="btn-card-action btn-share-quote" title="Share via WhatsApp">💬 Share</button>
+              </div>
+            </div>
+            
+<hr class="section-divider">
+<h2 id="table-of-contents-فہرست-مضامین">📑 Table of Contents (فہرستِ مضامین)</h2>
+<ol class="reader-list">
+<li>[Preface: Foundations of Hadith & Its Sacred Preservation](#preface-foundations-of-hadith--its-sacred-preservation)</li>
+<li>[Chapter 1: History & Origin of Hadith Compilation (تاریخِ تدوینِ حدیث)](#chapter-1-history--origin-of-hadith-compilation-تاریخ-تدوین-حدیث)</li>
+<li>[Chapter 2: Sanad (سند) — The Anatomy of Transmission Chains](#chapter-2-sanad-سند--the-anatomy-of-transmission-chains)</li>
+<li>[Chapter 3: Matn (متن) — The Text & The Science of Internal Critique](#chapter-3-matn-متن--the-text--the-science-of-internal-critique)</li>
+<li>[Chapter 4: The Master Classification of Hadith (اقسامِ و مراتبِ حدیث)](#chapter-4-the-master-classification-of-hadith-اقسام-و-مراتب-حدیث)</li>
+<li>[Chapter 5: Rijal al-Hadith & Jarh wa Ta'dil (علم رجال الحدیث والجرح والتعدیل)](#chapter-5-rijal-al-hadith--jarh-wa-tadil-علم-رجال-الحدیث-والجرح-والتعدیل)</li>
+<li>[Chapter 6: Kutub al-Sittah & The Hierarchy of Hadith Collections (کتبِ حدیث کے درجات و مراتب)](#chapter-6-kutub-al-sittah--the-hierarchy-of-hadith-collections-کتب-حدیث-کے-درجات-و-مراتب)</li>
+<li>[Chapter 7: Mustalah al-Hadith — The 100+ Technical Terms Compendium (اصطلاحاتِ حدیث کا انسائیکلوپیڈیا)](#chapter-7-mustalah-al-hadith--the-100-technical-terms-compendium-اصطلاحات-حدیث-کا-انسائیکلوپیڈیا)</li>
+<li>[Chapter 8: Fabricated Hadith (الحدیث الموضوع / من گھڑت روایات)](#chapter-8-fabricated-hadith-الحدیث-الموضوع--من-گھڑت-روایات)</li>
+<li>[Chapter 9: The Titans of Hadith Scholarship in History (تاریخ کے عظیم محدثین)](#chapter-9-the-titans-of-hadith-scholarship-in-history-تاریخ-کے-عظیم-محدثین)</li>
+<li>[Chapter 10: The Immortal Legacy of Women Narrators (محدثات اور راویاتِ حدیث)](#chapter-10-the-immortal-legacy-of-women-narrators-محدثات-اور-راویات-حدیث)</li>
+<li>[Chapter 11: Sunni vs. Shia Hadith Methodology (تقابلی جائزہ: اہل السنت اور اہل تشیع کا منہجِ حدیث)](#chapter-11-sunni-vs-shia-hadith-methodology-تقابلی-جائزہ-اہل-السنت-اور-اہل-تشیع-کا-منہج-حدیث)</li>
+<li>[Chapter 12: How to Verify a Hadith Today — A Modern Hands-On Field Guide (دورِ حاضر میں تخریج و تحقیق کا عملی طریقہ)](#chapter-12-how-to-verify-a-hadith-today--a-modern-hands-on-field-guide-دور-حاضر-میں-تخریج-و-تحقیق-کا-عملی-طریقہ)</li>
+<li>[Appendix: Master Classification Matrix & The Student's Curriculum (ضمیمہ: اصطلاحی خلاصہ اور نصابِ تعلیم)](#appendix-master-classification-matrix--the-students-curriculum-ضمیمہ-اصطلاحی-خلاصہ-اور-نصاب-تعلیم)</li>
+</ol>
+<hr class="section-divider">
+<div class="chapter-anchor" id="preface-foundations-of-hadith-its-sacred-preservation"></div>
+<h2 class="chapter-heading" data-chapter="preface-foundations-of-hadith-its-sacred-preservation">Preface: Foundations of Hadith & Its Sacred Preservation</h2>
+<h3 id="مقدمہ-حدیث-کی-بنیاد-اور-اس-کی-حفاظت-کا-الہی-نظام">(مقدمہ: حدیث کی بنیاد اور اس کی حفاظت کا الٰہی نظام)</h3>
+<h3 id="1-classical-terminology-hadith-sunnah-khabar-and-athar">1. Classical Terminology: Hadith, Sunnah, Khabar, and Athar</h3>
+<p>To the untrained mind, the terms <em>Hadith</em>, <em>Sunnah</em>, <em>Khabar</em>, and <em>Athar</em> are often used interchangeably. To a Muhaddith (Hadith scholar), each carries distinct boundaries:</p>
+
+            <div class="table-responsive">
+              <table class="reader-table">
+                <thead><tr><th>Term (اصطلاح)</th><th>Arabic</th><th>Linguistic Meaning</th><th>Technical Definition (اصطلاحی مفہوم)</th><th>Urdu Explanation (اردو وضاحت)</th></tr></thead>
+                <tbody><tr><td><strong>Hadith</strong></td><td dir="rtl" class="rtl-cell">حَدِيث</td><td>New, conversation, speech</td><td>Anything attributed to the Prophet Muhammad ﷺ: his sayings, actions, silent approvals, or physical/moral traits.</td><td dir="rtl" class="rtl-cell">ہر وہ قول، فعل، تقریر (خاموش منظوری) یا صفت جو رسول اللہ ﷺ کی طرف منسوب ہو۔</td></tr><tr><td><strong>Sunnah</strong></td><td dir="rtl" class="rtl-cell">سُنَّة</td><td>A well-trodden path, customary practice</td><td>The established religious norm, standard way of living, and legal precedents legislated by the Prophet ﷺ.</td><td dir="rtl" class="rtl-cell">نبی کریم ﷺ کا قائم کردہ دینی طریقہ، اسوہ اور قانون جو امت کے لیے واجب الاتباع ہو۔</td></tr><tr><td><strong>Khabar</strong></td><td dir="rtl" class="rtl-cell">خَبَر</td><td>News, report</td><td>A broader term: any historical report, whether from the Prophet ﷺ, the Companions, or general history.</td><td dir="rtl" class="rtl-cell">کوئی بھی تاریخی خبر، خواہ وہ حضور ﷺ سے منقول ہو یا عام تاریخ و لوگوں سے متعلق ہو۔</td></tr><tr><td><strong>Athar</strong></td><td dir="rtl" class="rtl-cell">أَثَر</td><td>Trace, vestige, footprint</td><td>Specifically reports attributed to the Sahabah (Companions) or Tabi'in (Successors).</td><td dir="rtl" class="rtl-cell">خاص طور پر صحابہ کرام اور تابعین عظام کے اقوال، فتاویٰ اور افعال کو اثر کہا جاتا ہے۔</td></tr></tbody>
+              </table>
+            </div>
+            
+
+            <div class="quote-card">
+              <div class="quote-body"><strong>NOTE:</strong> <br><strong>Hadith vs. Sunnah:</strong> Every authentic Hadith conveys a Sunnah, but Sunnah is the living, actionable standard distilled from the totality of Hadith, Qur'an, and continuous community practice (<em>al-'Amal</em>).</div>
+              <div class="quote-actions">
+                <button class="btn-card-action btn-copy-quote" title="Copy Text">📋 Copy</button>
+                <button class="btn-card-action btn-share-quote" title="Share via WhatsApp">💬 Share</button>
+              </div>
+            </div>
+            
+<hr class="section-divider">
+<h3 id="2-the-twin-pillars-of-every-hadith">2. The Twin Pillars of Every Hadith</h3>
+<p>Every single Hadith in existence consists of two distinct, indivisible components:</p>
+<pre class="diagram-box"><code>                       ┌──────────────────────────────────────────────┐
+                       │           THE COMPLETE HADITH (الحديث)        │
+                       └──────────────────────┬───────────────────────┘
+                                              │
+                      ┌───────────────────────┴───────────────────────┐
+                      ▼                                               ▼
+      ┌───────────────────────────────┐               ┌───────────────────────────────┐
+      │         SANAD / ISNAD         │               │             MATN              │
+      │        (السَّنَد / الإِسْنَاد)       │               │            (المَتْن)          │
+      ├───────────────────────────────┤               ├───────────────────────────────┤
+      │ The chronological chain of    │               │ The actual text, speech, or   │
+      │ transmitters connecting the   │               │ narration conveyed at the     │
+      │ collector to the Prophet ﷺ.   │               │ end of the chain.             │
+      │ (راویوں کا باقاعدہ تسلسل)     │               │ (کلام، قول یا واقعہ کا اصل متن)│
+      └───────────────────────────────┘               └───────────────────────────────┘</code></pre>
+<hr class="section-divider">
+<h3 id="3-the-miracle-of-the-isnad-system">3. The Miracle of the Isnad System</h3>
+<p>No civilization in human history ever developed an evidentiary apparatus as intellectually rigorous, ruthless, and exhaustive as the Islamic science of <strong>Isnad (Chain of Transmission)</strong>.</p>
+<p>Imam Abdullah ibn al-Mubarak (d. 181 AH), one of the greatest early masters, formulated the foundational axiom of Hadith scholarship:</p>
+<p class="ar-ur-paragraph" dir="rtl"><span class="katex-math">$\text{<span class="arabic-matn" dir="rtl">«الإِسْنَادُ مِنَ الدِّينِ، وَلَوْلَا الإِسْنَادُ لَقَالَ مَنْ شَاءَ مَا شَاءَ»</span>}</span>$</p>
+
+            <div class="quote-card">
+              <div class="quote-body"><em>"The Isnad is part of the religion; were it not for the Isnad, anyone could say whatever they wished!"</em><br><em>(اسناد دین کا حصہ ہے؛ اگر اسناد نہ ہوتی تو جس کا جو جی چاہتا وہ کہہ دیتا)</em></div>
+              <div class="quote-actions">
+                <button class="btn-card-action btn-copy-quote" title="Copy Text">📋 Copy</button>
+                <button class="btn-card-action btn-share-quote" title="Share via WhatsApp">💬 Share</button>
+              </div>
+            </div>
+            
+<p>The German orientalist Aloys Sprenger famously remarked:</p>
+
+            <div class="quote-card">
+              <div class="quote-body"><em>"The glory of the Mohammedan literature is its biographical dictionaries... Not only the most distinguished, but also every single individual who had handed down a tradition has been immortalized."</em></div>
+              <div class="quote-actions">
+                <button class="btn-card-action btn-copy-quote" title="Copy Text">📋 Copy</button>
+                <button class="btn-card-action btn-share-quote" title="Share via WhatsApp">💬 Share</button>
+              </div>
+            </div>
+            
+<p>The Muhaddithin scrutinized over <strong>500,000 individual narrators</strong>, detailing their dates of birth, travels, teachers, moral integrity, memory lapses, theological leanings, and exact dates of death to ensure no imposter could slip a fabricated word into the speech of the Prophet ﷺ.</p>
+<hr class="section-divider">
+<div class="chapter-anchor" id="chapter-1-history-origin-of-hadith-compilation-تاریخ-تدوین-حدیث"></div>
+<h2 class="chapter-heading" data-chapter="chapter-1-history-origin-of-hadith-compilation-تاریخ-تدوین-حدیث">Chapter 1: History & Origin of Hadith Compilation (تاریخِ تدوینِ حدیث)</h2>
+<p>The history of Hadith compilation is not an accidental, late development; it was a deliberate, multi-generational preservation program spanning six distinct epochs.</p>
+<pre class="diagram-box"><code>flowchart TD
+    E1["Epoch 1: Prophetic Era (عہدِ نبوی)<br>Memorization, Direct Practice & Personal Notebooks"] --> E2["Epoch 2: Sahabah & Early Tabi'in (عہدِ صحابہ)<br>Strict Witness Verification & Birth of Isnad Scrutiny"]
+    E2 --> E3["Epoch 3: Official State Tadwin (عہدِ تدوینِ عام)<br>Order of Caliph Umar ibn Abd al-Aziz & al-Zuhri"]
+    E3 --> E4["Epoch 4: Musannafat & Early Thematic Codification (عہدِ مصنفات)<br>Muwatta Malik, Musannaf Abd al-Razzaq"]
+    E4 --> E5["Epoch 5: The Golden Age of Critical Sifting (العصر الذهبي)<br>Bukhari, Muslim & The Canonical Six (Kutub al-Sittah)"]
+    E5 --> E6["Epoch 6: Encyclopedias, Mustadrakat & Textual Synthesis<br>Ibn al-Salah, Nawawi, Ibn Hajar al-Asqalani"]</code></pre>
+<hr class="section-divider">
+<h3 id="phase-1-the-prophetic-era-عہد-نبوی-ﷺ">Phase 1: The Prophetic Era (عہدِ نبوی ﷺ)</h3>
+<p>During the lifetime of the Prophet ﷺ, preservation operated through three synchronized channels:</p>
+<ol class="reader-list">
+<li><strong>Unrivaled Oral Memory:</strong> The Arabs were an oral society capable of memorizing thousands of lines of tribal poetry after a single recitation. The companions memorized the Prophet's words with intense devotion.</li>
+<li><strong>Living Embodying Practice (<em>al-'Amal</em>):</strong> The Sahabah did not merely memorize; they prayed five times a day, performed Hajj, and governed society strictly mirroring his visible example.</li>
+<li><strong>Written Records (<em>al-Kitabah</em>):</strong> Contrary to the myth that Hadith was not written down until 200 years later, dozens of Sahabah maintained personal written collections (<em>Suhuf</em>, singular <em>Sahifah</em>).</li>
+</ol>
+<h4 id="the-apparent-contradiction-prohibition-vs-permission-to-write">The Apparent Contradiction: Prohibition vs. Permission to Write</h4>
+<p>Skeptics often cite an apparent conflict between two authentic narrations:</p>
+<ul class="reader-list">
+<li><strong>The Prohibition:</strong> In Sahih Muslim, Abu Sa'id al-Khudri (RA) narrates that the Prophet ﷺ said:</li>
+</ul>
+<p class="ar-ur-paragraph" dir="rtl"><em><span class="arabic-matn" dir="rtl">«لَا تَكْتُبُوا عَنِّي، وَمَنْ كَتَبَ عَنِّي غَيْرَ الْقُرْآنِ فَلْيَمْحُهُ»</span></em></p>
+<p><em>(Do not write anything from me; and whoever wrote anything from me other than the Qur'an, let him erase it).</em></p>
+<ul class="reader-list">
+<li><strong>The Permission:</strong> In Sahih al-Bukhari, Abu Hurairah (RA) stated:</li>
+</ul>
+<p class="ar-ur-paragraph" dir="rtl"><em><span class="arabic-matn" dir="rtl">«مَا مِنْ أَصْحَابِ النَّبِيِّ ﷺ أَحَدٌ أَكْثَرَ حَدِيثًا عَنْهُ مِنِّي، إِلَّا مَا كَانَ مِنْ عَبْدِ اللَّهِ بْنِ عَمْرٍو، فَإِنَّهُ كَانَ يَكْتُبُ وَلَا أَكْتُبُ»</span></em></p>
+<p><em>(None of the companions has more Hadiths than me except Abdullah ibn 'Amr, for he used to write and I did not write).</em></p>
+<p>Furthermore, on the Conquest of Mecca, the Prophet ﷺ commanded: <em><span class="arabic-matn" dir="rtl">«اكْتُبُوا لِأَبِي شَاهٍ»</span></em> <em>(Write [this speech down] for Abu Shah).</em></p>
+<h4 id="the-scholarly-reconciliation-التوفيق-والجمع-بین-الروایات">The Scholarly Reconciliation (التوفيق والجمع بین الروایات):</h4>
+<p>The Muhaddithin (such as Imam al-Nawawi, al-Khatib al-Baghdadi, and Ibn Hajar) resolved this comprehensively:</p>
+<ol class="reader-list">
+<li><strong>Initial Fear of Quranic Confusion:</strong> In the early Madinan period, when the Qur'an was actively being revealed on parchment and palm stalks, writing Hadith on the same surfaces risked mixing human commentary with divine revelation. Once the Qur'an was firmly memorized, distinct, and established, general permission was granted.</li>
+<li><strong>Personal Capacity:</strong> The prohibition applied to those who might rely exclusively on messy writing and neglect memorization; the permission was granted to skilled scribes like Abdullah ibn 'Amr whose notebook, known as <strong>al-Sahifah al-Sadiqah (الصحيفة الصادقة)</strong>, contained over 1,000 Hadiths written directly from the lips of the Messenger ﷺ.</li>
+<li><strong>Documented Early Suhuf:</strong> Other famous written notebooks included:</li>
+</ol>
+<ul class="reader-list">
+<li><em>Sahifah of Ali ibn Abi Talib (رضي الله عنه)</em> on blood-money and legal ordinances.</li>
+<li><em>Sahifah of Hammam ibn Munabbih</em>, written directly from Abu Hurairah (RA), which survives intact today in manuscripts in Damascus and Berlin, matching word-for-word with Sahih al-Bukhari and Musnad Ahmad!</li>
+</ul>
+<hr class="section-divider">
+<h3 id="phase-2-the-sahabah-the-trial-عہد-صحابہ-اور-فتنہ-کا-ظہور">Phase 2: The Sahabah & The Trial (عہدِ صحابہ اور فتنہ کا ظہور)</h3>
+<p>Following the martyrdom of Caliph Uthman ibn Affan (RA) in 35 AH, sectarian factions (Khawarij, early Shi'a partisans, and political opportunists) emerged. Unscrupulous individuals began fabricating claims to justify their political agendas.</p>
+<p>The Sahabah responded with an iron curtain of verification:</p>
+<ul class="reader-list">
+<li><strong>Abu Bakr al-Siddiq (RA)</strong> refused to accept a grandmother's inheritance claim until al-Mughirah ibn Shu'bah and Muhammad ibn Maslamah bore joint witness that the Prophet ﷺ ruled in her favor.</li>
+<li><strong>Umar ibn al-Khattab (RA)</strong> threatened Abu Musa al-Ash'ari (RA) with discipline unless he brought a corroborating witness for the Hadith of asking permission three times.</li>
+<li><strong>The Golden Axiom of Ibn Sirin (d. 110 AH):</strong></li>
+</ul>
+<p class="ar-ur-paragraph" dir="rtl"><em><span class="arabic-matn" dir="rtl">«لَمْ يَكُونُوا يَسْأَلُونَ عَنِ الإِسْنَادِ، فَلَمَّا وَقَعَتِ الْفِتْنَةُ، قَالُوا: سَمُّوا لَنَا رِجَالَكُمْ، فَيُنْظَرُ إِلَى أَهْلِ السُّنَّةِ فَيُؤْخَذُ حَدِيثُهُمْ، وَيُنْظَرُ إِلَى أَهْلِ الْبِدَعِ فَلَا يُؤْخَذُ حَدِيثُهُمْ»</span></em></p>
+<p><em>(They did not use to ask about the chain of narration. But when the Fitnah occurred, they said: "Name your men to us!" Then they would look at the Ahl al-Sunnah and accept their Hadith, and look at the people of bid'ah and reject their Hadith).</em></p>
+<hr class="section-divider">
+<h3 id="phase-3-the-official-state-codification-عہد-تدوین-عام">Phase 3: The Official State Codification (عہدِ تدوینِ عام)</h3>
+<p>Around the turn of the first Islamic century (circa 99–101 AH), the pious Umayyad Caliph <strong>Umar ibn Abd al-Aziz (رحمه الله)</strong> feared that elderly scholars would pass away and oral traditions would disperse. He issued an official imperial decree to the governor of Madinah, Abu Bakr ibn Muhammad ibn Hazm, and the paramount scholar of the Hijaz:</p>
+
+            <div class="quote-card">
+              <div class="quote-body"><em>"Search for the Hadith of the Messenger of Allah ﷺ and write it down, for I fear the disappearance of knowledge and the passing of the scholars."</em></div>
+              <div class="quote-actions">
+                <button class="btn-card-action btn-copy-quote" title="Copy Text">📋 Copy</button>
+                <button class="btn-card-action btn-share-quote" title="Share via WhatsApp">💬 Share</button>
+              </div>
+            </div>
+            
+<p>The leading scholar who executed this mandate was <strong>Muhammad ibn Muslim ibn Shihab al-Zuhri (d. 124 AH)</strong>, who remarked:</p>
+<p><em><span class="arabic-matn" dir="rtl">«أَوَّلُ مَنْ دَوَّنَ الْعِلْمَ ابْنُ شِهَابٍ»</span></em> <em>(The first to officially codify knowledge systematically was Ibn Shihab al-Zuhri).</em></p>
+<hr class="section-divider">
+<h3 id="phase-4-5-the-eras-of-classification-the-golden-age">Phase 4 & 5: The Eras of Classification & The Golden Age</h3>
+<ul class="reader-list">
+<li><strong>2nd Century AH (Era of Musannafat):</strong> Scholars classified Hadiths topically alongside verdicts of Sahabah. The most celebrated monument of this era is the <strong>Muwatta of Imam Malik (d. 179 AH)</strong>.</li>
+<li><strong>3rd Century AH (The Golden Age):</strong> Scholars recognized the need to separate pure prophetic speech from legal commentary, and rigorously sift authentic Hadith from weak ones. This produced the monumental <strong>Kutub al-Sittah</strong> led by Imam Muhammad ibn Isma'il al-Bukhari (d. 256 AH) and Imam Muslim ibn al-Hajjaj (d. 261 AH).</li>
+</ul>
+<hr class="section-divider">
+<div class="chapter-anchor" id="chapter-2-sanad-سند-the-anatomy-of-transmission-chains"></div>
+<h2 class="chapter-heading" data-chapter="chapter-2-sanad-سند-the-anatomy-of-transmission-chains">Chapter 2: Sanad (سند) — The Anatomy of Transmission Chains</h2>
+<h3 id="1-definitions">1. Definitions</h3>
+<ul class="reader-list">
+<li><strong>Al-Sanad (السَّنَد):</strong> Linguistically means <em>that upon which something leans or depends</em> (ما يُعتمد عليه). Technically: The chronological pathway of narrators leading to the text of the Hadith.</li>
+<li><strong>Al-Isnad (الإِسْنَاد):</strong> The process of attributing a statement back through its chain of transmitters, person by person. Often used synonymously with Sanad.</li>
+<li><strong>Al-Musnid (المُسْنِد):</strong> The scholar who narrates the Hadith with its complete Sanad, whether they understand its deep jurisprudence or not.</li>
+<li><strong>Al-Musnad (المُسْنَد):</strong> (1) A book arranged by the names of the Sahabah narrators (e.g., Musnad Ahmad); or (2) A Hadith whose chain is completely connected back to the Prophet ﷺ.</li>
+</ul>
+<hr class="section-divider">
+<h3 id="2-dissecting-an-authentic-sanad-step-by-step">2. Dissecting an Authentic Sanad: Step-by-Step</h3>
+<p>Let us examine the very first Hadith in <strong>Sahih al-Bukhari</strong>:</p>
+<p><span class="katex-math">$\text{<span class="arabic-matn" dir="rtl">«إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ...»</span>} \quad \text{(Actions are judged only by intentions...)}</span>$</p>
+<p>Below is the complete chain of transmission illustrating how Imam al-Bukhari (in Uzbekistan) received this statement from the Prophet Muhammad ﷺ (in Madinah) over a span of 240 years:</p>
+<pre class="diagram-box"><code>┌────────────────────────────────────────────────────────────────────────────────┐
+│                        ANATOMY OF A TRANSMISSION CHAIN                         │
+└──────────────────────────────────────┬─────────────────────────────────────────┘
+                                       ▼
+  [AUTHOR / COLLECTOR]           Imam Muhammad ibn Isma'il al-Bukhari (d. 256 AH)
+                                       │ ◄─── "Haddathana" (حَدَّثَنَا - He narrated to us)
+  [LINK 1: Teacher]              Al-Humaydi (Abdullah ibn al-Zubayr) (d. 219 AH, Mecca)
+                                       │ ◄─── "Haddathana" (حَدَّثَنَا)
+  [LINK 2: Teacher's Teacher]    Sufyan ibn 'Uyaynah (d. 198 AH, Kufa / Mecca)
+                                       │ ◄─── "Haddathana" (حَدَّثَنَا)
+  [LINK 3: Senior Tabi'i]        Yahya ibn Sa'id al-Ansari (d. 143 AH, Madinah)
+                                       │ ◄─── "Akhbarani" (أَخْبَرَنِي - He informed me)
+  [LINK 4: Mid Tabi'i]           Muhammad ibn Ibrahim al-Taymi (d. 120 AH, Madinah)
+                                       │ ◄─── "Sami'a" (أَنَّهُ سَمِعَ - That he heard)
+  [LINK 5: Junior Tabi'i]        'Alqamah ibn Waqqas al-Laythi (d. ~75 AH, Madinah)
+                                       │ ◄─── "Yaquul: Sami'tu" (يَقُولُ: سَمِعْتُ)
+  [LINK 6: The Sahabi]           Amir al-Mu'minin 'Umar ibn al-Khattab (RA) (d. 23 AH)
+                                       │ ◄─── "Sami'tu Rasulullah ﷺ yaqul"
+  [SOURCE OF REVELATION]         Prophet Muhammad ﷺ (d. 11 AH, Madinah)
+                                       ▼
+  [THE MATN / TEXT]              «إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى...»</code></pre>
+<h4 id="what-the-muhaddith-investigates-in-this-chain">What the Muhaddith Investigates in this Chain:</h4>
+<ol class="reader-list">
+<li>Did al-Bukhari personally sit with al-Humaydi in Mecca? <strong>Yes, proven.</strong></li>
+<li>Did al-Humaydi hear directly from Sufyan? <strong>Yes, proven companionship.</strong></li>
+<li>Is Sufyan known to be trustworthy (<em>Thiqah</em>)? <strong>Yes, an undisputed master.</strong></li>
+<li>Did every link use auditory terms of direct hearing (<em>Haddathana, Sami'tu</em>) rather than ambiguous terms (<em>'An / From</em>)? <strong>Yes, direct hearing confirmed.</strong></li>
+<li>Did any narrator suffer memory deterioration? <strong>No.</strong></li>
+</ol>
+<hr class="section-divider">
+<h3 id="3-the-8-modes-of-transmission-طرق-التحمل-والأداء">3. The 8 Modes of Transmission (طرق التحمل والأداء)</h3>
+<p>How did a student receive a Hadith from a master? The scholars developed eight technical terms arranged in order of evidentiary weight:</p>
+<ol class="reader-list">
+<li><strong>Al-Sama' (السَّمَاعُ مِنْ لَفْظِ الشَّيْخِ):</strong> Hearing directly from the teacher's mouth as he recites from memory or book. Expressed as: <code>حَدَّثَنِي</code> (He narrated to me) or <code>سَمِعْتُ</code> (I heard). Highest category.</li>
+<li><strong>Al-Qira'ah / Al-'Ard (القِرَاءَةُ عَلَى الشَّيْخِ):</strong> The student reads the text aloud to the teacher while the teacher listens and verifies against his memory/master copy. Expressed as: <code>أَخْبَرَنَا</code> (He informed us) or <code>قَرَأْتُ عَلَيْهِ</code>.</li>
+<li><strong>Al-Ijazah (الإِجَازَة):</strong> Formal certification granting permission to a student to transmit a book or narrations without reading every word in person.</li>
+<li><strong>Al-Munawalah (المُنَاوَلَة):</strong> The teacher physically hands his verified manuscript to the student, saying: <em>"This is my hearing from my teachers; transmit it from me."</em></li>
+<li><strong>Al-Mukatabah (المُكَاتَبَة):</strong> The teacher writes Hadiths in his own hand and posts or delivers them to a verified recipient.</li>
+<li><strong>I'lam al-Shaykh (إِعْلَامُ الشَّيْخِ):</strong> The teacher informs the student: <em>"This Hadith is my narration,"</em> without explicitly adding permission to transmit.</li>
+<li><strong>Al-Wasiyyah (الوَصِيَّة):</strong> Bequeathing one's books to a specific scholar upon death.</li>
+<li><strong>Al-Wijadah (الوِجَادَة):</strong> Finding a confirmed manuscript in a deceased or distant scholar's verified handwriting without having sat with him. Requires prefixing: <em>"I found in the handwriting of X..."</em></li>
+</ol>
+<hr class="section-divider">
+<h3 id="4-high-chains-vs-low-chains-uluww-vs-nuzul-العلو-والنزول">4. High Chains vs. Low Chains ('Uluww vs. Nuzul - العلو والنزول)</h3>
+<p>Muhaddithin traveled thousands of miles across deserts on camel and foot seeking <strong>'Uluww (High Chains)</strong>:</p>
+<ul class="reader-list">
+<li><strong>Al-Isnad al-'Ali (الإسناد العالي):</strong> A chain with the fewest number of human links between the collector and the Prophet ﷺ. Fewer links mean fewer statistical points of potential human error.</li>
+<li><strong>Al-Isnad al-Nazil (الإسناد النازل):</strong> A chain with many intermediate narrators.</li>
+<li><strong>Thulathiyyat al-Bukhari (ثلاثيات البخاري):</strong> The pinnacle of high chains. In Sahih al-Bukhari, there are exactly <strong>22 Hadiths</strong> that possess only <strong>three human intermediaries</strong> between Imam al-Bukhari and Rasulullah ﷺ!</li>
+</ul>
+<hr class="section-divider">
+<h3 id="5-the-5-inviolable-conditions-for-a-sahih-hadith-شروط-الحديث-الصحيح-الخمسة">5. The 5 Inviolable Conditions for a Sahih Hadith (شروط الحديث الصحيح الخمسة)</h3>
+<p>Formulated systematically by Imam Abu 'Amr Ibn al-Salah (d. 643 AH) and refined by Ibn Hajar al-Asqalani:</p>
+<p><span class="katex-math">$\boxed{\text{Sahih Hadith} = \text{Ittisal} + \text{'Adalah} + \text{Dabt} + \text{No Shudhudh} + \text{No 'Illah}}</span>$</p>
+<pre class="diagram-box"><code>┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                        THE 5 CONDITIONS OF AUTHENTICITY                                │
+├────┬─────────────────────────────┬─────────────────────────────────────────────────────┤
+│ 1. │ Ittisal al-Sanad            │ Continuous, unbroken chain from first narrator to   │
+│    │ (اتِّصَالُ السَّنَد)              │ the final authority. No dropped or hidden links.    │
+├────┼─────────────────────────────┼─────────────────────────────────────────────────────┤
+│ 2. │ 'Adalat al-Ruwat            │ Absolute moral and religious uprightness of EVERY   │
+│    │ (عَدَالَةُ الرُّوَاة)             │ narrator (Muslim, sane, adult, pious, free from     │
+│    │                             │ major sins, heresy, or un-Islamic public behavior). │
+├────┼─────────────────────────────┼─────────────────────────────────────────────────────┤
+│ 3. │ Dabt al-Ruwat               │ Total cognitive accuracy and retention capacity.    │
+│    │ (ضَبْطُ الرُّوَاة)              │ Either Dabt Sadr (flawless mental recall) or        │
+│    │                             │ Dabt Kitab (unimpeachable preserved written text).  │
+├────┼─────────────────────────────┼─────────────────────────────────────────────────────┤
+│ 4. │ Adam al-Shudhudh            │ Absence of irregularity: The narration must NOT     │
+│    │ (عَدَمُ الشُّذُوذ)              │ contradict a narration transmitted by someone who   │
+│    │                             │ is even more reliable or numerous.                  │
+├────┼─────────────────────────────┼─────────────────────────────────────────────────────┤
+│ 5. │ Adam al-'Illah al-Qadihah   │ Complete freedom from subtle, damaging hidden       │
+│    │ (عَدَمُ العِلَّةِ القَادِحَة)       │ defects that look authentic on the surface but are  │
+│    │                             │ uncovered only by master comparative analysts.      │
+└────┴─────────────────────────────┴─────────────────────────────────────────────────────┘</code></pre>
+<hr class="section-divider">
+<div class="chapter-anchor" id="chapter-3-matn-متن-the-text-the-science-of-internal-critique"></div>
+<h2 class="chapter-heading" data-chapter="chapter-3-matn-متن-the-text-the-science-of-internal-critique">Chapter 3: Matn (متن) — The Text & The Science of Internal Critique</h2>
+<h3 id="1-definition">1. Definition</h3>
+<ul class="reader-list">
+<li><strong>Al-Matn (المَتْن):</strong> Linguistically means <em>firm, elevated ground</em>, or the back of a beast. Technically: The actual words and meaning conveyed at the termination of the Sanad.</li>
+<li><em>(متن کی اصطلاحی تعریف: سند کے اختتام پر پہنچ کر جو اصل کلام یا عبارت شروع ہوتی ہے اسے متن کہتے ہیں)</em>.</li>
+</ul>
+<hr class="section-divider">
+<h3 id="2-debunking-the-myth-did-muhaddithin-only-scrutinize-the-chain">2. Debunking the Myth: Did Muhaddithin Only Scrutinize the Chain?</h3>
+<p>Modern secular orientalists and critics occasionally claim that classical Hadith scholars were naive bibliophiles who only counted names in a chain and ignored the internal logic or morality of the text. <strong>This is historically false.</strong></p>
+<p>The classical scholars formulated an entire branch called <strong>Naqd al-Matn (نقد المتن - Textual Critique)</strong>:</p>
+<ul class="reader-list">
+<li>Imam Ibn al-Qayyim al-Jawziyyah (d. 751 AH) dedicated his entire treatise <strong>al-Manar al-Munif fi al-Sahih wal-Da'if</strong> to recognizing fabricated Hadiths purely by examining internal textual indicators, without even looking at the Sanad!</li>
+<li>Imam al-Khatib al-Baghdadi established: <em>"A Hadith cannot be accepted if it contradicts sound reason, the clear unequivocal text of the Qur'an, the definitive Mutawatir Sunnah, or historical consensus."</em></li>
+</ul>
+<hr class="section-divider">
+<h3 id="3-the-6-universal-red-flags-of-a-corrupted-matn-علامات-وضع-المتن">3. The 6 Universal Red Flags of a Corrupted Matn (علامات وضع المتن)</h3>
+<p>When analyzing a Hadith text, classical masters immediately flagged a narration as unauthentic if it exhibited any of the following:</p>
+<ol class="reader-list">
+<li><strong>Direct Contradiction with the Clear Qur'an (<code>مخالفة صريح القرآن</code>):</strong></li>
+</ol>
+<p>Any narration stating something directly negated by the Qur'an without possibility of reconciliation.</p>
+<p><em>Example:</em> The forged narration claiming the world would end in the year 500 AH, contradicting Surah Luqman (31:34): <em>"Indeed, Allah alone possesses knowledge of the Hour."</em></p>
+<ol class="reader-list">
+<li><strong>Gross Historical Anachronism (<code>مخالفة الحقائق التاريخية القطعية</code>):</strong></li>
+</ol>
+<p><em>Famous Case Study:</em> A document was brought to the great Muhaddith al-Khatib al-Baghdadi claiming the Prophet ﷺ exempt the Jewish citizens of Khaybar from the Jizyah tax, signed by the Sahabah Mu'awiyah ibn Abi Sufyan and Sa'd ibn Mu'adh.</p>
+<p>Al-Khatib looked at the text and instantly declared it a <strong>forgery</strong>:</p>
+<ul class="reader-list">
+<li>Jizyah had not even been legislated at the time of the battle of Khaybar (it was revealed after the Battle of Tabuk in Surah al-Tawbah).</li>
+<li>Sa'd ibn Mu'adh (RA) had already died years earlier during the Battle of the Trench (al-Khandaq)!</li>
+<li>Mu'awiyah (RA) was not even a Muslim at the time of Khaybar (he accepted Islam at the Conquest of Mecca)!</li>
+</ul>
+<ol class="reader-list">
+<li><strong>Absurd Linguistic Vulgarity (<code>ركاكة اللفظ والمعنى</code>):</strong></li>
+</ol>
+<p>The Prophet ﷺ possessed the most majestic, eloquent, and succinct speech in the Arabic language (<em>Jawami' al-Kalim</em>). Any text exhibiting childish, awkward, or vulgar phrasing cannot originate from him.</p>
+<ol class="reader-list">
+<li><strong>Astronomical Rewards for Trivial Acts (<code>الوعد العظيم بالثواب الجزيل على الفعل الحقير</code>):</strong></li>
+</ol>
+<p>Such as: <em>"Whoever prays two Rak'ahs on Tuesday will receive the reward of 70,000 prophets."</em></p>
+<ol class="reader-list">
+<li><strong>Absurd Disproportionate Punishments for Minor Slips (<code>الوعيد الشديد بالعقاب الأليم على الأمر اليسير</code>):</strong></li>
+</ol>
+<p>Such as: <em>"Whoever eats garlic will be plunged into Hellfire for 80 autumns."</em></p>
+<ol class="reader-list">
+<li><strong>Physical Impossibility & Rational Absurdity (<code>الإحالة العقلية والحسية</code>):</strong></li>
+</ol>
+<p>Fabrications claiming ridiculous superstitious traits that violate physical reality and divine wisdom.</p>
+<hr class="section-divider">
+<div class="chapter-anchor" id="chapter-4-the-master-classification-of-hadith-اقسام-و-مراتب-حدیث"></div>
+<h2 class="chapter-heading" data-chapter="chapter-4-the-master-classification-of-hadith-اقسام-و-مراتب-حدیث">Chapter 4: The Master Classification of Hadith (اقسامِ و مراتبِ حدیث)</h2>
+<p>Hadith is not simply "Sahih" or "Da'if." Hadith classification operates along <strong>four distinct dimensions</strong>:</p>
+<ol class="reader-list">
+<li>By Legal Evidentiary Authority (Acceptance vs. Rejection).</li>
+<li>By Terminal Attribution (Who said it?).</li>
+<li>By Transmission Volume (How many people narrated it at each link?).</li>
+<li>By Structural Defects (Where and how is the chain broken?).</li>
+</ol>
+<pre class="diagram-box"><code>                                  MASTER CLASSIFICATION TREE
+                                               │
+     ┌───────────────────┬─────────────────────┼─────────────────────┬──────────────────┐
+     ▼                   ▼                     ▼                     ▼                  ▼
+ [BY AUTHORITY]    [BY ATTRIBUTION]      [BY PATHWAYS]        [BY CONTINUITY]     [BY DEFECT]
+ ├─ Sahih          ├─ Marfu' (Prophet)   ├─ Mutawatir         ├─ Muttasil         ├─ Shadh
+ ├─ Hasan          ├─ Mawquf (Sahabi)    │  ├─ Lafzi          ├─ Munqati'         ├─ Munkar
+ ├─ Da'if          ├─ Maqtu' (Tabi'i)    │  └─ Ma'nawi        ├─ Mursal           ├─ Mudtarib
+ └─ Mawdu'         └─ Hadith Qudsi       └─ Ahad              ├─ Mu'dal           ├─ Maqlub
+                                            ├─ Mashhur        ├─ Mu'allaq         ├─ Mudraj
+                                            ├─ 'Aziz          ├─ Mudallas         └─ Mu'allal
+                                            └─ Gharib         └─ Mursal Khafi</code></pre>
+<hr class="section-divider">
+<h3 id="dimension-1-by-acceptance-rejection-من-حيث-القبول-والرد">Dimension 1: By Acceptance & Rejection (من حيث القبول والرد)</h3>
+<h4 id="1-sahih-li-dhatihi-صحيح-لذاته-authentic-in-and-of-itself">1. Sahih li-Dhatihi (صَحِيحٌ لِذَاتِهِ - Authentic in and of Itself)</h4>
+<ul class="reader-list">
+<li>Meets all 5 conditions completely with highest retention (<em>Tamam al-Dabt</em>).</li>
+<li><strong>Legal Ruling:</strong> Binding religious authority; obligatory to believe in theological matters (if Mutawatir) and act upon in Fiqh rulings.</li>
+</ul>
+<h4 id="2-sahih-li-ghayrihi-صحيح-لغيره-authentic-due-to-external-corroboration">2. Sahih li-Ghayrihi (صَحِيحٌ لِغَيْرِهِ - Authentic Due to External Corroboration)</h4>
+<ul class="reader-list">
+<li>A narration that is originally <em>Hasan li-Dhatihi</em> (a narrator has slightly minor retention deficit), but is supported by another independent chain of equal or superior strength. The two chains reinforce one another, elevating the Hadith to the status of Sahih.</li>
+</ul>
+<h4 id="3-hasan-li-dhatihi-حسن-لذاته-sound-good-in-and-of-itself">3. Hasan li-Dhatihi (حَسَنٌ لِذَاتِهِ - Sound / Good in and of Itself)</h4>
+<ul class="reader-list">
+<li>Meets conditions 1, 2, 4, and 5 of Sahih, but the narrator’s retention is slightly lighter (<em>Khaffa Dabtuhu</em>), though he remains completely truthful, honest, and morally upright.</li>
+<li><strong>Legal Ruling:</strong> Fully acceptable as proof in Islamic jurisprudence (Ahkam).</li>
+</ul>
+<h4 id="4-hasan-li-ghayrihi-حسن-لغيره-sound-due-to-supporting-corroboration">4. Hasan li-Ghayrihi (حَسَنٌ لِغَيْرِهِ - Sound Due to Supporting Corroboration)</h4>
+<ul class="reader-list">
+<li>A Hadith that is initially <strong>weak (Da'if)</strong> due to minor defects (e.g., poor memory, ambiguity in transmission, or an interruption), BUT is transmitted through multiple independent chains with distinct paths. The combination of chains rules out fabrication or coincidence, elevating it to <em>Hasan</em>.</li>
+</ul>
+<h4 id="5-daif-ضعيف-weak">5. Da'if (ضَعِيف - Weak)</h4>
+<ul class="reader-list">
+<li>A Hadith that fails to fulfill one or more conditions of Hasan or Sahih.</li>
+<li><em>(ضعیف کی تعریف: جس حدیث میں صحیح یا حسن کی شرائط پوری نہ ہوں)</em>.</li>
+<li><strong>Can a Da'if Hadith be acted upon?</strong></li>
+</ul>
+<p>Scholars (such as Imam Ahmad, al-Nawawi, and Ibn Hajar) permit acting upon weak Hadith <strong>ONLY</strong> under three strict conditions:</p>
+<ol class="reader-list">
+<li>The weakness must be mild (not severely weak, abandoned, or suspected of forgery).</li>
+<li>The Hadith must fall under an already established general Islamic principle (it cannot invent a brand-new practice).</li>
+<li>One must not believe with certainty that the Prophet ﷺ actually said it; rather, one acts on it out of moral caution (<em>Ihtiyat</em>) in encouraging righteous character (<em>Fada'il al-A'mal</em>).</li>
+</ol>
+<h4 id="6-mawdu-موضوع-fabricated-forged">6. Mawdu' (مَوْضُوع - Fabricated / Forged)</h4>
+<ul class="reader-list">
+<li>A deliberate lie, forgery, or invented statement falsely attributed to the Prophet ﷺ.</li>
+<li><strong>Legal Ruling:</strong> Strictly forbidden (<em>Haram</em>) to narrate or share, EXCEPT to warn Muslims against its deception.</li>
+</ul>
+<hr class="section-divider">
+<h3 id="dimension-2-by-terminal-attribution-من-حيث-منتهى-السند">Dimension 2: By Terminal Attribution (من حيث منتهى السند)</h3>
+
+            <div class="table-responsive">
+              <table class="reader-table">
+                <thead><tr><th>Class</th><th>Arabic</th><th>Attributed To</th><th>Example Phrasing</th><th>Legal Status</th></tr></thead>
+                <tbody><tr><td><strong>Marfu'</strong></td><td dir="rtl" class="rtl-cell">مَرْفُوع</td><td>Prophet Muhammad ﷺ</td><td><em>"The Messenger of Allah ﷺ said..."</em></td><td>Primary legislative source for all Islam.</td></tr><tr><td><strong>Mawquf</strong></td><td dir="rtl" class="rtl-cell">مَوْقُوف</td><td>A Sahabi (Companion)</td><td><em>"Umar ibn al-Khattab said: 'Hold yourselves accountable...'"</em></td><td>Strong legal precedent; if concerning unseen matters, carries ruling of Marfu'.</td></tr><tr><td><strong>Maqtu'</strong></td><td dir="rtl" class="rtl-cell">مَقْطُوع</td><td>A Tabi'i (Successor)</td><td><em>"Al-Hasan al-Basri said: 'O son of Adam, you are but days...'"</em></td><td>Historical and theological insight; not binding proof on the Ummah.</td></tr><tr><td><strong>Hadith Qudsi</strong></td><td dir="rtl" class="rtl-cell">حَدِيث قُدْسِي</td><td>Words from Allah, phrased by the Prophet ﷺ</td><td><em>"The Messenger of Allah ﷺ said that Allah Blessed and Exalted says: 'O My servants! I have forbidden oppression...'"</em></td><td>Holy message, but distinct from the Qur'an (cannot be recited in Salah, not miraculous in phrasing).</td></tr></tbody>
+              </table>
+            </div>
+            
+<h4 id="the-fundamental-difference-quran-vs-hadith-qudsi">The Fundamental Difference: Qur'an vs. Hadith Qudsi</h4>
+<pre class="diagram-box"><code>┌──────────────────────────────────────┬──────────────────────────────────────┐
+│          THE HOLY QUR'AN             │          HADITH QUDSI                │
+├──────────────────────────────────────┼──────────────────────────────────────┤
+│ Both Words and Meaning from Allah.   │ Meaning from Allah; words phrased    │
+│                                      │ by the Prophet ﷺ.                    │
+├──────────────────────────────────────┼──────────────────────────────────────┤
+│ Miraculous (I'jaz); inimitable.      │ Not an inimitable linguistic miracle.│
+├──────────────────────────────────────┼──────────────────────────────────────┤
+│ Recited as worship inside Salah.     │ Cannot be recited inside Salah.      │
+├──────────────────────────────────────┼──────────────────────────────────────┤
+│ 100% Mutawatir; rejecting an ayah    │ Transmitted via Ahad chains; graded  │
+│ expels one from Islam.               │ Sahih, Hasan, or Da'if like Hadiths. │
+└──────────────────────────────────────┴──────────────────────────────────────┘</code></pre>
+<hr class="section-divider">
+<h3 id="dimension-3-by-number-of-transmission-pathways-من-حيث-عدد-الطرق">Dimension 3: By Number of Transmission Pathways (من حيث عدد الطرق)</h3>
+<h4 id="1-al-mutawatir-المتواتر-mass-transmitted">1. Al-Mutawatir (المُتَوَاتِر - Mass-Transmitted)</h4>
+<p>A Hadith narrated by such an overwhelming number of independent narrators at <strong>every single generation</strong> of the chain that logic, human experience, and geography make it impossible for them to have colluded on a lie.</p>
+<ul class="reader-list">
+<li><strong>Mutawatir Lafzi (لفظي - Exact Wording):</strong> Mass-transmitted with identical words.</li>
+</ul>
+<p><em>Example:</em> <em><span class="arabic-matn" dir="rtl">«مَنْ كَذَبَ عَلَيَّ مُتَعَمِّدًا فَلْيَتَبَوَّأْ مَقْعَدَهُ مِنَ النَّارِ»</span></em> <em>(Whoever lies against me intentionally, let him take his seat in the Fire)</em> — narrated by over 70 distinct Sahabah!</p>
+<ul class="reader-list">
+<li><strong>Mutawatir Ma'nawi (معنوي - Conceptual):</strong> Hundreds of independent Hadiths describing the same reality in different words.</li>
+</ul>
+<p><em>Example:</em> Raising the hands in Du'a, or wiping over leather socks (<em>Khuffayn</em>).</p>
+<h4 id="2-al-ahad-الآحاد-singular-few-pathways">2. Al-Ahad (الآحَاد - Singular / Few Pathways)</h4>
+<p>Any Hadith that does not meet the strict threshold of Mutawatir. Subdivided into:</p>
+<ol class="reader-list">
+<li><strong>Al-Mashhur (المَشْهُور):</strong> Narrated by <strong>three or more</strong> independent narrators at every link in the chain, without reaching Mutawatir.</li>
+<li><strong>Al-'Aziz (العَزِيز):</strong> Narrated by <strong>not fewer than two</strong> narrators at any single link in the chain.</li>
+<li><strong>Al-Gharib (الغَرِيب):</strong> Narrated by <strong>only one single narrator</strong> at some stage in the chain.</li>
+</ol>
+<ul class="reader-list">
+<li><em>Gharib Mutlaq:</em> Narrated by a single Sahabi (e.g., Hadith of Intentions was narrated from the Prophet ﷺ <em>only</em> by Umar ibn al-Khattab RA).</li>
+<li><em>Gharib Nisbi:</em> A Hadith is well-known from a Sahabi, but only one specific student narrated it from a particular city.</li>
+</ul>
+<hr class="section-divider">
+<h3 id="dimension-4-broken-chains-structural-defects-انقطاع-السند">Dimension 4: Broken Chains & Structural Defects (انقطاع السند)</h3>
+<pre class="diagram-box"><code>        ========================================================================
+                               WHERE IS THE CHAIN BROKEN?
+        ========================================================================
+
+        [Collector: e.g., Bukhari]
+              │
+              ├── [Missing Link at the Beginning] ───────►  MU'ALLAQ (مُعَلَّق)
+              │
+        [Intermediate Narrator 1]
+              │
+              ├── [One Missing Link in Middle]   ───────►  MUNQATI' (مُنْقَطِع)
+              │
+        [Intermediate Narrator 2]
+              │
+              ├── [Two+ Consecutive Missing]     ───────►  MU'DAL (مُعْضَل)
+              │
+        [Tabi'i (Successor)]
+              │
+              ├── [Missing Sahabi Link at End]   ───────►  MURSAL (مُرْسَل)
+              │
+        [Prophet Muhammad ﷺ]</code></pre>
+<ol class="reader-list">
+<li><strong>Al-Mu'allaq (المُعَلَّق - Suspended):</strong> A chain where the author/collector omits one or more narrators from the <strong>beginning</strong> of the Sanad (his end).</li>
+<li><strong>Al-Mursal (المُرْسَل - Hurried / Dropped Sahabi):</strong> A chain where the <strong>Tabi'i</strong> bypasses the Sahabi and says directly: <em>"The Prophet ﷺ said..."</em></li>
+</ol>
+<p><em>Scholarly debate:</em> Imams Abu Hanifah and Malik accept Mursal if the Tabi'i is a senior, reliable master; Imam al-Shafi'i accepts it only if supported by another chain or Fatwa of Sahabah; Muhaddithin generally classify it as a category of Da'if until corroborated.</p>
+<ol class="reader-list">
+<li><strong>Al-Mu'dal (المُعْضَل - Perplexing / Doubly Severed):</strong> A chain where <strong>two or more consecutive</strong> narrators are missing anywhere in the chain. Severely weak.</li>
+<li><strong>Al-Munqati' (المُنْقَطِع - Severed / Disconnected):</strong> A chain where a single narrator (or non-consecutive narrators) is missing anywhere in the middle.</li>
+<li><strong>Al-Mudallas (المُدَلَّس - Concealed Defect):</strong> A deceptive narration where a narrator masks a defect:</li>
+</ol>
+<ul class="reader-list">
+<li><em>Tadlees al-Isnad:</em> Transmitting from a contemporary whom he met, using ambiguous phrasing (<em>'An / From</em>) to make people think he heard it directly, when in fact an unnamed weak third person stood between them!</li>
+<li><em>Tadlees al-Taswiyah:</em> The worst form: Dropping a weak narrator between two reliable teachers.</li>
+</ul>
+<ol class="reader-list">
+<li><strong>Al-Mursal al-Khafi (المُرْسَل الخَفِي - Hidden Disconnection):</strong> Narrating from a contemporary scholar whom he was alive at the same time as, but whom he never actually met or never took Hadith from.</li>
+</ol>
+<hr class="section-divider">
+<h3 id="dimension-5-hidden-textual-defects-الأوصاف-والعلل">Dimension 5: Hidden & Textual Defects (الأوصاف والعلل)</h3>
+<ul class="reader-list">
+<li><strong>Al-Mu'allal / Al-Ma'lul (المُعَلَّل / المَعْلُول):</strong> A Hadith with a subtle, elusive flaw (<em>'Illah</em>) that looks pristine on the surface. Detecting it requires encyclopedic memory of all variations.</li>
+<li><strong>Al-Shadh (الشَّاذُّ) vs. Al-Mahfuz (المَحْفُوظ):</strong> When a <strong>trustworthy narrator</strong> contradicts another narrator who is <strong>even more reliable</strong> or backed by a larger group. The superior version is called <em>Mahfuz</em>; the outlier is rejected as <em>Shadh</em>.</li>
+<li><strong>Al-Munkar (المُنْكَرُ) vs. Al-Ma'ruf (المَعْرُوف):</strong> When a <strong>weak narrator</strong> contradicts a reliable narrator. The weak contradiction is branded <em>Munkar</em> and dismissed.</li>
+<li><strong>Al-Mudtarib (المُضْطَرِب - Conflicted):</strong> A Hadith narrated with mutually irreconcilable variations of identical strength, such that no preference can be established.</li>
+<li><strong>Al-Maqlub (المَقْلُوب - Inverted):</strong> Transposition of text or names.</li>
+</ul>
+<p><em>The Legendary Test of Baghdad:</em> Scholars tested Imam al-Bukhari’s memory by swapping the chains and texts of <strong>100 Hadiths</strong>. He listened patiently, then reconstructed all 100 Hadiths from memory, correcting every inverted chain and text back to its rightful partner without a single error!</p>
+<ul class="reader-list">
+<li><strong>Al-Mudraj (المُدْرَج - Interpolated):</strong> A scholar or companion’s personal explanatory comment accidentally blended into the prophetic text without clear attribution.</li>
+</ul>
+<hr class="section-divider">
+<div class="chapter-anchor" id="chapter-5-rijal-al-hadith-jarh-wa-tadil-علم-رجال-الحدیث-والجرح-والتعدیل"></div>
+<h2 class="chapter-heading" data-chapter="chapter-5-rijal-al-hadith-jarh-wa-tadil-علم-رجال-الحدیث-والجرح-والتعدیل">Chapter 5: Rijal al-Hadith & Jarh wa Ta'dil (علم رجال الحدیث والجرح والتعدیل)</h2>
+<h3 id="1-the-twin-foundations-of-narrator-credibility">1. The Twin Foundations of Narrator Credibility</h3>
+<p><span class="katex-math">$\boxed{\text{Narrator Credibility} = \text{'Adalah (Moral Integrity)} \times \text{Dabt (Retention Precision)}}</span>$</p>
+<pre class="diagram-box"><code>┌──────────────────────────────────────────────┬──────────────────────────────────────────────┐
+│           1. AL-'ADALAH (العَدَالَة)          │            2. AL-DABT (الضَّبْط)              │
+│          Moral & Spiritual Integrity         │            Accuracy & Mental Retention       │
+├──────────────────────────────────────────────┼──────────────────────────────────────────────┤
+│ • Islam (Must be a practicing Muslim)        │ • Dabt al-Sadr (ضَبْطُ الصَّدْر): Retention   │
+│ • 'Aql (Sound intellect; sanity)             │   in the chest — flawless memorization from  │
+│ • Bulugh (Adulthood at time of narration)    │   time of hearing to time of delivery.       │
+│ • Taqwa (Freedom from major sins, persistence│ • Dabt al-Kitab (ضَبْطُ الكِتَاب): Precision  │
+│   in minor sins, or blatant innovations)     │   in the manuscript — verified notes free    │
+│ • Muru'ah (Observance of cultural decency,   │   from interpolations or family tampering.   │
+│   honor, and ethical manners)                │ • Alertness (Yaqadhah) against deception.    │
+└──────────────────────────────────────────────┴──────────────────────────────────────────────┘</code></pre>
+<hr class="section-divider">
+<h3 id="2-the-6-ranks-of-tadil-praise-verification-مراتب-التعديل">2. The 6 Ranks of Ta'dil (Praise & Verification - مراتب التعديل)</h3>
+<p>Formulated by Ibn Abi Hatim and codified by al-Dhahabi and Ibn Hajar:</p>
+
+            <div class="table-responsive">
+              <table class="reader-table">
+                <thead><tr><th>Rank</th><th>Classical Arabic Terminology</th><th>Meaning</th><th>Status / Rule</th></tr></thead>
+                <tbody><tr><td><strong>Tier 1 (Superlative)</strong></td><td dir="rtl" class="rtl-cell"><code>أَوْثَقُ النَّاسِ</code> ، <code>إِلَيْهِ المُنْتَهَى فِي التَّثَبُّتِ</code></td><td>"The most trustworthy of mankind," "The apex of verification"</td><td>Unquestioned highest authority.</td></tr><tr><td><strong>Tier 2 (Duplicated)</strong></td><td dir="rtl" class="rtl-cell"><code>ثِقَةٌ ثِقَةٌ</code> ، <code>ثِقَةٌ ثَبْتٌ</code> ، <code>عَدْلٌ ضَابِطٌ</code></td><td>"Trustworthy, trustworthy," "Trustworthy and immovable"</td><td>Highest tier of Sahih Hadith.</td></tr><tr><td><strong>Tier 3 (Single Term)</strong></td><td dir="rtl" class="rtl-cell"><code>ثِقَةٌ</code> ، <code>ثَبْتٌ</code> ، <code>حُجَّةٌ</code></td><td>"Trustworthy," "Firm," "A living proof"</td><td>Backbone of Sahih Hadith.</td></tr><tr><td><strong>Tier 4 (Acceptable)</strong></td><td dir="rtl" class="rtl-cell"><code>صَدُوقٌ</code> ، <code>لَا بَأْسَ بِهِ</code> ، <code>مَحَلُّهُ الصِّدْقُ</code></td><td>"Truthful," "No harm in him," "His place is honesty"</td><td>Narration is Hasan li-Dhatihi.</td></tr><tr><td><strong>Tier 5 (Marginal)</strong></td><td dir="rtl" class="rtl-cell"><code>شَيْخٌ</code> ، <code>يُكْتَبُ حَدِيثُهُ</code> ، <code>يُرْوَى حَدِيثُهُ</code></td><td>"An elder," "His Hadith is recorded for cross-checking"</td><td>Not independent proof; used for corroboration.</td></tr><tr><td><strong>Tier 6 (Near Weak)</strong></td><td dir="rtl" class="rtl-cell"><code>صَالِحُ الحَدِيثِ</code> ، <code>مُقَارِبُ الحَدِيثِ</code></td><td>"Righteous in Hadith," "Approaching acceptable"</td><td>Weak on its own; needs strong reinforcement.</td></tr></tbody>
+              </table>
+            </div>
+            
+<hr class="section-divider">
+<h3 id="3-the-6-ranks-of-jarh-criticism-disqualification-مراتب-الجرح">3. The 6 Ranks of Jarh (Criticism & Disqualification - مراتب الجرح)</h3>
+
+            <div class="table-responsive">
+              <table class="reader-table">
+                <thead><tr><th>Rank</th><th>Classical Arabic Terminology</th><th>Meaning</th><th>Status / Rule</th></tr></thead>
+                <tbody><tr><td><strong>Tier 1 (Mildest)</strong></td><td dir="rtl" class="rtl-cell"><code>فِيهِ مَقَالٌ</code> ، <code>لَيِّنُ الحَدِيثِ</code> ، <code>ضَعَّفُوهُ</code></td><td>"There is speech about him," "Soft in Hadith"</td><td>Mild weakness; eligible for <em>I'tibar</em> (corroboration).</td></tr><tr><td><strong>Tier 2 (Not Strong)</strong></td><td dir="rtl" class="rtl-cell"><code>لَيْسَ بِالقَوِيِّ</code> ، <code>لَا يُحْتَجُّ بِهِ</code></td><td>"He is not strong," "He cannot be used as proof"</td><td>Weak; rejected unless corroborated.</td></tr><tr><td><strong>Tier 3 (Explicit Weak)</strong></td><td dir="rtl" class="rtl-cell"><code>ضَعِيفٌ جِدًّا</code> ، <code>وَاهٍ بِمَرَّةٍ</code> ، <code>سَاقِطٌ</code></td><td>"Very weak," "Feeble," "Fallen"</td><td>Severely weak; cannot be elevated by other chains.</td></tr><tr><td><strong>Tier 4 (Abandoned)</strong></td><td dir="rtl" class="rtl-cell"><code>مَتْرُوكُ الحَدِيثِ</code> ، <code>ذَاهِبُ الحَدِيثِ</code></td><td>"His Hadith is abandoned," "Ruined in transmission"</td><td>Completely rejected; suspected of fabricating.</td></tr><tr><td><strong>Tier 5 (Accused)</strong></td><td dir="rtl" class="rtl-cell"><code>مُتَّهَمٌ بِالكَذِبِ</code> ، <code>يَسْرِقُ الحَدِيثَ</code></td><td>"Accused of lying," "Steals chains of Hadith"</td><td>Near-fabricator status; total nullity.</td></tr><tr><td><strong>Tier 6 (Proven Liar)</strong></td><td dir="rtl" class="rtl-cell"><code>كَذَّابٌ</code> ، <code>وَضَّاعٌ</code> ، <code>دَجَّالٌ</code></td><td>"Arch-liar," "Manufacturer of Hadith," "Imposter"</td><td>Forger of Hadith; creates <em>Mawdu'</em>.</td></tr></tbody>
+              </table>
+            </div>
+            
+<hr class="section-divider">
+<h3 id="4-golden-rules-for-resolving-conflicts-in-jarh-and-tadil">4. Golden Rules for Resolving Conflicts in Jarh and Ta'dil</h3>
+<p>What happens if Imam Ahmad praises a narrator, but Yahya ibn Ma'in criticizes him?</p>
+<ol class="reader-list">
+<li><strong>Rule 1: Detailed Criticism Outweighs General Praise:</strong></li>
+</ol>
+<p class="ar-ur-paragraph" dir="rtl"><span class="katex-math">$\text{<span class="arabic-matn" dir="rtl">«الجَرْحُ المُفَسَّرُ مُقَدَّمٌ عَلَى التَّعْدِيلِ المُجْمَلِ»</span>}</span>$</p>
+<p>If a critic explains <em>why</em> the person is weak (e.g., <em>"He mixed up his books after his house burned down"</em>), this specific evidence takes precedence over someone who merely says <em>"He is good."</em></p>
+<ol class="reader-list">
+<li><strong>Rule 2: Rivalry Between Contemporaries is Set Aside:</strong></li>
+</ol>
+<p class="ar-ur-paragraph" dir="rtl"><span class="katex-math">$\text{<span class="arabic-matn" dir="rtl">«كَلَامُ الأَقْرَانِ يُطْوَى وَلَا يُنْشَرُ»</span>}</span>$</p>
+<p>The natural personal tensions, theological rivalries, or scholarly competition between peers living in the same city are scrutinized heavily and dismissed if uncorroborated.</p>
+<ol class="reader-list">
+<li><strong>Rule 3: Understanding Critic Strictness:</strong></li>
+</ol>
+<p>Critics belong to three temperaments:</p>
+<ul class="reader-list">
+<li><em>Strict Critics (المتشددون):</em> Abu Hatim al-Razi, al-Nasa'i, Yahya al-Qattan (their slight criticism is weighed carefully).</li>
+<li><em>Balanced Critics (المعتدلون):</em> Imam al-Bukhari, Ahmad ibn Hanbal, al-Daraqutni, Ibn Hajar (gold standard).</li>
+<li><em>Lenient Critics (المتساهلون):</em> Ibn Hibban, al-Hakim, al-Tirmidhi (their solitary authentication needs corroboration).</li>
+</ul>
+<hr class="section-divider">
+<div class="chapter-anchor" id="chapter-6-kutub-al-sittah-the-hierarchy-of-hadith-collections-کتب-حدیث-کے-درجات-و-مراتب"></div>
+<h2 class="chapter-heading" data-chapter="chapter-6-kutub-al-sittah-the-hierarchy-of-hadith-collections-کتب-حدیث-کے-درجات-و-مراتب">Chapter 6: Kutub al-Sittah & The Hierarchy of Hadith Collections (کتبِ حدیث کے درجات و مراتب)</h2>
+<pre class="diagram-box"><code>┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                        THE SIX CANONICAL BOOKS (AL-KUTUB AL-SITTAH)                    │
+├────┬─────────────────────────────┬───────────────────────────┬──────────────┬──────────┤
+│ #  │ Book & Author               │ Arabic Title              │ Death Date   │ Hadiths  │
+├────┼─────────────────────────────┼───────────────────────────┼──────────────┼──────────┤
+│ 1. │ Sahih al-Bukhari            │ الجامع المسند الصحيح      │ 256 AH       │ ~7,563   │
+│    │ (Imam al-Bukhari)           │ المختصر من أمور رسول الله │              │ (w/ reps)│
+├────┼─────────────────────────────┼───────────────────────────┼──────────────┼──────────┤
+│ 2. │ Sahih Muslim                │ المسند الصحيح المختصر     │ 261 AH       │ ~7,500   │
+│    │ (Imam Muslim)               │ بنقل العدل عن العدل       │              │ (w/ reps)│
+├────┼─────────────────────────────┼───────────────────────────┼──────────────┼──────────┤
+│ 3. │ Sunan Abi Dawud             │ كتاب السنن                │ 275 AH       │ ~5,274   │
+│    │ (Imam Abu Dawud)            │                           │              │          │
+├────┼─────────────────────────────┼───────────────────────────┼──────────────┼──────────┤
+│ 4. │ Jami' al-Tirmidhi           │ الجامع المختصر من السنن   │ 279 AH       │ ~3,956   │
+│    │ (Imam al-Tirmidhi)          │ عن رسول الله ﷺ            │              │          │
+├────┼─────────────────────────────┼───────────────────────────┼──────────────┼──────────┤
+│ 5. │ Sunan al-Nasa'i (al-Mujtaba)│ المجتبى من السنن الكبرى   │ 303 AH       │ ~5,758   │
+│    │ (Imam al-Nasa'i)            │                           │              │          │
+├────┼─────────────────────────────┼───────────────────────────┼──────────────┼──────────┤
+│ 6. │ Sunan Ibn Majah             │ كتاب السنن                │ 273 AH       │ ~4,341   │
+│    │ (Imam Ibn Majah)            │                           │              │          │
+└────┴─────────────────────────────┴───────────────────────────┴──────────────┴──────────┘</code></pre>
+<hr class="section-divider">
+<h3 id="detailed-profiles-of-the-canonical-six">Detailed Profiles of the Canonical Six</h3>
+<h4 id="1-sahih-al-bukhari-الجامع-الصحيح-للإمام-البخاري">1. Sahih al-Bukhari (الجامع الصحيح للإمام البخاري)</h4>
+<ul class="reader-list">
+<li><strong>Status:</strong> Unanimously recognized by Muslim consensus as the <strong>most authentic book on earth after the Holy Qur'an</strong> (<em>أصح كتاب بعد كتاب الله</em>).</li>
+<li><strong>Compilation:</strong> Imam al-Bukhari spent <strong>16 years</strong> filtering through <strong>600,000 Hadiths</strong>, performing Ghusl and two Rak'ahs of Istikharah prayer before committing any single Hadith to his master book.</li>
+<li><strong>Strict Condition:</strong> To accept a chain, al-Bukhari required both:</li>
+</ul>
+<ol class="reader-list">
+<li><em>Mu'asarah (المُعَاصَرَة):</em> The two narrators must have lived at the same time.</li>
+<li><em>Thubut al-Liqa' (ثُبُوتُ اللِّقَاءِ):</em> <strong>Proven physical meeting</strong> between the two narrators must be historically established at least once.</li>
+</ol>
+<ul class="reader-list">
+<li><strong>Fiqhi Genius:</strong> <em><span class="arabic-matn" dir="rtl">«فِقْهُ البُخَارِيِّ فِي تَرَاجِمِهِ»</span></em> — The legal jurisprudence of al-Bukhari is embedded in his brilliant chapter headings (<em>Tarajim</em>).</li>
+</ul>
+<h4 id="2-sahih-muslim-صحيح-مسلم">2. Sahih Muslim (صحيح مسلم)</h4>
+<ul class="reader-list">
+<li><strong>Status:</strong> Second only to Bukhari in authenticity, but <strong>superior to Bukhari in artistic arrangement and structural elegance</strong>.</li>
+<li><strong>Compilation:</strong> Compiled in Nishapur over <strong>15 years</strong> from 300,000 Hadiths.</li>
+<li><strong>Condition:</strong> Imam Muslim required <em>Mu'asarah</em> (contemporary era) alongside <em>Imkan al-Liqa'</em> (physical possibility of meeting, i.e., living in adjacent cities without geographical barriers).</li>
+<li><strong>Master Feature:</strong> Muslim brings <strong>all chains and variant texts of a Hadith together in one single chapter</strong>, making comparative reading effortless, unlike Bukhari who scatters variants across multiple thematic Fiqh chapters.</li>
+<li><strong>The Famous Muqaddimah:</strong> Preceded by an indispensable introductory treatise outlining the principles of Hadith criticism.</li>
+</ul>
+<h4 id="3-sunan-abi-dawud-سنن-أبي-داود">3. Sunan Abi Dawud (سنن أبي داود)</h4>
+<ul class="reader-list">
+<li><strong>Mission:</strong> The premier legal code (<em>Ahkam</em>) of Islam. Abu Dawud selected 4,800 legal Hadiths from 500,000.</li>
+<li><strong>Distinction:</strong> Imam al-Khattabi stated: <em>"No book has been written in religious jurisprudence like Sunan Abi Dawud."</em></li>
+<li><strong>Grading Integrity:</strong> Abu Dawud stated: <em>"Whatever Hadith in my book has severe weakness, I have clearly stated so; whatever I remain silent upon is Salih (acceptable for legal practice)."</em></li>
+</ul>
+<h4 id="4-jami-al-tirmidhi-جامع-الترمذي">4. Jami' al-Tirmidhi (جامع الترمذي)</h4>
+<ul class="reader-list">
+<li><strong>Pioneering Innovation:</strong> Imam al-Tirmidhi was the first to systematically introduce graded verdicts at the end of every Hadith:</li>
+</ul>
+<p class="ar-ur-paragraph" dir="rtl"><em><span class="arabic-matn" dir="rtl">«هَذَا حَدِيثٌ حَسَنٌ صَحِيحٌ»</span></em> or <em><span class="arabic-matn" dir="rtl">«حَدِيثٌ غَرِيبٌ لَا نَعْرِفُهُ إِلَّا مِنْ هَذَا الوَجْهِ»</span></em>.</p>
+<ul class="reader-list">
+<li><strong>Comparative Fiqh:</strong> After quoting a Hadith, he documents the actual legal rulings of the Sahabah, Tabi'in, Sufyan al-Thawri, Malik, al-Shafi'i, Ahmad, and Ishaq.</li>
+</ul>
+<h4 id="5-sunan-al-nasai-al-mujtaba-سنن-النسائي-الصغرى">5. Sunan al-Nasa'i (al-Mujtaba / سنن النسائي الصغرى)</h4>
+<ul class="reader-list">
+<li><strong>Scrutiny:</strong> Of the four Sunan, <strong>al-Nasa'i has the strictest criteria for narrators</strong>, closer to Bukhari and Muslim than any other Sunan.</li>
+<li><strong>Focus:</strong> Masterclass in revealing subtle chain differences (<em>'Ilal</em>) and variant prepositions between regional schools.</li>
+</ul>
+<h4 id="6-sunan-ibn-majah-سنن-ابن-ماجه">6. Sunan Ibn Majah (سنن ابن ماجه)</h4>
+<ul class="reader-list">
+<li><strong>Excellence:</strong> Renowned for exceptional arrangement of chapters (<em>Husn al-Tarteeb</em>) and lack of repetition.</li>
+<li><strong>Caution:</strong> Contains the highest percentage of weak (<em>Da'if</em>) and a few fabricated (<em>Mawdu'</em>) narrations among the Six Books, particularly in its unique additions (<em>Zawa'id</em>).</li>
+</ul>
+<hr class="section-divider">
+<h3 id="shah-waliullah-dehlawis-4-tiers-of-hadith-collections">Shah Waliullah Dehlawi's 4 Tiers of Hadith Collections</h3>
+<p>In his seminal work <em>Hujjatullah al-Balighah (حجة الله البالغة)</em>, the great Indian reviver <strong>Shah Waliullah al-Dehlawi (d. 1176 AH)</strong> categorized all Hadith literature into four distinct qualitative ranks:</p>
+<pre class="diagram-box"><code>┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                      THE FOUR SCHOLARLY TIERS (TABAQAT AL-KUTUB)                       │
+├──────────┬──────────────────────────────────────┬──────────────────────────────────────┤
+│ Tier     │ Collections Included                 │ Nature & Evidentiary Value           │
+├──────────┼──────────────────────────────────────┼──────────────────────────────────────┤
+│ TABAQAH  │ 1. Muwatta Imam Malik                │ Highest authenticity. Nearly 100% of │
+│ 1        │ 2. Sahih al-Bukhari                  │ their contents are Sahih or verified │
+│          │ 3. Sahih Muslim                      │ through continuous community action. │
+├──────────┼──────────────────────────────────────┼──────────────────────────────────────┤
+│ TABAQAH  │ 1. Sunan Abi Dawud                   │ Next tier of legal authority. Major- │
+│ 2        │ 2. Jami' al-Tirmidhi                 │ ity is Sahih/Hasan; weak narrations  │
+│          │ 3. Sunan al-Nasa'i                   │ are noted or easily analyzed.        │
+│          │ 4. Musnad Ahmad ibn Hanbal           │                                      │
+├──────────┼──────────────────────────────────────┼──────────────────────────────────────┤
+│ TABAQAH  │ 1. Musannaf Abd al-Razzaq            │ Mixed collections containing Sahih,  │
+│ 3        │ 2. Musannaf Ibn Abi Shaybah          │ Hasan, Da'if, Munkar, and Mawquf     │
+│          │ 3. Sunan al-Bayhaqi / al-Daraqutni   │ reports. Must be filtered by a       │
+│          │ 4. Musnad al-Bazzar / al-Tabarani    │ qualified Muhaddith before citing.   │
+├──────────┼──────────────────────────────────────┼──────────────────────────────────────┤
+│ TABAQAH  │ 1. Books of Ibn Hibban (al-Majruhin) │ Books written to expose fabrications │
+│ 4        │ 2. Tarikh Baghdad (al-Khatib)        │ or late obscure compilations.        │
+│          │ 3. Tarikh Dimashq (Ibn 'Asakir)      │ Heavy concentration of fabricated,   │
+│          │ 4. Books of late preachers           │ baseless, or severely broken tales.  │
+└──────────┴──────────────────────────────────────┴──────────────────────────────────────┘</code></pre>
+<hr class="section-divider">
+<div class="chapter-anchor" id="chapter-7-mustalah-al-hadith-the-100-technical-terms-compendium"></div>
+<h2 class="chapter-heading" data-chapter="chapter-7-mustalah-al-hadith-the-100-technical-terms-compendium">Chapter 7: Mustalah al-Hadith — The 100+ Technical Terms Compendium</h2>
+<h3 id="اصطلاحات-حدیث-کا-جامع-انسائیکلوپیڈیا">(اصطلاحاتِ حدیث کا جامع انسائیکلوپیڈیا)</h3>
+<p>Below is an exhaustive reference compendium of classical terminology utilized across the sciences of transmission, criticism, and classification.</p>
+<hr class="section-divider">
+<h3 id="category-a-foundational-concepts-chain-architecture-120">Category A: Foundational Concepts & Chain Architecture (1–20)</h3>
+<ol class="reader-list">
+<li><strong>Al-Sanad (السَّنَد):</strong> The physical chain of narrators reaching the Matn. <em>(راویوں کا سلسلہ)</em>.</li>
+<li><strong>Al-Isnad (الإِسْنَاد):</strong> The act of elevating the statement back through its chain of transmission.</li>
+<li><strong>Al-Matn (المَتْن):</strong> The actual substantive text terminating the Sanad. <em>(حدیث کا اصل متن)</em>.</li>
+<li><strong>Al-Musnid (المُسْنِد):</strong> A narrator who transmits with a full chain.</li>
+<li><strong>Al-Muhaddith (المُحَدِّث):</strong> A specialist scholar who has mastered the chains, texts, defects, and narrators of thousands of Hadiths.</li>
+<li><strong>Al-Hafiz (الحَافِظ):</strong> A master who has memorized at least <strong>100,000 Hadiths</strong> with their chains, variant paths, and biographies of their narrators.</li>
+<li><strong>Al-Hujjah (الحُجَّة):</strong> A Hadith master who has memorized <strong>300,000 Hadiths</strong> with complete chains.</li>
+<li><strong>Al-Hakim (الحَاكِم):</strong> An supreme authority whose knowledge encompasses virtually all known Hadiths transmitted across the Islamic world.</li>
+<li><strong>Amir al-Mu'minin fil-Hadith (أَمِيرُ المُؤْمِنِينَ فِي الحَدِيث):</strong> The absolute sovereign title of Hadith scholarship, bestowed upon rare giants: Shu'bah, Sufyan al-Thawri, Malik, Ishaq ibn Rahwayh, Ahmad, al-Bukhari, and Ibn Hajar al-Asqalani.</li>
+<li><strong>Al-Takhrij (التَّخْرِيج):</strong> Tracing a Hadith to its original primary sources and evaluating its authenticity.</li>
+<li><strong>Al-I'tibar (الاعْتِبَار):</strong> The systematic comparative method of cross-referencing multiple chains to discover if a narrator is supported by others.</li>
+<li><strong>Al-Mutaba'ah (المُتَابَعَة):</strong> Direct parallel corroboration where another narrator transmits the <em>same</em> Hadith from the <em>same</em> teacher.</li>
+<li><strong>Al-Shahid (الشَّاهِد):</strong> Indirect corroboration where a <em>different</em> Sahabi narrates a Hadith with the <em>same meaning</em>.</li>
+<li><strong>Al-'Uluww (العُلُوّ):</strong> A high chain containing fewer human links to the Prophet ﷺ.</li>
+<li><strong>Al-Nuzul (النُّزُول):</strong> A low chain containing many intermediate human links.</li>
+<li><strong>Thulathiyyat (الثُّلَاثِيَّات):</strong> Ultra-high chains with only three transmitters between the author and the Prophet ﷺ.</li>
+<li><strong>Al-Sahabi (الصَّحَابِي):</strong> Anyone who met the Prophet ﷺ while believing in him and died upon Islam.</li>
+<li><strong>Al-Tabi'i (التَّابِعِي):</strong> Anyone who met one or more Sahabah while believing in Islam and died upon Islam.</li>
+<li><strong>Tab' al-Tabi'in (تَبَعُ التَّابِعِينَ):</strong> The third generation who learned from the Tabi'in.</li>
+<li><strong>Kharrajahu (أَخْرَجَهُ):</strong> "He recorded it" in his primary compiled collection.</li>
+</ol>
+<hr class="section-divider">
+<h3 id="category-b-authenticity-acceptance-rejection-2140">Category B: Authenticity, Acceptance & Rejection (21–40)</h3>
+<ol class="reader-list">
+<li><strong>Sahih li-Dhatihi (صَحِيحٌ لِذَاتِهِ):</strong> Intrinsically authentic Hadith fulfilling all 5 conditions.</li>
+<li><strong>Sahih li-Ghayrihi (صَحِيحٌ لِغَيْرِهِ):</strong> Hasan Hadith elevated by external corroborating chains.</li>
+<li><strong>Hasan li-Dhatihi (حَسَنٌ لِذَاتِهِ):</strong> Sound Hadith with slightly lighter narrator retention.</li>
+<li><strong>Hasan li-Ghayrihi (حَسَنٌ لِغَيْرِهِ):</strong> Mildly weak Hadith elevated through parallel independent paths.</li>
+<li><strong>Da'if (ضَعِيف):</strong> Weak Hadith failing one or more authenticity requirements.</li>
+<li><strong>Da'if Jiddan (ضَعِيفٌ جِدًّا):</strong> Severely weak; cannot be used for corroboration or elevated.</li>
+<li><strong>Mawdu' (مَوْضُوع):</strong> Fabricated, forged lie.</li>
+<li><strong>Thabit (ثَابِت):</strong> Established and sound.</li>
+<li><strong>Salih lil-Ihtijaj (صَالِحٌ لِلِاحْتِجَاج):</strong> Valid as standalone legal proof.</li>
+<li><strong>Jayyid (جَيِّد):</strong> "Good" — a term often used synonymously with authentic or high-grade Hasan.</li>
+<li><strong>Qawiy (قَوِيّ):</strong> Strong in transmission.</li>
+<li><strong>Mujawwad (مُجَوَّد):</strong> Rendered sound through refined transmission.</li>
+<li><strong>La Asla Lahu (لَا أَصْلَ لَهُ):</strong> "It has no basis" — a statement with no known Sanad in any recorded Islamic literature.</li>
+<li><strong>Batil (بَاطِل):</strong> False and groundless.</li>
+<li><strong>Matruk (مَتْرُوك):</strong> Abandoned; narrated by someone suspected of lying.</li>
+<li><strong>Saqit (سَاقِط):</strong> Fallen; completely devoid of academic value.</li>
+<li><strong>Muhkam (مُحْكَم):</strong> An authentic Hadith clear in meaning and free from contradictory texts.</li>
+<li><strong>Mukhtalaf al-Hadith (مُخْتَلِفُ الحَدِيث):</strong> Two authentic Hadiths that outwardly appear to contradict, requiring scholarly synthesis (<em>Jam'</em>).</li>
+<li><strong>Nasikh (نَاسِخ):</strong> A later prophetic ruling that abrogates an earlier ruling.</li>
+<li><strong>Mansukh (مَنْسُوخ):</strong> An authentic earlier ruling that has been superseded by a Nasikh text.</li>
+</ol>
+<hr class="section-divider">
+<h3 id="category-c-transmission-volumes-breadth-4155">Category C: Transmission Volumes & Breadth (41–55)</h3>
+<ol class="reader-list">
+<li><strong>Mutawatir (مُتَوَاتِر):</strong> Mass-transmitted beyond all doubt.</li>
+<li><strong>Mutawatir Lafzi (مُتَوَاتِرٌ لَفْظِيّ):</strong> Mass-transmitted with identical phrasing.</li>
+<li><strong>Mutawatir Ma'nawi (مُتَوَاتِرٌ مَعْنَوِيّ):</strong> Mass-transmitted in thematic consensus.</li>
+<li><strong>Ahad (آحَاد):</strong> Singular or non-Mutawatir transmission.</li>
+<li><strong>Mashhur (مَشْهُور):</strong> Minimum of three transmitters at every tier.</li>
+<li><strong>Mustafid (مُسْتَفِيض):</strong> Synonymous with Mashhur or a widely dispersed Ahad Hadith.</li>
+<li><strong>'Aziz (عَزِيز):</strong> Minimum of two transmitters at every tier.</li>
+<li><strong>Gharib (غَرِيب):</strong> Solitary narrator at some link.</li>
+<li><strong>Gharib Mutlaq (غَرِيبٌ مُطْلَق):</strong> Solitary at the very root of the chain (the Sahabi).</li>
+<li><strong>Gharib Nisbi (غَرِيبٌ نِسْبِي):</strong> Solitary relative to a specific city or teacher.</li>
+<li><strong>Fard (فَرْد):</strong> Unique; solitary transmission.</li>
+<li><strong>Fard Mutlaq (فَرْدٌ مُطْلَق):</strong> Completely solitary across all geographic centers.</li>
+<li><strong>Zawa'id (زَوَائِد):</strong> Unique Hadiths found in one collection that do not exist in another canonical set.</li>
+<li><strong>Turūq (طُرُق):</strong> Plural of Tariq — the various multiple pathways/branches of a Hadith's chain.</li>
+<li><strong>Wajh (وَجْه):</strong> A specific version or angle of transmission.</li>
+</ol>
+<hr class="section-divider">
+<h3 id="category-d-attributions-origins-5665">Category D: Attributions & Origins (56–65)</h3>
+<ol class="reader-list">
+<li><strong>Marfu' Sarih (مَرْفُوعٌ صَرِيح):</strong> Explicitly attributed to the Prophet ﷺ (<em>"I heard the Prophet say..."</em>).</li>
+<li><strong>Marfu' Hukman (مَرْفُوعٌ حُكْمًا):</strong> A Sahabi statement concerning the unseen (Paradise, Hell, Day of Judgment) that could not be derived from personal reasoning, thus carrying prophetic weight.</li>
+<li><strong>Mawquf (مَوْقُوف):</strong> Halted at the Sahabi.</li>
+<li><strong>Maqtu' (مَقْطُوع):</strong> Halted at the Tabi'i.</li>
+<li><strong>Hadith Qudsi (حَدِيثٌ قُدْسِيّ):</strong> Divine saying phrased by the Messenger ﷺ.</li>
+<li><strong>Athar (أَثَر):</strong> Legacy statement of a Sahabi or Tabi'i.</li>
+<li><strong>Isnad 'An'anah (مُعَنْعَن):</strong> Narration using the ambiguous term <em><span class="arabic-matn" dir="rtl">«عَنْ فُلَانٍ»</span></em> (<em>'An fulan</em> / From so-and-so).</li>
+<li><strong>Isnad Mu'annan (مُؤَنَّن):</strong> Narration using the term <em><span class="arabic-matn" dir="rtl">«أَنَّ فُلَانًا»</span></em> (<em>Anna fulanan</em> / That so-and-so).</li>
+<li><strong>Musalsal (مُسَلْسَل):</strong> A unique chain where every narrator repeats the exact same physical gesture, emotional state, or words as their teacher (e.g., <em>Musalsal bil-Awwaliyyah</em> — the Hadith of Mercy: every teacher tells his student, <em>"This is the very first Hadith I ever heard from my Shaykh"</em>).</li>
+<li><strong>Musalsal bil-Yad (مُسَلْسَلٌ بِالقَبْضِ عَلَى اللِّحْيَةِ):</strong> Chains accompanied by an identical physical gesture, such as clasping the beard or smiling.</li>
+</ol>
+<hr class="section-divider">
+<h3 id="category-e-disconnections-chain-breaks-6680">Category E: Disconnections & Chain Breaks (66–80)</h3>
+<ol class="reader-list">
+<li><strong>Muttasil / Mawsul (مُتَّصِل / مَوْصُول):</strong> Fully connected chain with no missing links.</li>
+<li><strong>Munqati' (مُنْقَطِع):</strong> Broken chain with an omitted intermediate link.</li>
+<li><strong>Mursal (مُرْسَل):</strong> Tabi'i narrating directly from the Prophet ﷺ, omitting the Sahabi.</li>
+<li><strong>Mursal al-Sahabi (مُرْسَلُ الصَّحَابِي):</strong> A young Sahabi (like Ibn Abbas) narrating an early Makkan event he did not personally witness, having heard it from an older Sahabi. Unanimously accepted as Sahih.</li>
+<li><strong>Mu'dal (مُعْضَل):</strong> Two or more consecutive missing narrators.</li>
+<li><strong>Mu'allaq (مُعَلَّق):</strong> Chain missing one or more narrators from the author's beginning end.</li>
+<li><strong>Mudallas (مُدَلَّس):</strong> Concealing an evidentiary defect in the chain.</li>
+<li><strong>Tadlees al-Isnad (تَدْلِيسُ الإِسْنَاد):</strong> Narrating from a teacher using ambiguous wording to imply direct hearing when an intermediary was omitted.</li>
+<li><strong>Tadlees al-Taswiyah (تَدْلِيسُ التَّسْوِيَة):</strong> Dropping a weak narrator between two reliable scholars in the upper chain.</li>
+<li><strong>Tadlees al-Shuyukh (تَدْلِيسُ الشُّيُوخ):</strong> Mentioning a teacher by an obscure nickname, kunyah, or lineage so people do not recognize his weakness.</li>
+<li><strong>Mursal Khafi (مُرْسَلٌ خَفِيّ):</strong> Disconnection between two contemporaries who never met or never exchanged that Hadith.</li>
+<li><strong>Mu'an'an al-Mudallis:</strong> When a known practitioner of Tadlees narrates with <em><span class="arabic-matn" dir="rtl">«عَنْ»</span></em>; rejected until he explicitly uses <em><span class="arabic-matn" dir="rtl">«حَدَّثَنَا»</span></em>.</li>
+<li><strong>Inqita' Zahir (انْقِطَاعٌ ظَاهِر):</strong> An obvious gap in the chain visible by comparing death and birth dates.</li>
+<li><strong>Inqita' Batin (انْقِطَاعٌ بَاطِن):</strong> A subtle, hidden gap undetectable without deep biographical research.</li>
+<li><strong>Mubham (مُبْهَم):</strong> An unnamed narrator in the chain (e.g., <em>"From a man,"</em> or <em>"From my uncle"</em>).</li>
+</ol>
+<hr class="section-divider">
+<h3 id="category-f-textual-corruptions-subtle-defects-81105">Category F: Textual Corruptions & Subtle Defects (81–105)</h3>
+<ol class="reader-list">
+<li><strong>Al-'Illah (العِلَّة):</strong> A hidden, damaging defect in an outwardly sound Hadith.</li>
+<li><strong>Al-Mu'allal (المُعَلَّل):</strong> A Hadith carrying an 'Illah defect.</li>
+<li><strong>Al-Shadh (الشَّاذّ):</strong> Reliable narrator contradicting an even more reliable narrator.</li>
+<li><strong>Al-Mahfuz (المَحْفُوظ):</strong> The stronger authentic version that defeats the Shadh version.</li>
+<li><strong>Al-Munkar (المُنْكَر):</strong> Weak narrator contradicting a reliable narrator.</li>
+<li><strong>Al-Ma'ruf (المَعْرُوف):</strong> The reliable version that defeats the Munkar version.</li>
+<li><strong>Al-Mudtarib (المُضْطَرِب):</strong> A Hadith with irreconcilable, equally-weighted variations.</li>
+<li><strong>Al-Maqlub (المَقْلُوب):</strong> Inversion of words or names in a chain or text.</li>
+<li><strong>Al-Mudraj (المُدْرَج):</strong> Extraneous commentary accidentally merged into the text.</li>
+<li><strong>Al-Musahhaf (المُصَحَّف):</strong> Misreading Arabic dots (e.g., reading <em>حَبَّة</em> as <em>خَبَّة</em>).</li>
+<li><strong>Al-Muharraf (المُحَرَّف):</strong> Misreading Arabic vowels/harakat while keeping the consonantal skeleton.</li>
+<li><strong>Al-Mazid fi Muttasil al-Asanid (المَزِيدُ فِي مُتَّصِلِ الأَسَانِيد):</strong> Mistakenly inserting an extra narrator into a chain that was already fully connected.</li>
+<li><strong>Al-Mu'talif wal-Mukhtalif (المُؤْتَلِفُ والمُخْتَلِف):</strong> Names written identically in Arabic script but pronounced completely differently (e.g., <em>سَلَّام</em> Sallam vs. <em>سَلَام</em> Salam).</li>
+<li><strong>Al-Muttafiq wal-Muftariq (المُتَّفِقُ والمُفْتَرِق):</strong> Narrators possessing identical names, fathers' names, and grandfathers' names, but who are entirely different human beings living in different eras!</li>
+<li><strong>Al-Mushtabih (المُشْتَبِه):</strong> Names where the father's name matches while the personal name differs.</li>
+<li><strong>Riwayah al-Akabir 'an al-Asaghir (رِوَايَةُ الأَكَابِرِ عَنِ الأَصَاغِر):</strong> An elder scholar or Sahabi narrating from a younger student.</li>
+<li><strong>Riwayah al-Aba' 'an al-Abna' (رِوَايَةُ الآبَاءِ عَنِ الأَبْنَاءِ):</strong> A father transmitting a Hadith from his own son.</li>
+<li><strong>Al-Mudabbaj (المُدَبَّج):</strong> Mutual narration: Two contemporary peer scholars narrating from each other (e.g., Abu Hurairah and Aisha).</li>
+<li><strong>Riwayah al-Aqran (رِوَايَةُ الأَقْرَان):</strong> Narrating from an academic peer of the same generational cohort.</li>
+<li><strong>Sabab Wurud al-Hadith (سَبَبُ وُرُودِ الحَدِيث):</strong> The specific historical circumstance and background context that prompted the Prophet ﷺ to utter the Hadith.</li>
+<li><strong>Gharib al-Hadith (غَرِيبُ الحَدِيث):</strong> Rare, archaic, or complex classical Arabic words within a Hadith requiring linguistic breakdown.</li>
+<li><strong>Ashab al-Sunan (أَصْحَابُ السُّنَن):</strong> The authors of the four canonical Sunan books (Abu Dawud, al-Tirmidhi, al-Nasa'i, and Ibn Majah).</li>
+<li><strong>Al-Shaykhan (الشَّيْخَان):</strong> "The Two Masters" — universally referring to <strong>Imam al-Bukhari and Imam Muslim</strong>.</li>
+<li><strong>Muttafaqun 'Alayh (مُتَّفَقٌ عَلَيْهِ):</strong> "Agreed Upon" — A Hadith recorded simultaneously by <strong>both al-Bukhari and Muslim</strong> from the same Sahabi. The highest possible tier of authenticity.</li>
+<li><strong>Rawahu al-Khamsah (رَوَاهُ الخَمْسَة):</strong> "Narrated by the Five" — referring to Ahmad, Abu Dawud, al-Tirmidhi, al-Nasa'i, and Ibn Majah.</li>
+</ol>
+<hr class="section-divider">
+<div class="chapter-anchor" id="chapter-8-fabricated-hadith-الحدیث-الموضوع-من-گھڑت-روایات"></div>
+<h2 class="chapter-heading" data-chapter="chapter-8-fabricated-hadith-الحدیث-الموضوع-من-گھڑت-روایات">Chapter 8: Fabricated Hadith (الحدیث الموضوع / من گھڑت روایات)</h2>
+<h3 id="1-the-divine-prohibition-terror-of-lying-upon-rasulullah-ﷺ">1. The Divine Prohibition & Terror of Lying Upon Rasulullah ﷺ</h3>
+<p>Fabricating a Hadith is not merely an intellectual error; in Islamic theology, it is one of the gravest destructive sins (<em>Kaba'ir</em>).</p>
+<p>The Messenger of Allah ﷺ delivered a Mutawatir warning transmitted by over 70 Companions:</p>
+<p class="ar-ur-paragraph" dir="rtl"><span class="katex-math">$\text{<span class="arabic-matn" dir="rtl">«مَنْ كَذَبَ عَلَيَّ مُتَعَمِّدًا فَلْيَتَبَوَّأْ مَقْعَدَهُ مِنَ النَّارِ»</span>}</span>$</p>
+
+            <div class="quote-card">
+              <div class="quote-body"><em>"Whoever intentionally lies upon me, let him take his designated seat in the Hellfire!"</em><br><em>(جو شخص مجھ پر جان بوجھ کر جھوٹ باندھے، وہ اپنا ٹھکانہ جہنم میں بنا لے)</em><br><strong>— [Sahih al-Bukhari & Sahih Muslim]</strong></div>
+              <div class="quote-actions">
+                <button class="btn-card-action btn-copy-quote" title="Copy Text">📋 Copy</button>
+                <button class="btn-card-action btn-share-quote" title="Share via WhatsApp">💬 Share</button>
+              </div>
+            </div>
+            
+<hr class="section-divider">
+<h3 id="2-the-5-motivations-of-the-fabricators-دوافع-الوضع">2. The 5 Motivations of the Fabricators (دوافع الوضع)</h3>
+<pre class="diagram-box"><code>┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                        WHY DID PEOPLE FABRICATE HADITHS?                               │
+├────┬─────────────────────────────┬─────────────────────────────────────────────────────┤
+│ 1. │ Heretical Sabotage          │ Heretics (al-Zanadiqah) who could not overthrow     │
+│    │ (الزَّنْدَقَةُ وَالخُبْث)         │ Islam by the sword, so they sought to corrupt it    │
+│    │                             │ from within. Abdul Karim ibn Abi al-Awja' confessed │
+│    │                             │ before his execution: "I fabricated 4,000 Hadiths   │
+│    │                             │ making the halal haram and the haram halal!"        │
+├────┼─────────────────────────────┼─────────────────────────────────────────────────────┤
+│ 2. │ Sectarian Partisanship      │ Political factions (Shi'a, Khawarij, Umayyads,      │
+│    │ (التَّعَصُّبُ الحِزْبِيُّ)         │ Abbasids) inventing Hadiths praising their leaders  │
+│    │                             │ or cursing their political rivals.                  │
+├────┼─────────────────────────────┼─────────────────────────────────────────────────────┤
+│ 3. │ Pious Fraud by Ascetics     │ The most dangerous category: Well-meaning Sufis     │
+│    │ (الحِسْبَةُ وَالتَّرْغِيبُ)        │ and ascetics who said: "We do not lie against him,  │
+│    │                             │ we lie FOR him to encourage people to read Qur'an!" │
+│    │                             │ Imam Yahya ibn Sa'id al-Qattan noted: "We never saw │
+│    │                             │ upright people lie more than in the Hadiths of zuhd"│
+├────┼─────────────────────────────┼─────────────────────────────────────────────────────┤
+│ 4. │ Flattery of Rulers          │ Courtiers inventing rulings to please sultans.      │
+│    │ (التَّزَلُّفُ إِلَى المُلُوكِ)     │ When Caliph al-Mahdi was flying pigeons, Ghiyath    │
+│    │                             │ ibn Ibrahim added "or birds" to the racing Hadith.  │
+│    │                             │ The Caliph gave him money, then slaughtered the bird│
+│    │                             │ saying: "I caused you to lie upon the Prophet ﷺ!"   │
+├────┼─────────────────────────────┼─────────────────────────────────────────────────────┤
+│ 5. │ Sensationalist Preachers    │ Street storytellers (al-Qussas) who entertained the │
+│    │ (التَّكَسُّبُ بِالقِصَصِ)         │ public with bizarre, sensational tales to collect   │
+│    │                             │ charity and gain fame.                              │
+└────┴─────────────────────────────┴─────────────────────────────────────────────────────┘</code></pre>
+<hr class="section-divider">
+<h3 id="3-case-studies-8-famous-fabricated-hadiths-circulating-today">3. Case Studies: 8 Famous Fabricated Hadiths Circulating Today</h3>
+<p>Many widespread cultural sayings are completely fabricated (<em>Mawdu'</em>):</p>
+<ol class="reader-list">
+<li><strong>"Love of one's homeland is part of faith" (<code>حُبُّ الوَطَنِ مِنَ الإِيمَانِ</code>)</strong></li>
+</ol>
+<p><em>Ruling:</em> <strong>Mawdu' (Fabricated)</strong>. As noted by al-Saghani, al-Suyuti, and al-Albani. Loving one's birthplace is a natural human instinct, not an article of faith.</p>
+<ol class="reader-list">
+<li><strong>"Seek knowledge even if it be in China" (<code>اطْلُبُوا العِلْمَ وَلَوْ بِالصِّينِ</code>)</strong></li>
+</ol>
+<p><em>Ruling:</em> <strong>Batil / Mawdu'</strong>. Ibn al-Jawzi recorded it in <em>al-Mawdu'at</em>; Ibn Hibban declared its narrator Abu Atikah an arch-liar.</p>
+<ol class="reader-list">
+<li><strong>"We returned from the lesser Jihad to the greater Jihad" (<code>رَجَعْنَا مِنَ الجِهَادِ الأَصْغَرِ إِلَى الجِهَادِ الأَكْبَرِ</code>)</strong></li>
+</ol>
+<p><em>Ruling:</em> <strong>Baseless (La Asla Lahu)</strong>. Ibn Hajar al-Asqalani and Ibn Taymiyyah confirmed this is a statement of an ascetic named Ibrahim ibn Abi Ablah, not the Prophet ﷺ.</p>
+<ol class="reader-list">
+<li><strong>"Disagreement among my Ummah is a mercy" (<code>اخْتِلَافُ أُمَّتِي رَحْمَةٌ</code>)</strong></li>
+</ol>
+<p><em>Ruling:</em> <strong>La Asla Lahu (No Sanad)</strong>. As noted by al-Subki and al-Albani.</p>
+<ol class="reader-list">
+<li><strong>"Whoever sleeps after 'Asr and loses his sanity has only himself to blame"</strong></li>
+</ol>
+<p><em>Ruling:</em> <strong>Da'if / Mawdu'</strong>. Used historically by Ibn al-Jawzi as an example of medical myths attributed to the Prophet ﷺ.</p>
+<ol class="reader-list">
+<li><strong>"The stomach is the house of all illness"</strong></li>
+</ol>
+<p><em>Ruling:</em> A saying of the ancient Arab physician <strong>al-Harith ibn Kaladah</strong>, not a Hadith.</p>
+<ol class="reader-list">
+<li><strong>"I was a hidden treasure, and I loved to be known..." (<code>كُنْتُ كَنْزًا مَخْفِيًّا...</code>)</strong></li>
+</ol>
+<p><em>Ruling:</em> <strong>Mawdu'</strong>. Confirmed by Ibn Taymiyyah, al-Zarkashi, and al-Suyuti as a fabricated mystical insertion.</p>
+<ol class="reader-list">
+<li><strong>"Wipe over the back of the neck during Wudu, for it protects from shackles"</strong></li>
+</ol>
+<p><em>Ruling:</em> <strong>Mawdu'</strong>. Fabricated; wiping the neck (<em>Mash al-Raqabah</em>) is not established in any authentic Sunnah.</p>
+<hr class="section-divider">
+<div class="chapter-anchor" id="chapter-9-the-titans-of-hadith-scholarship-in-history-تاریخ-کے-عظیم-محدثین"></div>
+<h2 class="chapter-heading" data-chapter="chapter-9-the-titans-of-hadith-scholarship-in-history-تاریخ-کے-عظیم-محدثین">Chapter 9: The Titans of Hadith Scholarship in History (تاریخ کے عظیم محدثین)</h2>
+<p>The preservation of the Sunnah was executed by generational luminaries whose lives were defined by absolute intellectual honesty, superhuman memory, and relentless travel across thousands of miles (<em>Rihlah fi Talab al-Hadith</em>).</p>
+<pre class="diagram-box"><code>                                CHRONOLOGY OF THE TITANS
+ 150 AH                   200 AH                   250 AH                   852 AH
+   ├── Imam Malik           ├── Imam al-Shafi'i      ├── Imam al-Bukhari      └── Ibn Hajar
+   │   (Muwatta)            │   (Risalah / Fiqh)     │   (Sahih al-Bukhari)       al-Asqalani
+   ├── Sufyan al-Thawri     ├── Yahya ibn Ma'in      ├── Imam Muslim              (Fath al-Bari)
+   │   (Ameer al-Mu'minin)  │   (Terror of Liars)    │   (Sahih Muslim)
+   └── Hammad ibn Salamah   └── Ahmad ibn Hanbal     └── The Four Imams
+                                (Imam Ahl al-Sunnah)     (Abu Dawud, Tirmidhi,
+                                                          Nasa'i, Ibn Majah)</code></pre>
+<hr class="section-divider">
+<h3 id="master-biographies">Master Biographies</h3>
+<h4 id="1-imam-malik-ibn-anas-93179-ah-the-imam-of-dar-al-hijrah">1. Imam Malik ibn Anas (93–179 AH) — The Imam of Dar al-Hijrah</h4>
+<ul class="reader-list">
+<li><strong>The Living Citadel:</strong> Born and bred in Madinah, he spent 60+ years teaching in the Prophet’s Mosque.</li>
+<li><strong>Extreme Veneration:</strong> He never mounted a horse in Madinah out of respect for the soil that contained the body of Rasulullah ﷺ. Before narrating a Hadith, he would perform Ghusl, don his finest robes, apply Oud, and sit with awe.</li>
+<li><strong>Masterwork:</strong> The <strong>Muwatta</strong>. Imam al-Shafi'i famously remarked: <em>"There is no book on earth after the Book of Allah more sound than Malik's Muwatta."</em> (stated before the appearance of Bukhari and Muslim).</li>
+</ul>
+<h4 id="2-imam-yahya-ibn-main-158233-ah-the-terror-of-liars">2. Imam Yahya ibn Ma'in (158–233 AH) — The Terror of Liars</h4>
+<ul class="reader-list">
+<li><strong>The Relentless Critic:</strong> Inherited 1,050,000 dirhams from his father and spent every single coin traveling to verify Hadiths, until he had to walk barefoot!</li>
+<li><strong>Fearless:</strong> When asked: <em>"Do you not fear that these men you criticize will be your opponents on the Day of Judgment?"</em> He replied: <em>"That they be my opponents on Judgment Day is far easier for me than the Prophet ﷺ opposing me and saying: 'Why did you not defend my Sunnah against the liars?!'"</em></li>
+</ul>
+<h4 id="3-imam-ahmad-ibn-hanbal-164241-ah-the-mountain-of-sunnah">3. Imam Ahmad ibn Hanbal (164–241 AH) — The Mountain of Sunnah</h4>
+<ul class="reader-list">
+<li><strong>Superhuman Memory:</strong> Memorized over <strong>1,000,000 Hadiths</strong>.</li>
+<li><strong>The Mihnah (Inquisition):</strong> Endured brutal imprisonment, public flogging, and torture under Caliph al-Mu'tasim for refusing to validate the Mu'tazilite doctrine of the "Created Qur'an." His steadfastness saved orthodox Sunni theology.</li>
+<li><strong>The Musnad:</strong> An encyclopedia containing over <strong>27,000 Hadiths</strong> arranged across 904 Sahabah biographies.</li>
+</ul>
+<h4 id="4-imam-muhammad-ibn-ismail-al-bukhari-194256-ah-ameer-al-muminin">4. Imam Muhammad ibn Isma'il al-Bukhari (194–256 AH) — Ameer al-Mu'minin</h4>
+<ul class="reader-list">
+<li><strong>The Phenomenon of Bukhara:</strong> Orphaned as a child, lost his eyesight and had it miraculously restored through his mother’s fervent prayers. By age 10, he was correcting his teachers' chains.</li>
+<li><strong>Photographic Recall:</strong> Once in Baghdad, scholars shuffled the chains and texts of 100 Hadiths. Al-Bukhari listened once, repeated each fabricated configuration, and corrected all 100 to their proper partners from memory without looking at a single note!</li>
+</ul>
+<h4 id="5-hafiz-al-asr-ibn-hajar-al-asqalani-773852-ah">5. Hafiz al-Asr: Ibn Hajar al-Asqalani (773–852 AH)</h4>
+<ul class="reader-list">
+<li><strong>The Final Authority:</strong> The unrivaled master of the late classical era.</li>
+<li><strong>Fath al-Bari (فَتْحُ البَارِي شَرْحُ صَحِيحِ البُخَارِي):</strong> Spent <strong>32 years</strong> authoring the supreme 13-volume commentary on Sahih al-Bukhari. The scholars famously coined the phrase:</li>
+</ul>
+<p><em><span class="arabic-matn" dir="rtl">«لَا هِجْرَةَ بَعْدَ الفَتْحِ»</span></em> <em>(There is no intellectual migration needed after the completion of al-Fath!)</em></p>
+<ul class="reader-list">
+<li><strong>Master Codifier:</strong> Authored <em>Nukhbat al-Fikar</em> (standard textbook on Mustalah), <em>Taqrib al-Tahdhib</em> (biographical verdicts on thousands of narrators), and <em>al-Isabah fi Tamyiz al-Sahabah</em>.</li>
+</ul>
+<hr class="section-divider">
+<div class="chapter-anchor" id="chapter-10-the-immortal-legacy-of-women-narrators-محدثات-اور-راویات-حدیث"></div>
+<h2 class="chapter-heading" data-chapter="chapter-10-the-immortal-legacy-of-women-narrators-محدثات-اور-راویات-حدیث">Chapter 10: The Immortal Legacy of Women Narrators (محدثات اور راویاتِ حدیث)</h2>
+<h3 id="1-the-historical-invariant-zero-women-fabricators-in-islamic-history">1. The Historical Invariant: Zero Women Fabricators in Islamic History</h3>
+<p>In the monumental 500-year history of narrator criticism, while thousands of men were exposed as liars, fabricators, or politically compromised, the great Hafiz <strong>Imam Shams al-Din al-Dhahabi (d. 748 AH)</strong> recorded a stunning historical reality in his biographical encyclopedia <em>Mizan al-I'tidal</em>:</p>
+<p class="ar-ur-paragraph" dir="rtl"><span class="katex-math">$\text{<span class="arabic-matn" dir="rtl">«مَا عَلِمْتُ فِي النِّسَاءِ مَنِ اتُّهِمَتْ وَلَا مَنْ تَرَكُوهَا»</span>}</span>$</p>
+
+            <div class="quote-card">
+              <div class="quote-body"><em>"I do not know of any woman who was ever accused of fabricating Hadith, nor any woman whose Hadith was abandoned!"</em><br><em>(مجھے پوری تاریخ میں ایک بھی ایسی عورت معلوم نہیں جس پر حدیث گھڑنے کا الزام لگا ہو یا جس کی روایت کو متروک قرار دیا گیا ہو)</em></div>
+              <div class="quote-actions">
+                <button class="btn-card-action btn-copy-quote" title="Copy Text">📋 Copy</button>
+                <button class="btn-card-action btn-share-quote" title="Share via WhatsApp">💬 Share</button>
+              </div>
+            </div>
+            
+<p>Women preserved the religion with unassailable integrity, providing the primary foundation for domestic jurisprudence, marital laws, and private prophetic life.</p>
+<hr class="section-divider">
+<h3 id="2-sayyidatuna-aisha-bint-abi-bakr-رضي-الله-عنها-the-intellectual-titan">2. Sayyidatuna Aisha bint Abi Bakr (رضي الله عنها) — The Intellectual Titan</h3>
+<ul class="reader-list">
+<li><strong>Rank:</strong> One of the top 7 prolific narrators (<em>al-Mukthirun</em>), narrating <strong>2,210 Hadiths</strong>.</li>
+<li><strong>Critical Jurisprudence:</strong> Aisha was not merely a passive transmitter; she was a brilliant jurist who critically corrected male Sahabah when they transmitted Hadiths out of context!</li>
+<li><strong>Al-Zarkashi's Compilation:</strong> Imam Badr al-Din al-Zarkashi authored a dedicated book entitled:</li>
+</ul>
+<p class="ar-ur-paragraph" dir="rtl"><em><span class="arabic-matn" dir="rtl">«الإِجَابَةُ لِإِيرَادِ مَا اسْتَدْرَكَتْهُ عَائِشَةُ عَلَى الصَّحَابَةِ»</span></em></p>
+<p><em>(The Definitive Answer: The Critical Corrections of Aisha Upon the Sahabah)</em>.</p>
+<ul class="reader-list">
+<li><em>Example:</em> When Abu Hurairah (RA) narrated: <em>"A dog, donkey, or woman nullifies the prayer if they walk in front of the worshipper,"</em> Aisha corrected him sharply: <em>"Have you compared us to dogs and donkeys?! I used to sleep in front of the Messenger of Allah ﷺ while he prayed Tahajjud, and when he wished to prostrate, he would pinch my foot and I would withdraw it!"</em></li>
+</ul>
+<hr class="section-divider">
+<h3 id="3-other-mothers-of-the-believers-female-companions">3. Other Mothers of the Believers & Female Companions</h3>
+<ul class="reader-list">
+<li><strong>Umm Salamah (Hind bint Abi Umayyah) (رضي الله عنها):</strong> Narrated <strong>378 Hadiths</strong>. Her astute advice during the Crisis of Hudaybiyyah saved the Muslim army from disintegration.</li>
+<li><strong>Hafsah bint Umar (رضي الله عنها):</strong> Entrusted with the primary official master copy of the Holy Qur'an compiled by Abu Bakr (RA).</li>
+<li><strong>Asma bint Abi Bakr, Umm 'Atiyyah al-Ansariyyah, and Rubayyi' bint Mu'awwidh:</strong> Crucial authorities on the laws of funeral rites (<em>Jana'iz</em>), Ablution (<em>Wudu</em>), and public military medicine.</li>
+</ul>
+<hr class="section-divider">
+<h3 id="4-eminent-female-scholars-of-the-medieval-eras">4. Eminent Female Scholars of the Medieval Eras</h3>
+<p>Women were not merely narrators in the early days; they were the professors of the greatest male imams throughout the classical era:</p>
+<ul class="reader-list">
+<li><strong>Karima al-Marwaziyya (d. 463 AH, Mecca):</strong> The supreme authority on <strong>Sahih al-Bukhari</strong>. Her personal manuscript was the primary authenticated reference for the entire Islamic world. Giants like al-Khatib al-Baghdadi traveled to Mecca specifically to read the entirety of Sahih al-Bukhari under her direction.</li>
+<li><strong>Fatimah bint Sa'd al-Khayr (d. 600 AH):</strong> Held the highest transmission chains of Sahih Muslim.</li>
+<li><strong>Shuhdah al-Katibah ("The Pride of Womanhood", d. 574 AH, Baghdad):</strong> Master calligrapher and paramount Muhaddithah of Iraq, teaching hundreds of male scholars in the grand mosque.</li>
+<li><strong>Zaynab bint al-Kamal (d. 740 AH, Damascus):</strong> Held dozens of high chains (<em>Asanid 'Aliyah</em>). <strong>Imam al-Dhahabi and Ibn Hajar al-Asqalani</strong> studied under dozens of female Hadith masters, prominently crediting them in their certifications (<em>Ijazat</em>).</li>
+</ul>
+<hr class="section-divider">
+<div class="chapter-anchor" id="chapter-11-sunni-vs-shia-hadith-methodology-تقابلی-جائزہ-اہل-السنت-اور-اہل-تشیع-کا-منہج-حدیث"></div>
+<h2 class="chapter-heading" data-chapter="chapter-11-sunni-vs-shia-hadith-methodology-تقابلی-جائزہ-اہل-السنت-اور-اہل-تشیع-کا-منہج-حدیث">Chapter 11: Sunni vs. Shia Hadith Methodology (تقابلی جائزہ: اہل السنت اور اہل تشیع کا منہجِ حدیث)</h2>
+<p>To understand Hadith at a professional level, an objective, scholarly comparative analysis of the methodology of <strong>Ahl al-Sunnah wal-Jama'ah</strong> and <strong>Shi'a Imami Ithna 'Ashariyyah</strong> is essential.</p>
+<pre class="diagram-box"><code>┌──────────────────────────────────────┬──────────────────────────────────────┐
+│       SUNNI METHODOLOGY              │       SHIA (IMAMI) METHODOLOGY       │
+├──────────────────────────────────────┼──────────────────────────────────────┤
+│ 1. SCOPE OF SUNNAH:                  │ 1. SCOPE OF SUNNAH:                  │
+│ Restricted to Prophet Muhammad ﷺ.    │ Encompasses the Prophet ﷺ AND the   │
+│ Sahabah statements are Athar.        │ 12 Infallible Imams (Ahl al-Bayt).   │
+├──────────────────────────────────────┼──────────────────────────────────────┤
+│ 2. CANONICAL COLLECTIONS:            │ 2. CANONICAL COLLECTIONS:            │
+│ The Six Books (Kutub al-Sittah)      │ The Four Books (al-Kutub al-Arba'ah) │
+│ (Bukhari, Muslim, Abu Dawud, etc.)   │ (al-Kafi, Man La Yahduruhu, etc.)    │
+├──────────────────────────────────────┼──────────────────────────────────────┤
+│ 3. INTEGRITY OF SAHABAH:             │ 3. INTEGRITY OF SAHABAH:             │
+│ 'Adalat al-Sahabah: All Companions   │ Selective critique: Companions are   │
+│ are morally upright transmitters     │ evaluated individually based on      │
+│ based on Quranic praise (Surah 9:100)│ their loyalty to the Wilayah of Ali. │
+├──────────────────────────────────────┼──────────────────────────────────────┤
+│ 4. ISNAD TRANSMISSION:               │ 4. ISNAD TRANSMISSION:               │
+│ Chain must connect back to Prophet ﷺ │ Chain must connect to an Infallible  │
+│ via continuous, named upright links. │ Imam; Imams are divinely inspired.   │
+├──────────────────────────────────────┼──────────────────────────────────────┤
+│ 5. HISTORICAL SYSTEMATIZATION:       │ 5. HISTORICAL SYSTEMATIZATION:       │
+│ 5-tier classification codified early │ Modern 4-tier grading introduced by  │
+│ by 2nd-3rd century AH.               │ Allamah al-Hilli (7th century AH).   │
+└──────────────────────────────────────┴──────────────────────────────────────┘</code></pre>
+<hr class="section-divider">
+<h3 id="deep-dive-into-the-points-of-divergence">Deep Dive into the Points of Divergence</h3>
+<h4 id="1-the-theological-scope-of-hadith">1. The Theological Scope of Hadith</h4>
+<ul class="reader-list">
+<li><strong>In Sunni Methodology:</strong> Hadith is exclusively the speech, action, approval, or characteristic of the Prophet Muhammad ﷺ. Statements of the Companions or family (<em>Ahl al-Bayt</em>) are historical evidence (<em>Athar</em>), but never independent theological sources unless directly attributed to the Prophet ﷺ.</li>
+<li><strong>In Shia Methodology:</strong> The Prophet ﷺ and the Twelve Imams are all <strong>Ma'sumin (المَعْصُومِين - Divinely Infallible)</strong>. Therefore, an authentic statement of Imam Ja'far al-Sadiq or Imam Muhammad al-Baqir is considered divine law (<em>Hujjah</em>) of identical legislative authority to a direct statement of the Prophet ﷺ.</li>
+</ul>
+<h4 id="2-the-canonical-collections">2. The Canonical Collections</h4>
+<ul class="reader-list">
+<li><strong>The Sunni Canon (الكتب الستة):</strong></li>
+</ul>
+<ol class="reader-list">
+<li>Sahih al-Bukhari</li>
+<li>Sahih Muslim</li>
+<li>Sunan Abi Dawud</li>
+<li>Jami' al-Tirmidhi</li>
+<li>Sunan al-Nasa'i</li>
+<li>Sunan Ibn Majah</li>
+</ol>
+<ul class="reader-list">
+<li><strong>The Shia Canon (الكتب الأربعة - Al-Kutub al-Arba'ah):</strong></li>
+</ul>
+<ol class="reader-list">
+<li><strong>Al-Kafi (الكَافِي):</strong> Compiled by Muhammad ibn Ya'qub al-Kulayni (d. 329 AH). The primary encyclopedia (over 16,000 narrations).</li>
+<li><strong>Man La Yahduruhu al-Faqih (مَنْ لَا يَحْضُرُهُ الفَقِيه):</strong> Compiled by Shaykh al-Saduq Ibn Babawayh (d. 381 AH).</li>
+<li><strong>Tahdhib al-Ahkam (تَهْذِيبُ الأَحْكَام):</strong> Compiled by Shaykh al-Ta'ifah Abu Ja'far al-Tusi (d. 460 AH).</li>
+<li><strong>Al-Istibsar (الاسْتِبْصَار):</strong> Also by Shaykh al-Tusi, focusing specifically on resolving apparent contradictions.</li>
+</ol>
+<h4 id="3-narrator-scrutiny-adalat-al-sahabah">3. Narrator Scrutiny & 'Adalat al-Sahabah</h4>
+<ul class="reader-list">
+<li><strong>The Sunni Principle of 'Adalat al-Sahabah (عَدَالَةُ الصَّحَابَةِ):</strong></li>
+</ul>
+<p>Sunni scholars hold that while Sahabah were human and not infallible in their personal sins, they are <strong>100% morally upright in transmitting religion</strong>. This is based directly on the Qur'an:</p>
+<p class="ar-ur-paragraph" dir="rtl"><em><span class="arabic-matn" dir="rtl">«وَالسَّابِقُونَ الْأَوَّلُونَ مِنَ الْمُهَاجِرِينَ وَالْأَنْصَارِ وَالَّذِينَ اتَّبَعُوهُمْ بِإِحْسَانٍ رَضِيَ اللَّهُ عَنْهُمْ وَرَضُوا عَنْهُ»</span></em> [Surah al-Tawbah: 100].</p>
+<p>Therefore, if a chain reaches a confirmed Sahabi (even if unnamed, e.g., <em>"A companion told me"</em>), the Sanad is considered valid because no Sahabi deliberately fabricated lies against the Prophet ﷺ.</p>
+<ul class="reader-list">
+<li><strong>The Shia Position:</strong></li>
+</ul>
+<p>Reject the blanket uprightness of all Companions. They subject the Sahabah to narrator criticism, accepting only those who maintained loyalty to Imam Ali ibn Abi Talib (RA) (such as Salman al-Farsi, Abu Dharr al-Ghifari, al-Miqdad, and Ammar ibn Yasir), while rejecting narrations transmitted through Abu Hurairah, Aisha, or Anas ibn Malik unless corroborated through an Imam.</p>
+<h4 id="4-the-shia-grading-evolution">4. The Shia Grading Evolution</h4>
+<p>Historically, early Shia scholars viewed all narrations in their primary books as reliable (<em>Mu'tabar</em>). In the 7th century AH, <strong>Jamal al-Din Ahmad ibn Tawus (d. 673 AH)</strong> and <strong>Allamah al-Hilli (d. 726 AH)</strong> introduced a four-tier classification system:</p>
+<ol class="reader-list">
+<li><strong>Sahih (صحيح):</strong> Fully connected chain through upright Imami Shi'a narrators (<em>Imami 'Adl</em>).</li>
+<li><strong>Hasan (حسن):</strong> Connected chain through praiseworthy Imami narrators whose absolute uprightness is unverified.</li>
+<li><strong>Muwaththaq (موثق - Reliable):</strong> Connected chain containing reliable, honest narrators who belong to non-Imami sects (e.g., Sunnis, Waqifites, or Fathites).</li>
+<li><strong>Da'if (ضعيف):</strong> Any narration failing the above criteria.</li>
+</ol>
+<hr class="section-divider">
+<div class="chapter-anchor" id="chapter-12-how-to-verify-a-hadith-today-a-modern-hands-on-field-guide"></div>
+<h2 class="chapter-heading" data-chapter="chapter-12-how-to-verify-a-hadith-today-a-modern-hands-on-field-guide">Chapter 12: How to Verify a Hadith Today — A Modern Hands-On Field Guide</h2>
+<h3 id="دور-حاضر-میں-تخریج-و-تحقیق-کا-عملی-طریقہ">(دورِ حاضر میں تخریج و تحقیق کا عملی طریقہ)</h3>
+<p>Today, you do not need to spend 20 years traveling to Baghdad, Damascus, and Cairo to verify a Hadith. The digital preservation of Islamic literature allows anyone with basic training to conduct professional <strong>Takhrij</strong> in under five minutes.</p>
+<pre class="diagram-box"><code>┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                        THE 4-STEP MODERN TAKHRIJ PROTOCOL                              │
+└──────────────────────────────────────┬─────────────────────────────────────────────────┘
+                                       ▼
+  [STEP 1: ISOLATE KEYWORDS]     Extract rare, unique Arabic words from the text
+                                       │ (e.g., instead of "Salah", search "Dhira'ayn")
+                                       ▼
+  [STEP 2: QUERY DIGITAL DESK]   Search primary databases (Sunnah.com / Dorar.net)
+                                       │
+                                       ▼
+  [STEP 3: IDENTIFY SOURCE BOOK] Locate the primary source (Bukhari, Ahmad, Tabarani)
+                                       │ Check if it's Tier 1, 2, 3, or 4!
+                                       ▼
+  [STEP 4: READ SCHOLARLY HUKM]  Examine the grading verdict (Hukm al-Muhaddith)
+                                       │ Cross-reference classical & contemporary critics
+                                       ▼
+  [FINAL VERDICT ESTABLISHED]    Determine legal and spiritual usability</code></pre>
+<hr class="section-divider">
+<h3 id="1-the-essential-digital-tool-suite">1. The Essential Digital Tool Suite</h3>
+<h4 id="a-sunnahcom-the-gold-standard-for-english-urdu-readers">A. Sunnah.com (The Gold Standard for English / Urdu Readers)</h4>
+<ul class="reader-list">
+<li><strong>What it is:</strong> The world's cleanest bilingual portal for the Kutub al-Sittah, Muwatta, Musnad Ahmad, Bulugh al-Maram, and Riyad al-Salihin.</li>
+<li><strong>How to use it:</strong></li>
+<li>Search using exact English keywords or root Arabic terms.</li>
+<li>Pay attention to the <strong>Grading Badge</strong> at the bottom of each Hadith:</li>
+<li><code>Sahih</code> (Green)</li>
+<li><code>Hasan</code> (Blue)</li>
+<li><code>Da'if</code> (Red/Yellow)</li>
+<li>Understand the grading scholar: Gradings on Sunnah.com for Sunan books are usually from <strong>Shaykh Nasiruddin al-Albani</strong> or <strong>Darussalam Research Team</strong> (Zubair Ali Zai).</li>
+</ul>
+<h4 id="b-dorarnet-الدرر-السنية-الموسوعة-الحديثية-the-sovereign-arabic-tool">B. Dorar.net (الدرر السنية - الموسوعة الحديثية) — The Sovereign Arabic Tool</h4>
+<ul class="reader-list">
+<li><strong>The Ultimate Search Engine:</strong> Maintained by a council of Hadith specialists.</li>
+<li><strong>Workflow on Dorar.net:</strong></li>
+</ul>
+<ol class="reader-list">
+<li>Visit <code>dorar.net/hadith/search</code>.</li>
+<li>Paste the Arabic phrase into the search box.</li>
+<li>Filter by: <em>"Exclude fabricated and baseless reports"</em> or <em>"Search all"</em>.</li>
+<li>The engine returns:</li>
+</ol>
+<ul class="reader-list">
+<li><strong>الراوي (The Narrator/Sahabi)</strong></li>
+<li><strong>المحدث (The Evaluating Scholar)</strong></li>
+<li><strong>المصدر (The Primary Source Book and Page Number)</strong></li>
+<li><strong>خلاصة حكم المحدث (The Scholar's Exact Verdict):</strong> (e.g., <em>صحيح</em>, <em>إسناده ضعيف</em>, <em>منكر</em>, <em>لا أصل له</em>).</li>
+</ul>
+<h4 id="c-shamelaws-المكتبة-الشاملة-the-digital-manuscript-library">C. Shamela.ws (المكتبة الشاملة) — The Digital Manuscript Library</h4>
+<ul class="reader-list">
+<li>Contains over <strong>15,000 digitized classical Islamic books</strong> with original page numbers matching printed editions.</li>
+<li>Used when you need to research the <strong>biography of a specific narrator</strong> in <em>Tahdhib al-Kamal</em> or look up hidden defects in <em>al-'Ilal</em> by al-Daraqutni.</li>
+</ul>
+<hr class="section-divider">
+<h3 id="2-a-real-world-hands-on-case-study">2. A Real-World Hands-On Case Study</h3>
+<p><strong>Scenario:</strong> A viral social media post claims:</p>
+<p><em>"The Prophet ﷺ said: Whoever informs people about the month of Rabi' al-Awwal first, the fire of Hell is forbidden for him!"</em></p>
+<p class="ar-ur-paragraph" dir="rtl"><em>(جو شخص ربیع الاول کے مہینے کی مبارکباد سب سے پہلے دے گا، اس پر جہنم کی آگ حرام ہو جائے گی)</em>.</p>
+<h4 id="execution-of-verification">Execution of Verification:</h4>
+<ol class="reader-list">
+<li><strong>Search on Dorar.net / Shamela:</strong> Query terms: <code>من بشر بمولد</code> or <code>من يهنئ الناس بربيع الأول</code>.</li>
+<li><strong>Result Analysis:</strong> Zero hits in Sahih al-Bukhari, Sahih Muslim, the 4 Sunan, Musnad Ahmad, or any primary Hadith book of the first 600 years of Islam!</li>
+<li><strong>Consulting Mawdu'at Manuals:</strong> The scholars of Hadith (such as Ibn Hajar and modern Hadith councils) classify this text as:</li>
+</ol>
+<p class="ar-ur-paragraph" dir="rtl"><span class="katex-math">$\text{<span class="arabic-matn" dir="rtl">«لَا أَصْلَ لَهُ وَهُوَ مَوْضُوعٌ مَكْذُوبٌ»</span>} \quad \text{(Baseless, fabricated lie!)}</span>$</p>
+<ol class="reader-list">
+<li><strong>Internal Textual Critique:</strong> The promise of guaranteed salvation from Hellfire simply for sending a calendar greeting violates all principles of Shari'ah.</li>
+<li><strong>Conclusion:</strong> It is completely forbidden (<em>Haram</em>) to share this message, and one must politely educate whoever forwarded it!</li>
+</ol>
+<hr class="section-divider">
+<div class="chapter-anchor" id="appendix-master-classification-matrix-the-students-curriculum"></div>
+<h2 class="chapter-heading" data-chapter="appendix-master-classification-matrix-the-students-curriculum">Appendix: Master Classification Matrix & The Student's Curriculum</h2>
+<h3 id="ضمیمہ-اصطلاحی-خلاصہ-اور-نصاب-تعلیم">(ضمیمہ: اصطلاحی خلاصہ اور نصابِ تعلیم)</h3>
+<h3 id="1-the-ultimate-hadith-classification-cheat-sheet">1. The Ultimate Hadith Classification Cheat Sheet</h3>
+<pre class="diagram-box"><code>Is the Chain Connected (Muttasil)?
+   ├── NO  ──► Missing at start? ──────────────► MU'ALLAQ (معلق)
+   │       ──► Missing Sahabi at end? ─────────► MURSAL (مرسل)
+   │       ──► Missing 2+ consecutive? ────────► MU'DAL (معضل)
+   │       ──► Missing intermediate link? ─────► MUNQATI' (منقطع)
+   │       ──► Hidden, concealed gap? ─────────► MUDALLAS (مدلس) / MURSAL KHAFI
+   │
+   └── YES ──► Are all narrators Upright ('Adl) and Precise (Dabit)?
+                 ├── NO  ──► Accused of lying? ──────► MAWDU' (موضوع) / MATRUK
+                 │       ──► Poor memory / weak? ────► DA'IF (ضعيف)
+                 │             └── Elevated by multiple paths? ──► HASAN LI-GHAYRIHI
+                 │
+                 └── YES ──► Free from Shudhudh and 'Illah?
+                               ├── NO  ──► Contradicts superior? ─► SHADH (شاذ)
+                               │       ──► Hidden subtle defect? ─► MU'ALLAL (معلل)
+                               │
+                               └── YES ──► Highest retention? ────► SAHIH LI-DHATIHI
+                                           Slightly lighter? ─────► HASAN LI-DHATIHI</code></pre>
+<hr class="section-divider">
+<h3 id="2-the-progressive-5-stage-curriculum-for-mastery-in-hadith-sciences">2. The Progressive 5-Stage Curriculum for Mastery in Hadith Sciences</h3>
+<p>If you wish to progress from a passionate beginner to an independent researcher (<em>Muhaqqiq</em>), follow the time-tested classical curriculum:</p>
+<pre class="diagram-box"><code>┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                        THE 5-STAGE HADITH MASTERY ROADMAP                              │
+├─────────┬──────────────────────────────┬───────────────────────┬───────────────────────┤
+│ Stage   │ Classical Text               │ Author                │ Focus & Learning Goal │
+├─────────┼──────────────────────────────┼───────────────────────┼───────────────────────┤
+│ STAGE 1 │ Al-Manzumah al-Bayquniyyah   │ Umar al-Bayquni       │ 34 poetic verses      │
+│ (Begin) │ (المنظومة البيقونية)         │ (d. ~1080 AH)         │ memorizing all core   │
+│         │ + Taysir Mustalah al-Hadith  │ Dr. Mahmud al-Tahhan  │ definitions quickly.  │
+├─────────┼──────────────────────────────┼───────────────────────┼───────────────────────┤
+│ STAGE 2 │ Nukhbat al-Fikar             │ Ibn Hajar al-Asqalani │ Logical, deductive    │
+│ (Inter) │ + Nuzhat al-Nazar            │ (d. 852 AH)           │ structural framework  │
+│         │ (نخبة الفكر في مصطلح أهل الأثر)│                     │ of Hadith sciences.   │
+├─────────┼──────────────────────────────┼───────────────────────┼───────────────────────┤
+│ STAGE 3 │ Muqaddimah Ibn al-Salah      │ Abu 'Amr Ibn al-Salah │ The master foundation │
+│ (Adv.)  │ (Ulum al-Hadith / علوم الحديث)│ (d. 643 AH)          │ of all classical 65   │
+│         │                              │                       │ Hadith disciplines.   │
+├─────────┼──────────────────────────────┼───────────────────────┼───────────────────────┤
+│ STAGE 4 │ Tadrib al-Rawi               │ Jalal al-Din al-Suyuti│ Exhaustive legal &    │
+│ (Master)│ (تدريب الراوي شرح تقريب      │ (d. 911 AH)           │ critical commentary   │
+│         │ النووي)                      │                       │ on Imam al-Nawawi.    │
+├─────────┼──────────────────────────────┼───────────────────────┼───────────────────────┤
+│ STAGE 5 │ Sharh 'Ilal al-Tirmidhi      │ Ibn Rajab al-Hanbali  │ Deepest mechanics of  │
+│ (Expert)│ (شرح علل الترمذي)            │ (d. 795 AH)           │ hidden defects, Rijal │
+│         │ + Primary Rijal Dictionaries │ + Mizzi & Ibn Hajar   │ and live Takhrij.     │
+└─────────┴──────────────────────────────┴───────────────────────┴───────────────────────┘</code></pre>
+<hr class="section-divider">
+<h3 id="3-spiritual-counsel-from-the-masters-of-hadith">3. Spiritual Counsel from the Masters of Hadith</h3>
+<p>To conclude this encyclopedia, remember the golden counsel of the classical Muhaddithin:</p>
+<p>Imam Sufyan al-Thawri (رحمه الله) said:</p>
+<p class="ar-ur-paragraph" dir="rtl"><em><span class="arabic-matn" dir="rtl">«إِذَا أَرَدْتَ أَنْ يَكُونَ حَدِيثُكَ صَحِيحًا فَاعْمَلْ بِهِ»</span></em></p>
+<p><em>(If you want your Hadith knowledge to be preserved and sound, act upon it!)</em></p>
+<p>And Imam al-Nawawi wrote:</p>
+
+            <div class="quote-card">
+              <div class="quote-body"><em>"It is incumbent upon the seeker of Hadith to begin with sincere purification of intention for Allah Almighty alone, to adorn themselves with noble character, modesty, and reverence for the Sunnah, and to transmit nothing without precise verification."</em></div>
+              <div class="quote-actions">
+                <button class="btn-card-action btn-copy-quote" title="Copy Text">📋 Copy</button>
+                <button class="btn-card-action btn-share-quote" title="Share via WhatsApp">💬 Share</button>
+              </div>
+            </div>
+            
+<hr class="section-divider">
+<pre class="diagram-box"><code>   وَآخِرُ دَعْوَانَا أَنِ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ
+   سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا أَنْتَ
+   أَسْتَغْفِرُكَ وَأَتُوبُ إِلَيْكَ</code></pre>
+  </main>
+
+  <!-- Floating Mobile Quick Bar -->
+  <aside class="floating-bar">
+    <button id="btn-float-drawer" class="btn-floating" title="Chapters">📑</button>
+    <button id="btn-float-search" class="btn-floating" title="Search">🔍</button>
+    <button id="btn-float-settings" class="btn-floating" title="Fonts & Reading">⚙️</button>
+    <button id="btn-float-top" class="btn-floating" title="Back to Top">⬆️</button>
+  </aside>
+
+  <!-- Chapter Navigation Drawer -->
+  <div id="drawer-overlay" class="drawer-overlay"></div>
+  <aside id="chapter-drawer" class="chapter-drawer" aria-label="Table of Contents">
+    <div class="drawer-header">
+      <span class="drawer-title">📚 Table of Contents</span>
+      <button id="btn-close-drawer" class="btn-nav" style="border:none;">✕</button>
+    </div>
+    <nav class="drawer-content">
+      
+        <a href="#preface-foundations-of-hadith-its-sacred-preservation" class="toc-item" data-target="preface-foundations-of-hadith-its-sacred-preservation">
+          <span class="toc-badge">INTRO</span>
+          <span class="toc-text">Foundations of Hadith & Its Sacred Preservation</span>
+        </a>
+        
+        <a href="#chapter-1-history-origin-of-hadith-compilation-تاریخ-تدوین-حدیث" class="toc-item" data-target="chapter-1-history-origin-of-hadith-compilation-تاریخ-تدوین-حدیث">
+          <span class="toc-badge">#1</span>
+          <span class="toc-text">Ch 1: History & Origin of Hadith Compilation (تاریخِ تدوینِ حدیث)</span>
+        </a>
+        
+        <a href="#chapter-2-sanad-سند-the-anatomy-of-transmission-chains" class="toc-item" data-target="chapter-2-sanad-سند-the-anatomy-of-transmission-chains">
+          <span class="toc-badge">#2</span>
+          <span class="toc-text">Ch 2: Sanad (سند) — The Anatomy of Transmission Chains</span>
+        </a>
+        
+        <a href="#chapter-3-matn-متن-the-text-the-science-of-internal-critique" class="toc-item" data-target="chapter-3-matn-متن-the-text-the-science-of-internal-critique">
+          <span class="toc-badge">#3</span>
+          <span class="toc-text">Ch 3: Matn (متن) — The Text & The Science of Internal Critique</span>
+        </a>
+        
+        <a href="#chapter-4-the-master-classification-of-hadith-اقسام-و-مراتب-حدیث" class="toc-item" data-target="chapter-4-the-master-classification-of-hadith-اقسام-و-مراتب-حدیث">
+          <span class="toc-badge">#4</span>
+          <span class="toc-text">Ch 4: The Master Classification of Hadith (اقسامِ و مراتبِ حدیث)</span>
+        </a>
+        
+        <a href="#chapter-5-rijal-al-hadith-jarh-wa-tadil-علم-رجال-الحدیث-والجرح-والتعدیل" class="toc-item" data-target="chapter-5-rijal-al-hadith-jarh-wa-tadil-علم-رجال-الحدیث-والجرح-والتعدیل">
+          <span class="toc-badge">#5</span>
+          <span class="toc-text">Ch 5: Rijal al-Hadith & Jarh wa Ta'dil (علم رجال الحدیث والجرح والتعدیل)</span>
+        </a>
+        
+        <a href="#chapter-6-kutub-al-sittah-the-hierarchy-of-hadith-collections-کتب-حدیث-کے-درجات-و-مراتب" class="toc-item" data-target="chapter-6-kutub-al-sittah-the-hierarchy-of-hadith-collections-کتب-حدیث-کے-درجات-و-مراتب">
+          <span class="toc-badge">#6</span>
+          <span class="toc-text">Ch 6: Kutub al-Sittah & The Hierarchy of Hadith Collections (کتبِ حدیث کے درجات و مراتب)</span>
+        </a>
+        
+        <a href="#chapter-7-mustalah-al-hadith-the-100-technical-terms-compendium" class="toc-item" data-target="chapter-7-mustalah-al-hadith-the-100-technical-terms-compendium">
+          <span class="toc-badge">#7</span>
+          <span class="toc-text">Ch 7: Mustalah al-Hadith — The 100+ Technical Terms Compendium</span>
+        </a>
+        
+        <a href="#chapter-8-fabricated-hadith-الحدیث-الموضوع-من-گھڑت-روایات" class="toc-item" data-target="chapter-8-fabricated-hadith-الحدیث-الموضوع-من-گھڑت-روایات">
+          <span class="toc-badge">#8</span>
+          <span class="toc-text">Ch 8: Fabricated Hadith (الحدیث الموضوع / من گھڑت روایات)</span>
+        </a>
+        
+        <a href="#chapter-9-the-titans-of-hadith-scholarship-in-history-تاریخ-کے-عظیم-محدثین" class="toc-item" data-target="chapter-9-the-titans-of-hadith-scholarship-in-history-تاریخ-کے-عظیم-محدثین">
+          <span class="toc-badge">#9</span>
+          <span class="toc-text">Ch 9: The Titans of Hadith Scholarship in History (تاریخ کے عظیم محدثین)</span>
+        </a>
+        
+        <a href="#chapter-10-the-immortal-legacy-of-women-narrators-محدثات-اور-راویات-حدیث" class="toc-item" data-target="chapter-10-the-immortal-legacy-of-women-narrators-محدثات-اور-راویات-حدیث">
+          <span class="toc-badge">#10</span>
+          <span class="toc-text">Ch 10: The Immortal Legacy of Women Narrators (محدثات اور راویاتِ حدیث)</span>
+        </a>
+        
+        <a href="#chapter-11-sunni-vs-shia-hadith-methodology-تقابلی-جائزہ-اہل-السنت-اور-اہل-تشیع-کا-منہج-حدیث" class="toc-item" data-target="chapter-11-sunni-vs-shia-hadith-methodology-تقابلی-جائزہ-اہل-السنت-اور-اہل-تشیع-کا-منہج-حدیث">
+          <span class="toc-badge">#11</span>
+          <span class="toc-text">Ch 11: Sunni vs. Shia Hadith Methodology (تقابلی جائزہ: اہل السنت اور اہل تشیع کا منہجِ حدیث)</span>
+        </a>
+        
+        <a href="#chapter-12-how-to-verify-a-hadith-today-a-modern-hands-on-field-guide" class="toc-item" data-target="chapter-12-how-to-verify-a-hadith-today-a-modern-hands-on-field-guide">
+          <span class="toc-badge">#12</span>
+          <span class="toc-text">Ch 12: How to Verify a Hadith Today — A Modern Hands-On Field Guide</span>
+        </a>
+        
+        <a href="#appendix-master-classification-matrix-the-students-curriculum" class="toc-item" data-target="appendix-master-classification-matrix-the-students-curriculum">
+          <span class="toc-badge">#13</span>
+          <span class="toc-text">App: Master Classification Matrix & The Student's Curriculum</span>
+        </a>
+        
+    </nav>
+  </aside>
+
+  <!-- Bottom Settings Sheet -->
+  <aside id="settings-sheet" class="settings-sheet" aria-label="Reader Settings">
+    <div class="sheet-handle"></div>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+      <h3 style="margin:0; font-size:1rem; color:var(--gold-primary);">⚙️ Reading & Font Controls</h3>
+      <button id="btn-close-settings" class="btn-nav" style="border:none; min-height:36px; min-width:36px;">✕</button>
+    </div>
+
+    <!-- Urdu Font Switcher -->
+    <div class="settings-group">
+      <div class="settings-group-title">🇵🇰 Urdu Typography (اردو فونٹ)</div>
+      <div class="toggle-grid">
+        <button id="btn-urdu-nastaliq" class="btn-toggle active" data-urdu="nastaliq">
+          <span>📜 Nastaliq</span>
+          <small style="opacity:0.8;">(روایتی)</small>
+        </button>
+        <button id="btn-urdu-naskh" class="btn-toggle" data-urdu="naskh">
+          <span>🔤 Flat Naskh</span>
+          <small style="opacity:0.8;">(سیدھا خط)</small>
+        </button>
+      </div>
+    </div>
+
+    <!-- Arabic Font Switcher -->
+    <div class="settings-group">
+      <div class="settings-group-title">🇸🇦 Arabic Typography (عربی فونٹ)</div>
+      <div class="toggle-grid">
+        <button id="btn-arabic-amiri" class="btn-toggle active" data-arabic="amiri">
+          <span>📖 Amiri</span>
+          <small style="opacity:0.8;">(قرآنی)</small>
+        </button>
+        <button id="btn-arabic-readex" class="btn-toggle" data-arabic="readex">
+          <span>✨ Readex</span>
+          <small style="opacity:0.8;">(ماڈرن)</small>
+        </button>
+      </div>
+    </div>
+
+    <!-- Theme Switcher -->
+    <div class="settings-group">
+      <div class="settings-group-title">🎨 Color Theme (تھیم)</div>
+      <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:0.5rem;">
+        <button id="theme-dark" class="btn-toggle active">🌙 AMOLED</button>
+        <button id="theme-sepia" class="btn-toggle">📜 Sepia</button>
+        <button id="theme-light" class="btn-toggle">☀️ Light</button>
+      </div>
+    </div>
+
+    <!-- Font Size Slider -->
+    <div class="settings-group">
+      <div style="display:flex; justify-content:space-between; margin-bottom:0.4rem; font-size:0.82rem;">
+        <span>Reading Font Size</span>
+        <strong id="label-font-size" style="color:var(--gold-primary);">18 px</strong>
+      </div>
+      <input type="range" id="slider-size" min="15" max="28" value="18" style="width:100%;">
+    </div>
+  </aside>
+
+  <!-- Search Modal -->
+  <div id="search-modal" class="search-modal">
+    <div class="search-box">
+      <input type="text" id="search-input" class="search-input" placeholder="Search Hadith, terms, narrators (e.g., Sanad, Bukhari, Sahih)..." autofocus>
+      <button id="btn-close-search" class="btn-nav" style="position:absolute; right:8px; top:6px; min-height:40px; min-width:40px;">✕</button>
+    </div>
+    <div id="search-results" class="search-results"></div>
+  </div>
+
+  <!-- ==========================================================================
+       Interactive Engine & Offline PWA Service Worker
+       ========================================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      // 1. Procedural Audio Synthesis (Directive 7 & Lesson 3.1: Non-musical tactical SFX)
+      let audioCtx = null;
+      function playTactileTick(freq = 600, duration = 0.04) {
+        try {
+          if (!audioCtx) {
+            const AudioClass = window.AudioContext || window.webkitAudioContext;
+            if (AudioClass) audioCtx = new AudioClass();
+          }
+          if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+          if (audioCtx) {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + duration);
+          }
+        } catch (e) {}
+      }
+
+      function playSuccessChime() {
+        playTactileTick(880, 0.05);
+        setTimeout(() => playTactileTick(1174.66, 0.07), 40);
+      }
+
+      // 2. Search Index Dataset
+      const SEARCH_INDEX = [{"title": "📜 الجامع في علوم الحديث ومصطلحه", "anchor": "الجامع-في-علوم-الحديث-ومصطلحه", "chapter": "Preface"}, {"title": "The Master Encyclopedia of Hadith Sciences", "anchor": "the-master-encyclopedia-of-hadith-sciences", "chapter": "Preface"}, {"title": "*From Beginner to Scholar — A Comprehensive Bilingual Guide (English & اردو)*", "anchor": "from-beginner-to-scholar-a-comprehensive-bilingual-guide-english-اردو", "chapter": "Preface"}, {"title": "📑 Table of Contents (فہرستِ مضامین)", "anchor": "table-of-contents-فہرست-مضامین", "chapter": "Preface"}, {"title": "Preface: Foundations of Hadith & Its Sacred Preservation", "anchor": "preface-foundations-of-hadith-its-sacred-preservation", "chapter": "Preface: Foundations of Hadith & Its Sacred Preservation"}, {"title": "(مقدمہ: حدیث کی بنیاد اور اس کی حفاظت کا الٰہی نظام)", "anchor": "مقدمہ-حدیث-کی-بنیاد-اور-اس-کی-حفاظت-کا-الہی-نظام", "chapter": "Preface: Foundations of Hadith & Its Sacred Preservation"}, {"title": "1. Classical Terminology: Hadith, Sunnah, Khabar, and Athar", "anchor": "1-classical-terminology-hadith-sunnah-khabar-and-athar", "chapter": "Preface: Foundations of Hadith & Its Sacred Preservation"}, {"title": "2. The Twin Pillars of Every Hadith", "anchor": "2-the-twin-pillars-of-every-hadith", "chapter": "Preface: Foundations of Hadith & Its Sacred Preservation"}, {"title": "3. The Miracle of the Isnad System", "anchor": "3-the-miracle-of-the-isnad-system", "chapter": "Preface: Foundations of Hadith & Its Sacred Preservation"}, {"title": "Chapter 1: History & Origin of Hadith Compilation (تاریخِ تدوینِ حدیث)", "anchor": "chapter-1-history-origin-of-hadith-compilation-تاریخ-تدوین-حدیث", "chapter": "Chapter 1: History & Origin of Hadith Compilation (تاریخِ تدوینِ حدیث)"}, {"title": "Phase 1: The Prophetic Era (عہدِ نبوی ﷺ)", "anchor": "phase-1-the-prophetic-era-عہد-نبوی-ﷺ", "chapter": "Chapter 1: History & Origin of Hadith Compilation (تاریخِ تدوینِ حدیث)"}, {"title": "The Apparent Contradiction: Prohibition vs. Permission to Write", "anchor": "the-apparent-contradiction-prohibition-vs-permission-to-write", "chapter": "Chapter 1: History & Origin of Hadith Compilation (تاریخِ تدوینِ حدیث)"}, {"title": "The Scholarly Reconciliation (التوفيق والجمع بین الروایات):", "anchor": "the-scholarly-reconciliation-التوفيق-والجمع-بین-الروایات", "chapter": "Chapter 1: History & Origin of Hadith Compilation (تاریخِ تدوینِ حدیث)"}, {"title": "Phase 2: The Sahabah & The Trial (عہدِ صحابہ اور فتنہ کا ظہور)", "anchor": "phase-2-the-sahabah-the-trial-عہد-صحابہ-اور-فتنہ-کا-ظہور", "chapter": "Chapter 1: History & Origin of Hadith Compilation (تاریخِ تدوینِ حدیث)"}, {"title": "Phase 3: The Official State Codification (عہدِ تدوینِ عام)", "anchor": "phase-3-the-official-state-codification-عہد-تدوین-عام", "chapter": "Chapter 1: History & Origin of Hadith Compilation (تاریخِ تدوینِ حدیث)"}, {"title": "Phase 4 & 5: The Eras of Classification & The Golden Age", "anchor": "phase-4-5-the-eras-of-classification-the-golden-age", "chapter": "Chapter 1: History & Origin of Hadith Compilation (تاریخِ تدوینِ حدیث)"}, {"title": "Chapter 2: Sanad (سند) — The Anatomy of Transmission Chains", "anchor": "chapter-2-sanad-سند-the-anatomy-of-transmission-chains", "chapter": "Chapter 2: Sanad (سند) — The Anatomy of Transmission Chains"}, {"title": "1. Definitions", "anchor": "1-definitions", "chapter": "Chapter 2: Sanad (سند) — The Anatomy of Transmission Chains"}, {"title": "2. Dissecting an Authentic Sanad: Step-by-Step", "anchor": "2-dissecting-an-authentic-sanad-step-by-step", "chapter": "Chapter 2: Sanad (سند) — The Anatomy of Transmission Chains"}, {"title": "What the Muhaddith Investigates in this Chain:", "anchor": "what-the-muhaddith-investigates-in-this-chain", "chapter": "Chapter 2: Sanad (سند) — The Anatomy of Transmission Chains"}, {"title": "3. The 8 Modes of Transmission (طرق التحمل والأداء)", "anchor": "3-the-8-modes-of-transmission-طرق-التحمل-والأداء", "chapter": "Chapter 2: Sanad (سند) — The Anatomy of Transmission Chains"}, {"title": "4. High Chains vs. Low Chains ('Uluww vs. Nuzul - العلو والنزول)", "anchor": "4-high-chains-vs-low-chains-uluww-vs-nuzul-العلو-والنزول", "chapter": "Chapter 2: Sanad (سند) — The Anatomy of Transmission Chains"}, {"title": "5. The 5 Inviolable Conditions for a Sahih Hadith (شروط الحديث الصحيح الخمسة)", "anchor": "5-the-5-inviolable-conditions-for-a-sahih-hadith-شروط-الحديث-الصحيح-الخمسة", "chapter": "Chapter 2: Sanad (سند) — The Anatomy of Transmission Chains"}, {"title": "Chapter 3: Matn (متن) — The Text & The Science of Internal Critique", "anchor": "chapter-3-matn-متن-the-text-the-science-of-internal-critique", "chapter": "Chapter 3: Matn (متن) — The Text & The Science of Internal Critique"}, {"title": "1. Definition", "anchor": "1-definition", "chapter": "Chapter 3: Matn (متن) — The Text & The Science of Internal Critique"}, {"title": "2. Debunking the Myth: Did Muhaddithin Only Scrutinize the Chain?", "anchor": "2-debunking-the-myth-did-muhaddithin-only-scrutinize-the-chain", "chapter": "Chapter 3: Matn (متن) — The Text & The Science of Internal Critique"}, {"title": "3. The 6 Universal Red Flags of a Corrupted Matn (علامات وضع المتن)", "anchor": "3-the-6-universal-red-flags-of-a-corrupted-matn-علامات-وضع-المتن", "chapter": "Chapter 3: Matn (متن) — The Text & The Science of Internal Critique"}, {"title": "Chapter 4: The Master Classification of Hadith (اقسامِ و مراتبِ حدیث)", "anchor": "chapter-4-the-master-classification-of-hadith-اقسام-و-مراتب-حدیث", "chapter": "Chapter 4: The Master Classification of Hadith (اقسامِ و مراتبِ حدیث)"}, {"title": "Dimension 1: By Acceptance & Rejection (من حيث القبول والرد)", "anchor": "dimension-1-by-acceptance-rejection-من-حيث-القبول-والرد", "chapter": "Chapter 4: The Master Classification of Hadith (اقسامِ و مراتبِ حدیث)"}, {"title": "1. Sahih li-Dhatihi (صَحِيحٌ لِذَاتِهِ - Authentic in and of Itself)", "anchor": "1-sahih-li-dhatihi-صحيح-لذاته-authentic-in-and-of-itself", "chapter": "Chapter 4: The Master Classification of Hadith (اقسامِ و مراتبِ حدیث)"}, {"title": "2. Sahih li-Ghayrihi (صَحِيحٌ لِغَيْرِهِ - Authentic Due to External Corroboration)", "anchor": "2-sahih-li-ghayrihi-صحيح-لغيره-authentic-due-to-external-corroboration", "chapter": "Chapter 4: The Master Classification of Hadith (اقسامِ و مراتبِ حدیث)"}, {"title": "3. Hasan li-Dhatihi (حَسَنٌ لِذَاتِهِ - Sound / Good in and of Itself)", "anchor": "3-hasan-li-dhatihi-حسن-لذاته-sound-good-in-and-of-itself", "chapter": "Chapter 4: The Master Classification of Hadith (اقسامِ و مراتبِ حدیث)"}, {"title": "4. Hasan li-Ghayrihi (حَسَنٌ لِغَيْرِهِ - Sound Due to Supporting Corroboration)", "anchor": "4-hasan-li-ghayrihi-حسن-لغيره-sound-due-to-supporting-corroboration", "chapter": "Chapter 4: The Master Classification of Hadith (اقسامِ و مراتبِ حدیث)"}, {"title": "5. Da'if (ضَعِيف - Weak)", "anchor": "5-daif-ضعيف-weak", "chapter": "Chapter 4: The Master Classification of Hadith (اقسامِ و مراتبِ حدیث)"}, {"title": "6. Mawdu' (مَوْضُوع - Fabricated / Forged)", "anchor": "6-mawdu-موضوع-fabricated-forged", "chapter": "Chapter 4: The Master Classification of Hadith (اقسامِ و مراتبِ حدیث)"}, {"title": "Dimension 2: By Terminal Attribution (من حيث منتهى السند)", "anchor": "dimension-2-by-terminal-attribution-من-حيث-منتهى-السند", "chapter": "Chapter 4: The Master Classification of Hadith (اقسامِ و مراتبِ حدیث)"}, {"title": "The Fundamental Difference: Qur'an vs. Hadith Qudsi", "anchor": "the-fundamental-difference-quran-vs-hadith-qudsi", "chapter": "Chapter 4: The Master Classification of Hadith (اقسامِ و مراتبِ حدیث)"}, {"title": "Dimension 3: By Number of Transmission Pathways (من حيث عدد الطرق)", "anchor": "dimension-3-by-number-of-transmission-pathways-من-حيث-عدد-الطرق", "chapter": "Chapter 4: The Master Classification of Hadith (اقسامِ و مراتبِ حدیث)"}, {"title": "1. Al-Mutawatir (المُتَوَاتِر - Mass-Transmitted)", "anchor": "1-al-mutawatir-المتواتر-mass-transmitted", "chapter": "Chapter 4: The Master Classification of Hadith (اقسامِ و مراتبِ حدیث)"}, {"title": "2. Al-Ahad (الآحَاد - Singular / Few Pathways)", "anchor": "2-al-ahad-الآحاد-singular-few-pathways", "chapter": "Chapter 4: The Master Classification of Hadith (اقسامِ و مراتبِ حدیث)"}, {"title": "Dimension 4: Broken Chains & Structural Defects (انقطاع السند)", "anchor": "dimension-4-broken-chains-structural-defects-انقطاع-السند", "chapter": "Chapter 4: The Master Classification of Hadith (اقسامِ و مراتبِ حدیث)"}, {"title": "Dimension 5: Hidden & Textual Defects (الأوصاف والعلل)", "anchor": "dimension-5-hidden-textual-defects-الأوصاف-والعلل", "chapter": "Chapter 4: The Master Classification of Hadith (اقسامِ و مراتبِ حدیث)"}, {"title": "Chapter 5: Rijal al-Hadith & Jarh wa Ta'dil (علم رجال الحدیث والجرح والتعدیل)", "anchor": "chapter-5-rijal-al-hadith-jarh-wa-tadil-علم-رجال-الحدیث-والجرح-والتعدیل", "chapter": "Chapter 5: Rijal al-Hadith & Jarh wa Ta'dil (علم رجال الحدیث والجرح والتعدیل)"}, {"title": "1. The Twin Foundations of Narrator Credibility", "anchor": "1-the-twin-foundations-of-narrator-credibility", "chapter": "Chapter 5: Rijal al-Hadith & Jarh wa Ta'dil (علم رجال الحدیث والجرح والتعدیل)"}, {"title": "2. The 6 Ranks of Ta'dil (Praise & Verification - مراتب التعديل)", "anchor": "2-the-6-ranks-of-tadil-praise-verification-مراتب-التعديل", "chapter": "Chapter 5: Rijal al-Hadith & Jarh wa Ta'dil (علم رجال الحدیث والجرح والتعدیل)"}, {"title": "3. The 6 Ranks of Jarh (Criticism & Disqualification - مراتب الجرح)", "anchor": "3-the-6-ranks-of-jarh-criticism-disqualification-مراتب-الجرح", "chapter": "Chapter 5: Rijal al-Hadith & Jarh wa Ta'dil (علم رجال الحدیث والجرح والتعدیل)"}, {"title": "4. Golden Rules for Resolving Conflicts in Jarh and Ta'dil", "anchor": "4-golden-rules-for-resolving-conflicts-in-jarh-and-tadil", "chapter": "Chapter 5: Rijal al-Hadith & Jarh wa Ta'dil (علم رجال الحدیث والجرح والتعدیل)"}, {"title": "Chapter 6: Kutub al-Sittah & The Hierarchy of Hadith Collections (کتبِ حدیث کے درجات و مراتب)", "anchor": "chapter-6-kutub-al-sittah-the-hierarchy-of-hadith-collections-کتب-حدیث-کے-درجات-و-مراتب", "chapter": "Chapter 6: Kutub al-Sittah & The Hierarchy of Hadith Collections (کتبِ حدیث کے درجات و مراتب)"}, {"title": "Detailed Profiles of the Canonical Six", "anchor": "detailed-profiles-of-the-canonical-six", "chapter": "Chapter 6: Kutub al-Sittah & The Hierarchy of Hadith Collections (کتبِ حدیث کے درجات و مراتب)"}, {"title": "1. Sahih al-Bukhari (الجامع الصحيح للإمام البخاري)", "anchor": "1-sahih-al-bukhari-الجامع-الصحيح-للإمام-البخاري", "chapter": "Chapter 6: Kutub al-Sittah & The Hierarchy of Hadith Collections (کتبِ حدیث کے درجات و مراتب)"}, {"title": "2. Sahih Muslim (صحيح مسلم)", "anchor": "2-sahih-muslim-صحيح-مسلم", "chapter": "Chapter 6: Kutub al-Sittah & The Hierarchy of Hadith Collections (کتبِ حدیث کے درجات و مراتب)"}, {"title": "3. Sunan Abi Dawud (سنن أبي داود)", "anchor": "3-sunan-abi-dawud-سنن-أبي-داود", "chapter": "Chapter 6: Kutub al-Sittah & The Hierarchy of Hadith Collections (کتبِ حدیث کے درجات و مراتب)"}, {"title": "4. Jami' al-Tirmidhi (جامع الترمذي)", "anchor": "4-jami-al-tirmidhi-جامع-الترمذي", "chapter": "Chapter 6: Kutub al-Sittah & The Hierarchy of Hadith Collections (کتبِ حدیث کے درجات و مراتب)"}, {"title": "5. Sunan al-Nasa'i (al-Mujtaba / سنن النسائي الصغرى)", "anchor": "5-sunan-al-nasai-al-mujtaba-سنن-النسائي-الصغرى", "chapter": "Chapter 6: Kutub al-Sittah & The Hierarchy of Hadith Collections (کتبِ حدیث کے درجات و مراتب)"}, {"title": "6. Sunan Ibn Majah (سنن ابن ماجه)", "anchor": "6-sunan-ibn-majah-سنن-ابن-ماجه", "chapter": "Chapter 6: Kutub al-Sittah & The Hierarchy of Hadith Collections (کتبِ حدیث کے درجات و مراتب)"}, {"title": "Shah Waliullah Dehlawi's 4 Tiers of Hadith Collections", "anchor": "shah-waliullah-dehlawis-4-tiers-of-hadith-collections", "chapter": "Chapter 6: Kutub al-Sittah & The Hierarchy of Hadith Collections (کتبِ حدیث کے درجات و مراتب)"}, {"title": "Chapter 7: Mustalah al-Hadith — The 100+ Technical Terms Compendium", "anchor": "chapter-7-mustalah-al-hadith-the-100-technical-terms-compendium", "chapter": "Chapter 7: Mustalah al-Hadith — The 100+ Technical Terms Compendium"}, {"title": "(اصطلاحاتِ حدیث کا جامع انسائیکلوپیڈیا)", "anchor": "اصطلاحات-حدیث-کا-جامع-انسائیکلوپیڈیا", "chapter": "Chapter 7: Mustalah al-Hadith — The 100+ Technical Terms Compendium"}, {"title": "Category A: Foundational Concepts & Chain Architecture (1–20)", "anchor": "category-a-foundational-concepts-chain-architecture-120", "chapter": "Chapter 7: Mustalah al-Hadith — The 100+ Technical Terms Compendium"}, {"title": "Category B: Authenticity, Acceptance & Rejection (21–40)", "anchor": "category-b-authenticity-acceptance-rejection-2140", "chapter": "Chapter 7: Mustalah al-Hadith — The 100+ Technical Terms Compendium"}, {"title": "Category C: Transmission Volumes & Breadth (41–55)", "anchor": "category-c-transmission-volumes-breadth-4155", "chapter": "Chapter 7: Mustalah al-Hadith — The 100+ Technical Terms Compendium"}, {"title": "Category D: Attributions & Origins (56–65)", "anchor": "category-d-attributions-origins-5665", "chapter": "Chapter 7: Mustalah al-Hadith — The 100+ Technical Terms Compendium"}, {"title": "Category E: Disconnections & Chain Breaks (66–80)", "anchor": "category-e-disconnections-chain-breaks-6680", "chapter": "Chapter 7: Mustalah al-Hadith — The 100+ Technical Terms Compendium"}, {"title": "Category F: Textual Corruptions & Subtle Defects (81–105)", "anchor": "category-f-textual-corruptions-subtle-defects-81105", "chapter": "Chapter 7: Mustalah al-Hadith — The 100+ Technical Terms Compendium"}, {"title": "Chapter 8: Fabricated Hadith (الحدیث الموضوع / من گھڑت روایات)", "anchor": "chapter-8-fabricated-hadith-الحدیث-الموضوع-من-گھڑت-روایات", "chapter": "Chapter 8: Fabricated Hadith (الحدیث الموضوع / من گھڑت روایات)"}, {"title": "1. The Divine Prohibition & Terror of Lying Upon Rasulullah ﷺ", "anchor": "1-the-divine-prohibition-terror-of-lying-upon-rasulullah-ﷺ", "chapter": "Chapter 8: Fabricated Hadith (الحدیث الموضوع / من گھڑت روایات)"}, {"title": "2. The 5 Motivations of the Fabricators (دوافع الوضع)", "anchor": "2-the-5-motivations-of-the-fabricators-دوافع-الوضع", "chapter": "Chapter 8: Fabricated Hadith (الحدیث الموضوع / من گھڑت روایات)"}, {"title": "3. Case Studies: 8 Famous Fabricated Hadiths Circulating Today", "anchor": "3-case-studies-8-famous-fabricated-hadiths-circulating-today", "chapter": "Chapter 8: Fabricated Hadith (الحدیث الموضوع / من گھڑت روایات)"}, {"title": "Chapter 9: The Titans of Hadith Scholarship in History (تاریخ کے عظیم محدثین)", "anchor": "chapter-9-the-titans-of-hadith-scholarship-in-history-تاریخ-کے-عظیم-محدثین", "chapter": "Chapter 9: The Titans of Hadith Scholarship in History (تاریخ کے عظیم محدثین)"}, {"title": "Master Biographies", "anchor": "master-biographies", "chapter": "Chapter 9: The Titans of Hadith Scholarship in History (تاریخ کے عظیم محدثین)"}, {"title": "1. Imam Malik ibn Anas (93–179 AH) — The Imam of Dar al-Hijrah", "anchor": "1-imam-malik-ibn-anas-93179-ah-the-imam-of-dar-al-hijrah", "chapter": "Chapter 9: The Titans of Hadith Scholarship in History (تاریخ کے عظیم محدثین)"}, {"title": "2. Imam Yahya ibn Ma'in (158–233 AH) — The Terror of Liars", "anchor": "2-imam-yahya-ibn-main-158233-ah-the-terror-of-liars", "chapter": "Chapter 9: The Titans of Hadith Scholarship in History (تاریخ کے عظیم محدثین)"}, {"title": "3. Imam Ahmad ibn Hanbal (164–241 AH) — The Mountain of Sunnah", "anchor": "3-imam-ahmad-ibn-hanbal-164241-ah-the-mountain-of-sunnah", "chapter": "Chapter 9: The Titans of Hadith Scholarship in History (تاریخ کے عظیم محدثین)"}, {"title": "4. Imam Muhammad ibn Isma'il al-Bukhari (194–256 AH) — Ameer al-Mu'minin", "anchor": "4-imam-muhammad-ibn-ismail-al-bukhari-194256-ah-ameer-al-muminin", "chapter": "Chapter 9: The Titans of Hadith Scholarship in History (تاریخ کے عظیم محدثین)"}, {"title": "5. Hafiz al-Asr: Ibn Hajar al-Asqalani (773–852 AH)", "anchor": "5-hafiz-al-asr-ibn-hajar-al-asqalani-773852-ah", "chapter": "Chapter 9: The Titans of Hadith Scholarship in History (تاریخ کے عظیم محدثین)"}, {"title": "Chapter 10: The Immortal Legacy of Women Narrators (محدثات اور راویاتِ حدیث)", "anchor": "chapter-10-the-immortal-legacy-of-women-narrators-محدثات-اور-راویات-حدیث", "chapter": "Chapter 10: The Immortal Legacy of Women Narrators (محدثات اور راویاتِ حدیث)"}, {"title": "1. The Historical Invariant: Zero Women Fabricators in Islamic History", "anchor": "1-the-historical-invariant-zero-women-fabricators-in-islamic-history", "chapter": "Chapter 10: The Immortal Legacy of Women Narrators (محدثات اور راویاتِ حدیث)"}, {"title": "2. Sayyidatuna Aisha bint Abi Bakr (رضي الله عنها) — The Intellectual Titan", "anchor": "2-sayyidatuna-aisha-bint-abi-bakr-رضي-الله-عنها-the-intellectual-titan", "chapter": "Chapter 10: The Immortal Legacy of Women Narrators (محدثات اور راویاتِ حدیث)"}, {"title": "3. Other Mothers of the Believers & Female Companions", "anchor": "3-other-mothers-of-the-believers-female-companions", "chapter": "Chapter 10: The Immortal Legacy of Women Narrators (محدثات اور راویاتِ حدیث)"}, {"title": "4. Eminent Female Scholars of the Medieval Eras", "anchor": "4-eminent-female-scholars-of-the-medieval-eras", "chapter": "Chapter 10: The Immortal Legacy of Women Narrators (محدثات اور راویاتِ حدیث)"}, {"title": "Chapter 11: Sunni vs. Shia Hadith Methodology (تقابلی جائزہ: اہل السنت اور اہل تشیع کا منہجِ حدیث)", "anchor": "chapter-11-sunni-vs-shia-hadith-methodology-تقابلی-جائزہ-اہل-السنت-اور-اہل-تشیع-کا-منہج-حدیث", "chapter": "Chapter 11: Sunni vs. Shia Hadith Methodology (تقابلی جائزہ: اہل السنت اور اہل تشیع کا منہجِ حدیث)"}, {"title": "Deep Dive into the Points of Divergence", "anchor": "deep-dive-into-the-points-of-divergence", "chapter": "Chapter 11: Sunni vs. Shia Hadith Methodology (تقابلی جائزہ: اہل السنت اور اہل تشیع کا منہجِ حدیث)"}, {"title": "1. The Theological Scope of Hadith", "anchor": "1-the-theological-scope-of-hadith", "chapter": "Chapter 11: Sunni vs. Shia Hadith Methodology (تقابلی جائزہ: اہل السنت اور اہل تشیع کا منہجِ حدیث)"}, {"title": "2. The Canonical Collections", "anchor": "2-the-canonical-collections", "chapter": "Chapter 11: Sunni vs. Shia Hadith Methodology (تقابلی جائزہ: اہل السنت اور اہل تشیع کا منہجِ حدیث)"}, {"title": "3. Narrator Scrutiny & 'Adalat al-Sahabah", "anchor": "3-narrator-scrutiny-adalat-al-sahabah", "chapter": "Chapter 11: Sunni vs. Shia Hadith Methodology (تقابلی جائزہ: اہل السنت اور اہل تشیع کا منہجِ حدیث)"}, {"title": "4. The Shia Grading Evolution", "anchor": "4-the-shia-grading-evolution", "chapter": "Chapter 11: Sunni vs. Shia Hadith Methodology (تقابلی جائزہ: اہل السنت اور اہل تشیع کا منہجِ حدیث)"}, {"title": "Chapter 12: How to Verify a Hadith Today — A Modern Hands-On Field Guide", "anchor": "chapter-12-how-to-verify-a-hadith-today-a-modern-hands-on-field-guide", "chapter": "Chapter 12: How to Verify a Hadith Today — A Modern Hands-On Field Guide"}, {"title": "(دورِ حاضر میں تخریج و تحقیق کا عملی طریقہ)", "anchor": "دور-حاضر-میں-تخریج-و-تحقیق-کا-عملی-طریقہ", "chapter": "Chapter 12: How to Verify a Hadith Today — A Modern Hands-On Field Guide"}, {"title": "1. The Essential Digital Tool Suite", "anchor": "1-the-essential-digital-tool-suite", "chapter": "Chapter 12: How to Verify a Hadith Today — A Modern Hands-On Field Guide"}, {"title": "A. Sunnah.com (The Gold Standard for English / Urdu Readers)", "anchor": "a-sunnahcom-the-gold-standard-for-english-urdu-readers", "chapter": "Chapter 12: How to Verify a Hadith Today — A Modern Hands-On Field Guide"}, {"title": "B. Dorar.net (الدرر السنية - الموسوعة الحديثية) — The Sovereign Arabic Tool", "anchor": "b-dorarnet-الدرر-السنية-الموسوعة-الحديثية-the-sovereign-arabic-tool", "chapter": "Chapter 12: How to Verify a Hadith Today — A Modern Hands-On Field Guide"}, {"title": "C. Shamela.ws (المكتبة الشاملة) — The Digital Manuscript Library", "anchor": "c-shamelaws-المكتبة-الشاملة-the-digital-manuscript-library", "chapter": "Chapter 12: How to Verify a Hadith Today — A Modern Hands-On Field Guide"}, {"title": "2. A Real-World Hands-On Case Study", "anchor": "2-a-real-world-hands-on-case-study", "chapter": "Chapter 12: How to Verify a Hadith Today — A Modern Hands-On Field Guide"}, {"title": "Execution of Verification:", "anchor": "execution-of-verification", "chapter": "Chapter 12: How to Verify a Hadith Today — A Modern Hands-On Field Guide"}, {"title": "Appendix: Master Classification Matrix & The Student's Curriculum", "anchor": "appendix-master-classification-matrix-the-students-curriculum", "chapter": "Appendix: Master Classification Matrix & The Student's Curriculum"}, {"title": "(ضمیمہ: اصطلاحی خلاصہ اور نصابِ تعلیم)", "anchor": "ضمیمہ-اصطلاحی-خلاصہ-اور-نصاب-تعلیم", "chapter": "Appendix: Master Classification Matrix & The Student's Curriculum"}, {"title": "1. The Ultimate Hadith Classification Cheat Sheet", "anchor": "1-the-ultimate-hadith-classification-cheat-sheet", "chapter": "Appendix: Master Classification Matrix & The Student's Curriculum"}, {"title": "2. The Progressive 5-Stage Curriculum for Mastery in Hadith Sciences", "anchor": "2-the-progressive-5-stage-curriculum-for-mastery-in-hadith-sciences", "chapter": "Appendix: Master Classification Matrix & The Student's Curriculum"}, {"title": "3. Spiritual Counsel from the Masters of Hadith", "anchor": "3-spiritual-counsel-from-the-masters-of-hadith", "chapter": "Appendix: Master Classification Matrix & The Student's Curriculum"}];
+
+      // 3. State Engine
+      const STATE_KEY = 'hadith_reader_settings_v1';
+      let state = {
+        urdu: 'nastaliq',
+        arabic: 'amiri',
+        theme: 'dark',
+        size: 18,
+        lastScrollPos: 0
+      };
+
+      try {
+        const saved = localStorage.getItem(STATE_KEY);
+        if (saved) state = Object.assign(state, JSON.parse(saved));
+      } catch (e) {}
+
+      function saveState() {
+        try {
+          localStorage.setItem(STATE_KEY, JSON.stringify(state));
+        } catch (e) {}
+      }
+
+      // 4. Component Bootloader
+      function initReader() {
+        const progressBar = document.getElementById('progress-bar');
+        const drawerOverlay = document.getElementById('drawer-overlay');
+        const chapterDrawer = document.getElementById('chapter-drawer');
+        const settingsSheet = document.getElementById('settings-sheet');
+        const searchModal = document.getElementById('search-modal');
+        const searchInput = document.getElementById('search-input');
+        const searchResults = document.getElementById('search-results');
+        const readerToast = document.getElementById('reader-toast');
+
+        // Font Stacks
+        const FONTS = {
+          urdu: {
+            nastaliq: "'Noto Nastaliq Urdu', 'Gulzar', 'Jameel Noori Nastaleeq', serif",
+            naskh: "'Noto Sans Arabic', 'Almarai', 'Segoe UI', Tahoma, sans-serif"
+          },
+          arabic: {
+            amiri: "'Amiri', 'Scheherazade New', 'Traditional Arabic', serif",
+            readex: "'Readex Pro', 'Noto Sans Arabic', 'IBM Plex Sans Arabic', sans-serif"
+          }
+        };
+
+        function applySettings() {
+          // Urdu Font
+          document.documentElement.style.setProperty('--font-urdu-active', FONTS.urdu[state.urdu]);
+          document.documentElement.style.setProperty('--urdu-line-height', state.urdu === 'nastaliq' ? '2.3' : '1.7');
+          document.getElementById('btn-urdu-nastaliq').classList.toggle('active', state.urdu === 'nastaliq');
+          document.getElementById('btn-urdu-naskh').classList.toggle('active', state.urdu === 'naskh');
+
+          // Arabic Font
+          document.documentElement.style.setProperty('--font-arabic-active', FONTS.arabic[state.arabic]);
+          document.getElementById('btn-arabic-amiri').classList.toggle('active', state.arabic === 'amiri');
+          document.getElementById('btn-arabic-readex').classList.toggle('active', state.arabic === 'readex');
+
+          // Theme
+          document.documentElement.setAttribute('data-theme', state.theme);
+          document.getElementById('theme-dark').classList.toggle('active', state.theme === 'dark');
+          document.getElementById('theme-sepia').classList.toggle('active', state.theme === 'sepia');
+          document.getElementById('theme-light').classList.toggle('active', state.theme === 'light');
+
+          // Font Size
+          document.documentElement.style.setProperty('--reader-font-size', state.size + 'px');
+          document.getElementById('slider-size').value = state.size;
+          document.getElementById('label-font-size').textContent = state.size + ' px';
+
+          saveState();
+        }
+
+        // Initial Apply
+        applySettings();
+
+        // Reading Progress Calculation
+        window.addEventListener('scroll', () => {
+          const winHeight = window.innerHeight;
+          const docHeight = document.documentElement.scrollHeight - winHeight;
+          const scrolled = window.scrollY;
+          const progress = Math.min(100, Math.max(0, (scrolled / docHeight) * 100));
+          if (progressBar) progressBar.style.width = progress + '%';
+
+          // Save reading position occasionally
+          state.lastScrollPos = scrolled;
+        }, { passive: true });
+
+        // Resume reading toast
+        if (state.lastScrollPos > 400) {
+          setTimeout(() => {
+            showToast('📖 Restored reading location');
+          }, 1000);
+        }
+
+        function showToast(msg) {
+          if (readerToast) {
+            readerToast.textContent = msg;
+            readerToast.classList.add('show');
+            setTimeout(() => readerToast.classList.remove('show'), 2400);
+          }
+        }
+
+        // Drawer Controls
+        function toggleDrawer(open) {
+          chapterDrawer.classList.toggle('active', open);
+          drawerOverlay.classList.toggle('active', open);
+          playTactileTick(open ? 550 : 420);
+        }
+
+        document.getElementById('btn-open-drawer').addEventListener('click', () => toggleDrawer(true));
+        document.getElementById('btn-float-drawer').addEventListener('click', () => toggleDrawer(true));
+        document.getElementById('btn-close-drawer').addEventListener('click', () => toggleDrawer(false));
+        drawerOverlay.addEventListener('click', () => {
+          toggleDrawer(false);
+          toggleSettings(false);
+        });
+
+        // Settings Sheet Controls
+        function toggleSettings(open) {
+          settingsSheet.classList.toggle('active', open);
+          drawerOverlay.classList.toggle('active', open);
+          playTactileTick(open ? 620 : 460);
+        }
+
+        document.getElementById('btn-open-settings').addEventListener('click', () => toggleSettings(true));
+        document.getElementById('btn-float-settings').addEventListener('click', () => toggleSettings(true));
+        document.getElementById('btn-close-settings').addEventListener('click', () => toggleSettings(false));
+
+        // Urdu Toggles
+        document.getElementById('btn-urdu-nastaliq').addEventListener('click', () => {
+          state.urdu = 'nastaliq';
+          applySettings();
+          playTactileTick(500);
+        });
+        document.getElementById('btn-urdu-naskh').addEventListener('click', () => {
+          state.urdu = 'naskh';
+          applySettings();
+          playTactileTick(500);
+        });
+
+        // Arabic Toggles
+        document.getElementById('btn-arabic-amiri').addEventListener('click', () => {
+          state.arabic = 'amiri';
+          applySettings();
+          playTactileTick(600);
+        });
+        document.getElementById('btn-arabic-readex').addEventListener('click', () => {
+          state.arabic = 'readex';
+          applySettings();
+          playTactileTick(600);
+        });
+
+        // Themes
+        document.getElementById('theme-dark').addEventListener('click', () => { state.theme = 'dark'; applySettings(); });
+        document.getElementById('theme-sepia').addEventListener('click', () => { state.theme = 'sepia'; applySettings(); });
+        document.getElementById('theme-light').addEventListener('click', () => { state.theme = 'light'; applySettings(); });
+
+        // Font Size Slider
+        document.getElementById('slider-size').addEventListener('input', (e) => {
+          state.size = e.target.value;
+          applySettings();
+        });
+
+        // Back to Top Button
+        document.getElementById('btn-float-top').addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          playTactileTick(700);
+        });
+
+        // Close drawer on TOC link click
+        document.querySelectorAll('.toc-item').forEach(item => {
+          item.addEventListener('click', () => {
+            toggleDrawer(false);
+            playTactileTick(650);
+          });
+        });
+
+        // Search Palette
+        function toggleSearch(open) {
+          searchModal.classList.toggle('active', open);
+          if (open) {
+            searchInput.value = '';
+            searchResults.innerHTML = '';
+            setTimeout(() => searchInput.focus(), 100);
+          }
+          playTactileTick(open ? 680 : 400);
+        }
+
+        document.getElementById('btn-open-search').addEventListener('click', () => toggleSearch(true));
+        document.getElementById('btn-float-search').addEventListener('click', () => toggleSearch(true));
+        document.getElementById('btn-close-search').addEventListener('click', () => toggleSearch(false));
+
+        searchInput.addEventListener('input', (e) => {
+          const q = e.target.value.trim().toLowerCase();
+          if (q.length < 2) {
+            searchResults.innerHTML = '';
+            return;
+          }
+
+          const matches = SEARCH_INDEX.filter(item => 
+            item.title.toLowerCase().includes(q) ||
+            item.chapter.toLowerCase().includes(q)
+          ).slice(0, 8);
+
+          if (matches.length === 0) {
+            searchResults.innerHTML = '<div style="color:var(--text-muted); text-align:center; padding:1.5rem;">No topics found matching "' + q + '"</div>';
+            return;
+          }
+
+          searchResults.innerHTML = matches.map(m => `
+            <a href="#${m.anchor}" class="search-result-item" onclick="document.getElementById('search-modal').classList.remove('active')">
+              <strong style="color:var(--gold-primary); font-size:0.95rem;">${m.title}</strong>
+              <small style="color:var(--text-muted); font-size:0.78rem;">📌 ${m.chapter}</small>
+            </a>
+          `).join('');
+        });
+
+        // 1-Tap Copy & Share Buttons on Quotes
+        document.querySelectorAll('.btn-copy-quote').forEach(btn => {
+          btn.addEventListener('click', async (e) => {
+            const card = e.target.closest('.quote-card');
+            const body = card.querySelector('.quote-body');
+            try {
+              await navigator.clipboard.writeText(body.innerText);
+              playSuccessChime();
+              showToast('✅ Hadith Copied to Clipboard!');
+            } catch (err) {}
+          });
+        });
+
+        document.querySelectorAll('.btn-share-quote').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const card = e.target.closest('.quote-card');
+            const body = card.querySelector('.quote-body');
+            const text = encodeURIComponent(body.innerText + "\n\n— From Hadith Sciences Master Guide");
+            window.open('https://api.whatsapp.com/send?text=' + text, '_blank');
+          });
+        });
+      }
+
+      // Safe Bootloader
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initReader);
+      } else {
+        initReader();
+      }
+
+      // Register Offline Service Worker
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js').catch(() => {});
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

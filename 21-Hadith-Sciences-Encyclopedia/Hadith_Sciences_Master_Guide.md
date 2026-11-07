@@ -1,3 +1,108 @@
+<style>
+  /* === Antigravity High-Visibility Islamic Typography Architecture === */
+  @import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Gulzar&family=Noto+Nastaliq+Urdu:wght@400..700&family=Noto+Sans+Arabic:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+  :root {
+    --font-english: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-arabic: 'Amiri', 'Scheherazade New', 'Traditional Arabic', serif;
+    --font-urdu: 'Noto Nastaliq Urdu', 'Gulzar', 'Jameel Noori Nastaleeq', 'Urdu Typesetting', serif;
+    --font-urdu-naskh: 'Noto Sans Arabic', 'Almarai', 'Segoe UI', Tahoma, sans-serif;
+  }
+
+  /* Document Body & English Typography */
+  body, .markdown-body, article, div.content {
+    font-family: var(--font-english);
+    font-size: 16px;
+    line-height: 1.75;
+    color: #e2e8f0;
+    background-color: #070709;
+  }
+
+  /* Headings with Arabic Subtitles */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-english);
+    color: #f8fafc;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    font-weight: 700;
+  }
+
+  /* Blockquote Styling for Hadith Citations */
+  blockquote {
+    border-left: 4px solid #f59e0b !important;
+    background: rgba(245, 158, 11, 0.06) !important;
+    padding: 1rem 1.4rem !important;
+    border-radius: 0.5rem !important;
+    margin: 1.25rem 0 !important;
+    line-height: 2.1 !important;
+  }
+
+  blockquote p {
+    margin-bottom: 0.6rem !important;
+  }
+
+  /* Tables: Clean Contrast, Aligned Columns & Spacing */
+  table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+    margin: 1.5rem 0 !important;
+    font-size: 0.92rem !important;
+  }
+
+  table th {
+    background: #171722 !important;
+    color: #f59e0b !important;
+    font-weight: 700 !important;
+    padding: 0.85rem 1rem !important;
+    border: 1px solid #262638 !important;
+    text-transform: uppercase !important;
+    font-size: 0.8rem !important;
+    letter-spacing: 0.05em !important;
+  }
+
+  table td {
+    padding: 0.85rem 1rem !important;
+    vertical-align: middle !important;
+    border: 1px solid #262638 !important;
+    background: #0d0d12 !important;
+  }
+
+  table tr:nth-child(even) td {
+    background: #12121a !important;
+  }
+
+  /* Code & ASCII Transmission Charts */
+  pre, code {
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+    background: #0d0d14 !important;
+    color: #38bdf8 !important;
+    border-radius: 0.4rem !important;
+  }
+
+  /* Print & PDF Export Rules */
+  @media print {
+    body, .markdown-body, article {
+      background: #ffffff !important;
+      color: #0f172a !important;
+      font-size: 11pt !important;
+    }
+    blockquote {
+      background: #f8fafc !important;
+      border-left-color: #d97706 !important;
+      color: #0f172a !important;
+    }
+    table th {
+      background: #f1f5f9 !important;
+      color: #0f172a !important;
+    }
+    table td {
+      background: #ffffff !important;
+      color: #0f172a !important;
+      border-color: #cbd5e1 !important;
+    }
+  }
+</style>
+
 # 📜 الجامع في علوم الحديث ومصطلحه
 # The Master Encyclopedia of Hadith Sciences
 ## *From Beginner to Scholar — A Comprehensive Bilingual Guide (English & اردو)*
