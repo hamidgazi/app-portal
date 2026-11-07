@@ -9,7 +9,11 @@
   "orientation": "portrait",
   "background_color": "#0a0e17",
   "theme_color": "#0a0e17",
-  "categories": ["education", "books", "reference"],
+  "categories": [
+    "education",
+    "books",
+    "reference"
+  ],
   "icons": [
     {
       "src": "icons/icon-192.png",
@@ -28,6 +32,44 @@
       "sizes": "512x512",
       "type": "image/svg+xml",
       "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Quranic Duas (78)",
+      "short_name": "Duas",
+      "description": "78 Canonical Quranic Supplications with Exegesis",
+      "url": "./duas.html",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Divine Commands (80)",
+      "short_name": "Commands",
+      "description": "80 Divine Commands & Injunctions for Living",
+      "url": "./commands.html",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Quranic Manners (67)",
+      "short_name": "Manners",
+      "description": "67 Verses on Social Ethics & Etiquette",
+      "url": "./manners.html",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     }
   ]
 }

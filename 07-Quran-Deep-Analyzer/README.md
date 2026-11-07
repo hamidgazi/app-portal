@@ -45,7 +45,7 @@ Rather than a superficial reading or listening application, **Quran Deep Analyze
 13. **Audio Recitation & Tartil Companion**: Multi-Qari EveryAyah CDN streaming (Mishary Alafasy, Al-Husary, Abdul Basit), repeat loop controls (`1x`, `3x`, `5x`, continuous), speed multipliers, and active Ayah emerald wave highlighting.
 
 ### 🌟 3 Standalone Luxury Portals
-- **Commands & Injunctions Portal (`commands.html`)**: Complete compendium of 521 Quranic commands and prohibitions across 29 thematic spheres, featuring parallel split-grid dual Urdu translations (**Kanzul Iman on Right**, **Kanzul Irfan on Left**).
+- **Commands & Injunctions Portal (`commands.html`)**: Complete compendium of 80 canonical Quranic commands across 8 thematic spheres (from the 521 comprehensive compendium), featuring parallel split-grid dual Urdu translations (**Kanzul Iman on Right**, **Kanzul Irfan on Left**).
 - **Manners & Etiquette Portal (`manners.html`)**: Deduplicated, lightweight portal covering 67 canonical verses across 9 modules of Quranic social etiquette and personal conduct.
 - **Duas & Supplications Encyclopedia (`duas.html`)**: Standalone luxury web app with 78 canonical Duas (40 Rabbana, 24 Rabbi, Prophetic Duas), Executive Dual-Mode architecture (Devotional Clean vs Study Exegesis), In-Card interactive translation switcher (Kanzul Iman / Kanzul Irfan / Both / English), dynamic typography scaler (A-/A+), and mobile Nastaleeq font boosting.
 
@@ -56,10 +56,10 @@ Rather than a superficial reading or listening application, **Quran Deep Analyze
 | Deliverable | Format | Access Link | Description |
 |:---|:---:|:---|:---|
 | **Main Web Platform & PWA** | `HTML / SPA` | [`index.html`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-Quran-Deep-Analyzer/index.html) | Master 13-module computational analytics platform and offline PWA. |
-| **Commands & Injunctions Portal** | `HTML / Standalone` | [`commands.html`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-Quran-Deep-Analyzer/commands.html) | 521 Quranic commands with dual Urdu translation cards and audio recitation. |
+| **Commands & Injunctions Portal** | `HTML / Standalone` | [`commands.html`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-Quran-Deep-Analyzer/commands.html) | 80 Quranic commands with dual Urdu translation cards and audio recitation. |
 | **Manners & Etiquette Portal** | `HTML / Standalone` | [`manners.html`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-Quran-Deep-Analyzer/manners.html) | Deduplicated Zero-CORS reader for 67 verses on Quranic ethics and manners. |
 | **Duas & Supplications Portal** | `HTML / Standalone` | [`duas.html`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-Quran-Deep-Analyzer/duas.html) | 78 canonical Duas with 4-tier cards, Sirat-ul-Jinan Tafsir drawer, and EveryAyah audio. |
-| **Divine Commands Dossier** | `Markdown` | [`DIVINE_COMMANDS_AND_INJUNCTIONS.md`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-Quran-Deep-Analyzer/DIVINE_COMMANDS_AND_INJUNCTIONS.md) | Exhaustive 185 KB scholarly reference cataloging all 521 Quranic commands. |
+| **Divine Commands Dossier** | `Markdown` | [`DIVINE_COMMANDS_AND_INJUNCTIONS.md`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-Quran-Deep-Analyzer/DIVINE_COMMANDS_AND_INJUNCTIONS.md) | Exhaustive 185 KB scholarly reference cataloging 80 canonical Quranic commands across 8 spheres. |
 | **Quranic Duas Compendium** | `Markdown` | [`QURANIC_DUAS_COMPENDIUM.md`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-Quran-Deep-Analyzer/QURANIC_DUAS_COMPENDIUM.md) | Exhaustive 264 KB reference for 78 Duas with virtues and Sirat-ul-Jinan exegesis. |
 | **Quranic Manners Reference** | `Markdown` | [`QURANIC_MANNERS_KANZUL_IMAN.md`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-Quran-Deep-Analyzer/QURANIC_MANNERS_KANZUL_IMAN.md) | 70 KB scholarly reference for 67 verses on Islamic manners. |
 | **Tajweed Rule Book** | `Markdown` | [`TAJWEED_RULE_BOOK.md`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-Quran-Deep-Analyzer/TAJWEED_RULE_BOOK.md) | 40 KB guide to dynamic phonological rules and vocalization principles. |
@@ -284,8 +284,8 @@ The entire Quran Deep Analyzer repository underwent an intensive, multi-perspect
 
 | Verification Metric | Benchmark Standard | Audit & Remediation Result | Status |
 |:---|:---:|:---|:---:|
-| **Automated Unit Tests** | $\ge 220$ tests | **223 / 223 tests passing** (0 failures, 0 errors in 74.2s) | ✅ PASS |
-| **PUA Ligature Sanitization (F-01)** | 0 PUA characters | **0 `\ue01e` occurrences across all 378 project files** | ✅ PASS |
+| **Automated Unit Tests** | $\ge 220$ tests | **245 / 245 tests passing** (0 failures, 0 errors in 67.7s) | ✅ PASS |
+| **PUA Ligature Sanitization (F-01)** | 0 PUA characters | **0 `\ue01e` occurrences across all 394 project files** | ✅ PASS |
 | **Standalone Huruf Muqatta'at (F-03)** | 19 verses vocalized | **19 / 19 verses in Kanzul Iman populated with sacred vocalized letters** | ✅ PASS |
 | **Comparative Drawer Direction (F-02)** | Strict RTL layout | **`direction: rtl;` enforced on `.comparative-drawer-grid`** | ✅ PASS |
 | **Tajweed Stopping Marks Regex (F-04)** | Include `\u0615` (Tah) | **Expanded character class incorporates `\u0615`, Sukun, and Waqf marks** | ✅ PASS |

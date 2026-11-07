@@ -84,11 +84,12 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Navigation requests: Serve cached index.html immediately for instant 0ms launch
+  // Navigation requests: Match requested page from cache first, then network, fallback to index.html
   if (req.mode === 'navigate') {
     event.respondWith(
-      caches.match('./index.html').then((cached) => {
-        return cached || fetch(req).catch(() => caches.match('./index.html'));
+      caches.match(req).then((cached) => {
+        if (cached) return cached;
+        return fetch(req).catch(() => caches.match('./index.html'));
       })
     );
     return;

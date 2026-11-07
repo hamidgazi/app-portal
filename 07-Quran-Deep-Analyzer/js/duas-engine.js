@@ -260,7 +260,7 @@
         <header class="dua-card-header">
           <div class="dua-meta-left">
             <span class="dua-serial-pill">#${d.serial_ur} (${d.serial})</span>
-            <span class="dua-coord-pill">[سورۃ ${d.surah_name_ar} ${d.surah_id}:${d.ayah_coordinate}]</span>
+            <span class="dua-coord-pill">[سورۃ ${d.surah_name_ar} ${d.ayah_coordinate}]</span>
             <span class="dua-surah-title">${escapeHtml(d.surah_name_roman)}</span>
             <span class="dua-type-tag">${typeBadgeLabel}</span>
             <span class="dua-speaker-tag">${escapeHtml(d.speaker_ur)}</span>
@@ -595,7 +595,46 @@
   }
 
   // Audio Playback
+  function togglePlayPause() {
+    playClickSfx();
+    if (!currentlyPlayingSerial) {
+      if (currentFilteredItems && currentFilteredItems.length > 0) {
+        playDua(currentFilteredItems[0].serial);
+      }
+      return;
+    }
+    if (!audioPlayer) return;
+
+    if (audioPlayer.paused) {
+      audioPlayer.play().then(() => {
+        updatePlayingCardState();
+        const d = duasData.find(x => x.serial === currentlyPlayingSerial);
+        updateDockUI(true, d);
+      }).catch(() => {});
+    } else {
+      audioPlayer.pause();
+      updatePlayingCardState();
+      const d = duasData.find(x => x.serial === currentlyPlayingSerial);
+      updateDockUI(false, d);
+    }
+  }
+
+  function closeAudioDock() {
+    playClickSfx();
+    if (audioPlayer && !audioPlayer.paused) {
+      audioPlayer.pause();
+    }
+    currentlyPlayingSerial = null;
+    updatePlayingCardState();
+    const dock = document.getElementById("native-duas-dock") || document.getElementById("duas-audio-dock");
+    if (dock) dock.classList.remove("show");
+  }
+
   function playDua(serial) {
+    if (typeof serial === "undefined") {
+      togglePlayPause();
+      return;
+    }
     playClickSfx();
     const d = duasData.find(x => x.serial === serial);
     if (!d || !d.audio_url) return;
@@ -649,7 +688,7 @@
     if (isPlaying && duaObj) {
       dock.classList.add("show");
       const titleEl = dock.querySelector(".dock-dua-title");
-      if (titleEl) titleEl.textContent = `[Surah ${duaObj.surah_name_roman} ${duaObj.surah_id}:${duaObj.ayah_coordinate}] ${duaObj.title_ur}`;
+      if (titleEl) titleEl.textContent = `[Surah ${duaObj.surah_name_roman} ${duaObj.ayah_coordinate}] ${duaObj.title_ur}`;
       const playBtn = dock.querySelector(".main-play");
       if (playBtn) playBtn.innerHTML = "⏸️";
     } else {
@@ -710,12 +749,12 @@ ${d.english}
 🎯 مقصد و فضیلت: ${d.purpose_virtue_ur}
 📜 شانِ نزول: ${d.reason_for_revelation_ur}
 
-📍 مقام: سورۃ ${d.surah_name_ar} (${d.surah_name_roman}) [آیت ${d.ayah_coordinate}]
+📍 مقام: سورۃ ${d.surah_name_ar} (${d.surah_name_roman}) [${d.ayah_coordinate}]
 Source: Quran Deep Analyzer`;
 
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(text).then(() => {
-        alert("✅ دعا متن، تراجم اور شانِ نزول کامیابی کے ساتھ کاپی ہو گئے۔");
+        showToast("✅ دعا متن، تراجم اور شانِ نزول کاپی ہو گئے۔");
       }).catch(() => fallbackCopy(text));
     } else {
       fallbackCopy(text);
@@ -729,7 +768,23 @@ Source: Quran Deep Analyzer`;
     ta.select();
     document.execCommand("copy");
     document.body.removeChild(ta);
-    alert("✅ دعا متن کامیابی سے کاپی ہو گیا۔");
+    showToast("✅ دعا متن کامیابی سے کاپی ہو گیا۔");
+  }
+
+  function showToast(msg) {
+    let toast = document.getElementById("duas-toast");
+    if (!toast) {
+      toast = document.createElement("div");
+      toast.id = "duas-toast";
+      toast.className = "duas-toast";
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.classList.add("show");
+    if (toast._timer) clearTimeout(toast._timer);
+    toast._timer = setTimeout(() => {
+      toast.classList.remove("show");
+    }, 2400);
   }
 
   function shareWhatsApp(serial) {
@@ -738,7 +793,7 @@ Source: Quran Deep Analyzer`;
     if (!d) return;
 
     const text = `🤲 *دعاؤں کا قرآنی انسائیکلوپیڈیا*
-*${d.title_ur}* [سورۃ ${d.surah_name_ar} ${d.surah_id}:${d.ayah_coordinate}]
+*${d.title_ur}* [سورۃ ${d.surah_name_ar} ${d.ayah_coordinate}]
 
 ${d.arabic}
 
@@ -880,6 +935,10 @@ ${d.urdu_kanzul_irfan}
     },
 
     playDua: playDua,
+    togglePlayPause: togglePlayPause,
+    closeAudioDock: closeAudioDock,
+    showToast: showToast,
+    getCurrentlyPlayingSerial: () => currentlyPlayingSerial,
     jumpToQuran: jumpToQuran,
     toggleStar: toggleBookmark,
     copyDua: copyDua,
@@ -895,6 +954,7 @@ ${d.urdu_kanzul_irfan}
     getFontScale: () => fontScale,
     getFontFamily: () => fontFamily,
     formatArabicVerse: formatArabicVerse,
+    buildDuaCardHtml: buildDuaCardHtml,
 
     setSearchQuery: function(q) {
       searchQuery = q;

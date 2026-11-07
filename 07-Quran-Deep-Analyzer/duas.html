@@ -239,8 +239,8 @@
     </div>
 
     <div class="dua-dock-controls">
-      <button type="button" class="dua-dock-btn main-play" onclick="DuasEngine.playDua(DuasEngine.currentlyPlayingSerial)" title="Play / Pause">⏸️</button>
-      <button type="button" class="dua-dock-btn" onclick="document.getElementById('duas-audio-dock').classList.remove('show');" title="Close Mini Player">✕</button>
+      <button type="button" class="dua-dock-btn main-play" onclick="DuasEngine.togglePlayPause()" title="Play / Pause">▶</button>
+      <button type="button" class="dua-dock-btn" onclick="DuasEngine.closeAudioDock()" title="Close Mini Player">✕</button>
     </div>
   </aside>
 

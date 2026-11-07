@@ -547,7 +547,7 @@
             category: 'verse',
             surahId: d.surah_id,
             ayahNum: d.ayah_start,
-            title: `${d.surah_name_roman} ${d.surah_id}:${d.ayah_coordinate}`,
+            title: `${d.surah_name_roman} ${d.ayah_coordinate}`,
             subtitle: d.english,
             arabic: d.arabic,
             arabicClean: d.arabic,
