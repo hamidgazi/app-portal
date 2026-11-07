@@ -46,7 +46,7 @@
       --spring: cubic-bezier(0.16, 1, 0.3, 1);
       
       --header-height: 56px;
-      --active-header-height: 48px;
+      --active-header-height: 42px;
       --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
 
@@ -540,93 +540,267 @@
       border: 1px solid var(--border-subtle);
     }
 
-    /* Pinned Favorites Row */
+    /* ==========================================================================
+       PINNED 'DAILY ESSENTIALS' FROSTED TOP DOCK
+       ========================================================================== */
+    .daily-dock-section {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-lg);
+      padding: 16px 14px 12px;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 32px -4px rgba(0, 0, 0, 0.45);
+      position: relative;
+    }
+
+    .daily-dock-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      padding: 0 4px;
+    }
+
+    .daily-dock-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .daily-dock-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.2px;
+    }
+
+    .daily-dock-badge {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      background: rgba(245, 158, 11, 0.12);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, 0.25);
+    }
+
+    /* ==========================================================================
+       NATIVE SMARTPHONE APP LAUNCHER GRID (iOS / Samsung One UI Style)
+       ========================================================================== */
+    .app-launcher-grid,
     .favorites-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px 8px;
+      padding: 4px 0;
     }
 
-    .fav-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: 14px 16px;
+    @media (min-width: 641px) and (max-width: 1024px) {
+      .app-launcher-grid,
+      .favorites-grid {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 18px 12px;
+      }
+    }
+
+    @media (min-width: 1025px) {
+      .app-launcher-grid,
+      .favorites-grid {
+        grid-template-columns: repeat(8, 1fr);
+        gap: 20px 14px;
+      }
+    }
+
+    .app-launcher-item {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 14px;
+      text-align: center;
       cursor: pointer;
-      transition: all 0.2s var(--spring);
-      position: relative;
+      user-select: none;
+      -webkit-user-select: none;
       touch-action: manipulation;
+      position: relative;
+      background: transparent;
+      border: none;
+      padding: 4px 2px;
+      border-radius: var(--radius-md);
+      transition: transform 0.15s cubic-bezier(0.2, 0, 0, 1), opacity 0.15s ease;
+      min-width: 0;
+      min-height: 48px;
     }
 
-    .fav-card:hover {
-      background: var(--bg-card-hover);
-      border-color: var(--border-glow);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-hover);
+    .app-launcher-item:hover {
+      transform: translateY(-3px);
     }
 
-    .fav-icon-box {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--border-subtle);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
+    .app-launcher-item:active {
+      transform: scale(0.92);
+    }
+
+    .app-launcher-icon-wrap {
+      position: relative;
+      width: 56px;
+      height: 56px;
+      margin-bottom: 7px;
       flex-shrink: 0;
     }
 
-    .fav-meta {
-      flex: 1;
-      min-width: 0;
+    @media (min-width: 768px) {
+      .app-launcher-icon-wrap {
+        width: 64px;
+        height: 64px;
+        margin-bottom: 8px;
+      }
     }
 
-    .fav-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--text-primary);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+    .app-launcher-icon {
+      width: 100%;
+      height: 100%;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      box-shadow: 0 8px 18px -4px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .fav-category {
-      font-size: 11.5px;
-      color: var(--text-dim);
-      margin-top: 2px;
+    @media (min-width: 768px) {
+      .app-launcher-icon {
+        font-size: 32px;
+        border-radius: 18px;
+      }
     }
 
-    .fav-pin-btn {
-      background: transparent;
-      border: none;
-      color: var(--accent-amber);
-      font-size: 16px;
+    .app-launcher-item:hover .app-launcher-icon {
+      box-shadow: 0 12px 24px -4px rgba(0, 0, 0, 0.6), 0 0 18px var(--icon-glow, rgba(56, 189, 248, 0.3));
+    }
+
+    /* High-Contrast Category Gradients */
+    .icon-grad-sacred {
+      background: linear-gradient(135deg, #047857 0%, #10b981 100%);
+      --icon-glow: rgba(16, 185, 129, 0.4);
+    }
+
+    .icon-grad-web {
+      background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
+      --icon-glow: rgba(56, 189, 248, 0.4);
+    }
+
+    .icon-grad-windows {
+      background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+      --icon-glow: rgba(168, 85, 247, 0.4);
+    }
+
+    .icon-grad-android {
+      background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
+      --icon-glow: rgba(245, 158, 11, 0.4);
+    }
+
+    .icon-grad-tools {
+      background: linear-gradient(135deg, #334155 0%, #64748b 100%);
+      --icon-glow: rgba(148, 163, 184, 0.4);
+    }
+
+    /* Pinned Indicator Star */
+    .launcher-fav-star {
+      position: absolute;
+      top: -3px;
+      right: -3px;
+      width: 17px;
+      height: 17px;
+      background: #f59e0b;
+      color: #000;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 800;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+      border: 1.5px solid #09090b;
+      pointer-events: none;
+    }
+
+    /* Desktop 3-dots Context Trigger */
+    .launcher-menu-trigger {
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      width: 22px;
+      height: 22px;
+      background: rgba(18, 18, 21, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 50%;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
       cursor: pointer;
-      padding: 6px;
-      border-radius: 6px;
-      transition: transform 0.15s;
+      opacity: 0;
+      transition: opacity 0.15s ease, background 0.15s ease, color 0.15s ease;
+      touch-action: manipulation;
     }
 
-    .fav-pin-btn:hover {
-      transform: scale(1.15);
+    .app-launcher-item:hover .launcher-menu-trigger,
+    .app-launcher-item:focus-within .launcher-menu-trigger {
+      opacity: 1;
     }
 
-    /* Thematic Clusters Grid */
+    .launcher-menu-trigger:hover {
+      background: rgba(56, 189, 248, 0.25);
+      color: var(--accent-cyan);
+    }
+
+    /* Centered 1-2 Line Typography */
+    .app-launcher-label {
+      font-size: 11.5px;
+      font-weight: 600;
+      line-height: 1.25;
+      color: var(--text-primary);
+      text-align: center;
+      width: 100%;
+      max-width: 86px;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      word-break: break-word;
+      letter-spacing: -0.2px;
+    }
+
+    @media (min-width: 768px) {
+      .app-launcher-label {
+        font-size: 12.5px;
+        max-width: 96px;
+      }
+    }
+
+    /* Backwards Compatibility Stubs for Existing Selectors */
+    .fav-card {
+      display: contents;
+    }
+
+    .app-card {
+      display: contents;
+    }
+
+    /* Thematic Clusters Container */
     .clusters-container {
       display: flex;
       flex-direction: column;
-      gap: 36px;
+      gap: 32px;
     }
 
     .cluster-block {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
     }
 
     .cluster-header {
@@ -644,13 +818,13 @@
     }
 
     .cluster-title {
-      font-size: 16.5px;
+      font-size: 16px;
       font-weight: 700;
       color: var(--text-primary);
     }
 
     .cluster-tag {
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 700;
       padding: 3px 9px;
       border-radius: var(--radius-full);
@@ -665,175 +839,214 @@
     .cluster-tag-tools { background: rgba(244, 63, 94, 0.12); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.3); }
 
     .cluster-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 16px;
+      display: contents;
     }
 
-    /* Linear-Style Production App Card (Whole-Card 1-Click Launch) */
-    .app-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: 20px;
+    /* ==========================================================================
+       LONG-PRESS QUICK ACTION BOTTOM SHEET
+       ========================================================================== */
+    .quick-actions-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 300;
+      align-items: flex-end;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .quick-actions-backdrop.open {
       display: flex;
-      flex-direction: column;
-      gap: 12px;
-      cursor: pointer;
-      position: relative;
-      transition: all 0.22s var(--spring);
-      box-shadow: var(--shadow-card);
-      user-select: none;
-      touch-action: manipulation;
-      min-height: 140px;
+      opacity: 1;
     }
 
-    .app-card:hover {
-      background: var(--bg-card-hover);
-      border-color: var(--border-glow);
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-hover);
+    @media (min-width: 641px) {
+      .quick-actions-backdrop {
+        align-items: center;
+        padding: 20px;
+      }
     }
 
-    .app-card-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 12px;
+    .quick-actions-sheet {
+      background: #141418;
+      border: 1px solid var(--border-glow);
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      padding: 16px 20px 28px;
+      width: 100%;
+      max-width: 440px;
+      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.85);
+      transform: translateY(100%);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      max-height: 85vh;
+      overflow-y: auto;
     }
 
-    .app-card-header-left {
+    @media (min-width: 641px) {
+      .quick-actions-sheet {
+        border-radius: 24px;
+        transform: translateY(20px) scale(0.96);
+        padding: 24px;
+      }
+    }
+
+    .quick-actions-backdrop.open .quick-actions-sheet {
+      transform: translateY(0) scale(1);
+    }
+
+    .sheet-drag-handle {
+      width: 36px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 2px;
+      margin: 0 auto 14px;
+    }
+
+    @media (min-width: 641px) {
+      .sheet-drag-handle {
+        display: none;
+      }
+    }
+
+    .sheet-app-header {
       display: flex;
       align-items: center;
       gap: 14px;
-      min-width: 0;
+      margin-bottom: 14px;
     }
 
-    .app-icon-squircle {
+    .sheet-app-icon {
       width: 48px;
       height: 48px;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 24px;
       flex-shrink: 0;
-      transition: transform 0.2s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     }
 
-    .app-card:hover .app-icon-squircle {
-      transform: scale(1.06);
-      border-color: rgba(56, 189, 248, 0.3);
-    }
-
-    .app-meta {
+    .sheet-app-meta {
+      flex: 1;
       min-width: 0;
     }
 
-    .app-title {
-      font-size: 15px;
+    .sheet-app-title {
+      font-size: 16px;
       font-weight: 700;
-      color: var(--text-primary);
-      line-height: 1.3;
+      color: #fff;
+      margin-bottom: 2px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .app-badge-pill {
-      display: inline-block;
-      font-size: 11px;
+    .sheet-app-badge {
+      font-size: 11.5px;
+      color: var(--accent-cyan);
       font-weight: 600;
+    }
+
+    .sheet-close-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-subtle);
       color: var(--text-dim);
-      margin-top: 3px;
-    }
-
-    .app-corner-actions {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      opacity: 0.6;
-      transition: opacity 0.15s ease;
-    }
-
-    .app-card:hover .app-corner-actions {
-      opacity: 1;
-    }
-
-    .corner-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-secondary);
       font-size: 14px;
-      padding: 6px;
-      border-radius: 6px;
       cursor: pointer;
-      transition: all 0.15s ease;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      text-decoration: none;
+      transition: all 0.15s ease;
+      touch-action: manipulation;
     }
 
-    .corner-btn:hover {
-      background: rgba(255, 255, 255, 0.08);
-      color: var(--text-primary);
+    .sheet-close-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
     }
 
-    .corner-btn.starred {
-      color: var(--accent-amber);
-    }
-
-    .app-card-desc {
+    .sheet-app-desc {
       font-size: 13px;
       color: var(--text-secondary);
-      line-height: 1.5;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
+      line-height: 1.45;
+      margin-bottom: 12px;
     }
 
-    .app-card-footer {
+    .sheet-app-tags {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: auto;
-      padding-top: 8px;
-    }
-
-    .app-tag-list {
-      display: flex;
-      gap: 6px;
       flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 18px;
     }
 
-    .card-tag {
-      font-size: 11px;
+    .sheet-tag {
+      font-size: 10.5px;
       padding: 2px 7px;
       border-radius: var(--radius-sm);
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(255, 255, 255, 0.06);
       color: var(--text-dim);
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    .launch-indicator {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--accent-cyan);
+    .sheet-action-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .sheet-action-row {
       display: flex;
       align-items: center;
-      gap: 4px;
-      opacity: 0;
-      transform: translateX(-4px);
-      transition: all 0.2s ease;
+      gap: 12px;
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      touch-action: manipulation;
+      min-height: 48px;
+      box-sizing: border-box;
     }
 
-    .app-card:hover .launch-indicator {
-      opacity: 1;
-      transform: translateX(0);
+    .sheet-action-row:hover,
+    .sheet-action-row:active {
+      background: rgba(56, 189, 248, 0.12);
+      border-color: rgba(56, 189, 248, 0.35);
+      color: #fff;
+    }
+
+    .sheet-action-icon {
+      font-size: 18px;
+      width: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sheet-action-label {
+      flex: 1;
+      text-align: left;
+    }
+
+    .sheet-action-arrow {
+      color: var(--text-dim);
+      font-size: 16px;
     }
 
     /* ==========================================================================
@@ -848,39 +1061,49 @@
       background: var(--bg-base);
     }
 
-    /* Ultra-Slim Active Topbar (48px) */
+    /* ==========================================================================
+       UNIVERSAL FIXED 42PX SLIM NAVIGATION BAR (Desktop & Mobile)
+       ========================================================================== */
     .active-topbar {
       height: var(--active-header-height);
+      min-height: 42px;
       background: #09090b;
       border-bottom: 1px solid var(--border-subtle);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 16px;
-      gap: 12px;
+      padding: 0 10px 0 6px;
+      gap: 8px;
       z-index: 10;
+      flex-shrink: 0;
     }
 
     .active-topbar-left {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 8px;
+      min-width: 0;
+      flex: 1;
     }
 
     .btn-back-hub {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid var(--border-subtle);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
       color: var(--text-primary);
-      padding: 6px 14px;
+      height: 32px;
+      min-height: 42px;
+      min-width: 48px;
+      padding: 0 12px;
       border-radius: var(--radius-sm);
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       transition: all 0.15s ease;
       touch-action: manipulation;
+      flex-shrink: 0;
     }
 
     .btn-back-hub:hover {
@@ -892,32 +1115,66 @@
     .active-app-info {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
+      min-width: 0;
+      overflow: hidden;
     }
 
     .active-app-icon {
-      font-size: 18px;
+      font-size: 16px;
+      flex-shrink: 0;
     }
 
     .active-app-name {
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 700;
       color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .active-app-tag {
-      font-size: 11px;
+      font-size: 10.5px;
       padding: 2px 7px;
       border-radius: var(--radius-full);
       background: rgba(255, 255, 255, 0.06);
       color: var(--text-dim);
       border: 1px solid var(--border-subtle);
+      white-space: nowrap;
+    }
+
+    @media (max-width: 520px) {
+      .active-app-tag {
+        display: none;
+      }
     }
 
     .active-topbar-right {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .active-topbar-right .action-btn {
+      height: 32px;
+      min-height: 42px;
+      min-width: 42px;
+      padding: 0 10px;
+      font-size: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    @media (max-width: 600px) {
+      .active-topbar-right .nav-btn-text {
+        display: none;
+      }
+      .active-topbar-right .action-btn {
+        padding: 0 8px;
+      }
     }
 
     /* Edge-to-Edge Canvas */
@@ -925,6 +1182,7 @@
       flex: 1;
       width: 100%;
       height: calc(100vh - var(--active-header-height));
+      height: calc(100dvh - var(--active-header-height));
       position: relative;
       overflow: hidden;
       background: var(--bg-base);
@@ -976,27 +1234,14 @@
       letter-spacing: 0.2px;
     }
 
-    /* Floating Back Pill on Mobile */
+    /* Floating Back Pill on Mobile (Decommissioned in favor of universal 42px bar) */
     .mobile-floating-back {
-      display: none;
+      display: none !important;
       position: fixed;
       top: 14px;
       left: 14px;
       z-index: 999;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 16px;
-      background: rgba(18, 18, 21, 0.88);
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      border-radius: var(--radius-full);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      color: var(--accent-cyan);
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
-      touch-action: manipulation;
+      pointer-events: none;
     }
 
     /* Modals & Overlays */
@@ -1123,34 +1368,22 @@
     }
 
     /* Desktop & Mobile Responsive Architecture */
-    @media (min-width: 901px) {
-      .mobile-floating-back {
-        display: none !important;
-      }
+    .mobile-floating-back {
+      display: none !important;
     }
 
     @media (max-width: 900px) {
-      .cluster-grid {
-        grid-template-columns: 1fr;
-      }
-      .favorites-grid {
-        grid-template-columns: 1fr;
-      }
       .dashboard-view {
-        padding: 16px 14px 80px;
-        gap: 20px;
+        padding: 14px 12px 60px;
+        gap: 18px;
       }
-      /* Pure Full-Stage on mobile: hide duplicate 48px topbar header and let app utilize full 100dvh */
+      /* Universal 42px Active Topbar remains active across all devices */
       .active-topbar {
-        display: none !important;
+        display: flex !important;
       }
       .stage-canvas {
-        height: 100vh !important;
-        height: 100dvh !important;
-      }
-      .mobile-floating-back {
-        top: max(14px, env(safe-area-inset-top));
-        left: max(14px, env(safe-area-inset-left));
+        height: calc(100vh - var(--active-header-height)) !important;
+        height: calc(100dvh - var(--active-header-height)) !important;
       }
     }
 
@@ -1275,16 +1508,17 @@
         </div>
       </section>
 
-      <!-- Pinned Favorites & Recents Strip -->
-      <section class="favorites-section" id="favorites-section" aria-labelledby="fav-section-title">
-        <div class="section-header">
-          <div class="section-title-wrap">
+      <!-- Pinned 'Daily Essentials' Frosted Top Dock -->
+      <section class="daily-dock-section" id="favorites-section" aria-labelledby="fav-section-title">
+        <div class="daily-dock-header">
+          <div class="daily-dock-title-wrap">
             <span class="section-icon">⭐</span>
-            <h2 class="section-title" id="fav-section-title">Quick Access & Pinned Favorites</h2>
-            <span class="section-count" id="favorites-count">0</span>
+            <h2 class="daily-dock-title" id="fav-section-title">Daily Essentials</h2>
+            <span class="daily-dock-badge">1-Tap Fast Launch</span>
           </div>
+          <span class="section-count" id="favorites-count">6</span>
         </div>
-        <div class="favorites-grid" id="favorites-grid">
+        <div class="app-launcher-grid daily-dock-grid favorites-grid" id="favorites-grid">
           <!-- Rendered dynamically -->
         </div>
       </section>
@@ -1301,11 +1535,11 @@
   <!-- Pure Full-Stage Active App Runner -->
   <div class="active-stage" id="active-stage" role="region" aria-label="Application Stage">
     
-    <!-- Ultra-Slim Active Header (48px) -->
+    <!-- Universal Fixed 42px Slim Navigation Bar -->
     <header class="active-topbar" id="active-topbar">
       <div class="active-topbar-left">
-        <button class="btn-back-hub" id="btn-back-hub" title="Return to Dashboard">
-          <span>←</span> Back to Hub
+        <button class="btn-back-hub" id="btn-back-hub" title="Return to Launcher Home">
+          <span>←</span> <span>Home</span>
         </button>
         <div class="active-app-info">
           <span class="active-app-icon" id="top-app-icon">🚀</span>
@@ -1315,9 +1549,9 @@
       </div>
 
       <div class="active-topbar-right">
-        <button class="action-btn" id="btn-reload-stage" title="Reload active application">🔄 Reload</button>
-        <a class="action-btn btn-primary" id="btn-popout-stage" href="#" target="_blank" rel="noopener" title="Open in dedicated tab">↗️ Pop Out</a>
-        <button class="action-btn" id="btn-share-stage" title="Share application link">🔗 Share</button>
+        <button class="action-btn" id="btn-reload-stage" title="Reload active application">🔄 <span class="nav-btn-text">Reload</span></button>
+        <button class="action-btn" id="btn-share-stage" title="Share application link">🔗 <span class="nav-btn-text">Share</span></button>
+        <a class="action-btn btn-primary" id="btn-popout-stage" href="#" target="_blank" rel="noopener" title="Open in dedicated tab">↗️ <span class="nav-btn-text">Pop Out</span></a>
       </div>
     </header>
 
@@ -1332,10 +1566,47 @@
 
   </div>
 
-  <!-- Mobile Floating Back Button -->
-  <button class="mobile-floating-back" id="mobile-floating-back" aria-label="Return to Master Index">
+  <!-- Mobile Floating Back Button (Preserved for compatibility) -->
+  <button class="mobile-floating-back" id="mobile-floating-back" aria-label="Return to Master Index" style="display:none !important;">
     <span>←</span> Hub
   </button>
+
+  <!-- Long-Press Quick Action Bottom Sheet -->
+  <div class="quick-actions-backdrop" id="quick-actions-modal" role="dialog" aria-modal="true" aria-labelledby="qa-title">
+    <div class="quick-actions-sheet" id="quick-actions-sheet">
+      <div class="sheet-drag-handle"></div>
+      <div class="sheet-app-header">
+        <div class="sheet-app-icon" id="qa-icon">📦</div>
+        <div class="sheet-app-meta">
+          <h3 class="sheet-app-title" id="qa-title">Application</h3>
+          <div class="sheet-app-badge" id="qa-badge">Essential</div>
+        </div>
+        <button class="sheet-close-btn" id="qa-close-btn" aria-label="Close Sheet">✕</button>
+      </div>
+      <p class="sheet-app-desc" id="qa-desc">Application description...</p>
+      <div class="sheet-app-tags" id="qa-tags"></div>
+      
+      <div class="sheet-action-list">
+        <button class="sheet-action-row" id="qa-action-launch">
+          <span class="sheet-action-icon">🚀</span>
+          <span class="sheet-action-label">Launch Application</span>
+          <span class="sheet-action-arrow">›</span>
+        </button>
+        <button class="sheet-action-row" id="qa-action-pin">
+          <span class="sheet-action-icon" id="qa-pin-icon">⭐</span>
+          <span class="sheet-action-label" id="qa-pin-label">Pin to Daily Dock</span>
+        </button>
+        <a class="sheet-action-row" id="qa-action-popout" target="_blank" rel="noopener">
+          <span class="sheet-action-icon">↗️</span>
+          <span class="sheet-action-label">Open in Dedicated Tab</span>
+        </a>
+        <button class="sheet-action-row" id="qa-action-share">
+          <span class="sheet-action-icon">🔗</span>
+          <span class="sheet-action-label">Share App Link</span>
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- Omnichannel QR Code & Share Modal -->
   <div class="modal-backdrop" id="modal-qr" role="dialog" aria-modal="true" aria-labelledby="modal-qr-title">
@@ -1525,77 +1796,252 @@
       });
     }
 
-    /* Toggle Favorite Pin */
+    /* ==========================================================================
+       SMARTPHONE LAUNCHER ENGINE & INTERACTION LOGIC
+       ========================================================================== */
+    const DEFAULT_DAILY_IDS = [
+      "02-Namaz-Prayer-Times__index_html",
+      "08-Hadith-Roman-Urdu__web__index_html",
+      "20-Arabic-Mastery__index_html",
+      "01-Events-Countdown__index_html",
+      "03-Thela-Stock-Manager__index_html",
+      "05-Cloud-Clipboard__index_html"
+    ];
+
+    function getClusterGradClass(clusterId) {
+      switch (clusterId) {
+        case "sacred": return "icon-grad-sacred";
+        case "web": return "icon-grad-web";
+        case "windows": return "icon-grad-windows";
+        case "android": return "icon-grad-android";
+        default: return "icon-grad-tools";
+      }
+    }
+
+    function renderLauncherItem(app, tokens = []) {
+      const isStarred = State.favorites.includes(app.id);
+      const cluster = getAppCluster(app);
+      const gradClass = getClusterGradClass(cluster);
+      const displayTitle = highlightMatch(app.title, tokens);
+
+      return `
+        <div class="app-launcher-item app-card" data-id="${escapeHtml(app.id)}" title="${escapeHtml(app.title)}" role="button" tabindex="0">
+          <div class="app-launcher-icon-wrap">
+            <div class="app-launcher-icon ${gradClass}">
+              ${app.icon || '📦'}
+            </div>
+            ${isStarred ? '<span class="launcher-fav-star" title="Pinned to Daily Dock">★</span>' : ''}
+            <button class="launcher-menu-trigger" title="Quick Actions (Long-press / Right-click)" aria-label="Quick Actions">⋮</button>
+          </div>
+          <div class="app-launcher-label">${displayTitle}</div>
+        </div>
+      `;
+    }
+
+    const renderAppCard = renderLauncherItem;
+
+    /* Long-Press & Interaction Delegation Handler */
+    function bindLauncherLongPress(element, app) {
+      let pressTimer = null;
+      let startX = 0;
+      let startY = 0;
+      let isLongPress = false;
+
+      // Mobile Touch Handling (500ms threshold)
+      element.addEventListener("touchstart", (e) => {
+        isLongPress = false;
+        if (!e.touches || !e.touches[0]) return;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        pressTimer = setTimeout(() => {
+          isLongPress = true;
+          AudioEngine.blip();
+          openQuickActionSheet(app);
+        }, 500);
+      }, { passive: true });
+
+      element.addEventListener("touchmove", (e) => {
+        if (!e.touches || !e.touches[0]) return;
+        if (Math.abs(e.touches[0].clientX - startX) > 10 || Math.abs(e.touches[0].clientY - startY) > 10) {
+          if (pressTimer) {
+            clearTimeout(pressTimer);
+            pressTimer = null;
+          }
+        }
+      }, { passive: true });
+
+      element.addEventListener("touchend", (e) => {
+        if (pressTimer) {
+          clearTimeout(pressTimer);
+          pressTimer = null;
+        }
+        if (isLongPress) {
+          e.preventDefault();
+        }
+      });
+
+      element.addEventListener("touchcancel", () => {
+        if (pressTimer) {
+          clearTimeout(pressTimer);
+          pressTimer = null;
+        }
+      });
+
+      // Right-Click Context Menu
+      element.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
+        AudioEngine.blip();
+        openQuickActionSheet(app);
+      });
+
+      // Desktop 3-Dots Button
+      const menuTrigger = element.querySelector(".launcher-menu-trigger");
+      if (menuTrigger) {
+        menuTrigger.addEventListener("click", (e) => {
+          e.stopPropagation();
+          AudioEngine.blip();
+          openQuickActionSheet(app);
+        });
+      }
+
+      // Primary Click: 1-Tap Launch
+      element.addEventListener("click", (e) => {
+        if (isLongPress) {
+          isLongPress = false;
+          return;
+        }
+        if (e.target.closest(".launcher-menu-trigger")) {
+          return;
+        }
+        launchApp(app.id);
+      });
+
+      // Keyboard Activation (Enter / Space)
+      element.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          launchApp(app.id);
+        }
+      });
+    }
+
+    /* Open Quick Actions Bottom Sheet */
+    function openQuickActionSheet(app) {
+      if (!app) return;
+      const modal = document.getElementById("quick-actions-modal");
+      const iconEl = document.getElementById("qa-icon");
+      const titleEl = document.getElementById("qa-title");
+      const badgeEl = document.getElementById("qa-badge");
+      const descEl = document.getElementById("qa-desc");
+      const tagsEl = document.getElementById("qa-tags");
+      const btnLaunch = document.getElementById("qa-action-launch");
+      const btnPin = document.getElementById("qa-action-pin");
+      const pinIcon = document.getElementById("qa-pin-icon");
+      const pinLabel = document.getElementById("qa-pin-label");
+      const btnPopout = document.getElementById("qa-action-popout");
+      const btnShare = document.getElementById("qa-action-share");
+
+      if (!modal) return;
+
+      const cluster = getAppCluster(app);
+      const gradClass = getClusterGradClass(cluster);
+      const isStarred = State.favorites.includes(app.id);
+      const url = getLaunchUrl(app);
+
+      if (iconEl) {
+        iconEl.className = `sheet-app-icon ${gradClass}`;
+        iconEl.textContent = app.icon || "📦";
+      }
+      if (titleEl) titleEl.textContent = app.title;
+      if (badgeEl) badgeEl.textContent = app.badge || app.category || "Application";
+      if (descEl) descEl.textContent = app.description || "No description available.";
+      if (tagsEl) {
+        tagsEl.innerHTML = (app.tags || []).map(t => `<span class="sheet-tag">${escapeHtml(t)}</span>`).join("");
+      }
+
+      if (pinIcon && pinLabel) {
+        pinIcon.textContent = isStarred ? "★" : "☆";
+        pinLabel.textContent = isStarred ? "Unpin from Daily Dock" : "Pin to Daily Dock";
+      }
+
+      if (btnLaunch) {
+        btnLaunch.onclick = () => {
+          closeQuickActionSheet();
+          launchApp(app.id);
+        };
+      }
+
+      if (btnPin) {
+        btnPin.onclick = () => {
+          toggleFavorite(app.id);
+          closeQuickActionSheet();
+        };
+      }
+
+      if (btnPopout) {
+        btnPopout.href = url;
+        btnPopout.onclick = () => {
+          AudioEngine.tap();
+          closeQuickActionSheet();
+        };
+      }
+
+      if (btnShare) {
+        btnShare.onclick = () => {
+          closeQuickActionSheet();
+          openShareModal(app.id);
+        };
+      }
+
+      modal.classList.add("open");
+    }
+
+    function closeQuickActionSheet() {
+      const modal = document.getElementById("quick-actions-modal");
+      if (modal) modal.classList.remove("open");
+    }
+
+    /* Toggle Daily Dock Favorite Pin */
     function toggleFavorite(appId) {
       const idx = State.favorites.indexOf(appId);
       if (idx > -1) {
         State.favorites.splice(idx, 1);
         AudioEngine.reset();
-        showToast("Removed from Favorites");
+        showToast("Removed from Daily Dock");
       } else {
         State.favorites.push(appId);
         AudioEngine.favorite();
-        showToast("Pinned to Favorites! ⭐");
+        showToast("Pinned to Daily Dock! ⭐");
       }
       localStorage.setItem("master_index_favorites", JSON.stringify(State.favorites));
-      renderFavorites();
+      renderDailyDock();
       renderDashboardClusters();
     }
 
-    /* Render Pinned Favorites */
-    function renderFavorites() {
+    /* Render Pinned Daily Essentials Dock */
+    function renderDailyDock() {
       const gridEl = document.getElementById("favorites-grid");
       const countEl = document.getElementById("favorites-count");
       if (!gridEl) return;
 
       let favApps = State.apps.filter(a => State.favorites.includes(a.id));
-      if (countEl) countEl.textContent = favApps.length;
 
       if (favApps.length === 0) {
-        // Default smart essentials
-        const defaultIds = [
-          "01-Events-Countdown__index_html",
-          "02-Namaz-Prayer-Times__index_html",
-          "03-Thela-Stock-Manager__index_html",
-          "07-Quran-Deep-Analyzer__index_html"
-        ];
-        favApps = State.apps.filter(a => defaultIds.includes(a.id));
+        favApps = State.apps.filter(a => DEFAULT_DAILY_IDS.includes(a.id));
       }
 
-      gridEl.innerHTML = favApps.map(app => {
-        const isStarred = State.favorites.includes(app.id);
-        const url = getLaunchUrl(app);
-        return `
-          <div class="fav-card" data-id="${escapeHtml(app.id)}" title="Click to launch ${escapeHtml(app.title)}">
-            <div class="fav-icon-box">${app.icon || '🚀'}</div>
-            <div class="fav-meta">
-              <div class="fav-title">${escapeHtml(app.title)}</div>
-              <div class="fav-category">${escapeHtml(app.badge || app.category || 'Essential')}</div>
-            </div>
-            <button class="fav-pin-btn" data-pin-id="${escapeHtml(app.id)}" title="${isStarred ? 'Unpin favorite' : 'Pin favorite'}">
-              ${isStarred ? '★' : '☆'}
-            </button>
-          </div>
-        `;
-      }).join("");
+      if (countEl) countEl.textContent = favApps.length;
 
-      // Bind Clicks
-      gridEl.querySelectorAll(".fav-card").forEach(card => {
-        card.addEventListener("click", (e) => {
-          if (e.target.closest(".fav-pin-btn")) return;
-          const appId = card.getAttribute("data-id");
-          launchApp(appId);
-        });
-      });
+      gridEl.innerHTML = favApps.map(app => renderLauncherItem(app, [])).join("");
 
-      gridEl.querySelectorAll(".fav-pin-btn").forEach(btn => {
-        btn.addEventListener("click", (e) => {
-          e.stopPropagation();
-          const appId = btn.getAttribute("data-pin-id");
-          toggleFavorite(appId);
-        });
+      gridEl.querySelectorAll(".app-launcher-item").forEach(item => {
+        const appId = item.getAttribute("data-id");
+        const app = State.apps.find(a => a.id === appId);
+        if (app) bindLauncherLongPress(item, app);
       });
     }
+
+    const renderFavorites = renderDailyDock;
 
     /* ==========================================================================
        DOMAIN TRANSLITERATION & AI SEARCH NLP ENGINE (Client-Side In-Place)
@@ -1872,7 +2318,7 @@
 
         totalMatches += scoredList.length;
 
-        const cardsMarkup = scoredList.map(item => renderAppCard(item.app, item.tokens)).join("");
+        const itemsMarkup = scoredList.map(item => renderLauncherItem(item.app, item.tokens)).join("");
 
         return `
           <div class="cluster-block" id="cluster-block-${cluster.id}">
@@ -1883,8 +2329,8 @@
               </div>
               <span class="section-count">${scoredList.length} ${scoredList.length === 1 ? 'Tool' : 'Tools'}</span>
             </div>
-            <div class="cluster-grid">
-              ${cardsMarkup}
+            <div class="app-launcher-grid">
+              ${itemsMarkup}
             </div>
           </div>
         `;
@@ -1925,65 +2371,12 @@
 
       container.innerHTML = clusterHtmls.join("");
 
-      // Bind Whole-Card Clicks
-      container.querySelectorAll(".app-card").forEach(card => {
-        card.addEventListener("click", (e) => {
-          if (e.target.closest(".corner-btn")) return;
-          const appId = card.getAttribute("data-id");
-          launchApp(appId);
-        });
+      // Bind long-press and click handlers
+      container.querySelectorAll(".app-launcher-item").forEach(item => {
+        const appId = item.getAttribute("data-id");
+        const app = State.apps.find(a => a.id === appId);
+        if (app) bindLauncherLongPress(item, app);
       });
-
-      container.querySelectorAll(".corner-btn-star").forEach(btn => {
-        btn.addEventListener("click", (e) => {
-          e.stopPropagation();
-          const appId = btn.getAttribute("data-star-id");
-          toggleFavorite(appId);
-        });
-      });
-
-      container.querySelectorAll(".corner-btn-share").forEach(btn => {
-        btn.addEventListener("click", (e) => {
-          e.stopPropagation();
-          const appId = btn.getAttribute("data-share-id");
-          openShareModal(appId);
-        });
-      });
-    }
-
-    function renderAppCard(app, tokens = []) {
-      const isStarred = State.favorites.includes(app.id);
-      const url = getLaunchUrl(app);
-      const displayTitle = highlightMatch(app.title, tokens);
-      const displayDesc = highlightMatch(app.description || '', tokens);
-
-      return `
-        <div class="app-card" data-id="${escapeHtml(app.id)}" title="Launch ${escapeHtml(app.title)}">
-          <div class="app-card-top">
-            <div class="app-card-header-left">
-              <div class="app-icon-squircle">${app.icon || '📦'}</div>
-              <div class="app-meta">
-                <div class="app-title">${displayTitle}</div>
-                <span class="app-badge-pill">${escapeHtml(app.badge || app.category || '')}</span>
-              </div>
-            </div>
-            <div class="app-corner-actions">
-              <button class="corner-btn corner-btn-share" data-share-id="${escapeHtml(app.id)}" title="Share link">🔗</button>
-              <a class="corner-btn" href="${escapeHtml(url)}" target="_blank" rel="noopener" title="Open in dedicated tab" onclick="event.stopPropagation(); AudioEngine.tap();">↗️</a>
-              <button class="corner-btn corner-btn-star ${isStarred ? 'starred' : ''}" data-star-id="${escapeHtml(app.id)}" title="${isStarred ? 'Unpin' : 'Pin to favorites'}">
-                ${isStarred ? '★' : '☆'}
-              </button>
-            </div>
-          </div>
-          <div class="app-card-desc">${displayDesc}</div>
-          <div class="app-card-footer">
-            <div class="app-tag-list">
-              ${(app.tags || []).slice(0, 2).map(t => `<span class="card-tag">${escapeHtml(t)}</span>`).join("")}
-            </div>
-            <span class="launch-indicator">Launch ↗</span>
-          </div>
-        </div>
-      `;
     }
 
     /* Stage Loader Helpers */
@@ -2015,7 +2408,6 @@
       localStorage.setItem("master_index_recents", JSON.stringify(State.recents));
 
       const url = getLaunchUrl(app);
-      const isMobile = window.innerWidth <= 900;
 
       const dashboard = document.getElementById("dashboard-view");
       const topbar = document.getElementById("main-topbar");
@@ -2029,9 +2421,7 @@
       if (stage) stage.style.display = "flex";
 
       if (btnPopout) btnPopout.href = url;
-      if (mobileBack) {
-        mobileBack.style.display = isMobile ? "flex" : "none";
-      }
+      if (mobileBack) mobileBack.style.display = "none";
 
       const iconEl = document.getElementById("top-app-icon");
       const titleEl = document.getElementById("top-app-title");
@@ -2379,9 +2769,28 @@
           }
         }],
 
+        ["Initialize Quick Actions Modal", () => {
+          const modal = document.getElementById("quick-actions-modal");
+          const closeBtn = document.getElementById("qa-close-btn");
+          if (modal) {
+            modal.addEventListener("click", (e) => {
+              if (e.target === modal) {
+                closeQuickActionSheet();
+                AudioEngine.reset();
+              }
+            });
+          }
+          if (closeBtn) {
+            closeBtn.addEventListener("click", () => {
+              closeQuickActionSheet();
+              AudioEngine.reset();
+            });
+          }
+        }],
+
         ["Render Initial UI", () => {
           renderCategoryPills();
-          renderFavorites();
+          renderDailyDock();
           renderDashboardClusters();
         }],
 
@@ -2389,6 +2798,12 @@
           window.addEventListener("keydown", (e) => {
             // Esc to dismiss modals or return to hub
             if (e.key === "Escape") {
+              const qaModal = document.getElementById("quick-actions-modal");
+              if (qaModal && qaModal.classList.contains("open")) {
+                closeQuickActionSheet();
+                AudioEngine.reset();
+                return;
+              }
               const modal = document.getElementById("modal-qr");
               if (modal && modal.classList.contains("open")) {
                 modal.classList.remove("open");
