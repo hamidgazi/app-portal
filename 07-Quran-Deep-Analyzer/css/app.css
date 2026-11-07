@@ -1466,9 +1466,10 @@ table.analytics-table tbody tr:hover {
 .compact-mode .translation-item.trans-layer-ki,
 .compact-mode .translation-item.trans-layer-kr,
 .compact-mode .translation-item[dir="rtl"] {
-  direction: rtl;
-  text-align: right;
-  justify-content: flex-start; /* In RTL flexbox, starts from the RIGHT edge */
+  direction: rtl !important;
+  text-align: right !important;
+  justify-content: flex-start !important; /* In RTL flexbox, starts from the RIGHT edge */
+  width: 100% !important;
 }
 
 .compact-mode .trans-text {
@@ -9081,3 +9082,33 @@ body[data-theme="parchment"] .jumper-preset-chip:hover {
   }
 }
 
+
+/* ==========================================================================
+   Quranic Manners & Commands Tab-Level BiDi & Right-Alignment Invariants
+   ========================================================================== */
+#tab-manners .manner-content-grid,
+#tab-commands .command-content-grid {
+  direction: rtl !important;
+  align-items: stretch !important;
+  width: 100% !important;
+}
+
+#tab-manners .manner-pane-ur,
+#tab-commands .command-pane-ur,
+#tab-manners .manner-title-ur,
+#tab-commands .command-title-ur,
+#tab-manners .manner-urdu-kanzuliman,
+#tab-commands .trans-body-ur {
+  direction: rtl !important;
+  text-align: right !important;
+  width: 100% !important;
+  align-self: stretch !important;
+}
+
+.compact-mode .trans-text.urdu,
+.ayah-card.compact-card .trans-text.urdu {
+  width: 100% !important;
+  flex: 1 1 auto !important;
+  direction: rtl !important;
+  text-align: right !important;
+}

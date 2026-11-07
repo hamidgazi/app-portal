@@ -589,7 +589,9 @@
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
       gap: 14px;
-      align-items: start;
+      align-items: stretch !important;
+      direction: rtl !important;
+      width: 100% !important;
       margin-top: 1px;
     }
 
@@ -605,8 +607,10 @@
       display: flex;
       flex-direction: column;
       gap: 3px;
-      direction: rtl;
-      text-align: right;
+      direction: rtl !important;
+      text-align: right !important;
+      width: 100% !important;
+      align-items: stretch !important;
       padding: 0;
       background: transparent;
       border: none;
@@ -631,6 +635,9 @@
       color: #fbbf24;
       line-height: 1.35;
       margin-bottom: 2px;
+      direction: rtl !important;
+      text-align: right !important;
+      width: 100% !important;
     }
 
     .command-title-en {
@@ -647,6 +654,13 @@
       display: flex;
       flex-direction: column;
       gap: 4px;
+      width: 100% !important;
+    }
+
+    .trans-stack-ur {
+      align-items: stretch !important;
+      direction: rtl !important;
+      text-align: right !important;
     }
 
     .trans-item-ur, .trans-item-en {
@@ -695,6 +709,8 @@
       color: #f8fafc !important;
       text-align: right !important;
       direction: rtl !important;
+      width: 100% !important;
+      align-self: stretch !important;
       word-break: break-word;
       overflow-wrap: break-word;
       margin-top: 4px;
@@ -1140,11 +1156,28 @@
         padding: 12px 14px;
       }
       .command-content-grid {
-        grid-template-columns: 1fr;
+        display: flex !important;
+        flex-direction: column !important;
         gap: 12px;
+        align-items: stretch !important;
+        width: 100% !important;
+        direction: rtl !important;
       }
-      .command-pane-ur, .command-pane-en {
-        padding: 10px 12px;
+      .command-pane-ur {
+        width: 100% !important;
+        align-self: stretch !important;
+        direction: rtl !important;
+        text-align: right !important;
+        padding: 6px 0;
+      }
+      .command-pane-en {
+        width: 100% !important;
+        align-self: stretch !important;
+        direction: ltr !important;
+        text-align: left !important;
+        padding: 6px 0;
+        border-right: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
       }
       .command-title-ur {
         font-size: 1.30rem;
@@ -1791,7 +1824,9 @@
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
       gap: 14px;
-      align-items: start;
+      align-items: stretch !important;
+      direction: rtl !important;
+      width: 100% !important;
       margin-top: 2px;
     }
 
@@ -1807,8 +1842,10 @@
       display: flex;
       flex-direction: column;
       gap: 3px;
-      direction: rtl;
-      text-align: right;
+      direction: rtl !important;
+      text-align: right !important;
+      width: 100% !important;
+      align-items: stretch !important;
     }
 
     .manner-pane-en {
@@ -1828,6 +1865,9 @@
       color: #fbbf24;
       line-height: 1.35;
       margin-bottom: 2px;
+      direction: rtl !important;
+      text-align: right !important;
+      width: 100% !important;
     }
 
     .manner-title-en {
@@ -1847,6 +1887,8 @@
       color: #f8fafc !important;
       text-align: right !important;
       direction: rtl !important;
+      width: 100% !important;
+      align-self: stretch !important;
       word-break: break-word;
       overflow-wrap: break-word;
       margin-top: 4px;
@@ -2108,9 +2150,12 @@
         justify-content: space-between;
       }
       .manner-content-grid {
-        display: flex;
-        flex-direction: column;
+        display: flex !important;
+        flex-direction: column !important;
         gap: 8px;
+        align-items: stretch !important;
+        width: 100% !important;
+        direction: rtl !important;
       }
       .manner-content-grid.mobile-order-en-first .manner-pane-en {
         order: 1;
@@ -2118,15 +2163,33 @@
         padding-bottom: 6px;
         padding-right: 0;
         border-right: none;
+        width: 100% !important;
+        align-self: stretch !important;
+        direction: ltr !important;
+        text-align: left !important;
       }
       .manner-content-grid.mobile-order-en-first .manner-pane-ur {
         order: 2;
+        width: 100% !important;
+        align-self: stretch !important;
+        direction: rtl !important;
+        text-align: right !important;
+      }
+      .manner-pane-ur {
+        width: 100% !important;
+        align-self: stretch !important;
+        direction: rtl !important;
+        text-align: right !important;
       }
       .manner-pane-en {
         padding-right: 0;
         border-right: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        padding-bottom: 6px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding-top: 6px;
+        width: 100% !important;
+        align-self: stretch !important;
+        direction: ltr !important;
+        text-align: left !important;
       }
     }
   
