@@ -278,6 +278,47 @@
       margin-bottom: 0.75rem;
     }
 
+    .quote-header {
+      margin-bottom: 0.65rem;
+      border-bottom: 1px dashed var(--border-subtle);
+      padding-bottom: 0.45rem;
+    }
+
+    .quote-title {
+      font-family: var(--font-arabic), serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--gold-primary);
+      line-height: 1.8;
+      letter-spacing: 0.02em;
+    }
+
+    .quote-text {
+      line-height: 2.1;
+    }
+
+    .reader-link {
+      color: var(--gold-primary);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.2s ease;
+    }
+
+    .reader-link:hover {
+      color: var(--cyan-primary);
+    }
+
+    code.ar-code {
+      font-family: var(--font-arabic), serif !important;
+      direction: rtl;
+      font-size: 1.05em;
+      color: var(--gold-primary);
+      background: var(--bg-card);
+      padding: 0.15rem 0.45rem;
+      border-radius: 0.35rem;
+      border: 1px solid var(--border-subtle);
+    }
+
     .quote-actions {
       display: flex;
       gap: 0.5rem;
@@ -1165,7 +1206,7 @@
 <hr class="section-divider">
 
             <div class="quote-card">
-              <div class="quote-body">### بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ<br><strong>الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ، وَالصَّلَاةُ وَالسَّلَامُ عَلَى سَيِّدِ الْمُرْسَلِينَ نَبِيِّنَا مُحَمَّدٍ وَعَلَى آلِهِ وَصَحْبِهِ أَجْمَعِينَ ، أَمَّا بَعْدُ:</strong></div>
+              <div class="quote-body"><div class="quote-header"><div class="quote-title">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div></div><div class="quote-text"><strong>الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ، وَالصَّلَاةُ وَالسَّلَامُ عَلَى سَيِّدِ الْمُرْسَلِينَ نَبِيِّنَا مُحَمَّدٍ وَعَلَى آلِهِ وَصَحْبِهِ أَجْمَعِينَ ، أَمَّا بَعْدُ:</strong></div></div>
               <div class="quote-actions">
                 <button class="btn-card-action btn-copy-quote" title="Copy Text">📋 Copy</button>
                 <button class="btn-card-action btn-share-quote" title="Share via WhatsApp">💬 Share</button>
@@ -1174,7 +1215,7 @@
             
 
             <div class="quote-card">
-              <div class="quote-body"><em>"Indeed, this knowledge is religion, so be careful from whom you take your religion."</em><br><strong>— Imam Muhammad ibn Sirin (رحمه الله)</strong><br><em><span class="arabic-matn" dir="rtl">«إِنَّ هَذَا الْعِلْمَ دِينٌ، فَانْظُرُوا عَمَّنْ تَأْخُذُونَ دِينَكُمْ»</span></em><br><em>(بے شک یہ علمِ حدیث دین ہے، پس خوب دیکھ بھال لو کہ تم اپنا دین کن لوگوں سے حاصل کر رہے ہو)</em></div>
+              <div class="quote-body"><div class="quote-text"><em>"Indeed, this knowledge is religion, so be careful from whom you take your religion."</em><br><strong>— Imam Muhammad ibn Sirin (رحمه الله)</strong><br><em><span class="arabic-matn" dir="rtl">«إِنَّ هَذَا الْعِلْمَ دِينٌ، فَانْظُرُوا عَمَّنْ تَأْخُذُونَ دِينَكُمْ»</span></em><br><em>(بے شک یہ علمِ حدیث دین ہے، پس خوب دیکھ بھال لو کہ تم اپنا دین کن لوگوں سے حاصل کر رہے ہو)</em></div></div>
               <div class="quote-actions">
                 <button class="btn-card-action btn-copy-quote" title="Copy Text">📋 Copy</button>
                 <button class="btn-card-action btn-share-quote" title="Share via WhatsApp">💬 Share</button>
@@ -1184,20 +1225,20 @@
 <hr class="section-divider">
 <h2 id="table-of-contents-فہرست-مضامین">📑 Table of Contents (فہرستِ مضامین)</h2>
 <ol class="reader-list">
-<li>[Preface: Foundations of Hadith & Its Sacred Preservation](#preface-foundations-of-hadith--its-sacred-preservation)</li>
-<li>[Chapter 1: History & Origin of Hadith Compilation (تاریخِ تدوینِ حدیث)](#chapter-1-history--origin-of-hadith-compilation-تاریخ-تدوین-حدیث)</li>
-<li>[Chapter 2: Sanad (سند) — The Anatomy of Transmission Chains](#chapter-2-sanad-سند--the-anatomy-of-transmission-chains)</li>
-<li>[Chapter 3: Matn (متن) — The Text & The Science of Internal Critique](#chapter-3-matn-متن--the-text--the-science-of-internal-critique)</li>
-<li>[Chapter 4: The Master Classification of Hadith (اقسامِ و مراتبِ حدیث)](#chapter-4-the-master-classification-of-hadith-اقسام-و-مراتب-حدیث)</li>
-<li>[Chapter 5: Rijal al-Hadith & Jarh wa Ta'dil (علم رجال الحدیث والجرح والتعدیل)](#chapter-5-rijal-al-hadith--jarh-wa-tadil-علم-رجال-الحدیث-والجرح-والتعدیل)</li>
-<li>[Chapter 6: Kutub al-Sittah & The Hierarchy of Hadith Collections (کتبِ حدیث کے درجات و مراتب)](#chapter-6-kutub-al-sittah--the-hierarchy-of-hadith-collections-کتب-حدیث-کے-درجات-و-مراتب)</li>
-<li>[Chapter 7: Mustalah al-Hadith — The 100+ Technical Terms Compendium (اصطلاحاتِ حدیث کا انسائیکلوپیڈیا)](#chapter-7-mustalah-al-hadith--the-100-technical-terms-compendium-اصطلاحات-حدیث-کا-انسائیکلوپیڈیا)</li>
-<li>[Chapter 8: Fabricated Hadith (الحدیث الموضوع / من گھڑت روایات)](#chapter-8-fabricated-hadith-الحدیث-الموضوع--من-گھڑت-روایات)</li>
-<li>[Chapter 9: The Titans of Hadith Scholarship in History (تاریخ کے عظیم محدثین)](#chapter-9-the-titans-of-hadith-scholarship-in-history-تاریخ-کے-عظیم-محدثین)</li>
-<li>[Chapter 10: The Immortal Legacy of Women Narrators (محدثات اور راویاتِ حدیث)](#chapter-10-the-immortal-legacy-of-women-narrators-محدثات-اور-راویات-حدیث)</li>
-<li>[Chapter 11: Sunni vs. Shia Hadith Methodology (تقابلی جائزہ: اہل السنت اور اہل تشیع کا منہجِ حدیث)](#chapter-11-sunni-vs-shia-hadith-methodology-تقابلی-جائزہ-اہل-السنت-اور-اہل-تشیع-کا-منہج-حدیث)</li>
-<li>[Chapter 12: How to Verify a Hadith Today — A Modern Hands-On Field Guide (دورِ حاضر میں تخریج و تحقیق کا عملی طریقہ)](#chapter-12-how-to-verify-a-hadith-today--a-modern-hands-on-field-guide-دور-حاضر-میں-تخریج-و-تحقیق-کا-عملی-طریقہ)</li>
-<li>[Appendix: Master Classification Matrix & The Student's Curriculum (ضمیمہ: اصطلاحی خلاصہ اور نصابِ تعلیم)](#appendix-master-classification-matrix--the-students-curriculum-ضمیمہ-اصطلاحی-خلاصہ-اور-نصاب-تعلیم)</li>
+<li><a href="#preface-foundations-of-hadith-its-sacred-preservation" class="reader-link">Preface: Foundations of Hadith & Its Sacred Preservation</a></li>
+<li><a href="#chapter-1-history-origin-of-hadith-compilation-تاریخ-تدوین-حدیث" class="reader-link">Chapter 1: History & Origin of Hadith Compilation (تاریخِ تدوینِ حدیث)</a></li>
+<li><a href="#chapter-2-sanad-سند-the-anatomy-of-transmission-chains" class="reader-link">Chapter 2: Sanad (سند) — The Anatomy of Transmission Chains</a></li>
+<li><a href="#chapter-3-matn-متن-the-text-the-science-of-internal-critique" class="reader-link">Chapter 3: Matn (متن) — The Text & The Science of Internal Critique</a></li>
+<li><a href="#chapter-4-the-master-classification-of-hadith-اقسام-و-مراتب-حدیث" class="reader-link">Chapter 4: The Master Classification of Hadith (اقسامِ و مراتبِ حدیث)</a></li>
+<li><a href="#chapter-5-rijal-al-hadith-jarh-wa-tadil-علم-رجال-الحدیث-والجرح-والتعدیل" class="reader-link">Chapter 5: Rijal al-Hadith & Jarh wa Ta'dil (علم رجال الحدیث والجرح والتعدیل)</a></li>
+<li><a href="#chapter-6-kutub-al-sittah-the-hierarchy-of-hadith-collections-کتب-حدیث-کے-درجات-و-مراتب" class="reader-link">Chapter 6: Kutub al-Sittah & The Hierarchy of Hadith Collections (کتبِ حدیث کے درجات و مراتب)</a></li>
+<li><a href="#chapter-7-mustalah-al-hadith-the-100-technical-terms-compendium-اصطلاحات-حدیث-کا-انسائیکلوپیڈیا" class="reader-link">Chapter 7: Mustalah al-Hadith — The 100+ Technical Terms Compendium (اصطلاحاتِ حدیث کا انسائیکلوپیڈیا)</a></li>
+<li><a href="#chapter-8-fabricated-hadith-الحدیث-الموضوع-من-گھڑت-روایات" class="reader-link">Chapter 8: Fabricated Hadith (الحدیث الموضوع / من گھڑت روایات)</a></li>
+<li><a href="#chapter-9-the-titans-of-hadith-scholarship-in-history-تاریخ-کے-عظیم-محدثین" class="reader-link">Chapter 9: The Titans of Hadith Scholarship in History (تاریخ کے عظیم محدثین)</a></li>
+<li><a href="#chapter-10-the-immortal-legacy-of-women-narrators-محدثات-اور-راویات-حدیث" class="reader-link">Chapter 10: The Immortal Legacy of Women Narrators (محدثات اور راویاتِ حدیث)</a></li>
+<li><a href="#chapter-11-sunni-vs-shia-hadith-methodology-تقابلی-جائزہ-اہل-السنت-اور-اہل-تشیع-کا-منہج-حدیث" class="reader-link">Chapter 11: Sunni vs. Shia Hadith Methodology (تقابلی جائزہ: اہل السنت اور اہل تشیع کا منہجِ حدیث)</a></li>
+<li><a href="#chapter-12-how-to-verify-a-hadith-today-a-modern-hands-on-field-guide-دور-حاضر-میں-تخریج-و-تحقیق-کا-عملی-طریقہ" class="reader-link">Chapter 12: How to Verify a Hadith Today — A Modern Hands-On Field Guide (دورِ حاضر میں تخریج و تحقیق کا عملی طریقہ)</a></li>
+<li><a href="#appendix-master-classification-matrix-the-students-curriculum-ضمیمہ-اصطلاحی-خلاصہ-اور-نصاب-تعلیم" class="reader-link">Appendix: Master Classification Matrix & The Student's Curriculum (ضمیمہ: اصطلاحی خلاصہ اور نصابِ تعلیم)</a></li>
 </ol>
 <hr class="section-divider">
 <div class="chapter-anchor" id="preface-foundations-of-hadith-its-sacred-preservation"></div>
@@ -1215,7 +1256,7 @@
             
 
             <div class="quote-card">
-              <div class="quote-body"><strong>NOTE:</strong> <br><strong>Hadith vs. Sunnah:</strong> Every authentic Hadith conveys a Sunnah, but Sunnah is the living, actionable standard distilled from the totality of Hadith, Qur'an, and continuous community practice (<em>al-'Amal</em>).</div>
+              <div class="quote-body"><div class="quote-text"><strong>NOTE:</strong> <br><strong>Hadith vs. Sunnah:</strong> Every authentic Hadith conveys a Sunnah, but Sunnah is the living, actionable standard distilled from the totality of Hadith, Qur'an, and continuous community practice (<em>al-'Amal</em>).</div></div>
               <div class="quote-actions">
                 <button class="btn-card-action btn-copy-quote" title="Copy Text">📋 Copy</button>
                 <button class="btn-card-action btn-share-quote" title="Share via WhatsApp">💬 Share</button>
@@ -1248,7 +1289,7 @@
 <p>Imam Abdullah ibn al-Mubarak (d. 181 AH), one of the greatest early masters, formulated the foundational axiom of Hadith scholarship:</p>
 
             <div class="quote-card">
-              <div class="quote-body">### <span class="arabic-matn" dir="rtl">«الإِسْنَادُ مِنَ الدِّينِ، وَلَوْلَا الإِسْنَادُ لَقَالَ مَنْ شَاءَ مَا شَاءَ»</span><br><em>"The Isnad is part of the religion; were it not for the Isnad, anyone could say whatever they wished!"</em><br>— <strong>Abdullah ibn al-Mubarak</strong> (رحمه الله)<br><em>(اسناد دین کا حصہ ہے؛ اگر اسناد نہ ہوتی تو جس کا جو جی چاہتا وہ کہہ دیتا)</em></div>
+              <div class="quote-body"><div class="quote-header"><div class="quote-title"><span class="arabic-matn" dir="rtl">«الإِسْنَادُ مِنَ الدِّينِ، وَلَوْلَا الإِسْنَادُ لَقَالَ مَنْ شَاءَ مَا شَاءَ»</span></div></div><div class="quote-text"><em>"The Isnad is part of the religion; were it not for the Isnad, anyone could say whatever they wished!"</em><br>— <strong>Abdullah ibn al-Mubarak</strong> (رحمه الله)<br><em>(اسناد دین کا حصہ ہے؛ اگر اسناد نہ ہوتی تو جس کا جو جی چاہتا وہ کہہ دیتا)</em></div></div>
               <div class="quote-actions">
                 <button class="btn-card-action btn-copy-quote" title="Copy Text">📋 Copy</button>
                 <button class="btn-card-action btn-share-quote" title="Share via WhatsApp">💬 Share</button>
@@ -1258,7 +1299,7 @@
 <p>The German orientalist Aloys Sprenger famously remarked:</p>
 
             <div class="quote-card">
-              <div class="quote-body"><em>"The glory of the Mohammedan literature is its biographical dictionaries... Not only the most distinguished, but also every single individual who had handed down a tradition has been immortalized."</em></div>
+              <div class="quote-body"><div class="quote-text"><em>"The glory of the Mohammedan literature is its biographical dictionaries... Not only the most distinguished, but also every single individual who had handed down a tradition has been immortalized."</em></div></div>
               <div class="quote-actions">
                 <button class="btn-card-action btn-copy-quote" title="Copy Text">📋 Copy</button>
                 <button class="btn-card-action btn-share-quote" title="Share via WhatsApp">💬 Share</button>
@@ -1380,7 +1421,7 @@
 <p>Around the turn of the first Islamic century (circa 99–101 AH), the pious Umayyad Caliph <strong>Umar ibn Abd al-Aziz (رحمه الله)</strong> feared that elderly scholars would pass away and oral traditions would disperse. He issued an official imperial decree to the governor of Madinah, Abu Bakr ibn Muhammad ibn Hazm, and the paramount scholar of the Hijaz:</p>
 
             <div class="quote-card">
-              <div class="quote-body"><em>"Search for the Hadith of the Messenger of Allah ﷺ and write it down, for I fear the disappearance of knowledge and the passing of the scholars."</em></div>
+              <div class="quote-body"><div class="quote-text"><em>"Search for the Hadith of the Messenger of Allah ﷺ and write it down, for I fear the disappearance of knowledge and the passing of the scholars."</em></div></div>
               <div class="quote-actions">
                 <button class="btn-card-action btn-copy-quote" title="Copy Text">📋 Copy</button>
                 <button class="btn-card-action btn-share-quote" title="Share via WhatsApp">💬 Share</button>
@@ -1410,7 +1451,7 @@
 <p>Let us examine the very first Hadith in <strong>Sahih al-Bukhari</strong>:</p>
 
             <div class="quote-card">
-              <div class="quote-body">### <span class="arabic-matn" dir="rtl">«إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ...»</span><br><em>(Actions are judged only by intentions...)</em></div>
+              <div class="quote-body"><div class="quote-header"><div class="quote-title"><span class="arabic-matn" dir="rtl">«إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ...»</span></div></div><div class="quote-text"><em>(Actions are judged only by intentions...)</em></div></div>
               <div class="quote-actions">
                 <button class="btn-card-action btn-copy-quote" title="Copy Text">📋 Copy</button>
                 <button class="btn-card-action btn-share-quote" title="Share via WhatsApp">💬 Share</button>
@@ -1518,8 +1559,8 @@
 <h3 id="3-the-8-modes-of-transmission-طرق-التحمل-والأداء">3. The 8 Modes of Transmission (طرق التحمل والأداء)</h3>
 <p>How did a student receive a Hadith from a master? The scholars developed eight technical terms arranged in order of evidentiary weight:</p>
 <ol class="reader-list">
-<li><strong>Al-Sama' (السَّمَاعُ مِنْ لَفْظِ الشَّيْخِ):</strong> Hearing directly from the teacher's mouth as he recites from memory or book. Expressed as: <code>حَدَّثَنِي</code> (He narrated to me) or <code>سَمِعْتُ</code> (I heard). Highest category.</li>
-<li><strong>Al-Qira'ah / Al-'Ard (القِرَاءَةُ عَلَى الشَّيْخِ):</strong> The student reads the text aloud to the teacher while the teacher listens and verifies against his memory/master copy. Expressed as: <code>أَخْبَرَنَا</code> (He informed us) or <code>قَرَأْتُ عَلَيْهِ</code>.</li>
+<li><strong>Al-Sama' (السَّمَاعُ مِنْ لَفْظِ الشَّيْخِ):</strong> Hearing directly from the teacher's mouth as he recites from memory or book. Expressed as: <code class="ar-code" dir="rtl">حَدَّثَنِي</code> (He narrated to me) or <code class="ar-code" dir="rtl">سَمِعْتُ</code> (I heard). Highest category.</li>
+<li><strong>Al-Qira'ah / Al-'Ard (القِرَاءَةُ عَلَى الشَّيْخِ):</strong> The student reads the text aloud to the teacher while the teacher listens and verifies against his memory/master copy. Expressed as: <code class="ar-code" dir="rtl">أَخْبَرَنَا</code> (He informed us) or <code class="ar-code" dir="rtl">قَرَأْتُ عَلَيْهِ</code>.</li>
 <li><strong>Al-Ijazah (الإِجَازَة):</strong> Formal certification granting permission to a student to transmit a book or narrations without reading every word in person.</li>
 <li><strong>Al-Munawalah (المُنَاوَلَة):</strong> The teacher physically hands his verified manuscript to the student, saying: <em>"This is my hearing from my teachers; transmit it from me."</em></li>
 <li><strong>Al-Mukatabah (المُكَاتَبَة):</strong> The teacher writes Hadiths in his own hand and posts or delivers them to a verified recipient.</li>
@@ -1540,7 +1581,7 @@
 <p>Formulated systematically by Imam Abu 'Amr Ibn al-Salah (d. 643 AH) and refined by Ibn Hajar al-Asqalani:</p>
 
             <div class="quote-card">
-              <div class="quote-body"><strong>The 5 Universal Pillars of Sahih:</strong><br><strong>Sahih Hadith</strong> = <strong>Ittisal</strong> <em>(Connected Chain)</em> + <strong>'Adalah</strong> <em>(Moral Integrity)</em> + <strong>Dabt</strong> <em>(Retention Accuracy)</em> + <strong>No Shudhudh</strong> <em>(No Contradiction)</em> + <strong>No 'Illah</strong> <em>(No Hidden Flaw)</em></div>
+              <div class="quote-body"><div class="quote-text"><strong>The 5 Universal Pillars of Sahih:</strong><br><strong>Sahih Hadith</strong> = <strong>Ittisal</strong> <em>(Connected Chain)</em> + <strong>'Adalah</strong> <em>(Moral Integrity)</em> + <strong>Dabt</strong> <em>(Retention Accuracy)</em> + <strong>No Shudhudh</strong> <em>(No Contradiction)</em> + <strong>No 'Illah</strong> <em>(No Hidden Flaw)</em></div></div>
               <div class="quote-actions">
                 <button class="btn-card-action btn-copy-quote" title="Copy Text">📋 Copy</button>
                 <button class="btn-card-action btn-share-quote" title="Share via WhatsApp">💬 Share</button>
@@ -1575,12 +1616,12 @@
 <h3 id="3-the-6-universal-red-flags-of-a-corrupted-matn-علامات-وضع-المتن">3. The 6 Universal Red Flags of a Corrupted Matn (علامات وضع المتن)</h3>
 <p>When analyzing a Hadith text, classical masters immediately flagged a narration as unauthentic if it exhibited any of the following:</p>
 <ol class="reader-list">
-<li><strong>Direct Contradiction with the Clear Qur'an (<code>مخالفة صريح القرآن</code>):</strong></li>
+<li><strong>Direct Contradiction with the Clear Qur'an (<code class="ar-code" dir="rtl">مخالفة صريح القرآن</code>):</strong></li>
 </ol>
 <p>Any narration stating something directly negated by the Qur'an without possibility of reconciliation.</p>
 <p><em>Example:</em> The forged narration claiming the world would end in the year 500 AH, contradicting Surah Luqman (31:34): <em>"Indeed, Allah alone possesses knowledge of the Hour."</em></p>
 <ol class="reader-list">
-<li><strong>Gross Historical Anachronism (<code>مخالفة الحقائق التاريخية القطعية</code>):</strong></li>
+<li><strong>Gross Historical Anachronism (<code class="ar-code" dir="rtl">مخالفة الحقائق التاريخية القطعية</code>):</strong></li>
 </ol>
 <p><em>Famous Case Study:</em> A document was brought to the great Muhaddith al-Khatib al-Baghdadi claiming the Prophet ﷺ exempt the Jewish citizens of Khaybar from the Jizyah tax, signed by the Sahabah Mu'awiyah ibn Abi Sufyan and Sa'd ibn Mu'adh.</p>
 <p>Al-Khatib looked at the text and instantly declared it a <strong>forgery</strong>:</p>
@@ -1590,19 +1631,19 @@
 <li>Mu'awiyah (RA) was not even a Muslim at the time of Khaybar (he accepted Islam at the Conquest of Mecca)!</li>
 </ul>
 <ol class="reader-list">
-<li><strong>Absurd Linguistic Vulgarity (<code>ركاكة اللفظ والمعنى</code>):</strong></li>
+<li><strong>Absurd Linguistic Vulgarity (<code class="ar-code" dir="rtl">ركاكة اللفظ والمعنى</code>):</strong></li>
 </ol>
 <p>The Prophet ﷺ possessed the most majestic, eloquent, and succinct speech in the Arabic language (<em>Jawami' al-Kalim</em>). Any text exhibiting childish, awkward, or vulgar phrasing cannot originate from him.</p>
 <ol class="reader-list">
-<li><strong>Astronomical Rewards for Trivial Acts (<code>الوعد العظيم بالثواب الجزيل على الفعل الحقير</code>):</strong></li>
+<li><strong>Astronomical Rewards for Trivial Acts (<code class="ar-code" dir="rtl">الوعد العظيم بالثواب الجزيل على الفعل الحقير</code>):</strong></li>
 </ol>
 <p>Such as: <em>"Whoever prays two Rak'ahs on Tuesday will receive the reward of 70,000 prophets."</em></p>
 <ol class="reader-list">
-<li><strong>Absurd Disproportionate Punishments for Minor Slips (<code>الوعيد الشديد بالعقاب الأليم على الأمر اليسير</code>):</strong></li>
+<li><strong>Absurd Disproportionate Punishments for Minor Slips (<code class="ar-code" dir="rtl">الوعيد الشديد بالعقاب الأليم على الأمر اليسير</code>):</strong></li>
 </ol>
 <p>Such as: <em>"Whoever eats garlic will be plunged into Hellfire for 80 autumns."</em></p>
 <ol class="reader-list">
-<li><strong>Physical Impossibility & Rational Absurdity (<code>الإحالة العقلية والحسية</code>):</strong></li>
+<li><strong>Physical Impossibility & Rational Absurdity (<code class="ar-code" dir="rtl">الإحالة العقلية والحسية</code>):</strong></li>
 </ol>
 <p>Fabrications claiming ridiculous superstitious traits that violate physical reality and divine wisdom.</p>
 <hr class="section-divider">
@@ -1799,7 +1840,7 @@
 <h3 id="1-the-twin-foundations-of-narrator-credibility">1. The Twin Foundations of Narrator Credibility</h3>
 
             <div class="quote-card">
-              <div class="quote-body"><strong>The Narrator Credibility Equation:</strong><br><strong>Narrator Credibility</strong> = <strong>'Adalah</strong> <em>(Moral Integrity & Uprightness)</em> × <strong>Dabt</strong> <em>(Retention Accuracy & Precision)</em></div>
+              <div class="quote-body"><div class="quote-text"><strong>The Narrator Credibility Equation:</strong><br><strong>Narrator Credibility</strong> = <strong>'Adalah</strong> <em>(Moral Integrity & Uprightness)</em> × <strong>Dabt</strong> <em>(Retention Accuracy & Precision)</em></div></div>
               <div class="quote-actions">
                 <button class="btn-card-action btn-copy-quote" title="Copy Text">📋 Copy</button>
                 <button class="btn-card-action btn-share-quote" title="Share via WhatsApp">💬 Share</button>
@@ -1821,7 +1862,7 @@
             <div class="table-responsive">
               <table class="reader-table">
                 <thead><tr><th>Rank</th><th>Classical Arabic Terminology</th><th>Meaning</th><th>Status / Rule</th></tr></thead>
-                <tbody><tr><td><strong>Tier 1 (Superlative)</strong></td><td dir="rtl" class="rtl-cell"><code>أَوْثَقُ النَّاسِ</code> ، <code>إِلَيْهِ المُنْتَهَى فِي التَّثَبُّتِ</code></td><td>"The most trustworthy of mankind," "The apex of verification"</td><td>Unquestioned highest authority.</td></tr><tr><td><strong>Tier 2 (Duplicated)</strong></td><td dir="rtl" class="rtl-cell"><code>ثِقَةٌ ثِقَةٌ</code> ، <code>ثِقَةٌ ثَبْتٌ</code> ، <code>عَدْلٌ ضَابِطٌ</code></td><td>"Trustworthy, trustworthy," "Trustworthy and immovable"</td><td>Highest tier of Sahih Hadith.</td></tr><tr><td><strong>Tier 3 (Single Term)</strong></td><td dir="rtl" class="rtl-cell"><code>ثِقَةٌ</code> ، <code>ثَبْتٌ</code> ، <code>حُجَّةٌ</code></td><td>"Trustworthy," "Firm," "A living proof"</td><td>Backbone of Sahih Hadith.</td></tr><tr><td><strong>Tier 4 (Acceptable)</strong></td><td dir="rtl" class="rtl-cell"><code>صَدُوقٌ</code> ، <code>لَا بَأْسَ بِهِ</code> ، <code>مَحَلُّهُ الصِّدْقُ</code></td><td>"Truthful," "No harm in him," "His place is honesty"</td><td>Narration is Hasan li-Dhatihi.</td></tr><tr><td><strong>Tier 5 (Marginal)</strong></td><td dir="rtl" class="rtl-cell"><code>شَيْخٌ</code> ، <code>يُكْتَبُ حَدِيثُهُ</code> ، <code>يُرْوَى حَدِيثُهُ</code></td><td>"An elder," "His Hadith is recorded for cross-checking"</td><td>Not independent proof; used for corroboration.</td></tr><tr><td><strong>Tier 6 (Near Weak)</strong></td><td dir="rtl" class="rtl-cell"><code>صَالِحُ الحَدِيثِ</code> ، <code>مُقَارِبُ الحَدِيثِ</code></td><td>"Righteous in Hadith," "Approaching acceptable"</td><td>Weak on its own; needs strong reinforcement.</td></tr></tbody>
+                <tbody><tr><td><strong>Tier 1 (Superlative)</strong></td><td dir="rtl" class="rtl-cell"><code class="ar-code" dir="rtl">أَوْثَقُ النَّاسِ</code> ، <code class="ar-code" dir="rtl">إِلَيْهِ المُنْتَهَى فِي التَّثَبُّتِ</code></td><td>"The most trustworthy of mankind," "The apex of verification"</td><td>Unquestioned highest authority.</td></tr><tr><td><strong>Tier 2 (Duplicated)</strong></td><td dir="rtl" class="rtl-cell"><code class="ar-code" dir="rtl">ثِقَةٌ ثِقَةٌ</code> ، <code class="ar-code" dir="rtl">ثِقَةٌ ثَبْتٌ</code> ، <code class="ar-code" dir="rtl">عَدْلٌ ضَابِطٌ</code></td><td>"Trustworthy, trustworthy," "Trustworthy and immovable"</td><td>Highest tier of Sahih Hadith.</td></tr><tr><td><strong>Tier 3 (Single Term)</strong></td><td dir="rtl" class="rtl-cell"><code class="ar-code" dir="rtl">ثِقَةٌ</code> ، <code class="ar-code" dir="rtl">ثَبْتٌ</code> ، <code class="ar-code" dir="rtl">حُجَّةٌ</code></td><td>"Trustworthy," "Firm," "A living proof"</td><td>Backbone of Sahih Hadith.</td></tr><tr><td><strong>Tier 4 (Acceptable)</strong></td><td dir="rtl" class="rtl-cell"><code class="ar-code" dir="rtl">صَدُوقٌ</code> ، <code class="ar-code" dir="rtl">لَا بَأْسَ بِهِ</code> ، <code class="ar-code" dir="rtl">مَحَلُّهُ الصِّدْقُ</code></td><td>"Truthful," "No harm in him," "His place is honesty"</td><td>Narration is Hasan li-Dhatihi.</td></tr><tr><td><strong>Tier 5 (Marginal)</strong></td><td dir="rtl" class="rtl-cell"><code class="ar-code" dir="rtl">شَيْخٌ</code> ، <code class="ar-code" dir="rtl">يُكْتَبُ حَدِيثُهُ</code> ، <code class="ar-code" dir="rtl">يُرْوَى حَدِيثُهُ</code></td><td>"An elder," "His Hadith is recorded for cross-checking"</td><td>Not independent proof; used for corroboration.</td></tr><tr><td><strong>Tier 6 (Near Weak)</strong></td><td dir="rtl" class="rtl-cell"><code class="ar-code" dir="rtl">صَالِحُ الحَدِيثِ</code> ، <code class="ar-code" dir="rtl">مُقَارِبُ الحَدِيثِ</code></td><td>"Righteous in Hadith," "Approaching acceptable"</td><td>Weak on its own; needs strong reinforcement.</td></tr></tbody>
               </table>
             </div>
             
@@ -1831,7 +1872,7 @@
             <div class="table-responsive">
               <table class="reader-table">
                 <thead><tr><th>Rank</th><th>Classical Arabic Terminology</th><th>Meaning</th><th>Status / Rule</th></tr></thead>
-                <tbody><tr><td><strong>Tier 1 (Mildest)</strong></td><td dir="rtl" class="rtl-cell"><code>فِيهِ مَقَالٌ</code> ، <code>لَيِّنُ الحَدِيثِ</code> ، <code>ضَعَّفُوهُ</code></td><td>"There is speech about him," "Soft in Hadith"</td><td>Mild weakness; eligible for <em>I'tibar</em> (corroboration).</td></tr><tr><td><strong>Tier 2 (Not Strong)</strong></td><td dir="rtl" class="rtl-cell"><code>لَيْسَ بِالقَوِيِّ</code> ، <code>لَا يُحْتَجُّ بِهِ</code></td><td>"He is not strong," "He cannot be used as proof"</td><td>Weak; rejected unless corroborated.</td></tr><tr><td><strong>Tier 3 (Explicit Weak)</strong></td><td dir="rtl" class="rtl-cell"><code>ضَعِيفٌ جِدًّا</code> ، <code>وَاهٍ بِمَرَّةٍ</code> ، <code>سَاقِطٌ</code></td><td>"Very weak," "Feeble," "Fallen"</td><td>Severely weak; cannot be elevated by other chains.</td></tr><tr><td><strong>Tier 4 (Abandoned)</strong></td><td dir="rtl" class="rtl-cell"><code>مَتْرُوكُ الحَدِيثِ</code> ، <code>ذَاهِبُ الحَدِيثِ</code></td><td>"His Hadith is abandoned," "Ruined in transmission"</td><td>Completely rejected; suspected of fabricating.</td></tr><tr><td><strong>Tier 5 (Accused)</strong></td><td dir="rtl" class="rtl-cell"><code>مُتَّهَمٌ بِالكَذِبِ</code> ، <code>يَسْرِقُ الحَدِيثَ</code></td><td>"Accused of lying," "Steals chains of Hadith"</td><td>Near-fabricator status; total nullity.</td></tr><tr><td><strong>Tier 6 (Proven Liar)</strong></td><td dir="rtl" class="rtl-cell"><code>كَذَّابٌ</code> ، <code>وَضَّاعٌ</code> ، <code>دَجَّالٌ</code></td><td>"Arch-liar," "Manufacturer of Hadith," "Imposter"</td><td>Forger of Hadith; creates <em>Mawdu'</em>.</td></tr></tbody>
+                <tbody><tr><td><strong>Tier 1 (Mildest)</strong></td><td dir="rtl" class="rtl-cell"><code class="ar-code" dir="rtl">فِيهِ مَقَالٌ</code> ، <code class="ar-code" dir="rtl">لَيِّنُ الحَدِيثِ</code> ، <code class="ar-code" dir="rtl">ضَعَّفُوهُ</code></td><td>"There is speech about him," "Soft in Hadith"</td><td>Mild weakness; eligible for <em>I'tibar</em> (corroboration).</td></tr><tr><td><strong>Tier 2 (Not Strong)</strong></td><td dir="rtl" class="rtl-cell"><code class="ar-code" dir="rtl">لَيْسَ بِالقَوِيِّ</code> ، <code class="ar-code" dir="rtl">لَا يُحْتَجُّ بِهِ</code></td><td>"He is not strong," "He cannot be used as proof"</td><td>Weak; rejected unless corroborated.</td></tr><tr><td><strong>Tier 3 (Explicit Weak)</strong></td><td dir="rtl" class="rtl-cell"><code class="ar-code" dir="rtl">ضَعِيفٌ جِدًّا</code> ، <code class="ar-code" dir="rtl">وَاهٍ بِمَرَّةٍ</code> ، <code class="ar-code" dir="rtl">سَاقِطٌ</code></td><td>"Very weak," "Feeble," "Fallen"</td><td>Severely weak; cannot be elevated by other chains.</td></tr><tr><td><strong>Tier 4 (Abandoned)</strong></td><td dir="rtl" class="rtl-cell"><code class="ar-code" dir="rtl">مَتْرُوكُ الحَدِيثِ</code> ، <code class="ar-code" dir="rtl">ذَاهِبُ الحَدِيثِ</code></td><td>"His Hadith is abandoned," "Ruined in transmission"</td><td>Completely rejected; suspected of fabricating.</td></tr><tr><td><strong>Tier 5 (Accused)</strong></td><td dir="rtl" class="rtl-cell"><code class="ar-code" dir="rtl">مُتَّهَمٌ بِالكَذِبِ</code> ، <code class="ar-code" dir="rtl">يَسْرِقُ الحَدِيثَ</code></td><td>"Accused of lying," "Steals chains of Hadith"</td><td>Near-fabricator status; total nullity.</td></tr><tr><td><strong>Tier 6 (Proven Liar)</strong></td><td dir="rtl" class="rtl-cell"><code class="ar-code" dir="rtl">كَذَّابٌ</code> ، <code class="ar-code" dir="rtl">وَضَّاعٌ</code> ، <code class="ar-code" dir="rtl">دَجَّالٌ</code></td><td>"Arch-liar," "Manufacturer of Hadith," "Imposter"</td><td>Forger of Hadith; creates <em>Mawdu'</em>.</td></tr></tbody>
               </table>
             </div>
             
@@ -1843,7 +1884,7 @@
 </ol>
 
             <div class="quote-card">
-              <div class="quote-body"><strong><span class="arabic-matn" dir="rtl">«الجَرْحُ المُفَسَّرُ مُقَدَّمٌ عَلَى التَّعْدِيلِ المُجْمَلِ»</span></strong><br><em>(Detailed criticism takes precedence over general praise.)</em></div>
+              <div class="quote-body"><div class="quote-text"><strong><span class="arabic-matn" dir="rtl">«الجَرْحُ المُفَسَّرُ مُقَدَّمٌ عَلَى التَّعْدِيلِ المُجْمَلِ»</span></strong><br><em>(Detailed criticism takes precedence over general praise.)</em></div></div>
               <div class="quote-actions">
                 <button class="btn-card-action btn-copy-quote" title="Copy Text">📋 Copy</button>
                 <button class="btn-card-action btn-share-quote" title="Share via WhatsApp">💬 Share</button>
@@ -1856,7 +1897,7 @@
 </ol>
 
             <div class="quote-card">
-              <div class="quote-body"><strong><span class="arabic-matn" dir="rtl">«كَلَامُ الأَقْرَانِ يُطْوَى وَلَا يُنْشَرُ»</span></strong><br><em>(The disputes between contemporary peers are folded away and not publicized.)</em></div>
+              <div class="quote-body"><div class="quote-text"><strong><span class="arabic-matn" dir="rtl">«كَلَامُ الأَقْرَانِ يُطْوَى وَلَا يُنْشَرُ»</span></strong><br><em>(The disputes between contemporary peers are folded away and not publicized.)</em></div></div>
               <div class="quote-actions">
                 <button class="btn-card-action btn-copy-quote" title="Copy Text">📋 Copy</button>
                 <button class="btn-card-action btn-share-quote" title="Share via WhatsApp">💬 Share</button>
@@ -2084,7 +2125,7 @@
 <p>The Messenger of Allah ﷺ delivered a Mutawatir warning transmitted by over 70 Companions:</p>
 
             <div class="quote-card">
-              <div class="quote-body">### <span class="arabic-matn" dir="rtl">«مَنْ كَذَبَ عَلَيَّ مُتَعَمِّدًا فَلْيَتَبَوَّأْ مَقْعَدَهُ مِنَ النَّارِ»</span><br><em>"Whoever intentionally lies upon me, let him take his designated seat in the Hellfire!"</em><br>— <strong>Prophet Muhammad ﷺ</strong> (Sahih al-Bukhari & Sahih Muslim)<br><em>(جو شخص مجھ پر جان بوجھ کر جھوٹ باندھے، وہ اپنا ٹھکانہ جہنم میں بنا لے)</em><br><strong>— [Sahih al-Bukhari & Sahih Muslim]</strong></div>
+              <div class="quote-body"><div class="quote-header"><div class="quote-title"><span class="arabic-matn" dir="rtl">«مَنْ كَذَبَ عَلَيَّ مُتَعَمِّدًا فَلْيَتَبَوَّأْ مَقْعَدَهُ مِنَ النَّارِ»</span></div></div><div class="quote-text"><em>"Whoever intentionally lies upon me, let him take his designated seat in the Hellfire!"</em><br>— <strong>Prophet Muhammad ﷺ</strong> (Sahih al-Bukhari & Sahih Muslim)<br><em>(جو شخص مجھ پر جان بوجھ کر جھوٹ باندھے، وہ اپنا ٹھکانہ جہنم میں بنا لے)</em><br><strong>— [Sahih al-Bukhari & Sahih Muslim]</strong></div></div>
               <div class="quote-actions">
                 <button class="btn-card-action btn-copy-quote" title="Copy Text">📋 Copy</button>
                 <button class="btn-card-action btn-share-quote" title="Share via WhatsApp">💬 Share</button>
@@ -2105,19 +2146,19 @@
 <h3 id="3-case-studies-8-famous-fabricated-hadiths-circulating-today">3. Case Studies: 8 Famous Fabricated Hadiths Circulating Today</h3>
 <p>Many widespread cultural sayings are completely fabricated (<em>Mawdu'</em>):</p>
 <ol class="reader-list">
-<li><strong>"Love of one's homeland is part of faith" (<code>حُبُّ الوَطَنِ مِنَ الإِيمَانِ</code>)</strong></li>
+<li><strong>"Love of one's homeland is part of faith" (<code class="ar-code" dir="rtl">حُبُّ الوَطَنِ مِنَ الإِيمَانِ</code>)</strong></li>
 </ol>
 <p><em>Ruling:</em> <strong>Mawdu' (Fabricated)</strong>. As noted by al-Saghani, al-Suyuti, and al-Albani. Loving one's birthplace is a natural human instinct, not an article of faith.</p>
 <ol class="reader-list">
-<li><strong>"Seek knowledge even if it be in China" (<code>اطْلُبُوا العِلْمَ وَلَوْ بِالصِّينِ</code>)</strong></li>
+<li><strong>"Seek knowledge even if it be in China" (<code class="ar-code" dir="rtl">اطْلُبُوا العِلْمَ وَلَوْ بِالصِّينِ</code>)</strong></li>
 </ol>
 <p><em>Ruling:</em> <strong>Batil / Mawdu'</strong>. Ibn al-Jawzi recorded it in <em>al-Mawdu'at</em>; Ibn Hibban declared its narrator Abu Atikah an arch-liar.</p>
 <ol class="reader-list">
-<li><strong>"We returned from the lesser Jihad to the greater Jihad" (<code>رَجَعْنَا مِنَ الجِهَادِ الأَصْغَرِ إِلَى الجِهَادِ الأَكْبَرِ</code>)</strong></li>
+<li><strong>"We returned from the lesser Jihad to the greater Jihad" (<code class="ar-code" dir="rtl">رَجَعْنَا مِنَ الجِهَادِ الأَصْغَرِ إِلَى الجِهَادِ الأَكْبَرِ</code>)</strong></li>
 </ol>
 <p><em>Ruling:</em> <strong>Baseless (La Asla Lahu)</strong>. Ibn Hajar al-Asqalani and Ibn Taymiyyah confirmed this is a statement of an ascetic named Ibrahim ibn Abi Ablah, not the Prophet ﷺ.</p>
 <ol class="reader-list">
-<li><strong>"Disagreement among my Ummah is a mercy" (<code>اخْتِلَافُ أُمَّتِي رَحْمَةٌ</code>)</strong></li>
+<li><strong>"Disagreement among my Ummah is a mercy" (<code class="ar-code" dir="rtl">اخْتِلَافُ أُمَّتِي رَحْمَةٌ</code>)</strong></li>
 </ol>
 <p><em>Ruling:</em> <strong>La Asla Lahu (No Sanad)</strong>. As noted by al-Subki and al-Albani.</p>
 <ol class="reader-list">
@@ -2129,7 +2170,7 @@
 </ol>
 <p><em>Ruling:</em> A saying of the ancient Arab physician <strong>al-Harith ibn Kaladah</strong>, not a Hadith.</p>
 <ol class="reader-list">
-<li><strong>"I was a hidden treasure, and I loved to be known..." (<code>كُنْتُ كَنْزًا مَخْفِيًّا...</code>)</strong></li>
+<li><strong>"I was a hidden treasure, and I loved to be known..." (<code class="ar-code" dir="rtl">كُنْتُ كَنْزًا مَخْفِيًّا...</code>)</strong></li>
 </ol>
 <p><em>Ruling:</em> <strong>Mawdu'</strong>. Confirmed by Ibn Taymiyyah, al-Zarkashi, and al-Suyuti as a fabricated mystical insertion.</p>
 <ol class="reader-list">
@@ -2220,7 +2261,7 @@
 <p>In the monumental 500-year history of narrator criticism, while thousands of men were exposed as liars, fabricators, or politically compromised, the great Hafiz <strong>Imam Shams al-Din al-Dhahabi (d. 748 AH)</strong> recorded a stunning historical reality in his biographical encyclopedia <em>Mizan al-I'tidal</em>:</p>
 
             <div class="quote-card">
-              <div class="quote-body">### <span class="arabic-matn" dir="rtl">«مَا عَلِمْتُ فِي النِّسَاءِ مَنِ اتُّهِمَتْ وَلَا مَنْ تَرَكُوهَا»</span><br><em>"I do not know of any woman who was ever accused of fabricating Hadith, nor any woman whose Hadith was abandoned!"</em><br>— <strong>Imam al-Dhahabi</strong> (<em>Mizan al-I'tidal</em>)<br><em>(مجھے پوری تاریخ میں ایک بھی ایسی عورت معلوم نہیں جس پر حدیث گھڑنے کا الزام لگا ہو یا جس کی روایت کو متروک قرار دیا گیا ہو)</em></div>
+              <div class="quote-body"><div class="quote-header"><div class="quote-title"><span class="arabic-matn" dir="rtl">«مَا عَلِمْتُ فِي النِّسَاءِ مَنِ اتُّهِمَتْ وَلَا مَنْ تَرَكُوهَا»</span></div></div><div class="quote-text"><em>"I do not know of any woman who was ever accused of fabricating Hadith, nor any woman whose Hadith was abandoned!"</em><br>— <strong>Imam al-Dhahabi</strong> (<em>Mizan al-I'tidal</em>)<br><em>(مجھے پوری تاریخ میں ایک بھی ایسی عورت معلوم نہیں جس پر حدیث گھڑنے کا الزام لگا ہو یا جس کی روایت کو متروک قرار دیا گیا ہو)</em></div></div>
               <div class="quote-actions">
                 <button class="btn-card-action btn-copy-quote" title="Copy Text">📋 Copy</button>
                 <button class="btn-card-action btn-share-quote" title="Share via WhatsApp">💬 Share</button>
@@ -2398,13 +2439,13 @@
 <p class="ar-ur-paragraph" dir="rtl"><em>(جو شخص ربیع الاول کے مہینے کی مبارکباد سب سے پہلے دے گا، اس پر جہنم کی آگ حرام ہو جائے گی)</em>.</p>
 <h4 id="execution-of-verification">Execution of Verification:</h4>
 <ol class="reader-list">
-<li><strong>Search on Dorar.net / Shamela:</strong> Query terms: <code>من بشر بمولد</code> or <code>من يهنئ الناس بربيع الأول</code>.</li>
+<li><strong>Search on Dorar.net / Shamela:</strong> Query terms: <code class="ar-code" dir="rtl">من بشر بمولد</code> or <code class="ar-code" dir="rtl">من يهنئ الناس بربيع الأول</code>.</li>
 <li><strong>Result Analysis:</strong> Zero hits in Sahih al-Bukhari, Sahih Muslim, the 4 Sunan, Musnad Ahmad, or any primary Hadith book of the first 600 years of Islam!</li>
 <li><strong>Consulting Mawdu'at Manuals:</strong> The scholars of Hadith (such as Ibn Hajar and modern Hadith councils) classify this text as:</li>
 </ol>
 
             <div class="quote-card">
-              <div class="quote-body"><strong><span class="arabic-matn" dir="rtl">«لَا أَصْلَ لَهُ وَهُوَ مَوْضُوعٌ مَكْذُوبٌ»</span></strong><br><em>(Baseless, fabricated lie!)</em></div>
+              <div class="quote-body"><div class="quote-text"><strong><span class="arabic-matn" dir="rtl">«لَا أَصْلَ لَهُ وَهُوَ مَوْضُوعٌ مَكْذُوبٌ»</span></strong><br><em>(Baseless, fabricated lie!)</em></div></div>
               <div class="quote-actions">
                 <button class="btn-card-action btn-copy-quote" title="Copy Text">📋 Copy</button>
                 <button class="btn-card-action btn-share-quote" title="Share via WhatsApp">💬 Share</button>
@@ -2464,7 +2505,7 @@
 <p>And Imam al-Nawawi wrote:</p>
 
             <div class="quote-card">
-              <div class="quote-body"><em>"It is incumbent upon the seeker of Hadith to begin with sincere purification of intention for Allah Almighty alone, to adorn themselves with noble character, modesty, and reverence for the Sunnah, and to transmit nothing without precise verification."</em></div>
+              <div class="quote-body"><div class="quote-text"><em>"It is incumbent upon the seeker of Hadith to begin with sincere purification of intention for Allah Almighty alone, to adorn themselves with noble character, modesty, and reverence for the Sunnah, and to transmit nothing without precise verification."</em></div></div>
               <div class="quote-actions">
                 <button class="btn-card-action btn-copy-quote" title="Copy Text">📋 Copy</button>
                 <button class="btn-card-action btn-share-quote" title="Share via WhatsApp">💬 Share</button>
@@ -2474,7 +2515,7 @@
 <hr class="section-divider">
 
             <div class="quote-card">
-              <div class="quote-body">### وَآخِرُ دَعْوَانَا أَنِ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ<br><strong>سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا أَنْتَ ، أَسْتَغْفِرُكَ وَأَتُوبُ إِلَيْكَ</strong></div>
+              <div class="quote-body"><div class="quote-header"><div class="quote-title">وَآخِرُ دَعْوَانَا أَنِ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ</div></div><div class="quote-text"><strong>سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا أَنْتَ ، أَسْتَغْفِرُكَ وَأَتُوبُ إِلَيْكَ</strong></div></div>
               <div class="quote-actions">
                 <button class="btn-card-action btn-copy-quote" title="Copy Text">📋 Copy</button>
                 <button class="btn-card-action btn-share-quote" title="Share via WhatsApp">💬 Share</button>

@@ -54,7 +54,6 @@ c:\Users\Shop PC 2\OneDrive\Desktop\Antigravity Files\21-Hadith-Sciences-Encyclo
 │
 ├── scripts/
 │   ├── build_pwa.py                    # Deterministic Markdown-to-PWA compiler
-│   ├── fix_mobile_rendering.py         # Mobile Markdown optimization pipeline
 │   └── test_hadith_project.py          # Automated verification test suite (100% pass)
 │
 └── web/
@@ -84,8 +83,9 @@ Invoke-Item "c:\Users\Shop PC 2\OneDrive\Desktop\Antigravity Files\21-Hadith-Sci
 
 ## 6. 🛡️ Automated Quality & Verification Status
 
-- **Mobile Viewport Robustness**: 100% of ASCII diagrams and flowcharts optimized to $\le 45$ characters per line to guarantee zero line-wrapping failure across any Android/iOS markdown viewer.
-- **Zero Math Artifacts**: Completely eliminated all pseudo-LaTeX `$$` math expressions in favor of universally compliant Markdown blockquotes and callouts.
+- **Mobile Viewport Robustness**: 100% of ASCII diagrams and flowcharts strictly optimized to $\le 38$ characters per line to guarantee zero line-wrapping failure across any Android/iOS markdown viewer on portrait screens (down to 320px–360px).
+- **Zero Math & Syntax Leakage**: Completely eliminated all pseudo-LaTeX `$$` math expressions in favor of universally compliant Markdown blockquotes and callouts; eliminated unparsed `###` headers in quote cards and raw markdown link brackets.
+- **Anchor Link Precision**: Verified all 14 Table of Contents anchor links have exact matching slugs (single-hyphen) for seamless navigation across third-party markdown viewers and web PWA.
 - **Native Responsive Tables**: Replaced rigid Unicode box tables with native Markdown tables that flow and resize responsively across mobile displays.
 - **Syntax Validation**: `node --check` passed with 0 syntax errors across all extracted script blocks.
 - **PWA Conformance**: Fully verified against W3C manifest and Service Worker lifecycle standards.

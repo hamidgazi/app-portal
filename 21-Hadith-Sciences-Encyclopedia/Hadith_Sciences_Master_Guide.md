@@ -136,20 +136,20 @@
 
 ## 📑 Table of Contents (فہرستِ مضامین)
 
-1. [Preface: Foundations of Hadith & Its Sacred Preservation](#preface-foundations-of-hadith--its-sacred-preservation)
-2. [Chapter 1: History & Origin of Hadith Compilation (تاریخِ تدوینِ حدیث)](#chapter-1-history--origin-of-hadith-compilation-تاریخ-تدوین-حدیث)
-3. [Chapter 2: Sanad (سند) — The Anatomy of Transmission Chains](#chapter-2-sanad-سند--the-anatomy-of-transmission-chains)
-4. [Chapter 3: Matn (متن) — The Text & The Science of Internal Critique](#chapter-3-matn-متن--the-text--the-science-of-internal-critique)
+1. [Preface: Foundations of Hadith & Its Sacred Preservation](#preface-foundations-of-hadith-its-sacred-preservation)
+2. [Chapter 1: History & Origin of Hadith Compilation (تاریخِ تدوینِ حدیث)](#chapter-1-history-origin-of-hadith-compilation-تاریخ-تدوین-حدیث)
+3. [Chapter 2: Sanad (سند) — The Anatomy of Transmission Chains](#chapter-2-sanad-سند-the-anatomy-of-transmission-chains)
+4. [Chapter 3: Matn (متن) — The Text & The Science of Internal Critique](#chapter-3-matn-متن-the-text-the-science-of-internal-critique)
 5. [Chapter 4: The Master Classification of Hadith (اقسامِ و مراتبِ حدیث)](#chapter-4-the-master-classification-of-hadith-اقسام-و-مراتب-حدیث)
-6. [Chapter 5: Rijal al-Hadith & Jarh wa Ta'dil (علم رجال الحدیث والجرح والتعدیل)](#chapter-5-rijal-al-hadith--jarh-wa-tadil-علم-رجال-الحدیث-والجرح-والتعدیل)
-7. [Chapter 6: Kutub al-Sittah & The Hierarchy of Hadith Collections (کتبِ حدیث کے درجات و مراتب)](#chapter-6-kutub-al-sittah--the-hierarchy-of-hadith-collections-کتب-حدیث-کے-درجات-و-مراتب)
-8. [Chapter 7: Mustalah al-Hadith — The 100+ Technical Terms Compendium (اصطلاحاتِ حدیث کا انسائیکلوپیڈیا)](#chapter-7-mustalah-al-hadith--the-100-technical-terms-compendium-اصطلاحات-حدیث-کا-انسائیکلوپیڈیا)
-9. [Chapter 8: Fabricated Hadith (الحدیث الموضوع / من گھڑت روایات)](#chapter-8-fabricated-hadith-الحدیث-الموضوع--من-گھڑت-روایات)
+6. [Chapter 5: Rijal al-Hadith & Jarh wa Ta'dil (علم رجال الحدیث والجرح والتعدیل)](#chapter-5-rijal-al-hadith-jarh-wa-tadil-علم-رجال-الحدیث-والجرح-والتعدیل)
+7. [Chapter 6: Kutub al-Sittah & The Hierarchy of Hadith Collections (کتبِ حدیث کے درجات و مراتب)](#chapter-6-kutub-al-sittah-the-hierarchy-of-hadith-collections-کتب-حدیث-کے-درجات-و-مراتب)
+8. [Chapter 7: Mustalah al-Hadith — The 100+ Technical Terms Compendium (اصطلاحاتِ حدیث کا انسائیکلوپیڈیا)](#chapter-7-mustalah-al-hadith-the-100-technical-terms-compendium-اصطلاحات-حدیث-کا-انسائیکلوپیڈیا)
+9. [Chapter 8: Fabricated Hadith (الحدیث الموضوع / من گھڑت روایات)](#chapter-8-fabricated-hadith-الحدیث-الموضوع-من-گھڑت-روایات)
 10. [Chapter 9: The Titans of Hadith Scholarship in History (تاریخ کے عظیم محدثین)](#chapter-9-the-titans-of-hadith-scholarship-in-history-تاریخ-کے-عظیم-محدثین)
 11. [Chapter 10: The Immortal Legacy of Women Narrators (محدثات اور راویاتِ حدیث)](#chapter-10-the-immortal-legacy-of-women-narrators-محدثات-اور-راویات-حدیث)
 12. [Chapter 11: Sunni vs. Shia Hadith Methodology (تقابلی جائزہ: اہل السنت اور اہل تشیع کا منہجِ حدیث)](#chapter-11-sunni-vs-shia-hadith-methodology-تقابلی-جائزہ-اہل-السنت-اور-اہل-تشیع-کا-منہج-حدیث)
-13. [Chapter 12: How to Verify a Hadith Today — A Modern Hands-On Field Guide (دورِ حاضر میں تخریج و تحقیق کا عملی طریقہ)](#chapter-12-how-to-verify-a-hadith-today--a-modern-hands-on-field-guide-دور-حاضر-میں-تخریج-و-تحقیق-کا-عملی-طریقہ)
-14. [Appendix: Master Classification Matrix & The Student's Curriculum (ضمیمہ: اصطلاحی خلاصہ اور نصابِ تعلیم)](#appendix-master-classification-matrix--the-students-curriculum-ضمیمہ-اصطلاحی-خلاصہ-اور-نصاب-تعلیم)
+13. [Chapter 12: How to Verify a Hadith Today — A Modern Hands-On Field Guide (دورِ حاضر میں تخریج و تحقیق کا عملی طریقہ)](#chapter-12-how-to-verify-a-hadith-today-a-modern-hands-on-field-guide-دور-حاضر-میں-تخریج-و-تحقیق-کا-عملی-طریقہ)
+14. [Appendix: Master Classification Matrix & The Student's Curriculum (ضمیمہ: اصطلاحی خلاصہ اور نصابِ تعلیم)](#appendix-master-classification-matrix-the-students-curriculum-ضمیمہ-اصطلاحی-خلاصہ-اور-نصاب-تعلیم)
 
 ---
 
@@ -175,13 +175,15 @@ To the untrained mind, the terms *Hadith*, *Sunnah*, *Khabar*, and *Athar* are o
 Every single Hadith in existence consists of two distinct, indivisible components:
 
 ```
-   THE COMPLETE HADITH (الحديث)
-               │
-   ┌───────────┴───────────┐
-   ▼                       ▼
-1. AL-SANAD (السند)    2. AL-MATN (المتن)
-The Chain of           The Sacred Text
-Transmitters           or Narration
+THE COMPLETE HADITH (الحديث)
+│
+├── 1. AL-SANAD (السند)
+│   The Chain of Transmitters
+│   (راویوں کا باقاعدہ تسلسل)
+│
+└── 2. AL-MATN (المتن)
+    The Sacred Text / Narration
+    (حدیث کا اصل کلام یا واقعہ)
 ```
 
 ---
@@ -211,28 +213,28 @@ The history of Hadith compilation is not an accidental, late development; it was
 THE 6 EPOCHS OF HADITH COMPILATION
 │
 ▼
-[EPOCH 1: 1–11 AH] Prophetic Era (عہدِ نبوی)
-Oral preservation, practice & notebooks.
+[EPOCH 1: 1–11 AH] Prophetic Era
+Oral transmission, practice & notes.
 │
 ▼
-[EPOCH 2: 11–100 AH] Sahabah & Tabi'in
-Witness demands & birth of Isnad scrutiny.
+[EPOCH 2: 11–100 AH] Sahabah Era
+Witness demands & birth of Isnad.
 │
 ▼
-[EPOCH 3: 99–124 AH] Official State Tadwin
-Royal decree of Umar II; codified by Zuhri.
+[EPOCH 3: 99–124 AH] State Tadwin
+Royal decree; codified by Zuhri.
 │
 ▼
-[EPOCH 4: 2nd Cent. AH] Thematic Musannafat
-Subject-based Fiqh: Muwatta, Abd al-Razzaq.
+[EPOCH 4: 2nd C. AH] Musannafat
+Subject Fiqh: Malik & Abd al-Razzaq.
 │
 ▼
-[EPOCH 5: 3rd C. AH] Golden Era of Sifting
-Isolation of pure Sahih: Bukhari & Muslim.
+[EPOCH 5: 3rd C. AH] Golden Age
+Pure Sahih sifted: Bukhari & Muslim.
 │
 ▼
-[EPOCH 6: 4th–9th AH] Master Synthesis
-Mustalah canons & commentaries: Ibn Hajar.
+[EPOCH 6: 4th–9th AH] Canons
+Mustalah canons: Ibn al-Salah & Hajar.
 ```
 
 ---
@@ -315,7 +317,7 @@ ANATOMY OF A TRANSMISSION CHAIN
 │
 ▼
 [AUTHOR / COLLECTOR]
-Imam Muhammad al-Bukhari (d. 256 AH)
+Imam al-Bukhari (d. 256 AH)
 │ ◄── "Haddathana" (حَدَّثَنَا)
 ▼
 [LINK 1: Teacher]
@@ -340,11 +342,11 @@ Muhammad ibn Ibrahim al-Taymi
 ▼
 [THE SAHABI: Companion]
 'Umar ibn al-Khattab (RA) (d. 23 AH)
-│ ◄── "Sami'tu" (سَمِعْتُ رَسُولَ اللَّهِ)
+│ ◄── "Sami'tu" (سَمِعْتُ)
 ▼
 [FINAL SOURCE]
 Prophet Muhammad ﷺ (d. 11 AH)
-└──► «إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ...»
+└──► Prophetic Text (Al-Matn)
 ```
 
 #### What the Muhaddith Investigates in this Chain:
@@ -458,30 +460,30 @@ MASTER CLASSIFICATION TREE
 │   └── Hadith Qudsi (قدسي - Divine)
 │
 ├── 3. BY TRANSMISSION PATHWAYS
-│   ├── Mutawatir (متواتر - Mass-Narrated)
+│   ├── Mutawatir (متواتر - Mass)
 │   │   ├── Lafzi (Verbatim)
 │   │   └── Ma'nawi (In Meaning)
 │   └── Ahad (آحاد - Solitary)
-│       ├── Mashhur (Well-Known, 3+ paths)
+│       ├── Mashhur (Famous, 3+ paths)
 │       ├── 'Aziz (Rare, 2 paths)
 │       └── Gharib (Singular, 1 path)
 │
 ├── 4. BY CHAIN CONTINUITY
 │   ├── Muttasil (متصل - Unbroken)
 │   ├── Munqati' (منقطع - Interrupted)
-│   ├── Mursal (مرسل - Sahabi Omitted)
-│   ├── Mu'dal (معضل - 2+ Links Missing)
-│   ├── Mu'allaq (معلق - Start Missing)
-│   ├── Mudallas (مدلس - Concealed Flaw)
-│   └── Mursal Khafi (مرسل خفي - Hidden Gap)
+│   ├── Mursal (مرسل - Sahabi Gap)
+│   ├── Mu'dal (معضل - 2+ Missing)
+│   ├── Mu'allaq (معلق - Start Gap)
+│   ├── Mudallas (مدلس - Concealed)
+│   └── Mursal Khafi (خفي - Hidden)
 │
 └── 5. BY DEFECT & DISRUPTION
     ├── Shadh (شاذ - Contradictory)
-    ├── Munkar (منكر - Weak Contradicts)
-    ├── Mudtarib (مضطرب - Inconsistent)
+    ├── Munkar (منكر - Weak Opposes)
+    ├── Mudtarib (مضطرب - Confused)
     ├── Maqlub (مقلوب - Inverted)
     ├── Mudraj (مدرج - Interpolated)
-    └── Mu'allal (معلل - Subtly Defective)
+    └── Mu'allal (معلل - Defective)
 ```
 
 ---
@@ -910,23 +912,23 @@ The preservation of the Sunnah was executed by generational luminaries whose liv
 ```
 CHRONOLOGY OF THE TITANS
 │
-├── [150 AH] Early Codifiers & Pillars
-│   ├── Imam Malik (d. 179 AH) — Muwatta
+├── [150 AH] Early Codifiers
+│   ├── Imam Malik (d. 179 AH)
 │   ├── Sufyan al-Thawri (d. 161 AH)
 │   └── Hammad ibn Salamah (d. 167 AH)
 │
-├── [200 AH] Systematic Legal Theorists
+├── [200 AH] Legal Theorists
 │   ├── Imam al-Shafi'i (d. 204 AH)
 │   ├── Yahya ibn Ma'in (d. 233 AH)
 │   └── Ahmad ibn Hanbal (d. 241 AH)
 │
-├── [250 AH] Golden Era of Canonical Sahih
+├── [250 AH] Canonical Sahih Era
 │   ├── Imam al-Bukhari (d. 256 AH)
 │   ├── Imam Muslim (d. 261 AH)
 │   └── The Four Sunan Compilers
 │
-└── [852 AH] Grand Encyclopedic Age
-    └── Ibn Hajar al-Asqalani (d. 852 AH)
+└── [852 AH] Grand Synthesis
+    └── Ibn Hajar al-Asqalani (d. 852)
 ```
 
 ---
@@ -1134,25 +1136,26 @@ Determine usability for law and creed.
 ### 1. The Ultimate Hadith Classification Cheat Sheet
 
 ```
-Is the Chain Connected (Muttasil)?
-├── NO: Broken Chain
-│   ├── Missing at start ──► MU'ALLAQ (معلق)
-│   ├── Missing at end ──► MURSAL (مرسل)
-│   ├── 2+ missing ──► MU'DAL (معضل)
-│   ├── Link missing ──► MUNQATI' (منقطع)
-│   └── Hidden gap ──► MUDALLAS (مدلس)
+STEP 1: Chain Connected (Muttasil)?
+├── NO (Broken Chain):
+│   ├── Start omitted ──► MU'ALLAQ
+│   ├── End omitted ──► MURSAL
+│   ├── 2+ missing ──► MU'DAL
+│   ├── Middle gap ──► MUNQATI'
+│   └── Hidden gap ──► MUDALLAS
 │
-└── YES: Connected Chain
-    └── Are all narrators Upright & Precise?
-        ├── NO: Defect in Narrator
-        │   ├── Accused of lie ──► MAWDU'
-        │   └── Weak memory ──► DA'IF
-        │       └── Corroborated? ──► HASAN
-        │
-        └── YES: Reliable Narrators
-            └── Free from Shudhudh & 'Illah?
-                ├── NO ──► SHADH / MU'ALLAL
-                └── YES ──► SAHIH / HASAN
+└── YES (Connected Chain):
+    Proceed to Step 2 ──►
+
+STEP 2: Narrator & Text Integrity
+├── Defect in Narrator:
+│   ├── Fabricator ──► MAWDU'
+│   └── Weak memory ──► DA'IF
+│       └── Corroborated ──► HASAN
+│
+└── Reliable Narrators:
+    ├── Subtle flaw ──► SHADH/MU'ALLAL
+    └── Flawless ──► SAHIH / HASAN
 ```
 
 ---
