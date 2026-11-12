@@ -211,28 +211,28 @@ The history of Hadith compilation is not an accidental, late development; it was
 THE 6 EPOCHS OF HADITH COMPILATION
 │
 ▼
-[EPOCH 1: 1–11 AH] Prophetic Era (عہدِ نبوی ﷺ)
-Oral preservation, living practice & Sahifah.
+[EPOCH 1: 1–11 AH] Prophetic Era (عہدِ نبوی)
+Oral preservation, practice & notebooks.
 │
 ▼
-[EPOCH 2: 11–100 AH] Sahabah & Early Tabi'in
+[EPOCH 2: 11–100 AH] Sahabah & Tabi'in
 Witness demands & birth of Isnad scrutiny.
 │
 ▼
 [EPOCH 3: 99–124 AH] Official State Tadwin
-Imperial decree of Umar II; codified by Zuhri.
+Royal decree of Umar II; codified by Zuhri.
 │
 ▼
 [EPOCH 4: 2nd Cent. AH] Thematic Musannafat
 Subject-based Fiqh: Muwatta, Abd al-Razzaq.
 │
 ▼
-[EPOCH 5: 3rd Cent. AH] Golden Age of Sifting
-Rigorous isolation of Sahih: Bukhari, Muslim.
+[EPOCH 5: 3rd C. AH] Golden Era of Sifting
+Isolation of pure Sahih: Bukhari & Muslim.
 │
 ▼
-[EPOCH 6: 4th–9th AH] Master Canons & Synthesis
-Mustalah codification & commentaries: Ibn Hajar.
+[EPOCH 6: 4th–9th AH] Master Synthesis
+Mustalah canons & commentaries: Ibn Hajar.
 ```
 
 ---
@@ -315,11 +315,11 @@ ANATOMY OF A TRANSMISSION CHAIN
 │
 ▼
 [AUTHOR / COLLECTOR]
-Imam Muhammad ibn Isma'il al-Bukhari (d. 256 AH)
-│ ◄── "Haddathana" (حَدَّثَنَا - He narrated to us)
+Imam Muhammad al-Bukhari (d. 256 AH)
+│ ◄── "Haddathana" (حَدَّثَنَا)
 ▼
 [LINK 1: Teacher]
-Al-Humaydi (Abdullah ibn al-Zubayr) (d. 219 AH)
+Al-Humaydi (Abdullah ibn al-Zubayr)
 │ ◄── "Haddathana" (حَدَّثَنَا)
 ▼
 [LINK 2: Teacher's Teacher]
@@ -328,22 +328,22 @@ Sufyan ibn 'Uyaynah (d. 198 AH)
 ▼
 [LINK 3: Senior Tabi'i]
 Yahya ibn Sa'id al-Ansari (d. 143 AH)
-│ ◄── "Akhbarani" (أَخْبَرَنِي - He informed me)
+│ ◄── "Akhbarani" (أَخْبَرَنِي)
 ▼
 [LINK 4: Mid Tabi'i]
-Muhammad ibn Ibrahim al-Taymi (d. 120 AH)
-│ ◄── "Sami'a" (أَنَّهُ سَمِعَ - That he heard)
+Muhammad ibn Ibrahim al-Taymi
+│ ◄── "Sami'a" (أَنَّهُ سَمِعَ)
 ▼
 [LINK 5: Junior Tabi'i]
-'Alqamah ibn Waqqas al-Laythi (d. ~75 AH)
-│ ◄── "Yaqulu: Sami'tu" (يَقُولُ: سَمِعْتُ)
+'Alqamah ibn Waqqas al-Laythi
+│ ◄── "Yaqulu: Sami'tu" (يَقُولُ)
 ▼
 [THE SAHABI: Companion]
-Amir al-Mu'minin 'Umar ibn al-Khattab (RA) (d. 23 AH)
-│ ◄── "Sami'tu Rasulullah" (سَمِعْتُ رَسُولَ اللَّهِ ﷺ)
+'Umar ibn al-Khattab (RA) (d. 23 AH)
+│ ◄── "Sami'tu" (سَمِعْتُ رَسُولَ اللَّهِ)
 ▼
 [FINAL SOURCE]
-Prophet Muhammad ﷺ (d. 11 AH, Madinah)
+Prophet Muhammad ﷺ (d. 11 AH)
 └──► «إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ...»
 ```
 
@@ -477,10 +477,10 @@ MASTER CLASSIFICATION TREE
 │
 └── 5. BY DEFECT & DISRUPTION
     ├── Shadh (شاذ - Contradictory)
-    ├── Munkar (منكر - Weak Contradicts Strong)
+    ├── Munkar (منكر - Weak Contradicts)
     ├── Mudtarib (مضطرب - Inconsistent)
-    ├── Maqlub (مقلوب - Inverted/Reversed)
-    ├── Mudraj (مدرج - Interpolated Text)
+    ├── Maqlub (مقلوب - Inverted)
+    ├── Mudraj (مدرج - Interpolated)
     └── Mu'allal (معلل - Subtly Defective)
 ```
 
@@ -912,21 +912,21 @@ CHRONOLOGY OF THE TITANS
 │
 ├── [150 AH] Early Codifiers & Pillars
 │   ├── Imam Malik (d. 179 AH) — Muwatta
-│   ├── Sufyan al-Thawri (d. 161 AH) — Amir al-Mu'minin
+│   ├── Sufyan al-Thawri (d. 161 AH)
 │   └── Hammad ibn Salamah (d. 167 AH)
 │
-├── [200 AH] Systematic Legal & Critical Theorists
-│   ├── Imam al-Shafi'i (d. 204 AH) — Al-Risalah
-│   ├── Yahya ibn Ma'in (d. 233 AH) — Master of Rijal
-│   └── Ahmad ibn Hanbal (d. 241 AH) — Musnad
+├── [200 AH] Systematic Legal Theorists
+│   ├── Imam al-Shafi'i (d. 204 AH)
+│   ├── Yahya ibn Ma'in (d. 233 AH)
+│   └── Ahmad ibn Hanbal (d. 241 AH)
 │
-├── [250 AH] The Golden Era of Canonical Sahih
-│   ├── Imam al-Bukhari (d. 256 AH) — Sahih
-│   ├── Imam Muslim (d. 261 AH) — Sahih
-│   └── The 4 Sunan (Abu Dawud, Tirmidhi, Nasa'i, Ibn Majah)
+├── [250 AH] Golden Era of Canonical Sahih
+│   ├── Imam al-Bukhari (d. 256 AH)
+│   ├── Imam Muslim (d. 261 AH)
+│   └── The Four Sunan Compilers
 │
-└── [852 AH] Grand Synthesis & Encyclopedic Age
-    └── Ibn Hajar al-Asqalani (d. 852 AH) — Fath al-Bari
+└── [852 AH] Grand Encyclopedic Age
+    └── Ibn Hajar al-Asqalani (d. 852 AH)
 ```
 
 ---
@@ -1061,19 +1061,19 @@ THE 4-STEP MODERN TAKHRIJ PROTOCOL
 │
 ▼
 [STEP 1: ISOLATE KEYWORDS]
-Extract rare Arabic words from text.
+Extract rare Arabic terms from text.
 │
 ▼
 [STEP 2: QUERY DIGITAL DESK]
-Search primary databases (Sunnah.com / Dorar.net).
+Search Sunnah.com / Dorar.net engines.
 │
 ▼
 [STEP 3: IDENTIFY SOURCE BOOK]
-Locate source (Bukhari, Ahmad, etc.) & check its Tier!
+Locate source (Bukhari, Ahmad) & Tier!
 │
 ▼
 [STEP 4: READ SCHOLARLY HUKM]
-Examine grading verdict of classical & modern critics.
+Examine grading verdict of critics.
 │
 ▼
 [FINAL VERDICT ESTABLISHED]
@@ -1137,23 +1137,22 @@ Determine usability for law and creed.
 Is the Chain Connected (Muttasil)?
 ├── NO: Broken Chain
 │   ├── Missing at start ──► MU'ALLAQ (معلق)
-│   ├── Missing at end (Sahabi) ──► MURSAL (مرسل)
-│   ├── 2+ consecutive missing ──► MU'DAL (معضل)
-│   ├── Intermediate missing ──► MUNQATI' (منقطع)
-│   └── Hidden gap ──► MUDALLAS / MURSAL KHAFI
+│   ├── Missing at end ──► MURSAL (مرسل)
+│   ├── 2+ missing ──► MU'DAL (معضل)
+│   ├── Link missing ──► MUNQATI' (منقطع)
+│   └── Hidden gap ──► MUDALLAS (مدلس)
 │
 └── YES: Connected Chain
     └── Are all narrators Upright & Precise?
         ├── NO: Defect in Narrator
-        │   ├── Accused of lying ──► MAWDU' / MATRUK
-        │   └── Weak retention ──► DA'IF
-        │       └── Corroborated? ──► HASAN LI-GHAYRIHI
+        │   ├── Accused of lie ──► MAWDU'
+        │   └── Weak memory ──► DA'IF
+        │       └── Corroborated? ──► HASAN
         │
         └── YES: Reliable Narrators
             └── Free from Shudhudh & 'Illah?
-                ├── NO ──► SHADH (شاذ) / MU'ALLAL (معلل)
-                └── YES: Highest retention ──► SAHIH
-                         Slightly lesser ──► HASAN
+                ├── NO ──► SHADH / MU'ALLAL
+                └── YES ──► SAHIH / HASAN
 ```
 
 ---
