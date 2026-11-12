@@ -37,9 +37,12 @@ This actionable tracker translates the clinical findings from [MASTER_DERMATOLOG
   [ ] Step 5: Lip Shield Application
       * Tap lips with a drop of clean tap water.
       * Seal immediately with La Roche-Posay Cicaplast Lèvres or Aquaphor Healing Ointment.
-  [ ] Step 6: SLS-Free Oral Care & Tongue Scraping
+  [ ] Step 6: SLS-Free Oral Care, Tongue Debridement & VSC Eradication
       * Brush teeth using Sensodyne Pronamel or Biotene SLS-free toothpaste.
-      * Scrape tongue with copper/stainless steel scraper; avoid antibacterial alcohol mouthwashes.
+      * Scrape tongue dorsum with medical stainless steel / copper scraper (4–6 glides back-to-front).
+      * 60-Second Oxygenating Dual Rinse: Swish 30s around teeth and deep-gargle 30s with Stabilized
+        Chlorine Dioxide (TheraBreath/CloSYS) or Zinc Lactate to destroy Volatile Sulfur Compounds (VSCs).
+        Strictly avoid alcohol-based mouthwashes.
   [ ] Step 7: Systemic Metabolic & Bioenergetic Ingestion
       * Oral Berberine HCl (500mg) or Myo-Inositol (2,000mg) with breakfast (activates AMPK).
       * Creatine Monohydrate (5g) + Ubiquinol CoQ10 (100mg) in water (ATP cellular reload).
@@ -72,6 +75,10 @@ This actionable tracker translates the clinical findings from [MASTER_DERMATOLOG
         extending 1 mm beyond the vermilion border.
       * ZERO-TOLERANCE RULE: Do NOT pick, peel, or bite crusts. Snip loose flakes flush
         with clean cuticle scissors if needed.
+  [ ] Step 4: Nocturnal Halitosis & Nasal Airway Decontamination
+      * Hypertonic 2.7% Alkaline Sinus Rinse: Flush nasal passages 30 min before bed to halt post-nasal mucus pooling.
+      * Evening Tongue Debridement & 60-second Chlorine Dioxide / Zinc deep gargle.
+      * Dissolve 1 Spry 100% Xylitol mint on tongue before sleep to stimulate nocturnal salivation against xerostomia.
 ```
 
 ---
