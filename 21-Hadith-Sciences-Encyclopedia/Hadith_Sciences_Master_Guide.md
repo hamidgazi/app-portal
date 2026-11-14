@@ -27,48 +27,129 @@
     font-weight: 700;
   }
 
-  /* Blockquote Styling for Hadith Citations */
-  blockquote {
-    border-left: 4px solid #f59e0b !important;
-    background: rgba(245, 158, 11, 0.06) !important;
-    padding: 1rem 1.4rem !important;
-    border-radius: 0.5rem !important;
-    margin: 1.25rem 0 !important;
-    line-height: 2.1 !important;
+  /* Blockquote & Hadith Citations: Compact Mobile Architecture */
+  blockquote,
+  .markdown-rendered blockquote,
+  .quote-card {
+    border-left: 3px solid #f59e0b !important;
+    background: rgba(245, 158, 11, 0.05) !important;
+    padding: 0.65rem 0.95rem !important;
+    border-radius: 0.45rem !important;
+    margin: 0.75rem 0 !important;
+    line-height: 1.6 !important;
+    box-sizing: border-box !important;
   }
 
-  blockquote p {
-    margin-bottom: 0.6rem !important;
+  blockquote p,
+  .markdown-rendered blockquote p,
+  .quote-body p {
+    margin-top: 0.2rem !important;
+    margin-bottom: 0.35rem !important;
+    line-height: 1.6 !important;
   }
 
-  /* Tables: Clean Contrast, Aligned Columns & Spacing */
-  table {
+  blockquote p:last-child,
+  .markdown-rendered blockquote p:last-child,
+  .quote-body p:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  blockquote h1, blockquote h2, blockquote h3, blockquote h4, blockquote h5, blockquote h6,
+  .markdown-rendered blockquote h1, .markdown-rendered blockquote h2, .markdown-rendered blockquote h3, .markdown-rendered blockquote h4,
+  .quote-card h1, .quote-card h2, .quote-card h3, .quote-card h4 {
+    margin-top: 0 !important;
+    margin-bottom: 0.35rem !important;
+    padding-top: 0 !important;
+    line-height: 1.35 !important;
+    font-size: 1.15rem !important;
+  }
+
+  blockquote + blockquote {
+    margin-top: 0.45rem !important;
+  }
+
+  /* Tables: Full 100% Width Containment & Proportional Column Architecture */
+  .table-wrapper,
+  .markdown-rendered .table-wrapper,
+  .table-responsive {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    display: block !important;
+    margin: 1rem 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  table,
+  .markdown-rendered table,
+  .markdown-preview-view table,
+  .table-wrapper table,
+  .cm-table-widget,
+  .reader-table {
     border-collapse: collapse !important;
     width: 100% !important;
-    margin: 1.5rem 0 !important;
-    font-size: 0.92rem !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    display: table !important;
+    margin: 0 !important;
+    font-size: 0.88rem !important;
+    box-sizing: border-box !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
   }
 
   table th {
     background: #171722 !important;
     color: #f59e0b !important;
     font-weight: 700 !important;
-    padding: 0.85rem 1rem !important;
+    padding: 0.65rem 0.85rem !important;
     border: 1px solid #262638 !important;
     text-transform: uppercase !important;
-    font-size: 0.8rem !important;
-    letter-spacing: 0.05em !important;
+    font-size: 0.78rem !important;
+    letter-spacing: 0.04em !important;
+    white-space: nowrap !important;
+    word-break: keep-all !important;
   }
 
   table td {
-    padding: 0.85rem 1rem !important;
-    vertical-align: middle !important;
+    padding: 0.65rem 0.85rem !important;
+    vertical-align: top !important;
     border: 1px solid #262638 !important;
     background: #0d0d12 !important;
+    line-height: 1.55 !important;
   }
 
   table tr:nth-child(even) td {
     background: #12121a !important;
+  }
+
+  /* Compact Index / Serial Number Columns (#, Rank, Tier, Stage) */
+  table th:first-child,
+  table td:first-child {
+    white-space: nowrap !important;
+    text-align: center !important;
+  }
+
+  @media (max-width: 640px) {
+    blockquote,
+    .markdown-rendered blockquote,
+    .quote-card {
+      padding: 0.55rem 0.8rem !important;
+      margin: 0.6rem 0 !important;
+      font-size: 0.92rem !important;
+    }
+    blockquote h3, .quote-title {
+      font-size: 1.05rem !important;
+    }
+    table,
+    .markdown-rendered table,
+    .reader-table {
+      font-size: 0.84rem !important;
+    }
+    table th, table td {
+      padding: 0.5rem 0.65rem !important;
+    }
   }
 
   /* Code & ASCII Transmission Charts - Mobile-Safe Responsive Monospace */
@@ -126,7 +207,7 @@
 
 > ### بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
 > **الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ، وَالصَّلَاةُ وَالسَّلَامُ عَلَى سَيِّدِ الْمُرْسَلِينَ نَبِيِّنَا مُحَمَّدٍ وَعَلَى آلِهِ وَصَحْبِهِ أَجْمَعِينَ ، أَمَّا بَعْدُ:**
-
+>
 > *"Indeed, this knowledge is religion, so be careful from whom you take your religion."*  
 > **— Imam Muhammad ibn Sirin (رحمه الله)**  
 > *«إِنَّ هَذَا الْعِلْمَ دِينٌ، فَانْظُرُوا عَمَّنْ تَأْخُذُونَ دِينَكُمْ»*  
@@ -159,7 +240,7 @@
 ### 1. Classical Terminology: Hadith, Sunnah, Khabar, and Athar
 To the untrained mind, the terms *Hadith*, *Sunnah*, *Khabar*, and *Athar* are often used interchangeably. To a Muhaddith (Hadith scholar), each carries distinct boundaries:
 
-| Term (اصطلاح) | Arabic | Linguistic Meaning | Technical Definition (اصطلاحی مفہوم) | Urdu Explanation (اردو وضاحت) |
+| Term&nbsp;(اصطلاح) | Arabic | Linguistic&nbsp;Meaning | Technical&nbsp;Definition&nbsp;(اصطلاحی&nbsp;مفہوم) | Urdu&nbsp;Explanation&nbsp;(اردو&nbsp;وضاحت) |
 |---|---|---|---|---|
 | **Hadith** | حَدِيث | New, conversation, speech | Anything attributed to the Prophet Muhammad ﷺ: his sayings, actions, silent approvals, or physical/moral traits. | ہر وہ قول، فعل، تقریر (خاموش منظوری) یا صفت جو رسول اللہ ﷺ کی طرف منسوب ہو۔ |
 | **Sunnah** | سُنَّة | A well-trodden path, customary practice | The established religious norm, standard way of living, and legal precedents legislated by the Prophet ﷺ. | نبی کریم ﷺ کا قائم کردہ دینی طریقہ، اسوہ اور قانون جو امت کے لیے واجب الاتباع ہو۔ |
@@ -386,13 +467,13 @@ Formulated systematically by Imam Abu 'Amr Ibn al-Salah (d. 643 AH) and refined 
 > **The 5 Universal Pillars of Sahih:**  
 > **Sahih Hadith** = **Ittisal** *(Connected Chain)* + **'Adalah** *(Moral Integrity)* + **Dabt** *(Retention Accuracy)* + **No Shudhudh** *(No Contradiction)* + **No 'Illah** *(No Hidden Flaw)*
 
-| # | Condition | Arabic | Meaning & Evidentiary Scope |
-|---|-----------|--------|------------------------------|
-| 1 | **Ittisal al-Sanad** | اتِّصَالُ السَّنَد | Continuous, unbroken chain from first narrator to the final authority. No dropped or hidden links. |
-| 2 | **'Adalat al-Ruwat** | عَدَالَةُ الرُّوَاة | Moral, religious, and ethical integrity of every narrator: Muslim, sane, mature, non-fasiq, free of dishonor. |
-| 3 | **Dabt al-Ruwat** | ضَبْطُ الرُّوَاة | Flawless precision and memory retention: in chest (*Dabt al-Sadr*) or in verified manuscript (*Dabt al-Kitab*). |
-| 4 | **'Adam al-Shudhudh** | عَدَمُ الشُّذُوذ | Absence of irregularity: A reliable narrator must NOT contradict someone more reliable than them. |
-| 5 | **'Adam al-'Illah** | عَدَمُ العِلَّة القَادِحَة | Absence of hidden, subtle, damaging defects (*'Ilal*) that require microscopic critical analysis to detect. |
+| # | Condition | Arabic | Meaning&nbsp;&&nbsp;Evidentiary&nbsp;Scope |
+|---|-----------|--------|-------------------------------------------|
+| 1 | **Ittisal&nbsp;al-Sanad** | اتِّصَالُ&nbsp;السَّنَد | Continuous, unbroken chain from first narrator to the final authority. No dropped or hidden links. |
+| 2 | **'Adalat&nbsp;al-Ruwat** | عَدَالَةُ&nbsp;الرُّوَاة | Moral, religious, and ethical integrity of every narrator: Muslim, sane, mature, non-fasiq, free of dishonor. |
+| 3 | **Dabt&nbsp;al-Ruwat** | ضَبْطُ&nbsp;الرُّوَاة | Flawless precision and memory retention: in chest (*Dabt al-Sadr*) or in verified manuscript (*Dabt al-Kitab*). |
+| 4 | **'Adam&nbsp;al-Shudhudh** | عَدَمُ&nbsp;الشُّذُوذ | Absence of irregularity: A reliable narrator must NOT contradict someone more reliable than them. |
+| 5 | **'Adam&nbsp;al-'Illah** | عَدَمُ&nbsp;العِلَّة&nbsp;القَادِحَة | Absence of hidden, subtle, damaging defects (*'Ilal*) that require microscopic critical analysis to detect. |
 
 ---
 
@@ -521,7 +602,7 @@ MASTER CLASSIFICATION TREE
 
 ### Dimension 2: By Terminal Attribution (من حيث منتهى السند)
 
-| Class | Arabic | Attributed To | Example Phrasing | Legal Status |
+| Class | Arabic | Attributed&nbsp;To | Example&nbsp;Phrasing | Legal&nbsp;Status |
 |---|---|---|---|---|
 | **Marfu'** | مَرْفُوع | Prophet Muhammad ﷺ | *"The Messenger of Allah ﷺ said..."* | Primary legislative source for all Islam. |
 | **Mawquf** | مَوْقُوف | A Sahabi (Companion) | *"Umar ibn al-Khattab said: 'Hold yourselves accountable...'"* | Strong legal precedent; if concerning unseen matters, carries ruling of Marfu'. |
@@ -529,7 +610,7 @@ MASTER CLASSIFICATION TREE
 | **Hadith Qudsi** | حَدِيث قُدْسِي | Words from Allah, phrased by the Prophet ﷺ | *"The Messenger of Allah ﷺ said that Allah Blessed and Exalted says: 'O My servants! I have forbidden oppression...'"* | Holy message, but distinct from the Qur'an (cannot be recited in Salah, not miraculous in phrasing). |
 
 #### The Fundamental Difference: Qur'an vs. Hadith Qudsi
-| Distinction Point | The Holy Qur'an | Hadith Qudsi |
+| Distinction&nbsp;Point | The&nbsp;Holy&nbsp;Qur'an | Hadith&nbsp;Qudsi |
 |-------------------|-----------------|--------------|
 | **Origin & Phrasing** | Both Words and Meaning from Allah. | Meaning from Allah; words phrased by the Prophet ﷺ. |
 | **Linguistic Miracle (I'jaz)** | Miraculous (I'jaz); inimitable by mankind. | Not an inimitable linguistic miracle. |
@@ -616,7 +697,7 @@ WHERE IS THE CHAIN BROKEN?
 ### 2. The 6 Ranks of Ta'dil (Praise & Verification - مراتب التعديل)
 Formulated by Ibn Abi Hatim and codified by al-Dhahabi and Ibn Hajar:
 
-| Rank | Classical Arabic Terminology | Meaning | Status / Rule |
+| Rank | Classical&nbsp;Arabic&nbsp;Terminology | Meaning | Status&nbsp;/&nbsp;Rule |
 |---|---|---|---|
 | **Tier 1 (Superlative)** | `أَوْثَقُ النَّاسِ` ، `إِلَيْهِ المُنْتَهَى فِي التَّثَبُّتِ` | "The most trustworthy of mankind," "The apex of verification" | Unquestioned highest authority. |
 | **Tier 2 (Duplicated)** | `ثِقَةٌ ثِقَةٌ` ، `ثِقَةٌ ثَبْتٌ` ، `عَدْلٌ ضَابِطٌ` | "Trustworthy, trustworthy," "Trustworthy and immovable" | Highest tier of Sahih Hadith. |
@@ -629,7 +710,7 @@ Formulated by Ibn Abi Hatim and codified by al-Dhahabi and Ibn Hajar:
 
 ### 3. The 6 Ranks of Jarh (Criticism & Disqualification - مراتب الجرح)
 
-| Rank | Classical Arabic Terminology | Meaning | Status / Rule |
+| Rank | Classical&nbsp;Arabic&nbsp;Terminology | Meaning | Status&nbsp;/&nbsp;Rule |
 |---|---|---|---|
 | **Tier 1 (Mildest)** | `فِيهِ مَقَالٌ` ، `لَيِّنُ الحَدِيثِ` ، `ضَعَّفُوهُ` | "There is speech about him," "Soft in Hadith" | Mild weakness; eligible for *I'tibar* (corroboration). |
 | **Tier 2 (Not Strong)** | `لَيْسَ بِالقَوِيِّ` ، `لَا يُحْتَجُّ بِهِ` | "He is not strong," "He cannot be used as proof" | Weak; rejected unless corroborated. |
@@ -660,8 +741,8 @@ What happens if Imam Ahmad praises a narrator, but Yahya ibn Ma'in criticizes hi
 
 ## Chapter 6: Kutub al-Sittah & The Hierarchy of Hadith Collections (کتبِ حدیث کے درجات و مراتب)
 
-| # | Book & Author | Arabic Title | Death Date | Hadiths Count |
-|---|---------------|--------------|------------|---------------|
+| # | Book&nbsp;&&nbsp;Author | Arabic&nbsp;Title | Death&nbsp;Date | Hadiths&nbsp;Count |
+|---|------------------------|--------------|------------|---------------|
 | 1 | **Sahih al-Bukhari** (Imam al-Bukhari) | الجامع المسند الصحيح المختصر من أمور رسول الله ﷺ | 256 AH | ~7,563 (with repetitions) |
 | 2 | **Sahih Muslim** (Imam Muslim) | المسند الصحيح المختصر بنقل العدل عن العدل | 261 AH | ~7,500 (with repetitions) |
 | 3 | **Sunan Abi Dawud** (Imam Abu Dawud) | كتاب السنن | 275 AH | ~5,274 |
@@ -711,7 +792,7 @@ What happens if Imam Ahmad praises a narrator, but Yahya ibn Ma'in criticizes hi
 ### Shah Waliullah Dehlawi's 4 Tiers of Hadith Collections
 In his seminal work *Hujjatullah al-Balighah (حجة الله البالغة)*, the great Indian reviver **Shah Waliullah al-Dehlawi (d. 1176 AH)** categorized all Hadith literature into four distinct qualitative ranks:
 
-| Tier | Collections Included | Nature & Evidentiary Value |
+| Tier | Collections&nbsp;Included | Nature&nbsp;&&nbsp;Evidentiary&nbsp;Value |
 |------|----------------------|----------------------------|
 | **Tabaqah 1** | 1. Muwatta Imam Malik<br>2. Sahih al-Bukhari<br>3. Sahih Muslim | **Highest authenticity.** Nearly 100% of their contents are Sahih or verified through continuous community action. |
 | **Tabaqah 2** | 1. Sunan Abi Dawud<br>2. Jami' al-Tirmidhi<br>3. Sunan al-Nasa'i<br>4. Musnad Ahmad ibn Hanbal | **Next tier of legal authority.** Majority is Sahih/Hasan; weak narrations are noted or easily analyzed. |
@@ -873,7 +954,7 @@ The Messenger of Allah ﷺ delivered a Mutawatir warning transmitted by over 70 
 
 ### 2. The 5 Motivations of the Fabricators (دوافع الوضع)
 
-| # | Motive & Category | Arabic | Historical Context & Examples |
+| # | Motive&nbsp;&&nbsp;Category | Arabic | Historical&nbsp;Context&nbsp;&&nbsp;Examples |
 |---|-------------------|--------|-------------------------------|
 | 1 | **Heretical Sabotage** | الزَّنْدَقَةُ وَالخُبْث | Heretics (*al-Zanadiqah*) who sought to corrupt Islam from within. Abdul Karim ibn Abi al-Awja' confessed before execution: *"I fabricated 4,000 Hadiths making halal haram and haram halal!"* |
 | 2 | **Sectarian Partisanship** | التَّعَصُّبُ الحِزْبِيُّ | Political factions (Shi'a, Khawarij, Umayyads, Abbasids) inventing Hadiths praising their partisans or cursing rivals. |
@@ -1006,7 +1087,7 @@ Women were not merely narrators in the early days; they were the professors of t
 
 To understand Hadith at a professional level, an objective, scholarly comparative analysis of the methodology of **Ahl al-Sunnah wal-Jama'ah** and **Shi'a Imami Ithna 'Ashariyyah** is essential.
 
-| Comparison Point | Sunni Methodology | Shia (Imami) Methodology |
+| Comparison&nbsp;Point | Sunni&nbsp;Methodology | Shia&nbsp;(Imami)&nbsp;Methodology |
 |------------------|-------------------|--------------------------|
 | **1. Scope of Sunnah** | Restricted strictly to the Prophet Muhammad ﷺ. Sahabah statements are Athar. | Encompasses the Prophet ﷺ AND the 12 Infallible Imams (Ahl al-Bayt). |
 | **2. Canonical Collections** | The Six Books (*Kutub al-Sittah*): Bukhari, Muslim, Abu Dawud, Tirmidhi, Nasa'i, Ibn Majah. | The Four Books (*al-Kutub al-Arba'ah*): al-Kafi, Man La Yahduruhu al-Faqih, al-Tahdhib, al-Istibsar. |
@@ -1164,7 +1245,7 @@ STEP 2: Narrator & Text Integrity
 
 If you wish to progress from a passionate beginner to an independent researcher (*Muhaqqiq*), follow the time-tested classical curriculum:
 
-| Stage | Classical Text & Arabic | Author & Date | Focus & Learning Goal |
+| Stage | Classical&nbsp;Text&nbsp;&&nbsp;Arabic | Author&nbsp;&&nbsp;Date | Focus&nbsp;&&nbsp;Learning&nbsp;Goal |
 |-------|-------------------------|---------------|-----------------------|
 | **Stage 1 (Beginner)** | **Al-Manzumah al-Bayquniyyah** (المنظومة البيقونية)<br>+ *Taysir Mustalah al-Hadith* | Umar al-Bayquni (d. ~1080 AH)<br>+ Dr. Mahmud al-Tahhan | 34 poetic verses memorizing all core Mustalah definitions rapidly. |
 | **Stage 2 (Intermediate)** | **Nukhbat al-Fikar & Nuzhat al-Nazar** (نخبة الفكر في مصطلح أهل الأثر) | Ibn Hajar al-Asqalani (d. 852 AH) | Logical, deductive architectural framework of Hadith sciences. |
