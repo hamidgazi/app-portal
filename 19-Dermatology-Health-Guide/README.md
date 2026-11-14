@@ -1,4 +1,4 @@
-# 🩺 Clinical Dermatology & Skin Recovery Protocol (19-Dermatology-Health-Guide)
+# 🩺 Clinical Dermatology & ENT Health Suite (19-Dermatology-Health-Guide)
 
 A medical-grade, evidence-based clinical action suite, diagnostic compendium, and interactive web application engineered around the **Pareto 80/20 Principle**: each clinical condition provides an executive **80/20 High-Yield Capsule** (a 4-point matrix giving 80% of clinical recovery in under 60 seconds), followed immediately by an **unabridged 360° clinical deep-dive** incorporating advanced cellular bioenergetics, oral insulin sensitizers, postural sinus drainage, and trichological bond repair:
 
