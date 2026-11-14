@@ -59,10 +59,13 @@ self.addEventListener("fetch", (event) => {
     const isNavigationOrHtml = 
       event.request.mode === "navigate" ||
       url.pathname.endsWith(".html") ||
-      url.pathname.endsWith("/");
+      url.pathname.endsWith("/") ||
+      url.pathname.endsWith(".json") ||
+      url.pathname.includes("portal_catalog") ||
+      url.pathname.includes("links_catalog");
 
     if (isNavigationOrHtml) {
-      // Network-First Strategy for HTML/Navigations
+      // Network-First Strategy for HTML/Navigations/Dynamic Catalogs
       event.respondWith(
         fetch(event.request)
           .then((networkResponse) => {

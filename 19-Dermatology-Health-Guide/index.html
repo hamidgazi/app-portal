@@ -380,12 +380,17 @@
       display: flex;
       gap: 6px;
       overflow-x: auto;
-      padding: 8px 0 14px;
+      padding: 8px 12px;
       margin-bottom: 18px;
       border-bottom: 1px solid var(--border);
       scrollbar-width: thin;
       scrollbar-color: rgba(56, 189, 248, 0.4) transparent;
       -webkit-overflow-scrolling: touch;
+      position: sticky;
+      top: var(--nav-height, 56px);
+      background: rgba(9, 13, 22, 0.96);
+      backdrop-filter: blur(12px);
+      z-index: 85;
     }
 
     .sub-pill {
@@ -411,6 +416,13 @@
       color: #fff;
     }
 
+    .sub-pill.active {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #fff;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+    }
+
     /* Main Container & Sections */
     .main-container {
       max-width: 1240px;
@@ -432,7 +444,11 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Cards */
+    /* Cards & Anchor Targets */
+    .card, .science-card, .recovery-timeline-anchor {
+      scroll-margin-top: calc(var(--nav-height, 60px) + 55px);
+    }
+
     .card {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -3867,11 +3883,12 @@
 
           playTactileClick();
 
-          // Scroll target section into view smoothly
+          // Scroll target section into view smoothly & update dynamic nav height
           const targetSec = document.getElementById(targetId);
           if (targetSec) {
             const mainNav = document.querySelector(".tab-nav-wrapper");
             const navHeight = mainNav ? mainNav.offsetHeight : 70;
+            document.documentElement.style.setProperty("--nav-height", navHeight + "px");
             const targetTop = targetSec.getBoundingClientRect().top + window.pageYOffset - navHeight - 10;
             window.scrollTo({
               top: Math.max(0, targetTop),
@@ -3907,11 +3924,19 @@
                   if (targetEl) {
                     const mainNav = document.querySelector(".tab-nav-wrapper");
                     const navHeight = mainNav ? mainNav.offsetHeight : 70;
-                    const offsetTop = targetEl.getBoundingClientRect().top + window.pageYOffset - navHeight - 15;
+                    document.documentElement.style.setProperty("--nav-height", navHeight + "px");
+                    const subNav = targetEl.closest(".section-view")?.querySelector(".sub-nav-bar");
+                    const subNavHeight = subNav ? subNav.offsetHeight : 0;
+                    const offsetTop = targetEl.getBoundingClientRect().top + window.pageYOffset - navHeight - subNavHeight - 14;
                     window.scrollTo({
                       top: Math.max(0, offsetTop),
                       behavior: "smooth"
                     });
+                    if (subNav) {
+                      subNav.querySelectorAll(".sub-pill").forEach(p => {
+                        p.classList.toggle("active", p.getAttribute("data-scroll-to") === targetAnchor);
+                      });
+                    }
                   }
                 }, 80);
               }
@@ -3945,11 +3970,18 @@
               playTactileClick();
               const mainNav = document.querySelector(".tab-nav-wrapper");
               const navHeight = mainNav ? mainNav.offsetHeight : 70;
-              const offsetTop = targetEl.getBoundingClientRect().top + window.pageYOffset - navHeight - 15;
+              document.documentElement.style.setProperty("--nav-height", navHeight + "px");
+              const subNav = targetEl.closest(".section-view")?.querySelector(".sub-nav-bar");
+              const subNavHeight = subNav ? subNav.offsetHeight : 0;
+              const offsetTop = targetEl.getBoundingClientRect().top + window.pageYOffset - navHeight - subNavHeight - 14;
               window.scrollTo({
                 top: Math.max(0, offsetTop),
                 behavior: "smooth"
               });
+              if (subNav) {
+                subNav.querySelectorAll(".sub-pill").forEach(p => p.classList.remove("active"));
+                pill.classList.add("active");
+              }
               showToast("Jumped to " + this.textContent.trim());
             }
           });

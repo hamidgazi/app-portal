@@ -1255,6 +1255,16 @@
       line-height: 1.2;
       touch-action: manipulation;
     }
+    /* Directive 5: Enforce >= 48px touch target hitbox */
+    .direct-fullscreen-launch-badge::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      min-width: 48px;
+      min-height: 48px;
+    }
     .direct-fullscreen-launch-badge:hover,
     .direct-fullscreen-launch-badge:active {
       background: linear-gradient(135deg, #38bdf8, #3b82f6);
@@ -1752,9 +1762,9 @@
     <span id="toast-msg">Link copied to clipboard!</span>
   </div>
 
-  <!-- Catalogs & Search Scripts -->
-  <script src="portal_catalog.js"></script>
-  <script src="links_catalog.js"></script>
+  <!-- Catalogs & Search Scripts (v2.3.0 Cache-Busted) -->
+  <script src="portal_catalog.js?v=2.3.0"></script>
+  <script src="links_catalog.js?v=2.3.0"></script>
 
   <!-- ==========================================================================
        APPLICATION LOGIC & DEFENSIVE BOOTLOADER
@@ -2289,18 +2299,36 @@
 
       // Clinical Dermatology, Breathing & ENT Health Suite
       "skin": ["skin", "dermatology", "acne", "derma", "isotretinoin", "skincare", "clinical", "recovery"],
-      "acne": ["skin", "acne", "isotretinoin", "dermatology", "derma", "blemish", "pimples"],
+      "acne": ["skin", "acne", "isotretinoin", "dermatology", "derma", "blemish", "pimples", "bacne"],
+      "bacne": ["bacne", "acne", "skin", "body-acne", "dermatology", "sweat"],
+      "lips": ["lips", "cheilitis", "chapped", "dermatology", "skin"],
+      "chapped": ["chapped", "lips", "cheilitis", "skin", "dermatology"],
+      "cheilitis": ["cheilitis", "lips", "chapped", "dermatology", "skin"],
       "derma": ["dermatology", "derma", "skin", "acne", "isotretinoin", "skincare"],
       "dermatology": ["dermatology", "derma", "skin", "acne", "isotretinoin", "clinical"],
       "isotretinoin": ["isotretinoin", "accutane", "retinoid", "acne", "skin", "dermatology"],
-      "breathing": ["breathing", "breath", "sinus", "cough", "halitosis", "ent", "nose", "lungs", "bad-breath"],
-      "breath": ["breath", "breathing", "halitosis", "bad-breath", "tongue", "sinus", "cough"],
-      "bad-breath": ["bad-breath", "breath", "halitosis", "tongue", "mouth", "odor", "vsc"],
-      "halitosis": ["halitosis", "breath", "bad-breath", "tongue", "mouth", "odor", "sulfur"],
-      "sinus": ["sinus", "breathing", "nose", "blockage", "phlegm", "rhinitis", "ent", "cough"],
-      "cough": ["cough", "sinus", "phlegm", "post-nasal", "throat", "ent", "breathing"],
-      "phlegm": ["phlegm", "mucus", "sinus", "cough", "throat", "breathing"],
-      "ent": ["ent", "ear", "nose", "throat", "sinus", "breathing", "cough", "halitosis"],
+      "breathing": ["breathing", "breath", "sinus", "cough", "halitosis", "ent", "nose", "nasal", "lungs", "bad-breath", "respiratory", "airway"],
+      "breath": ["breath", "breathing", "halitosis", "bad-breath", "tongue", "sinus", "cough", "mouth", "odor"],
+      "bad-breath": ["bad-breath", "breath", "halitosis", "tongue", "mouth", "odor", "vsc", "smell"],
+      "halitosis": ["halitosis", "breath", "bad-breath", "tongue", "mouth", "odor", "sulfur", "smell"],
+      "sinus": ["sinus", "breathing", "nose", "nasal", "blockage", "congestion", "phlegm", "rhinitis", "ent", "cough"],
+      "nasal": ["nasal", "nose", "sinus", "breathing", "breath", "ent", "blockage", "congestion", "airway"],
+      "nose": ["nose", "nasal", "sinus", "breathing", "breath", "ent", "blockage", "congestion"],
+      "congestion": ["congestion", "sinus", "nasal", "nose", "blockage", "breathing", "ent"],
+      "blockage": ["blockage", "blocked", "sinus", "nasal", "nose", "breathing", "congestion"],
+      "blocked": ["blocked", "blockage", "sinus", "nasal", "nose", "breathing", "congestion"],
+      "cough": ["cough", "sinus", "phlegm", "post-nasal", "throat", "ent", "breathing", "respiratory"],
+      "phlegm": ["phlegm", "mucus", "sinus", "cough", "throat", "breathing", "post-nasal"],
+      "mucus": ["mucus", "phlegm", "sinus", "cough", "throat", "breathing", "nasal"],
+      "throat": ["throat", "cough", "phlegm", "post-nasal", "breathing", "ent", "halitosis"],
+      "lungs": ["lungs", "breathing", "breath", "cough", "respiratory", "airway"],
+      "respiratory": ["respiratory", "breathing", "breath", "sinus", "cough", "airway", "ent", "lungs"],
+      "ent": ["ent", "ear", "nose", "throat", "sinus", "breathing", "cough", "halitosis", "nasal"],
+      "odor": ["odor", "smell", "halitosis", "bad-breath", "breath", "mouth"],
+      "smell": ["smell", "odor", "halitosis", "bad-breath", "breath", "mouth"],
+      "mouth": ["mouth", "oral", "tongue", "halitosis", "breath", "bad-breath", "odor"],
+      "oral": ["oral", "mouth", "tongue", "halitosis", "breath", "bad-breath", "odor"],
+      "tongue": ["tongue", "mouth", "oral", "halitosis", "breath", "bad-breath"],
 
       // Arabic Language & Grammar
       "arabic": ["arabic", "sarf", "nahw", "grammar", "mastery", "particles", "harf", "vocabulary"],
