@@ -1220,9 +1220,56 @@
       min-width: 48px;
     }
 
+    .btn-popout-fullscreen {
+      background: linear-gradient(135deg, #0ea5e9, #2563eb) !important;
+      color: #fff !important;
+      font-weight: 700 !important;
+      box-shadow: 0 2px 8px rgba(14, 165, 233, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    }
+    .btn-popout-fullscreen:hover, .btn-popout-fullscreen:active {
+      background: linear-gradient(135deg, #38bdf8, #3b82f6) !important;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(14, 165, 233, 0.5);
+    }
+
+    .direct-fullscreen-launch-badge {
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #0ea5e9, #2563eb);
+      color: #fff;
+      font-size: 8.5px;
+      font-weight: 800;
+      padding: 1px 5px;
+      border-radius: 999px;
+      white-space: nowrap;
+      text-decoration: none;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+      z-index: 10;
+      border: 1px solid rgba(255,255,255,0.3);
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      line-height: 1.2;
+      touch-action: manipulation;
+    }
+    .direct-fullscreen-launch-badge:hover,
+    .direct-fullscreen-launch-badge:active {
+      background: linear-gradient(135deg, #38bdf8, #3b82f6);
+      transform: translateX(-50%) scale(1.05);
+      color: #fff;
+    }
+
     @media (max-width: 600px) {
       .active-topbar-right .nav-btn-text {
         display: none;
+      }
+      .active-topbar-right #btn-popout-stage .nav-btn-text {
+        display: inline !important;
+        font-weight: 700;
+        font-size: 11px;
       }
       .active-topbar-right .action-btn {
         padding: 0 8px;
@@ -1603,7 +1650,7 @@
       <div class="active-topbar-right">
         <button class="action-btn" id="btn-reload-stage" title="Reload active application">🔄 <span class="nav-btn-text">Reload</span></button>
         <button class="action-btn" id="btn-share-stage" title="Share application link">🔗 <span class="nav-btn-text">Share</span></button>
-        <a class="action-btn btn-primary" id="btn-popout-stage" href="#" target="_blank" rel="noopener" title="Open in dedicated tab">↗️ <span class="nav-btn-text">Pop Out</span></a>
+        <a class="action-btn btn-primary btn-popout-fullscreen" id="btn-popout-stage" href="#" target="_blank" rel="noopener" title="Launch Dedicated Full-Screen in new tab (bypasses iframe shell)">⛶ <span class="nav-btn-text">Full-Screen</span></a>
       </div>
     </header>
 
@@ -1652,8 +1699,8 @@
           <span class="sheet-action-label" id="qa-pin-label">Pin to Daily Dock</span>
         </button>
         <a class="sheet-action-row" id="qa-action-popout" target="_blank" rel="noopener">
-          <span class="sheet-action-icon">↗️</span>
-          <span class="sheet-action-label">Open in Dedicated Tab</span>
+          <span class="sheet-action-icon">⛶</span>
+          <span class="sheet-action-label">Dedicated Full-Screen Launch (New Tab)</span>
         </a>
         <button class="sheet-action-row" id="qa-action-share">
           <span class="sheet-action-icon">🔗</span>
@@ -1897,6 +1944,8 @@
       const cluster = getAppCluster(app);
       const gradClass = getClusterGradClass(cluster);
       const displayTitle = highlightMatch(app.title, tokens);
+      const isDermSuite = app.id === "19-Dermatology-Health-Guide__index_html" || app.relPath === "19-Dermatology-Health-Guide/index.html" || (app.id && app.id.includes("19-Dermatology"));
+      const launchUrl = getLaunchUrl(app);
 
       return `
         <div class="app-launcher-item app-card" data-id="${escapeHtml(app.id)}" title="${escapeHtml(app.title)}" role="button" tabindex="0">
@@ -1905,6 +1954,11 @@
               ${app.icon || '📦'}
             </div>
             ${isStarred ? '<span class="launcher-fav-star" title="Pinned to Daily Dock">★</span>' : ''}
+            ${isDermSuite ? `
+              <a href="${launchUrl}" target="_blank" rel="noopener" class="direct-fullscreen-launch-badge" title="Dedicated Full-Screen Launch (Bypasses iframe)" onclick="event.stopPropagation(); AudioEngine.tap();">
+                ⛶ Full
+              </a>
+            ` : ''}
             <button class="launcher-menu-trigger" title="Quick Actions (Long-press / Right-click)" aria-label="Quick Actions">⋮</button>
           </div>
           <div class="app-launcher-label">${displayTitle}</div>
@@ -2233,12 +2287,20 @@
       "update": ["updater", "update", "winget", "software"],
       "software": ["software", "freeware", "suite", "apps", "tools", "winget"],
 
-      // Dermatology & Skin Recovery
+      // Clinical Dermatology, Breathing & ENT Health Suite
       "skin": ["skin", "dermatology", "acne", "derma", "isotretinoin", "skincare", "clinical", "recovery"],
       "acne": ["skin", "acne", "isotretinoin", "dermatology", "derma", "blemish", "pimples"],
       "derma": ["dermatology", "derma", "skin", "acne", "isotretinoin", "skincare"],
       "dermatology": ["dermatology", "derma", "skin", "acne", "isotretinoin", "clinical"],
       "isotretinoin": ["isotretinoin", "accutane", "retinoid", "acne", "skin", "dermatology"],
+      "breathing": ["breathing", "breath", "sinus", "cough", "halitosis", "ent", "nose", "lungs", "bad-breath"],
+      "breath": ["breath", "breathing", "halitosis", "bad-breath", "tongue", "sinus", "cough"],
+      "bad-breath": ["bad-breath", "breath", "halitosis", "tongue", "mouth", "odor", "vsc"],
+      "halitosis": ["halitosis", "breath", "bad-breath", "tongue", "mouth", "odor", "sulfur"],
+      "sinus": ["sinus", "breathing", "nose", "blockage", "phlegm", "rhinitis", "ent", "cough"],
+      "cough": ["cough", "sinus", "phlegm", "post-nasal", "throat", "ent", "breathing"],
+      "phlegm": ["phlegm", "mucus", "sinus", "cough", "throat", "breathing"],
+      "ent": ["ent", "ear", "nose", "throat", "sinus", "breathing", "cough", "halitosis"],
 
       // Arabic Language & Grammar
       "arabic": ["arabic", "sarf", "nahw", "grammar", "mastery", "particles", "harf", "vocabulary"],

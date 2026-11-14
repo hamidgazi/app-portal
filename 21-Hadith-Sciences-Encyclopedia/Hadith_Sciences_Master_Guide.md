@@ -30,67 +30,79 @@
   /* Blockquote & Hadith Citations: Compact Mobile Architecture */
   blockquote,
   .markdown-rendered blockquote,
-  .quote-card {
+  .markdown-preview-view blockquote,
+  .quote-card,
+  .callout,
+  .markdown-rendered .callout {
     border-left: 3px solid #f59e0b !important;
     background: rgba(245, 158, 11, 0.05) !important;
-    padding: 0.65rem 0.95rem !important;
+    padding: 0.55rem 0.85rem !important;
     border-radius: 0.45rem !important;
-    margin: 0.75rem 0 !important;
-    line-height: 1.6 !important;
+    margin: 0.65rem 0 !important;
+    line-height: 1.55 !important;
     box-sizing: border-box !important;
   }
 
   blockquote p,
   .markdown-rendered blockquote p,
-  .quote-body p {
-    margin-top: 0.2rem !important;
-    margin-bottom: 0.35rem !important;
-    line-height: 1.6 !important;
+  .markdown-preview-view blockquote p,
+  .quote-body p,
+  .callout-content p {
+    margin-top: 0.15rem !important;
+    margin-bottom: 0.25rem !important;
+    line-height: 1.55 !important;
   }
 
   blockquote p:last-child,
   .markdown-rendered blockquote p:last-child,
+  .callout-content p:last-child,
   .quote-body p:last-child {
     margin-bottom: 0 !important;
   }
 
   blockquote h1, blockquote h2, blockquote h3, blockquote h4, blockquote h5, blockquote h6,
-  .markdown-rendered blockquote h1, .markdown-rendered blockquote h2, .markdown-rendered blockquote h3, .markdown-rendered blockquote h4,
+  .markdown-rendered blockquote h1, .markdown-rendered blockquote h2, .markdown-rendered blockquote h3, .markdown-rendered blockquote h4, .markdown-rendered blockquote h5, .markdown-rendered blockquote h6,
+  .markdown-preview-view blockquote h1, .markdown-preview-view blockquote h2, .markdown-preview-view blockquote h3, .markdown-preview-view blockquote h4,
   .quote-card h1, .quote-card h2, .quote-card h3, .quote-card h4 {
     margin-top: 0 !important;
-    margin-bottom: 0.35rem !important;
+    margin-bottom: 0.25rem !important;
     padding-top: 0 !important;
-    line-height: 1.35 !important;
-    font-size: 1.15rem !important;
+    line-height: 1.3 !important;
+    font-size: 1.05rem !important;
   }
 
-  blockquote + blockquote {
-    margin-top: 0.45rem !important;
+  blockquote + blockquote,
+  .callout + .callout {
+    margin-top: 0.35rem !important;
   }
 
-  /* Tables: Full 100% Width Containment & Proportional Column Architecture */
+  /* Tables: Full 100% Width Containment & Zero-Void Architecture */
   .table-wrapper,
   .markdown-rendered .table-wrapper,
-  .table-responsive {
+  .table-responsive,
+  .markdown-preview-view .table-wrapper,
+  .markdown-preview-section .table-wrapper,
+  .cm-table-widget {
     width: 100% !important;
+    min-width: 100% !important;
     max-width: 100% !important;
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch !important;
     display: block !important;
-    margin: 1rem 0 !important;
+    margin: 0.85rem 0 !important;
     box-sizing: border-box !important;
   }
 
   table,
   .markdown-rendered table,
   .markdown-preview-view table,
-  .table-wrapper table,
-  .cm-table-widget,
+  .markdown-preview-section table,
+  .table-wrapper > table,
+  .cm-table-widget > table,
   .reader-table {
     border-collapse: collapse !important;
     width: 100% !important;
     min-width: 100% !important;
-    max-width: 100% !important;
     display: table !important;
     margin: 0 !important;
     font-size: 0.88rem !important;
@@ -103,7 +115,7 @@
     background: #171722 !important;
     color: #f59e0b !important;
     font-weight: 700 !important;
-    padding: 0.65rem 0.85rem !important;
+    padding: 0.6rem 0.8rem !important;
     border: 1px solid #262638 !important;
     text-transform: uppercase !important;
     font-size: 0.78rem !important;
@@ -113,7 +125,7 @@
   }
 
   table td {
-    padding: 0.65rem 0.85rem !important;
+    padding: 0.6rem 0.8rem !important;
     vertical-align: top !important;
     border: 1px solid #262638 !important;
     background: #0d0d12 !important;
@@ -124,31 +136,38 @@
     background: #12121a !important;
   }
 
-  /* Compact Index / Serial Number Columns (#, Rank, Tier, Stage) */
-  table th:first-child,
-  table td:first-child {
-    white-space: nowrap !important;
-    text-align: center !important;
-  }
-
   @media (max-width: 640px) {
     blockquote,
     .markdown-rendered blockquote,
-    .quote-card {
-      padding: 0.55rem 0.8rem !important;
-      margin: 0.6rem 0 !important;
-      font-size: 0.92rem !important;
+    .quote-card,
+    .callout {
+      padding: 0.45rem 0.65rem !important;
+      margin: 0.5rem 0 !important;
+      font-size: 0.9rem !important;
     }
-    blockquote h3, .quote-title {
-      font-size: 1.05rem !important;
+    blockquote h1, blockquote h2, blockquote h3, blockquote h4, blockquote h5, blockquote h6,
+    .markdown-rendered blockquote h1, .markdown-rendered blockquote h2, .markdown-rendered blockquote h3, .markdown-rendered blockquote h4,
+    .quote-title {
+      font-size: 0.98rem !important;
+      margin-top: 0 !important;
+      margin-bottom: 0.2rem !important;
+    }
+    blockquote p,
+    .markdown-rendered blockquote p,
+    .quote-body p {
+      margin-top: 0.1rem !important;
+      margin-bottom: 0.2rem !important;
+      line-height: 1.5 !important;
     }
     table,
     .markdown-rendered table,
     .reader-table {
-      font-size: 0.84rem !important;
+      font-size: 0.82rem !important;
+      min-width: 520px !important;
+      width: 100% !important;
     }
     table th, table td {
-      padding: 0.5rem 0.65rem !important;
+      padding: 0.45rem 0.6rem !important;
     }
   }
 

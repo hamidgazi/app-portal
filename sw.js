@@ -1,10 +1,10 @@
 /**
  * Antigravity App Portal Service Worker
- * Version: app-portal-v2.2.0
- * Strategy: Stale-While-Revalidate with Instant Cache Purge & Offline Shell
+ * Version: app-portal-v2.3.0
+ * Strategy: Network-First for HTML/Navigations (Instant Cloud Updates) + Stale-While-Revalidate for Static Assets
  */
 
-const CACHE_NAME = "app-portal-v2.2.0";
+const CACHE_NAME = "app-portal-v2.3.0";
 
 const PRECACHE_ASSETS = [
   "./",
@@ -47,14 +47,45 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-// Fetch: Stale-while-revalidate for local assets, network-first for external APIs
+// Fetch: Network-First for HTML navigation requests (solves stale cloud cache trap)
+// Stale-While-Revalidate for local assets, network-first for external APIs
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
 
   const url = new URL(event.request.url);
 
-  // Handle local origin requests with Stale-While-Revalidate
+  // Handle local origin requests
   if (url.origin === self.location.origin) {
+    const isNavigationOrHtml = 
+      event.request.mode === "navigate" ||
+      url.pathname.endsWith(".html") ||
+      url.pathname.endsWith("/");
+
+    if (isNavigationOrHtml) {
+      // Network-First Strategy for HTML/Navigations
+      event.respondWith(
+        fetch(event.request)
+          .then((networkResponse) => {
+            if (networkResponse && networkResponse.status === 200) {
+              const responseClone = networkResponse.clone();
+              caches.open(CACHE_NAME).then((cache) => {
+                cache.put(event.request, responseClone);
+              });
+            }
+            return networkResponse;
+          })
+          .catch(() => {
+            // Offline fallback
+            return caches.match(event.request).then((cached) => {
+              if (cached) return cached;
+              return caches.match("index.html");
+            });
+          })
+      );
+      return;
+    }
+
+    // Stale-While-Revalidate Strategy for Static Assets (JS, CSS, Images, Icons)
     event.respondWith(
       caches.match(event.request).then((cachedResponse) => {
         const fetchPromise = fetch(event.request).then((networkResponse) => {
@@ -66,10 +97,6 @@ self.addEventListener("fetch", (event) => {
           }
           return networkResponse;
         }).catch((err) => {
-          // If offline and no cached response for navigation, return cached index.html
-          if (event.request.mode === "navigate") {
-            return caches.match("index.html");
-          }
           throw err;
         });
 

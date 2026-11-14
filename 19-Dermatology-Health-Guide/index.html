@@ -1171,8 +1171,8 @@
         <button class="triage-chip" data-target-tab="tab-joints">🌟 Dark Joints / AN</button>
         <button class="triage-chip" data-target-tab="tab-perianal">🍑 Cleft Darkening</button>
         <button class="triage-chip" data-target-tab="tab-hair">💇 Hard Frizzy Hair</button>
-        <button class="triage-chip" data-target-tab="tab-cough">🫁 60% Sinus Block</button>
-        <button class="triage-chip" data-target-tab="tab-cough">👅 Bad Breath & Tongue</button>
+        <button class="triage-chip" data-target-tab="tab-cough" data-target-anchor="card-sinus-cough">🫁 60% Sinus Block</button>
+        <button class="triage-chip" data-target-tab="tab-cough" data-target-anchor="card-halitosis">👅 Bad Breath & Tongue</button>
         <button class="triage-chip" data-target-tab="tab-vitality">⚡ 2PM Fatigue Crash</button>
         <button class="triage-chip" data-target-tab="tab-gems">💎 10 Hidden Gems</button>
         <button class="triage-chip" data-target-tab="tab-daily">📅 Daily Tracker</button>
@@ -1198,7 +1198,7 @@
       <button class="tab-btn" data-tab="tab-joints" id="btn-tab-joints" role="tab" aria-selected="false"><span class="tab-label-full">🌟 Dark Joints & AN</span><span class="tab-label-short">🌟 Joints</span> <span class="badge-count"></span></button>
       <button class="tab-btn" data-tab="tab-perianal" id="btn-tab-perianal" role="tab" aria-selected="false"><span class="tab-label-full">🍑 Perianal / Cleft</span><span class="tab-label-short">🍑 Cleft</span> <span class="badge-count"></span></button>
       <button class="tab-btn" data-tab="tab-hair" id="btn-tab-hair" role="tab" aria-selected="false"><span class="tab-label-full">💇 Hair & Spa</span><span class="tab-label-short">💇 Hair</span> <span class="badge-count"></span></button>
-      <button class="tab-btn" data-tab="tab-cough" id="btn-tab-cough" role="tab" aria-selected="false"><span class="tab-label-full">🫁 Cough & Sinus</span><span class="tab-label-short">🫁 Sinus</span> <span class="badge-count"></span></button>
+      <button class="tab-btn" data-tab="tab-cough" id="btn-tab-cough" role="tab" aria-selected="false"><span class="tab-label-full">🫁 Sinus, Breath & Cough</span><span class="tab-label-short">🫁 Sinus & Breath</span> <span class="badge-count"></span></button>
       <button class="tab-btn" data-tab="tab-vitality" id="btn-tab-vitality" role="tab" aria-selected="false"><span class="tab-label-full">⚡ Vitality & Stamina</span><span class="tab-label-short">⚡ Vitality</span> <span class="badge-count"></span></button>
       <button class="tab-btn" data-tab="tab-gems" id="btn-tab-gems" role="tab" aria-selected="false"><span class="tab-label-full">💎 Gems & Mistakes</span><span class="tab-label-short">💎 Gems</span> <span class="badge-count"></span></button>
       <button class="tab-btn" data-tab="tab-daily" id="btn-tab-daily" role="tab" aria-selected="false"><span class="tab-label-full">📅 Action Tracker</span><span class="tab-label-short">📅 Tracker</span> <span class="badge-count"></span></button>
@@ -2182,8 +2182,18 @@
     </section>
     
 
-    <section class="section-view" id="tab-cough" data-tab-name="Cough & Sinus">
-      <div class="card">
+    <section class="section-view" id="tab-cough" data-tab-name="Sinus, Breath & Cough">
+
+      <!-- Sticky In-Tab Sub-Nav Anchor Bar -->
+      <div class="sub-nav-bar">
+        <span style="font-size: 0.76rem; font-weight: 800; color: var(--accent); display: flex; align-items: center; margin-right: 6px;">⚡ JUMP TO:</span>
+        <button class="sub-pill" data-scroll-to="card-sinus-cough">🫁 60% Sinus & Phlegm</button>
+        <button class="sub-pill" data-scroll-to="card-halitosis">👅 Bad Breath & Halitosis</button>
+        <button class="sub-pill" data-scroll-to="card-recovery-timeline">⏱️ 7-Day ENT Recovery</button>
+        <button class="sub-pill" data-scroll-to="card-airway-science">🔬 Airway Pathophysiology</button>
+      </div>
+
+      <div class="card" id="card-sinus-cough">
         <div class="card-title">
           <span>🫁 Clinical ENT Protocol: Rhinosinusitis, 60% Nasal Blockage & Upper Airway Cough</span>
           <span class="badge-blackbox">Otrivin 3-Day Maximum</span>
@@ -2317,8 +2327,9 @@
         </div>
 
         <!-- 7-Day Action Plan Table -->
-        <h3 style="font-size: 1.05rem; margin: 20px 0 10px; color: var(--accent);">The 7-Day Respiratory & Cough Action Protocol</h3>
-        <div class="table-container">
+        <div id="card-recovery-timeline" class="recovery-timeline-anchor">
+          <h3 style="font-size: 1.05rem; margin: 20px 0 10px; color: var(--accent);">The 7-Day Respiratory & Cough Action Protocol</h3>
+          <div class="table-container">
           <table class="clinical-table">
             <thead>
               <tr>
@@ -2350,9 +2361,10 @@
             </tbody>
           </table>
         </div>
+      </div>
 
         <!-- Open Science Reading Card (Zero-Click Reading) -->
-        <div class="science-card">
+        <div class="science-card" id="card-airway-science">
           <div class="science-header">
             <span>🔬 Complete Pathophysiology & Respiratory Reflex Science</span>
           </div>
@@ -2396,7 +2408,7 @@
       </div>
     
         <!-- Specialized Sub-Protocol: Oral Halitosis, Posterior Tongue Biofilm & Post-Nasal Malodor -->
-        <div class="card" style="margin-top: 28px; border-left: 4px solid #10b981;">
+        <div class="card" id="card-halitosis" style="margin-top: 28px; border-left: 4px solid #10b981;">
           <div class="card-title">
             <span>👅 Specialized Protocol: Oral Halitosis, Posterior Tongue Biofilm & Post-Nasal Drip Odor</span>
             <span class="badge-active">80/20 VSC Eradication</span>
@@ -3886,8 +3898,23 @@
         triageChips.forEach(chip => {
           chip.addEventListener("click", function() {
             const targetTab = this.getAttribute("data-target-tab");
+            const targetAnchor = this.getAttribute("data-target-anchor");
             if (targetTab) {
               switchTab(targetTab);
+              if (targetAnchor) {
+                setTimeout(() => {
+                  const targetEl = document.getElementById(targetAnchor);
+                  if (targetEl) {
+                    const mainNav = document.querySelector(".tab-nav-wrapper");
+                    const navHeight = mainNav ? mainNav.offsetHeight : 70;
+                    const offsetTop = targetEl.getBoundingClientRect().top + window.pageYOffset - navHeight - 15;
+                    window.scrollTo({
+                      top: Math.max(0, offsetTop),
+                      behavior: "smooth"
+                    });
+                  }
+                }, 80);
+              }
               showToast("Switched to " + (this.textContent.trim()));
             }
           });
