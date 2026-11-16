@@ -26,8 +26,9 @@ Designed according to the **Foundations-First Principle (The Madinah Book Law)**
 
 | Deliverable | Direct Clickable File Link | Format | Description |
 | :--- | :--- | :--- | :--- |
-| **Interactive PWA Studio & Mobile Reader** | [index.html](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/20-Arabic-Mastery/index.html) | HTML5 / PWA | Royal Emerald & Gold Master Study Studio with embedded 15-chapter Kindle-style Mobile Book Reader, active-recall drills, Ayah inspector, flashcards & quizzes. |
+| **Interactive PWA Studio & Mobile Reader** | [index.html](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/20-Arabic-Mastery/index.html) | HTML5 / PWA | Royal Emerald & Gold Master Study Studio with embedded 16-chapter Kindle-style Mobile Book Reader, active-recall drills, Ayah inspector, flashcards & quizzes. |
 | **Live Mobile Cloud URL** | [Live Web App](https://hamidgazi.github.io/app-portal/20-Arabic-Mastery/index.html) | Live Cloud | 24/7 Mobile-optimized web portal accessible worldwide on iOS, Android, and desktop. |
+| **Chapter 00: The Twin Pillars (صرف و نحو)** | [CHAPTER_00_TWIN_PILLARS_SARF_AND_NAHW.md](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/20-Arabic-Mastery/textbook_chapters/CHAPTER_00_TWIN_PILLARS_SARF_AND_NAHW.md) | Markdown | Foundational orientation to Ilm us-Sarf (Morphology) & Ilm un-Nahw (Syntax), the 3 word families (Ism, Fi'l, Harf), and I'raab case endings. |
 | **Chapter 01: Near Pointing (هٰذَا)** | [CHAPTER_01_THIS_IS_HAADHA.md](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/20-Arabic-Mastery/textbook_chapters/CHAPTER_01_THIS_IS_HAADHA.md) | Markdown | Near masculine demonstrative, Tanween, مَا vs مَنْ, and complete answer key. |
 | **Chapter 02: Distant Pointing (ذٰلِكَ)** | [CHAPTER_02_THAT_IS_DHAALIKA.md](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/20-Arabic-Mastery/textbook_chapters/CHAPTER_02_THAT_IS_DHAALIKA.md) | Markdown | Distant masculine demonstrative, conjunction وَ, contrast drills, and answer key. |
 | **Chapter 03: Definite & Nominal Sentences** | [CHAPTER_03_DEFINITE_NOUNS_AND_NOMINAL_SENTENCE.md](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/20-Arabic-Mastery/textbook_chapters/CHAPTER_03_DEFINITE_NOUNS_AND_NOMINAL_SENTENCE.md) | Markdown | The Al- vs Tanween duel, Solar/Lunar letters, Mubtada' and Khabar sentence structure. |
@@ -113,7 +114,12 @@ c:/Users/Shop PC 2/OneDrive/Desktop/Antigravity Files/20-Arabic-Mastery/
 
 ## 5. Automated Quality & Verification Status
 
-- **Automated Tests**: Passed (**22/22 test cases**, `node --check` 0 errors).
+- **Automated Tests**: Passed (**25/25 test cases**, `node --check` 0 errors).
+- **Classical Sarf & Nahw Integration**:
+  - **Chapter 0 Orientation Gateway**: Dedicated manual & Home dashboard plaque introducing Ilm us-Sarf (Mother) and Ilm un-Nahw (Father) with the 3 word families (Ism, Fi'l, Harf).
+  - **Full Disciplinary Mapping**: All 16 chapters tagged with explicit badges (`🏷️ عِلْمُ النَّحْوِ`, `🏷️ عِلْمُ الصَّرْفِ`, `🏷️ تَطْبِيقٌ شَامِلٌ`).
+  - **Interactive 14-Form Gardan Pavilion**: Responsive conjugation matrix for past and present verbs with person filters (غائب / حاضر / متکلم), root-highlighting (ف-ع-ل), and pronoun breakdowns.
+  - **Visual Tarkeeb Blueprints**: Color-coded parsing chips (`مبتدأ`, `خبر`, `فاعل`, `مفعول به`) and I'raab case reasons (`مرفوع`, `منصوب`, `مجرور`).
 - **Synchronized Balanced Practice Studio**:
   - **100% Option A Predictability Solved**: Exactly 25% distribution across all 4 options (strictly 3 of A, 3 of B, 3 of C, and 3 of D in every single chapter; 45 of each across 180 drills).
   - **1-to-1 Workbook & Studio Synchronization**: Part 6 in-lesson workbook and interactive studio match 1-to-1 with explicit lettered solutions (`Correct Answer: (B) A key (ایک چابی)`).
