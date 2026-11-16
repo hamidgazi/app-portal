@@ -85,19 +85,47 @@ This actionable tracker translates the clinical findings from [MASTER_DERMATOLOG
 
 ## 2. Weekly Therapeutic Cadence Calendar
 
-<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+#### 📅 Monday
+- **Shower Wash Active (Leave 3–5 min)**: Ketoconazole 2% Wash
+- **Morning Body Lotion**: Urea 10% / AmLactin 12%
+- **Evening Back Treatment**: Adapalene 0.1% / Tretinoin [Rx]
+- **Lip Slugging (Nightly)**: Pure Petrolatum (Vaseline)
 
-| Day of Week | Shower Wash Active (Leave 3–5 min) | Morning Body Lotion | Evening Back Treatment | Lip Slugging (Nightly) |
-| :--- | :--- | :--- | :--- | :--- |
-| **Monday** | Ketoconazole 2% Wash | Urea 10% / AmLactin 12% | Adapalene 0.1% / Tretinoin [Rx] | Pure Petrolatum (Vaseline) |
-| **Tuesday** | Benzoyl Peroxide 10% Wash | Urea 10% / AmLactin 12% | Bland Moisturizer | Pure Petrolatum (Vaseline) |
-| **Wednesday** | Ketoconazole 2% Wash | Urea 10% / AmLactin 12% | Aluminum Chloride Antiperspirant | Pure Petrolatum (Vaseline) |
-| **Thursday** | Benzoyl Peroxide 10% Wash | Urea 10% / AmLactin 12% | Adapalene 0.1% / Tretinoin [Rx] | Pure Petrolatum (Vaseline) |
-| **Friday** | Ketoconazole 2% Wash | Urea 10% / AmLactin 12% | Bland Moisturizer | Pure Petrolatum (Vaseline) |
-| **Saturday** | Benzoyl Peroxide 10% Wash | Urea 10% / AmLactin 12% | Adapalene 0.1% / Tretinoin [Rx] | Pure Petrolatum (Vaseline) |
-| **Sunday** | Gentle Hydrating Syndet | Urea 10% / AmLactin 12% | Aluminum Chloride Antiperspirant | Pure Petrolatum (Vaseline) |
+#### 📅 Tuesday
+- **Shower Wash Active (Leave 3–5 min)**: Benzoyl Peroxide 10% Wash
+- **Morning Body Lotion**: Urea 10% / AmLactin 12%
+- **Evening Back Treatment**: Bland Moisturizer
+- **Lip Slugging (Nightly)**: Pure Petrolatum (Vaseline)
 
-</div>
+#### 📅 Wednesday
+- **Shower Wash Active (Leave 3–5 min)**: Ketoconazole 2% Wash
+- **Morning Body Lotion**: Urea 10% / AmLactin 12%
+- **Evening Back Treatment**: Aluminum Chloride Antiperspirant
+- **Lip Slugging (Nightly)**: Pure Petrolatum (Vaseline)
+
+#### 📅 Thursday
+- **Shower Wash Active (Leave 3–5 min)**: Benzoyl Peroxide 10% Wash
+- **Morning Body Lotion**: Urea 10% / AmLactin 12%
+- **Evening Back Treatment**: Adapalene 0.1% / Tretinoin [Rx]
+- **Lip Slugging (Nightly)**: Pure Petrolatum (Vaseline)
+
+#### 📅 Friday
+- **Shower Wash Active (Leave 3–5 min)**: Ketoconazole 2% Wash
+- **Morning Body Lotion**: Urea 10% / AmLactin 12%
+- **Evening Back Treatment**: Bland Moisturizer
+- **Lip Slugging (Nightly)**: Pure Petrolatum (Vaseline)
+
+#### 📅 Saturday
+- **Shower Wash Active (Leave 3–5 min)**: Benzoyl Peroxide 10% Wash
+- **Morning Body Lotion**: Urea 10% / AmLactin 12%
+- **Evening Back Treatment**: Adapalene 0.1% / Tretinoin [Rx]
+- **Lip Slugging (Nightly)**: Pure Petrolatum (Vaseline)
+
+#### 📅 Sunday
+- **Shower Wash Active (Leave 3–5 min)**: Gentle Hydrating Syndet
+- **Morning Body Lotion**: Urea 10% / AmLactin 12%
+- **Evening Back Treatment**: Aluminum Chloride Antiperspirant
+- **Lip Slugging (Nightly)**: Pure Petrolatum (Vaseline)
 
 ---
 

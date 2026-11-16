@@ -721,21 +721,35 @@ Standard upright nasal spraying deposits >80% of medicine on the anterior floor 
 | ⏱️ **4. Expected Clinical Timeline** | **Day 1:** Afternoon crash eliminated<br>**7–10 Days:** Phosphocreatine ATP saturation<br>**3–4 Weeks:** Deep mitochondrial biogenesis & autonomic vagal remodeling. |
 
 ### The Modular Clinical Decision Matrix ("When You Experience X, Do Y")
-Use this reference matrix to instantly locate the exact short-term acute intervention and long-term biological fix for any specific state:
+Use this reference guide to instantly locate the exact short-term acute intervention and long-term biological fix for any specific state:
 
-<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+#### ⚡ Afternoon Sleepiness / "Food Coma"
+- **Immediate Short-Term Rescue (15–30 Min)**: 10-minute brisk walk + 500ml cold water with pinch of sea salt + 2 cycles of Physiological Sigh.
+- **Long-Term Biological Maintenance (Cellular Fix)**: Switch to "Savory Protein & Fiber First" lunches; eliminate liquid sugars; implement the 90-minute morning caffeine delay.
 
-| State / Symptom | Immediate Short-Term Rescue (15–30 Min) | Long-Term Biological Maintenance (Cellular Fix) |
-| :--- | :--- | :--- |
-| **Afternoon Sleepiness / "Food Coma"** | 10-minute brisk walk + 500ml cold water with pinch of sea salt + 2 cycles of Physiological Sigh. | Switch to "Savory Protein & Fiber First" lunches; eliminate liquid sugars; implement the 90-minute morning caffeine delay. |
-| **Brain Fog / Inability to Concentrate** | Alpha-GPC 300mg + L-Tyrosine 500mg on an empty stomach + L-Citrulline 3g (boosts cerebral blood flow). | Daily Creatine Monohydrate (5g) + Lion's Mane Mushroom (1000mg) + 90/20 Ultradian work blocks. |
-| **Acute Stress / Anxiety / Racing Thoughts** | Perform 3 to 5 consecutive **Physiological Sighs** (double inhale nose, long exhale mouth) + splash cold water on eyes. | Ashwagandha KSM-66 (300–600mg evening) + daily 10-min Resonant Frequency Breathing (4s in, 6s out). |
-| **Low Physical Stamina / Early Fatigue** | Electrolyte hydration (Sodium, Potassium, Magnesium) + 200mg L-Citrulline Malate. | Zone 2 cardiovascular base (150 min/week nasal-only breathing) + Ubiquinol CoQ10 (100–200mg) + Creatine. |
-| **Gut Bloat / Sluggish Digestion / Discomfort** | Peppermint or Ginger warm infusion + 10-minute post-meal upright walking. | L-Glutamine powder (5g morning) to seal tight junctions + 30-plant weekly fiber diversity + Spore Probiotics. |
-| **Poor Sleep / Waking Up Exhausted** | Tonight: Magnesium Bisglycinate (300mg) + L-Theanine (200mg) 60 min before bed + cool bedroom (66°F / 19°C). | Morning 10,000 lux outdoor sunlight within 30 min of waking; strict cutoff of caffeine 10 hours before sleep. |
-| **Sluggish Circulation / Cold Extremities** | 20 deep diaphragmatic breaths + brisk stair climb (stimulates eNOS nitric oxide release). | High-dose Omega-3 (2000–3000mg EPA/DHA) + L-Citrulline (3g–6g) + Kyolic Aged Garlic extract. |
+#### 🧠 Brain Fog / Inability to Concentrate
+- **Immediate Short-Term Rescue (15–30 Min)**: Alpha-GPC 300mg + L-Tyrosine 500mg on an empty stomach + L-Citrulline 3g (boosts cerebral blood flow).
+- **Long-Term Biological Maintenance (Cellular Fix)**: Daily Creatine Monohydrate (5g) + Lion's Mane Mushroom (1000mg) + 90/20 Ultradian work blocks.
 
-</div>
+#### 🧘 Acute Stress / Anxiety / Racing Thoughts
+- **Immediate Short-Term Rescue (15–30 Min)**: Perform 3 to 5 consecutive **Physiological Sighs** (double inhale nose, long exhale mouth) + splash cold water on eyes.
+- **Long-Term Biological Maintenance (Cellular Fix)**: Ashwagandha KSM-66 (300–600mg evening) + daily 10-min Resonant Frequency Breathing (4s in, 6s out).
+
+#### 🔋 Low Physical Stamina / Early Fatigue
+- **Immediate Short-Term Rescue (15–30 Min)**: Electrolyte hydration (Sodium, Potassium, Magnesium) + 200mg L-Citrulline Malate.
+- **Long-Term Biological Maintenance (Cellular Fix)**: Zone 2 cardiovascular base (150 min/week nasal-only breathing) + Ubiquinol CoQ10 (100–200mg) + Creatine.
+
+#### 🌿 Gut Bloat / Sluggish Digestion / Discomfort
+- **Immediate Short-Term Rescue (15–30 Min)**: Peppermint or Ginger warm infusion + 10-minute post-meal upright walking.
+- **Long-Term Biological Maintenance (Cellular Fix)**: L-Glutamine powder (5g morning) to seal tight junctions + 30-plant weekly fiber diversity + Spore Probiotics.
+
+#### 🌙 Poor Sleep / Waking Up Exhausted
+- **Immediate Short-Term Rescue (15–30 Min)**: Tonight: Magnesium Bisglycinate (300mg) + L-Theanine (200mg) 60 min before bed + cool bedroom (66°F / 19°C).
+- **Long-Term Biological Maintenance (Cellular Fix)**: Morning 10,000 lux outdoor sunlight within 30 min of waking; strict cutoff of caffeine 10 hours before sleep.
+
+#### 🩸 Sluggish Circulation / Cold Extremities
+- **Immediate Short-Term Rescue (15–30 Min)**: 20 deep diaphragmatic breaths + brisk stair climb (stimulates eNOS nitric oxide release).
+- **Long-Term Biological Maintenance (Cellular Fix)**: High-dose Omega-3 (2000–3000mg EPA/DHA) + L-Citrulline (3g–6g) + Kyolic Aged Garlic extract.
 
 ---
 
