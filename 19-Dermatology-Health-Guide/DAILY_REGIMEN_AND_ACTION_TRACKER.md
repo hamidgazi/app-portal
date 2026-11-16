@@ -2,14 +2,14 @@
 
 ## Overview
 
-> ### ⭐ 80/20 High-Yield Action & Habit Capsule (Top 20% Protocols Delivering 80% Results)
->
-> | Dimension | Action Directive |
-> | :--- | :--- |
-> | 🎯 **1. The Golden Action** | **Execute the core AM/Shower/PM protocol consistently** using the checklist with zero skipped days in the first 21 days. |
-> | 💊 **2. Gold-Standard Active Anchor** | **AM:** Urea 10% / AmLactin 12% + Cica Balm + Oral Berberine 500mg / Creatine 5g \| **Shower:** Ketoconazole 2% / BP 10% (3-5 min dwell) \| **PM:** Zinc Oxide 40% barrier + Retinoid / Azelaic + Vaseline slugging. |
-> | 🚫 **3. The Fatal 80% Trap** | **'Treatment Overload'**—introducing 5 new high-strength actives on the same day without patch-testing, or skipping barrier repair when skin begins feeling slightly dry. |
-> | ⏱️ **4. Expected Clinical Timeline** | **Phase 1 (W1–2):** Acute reset & habit lock-in \| **Phase 2 (W3–4):** Dead skin clearance \| **Phase 3 (W5–8):** Pigment fading \| **Phase 4 (W9–12):** Permanent remission. |
+### ⭐ 80/20 High-Yield Action & Habit Capsule (Top 20% Protocols Delivering 80% Results)
+
+| Dimension | Action Directive |
+| :--- | :--- |
+| 🎯 **1. The Golden Action** | **Execute the core AM/Shower/PM protocol consistently** using the checklist with zero skipped days in the first 21 days. |
+| 💊 **2. Gold-Standard Active Anchor** | **AM:** Urea 10% / AmLactin 12% + Cica Balm + Oral Berberine 500mg / Creatine 5g<br>**Shower:** Ketoconazole 2% / BP 10% (3-5 min dwell)<br>**PM:** Zinc Oxide 40% barrier + Retinoid / Azelaic + Vaseline slugging. |
+| 🚫 **3. The Fatal 80% Trap** | **'Treatment Overload'**—introducing 5 new high-strength actives on the same day without patch-testing, or skipping barrier repair when skin begins feeling slightly dry. |
+| ⏱️ **4. Expected Clinical Timeline** | **Phase 1 (W1–2):** Acute reset & habit lock-in<br>**Phase 2 (W3–4):** Dead skin clearance<br>**Phase 3 (W5–8):** Pigment fading<br>**Phase 4 (W9–12):** Permanent remission. |
 
 This actionable tracker translates the clinical findings from [MASTER_DERMATOLOGY_PROTOCOL.md](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/19-Dermatology-Health-Guide/MASTER_DERMATOLOGY_PROTOCOL.md) into a clear, day-by-day protocol to ensure seamless habit adoption, prevent skin trauma, and track objective milestones across 12 weeks.
 
