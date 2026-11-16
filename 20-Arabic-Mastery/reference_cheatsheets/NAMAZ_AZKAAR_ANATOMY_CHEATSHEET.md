@@ -14,6 +14,8 @@ Transform your 5 daily prayers from ritual recitation into conscious conversatio
 
 ## 2. Opening Supplication: Thana / Istiftaah (ثناء)
 > **سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ وَتَبَارَكَ اسْمُكَ وَتَعَالَىٰ جَدُّكَ وَلَا إِلَٰهَ غَيْرُكَ**
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Arabic Token | Grammatical Breakdown | English Meaning | Urdu Meaning |
 | :--- | :--- | :--- | :--- |
 | **سُبْحَانَـ** | Verbal noun of purity (*Tanzih*) | Completely free from defect | بے عیب اور پاک |
@@ -29,6 +31,8 @@ Transform your 5 daily prayers from ritual recitation into conscious conversatio
 | **وَلَا** | And + Negative | And no | اور نہیں |
 | **إِلَٰهَ** | Noun of generic negation | Deity worthy of worship | کوئی معبود |
 | **غَيْرُكَ** | *Ghayr* (Other) + *-ka* (You) | Other than You | آپ کے سوا |
+
+</div>
 
 ---
 

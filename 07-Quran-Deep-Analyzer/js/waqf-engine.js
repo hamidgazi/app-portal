@@ -157,18 +157,20 @@
     formatArabicWithStopSigns(arabicText, ayahNum, options = {}) {
       if (!arabicText) return '';
       let text = String(arabicText).trim();
-      const num = (ayahNum !== undefined && ayahNum !== null) ? String(ayahNum) : '';
+      const rawNum = (ayahNum !== undefined && ayahNum !== null) ? String(ayahNum).trim() : '';
+      // Strip any surah prefix if passed (e.g. "2:286" -> "286")
+      const num = rawNum.includes(':') ? rawNum.split(':').pop() : rawNum;
 
       // 1. Wrap inline waqf marks if enabled (default: true)
       if (options.includeInlineWaqf !== false) {
         text = this.wrapInlineWaqfSymbols(text);
       }
 
-      // 2. Append End-of-Ayah Sign (۝ [number]) if ayahNum provided and not already present
-      if (num && !text.includes('quran-ayah-stop-mark') && !text.includes('۝')) {
-        // Strip trailing dashes, waqf mutlaq at very end or spaces
-        text = text.replace(/[\s\-\u0615\u06D5-\u06DC\u06DF-\u06ED\u06E0\u06E2\u06E9]+$/, '');
-        const digitsClass = num.length >= 3 ? ' digits-3' : '';
+      // 2. Append End-of-Ayah Sign (۝ [number]) if num provided and not already present
+      if (num && !text.includes('quran-ayah-stop-mark')) {
+        // Strip trailing dashes, waqf mutlaq at very end, spaces, and any raw rosette glyphs (۝, \u06dd)
+        text = text.replace(/[\s\-\u0615\u06D5-\u06DC\u06DF-\u06ED\u06E0\u06E2\u06E9\u06DD۝]+$/, '');
+        const digitsClass = num.length >= 3 ? ' digits-3' : (num.length === 2 ? ' digits-2' : ' digits-1');
         const endSignHtml = ` <span class="quran-ayah-stop-mark" data-waqf-key="ayah_end" data-ayah="${num}" data-digits="${num.length}" role="button" tabindex="0" title="End of Ayah ${num} • وقفِ تام" aria-label="End of Ayah ${num}"><span class="quran-ayah-stop-symbol">۝</span><span class="quran-ayah-stop-num${digitsClass}">${num}</span></span>`;
         text = text + endSignHtml;
       }

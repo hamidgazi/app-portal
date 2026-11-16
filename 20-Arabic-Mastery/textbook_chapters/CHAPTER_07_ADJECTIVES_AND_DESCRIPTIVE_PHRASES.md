@@ -26,12 +26,16 @@ The describing word is called **الصِّفَة** (*As-Sifah* — the adjective
 
 In Arabic, an adjective is completely subservient to its noun. It must agree with its noun in **4 distinct areas**:
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Dimension | The Law | Example: Indefinite | Example: Definite |
 | :--- | :--- | :--- | :--- |
 | **1. Definiteness** | Both have **الـ**, or both have **تنوين** | قَلَمٌ جَدِيدٌ (*a new pen*) | الْقَلَمُ الْجَدِيدُ (*the new pen*) |
 | **2. Gender** | Both Masculine, or both Feminine | بَيْتٌ كَبِيرٌ (*a big house [m]*) | غُرْفَةٌ كَبِيرَةٌ (*a big room [f]*) |
 | **3. Number** | Both Singular (or dual/plural) | وَلَدٌ صَالِحٌ (*one good boy*) | — |
 | **4. Case Ending (I'raab)** | Both take **Pesh**, both take **Zer**, or both take **Zabar** | فِي بَيْتٍ جَدِيدٍ (*in a new house*) | فِي الْبَيْتِ الْجَدِيدِ (*in the new house*) |
+
+</div>
 
 ---
 
@@ -52,6 +56,8 @@ Look very carefully at this comparison. It is the single most tested concept in 
 
 Here are 16 essential adjectives:
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Arabic Script | Roman Urdu | Urdu Meaning | English Meaning | Paired Opposite |
 | :--- | :--- | :--- | :--- | :--- |
 | **جَدِيدٌ** | *Jadeedun* | نیا | New | قَدِيمٌ (Old) |
@@ -70,6 +76,8 @@ Here are 16 essential adjectives:
 | **جَوْعَانُ** | *Jaw'aanu* | بھوکا | Hungry | — |
 | **عَطْشَانُ** | *'Atshaanu* | پیاسا | Thirsty | — |
 | **مَلْآنُ** | *Mal'aanu* | بھرا ہوا (گلاس وغیرہ) | Full | — |
+
+</div>
 
 *(Note: Adjectives ending in انُ like كَسْلَانُ and جَوْعَانُ take a single Dammah, never Tanween!)*
 

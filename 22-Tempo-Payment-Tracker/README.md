@@ -34,11 +34,15 @@ $$\text{Difference} = \text{Cash Handed Over} - \text{Net Due}$$
 
 ## 📦 Deliverables Catalog
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | File | Format | Description |
 |------|--------|-------------|
 | [`index.html`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/22-Tempo-Payment-Tracker/index.html) | Standalone Single-File PWA | Complete production web application with Day/Night adaptive theme, multi-row batch dispatch, photo capture, chronological passbook ledger, and print engine |
 | [`verify_all.js`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/22-Tempo-Payment-Tracker/verify_all.js) | Node.js Test Suite | Comprehensive automated regression suite covering syntax, DOM ID binding, Devanagari audit, and financial ledger simulation |
 | [`README.md`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/22-Tempo-Payment-Tracker/README.md) | Markdown Navigation Hub | Project executive documentation, mathematical ledger model, directory tree, and quality verification status |
+
+</div>
 
 ---
 
@@ -131,6 +135,8 @@ Live Portal URL:
 
 ## 🛡️ Automated Quality & Verification Status
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Check | Tool / Method | Target Metric | Current Status |
 |-------|---------------|---------------|----------------|
 | **JavaScript AST Syntax** | `node --check` | 0 Syntax Errors | Passed (Exit Code 0) |
@@ -139,3 +145,5 @@ Live Portal URL:
 | **Mobile Touch Hitbox** | CSS Layout Audit | $\ge 48\text{ px}$ | Verified Across All Interactive Controls |
 | **Acoustic Feedback** | Browser Web Audio API | Zero Music / Zero Assets | Passed (Procedural SFX Only) |
 | **Data Persistence** | `localStorage` Schemas | Backward Compatible | V1/V2/V3 Auto-Migration Verified |
+
+</div>

@@ -38,10 +38,14 @@ Arabic also assigns gender to every noun! But unlike Urdu or French where you of
 
 When pointing to a feminine noun, you cannot use **هٰذَا** or **ذٰلِكَ**! Arabic has dedicated royal feminine pointers:
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Distance | Masculine Pointer | Feminine Pointer | Meaning |
 | :--- | :--- | :--- | :--- |
 | **Near (قریب)** | **هٰذَا** (*Haadhaa*) | **هٰذِهِ** (*Haadhihi*) | This is |
 | **Distant (دور)** | **ذٰلِكَ** (*Dhaalika*) | **تِلْكَ** (*Tilka*) | That is |
+
+</div>
 
 - **هٰذَا وَلَدٌ** (*This is a boy*) ↔ **هٰذِهِ بِنْتٌ** (*This is a girl*).
 - **ذٰلِكَ مَسْجِدٌ** (*That is a mosque*) ↔ **تِلْكَ مَدْرَسَةٌ** (*That is a school*).
@@ -51,6 +55,8 @@ When pointing to a feminine noun, you cannot use **هٰذَا** or **ذٰلِك�
 ## 📦 Part 2: High-Yield Vocabulary Bank (مفردات الباب)
 
 Here are 16 essential feminine nouns:
+
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
 
 | Arabic Script | Roman Urdu | Urdu Meaning | English Meaning | Feminine Category |
 | :--- | :--- | :--- | :--- | :--- |
@@ -70,6 +76,8 @@ Here are 16 essential feminine nouns:
 | **أُذُنٌ** | *Udhunun* | کان | Ear | Paired Body Part |
 | **يَدٌ** | *Yadun* | ہاتھ | Hand | Paired Body Part |
 | **رِجْلٌ** | *Rijlun* | پاؤں / ٹانگ | Foot / leg | Paired Body Part |
+
+</div>
 
 ---
 

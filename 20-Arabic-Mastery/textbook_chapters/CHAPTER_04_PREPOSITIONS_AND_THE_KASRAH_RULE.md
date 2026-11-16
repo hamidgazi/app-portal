@@ -38,6 +38,8 @@ The preposition is called **حَرْفُ جَرٍّ** (*Harf Jarr* — the dragg
 
 Here are 15 essential prepositions, locations, and rooms:
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Arabic Script | Roman Urdu | Urdu Meaning | English Meaning | Category |
 | :--- | :--- | :--- | :--- | :--- |
 | **فِي** | *Fee* | میں / کے اندر | In / inside | Preposition |
@@ -55,6 +57,8 @@ Here are 15 essential prepositions, locations, and rooms:
 | **مَدْرَسَةٌ** | *Madrasatun* | اسکول / مدرسہ | A school | Noun (Location) |
 | **سَاعَةٌ** | *Saa'atun* | گھڑی / وقت | A watch / clock | Noun (Object) |
 | **السَّمَاءُ** | *As-Samaa'u* | آسمان | The sky / heaven | Noun (Location) |
+
+</div>
 
 ---
 

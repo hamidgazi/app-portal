@@ -53,6 +53,8 @@ Rather than a superficial reading or listening application, **Quran Deep Analyze
 
 ## 📦 2. Deliverables Catalog
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Deliverable | Format | Access Link | Description |
 |:---|:---:|:---|:---|
 | **Main Web Platform & PWA** | `HTML / SPA` | [`index.html`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-Quran-Deep-Analyzer/index.html) | Master 13-module computational analytics platform and offline PWA. |
@@ -72,6 +74,8 @@ Rather than a superficial reading or listening application, **Quran Deep Analyze
 | **Classical Waqf Rules** | `JSON` | [`data/quran_waqf_rules.json`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-Quran-Deep-Analyzer/data/quran_waqf_rules.json) | Classical stopping rules with U+06DD rosettes and trilingual explanations. |
 | **Surah Databases** | `Directory` | [`data/surahs_js/`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-Quran-Deep-Analyzer/data/surahs_js/) | 114 individual Surah JavaScript files assigning canonical window namespaces. |
 | **Master Test Suite** | `Python / Unit` | [`tests/`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-Quran-Deep-Analyzer/tests/) | 36 test modules executing 223 automated unit tests with 100% pass guarantee. |
+
+</div>
 
 ---
 
@@ -282,6 +286,8 @@ python "Antigravity Files/Common-Resources/App-Portal/deploy_github.py"
 
 The entire Quran Deep Analyzer repository underwent an intensive, multi-perspective forensic audit and 100% verified remediation across four engineering milestones:
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Verification Metric | Benchmark Standard | Audit & Remediation Result | Status |
 |:---|:---:|:---|:---:|
 | **Automated Unit Tests** | $\ge 220$ tests | **245 / 245 tests passing** (0 failures, 0 errors in 67.7s) | ✅ PASS |
@@ -297,6 +303,8 @@ The entire Quran Deep Analyzer repository underwent an intensive, multi-perspect
 | **AST JavaScript Integrity** | 0 syntax errors | **140 / 140 JS files pass `node --check` cleanly** | ✅ PASS |
 | **JSON Data Integrity** | 100% valid JSON | **137 / 137 JSON files parsed with zero syntax errors** | ✅ PASS |
 | **Zero Desktop Pollution** | 0 loose root files | **100% of assets confined inside `Antigravity Files/`** | ✅ PASS |
+
+</div>
 
 ---
 

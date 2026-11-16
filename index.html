@@ -2672,6 +2672,15 @@
         iframe.onload = () => {
           loaded = true;
           hideIframeLoader();
+          try {
+            if (iframe.contentDocument && iframe.contentDocument.title) {
+              const titleEl = document.getElementById("top-app-title");
+              if (titleEl) {
+                const docTitle = iframe.contentDocument.title.split("|")[0].split("•")[0].trim();
+                if (docTitle && docTitle.length > 2) titleEl.textContent = docTitle;
+              }
+            }
+          } catch (err) {}
         };
         iframe.onerror = () => {
           loaded = true;

@@ -29,12 +29,16 @@ To transform any past tense root into the present tense, you must attach one of 
 
 $$\boxed{\mathbf{أ} \quad \mathbf{ن} \quad \mathbf{ي} \quad \mathbf{ت}}$$
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Prefix Letter | Person & Role | Formula with ذ-ه-ب | Present Verb | English Meaning | Urdu Meaning |
 | :---: | :--- | :--- | :--- | :--- | :--- |
 | **أَ** | **1st Person (أَنَا / I)** | أَ + ذْهَبُ | **أَذْهَبُ** (*Adhhabu*) | I go / I am going | میں جاتا ہوں |
 | **نَ** | **1st Person Plural (نَحْنُ / We)** | نَ + ذْهَبُ | **نَذْهَبُ** (*Nadhhabu*) | We go / We are going | ہم جاتے ہیں |
 | **يَ** | **3rd Person Masc. (هُوَ / He)** | يَ + ذْهَبُ | **يَذْهَبُ** (*Yadhhabu*) | He goes / He is going | وہ جاتا ہے |
 | **تَ** | **2nd Masc. (أَنْتَ / You) OR 3rd Fem. (هِيَ / She)** | تَ + ذْهَبُ | **تَذْهَبُ** (*Tadhhabu*) | You go / She goes | تم جاتے ہو / وہ جاتی ہے |
+
+</div>
 
 Look how intuitive this is:
 - **أَ** reflects **أَ**نَا (*I*)
@@ -59,6 +63,8 @@ Arabic makes this delightfully simple:
 
 Here are 15 essential Present Tense verbs paired with their Past Tense roots:
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Past Tense (ماضی) | Present Tense (مضارع) | Roman Urdu | Urdu Meaning | English Meaning |
 | :--- | :--- | :--- | :--- | :--- |
 | **ذَهَبَ** | **يَذْهَبُ** | *Yadhhabu* | وہ جاتا ہے | He goes |
@@ -76,6 +82,8 @@ Here are 15 essential Present Tense verbs paired with their Past Tense roots:
 | **غَسَلَ** | **يَغْسِلُ** | *Yaghsilu* | وہ دھوتا ہے | He washes |
 | **لَعِبَ** | **يَلْعَبُ** | *Yal'abu* | وہ کھیلتا ہے | He plays |
 | **سَأَلَ** | **يَسْأَلُ** | *Yas'alu* | وہ پوچھتا ہے / مانگتا ہے | He asks |
+
+</div>
 
 ---
 

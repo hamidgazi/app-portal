@@ -61,6 +61,8 @@ Only the middle letter ('Ayn) fluctuates:
 
 Here are 15 foundational 3-letter action verbs:
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Verb Script | Root | Pattern | Roman Urdu | Urdu Meaning | English Meaning |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **ذَهَبَ** | ذ-ه-ب | فَعَلَ | *Dhahaba* | وہ گیا | He went |
@@ -78,6 +80,8 @@ Here are 15 foundational 3-letter action verbs:
 | **عَلِمَ** | ع-ل-م | فَعِلَ | *'Alima* | اس نے جانا / معلوم کیا | He knew |
 | **لَعِبَ** | ل-ع-ب | فَعِلَ | *La'iba* | وہ کھیلا | He played |
 | **ضَرَبَ** | ض-ر-ب | فَعَلَ | *Daraba* | اس نے مارا / ضرب لگائی | He struck / hit |
+
+</div>
 
 ---
 

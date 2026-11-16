@@ -1,10 +1,10 @@
 /**
  * Antigravity App Portal Service Worker
- * Version: app-portal-v2.3.0
+ * Version: app-portal-v2.4.0
  * Strategy: Network-First for HTML/Navigations (Instant Cloud Updates) + Stale-While-Revalidate for Static Assets
  */
 
-const CACHE_NAME = "app-portal-v2.3.0";
+const CACHE_NAME = "app-portal-v2.4.0";
 
 const PRECACHE_ASSETS = [
   "./",

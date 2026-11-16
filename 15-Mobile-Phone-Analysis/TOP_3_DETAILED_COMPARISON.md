@@ -10,6 +10,8 @@
 
 ## 📊 Master Side-by-Side Comparison Table
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Practical Evaluation Dimension | 👑 Samsung Galaxy A56 5G (~₹35,999) | 🥈 Motorola Edge 70 Pro 5G (~₹34,999) | 🥉 Motorola Edge 70 Fusion 5G (~₹25,999) | 🏅 Category Winner & Practical Rationale |
 | :--- | :--- | :--- | :--- | :--- |
 | **1. In-Hand Ergonomics & Weight** | 🟡 198g, 7.4mm thin; solid flat aluminum frame; balanced weight. | 🟡 185g, 7.3mm ultra-thin; quad-curved linen/leather back; premium grip. | 🟢 **[BEST IN CLASS]** **178g ultra-featherweight**, 7.5mm thin; effortless one-handed scrolling with zero pinky finger fatigue. | 🟢 **Motorola Edge 70 Fusion** wins for hand comfort and daily thumb ergonomics (< 180g). |
@@ -25,6 +27,8 @@
 | **11. Software Update Policy & Longevity** | 🟢 **[BEST IN CLASS]** **6 Major Android OS Upgrades + 6 Years Security Patches** (guaranteed support until 2031); reliable monthly updates. | 🟡 3 Major Android OS Upgrades + 4 Years Security Patches; bimonthly/quarterly update rollout cadence. | 🟡 3 Major Android OS Upgrades + 4 Years Security Patches; bimonthly/quarterly rollout cadence. | 🟢 **Samsung Galaxy A56** dominates software lifespan (double the OS support of Motorola). |
 | **12. Water & Ingress Durability** | 🟡 **IP67** rating (submersible up to 1 meter in freshwater for 30 minutes; safe against pool/rain drops). | 🟢 **[BEST IN CLASS]** **IP68 + IP69** rating (submersible up to 1.5m AND resistant to high-pressure hot water jets). | 🟢 **[BEST IN CLASS]** **IP68 + IP69** rating + MIL-STD-810H shock and drop certified. | 🟢 **Tie (Moto Edge 70 Pro & Fusion)**: IP69 ingress rating withstands high-pressure washing and harsh environments. |
 | **13. Price & Value for Money** | 🟡 ~₹35,999 (+ ₹1,500 charger = **₹37,499 Total**); premium brand tax, but highest resale value. | 🟡 ~₹34,999 (Complete box with 90W charger); near-flagship hardware for mid-range price. | 🟢 **[BEST IN CLASS]** **~₹25,999 (Complete box with 68W charger)**; delivers 90% of daily user satisfaction for **₹10,000 less**. | 🟢 **Motorola Edge 70 Fusion** wins outright on price-to-performance ratio and entry budget. |
+
+</div>
 
 ---
 
@@ -104,8 +108,12 @@ graph LR
 
 ## 🎯 Final Verdict: Which Phone Fits Your Daily Life?
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Your Lifestyle & Priorities | The Right Choice for You | Why It Fits You Best |
 | :--- | :---: | :--- |
 | **"I want a phone that lasts 4 to 6 years without slowing down, has dependable point-and-shoot cameras, zero ads, and I don't mind flat screens or buying a charger."** | **👑 Samsung Galaxy A56 5G** | Unmatched 6-year software support, flat drop-resistant glass, Knox banking security, and instant shutter speed. |
 | **"I want near-flagship processing power, dedicated 3x zoom photography, fast 90W charging in the box, and a sleek curved display."** | **🥈 Motorola Edge 70 Pro 5G** | Dimensity 8500 Extreme speed, full telephoto camera versatility, 2,160Hz eye-safe display, and wireless charging. |
 | **"I want to spend around ₹25,000–₹26,000 for a phone that feels light in hand, has IP68/IP69 water resistance, and clean software without ad clutter."** | **🥉 Motorola Edge 70 Fusion 5G** | Saves ₹10,000+, weighs only 178g, includes the charger in the box, and provides an ad-free experience. |
+
+</div>

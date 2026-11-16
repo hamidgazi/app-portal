@@ -68,6 +68,8 @@ Look at this miracle of consistency:
 
 Here are 15 high-frequency nouns frequently serving as Doers and Objects:
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Arabic Script | Roman Urdu | Urdu Meaning | English Meaning | Case Vowel as Object |
 | :--- | :--- | :--- | :--- | :--- |
 | **الدَّرْسُ** | *Ad-Darsu* | سبق | The lesson | الدَّرْسَ (Zabar) |
@@ -85,6 +87,8 @@ Here are 15 high-frequency nouns frequently serving as Doers and Objects:
 | **الْحَيَّةُ** | *Al-Hayyatu* | سانپ | The snake | الْحَيَّةَ (Zabar) |
 | **اللَّهُ** | *Allaahu* | اللہ تعالیٰ | Allah Almighty | اللَّهَ (Zabar) |
 | **الْإِنْسَانُ** | *Al-Insaanu* | انسان | Humankind / human | الْإِنْسَانَ (Zabar) |
+
+</div>
 
 ---
 

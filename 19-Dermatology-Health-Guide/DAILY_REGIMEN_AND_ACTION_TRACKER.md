@@ -85,6 +85,8 @@ This actionable tracker translates the clinical findings from [MASTER_DERMATOLOG
 
 ## 2. Weekly Therapeutic Cadence Calendar
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Day of Week | Shower Wash Active (Leave 3–5 min) | Morning Body Lotion | Evening Back Treatment | Lip Slugging (Nightly) |
 | :--- | :--- | :--- | :--- | :--- |
 | **Monday** | Ketoconazole 2% Wash | Urea 10% / AmLactin 12% | Adapalene 0.1% / Tretinoin [Rx] | Pure Petrolatum (Vaseline) |
@@ -94,6 +96,8 @@ This actionable tracker translates the clinical findings from [MASTER_DERMATOLOG
 | **Friday** | Ketoconazole 2% Wash | Urea 10% / AmLactin 12% | Bland Moisturizer | Pure Petrolatum (Vaseline) |
 | **Saturday** | Benzoyl Peroxide 10% Wash | Urea 10% / AmLactin 12% | Adapalene 0.1% / Tretinoin [Rx] | Pure Petrolatum (Vaseline) |
 | **Sunday** | Gentle Hydrating Syndet | Urea 10% / AmLactin 12% | Aluminum Chloride Antiperspirant | Pure Petrolatum (Vaseline) |
+
+</div>
 
 ---
 

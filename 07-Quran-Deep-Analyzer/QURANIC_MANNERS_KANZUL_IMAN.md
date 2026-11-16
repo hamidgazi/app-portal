@@ -11,6 +11,8 @@
 
 ## 📑 فہرستِ موضوعات (Table of Contents)
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | باب نمبر | موضوع کا عنوان | انگریزی عنوان | آیات کی تعداد | سلسلہ وار نمبر |
 | :---: | :--- | :--- | :---: | :---: |
 | **1** | [💬 آدابِ گفتگو، کلام اور سچائی](#باب-1-speech) | Speech Etiquette, Voice & Truthfulness | **10** | <small>`#1 تا #10`</small> |
@@ -22,6 +24,8 @@
 | **7** | [💰 مالی معاملات، دیانت اور ناپ تول](#باب-7-financial) | Financial Integrity & Contracts | **8** | <small>`#47 تا #54`</small> |
 | **8** | [🤲 یتیموں، مسکینوں اور کمزوروں کے حقوق](#باب-8-vulnerable) | Care for the Vulnerable & Orphans | **7** | <small>`#55 تا #61`</small> |
 | **9** | [🤝 اختلاف، بحث اور دعوت کے آداب](#باب-9-dialogue) | Dialogue, Debate & Admonition | **6** | <small>`#62 تا #67`</small> |
+
+</div>
 
 ---
 

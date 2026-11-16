@@ -31,6 +31,8 @@ $$\text{نَحْنُ} + \text{مُسْلِمُونَ} = \mathbf{\text{نَحْن
 
 ### The 14 Royal Detached Pronouns (الضمائر المنفصلة):
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Perspective | Number & Gender | Arabic Script | Pronunciation | Urdu Meaning | English Meaning |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **3rd Person (غائب)** | 1 Masc. | **هُوَ** | *Huwa* | وہ (ایک مرد) | He |
@@ -47,6 +49,8 @@ $$\text{نَحْنُ} + \text{مُسْلِمُونَ} = \mathbf{\text{نَحْن
 | | Plural Fem. | **أَنْتُنَّ** | *Antunna* | آپ سب (عورتیں) | You all (f. pl) |
 | **1st Person (متکلم)** | 1 Masc./Fem. | **أَنَا** | *Anaa* | میں | I |
 | | Dual & Plural | **نَحْنُ** | *Nahnu* | ہم / ہم دونوں | We |
+
+</div>
 
 ### Vocabulary Bank (Professions & Roles):
 1. **مُهَنْدِسٌ** (*Muhandisun*) — Engineer

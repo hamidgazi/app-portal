@@ -259,12 +259,16 @@
 ### 1. Classical Terminology: Hadith, Sunnah, Khabar, and Athar
 To the untrained mind, the terms *Hadith*, *Sunnah*, *Khabar*, and *Athar* are often used interchangeably. To a Muhaddith (Hadith scholar), each carries distinct boundaries:
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Term&nbsp;(اصطلاح) | Arabic | Linguistic&nbsp;Meaning | Technical&nbsp;Definition&nbsp;(اصطلاحی&nbsp;مفہوم) | Urdu&nbsp;Explanation&nbsp;(اردو&nbsp;وضاحت) |
 |---|---|---|---|---|
 | **Hadith** | حَدِيث | New, conversation, speech | Anything attributed to the Prophet Muhammad ﷺ: his sayings, actions, silent approvals, or physical/moral traits. | ہر وہ قول، فعل، تقریر (خاموش منظوری) یا صفت جو رسول اللہ ﷺ کی طرف منسوب ہو۔ |
 | **Sunnah** | سُنَّة | A well-trodden path, customary practice | The established religious norm, standard way of living, and legal precedents legislated by the Prophet ﷺ. | نبی کریم ﷺ کا قائم کردہ دینی طریقہ، اسوہ اور قانون جو امت کے لیے واجب الاتباع ہو۔ |
 | **Khabar** | خَبَر | News, report | A broader term: any historical report, whether from the Prophet ﷺ, the Companions, or general history. | کوئی بھی تاریخی خبر، خواہ وہ حضور ﷺ سے منقول ہو یا عام تاریخ و لوگوں سے متعلق ہو۔ |
 | **Athar** | أَثَر | Trace, vestige, footprint | Specifically reports attributed to the Sahabah (Companions) or Tabi'in (Successors). | خاص طور پر صحابہ کرام اور تابعین عظام کے اقوال، فتاویٰ اور افعال کو اثر کہا جاتا ہے۔ |
+
+</div>
 
 > [!NOTE]
 > **Hadith vs. Sunnah:** Every authentic Hadith conveys a Sunnah, but Sunnah is the living, actionable standard distilled from the totality of Hadith, Qur'an, and continuous community practice (*al-'Amal*).
@@ -486,6 +490,8 @@ Formulated systematically by Imam Abu 'Amr Ibn al-Salah (d. 643 AH) and refined 
 > **The 5 Universal Pillars of Sahih:**  
 > **Sahih Hadith** = **Ittisal** *(Connected Chain)* + **'Adalah** *(Moral Integrity)* + **Dabt** *(Retention Accuracy)* + **No Shudhudh** *(No Contradiction)* + **No 'Illah** *(No Hidden Flaw)*
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | # | Condition | Arabic | Meaning&nbsp;&&nbsp;Evidentiary&nbsp;Scope |
 |---|-----------|--------|-------------------------------------------|
 | 1 | **Ittisal&nbsp;al-Sanad** | اتِّصَالُ&nbsp;السَّنَد | Continuous, unbroken chain from first narrator to the final authority. No dropped or hidden links. |
@@ -493,6 +499,8 @@ Formulated systematically by Imam Abu 'Amr Ibn al-Salah (d. 643 AH) and refined 
 | 3 | **Dabt&nbsp;al-Ruwat** | ضَبْطُ&nbsp;الرُّوَاة | Flawless precision and memory retention: in chest (*Dabt al-Sadr*) or in verified manuscript (*Dabt al-Kitab*). |
 | 4 | **'Adam&nbsp;al-Shudhudh** | عَدَمُ&nbsp;الشُّذُوذ | Absence of irregularity: A reliable narrator must NOT contradict someone more reliable than them. |
 | 5 | **'Adam&nbsp;al-'Illah** | عَدَمُ&nbsp;العِلَّة&nbsp;القَادِحَة | Absence of hidden, subtle, damaging defects (*'Ilal*) that require microscopic critical analysis to detect. |
+
+</div>
 
 ---
 
@@ -621,6 +629,8 @@ MASTER CLASSIFICATION TREE
 
 ### Dimension 2: By Terminal Attribution (من حيث منتهى السند)
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Class | Arabic | Attributed&nbsp;To | Example&nbsp;Phrasing | Legal&nbsp;Status |
 |---|---|---|---|---|
 | **Marfu'** | مَرْفُوع | Prophet Muhammad ﷺ | *"The Messenger of Allah ﷺ said..."* | Primary legislative source for all Islam. |
@@ -628,13 +638,19 @@ MASTER CLASSIFICATION TREE
 | **Maqtu'** | مَقْطُوع | A Tabi'i (Successor) | *"Al-Hasan al-Basri said: 'O son of Adam, you are but days...'"* | Historical and theological insight; not binding proof on the Ummah. |
 | **Hadith Qudsi** | حَدِيث قُدْسِي | Words from Allah, phrased by the Prophet ﷺ | *"The Messenger of Allah ﷺ said that Allah Blessed and Exalted says: 'O My servants! I have forbidden oppression...'"* | Holy message, but distinct from the Qur'an (cannot be recited in Salah, not miraculous in phrasing). |
 
+</div>
+
 #### The Fundamental Difference: Qur'an vs. Hadith Qudsi
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Distinction&nbsp;Point | The&nbsp;Holy&nbsp;Qur'an | Hadith&nbsp;Qudsi |
 |-------------------|-----------------|--------------|
 | **Origin & Phrasing** | Both Words and Meaning from Allah. | Meaning from Allah; words phrased by the Prophet ﷺ. |
 | **Linguistic Miracle (I'jaz)** | Miraculous (I'jaz); inimitable by mankind. | Not an inimitable linguistic miracle. |
 | **Ritual Recitation** | Recited as act of worship inside Salah. | Cannot be recited inside Salah. |
 | **Transmission & Status** | 100% Mutawatir; rejecting an Ayah expels one from Islam. | Transmitted via Ahad chains; graded Sahih, Hasan, or Da'if like other Hadiths. |
+
+</div>
 
 ---
 
@@ -706,15 +722,21 @@ WHERE IS THE CHAIN BROKEN?
 > **The Narrator Credibility Equation:**  
 > **Narrator Credibility** = **'Adalah** *(Moral Integrity & Uprightness)* × **Dabt** *(Retention Accuracy & Precision)*
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Dimension | 1. Al-'Adalah (العَدَالَة) — Moral Integrity | 2. Al-Dabt (الضَّبْط) — Precision & Retention |
 |-----------|---------------------------------------------|-----------------------------------------------|
 | **Core Definition** | Moral, religious, and spiritual uprightness. | Flawless accuracy and mental retention. |
 | **Requirements** | • **Islam**: Must be a practicing Muslim.<br>• **'Aql**: Sound intellect; sanity.<br>• **Bulugh**: Adulthood at time of delivery.<br>• **Taqwa**: Freedom from major sins, persistence in minor sins, or heresy.<br>• **Muru'ah**: Decency, honor, and noble conduct. | • **Dabt al-Sadr (ضَبْطُ الصَّدْر)**: Flawless memorization from hearing to delivery.<br>• **Dabt al-Kitab (ضَبْطُ الكِتَاب)**: Meticulous manuscript preservation free from tampering.<br>• **Yaqadhah (يَقَظَة)**: Constant alertness against mistake or deception. |
 
+</div>
+
 ---
 
 ### 2. The 6 Ranks of Ta'dil (Praise & Verification - مراتب التعديل)
 Formulated by Ibn Abi Hatim and codified by al-Dhahabi and Ibn Hajar:
+
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
 
 | Rank | Classical&nbsp;Arabic&nbsp;Terminology | Meaning | Status&nbsp;/&nbsp;Rule |
 |---|---|---|---|
@@ -725,9 +747,13 @@ Formulated by Ibn Abi Hatim and codified by al-Dhahabi and Ibn Hajar:
 | **Tier 5 (Marginal)** | `شَيْخٌ` ، `يُكْتَبُ حَدِيثُهُ` ، `يُرْوَى حَدِيثُهُ` | "An elder," "His Hadith is recorded for cross-checking" | Not independent proof; used for corroboration. |
 | **Tier 6 (Near Weak)** | `صَالِحُ الحَدِيثِ` ، `مُقَارِبُ الحَدِيثِ` | "Righteous in Hadith," "Approaching acceptable" | Weak on its own; needs strong reinforcement. |
 
+</div>
+
 ---
 
 ### 3. The 6 Ranks of Jarh (Criticism & Disqualification - مراتب الجرح)
+
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
 
 | Rank | Classical&nbsp;Arabic&nbsp;Terminology | Meaning | Status&nbsp;/&nbsp;Rule |
 |---|---|---|---|
@@ -737,6 +763,8 @@ Formulated by Ibn Abi Hatim and codified by al-Dhahabi and Ibn Hajar:
 | **Tier 4 (Abandoned)** | `مَتْرُوكُ الحَدِيثِ` ، `ذَاهِبُ الحَدِيثِ` | "His Hadith is abandoned," "Ruined in transmission" | Completely rejected; suspected of fabricating. |
 | **Tier 5 (Accused)** | `مُتَّهَمٌ بِالكَذِبِ` ، `يَسْرِقُ الحَدِيثَ` | "Accused of lying," "Steals chains of Hadith" | Near-fabricator status; total nullity. |
 | **Tier 6 (Proven Liar)** | `كَذَّابٌ` ، `وَضَّاعٌ` ، `دَجَّالٌ` | "Arch-liar," "Manufacturer of Hadith," "Imposter" | Forger of Hadith; creates *Mawdu'*. |
+
+</div>
 
 ---
 
@@ -760,6 +788,8 @@ What happens if Imam Ahmad praises a narrator, but Yahya ibn Ma'in criticizes hi
 
 ## Chapter 6: Kutub al-Sittah & The Hierarchy of Hadith Collections (کتبِ حدیث کے درجات و مراتب)
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | # | Book&nbsp;&&nbsp;Author | Arabic&nbsp;Title | Death&nbsp;Date | Hadiths&nbsp;Count |
 |---|------------------------|--------------|------------|---------------|
 | 1 | **Sahih al-Bukhari** (Imam al-Bukhari) | الجامع المسند الصحيح المختصر من أمور رسول الله ﷺ | 256 AH | ~7,563 (with repetitions) |
@@ -768,6 +798,8 @@ What happens if Imam Ahmad praises a narrator, but Yahya ibn Ma'in criticizes hi
 | 4 | **Jami' al-Tirmidhi** (Imam al-Tirmidhi) | الجامع المختصر من السنن عن رسول الله ﷺ | 279 AH | ~3,956 |
 | 5 | **Sunan al-Nasa'i (al-Mujtaba)** (Imam al-Nasa'i) | المجتبى من السنن الكبرى | 303 AH | ~5,758 |
 | 6 | **Sunan Ibn Majah** (Imam Ibn Majah) | كتاب السنن | 273 AH | ~4,341 |
+
+</div>
 
 ---
 
@@ -811,12 +843,16 @@ What happens if Imam Ahmad praises a narrator, but Yahya ibn Ma'in criticizes hi
 ### Shah Waliullah Dehlawi's 4 Tiers of Hadith Collections
 In his seminal work *Hujjatullah al-Balighah (حجة الله البالغة)*, the great Indian reviver **Shah Waliullah al-Dehlawi (d. 1176 AH)** categorized all Hadith literature into four distinct qualitative ranks:
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Tier | Collections&nbsp;Included | Nature&nbsp;&&nbsp;Evidentiary&nbsp;Value |
 |------|----------------------|----------------------------|
 | **Tabaqah 1** | 1. Muwatta Imam Malik<br>2. Sahih al-Bukhari<br>3. Sahih Muslim | **Highest authenticity.** Nearly 100% of their contents are Sahih or verified through continuous community action. |
 | **Tabaqah 2** | 1. Sunan Abi Dawud<br>2. Jami' al-Tirmidhi<br>3. Sunan al-Nasa'i<br>4. Musnad Ahmad ibn Hanbal | **Next tier of legal authority.** Majority is Sahih/Hasan; weak narrations are noted or easily analyzed. |
 | **Tabaqah 3** | 1. Musannaf Abd al-Razzaq<br>2. Musannaf Ibn Abi Shaybah<br>3. Sunan al-Bayhaqi / al-Daraqutni<br>4. Musnad al-Bazzar / al-Tabarani | **Mixed collections** containing Sahih, Hasan, Da'if, Munkar, and Mawquf reports. Must be filtered by a qualified Muhaddith before citing. |
 | **Tabaqah 4** | 1. Books of Ibn Hibban (*al-Majruhin*)<br>2. Tarikh Baghdad (al-Khatib)<br>3. Tarikh Dimashq (Ibn 'Asakir)<br>4. Books of late preachers | **Critical & specialized works** written to expose fabrications, or late compilations containing weak or fabricated material. |
+
+</div>
 
 ---
 
@@ -973,6 +1009,8 @@ The Messenger of Allah ﷺ delivered a Mutawatir warning transmitted by over 70 
 
 ### 2. The 5 Motivations of the Fabricators (دوافع الوضع)
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | # | Motive&nbsp;&&nbsp;Category | Arabic | Historical&nbsp;Context&nbsp;&&nbsp;Examples |
 |---|-------------------|--------|-------------------------------|
 | 1 | **Heretical Sabotage** | الزَّنْدَقَةُ وَالخُبْث | Heretics (*al-Zanadiqah*) who sought to corrupt Islam from within. Abdul Karim ibn Abi al-Awja' confessed before execution: *"I fabricated 4,000 Hadiths making halal haram and haram halal!"* |
@@ -980,6 +1018,8 @@ The Messenger of Allah ﷺ delivered a Mutawatir warning transmitted by over 70 
 | 3 | **Pious Fraud by Ascetics** | الحِسْبَةُ وَالتَّرْغِيبُ | The most dangerous category: Well-meaning ascetics who claimed: *"We do not lie against him, we lie FOR him to encourage devotion!"* Yahya al-Qattan noted: *"We never saw upright people lie more than in Hadiths of asceticism."* |
 | 4 | **Flattery of Rulers** | التَّزَلُّفُ إِلَى المُلُوكِ | Courtiers inventing rulings to please rulers. When Caliph al-Mahdi flew pigeons, Ghiyath added *"or birds"* to racing Hadith. The Caliph rewarded him, then slaughtered the bird saying: *"I made you lie upon the Prophet ﷺ!"* |
 | 5 | **Sensationalist Preachers** | التَّكَسُّبُ بِالقِصَصِ | Street storytellers (*al-Qussas*) entertaining crowds with bizarre tales to collect donations and gain fame. |
+
+</div>
 
 ---
 
@@ -1106,6 +1146,8 @@ Women were not merely narrators in the early days; they were the professors of t
 
 To understand Hadith at a professional level, an objective, scholarly comparative analysis of the methodology of **Ahl al-Sunnah wal-Jama'ah** and **Shi'a Imami Ithna 'Ashariyyah** is essential.
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Comparison&nbsp;Point | Sunni&nbsp;Methodology | Shia&nbsp;(Imami)&nbsp;Methodology |
 |------------------|-------------------|--------------------------|
 | **1. Scope of Sunnah** | Restricted strictly to the Prophet Muhammad ﷺ. Sahabah statements are Athar. | Encompasses the Prophet ﷺ AND the 12 Infallible Imams (Ahl al-Bayt). |
@@ -1113,6 +1155,8 @@ To understand Hadith at a professional level, an objective, scholarly comparativ
 | **3. Integrity of Sahabah** | **'Adalat al-Sahabah**: All Companions are deemed morally upright transmitters based on Quranic praise (Surah 9:100). | Selective critique: Companions evaluated individually based on allegiance to Ahl al-Bayt. |
 | **4. Isnad Transmission** | Chain must connect back to Prophet ﷺ via unbroken named transmitters. | Chain must connect to an Infallible Imam; Imams have divine authority (*Ismah*). |
 | **5. Historical Systematization** | Classical 3-to-5 tier grading codified by 2nd–3rd century AH. | Modern 4-tier grading (Sahih, Hasan, Muwaththaq, Da'if) codified by Allamah al-Hilli (7th c. AH). |
+
+</div>
 
 ---
 
@@ -1264,6 +1308,8 @@ STEP 2: Narrator & Text Integrity
 
 If you wish to progress from a passionate beginner to an independent researcher (*Muhaqqiq*), follow the time-tested classical curriculum:
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Stage | Classical&nbsp;Text&nbsp;&&nbsp;Arabic | Author&nbsp;&&nbsp;Date | Focus&nbsp;&&nbsp;Learning&nbsp;Goal |
 |-------|-------------------------|---------------|-----------------------|
 | **Stage 1 (Beginner)** | **Al-Manzumah al-Bayquniyyah** (المنظومة البيقونية)<br>+ *Taysir Mustalah al-Hadith* | Umar al-Bayquni (d. ~1080 AH)<br>+ Dr. Mahmud al-Tahhan | 34 poetic verses memorizing all core Mustalah definitions rapidly. |
@@ -1271,6 +1317,8 @@ If you wish to progress from a passionate beginner to an independent researcher 
 | **Stage 3 (Advanced)** | **Muqaddimah Ibn al-Salah** (مقدمة ابن الصلاح / علوم الحديث) | Abu 'Amr Ibn al-Salah (d. 643 AH) | The master foundation text detailing all 65 classical Hadith disciplines. |
 | **Stage 4 (Mastery)** | **Tadrib al-Rawi** (تدريب الراوي في شرح تقريب النواوي) | Jalal al-Din al-Suyuti (d. 911 AH) | Exhaustive encyclopedic commentary on Imam al-Nawawi's *Taqrib*. |
 | **Stage 5 (Expert)** | **Sharh 'Ilal al-Tirmidhi** (شرح علل الترمذي)<br>+ Primary Rijal Dictionaries | Ibn Rajab al-Hanbali (d. 795 AH)<br>+ al-Mizzi & Ibn Hajar | Deepest mechanics of hidden defects (*'Ilal*), comparative Sanad analysis, and live Takhrij. |
+
+</div>
 
 ---
 

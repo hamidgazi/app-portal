@@ -42,10 +42,14 @@ Reciting the Holy Qur'an with Tajweed is a **Fard 'Ayn (فرضِ عین - indivi
 ### 1.3 The Two Grades of Recitation Errors (لحن)
 In Islamic jurisprudence and phonetics, errors in recitation are strictly bifurcated into two categories:
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Error Type | Definition & Phonetic Nature | Shar'i Ruling | Impact on Salah (نماز) |
 | :--- | :--- | :---: | :---: |
 | **Lahn Jali (لحنِ جلی - Fatal / Obvious Error)** | Changing one letter for another (e.g., swapping `ع` with `ء`, or `ط` with `ت`), or altering a diacritical vowel (e.g., changing Fathah to Dammah: `أَنْعَمْتَ` $\to$ `أَنْعَمْتُ`). | **Strictly Forbidden (حرام)** | Invalidates prayer (فسادِ نماز) if meaning changes fundamentally. |
 | **Lahn Khafi (لحنِ خفی - Minor / Subtle Error)** | Shortening or lengthening a Madd beyond its count, neglecting Ghunnah or Ikhfa timing, or missing subtle Tafkheem/Tarqeeq nuances. | **Disliked / Reprehensible (مکروہ)** | Prayer remains valid, but the reciter incurs deficiency in spiritual reward. |
+
+</div>
 
 ---
 
@@ -75,6 +79,8 @@ To eliminate cognitive overload and enable instantaneous visual recognition for 
 
 ### Complete Color Psychology Mapping Specification
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Color Family | Visual Cue & Psychological Rationale | Canonical Rule | Harakat | Alifs | Hex Code | AMOLED Background Glow |
 | :--- | :--- | :--- | :---: | :---: | :---: | :---: |
 | 🔴 **Deep Crimson** | Maximum alertness, absolute stop, intense vocalic stretch | **Madd Lazim (مد لازم)** | 6 | 3 | `#ef4444` | `rgba(239, 68, 68, 0.20)` |
@@ -88,6 +94,8 @@ To eliminate cognitive overload and enable instantaneous visual recognition for 
 | 🔵 **Sky Blue** | Ripple effect, water droplet bouncing off smooth stone | **Qalqalah (قلقلہ - قطب جد)** | Kinetic | Echo | `#38bdf8` | `rgba(56, 189, 248, 0.20)` |
 | 🔷 **Cobalt Blue** | Weight, grandeur, full mouth cavity resonance (*Pur*) | **Tafkheem (تفخیم - خص ضغط قظ)** | Heavy | Full | `#60a5fa` | `rgba(96, 165, 250, 0.18)` |
 | ⚪ **Muted Slate** | Dropped sounds, silent letters bypassed in recitation flow | **Silent Letters & Idgham Bila-Ghunnah** | 0 | 0 | `#94a3b8` | `rgba(148, 163, 184, 0.12)` |
+
+</div>
 
 ---
 
@@ -431,6 +439,8 @@ The letter Laam is naturally light in all Arabic words (`لَكُمْ`, `قَا�
 ### 9.3 The Complex Rules of Raa (احکامِ راء)
 The letter Raa oscillates between Heavy and Light depending on its environmental vowels:
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Recitation State | Phonetic Condition | Quranic Benchmarks |
 | :--- | :--- | :--- |
 | **Heavy (پر - Tafkheem)** | 1. Raa has Fathah or Dammah (`رَ` / `رُ`) | `رَبَّنَا`, `رُزِقْنَا` |
@@ -441,12 +451,16 @@ The letter Raa oscillates between Heavy and Light depending on its environmental
 | | 2. Raa Sakinah preceded by an original Kasrah, with no following heavy letter | `فِرْعَوْنَ`, `مِرْيَةٍ` |
 | | 3. Raa Sakinah preceded by Yaa Sakinah at Waqf | `خَبِيرٌ` $\to$ `خَبِيرْ`, `بَصِيرْ` |
 
+</div>
+
 ---
 
 ## Chapter 10: Signs of Waqf & Indo-Pak Punctuation (علاماتِ وقف و رموزِ اوقاف)
 <a id="chapter-10-signs-of-waqf--indo-pak-punctuation-علامات-وقف-و-رموز-اوقاف"></a>
 
 The 16-line Indian and Pakistani Tajweedi Mushafs feature an enriched set of marginal stop marks codified by Allamah Sajawandi and Indian Qirā'ah scholars to guide reciters:
+
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
 
 | Sign | Urdu Term | Translation | Meaning & Reciter Action |
 | :---: | :--- | :--- | :--- |
@@ -459,6 +473,8 @@ The 16-line Indian and Pakistani Tajweedi Mushafs feature an enriched set of mar
 | **قف** | الامر بالوقف | The Command to Pause | **Stop Encouraged**. Draws listener focus to a profound shift in context. |
 | **سکتہ** | سکتہ لطیفہ | Gentle Breathless Pause | **Hold Sound, Retain Breath**. Stop vocal sound for ~1 Alif while holding the current breath (Found in Surah Al-Kahf 18:1, Ya-Sin 36:52, Al-Qiyamah 75:27, Al-Mutaffifin 83:14). |
 | **ۛ ۛ** | معانقہ / مراقبہ | Embracing Stop (Paired) | **Stop at EITHER One, NEVER Both**. If you stop at sign 1, glide past sign 2; if you continue at 1, stop at 2 (`ذَٰلِكَ الْكِتَابُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى`). |
+
+</div>
 
 ---
 

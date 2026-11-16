@@ -38,6 +38,8 @@ $$\underbrace{\text{بَابُ}}_{\text{المضاف (Door of)}} \quad + \quad \
 
 Here are 15 high-frequency nouns, kinship terms, and spatial adverbs:
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Arabic Script | Roman Urdu | Urdu Meaning | English Meaning | Grammatical Role |
 | :--- | :--- | :--- | :--- | :--- |
 | **دَفْتَرٌ** | *Daftarun* | کاپی / رجسٹر | A notebook | Noun (Object) |
@@ -55,6 +57,8 @@ Here are 15 high-frequency nouns, kinship terms, and spatial adverbs:
 | **هُنَا** | *Hunaa* | یہاں | Here | Demonstrative Adverb |
 | **هُنَاكَ** | *Hunaaka* | وہاں | There | Demonstrative Adverb |
 | **اسْمٌ** | *Ismun* | نام | A name | Noun |
+
+</div>
 
 ---
 

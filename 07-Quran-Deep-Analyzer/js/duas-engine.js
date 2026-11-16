@@ -211,8 +211,24 @@
   function formatArabicVerse(d) {
     if (!d || !d.arabic) return "";
     const raw = String(d.arabic).trim();
-    const start = d.ayah_start;
-    const end = d.ayah_end;
+    let start = d.ayah_start;
+    let end = d.ayah_end;
+
+    // If start is missing, attempt parsing from ayah_coordinate (e.g. "2:286" -> 286, "3:191-192" -> 191..192)
+    if (start === undefined || start === null) {
+      const coord = String(d.ayah_coordinate || "");
+      const match = coord.match(/:(\d+)(?:-(\d+))?/);
+      if (match) {
+        start = parseInt(match[1], 10);
+        end = match[2] ? parseInt(match[2], 10) : start;
+      }
+    }
+
+    // Helper to compute adaptive digit classes (1, 2, or 3 digits)
+    const getDigitsClass = (n) => {
+      const len = String(n).length;
+      return len >= 3 ? " digits-3" : (len === 2 ? " digits-2" : " digits-1");
+    };
 
     // Check if text contains pre-embedded \u06dd or ۝ rosettes
     if (raw.includes("\u06dd") || raw.includes("۝")) {
@@ -220,13 +236,13 @@
       const parts = raw.split(/[\u06dd۝]/);
       const res = [];
       for (let idx = 0; idx < parts.length; idx++) {
-        const pClean = parts[idx].trim().replace(/[\s\-\u0615\u06D5-\u06DC\u06DF-\u06ED]+$/, "");
+        const pClean = parts[idx].trim().replace(/[\s\-\u0615\u06D5-\u06DC\u06DF-\u06ED\u06E0\u06E2\u06E9]+$/, "");
         if (pClean) {
           res.push(escapeHtml(pClean));
         }
         if (idx < parts.length - 1) {
           const num = (curr !== undefined && curr !== null) ? String(curr) : "";
-          const digitsClass = num.length >= 3 ? " digits-3" : "";
+          const digitsClass = getDigitsClass(num);
           res.push(` <span class="dua-ayah-num${digitsClass}" data-ayah="${num}" role="button" tabindex="0" title="Ayah ${num}">${num}</span> `);
           if (curr !== undefined && curr !== null && (end === undefined || curr < end)) {
             curr++;
@@ -236,9 +252,9 @@
       return res.join("").trim();
     } else {
       // Single Ayah: strip trailing pause marks & append single canonical rosette
-      const pClean = raw.replace(/[\s\-\u0615\u06D5-\u06DC\u06DF-\u06ED]+$/, "");
-      const num = (start !== undefined && start !== null) ? String(start) : String(d.ayah_coordinate || "");
-      const digitsClass = num.length >= 3 ? " digits-3" : "";
+      const pClean = raw.replace(/[\s\-\u0615\u06D5-\u06DC\u06DF-\u06ED\u06E0\u06E2\u06E9]+$/, "");
+      const num = (start !== undefined && start !== null) ? String(start) : "";
+      const digitsClass = getDigitsClass(num);
       return `${escapeHtml(pClean)} <span class="dua-ayah-num${digitsClass}" data-ayah="${num}" role="button" tabindex="0" title="Ayah ${num}">${num}</span>`;
     }
   }

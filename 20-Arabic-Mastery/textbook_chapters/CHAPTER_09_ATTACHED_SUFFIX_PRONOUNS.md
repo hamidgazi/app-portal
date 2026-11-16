@@ -42,6 +42,8 @@ $$\text{بَيْتٌ} \quad + \quad \text{ـنَا} \quad = \quad \mathbf{\text{
 
 Here are the high-yield attached suffixes:
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Perspective | Suffix | Example with كِتَابٌ (Book) | Pronunciation | Meaning |
 | :--- | :--- | :--- | :--- | :--- |
 | **3rd Masc. (اس کا)** | **ـهُ** | **كِتَابُهُ** | *Kitaabu-hu* | His book |
@@ -54,6 +56,8 @@ Here are the high-yield attached suffixes:
 | **2nd Fem. Plural (آپ سب کا)** | **ـكُنَّ** | **كِتَابُكُنَّ** | *Kitaabu-kunna* | Your book (f. pl) |
 | **1st Singular (میرا)** | **ـي** | **كِتَابِي** | *Kitaab-ee* | My book |
 | **1st Plural (ہمارا)** | **ـنَا** | **كِتَابُنَا** | *Kitaabu-naa* | Our book |
+
+</div>
 
 ### Vocabulary Bank (Identity & Relationships):
 1. **اسْمٌ** (*Ismun*) — Name ➔ **اسْمِي** (*My name*)

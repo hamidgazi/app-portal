@@ -25,7 +25,7 @@
    - [4.3 In-Modal Help & Interactive Cheatsheet](#43-in-modal-help--interactive-cheatsheet)
 5. [Real-World Project Integration Recipes](#5-real-world-project-integration-recipes)
    - [Recipe 1: Master App Portal (`App-Portal`)](#recipe-1-master-app-portal-app-portal)
-   - [Recipe 2: India National Pincode Search (`08-Pincode-Search`)](#recipe-2-india-national-pincode-search-08-pincode-search)
+   - [Recipe 2: India National Pincode Search (`04-Pincode-Search`)](#recipe-2-india-national-pincode-search-08-pincode-search)
    - [Recipe 3: Sustainable Weight Gain & Nutrition Guide (`13-Sustainable-Weight-Gain-Guide`)](#recipe-3-sustainable-weight-gain--nutrition-guide-13-sustainable-weight-gain-guide)
    - [Recipe 4: Islamic Fiqh & Prayer Times (`02-Namaz-Prayer-Times`)](#recipe-4-islamic-fiqh--prayer-times-02-namaz-prayer-times)
    - [Recipe 5: Universal Single-Page HTML Template](#recipe-5-universal-single-page-html-template)
@@ -90,6 +90,8 @@ $$\text{Similarity}(a, b) = 1.0 - \frac{\text{Levenshtein}(a, b)}{\max(|a|, |b|)
 ### 2.4 Semantic Concept & Synonym Expansion Graph
 The engine maintains an in-memory synonym dictionary mapping common root concepts to semantic clusters. When a user queries a concept, the engine automatically expands the query into synonymous terms with a $70\%$ weighting:
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Root Concept | Expanded Synonym Cluster |
 | :--- | :--- |
 | **`food`** | `nutrition`, `diet`, `meal`, `calories`, `eating`, `shake`, `protein`, `carbs`, `breakfast`, `lunch`, `dinner` |
@@ -100,6 +102,8 @@ The engine maintains an in-memory synonym dictionary mapping common root concept
 | **`pincode`** | `postal`, `zip`, `zipcode`, `area`, `postoffice`, `taluk`, `district`, `city`, `location`, `pin` |
 | **`code`** | `developer`, `script`, `javascript`, `python`, `programming`, `software`, `git`, `terminal`, `api` |
 | **`fast`** | `quick`, `speed`, `express`, `rapid`, `instant`, `prompt` |
+
+</div>
 
 Developers can pass custom domain synonym maps via the initialization options (`AISearch.init({ synonyms: { ... } })`).
 
@@ -174,6 +178,8 @@ When initialized with a Google Gemini API key (`geminiApiKey: '...'`):
 
 ### 3.2 Side-by-Side Comparison Matrix
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Evaluation Dimension | ❌ Traditional Search (`Ctrl+F` / `.indexOf`) | 🤖 Antigravity AI Search Engine |
 | :--- | :--- | :--- |
 | **Typo Tolerance** | 0% tolerance (single typo fails completely) | Normalized Levenshtein distance ($\ge 0.58$ threshold) |
@@ -186,11 +192,15 @@ When initialized with a Google Gemini API key (`geminiApiKey: '...'`):
 | **Mobile UX** | Awkward desktop toolbars, small touch targets | Native AMOLED bottom-sheet with $\ge 48\text{ px}$ hitboxes |
 | **Offline Durability** | Works offline but dumb | **100% offline intelligence (0 dependencies, 0 network)** |
 
+</div>
+
 ---
 
 ## 4. End-User & Power Searcher Playbook
 
 ### 4.1 Keyboard Navigation Controls
+
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
 
 | Shortcut | Action | Description |
 | :--- | :--- | :--- |
@@ -200,6 +210,8 @@ When initialized with a Google Gemini API key (`geminiApiKey: '...'`):
 | **`↑`** (Arrow Up) | **Previous Result** | Moves highlight up through ranked cards. |
 | **`Enter`** (Return) | **Select & Jump** | Jumps to selected section, smoothly centers viewport, and pulses target. |
 | **`Escape`** (ESC) | **Dismiss** | Closes the search modal immediately. |
+
+</div>
 
 ### 4.2 Query Tricks & Syntax Operators
 - **Typo-Tolerant Search:** Type phonetic or misspelled words (e.g., `"delhii"`, `"kuik"`, `"shippment"`). The engine automatically matches the closest dictionary root.
@@ -230,7 +242,7 @@ Typing `?` or `help` into the search input replaces the results list with an int
       data: [
         { id: 'app-events', title: 'Events Countdown', content: 'Countdown timers for major upcoming events.', url: '../01-Events-Countdown/index.html', category: 'Productivity' },
         { id: 'app-namaz', title: 'Namaz Prayer Times', content: 'Accurate prayer times, wudu, and Ramadan schedule.', url: '../02-Namaz-Prayer-Times/index.html', category: 'Islamic' },
-        { id: 'app-pincode', title: 'India Pincode Directory', content: 'Fast postal code search for all Indian states and districts.', url: '../08-Pincode-Search/index.html', category: 'Tools' },
+        { id: 'app-pincode', title: 'India Pincode Directory', content: 'Fast postal code search for all Indian states and districts.', url: '../04-Pincode-Search/index.html', category: 'Tools' },
         { id: 'app-weight', title: 'Weight Gain Protocol', content: 'Calorie surplus diet plans, shakes, and workout guide.', url: '../13-Sustainable-Weight-Gain-Guide/Weight_Gain_Dashboard.html', category: 'Health' }
       ],
       synonyms: {
@@ -247,11 +259,11 @@ Typing `?` or `help` into the search input replaces the results list with an int
 
 ---
 
-### Recipe 2: India National Pincode Search (`08-Pincode-Search`)
+### Recipe 2: India National Pincode Search (`04-Pincode-Search`)
 *Use Case: Tolerates misspellings in city, taluk, and post office names.*
 
 ```html
-<!-- Include in 08-Pincode-Search/index.html -->
+<!-- Include in 04-Pincode-Search/index.html -->
 <link rel="stylesheet" href="../Common-Resources/AI-Search-Kit/ai_search.css">
 <script src="../Common-Resources/AI-Search-Kit/ai_search.js"></script>
 

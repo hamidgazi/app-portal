@@ -34,6 +34,8 @@ Now, as you step into the sacred territory of **Surah Al-Fatiha**, the **Daily N
 
 Master these 15 essential, high-frequency sacred words that form the bedrock of daily prayer and Quranic reflection. Notice the precise Harakat, roots, and canonical meanings:
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Arabic Script | Roman Urdu | Kanzul Iman (امام احمد رضا) | Kanzul Irfan (مفتی قاسم) | English Meaning | 3-Letter Root | Category |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **اَلْحَمْدُ** | *Al-Hamdu* | سب خوبیاں | سب تعریفیں | All praise & gratitude | ح - م - د | Ism (Marfoo' with Pesh `ُ`) |
@@ -51,6 +53,8 @@ Master these 15 essential, high-frequency sacred words that form the bedrock of 
 | **صَلَاةٌ / صَلِّ** | *Salaatun / Salli* | درود / نماز | رحمت / نماز | Prayer / Send blessings | ص - ل - و | Ism / Fi'l Amr (Dua) |
 | **اَحَدٌ** | *Ahadun* | ایک ہے | ایک ہے | The Absolute One | أ - ح - د | Ism (Predicate Khabar) |
 | **الصَّمَدُ** | *As-Samadu* | بے نیاز | بے نیاز | The Self-Sufficient Eternal | ص - م - د | Ism (Predicate Khabar) |
+
+</div>
 
 ---
 

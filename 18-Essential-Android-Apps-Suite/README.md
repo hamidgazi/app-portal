@@ -9,7 +9,7 @@
 
 Modern factory Android installations arrive congested with background telemetry, pre-installed manufacturer bloatware, non-stop in-app advertisements, and aggressive cloud lock-in. 
 
-**Project 11 (`11-Essential-Android-Apps-Suite`)** delivers the mobile counterpart to Project 10 (PC Software Suite), establishing:
+**Project 11 (`18-Essential-Android-Apps-Suite`)** delivers the mobile counterpart to Project 10 (PC Software Suite), establishing:
 1. **The 5 Intuitive Activity Clusters & 2 Dedicated Hubs**:
    - **📁 Cluster 1: Everyday Essentials & File Operations** (Brave Browser, MiXplorer Silver, Material Files, Aves Libre Photo Gallery, ZArchiver, LocalSend)
    - **📄 Cluster 2: Reading, Documents & Knowledge Base** (ReadEra Book Reader, Xodo PDF Editor & Markup, Collabora Office, Markor Notes)
@@ -26,17 +26,21 @@ Modern factory Android installations arrive congested with background telemetry,
 
 ## 📦 2. Deliverables Catalog
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Deliverable Asset | Format | Direct Clickable Link | Operational Purpose |
 | :--- | :---: | :--- | :--- |
-| **Master Mobile Apps Guide** | Markdown (`.md`) | [Essential_Android_Apps_Master_Guide.md](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/11-Essential-Android-Apps-Suite/Essential_Android_Apps_Master_Guide.md) | Restructured 5-cluster guide with 1-Screen Quick-Finder, cluster summary tables, Secret Web Arsenal, and Interoperability Playbook. |
-| **Project Navigation Hub** | Markdown (`.md`) | [README.md](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/11-Essential-Android-Apps-Suite/README.md) | Executive directory hub, architecture overview, and quick-start setup. |
+| **Master Mobile Apps Guide** | Markdown (`.md`) | [Essential_Android_Apps_Master_Guide.md](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/18-Essential-Android-Apps-Suite/Essential_Android_Apps_Master_Guide.md) | Restructured 5-cluster guide with 1-Screen Quick-Finder, cluster summary tables, Secret Web Arsenal, and Interoperability Playbook. |
+| **Project Navigation Hub** | Markdown (`.md`) | [README.md](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/18-Essential-Android-Apps-Suite/README.md) | Executive directory hub, architecture overview, and quick-start setup. |
+
+</div>
 
 ---
 
 ## 📂 3. Annotated Directory Tree
 
 ```
-c:/Users/Shop PC 2/OneDrive/Desktop/Antigravity Files/11-Essential-Android-Apps-Suite/
+c:/Users/Shop PC 2/OneDrive/Desktop/Antigravity Files/18-Essential-Android-Apps-Suite/
 ├── README.md                                  # Executive navigation hub and repository overview
 └── Essential_Android_Apps_Master_Guide.md     # Restructured 5-cluster guide with Web Arsenal & Playbook
 ```

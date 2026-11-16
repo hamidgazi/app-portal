@@ -9,7 +9,7 @@
 
 A high-performance Windows workstation requires software that is fast, resilient, zero-bloat, and respects user privacy. Standard consumer Windows installations suffer from sluggish search indexers, crashing large-file copies, bloated subscription-based PDF software, and uninstaller leftovers.
 
-**Project 10 (`10-Essential-PC-Software-Suite`)** provides:
+**Project 10 (`14-Essential-PC-Software-Suite`)** provides:
 1. **The 5 Intuitive Activity Clusters & 2 Dedicated Hubs**:
    - **📁 Cluster 1: Everyday Essentials & File Operations** (Web Browsing, Instant Search, Dual-Pane Manager, Storage Forensics, Zip Archiving, Local File Sharing)
    - **📄 Cluster 2: Reading, Documents & Knowledge Base** (SumatraPDF, PDF-XChange Editor, LibreOffice Suite, Obsidian PKM)
@@ -26,19 +26,23 @@ A high-performance Windows workstation requires software that is fast, resilient
 
 ## 📦 2. Deliverables Catalog
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Deliverable Asset | Format | Direct Clickable Link | Operational Purpose |
 | :--- | :---: | :--- | :--- |
-| **Master Software Guide** | Markdown (`.md`) | [Essential_PC_Software_Master_Guide.md](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/10-Essential-PC-Software-Suite/Essential_PC_Software_Master_Guide.md) | Restructured 5-cluster guide with 1-Screen Quick-Finder, cluster summary tables, Secret Web Arsenal, and Interoperability Playbook. |
-| **Interactive Winget Installer** | PowerShell (`.ps1`) | [Install_Essential_Software.ps1](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/10-Essential-PC-Software-Suite/Install_Essential_Software.ps1) | Menu-driven console installer for 1-click batch installation by category, hidden gems, or full workstation bundle. |
-| **1-Click Batch Launcher** | Batch (`.bat`) | [Quick_Install_Menu.bat](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/10-Essential-PC-Software-Suite/Quick_Install_Menu.bat) | Double-clickable desktop wrapper executing the PowerShell installer with execution policy bypass. |
-| **Chocolatey Installer** | Batch (`.bat`) | [Install_Chocolatey.bat](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/10-Essential-PC-Software-Suite/Install_Chocolatey.bat) | 1-Click self-elevating installer for the official Chocolatey package manager engine. |
+| **Master Software Guide** | Markdown (`.md`) | [Essential_PC_Software_Master_Guide.md](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/14-Essential-PC-Software-Suite/Essential_PC_Software_Master_Guide.md) | Restructured 5-cluster guide with 1-Screen Quick-Finder, cluster summary tables, Secret Web Arsenal, and Interoperability Playbook. |
+| **Interactive Winget Installer** | PowerShell (`.ps1`) | [Install_Essential_Software.ps1](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/14-Essential-PC-Software-Suite/Install_Essential_Software.ps1) | Menu-driven console installer for 1-click batch installation by category, hidden gems, or full workstation bundle. |
+| **1-Click Batch Launcher** | Batch (`.bat`) | [Quick_Install_Menu.bat](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/14-Essential-PC-Software-Suite/Quick_Install_Menu.bat) | Double-clickable desktop wrapper executing the PowerShell installer with execution policy bypass. |
+| **Chocolatey Installer** | Batch (`.bat`) | [Install_Chocolatey.bat](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/14-Essential-PC-Software-Suite/Install_Chocolatey.bat) | 1-Click self-elevating installer for the official Chocolatey package manager engine. |
+
+</div>
 
 ---
 
 ## 📂 3. Annotated Directory Tree
 
 ```
-c:/Users/Shop PC 2/OneDrive/Desktop/Antigravity Files/10-Essential-PC-Software-Suite/
+c:/Users/Shop PC 2/OneDrive/Desktop/Antigravity Files/14-Essential-PC-Software-Suite/
 ├── README.md                                  # Executive navigation hub and repository overview
 ├── Essential_PC_Software_Master_Guide.md      # Restructured 5-cluster guide with Web Arsenal & Playbook
 ├── Install_Essential_Software.ps1             # Interactive PowerShell Winget batch installer
@@ -51,11 +55,11 @@ c:/Users/Shop PC 2/OneDrive/Desktop/Antigravity Files/10-Essential-PC-Software-S
 ## ⚡ 4. Quick-Start & Operational Commands
 
 ### 1-Click GUI/Console Launch
-Double-click **[`Quick_Install_Menu.bat`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/10-Essential-PC-Software-Suite/Quick_Install_Menu.bat)** to open the interactive category installer.
+Double-click **[`Quick_Install_Menu.bat`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/14-Essential-PC-Software-Suite/Quick_Install_Menu.bat)** to open the interactive category installer.
 
 ### Manual PowerShell Execution
 ```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File "c:\Users\Shop PC 2\OneDrive\Desktop\Antigravity Files\10-Essential-PC-Software-Suite\Install_Essential_Software.ps1"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "c:\Users\Shop PC 2\OneDrive\Desktop\Antigravity Files\14-Essential-PC-Software-Suite\Install_Essential_Software.ps1"
 ```
 
 ### Direct Winget Single-App Commands

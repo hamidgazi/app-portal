@@ -33,6 +33,8 @@ Notice how natural and flowing Classical Arabic becomes when combining proximity
 
 Here are 15 high-frequency everyday nouns featuring nature, animals, and professions:
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Arabic Script | Roman Urdu / Pronunciation | Urdu Meaning | English Meaning | Grammatical Category |
 | :--- | :--- | :--- | :--- | :--- |
 | **ذٰلِكَ** | *Dhaalika* | وہ (دور کے لیے) | That (Masc. distant) | Demonstrative Pronoun |
@@ -50,6 +52,8 @@ Here are 15 high-frequency everyday nouns featuring nature, animals, and profess
 | **حِمَارٌ** | *Himaarun* | گدھا | A donkey | Noun (Animal, Masc.) |
 | **حِصَانٌ** | *Hisaanun* | گھوڑا | A horse | Noun (Animal, Masc.) |
 | **جَمَلٌ** | *Jamalun* | اونٹ | A camel | Noun (Animal, Masc.) |
+
+</div>
 
 ---
 

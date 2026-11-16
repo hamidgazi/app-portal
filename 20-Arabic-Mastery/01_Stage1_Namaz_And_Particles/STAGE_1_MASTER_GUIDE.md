@@ -20,11 +20,15 @@ In this stage, you will master:
 
 In classical Arabic lexicography, every word (*Kalimah*) in the dictionary and the Qur'an falls into exactly one of three categories:
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Category | Arabic Term | Urdu Equivalent | English Meaning | Definition & Identification Marks |
 | :--- | :--- | :--- | :--- | :--- |
 | **1. The Noun / Adjective** | **الِاسْم (Al-Ism)** | اسم (Ism) | Noun, Pronoun, Adjective, Name | Indicates a person, place, thing, attribute, or idea, **independent of time**. <br>• Signs: Has *Alif-Laam* (ال), has *Tanween* (ٌ ً ٍ), follows a Harf Jarr, or is possessed. |
 | **2. The Verb / Action** | **الفِعْل (Al-Fi'l)** | فعل (Fi'l) | Verb, Action Word | Indicates an action or state **bound to time** (Past, Present/Future, or Command). <br>• Signs: Accepts *Qad* (قد), *Seen* (سـ), *Sawfa* (سوف), or past-tense suffix *Ta* (تْ). |
 | **3. The Particle / Connector** | **الحَرْف (Al-Harf)** | حرف (Harf) | Preposition, Conjunction, Particle | Has **no complete meaning on its own**; its meaning only appears when joined to an Ism or Fi'l. <br>• Examples: *Fee* (في - in), *Min* (من - from), *Wa* (و - and). |
+
+</div>
 
 > [!NOTE]
 > **The Urdu Connection**: Just like Urdu says *"Yeh cheez ek Ism hai"* or *"Yeh kaam ek Fi'l hai"*, Arabic uses identical concepts. If it doesn't have a tense/clock attached, it is an **Ism**. If it has a tense/clock (he did, he does, do!), it is a **Fi'l**. If it's a small glue word, it is a **Harf**.
@@ -41,6 +45,8 @@ Pronouns are classified as **Ism** in Arabic. Arabic has a rigorous, beautiful s
 ### Table 1: Detached Pronouns (الضمائر المنفصلة) — Standalone Words
 These stand by themselves as the subject of a sentence:
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Person | Gender | Singular (واحد) | Dual (تثنیہ - Two) | Plural (جمع - 3+) | Urdu Meaning |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **3rd Person (غائب)** | Masc. | **هُوَ** (*Huwa*) - He | **هُمَا** (*Humaa*) - They two | **هُمْ** (*Hum*) - They all | وہ (مرد) / وہ سب |
@@ -49,8 +55,12 @@ These stand by themselves as the subject of a sentence:
 | **2nd Person (حاضر)** | Fem. | **أَنْتِ** (*Anti*) - You | **أَنْتُمَا** (*Antumaa*) - You two | **أَنْتُنَّ** (*Antunna*) - You all | آپ (عورت) / تم سب |
 | **1st Person (متکلم)** | Common| **أَنَا** (*Anaa*) - I | — | **نَحْنُ** (*Nahnu*) - We | میں / ہم |
 
+</div>
+
 ### Table 2: Attached Pronouns (الضمائر المتصلة) — Suffixes
 These attach to the end of an Ism (showing possession: "his book"), Harf (showing direction: "to him"), or Fi'l (showing direct object: "helped him"):
+
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
 
 | Person | Suffix | With an Ism (*Kitaab* = Book) | Meaning | With a Harf (*Lahu* = For him) |
 | :--- | :--- | :--- | :--- | :--- |
@@ -61,6 +71,8 @@ These attach to the end of an Ism (showing possession: "his book"), Harf (showin
 | 2nd Masc. Plur. | **ـكُمْ** (*-kum*) | كِتَابُكُمْ (*Kitaabu-kum*) | Your (all) book (تم سب کی کتاب)| لَكُمْ (*La-kum*) - For you all |
 | 1st Person Sing.| **ـي** (*-ee*) | كِتَابِي (*Kitaab-ee*) | My book (میری کتاب) | لِي (*Lee*) - For me |
 | 1st Person Plur.| **ـنَا** (*-naa*) | كِتَابُنَا (*Kitaabu-naa*) | Our book (ہماری کتاب) | لَنَا (*La-naa*) - For us |
+
+</div>
 
 ---
 
@@ -73,6 +85,8 @@ In Arabic, prepositions are called **Huroof al-Jarr**. Their absolute superpower
 
 Here are the 8 most frequent prepositions in the Qur'an:
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Arabic Particle | Transliteration | Urdu Meaning | English Meaning | Quranic Example |
 | :--- | :--- | :--- | :--- | :--- |
 | **فِي** | *Fee* | میں | In / Inside | فِي سَبِيلِ اللَّهِ (*Fee sabeel-il-Laah*) |
@@ -83,6 +97,8 @@ Here are the 8 most frequent prepositions in the Qur'an:
 | **لِـ** | *Li-* | کے لیے | For / Belonging to | لِلَّهِ (*Lil-Laah*) |
 | **عَنْ** | *'An* | سے / بارے میں | From / About | رَضِيَ اللَّهُ عَنْهُمْ (*Radiya-l-Laahu 'an-hum*) |
 | **كَـ** | *Ka-* | کی طرح / مانند | Like / As | كَعَصْفٍ مَّأْكُولٍ (*Ka-'asfin ma'kool*) |
+
+</div>
 
 ---
 

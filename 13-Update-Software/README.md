@@ -17,30 +17,29 @@ PC Software Update Hub is a high-performance Windows desktop package center engi
 
 ## 📦 2. Deliverables Catalog
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Deliverable Asset | Format | Direct File Link | Operational Purpose |
 | :--- | :---: | :--- | :--- |
-| **Silent VBS Launcher** | `.vbs` | [Update_PC_Software.vbs](file:///C:/Users/Shop%20PC%202/OneDrive/Desktop/Update_PC_Software.vbs) | 1-click Desktop launcher with **0 black console windows** and 0 Command Processor popups. |
-| **Desktop Windows Shortcut** | `.lnk` | [Update PC Software.lnk](file:///C:/Users/Shop%20PC%202/OneDrive/Desktop/Update%20PC%20Software.lnk) | Branded desktop shortcut with official Windows software update icon (`shell32.dll,238`). |
-| **Direct Batch Launcher** | `.bat` | [Update_PC_Software.bat](file:///C:/Users/Shop%20PC%202/OneDrive/Desktop/Update_PC_Software.bat) | Direct fallback launcher that calls PowerShell elevated without elevating `cmd.exe`. |
-| **Master GUI Engine** | `.ps1` | [PC_Software_Updater.ps1](file:///C:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/06-Update%20Softwares/PC_Software_Updater.ps1) | The core Fluent dark-themed WPF graphical user interface and multi-channel update engine. |
-| **Transaction History** | `.log` | [update_history.log](file:///C:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/06-Update%20Softwares/update_history.log) | Real-time diagnostic activity journal recording scans, installations, and error codes. |
+| **Silent VBS Launcher** | `.vbs` | [Update_PC_Software.vbs](file:///C:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/13-Update-Software/Update_PC_Software.vbs) | 1-click launcher with **0 black console windows** and 0 Command Processor popups. |
+| **Direct Batch Launcher** | `.bat` | [Update_PC_Software.bat](file:///C:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/13-Update-Software/Update_PC_Software.bat) | Direct fallback launcher that calls PowerShell elevated without elevating `cmd.exe`. |
+| **Master GUI Engine** | `.ps1` | [PC_Software_Updater.ps1](file:///C:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/13-Update-Software/PC_Software_Updater.ps1) | The core Fluent dark-themed WPF graphical user interface and multi-channel update engine. |
+| **Transaction History** | `.log` | [update_history.log](file:///C:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/13-Update-Software/update_history.log) | Real-time diagnostic activity journal recording scans, installations, and error codes. |
+
+</div>
 
 ---
 
 ## 📂 3. Annotated Directory Tree
 
 ```
-c:/Users/Shop PC 2/OneDrive/Desktop/
-├── Update_PC_Software.vbs               # Primary silent Desktop launcher (0 console windows)
-├── Update PC Software.lnk               # Desktop shortcut with Windows software update icon
-├── Update_PC_Software.bat               # Fallback Desktop batch launcher
-└── Antigravity Files/
-    └── 06-Update-Software/             # Dedicated Project Repository
-        ├── PC_Software_Updater.ps1      # Master WPF GUI & Autonomous Engine
-        ├── Update_PC_Software.bat       # Local directory batch launcher
-        ├── Update_PC_Software.vbs       # Local directory silent VBS launcher
-        ├── update_history.log           # Real-time transaction and diagnostic log
-        └── README.md                    # Executive project documentation hub
+Antigravity Files/
+└── 13-Update-Software/                  # Dedicated Project Repository
+    ├── PC_Software_Updater.ps1          # Master WPF GUI & Autonomous Engine
+    ├── Update_PC_Software.bat           # Local directory batch launcher
+    ├── Update_PC_Software.vbs           # Local directory silent VBS launcher
+    ├── update_history.log               # Real-time transaction and diagnostic log
+    └── README.md                        # Executive project documentation hub
 ```
 
 ---
@@ -48,11 +47,11 @@ c:/Users/Shop PC 2/OneDrive/Desktop/
 ## ⚡ 4. Quick-Start & Operational Commands
 
 ### 1-Click Execution (Recommended)
-Double-click either **[`Update_PC_Software.vbs`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Update_PC_Software.vbs)** or **[`Update PC Software.lnk`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Update%20PC%20Software.lnk)** on your Desktop.
+Double-click [`Update_PC_Software.vbs`](file:///C:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/13-Update-Software/Update_PC_Software.vbs) or [`Update_PC_Software.bat`](file:///C:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/13-Update-Software/Update_PC_Software.bat).
 
 ### Manual Terminal Launch (PowerShell)
 ```powershell
-powershell -WindowStyle Hidden -NoProfile -ExecutionPolicy Bypass -File "C:\Users\Shop PC 2\OneDrive\Desktop\Antigravity Files\06-Update-Software\PC_Software_Updater.ps1"
+powershell -WindowStyle Hidden -NoProfile -ExecutionPolicy Bypass -File "C:\Users\Shop PC 2\OneDrive\Desktop\Antigravity Files\13-Update-Software\PC_Software_Updater.ps1"
 ```
 
 ### Script Syntax Integrity Verification

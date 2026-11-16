@@ -21,6 +21,8 @@
 
 Smartphone manufacturers frequently rely on inflated on-paper metrics that mislead buyers in retail showrooms. Below is the operational truth behind common marketing tactics:
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Marketing Claim | On-Paper Specification | Real-World Practical Reality |
 | :--- | :--- | :--- |
 | **"5,000+ Nits Peak Brightness"** | Measured on a microscopic 1% display window for 2 seconds in a refrigerated lab. | In direct outdoor sunlight, the screen triggers thermal limits and throttles to **800–1,200 sustained nits** after 3 minutes to avoid thermal shutdown. |
@@ -29,6 +31,8 @@ Smartphone manufacturers frequently rely on inflated on-paper metrics that misle
 | **"10,000mAh Monster Battery"** | Multi-day battery endurance. | Adds significant weight (**220g+**) and thickness (**> 9mm**), causing severe pinky finger and wrist strain during one-handed bed or couch browsing. |
 | **"60W–90W Blazing Fast Charging"** | Full charge in 25–35 minutes. | Often accompanied by aggressive thermal degradation over 2–3 years unless high-grade dual-cell split architectures and smart battery cycle algorithms are implemented. |
 | **"6 Years of Android Updates"** | OEM marketing promise. | Only valuable if the OEM delivers rapid, bug-free OTA patches. Budget/tier-2 lines often experience delayed or buggy major updates after Year 2. |
+
+</div>
 
 ---
 
@@ -111,6 +115,8 @@ mindmap
 
 ## 📊 Master Practical Comparison Matrix
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Model | Price (Approx) | Form & Weight | Display & PWM | Processor & Sustained Thermals | Primary & Secondary Cameras | Software & Bloatware | Battery & Charger Policy | Ingress (IP Rating) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Samsung Galaxy A56 5G** | ₹35,999 | 198g, 7.4mm, Flat Glass/Metal | 6.7" FHD+ 120Hz AMOLED, 1000 nits HBM, 480Hz PWM | Exynos 1580 (4nm), Stable 60fps, low heat | 50MP Sony IMX906 (OIS) + 12MP UW + 5MP Macro; 4K60 Front | **One UI 7 (Android 15/16)**, Zero ads, **6 OS / 6 Yrs Sec** | 5,000mAh, 45W, **NO charger in box** | **IP67** |
@@ -123,6 +129,8 @@ mindmap
 | **OPPO K14 Plus 5G** | ₹23,999 | 210g, 8.5mm, Flat | 6.78" 144Hz AMOLED, 1200 nits HBM, 2160Hz PWM | Dimensity 7360 MAX, Reliable daily multi-task | 50MP (OIS) + 2MP secondary; 16MP Front | ColorOS 16, High notification spam, 2–3 OS updates | **8,000mAh**, 80W, **80W charger IN BOX** | IP64 |
 | *Benchmark*: **iQOO Neo 10** | ₹33,999 | 196g, 7.9mm, Flat | 6.78" 1.5K 144Hz 8T LTPO, 1800 nits HBM, 2160Hz PWM | **Snapdragon 8s Gen 4 / 8 Gen 3 class**, Vapor chamber | 50MP Sony IMX921 (OIS) + 8MP UW; 16MP Front | Funtouch OS 16, Moderate bloat, 3 OS updates | 6,500mAh, **120W**, **120W charger IN BOX** | IP65 |
 | *Benchmark*: **Nothing Phone (3a) Pro** | ₹28,999 | 190g, 8.1mm, Flat Symmetrical | 6.7" FHD+ 120Hz AMOLED, 1300 nits HBM, 2160Hz PWM | Dimensity 7350 Pro, Smooth everyday speed | 50MP Sony (OIS) + 50MP UW + 50MP Tele; 32MP Front | **Nothing OS**, **Zero bloatware**, 3 OS updates | 5,500mAh, 50W, Charger depends on region | IP64 |
+
+</div>
 
 ---
 

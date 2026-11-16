@@ -18,19 +18,23 @@ All optimizations are strictly software-based, 100% reversible, and require **ze
 
 ## 2. Deliverables Catalog
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Deliverable | Format | Location | Purpose |
 | :--- | :--- | :--- | :--- |
-| **System Acceleration Launcher** | `.bat` | [`Apply PC Acceleration.bat`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-System%20Acceleration/scripts/Apply_System_Tweaks.ps1) | 1-Click launcher applying system-level service and memory tweaks. |
-| **System Rollback Launcher** | `.bat` | [`Rollback PC Acceleration.bat`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-System%20Acceleration/scripts/Rollback_PC_Acceleration.ps1) | 1-Click launcher restoring all Windows default settings, services, and power schemes. |
-| **Disable Intel Usage Report** | `.vbs` / `.bat` | [`Disable_Intel_Usage_Report.vbs`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-System%20Acceleration/Disable_Intel_Usage_Report.vbs) | 1-Click silent launcher disabling Intel SUR and DSA telemetry services, freeing **~585 MB RAM**. |
-| **Rollback Intel Usage Report** | `.vbs` / `.bat` | [`Rollback_Intel_Usage_Report.vbs`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-System%20Acceleration/Rollback_Intel_Usage_Report.vbs) | 1-Click launcher re-enabling Intel SUR and DSA services. |
-| **Windows Defender Optimizer** | `.vbs` / `.ps1` | [`Optimize_Windows_Defender.vbs`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-System%20Acceleration/Optimize_Windows_Defender.vbs) | Silent 1-click launcher taming MsMpEng.exe, capping CPU at 15%, and breaking the self-scan loop. |
-| **Windows Defender Rollback** | `.vbs` / `.ps1` | [`Rollback_Windows_Defender.vbs`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-System%20Acceleration/Rollback_Windows_Defender.vbs) | 1-click launcher restoring default Defender CPU load factors and scanning settings. |
-| **Disable Defender Completely** | `.vbs` / `.bat` | [`Disable_Defender_Full.vbs`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-System%20Acceleration/Disable_Defender_Full.vbs) | Silent 1-click launcher turning off Defender policies and freeing **~336 MB RAM** (0 MB RAM used). |
-| **Re-Enable Defender Full** | `.vbs` / `.bat` | [`Enable_Defender_Full.vbs`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-System%20Acceleration/Enable_Defender_Full.vbs) | 1-click launcher restoring active Defender real-time protection. |
-| **Restore App Icons & Pagefile** | `.vbs` / `.bat` | [`Restore_App_Icons.vbs`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-System%20Acceleration/Restore_App_Icons.vbs) | 1-Click silent launcher repairing corrupted UWP Store app icons (WhatsApp, Telegram, ChatGPT), restoring SSD Pagefile virtual memory, and configuring SearchApp. |
+| **System Acceleration Launcher** | `.bat` | [`Apply PC Acceleration.bat`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/12-System-Acceleration/scripts/Apply_System_Tweaks.ps1) | 1-Click launcher applying system-level service and memory tweaks. |
+| **System Rollback Launcher** | `.bat` | [`Rollback PC Acceleration.bat`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/12-System-Acceleration/scripts/Rollback_PC_Acceleration.ps1) | 1-Click launcher restoring all Windows default settings, services, and power schemes. |
+| **Disable Intel Usage Report** | `.vbs` / `.bat` | [`Disable_Intel_Usage_Report.vbs`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/12-System-Acceleration/Disable_Intel_Usage_Report.vbs) | 1-Click silent launcher disabling Intel SUR and DSA telemetry services, freeing **~585 MB RAM**. |
+| **Rollback Intel Usage Report** | `.vbs` / `.bat` | [`Rollback_Intel_Usage_Report.vbs`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/12-System-Acceleration/Rollback_Intel_Usage_Report.vbs) | 1-Click launcher re-enabling Intel SUR and DSA services. |
+| **Windows Defender Optimizer** | `.vbs` / `.ps1` | [`Optimize_Windows_Defender.vbs`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/12-System-Acceleration/Optimize_Windows_Defender.vbs) | Silent 1-click launcher taming MsMpEng.exe, capping CPU at 15%, and breaking the self-scan loop. |
+| **Windows Defender Rollback** | `.vbs` / `.ps1` | [`Rollback_Windows_Defender.vbs`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/12-System-Acceleration/Rollback_Windows_Defender.vbs) | 1-click launcher restoring default Defender CPU load factors and scanning settings. |
+| **Disable Defender Completely** | `.vbs` / `.bat` | [`Disable_Defender_Full.vbs`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/12-System-Acceleration/Disable_Defender_Full.vbs) | Silent 1-click launcher turning off Defender policies and freeing **~336 MB RAM** (0 MB RAM used). |
+| **Re-Enable Defender Full** | `.vbs` / `.bat` | [`Enable_Defender_Full.vbs`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/12-System-Acceleration/Enable_Defender_Full.vbs) | 1-click launcher restoring active Defender real-time protection. |
+| **Restore App Icons & Pagefile** | `.vbs` / `.bat` | [`Restore_App_Icons.vbs`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/12-System-Acceleration/Restore_App_Icons.vbs) | 1-Click silent launcher repairing corrupted UWP Store app icons (WhatsApp, Telegram, ChatGPT), restoring SSD Pagefile virtual memory, and configuring SearchApp. |
 | **Executive Plan Artifact** | `.md` | [`system_acceleration_plan.md`](file:///C:/Users/Shop%20PC%202/.gemini/antigravity/brain/21a33fd0-d74a-484f-98c0-47fef47d0e7f/system_acceleration_plan.md) | Architectural roadmap and telemetry findings. |
-| **Registry Snapshots & Backups** | `.reg` / `.lnk` | [`backups/`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-System%20Acceleration/backups/) | Full pre-optimization registry exports and backed up startup shortcuts. |
+| **Registry Snapshots & Backups** | `.reg` / `.lnk` | [`backups/`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/12-System-Acceleration/backups/) | Full pre-optimization registry exports and backed up startup shortcuts. |
+
+</div>
 
 ---
 
@@ -38,7 +42,7 @@ All optimizations are strictly software-based, 100% reversible, and require **ze
 
 ```
 Antigravity Files/
-└── 07-System-Acceleration/
+└── 12-System-Acceleration/
     ├── README.md                           <-- Master navigation hub & documentation
     ├── Restore_App_Icons.vbs               <-- 1-Click silent launcher repairing broken UWP Store icons & Pagefile
     ├── Restore_App_Icons.bat               <-- Batch wrapper for App Icon & Pagefile restoration
@@ -85,32 +89,32 @@ Antigravity Files/
 ## 4. Quick-Start & Maintenance Commands
 
 ### Apply System-Level Optimizations (Elevated)
-Double-click [`Apply PC Acceleration.bat`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Apply%20PC%20Acceleration.bat) on the Desktop and click **"Yes"** on the Windows UAC prompt.
+Double-click [`Optimize_Windows_Defender.bat`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/12-System-Acceleration/Optimize_Windows_Defender.bat) or run [`Apply_System_Tweaks.ps1`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/12-System-Acceleration/scripts/Apply_System_Tweaks.ps1) and click **"Yes"** on the Windows UAC prompt.
 
 Or run manually from an Administrator PowerShell prompt:
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File "c:\Users\Shop PC 2\OneDrive\Desktop\Antigravity Files\07-System-Acceleration\scripts\Apply_System_Tweaks.ps1"
+powershell -NoProfile -ExecutionPolicy Bypass -File "c:\Users\Shop PC 2\OneDrive\Desktop\Antigravity Files\12-System-Acceleration\scripts\Apply_System_Tweaks.ps1"
 ```
 
 ### Apply Windows Defender & Antimalware Service Optimization (Elevated)
-Double-click [`Optimize_Windows_Defender.vbs`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-System%20Acceleration/Optimize_Windows_Defender.vbs) (or [`Optimize_Windows_Defender.bat`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-System%20Acceleration/Optimize_Windows_Defender.bat)) and click **"Yes"** on the Windows UAC prompt.
+Double-click [`Optimize_Windows_Defender.vbs`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/12-System-Acceleration/Optimize_Windows_Defender.vbs) (or [`Optimize_Windows_Defender.bat`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/12-System-Acceleration/Optimize_Windows_Defender.bat)) and click **"Yes"** on the Windows UAC prompt.
 
 Or run manually from an Administrator PowerShell prompt:
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File "c:\Users\Shop PC 2\OneDrive\Desktop\Antigravity Files\07-System-Acceleration\scripts\Optimize_Windows_Defender.ps1"
+powershell -NoProfile -ExecutionPolicy Bypass -File "c:\Users\Shop PC 2\OneDrive\Desktop\Antigravity Files\12-System-Acceleration\scripts\Optimize_Windows_Defender.ps1"
 ```
 
 ### Disable Intel Usage Report & DSA Telemetry (Reclaim ~585 MB RAM)
-Double-click [`Disable_Intel_Usage_Report.vbs`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-System%20Acceleration/Disable_Intel_Usage_Report.vbs) (or [`Disable_Intel_Usage_Report.bat`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-System%20Acceleration/Disable_Intel_Usage_Report.bat)) and click **"Yes"** on the Windows UAC prompt.
+Double-click [`Disable_Intel_Usage_Report.vbs`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/12-System-Acceleration/Disable_Intel_Usage_Report.vbs) (or [`Disable_Intel_Usage_Report.bat`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/12-System-Acceleration/Disable_Intel_Usage_Report.bat)) and click **"Yes"** on the Windows UAC prompt.
 
 ### Re-Enable Intel Usage Report & DSA
-Double-click [`Rollback_Intel_Usage_Report.vbs`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-System%20Acceleration/Rollback_Intel_Usage_Report.vbs) and click **"Yes"** on the Windows UAC prompt.
+Double-click [`Rollback_Intel_Usage_Report.vbs`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/12-System-Acceleration/Rollback_Intel_Usage_Report.vbs) and click **"Yes"** on the Windows UAC prompt.
 
 ### Completely Disable Windows Defender (Reclaim ~336 MB RAM)
-Double-click [`Disable_Defender_Full.vbs`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-System%20Acceleration/Disable_Defender_Full.vbs) (or [`Disable_Defender_Full.bat`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-System%20Acceleration/Disable_Defender_Full.bat)) and click **"Yes"** on the Windows UAC prompt.
+Double-click [`Disable_Defender_Full.vbs`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/12-System-Acceleration/Disable_Defender_Full.vbs) (or [`Disable_Defender_Full.bat`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/12-System-Acceleration/Disable_Defender_Full.bat)) and click **"Yes"** on the Windows UAC prompt.
 
 ### Re-Enable Windows Defender Full Protection
-Double-click [`Enable_Defender_Full.vbs`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/07-System%20Acceleration/Enable_Defender_Full.vbs) and click **"Yes"** on the Windows UAC prompt.
+Double-click [`Enable_Defender_Full.vbs`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/12-System-Acceleration/Enable_Defender_Full.vbs) and click **"Yes"** on the Windows UAC prompt.
 
 ---
 

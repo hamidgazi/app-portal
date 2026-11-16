@@ -8,6 +8,8 @@ These ~40 small connector words account for over **$25\%$ of all running words i
 ## 1. Prepositions (حروف الجر - Huroof al-Jarr)
 *Rule*: Forces the following noun to take a **Kasrah / Zer (ِ / ٍ)** at its end.
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Particle | Transliteration | Urdu Meaning | English Meaning | Quranic Formula & Example |
 | :--- | :--- | :--- | :--- | :--- |
 | **فِي** | *Fee* | میں | In / Inside / Within | فِي الْقَلْبِ (*Fee-l-qalbi* - In the heart) |
@@ -20,9 +22,13 @@ These ~40 small connector words account for over **$25\%$ of all running words i
 | **كَـ** | *Ka-* | کی مانند / جیسا | Like / Resembling | كَالْجِبَالِ (*Kal-jibaali* - Like mountains) |
 | **حَتَّى** | *Hattaa* | یہاں تک کہ | Until / Up to | حَتَّى مَطْلَعِ الْفَجْرِ (*Until dawn*) |
 
+</div>
+
 ---
 
 ## 2. Conjunctions & Connectors (حروف العطف - Huroof al-'Atf)
+
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
 
 | Particle | Transliteration | Urdu Meaning | English Meaning | Function & Nuance |
 | :--- | :--- | :--- | :--- | :--- |
@@ -34,9 +40,13 @@ These ~40 small connector words account for over **$25\%$ of all running words i
 | **بَلْ** | *Bal* | بلکہ | Nay / Rather | Rectification / correcting a previous statement. |
 | **لَكِنْ** | *Laakin* | لیکن / مگر | But / However | Concession or contrast. |
 
+</div>
+
 ---
 
 ## 3. Emphasis & Assurance Particles (حروف التوكيد)
+
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
 
 | Particle | Transliteration | Urdu Meaning | English Meaning | Grammatical Impact |
 | :--- | :--- | :--- | :--- | :--- |
@@ -46,9 +56,13 @@ These ~40 small connector words account for over **$25\%$ of all running words i
 | **لَـ** | *La-* | البتہ / ضرور | Surely / Truly | Emphatic prefix: *La-fee khusr* (Surely in loss). |
 | **كَلَّا** | *Kallaa* | ہرگز نہیں! | Nay! / By no means! | Strong divine negation and rebuke. |
 
+</div>
+
 ---
 
 ## 4. Negation Particles (حروف النفي)
+
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
 
 | Particle | Transliteration | Urdu Meaning | English Meaning | Tense Target |
 | :--- | :--- | :--- | :--- | :--- |
@@ -58,9 +72,13 @@ These ~40 small connector words account for over **$25\%$ of all running words i
 | **لَنْ** | *Lan* | ہرگز نہیں کرے گا | Never will (Strict Future) | *Lan tanaaloo* (You shall never attain). |
 | **لَيْسَ** | *Laysa* | نہیں ہے | Is not / Are not | Negates an Ism / Nominal sentence. |
 
+</div>
+
 ---
 
 ## 5. Question & Interrogative Words (أسماء الاستفهام)
+
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
 
 | Word | Transliteration | Urdu Meaning | English Meaning | Example in Quran |
 | :--- | :--- | :--- | :--- | :--- |
@@ -72,3 +90,5 @@ These ~40 small connector words account for over **$25\%$ of all running words i
 | **كَمْ** | *Kam* | کتنا / کتنے | How many / How much? | كَمْ لَبِثْتُمْ (*How long did you remain?*) |
 | **أَيُّ** | *Ayyu* | کونسا | Which? | فَبِأَيِّ آلَاءِ رَبِّكُمَا (*Which favors of your Lord...*) |
 | **أَ / هَلْ** | *A / Hal* | کیا (ہاں یا نہ) | Is? / Are? / Do? | هَلْ أَتَاكَ (*Has there come to you...*) |
+
+</div>

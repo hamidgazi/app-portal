@@ -25,6 +25,8 @@ Users can search in English / Roman Urdu regardless of transliteration style, ma
 
 ## 📑 Deliverables Catalog
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Output Deliverable | Format | Access Link | Description |
 | :--- | :---: | :--- | :--- |
 | **Roman Naat Studio Web App** | Web App / PWA | [index.html](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/10-Roman-Naat/index.html) | Standalone client-side application with instant phonetic search, WhatsApp export, full reader modal, and recitation deck. |
@@ -37,6 +39,8 @@ Users can search in English / Roman Urdu regardless of transliteration style, ma
 | **Dataset Integrity Test Suite** | Python | [test_dataset_integrity.py](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/10-Roman-Naat/tests/test_dataset_integrity.py) | Unit test validating coverage, schema fields, and 100% unique kalam IDs. |
 | **Search Accuracy Test Suite** | Python | [test_search_accuracy.py](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/10-Roman-Naat/tests/test_search_accuracy.py) | Automated test validating recall and phonetic tolerance across varied Roman queries. |
 | **Script Compilation Test** | Node.js | [test_script_compilation.js](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/10-Roman-Naat/tests/test_script_compilation.js) | `node --check` test verifying 0 syntax errors across all JavaScript scripts. |
+
+</div>
 
 ---
 
@@ -96,11 +100,17 @@ node "c:/Users/Shop PC 2/OneDrive/Desktop/Antigravity Files/10-Roman-Naat/tests/
 
 ## 🛡️ Automated Quality & Verification Status
 
-- **Total Canonical Books**: 4 / 4 Parsed
-- **Total Valid Kalams**: 363 (100% with $>0$ couplets)
-- **Total Verses / Shers**: 7,893 Couplets
-- **Dataset Schema Integrity**: 4 / 4 Tests Passed (`0.145s`)
-- **Search Accuracy & Phonetics**: 5 / 5 Tests Passed (`0.438s`)
-- **JavaScript Syntax Check (`node --check`)**: 5 / 5 Files Clean (`0 Syntax Errors`)
-- **Music Policy (Directive 7)**: 100% Compliant (Zero musical tracks; procedural tactile Web Audio only)
-- **Offline & Mobile Ergonomics**: Zero-CORS bundle, $\ge 48\text{px}$ touch targets, responsive down to $320\text{px}$.
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
+| Verification&nbsp;Tier | Focus&nbsp;Area | Result | Status |
+| :--- | :--- | :---: | :---: |
+| **Corpus Extraction** | 4 Canonical Bareilly poetry books | 363 Kalams, 7,893 Shers | 🟢 100% Pass |
+| **Dataset Schema Integrity** | `test_dataset_integrity.py` schema validation | 4 / 4 passed (0.14s) | 🟢 100% Pass |
+| **Phonetic Search Accuracy** | `test_search_accuracy.py` recall & soundex | 5 / 5 passed (0.44s) | 🟢 100% Pass |
+| **Directive 5: Syntax Compilation** | `node --check` across all JS scripts | 0 syntax errors | 🟢 100% Pass |
+| **Directive 7: Zero Music** | Procedural Web Audio API sound effects only | 0 music tracks | 🟢 100% Pass |
+| **Directive 9: Responsive Tables** | All Markdown tables wrapped in `.table-responsive` | 100% compliant | 🟢 100% Pass |
+| **Offline Durability** | Zero-CORS pre-compiled bundle (`data/naat_library_data.js`) | 100% offline | 🟢 100% Pass |
+
+</div>
+

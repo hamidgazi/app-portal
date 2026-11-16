@@ -22,6 +22,8 @@ Designed according to the **Foundations-First Principle (The Madinah Book Law)**
 
 ## 2. Deliverables Catalog
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Deliverable | Direct Clickable File Link | Format | Description |
 | :--- | :--- | :--- | :--- |
 | **Interactive PWA Studio & Mobile Reader** | [index.html](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/20-Arabic-Mastery/index.html) | HTML5 / PWA | Royal Emerald & Gold Master Study Studio with embedded 15-chapter Kindle-style Mobile Book Reader, active-recall drills, Ayah inspector, flashcards & quizzes. |
@@ -43,6 +45,8 @@ Designed according to the **Foundations-First Principle (The Madinah Book Law)**
 | **Chapter 15: Grand Sacred Capstone** | [CHAPTER_15_GRAND_CAPSTONE_SACRED_QURAN_AND_NAMAZ.md](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/20-Arabic-Mastery/textbook_chapters/CHAPTER_15_GRAND_CAPSTONE_SACRED_QURAN_AND_NAMAZ.md) | Markdown | Full syntax of Surah Al-Fatiha, Daily Namaz Azkaar, and Short Surahs (Kanzul Iman & Irfan). |
 | **Automated Test Suite** | [test_interactive_app.py](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/20-Arabic-Mastery/tests/test_interactive_app.py) | Python Unit Test | `node --check` script compilation, 15 chapters check, 6-part anatomy & audio invariants. |
 | **Master Pedagogical Plan** | [arabic_learning_master_plan.md](file:///C:/Users/Shop%20PC%202/.gemini/antigravity/brain/f83e2021-d27c-4adc-a41d-693f3df2cb53/arabic_learning_master_plan.md) | Plan Artifact | Master implementation architecture approved for 15-chapter foundations-first self-study. |
+
+</div>
 
 ---
 

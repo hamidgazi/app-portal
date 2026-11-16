@@ -40,6 +40,8 @@ No linking verb is required. The moment you place a definite noun next to an ind
 
 Here are 16 essential adjectives and state-words used constantly in classical Arabic:
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Arabic Script | Roman Urdu | Urdu Meaning | English Meaning | Paired Opposite |
 | :--- | :--- | :--- | :--- | :--- |
 | **مَكْسُورٌ** | *Maksoorun* | ٹوٹا ہوا | Broken | — |
@@ -58,6 +60,8 @@ Here are 16 essential adjectives and state-words used constantly in classical Ar
 | **بَارِدٌ** | *Baaridun* | ٹھنڈا | Cold | حَارٌّ (Hot) |
 | **نَظِيفٌ** | *Natheefun* | صاف ستھرا | Clean | وَسِخٌ (Dirty) |
 | **جَمِيلٌ** | *Jameelun* | خوبصورت | Beautiful | — |
+
+</div>
 
 ---
 

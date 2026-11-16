@@ -21,6 +21,8 @@ It features a **standalone offline Progressive Web App (PWA)** specifically engi
 
 ## 2. 🌟 Deliverables Catalog
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Deliverable | Format | File Link | Scope | Status | Description |
 | :--- | :---: | :--- | :---: | :---: | :--- |
 | **Hadith Sciences Mobile PWA** | **PWA Web** | [web/index.html](file:///C:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/21-Hadith-Sciences-Encyclopedia/web/index.html) | All 12 Chapters | Active | Standalone mobile reader with live font switcher, chapter drawer, search, and reading progress bar. |
@@ -31,6 +33,8 @@ It features a **standalone offline Progressive Web App (PWA)** specifically engi
 | **Automated PWA Builder** | **Python** | [scripts/build_pwa.py](file:///C:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/21-Hadith-Sciences-Encyclopedia/scripts/build_pwa.py) | Compiler | Active | Deterministic Markdown-to-PWA compilation pipeline. |
 | **Curriculum & Implementation Plan** | **Artifact** | [hadith_guide_plan.md](file:///C:/Users/Shop%20PC%202/.gemini/antigravity/brain/72fa16d6-d991-4f94-b234-ebbb0e9c8e48/hadith_guide_plan.md) | Project Scope | Approved | Full architectural plan approved by the user during planning phase. |
 | **Walkthrough & Verification Summary** | **Artifact** | [walkthrough.md](file:///C:/Users/Shop%20PC%202/.gemini/antigravity/brain/72fa16d6-d991-4f94-b234-ebbb0e9c8e48/walkthrough.md) | Summary | Active | Final verification log and complete chapter catalog. |
+
+</div>
 
 ---
 

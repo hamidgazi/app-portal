@@ -9,7 +9,7 @@
  * ============================================================================
  */
 
-const CACHE_NAME = 'quran-deep-analyzer-v2.1.3';
+const CACHE_NAME = 'quran-deep-analyzer-v2.2.0';
 
 const PRECACHE_ASSETS = [
   './',

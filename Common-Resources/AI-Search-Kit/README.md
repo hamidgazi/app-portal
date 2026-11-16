@@ -19,6 +19,8 @@ The **Antigravity Universal AI Search Kit** delivers a dual-engine architecture:
 
 Why traditional search fails and how the AI Search Kit solves every limitation:
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Evaluation Dimension | ❌ Traditional Search (`Ctrl+F` / `.indexOf`) | 🤖 Antigravity AI Search Engine |
 | :--- | :--- | :--- |
 | **Typo Tolerance** | **0% tolerance.** A search for `"delhii"` or `"kuik"` returns 0 results, forcing user frustration. | **Fuzzy Distance Matching:** Uses Levenshtein and n-gram edit distance algorithms to accurately find `"Delhi"` and `"quick"`. |
@@ -28,6 +30,8 @@ Why traditional search fails and how the AI Search Kit solves every limitation:
 | **Answer Synthesis** | **No synthesis.** User must hunt through 30 disjointed paragraphs to find what they need. | **AI Direct Answer Card:** Optional Gemini Flash RAG synthesis provides a 2-sentence executive summary at the top. |
 | **User Experience & Navigation** | **Tiny browser highlights.** Jarring instant jump with no spatial context. | **Spotlight Command Palette (`Ctrl+K`):** Keyboard navigable, smoothly scrolls to center, and illuminates target with neon pulse. |
 | **Mobile Touch Ergonomics** | **Awkward browser toolbars.** Clutters small screens and lacks tactile touch targets. | **Responsive Bottom-Sheet:** Slides up natively on phones with $\ge 48\text{ px}$ hitboxes (Directive 5). |
+
+</div>
 
 ---
 
@@ -77,12 +81,16 @@ Beyond individual HTML webpages, AI search engines can be deployed across numero
 
 ## 4. Deliverables Catalog
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Deliverable | Path | Format | Description |
 | :--- | :--- | :--- | :--- |
 | **Core Engine** | [`ai_search.js`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/Common-Resources/AI-Search-Kit/ai_search.js) | Pure ES6 | Zero-dependency hybrid BM25 + Levenshtein + Synonym engine with Web Audio acoustic feedback and DOM crawler. |
 | **Stylesheet** | [`ai_search.css`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/Common-Resources/AI-Search-Kit/ai_search.css) | CSS3 | AMOLED glassmorphic theme, desktop `Ctrl+K` palette, mobile bottom sheet, and pulsing target animations. |
 | **Showcase Demo** | [`demo.html`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/Common-Resources/AI-Search-Kit/demo.html) | HTML5 | Interactive testbed with multi-domain content, typo test chips, and live spotlight navigation. |
 | **Test Suite** | [`tests/test_ai_search.py`](file:///c:/Users/Shop%20PC%202/OneDrive/Desktop/Antigravity%20Files/Common-Resources/AI-Search-Kit/tests/test_ai_search.py) | Python 3 | Automated test suite validating `node --check`, BM25 math, fuzzy matching, and Directive 7 compliance. |
+
+</div>
 
 ---
 

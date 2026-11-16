@@ -68,6 +68,8 @@ Quran Deep Analyzer incorporates a **Dual-Font Switcher** in all Display Setting
 
 ### Top 10 Urdu Fonts: Ranked for Readability & Beauty
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Rank | Font&nbsp;Name | Script&nbsp;Style | Best&nbsp;Use&nbsp;Case | Web/Mobile&nbsp;Score | Readability & Aesthetic Notes |
 | :---: | :--- | :--- | :--- | :---: | :--- |
 | **1** | **Jameel&nbsp;Noori&nbsp;Nastaleeq** | Classic&nbsp;Nastaliq | Formal literature, Quranic translations, desktop reading | ⭐⭐⭐⭐⭐&nbsp;(9.8/10) | The gold standard of Urdu publishing. Based on the celebrated Noori Nastaleeq ligatures. Unequalled calligraphic beauty, authentic cascading baselines, and emotional resonance for South Asian readers. Pre-bundled locally in the app. |
@@ -80,6 +82,8 @@ Quran Deep Analyzer incorporates a **Dual-Font Switcher** in all Display Setting
 | **8** | **Amiri** | Classical&nbsp;Naskh | Bilingual Arabic-Urdu scholarly notes | ⭐⭐⭐⭐½&nbsp;(9.1/10) | A revival of the famous Bulaq Press typeface from Cairo. Elegant, dignified, with wide open counters. Ideal when Arabic scripture and Urdu commentary appear in close proximity. |
 | **9** | **Dubai** | Humanist&nbsp;Sans | Modern app interfaces, navigation | ⭐⭐⭐⭐&nbsp;(8.9/10) | Commissioned by the Dubai government and designed by Monotype. Crisp, modern sans-serif aesthetic with balanced proportions across Latin and Arabic-script characters. |
 | **10** | **Alvi&nbsp;Nastaleeq** | Compact&nbsp;Nastaliq | Books, long-form PDF publishing | ⭐⭐⭐⭐&nbsp;(8.8/10) | Compact ligature set with tighter vertical baselines than Jameel Noori. Great for reducing page count in printed publications. |
+
+</div>
 
 ### How to Toggle Fonts in Quran Deep Analyzer
 1. Open the **Display Settings** cog `⚙️` in the top navigation or on Ayah cards.
@@ -281,6 +285,8 @@ Access via the **10th Tab (`#tab-notebook`)**:
 
 ## ⌨️ 14. Keyboard Shortcuts & Pro-Tips
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Shortcut | Action | Description |
 | :--- | :--- | :--- |
 | **`/`** or **`Ctrl + K`** | **Open Spotlight Search** | Focuses the universal AI search bar from anywhere. |
@@ -290,6 +296,8 @@ Access via the **10th Tab (`#tab-notebook`)**:
 | **`Click Ayah Mark`** | **Waqf Guidance** | Displays the trilingual phonetic pause rule for that verse. |
 | **`Drag Scrubber`** | **Edge Navigation** | 120 FPS high-speed scrolling through Surah verses. |
 | **`↩ Return Pill`** | **Origin Return** | Jumps back to your previous tab and scroll position. |
+
+</div>
 
 ---
 

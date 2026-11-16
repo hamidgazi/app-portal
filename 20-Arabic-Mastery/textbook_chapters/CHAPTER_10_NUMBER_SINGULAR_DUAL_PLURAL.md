@@ -68,6 +68,8 @@ Only human beings with intellect (men, women, teachers, doctors) receive true pl
 
 Here are 15 foundational Singular-Dual-Plural transformations:
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Singular (مفرد) | Dual (مثنى) | Plural (جمع) | Plural Type | Meaning |
 | :--- | :--- | :--- | :--- | :--- |
 | **كِتَابٌ** | كِتَابَانِ | **كُتُبٌ** | Broken | Book / Books |
@@ -85,6 +87,8 @@ Here are 15 foundational Singular-Dual-Plural transformations:
 | **طَالِبَةٌ** | طَالِبَتَانِ | **طَالِبَاتٌ** | Sound Fem. | Female Student(s) |
 | **مُسْلِمَةٌ** | مُسْلِمَتَانِ | **مُسْلِمَاتٌ** | Sound Fem. | Muslim Woman/Women |
 | **سَيَّارَةٌ** | سَيَّارَتَانِ | **سَيَّارَاتٌ** | Sound Fem. | Car / Cars |
+
+</div>
 
 ---
 

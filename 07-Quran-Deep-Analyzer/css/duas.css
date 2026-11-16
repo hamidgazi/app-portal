@@ -834,12 +834,27 @@
   transform: translateY(-1px) scale(1.06);
 }
 
+.dua-ayah-num.digits-1 {
+  width: 1.35em;
+  min-width: 1.35em;
+  border-radius: 50%;
+  padding: 0;
+}
+
+.dua-ayah-num.digits-2 {
+  min-width: 1.62em;
+  border-radius: 9999px;
+  padding: 0 0.26em;
+}
+
 .dua-ayah-num.digits-3,
 .dua-ayah-num[data-ayah*="-"],
 .dua-ayah-num[data-ayah*=":"] {
-  font-size: 0.50em;
-  letter-spacing: -0.02em;
-  padding: 0 0.35em;
+  min-width: 1.90em;
+  border-radius: 9999px;
+  font-size: 0.48em;
+  letter-spacing: -0.03em;
+  padding: 0 0.34em;
 }
 
 /* Dual Urdu Translations Split Grid */

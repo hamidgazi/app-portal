@@ -37,6 +37,8 @@ $$\text{هٰذَا} + \text{بَيْتٌ} = \text{هٰذَا بَيْتٌ}$$
 
 Memorize these 15 essential, tangible everyday masculine nouns. Notice that every single word ends with **تَنْوِين** (double pesh `ٌ`):
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Arabic Script | Roman Urdu / Pronunciation | Urdu Meaning | English Meaning | Grammatical Category |
 | :--- | :--- | :--- | :--- | :--- |
 | **بَيْتٌ** | *Baytun* | ایک گھر | A house | Noun (Masc.) |
@@ -54,6 +56,8 @@ Memorize these 15 essential, tangible everyday masculine nouns. Notice that ever
 | **وَلَدٌ** | *Waladun* | ایک لڑکا | A boy | Noun (Person, Masc.) |
 | **طَالِبٌ** | *Taalibun* | ایک طالب علم | A student | Noun (Person, Masc.) |
 | **رَجُلٌ** | *Rajulun* | ایک آدمی / مرد | A man | Noun (Person, Masc.) |
+
+</div>
 
 ---
 

@@ -25,6 +25,8 @@ Let us demystify the entire 14-form matrix using the golden root **ذَهَبَ*
 
 Here is the complete past tense table for **ذَهَبَ** (He went):
 
+<div class="table-responsive" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+
 | Person (شخص) | Number & Gender | Verb Form | Pronunciation | The Attached Doer (الفاعل) | English Meaning | Urdu Meaning |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **3rd Masc. (غائب مذکر)** | 1 (واحد) | **ذَهَبَ** | *Dhahaba* | Hidden (هُوَ) | He went | وہ ایک مرد گیا |
@@ -41,6 +43,8 @@ Here is the complete past tense table for **ذَهَبَ** (He went):
 | | Plural (جمع) | **ذَهَبْتُنَّ** | *Dhahab-tunna* | Plural Fem. Taa (تُنَّ) | You all (f) went | تم سب عورتیں گئیں |
 | **1st Person (متکلم)** | 1 (مفرد) | **ذَهَبْتُ** | *Dhahab-tu* | Taa with Dammah (تُ) | I went | میں گیا / میں گئی |
 | | Plural (جمع) | **ذَهَبْنَا** | *Dhahab-naa* | Naa of Plural (نَا) | We went | ہم گئے / ہم گئیں |
+
+</div>
 
 ---
 
