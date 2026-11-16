@@ -46,6 +46,134 @@ Here is the complete past tense table for **ذَهَبَ** (He went):
 
 </div>
 
+
+<div class="gardan-pavilion" id="gardan-past-dhahaba">
+  <div class="gardan-topbar">
+    <div class="gardan-title-group">
+      <span class="discipline-pill pill-sarf">⚡ عِلْمُ الصَّرْفِ • Interactive Gardan Matrix</span>
+      <h3 class="gardan-heading">گردانِ ماضی معروف — Past Tense 14-Form Matrix</h3>
+      <p class="gardan-root-tag">Root Seed: <bdi class="ar-inline" dir="rtl"><strong>ذ - ه - ب</strong></bdi> (To Go / جانا) • Universal Weight: <bdi class="ar-inline" dir="rtl"><strong>فَعَلَ</strong></bdi></p>
+    </div>
+    <div class="gardan-filter-pills" role="tablist">
+      <button type="button" class="gardan-tab active" onclick="window.filterGardan('all', this, 'gardan-past-dhahaba')">All 14 (تمام صیغے)</button>
+      <button type="button" class="gardan-tab" onclick="window.filterGardan('ghaib', this, 'gardan-past-dhahaba')">غائب • 3rd Person (6)</button>
+      <button type="button" class="gardan-tab" onclick="window.filterGardan('mukhatab', this, 'gardan-past-dhahaba')">حاضر • 2nd Person (6)</button>
+      <button type="button" class="gardan-tab" onclick="window.filterGardan('mutakallim', this, 'gardan-past-dhahaba')">متکلم • 1st Person (2)</button>
+    </div>
+  </div>
+
+  <div class="gardan-grid">
+    <!-- 3rd Person Masculine (غائب مذكر) -->
+    <div class="gardan-card" data-category="ghaib" onclick="window.inspectGardanCard(this)">
+      <div class="gardan-card-badge">واحد مذكر غائب</div>
+      <div class="gardan-arabic-form" dir="rtl"><span class="root-segment">ذَهَبَ</span></div>
+      <div class="gardan-meaning-en">He went</div>
+      <div class="gardan-meaning-ur" dir="rtl">وہ ایک مرد گیا</div>
+      <div class="gardan-tag-sub">Subject: Hidden هُوَ</div>
+    </div>
+    <div class="gardan-card" data-category="ghaib" onclick="window.inspectGardanCard(this)">
+      <div class="gardan-card-badge">تثنیہ مذكر غائب</div>
+      <div class="gardan-arabic-form" dir="rtl"><span class="root-segment">ذَهَبَ</span><span class="suffix-segment">ا</span></div>
+      <div class="gardan-meaning-en">They two (m) went</div>
+      <div class="gardan-meaning-ur" dir="rtl">وہ دو مرد گئے</div>
+      <div class="gardan-tag-sub">Suffix: Alif of Dual (ا)</div>
+    </div>
+    <div class="gardan-card" data-category="ghaib" onclick="window.inspectGardanCard(this)">
+      <div class="gardan-card-badge">جمع مذكر غائب</div>
+      <div class="gardan-arabic-form" dir="rtl"><span class="root-segment">ذَهَبُ</span><span class="suffix-segment">وا</span></div>
+      <div class="gardan-meaning-en">They all (m) went</div>
+      <div class="gardan-meaning-ur" dir="rtl">وہ سب مرد گئے</div>
+      <div class="gardan-tag-sub">Suffix: Waw of Plural (وا)</div>
+    </div>
+
+    <!-- 3rd Person Feminine (غائب مؤنث) -->
+    <div class="gardan-card" data-category="ghaib" onclick="window.inspectGardanCard(this)">
+      <div class="gardan-card-badge">واحد مؤنث غائب</div>
+      <div class="gardan-arabic-form" dir="rtl"><span class="root-segment">ذَهَبَ</span><span class="suffix-segment">تْ</span></div>
+      <div class="gardan-meaning-en">She went</div>
+      <div class="gardan-meaning-ur" dir="rtl">وہ ایک عورت گئی</div>
+      <div class="gardan-tag-sub">Suffix: Feminine Taa (تْ)</div>
+    </div>
+    <div class="gardan-card" data-category="ghaib" onclick="window.inspectGardanCard(this)">
+      <div class="gardan-card-badge">تثنیہ مؤنث غائب</div>
+      <div class="gardan-arabic-form" dir="rtl"><span class="root-segment">ذَهَبَ</span><span class="suffix-segment">تَا</span></div>
+      <div class="gardan-meaning-en">They two (f) went</div>
+      <div class="gardan-meaning-ur" dir="rtl">وہ دو عورتیں گئیں</div>
+      <div class="gardan-tag-sub">Suffix: Dual Fem. (تَا)</div>
+    </div>
+    <div class="gardan-card" data-category="ghaib" onclick="window.inspectGardanCard(this)">
+      <div class="gardan-card-badge">جمع مؤنث غائب</div>
+      <div class="gardan-arabic-form" dir="rtl"><span class="root-segment">ذَهَبْ</span><span class="suffix-segment">نَ</span></div>
+      <div class="gardan-meaning-en">They all (f) went</div>
+      <div class="gardan-meaning-ur" dir="rtl">وہ سب عورتیں گئیں</div>
+      <div class="gardan-tag-sub">Suffix: Noon of Women (نَ)</div>
+    </div>
+
+    <!-- 2nd Person Masculine (حاضر مذكر) -->
+    <div class="gardan-card" data-category="mukhatab" onclick="window.inspectGardanCard(this)">
+      <div class="gardan-card-badge">واحد مذكر حاضر</div>
+      <div class="gardan-arabic-form" dir="rtl"><span class="root-segment">ذَهَبْ</span><span class="suffix-segment">تَ</span></div>
+      <div class="gardan-meaning-en">You (m) went</div>
+      <div class="gardan-meaning-ur" dir="rtl">تم ایک مرد گئے</div>
+      <div class="gardan-tag-sub">Suffix: Taa Fathah (تَ)</div>
+    </div>
+    <div class="gardan-card" data-category="mukhatab" onclick="window.inspectGardanCard(this)">
+      <div class="gardan-card-badge">تثنیہ مذكر حاضر</div>
+      <div class="gardan-arabic-form" dir="rtl"><span class="root-segment">ذَهَبْ</span><span class="suffix-segment">تُمَا</span></div>
+      <div class="gardan-meaning-en">You two (m) went</div>
+      <div class="gardan-meaning-ur" dir="rtl">تم دو مرد گئے</div>
+      <div class="gardan-tag-sub">Suffix: Dual Taa (تُمَا)</div>
+    </div>
+    <div class="gardan-card" data-category="mukhatab" onclick="window.inspectGardanCard(this)">
+      <div class="gardan-card-badge">جمع مذكر حاضر</div>
+      <div class="gardan-arabic-form" dir="rtl"><span class="root-segment">ذَهَبْ</span><span class="suffix-segment">تُمْ</span></div>
+      <div class="gardan-meaning-en">You all (m) went</div>
+      <div class="gardan-meaning-ur" dir="rtl">تم سب مرد گئے</div>
+      <div class="gardan-tag-sub">Suffix: Plural Taa (تُمْ)</div>
+    </div>
+
+    <!-- 2nd Person Feminine (حاضر مؤنث) -->
+    <div class="gardan-card" data-category="mukhatab" onclick="window.inspectGardanCard(this)">
+      <div class="gardan-card-badge">واحد مؤنث حاضر</div>
+      <div class="gardan-arabic-form" dir="rtl"><span class="root-segment">ذَهَبْ</span><span class="suffix-segment">تِ</span></div>
+      <div class="gardan-meaning-en">You (f) went</div>
+      <div class="gardan-meaning-ur" dir="rtl">تم ایک عورت گئیں</div>
+      <div class="gardan-tag-sub">Suffix: Taa Kasrah (تِ)</div>
+    </div>
+    <div class="gardan-card" data-category="mukhatab" onclick="window.inspectGardanCard(this)">
+      <div class="gardan-card-badge">تثنیہ مؤنث حاضر</div>
+      <div class="gardan-arabic-form" dir="rtl"><span class="root-segment">ذَهَبْ</span><span class="suffix-segment">تُمَا</span></div>
+      <div class="gardan-meaning-en">You two (f) went</div>
+      <div class="gardan-meaning-ur" dir="rtl">تم دو عورتیں گئیں</div>
+      <div class="gardan-tag-sub">Suffix: Dual Taa (تُمَا)</div>
+    </div>
+    <div class="gardan-card" data-category="mukhatab" onclick="window.inspectGardanCard(this)">
+      <div class="gardan-card-badge">جمع مؤنث حاضر</div>
+      <div class="gardan-arabic-form" dir="rtl"><span class="root-segment">ذَهَبْ</span><span class="suffix-segment">تُنَّ</span></div>
+      <div class="gardan-meaning-en">You all (f) went</div>
+      <div class="gardan-meaning-ur" dir="rtl">تم سب عورتیں گئیں</div>
+      <div class="gardan-tag-sub">Suffix: Plural Fem. (تُنَّ)</div>
+    </div>
+
+    <!-- 1st Person (متکلم) -->
+    <div class="gardan-card" data-category="mutakallim" onclick="window.inspectGardanCard(this)">
+      <div class="gardan-card-badge">واحد متکلم (مذكر/مؤنث)</div>
+      <div class="gardan-arabic-form" dir="rtl"><span class="root-segment">ذَهَبْ</span><span class="suffix-segment">تُ</span></div>
+      <div class="gardan-meaning-en">I went</div>
+      <div class="gardan-meaning-ur" dir="rtl">میں گیا / میں گئی</div>
+      <div class="gardan-tag-sub">Suffix: Taa Dammah (تُ)</div>
+    </div>
+    <div class="gardan-card" data-category="mutakallim" onclick="window.inspectGardanCard(this)">
+      <div class="gardan-card-badge">جمع متکلم (مذكر/مؤنث)</div>
+      <div class="gardan-arabic-form" dir="rtl"><span class="root-segment">ذَهَبْ</span><span class="suffix-segment">نَا</span></div>
+      <div class="gardan-meaning-en">We went</div>
+      <div class="gardan-meaning-ur" dir="rtl">ہم گئے / ہم گئیں</div>
+      <div class="gardan-tag-sub">Suffix: Naa of Group (نَا)</div>
+    </div>
+  </div>
+</div>
+
+
 ---
 
 ## 📐 Part 3: Visual Grammar Formulas & Blueprints (قواعد)
